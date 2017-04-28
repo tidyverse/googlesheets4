@@ -1,0 +1,11 @@
+Package: googlesheets2
+Title: Temporary package to work on major refactor of googlesheets
+Version: 0.0.0.9000
+Authors@R: person("Jennifer", "Bryan", role=c("aut", "cre"),
+  email = "jenny@stat.ubc.ca")
+Description: Temporary package to work on major refactor of googlesheets.
+  Temporary package to work on major refactor of googlesheets.
+Depends: R (>= 3.3.2)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true

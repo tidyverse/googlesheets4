@@ -12,4 +12,5 @@ LazyData: true
 RoxygenNote: 6.0.1
 URL: https://jennybc.github.io/googlesheets2/, https://github.com/jennybc/googlesheets2
 BugReports: https://github.com/jennybc/googlesheets2/issues
-Suggests: covr
+Suggests: covr,
+    testthat

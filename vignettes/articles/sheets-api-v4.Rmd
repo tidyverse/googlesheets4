@@ -1,0 +1,67 @@
+---
+title: "Google Sheets API v4"
+---
+
+```{r setup}
+library(rprojroot)
+library(jsonlite)
+library(tidyverse)
+```
+
+## Exploring the Google Sheets API v4 Discovery Document
+
+This is a machine-generated spec that describes what the API understands. Only the human-edited help strings are patched in.
+
+<https://sheets.googleapis.com/$discovery/rest?version=v4>
+
+*above should be `https://sheets.googleapis.com/$discovery/rest?version=v4` but rendering often URLencodes the `$` and breaks the link*
+
+Perhaps I will use this to automatically generate documentation for a low-level interface provided by the new googlesheets. It will be used internally and exposed for users who want direct access.
+
+Inspired by the way the [node-github](https://mikedeboer.github.io/node-github/) automatically generates docs for the [GitHub API](https://developer.github.com/v3/), based on this [JSON file](https://github.com/mikedeboer/node-github/blob/master/lib/routes.json) documenting the underlying API.
+
+```{r load-endpoints, include = FALSE}
+dd_fname <- find_package_root_file("data-raw") %>%
+  list.files(pattern = "endpoints.rds$", full.names = TRUE)
+if (length(dd_fname) < 1) {
+  message("Cannot find the endpoint data.")
+  knitr::knit_exit()
+}
+df <- readRDS(dd_fname)
+```
+
+
+```{r results = "asis", echo = FALSE}
+qq <- function(.x, .y = "THINGY!", depth = -1) {
+  spaces <- c(2, 4, 8) ## I have no idea why depth * 2 doesn't simply work :(
+  pre <- if (depth <= 0) "\n## " else str_c(strrep(" ", spaces[depth]), "* ")
+  post <- if (depth <= 0) "\n" else ":"
+  if (depth >= 0) {
+    cat(str_c(pre, .y, post))
+  }
+  if (is_list(.x)) {
+    cat("\n")
+    iwalk(.x, qq, depth = depth + 1)
+  } else {
+    ## endpoints %>% map_chr("path") %>% nchar() == 55
+    cat(
+      " ",
+      str_trunc(as.character(.x), 60 - spaces[depth] - 2 * depth), "\n")
+  }
+}
+endpoints <- df %>%
+  pmap(list) %>%
+  set_names(df$id)
+qq(endpoints)
+
+# x <- df[1,  ]
+# qq(x)
+# pwalk(df, lift_ld(qq))
+
+# do_one <- function(...) {
+#   lift_ld(qq)(...)
+#   cat("\n\n")
+# }
+# pwalk(df, do_one)
+```
+

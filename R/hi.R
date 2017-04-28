@@ -5,5 +5,5 @@
 #'
 #' @examples
 gs_hi <- function() {
-  cat("hi!")
+  message("hi!")
 }

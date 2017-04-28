@@ -1,5 +1,5 @@
 context("Placeholder")
 
 test_that("stuff works", {
-  expect_identical(TRUE, TRUE)
+  expect_message(gs_hi(), "hi!")
 })

@@ -46,13 +46,10 @@ nms_list <- endpoints %>%
 nms_glop <- nms_list %>%
   reduce(union)
 ## reach a consensus on name order
-nms_pos <- nms_list %>%
-  ## I don't really want column binding but have little choice today
+nms_rksum <- nms_list %>%
   map_dfc(~ match(nms_glop, .x)) %>%
-  add_column(nms = nms_glop, .before = 1) %>%
-  add_column(rk_sum = rowSums(.[ , -1], na.rm = TRUE), .before = 1) %>%
-  arrange(rk_sum)
-nms <- nms_pos$nms
+  rowSums(na.rm = TRUE)
+nms <- nms_glop[order(nms_rksum)]
 
 ## over-simple functions to coerce to atomic, if possible
 can_be_atomic <- function(l) all(lengths(l) < 2)
@@ -69,41 +66,42 @@ atomicate <- function(l) {
 
 ## poor woman's implementation of transpread()
 ## transpose a list and make a tibble
-df <- nms %>%
+.endpoints <- nms %>%
   map(~ map(endpoints, .x)) %>%
   modify_if(can_be_atomic, atomicate) %>%
   set_names(nms) %>%
   as_tibble()
-#View(df)
+#View(.endpoints)
 
 ## more processing is needed :(
 
 ## these look identical, are they?
-identical(df$path, df$flatPath)
+identical(.endpoints$path, .endpoints$flatPath)
 ## drop flatPath
-df$flatPath <- NULL
+.endpoints$flatPath <- NULL
 
 ## consensus order from above is pretty lame, actually
-df <- df %>%
+.endpoints <- .endpoints %>%
   select(id, httpMethod, path, parameters, scopes, description, everything())
 
-df$scopes <- df$scopes %>%
+.endpoints$scopes <- .endpoints$scopes %>%
   map(~ gsub("https://www.googleapis.com/auth/", "", .)) %>%
   map_chr(str_c, collapse = ", ")
 
-df$parameterOrder <- df$parameterOrder %>%
+.endpoints$parameterOrder <- .endpoints$parameterOrder %>%
   modify_if(is_null, ~ NA_character_) %>%
   map_chr(str_c, collapse = ", ")
 
-df$response <- df$response %>%
+.endpoints$response <- .endpoints$response %>%
   map_chr("$ref", .null = NA_character_)
-df$request <- df$request %>%
+.endpoints$request <- .endpoints$request %>%
   map_chr("$ref", .null = NA_character_)
-#View(df)
+#View(.endpoints)
 
 out_fname <- str_replace(
   json_fname,
   "discovery-document.json",
   "endpoints.rds")
-saveRDS(df, file = out_fname)
+saveRDS(.endpoints, file = out_fname)
 
+use_data(.endpoints, internal = TRUE, overwrite = TRUE)

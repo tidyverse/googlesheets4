@@ -34,6 +34,9 @@
 <li>
   <a href="../../articles/index.html">Articles</a>
 </li>
+<li>
+  <a href="../../news/index.html">News</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -73,7 +76,11 @@
 <li>If the request doesn’t require authorization (such as a request for public data), then the application must provide either the API key or an OAuth 2.0 token, or both—whatever option is most convenient for you.</li>
 </ul>
 </blockquote>
-<p>Proposal: Always send an API key, i.e. just bake this into every request emitted by googlesheets. Determine the key like so:</p>
+</div>
+<div id="api-key" class="section level2">
+<h2 class="hasAnchor">
+<a href="#api-key" class="anchor"></a>API Key</h2>
+<p>Proposal: Always send an API key, i.e. just bake this into every request emitted by googlesheets. Consult the following sources for the key, in this order:</p>
 <ol style="list-style-type: decimal">
 <li>Key specified directly in a <code>gs_whatever()</code> function call.</li>
 <li>
@@ -81,6 +88,37 @@
 <li>
 <code>getOption("googlesheets.api.key")</code>, a fallback key baked into the package.</li>
 </ol>
+<p>Currently implemented as <code><a href="../../reference/api_key.html">api_key()</a></code>.</p>
+</div>
+<div id="oauth" class="section level2">
+<h2 class="hasAnchor">
+<a href="#oauth" class="anchor"></a>Oauth</h2>
+<p>When will I send an OAuth2.0 token?</p>
+<div id="v3-post-mortem" class="section level3">
+<h3 class="hasAnchor">
+<a href="#v3-post-mortem" class="anchor"></a>v3 <em>post mortem</em>
+</h3>
+<p>The Sheets API v3 has the notion of <a href="https://developers.google.com/sheets/api/guides/migration#visibility"><em>visibility</em></a>:</p>
+<blockquote>
+<p>The Sheets API v3 expresses visibility directly in its endpoints. A public spreadsheet has been “Published to the Web” and thus can be accessed by the API without authorization, while a private spreadsheet does require authentication.</p>
+</blockquote>
+<p>Previously, I would inspect the endpoint URL. Presence of <code>private</code> versus <code>public</code> dictated that I would or would not send a token, respectively. But sometimes these URLs were, in fact, constructed by googlesheets itself. There was a moderate current towards building private URLs, even when public was possible. And that could lead to prompts to authenticate when it wasn’t strictly necessary.</p>
+<p>This class of aggravation was further exacerbated by the gotcha re: Sheets being “Public on the web” vs “Published to the web”, which was not my fault (<em>btw, I wonder if that’s still a problem?</em>).</p>
+</div>
+<div id="v4-planning" class="section level3">
+<h3 class="hasAnchor">
+<a href="#v4-planning" class="anchor"></a>v4 planning</h3>
+<p><code>visibility</code> is mercifully now gone:</p>
+<blockquote>
+<p>In the new Sheets API v4, there is no explicit declaration of visibility. API calls are made using spreadsheet IDs. If the application does not have permission to access specified spreadsheet, an error is returned. Otherwise the call proceeds.</p>
+</blockquote>
+<p>Thinking out loud:</p>
+<ul>
+<li>Some endpoints or user-facing tasks will have a universal requirement (or perhaps lack?) for a token. Example of such an endpoint: <code>sheets.spreadsheets.sheets.copyTo</code>. Example of such a task: listing a user’s Sheets. Both of those will absolutely require a token. I will hardwire the inclusion of <code><a href="../../reference/google_token.html">google_token()</a></code> into requests built against such an endpoint or into the requests formed in such an operation.</li>
+<li>For other endpoints or tasks, the need for a token can only be determined through knowledge of the authenticated user’s relationship to the target Sheet. So I need to make sure all necessary info is stored at registration time.</li>
+<li>Open question: if I don’t know whether to send a token, do I default to “send if I have”? Or try-catch and retry with token on failure? Maybe this will never come up. Depends on how registration sorts out.</li>
+</ul>
+</div>
 </div>
 </div>
   </div>
@@ -90,6 +128,8 @@
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#authorize-requests">Authorize Requests</a></li>
+      <li><a href="#api-key">API Key</a></li>
+      <li><a href="#oauth">Oauth</a></li>
       </ul>
 </div>
       </div>

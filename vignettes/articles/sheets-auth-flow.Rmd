@@ -13,7 +13,7 @@ Quoting from:
 >  * If the request requires authorization (such as a request for an individual's private data), then the application must provide an OAuth 2.0 token with the request. The application may also provide the API key, but it doesn't have to.
 >  * If the request doesn't require authorization (such as a request for public data), then the application must provide either the API key or an OAuth 2.0 token, or both—whatever option is most convenient for you.
 
-### API Key
+## API Key
 
 Proposal: Always send an API key, i.e. just bake this into every request emitted by googlesheets. Consult the following sources for the key, in this order:
 
@@ -23,11 +23,11 @@ Proposal: Always send an API key, i.e. just bake this into every request emitted
 
 Currently implemented as `api_key()`.
 
-### Oauth
+## Oauth
 
 When will I send an OAuth2.0 token?
 
-#### v3 *post mortem*
+### v3 *post mortem*
 
 The Sheets API v3 has the notion of [*visibility*](https://developers.google.com/sheets/api/guides/migration#visibility):
 
@@ -37,7 +37,7 @@ Previously, I would inspect the endpoint URL. Presence of `private` versus `publ
 
 This class of aggravation was further exacerbated by the gotcha re: Sheets being "Public on the web" vs "Published to the web", which was not my fault (*btw, I wonder if that's still a problem?*).
 
-#### v4 planning
+### v4 planning
 
 `visibility` is mercifully now gone:
 

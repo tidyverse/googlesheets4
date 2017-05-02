@@ -56,6 +56,9 @@
 <li>
   <a href="../articles/index.html">Articles</a>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -89,7 +92,7 @@ automatically refreshed, as necessary.</p>
     
 
     <pre class="usage"><span class='fu'>gs_auth</span>(<span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>new_user</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>key</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"googlesheets.client_id"</span>),
+  <span class='kw'>client_id</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"googlesheets.client_id"</span>),
   <span class='kw'>secret</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"googlesheets.client_secret"</span>),
   <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fu'>getOption</span>(<span class='st'>"googlesheets.httr_oauth_cache"</span>), <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
@@ -108,9 +111,10 @@ wipe the slate clean and re-authenticate with the same or different Google
 account. This disables the <code>.httr-oauth</code> file in current working directory.</p></td>
     </tr>
     <tr>
-      <th>key, secret</th>
-      <td><p>the "Client ID" and "Client secret" for the application;
-defaults to the ID and secret built into the googlesheets package</p></td>
+      <th>client_id, secret</th>
+      <td><p>the "Client ID" and "Client secret" for the
+application; defaults to the ID and secret built into the googlesheets
+package</p></td>
     </tr>
     <tr>
       <th>cache</th>
@@ -137,20 +141,21 @@ necessary, this function allows the user to</p><ul>
 <li><p>Force the creation of a new token.</p></li>
 <li><p>Retrieve current token as an object, for possible storage to an <code>.rds</code> file.</p></li>
 <li><p>Read the token from an object or from an <code>.rds</code> file.</p></li>
-<li><p>Provide your own app key and secret. This requires setting up a new project
-in <a href = 'https://console.developers.google.com'>Google Developers Console</a>.</p></li>
+<li><p>Provide your own app client id and secret. This requires setting up a new
+project in
+<a href = 'https://console.developers.google.com'>Google Developers Console</a>.</p></li>
 <li><p>Prevent caching of credentials in <code>.httr-oauth</code>.</p></li>
 </ul>
-    <p>In a direct call to <code>gs_auth()</code>, the user can provide the token, app key and
-secret explicitly and can dictate whether interactively-obtained credentials
-will be cached in <code>.httr_oauth</code>. If unspecified, these arguments are
-controlled via options, which, if undefined at the time googlesheets is
+    <p>In a direct call to <code>gs_auth()</code>, the user can provide the token, client id
+and secret explicitly and can dictate whether interactively-obtained
+credentials will be cached in <code>.httr_oauth</code>. If unspecified, these arguments
+are controlled via options, which, if undefined at the time googlesheets is
 loaded, are defined like so:</p><ul>
-<li><p><em>key</em>: Set to option <code>googlesheets.client_id</code>, which defaults to a client
-ID that ships with the package.</p></li>
-<li><p><em>secret</em>: Set to option <code>googlesheets.client_secret</code>, which defaults to a
-client secret that ships with the package.</p></li>
-<li><p><em>cache</em>: Set to option <code>googlesheets.httr_oauth_cache</code>, which defaults to
+<li><p>_<em>client\emphid</em>: Set to option <code>googlesheets.client_id</code>, which defaults to
+a client ID that ships with the package.</p></li>
+<li><p><strong>secret</strong>: Set to option <code>googlesheets.client_secret</code>, which defaults to
+a client secret that ships with the package.</p></li>
+<li><p><strong>cache</strong>: Set to option <code>googlesheets.httr_oauth_cache</code>, which defaults to
 <code>TRUE</code>.</p></li>
 </ul>
     <p>To override these defaults in a persistent way, predefine one or more of them
@@ -158,8 +163,8 @@ with lines like this in a <code>.Rprofile</code> file:</p><pre>options(googleshe
         googlesheets.client_secret = "BAR",
         googlesheets.httr_oauth_cache = FALSE)
 </pre>
-    <p>See <code><a href='http://www.rdocumentation.org/packages/base/topics/Startup'>base::Startup()</a></code> for possible locations for this file and the
-implications thereof.</p>
+    <p>See <code>Startup()</code> for possible locations for this file and the implications
+thereof.</p>
 <p>More detail is available from <a href = 'https://developers.google.com/identity/protocols/OAuth2InstalledApp'>Using OAuth 2.0 for InstalledApplications</a>.
 See <code><a href='gs_webapp_auth_url.html'>gs_webapp_auth_url()</a></code> and <code><a href='gs_webapp_get_token.html'>gs_webapp_get_token()</a></code> for functions that
 execute the "web server application" flow.</p>

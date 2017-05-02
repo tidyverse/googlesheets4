@@ -1,72 +1,64 @@
 # environment to store credentials
 .state <- new.env(parent = emptyenv())
 
-#' Authorize \code{googlesheets}
+#' Authorize googlesheets
 #'
-#' Authorize \code{googlesheets} to view and manage your files. You will be
-#' directed to a web browser, asked to sign in to your Google account, and to
-#' grant \code{googlesheets} permission to operate on your behalf with Google
-#' Sheets and Google Drive. By default, these user credentials are cached in a
-#' file named \code{.httr-oauth} in the current working directory, from where
-#' they can be automatically refreshed, as necessary.
+#' Authorize googlesheets to view and manage your files. You will be directed to
+#' a web browser, asked to sign in to your Google account, and to grant
+#' googlesheets permission to operate on your behalf with Google Sheets and
+#' Google Drive. By default, these user credentials are cached in a file named
+#' `.httr-oauth` in the current working directory, from where they can be
+#' automatically refreshed, as necessary.
 #'
-#' Most users, most of the time, do not need to call this function
-#' explicitly -- it will be triggered by the first action that
-#' requires authorization. Even when called, the default arguments will often
-#' suffice. However, when necessary, this function allows the user to
+#' Most users, most of the time, do not need to call this function explicitly --
+#' it will be triggered by the first action that requires authorization. Even
+#' when called, the default arguments will often suffice. However, when
+#' necessary, this function allows the user to
 #'
-#' \itemize{
-#'   \item force the creation of a new token
-#'   \item retrieve current token as an object, for possible storage to an
-#'   \code{.rds} file
-#'   \item read the token from an object or from an \code{.rds} file
-#'   \item provide your own app key and secret -- this requires setting up a new
-#'   project in
-#'   \href{https://console.developers.google.com}{Google Developers Console}
-#'   \item prevent caching of credentials in \code{.httr-oauth}
-#' }
+#' * Force the creation of a new token.
+#' * Retrieve current token as an object, for possible storage to an `.rds` file.
+#' * Read the token from an object or from an `.rds` file.
+#' * Provide your own app key and secret. This requires setting up a new project
+#'   in [Google Developers Console](https://console.developers.google.com).
+#' * Prevent caching of credentials in `.httr-oauth`.
 #'
-#' In a direct call to \code{gs_auth}, the user can provide the token, app key
-#' and secret explicitly and can dictate whether interactively-obtained
-#' credentials will be cached in \code{.httr_oauth}. If unspecified, these
-#' arguments are controlled via options, which, if undefined at the time
-#' \code{googlesheets} is loaded, are defined like so:
+#' In a direct call to [gs_auth()], the user can provide the token, app key and
+#' secret explicitly and can dictate whether interactively-obtained credentials
+#' will be cached in `.httr_oauth`. If unspecified, these arguments are
+#' controlled via options, which, if undefined at the time googlesheets is
+#' loaded, are defined like so:
 #'
-#' \describe{
-#'   \item{key}{Set to option \code{googlesheets.client_id}, which defaults to
-#'   a client ID that ships with the package}
-#'   \item{secret}{Set to option \code{googlesheets.client_secret}, which
-#'   defaults to a client secret that ships with the package}
-#'   \item{cache}{Set to option \code{googlesheets.httr_oauth_cache}, which
-#'   defaults to \code{TRUE}}
-#' }
+#'  * _key_: Set to option `googlesheets.client_id`, which defaults to a client
+#'    ID that ships with the package.
+#'  * _secret_: Set to option `googlesheets.client_secret`, which defaults to a
+#'    client secret that ships with the package.
+#'  * _cache_: Set to option `googlesheets.httr_oauth_cache`, which defaults to
+#'    `TRUE`.
 #'
-#' To override these defaults in persistent way, predefine one or more of
-#' them with lines like this in a \code{.Rprofile} file:
-#' \preformatted{
+#' To override these defaults in a persistent way, predefine one or more of them
+#' with lines like this in a `.Rprofile` file:
+#' ```
 #' options(googlesheets.client_id = "FOO",
 #'         googlesheets.client_secret = "BAR",
 #'         googlesheets.httr_oauth_cache = FALSE)
-#' }
-#' See \code{\link[base]{Startup}} for possible locations for this file and the
+#' ```
+#' See [base::Startup()] for possible locations for this file and the
 #' implications thereof.
 #'
-#' More detail is available from
-#' \href{https://developers.google.com/identity/protocols/OAuth2InstalledApp}{Using
-#' OAuth 2.0 for Installed Applications}. See \code{\link{gs_webapp_auth_url}}
-#' and \code{\link{gs_webapp_get_token}} for functions that execute the "web
-#' server application" flow.
+#' More detail is available from [Using OAuth 2.0 for Installed
+#' Applications](https://developers.google.com/identity/protocols/OAuth2InstalledApp).
+#' See [gs_webapp_auth_url()] and [gs_webapp_get_token()] for functions that
+#' execute the "web server application" flow.
 #'
 #' @param token optional; an actual token object or the path to a valid token
-#'   stored as an \code{.rds} file
-#' @param new_user logical, defaults to \code{FALSE}. Set to \code{TRUE} if you
-#'   want to wipe the slate clean and re-authenticate with the same or different
-#'   Google account. This disables the \code{.httr-oauth} file in current
-#'   working directory.
+#'   stored as an `.rds` file
+#' @param new_user logical, defaults to `FALSE`. Set to `TRUE` if you want to
+#'   wipe the slate clean and re-authenticate with the same or different Google
+#'   account. This disables the `.httr-oauth` file in current working directory.
 #' @param key,secret the "Client ID" and "Client secret" for the application;
-#'   defaults to the ID and secret built into the \code{googlesheets} package
-#' @param cache logical indicating if \code{googlesheets} should cache
-#'   credentials in the default cache file \code{.httr-oauth}
+#'   defaults to the ID and secret built into the googlesheets package
+#' @param cache logical indicating if googlesheets should cache credentials in
+#'   the default cache file `.httr-oauth`
 #' @template verbose
 #'
 #' @template return-Token2
@@ -139,13 +131,13 @@ gs_auth <- function(token = NULL,
 
 #' Produce Google token
 #'
-#' If token is not already available, call \code{\link{gs_auth}} to either load
+#' If token is not already available, call [gs_auth()] to either load
 #' from cache or initiate OAuth2.0 flow. Return the token -- not "bare" but,
 #' rather, prepared for inclusion in downstream requests. Use
-#' \code{access_token()} to reveal the actual access token, suitable for use
-#' with \code{curl}.
+#' [access_token()] to reveal the actual access token, suitable for use
+#' with `curl`.
 #'
-#' @return a \code{request} object (an S3 class provided by \code{httr})
+#' @return a [httr::request] object (an S3 class provided by httr)
 #'
 #' @keywords internal
 google_token <- function(verbose = FALSE) {
@@ -160,8 +152,7 @@ omit_token_if <- function(cond) if (cond) NULL else google_token()
 
 #' Check token availability
 #'
-#' Check if a token is available in \code{\link{googlesheets}}' internal
-#' \code{.state} environment.
+#' Check if a token is available in googlesheets' internal `.state` environment.
 #'
 #' @return logical
 #'
@@ -191,12 +182,12 @@ token_available <- function(verbose = TRUE) {
 
 #' Suspend authorization
 #'
-#' Suspend \code{\link{googlesheets}}' authorization to place requests to the
-#' Drive and Sheets APIs on behalf of the authenticated user.
+#' Suspend googlesheets' authorization to place requests to the Drive and Sheets
+#' APIs on behalf of the authenticated user.
 #'
-#' @param clear_cache logical indicating whether to disable the
-#'   \code{.httr-oauth} file in working directory, if such exists, by renaming
-#'   to \code{.httr-oauth-SUSPENDED}
+#' @param clear_cache logical indicating whether to disable the `.httr-oauth`
+#'   file in working directory, if such exists, by renaming to
+#'   `.httr-oauth-SUSPENDED`
 #' @template verbose
 #' @export
 #' @family auth functions

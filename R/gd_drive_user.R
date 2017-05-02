@@ -25,26 +25,24 @@ drive_user <- function() {
 
 #' Retrieve information about the current Google user
 #'
-#' Retrieve information about the Google user that has authorized
-#' \code{\link{googlesheets}} to call the Drive and Sheets APIs on their behalf.
-#' As long as \code{full = FALSE} (the default), only the most useful subset of
-#' the information available from
-#' \href{https://developers.google.com/drive/v2/reference/about/get}{the "about"
-#' endpoint} of the Drive API is returned. This is also the information exposed
-#' in the print method:
+#' Retrieve information about the Google user that has authorized googlesheets
+#' to call the Drive and Sheets APIs on their behalf. As long as `full = FALSE`
+#' (the default), only the most useful subset of the information available from
+#' [the "about" endpoint](https://developers.google.com/drive/v2/reference/about/get) of the
+#' Drive API is returned. This is also the information exposed in the print
+#' method:
+#' * User's display name
+#' * User's email
+#' * Date-time of user info lookup
+#' * User's permission ID
+#' * User's root folder ID
 #'
-#' \itemize{
-#' \item User's display name
-#' \item User's email
-#' \item Date-time of user info lookup
-#' \item User's permission ID
-#' \item User's root folder ID
-#' }
+#' When `full = TRUE`, all information provided by the API is returned.
 #'
-#' When \code{full = TRUE}, all information provided by the API is returned.
+#' an object of S3 class `drive_user`, which is just a list
 #'
-#' @param full Logical, indicating whether to return selected (\code{FALSE},
-#' the default) or full (\code{TRUE}) user information.
+#' @param full Logical, indicating whether to return selected (`FALSE`,
+#' the default) or full (`TRUE`) user information.
 #' @template verbose
 #'
 #' @template return-drive_user

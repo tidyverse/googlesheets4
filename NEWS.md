@@ -1,5 +1,6 @@
 # googlesheets 0.2.1.9000
 
+  * The `key` argument to `gs_auth()` is renamed to `client_id`. Not only is this more descriptive, but since the Sheets v4 API now accepts an API key, the term `key` is needed to refer to that.
   * `gs_upload()` now has an `overwrite` argument. (#285 @omgjens, @jennybc)
 
 # googlesheets 0.2.1

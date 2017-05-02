@@ -7,3 +7,4 @@
 ^appveyor\.yml$
 ^data-raw$
 ^man-roxygen$
+^\.httr-oauth$

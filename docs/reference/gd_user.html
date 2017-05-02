@@ -81,31 +81,22 @@
 
     
     <p>Retrieve information about the Google user that has authorized googlesheets
-to call the Drive and Sheets APIs on their behalf. As long as <code>full = FALSE</code>
-(the default), only the most useful subset of the information available from
-<a href = 'https://developers.google.com/drive/v2/reference/about/get'>the "about" endpoint</a> of the
-Drive API is returned. This is also the information exposed in the print
-method:</p><ul>
+to call the Drive and Sheets APIs on their behalf. Returns info from <a href = 'https://developers.google.com/drive/v2/reference/about/get'>the"about" endpoint</a>
+of the Drive API:</p><ul>
 <li><p>User's display name</p></li>
 <li><p>User's email</p></li>
-<li><p>Date-time of user info lookup</p></li>
+<li><p>Datetime of the API call</p></li>
 <li><p>User's permission ID</p></li>
-<li><p>User's root folder ID</p></li>
 </ul>
     
 
-    <pre class="usage"><span class='fu'>gd_user</span>(<span class='kw'>full</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>gd_user</span>(<span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='fu'>gs_user</span>(<span class='kw'>full</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>gs_user</span>(<span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>full</th>
-      <td><p>Logical, indicating whether to return selected (<code>FALSE</code>,
-the default) or full (<code>TRUE</code>) user information.</p></td>
-    </tr>
     <tr>
       <th>verbose</th>
       <td><p>logical; do you want informative messages?</p></td>
@@ -115,11 +106,6 @@ the default) or full (<code>TRUE</code>) user information.</p></td>
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>an object of S3 class <code>drive_user</code>, which is just a list</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>When <code>full = TRUE</code>, all information provided by the API is returned.</p>
-<p>an object of S3 class <code>drive_user</code>, which is just a list</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -140,8 +126,6 @@ the default) or full (<code>TRUE</code>) user information.</p></td>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>
       

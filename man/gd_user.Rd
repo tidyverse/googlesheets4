@@ -5,14 +5,11 @@
 \alias{gs_user}
 \title{Retrieve information about the current Google user}
 \usage{
-gd_user(full = FALSE, verbose = TRUE)
+gd_user(verbose = TRUE)
 
-gs_user(full = FALSE, verbose = TRUE)
+gs_user(verbose = TRUE)
 }
 \arguments{
-\item{full}{Logical, indicating whether to return selected (\code{FALSE},
-the default) or full (\code{TRUE}) user information.}
-
 \item{verbose}{logical; do you want informative messages?}
 }
 \value{
@@ -20,23 +17,14 @@ an object of S3 class \code{drive_user}, which is just a list
 }
 \description{
 Retrieve information about the Google user that has authorized googlesheets
-to call the Drive and Sheets APIs on their behalf. As long as \code{full = FALSE}
-(the default), only the most useful subset of the information available from
-\href{https://developers.google.com/drive/v2/reference/about/get}{the "about" endpoint} of the
-Drive API is returned. This is also the information exposed in the print
-method:
+to call the Drive and Sheets APIs on their behalf. Returns info from \href{https://developers.google.com/drive/v2/reference/about/get}{the"about" endpoint}
+of the Drive API:
 \itemize{
 \item User's display name
 \item User's email
-\item Date-time of user info lookup
+\item Datetime of the API call
 \item User's permission ID
-\item User's root folder ID
 }
-}
-\details{
-When \code{full = TRUE}, all information provided by the API is returned.
-
-an object of S3 class \code{drive_user}, which is just a list
 }
 \examples{
 \dontrun{

@@ -1,6 +1,3 @@
-# environment to store credentials
-.state <- new.env(parent = emptyenv())
-
 #' Authorize googlesheets
 #'
 #' Authorize googlesheets to view and manage your files. You will be directed to
@@ -18,21 +15,22 @@
 #' * Force the creation of a new token.
 #' * Retrieve current token as an object, for possible storage to an `.rds` file.
 #' * Read the token from an object or from an `.rds` file.
-#' * Provide your own app key and secret. This requires setting up a new project
-#'   in [Google Developers Console](https://console.developers.google.com).
+#' * Provide your own app client id and secret. This requires setting up a new
+#'   project in
+#'   [Google Developers Console](https://console.developers.google.com).
 #' * Prevent caching of credentials in `.httr-oauth`.
 #'
-#' In a direct call to [gs_auth()], the user can provide the token, app key and
-#' secret explicitly and can dictate whether interactively-obtained credentials
-#' will be cached in `.httr_oauth`. If unspecified, these arguments are
-#' controlled via options, which, if undefined at the time googlesheets is
+#' In a direct call to [gs_auth()], the user can provide the token, client id
+#' and secret explicitly and can dictate whether interactively-obtained
+#' credentials will be cached in `.httr_oauth`. If unspecified, these arguments
+#' are controlled via options, which, if undefined at the time googlesheets is
 #' loaded, are defined like so:
 #'
-#'  * _key_: Set to option `googlesheets.client_id`, which defaults to a client
-#'    ID that ships with the package.
-#'  * _secret_: Set to option `googlesheets.client_secret`, which defaults to a
-#'    client secret that ships with the package.
-#'  * _cache_: Set to option `googlesheets.httr_oauth_cache`, which defaults to
+#'  * __client\_id__: Set to option `googlesheets.client_id`, which defaults to
+#'    a client ID that ships with the package.
+#'  * __secret__: Set to option `googlesheets.client_secret`, which defaults to
+#'    a client secret that ships with the package.
+#'  * __cache__: Set to option `googlesheets.httr_oauth_cache`, which defaults to
 #'    `TRUE`.
 #'
 #' To override these defaults in a persistent way, predefine one or more of them
@@ -42,8 +40,9 @@
 #'         googlesheets.client_secret = "BAR",
 #'         googlesheets.httr_oauth_cache = FALSE)
 #' ```
-#' See [base::Startup()] for possible locations for this file and the
-#' implications thereof.
+#'
+#' See [Startup()] for possible locations for this file and the implications
+#' thereof.
 #'
 #' More detail is available from [Using OAuth 2.0 for Installed
 #' Applications](https://developers.google.com/identity/protocols/OAuth2InstalledApp).
@@ -55,8 +54,9 @@
 #' @param new_user logical, defaults to `FALSE`. Set to `TRUE` if you want to
 #'   wipe the slate clean and re-authenticate with the same or different Google
 #'   account. This disables the `.httr-oauth` file in current working directory.
-#' @param key,secret the "Client ID" and "Client secret" for the application;
-#'   defaults to the ID and secret built into the googlesheets package
+#' @param client_id,secret the "Client ID" and "Client secret" for the
+#'   application; defaults to the ID and secret built into the googlesheets
+#'   package
 #' @param cache logical indicating if googlesheets should cache credentials in
 #'   the default cache file `.httr-oauth`
 #' @template verbose
@@ -84,7 +84,7 @@
 #' }
 gs_auth <- function(token = NULL,
                     new_user = FALSE,
-                    key = getOption("googlesheets.client_id"),
+                    client_id = getOption("googlesheets.client_id"),
                     secret = getOption("googlesheets.client_secret"),
                     cache = getOption("googlesheets.httr_oauth_cache"),
                     verbose = TRUE) {
@@ -97,10 +97,18 @@ gs_auth <- function(token = NULL,
 
     scope_list <- c("https://spreadsheets.google.com/feeds",
                     "https://www.googleapis.com/auth/drive")
-    googlesheets_app <- httr::oauth_app("google", key = key, secret = secret)
+    googlesheets_app <- httr::oauth_app(
+      "google",
+      key = client_id,
+      secret = secret
+    )
     google_token <-
-      httr::oauth2.0_token(httr::oauth_endpoints("google"), googlesheets_app,
-                           scope = scope_list, cache = cache)
+      httr::oauth2.0_token(
+        httr::oauth_endpoints("google"),
+        googlesheets_app,
+        scope = scope_list,
+        cache = cache
+      )
     stopifnot(is_legit_token(google_token, verbose = TRUE))
     .state$token <- google_token
 
@@ -129,56 +137,6 @@ gs_auth <- function(token = NULL,
 
 }
 
-#' Produce Google token
-#'
-#' If token is not already available, call [gs_auth()] to either load from cache
-#' or initiate OAuth2.0 flow. Return the token -- not "bare" but, rather,
-#' prepared for inclusion in downstream requests. Use the unexported function
-#' `access_token()`` to reveal the actual access token, suitable for use with
-#' `curl`.
-#'
-#' @return a `httr::request-class` object (an S3 class provided by httr)
-#'
-#' @keywords internal
-google_token <- function(verbose = FALSE) {
-  if (!token_available(verbose = verbose)) gs_auth(verbose = verbose)
-  httr::config(token = .state$token)
-}
-
-#' @rdname google_token
-include_token_if <- function(cond) if (cond) google_token() else NULL
-#' @rdname google_token
-omit_token_if <- function(cond) if (cond) NULL else google_token()
-
-#' Check token availability
-#'
-#' Check if a token is available in googlesheets' internal `.state` environment.
-#'
-#' @return logical
-#'
-#' @keywords internal
-token_available <- function(verbose = TRUE) {
-
-  if (is.null(.state$token)) {
-    if (verbose) {
-      if (file.exists(".httr-oauth")) {
-        message("A .httr-oauth file exists in current working ",
-                "directory.\nWhen/if needed, the credentials cached in ",
-                ".httr-oauth will be used for this session.\nOr run gs_auth() ",
-                "for explicit authentication and authorization.")
-      } else {
-        message("No .httr-oauth file exists in current working directory.\n",
-                "When/if needed, 'googlesheets' will initiate authentication ",
-                "and authorization.\nOr run gs_auth() to trigger this ",
-                "explicitly.")
-      }
-    }
-    return(FALSE)
-  }
-
-  TRUE
-
-}
 
 #' Suspend authorization
 #'
@@ -244,10 +202,4 @@ is_legit_token <- function(x, verbose = FALSE) {
 
   TRUE
 
-}
-
-## useful when debugging
-access_token <- function() {
-  if (!token_available(verbose = TRUE)) return(NULL)
-  .state$token$credentials$access_token
 }

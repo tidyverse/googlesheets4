@@ -5,7 +5,7 @@
 \title{Authorize googlesheets}
 \usage{
 gs_auth(token = NULL, new_user = FALSE,
-  key = getOption("googlesheets.client_id"),
+  client_id = getOption("googlesheets.client_id"),
   secret = getOption("googlesheets.client_secret"),
   cache = getOption("googlesheets.httr_oauth_cache"), verbose = TRUE)
 }
@@ -17,8 +17,9 @@ stored as an \code{.rds} file}
 wipe the slate clean and re-authenticate with the same or different Google
 account. This disables the \code{.httr-oauth} file in current working directory.}
 
-\item{key, secret}{the "Client ID" and "Client secret" for the application;
-defaults to the ID and secret built into the googlesheets package}
+\item{client_id, secret}{the "Client ID" and "Client secret" for the
+application; defaults to the ID and secret built into the googlesheets
+package}
 
 \item{cache}{logical indicating if googlesheets should cache credentials in
 the default cache file \code{.httr-oauth}}
@@ -46,22 +47,23 @@ necessary, this function allows the user to
 \item Force the creation of a new token.
 \item Retrieve current token as an object, for possible storage to an \code{.rds} file.
 \item Read the token from an object or from an \code{.rds} file.
-\item Provide your own app key and secret. This requires setting up a new project
-in \href{https://console.developers.google.com}{Google Developers Console}.
+\item Provide your own app client id and secret. This requires setting up a new
+project in
+\href{https://console.developers.google.com}{Google Developers Console}.
 \item Prevent caching of credentials in \code{.httr-oauth}.
 }
 
-In a direct call to \code{\link[=gs_auth]{gs_auth()}}, the user can provide the token, app key and
-secret explicitly and can dictate whether interactively-obtained credentials
-will be cached in \code{.httr_oauth}. If unspecified, these arguments are
-controlled via options, which, if undefined at the time googlesheets is
+In a direct call to \code{\link[=gs_auth]{gs_auth()}}, the user can provide the token, client id
+and secret explicitly and can dictate whether interactively-obtained
+credentials will be cached in \code{.httr_oauth}. If unspecified, these arguments
+are controlled via options, which, if undefined at the time googlesheets is
 loaded, are defined like so:
 \itemize{
-\item \emph{key}: Set to option \code{googlesheets.client_id}, which defaults to a client
-ID that ships with the package.
-\item \emph{secret}: Set to option \code{googlesheets.client_secret}, which defaults to a
-client secret that ships with the package.
-\item \emph{cache}: Set to option \code{googlesheets.httr_oauth_cache}, which defaults to
+\item _\emph{client\\emph{id}}: Set to option \code{googlesheets.client_id}, which defaults to
+a client ID that ships with the package.
+\item \strong{secret}: Set to option \code{googlesheets.client_secret}, which defaults to
+a client secret that ships with the package.
+\item \strong{cache}: Set to option \code{googlesheets.httr_oauth_cache}, which defaults to
 \code{TRUE}.
 }
 
@@ -71,8 +73,8 @@ with lines like this in a \code{.Rprofile} file:\preformatted{options(googleshee
         googlesheets.httr_oauth_cache = FALSE)
 }
 
-See \code{\link[base:Startup]{base::Startup()}} for possible locations for this file and the
-implications thereof.
+See \code{\link[=Startup]{Startup()}} for possible locations for this file and the implications
+thereof.
 
 More detail is available from \href{https://developers.google.com/identity/protocols/OAuth2InstalledApp}{Using OAuth 2.0 for InstalledApplications}.
 See \code{\link[=gs_webapp_auth_url]{gs_webapp_auth_url()}} and \code{\link[=gs_webapp_get_token]{gs_webapp_get_token()}} for functions that

@@ -10,6 +10,7 @@
     googlesheets.httr_oauth_cache = TRUE,
     googlesheets.client_id = "178989665258-f4scmimctv2o96isfppehg1qesrpvjro.apps.googleusercontent.com",
     googlesheets.client_secret = "iWPrYg0lFHNQblnRrDbypvJL",
+    googlesheets.api.key = "AIzaSyBTBKXVfmtjOSYmn7wm6S4yMvqdeBMtZMI",
     googlesheets.webapp.client_id = "178989665258-mbn7q84ai89if6ja59jmh8tqn5aqoe3n.apps.googleusercontent.com",
     googlesheets.webapp.client_secret = "UiF2uCHeMiUH0BeNbSAzzBxL",
     googlesheets.webapp.redirect_uri = "http://127.0.0.1:4642"

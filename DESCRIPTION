@@ -16,7 +16,8 @@ Suggests: covr,
     knitr,
     rprojroot,
     rmarkdown,
-    testthat
+    testthat,
+    withr
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
 Imports: httr,

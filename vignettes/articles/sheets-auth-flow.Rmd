@@ -1,0 +1,22 @@
+---
+title: "Google Sheets API v4 Auth Flow"
+---
+
+## Authorize Requests
+
+Quoting from:
+
+<https://developers.google.com/sheets/api/guides/authorizing>
+
+> Every request your application sends to the Google Sheets API needs to identify your application to Google. There are two ways to identify your application: using __an OAuth 2.0 token (which also authorizes the request)__ and/or using __the application's API key__. Here's how to determine which of those options to use:
+>
+>  * If the request requires authorization (such as a request for an individual's private data), then the application must provide an OAuth 2.0 token with the request. The application may also provide the API key, but it doesn't have to.
+>  * If the request doesn't require authorization (such as a request for public data), then the application must provide either the API key or an OAuth 2.0 token, or both—whatever option is most convenient for you.
+
+Proposal: Always send an API key, i.e. just bake this into every request emitted by googlesheets. Determine the key like so:
+
+  1. Key specified directly in a `gs_whatever()` function call.
+  1. `Sys.getenv("GOOGLESHEETS_API_KEY")`, which gives user a way to set this across multiple function calls, possibly at startup via `.Renviron`.
+  1. `getOption("googlesheets.api.key")`, a fallback key baked into the package.
+
+Currently implemented as `api_key()`.

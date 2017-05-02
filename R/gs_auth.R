@@ -131,13 +131,13 @@ gs_auth <- function(token = NULL,
 
 #' Produce Google token
 #'
-#' If token is not already available, call [gs_auth()] to either load
-#' from cache or initiate OAuth2.0 flow. Return the token -- not "bare" but,
-#' rather, prepared for inclusion in downstream requests. Use
-#' [access_token()] to reveal the actual access token, suitable for use
-#' with `curl`.
+#' If token is not already available, call [gs_auth()] to either load from cache
+#' or initiate OAuth2.0 flow. Return the token -- not "bare" but, rather,
+#' prepared for inclusion in downstream requests. Use the unexported function
+#' `access_token()`` to reveal the actual access token, suitable for use with
+#' `curl`.
 #'
-#' @return a [httr::request] object (an S3 class provided by httr)
+#' @return a `httr::request-class` object (an S3 class provided by httr)
 #'
 #' @keywords internal
 google_token <- function(verbose = FALSE) {

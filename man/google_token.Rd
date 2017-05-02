@@ -13,13 +13,12 @@ include_token_if(cond)
 omit_token_if(cond)
 }
 \value{
-a \link[httr:request]{httr::request} object (an S3 class provided by httr)
+a \code{httr::request-class} object (an S3 class provided by httr)
 }
 \description{
-If token is not already available, call \code{\link[=gs_auth]{gs_auth()}} to either load
-from cache or initiate OAuth2.0 flow. Return the token -- not "bare" but,
-rather, prepared for inclusion in downstream requests. Use
-\code{\link[=access_token]{access_token()}} to reveal the actual access token, suitable for use
-with \code{curl}.
+If token is not already available, call \code{\link[=gs_auth]{gs_auth()}} to either load from cache
+or initiate OAuth2.0 flow. Return the token -- not "bare" but, rather,
+prepared for inclusion in downstream requests. Use the unexported function
+\code{access_token()`` to reveal the actual access token, suitable for use with}curl`.
 }
 \keyword{internal}

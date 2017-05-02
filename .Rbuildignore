@@ -6,3 +6,4 @@
 ^codecov\.yml$
 ^appveyor\.yml$
 ^data-raw$
+^man-roxygen$

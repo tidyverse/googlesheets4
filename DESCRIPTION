@@ -19,3 +19,7 @@ Suggests: covr,
     testthat
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
+Imports: httr,
+    jsonlite,
+    purrr,
+    xml2

@@ -22,12 +22,12 @@ Inspired by the way the [node-github](https://mikedeboer.github.io/node-github/)
 
 ```{r load-endpoints, include = FALSE}
 dd_fname <- find_package_root_file("data-raw") %>%
-  list.files(pattern = "endpoints.rds$", full.names = TRUE)
+  list.files(pattern = "endpoints-list.rds$", full.names = TRUE)
 if (length(dd_fname) < 1) {
   message("Cannot find the endpoint data.")
   knitr::knit_exit()
 }
-df <- readRDS(dd_fname)
+elist <- readRDS(dd_fname)
 ```
 
 
@@ -49,19 +49,6 @@ qq <- function(.x, .y = "THINGY!", depth = -1) {
       str_trunc(as.character(.x), 60 - spaces[depth] - 2 * depth), "\n")
   }
 }
-endpoints <- df %>%
-  pmap(list) %>%
-  set_names(df$id)
-qq(endpoints)
-
-# x <- df[1,  ]
-# qq(x)
-# pwalk(df, lift_ld(qq))
-
-# do_one <- function(...) {
-#   lift_ld(qq)(...)
-#   cat("\n\n")
-# }
-# pwalk(df, do_one)
+qq(elist)
 ```
 

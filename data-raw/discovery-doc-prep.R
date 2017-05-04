@@ -43,41 +43,41 @@ nms <- endpoints %>%
   reduce(union)
 
 ## tibble with one row per endpoint
-.endpoints <- endpoints %>%
+edf <- endpoints %>%
   transpose(.names = nms) %>%
   simplify_all(.type = character(1)) %>%
   as_tibble()
-#View(.endpoints)
+#View(edf)
 
 ## more processing is needed :(
 
 ## clean up individual variables
 
 ## these look identical, are they?
-identical(.endpoints$path, .endpoints$flatPath)
+identical(edf$path, edf$flatPath)
 ## drop flatPath
-.endpoints$flatPath <- NULL
+edf$flatPath <- NULL
 
 ## enforce my own order
-.endpoints <- .endpoints %>%
+edf <- edf %>%
   select(id, httpMethod, path, parameters, scopes, description, everything())
 
-.endpoints$scopes <- .endpoints$scopes %>%
+edf$scopes <- edf$scopes %>%
   map(~ gsub("https://www.googleapis.com/auth/", "", .)) %>%
   map_chr(str_c, collapse = ", ")
 
-.endpoints$parameterOrder <- .endpoints$parameterOrder %>%
+edf$parameterOrder <- edf$parameterOrder %>%
   modify_if(~ length(.x) < 1, ~ NA_character_) %>%
   map_chr(str_c, collapse = ", ")
 
-.endpoints$response <- .endpoints$response %>%
+edf$response <- edf$response %>%
   map_chr("$ref", .null = NA_character_)
-.endpoints$request <- .endpoints$request %>%
+edf$request <- edf$request %>%
   map_chr("$ref", .null = NA_character_)
-#View(.endpoints)
+#View(edf)
 
 ## loooong side journey to clean up parameters
-params <- .endpoints %>%
+params <- edf %>%
   select(id, parameters) %>% {
     ## unnest() won't work with a list ... doing it manually
     tibble(
@@ -135,7 +135,7 @@ query_params <- query_params %>%
   mutate(query_params = map(query_params, deframe))
 
 ## join the path and query parameters back to main endpoint tibble
-.endpoints <- .endpoints %>%
+edf <- edf %>%
   left_join(path_params) %>%
   left_join(query_params) %>%
   select(id, httpMethod, path, parameters, path_params, query_params,
@@ -143,20 +143,52 @@ query_params <- query_params %>%
 
 ## spot check that we have the same (number of) parameters
 tibble(
-  orig_n = .endpoints$parameters %>% lengths(),
-  path_n = .endpoints$path_params %>% lengths(),
-  query_n = .endpoints$query_params %>% lengths(),
+  orig_n = edf$parameters %>% lengths(),
+  path_n = edf$path_params %>% lengths(),
+  query_n = edf$query_params %>% lengths(),
   new_n = path_n + query_n,
   ok = orig_n == new_n
 )
 
-.endpoints <- .endpoints %>%
+edf <- edf %>%
   select(-parameters)
+
+## WE ARE DONE
+## saving in various forms
+
+## full spec as tibble, one row per endpoint
+out_fname <- str_replace(
+  json_fname,
+  "discovery-document.json",
+  "endpoints-tibble.rds")
+saveRDS(edf, file = out_fname)
+
+## full spec as list
+## transpose again, back to a list with one component per endpoint
+elist <- edf %>%
+  pmap(list) %>%
+  set_names(edf$id)
+#listviewer::jsonedit(elist)
 
 out_fname <- str_replace(
   json_fname,
   "discovery-document.json",
-  "endpoints.rds")
+  "endpoints-list.rds")
+saveRDS(elist, file = out_fname)
 
-saveRDS(.endpoints, file = out_fname)
+out_fname <- str_replace(
+  json_fname,
+  "discovery-document.json",
+  "endpoints-list.json")
+elist %>%
+  toJSON(pretty = TRUE) %>%
+  writeLines(out_fname)
+
+## partial spec as list, i.e. drop variables not needed internally
+.endpoints <- edf %>%
+  select(id, verb = httpMethod, path, path_params, query_params) %>%
+  pmap(list) %>%
+  set_names(edf$id)
+#listviewer::jsonedit(.endpoints)
+
 use_data(.endpoints, internal = TRUE, overwrite = TRUE)

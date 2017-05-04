@@ -20,7 +20,8 @@ Suggests: covr,
     withr
 VignetteBuilder: knitr
 Roxygen: list(markdown = TRUE)
-Imports: httr,
+Imports: glue,
+    httr,
     jsonlite,
     purrr,
     xml2

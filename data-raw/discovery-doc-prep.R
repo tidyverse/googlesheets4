@@ -25,7 +25,7 @@ if (length(dd_cache) < 1) {
 dd_content <- fromJSON(json_fname)
 ## listviewer::jsonedit(dd_content)
 
-## extract the collections and get to same level of hierarchy
+## extract the collections and bring to same level of hierarchy
 spreadsheets <- dd_content[[c("resources", "spreadsheets", "methods")]]
 names(spreadsheets) <- paste("spreadsheets", names(spreadsheets), sep = "_")
 sheets <-
@@ -38,49 +38,27 @@ endpoints <- c(spreadsheets, sheets, values)
 # str(endpoints, max.level = 1)
 # listviewer::jsonedit(endpoints)
 
-## determine the names of sub-items and a consensus order
-## get vector of names for each endpoint
-nms_list <- endpoints %>%
-  map(names)
-## union of names across endpoints
-nms_glop <- nms_list %>%
+nms <- endpoints %>%
+  map(names) %>%
   reduce(union)
-## reach a consensus on name order
-nms_rksum <- nms_list %>%
-  map_dfc(~ match(nms_glop, .x)) %>%
-  rowSums(na.rm = TRUE)
-nms <- nms_glop[order(nms_rksum)]
 
-## over-simple functions to coerce to atomic, if possible
-can_be_atomic <- function(l) all(lengths(l) < 2)
-atomicate <- function(l) {
-  ## would be use the most frequent class
-  cls <- class(l[[1]])
-  switch(cls,
-         logical = flatten_lgl(l),
-         integer = flatten_int(l),
-         numeric = flatten_dbl(l),
-         character = flatten_chr(l),
-         l)
-}
-
-## poor woman's implementation of transpread()
-## transpose a list and make a tibble
-.endpoints <- nms %>%
-  map(~ map(endpoints, .x)) %>%
-  modify_if(can_be_atomic, atomicate) %>%
-  set_names(nms) %>%
+## tibble with one row per endpoint
+.endpoints <- endpoints %>%
+  transpose(.names = nms) %>%
+  simplify_all(.type = character(1)) %>%
   as_tibble()
 #View(.endpoints)
 
 ## more processing is needed :(
+
+## clean up individual variables
 
 ## these look identical, are they?
 identical(.endpoints$path, .endpoints$flatPath)
 ## drop flatPath
 .endpoints$flatPath <- NULL
 
-## consensus order from above is pretty lame, actually
+## enforce my own order
 .endpoints <- .endpoints %>%
   select(id, httpMethod, path, parameters, scopes, description, everything())
 
@@ -89,7 +67,7 @@ identical(.endpoints$path, .endpoints$flatPath)
   map_chr(str_c, collapse = ", ")
 
 .endpoints$parameterOrder <- .endpoints$parameterOrder %>%
-  modify_if(is_null, ~ NA_character_) %>%
+  modify_if(~ length(.x) < 1, ~ NA_character_) %>%
   map_chr(str_c, collapse = ", ")
 
 .endpoints$response <- .endpoints$response %>%
@@ -98,10 +76,87 @@ identical(.endpoints$path, .endpoints$flatPath)
   map_chr("$ref", .null = NA_character_)
 #View(.endpoints)
 
+## loooong side journey to clean up parameters
+params <- .endpoints %>%
+  select(id, parameters) %>% {
+    ## unnest() won't work with a list ... doing it manually
+    tibble(
+      id = rep(.$id, lengths(.$parameters)),
+      parameters = flatten(.$parameters),
+      pname = names(parameters)
+    )
+  } %>%
+  select(id, pname, parameters)
+#params$parameters %>% map(names) %>% reduce(union)
+nms <-
+  c("location", "required", "type", "repeated", "format", "enum", "description")
+
+## tibble with one row per parameter
+## variables id and pname keep track of endpoint and parameter name
+params <- params$parameters %>%
+  transpose(.names = nms) %>%
+  as_tibble() %>%
+  add_column(pname = params$pname, .before = 1) %>%
+  add_column(id = params$id, .before = 1)
+params <- params %>%
+  mutate(
+    location = location %>% flatten_chr(),
+    required = required %>% map(1, .null = NA) %>% flatten_lgl(),
+    type = type %>% flatten_chr(),
+    repeated = repeated %>% map(1, .null = NA) %>% flatten_lgl(),
+    format = format %>%  map(1, .null = NA) %>% flatten_chr(),
+    enum = enum %>%  modify_if(is_null, ~ NA),
+    description = description %>% flatten_chr()
+  )
+## repack all the info for each parameter into a list
+repacked <- params %>%
+  select(-id, -pname, -location) %>%
+  pmap(list)
+params <- params %>%
+  select(id, pname, location) %>%
+  mutate(pdata = repacked)
+
+## tibble with one or zero rows per endpoint and a list of path parameters
+path_params <- params %>%
+  filter(location == "path") %>%
+  select(-location)
+path_params <- path_params %>%
+  group_by(id) %>%
+  nest(.key = path_params) %>%
+  mutate(path_params = map(path_params, deframe))
+
+## tibble with one or zero rows per endpoint and a list of query parameters
+query_params <- params %>%
+  filter(location == "query") %>%
+  select(-location)
+query_params <- query_params %>%
+  group_by(id) %>%
+  nest(.key = query_params) %>%
+  mutate(query_params = map(query_params, deframe))
+
+## join the path and query parameters back to main endpoint tibble
+.endpoints <- .endpoints %>%
+  left_join(path_params) %>%
+  left_join(query_params) %>%
+  select(id, httpMethod, path, parameters, path_params, query_params,
+         everything())
+
+## spot check that we have the same (number of) parameters
+tibble(
+  orig_n = .endpoints$parameters %>% lengths(),
+  path_n = .endpoints$path_params %>% lengths(),
+  query_n = .endpoints$query_params %>% lengths(),
+  new_n = path_n + query_n,
+  ok = orig_n == new_n
+)
+
+.endpoints <- .endpoints %>%
+  select(-parameters)
+
 out_fname <- str_replace(
   json_fname,
   "discovery-document.json",
   "endpoints.rds")
-saveRDS(.endpoints, file = out_fname)
 
+saveRDS(.endpoints, file = out_fname)
 use_data(.endpoints, internal = TRUE, overwrite = TRUE)

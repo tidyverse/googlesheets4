@@ -8,3 +8,4 @@
 ^data-raw$
 ^man-roxygen$
 ^\.httr-oauth$
+^scratch\.R$

@@ -4,3 +4,4 @@
 .Ruserdata
 inst/doc
 .httr-oauth
+scratch.R

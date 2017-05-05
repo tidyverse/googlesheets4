@@ -25,3 +25,4 @@ Imports: glue,
     jsonlite,
     purrr,
     xml2
+Remotes: tidyverse/purrr

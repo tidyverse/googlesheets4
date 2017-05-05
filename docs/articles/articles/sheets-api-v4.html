@@ -87,11 +87,11 @@
 <p>Perhaps I will use this to automatically generate documentation for a low-level interface provided by the new googlesheets. It will be used internally and exposed for users who want direct access.</p>
 <p>Inspired by the way the <a href="https://mikedeboer.github.io/node-github/">node-github</a> automatically generates docs for the <a href="https://developer.github.com/v3/">GitHub API</a>, based on this <a href="https://github.com/mikedeboer/node-github/blob/master/lib/routes.json">JSON file</a> documenting the underlying API.</p>
 </div>
-<div id="sheets-spreadsheets-get" class="section level2">
+<div id="spreadsheets-get" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sheets-spreadsheets-get" class="anchor"></a>sheets.spreadsheets.get</h2>
+<a href="#spreadsheets-get" class="anchor"></a>spreadsheets.get</h2>
 <ul>
-<li>id: sheets.spreadsheets.get</li>
+<li>method: spreadsheets.get</li>
 <li>httpMethod: GET</li>
 <li>path: v4/spreadsheets/{spreadsheetId}</li>
 <li>path_params:
@@ -139,11 +139,11 @@
 <li>request: NA</li>
 </ul>
 </div>
-<div id="sheets-spreadsheets-create" class="section level2">
+<div id="spreadsheets-create" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sheets-spreadsheets-create" class="anchor"></a>sheets.spreadsheets.create</h2>
+<a href="#spreadsheets-create" class="anchor"></a>spreadsheets.create</h2>
 <ul>
-<li>id: sheets.spreadsheets.create</li>
+<li>method: spreadsheets.create</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets</li>
 <li>path_params:<br>
@@ -157,11 +157,11 @@
 <li>request: Spreadsheet</li>
 </ul>
 </div>
-<div id="sheets-spreadsheets-batchupdate" class="section level2">
+<div id="spreadsheets-batchupdate" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sheets-spreadsheets-batchupdate" class="anchor"></a>sheets.spreadsheets.batchUpdate</h2>
+<a href="#spreadsheets-batchupdate" class="anchor"></a>spreadsheets.batchUpdate</h2>
 <ul>
-<li>id: sheets.spreadsheets.batchUpdate</li>
+<li>method: spreadsheets.batchUpdate</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets/{spreadsheetId}:batchUpdate</li>
 <li>path_params:
@@ -185,11 +185,11 @@
 </ul>
 <p>Each… * response: BatchUpdateSpreadsheetResponse * parameterOrder: spreadsheetId * request: BatchUpdateSpreadsheetRequest</p>
 </div>
-<div id="sheets-spreadsheets-sheets-copyto" class="section level2">
+<div id="spreadsheets-sheets-copyto" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sheets-spreadsheets-sheets-copyto" class="anchor"></a>sheets.spreadsheets.sheets.copyTo</h2>
+<a href="#spreadsheets-sheets-copyto" class="anchor"></a>spreadsheets.sheets.copyTo</h2>
 <ul>
-<li>id: sheets.spreadsheets.sheets.copyTo</li>
+<li>method: spreadsheets.sheets.copyTo</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo</li>
 <li>path_params:
@@ -225,11 +225,11 @@
 <li>request: CopySheetToAnotherSpreadsheetRequest</li>
 </ul>
 </div>
-<div id="sheets-spreadsheets-values-append" class="section level2">
+<div id="spreadsheets-values-append" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sheets-spreadsheets-values-append" class="anchor"></a>sheets.spreadsheets.values.append</h2>
+<a href="#spreadsheets-values-append" class="anchor"></a>spreadsheets.values.append</h2>
 <ul>
-<li>id: sheets.spreadsheets.values.append</li>
+<li>method: spreadsheets.values.append</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values/{range}:append</li>
 <li>path_params:
@@ -317,11 +317,11 @@
 <li>request: ValueRange</li>
 </ul>
 </div>
-<div id="sheets-spreadsheets-values-batchclear" class="section level2">
+<div id="spreadsheets-values-batchclear" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sheets-spreadsheets-values-batchclear" class="anchor"></a>sheets.spreadsheets.values.batchClear</h2>
+<a href="#spreadsheets-values-batchclear" class="anchor"></a>spreadsheets.values.batchClear</h2>
 <ul>
-<li>id: sheets.spreadsheets.values.batchClear</li>
+<li>method: spreadsheets.values.batchClear</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values:batchClear</li>
 <li>path_params:
@@ -347,11 +347,11 @@
 <li>request: BatchClearValuesRequest</li>
 </ul>
 </div>
-<div id="sheets-spreadsheets-values-get" class="section level2">
+<div id="spreadsheets-values-get" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sheets-spreadsheets-values-get" class="anchor"></a>sheets.spreadsheets.values.get</h2>
+<a href="#spreadsheets-values-get" class="anchor"></a>spreadsheets.values.get</h2>
 <ul>
-<li>id: sheets.spreadsheets.values.get</li>
+<li>method: spreadsheets.values.get</li>
 <li>httpMethod: GET</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values/{range}</li>
 <li>path_params:
@@ -419,11 +419,11 @@
 <li>request: NA</li>
 </ul>
 </div>
-<div id="sheets-spreadsheets-values-update" class="section level2">
+<div id="spreadsheets-values-update" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sheets-spreadsheets-values-update" class="anchor"></a>sheets.spreadsheets.values.update</h2>
+<a href="#spreadsheets-values-update" class="anchor"></a>spreadsheets.values.update</h2>
 <ul>
-<li>id: sheets.spreadsheets.values.update</li>
+<li>method: spreadsheets.values.update</li>
 <li>httpMethod: PUT</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values/{range}</li>
 <li>path_params:
@@ -501,11 +501,11 @@
 <li>request: ValueRange</li>
 </ul>
 </div>
-<div id="sheets-spreadsheets-values-batchupdate" class="section level2">
+<div id="spreadsheets-values-batchupdate" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sheets-spreadsheets-values-batchupdate" class="anchor"></a>sheets.spreadsheets.values.batchUpdate</h2>
+<a href="#spreadsheets-values-batchupdate" class="anchor"></a>spreadsheets.values.batchUpdate</h2>
 <ul>
-<li>id: sheets.spreadsheets.values.batchUpdate</li>
+<li>method: spreadsheets.values.batchUpdate</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values:batchUpdate</li>
 <li>path_params:
@@ -531,11 +531,11 @@
 <li>request: BatchUpdateValuesRequest</li>
 </ul>
 </div>
-<div id="sheets-spreadsheets-values-clear" class="section level2">
+<div id="spreadsheets-values-clear" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sheets-spreadsheets-values-clear" class="anchor"></a>sheets.spreadsheets.values.clear</h2>
+<a href="#spreadsheets-values-clear" class="anchor"></a>spreadsheets.values.clear</h2>
 <ul>
-<li>id: sheets.spreadsheets.values.clear</li>
+<li>method: spreadsheets.values.clear</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values/{range}:clear</li>
 <li>path_params:
@@ -571,11 +571,11 @@
 <li>request: ClearValuesRequest</li>
 </ul>
 </div>
-<div id="sheets-spreadsheets-values-batchget" class="section level2">
+<div id="spreadsheets-values-batchget" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sheets-spreadsheets-values-batchget" class="anchor"></a>sheets.spreadsheets.values.batchGet</h2>
+<a href="#spreadsheets-values-batchget" class="anchor"></a>spreadsheets.values.batchGet</h2>
 <ul>
-<li>id: sheets.spreadsheets.values.batchGet</li>
+<li>method: spreadsheets.values.batchGet</li>
 <li>httpMethod: GET</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values:batchGet</li>
 <li>path_params:
@@ -651,17 +651,17 @@
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#exploring-the-google-sheets-api-v4-discovery-document">Exploring the Google Sheets API v4 Discovery Document</a></li>
-      <li><a href="#sheets.spreadsheets.get">sheets.spreadsheets.get</a></li>
-      <li><a href="#sheets.spreadsheets.create">sheets.spreadsheets.create</a></li>
-      <li><a href="#sheets.spreadsheets.batchupdate">sheets.spreadsheets.batchUpdate</a></li>
-      <li><a href="#sheets.spreadsheets.sheets.copyto">sheets.spreadsheets.sheets.copyTo</a></li>
-      <li><a href="#sheets.spreadsheets.values.append">sheets.spreadsheets.values.append</a></li>
-      <li><a href="#sheets.spreadsheets.values.batchclear">sheets.spreadsheets.values.batchClear</a></li>
-      <li><a href="#sheets.spreadsheets.values.get">sheets.spreadsheets.values.get</a></li>
-      <li><a href="#sheets.spreadsheets.values.update">sheets.spreadsheets.values.update</a></li>
-      <li><a href="#sheets.spreadsheets.values.batchupdate">sheets.spreadsheets.values.batchUpdate</a></li>
-      <li><a href="#sheets.spreadsheets.values.clear">sheets.spreadsheets.values.clear</a></li>
-      <li><a href="#sheets.spreadsheets.values.batchget">sheets.spreadsheets.values.batchGet</a></li>
+      <li><a href="#spreadsheets.get">spreadsheets.get</a></li>
+      <li><a href="#spreadsheets.create">spreadsheets.create</a></li>
+      <li><a href="#spreadsheets.batchupdate">spreadsheets.batchUpdate</a></li>
+      <li><a href="#spreadsheets.sheets.copyto">spreadsheets.sheets.copyTo</a></li>
+      <li><a href="#spreadsheets.values.append">spreadsheets.values.append</a></li>
+      <li><a href="#spreadsheets.values.batchclear">spreadsheets.values.batchClear</a></li>
+      <li><a href="#spreadsheets.values.get">spreadsheets.values.get</a></li>
+      <li><a href="#spreadsheets.values.update">spreadsheets.values.update</a></li>
+      <li><a href="#spreadsheets.values.batchupdate">spreadsheets.values.batchUpdate</a></li>
+      <li><a href="#spreadsheets.values.clear">spreadsheets.values.clear</a></li>
+      <li><a href="#spreadsheets.values.batchget">spreadsheets.values.batchGet</a></li>
       </ul>
 </div>
       </div>

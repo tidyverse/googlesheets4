@@ -5,3 +5,8 @@ cpf <- function(...) cat(paste0(sprintf(...), "\n"))
 mpf <- function(...) message(sprintf(...))
 wpf <- function(...) warning(sprintf(...), call. = FALSE)
 spf <- function(...) stop(sprintf(...), call. = FALSE)
+
+## useful in development
+str0 <- function(...) str(..., max.level = 0)
+str1 <- function(...) str(..., max.level = 1)
+str2 <- function(...) str(..., max.level = 2)

@@ -1,6 +1,6 @@
 {
-  "sheets.spreadsheets.get": {
-    "id": ["sheets.spreadsheets.get"],
+  "spreadsheets.get": {
+    "method": ["spreadsheets.get"],
     "httpMethod": ["GET"],
     "path": ["v4/spreadsheets/{spreadsheetId}"],
     "path_params": {
@@ -37,8 +37,8 @@
     "parameterOrder": ["spreadsheetId"],
     "request": [null]
   },
-  "sheets.spreadsheets.create": {
-    "id": ["sheets.spreadsheets.create"],
+  "spreadsheets.create": {
+    "method": ["spreadsheets.create"],
     "httpMethod": ["POST"],
     "path": ["v4/spreadsheets"],
     "path_params": {},
@@ -49,8 +49,8 @@
     "parameterOrder": [null],
     "request": ["Spreadsheet"]
   },
-  "sheets.spreadsheets.batchUpdate": {
-    "id": ["sheets.spreadsheets.batchUpdate"],
+  "spreadsheets.batchUpdate": {
+    "method": ["spreadsheets.batchUpdate"],
     "httpMethod": ["POST"],
     "path": ["v4/spreadsheets/{spreadsheetId}:batchUpdate"],
     "path_params": {
@@ -70,8 +70,8 @@
     "parameterOrder": ["spreadsheetId"],
     "request": ["BatchUpdateSpreadsheetRequest"]
   },
-  "sheets.spreadsheets.sheets.copyTo": {
-    "id": ["sheets.spreadsheets.sheets.copyTo"],
+  "spreadsheets.sheets.copyTo": {
+    "method": ["spreadsheets.sheets.copyTo"],
     "httpMethod": ["POST"],
     "path": ["v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo"],
     "path_params": {
@@ -99,8 +99,8 @@
     "parameterOrder": ["spreadsheetId, sheetId"],
     "request": ["CopySheetToAnotherSpreadsheetRequest"]
   },
-  "sheets.spreadsheets.values.append": {
-    "id": ["sheets.spreadsheets.values.append"],
+  "spreadsheets.values.append": {
+    "method": ["spreadsheets.values.append"],
     "httpMethod": ["POST"],
     "path": ["v4/spreadsheets/{spreadsheetId}/values/{range}:append"],
     "path_params": {
@@ -169,8 +169,8 @@
     "parameterOrder": ["spreadsheetId, range"],
     "request": ["ValueRange"]
   },
-  "sheets.spreadsheets.values.batchClear": {
-    "id": ["sheets.spreadsheets.values.batchClear"],
+  "spreadsheets.values.batchClear": {
+    "method": ["spreadsheets.values.batchClear"],
     "httpMethod": ["POST"],
     "path": ["v4/spreadsheets/{spreadsheetId}/values:batchClear"],
     "path_params": {
@@ -190,8 +190,8 @@
     "parameterOrder": ["spreadsheetId"],
     "request": ["BatchClearValuesRequest"]
   },
-  "sheets.spreadsheets.values.get": {
-    "id": ["sheets.spreadsheets.values.get"],
+  "spreadsheets.values.get": {
+    "method": ["spreadsheets.values.get"],
     "httpMethod": ["GET"],
     "path": ["v4/spreadsheets/{spreadsheetId}/values/{range}"],
     "path_params": {
@@ -244,8 +244,8 @@
     "parameterOrder": ["spreadsheetId, range"],
     "request": [null]
   },
-  "sheets.spreadsheets.values.update": {
-    "id": ["sheets.spreadsheets.values.update"],
+  "spreadsheets.values.update": {
+    "method": ["spreadsheets.values.update"],
     "httpMethod": ["PUT"],
     "path": ["v4/spreadsheets/{spreadsheetId}/values/{range}"],
     "path_params": {
@@ -306,8 +306,8 @@
     "parameterOrder": ["spreadsheetId, range"],
     "request": ["ValueRange"]
   },
-  "sheets.spreadsheets.values.batchUpdate": {
-    "id": ["sheets.spreadsheets.values.batchUpdate"],
+  "spreadsheets.values.batchUpdate": {
+    "method": ["spreadsheets.values.batchUpdate"],
     "httpMethod": ["POST"],
     "path": ["v4/spreadsheets/{spreadsheetId}/values:batchUpdate"],
     "path_params": {
@@ -327,8 +327,8 @@
     "parameterOrder": ["spreadsheetId"],
     "request": ["BatchUpdateValuesRequest"]
   },
-  "sheets.spreadsheets.values.clear": {
-    "id": ["sheets.spreadsheets.values.clear"],
+  "spreadsheets.values.clear": {
+    "method": ["spreadsheets.values.clear"],
     "httpMethod": ["POST"],
     "path": ["v4/spreadsheets/{spreadsheetId}/values/{range}:clear"],
     "path_params": {
@@ -356,8 +356,8 @@
     "parameterOrder": ["spreadsheetId, range"],
     "request": ["ClearValuesRequest"]
   },
-  "sheets.spreadsheets.values.batchGet": {
-    "id": ["sheets.spreadsheets.values.batchGet"],
+  "spreadsheets.values.batchGet": {
+    "method": ["spreadsheets.values.batchGet"],
     "httpMethod": ["GET"],
     "path": ["v4/spreadsheets/{spreadsheetId}/values:batchGet"],
     "path_params": {

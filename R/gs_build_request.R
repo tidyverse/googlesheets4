@@ -6,13 +6,10 @@ gs_build_request <- function(method = character(), params = list()) {
 
   params <- match_params(params, endpoint$parameters)
   params <- handle_repeats(params, endpoint$parameters)
-
-  ## TO DO: check parameter type
-  # .endpoints %>% map("path_params") %>% flatten() %>% map_chr("type")
-  # .endpoints %>% map("query_params") %>% flatten() %>% map_chr("type")
-
-  ## TO DO: check enums
-
+  ## Maybe TO DO: check parameter type?
+  ## Everything will be coerced to character anyway, so if I relay error
+  ## messages well, user will learn about malformed params anyway.
+  check_enums(params, endpoint$parameters)
   params <- partition_params(params, endpoint$parameters)
 
   out <- list(
@@ -29,10 +26,10 @@ gs_build_request <- function(method = character(), params = list()) {
   out
 }
 
-match_params <- function(have, allowed) {
+match_params <- function(provided, spec) {
   ## .endpoints %>% map("parameters") %>% flatten() %>% map_lgl("required")
-  required <- allowed %>% purrr::keep("required") %>% names()
-  missing <- setdiff(required, names(have))
+  required <- spec %>% purrr::keep("required") %>% names()
+  missing <- setdiff(required, names(provided))
   if (length(missing)) {
     stop(
       "Required parameter(s) are missing:\n",
@@ -41,70 +38,99 @@ match_params <- function(have, allowed) {
     )
   }
 
-  unknown <- setdiff(names(have), names(allowed))
+  unknown <- setdiff(names(provided), names(spec))
   if (length(unknown)) {
-    m <- names(have) %in% unknown
+    m <- names(provided) %in% unknown
     message(
       "Ignoring these unrecognized parameters:\n",
-      paste(names(have[m]), have[m], sep = ": ", collapse = "\n")
+      paste(names(provided[m]), provided[m], sep = ": ", collapse = "\n")
     )
-    have <- have[!m]
+    provided <- provided[!m]
   }
-  return(have)
+  return(provided)
 }
 
-handle_repeats <- function(user, api) {
+handle_repeats <- function(provided, spec) {
 
-  if (length(user) < 1) {
-    return(invisible(user))
+  if (length(provided) < 1) {
+    return(provided)
   }
-  can_repeat <- api[names(user)] %>%
+  can_repeat <- spec[names(provided)] %>%
     purrr::map_lgl("repeated") %>%
     purrr::map_lgl(isTRUE)
-  too_long <- lengths(user) > 1 & !can_repeat
+  too_long <- lengths(provided) > 1 & !can_repeat
   if (any(too_long)) {
     stop(
       "These parameter(s) are not allowed to have length > 1:\n",
-      names(user)[too_long],
+      names(provided)[too_long],
       call. = FALSE
     )
   }
 
-  is_a_repeat <- duplicated(names(user))
+  is_a_repeat <- duplicated(names(provided))
   too_many <- is_a_repeat & !can_repeat
   if (any(too_many)) {
     stop(
       "These parameter(s) are not allowed to appear more than once:\n",
-      names(user)[too_many],
+      names(provided)[too_many],
       call. = FALSE
     )
   }
 
   ## replicate anything with length > 1
-  n <- lengths(user)
-  nms <- names(user)
+  n <- lengths(provided)
+  nms <- names(provided)
   ## this thwarts protection from urlencoding via I() ... revisit if needed
-  user <- user %>% purrr::flatten() %>% purrr::set_names(rep(nms, n))
+  provided <- provided %>% purrr::flatten() %>% purrr::set_names(rep(nms, n))
 
-  return(invisible(user))
+  return(provided)
 }
 
-partition_params <- function(params, endpoint) {
-  path_params <- query_params <- NULL
-  path_param_names <- endpoint %>% purrr::keep(~.x$location == "path") %>% names()
-  query_param_names <- endpoint %>% purrr::keep(~.x$location == "query") %>% names()
-  if (length(path_param_names) && length(params)) {
-    m <- names(params) %in% path_param_names
-    path_params <- params[m]
-    params <- params[!m]
+check_enums <- function(provided, spec) {
+  values <- spec %>% purrr::map("enum")
+  if (length(provided) < 1 | length(values) < 1) {
+    return(provided)
   }
-  if (length(query_param_names) && length(params)) {
-    m <- names(params) %in% query_param_names
+  check_it <- tibble::tibble(
+    pname = names(provided),
+    pdata = purrr::flatten_chr(provided),
+    values = values[pname]
+  )
+  not_an_enum <- check_it$values %>% purrr::map(is.na) %>% purrr::map_lgl(all)
+  check_it <- check_it[!not_an_enum, ]
+  ok <- purrr::map2_lgl(check_it$pdata, check_it$values, ~ .x %in% .y)
+  if (any(!ok)) {
+    problems <- check_it[!ok, ]
+    problems$values <- problems$values %>% purrr::map_chr(paste, collapse = " | ")
+    template <- paste0("Parameter '{pname}' has value '{pdata}', ",
+                       "but it must be one of these:\n{values}\n\n")
+    msgs <- glue::glue_data(problems, template)
+    msgs %>% purrr::walk(message)
+    stop("Invalid parameter value(s).", call. = FALSE)
+  }
+  return(provided)
+}
+
+partition_params <- function(provided, spec) {
+  path_params <- query_params <- NULL
+  path_param_names <- spec %>%
+    purrr::keep(~.x$location == "path") %>%
+    names()
+  query_param_names <- spec %>%
+    purrr::keep(~.x$location == "query") %>%
+    names()
+  if (length(path_param_names) && length(provided)) {
+    m <- names(provided) %in% path_param_names
+    path_params <- provided[m]
+    provided <- provided[!m]
+  }
+  if (length(query_param_names) && length(provided)) {
+    m <- names(provided) %in% query_param_names
     ## leave query_params as NULL vs list() if no matches
     ## for the sake of downstream URLs
     if (any(m)) {
-      query_params <- params[m]
-      params <- params[!m]
+      query_params <- provided[m]
+      provided <- provided[!m]
     }
   }
 

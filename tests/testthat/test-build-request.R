@@ -115,3 +115,40 @@ test_that("ranges can be explicitly repeated", {
     "https://sheets.googleapis.com/v4/spreadsheets/abc?ranges=Sheet1%21A1%3AB2&ranges=Sheet1%21D%3AD"
   )
 })
+
+test_that("valid enum values are accepted", {
+  expect_silent(
+    req <- gs_build_request(
+      "spreadsheets.values.append",
+      list(
+        spreadsheetId = "abc",
+        range = "Sheet1!A1:B2",
+        responseValueRenderOption = "FORMULA",
+        valueInputOption = "RAW"
+      )
+    )
+  )
+  expect_identical(
+    req$url,
+    "https://sheets.googleapis.com/v4/spreadsheets/abc/values/Sheet1!A1:B2:append?responseValueRenderOption=FORMULA&valueInputOption=RAW"
+  )
+})
+
+test_that("invalid enum values are detected, messaged, and errored", {
+  expect_error(
+    expect_message(
+      req <- gs_build_request(
+        "spreadsheets.values.append",
+        list(
+          spreadsheetId = "abc",
+          range = "Sheet1!A1:B2",
+          responseValueRenderOption = "FOO",
+          valueInputOption = "FOO"
+        )
+      ),
+      "Parameter '[a-zA-Z]+' has value 'FOO', but it must be one of these"
+    ),
+    "Invalid parameter value(s).",
+    fixed = TRUE
+  )
+})

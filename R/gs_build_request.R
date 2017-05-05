@@ -4,20 +4,16 @@ gs_build_request <- function(method = character(), params = list()) {
     stop("Endpoint not recognized:\n", method, call. = FALSE)
   }
 
-  params <- partition_params(params, endpoint)
-
-  require_params(params$path_params, endpoint$path_params)
-  require_params(params$query_params, endpoint$query_params)
-
-  handle_repeats(params$path_params, endpoint$path_params)
-  params$query_params <-
-    handle_repeats(params$query_params, endpoint$query_params)
+  params <- match_params(params, endpoint$parameters)
+  params <- handle_repeats(params, endpoint$parameters)
 
   ## TO DO: check parameter type
   # .endpoints %>% map("path_params") %>% flatten() %>% map_chr("type")
   # .endpoints %>% map("query_params") %>% flatten() %>% map_chr("type")
 
   ## TO DO: check enums
+
+  params <- partition_params(params, endpoint$parameters)
 
   out <- list(
     method = method,
@@ -33,41 +29,10 @@ gs_build_request <- function(method = character(), params = list()) {
   out
 }
 
-## simply partitions -- no checks for completeness, length, or type
-partition_params <- function(params, endpoint) {
-  path_params <- query_params <- NULL
-  if (length(endpoint$path_params) && length(params)) {
-    m <- names(params) %in% names(endpoint$path_params)
-    path_params <- params[m]
-    params <- params[-m]
-  }
-  if (length(endpoint$query_params) && length(params)) {
-    m <- names(params) %in% names(endpoint$query_params)
-    ## leave query_params as NULL vs list() if no matches
-    if (any(m)) {
-      query_params <- params[m]
-      params <- params[!m]
-    }
-  }
-  if (length(params)) {
-    message(
-      "Ignoring these unrecognized parameters:\n",
-      paste(names(params), params, sep = ": ", collapse = "\n")
-    )
-  }
-  return(list(
-    path_params = path_params,
-    query_params = query_params
-  ))
-}
-
-
-require_params <- function(have, need) {
-  ## .endpoints %>% map("path_params") %>% flatten() %>% map_lgl("required")
-  ## .endpoints %>% map("query_params") %>% flatten() %>% map_lgl("required")
-  required <- need %>% purrr::map_lgl("required") %>% purrr::map_lgl(isTRUE)
-  need <- need[required]
-  missing <- setdiff(names(need), names(have))
+match_params <- function(have, allowed) {
+  ## .endpoints %>% map("parameters") %>% flatten() %>% map_lgl("required")
+  required <- allowed %>% purrr::keep("required") %>% names()
+  missing <- setdiff(required, names(have))
   if (length(missing)) {
     stop(
       "Required parameter(s) are missing:\n",
@@ -75,7 +40,17 @@ require_params <- function(have, need) {
       call. = FALSE
     )
   }
-  return(invisible())
+
+  unknown <- setdiff(names(have), names(allowed))
+  if (length(unknown)) {
+    m <- names(have) %in% unknown
+    message(
+      "Ignoring these unrecognized parameters:\n",
+      paste(names(have[m]), have[m], sep = ": ", collapse = "\n")
+    )
+    have <- have[!m]
+  }
+  return(have)
 }
 
 handle_repeats <- function(user, api) {
@@ -112,4 +87,29 @@ handle_repeats <- function(user, api) {
   user <- user %>% purrr::flatten() %>% purrr::set_names(rep(nms, n))
 
   return(invisible(user))
+}
+
+partition_params <- function(params, endpoint) {
+  path_params <- query_params <- NULL
+  path_param_names <- endpoint %>% purrr::keep(~.x$location == "path") %>% names()
+  query_param_names <- endpoint %>% purrr::keep(~.x$location == "query") %>% names()
+  if (length(path_param_names) && length(params)) {
+    m <- names(params) %in% path_param_names
+    path_params <- params[m]
+    params <- params[!m]
+  }
+  if (length(query_param_names) && length(params)) {
+    m <- names(params) %in% query_param_names
+    ## leave query_params as NULL vs list() if no matches
+    ## for the sake of downstream URLs
+    if (any(m)) {
+      query_params <- params[m]
+      params <- params[!m]
+    }
+  }
+
+  return(list(
+    path_params = path_params,
+    query_params = query_params
+  ))
 }

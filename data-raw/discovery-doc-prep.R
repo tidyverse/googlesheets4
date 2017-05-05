@@ -3,6 +3,14 @@ library(jsonlite)
 library(httr)
 library(tidyverse)
 
+## play with view() proposed by @jimhester
+is_sourced <- function() c("source", "sys.source") %in% vapply(sys.calls(), function(x) as.character(x[[1L]]), character(1))
+is_knitting <- function() !is.null(getOption("knitr.in.progress"))
+view <- function(x) {
+  if (interactive() && !is_sourced() && !is_knitting()) View(x)
+  invisible(x)
+}
+
 ## load the API spec, including download if necessary
 dd_cache <- find_package_root_file("data-raw") %>%
   list.files(pattern = "discovery-document.json$", full.names = TRUE)
@@ -25,7 +33,7 @@ if (length(dd_cache) < 1) {
 dd_content <- fromJSON(json_fname)
 ## listviewer::jsonedit(dd_content)
 
-## extract the collections and bring to same level of hierarchy
+## extract the method collections and bring to same level of hierarchy
 spreadsheets <- dd_content[[c("resources", "spreadsheets", "methods")]]
 names(spreadsheets) <- paste("spreadsheets", names(spreadsheets), sep = ".")
 sheets <-
@@ -47,7 +55,7 @@ edf <- endpoints %>%
   transpose(.names = nms) %>%
   simplify_all(.type = character(1)) %>%
   as_tibble()
-#View(edf)
+view(edf)
 
 ## more processing is needed :(
 
@@ -79,9 +87,10 @@ edf$response <- edf$response %>%
   map_chr("$ref", .null = NA_character_)
 edf$request <- edf$request %>%
   map_chr("$ref", .null = NA_character_)
-#View(edf)
+view(edf)
 
 ## loooong side journey to clean up parameters
+## give them common sub-elements, in a common order
 params <- edf %>%
   select(method, parameters) %>% {
     ## unnest() won't work with a list ... doing it manually
@@ -115,48 +124,23 @@ params <- params %>%
   )
 ## repack all the info for each parameter into a list
 repacked <- params %>%
-  select(-method, -pname, -location) %>%
+  select(-method, -pname) %>%
   pmap(list)
 params <- params %>%
-  select(method, pname, location) %>%
+  select(method, pname) %>%
   mutate(pdata = repacked)
-
-## tibble with one or zero rows per endpoint and a list of path parameters
-path_params <- params %>%
-  filter(location == "path") %>%
-  select(-location)
-path_params <- path_params %>%
+## repack all the parameters for each method into a named list
+params <- params %>%
   group_by(method) %>%
-  nest(.key = path_params) %>%
-  mutate(path_params = map(path_params, deframe))
+  nest(.key = parameters) %>%
+  mutate(parameters = map(parameters, deframe))
 
-## tibble with one or zero rows per endpoint and a list of query parameters
-query_params <- params %>%
-  filter(location == "query") %>%
-  select(-location)
-query_params <- query_params %>%
-  group_by(method) %>%
-  nest(.key = query_params) %>%
-  mutate(query_params = map(query_params, deframe))
-
-## join the path and query parameters back to main endpoint tibble
+## replace the parameters in the main endpoint tibble
 edf <- edf %>%
-  left_join(path_params) %>%
-  left_join(query_params) %>%
-  select(method, httpMethod, path, parameters, path_params, query_params,
-         everything())
-
-## spot check that we have the same (number of) parameters
-tibble(
-  orig_n = edf$parameters %>% lengths(),
-  path_n = edf$path_params %>% lengths(),
-  query_n = edf$query_params %>% lengths(),
-  new_n = path_n + query_n,
-  ok = orig_n == new_n
-)
-
-edf <- edf %>%
-  select(-parameters)
+  select(-parameters) %>%
+  left_join(params) %>%
+  select(method, httpMethod, path, parameters, everything())
+view(edf)
 
 ## WE ARE DONE
 ## saving in various forms
@@ -189,9 +173,10 @@ elist %>%
   toJSON(pretty = TRUE) %>%
   writeLines(out_fname)
 
-## partial spec as list, i.e. drop variables not needed internally
+## partial spec as list, i.e. keep only the variables I currently use to
+## create the API
 .endpoints <- edf %>%
-  select(method, verb = httpMethod, path, path_params, query_params) %>%
+  select(method, verb = httpMethod, path, parameters) %>%
   pmap(list) %>%
   set_names(edf$method)
 #listviewer::jsonedit(.endpoints)

@@ -67,9 +67,9 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rprojroot)
 <span class="kw">library</span>(jsonlite)
 <span class="kw">library</span>(tidyverse)</code></pre></div>
-<pre><code>## + ggplot2 2.2.1             Date: 2017-05-04
+<pre><code>## + ggplot2 2.2.1             Date: 2017-05-05
 ## + tibble  1.3.0.9001           R: 3.3.2
-## + tidyr   0.6.1.9000          OS: OS X El Capitan 10.11.6
+## + tidyr   0.6.2.9000          OS: OS X El Capitan 10.11.6
 ## + readr   1.1.0              GUI: X11
 ## + purrr   0.2.2.9000      Locale: en_CA.UTF-8
 ## + dplyr   0.5.0.9004          TZ: America/Vancouver
@@ -94,24 +94,11 @@
 <li>method: spreadsheets.get</li>
 <li>httpMethod: GET</li>
 <li>path: v4/spreadsheets/{spreadsheetId}</li>
-<li>path_params:
-<ul>
-<li>spreadsheetId:
-<ul>
-<li>required: TRUE</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: NA</li>
-<li>description: The spreadsheet to request.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>query_params:
+<li>parameters:
 <ul>
 <li>ranges:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: TRUE</li>
@@ -122,12 +109,24 @@
 </li>
 <li>includeGridData:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: boolean</li>
 <li>repeated: NA</li>
 <li>format: NA</li>
 <li>enum: NA</li>
 <li>description: True if grid data should be returned. This …</li>
+</ul>
+</li>
+<li>spreadsheetId:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>format: NA</li>
+<li>enum: NA</li>
+<li>description: The spreadsheet to request.</li>
 </ul>
 </li>
 </ul>
@@ -146,9 +145,7 @@
 <li>method: spreadsheets.create</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets</li>
-<li>path_params:<br>
-</li>
-<li>query_params:<br>
+<li>parameters:<br>
 </li>
 <li>scopes: drive, spreadsheets</li>
 <li>description: Creates a spreadsheet, returning the newly created sp…</li>
@@ -164,10 +161,11 @@
 <li>method: spreadsheets.batchUpdate</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets/{spreadsheetId}:batchUpdate</li>
-<li>path_params:
+<li>parameters:
 <ul>
 <li>spreadsheetId:
 <ul>
+<li>location: path</li>
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -177,8 +175,6 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>query_params:<br>
 </li>
 <li>scopes: drive, spreadsheets</li>
 <li>description: Applies one or more updates to the spreadsheet.</li>
@@ -192,10 +188,11 @@
 <li>method: spreadsheets.sheets.copyTo</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo</li>
-<li>path_params:
+<li>parameters:
 <ul>
 <li>sheetId:
 <ul>
+<li>location: path</li>
 <li>required: TRUE</li>
 <li>type: integer</li>
 <li>repeated: NA</li>
@@ -206,6 +203,7 @@
 </li>
 <li>spreadsheetId:
 <ul>
+<li>location: path</li>
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -215,8 +213,6 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>query_params:<br>
 </li>
 <li>scopes: drive, spreadsheets</li>
 <li>description: Copies a single sheet from a spreadsheet to another s…</li>
@@ -232,10 +228,22 @@
 <li>method: spreadsheets.values.append</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values/{range}:append</li>
-<li>path_params:
+<li>parameters:
 <ul>
+<li>includeValuesInResponse:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>format: NA</li>
+<li>enum: NA</li>
+<li>description: Determines if the update response should in…</li>
+</ul>
+</li>
 <li>range:
 <ul>
+<li>location: path</li>
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -246,6 +254,7 @@
 </li>
 <li>spreadsheetId:
 <ul>
+<li>location: path</li>
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -254,22 +263,9 @@
 <li>description: The ID of the spreadsheet to update.</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>query_params:
-<ul>
-<li>includeValuesInResponse:
-<ul>
-<li>required: NA</li>
-<li>type: boolean</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: NA</li>
-<li>description: Determines if the update response should in…</li>
-</ul>
-</li>
 <li>responseValueRenderOption:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -280,6 +276,7 @@
 </li>
 <li>insertDataOption:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -290,6 +287,7 @@
 </li>
 <li>valueInputOption:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -300,6 +298,7 @@
 </li>
 <li>responseDateTimeRenderOption:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -324,10 +323,11 @@
 <li>method: spreadsheets.values.batchClear</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values:batchClear</li>
-<li>path_params:
+<li>parameters:
 <ul>
 <li>spreadsheetId:
 <ul>
+<li>location: path</li>
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -337,8 +337,6 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>query_params:<br>
 </li>
 <li>scopes: drive, spreadsheets</li>
 <li>description: Clears one or more ranges of values from a spreadshee…</li>
@@ -354,10 +352,22 @@
 <li>method: spreadsheets.values.get</li>
 <li>httpMethod: GET</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values/{range}</li>
-<li>path_params:
+<li>parameters:
 <ul>
+<li>majorDimension:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>format: NA</li>
+<li>enum: DIMENSION_UNSPECIFIED ROWS COLUMNS</li>
+<li>description: The major dimension that results should use…</li>
+</ul>
+</li>
 <li>spreadsheetId:
 <ul>
+<li>location: path</li>
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -368,6 +378,7 @@
 </li>
 <li>range:
 <ul>
+<li>location: path</li>
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -376,22 +387,9 @@
 <li>description: The A1 notation of the values to retrieve.</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>query_params:
-<ul>
-<li>majorDimension:
-<ul>
-<li>required: NA</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: DIMENSION_UNSPECIFIED ROWS COLUMNS</li>
-<li>description: The major dimension that results should use…</li>
-</ul>
-</li>
 <li>valueRenderOption:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -402,6 +400,7 @@
 </li>
 <li>dateTimeRenderOption:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -426,10 +425,11 @@
 <li>method: spreadsheets.values.update</li>
 <li>httpMethod: PUT</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values/{range}</li>
-<li>path_params:
+<li>parameters:
 <ul>
 <li>range:
 <ul>
+<li>location: path</li>
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -438,22 +438,9 @@
 <li>description: The A1 notation of the values to update.</li>
 </ul>
 </li>
-<li>spreadsheetId:
-<ul>
-<li>required: TRUE</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: NA</li>
-<li>description: The ID of the spreadsheet to update.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>query_params:
-<ul>
 <li>includeValuesInResponse:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: boolean</li>
 <li>repeated: NA</li>
@@ -462,8 +449,20 @@
 <li>description: Determines if the update response should in…</li>
 </ul>
 </li>
+<li>spreadsheetId:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>format: NA</li>
+<li>enum: NA</li>
+<li>description: The ID of the spreadsheet to update.</li>
+</ul>
+</li>
 <li>responseValueRenderOption:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -474,6 +473,7 @@
 </li>
 <li>valueInputOption:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -484,6 +484,7 @@
 </li>
 <li>responseDateTimeRenderOption:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -508,10 +509,11 @@
 <li>method: spreadsheets.values.batchUpdate</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values:batchUpdate</li>
-<li>path_params:
+<li>parameters:
 <ul>
 <li>spreadsheetId:
 <ul>
+<li>location: path</li>
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -521,8 +523,6 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>query_params:<br>
 </li>
 <li>scopes: drive, spreadsheets</li>
 <li>description: Sets values in one or more ranges of a spreadsheet. T…</li>
@@ -538,10 +538,11 @@
 <li>method: spreadsheets.values.clear</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values/{range}:clear</li>
-<li>path_params:
+<li>parameters:
 <ul>
 <li>range:
 <ul>
+<li>location: path</li>
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -552,6 +553,7 @@
 </li>
 <li>spreadsheetId:
 <ul>
+<li>location: path</li>
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -561,8 +563,6 @@
 </ul>
 </li>
 </ul>
-</li>
-<li>query_params:<br>
 </li>
 <li>scopes: drive, spreadsheets</li>
 <li>description: Clears values from a spreadsheet. The caller must spe…</li>
@@ -578,24 +578,11 @@
 <li>method: spreadsheets.values.batchGet</li>
 <li>httpMethod: GET</li>
 <li>path: v4/spreadsheets/{spreadsheetId}/values:batchGet</li>
-<li>path_params:
-<ul>
-<li>spreadsheetId:
-<ul>
-<li>required: TRUE</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: NA</li>
-<li>description: The ID of the spreadsheet to retrieve data …</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>query_params:
+<li>parameters:
 <ul>
 <li>ranges:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: TRUE</li>
@@ -606,6 +593,7 @@
 </li>
 <li>majorDimension:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -614,8 +602,20 @@
 <li>description: The major dimension that results should use…</li>
 </ul>
 </li>
+<li>spreadsheetId:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>format: NA</li>
+<li>enum: NA</li>
+<li>description: The ID of the spreadsheet to retrieve data …</li>
+</ul>
+</li>
 <li>valueRenderOption:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
@@ -626,6 +626,7 @@
 </li>
 <li>dateTimeRenderOption:
 <ul>
+<li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>

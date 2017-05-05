@@ -23,6 +23,6 @@ Roxygen: list(markdown = TRUE)
 Imports: glue,
     httr,
     jsonlite,
-    purrr,
+    purrr (>= 0.2.2.1),
     xml2
 Remotes: tidyverse/purrr

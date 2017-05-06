@@ -24,5 +24,6 @@ Imports: glue,
     httr,
     jsonlite,
     purrr (>= 0.2.2.1),
+    tibble,
     xml2
 Remotes: tidyverse/purrr

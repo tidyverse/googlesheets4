@@ -93,9 +93,9 @@ check_enums <- function(provided, spec) {
   }
   check_it <- tibble::tibble(
     pname = names(provided),
-    pdata = purrr::flatten_chr(provided),
-    values = values[pname]
+    pdata = purrr::flatten_chr(provided)
   )
+  check_it$values = values[check_it$pname]
   not_an_enum <- check_it$values %>% purrr::map(is.na) %>% purrr::map_lgl(all)
   check_it <- check_it[!not_an_enum, ]
   ok <- purrr::map2_lgl(check_it$pdata, check_it$values, ~ .x %in% .y)

@@ -49,7 +49,7 @@ test_that("unknown parameters are dropped and messaged", {
       "spreadsheets.get",
       list(spreadsheetId = "abc", x = "x", y = "y")
     ),
-    "Ignoring these unrecognized parameters:\nx: x\ny: y"
+    "Ignoring these unrecognized parameters:\\s+x: x\\s+y: y.*"
   )
   expect_identical(
     req$url,

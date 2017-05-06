@@ -31,20 +31,17 @@ match_params <- function(provided, spec) {
   required <- spec %>% purrr::keep("required") %>% names()
   missing <- setdiff(required, names(provided))
   if (length(missing)) {
-    stop(
-      "Required parameter(s) are missing:\n",
-      missing,
-      call. = FALSE
-    )
+    stop("Required parameter(s) are missing:\n", missing, call. = FALSE)
   }
 
   unknown <- setdiff(names(provided), names(spec))
   if (length(unknown)) {
     m <- names(provided) %in% unknown
-    message(
-      "Ignoring these unrecognized parameters:\n",
-      paste(names(provided[m]), provided[m], sep = ": ", collapse = "\n")
+    msgs <- c(
+      "Ignoring these unrecognized parameters:",
+      glue::glue_data(tibble::enframe(provided[m]), "{name}: {value}")
     )
+    message(paste(msgs, collapse = "\n"))
     provided <- provided[!m]
   }
   return(provided)

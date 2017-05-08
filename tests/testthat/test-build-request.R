@@ -9,7 +9,7 @@ test_that("non-existent endpoint errors", {
 
 test_that("request with no parameters works", {
   req <- gs_build_request("spreadsheets.create")
-  expect_identical(
+  expect_match(
     req$url,
     "https://sheets.googleapis.com/v4/spreadsheets"
   )
@@ -28,7 +28,7 @@ test_that("path parameters are substituted", {
     "spreadsheets.get",
     list(spreadsheetId = "abc")
   )
-  expect_identical(
+  expect_match(
     req$url,
     "https://sheets.googleapis.com/v4/spreadsheets/abc"
   )
@@ -37,7 +37,7 @@ test_that("path parameters are substituted", {
     "spreadsheets.sheets.copyTo",
     list(spreadsheetId = "abc", sheetId = "def")
   )
-  expect_identical(
+  expect_match(
     req$url,
     "https://sheets.googleapis.com/v4/spreadsheets/abc/sheets/def:copyTo"
   )
@@ -51,7 +51,7 @@ test_that("unknown parameters are dropped and messaged", {
     ),
     "Ignoring these unrecognized parameters:\\s+x: x\\s+y: y.*"
   )
-  expect_identical(
+  expect_match(
     req$url,
     "https://sheets.googleapis.com/v4/spreadsheets/abc"
   )
@@ -93,9 +93,10 @@ test_that("ranges can have length > 1 and get expanded", {
       )
     )
   )
-  expect_identical(
+  expect_match(
     req$url,
-    "https://sheets.googleapis.com/v4/spreadsheets/abc?ranges=Sheet1%21A1%3AB2&ranges=Sheet1%21D%3AD"
+    "https://sheets.googleapis.com/v4/spreadsheets/abc?ranges=Sheet1%21A1%3AB2&ranges=Sheet1%21D%3AD",
+    fixed = TRUE
   )
 })
 
@@ -110,9 +111,10 @@ test_that("ranges can be explicitly repeated", {
       )
     )
   )
-  expect_identical(
+  expect_match(
     req$url,
-    "https://sheets.googleapis.com/v4/spreadsheets/abc?ranges=Sheet1%21A1%3AB2&ranges=Sheet1%21D%3AD"
+    "https://sheets.googleapis.com/v4/spreadsheets/abc?ranges=Sheet1%21A1%3AB2&ranges=Sheet1%21D%3AD",
+    fixed = TRUE
   )
 })
 
@@ -128,9 +130,10 @@ test_that("valid enum values are accepted", {
       )
     )
   )
-  expect_identical(
+  expect_match(
     req$url,
-    "https://sheets.googleapis.com/v4/spreadsheets/abc/values/Sheet1!A1:B2:append?responseValueRenderOption=FORMULA&valueInputOption=RAW"
+    "https://sheets.googleapis.com/v4/spreadsheets/abc/values/Sheet1!A1:B2:append?responseValueRenderOption=FORMULA&valueInputOption=RAW",
+    fixed = TRUE
   )
 })
 
@@ -150,5 +153,25 @@ test_that("invalid enum values are detected, messaged, and errored", {
     ),
     "Invalid parameter value(s).",
     fixed = TRUE
+  )
+})
+
+test_that("built-in API key is sent by default", {
+  req <- gs_build_request("spreadsheets.create")
+  expect_match(
+    req$url,
+    paste0(
+      "https://sheets.googleapis.com/v4/spreadsheets?key=",
+      getOption("googlesheets.api.key")
+    ),
+    fixed = TRUE
+  )
+})
+
+test_that("API key can be specified directly", {
+  req <- gs_build_request("spreadsheets.create", .api_key = "abc")
+  expect_identical(
+    req$url,
+    "https://sheets.googleapis.com/v4/spreadsheets?key=abc"
   )
 })

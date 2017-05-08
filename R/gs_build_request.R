@@ -1,4 +1,7 @@
-gs_build_request <- function(method = character(), params = list()) {
+gs_build_request <- function(
+  method = character(),
+  params = list(),
+  .api_key = api_key()) {
   endpoint <- .endpoints[[method]]
   if (is.null(endpoint)) {
     stop("Endpoint not recognized:\n", method, call. = FALSE)
@@ -16,7 +19,7 @@ gs_build_request <- function(method = character(), params = list()) {
     method = method,
     verb = endpoint$verb,
     path = glue::glue_data(params$path_params, endpoint$path),
-    query = params$query_params
+    query = c(params$query_params, list(key = .api_key))
   )
   out$url <- httr::modify_url(
     url = .state$gs_base_url,

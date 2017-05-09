@@ -1,10 +1,10 @@
 gs_build_request <- function(path,
-                             verb,
+                             method,
                              params = list(),
                              .api_key = api_key()) {
   params <- partition_params(params, extract_param_names(path))
   out <- list(
-    verb = verb,
+    method = method,
     path = glue::glue_data(params$path_params, path),
     query = c(params$query_params, list(key = .api_key))
   )
@@ -16,27 +16,31 @@ gs_build_request <- function(path,
   out
 }
 
-gs_generate_request <- function(method = character(),
+gs_generate_request <- function(endpoint = character(),
                                 params = list(),
                                 .api_key = api_key()) {
-  endpoint <- .endpoints[[method]]
-  if (is.null(endpoint)) {
-    stop("Endpoint not recognized:\n", method, call. = FALSE)
+  ept <- .endpoints[[endpoint]]
+  if (is.null(ept)) {
+    stop("Endpoint not recognized:\n", endpoint, call. = FALSE)
   }
 
-  params <- match_params(params, endpoint$parameters)
-  params <- handle_repeats(params, endpoint$parameters)
-  check_enums(params, endpoint$parameters)
-  params <- partition_params(params, keep_path_param_names(endpoint$parameters))
+  ## use the spec to vet and rework request parameters
+  params <-  match_params(params, ept$parameters)
+  params <- handle_repeats(params, ept$parameters)
+  check_enums(params, ept$parameters)
+  params <- partition_params(params, keep_path_param_names(ept$parameters))
 
   gs_build_request(
-    path = glue::glue_data(params$path_params, endpoint$path),
-    verb = endpoint$verb,
+    path = glue::glue_data(params$path_params, ept$path),
+    method = ept$method,
     params = params$query_params,
     .api_key = .api_key
   )
 }
 
+## match params provided by user to spec
+##   * error if required params are missing
+##   * message and drop unknown params
 match_params <- function(provided, spec) {
   ## .endpoints %>% map("parameters") %>% flatten() %>% map_lgl("required")
   required <- spec %>% purrr::keep("required") %>% names()
@@ -58,9 +62,12 @@ match_params <- function(provided, spec) {
   return(provided)
 }
 
+## certain params can be repeated on specific endpoints, e.g., ranges
+##   * replicate as needed in the query params
+##   * detect and error for any other repetition
 handle_repeats <- function(provided, spec) {
 
-  if (length(provided) < 1) {
+  if (length(provided) == 0) {
     return(provided)
   }
   can_repeat <- spec[names(provided)] %>%
@@ -94,9 +101,10 @@ handle_repeats <- function(provided, spec) {
   return(provided)
 }
 
+## a few parameters have fixed lists of possible values -- a.k.a the "enums"
 check_enums <- function(provided, spec) {
   values <- spec %>% purrr::map("enum")
-  if (length(provided) < 1 | length(values) < 1) {
+  if (length(provided) == 0 | length(values) == 0) {
     return(provided)
   }
   check_it <- tibble::tibble(
@@ -119,6 +127,10 @@ check_enums <- function(provided, spec) {
   return(provided)
 }
 
+## extract the path params by name and put the leftovers in query
+## why is this correct?
+## if the endpoint was specified, we have already matched against spec
+## if the endpoint was unspecified, we have no choice
 partition_params <- function(provided, path_param_names) {
   query_params <- provided
   path_params <- NULL
@@ -127,8 +139,9 @@ partition_params <- function(provided, path_param_names) {
     path_params <- query_params[m]
     query_params <- query_params[!m]
   }
-  ## if no query_params, NULL is preferred to list()
-  ## for the sake of downstream URLs
+  ## if no query_params, NULL is preferred to list() for the sake of
+  ## downstream URLs, though the API key will generally imply there are
+  ## no empty queries
   if (length(query_params) == 0) {
     query_params <- NULL
   }
@@ -138,12 +151,15 @@ partition_params <- function(provided, path_param_names) {
   ))
 }
 
+## names of parameters declared in spec to be in path vs query
 keep_path_param_names <- function(spec) {
   spec %>%
     purrr::keep(~.x$location == "path") %>%
     names()
 }
 
+##  input: /v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo
+## output: spreadsheetId, sheetId
 extract_param_names <- function(path) {
   m <- gregexpr("\\{[^/]*\\}", path)
   path_param_names <- regmatches(path, m)[[1]]

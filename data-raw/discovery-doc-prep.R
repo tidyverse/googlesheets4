@@ -14,7 +14,7 @@ view <- function(x) {
 ## load the API spec, including download if necessary
 dd_cache <- find_package_root_file("data-raw") %>%
   list.files(pattern = "discovery-document.json$", full.names = TRUE)
-if (length(dd_cache) < 1) {
+if (length(dd_cache) == 0) {
   dd_get <- GET("https://sheets.googleapis.com/$discovery/rest?version=v4")
   dd_content <- content(dd_get)
   json_fname <- dd_content[c("revision", "id")] %>%
@@ -31,6 +31,7 @@ if (length(dd_cache) < 1) {
   json_fname <- rev(dd_cache)[1]
 }
 dd_content <- fromJSON(json_fname)
+view(dd_content)
 ## listviewer::jsonedit(dd_content)
 
 ## extract the method collections and bring to same level of hierarchy
@@ -44,6 +45,7 @@ values <-
 names(values) <- paste("spreadsheets", "values", names(values), sep = ".")
 endpoints <- c(spreadsheets, sheets, values)
 # str(endpoints, max.level = 1)
+view(endpoints)
 # listviewer::jsonedit(endpoints)
 
 nms <- endpoints %>%
@@ -61,10 +63,9 @@ view(edf)
 
 ## clean up individual variables
 
-## docs call these "methods" and omit the leading `sheets.`
+## docs omit the leading `sheets.`
 edf <- edf %>%
-  rename(method = id) %>%
-  mutate(method = gsub("^sheets\\.", "", method))
+  mutate(id = gsub("^sheets\\.", "", id))
 
 ## these look identical, are they?
 identical(edf$path, edf$flatPath)
@@ -73,7 +74,7 @@ edf$flatPath <- NULL
 
 ## enforce my own order
 edf <- edf %>%
-  select(method, httpMethod, path, parameters, scopes, description, everything())
+  select(id, httpMethod, path, parameters, scopes, description, everything())
 
 edf$scopes <- edf$scopes %>%
   map(~ gsub("https://www.googleapis.com/auth/", "", .)) %>%
@@ -92,15 +93,15 @@ view(edf)
 ## loooong side journey to clean up parameters
 ## give them common sub-elements, in a common order
 params <- edf %>%
-  select(method, parameters) %>% {
+  select(id, parameters) %>% {
     ## unnest() won't work with a list ... doing it manually
     tibble(
-      method = rep(.$method, lengths(.$parameters)),
+      id = rep(.$id, lengths(.$parameters)),
       parameters = flatten(.$parameters),
       pname = names(parameters)
     )
   } %>%
-  select(method, pname, parameters)
+  select(id, pname, parameters)
 #params$parameters %>% map(names) %>% reduce(union)
 nms <-
   c("location", "required", "type", "repeated", "format", "enum", "description")
@@ -111,7 +112,7 @@ params <- params$parameters %>%
   transpose(.names = nms) %>%
   as_tibble() %>%
   add_column(pname = params$pname, .before = 1) %>%
-  add_column(method = params$method, .before = 1)
+  add_column(id = params$id, .before = 1)
 params <- params %>%
   mutate(
     location = location %>% flatten_chr(),
@@ -124,14 +125,14 @@ params <- params %>%
   )
 ## repack all the info for each parameter into a list
 repacked <- params %>%
-  select(-method, -pname) %>%
+  select(-id, -pname) %>%
   pmap(list)
 params <- params %>%
-  select(method, pname) %>%
+  select(id, pname) %>%
   mutate(pdata = repacked)
 ## repack all the parameters for each method into a named list
 params <- params %>%
-  group_by(method) %>%
+  group_by(id) %>%
   nest(.key = parameters) %>%
   mutate(parameters = map(parameters, deframe))
 
@@ -139,7 +140,7 @@ params <- params %>%
 edf <- edf %>%
   select(-parameters) %>%
   left_join(params) %>%
-  select(method, httpMethod, path, parameters, everything())
+  select(id, httpMethod, path, parameters, everything())
 view(edf)
 
 ## WE ARE DONE
@@ -156,7 +157,8 @@ saveRDS(edf, file = out_fname)
 ## transpose again, back to a list with one component per endpoint
 elist <- edf %>%
   pmap(list) %>%
-  set_names(edf$method)
+  set_names(edf$id)
+view(elist)
 #listviewer::jsonedit(elist)
 
 out_fname <- str_replace(
@@ -175,10 +177,12 @@ elist %>%
 
 ## partial spec as list, i.e. keep only the variables I currently use to
 ## create the API
+## convert to my naming scheme, which is more consistent with general use
 .endpoints <- edf %>%
-  select(method, verb = httpMethod, path, parameters) %>%
+  select(id, method = httpMethod, path, parameters) %>%
   pmap(list) %>%
-  set_names(edf$method)
+  set_names(edf$id)
+view(.endpoints)
 #listviewer::jsonedit(.endpoints)
 
 use_data(.endpoints, internal = TRUE, overwrite = TRUE)

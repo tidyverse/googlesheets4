@@ -1,7 +1,6 @@
-gs_build_request <- function(
-  method = character(),
-  params = list(),
-  .api_key = api_key()) {
+gs_build_request <- function(method = character(),
+                             params = list(),
+                             .api_key = api_key()) {
   endpoint <- .endpoints[[method]]
   if (is.null(endpoint)) {
     stop("Endpoint not recognized:\n", method, call. = FALSE)

@@ -1,23 +1,11 @@
-gs_build_request <- function(method = character(),
+gs_build_request <- function(path,
+                             verb,
                              params = list(),
                              .api_key = api_key()) {
-  endpoint <- .endpoints[[method]]
-  if (is.null(endpoint)) {
-    stop("Endpoint not recognized:\n", method, call. = FALSE)
-  }
-
-  params <- match_params(params, endpoint$parameters)
-  params <- handle_repeats(params, endpoint$parameters)
-  ## Maybe TO DO: check parameter type?
-  ## Everything will be coerced to character anyway, so if I relay error
-  ## messages well, user will learn about malformed params anyway.
-  check_enums(params, endpoint$parameters)
-  params <- partition_params(params, endpoint$parameters)
-
+  params <- partition_params(params, extract_param_names(path))
   out <- list(
-    method = method,
-    verb = endpoint$verb,
-    path = glue::glue_data(params$path_params, endpoint$path),
+    verb = verb,
+    path = glue::glue_data(params$path_params, path),
     query = c(params$query_params, list(key = .api_key))
   )
   out$url <- httr::modify_url(
@@ -26,6 +14,27 @@ gs_build_request <- function(method = character(),
     query = out$query
   )
   out
+}
+
+gs_generate_request <- function(method = character(),
+                                params = list(),
+                                .api_key = api_key()) {
+  endpoint <- .endpoints[[method]]
+  if (is.null(endpoint)) {
+    stop("Endpoint not recognized:\n", method, call. = FALSE)
+  }
+
+  params <- match_params(params, endpoint$parameters)
+  params <- handle_repeats(params, endpoint$parameters)
+  check_enums(params, endpoint$parameters)
+  params <- partition_params(params, keep_path_param_names(endpoint$parameters))
+
+  gs_build_request(
+    path = glue::glue_data(params$path_params, endpoint$path),
+    verb = endpoint$verb,
+    params = params$query_params,
+    .api_key = .api_key
+  )
 }
 
 match_params <- function(provided, spec) {
@@ -110,31 +119,33 @@ check_enums <- function(provided, spec) {
   return(provided)
 }
 
-partition_params <- function(provided, spec) {
-  path_params <- query_params <- NULL
-  path_param_names <- spec %>%
-    purrr::keep(~.x$location == "path") %>%
-    names()
-  query_param_names <- spec %>%
-    purrr::keep(~.x$location == "query") %>%
-    names()
-  if (length(path_param_names) && length(provided)) {
+partition_params <- function(provided, path_param_names) {
+  query_params <- provided
+  path_params <- NULL
+  if (length(path_param_names) && length(query_params)) {
     m <- names(provided) %in% path_param_names
-    path_params <- provided[m]
-    provided <- provided[!m]
+    path_params <- query_params[m]
+    query_params <- query_params[!m]
   }
-  if (length(query_param_names) && length(provided)) {
-    m <- names(provided) %in% query_param_names
-    ## leave query_params as NULL vs list() if no matches
-    ## for the sake of downstream URLs
-    if (any(m)) {
-      query_params <- provided[m]
-      provided <- provided[!m]
-    }
+  ## if no query_params, NULL is preferred to list()
+  ## for the sake of downstream URLs
+  if (length(query_params) == 0) {
+    query_params <- NULL
   }
-
   return(list(
     path_params = path_params,
     query_params = query_params
   ))
+}
+
+keep_path_param_names <- function(spec) {
+  spec %>%
+    purrr::keep(~.x$location == "path") %>%
+    names()
+}
+
+extract_param_names <- function(path) {
+  m <- gregexpr("\\{[^/]*\\}", path)
+  path_param_names <- regmatches(path, m)[[1]]
+  gsub("[\\{\\}]", "", path_param_names)
 }

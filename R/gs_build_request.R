@@ -1,21 +1,46 @@
-gs_build_request <- function(path,
-                             method,
-                             params = list(),
-                             .api_key = api_key()) {
-  params <- partition_params(params, extract_param_names(path))
-  out <- list(
-    method = method,
-    path = glue::glue_data(params$path_params, path),
-    query = c(params$query_params, list(key = .api_key))
-  )
-  out$url <- httr::modify_url(
-    url = .state$gs_base_url,
-    path = out$path,
-    query = out$query
-  )
-  out
-}
+#' Generate a request for the Sheets v4 API
+#'
+#' Generate a request, using some knowledge of the [Sheets v4
+#' API](https://developers.google.com/sheets/api/reference/rest/). Most users
+#' should, instead, use higher-level wrappers that facilitate common tasks, such
+#' as reading the contents of a sheet. The functions here are intended for
+#' internal use and for programming around the Sheets API.
+#'
+#' There are two functions:
+#' * `gs_generate_request()` is a wrapper around `gs_build_request()`. It takes
+#' a nickname for an endpoint and uses the API spec to look up the `path` and
+#' `method`. The `params` are checked for validity and completeness with respect
+#' to the endpoint. It then passes things along to `gs_build_request()`.
+#' * `gs_build_request()` builds a request from explicit parts. It is quite
+#' dumb, only doing URL endpoint substitution and URL formation. It's up to the
+#' caller to make sure the `path`, `method`, and `params` are valid.
+#'
+#' @param endpoint `character(1)`\cr Nickname for one of the documented Sheets
+#'   v4 API endpoints. *to do: list or link, once I've auto-generated those
+#'   docs*
+#' @param params `named list()`\cr Parameters destined for endpoint URL
+#'   substitution or, otherwise, the query.
+#' @param .api_key `character(1)`\cr A valid [API
+#'   key](https://developers.google.com/sheets/api/guides/authorizing#APIKey).
+#'   Defaults to a key built into the googlesheets package.
+#'
 
+#' @return `list()`\cr Components are `method`, `path`, `query`, and `url`,
+#'   suitable as input for [gs_make_request()]. The `path` is post-substitution
+#'   and the `query` is a named list of all the input `params` that were not
+#'   used during this substitution. `url` is the full URL after prepending the
+#'   base URL for the Sheets v4 API and appending an API key to the query.
+#' @export
+#' @examples
+#' req <- gs_generate_request(
+#'   "spreadsheets.values.append",
+#'   list(
+#'     spreadsheetId = "abc",
+#'     range = "Sheet1!A1:B2",
+#'     responseValueRenderOption = "FORMULA"
+#'   )
+#' )
+#' req
 gs_generate_request <- function(endpoint = character(),
                                 params = list(),
                                 .api_key = api_key()) {
@@ -36,6 +61,45 @@ gs_generate_request <- function(endpoint = character(),
     params = params$query_params,
     .api_key = .api_key
   )
+}
+
+#' @param path character, e.g.,
+#'   `"v4/spreadsheets/{spreadsheetId}/values/{range}:append"`. It can include
+#'   variables inside curly brackets, as the example does, which are substituted
+#'   using named parameters found in the `params` argument.
+#' @param method character, should match an HTTP verb, e.g., `GET`, `POST`, or
+#'   `PUT`
+#' @rdname gs_generate_request
+#' @export
+#' @examples
+#' req <- gs_build_request(
+#'   path = "v4/spreadsheets/{spreadsheetId}/values/{range}:append",
+#'   method = "POST",
+#'   list(
+#'     spreadsheetId = "abc",
+#'     range = "Sheet1!A1:B2",
+#'     responseValueRenderOption = "FORMULA"
+#'   )
+#' )
+#' req
+gs_build_request <- function(path,
+                             method,
+                             params = list(),
+                             .api_key = api_key()) {
+  params <- partition_params(params, extract_param_names(path))
+  out <- list(
+    method = method,
+    path = glue::glue_data(params$path_params, path),
+    query = c(params$query_params, list(key = .api_key))
+  )
+  ## yes it is redundant to store the parts and the url
+  ## but it is helpful to me, so it shall be this way
+  out$url <- httr::modify_url(
+    url = .state$gs_base_url,
+    path = out$path,
+    query = out$query
+  )
+  out
 }
 
 ## match params provided by user to spec

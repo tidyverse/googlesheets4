@@ -50,15 +50,14 @@ gs_generate_request <- function(endpoint = character(),
   }
 
   ## use the spec to vet and rework request parameters
-  params <-  match_params(params, ept$parameters)
+  params <-   match_params(params, ept$parameters)
   params <- handle_repeats(params, ept$parameters)
-  check_enums(params, ept$parameters)
-  params <- partition_params(params, keep_path_param_names(ept$parameters))
+               check_enums(params, ept$parameters)
 
   gs_build_request(
-    path = glue::glue_data(params$path_params, ept$path),
+    path = ept$path,
     method = ept$method,
-    params = params$query_params,
+    params = params,
     .api_key = .api_key
   )
 }
@@ -213,13 +212,6 @@ partition_params <- function(provided, path_param_names) {
     path_params = path_params,
     query_params = query_params
   ))
-}
-
-## names of parameters declared in spec to be in path vs query
-keep_path_param_names <- function(spec) {
-  spec %>%
-    purrr::keep(~.x$location == "path") %>%
-    names()
 }
 
 ##  input: /v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo

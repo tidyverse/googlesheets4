@@ -9,7 +9,7 @@
 #' @export
 gs_make_request <- function(req) {
   verb_fun <- list("GET" = httr::GET, "POST" = httr::POST, "PATCH" = httr::PATCH,
-                   "PUT" = httr::PUT, "DELETE" = httr::DELETE)[[req$verb]]
+                   "PUT" = httr::PUT, "DELETE" = httr::DELETE)[[req$method]]
   if (is.null(verb_fun)) {
     stop("Unknown HTTP verb:\n", req$verb, call. = FALSE)
   }

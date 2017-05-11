@@ -8,7 +8,6 @@
 #'
 #' @docType package
 #' @name googlesheets
-#' @importFrom purrr %>%
 #' @importFrom purrr %||%
 NULL
 

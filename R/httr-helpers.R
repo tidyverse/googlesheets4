@@ -3,8 +3,9 @@ stop_for_content_type <- function(resp, expected) {
   if (actual != expected) {
     stop(
       glue::glue(
-        "Expected content-type:\n{expected}\n",
-        "Actual content-type:\n{actual}")
+        "\n\nExpected content-type:\n{expected}\n",
+        "Actual content-type:\n{actual}"),
+      call. = FALSE
     )
   }
   invisible(resp)

@@ -1,8 +1,10 @@
 Package: googlesheets2
 Title: Temporary package to work on major refactor of googlesheets
 Version: 0.0.0.9000
-Authors@R: person("Jennifer", "Bryan", role=c("aut", "cre"),
-  email = "jenny@stat.ubc.ca")
+Authors@R: c(
+  person("Jennifer", "Bryan", ,"jenny@rstudio.com", role = c("aut", "cre")),
+  person("RStudio", role = c("cph", "fnd")
+  )
 Description: Temporary package to work on major refactor of googlesheets.
   Temporary package to work on major refactor of googlesheets.
 Depends: R (>= 3.3.2)

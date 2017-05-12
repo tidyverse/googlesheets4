@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Produce the API key — api_key • googlesheets2</title>
+<title>Print info about a <code>gsheet</code> object — print.gsheet • googlesheets2</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -79,54 +79,47 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Produce the API key</h1>
+    <h1>Print info about a <code>gsheet</code> object</h1>
     </div>
 
     
-    <p>If a request doesn't require authorization, such as reading public data, it
-is sufficient to call the Sheets API with only an API key, as opposed to an
-OAuth2.0 token. Therefore, googlesheets ships with an API key and sends it
-with every request. The user can override this default by defining the
-<code>GOOGLESHEETS_API_KEY</code> environment variable or by specifying the key
-directly in a function call.</p>
+    <p>Display information about a Google spreadsheet that has been registered with
+googlesheets: the name or title of the spreadsheet, date-time of
+registration, date-time of last update (at time of registration), visibility,
+permissions, version, the number of worksheets contained, worksheet titles
+and extent, and sheet key. <em>A lot of that is not true yet or anymore!</em></p>
     
 
-    <pre class="usage"><span class='fu'>api_key</span>()</pre>
-        
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>an API key, as a length-one character vector</p>
+    <pre class="usage"><span class='co'># S3 method for gsheet</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>To override for the length of an R session, use <code>Sys.setenv()</code>:</p><pre>Sys.setenv(GOOGLESHEETS_API_KEY = "YOUR_KEY_GOES_HERE")
-</pre>
-    <p>To override more persistently, define the env var in a <code>.Renviron</code> file that
-will be consulted at startup. Include a line like this:</p><pre>GOOGLESHEETS_API_KEY=YOUR_KEY_GOES_HERE
-</pre>
-    <p>See Startup for possible locations for this file and the implications
-thereof.</p>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p><code>gsheet</code> object returned by functions such as <code>sheet_name()</code>,
+<code>sheet_id()</code>, and friends</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>potential further arguments (required for Method/Generic reasons)</p></td>
+    </tr>
+    </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## the built-in fallback key</span>
-<span class='fu'>api_key</span>()</div><div class='output co'>#&gt; [1] "AIzaSyBTBKXVfmtjOSYmn7wm6S4yMvqdeBMtZMI"</div><div class='input'>
-<span class='co'>## we use withr::with_envvar() to temporarily set GOOGLESHEETS_API_KEY</span>
-<span class='kw'>if</span> (<span class='fu'>requireNamespace</span>(<span class='st'>"withr"</span>, <span class='kw'>quietly</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)) {
-  <span class='kw'>withr</span><span class='kw'>::</span><span class='fu'>with_envvar</span>(
-    <span class='kw'>new</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"GOOGLESHEETS_API_KEY"</span> <span class='kw'>=</span> <span class='st'>"abc"</span>),
-    <span class='fu'>api_key</span>()
-  )
-}</div><div class='output co'>#&gt; [1] "abc"</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
+  <span class='no'>foo</span> <span class='kw'>&lt;-</span> <span class='fu'>gs_new</span>(<span class='st'>"foo"</span>)
+  <span class='no'>foo</span>
+  <span class='fu'>print</span>(<span class='no'>foo</span>)
+})</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-      
+      <li><a href="#arguments">Arguments</a></li>
+            
       <li><a href="#examples">Examples</a></li>
     </ul>
 

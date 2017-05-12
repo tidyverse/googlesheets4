@@ -7,8 +7,8 @@
 \method{print}{gsheet}(x, ...)
 }
 \arguments{
-\item{x}{\code{\link{gsheet}} object returned by functions such as \code{\link[=sheet_name]{sheet_name()}},
-\code{\link[=sheet_id]{sheet_id()}}, and friends}
+\item{x}{\code{gsheet} object returned by functions such as \code{sheet_name()},
+\code{sheet_id()}, and friends}
 
 \item{...}{potential further arguments (required for Method/Generic reasons)}
 }

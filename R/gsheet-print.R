@@ -6,8 +6,8 @@
 #' permissions, version, the number of worksheets contained, worksheet titles
 #' and extent, and sheet key. *A lot of that is not true yet or anymore!*
 #'
-#' @param x [`gsheet`] object returned by functions such as [sheet_name()],
-#'   [sheet_id()], and friends
+#' @param x `gsheet` object returned by functions such as `sheet_name()`,
+#'   `sheet_id()`, and friends
 #' @param ... potential further arguments (required for Method/Generic reasons)
 #'
 #' @examples

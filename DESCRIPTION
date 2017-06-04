@@ -1,4 +1,4 @@
-Package: googlesheets2
+Package: googlesheets4
 Title: Temporary package to work on major refactor of googlesheets
 Version: 0.0.0.9000
 Authors@R: c(

@@ -9,3 +9,4 @@
 ^man-roxygen$
 ^\.httr-oauth$
 ^scratch\.R$
+^old$

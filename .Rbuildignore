@@ -1,4 +1,3 @@
-^.*\.Rproj$
 ^\.Rproj\.user$
 ^docs$
 ^_pkgdown\.yml$
@@ -10,3 +9,6 @@
 ^\.httr-oauth$
 ^scratch\.R$
 ^old$
+^googlesheets4\.Rproj$
+^LICENSE\.md$
+^vignettes$

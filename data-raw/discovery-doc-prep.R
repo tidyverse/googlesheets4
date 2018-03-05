@@ -32,21 +32,26 @@ if (length(dd_cache) == 0) {
 }
 dd_content <- fromJSON(json_fname)
 view(dd_content)
-## listviewer::jsonedit(dd_content)
 
-## extract the method collections and bring to same level of hierarchy
+## extract methods for the spreadsheets collection ... why?
+## because I will have to call the 'get' method, at the very least
+## for the main spreadsheet object
 spreadsheets <- dd_content[[c("resources", "spreadsheets", "methods")]]
-names(spreadsheets) <- paste("spreadsheets", names(spreadsheets), sep = ".")
-sheets <-
-  dd_content[[c("resources", "spreadsheets", "resources", "sheets", "methods")]]
-names(sheets) <- paste("spreadsheets", "sheets", names(sheets), sep = ".")
-values <-
-  dd_content[[c("resources", "spreadsheets", "resources", "values", "methods")]]
-names(values) <- paste("spreadsheets", "values", names(values), sep = ".")
-endpoints <- c(spreadsheets, sheets, values)
-# str(endpoints, max.level = 1)
+## names(spreadsheets)
+names(spreadsheets) <- map_chr(spreadsheets, "id")
+
+## extract methods for the spreadsheets.values collection ... why?
+## https://developers.google.com/sheets/api/samples/
+## "If you just need to read or write cell values, the spreadsheets.values
+## collection is a better choice than the spreadsheets collection. The
+## former's interface is easier to use for simple read/write operations."
+values <- dd_content[[c("resources", "spreadsheets", "resources", "values", "methods")]]
+## names(values)
+names(values) <- map_chr(values, "id")
+
+## catenate these two lists of methods
+endpoints <- c(spreadsheets, values)
 view(endpoints)
-# listviewer::jsonedit(endpoints)
 
 nms <- endpoints %>%
   map(names) %>%
@@ -63,7 +68,10 @@ view(edf)
 
 ## clean up individual variables
 
-## docs omit the leading `sheets.`
+## it is tempting to trim the entire common stem from 'id'
+## e.g. delete "sheets.spreadsheets." from "sheets.spreadsheets.get"
+## but I will resist and only trim "sheets." for now
+## that is consistent with method ids given in the docs
 edf <- edf %>%
   mutate(id = gsub("^sheets\\.", "", id))
 
@@ -72,7 +80,7 @@ identical(edf$path, edf$flatPath)
 ## drop flatPath
 edf$flatPath <- NULL
 
-## enforce my own order
+## enforce my own variable order
 edf <- edf %>%
   select(id, httpMethod, path, parameters, scopes, description, everything())
 
@@ -90,6 +98,8 @@ edf$request <- edf$request %>%
   map_chr("$ref", .null = NA_character_)
 view(edf)
 
+## tbh I'm not sure what 'parameterOrder' is good for?
+
 ## loooong side journey to clean up parameters
 ## give them common sub-elements, in a common order
 params <- edf %>%
@@ -102,9 +112,8 @@ params <- edf %>%
     )
   } %>%
   select(id, pname, parameters)
-#params$parameters %>% map(names) %>% reduce(union)
-nms <-
-  c("location", "required", "type", "repeated", "format", "enum", "description")
+# params$parameters %>% map(names) %>% reduce(union)
+nms <- c("location", "required", "type", "repeated", "enum", "description")
 
 ## tibble with one row per parameter
 ## variables method and pname keep track of endpoint and parameter name
@@ -119,7 +128,6 @@ params <- params %>%
     required = required %>% map(1, .null = NA) %>% flatten_lgl(),
     type = type %>% flatten_chr(),
     repeated = repeated %>% map(1, .null = NA) %>% flatten_lgl(),
-    format = format %>%  map(1, .null = NA) %>% flatten_chr(),
     enum = enum %>%  modify_if(is_null, ~ NA),
     description = description %>% flatten_chr()
   )
@@ -159,7 +167,6 @@ elist <- edf %>%
   pmap(list) %>%
   set_names(edf$id)
 view(elist)
-#listviewer::jsonedit(elist)
 
 out_fname <- str_replace(
   json_fname,
@@ -177,12 +184,12 @@ elist %>%
 
 ## partial spec as list, i.e. keep only the variables I currently use to
 ## create the API
-## convert to my naming scheme, which is more consistent with general use
+## rename to 'method', from 'httpMethod'
 .endpoints <- edf %>%
-  select(id, method = httpMethod, path, parameters) %>%
+  select(id, method = httpMethod, path, parameters, request, response) %>%
   pmap(list) %>%
   set_names(edf$id)
+attr(.endpoints, "base_url") <- dd_content$baseUrl
 view(.endpoints)
-#listviewer::jsonedit(.endpoints)
 
-use_data(.endpoints, internal = TRUE, overwrite = TRUE)
+devtools::use_data(.endpoints, internal = TRUE, overwrite = TRUE)

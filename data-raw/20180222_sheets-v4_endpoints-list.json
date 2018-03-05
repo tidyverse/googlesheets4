@@ -1,0 +1,449 @@
+{
+  "spreadsheets.get": {
+    "id": ["spreadsheets.get"],
+    "httpMethod": ["GET"],
+    "path": ["v4/spreadsheets/{spreadsheetId}"],
+    "parameters": {
+      "ranges": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [true],
+        "enum": [null],
+        "description": ["The ranges to retrieve from the spreadsheet."]
+      },
+      "includeGridData": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["True if grid data should be returned.\nThis parameter is ignored if a field mask was set in the request."]
+      },
+      "spreadsheetId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The spreadsheet to request."]
+      }
+    },
+    "scopes": ["drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"],
+    "description": ["Returns the spreadsheet at the given ID.\nThe caller must specify the spreadsheet ID.\n\nBy default, data within grids will not be returned.\nYou can include grid data one of two ways:\n\n* Specify a field mask listing your desired fields using the `fields` URL\nparameter in HTTP\n\n* Set the includeGridData\nURL parameter to true.  If a field mask is set, the `includeGridData`\nparameter is ignored\n\nFor large spreadsheets, it is recommended to retrieve only the specific\nfields of the spreadsheet that you want.\n\nTo retrieve only subsets of the spreadsheet, use the\nranges URL parameter.\nMultiple ranges can be specified.  Limiting the range will\nreturn only the portions of the spreadsheet that intersect the requested\nranges. Ranges are specified using A1 notation."],
+    "response": ["Spreadsheet"],
+    "parameterOrder": ["spreadsheetId"],
+    "request": [null]
+  },
+  "spreadsheets.getByDataFilter": {
+    "id": ["spreadsheets.getByDataFilter"],
+    "httpMethod": ["POST"],
+    "path": ["v4/spreadsheets/{spreadsheetId}:getByDataFilter"],
+    "parameters": {
+      "spreadsheetId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The spreadsheet to request."]
+      }
+    },
+    "scopes": ["drive, drive.file, spreadsheets"],
+    "description": ["Returns the spreadsheet at the given ID.\nThe caller must specify the spreadsheet ID.\n\nThis method differs from GetSpreadsheet in that it allows selecting\nwhich subsets of spreadsheet data to return by specifying a\ndataFilters parameter.\nMultiple DataFilters can be specified.  Specifying one or\nmore data filters will return the portions of the spreadsheet that\nintersect ranges matched by any of the filters.\n\nBy default, data within grids will not be returned.\nYou can include grid data one of two ways:\n\n* Specify a field mask listing your desired fields using the `fields` URL\nparameter in HTTP\n\n* Set the includeGridData\nparameter to true.  If a field mask is set, the `includeGridData`\nparameter is ignored\n\nFor large spreadsheets, it is recommended to retrieve only the specific\nfields of the spreadsheet that you want."],
+    "response": ["Spreadsheet"],
+    "parameterOrder": ["spreadsheetId"],
+    "request": ["GetSpreadsheetByDataFilterRequest"]
+  },
+  "spreadsheets.create": {
+    "id": ["spreadsheets.create"],
+    "httpMethod": ["POST"],
+    "path": ["v4/spreadsheets"],
+    "parameters": {},
+    "scopes": ["drive, drive.file, spreadsheets"],
+    "description": ["Creates a spreadsheet, returning the newly created spreadsheet."],
+    "response": ["Spreadsheet"],
+    "parameterOrder": [null],
+    "request": ["Spreadsheet"]
+  },
+  "spreadsheets.batchUpdate": {
+    "id": ["spreadsheets.batchUpdate"],
+    "httpMethod": ["POST"],
+    "path": ["v4/spreadsheets/{spreadsheetId}:batchUpdate"],
+    "parameters": {
+      "spreadsheetId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The spreadsheet to apply the updates to."]
+      }
+    },
+    "scopes": ["drive, drive.file, spreadsheets"],
+    "description": ["Applies one or more updates to the spreadsheet.\n\nEach request is validated before\nbeing applied. If any request is not valid then the entire request will\nfail and nothing will be applied.\n\nSome requests have replies to\ngive you some information about how\nthey are applied. The replies will mirror the requests.  For example,\nif you applied 4 updates and the 3rd one had a reply, then the\nresponse will have 2 empty replies, the actual reply, and another empty\nreply, in that order.\n\nDue to the collaborative nature of spreadsheets, it is not guaranteed that\nthe spreadsheet will reflect exactly your changes after this completes,\nhowever it is guaranteed that the updates in the request will be\napplied together atomically. Your changes may be altered with respect to\ncollaborator changes. If there are no collaborators, the spreadsheet\nshould reflect your changes."],
+    "response": ["BatchUpdateSpreadsheetResponse"],
+    "parameterOrder": ["spreadsheetId"],
+    "request": ["BatchUpdateSpreadsheetRequest"]
+  },
+  "spreadsheets.values.batchGet": {
+    "id": ["spreadsheets.values.batchGet"],
+    "httpMethod": ["GET"],
+    "path": ["v4/spreadsheets/{spreadsheetId}/values:batchGet"],
+    "parameters": {
+      "valueRenderOption": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["FORMATTED_VALUE", "UNFORMATTED_VALUE", "FORMULA"],
+        "description": ["How values should be represented in the output.\nThe default render option is ValueRenderOption.FORMATTED_VALUE."]
+      },
+      "dateTimeRenderOption": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["SERIAL_NUMBER", "FORMATTED_STRING"],
+        "description": ["How dates, times, and durations should be represented in the output.\nThis is ignored if value_render_option is\nFORMATTED_VALUE.\nThe default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER]."]
+      },
+      "ranges": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [true],
+        "enum": [null],
+        "description": ["The A1 notation of the values to retrieve."]
+      },
+      "majorDimension": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["DIMENSION_UNSPECIFIED", "ROWS", "COLUMNS"],
+        "description": ["The major dimension that results should use.\n\nFor example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`,\nthen requesting `range=A1:B2,majorDimension=ROWS` will return\n`[[1,2],[3,4]]`,\nwhereas requesting `range=A1:B2,majorDimension=COLUMNS` will return\n`[[1,3],[2,4]]`."]
+      },
+      "spreadsheetId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The ID of the spreadsheet to retrieve data from."]
+      }
+    },
+    "scopes": ["drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"],
+    "description": ["Returns one or more ranges of values from a spreadsheet.\nThe caller must specify the spreadsheet ID and one or more ranges."],
+    "response": ["BatchGetValuesResponse"],
+    "parameterOrder": ["spreadsheetId"],
+    "request": [null]
+  },
+  "spreadsheets.values.clear": {
+    "id": ["spreadsheets.values.clear"],
+    "httpMethod": ["POST"],
+    "path": ["v4/spreadsheets/{spreadsheetId}/values/{range}:clear"],
+    "parameters": {
+      "spreadsheetId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The ID of the spreadsheet to update."]
+      },
+      "range": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The A1 notation of the values to clear."]
+      }
+    },
+    "scopes": ["drive, drive.file, spreadsheets"],
+    "description": ["Clears values from a spreadsheet.\nThe caller must specify the spreadsheet ID and range.\nOnly values are cleared -- all other properties of the cell (such as\nformatting, data validation, etc..) are kept."],
+    "response": ["ClearValuesResponse"],
+    "parameterOrder": ["spreadsheetId, range"],
+    "request": ["ClearValuesRequest"]
+  },
+  "spreadsheets.values.batchClearByDataFilter": {
+    "id": ["spreadsheets.values.batchClearByDataFilter"],
+    "httpMethod": ["POST"],
+    "path": ["v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter"],
+    "parameters": {
+      "spreadsheetId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The ID of the spreadsheet to update."]
+      }
+    },
+    "scopes": ["drive, drive.file, spreadsheets"],
+    "description": ["Clears one or more ranges of values from a spreadsheet.\nThe caller must specify the spreadsheet ID and one or more\nDataFilters. Ranges matching any of the specified data\nfilters will be cleared.  Only values are cleared -- all other properties\nof the cell (such as formatting, data validation, etc..) are kept."],
+    "response": ["BatchClearValuesByDataFilterResponse"],
+    "parameterOrder": ["spreadsheetId"],
+    "request": ["BatchClearValuesByDataFilterRequest"]
+  },
+  "spreadsheets.values.append": {
+    "id": ["spreadsheets.values.append"],
+    "httpMethod": ["POST"],
+    "path": ["v4/spreadsheets/{spreadsheetId}/values/{range}:append"],
+    "parameters": {
+      "range": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The A1 notation of a range to search for a logical table of data.\nValues will be appended after the last row of the table."]
+      },
+      "includeValuesInResponse": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Determines if the update response should include the values\nof the cells that were appended. By default, responses\ndo not include the updated values."]
+      },
+      "spreadsheetId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The ID of the spreadsheet to update."]
+      },
+      "responseValueRenderOption": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["FORMATTED_VALUE", "UNFORMATTED_VALUE", "FORMULA"],
+        "description": ["Determines how values in the response should be rendered.\nThe default render option is ValueRenderOption.FORMATTED_VALUE."]
+      },
+      "insertDataOption": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["OVERWRITE", "INSERT_ROWS"],
+        "description": ["How the input data should be inserted."]
+      },
+      "valueInputOption": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["INPUT_VALUE_OPTION_UNSPECIFIED", "RAW", "USER_ENTERED"],
+        "description": ["How the input data should be interpreted."]
+      },
+      "responseDateTimeRenderOption": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["SERIAL_NUMBER", "FORMATTED_STRING"],
+        "description": ["Determines how dates, times, and durations in the response should be\nrendered. This is ignored if response_value_render_option is\nFORMATTED_VALUE.\nThe default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER]."]
+      }
+    },
+    "scopes": ["drive, drive.file, spreadsheets"],
+    "description": ["Appends values to a spreadsheet. The input range is used to search for\nexisting data and find a \"table\" within that range. Values will be\nappended to the next row of the table, starting with the first column of\nthe table. See the\n[guide](/sheets/api/guides/values#appending_values)\nand\n[sample code](/sheets/api/samples/writing#append_values)\nfor specific details of how tables are detected and data is appended.\n\nThe caller must specify the spreadsheet ID, range, and\na valueInputOption.  The `valueInputOption` only\ncontrols how the input data will be added to the sheet (column-wise or\nrow-wise), it does not influence what cell the data starts being written\nto."],
+    "response": ["AppendValuesResponse"],
+    "parameterOrder": ["spreadsheetId, range"],
+    "request": ["ValueRange"]
+  },
+  "spreadsheets.values.batchGetByDataFilter": {
+    "id": ["spreadsheets.values.batchGetByDataFilter"],
+    "httpMethod": ["POST"],
+    "path": ["v4/spreadsheets/{spreadsheetId}/values:batchGetByDataFilter"],
+    "parameters": {
+      "spreadsheetId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The ID of the spreadsheet to retrieve data from."]
+      }
+    },
+    "scopes": ["drive, drive.file, spreadsheets"],
+    "description": ["Returns one or more ranges of values that match the specified data filters.\nThe caller must specify the spreadsheet ID and one or more\nDataFilters.  Ranges that match any of the data filters in\nthe request will be returned."],
+    "response": ["BatchGetValuesByDataFilterResponse"],
+    "parameterOrder": ["spreadsheetId"],
+    "request": ["BatchGetValuesByDataFilterRequest"]
+  },
+  "spreadsheets.values.batchClear": {
+    "id": ["spreadsheets.values.batchClear"],
+    "httpMethod": ["POST"],
+    "path": ["v4/spreadsheets/{spreadsheetId}/values:batchClear"],
+    "parameters": {
+      "spreadsheetId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The ID of the spreadsheet to update."]
+      }
+    },
+    "scopes": ["drive, drive.file, spreadsheets"],
+    "description": ["Clears one or more ranges of values from a spreadsheet.\nThe caller must specify the spreadsheet ID and one or more ranges.\nOnly values are cleared -- all other properties of the cell (such as\nformatting, data validation, etc..) are kept."],
+    "response": ["BatchClearValuesResponse"],
+    "parameterOrder": ["spreadsheetId"],
+    "request": ["BatchClearValuesRequest"]
+  },
+  "spreadsheets.values.get": {
+    "id": ["spreadsheets.values.get"],
+    "httpMethod": ["GET"],
+    "path": ["v4/spreadsheets/{spreadsheetId}/values/{range}"],
+    "parameters": {
+      "valueRenderOption": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["FORMATTED_VALUE", "UNFORMATTED_VALUE", "FORMULA"],
+        "description": ["How values should be represented in the output.\nThe default render option is ValueRenderOption.FORMATTED_VALUE."]
+      },
+      "dateTimeRenderOption": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["SERIAL_NUMBER", "FORMATTED_STRING"],
+        "description": ["How dates, times, and durations should be represented in the output.\nThis is ignored if value_render_option is\nFORMATTED_VALUE.\nThe default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER]."]
+      },
+      "majorDimension": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["DIMENSION_UNSPECIFIED", "ROWS", "COLUMNS"],
+        "description": ["The major dimension that results should use.\n\nFor example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`,\nthen requesting `range=A1:B2,majorDimension=ROWS` will return\n`[[1,2],[3,4]]`,\nwhereas requesting `range=A1:B2,majorDimension=COLUMNS` will return\n`[[1,3],[2,4]]`."]
+      },
+      "spreadsheetId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The ID of the spreadsheet to retrieve data from."]
+      },
+      "range": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The A1 notation of the values to retrieve."]
+      }
+    },
+    "scopes": ["drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"],
+    "description": ["Returns a range of values from a spreadsheet.\nThe caller must specify the spreadsheet ID and a range."],
+    "response": ["ValueRange"],
+    "parameterOrder": ["spreadsheetId, range"],
+    "request": [null]
+  },
+  "spreadsheets.values.update": {
+    "id": ["spreadsheets.values.update"],
+    "httpMethod": ["PUT"],
+    "path": ["v4/spreadsheets/{spreadsheetId}/values/{range}"],
+    "parameters": {
+      "includeValuesInResponse": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Determines if the update response should include the values\nof the cells that were updated. By default, responses\ndo not include the updated values.\nIf the range to write was larger than than the range actually written,\nthe response will include all values in the requested range (excluding\ntrailing empty rows and columns)."]
+      },
+      "range": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The A1 notation of the values to update."]
+      },
+      "spreadsheetId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The ID of the spreadsheet to update."]
+      },
+      "responseValueRenderOption": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["FORMATTED_VALUE", "UNFORMATTED_VALUE", "FORMULA"],
+        "description": ["Determines how values in the response should be rendered.\nThe default render option is ValueRenderOption.FORMATTED_VALUE."]
+      },
+      "valueInputOption": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["INPUT_VALUE_OPTION_UNSPECIFIED", "RAW", "USER_ENTERED"],
+        "description": ["How the input data should be interpreted."]
+      },
+      "responseDateTimeRenderOption": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["SERIAL_NUMBER", "FORMATTED_STRING"],
+        "description": ["Determines how dates, times, and durations in the response should be\nrendered. This is ignored if response_value_render_option is\nFORMATTED_VALUE.\nThe default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER]."]
+      }
+    },
+    "scopes": ["drive, drive.file, spreadsheets"],
+    "description": ["Sets values in a range of a spreadsheet.\nThe caller must specify the spreadsheet ID, range, and\na valueInputOption."],
+    "response": ["UpdateValuesResponse"],
+    "parameterOrder": ["spreadsheetId, range"],
+    "request": ["ValueRange"]
+  },
+  "spreadsheets.values.batchUpdateByDataFilter": {
+    "id": ["spreadsheets.values.batchUpdateByDataFilter"],
+    "httpMethod": ["POST"],
+    "path": ["v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter"],
+    "parameters": {
+      "spreadsheetId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The ID of the spreadsheet to update."]
+      }
+    },
+    "scopes": ["drive, drive.file, spreadsheets"],
+    "description": ["Sets values in one or more ranges of a spreadsheet.\nThe caller must specify the spreadsheet ID,\na valueInputOption, and one or more\nDataFilterValueRanges."],
+    "response": ["BatchUpdateValuesByDataFilterResponse"],
+    "parameterOrder": ["spreadsheetId"],
+    "request": ["BatchUpdateValuesByDataFilterRequest"]
+  },
+  "spreadsheets.values.batchUpdate": {
+    "id": ["spreadsheets.values.batchUpdate"],
+    "httpMethod": ["POST"],
+    "path": ["v4/spreadsheets/{spreadsheetId}/values:batchUpdate"],
+    "parameters": {
+      "spreadsheetId": {
+        "location": ["path"],
+        "required": [true],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["The ID of the spreadsheet to update."]
+      }
+    },
+    "scopes": ["drive, drive.file, spreadsheets"],
+    "description": ["Sets values in one or more ranges of a spreadsheet.\nThe caller must specify the spreadsheet ID,\na valueInputOption, and one or more\nValueRanges."],
+    "response": ["BatchUpdateValuesResponse"],
+    "parameterOrder": ["spreadsheetId"],
+    "request": ["BatchUpdateValuesRequest"]
+  }
+}

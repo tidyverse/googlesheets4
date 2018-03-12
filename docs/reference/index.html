@@ -6,13 +6,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • googlesheets2</title>
+<title> • googlesheets4</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -23,6 +24,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+  
+  
 
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -46,24 +49,44 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">googlesheets2</a>
+      <a class="navbar-brand" href="../index.html">googlesheets4</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../articles/index.html">Articles</a>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/articles/googlesheets4-design-notes.html">googlesheets4 design notes</a>
+    </li>
+    <li>
+      <a href="../articles/articles/sheets-api-v4.html">Google Sheets API v4</a>
+    </li>
+    <li>
+      <a href="../articles/articles/sheets-auth-flow.html">Google Sheets API v4 Auth Flow</a>
+    </li>
+    <li>
+      <a href="../articles/whatever.html">Imagine a vignette</a>
+    </li>
+  </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/tidyverse/googlesheets2">
+  <a href="https://github.com/tidyverse/googlesheets4">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -93,81 +116,7 @@
         <col class="title" />
       </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="api_key.html">api_key</a></code> </p>
-          </td>
-          <td><p>Produce the API key</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="gd_token.html">gd_token</a></code> <code><a href="gd_token.html">gs_token</a></code> </p>
-          </td>
-          <td><p>Retrieve and report on the current token</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="gd_user.html">gd_user</a></code> <code><a href="gd_user.html">gs_user</a></code> </p>
-          </td>
-          <td><p>Retrieve information about the current Google user</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="googlesheets.html">googlesheets</a></code> </p>
-          </td>
-          <td><p>googlesheets</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="gs_auth.html">gs_auth</a></code> </p>
-          </td>
-          <td><p>Authorize googlesheets</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="gs_deauth.html">gs_deauth</a></code> </p>
-          </td>
-          <td><p>Suspend authorization</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="gs_generate_request.html">gs_generate_request</a></code> <code><a href="gs_generate_request.html">gs_build_request</a></code> </p>
-          </td>
-          <td><p>Generate a request for the Sheets v4 API</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="gs_make_request.html">gs_make_request</a></code> </p>
-          </td>
-          <td><p>Execute a request</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="gs_webapp_auth_url.html">gs_webapp_auth_url</a></code> </p>
-          </td>
-          <td><p>Build URL for authentication</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="gs_webapp_get_token.html">gs_webapp_get_token</a></code> </p>
-          </td>
-          <td><p>Exchange authorization code for an access token</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="print.gsheet.html">print</a></code> </p>
-          </td>
-          <td><p>Print info about a <code>gsheet</code> object</p></td>
-        </tr>
-      </tbody>
+      
       </table>
     </div>
   </div>
@@ -175,7 +124,6 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
     </ul>
   </div>
 </div>
@@ -186,7 +134,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

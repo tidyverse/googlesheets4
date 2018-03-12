@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Google Sheets API v4 • googlesheets2</title>
+<title>Google Sheets API v4 • googlesheets4</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
@@ -24,23 +24,44 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../../index.html">googlesheets2</a>
+      <a class="navbar-brand" href="../../index.html">googlesheets4</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
+  <a href="../../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
+</li>
+<li>
   <a href="../../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
 <li>
-  <a href="../../articles/index.html">Articles</a>
-</li>
-<li>
-  <a href="../../news/index.html">News</a>
+      <a href="../../articles/articles/googlesheets4-design-notes.html">googlesheets4 design notes</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/sheets-api-v4.html">Google Sheets API v4</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/sheets-auth-flow.html">Google Sheets API v4 Auth Flow</a>
+    </li>
+    <li>
+      <a href="../../articles/whatever.html">Imagine a vignette</a>
+    </li>
+  </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/tidyverse/googlesheets2">
+  <a href="https://github.com/tidyverse/googlesheets4">
     <span class="fa fa-github fa-lg"></span>
      
   </a>
@@ -64,24 +85,23 @@
     
     
 <div class="contents">
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rprojroot)
-<span class="kw">library</span>(jsonlite)
-<span class="kw">library</span>(tidyverse)</code></pre></div>
-<pre><code>## + ggplot2 2.2.1             Date: 2017-05-11
-## + tibble  1.3.0.9001           R: 3.3.2
-## + tidyr   0.6.2.9000          OS: OS X El Capitan 10.11.6
-## + readr   1.1.0              GUI: X11
-## + purrr   0.2.2.9000      Locale: en_CA.UTF-8
-## + dplyr   0.5.0.9004          TZ: America/Vancouver
-## + stringr 1.2.0           
-## + forcats 0.2.0</code></pre>
-<pre><code>## Conflicts -----------------------------------------------------------------</code></pre>
-<pre><code>## * filter(),  from dplyr, masks stats::filter()
-## * lag(),     from dplyr, masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(rprojroot)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(jsonlite)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
+<pre><code>## ── Attaching packages ─────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 2.2.1          ✔ purrr   0.2.4.9000
+## ✔ tibble  1.4.2          ✔ dplyr   0.7.4.9000
+## ✔ tidyr   0.7.2          ✔ stringr 1.3.0     
+## ✔ readr   1.1.1.9000     ✔ forcats 0.2.0</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter()  masks stats::filter()
+## ✖ purrr::flatten() masks jsonlite::flatten()
+## ✖ dplyr::lag()     masks stats::lag()</code></pre>
 <div id="exploring-the-google-sheets-api-v4-discovery-document" class="section level2">
 <h2 class="hasAnchor">
 <a href="#exploring-the-google-sheets-api-v4-discovery-document" class="anchor"></a>Exploring the Google Sheets API v4 Discovery Document</h2>
 <p>This is a machine-generated spec that describes what the API understands. Only the human-edited help strings are patched in.</p>
+<p><a href="https://sheets.googleapis.com/%24discovery/rest?version=v4"></a><a href="https://sheets.googleapis.com/%24discovery/rest?version=v4" class="uri">https://sheets.googleapis.com/$discovery/rest?version=v4</a>!</p>
 <p><a href="https://sheets.googleapis.com/%24discovery/rest?version=v4" class="uri">https://sheets.googleapis.com/$discovery/rest?version=v4</a></p>
 <p><em>above should be <code>https://sheets.googleapis.com/$discovery/rest?version=v4</code> but rendering often URLencodes the <code>$</code> and breaks the link</em></p>
 <p>Perhaps I will use this to automatically generate documentation for a low-level interface provided by the new googlesheets. It will be used internally and exposed for users who want direct access.</p>
@@ -102,7 +122,6 @@
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: TRUE</li>
-<li>format: NA</li>
 <li>enum: NA</li>
 <li>description: The ranges to retrieve from the spreadsheet.</li>
 </ul>
@@ -113,7 +132,6 @@
 <li>required: NA</li>
 <li>type: boolean</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: NA</li>
 <li>description: True if grid data should be returned. This …</li>
 </ul>
@@ -124,18 +142,45 @@
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: NA</li>
 <li>description: The spreadsheet to request.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>scopes: drive, drive.readonly, spreadsheets, spreadsheets.rea…</li>
+<li>scopes: drive, drive.file, drive.readonly, spreadsheets, spre…</li>
 <li>description: Returns the spreadsheet at the given ID. The caller m…</li>
 <li>response: Spreadsheet</li>
 <li>parameterOrder: spreadsheetId</li>
 <li>request: NA</li>
+</ul>
+</div>
+<div id="spreadsheets-getbydatafilter" class="section level2">
+<h2 class="hasAnchor">
+<a href="#spreadsheets-getbydatafilter" class="anchor"></a>spreadsheets.getByDataFilter</h2>
+<ul>
+<li>id: spreadsheets.getByDataFilter</li>
+<li>httpMethod: POST</li>
+<li>path: v4/spreadsheets/{spreadsheetId}:getByDataFilter</li>
+<li>parameters:
+<ul>
+<li>spreadsheetId:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: The spreadsheet to request.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>scopes: drive, drive.file, spreadsheets</li>
+<li>description: Returns the spreadsheet at the given ID. The caller m…</li>
+<li>response: Spreadsheet</li>
+<li>parameterOrder: spreadsheetId</li>
+<li>request: GetSpreadsheetByDataFilterRequest</li>
 </ul>
 </div>
 <div id="spreadsheets-create" class="section level2">
@@ -145,9 +190,8 @@
 <li>id: spreadsheets.create</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets</li>
-<li>parameters:<br>
-</li>
-<li>scopes: drive, spreadsheets</li>
+<li>parameters: NA</li>
+<li>scopes: drive, drive.file, spreadsheets</li>
 <li>description: Creates a spreadsheet, returning the newly created sp…</li>
 <li>response: Spreadsheet</li>
 <li>parameterOrder: NA</li>
@@ -169,36 +213,64 @@
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: NA</li>
 <li>description: The spreadsheet to apply the updates to.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>scopes: drive, spreadsheets</li>
+<li>scopes: drive, drive.file, spreadsheets</li>
 <li>description: Applies one or more updates to the spreadsheet.</li>
 </ul>
 <p>Each… * response: BatchUpdateSpreadsheetResponse * parameterOrder: spreadsheetId * request: BatchUpdateSpreadsheetRequest</p>
 </div>
-<div id="spreadsheets-sheets-copyto" class="section level2">
+<div id="spreadsheets-values-batchget" class="section level2">
 <h2 class="hasAnchor">
-<a href="#spreadsheets-sheets-copyto" class="anchor"></a>spreadsheets.sheets.copyTo</h2>
+<a href="#spreadsheets-values-batchget" class="anchor"></a>spreadsheets.values.batchGet</h2>
 <ul>
-<li>id: spreadsheets.sheets.copyTo</li>
-<li>httpMethod: POST</li>
-<li>path: v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo</li>
+<li>id: spreadsheets.values.batchGet</li>
+<li>httpMethod: GET</li>
+<li>path: v4/spreadsheets/{spreadsheetId}/values:batchGet</li>
 <li>parameters:
 <ul>
-<li>sheetId:
+<li>valueRenderOption:
 <ul>
-<li>location: path</li>
-<li>required: TRUE</li>
-<li>type: integer</li>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
 <li>repeated: NA</li>
-<li>format: int32</li>
+<li>enum: FORMATTED_VALUE UNFORMATTED_VALUE FORMULA</li>
+<li>description: How values should be represented in the out…</li>
+</ul>
+</li>
+<li>dateTimeRenderOption:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: SERIAL_NUMBER FORMATTED_STRING</li>
+<li>description: How dates, times, and durations should be r…</li>
+</ul>
+</li>
+<li>ranges:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: TRUE</li>
 <li>enum: NA</li>
-<li>description: The ID of the sheet to copy.</li>
+<li>description: The A1 notation of the values to retrieve.</li>
+</ul>
+</li>
+<li>majorDimension:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: DIMENSION_UNSPECIFIED ROWS COLUMNS</li>
+<li>description: The major dimension that results should use…</li>
 </ul>
 </li>
 <li>spreadsheetId:
@@ -207,18 +279,83 @@
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: NA</li>
-<li>description: The ID of the spreadsheet containing the sh…</li>
+<li>description: The ID of the spreadsheet to retrieve data …</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>scopes: drive, spreadsheets</li>
-<li>description: Copies a single sheet from a spreadsheet to another s…</li>
-<li>response: SheetProperties</li>
-<li>parameterOrder: spreadsheetId, sheetId</li>
-<li>request: CopySheetToAnotherSpreadsheetRequest</li>
+<li>scopes: drive, drive.file, drive.readonly, spreadsheets, spre…</li>
+<li>description: Returns one or more ranges of values from a spreadshe…</li>
+<li>response: BatchGetValuesResponse</li>
+<li>parameterOrder: spreadsheetId</li>
+<li>request: NA</li>
+</ul>
+</div>
+<div id="spreadsheets-values-clear" class="section level2">
+<h2 class="hasAnchor">
+<a href="#spreadsheets-values-clear" class="anchor"></a>spreadsheets.values.clear</h2>
+<ul>
+<li>id: spreadsheets.values.clear</li>
+<li>httpMethod: POST</li>
+<li>path: v4/spreadsheets/{spreadsheetId}/values/{range}:clear</li>
+<li>parameters:
+<ul>
+<li>spreadsheetId:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: The ID of the spreadsheet to update.</li>
+</ul>
+</li>
+<li>range:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: The A1 notation of the values to clear.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>scopes: drive, drive.file, spreadsheets</li>
+<li>description: Clears values from a spreadsheet. The caller must spe…</li>
+<li>response: ClearValuesResponse</li>
+<li>parameterOrder: spreadsheetId, range</li>
+<li>request: ClearValuesRequest</li>
+</ul>
+</div>
+<div id="spreadsheets-values-batchclearbydatafilter" class="section level2">
+<h2 class="hasAnchor">
+<a href="#spreadsheets-values-batchclearbydatafilter" class="anchor"></a>spreadsheets.values.batchClearByDataFilter</h2>
+<ul>
+<li>id: spreadsheets.values.batchClearByDataFilter</li>
+<li>httpMethod: POST</li>
+<li>path: v4/spreadsheets/{spreadsheetId}/values:batchClearByDa…</li>
+<li>parameters:
+<ul>
+<li>spreadsheetId:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: The ID of the spreadsheet to update.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>scopes: drive, drive.file, spreadsheets</li>
+<li>description: Clears one or more ranges of values from a spreadshee…</li>
+<li>response: BatchClearValuesByDataFilterResponse</li>
+<li>parameterOrder: spreadsheetId</li>
+<li>request: BatchClearValuesByDataFilterRequest</li>
 </ul>
 </div>
 <div id="spreadsheets-values-append" class="section level2">
@@ -230,26 +367,24 @@
 <li>path: v4/spreadsheets/{spreadsheetId}/values/{range}:append</li>
 <li>parameters:
 <ul>
-<li>includeValuesInResponse:
-<ul>
-<li>location: query</li>
-<li>required: NA</li>
-<li>type: boolean</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: NA</li>
-<li>description: Determines if the update response should in…</li>
-</ul>
-</li>
 <li>range:
 <ul>
 <li>location: path</li>
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: NA</li>
 <li>description: The A1 notation of a range to search for a …</li>
+</ul>
+</li>
+<li>includeValuesInResponse:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Determines if the update response should in…</li>
 </ul>
 </li>
 <li>spreadsheetId:
@@ -258,7 +393,6 @@
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: NA</li>
 <li>description: The ID of the spreadsheet to update.</li>
 </ul>
@@ -269,7 +403,6 @@
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: FORMATTED_VALUE UNFORMATTED_VALUE FORMULA</li>
 <li>description: Determines how values in the response shoul…</li>
 </ul>
@@ -280,7 +413,6 @@
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: OVERWRITE INSERT_ROWS</li>
 <li>description: How the input data should be inserted.</li>
 </ul>
@@ -291,7 +423,6 @@
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: INPUT_VALUE_OPTION_UNSPECIFIED RAW USER_ENTERED</li>
 <li>description: How the input data should be interpreted.</li>
 </ul>
@@ -302,18 +433,45 @@
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: SERIAL_NUMBER FORMATTED_STRING</li>
 <li>description: Determines how dates, times, and durations …</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>scopes: drive, spreadsheets</li>
+<li>scopes: drive, drive.file, spreadsheets</li>
 <li>description: Appends values to a spreadsheet. The input range is u…</li>
 <li>response: AppendValuesResponse</li>
 <li>parameterOrder: spreadsheetId, range</li>
 <li>request: ValueRange</li>
+</ul>
+</div>
+<div id="spreadsheets-values-batchgetbydatafilter" class="section level2">
+<h2 class="hasAnchor">
+<a href="#spreadsheets-values-batchgetbydatafilter" class="anchor"></a>spreadsheets.values.batchGetByDataFilter</h2>
+<ul>
+<li>id: spreadsheets.values.batchGetByDataFilter</li>
+<li>httpMethod: POST</li>
+<li>path: v4/spreadsheets/{spreadsheetId}/values:batchGetByData…</li>
+<li>parameters:
+<ul>
+<li>spreadsheetId:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: The ID of the spreadsheet to retrieve data …</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>scopes: drive, drive.file, spreadsheets</li>
+<li>description: Returns one or more ranges of values that match the s…</li>
+<li>response: BatchGetValuesByDataFilterResponse</li>
+<li>parameterOrder: spreadsheetId</li>
+<li>request: BatchGetValuesByDataFilterRequest</li>
 </ul>
 </div>
 <div id="spreadsheets-values-batchclear" class="section level2">
@@ -331,14 +489,13 @@
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: NA</li>
 <li>description: The ID of the spreadsheet to update.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>scopes: drive, spreadsheets</li>
+<li>scopes: drive, drive.file, spreadsheets</li>
 <li>description: Clears one or more ranges of values from a spreadshee…</li>
 <li>response: BatchClearValuesResponse</li>
 <li>parameterOrder: spreadsheetId</li>
@@ -354,46 +511,12 @@
 <li>path: v4/spreadsheets/{spreadsheetId}/values/{range}</li>
 <li>parameters:
 <ul>
-<li>majorDimension:
-<ul>
-<li>location: query</li>
-<li>required: NA</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: DIMENSION_UNSPECIFIED ROWS COLUMNS</li>
-<li>description: The major dimension that results should use…</li>
-</ul>
-</li>
-<li>spreadsheetId:
-<ul>
-<li>location: path</li>
-<li>required: TRUE</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: NA</li>
-<li>description: The ID of the spreadsheet to retrieve data …</li>
-</ul>
-</li>
-<li>range:
-<ul>
-<li>location: path</li>
-<li>required: TRUE</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: NA</li>
-<li>description: The A1 notation of the values to retrieve.</li>
-</ul>
-</li>
 <li>valueRenderOption:
 <ul>
 <li>location: query</li>
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: FORMATTED_VALUE UNFORMATTED_VALUE FORMULA</li>
 <li>description: How values should be represented in the out…</li>
 </ul>
@@ -404,14 +527,43 @@
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: SERIAL_NUMBER FORMATTED_STRING</li>
 <li>description: How dates, times, and durations should be r…</li>
 </ul>
 </li>
+<li>majorDimension:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: DIMENSION_UNSPECIFIED ROWS COLUMNS</li>
+<li>description: The major dimension that results should use…</li>
 </ul>
 </li>
-<li>scopes: drive, drive.readonly, spreadsheets, spreadsheets.rea…</li>
+<li>spreadsheetId:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: The ID of the spreadsheet to retrieve data …</li>
+</ul>
+</li>
+<li>range:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: The A1 notation of the values to retrieve.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>scopes: drive, drive.file, drive.readonly, spreadsheets, spre…</li>
 <li>description: Returns a range of values from a spreadsheet. The cal…</li>
 <li>response: ValueRange</li>
 <li>parameterOrder: spreadsheetId, range</li>
@@ -427,26 +579,24 @@
 <li>path: v4/spreadsheets/{spreadsheetId}/values/{range}</li>
 <li>parameters:
 <ul>
-<li>range:
-<ul>
-<li>location: path</li>
-<li>required: TRUE</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: NA</li>
-<li>description: The A1 notation of the values to update.</li>
-</ul>
-</li>
 <li>includeValuesInResponse:
 <ul>
 <li>location: query</li>
 <li>required: NA</li>
 <li>type: boolean</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: NA</li>
 <li>description: Determines if the update response should in…</li>
+</ul>
+</li>
+<li>range:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: The A1 notation of the values to update.</li>
 </ul>
 </li>
 <li>spreadsheetId:
@@ -455,7 +605,6 @@
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: NA</li>
 <li>description: The ID of the spreadsheet to update.</li>
 </ul>
@@ -466,7 +615,6 @@
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: FORMATTED_VALUE UNFORMATTED_VALUE FORMULA</li>
 <li>description: Determines how values in the response shoul…</li>
 </ul>
@@ -477,7 +625,6 @@
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: INPUT_VALUE_OPTION_UNSPECIFIED RAW USER_ENTERED</li>
 <li>description: How the input data should be interpreted.</li>
 </ul>
@@ -488,18 +635,45 @@
 <li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: SERIAL_NUMBER FORMATTED_STRING</li>
 <li>description: Determines how dates, times, and durations …</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>scopes: drive, spreadsheets</li>
+<li>scopes: drive, drive.file, spreadsheets</li>
 <li>description: Sets values in a range of a spreadsheet. The caller m…</li>
 <li>response: UpdateValuesResponse</li>
 <li>parameterOrder: spreadsheetId, range</li>
 <li>request: ValueRange</li>
+</ul>
+</div>
+<div id="spreadsheets-values-batchupdatebydatafilter" class="section level2">
+<h2 class="hasAnchor">
+<a href="#spreadsheets-values-batchupdatebydatafilter" class="anchor"></a>spreadsheets.values.batchUpdateByDataFilter</h2>
+<ul>
+<li>id: spreadsheets.values.batchUpdateByDataFilter</li>
+<li>httpMethod: POST</li>
+<li>path: v4/spreadsheets/{spreadsheetId}/values:batchUpdateByD…</li>
+<li>parameters:
+<ul>
+<li>spreadsheetId:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: The ID of the spreadsheet to update.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>scopes: drive, drive.file, spreadsheets</li>
+<li>description: Sets values in one or more ranges of a spreadsheet. T…</li>
+<li>response: BatchUpdateValuesByDataFilterResponse</li>
+<li>parameterOrder: spreadsheetId</li>
+<li>request: BatchUpdateValuesByDataFilterRequest</li>
 </ul>
 </div>
 <div id="spreadsheets-values-batchupdate" class="section level2">
@@ -517,152 +691,43 @@
 <li>required: TRUE</li>
 <li>type: string</li>
 <li>repeated: NA</li>
-<li>format: NA</li>
 <li>enum: NA</li>
 <li>description: The ID of the spreadsheet to update.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>scopes: drive, spreadsheets</li>
+<li>scopes: drive, drive.file, spreadsheets</li>
 <li>description: Sets values in one or more ranges of a spreadsheet. T…</li>
 <li>response: BatchUpdateValuesResponse</li>
 <li>parameterOrder: spreadsheetId</li>
 <li>request: BatchUpdateValuesRequest</li>
 </ul>
 </div>
-<div id="spreadsheets-values-clear" class="section level2">
-<h2 class="hasAnchor">
-<a href="#spreadsheets-values-clear" class="anchor"></a>spreadsheets.values.clear</h2>
-<ul>
-<li>id: spreadsheets.values.clear</li>
-<li>httpMethod: POST</li>
-<li>path: v4/spreadsheets/{spreadsheetId}/values/{range}:clear</li>
-<li>parameters:
-<ul>
-<li>range:
-<ul>
-<li>location: path</li>
-<li>required: TRUE</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: NA</li>
-<li>description: The A1 notation of the values to clear.</li>
-</ul>
-</li>
-<li>spreadsheetId:
-<ul>
-<li>location: path</li>
-<li>required: TRUE</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: NA</li>
-<li>description: The ID of the spreadsheet to update.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>scopes: drive, spreadsheets</li>
-<li>description: Clears values from a spreadsheet. The caller must spe…</li>
-<li>response: ClearValuesResponse</li>
-<li>parameterOrder: spreadsheetId, range</li>
-<li>request: ClearValuesRequest</li>
-</ul>
-</div>
-<div id="spreadsheets-values-batchget" class="section level2">
-<h2 class="hasAnchor">
-<a href="#spreadsheets-values-batchget" class="anchor"></a>spreadsheets.values.batchGet</h2>
-<ul>
-<li>id: spreadsheets.values.batchGet</li>
-<li>httpMethod: GET</li>
-<li>path: v4/spreadsheets/{spreadsheetId}/values:batchGet</li>
-<li>parameters:
-<ul>
-<li>ranges:
-<ul>
-<li>location: query</li>
-<li>required: NA</li>
-<li>type: string</li>
-<li>repeated: TRUE</li>
-<li>format: NA</li>
-<li>enum: NA</li>
-<li>description: The A1 notation of the values to retrieve.</li>
-</ul>
-</li>
-<li>majorDimension:
-<ul>
-<li>location: query</li>
-<li>required: NA</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: DIMENSION_UNSPECIFIED ROWS COLUMNS</li>
-<li>description: The major dimension that results should use…</li>
-</ul>
-</li>
-<li>spreadsheetId:
-<ul>
-<li>location: path</li>
-<li>required: TRUE</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: NA</li>
-<li>description: The ID of the spreadsheet to retrieve data …</li>
-</ul>
-</li>
-<li>valueRenderOption:
-<ul>
-<li>location: query</li>
-<li>required: NA</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: FORMATTED_VALUE UNFORMATTED_VALUE FORMULA</li>
-<li>description: How values should be represented in the out…</li>
-</ul>
-</li>
-<li>dateTimeRenderOption:
-<ul>
-<li>location: query</li>
-<li>required: NA</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>format: NA</li>
-<li>enum: SERIAL_NUMBER FORMATTED_STRING</li>
-<li>description: How dates, times, and durations should be r…</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>scopes: drive, drive.readonly, spreadsheets, spreadsheets.rea…</li>
-<li>description: Returns one or more ranges of values from a spreadshe…</li>
-<li>response: BatchGetValuesResponse</li>
-<li>parameterOrder: spreadsheetId</li>
-<li>request: NA</li>
-</ul>
-</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#exploring-the-google-sheets-api-v4-discovery-document">Exploring the Google Sheets API v4 Discovery Document</a></li>
-      <li><a href="#spreadsheets.get">spreadsheets.get</a></li>
-      <li><a href="#spreadsheets.create">spreadsheets.create</a></li>
-      <li><a href="#spreadsheets.batchupdate">spreadsheets.batchUpdate</a></li>
-      <li><a href="#spreadsheets.sheets.copyto">spreadsheets.sheets.copyTo</a></li>
-      <li><a href="#spreadsheets.values.append">spreadsheets.values.append</a></li>
-      <li><a href="#spreadsheets.values.batchclear">spreadsheets.values.batchClear</a></li>
-      <li><a href="#spreadsheets.values.get">spreadsheets.values.get</a></li>
-      <li><a href="#spreadsheets.values.update">spreadsheets.values.update</a></li>
-      <li><a href="#spreadsheets.values.batchupdate">spreadsheets.values.batchUpdate</a></li>
-      <li><a href="#spreadsheets.values.clear">spreadsheets.values.clear</a></li>
-      <li><a href="#spreadsheets.values.batchget">spreadsheets.values.batchGet</a></li>
+      <li><a href="#spreadsheets-get">spreadsheets.get</a></li>
+      <li><a href="#spreadsheets-getbydatafilter">spreadsheets.getByDataFilter</a></li>
+      <li><a href="#spreadsheets-create">spreadsheets.create</a></li>
+      <li><a href="#spreadsheets-batchupdate">spreadsheets.batchUpdate</a></li>
+      <li><a href="#spreadsheets-values-batchget">spreadsheets.values.batchGet</a></li>
+      <li><a href="#spreadsheets-values-clear">spreadsheets.values.clear</a></li>
+      <li><a href="#spreadsheets-values-batchclearbydatafilter">spreadsheets.values.batchClearByDataFilter</a></li>
+      <li><a href="#spreadsheets-values-append">spreadsheets.values.append</a></li>
+      <li><a href="#spreadsheets-values-batchgetbydatafilter">spreadsheets.values.batchGetByDataFilter</a></li>
+      <li><a href="#spreadsheets-values-batchclear">spreadsheets.values.batchClear</a></li>
+      <li><a href="#spreadsheets-values-get">spreadsheets.values.get</a></li>
+      <li><a href="#spreadsheets-values-update">spreadsheets.values.update</a></li>
+      <li><a href="#spreadsheets-values-batchupdatebydatafilter">spreadsheets.values.batchUpdateByDataFilter</a></li>
+      <li><a href="#spreadsheets-values-batchupdate">spreadsheets.values.batchUpdate</a></li>
       </ul>
 </div>
       </div>
@@ -675,7 +740,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>

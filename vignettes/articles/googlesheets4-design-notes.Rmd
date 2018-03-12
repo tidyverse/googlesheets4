@@ -1,0 +1,375 @@
+---
+title: "googlesheets4 design notes"
+output:
+  github_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+*This is useful to me and not necessarily for outside consumption.*
+
+## Peer group
+
+Packages to consider in design of googlesheets4:
+
+  * googlesheets: let's keep the good and fix the bad
+  * readr: reference point for UI, col spec, parsing
+  * readxl: reference point for parsing, (work)sheets/tabs, cell ranges
+
+## Col spec
+
+All 3 packages provide a way for user to specify the output type of each column.
+
+readr has the col spec system that we are most commited to long-term. `col_types` accepts a string using a single letter shorthand (e.g. `"c"` for character), as well as a longer form more conducive to passing ancillary info, such as datetime format. If no column type is given, it is guessed.
+
+googlesheets exposes the readr col spec API. All `gs_read*()` functions literally call either `read_csv()` or `type_convert()`. This has downsides, primarily the fact that, by default, googlesheets reads and parses *formatted* cell contents. The good news is that googlesheets did not introduce its own way to describe col spec.
+
+```{r, cache = TRUE}
+library(googlesheets)
+gs_read(gs_gap(), ws = "Europe", n_max = 4, col_types = c("cciddd"))
+```
+
+readxl has its own col spec system, but it is slated to evolve towards readr. `col_types` is a character vector with one entry per column from these options: "skip", "guess", "logical", "numeric", "date", "text" or "list". It lacks some of readr's output types and control: no integers (Excel itself has no concept of integer, but still), no factors, less variety wrt date/time/datetime. The "list" type is unique to readxl and is equally relevant to Google Sheets.
+
+```{r, cache = TRUE}
+library(readxl)
+(clippy <- read_excel(
+  readxl_example("clippy.xlsx"),
+  col_types = c("text", "list"))
+)
+tibble::deframe(clippy)
+```
+
+## Parsing
+
+Given a column type, each cell is processed to produce an atom in a vector of the target type. This is a loop over cells (within a loop over columns).
+
+readxl: We infer type for every cell, either in the guessing pass or at parse time. Cell type inference is based on Excel's declared cell type, the cell data, and user inputs `na` and `trim_ws` (e.g., https://github.com/tidyverse/readxl/blob/c02f81c3b9f7c6177ed9d13748377450bff9abe1/src/XlsxCell.h#L56):
+
+The cell type and the column type are both enums:
+
+```{cpp, eval = FALSE}
+enum CellType {
+  CELL_UNKNOWN,
+  CELL_BLANK,
+  CELL_LOGICAL,
+  CELL_DATE,
+  CELL_NUMERIC,
+  CELL_TEXT
+};
+
+enum ColType {
+  COL_UNKNOWN, // implies column type needs to be guessed
+  COL_BLANK,   // occurs when col_types = NULL and observe only CELL_BLANKs
+  COL_LOGICAL,
+  COL_DATE,
+  COL_NUMERIC,
+  COL_TEXT,
+  COL_LIST,    // occurs only as user-specified column type
+  COL_SKIP     // occurs only as user-specified column type
+};
+```
+
+There is a large `switch()` statement that fits a cell of type *x* into a column of type *y*. This is simple for matching types, such as `CELL_TEXT` and `COL_TEXT`. When it's not, we must coerce. The simplest coercions are when `NA` is the only sensible value, such as `CELL_LOGICAL` to `COL_DATE`. Examples of trickier coercions: `CELL_TEXT` to `COL_LOGICAL` (we use R's rules for this) or `CELL_DATE` to `COL_TEXT` (we can't really do this right now).
+
+readr. I don't know it well enough to give same summary. Will do if becomes necessary. The googlesheets4 parsing is more likely to be modelled after readxl anyway, because the info available for each cell is more similar. Presumably there is no notion of "cell type" for readr, since it is always a string.
+
+List of the readr parsers (single character shorthand in parens):
+
+  - `guess_parser()` (?)
+  - `col_skip()` (_) (-)
+  - `parse_logical()` (l)
+  - `parse_integer()` (i)
+  - `parse_double()` (d)
+  - `parse_number()` (n)
+  - `parse_datetime(..., format = "??")` (T)
+  - `parse_date(..., format = "??")` (D)
+  - `parse_time(..., format = "??")` (t)
+  - `parse_factor(..., levels = "??")` *why does this not have shortcode? issue opened*
+  - `parse_character()` (c)
+
+## Guessing
+
+readxl guesses a col type like so:
+
+  * Determine cell type = cell enum value.
+  * Track cumulative max enum value for the first `guess_max` cells. Bit of hand-waving here because, while it's clear that Boolean < integer < double, datetimes are just special.
+  * The max enum value is the guessed col type.
+
+readr: I haven't looked at this. I assume it is also a "max col type" approach.
+
+Observation: It makes sense and is very R-like to take the "maximum" type, i.e. the current pushes everything towards character. Is it worth considering a "majority rules" mentality?
+
+## Google Sheet cell data from Sheets API v4
+
+Two options:
+
+  * [spreadsheets.values collection](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values): simplest for reading/writing spreadsheet values. Would be nice to use this, but ...
+  * [spreadsheets collection](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets): for reading/writing any aspect of the spreadsheet. It appears that I *must* use this. Cell typing and coercion will be better if we have the contents in various forms (e.g., unformatted and formatted), plus information about the format itself.
+  
+In everything below, I'm suppressing the fact that it's possible to limit the read to specific cells. Not relevant for picking the endpoint.
+  
+### Examples
+
+Let's look at numeric data, especially datetimes and datetime formulas, to see exactly what's available for a cell.
+
+Reading from this Sheet:
+
+<https://docs.google.com/spreadsheets/d/1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU/edit#gid=0>
+
+#### spreadsheets.values.get
+
+*This can be skipped, because I suspect we will not use this endpoint. But I needed to take a look.*
+
+[`spreadsheets.values.get`](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get) has three query parameters:
+
+  * `majorDimension`: whether row or column increments fastest in the reply. Boring. Not explored.
+  * `valueRenderOption`: An enum:
+    - `FORMATTED_VALUE` (default): Values calculated & formatted according to the cell's formatting (automatic or explicit) and spreadsheet's locale. You basically get the strings that user sees in the browser. Current googlesheets package works with v3 equivalent of this and processes via readr. 
+    - `UNFORMATTED_VALUE`: Values are calculated but not formatted. Except there's a loophole: iff the cell has a date-ish format and `dateTimeRenderOption = "FORMATTED_STRING"`, then the those specific cells are handled as if `valueRenderOption = "FORMATTED_VALUE"`. I don't see any clever way to exploit this, but just note it.
+    - `FORMULA`: Values are not calculated. You get what was entered. If the cell contains a formula, you get that. For non-formula cells, seems to be equivalent to`UNFORMATTED_VALUE`. Except for the same loophole noted above for cells bearing a date-ish format when `dateTimeRenderOption = "FORMATTED_STRING"`.
+  * `dateTimeRenderOption`: An enum:
+    - Ignored if `valueRenderOption = "FORMATTED_VALUE"`, which is the default.
+    - `SERIAL_NUMBER` (default): Cells formatted as date, time, datetime, or duration are output as doubles in "serial number" format. The whole number portion of the value (left of the decimal) counts the days since December 30th 1899. The fractional portion (right of the decimal) counts the time as a fraction of the day. 1900 is not treated as a leap year, i.e. Sheets does not reproduce the Lotus 1-2-3 bug.
+    - `FORMATTED_STRING`: Date-ish cells are returned as formatted strings, even if `valueRenderOption = "UNFORMATTED_VALUE"`.
+
+*hidden chunk here that hits the `spreadsheets.values.get` endpoint and gets response ready for inspection*
+
+```{r, include = FALSE, cache = TRUE}
+## This is ugly because ... the package we need is the one we're designing.
+library(tidyverse)
+library(gargle)
+
+#(x <- googledrive::drive_get("googlesheets4-design-exploration"))
+#file_id <- x$id
+file_id <- "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU"
+
+get_values <- function(valueRenderOption = "FORMATTED_VALUE",
+                       dateTimeRenderOption = "SERIAL_NUMBER",
+                       spreadsheetId = "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU",
+                       range = "Sheet1") {
+  req <- build_request(
+    method = "GET",
+    path = "v4/spreadsheets/{spreadsheetId}/values/{range}",
+    params = list(
+      spreadsheetId = spreadsheetId,
+      range = range,
+      valueRenderOption = valueRenderOption,
+      dateTimeRenderOption = dateTimeRenderOption
+    ),
+    base_url = "https://sheets.googleapis.com",
+    key = gargle_api_key()
+  )
+  raw_resp <- make_request(req)
+  httr::content(raw_resp)[["values"]]
+}
+
+f <- function(x) {
+  x %>% 
+    transpose %>% 
+    simplify_all() %>% 
+    set_names(map_chr(., 1)) %>% 
+    map(`[`, -1) %>% 
+    as_tibble()
+}
+
+vro <- c("FORMATTED_VALUE", "UNFORMATTED_VALUE", "FORMULA") %>% set_names()
+sv_serial <- vro %>%
+  map(get_values, dateTimeRenderOption = "SERIAL_NUMBER") %>%
+  map(f)
+sv_string <- vro %>%
+  map(get_values, dateTimeRenderOption = "FORMATTED_STRING") %>%
+  map(f)
+
+val_df <- bind_cols(
+  sv_serial[["FORMATTED_VALUE"]][c("as_entered", "format")],
+  FORMATTED_VALUE = sv_serial[["FORMATTED_VALUE"]][["x"]],
+  UNFORMATTED_VALUE = sv_serial[["UNFORMATTED_VALUE"]][["x"]],
+  FORMULA = sv_serial[["FORMULA"]][["x"]],
+  FORMATTED_VALUE2 = sv_string[["FORMATTED_VALUE"]][["x"]],
+  UNFORMATTED_VALUE2 = sv_string[["UNFORMATTED_VALUE"]][["x"]],
+  FORMULA2 = sv_string[["FORMULA"]][["x"]]
+)
+```
+
+Side-by-side comparison of `FORMATTED_VALUE` vs. `UNFORMATTED_VALUE` vs. `FORMULA`. Remember this requires 3 separate API calls, i.e. you can't get all 3 of these from `spreadsheet.values` at the same time.
+
+```{r, echo = FALSE, cache = TRUE}
+val_df %>% 
+  select(as_entered, format, FORMATTED_VALUE, UNFORMATTED_VALUE, FORMULA) %>%
+  print(n = Inf)
+```
+
+Here's a look at same, but combined with `dateTimeRenderOption = "FORMATTED_STRING"`. Observations:
+
+  * `FORMATTED_VALUE` is same as above.
+  * `UNFORMATTED_VALUE` is same as `FORMATTED_VALUE` for cells bearing a date-ish format.
+  * `FORMULA` is same as above for formula cells and numbers entered as numbers. I note `FORMULA` is different in the case of the datetime that was typed in (first row).
+
+```{r, echo = FALSE, cache = TRUE}
+val_df %>%
+  select(as_entered, format, FORMATTED_VALUE2, UNFORMATTED_VALUE2, FORMULA2) %>%
+  print(n = Inf)
+```
+
+```{r include = FALSE, cache = TRUE}
+## backing up claims I make in the prose
+identical(val_df$FORMATTED_VALUE, val_df$FORMATTED_VALUE2)     ## TRUE
+identical(val_df$UNFORMATTED_VALUE, val_df$UNFORMATTED_VALUE2) ## FALSE
+identical(val_df$FORMULA, val_df$FORMULA2)                     ## FALSE
+
+## these should all be cells bearing a date-ish format
+val_df %>% 
+  filter(UNFORMATTED_VALUE != UNFORMATTED_VALUE2) %>% 
+  select(-FORMATTED_VALUE, -FORMATTED_VALUE2, -FORMULA, -FORMULA2)
+
+## there should be no cells bearing a date-ish format
+val_df %>% 
+  filter(UNFORMATTED_VALUE == UNFORMATTED_VALUE2) %>% 
+  select(-FORMATTED_VALUE, -FORMATTED_VALUE2, -FORMULA, -FORMULA2)
+
+## should be non-formula, i.e. literal, datetimes
+val_df %>% 
+  select(as_entered, format, FORMULA, FORMULA2) %>% 
+  filter(FORMULA != FORMULA2)
+
+## everything but literal datetimes
+val_df %>% 
+  select(as_entered, format, FORMULA, FORMULA2) %>% 
+  filter(FORMULA == FORMULA2)
+```
+
+#### spreadsheets.get
+
+[`spreadsheets.get`](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get) can return cell data:
+
+  * `includeGridData = "TRUE"`: Put this in the query to request cell data. You will get *everything*.
+  * Field mask. More granular way to specify desired fields in the query. We'll use this in the long-run, for fine control. I've used `includeGridData` in this pilot study too see full detail (some of which I am still suppressing).
+  
+*hidden chunk here that hits the `spreadsheets.get` endpoint and gets response ready for inspection*
+  
+```{r include = FALSE, cache = TRUE}
+## This is ugly because ... the package we need is the one we're designing.
+library(tidyverse)
+library(gargle)
+
+#(x <- googledrive::drive_get("googlesheets4-design-exploration"))
+#file_id <- x$id
+file_id <- "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU"
+
+req <- build_request(
+  method = "GET",
+  path = "v4/spreadsheets/{spreadsheetId}",
+  params = list(
+    spreadsheetId = file_id,
+    ranges = "Sheet1!A:A",
+    includeGridData = "true"
+  ),
+  base_url = "https://sheets.googleapis.com",
+  key = gargle_api_key()
+)
+raw_resp <- make_request(req)
+resp <- httr::content(raw_resp) %>%
+  pluck(list("sheets", 1, "data", 1, "rowData")) %>% 
+  map(list("values", 1))
+
+## throw away some components that I have no use for, so I can still show
+## semi-realistic raw return values, prior to rectangling
+## this drops stuff like cell backgroundColor and fontFamily
+purge <- function(x) {
+  x[["effectiveFormat"]] <- x[["effectiveFormat"]]["numberFormat"]
+  x
+}
+resp <- map(resp, purge)
+
+df <- resp %>% 
+  transpose() %>% 
+  as_tibble() %>% 
+  mutate(
+    formattedValue = flatten_chr(formattedValue),
+    userEnteredValue_name = map_chr(userEnteredValue, names),
+    userEnteredValue_value = map_chr(userEnteredValue, unlist),
+    effectiveValue_name = map_chr(effectiveValue, names),
+    effectiveValue_value = map_chr(effectiveValue, unlist),
+    effectiveFormat_nf_type = map_chr(
+      effectiveFormat,
+      c("numberFormat", "type"),
+      .default = NA
+    ),
+    effectiveFormat_nf_pattern = map_chr(
+      effectiveFormat,
+      c("numberFormat", "pattern"),
+      .default = NA
+    )
+  ) %>% 
+  select(-userEnteredValue, -effectiveValue, -effectiveFormat)
+```
+
+If you drill down, the data you get for each cell is an instance of [`CellData`](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#CellData).
+
+Here's (trimmed down) `CellData` on cell A2, a literal, explicitly formatted datetime:
+
+```{r}
+str(resp[[2]])
+```
+
+Here's (trimmed down) `CellData` on cell A3, an automatically formatted datetime formula:
+
+```{r}
+str(resp[[3]])
+```
+
+Observations:
+
+  * `effectiveValue` and `effectiveFormat` provide the basis for cell typing.
+  * `formattedValue` is useful for coercing to character, i.e. Google has already done it and, unlike Excel, exposes it.
+  * `effectiveFormat` *could* provide a basis for transmitting datetime format from the Sheet into R, if we had a lexicon or a grammar for the formats. [Sheets API docs on 
+Date and Number Formats](https://developers.google.com/sheets/api/guides/formats). [TimeFormatStrings](https://github.com/WizardMac/TimeFormatStrings), a C library to read and write time format strings (Excel, Stata, Unicode).
+  * `userEnteredValue` could be used if we aspire to return formulas.
+  
+Let's look at these fields for all cells.
+
+`userEnteredValue` and `effectiveValue` hold an instance of `ExtendedValue`, which is always exactly one of the following:
+
+  * `numberValue`
+  * `stringValue`
+  * `boolValue`
+  * `formulaValue`
+  * `errorValue`, which will be an instance of `ErrorValue`
+
+```{r, cache = TRUE}
+df %>%
+  select(formattedValue, starts_with("user")) %>% 
+  print(n = Inf)
+```
+
+```{r, cache = TRUE}
+df %>%
+  select(formattedValue, starts_with("effectiveValue")) %>% 
+  print(n = Inf)
+```
+
+`effectiveFormat` holds an instance of `CellFormat` and we only care about the sub-component `NumberFormat`. If it exists, it has a `type` and possibly a `pattern`. Possible values for `type` of `NumberFormat`:
+
+  * `TEXT`
+  * `NUMBER`
+  * `PERCENT`
+  * `CURRENCY`
+  * `DATE`
+  * `TIME`
+  * `DATE_TIME`
+  * `SCIENTIFIC`
+
+```{r, cache = TRUE}
+df %>%
+  select(formattedValue, starts_with("effectiveFormat")) %>% 
+  print(n = Inf)
+```
+
+An `NA` for the `type` of `NumberFormat` means there is no `NumberFormat`. If there is a `NumberFormat`, an `NA` for `pattern` of `NumberFormat` means a default for that type is selected based on the user's locale. *[The docs](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#NumberFormat) say "user's locale" and in other places are careful to say "spreadsheet's locale". Not sure what to make of this here.*

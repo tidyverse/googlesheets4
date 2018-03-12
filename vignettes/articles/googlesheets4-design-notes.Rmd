@@ -32,7 +32,7 @@ googlesheets exposes the readr col spec API. All `gs_read*()` functions literall
 
 ```{r, cache = TRUE}
 library(googlesheets)
-gs_read(gs_gap(), ws = "Europe", n_max = 4, col_types = c("cciddd"))
+gs_read(gs_gap(), ws = "Europe", n_max = 4, col_types = "cciddd")
 ```
 
 readxl has its own col spec system, but it is slated to evolve towards readr. `col_types` is a character vector with one entry per column from these options: "skip", "guess", "logical", "numeric", "date", "text" or "list". It lacks some of readr's output types and control: no integers (Excel itself has no concept of integer, but still), no factors, less variety wrt date/time/datetime. The "list" type is unique to readxl and is equally relevant to Google Sheets.
@@ -50,7 +50,7 @@ tibble::deframe(clippy)
 
 Given a column type, each cell is processed to produce an atom in a vector of the target type. This is a loop over cells (within a loop over columns).
 
-readxl: We infer type for every cell, either in the guessing pass or at parse time. Cell type inference is based on Excel's declared cell type, the cell data, and user inputs `na` and `trim_ws` (e.g., https://github.com/tidyverse/readxl/blob/c02f81c3b9f7c6177ed9d13748377450bff9abe1/src/XlsxCell.h#L56):
+readxl: We infer type for every cell, either in the guessing pass or at parse time. Cell type inference is based on Excel's declared cell type, the cell data, and user inputs `na` and `trim_ws` (e.g., https://github.com/tidyverse/readxl/blob/c02f81c3b9f7c6177ed9d13748377450bff9abe1/src/XlsxCell.h#L56).
 
 The cell type and the column type are both enums:
 
@@ -132,7 +132,7 @@ Reading from this Sheet:
   * `majorDimension`: whether row or column increments fastest in the reply. Boring. Not explored.
   * `valueRenderOption`: An enum:
     - `FORMATTED_VALUE` (default): Values calculated & formatted according to the cell's formatting (automatic or explicit) and spreadsheet's locale. You basically get the strings that user sees in the browser. Current googlesheets package works with v3 equivalent of this and processes via readr. 
-    - `UNFORMATTED_VALUE`: Values are calculated but not formatted. Except there's a loophole: iff the cell has a date-ish format and `dateTimeRenderOption = "FORMATTED_STRING"`, then the those specific cells are handled as if `valueRenderOption = "FORMATTED_VALUE"`. I don't see any clever way to exploit this, but just note it.
+    - `UNFORMATTED_VALUE`: Values are calculated but not formatted. Except there's a loophole: iff the cell has a date-ish format and `dateTimeRenderOption = "FORMATTED_STRING"`, then those specific cells are handled as if `valueRenderOption = "FORMATTED_VALUE"`. I don't see any clever way to exploit this, but just note it.
     - `FORMULA`: Values are not calculated. You get what was entered. If the cell contains a formula, you get that. For non-formula cells, seems to be equivalent to`UNFORMATTED_VALUE`. Except for the same loophole noted above for cells bearing a date-ish format when `dateTimeRenderOption = "FORMATTED_STRING"`.
   * `dateTimeRenderOption`: An enum:
     - Ignored if `valueRenderOption = "FORMATTED_VALUE"`, which is the default.
@@ -328,7 +328,7 @@ str(resp[[3]])
 Observations:
 
   * `effectiveValue` and `effectiveFormat` provide the basis for cell typing.
-  * `formattedValue` is useful for coercing to character, i.e. Google has already done it and, unlike Excel, exposes it.
+  * `formattedValue` is useful for coercing to character, i.e. Google has already done it and, unlike Excel, exposes it. AFAICT it is exactly what you get from `spreadsheets.values.get` when `valueRenderOption = "FORMATTED_VALUE"`.
   * `effectiveFormat` *could* provide a basis for transmitting datetime format from the Sheet into R, if we had a lexicon or a grammar for the formats. [Sheets API docs on 
 Date and Number Formats](https://developers.google.com/sheets/api/guides/formats). [TimeFormatStrings](https://github.com/WizardMac/TimeFormatStrings), a C library to read and write time format strings (Excel, Stata, Unicode).
   * `userEnteredValue` could be used if we aspire to return formulas.

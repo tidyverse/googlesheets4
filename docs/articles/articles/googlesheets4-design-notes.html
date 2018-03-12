@@ -103,7 +103,7 @@
 <p>readr has the col spec system that we are most commited to long-term. <code>col_types</code> accepts a string using a single letter shorthand (e.g. <code>"c"</code> for character), as well as a longer form more conducive to passing ancillary info, such as datetime format. If no column type is given, it is guessed.</p>
 <p>googlesheets exposes the readr col spec API. All <code>gs_read*()</code> functions literally call either <code>read_csv()</code> or <code>type_convert()</code>. This has downsides, primarily the fact that, by default, googlesheets reads and parses <em>formatted</em> cell contents. The good news is that googlesheets did not introduce its own way to describe col spec.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(googlesheets)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_read">gs_read</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/googlesheets/topics/example-sheets">gs_gap</a></span>(), <span class="dt">ws =</span> <span class="st">"Europe"</span>, <span class="dt">n_max =</span> <span class="dv">4</span>, <span class="dt">col_types =</span> <span class="kw">c</span>(<span class="st">"cciddd"</span>))</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_read">gs_read</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/googlesheets/topics/example-sheets">gs_gap</a></span>(), <span class="dt">ws =</span> <span class="st">"Europe"</span>, <span class="dt">n_max =</span> <span class="dv">4</span>, <span class="dt">col_types =</span> <span class="st">"cciddd"</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; Accessing worksheet titled 'Europe'.</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt; # A tibble: 4 x 6</span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></a>
@@ -142,7 +142,7 @@
 <h2 class="hasAnchor">
 <a href="#parsing" class="anchor"></a>Parsing</h2>
 <p>Given a column type, each cell is processed to produce an atom in a vector of the target type. This is a loop over cells (within a loop over columns).</p>
-<p>readxl: We infer type for every cell, either in the guessing pass or at parse time. Cell type inference is based on Excel’s declared cell type, the cell data, and user inputs <code>na</code> and <code>trim_ws</code> (e.g., <a href="https://github.com/tidyverse/readxl/blob/c02f81c3b9f7c6177ed9d13748377450bff9abe1/src/XlsxCell.h#L56" class="uri">https://github.com/tidyverse/readxl/blob/c02f81c3b9f7c6177ed9d13748377450bff9abe1/src/XlsxCell.h#L56</a>):</p>
+<p>readxl: We infer type for every cell, either in the guessing pass or at parse time. Cell type inference is based on Excel’s declared cell type, the cell data, and user inputs <code>na</code> and <code>trim_ws</code> (e.g., <a href="https://github.com/tidyverse/readxl/blob/c02f81c3b9f7c6177ed9d13748377450bff9abe1/src/XlsxCell.h#L56" class="uri">https://github.com/tidyverse/readxl/blob/c02f81c3b9f7c6177ed9d13748377450bff9abe1/src/XlsxCell.h#L56</a>).</p>
 <p>The cell type and the column type are both enums:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">enum</span> CellType {</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">  CELL_UNKNOWN,</a>
@@ -235,7 +235,7 @@
 <li>
 <code>FORMATTED_VALUE</code> (default): Values calculated &amp; formatted according to the cell’s formatting (automatic or explicit) and spreadsheet’s locale. You basically get the strings that user sees in the browser. Current googlesheets package works with v3 equivalent of this and processes via readr.</li>
 <li>
-<code>UNFORMATTED_VALUE</code>: Values are calculated but not formatted. Except there’s a loophole: iff the cell has a date-ish format and <code>dateTimeRenderOption = "FORMATTED_STRING"</code>, then the those specific cells are handled as if <code>valueRenderOption = "FORMATTED_VALUE"</code>. I don’t see any clever way to exploit this, but just note it.</li>
+<code>UNFORMATTED_VALUE</code>: Values are calculated but not formatted. Except there’s a loophole: iff the cell has a date-ish format and <code>dateTimeRenderOption = "FORMATTED_STRING"</code>, then those specific cells are handled as if <code>valueRenderOption = "FORMATTED_VALUE"</code>. I don’t see any clever way to exploit this, but just note it.</li>
 <li>
 <code>FORMULA</code>: Values are not calculated. You get what was entered. If the cell contains a formula, you get that. For non-formula cells, seems to be equivalent to<code>UNFORMATTED_VALUE</code>. Except for the same loophole noted above for cells bearing a date-ish format when <code>dateTimeRenderOption = "FORMATTED_STRING"</code>.</li>
 </ul>
@@ -372,7 +372,7 @@
 <li>
 <code>effectiveValue</code> and <code>effectiveFormat</code> provide the basis for cell typing.</li>
 <li>
-<code>formattedValue</code> is useful for coercing to character, i.e. Google has already done it and, unlike Excel, exposes it.</li>
+<code>formattedValue</code> is useful for coercing to character, i.e. Google has already done it and, unlike Excel, exposes it. AFAICT it is exactly what you get from <code>spreadsheets.values.get</code> when <code>valueRenderOption = "FORMATTED_VALUE"</code>.</li>
 <li>
 <code>effectiveFormat</code> <em>could</em> provide a basis for transmitting datetime format from the Sheet into R, if we had a lexicon or a grammar for the formats. <a href="https://developers.google.com/sheets/api/guides/formats">Sheets API docs on Date and Number Formats</a>. <a href="https://github.com/WizardMac/TimeFormatStrings">TimeFormatStrings</a>, a C library to read and write time format strings (Excel, Stata, Unicode).</li>
 <li>

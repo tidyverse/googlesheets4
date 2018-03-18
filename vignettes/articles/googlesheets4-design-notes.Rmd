@@ -54,7 +54,7 @@ readxl: We infer type for every cell, either in the guessing pass or at parse ti
 
 The cell type and the column type are both enums:
 
-```{cpp, eval = FALSE}
+``` cpp
 enum CellType {
   CELL_UNKNOWN,
   CELL_BLANK,
@@ -82,8 +82,8 @@ readr. I don't know it well enough to give same summary. Will do if becomes nece
 
 List of the readr parsers (single character shorthand in parens):
 
-  - `guess_parser()` (?)
   - `col_skip()` (_) (-)
+  - `guess_parser()` (?)
   - `parse_logical()` (l)
   - `parse_integer()` (i)
   - `parse_double()` (d)
@@ -111,21 +111,19 @@ Observation: It makes sense and is very R-like to take the "maximum" type, i.e. 
 Two options:
 
   * [spreadsheets.values collection](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values): simplest for reading/writing spreadsheet values. Would be nice to use this, but ...
-  * [spreadsheets collection](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets): for reading/writing any aspect of the spreadsheet. It appears that I *must* use this. Cell typing and coercion will be better if we have the contents in various forms (e.g., unformatted and formatted), plus information about the format itself.
+  * [spreadsheets collection](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets): for reading/writing any aspect of the spreadsheet. I *must* use this, at least for reading. Cell typing and coercion demand that we have the contents in various forms (e.g., as entered, unformatted, and formatted), plus information about the format itself.
   
 In everything below, I'm suppressing the fact that it's possible to limit the read to specific cells. Not relevant for picking the endpoint.
   
-### Examples
+### Example Sheet
 
-Let's look at numeric data, especially datetimes and datetime formulas, to see exactly what's available for a cell.
-
-Reading from this Sheet:
+I've built an example Sheet with numeric data, especially datetimes and datetime formulas, to study what's available for a cell.
 
 <https://docs.google.com/spreadsheets/d/1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU/edit#gid=0>
 
-#### spreadsheets.values.get
+### spreadsheets.values.get
 
-*This can be skipped, because I suspect we will not use this endpoint. But I needed to take a look.*
+*This can be skipped, because we will not use this endpoint. But I needed to take a look. It is also the easiest way to juxtapose: as entered, unformatted, formatted.*
 
 [`spreadsheets.values.get`](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.values/get) has three query parameters:
 
@@ -245,12 +243,12 @@ val_df %>%
   filter(FORMULA == FORMULA2)
 ```
 
-#### spreadsheets.get
+### spreadsheets.get
 
 [`spreadsheets.get`](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get) can return cell data:
 
   * `includeGridData = "TRUE"`: Put this in the query to request cell data. You will get *everything*.
-  * Field mask. More granular way to specify desired fields in the query. We'll use this in the long-run, for fine control. I've used `includeGridData` in this pilot study too see full detail (some of which I am still suppressing).
+  * Field mask. More granular way to specify desired fields in the query. We'll use this in the long-run, for fine control (see end of this article). I've used `includeGridData` here to see full detail (some of which I am still suppressing).
   
 *hidden chunk here that hits the `spreadsheets.get` endpoint and gets response ready for inspection*
   
@@ -327,11 +325,12 @@ str(resp[[3]])
 
 Observations:
 
-  * `effectiveValue` and `effectiveFormat` provide the basis for cell typing.
-  * `formattedValue` is useful for coercing to character, i.e. Google has already done it and, unlike Excel, exposes it. AFAICT it is exactly what you get from `spreadsheets.values.get` when `valueRenderOption = "FORMATTED_VALUE"`.
+  * `formattedValue` is useful for coercing to character, i.e. Google has already done it and, unlike Excel, exposes it. It is the same as what you get from `spreadsheets.values.get` when `valueRenderOption = "FORMATTED_VALUE"`.
+  * `userEnteredValue` could be used if we aspire to return formulas. It is basically the same as what you get from `spreadsheets.values.get` when `valueRenderOption = "FORMULA"`.
+  * `effectiveValue` is our main source of cell data. It is basically the same as what you get from `spreadsheets.values.get` when `valueRenderOption = "UNFORMATTED_VALUE"`.
+  * `effectiveValue` and `effectiveFormat`, together, provide the basis for cell typing.
   * `effectiveFormat` *could* provide a basis for transmitting datetime format from the Sheet into R, if we had a lexicon or a grammar for the formats. [Sheets API docs on 
 Date and Number Formats](https://developers.google.com/sheets/api/guides/formats). [TimeFormatStrings](https://github.com/WizardMac/TimeFormatStrings), a C library to read and write time format strings (Excel, Stata, Unicode).
-  * `userEnteredValue` could be used if we aspire to return formulas.
   
 Let's look at these fields for all cells.
 
@@ -343,19 +342,19 @@ Let's look at these fields for all cells.
   * `formulaValue`
   * `errorValue`, which will be an instance of `ErrorValue`
 
-```{r, cache = TRUE}
+```{r}
 df %>%
   select(formattedValue, starts_with("user")) %>% 
   print(n = Inf)
 ```
 
-```{r, cache = TRUE}
+```{r}
 df %>%
   select(formattedValue, starts_with("effectiveValue")) %>% 
   print(n = Inf)
 ```
 
-`effectiveFormat` holds an instance of `CellFormat` and we only care about the sub-component `NumberFormat`. If it exists, it has a `type` and possibly a `pattern`. Possible values for `type` of `NumberFormat`:
+`effectiveFormat`, if it exists, holds an instance of `CellFormat`. We only care about the sub-component `NumberFormat`. If it exists, `NumberFormat` has a `type` and possibly a `pattern`. Possible values for `type` of `NumberFormat`:
 
   * `TEXT`
   * `NUMBER`
@@ -366,10 +365,176 @@ df %>%
   * `DATE_TIME`
   * `SCIENTIFIC`
 
-```{r, cache = TRUE}
+```{r}
 df %>%
   select(formattedValue, starts_with("effectiveFormat")) %>% 
   print(n = Inf)
 ```
 
-An `NA` for the `type` of `NumberFormat` means there is no `NumberFormat`. If there is a `NumberFormat`, an `NA` for `pattern` of `NumberFormat` means a default for that type is selected based on the user's locale. *[The docs](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#NumberFormat) say "user's locale" and in other places are careful to say "spreadsheet's locale". Not sure what to make of this here.*
+A cell will not have an `effectiveFormat` if it bears the `defaultFormat`, which is a [property of the enclosing spreadsheet](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#spreadsheetproperties).
+
+A cell with an `effectiveFormat` does not necessarily have a `NumberFormat`, indicated by `NA` above. A cell with a `NumberFormat` does not necessarily have a `pattern`, indicated by `NA` above. That means a default pattern for that type is selected based on the user's locale. *[The docs](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#NumberFormat) say "user's locale" and in other places are careful to say "spreadsheet's locale". Not sure if this is sloppiness or is significant.*
+
+### spreadsheets.values.get vs. spreadsheets.get
+
+Nailing down my understanding of the two endpoints.
+
+Claim: cell values returned by `spreadsheets.values.get` when `valueRenderOption = "FORMATTED_VALUE"` (default) are same as `formattedValue` from `spreadsheets.get`.
+
+```{r}
+tibble(
+  ss_values_get = val_df$FORMATTED_VALUE,
+  ss_get = df$formattedValue[-1],
+  same = ss_values_get == ss_get,
+  fla = val_df$FORMULA
+  ) %>%
+  filter(!str_detect(val_df$FORMULA, "now")) %>% 
+  select(-fla) %>% 
+  print(n = Inf)
+```
+
+TRUE. My use of the `now()` datetime formula in the example spreadsheet is regrettable here, hence those rows are filtered out.
+
+Claim: cell values returned by `spreadsheets.values.get` when `valueRenderOption = "UNFORMATTED_VALUE"` are same as `effectiveValue` from `spreadsheets.get`.
+
+```{r}
+tibble(
+  ss_values_get = val_df$UNFORMATTED_VALUE,
+  ss_get = df$effectiveValue_value[-1],
+  same = ss_values_get == ss_get,
+  fla = val_df$FORMULA
+  ) %>%
+  filter(!str_detect(val_df$FORMULA, "now")) %>% 
+  select(-fla) %>% 
+  print(n = Inf)
+```
+
+MEH. I suspect this is TRUE up to the width/precision of the double-to-string conversion, which inexplicably seems to be different across the two endpoints. It's too bad that `spreadsheets.values.get` seems to report *greater* precision for the literal datetime than `spreadsheets.get`. It's hard to understand why the endpoint described as more powerful would have lower precision for any sort of cell.
+
+Claim: cell values returned by `spreadsheets.values.get` when `valueRenderOption = "FORMULA"` are same as `userEnteredValue` from `spreadsheets.get`.
+
+```{r}
+tibble(
+  ss_values_get = val_df$FORMULA,
+  ss_get = df$userEnteredValue_value[-1],
+  ss_get_type = df$userEnteredValue_name[-1],
+  same = ss_values_get == ss_get
+  ) %>%
+  print(n = Inf)
+
+```
+
+MEH. As above, seems to be same content, but with differences in width/precision of doubles.
+
+### Field mask and partial response
+
+<https://developers.google.com/sheets/api/guides/concepts#partial_responses>
+
+It's clear I will ultimately use `spreadsheets.get` for Sheet reading, so here I explore how to control the payload via a field mask. This seems pretty close to what I'll need to read rectangular regions. Example with the range A2:B3.
+
+```{r, cache = TRUE}
+library(tidyverse)
+library(gargle)
+
+#(x <- googledrive::drive_get("googlesheets4-design-exploration"))
+#file_id <- x$id
+file_id <- "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU"
+
+req <- build_request(
+  method = "GET",
+  path = "v4/spreadsheets/{spreadsheetId}",
+  params = list(
+    spreadsheetId = file_id,
+    #ranges = "Sheet1!A:A",
+    ranges = "Sheet1!A2:B3",
+    #includeGridData = TRUE
+    fields = "spreadsheetId,properties,spreadsheetUrl,sheets.data(startRow,startColumn),sheets.data.rowData.values(formattedValue,userEnteredValue,effectiveValue,effectiveFormat.numberFormat)"
+  ),
+  base_url = "https://sheets.googleapis.com",
+  key = gargle_api_key()
+)
+raw_resp <- make_request(req)
+ct <- httr::content(raw_resp)
+```
+
+Spreadsheet-level metadata:
+
+```{r}
+list(
+  spreadsheet_id = "spreadsheetId",
+  spreadsheet_url = "spreadsheetUrl",
+  title = c("properties", "title"),
+  locale = c("properties", "locale"),
+  time_zone = c("properties", "timeZone")
+) %>%
+  map_chr(~ ct[[.x]]) %>% 
+  enframe()
+```
+
+*Metadata about the sheets is available here, but my current field mask does not request it. I assume we'll populate info about the sheets when registering the Sheet, not while reading rectangles.*
+
+The reply has a component `sheets`, holding instances of `Sheet`, one per sheet given in `ranges` in the request. We have just one because `ranges = "Sheet1!A2:B3"`. We look at the `data` component, which contains an instance of [`GridData`](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#GridData). 
+
+```{r}
+pluck(ct, "sheets", 1, "data", 1) %>% 
+  str(max.level = 2)
+```
+
+The upper left corner of the rectangle is identified via `startRow` and `startColumn`. Both are zero-based and, apparently, are omitted if the value is zero.
+
+The cell data is found within `rowData`, one object per row and, within that, `values` and, within that, one instance of [`CellData`](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#CellData) per cell.
+
+```{r}
+resp <- ct %>%
+  pluck(list("sheets", 1, "data", 1, "rowData"))
+str(resp, max.level = 3)
+```
+
+Here it is, post-rectangling.
+
+```{r, echo = FALSE}
+library(cellranger)
+
+## modified from https://github.com/rsheets/cellranger/issues/30
+unrange <- function(x, major_dimension = c("rows", "columns")) {
+  major_dimension <- match.arg(major_dimension)
+  limits <- as.cell_limits(x)
+  rows <- seq(limits$ul[1], limits$lr[1])
+  cols <- seq(limits$ul[2], limits$lr[2])
+  rowcol <- switch(
+    major_dimension,
+    rows = expand.grid(rows = rows, cols = cols, stringsAsFactors = FALSE),
+    columns = expand.grid(cols = cols, rows = rows, stringsAsFactors = FALSE)
+  )
+  cell_addrs <- cell_addr(rowcol[["rows"]], rowcol[["cols"]])
+  to_string(cell_addrs, fo = "A1", strict = FALSE)
+}
+
+cells <- resp %>% 
+  map("values") %>% 
+  flatten()
+
+df <- cells %>% 
+  transpose(.names = c(
+    "formattedValue",
+    "userEnteredValue",
+    "effectiveValue",
+    "effectiveFormat"
+  )) %>% 
+  as_tibble() %>% 
+  mutate(numberFormat = map(effectiveFormat, "numberFormat")) %>% 
+  select(-effectiveFormat)
+df <- df %>% 
+  mutate(enter_type = map_chr(userEnteredValue, names),
+         enter_value = map(userEnteredValue, unlist),
+         effective_type = map_chr(effectiveValue, names),
+         effective_value = map(effectiveValue, unlist),
+         formatted_value = flatten_chr(formattedValue),
+         format_type = map_chr(numberFormat, "type", .default = NA),
+         format_pattern = map_chr(numberFormat, "pattern", .default = NA)) %>% 
+  select(-userEnteredValue, -effectiveValue, -formattedValue, -numberFormat) %>% 
+  add_column(cell = unrange("A2:B3"), .before = 1)
+df
+glimpse(df)
+```
+

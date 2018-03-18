@@ -3,5 +3,6 @@
 .RData
 .Ruserdata
 inst/doc
-.httr-oauth
+.httr-oauth*
 scratch.R
+*cache*

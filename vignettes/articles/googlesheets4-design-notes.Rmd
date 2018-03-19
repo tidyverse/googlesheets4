@@ -153,7 +153,7 @@ get_values <- function(valueRenderOption = "FORMATTED_VALUE",
                        dateTimeRenderOption = "SERIAL_NUMBER",
                        spreadsheetId = "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU",
                        range = "Sheet1") {
-  req <- build_request(
+  req <- request_build(
     method = "GET",
     path = "v4/spreadsheets/{spreadsheetId}/values/{range}",
     params = list(
@@ -165,7 +165,7 @@ get_values <- function(valueRenderOption = "FORMATTED_VALUE",
     base_url = "https://sheets.googleapis.com",
     key = gargle_api_key()
   )
-  raw_resp <- make_request(req)
+  raw_resp <- request_make(req)
   httr::content(raw_resp)[["values"]]
 }
 
@@ -199,7 +199,7 @@ val_df <- bind_cols(
 
 Side-by-side comparison of `FORMATTED_VALUE` vs. `UNFORMATTED_VALUE` vs. `FORMULA`. Remember this requires 3 separate API calls, i.e. you can't get all 3 of these from `spreadsheet.values` at the same time.
 
-```{r, echo = FALSE, cache = TRUE}
+```{r, echo = FALSE}
 val_df %>% 
   select(as_entered, format, FORMATTED_VALUE, UNFORMATTED_VALUE, FORMULA) %>%
   print(n = Inf)
@@ -211,13 +211,13 @@ Here's a look at same, but combined with `dateTimeRenderOption = "FORMATTED_STRI
   * `UNFORMATTED_VALUE` is same as `FORMATTED_VALUE` for cells bearing a date-ish format.
   * `FORMULA` is same as above for formula cells and numbers entered as numbers. I note `FORMULA` is different in the case of the datetime that was typed in (first row).
 
-```{r, echo = FALSE, cache = TRUE}
+```{r, echo = FALSE}
 val_df %>%
   select(as_entered, format, FORMATTED_VALUE2, UNFORMATTED_VALUE2, FORMULA2) %>%
   print(n = Inf)
 ```
 
-```{r include = FALSE, cache = TRUE}
+```{r include = FALSE, eval = FALSE}
 ## backing up claims I make in the prose
 identical(val_df$FORMATTED_VALUE, val_df$FORMATTED_VALUE2)     ## TRUE
 identical(val_df$UNFORMATTED_VALUE, val_df$UNFORMATTED_VALUE2) ## FALSE
@@ -262,7 +262,7 @@ library(gargle)
 #file_id <- x$id
 file_id <- "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU"
 
-req <- build_request(
+req <- request_build(
   method = "GET",
   path = "v4/spreadsheets/{spreadsheetId}",
   params = list(
@@ -273,7 +273,7 @@ req <- build_request(
   base_url = "https://sheets.googleapis.com",
   key = gargle_api_key()
 )
-raw_resp <- make_request(req)
+raw_resp <- request_make(req)
 resp <- httr::content(raw_resp) %>%
   pluck(list("sheets", 1, "data", 1, "rowData")) %>% 
   map(list("values", 1))
@@ -441,7 +441,7 @@ library(gargle)
 #file_id <- x$id
 file_id <- "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU"
 
-req <- build_request(
+req <- request_build(
   method = "GET",
   path = "v4/spreadsheets/{spreadsheetId}",
   params = list(
@@ -454,7 +454,7 @@ req <- build_request(
   base_url = "https://sheets.googleapis.com",
   key = gargle_api_key()
 )
-raw_resp <- make_request(req)
+raw_resp <- request_make(req)
 ct <- httr::content(raw_resp)
 ```
 
@@ -538,4 +538,3 @@ df <- df %>%
 df
 glimpse(df)
 ```
-

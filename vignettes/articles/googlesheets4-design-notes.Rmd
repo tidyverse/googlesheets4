@@ -10,6 +10,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(tidyverse)
 ```
 
 *This is useful to me and not necessarily for outside consumption.*

@@ -538,3 +538,59 @@ df <- df %>%
 df
 glimpse(df)
 ```
+
+
+## Usage and design
+
+Big question: Will googlesheets4 have a notion of a spreadsheet object?
+
+### Peer packages
+
+What do peer packages do?
+
+  * No object. Neither readr nor readxl has a notion of a persistent data source. `read_csv()` (and friends) and `read_excel()` take a path to a file and return data. That is all.
+  
+    ``` r
+    library(readr)
+    read_csv(readr_example("mtcars.csv")) %>% head(3)
+    
+    library(readxl)
+    read_excel(readxl_example("datasets.xlsx"), sheet = "mtcars") %>% head(3)
+    ```
+
+  * Glorified pointer. googlesheets (the original) has a `googlesheet` object. It holds the file id and other spreadsheet-specific metadata. You pass this object to `gs_read()`.
+
+    ```{r, cache = TRUE}
+    library(googlesheets)
+    (ss <- gs_gap())
+    gs_read(ss, ws = "Europe", n_max = 3)
+    ```
+
+  * More glorified pointer. googledrive has a `dribble` object. A key feature is that it's built to hold many files at once, as rows in the dribble. It has no notion of file type. Columns are file id, file title, and a hairy list-column.
+
+  * Persistent, mutable spreadsheet object. The (currently dormant) [rsheets effort](https://github.com/rsheets) spec'd out a *linen object*: an R6 data structure to hold a spreadsheet. Rich Fitzjohn implemented it for Excel spreadsheets, but it was absolutely designed with Google Sheets in mind, too. The spreadsheet object has document-level metadata, holds individual worksheets, and can accomodate cell data and, even, formatting. The idea was to read everything out of the spreadsheet all at once and then work with the linen object for downstream operations. This supports, for example, shared infrastructure for dealing with common spreadsheet aggravations.
+  
+### More thoughts
+
+A spreadsheet is more like a database with multiple tables than a csv file. Which suggests it's not crazy to think of establishing a connection, then reading from and writing to the different tables within it.
+
+readxl and readr are read-only and the target files tend to be local and static. In contrast, googlesheets4 will be read/write and the target file is more volatile. I feel like this supports the use of a persistent object, but I can't say exactly why.
+
+File id is the only thing that can't change about a Google Sheet. Even if we augment the file id with other metadata, at request time, there's no guarantee that the metadata is still accurate.
+
+  * Storing the file name along with the id just seems humane. It will almost always be correct.
+  * It's very nice to have an overview of the worksheets: name, extent. Even readxl will list the worksheet names for you (`readxl::excel_sheets()`).
+  * How much do we rely on the most recent metadata versus dutifully update? For example, when asked to read a specific worksheet, do we just try or do we use current or refreshed metadata to first establish that the worksheet actually exists?
+
+These are related, but distinct, and shouldn't be conflated:
+
+  * Registering a spreadsheet as a pointer-with-metadata.
+    - Example: current googlesheet object.
+  * Capturing an exhaustive snapshot of a spreadsheet or a worksheet as an R object that is intelligible and amenable to further manipulation. The linen object is an example. A lower-tech example is the tibble returned by `googlesheets::gs_read_cellfeed()`. It has one row per cell and columns for, e.g.,  cell reference, various forms of cell contents, and cell formatting.
+
+googlesheets makes data immediately available in two forms:
+
+  * A data frame with same "shape" as the Sheet. Defaults to formatted cell contents, but `gs_read(..., literal = FALSE)` requests unformatted contents.
+  * A data frame with one row per cell via `gs_read_cellfeed()`, with cell location data and cell contents in three forms ("literal value" = formatted, "input value" = (sort of) what was typed, "numeric value" = actual numeric value).
+
+In fact, in general `gs_read()` is a call to `gs_read_cellfeed()` followed by a call to `gs_reshape_cellfeed()` (which reshapes and enforces col types). This seems like a good design, i.e. to expose the "one row per cell" form, but offer a nice wrapper that does the reshaping.

@@ -107,7 +107,7 @@
 <a href="#col-spec" class="anchor"></a>Col spec</h2>
 <p>All 3 packages provide a way for user to specify the output type of each column.</p>
 <p>readr has the col spec system that we are most commited to long-term. <code>col_types</code> accepts a string using a single letter shorthand (e.g. <code>"c"</code> for character), as well as a longer form more conducive to passing ancillary info, such as datetime format. If no column type is given, it is guessed.</p>
-<p>googlesheets exposes the readr col spec API. All <code>gs_read*()</code> functions literally call either <code>read_csv()</code> or <code>type_convert()</code>. This has downsides, primarily the fact that, by default, googlesheets reads and parses <em>formatted</em> cell contents. The good news is that googlesheets did not introduce its own way to describe col spec.</p>
+<p>googlesheets exposes the readr col spec API. All <code>gs_read*()</code> functions literally call either <code><a href="http://www.rdocumentation.org/packages/readr/topics/read_delim">read_csv()</a></code> or <code><a href="http://www.rdocumentation.org/packages/readr/topics/type_convert">type_convert()</a></code>. This has downsides, primarily the fact that, by default, googlesheets reads and parses <em>formatted</em> cell contents. The good news is that googlesheets did not introduce its own way to describe col spec.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(googlesheets)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_read">gs_read</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/googlesheets/topics/example-sheets">gs_gap</a></span>(), <span class="dt">ws =</span> <span class="st">"Europe"</span>, <span class="dt">n_max =</span> <span class="dv">4</span>, <span class="dt">col_types =</span> <span class="st">"cciddd"</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; Accessing worksheet titled 'Europe'.</span></a>
@@ -174,28 +174,28 @@
 <p>List of the readr parsers (single character shorthand in parens):</p>
 <ul>
 <li>
-<code>col_skip()</code> (_) (-)</li>
+<code><a href="http://www.rdocumentation.org/packages/readr/topics/col_skip">col_skip()</a></code> (_) (-)</li>
 <li>
-<code>guess_parser()</code> (?)</li>
+<code><a href="http://www.rdocumentation.org/packages/readr/topics/parse_guess">guess_parser()</a></code> (?)</li>
 <li>
-<code>parse_logical()</code> (l)</li>
+<code><a href="http://www.rdocumentation.org/packages/readr/topics/parse_atomic">parse_logical()</a></code> (l)</li>
 <li>
-<code>parse_integer()</code> (i)</li>
+<code><a href="http://www.rdocumentation.org/packages/readr/topics/parse_atomic">parse_integer()</a></code> (i)</li>
 <li>
-<code>parse_double()</code> (d)</li>
+<code><a href="http://www.rdocumentation.org/packages/readr/topics/parse_atomic">parse_double()</a></code> (d)</li>
 <li>
-<code>parse_number()</code> (n)</li>
+<code><a href="http://www.rdocumentation.org/packages/readr/topics/parse_number">parse_number()</a></code> (n)</li>
 <li>
-<code>parse_datetime(..., format = "??")</code> (T)</li>
+<code><a href="http://www.rdocumentation.org/packages/readr/topics/parse_datetime">parse_datetime(..., format = "??")</a></code> (T)</li>
 <li>
-<code>parse_date(..., format = "??")</code> (D)</li>
+<code><a href="http://www.rdocumentation.org/packages/readr/topics/parse_datetime">parse_date(..., format = "??")</a></code> (D)</li>
 <li>
-<code>parse_time(..., format = "??")</code> (t)</li>
+<code><a href="http://www.rdocumentation.org/packages/readr/topics/parse_datetime">parse_time(..., format = "??")</a></code> (t)</li>
 <li>
-<code>parse_factor(..., levels = "??")</code> <em>why does this not have shortcode? issue opened</em>
+<code><a href="http://www.rdocumentation.org/packages/readr/topics/parse_factor">parse_factor(..., levels = "??")</a></code> <em>why does this not have shortcode? issue opened</em>
 </li>
 <li>
-<code>parse_character()</code> (c)</li>
+<code><a href="http://www.rdocumentation.org/packages/readr/topics/parse_atomic">parse_character()</a></code> (c)</li>
 </ul>
 </div>
 <div id="guessing" class="section level2">
@@ -733,6 +733,95 @@
 #&gt; $ format_pattern  &lt;chr&gt; "M/d/yyyy H:mm:ss", NA, NA, NA</code></pre>
 </div>
 </div>
+<div id="usage-and-design" class="section level2">
+<h2 class="hasAnchor">
+<a href="#usage-and-design" class="anchor"></a>Usage and design</h2>
+<p>Big question: Will googlesheets4 have a notion of a spreadsheet object?</p>
+<div id="peer-packages" class="section level3">
+<h3 class="hasAnchor">
+<a href="#peer-packages" class="anchor"></a>Peer packages</h3>
+<p>What do peer packages do?</p>
+<ul>
+<li>
+<p>No object. Neither readr nor readxl has a notion of a persistent data source. <code><a href="http://www.rdocumentation.org/packages/readr/topics/read_delim">read_csv()</a></code> (and friends) and <code><a href="http://www.rdocumentation.org/packages/readxl/topics/read_excel">read_excel()</a></code> take a path to a file and return data. That is all.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/readr/topics/read_delim">read_csv</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/readr/topics/readr_example">readr_example</a></span>(<span class="st">"mtcars.csv"</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="kw">library</span>(readxl)</a>
+<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="kw"><a href="http://www.rdocumentation.org/packages/readxl/topics/read_excel">read_excel</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/readxl/topics/readxl_example">readxl_example</a></span>(<span class="st">"datasets.xlsx"</span>), <span class="dt">sheet =</span> <span class="st">"mtcars"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">3</span>)</a></code></pre></div>
+</li>
+<li>
+<p>Glorified pointer. googlesheets (the original) has a <code>googlesheet</code> object. It holds the file id and other spreadsheet-specific metadata. You pass this object to <code><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_read">gs_read()</a></code>.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">library</span>(googlesheets)</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">(ss &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/googlesheets/topics/example-sheets">gs_gap</a></span>())</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co">#&gt;                   Spreadsheet title: test-gs-gapminder</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co">#&gt;                  Spreadsheet author: rpackagetest</span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co">#&gt;   Date of googlesheets registration: 2018-03-20 00:31:02 GMT</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co">#&gt;     Date of last spreadsheet update: 2015-04-22 18:27:11 GMT</span></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="co">#&gt;                          visibility: public</span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="co">#&gt;                         permissions: rw</span></a>
+<a class="sourceLine" id="cb20-9" data-line-number="9"><span class="co">#&gt;                             version: new</span></a>
+<a class="sourceLine" id="cb20-10" data-line-number="10"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb20-11" data-line-number="11"><span class="co">#&gt; Contains 5 worksheets:</span></a>
+<a class="sourceLine" id="cb20-12" data-line-number="12"><span class="co">#&gt; (Title): (Nominal worksheet extent as rows x columns)</span></a>
+<a class="sourceLine" id="cb20-13" data-line-number="13"><span class="co">#&gt; Africa: 625 x 6</span></a>
+<a class="sourceLine" id="cb20-14" data-line-number="14"><span class="co">#&gt; Americas: 301 x 6</span></a>
+<a class="sourceLine" id="cb20-15" data-line-number="15"><span class="co">#&gt; Asia: 397 x 6</span></a>
+<a class="sourceLine" id="cb20-16" data-line-number="16"><span class="co">#&gt; Europe: 361 x 6</span></a>
+<a class="sourceLine" id="cb20-17" data-line-number="17"><span class="co">#&gt; Oceania: 25 x 6</span></a>
+<a class="sourceLine" id="cb20-18" data-line-number="18"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb20-19" data-line-number="19"><span class="co">#&gt; Key: 1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ</span></a>
+<a class="sourceLine" id="cb20-20" data-line-number="20"><span class="co">#&gt; Browser URL: https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/</span></a>
+<a class="sourceLine" id="cb20-21" data-line-number="21"><span class="kw"><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_read">gs_read</a></span>(ss, <span class="dt">ws =</span> <span class="st">"Europe"</span>, <span class="dt">n_max =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb20-22" data-line-number="22"><span class="co">#&gt; Accessing worksheet titled 'Europe'.</span></a>
+<a class="sourceLine" id="cb20-23" data-line-number="23"><span class="co">#&gt; Parsed with column specification:</span></a>
+<a class="sourceLine" id="cb20-24" data-line-number="24"><span class="co">#&gt; cols(</span></a>
+<a class="sourceLine" id="cb20-25" data-line-number="25"><span class="co">#&gt;   country = col_character(),</span></a>
+<a class="sourceLine" id="cb20-26" data-line-number="26"><span class="co">#&gt;   continent = col_character(),</span></a>
+<a class="sourceLine" id="cb20-27" data-line-number="27"><span class="co">#&gt;   year = col_double(),</span></a>
+<a class="sourceLine" id="cb20-28" data-line-number="28"><span class="co">#&gt;   lifeExp = col_double(),</span></a>
+<a class="sourceLine" id="cb20-29" data-line-number="29"><span class="co">#&gt;   pop = col_double(),</span></a>
+<a class="sourceLine" id="cb20-30" data-line-number="30"><span class="co">#&gt;   gdpPercap = col_double()</span></a>
+<a class="sourceLine" id="cb20-31" data-line-number="31"><span class="co">#&gt; )</span></a>
+<a class="sourceLine" id="cb20-32" data-line-number="32"><span class="co">#&gt; # A tibble: 3 x 6</span></a>
+<a class="sourceLine" id="cb20-33" data-line-number="33"><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></a>
+<a class="sourceLine" id="cb20-34" data-line-number="34"><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb20-35" data-line-number="35"><span class="co">#&gt; 1 Albania Europe    1952.    55.2 1282697.     1601.</span></a>
+<a class="sourceLine" id="cb20-36" data-line-number="36"><span class="co">#&gt; 2 Albania Europe    1957.    59.3 1476505.     1942.</span></a>
+<a class="sourceLine" id="cb20-37" data-line-number="37"><span class="co">#&gt; 3 Albania Europe    1962.    64.8 1728137.     2313.</span></a></code></pre></div>
+</li>
+<li><p>More glorified pointer. googledrive has a <code>dribble</code> object. A key feature is that it’s built to hold many files at once, as rows in the dribble. It has no notion of file type. Columns are file id, file title, and a hairy list-column.</p></li>
+<li><p>Persistent, mutable spreadsheet object. The (currently dormant) <a href="https://github.com/rsheets">rsheets effort</a> spec’d out a <em>linen object</em>: an R6 data structure to hold a spreadsheet. Rich Fitzjohn implemented it for Excel spreadsheets, but it was absolutely designed with Google Sheets in mind, too. The spreadsheet object has document-level metadata, holds individual worksheets, and can accomodate cell data and, even, formatting. The idea was to read everything out of the spreadsheet all at once and then work with the linen object for downstream operations. This supports, for example, shared infrastructure for dealing with common spreadsheet aggravations.</p></li>
+</ul>
+</div>
+<div id="more-thoughts" class="section level3">
+<h3 class="hasAnchor">
+<a href="#more-thoughts" class="anchor"></a>More thoughts</h3>
+<p>A spreadsheet is more like a database with multiple tables than a csv file. Which suggests it’s not crazy to think of establishing a connection, then reading from and writing to the different tables within it.</p>
+<p>readxl and readr are read-only and the target files tend to be local and static. In contrast, googlesheets4 will be read/write and the target file is more volatile. I feel like this supports the use of a persistent object, but I can’t say exactly why.</p>
+<p>File id is the only thing that can’t change about a Google Sheet. Even if we augment the file id with other metadata, at request time, there’s no guarantee that the metadata is still accurate.</p>
+<ul>
+<li>Storing the file name along with the id just seems humane. It will almost always be correct.</li>
+<li>It’s very nice to have an overview of the worksheets: name, extent. Even readxl will list the worksheet names for you (<code><a href="http://www.rdocumentation.org/packages/readxl/topics/excel_sheets">readxl::excel_sheets()</a></code>).</li>
+<li>How much do we rely on the most recent metadata versus dutifully update? For example, when asked to read a specific worksheet, do we just try or do we use current or refreshed metadata to first establish that the worksheet actually exists?</li>
+</ul>
+<p>These are related, but distinct, and shouldn’t be conflated:</p>
+<ul>
+<li>Registering a spreadsheet as a pointer-with-metadata.
+<ul>
+<li>Example: current googlesheet object.</li>
+</ul>
+</li>
+<li>Capturing an exhaustive snapshot of a spreadsheet or a worksheet as an R object that is intelligible and amenable to further manipulation. The linen object is an example. A lower-tech example is the tibble returned by <code><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_read_cellfeed">googlesheets::gs_read_cellfeed()</a></code>. It has one row per cell and columns for, e.g., cell reference, various forms of cell contents, and cell formatting.</li>
+</ul>
+<p>googlesheets makes data immediately available in two forms:</p>
+<ul>
+<li>A data frame with same “shape” as the Sheet. Defaults to formatted cell contents, but <code><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_read">gs_read(..., literal = FALSE)</a></code> requests unformatted contents.</li>
+<li>A data frame with one row per cell via <code><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_read_cellfeed">gs_read_cellfeed()</a></code>, with cell location data and cell contents in three forms (“literal value” = formatted, “input value” = (sort of) what was typed, “numeric value” = actual numeric value).</li>
+</ul>
+<p>In fact, in general <code><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_read">gs_read()</a></code> is a call to <code><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_read_cellfeed">gs_read_cellfeed()</a></code> followed by a call to <code><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_reshape_cellfeed">gs_reshape_cellfeed()</a></code> (which reshapes and enforces col types). This seems like a good design, i.e. to expose the “one row per cell” form, but offer a nice wrapper that does the reshaping.</p>
+</div>
+</div>
 </div>
   </div>
 
@@ -747,6 +836,7 @@
       <li><a href="#parsing">Parsing</a></li>
       <li><a href="#guessing">Guessing</a></li>
       <li><a href="#google-sheet-cell-data-from-sheets-api-v4">Google Sheet cell data from Sheets API v4</a></li>
+      <li><a href="#usage-and-design">Usage and design</a></li>
       </ul>
 </div>
       </div>

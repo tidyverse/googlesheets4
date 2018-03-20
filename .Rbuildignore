@@ -12,3 +12,4 @@
 ^googlesheets4\.Rproj$
 ^LICENSE\.md$
 ^vignettes$
+^README\.Rmd$

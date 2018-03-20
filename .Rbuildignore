@@ -13,3 +13,4 @@
 ^LICENSE\.md$
 ^vignettes$
 ^README\.Rmd$
+^\.github$

@@ -193,3 +193,19 @@ attr(.endpoints, "base_url") <- dd_content$baseUrl
 view(.endpoints)
 
 devtools::use_data(.endpoints, internal = TRUE, overwrite = TRUE)
+
+## TO CONSIDER:
+## store schemas that seem very important, i.e. I might actually write
+## some code specific to creating or parsing such an item
+
+# schemas <- c(edf$request, edf$response)
+# tibble(schemas) %>%
+#   drop_na(schemas) %>%
+#   count(schemas) %>%
+#   arrange(desc(n)) %>%
+#   filter(n > 1) %>%
+#   pull(schemas)
+## Lesson: "Spreadsheet" and "ValueRange" seem worthy
+
+# .schemas <- dd_content[["schemas"]][c("Spreadsheet", "ValueRange")]
+# view(.schemas)

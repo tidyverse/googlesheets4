@@ -2,7 +2,7 @@ Package: googlesheets4
 Title: Manage Google Spreadsheets from R using the Sheets API V4
 Version: 0.0.0.9000
 Authors@R: c(
-    person("Jennifer", "Bryan", , "jenny@rstudio.com", role = c("cre", "aut"),
+    person("Jennifer", "Bryan", , "jenny@rstudio.com", role = c("cre", "aut"),  
       comment = c(ORCID = "0000-0002-6983-2759")
     ),
     person("RStudio", role = c("cph", "fnd"))
@@ -17,7 +17,7 @@ Imports:
     gargle,
     googledrive
 Remotes: 
-    tidyverse/gargle
+    r-lib/gargle
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true

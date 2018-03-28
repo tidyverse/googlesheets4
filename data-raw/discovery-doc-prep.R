@@ -33,6 +33,9 @@ if (length(dd_cache) == 0) {
 dd_content <- fromJSON(json_fname)
 view(dd_content)
 
+dd_content[["baseUrl"]]
+## "https://sheets.googleapis.com/"
+
 ## extract methods for the spreadsheets collection ... why?
 ## because I will have to call the 'get' method, at the very least
 ## for the main spreadsheet object

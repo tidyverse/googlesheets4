@@ -1,0 +1,23 @@
+---
+title: "googlesheets4 conventions"
+output:
+  github_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+*This is useful to me and not necessarily for outside consumption.*
+
+## Vocabulary
+
+The file or document is a **spreadsheet**. It is uniquely identified by a `fileId` (Drive API speak) or a `spreadsheetId` (Sheets API speak).
+
+A spreadsheet contains one or more **sheets**. In normal life, people also say "worksheet" or "tab". But not us. We say "sheet".
+
+To connect back to Excel, a workbook = a spreadsheet = (xlsx) a SpreadsheetML package. It contains at least one sheet.

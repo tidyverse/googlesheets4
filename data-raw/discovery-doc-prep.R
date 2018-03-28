@@ -131,6 +131,7 @@ params <- params %>%
     enum = enum %>%  modify_if(is_null, ~ NA),
     description = description %>% flatten_chr()
   )
+
 ## repack all the info for each parameter into a list
 repacked <- params %>%
   select(-id, -pname) %>%
@@ -138,11 +139,21 @@ repacked <- params %>%
 params <- params %>%
   select(id, pname) %>%
   mutate(pdata = repacked)
+
 ## repack all the parameters for each method into a named list
 params <- params %>%
   group_by(id) %>%
   nest(.key = parameters) %>%
   mutate(parameters = map(parameters, deframe))
+
+## add a 'key' parameter to each endpoint
+## this was built into the Drive API Discovery Document
+## but appears to not be the case for Sheets
+key_template <- googledrive::drive_endpoints() %>%
+  pluck(list(1, "parameters", "key"))
+
+params$parameters <- params$parameters %>%
+  map(~ {.x[["key"]] <- key_template; .x})
 
 ## replace the parameters in the main endpoint tibble
 edf <- edf %>%

@@ -6,7 +6,7 @@
 ^appveyor\.yml$
 ^data-raw$
 ^man-roxygen$
-^\.httr-oauth$
+^\.httr-oauth.*
 ^scratch\.R$
 ^old$
 ^googlesheets4\.Rproj$

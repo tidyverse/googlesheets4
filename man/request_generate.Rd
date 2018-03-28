@@ -23,28 +23,29 @@ via \code{sheets_api_key()} (nope, not set up yet). googlesheets4 ships with a
 built-in key or users can override with their own via
 \code{sheets_auth_config()} (nope, not set up yet).}
 
-\item{token}{Set to \code{NULL} to suppress the inclusion of a token. Note that,
-if auth has been de-activated via \code{sheets_auth_config()}, \code{sheets_token()}
-will actually return \code{NULL}. (none of that is implemented yet)}
+\item{token}{Set this to \code{NULL} to suppress the inclusion of a token. Note
+that, if auth has been de-activated via \code{sheets_auth_config()},
+\code{sheets_token()} will actually return \code{NULL}. (none of that is implemented
+yet)}
 }
 \value{
-\code{list()}\cr Components are \code{method}, \code{path}, \code{query}, \code{body},
-\code{token}, and \code{url}, suitable as input for \code{\link[gargle:request_make]{gargle::request_make()}}.
+\code{list()}\cr Components are \code{method}, \code{url}, \code{body}, and \code{token},
+suitable as input for \code{\link[=request_make]{request_make()}}.
 }
 \description{
-Generate a request, using knowledge of the \href{https://developers.google.com/sheets/api/}{Sheets API} from its \href{https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest}{Discovery Document}.
-Most users should, instead, use higher-level wrappers that facilitate
-common tasks, such as reading or writing worksheets or cell ranges. The
-functions here are intended for internal use and for programming around the
-Sheets API.
+Generate a request, using knowledge of the \href{https://developers.google.com/sheets/api/}{Sheets API} from its \href{https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest}{Discovery Document}. Use
+\code{\link[=request_make]{request_make()}} to execute the request. Most users should, instead, use
+higher-level wrappers that facilitate common tasks, such as reading or
+writing worksheets or cell ranges. The functions here are intended for
+internal use and for programming around the Sheets API.
 
 \code{request_generate()} lets you provide the bare minimum of input.
 It takes a nickname for an endpoint and:
 \itemize{
-\item Uses the API spec to look up the \code{path}, \code{method}, and base URL.
+\item Uses the API spec to look up the \code{method}, \code{path}, and \code{base_url}.
 \item Checks \code{params} for validity and completeness with respect to the
-endpoint. Separates parameters into those destined for the body, the query,
-and URL endpoint substitution (which is also enacted).
+endpoint. Uses \code{params} for URL endpoint subsitution and separates
+remaining parameters into those destined for the body versus the query.
 \item Adds an API key to the query if and only if \code{token = NULL}.
 }
 }
@@ -61,5 +62,7 @@ req
 \seealso{
 \code{\link[gargle:request_develop]{gargle::request_develop()}}, \code{\link[gargle:request_build]{gargle::request_build()}},
 \code{\link[gargle:request_make]{gargle::request_make()}}
+
+Other low-level API functions: \code{\link{request_make}}
 }
 \concept{low-level API functions}

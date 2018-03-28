@@ -24,4 +24,5 @@ LazyData: true
 RoxygenNote: 6.0.1.9000
 Roxygen: list(markdown = TRUE)
 Suggests: 
-    covr
+    covr,
+    testthat

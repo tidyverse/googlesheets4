@@ -18,10 +18,9 @@ endpoints that are used internally by googlesheets4.
 Returns a list of selected Sheets API v4 endpoints, as stored inside the
 googlesheets4 package. The names of this list (or the \code{id} sub-elements) are
 the nicknames that can be used to specify an endpoint in
-\code{request_generate()}. For each endpoint, we store its nickname or \code{id}, the
-associated HTTP \code{method}, the \code{path}, and details about the parameters. This list
-is derived programmatically from the
-\href{https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest}{Sheets API v4 Discovery Document}.
+\code{\link[=request_generate]{request_generate()}}. For each endpoint, we store its nickname or \code{id}, the
+associated HTTP \code{method}, the \code{path}, and details about the parameters. This
+list is derived programmatically from the \href{https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest}{Sheets API v4 Discovery Document}.
 }
 \examples{
 str(sheets_endpoints(), max.level = 2)

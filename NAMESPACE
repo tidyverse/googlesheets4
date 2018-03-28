@@ -3,4 +3,7 @@
 export(request_generate)
 export(request_make)
 export(sheets_endpoints)
+importFrom(glue,collapse)
+importFrom(glue,glue)
+importFrom(glue,glue_data)
 importFrom(purrr,"%||%")

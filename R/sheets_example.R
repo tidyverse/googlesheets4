@@ -1,3 +1,5 @@
+## TODO: ideally these would be actual Sheet names; currently not true
+## TODO: consult remote key-value store for these? in case they change?
 .sheets_examples <- c(
      "gapminder" = "1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ",
       "mini-gap" = "1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY",
@@ -9,9 +11,9 @@
 #'
 #' googlesheets4 ships with static IDs for some world-readable example Sheets
 #' for use in examples and documentation. This function make them easy to
-#' access.
+#' access by a nickname.
 #'
-#' @param name Nickname of the example Sheet. If `NULL`, the examples are
+#' @param name Nickname of an example Sheet. If `NULL`, the examples are
 #'   listed.
 #'
 #' @return Either a single [sheets_id] object or a named character vector of all

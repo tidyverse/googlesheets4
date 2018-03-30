@@ -7,7 +7,7 @@
 sheets_example(name = NULL)
 }
 \arguments{
-\item{name}{Nickname of the example Sheet. If \code{NULL}, the examples are
+\item{name}{Nickname of an example Sheet. If \code{NULL}, the examples are
 listed.}
 }
 \value{
@@ -17,7 +17,7 @@ built-in examples.
 \description{
 googlesheets4 ships with static IDs for some world-readable example Sheets
 for use in examples and documentation. This function make them easy to
-access.
+access by a nickname.
 }
 \examples{
 sheets_example()

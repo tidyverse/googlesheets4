@@ -24,6 +24,10 @@ characters", typically 44 characters long, in our experience. Example:
 \link{googledrive} package. In general, a \code{dribble} can represent several files,
 one row per file. Since googlesheets4 is not vectorized over spreadsheets,
 we are only prepared to accept a one-row \code{dribble}.
+\itemize{
+\item \code{\link[googledrive:drive_get]{googledrive::drive_get("YOUR SHEET NAME")}}
+is a great way to look up a Sheet via its name.
+}
 }
 
 This is a generic function.

@@ -50,10 +50,11 @@ sheets_id <- function(x) {
 #'   [googledrive] package. In general, a `dribble` can represent several files,
 #'   one row per file. Since googlesheets4 is not vectorized over spreadsheets,
 #'   we are only prepared to accept a one-row `dribble`.
+#'     - [`googledrive::drive_get("YOUR SHEET NAME")`][googledrive::drive_get()]
+#'     is a great way to look up a Sheet via its name.
 #'
 #' @description This is a generic function.
 #'
-
 #' @param x Something that uniquely identifies a Google Sheet (see below for
 #'   anticipated inputs.
 #' @param ... Other arguments passed down to methods. (Not used.)
@@ -122,7 +123,7 @@ as_sheets_id.character <- function(x, ...) {
   sheets_id(out)
 }
 
-## currently just copied from googledrive
+## copied from googledrive
 one_id <- function(x) {
   if (!grepl("^http|/", x)) return(x)
 

@@ -1,6 +1,9 @@
 #' @importFrom glue glue glue_data collapse
 NULL
 
+sq <- function(x) glue::single_quote(x)
+bt <- function(x) glue::backtick(x)
+
 stop_glue <- function(..., .sep = "", .envir = parent.frame(),
                       call. = FALSE, .domain = NULL) {
   stop(

@@ -19,7 +19,7 @@
 #' @export
 #' @family low-level API functions
 request_make <- function(x, ...){
-  gargle::request_make(x, ..., user_agent = sheets_user_agent)
+  gargle::request_make(x, ..., user_agent = sheets_user_agent())
 }
 
 sheets_user_agent <- function() {

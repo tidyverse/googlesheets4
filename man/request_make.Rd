@@ -28,6 +28,7 @@ been created with \code{\link[=request_generate]{request_generate()}} or \code{\
 output is processed with \code{process_response()}.
 }
 \seealso{
-Other low-level API functions: \code{\link{request_generate}}
+Other low-level API functions: \code{\link{request_generate}},
+  \code{\link{response_process}}
 }
 \concept{low-level API functions}

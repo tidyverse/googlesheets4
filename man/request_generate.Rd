@@ -63,6 +63,7 @@ req
 \code{\link[gargle:request_develop]{gargle::request_develop()}}, \code{\link[gargle:request_build]{gargle::request_build()}},
 \code{\link[gargle:request_make]{gargle::request_make()}}
 
-Other low-level API functions: \code{\link{request_make}}
+Other low-level API functions: \code{\link{request_make}},
+  \code{\link{response_process}}
 }
 \concept{low-level API functions}

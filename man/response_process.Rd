@@ -4,10 +4,10 @@
 \alias{response_process}
 \title{Process a response from a Google API}
 \usage{
-response_process(raw_resp)
+response_process(resp)
 }
 \arguments{
-\item{res}{Object of class \code{response} from \link{httr}.}
+\item{resp}{Object of class \code{response} from \link{httr}.}
 }
 \value{
 List.

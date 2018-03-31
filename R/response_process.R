@@ -2,13 +2,13 @@
 #'
 #' Temporarily gestating this in googlesheets4 but it is destined for gargle.
 #'
-#' @param res Object of class `response` from [httr].
+#' @param resp Object of class `response` from [httr].
 #'
 #' @return List.
 #' @export
 #' @family low-level API functions
-response_process <- function(raw_resp) {
-  status <- httr::status_code(raw_resp)
+response_process <- function(resp) {
+  status <- httr::status_code(resp)
 
   if (status < 200 || (status >= 300 && status < 400)) {
     stop_glue(
@@ -22,10 +22,10 @@ response_process <- function(raw_resp) {
   }
 
   if (status >= 400) {
-    google_error(raw_resp)
+    google_error(resp)
   }
 
-  raw_resp %>%
+  resp %>%
     stop_for_content_type() %>%
     httr::content(as = "parsed", type = "application/json")
 }

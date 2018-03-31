@@ -18,6 +18,7 @@ Imports:
     glue,
     googledrive,
     httr,
+    magrittr,
     purrr
 Suggests: 
     covr,

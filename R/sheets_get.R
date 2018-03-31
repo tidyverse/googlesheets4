@@ -78,8 +78,12 @@ sheets_spreadsheet <- function(x = list()) {
       start_column = map_int(nr, c("range", "startColumnIndex")) + 1L,
         end_column = map_int(nr, c("range", "endColumnIndex"))
     )
-    sheets <- tibble::deframe(out$sheets[c("id", "name")])
-    out$named_ranges$sheet_name <- sheets[out$named_ranges$sheet_id]
+    out$named_ranges$sheet_name <- vlookup(
+      out$named_ranges$sheet_id,
+      data = out$sheets,
+      key = "id",
+      value = "name"
+    )
     out$named_ranges$range <- purrr::pmap_chr(out$named_ranges, make_range)
   }
 

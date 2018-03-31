@@ -28,14 +28,109 @@
         "enum": [null],
         "description": ["True if grid data should be returned.\nThis parameter is ignored if a field mask was set in the request."]
       },
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
       "key": {
         "location": ["query"],
         "required": [null],
         "type": ["string"],
         "repeated": [null],
-        "format": [null],
         "enum": [null],
         "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
       }
     },
     "scopes": ["drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"],
@@ -57,14 +152,109 @@
         "enum": [null],
         "description": ["The spreadsheet to request."]
       },
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
       "key": {
         "location": ["query"],
         "required": [null],
         "type": ["string"],
         "repeated": [null],
-        "format": [null],
         "enum": [null],
         "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
       }
     },
     "scopes": ["drive, drive.file, spreadsheets"],
@@ -77,7 +267,112 @@
     "id": ["spreadsheets.create"],
     "httpMethod": ["POST"],
     "path": ["v4/spreadsheets"],
-    "parameters": {},
+    "parameters": {
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
+      "key": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
+      }
+    },
     "scopes": ["drive, drive.file, spreadsheets"],
     "description": ["Creates a spreadsheet, returning the newly created spreadsheet."],
     "response": ["Spreadsheet"],
@@ -97,14 +392,109 @@
         "enum": [null],
         "description": ["The spreadsheet to apply the updates to."]
       },
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
       "key": {
         "location": ["query"],
         "required": [null],
         "type": ["string"],
         "repeated": [null],
-        "format": [null],
         "enum": [null],
         "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
       }
     },
     "scopes": ["drive, drive.file, spreadsheets"],
@@ -158,14 +548,109 @@
         "enum": [null],
         "description": ["The ID of the spreadsheet to retrieve data from."]
       },
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
       "key": {
         "location": ["query"],
         "required": [null],
         "type": ["string"],
         "repeated": [null],
-        "format": [null],
         "enum": [null],
         "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
       }
     },
     "scopes": ["drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"],
@@ -195,14 +680,109 @@
         "enum": [null],
         "description": ["The A1 notation of the values to clear."]
       },
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
       "key": {
         "location": ["query"],
         "required": [null],
         "type": ["string"],
         "repeated": [null],
-        "format": [null],
         "enum": [null],
         "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
       }
     },
     "scopes": ["drive, drive.file, spreadsheets"],
@@ -224,14 +804,109 @@
         "enum": [null],
         "description": ["The ID of the spreadsheet to update."]
       },
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
       "key": {
         "location": ["query"],
         "required": [null],
         "type": ["string"],
         "repeated": [null],
-        "format": [null],
         "enum": [null],
         "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
       }
     },
     "scopes": ["drive, drive.file, spreadsheets"],
@@ -301,14 +976,109 @@
         "enum": [null],
         "description": ["Determines if the update response should include the values\nof the cells that were appended. By default, responses\ndo not include the updated values."]
       },
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
       "key": {
         "location": ["query"],
         "required": [null],
         "type": ["string"],
         "repeated": [null],
-        "format": [null],
         "enum": [null],
         "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
       }
     },
     "scopes": ["drive, drive.file, spreadsheets"],
@@ -330,14 +1100,109 @@
         "enum": [null],
         "description": ["The ID of the spreadsheet to retrieve data from."]
       },
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
       "key": {
         "location": ["query"],
         "required": [null],
         "type": ["string"],
         "repeated": [null],
-        "format": [null],
         "enum": [null],
         "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
       }
     },
     "scopes": ["drive, drive.file, spreadsheets"],
@@ -359,14 +1224,109 @@
         "enum": [null],
         "description": ["The ID of the spreadsheet to update."]
       },
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
       "key": {
         "location": ["query"],
         "required": [null],
         "type": ["string"],
         "repeated": [null],
-        "format": [null],
         "enum": [null],
         "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
       }
     },
     "scopes": ["drive, drive.file, spreadsheets"],
@@ -420,14 +1380,109 @@
         "enum": ["SERIAL_NUMBER", "FORMATTED_STRING"],
         "description": ["How dates, times, and durations should be represented in the output.\nThis is ignored if value_render_option is\nFORMATTED_VALUE.\nThe default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER]."]
       },
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
       "key": {
         "location": ["query"],
         "required": [null],
         "type": ["string"],
         "repeated": [null],
-        "format": [null],
         "enum": [null],
         "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
       }
     },
     "scopes": ["drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"],
@@ -449,14 +1504,109 @@
         "enum": [null],
         "description": ["The ID of the spreadsheet to update."]
       },
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
       "key": {
         "location": ["query"],
         "required": [null],
         "type": ["string"],
         "repeated": [null],
-        "format": [null],
         "enum": [null],
         "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
       }
     },
     "scopes": ["drive, drive.file, spreadsheets"],
@@ -518,14 +1668,109 @@
         "enum": ["SERIAL_NUMBER", "FORMATTED_STRING"],
         "description": ["Determines how dates, times, and durations in the response should be\nrendered. This is ignored if response_value_render_option is\nFORMATTED_VALUE.\nThe default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER]."]
       },
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
       "key": {
         "location": ["query"],
         "required": [null],
         "type": ["string"],
         "repeated": [null],
-        "format": [null],
         "enum": [null],
         "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
       }
     },
     "scopes": ["drive, drive.file, spreadsheets"],
@@ -547,14 +1792,109 @@
         "enum": [null],
         "description": ["The ID of the spreadsheet to update."]
       },
+      "upload_protocol": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Upload protocol for media (e.g. \"raw\", \"multipart\")."]
+      },
+      "prettyPrint": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Returns response with indentations and line breaks."]
+      },
+      "uploadType": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Legacy upload protocol for media (e.g. \"media\", \"multipart\")."]
+      },
+      "fields": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Selector specifying which fields to include in a partial response."]
+      },
+      "$.xgafv": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["1", "2"],
+        "description": ["V1 error format."]
+      },
+      "callback": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["JSONP"]
+      },
+      "alt": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": ["json", "media", "proto"],
+        "description": ["Data format for response."]
+      },
       "key": {
         "location": ["query"],
         "required": [null],
         "type": ["string"],
         "repeated": [null],
-        "format": [null],
         "enum": [null],
         "description": ["API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."]
+      },
+      "access_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth access token."]
+      },
+      "quotaUser": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."]
+      },
+      "pp": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["boolean"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["Pretty-print response."]
+      },
+      "oauth_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth 2.0 token for the current user."]
+      },
+      "bearer_token": {
+        "location": ["query"],
+        "required": [null],
+        "type": ["string"],
+        "repeated": [null],
+        "enum": [null],
+        "description": ["OAuth bearer token."]
       }
     },
     "scopes": ["drive, drive.file, spreadsheets"],

@@ -56,6 +56,13 @@ names(values) <- map_chr(values, "id")
 endpoints <- c(spreadsheets, values)
 view(endpoints)
 
+## add API-wide params to all endpoints
+add_global_params <- function(x) {
+  x[["parameters"]] <- c(x[["parameters"]], dd_content[["parameters"]])
+  x
+}
+endpoints <- map(endpoints, add_global_params)
+
 nms <- endpoints %>%
   map(names) %>%
   reduce(union)
@@ -148,15 +155,6 @@ params <- params %>%
   group_by(id) %>%
   nest(.key = parameters) %>%
   mutate(parameters = map(parameters, deframe))
-
-## add a 'key' parameter to each endpoint
-## this was built into the Drive API Discovery Document
-## but appears to not be the case for Sheets
-key_template <- googledrive::drive_endpoints() %>%
-  pluck(list(1, "parameters", "key"))
-
-params$parameters <- params$parameters %>%
-  map(~ {.x[["key"]] <- key_template; .x})
 
 ## replace the parameters in the main endpoint tibble
 edf <- edf %>%

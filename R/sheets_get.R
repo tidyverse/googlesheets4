@@ -54,6 +54,7 @@ sheets_spreadsheet <- function(x = list()) {
              index = map_int(p, "index"),
                 id = map_chr(p, "sheetId"),
               type = map_chr(p, "sheetType"),
+           visible = !map_lgl(p, "hidden", .default = FALSE),
          grid_rows = map_int(p, c("gridProperties", "rowCount"), .default = NA),
       grid_columns = map_int(p, c("gridProperties", "columnCount"), .default = NA)
     )

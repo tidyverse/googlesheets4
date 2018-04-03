@@ -32,3 +32,6 @@ is a great way to look up a Sheet via its name.
 
 This is a generic function.
 }
+\examples{
+as_sheets_id("abc")
+}

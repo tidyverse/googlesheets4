@@ -61,7 +61,6 @@ sheets_id <- function(x) {
 #' @export
 #' @examples
 #' as_sheets_id("abc")
-#' }
 as_sheets_id <- function(x, ...) UseMethod("as_sheets_id")
 
 #' @export

@@ -13,13 +13,10 @@ test_that("string with invalid character is rejected", {
   expect_error(as_sheets_id("abc{123"), "invalid characters")
 })
 
-test_that("NULL and length-zero character pass through", {
-  expect_null(as_sheets_id(NULL))
-  expect_identical(as_sheets_id(character()), character())
-})
-
 test_that("invalid inputs are caught", {
-  expect_error(as_sheets_id(letters[1:2]), "must not have length > 1")
+  expect_error(as_sheets_id(NULL), "Cannot turn `NULL`")
+  expect_error(as_sheets_id(character()), "must have length == 1")
+  expect_error(as_sheets_id(letters[1:2]), "must have length == 1")
   expect_error(as_sheets_id(1), "Don't know how to coerce")
 })
 

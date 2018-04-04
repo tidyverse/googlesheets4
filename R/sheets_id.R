@@ -1,10 +1,21 @@
-#' sheets_id object
+#' `sheets_id` object
 #'
-#' Holds a spreadsheet identifier. This is what the Sheets and Drive APIs refer
-#' to as `spreadsheetId` and `fileId`, respectively.
+#' @description Holds a spreadsheet identifier, i.e. a string. This is what the
+#'   Sheets and Drive APIs refer to as `spreadsheetId` and `fileId`,
+#'   respectively. Any object of class `sheets_id` will also have the
+#'   [`drive_id`][googledrive::as_id] class, which is used by [googledrive] for
+#'   the same purpose.
+#'
+#' @description This means you can pipe a `sheets_id` object straight into
+#'   [googledrive] functions for all your Google Drive needs that have nothing
+#'   to do with the file being a spreadsheet. Examples: examine or change file
+#'   name, path, or permissions, copy the file, or visit it in a web browser.
 #'
 #' @name sheets_id
 #' @seealso [as_sheets_id()]
+#'
+#' @examples
+#' sheets_example("mini-gap")
 NULL
 
 ## implementing sheets_id as advised here:
@@ -13,7 +24,7 @@ NULL
 ## constructor: efficiently creates new objects with the correct structure
 new_sheets_id <- function(x) {
   stopifnot(is_string(x))
-  structure(x, class = "sheets_id")
+  structure(x, class = c("sheets_id", "drive_id"))
 }
 
 ## validator: performs more expensive checks that the object has correct values
@@ -64,7 +75,9 @@ sheets_id <- function(x) {
 as_sheets_id <- function(x, ...) UseMethod("as_sheets_id")
 
 #' @export
-as_sheets_id.NULL <- function(x, ...) NULL
+as_sheets_id.NULL <- function(x, ...) {
+  stop_glue("Cannot turn `NULL` into a `sheets_id` object.")
+}
 
 #' @export
 as_sheets_id.sheets_id <- function(x, ...) x
@@ -104,10 +117,9 @@ as_sheets_id.default <- function(x, ...) {
 
 #' @export
 as_sheets_id.character <- function(x, ...) {
-  if (length(x) == 0L) return(x)
-  if (length(x) > 1) {
+  if (length(x) != 1) {
     stop_glue(
-      "Character input must not have length > 1.\n",
+      "Character input must have length == 1.\n",
       "  * Actual input has length {length(x)}."
     )
   }

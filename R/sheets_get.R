@@ -1,4 +1,7 @@
-#' get a sheet
+#' Get metadata for a spreadsheet
+#'
+#' WIP. Name should maybe involve "meta" or "metadata"? OTOH there's an obvious
+#' connection to [googledrive::drive_get()].
 #'
 #' @inheritParams sheets_cells
 #'
@@ -87,5 +90,37 @@ sheets_spreadsheet <- function(x = list()) {
     out$named_ranges$range <- purrr::pmap_chr(out$named_ranges, make_range)
   }
 
-  out
+  structure(out, class = c("sheets_meta", "list"))
+}
+
+#' @export
+format.sheets_meta <- function(x, ...) {
+
+  meta <- glue_data(
+    x,
+    "
+      Spreadsheet name: {name}
+                    ID: {spreadsheet_id}
+                Locale: {locale}
+             Time zone: {time_zone}
+           # of sheets: {nrow(x$sheets)}
+    ",
+    .sep = "\n"
+  )
+  meta <- strsplit(meta, split = "\n")[[1]]
+
+  col1 <- fr(c("(Sheet name)", x$sheets$name))
+  col2 <- c(
+    "(Nominal extent in rows x columns)",
+    glue_data(x$sheets, "{grid_rows} x {grid_columns}")
+  )
+  sheets <- glue_data(list(col1 = col1, col2 = col2), "{col1}: {col2}")
+
+  c(meta, "", sheets)
+}
+
+#' @export
+print.sheets_meta <- function(x, ...) {
+  cat(format(x), sep = "\n")
+  invisible(x)
 }

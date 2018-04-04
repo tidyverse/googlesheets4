@@ -4,6 +4,8 @@ NULL
 sq <- function(x) glue::single_quote(x)
 bt <- function(x) glue::backtick(x)
 
+fr <- function(x) format(x, justify = 'right')
+
 stop_glue <- function(..., .sep = "", .envir = parent.frame(),
                       call. = FALSE, .domain = NULL) {
   stop(

@@ -2,7 +2,7 @@
 % Please edit documentation in R/sheets_get.R
 \name{sheets_get}
 \alias{sheets_get}
-\title{get a sheet}
+\title{Get metadata for a spreadsheet}
 \usage{
 sheets_get(ss)
 }
@@ -14,7 +14,8 @@ through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 something TBD
 }
 \description{
-get a sheet
+WIP. Name should maybe involve "meta" or "metadata"? OTOH there's an obvious
+connection to \code{\link[googledrive:drive_get]{googledrive::drive_get()}}.
 }
 \examples{
 sheets_get(sheets_example("design-dates"))

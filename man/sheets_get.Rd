@@ -11,7 +11,7 @@ sheets_get(ss)
 through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 }
 \value{
-something
+something TBD
 }
 \description{
 get a sheet

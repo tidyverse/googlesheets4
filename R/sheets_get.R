@@ -1,9 +1,8 @@
 #' get a sheet
 #'
-#' @param ss Something that uniquely identifies a Google Sheet. Processed
-#'   through [as_sheets_id()].
+#' @inheritParams sheets_cells
 #'
-#' @return something
+#' @return something TBD
 #' @export
 #'
 #' @examples

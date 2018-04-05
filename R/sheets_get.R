@@ -5,7 +5,7 @@
 #'
 #' @inheritParams sheets_cells
 #'
-#' @return something TBD
+#' @return A list with S3 class `sheets_meta`, for printing purposes.
 #' @export
 #'
 #' @examples
@@ -34,9 +34,9 @@ sheets_get_impl_ <- function(ssid,
   response_process(raw_resp)
 }
 
-## input: an instance of Spreadsheet, in Sheets API v4 sense, as a list
+## input: an instance of Spreadsheet
 ## https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#Spreadsheet
-## output: ?a list or an instance of some TBD S3 class?
+## output: a list with S3 class `sheets_meta`
 sheets_spreadsheet <- function(x = list()) {
   ours_theirs <- list(
      spreadsheet_id = "spreadsheetId",

@@ -1,17 +1,20 @@
 #' Read cells from a Sheet
 #'
-#' WIP WIP WIP
+#' WIP! A low-level function that is, however, meant to be exposed. Retrieves
+#' cell data and puts into a tibble with `row`, `column`, and a `cell`
+#' list-column.
 #'
 #' @param ss Something that uniquely identifies a Google Sheet. Processed
 #'   through [as_sheets_id()].
 #' @param sheet Sheet to read. Either a string (the name of a sheet), or an
 #'   integer (the position of the sheet). Ignored if the sheet is specified via
 #'   `range`. If neither argument specifies the sheet, defaults to the first
-#'   visible sheet. *basically copied from readxl*
-#' @param range A cell range to read from, as described in cell-specification
-#'   (does not link to anything yet) *basically copied from readxl*
+#'   visible sheet. *wording basically copied from readxl* *NOT WIRED UP YET*
+#' @param range A cell range to read from, as described in FILL THIS IN
+#'   *wording basically copied copied from readxl*
 #'
-#' @return something TBD
+#' @return A tibble with one row per non-empty cell in the `range`. *this might
+#'   get dignified with a class?*
 #' @export
 #'
 #' @examples
@@ -23,8 +26,6 @@
 sheets_cells <- function(ss,
                          sheet = NULL,
                          range = NULL
-                         #na = "", trim_ws = TRUE
-                         #skip = 0, n_max = Inf
                          ) {
   ssid <- as_sheets_id(ss)
   x <- sheets_get(ssid)
@@ -39,6 +40,7 @@ sheets_cells <- function(ss,
   cells(resp)
 }
 
+## TODO: this is a glorified placeholder right now
 standardise_range <- function(sheet = NULL, range = NULL, sheet_df) {
   if (!is.null(sheet)) {
     message_glue("{sq('sheet')} is not wired up yet. Ignored.")
@@ -71,20 +73,25 @@ sheets_cells_impl_ <- function(ssid,
   response_process(raw_resp)
 }
 
-## input: an instance of Spreadsheet, in Sheets API v4 sense, as a list
+## input: an instance of Spreadsheet
 ## https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#Spreadsheet
-## output: ?a list or an instance of some TBD S3 class?
+## output: a tibble with one row per non-empty cell (row, column, cell)
 cells <- function(x = list()) {
   ## identify upper left cell of the rectangle
-  ## return values are zero-based, hence we add 1
   ## values are absent in the response if equal to 0, hence the default
+  ## return values are zero-based, hence we add 1
      start_row <- (pluck(x, "sheets", 1, "data", 1, "startRow") %||% 0) + 1
   start_column <- (pluck(x, "sheets", 1, "data", 1, "startColumn") %||% 0) + 1
+
+  ## TODO: deal with the merged cells
 
   row_data <-  x %>%
     pluck("sheets", 1, "data", 1, "rowData") %>%
     map("values")
 
+  ## an empty row can be present as an explicit NULL
+  ## within a non-empty row, an empty cell can be present as list()
+  ## rows are ragged and appear to end at the last non-empty cell
   row_lengths <- lengths(row_data)
   n_rows <- length(row_data)
 
@@ -96,6 +103,9 @@ cells <- function(x = list()) {
     col = sequence(row_lengths),
     cell = purrr::flatten(row_data)
   )
+
+  ## cells can be present, just because they bear a format (much like Excel)
+  ## as in readxl, we only load cells with content
   cell_is_empty <- map_lgl(out$cell, ~ is.null(pluck(.x, "effectiveValue")))
   out[!cell_is_empty, ]
 }

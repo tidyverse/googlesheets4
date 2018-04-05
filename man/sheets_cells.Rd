@@ -13,17 +13,24 @@ through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 \item{sheet}{Sheet to read. Either a string (the name of a sheet), or an
 integer (the position of the sheet). Ignored if the sheet is specified via
 \code{range}. If neither argument specifies the sheet, defaults to the first
-visible sheet. \emph{basically copied from readxl}}
+visible sheet. \emph{wording basically copied from readxl} \emph{NOT WIRED UP YET}}
 
-\item{range}{A cell range to read from, as described in cell-specification
-(does not link to anything yet) \emph{basically copied from readxl}}
+\item{range}{A cell range to read from, as described in FILL THIS IN
+\emph{wording basically copied copied from readxl}}
 }
 \value{
-something TBD
+A tibble with one row per non-empty cell in the \code{range}. \emph{this might
+get dignified with a class?}
 }
 \description{
-WIP WIP WIP
+WIP! A low-level function that is, however, meant to be exposed. Retrieves
+cell data and puts into a tibble with \code{row}, \code{column}, and a \code{cell}
+list-column.
 }
 \examples{
-x <- sheets_cells(sheets_example("design-dates"))
+sheets_cells(sheets_example("design-dates"))
+sheets_cells(sheets_example("gapminder"))
+sheets_cells(sheets_example("mini-gap"))
+sheets_cells(sheets_example("ff"))
+sheets_cells("1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM")
 }

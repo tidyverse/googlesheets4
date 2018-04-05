@@ -11,7 +11,7 @@ sheets_get(ss)
 through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 }
 \value{
-something TBD
+A list with S3 class \code{sheets_meta}, for printing purposes.
 }
 \description{
 WIP. Name should maybe involve "meta" or "metadata"? OTOH there's an obvious

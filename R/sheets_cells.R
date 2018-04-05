@@ -15,8 +15,17 @@
 #' @export
 #'
 #' @examples
-#' x <- sheets_cells(sheets_example("design-dates"))
-sheets_cells <- function(ss, sheet = NULL, range = NULL) {
+#' sheets_cells(sheets_example("design-dates"))
+#' sheets_cells(sheets_example("gapminder"))
+#' sheets_cells(sheets_example("mini-gap"))
+#' sheets_cells(sheets_example("ff"))
+#' sheets_cells("1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM")
+sheets_cells <- function(ss,
+                         sheet = NULL,
+                         range = NULL
+                         #na = "", trim_ws = TRUE
+                         #skip = 0, n_max = Inf
+                         ) {
   ssid <- as_sheets_id(ss)
   x <- sheets_get(ssid)
   message_glue("Reading from {sq(x$name)}")
@@ -76,21 +85,17 @@ cells <- function(x = list()) {
     pluck("sheets", 1, "data", 1, "rowData") %>%
     map("values")
 
-  ## TODO: remove this once I feel confident re: the empty cell situation
   row_lengths <- lengths(row_data)
-  if (min(row_lengths) != max(row_lengths)) {
-    stop_glue(
-      "Rows do not contain same number of cells!\n",
-      "min = {min(row_lengths)}, max = {max(row_lengths)}"
-    )
-  }
-
   n_rows <- length(row_data)
-  n_cols <- length(row_data[[1]])
 
-  tibble::tibble(
-    row = rep(seq_len(n_rows), each = n_cols),
-    col = rep.int(seq_len(n_cols), times = n_rows),
+  out <- tibble::tibble(
+    row = rep.int(
+      seq.int(from = start_row, length.out = n_rows),
+      times = row_lengths
+    ),
+    col = sequence(row_lengths),
     cell = purrr::flatten(row_data)
   )
+  cell_is_empty <- map_lgl(out$cell, ~ is.null(pluck(.x, "effectiveValue")))
+  out[!cell_is_empty, ]
 }

@@ -23,6 +23,7 @@
 #' sheets_cells(sheets_example("mini-gap"))
 #' sheets_cells(sheets_example("ff"))
 #' sheets_cells("1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM")
+#' sheets_cells("1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM", range = "date-timeofday-duration")
 sheets_cells <- function(ss,
                          sheet = NULL,
                          range = NULL

@@ -1,5 +1,17 @@
 context("test-utils.R")
 
+test_that("check_length_one() works", {
+  expect_error_free(check_length_one(1))
+  expect_error(check_length_one(1:2), "must have length 1")
+  expect_error(check_length_one(letters), "letters")
+})
+
+test_that("check_character() works", {
+  expect_error_free(check_character(letters))
+  expect_error(check_character(1:2), "integer")
+})
+
+
 test_that("vlookup() works", {
   df <- tibble::tibble(
     i = 1:3,
@@ -8,7 +20,7 @@ test_that("vlookup() works", {
     fctr = factor(letters)
   )
 
-  ## internal function, does not support unquoted variable names
+  ## internal function, therefore it does not support unquoted variable names
   expect_error(vlookup("c", df, letters, i), "not found")
 
   expect_identical(vlookup("c", df, "letters", "i"), 3L)

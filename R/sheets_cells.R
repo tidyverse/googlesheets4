@@ -78,7 +78,7 @@ cells <- function(x = list()) {
   ## an empty row can be present as an explicit NULL
   ## within a non-empty row, an empty cell can be present as list()
   ## rows are ragged and appear to end at the last non-empty cell
-  row_lengths <- lengths(row_data)
+  row_lengths <- map_int(row_data, length)
   n_rows <- length(row_data)
 
   out <- tibble::tibble(

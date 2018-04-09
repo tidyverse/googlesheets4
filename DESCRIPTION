@@ -21,6 +21,7 @@ Imports:
     httr,
     magrittr,
     purrr,
+    rematch2,
     tibble
 Suggests: 
     covr,

@@ -26,8 +26,7 @@
 #' sheets_cells("1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM", range = "date-timeofday-duration")
 sheets_cells <- function(ss,
                          sheet = NULL,
-                         range = NULL
-                         ) {
+                         range = NULL) {
   ssid <- as_sheets_id(ss)
   x <- sheets_get(ssid)
   message_glue("Reading from {sq(x$name)}")
@@ -39,20 +38,6 @@ sheets_cells <- function(ss,
     ranges = range
   )
   cells(resp)
-}
-
-## TODO: this is a glorified placeholder right now
-standardise_range <- function(sheet = NULL, range = NULL, sheet_df) {
-  if (!is.null(sheet)) {
-    message_glue("{sq('sheet')} is not wired up yet. Ignored.")
-  }
-  if (is.null(range)) {
-    visible_sheets <- sheet_df$name[sheet_df$visible]
-    if (length(visible_sheets)) {
-      range <- visible_sheets[[1]]
-    }
-  }
-  range
 }
 
 ## I want a separate worker so there is a version of this available that
@@ -86,7 +71,7 @@ cells <- function(x = list()) {
 
   ## TODO: deal with the merged cells
 
-  row_data <-  x %>%
+  row_data <- x %>%
     pluck("sheets", 1, "data", 1, "rowData") %>%
     map("values")
 

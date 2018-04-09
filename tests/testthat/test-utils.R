@@ -21,7 +21,9 @@ test_that("vlookup() works", {
   )
 
   ## internal function, therefore it does not support unquoted variable names
-  expect_error(vlookup("c", df, letters, i), "not found")
+  ## R <= 3.4.4 error msg is "object 'i' not found"
+  ## R devel error msg is "is_string(key) is not TRUE"
+  expect_error(vlookup("c", df, letters, i))
 
   expect_identical(vlookup("c", df, "letters", "i"), 3L)
   expect_identical(vlookup(c("a", "c"), df, "letters", "i"), c(1L, 3L))

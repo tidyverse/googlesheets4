@@ -31,7 +31,7 @@ sheets_cells <- function(ss,
   x <- sheets_get(ssid)
   message_glue("Reading from {sq(x$name)}")
   range <- standardise_range(sheet, range, x$sheets)
-  message_glue("Range {sq(range)}")
+  message_glue("Range {sq(sq_unescape(range))}")
 
   resp <- sheets_cells_impl_(
     ssid,

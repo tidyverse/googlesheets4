@@ -1,4 +1,4 @@
-#' @importFrom glue glue glue_data collapse
+#' @importFrom glue glue glue_data glue_collapse
 NULL
 
 sq <- function(x) glue::single_quote(x)
@@ -22,7 +22,7 @@ stop_glue_data <- function(..., .sep = "", .envir = parent.frame(),
   )
 }
 
-stop_collapse <- function(x) stop(collapse(x, sep = "\n"), call. = FALSE)
+stop_collapse <- function(x) stop(glue_collapse(x, sep = "\n"), call. = FALSE)
 
 warning_glue <- function(..., .sep = "", .envir = parent.frame(),
                          call. = FALSE, .domain = NULL) {
@@ -40,7 +40,7 @@ warning_glue_data <- function(..., .sep = "", .envir = parent.frame(),
   )
 }
 
-warning_collapse <- function(x) warning(collapse(x, sep = "\n"))
+warning_collapse <- function(x) warning(glue_collapse(x, sep = "\n"))
 
 message_glue <- function(..., .sep = "", .envir = parent.frame(),
                          .domain = NULL, .appendLF = TRUE) {
@@ -58,4 +58,4 @@ message_glue_data <- function(..., .sep = "", .envir = parent.frame(),
   )
 }
 
-message_collapse <- function(x) message(collapse(x, sep = "\n"))
+message_collapse <- function(x) message(glue_collapse(x, sep = "\n"))

@@ -11,7 +11,7 @@ check_character <- function(x, nm = deparse(substitute(x))) {
   if (!is.character(x)) {
     stop_glue(
       "{bt(nm)} must be character:\n",
-      "  * {bt(nm)} has class {collapse(class(x), sep = '/')}"
+      "  * {bt(nm)} has class {glue_collapse(class(x), sep = '/')}"
     )
   }
   x

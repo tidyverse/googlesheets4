@@ -16,7 +16,7 @@ Depends:
 Imports: 
     cellranger,
     gargle,
-    glue,
+    glue (> 1.2.0),
     googledrive,
     httr,
     magrittr,
@@ -26,8 +26,9 @@ Imports:
 Suggests: 
     covr,
     testthat
-Remotes: 
-    r-lib/gargle
+Remotes:  
+    r-lib/gargle,
+    tidyverse/glue
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true

@@ -44,7 +44,7 @@ standardise_range <- function(sheet = NULL, range = NULL, sheet_df) {
       stop_glue(
         "{bt('sheet')} must be either character (sheet name) or ",
         "numeric (sheet number):\n",
-        "  * {bt('sheet')} has class {collapse(class(sheet), sep = '/')}"
+        "  * {bt('sheet')} has class {glue_collapse(class(sheet), sep = '/')}"
       )
     }
   }
@@ -71,7 +71,7 @@ standardise_range <- function(sheet = NULL, range = NULL, sheet_df) {
   }
 
   ## strip the 'glue' class
-  as.character(collapse(c(sq_escape(sheet), range), sep = "!"))
+  as.character(glue_collapse(c(sq_escape(sheet), range), sep = "!"))
 }
 
 A1_char_class <- "[a-zA-Z0-9:$]"

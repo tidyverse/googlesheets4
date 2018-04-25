@@ -110,7 +110,7 @@ as_sheets_id.dribble <- function(x, ...) {
 #' @export
 as_sheets_id.default <- function(x, ...) {
   stop_glue_data(
-    list(x = collapse(class(x), sep = "/")),
+    list(x = glue_collapse(class(x), sep = "/")),
     "Don't know how to coerce object of class {sq(x)} into a sheets_id"
   )
 }

@@ -87,6 +87,7 @@ cells <- function(x = list()) {
       times = row_lengths
     ),
     col = sequence(row_lengths),
+    loc = as.character(glue("{cellranger::num_to_letter(col)}{row}")),
     cell = purrr::flatten(row_data)
   )
 

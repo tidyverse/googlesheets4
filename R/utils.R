@@ -1,5 +1,15 @@
 is_string <- function(x) is.character(x) && length(x) == 1L
 
+is_integerish <- function(x) {
+  floor(x) == x
+}
+
+check_string <- function(x, nm = deparse(substitute(x))) {
+  check_character(x)
+  check_length_one(x)
+  x
+}
+
 check_length_one <- function(x, nm = deparse(substitute(x))) {
   if (length(x) != 1) {
     stop_glue("{bt(nm)} must have length 1, not length {length(x)}")
@@ -15,6 +25,17 @@ check_character <- function(x, nm = deparse(substitute(x))) {
     )
   }
   x
+}
+
+check_non_negative_integer <- function(i, nm = deparse(substitute(x))) {
+  if (length(i) != 1 || !is.numeric(i) ||
+      !is_integerish(i) || is.na(i) || i < 0) {
+    stop_glue(
+      "{bt(nm)} must be a positive integer:\n",
+      "  * {bt(nm)} has class {glue_collapse(class(x), sep = '/')}"
+    )
+  }
+  i
 }
 
 vlookup <- function(this, data, key, value) {

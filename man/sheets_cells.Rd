@@ -13,7 +13,7 @@ through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 \item{sheet}{Sheet to read. Either a string (the name of a sheet), or an
 integer (the position of the sheet). Ignored if the sheet is specified via
 \code{range}. If neither argument specifies the sheet, defaults to the first
-visible sheet. \emph{wording basically copied from readxl} \emph{NOT WIRED UP YET}}
+visible sheet. \emph{wording basically copied from readxl}}
 
 \item{range}{A cell range to read from, as described in FILL THIS IN
 \emph{wording basically copied copied from readxl}}
@@ -24,14 +24,19 @@ get dignified with a class?}
 }
 \description{
 WIP! A low-level function that is, however, meant to be exposed. Retrieves
-cell data and puts into a tibble with \code{row}, \code{column}, and a \code{cell}
+cell data and puts into a tibble with \code{row}, \code{column}, \code{loc}, and a \code{cell}
 list-column.
 }
 \examples{
 sheets_cells(sheets_example("design-dates"))
-sheets_cells(sheets_example("gapminder"))
+#sheets_cells(sheets_example("gapminder"))
 sheets_cells(sheets_example("mini-gap"))
 sheets_cells(sheets_example("ff"))
-sheets_cells("1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM")
-sheets_cells("1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM", range = "date-timeofday-duration")
+
+test_sheet <- "1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM"
+sheets_cells(test_sheet)
+sheets_cells(test_sheet, range = "date-timeofday-duration")
+x <- sheets_cells(test_sheet, range = "C2:D4")
+x
+#x \%>\% tidyr::complete(row, col, fill = list(cell = list(list())))
 }

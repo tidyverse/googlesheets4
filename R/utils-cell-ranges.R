@@ -27,7 +27,7 @@ make_range <- function(start_row, end_row, start_column, end_column,
   cellranger::as.range(cl, fo = "A1")
 }
 
-standardise_range <- function(sheet = NULL, range = NULL, sheet_df) {
+standardise_range <- function(sheet = NULL, range = NULL, sheet_df = NULL) {
   if (is.null(range)) {
     sheet <- sheet %||% 1L
   } else {
@@ -48,9 +48,24 @@ standardise_range <- function(sheet = NULL, range = NULL, sheet_df) {
       )
     }
   }
-  ## range guaranteed to be NULL or naked cell ref or range
+  ## range guaranteed to be NULL or unqualified cell ref or range
   ## sheet guaranteed to be NULL, a number, or name of a sheet or named range
   ## at least one of (sheet, range) guaranteed to be non-NULL
+
+  if (is.numeric(sheet) && is.null(sheet_df)) {
+    if (is.null(range)) {
+      ## we have nothing to send to the API as the range --> untenable
+      stop_glue(
+        "{bt('sheet')} specified by number in the absence of sheet data ",
+        "or a range."
+      )
+    }
+    warning_glue(
+      "{bt('sheet')} specified by number in the absence of sheet data. ",
+      "Ignoring."
+    )
+    sheet <- NULL
+  }
 
   if (is.numeric(sheet)) {
     visible_sheets <- sheet_df$name[sheet_df$visible]
@@ -70,8 +85,7 @@ standardise_range <- function(sheet = NULL, range = NULL, sheet_df) {
     sheet <- visible_sheets[[sheet]]
   }
 
-  ## strip the 'glue' class
-  as.character(glue_collapse(c(sq_escape(sheet), range), sep = "!"))
+  list(sheet = sheet, range = range)
 }
 
 A1_char_class <- "[a-zA-Z0-9:$]"
@@ -103,6 +117,10 @@ parse_user_range <- function(x) {
   if (all(grepl(A1_rx, strsplit(x, split = ":")[[1]]))) {
     list(sheet = NULL, range = x)
   } else {
+    ## TO THINK: I am questioning if this should even be allowed
+    ## perhaps you MUST use sheet argument for this, not range?
+    ## to be clear: we're talking about passing a sheet name or name of a
+    ## named range, without a '!A1:C4' type of range as suffix
     list(sheet = x, range = NULL)
   }
   ## TODO: above is still not sophisticated enough to detect that

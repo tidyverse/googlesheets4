@@ -26,9 +26,14 @@ sheets_cells <- function(ss,
                          sheet = NULL,
                          range = NULL) {
   out <- get_cells(ss = ss, sheet = sheet, range = range)
+  add_loc(out)
+}
+
+## I use this elsewhere during development, so handy to have in a function
+add_loc <- function(df) {
   tibble::add_column(
-    out,
-    loc = as.character(glue("{cellranger::num_to_letter(out$col)}{out$row}")),
+    df,
+    loc = as.character(glue("{cellranger::num_to_letter(df$col)}{df$row}")),
     .before = "cell"
   )
 }

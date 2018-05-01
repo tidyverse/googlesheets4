@@ -42,4 +42,10 @@ WIP! The main read function of this package.
 }
 \examples{
 read_sheet(sheets_example("mini-gap"))
+test_sheet <- "1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM"
+read_sheet(test_sheet)
+read_sheet(test_sheet, skip = 2)
+read_sheet(test_sheet, n_max = 2)
+read_sheet(test_sheet, range = "A1:B2")
+read_sheet(test_sheet, range = "B2:C4")
 }

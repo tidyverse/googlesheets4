@@ -38,6 +38,13 @@ check_non_negative_integer <- function(i, nm = deparse(substitute(x))) {
   i
 }
 
+check_bool <- function(bool, nm = deparse(substitute(x))) {
+  if (!isTRUE(bool) && !identical(bool, FALSE)) {
+    stop_glue("{bt(nm)} must be either TRUE or FALSE")
+  }
+  bool
+}
+
 vlookup <- function(this, data, key, value) {
   stopifnot(is_string(key), is_string(value))
   m <- match(this, data[[key]])

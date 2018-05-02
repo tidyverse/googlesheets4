@@ -56,3 +56,16 @@ vlookup <- function(this, data, key, value) {
 ws_trim <- function(x) {
   sub("\\s*$", "", sub("^\\s*", "", x))
 }
+
+enforce_na <- function(x, na = "") {
+  stopifnot(is.character(x), is.character(na))
+  x[x %in% na] <- NA_character_
+  x
+}
+
+groom_text <- function(x, na = "", trim_ws = TRUE) {
+  if (isTRUE(trim_ws)) {
+    x <- ws_trim(x)
+  }
+  enforce_na(x, na)
+}

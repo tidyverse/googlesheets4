@@ -1,10 +1,18 @@
 ## input: an instance of CellData
 ## https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#CellData
-## returns one of the following, inspired by CellType enum in readxl
+## returns same, but adds one of the following as a class, inspired by
+## CellType enum in readxl
 ##   * CELL_BLANK
 ##   * CELL_LOGICAL
 ##   * CELL_NUMERIC.XXX
 ##   * CELL_TEXT
+apply_type <- function(cell, na = "", trim_ws = TRUE) {
+  map(cell, ~ structure(
+    .x,
+    class = c(infer_type(.x, na = na, trim_ws = trim_ws), class(.x))
+  ))
+}
+
 infer_type <- function(cell, na = "", trim_ws = TRUE) {
   ## Blank cell criteria
   ##   * cell is NULL or list()

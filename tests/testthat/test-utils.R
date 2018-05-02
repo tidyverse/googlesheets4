@@ -35,3 +35,23 @@ test_that("vlookup() works", {
   expect_identical(vlookup("b", df, "fctr", "i"), 2L)
   expect_identical(vlookup(c("b", "c", "a"), df, "fctr", "i"), c(2L, 3L, 1L))
 })
+
+test_that("enforce_na() works", {
+  expect_error(enforce_na(1), "is.character(x) is not TRUE", fixed = TRUE)
+  expect_error(enforce_na("a", 1), "is.character(na) is not TRUE", fixed = TRUE)
+
+  expect_identical(enforce_na(character()), character())
+
+  expect_identical(
+    enforce_na(c("a", "", "c")),
+               c("a", NA, "c")
+  )
+  expect_identical(
+    enforce_na(c("a", "", "c"), "c"),
+               c("a", "", NA)
+  )
+  expect_identical(
+    enforce_na(c("abc", "", "cab"), c("abc", "")),
+               c(   NA, NA, "cab")
+  )
+})

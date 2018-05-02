@@ -29,6 +29,13 @@
 #' read_sheet(test_sheet, n_max = 2)
 #' read_sheet(test_sheet, range = "A1:B2")
 #' read_sheet(test_sheet, range = "B2:C4")
+#' read_sheet(test_sheet, range = "B2:E5")
+#'
+#' ss <- sheets_example("deaths")
+#' range <- "A5:F15"
+#' col_types <- "ccilDD"
+#' read_excel(readxl_example("deaths.xlsx"), range = "other!A5:F15")
+#' read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
 read_sheet <- function(ss,
                        sheet = NULL,
                        range = NULL,
@@ -52,7 +59,54 @@ read_sheet <- function(ss,
     skip = skip, n_max = n_max
   )
 
-  out
+  # TODO: remove this, but can be nice during dev
+  #out <- add_loc(out)
+
+  ## absolute spreadsheet coordinates no longer relevant
+  ## update row, col to refer to location in our output data frame
+  has_col_names <- isTRUE(col_names)
+  out$row <- out$row - min(out$row) + !has_col_names
+  out$col <- out$col - min(out$col) + 1
+  nr <- max(out$row)
+  nc <- max(out$col)
+
+  out$cell <- apply_type(out$cell)
+
+  if (has_col_names) {
+    col_names <- character(length = nc)
+    this <- out$row == 0
+    col_names[out$col[this]] <- as_character(out$cell[this])
+    col_names <- tibble::tidy_names(col_names)
+    out <- out[!this, ]
+  }
+
+  types <- strsplit(col_types, split = '')[[1]]
+  types <- rep_len(types, length.out = nc)
+
+  out_split <- map(seq_len(nc), ~ out[out$col == .x, ])
+
+  out_scratch <- purrr::map2(
+    out_split,
+    types,
+    make_column,
+    na = na, trim_ws = trim_ws, nr = nr
+  ) %>% purrr::set_names(col_names)
+
+  tibble::as_tibble(out_scratch)
+}
+
+make_column <- function(df, shortcode, ..., nr) {
+  parsed <- parse(df, shortcode, ...)
+  column <- switch(
+    shortcode,
+    `T` = rep(as.POSIXct(NA), length.out = nr),
+    D = rep(as.Date(NA), length.out = nr),
+    ## TODO: time of day not implemented yet
+    t = rep(as.POSIXct(NA), length.out = nr),
+    vector(mode = mode(parsed), length = nr)
+  )
+  column[df$row] <- parsed
+  column
 }
 
 check_col_names_and_types <- function(col_names, col_types) {

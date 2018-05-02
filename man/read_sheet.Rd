@@ -48,4 +48,11 @@ read_sheet(test_sheet, skip = 2)
 read_sheet(test_sheet, n_max = 2)
 read_sheet(test_sheet, range = "A1:B2")
 read_sheet(test_sheet, range = "B2:C4")
+read_sheet(test_sheet, range = "B2:E5")
+
+ss <- sheets_example("deaths")
+range <- "A5:F15"
+col_types <- "ccilDD"
+read_excel(readxl_example("deaths.xlsx"), range = "other!A5:F15")
+read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
 }

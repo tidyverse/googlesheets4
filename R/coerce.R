@@ -19,8 +19,11 @@ parse <- function(x, shortcode, ...) {
   parse_fun(x$cell, ...)
 }
 
+## TODO: WRONG this column should not exist in the result, it shouldn't just be
+## filled with NAs
 as_skip <- function(cell, ...) purrr::rep_along(cell, NA)
 
+## TO DO: actually make each atom what it should be
 as_is <- function(cell, ...) cell
 
 ## prepare to coerce to logical, integer, double
@@ -69,7 +72,6 @@ cell_content_datetime <- function(cell, na = "", trim_ws = TRUE) {
     CELL_NUMERIC.DATE = pluck(cell, "effectiveValue", "numberValue"),
     CELL_NUMERIC.TIME = pluck(cell, "effectiveValue", "numberValue"),
     CELL_NUMERIC.DATE_TIME = pluck(cell, "effectiveValue", "numberValue"),
-    ## TO DO: I could attempt some character to date conversion
     CELL_TEXT = NA
   )
 }
@@ -79,7 +81,7 @@ as_datetime <- function(cell, na = "", trim_ws = TRUE) {
     map(cell_content_datetime, na = na, trim_ws = trim_ws) %>%
     map_dbl(as.double) %>%
     `*`(24 * 60 * 60) %>%
-    as.POSIXct(origin = "1899-12-30", tz = "GMT")
+    as.POSIXct(origin = "1899-12-30", tz = "UTC")
 }
 
 as_date <- function(cell, na = "", trim_ws = TRUE) {

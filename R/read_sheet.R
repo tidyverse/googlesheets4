@@ -64,6 +64,7 @@ read_sheet <- function(ss,
 
   ## absolute spreadsheet coordinates no longer relevant
   ## update row, col to refer to location in our output data frame
+  ## row 0 holds cells designated as column names
   has_col_names <- isTRUE(col_names)
   out$row <- out$row - min(out$row) + !has_col_names
   out$col <- out$col - min(out$col) + 1
@@ -95,14 +96,16 @@ read_sheet <- function(ss,
   tibble::as_tibble(out_scratch)
 }
 
+## TO DO: move this physically and conceptually into coercing
 make_column <- function(df, shortcode, ..., nr) {
   parsed <- parse(df, shortcode, ...)
   column <- switch(
     shortcode,
-    `T` = rep(as.POSIXct(NA), length.out = nr),
-    D = rep(as.Date(NA), length.out = nr),
+    ## TODO: do I need set timezone in any of these?
+    `T` = as.POSIXct(rep(NA, length.out = nr)),
+    D = as.Date(rep(NA, length.out = nr)),
     ## TODO: time of day not implemented yet
-    t = rep(as.POSIXct(NA), length.out = nr),
+    t = as.POSIXct(rep(NA, length.out = nr)),
     vector(mode = mode(parsed), length = nr)
   )
   column[df$row] <- parsed

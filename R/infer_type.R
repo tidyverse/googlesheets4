@@ -7,6 +7,9 @@
 ##   * CELL_NUMERIC.XXX
 ##   * CELL_TEXT
 apply_type <- function(cell, na = "", trim_ws = TRUE) {
+  ## TODO: map_chr to get types as character vector
+  ## TODO: map again to apply type
+  ## TODO: set the class, don't append
   map(cell, ~ structure(
     .x,
     class = c(infer_type(.x, na = na, trim_ws = trim_ws), class(.x))
@@ -86,6 +89,7 @@ number_types <- c(
   SCIENTIFIC = "CELL_NUMERIC",
   ## on the R side, at this time, all of the above will be treated as numeric
   ## no current reason to distinguish them, for col type guessing or coercion
+  ## TODO: CELL_NUMERIC.DATE --> CELL_DATE etc.
         DATE = "CELL_NUMERIC.DATE",
         TIME = "CELL_NUMERIC.TIME",
    DATE_TIME = "CELL_NUMERIC.DATE_TIME"

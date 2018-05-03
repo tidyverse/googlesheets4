@@ -15,24 +15,36 @@ through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 \item{sheet}{Sheet to read. Either a string (the name of a sheet), or an
 integer (the position of the sheet). Ignored if the sheet is specified via
 \code{range}. If neither argument specifies the sheet, defaults to the first
-visible sheet. \emph{wording basically copied from readxl}}
+visible sheet.}
 
-\item{range}{A cell range to read from, as described in FILL THIS IN
-\emph{wording basically copied copied from readxl}}
+\item{range}{A cell range to read from, as described in FILL THIS IN.}
 
-\item{col_names}{column names}
+\item{col_names}{\code{TRUE} to use the first row as column names, \code{FALSE} to get
+default names, or a character vector to provide column names directly. In
+all cases, names are processed through \code{\link[tibble:tidy_names]{tibble::tidy_names()}}. If user
+provides \code{col_types}, \code{col_names} can have one entry per column, i.e. have
+the same length as \code{col_types}, or one entry per unskipped column.}
 
-\item{col_types}{column types}
+\item{col_types}{column types Either \code{NULL} to guess all from the spreadsheet
+or (TEMPORARY INTERFACE!!!) a string using readr shortcodes, with one
+character or code per column. If exactly one \code{col_type} is specified, it is
+recycled. See Details for more.}
 
-\item{na}{na strings}
+\item{na}{Character vector of strings to interpret as missing values. By
+default, blank cells are treated as missing data.}
 
-\item{trim_ws}{whether to trim ws}
+\item{trim_ws}{Should leading and trailing whitespace be trimmed?}
 
-\item{skip}{rows to skip}
+\item{skip}{Minimum number of rows to skip before reading anything, be it
+column names or data. Leading empty rows are automatically skipped, so this
+is a lower bound. Ignored if \code{range} is given.}
 
-\item{n_max}{max data rows to read}
+\item{n_max}{Maximum number of data rows to read. Trailing empty rows are
+automatically skipped, so this is an upper bound on the number of rows in
+the returned tibble. Ignored if \code{range} is given.}
 
-\item{guess_max}{max rows to consult in column typing}
+\item{guess_max}{Maximum number of data rows to use for guessing column
+types.}
 }
 \value{
 a tibble
@@ -40,8 +52,20 @@ a tibble
 \description{
 WIP! The main read function of this package.
 }
+\details{
+Data in a skipped column is still requested from the API (we work in a
+rectangle, after all), but is not parsed into the data frame output. The
+\code{"list"} type requests a column that is a list of length 1 vectors, using the
+type guessing logic from \code{col_types = NULL}, but on a cell-by-cell basis.
+Shortcode refresher: \code{_} or \code{-} for skip, \code{?} for guess, \code{l} for logical, \code{i}
+for integer, \code{d} or \code{n} for double, \code{c} for character, \code{T} for POSIXct
+datetime, \code{D} for date, \code{t} for time-of-day (currently treated like a
+datetime). To be determined: factor, list, raw (meaning API payload, not raw
+in the usual R sense).
+}
 \examples{
 read_sheet(sheets_example("mini-gap"))
+read_sheet(sheets_example("mini-gap"), sheet = "Europe", col_types = "cciddd")
 test_sheet <- "1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM"
 read_sheet(test_sheet)
 read_sheet(test_sheet, skip = 2)
@@ -53,6 +77,6 @@ read_sheet(test_sheet, range = "B2:E5")
 ss <- sheets_example("deaths")
 range <- "A5:F15"
 col_types <- "ccilDD"
-read_excel(readxl_example("deaths.xlsx"), range = "other!A5:F15")
+#read_excel(readxl_example("deaths.xlsx"), range = "other!A5:F15")
 read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
 }

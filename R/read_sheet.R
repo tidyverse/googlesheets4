@@ -29,7 +29,7 @@
 #'   character or code per column. If exactly one `col_type` is specified, it is
 #'   recycled. See Details for more.
 #' @param na Character vector of strings to interpret as missing values. By
-#'   default, readxl treats blank cells as missing data.
+#'   default, blank cells are treated as missing data.
 #' @param trim_ws Should leading and trailing whitespace be trimmed?
 #' @param skip Minimum number of rows to skip before reading anything, be it
 #'   column names or data. Leading empty rows are automatically skipped, so this
@@ -57,7 +57,7 @@
 #' ss <- sheets_example("deaths")
 #' range <- "A5:F15"
 #' col_types <- "ccilDD"
-#' read_excel(readxl_example("deaths.xlsx"), range = "other!A5:F15")
+#' #read_excel(readxl_example("deaths.xlsx"), range = "other!A5:F15")
 #' read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
 read_sheet <- function(ss,
                        sheet = NULL,

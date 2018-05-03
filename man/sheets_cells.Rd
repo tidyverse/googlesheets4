@@ -13,10 +13,9 @@ through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 \item{sheet}{Sheet to read. Either a string (the name of a sheet), or an
 integer (the position of the sheet). Ignored if the sheet is specified via
 \code{range}. If neither argument specifies the sheet, defaults to the first
-visible sheet. \emph{wording basically copied from readxl}}
+visible sheet.}
 
-\item{range}{A cell range to read from, as described in FILL THIS IN
-\emph{wording basically copied copied from readxl}}
+\item{range}{A cell range to read from, as described in FILL THIS IN.}
 }
 \value{
 A tibble with one row per non-empty cell in the \code{range}. \emph{this might

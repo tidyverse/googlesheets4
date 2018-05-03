@@ -55,7 +55,7 @@ read_sheet <- function(ss,
   out <- get_cells(
     ss = ss,
     sheet = sheet, range = range,
-    has_col_names = isTRUE(col_names),
+    col_names_in_sheet = isTRUE(col_names),
     skip = skip, n_max = n_max
   )
 
@@ -63,26 +63,41 @@ read_sheet <- function(ss,
   #out <- add_loc(out)
 
   ## absolute spreadsheet coordinates no longer relevant
-  ## update row, col to refer to location in our output data frame
+  ## update row, col to refer to location in output data frame
   ## row 0 holds cells designated as column names
-  has_col_names <- isTRUE(col_names)
-  out$row <- out$row - min(out$row) + !has_col_names
-  out$col <- out$col - min(out$col) + 1
+  col_names_in_sheet <- isTRUE(col_names)
+  out$row <- out$row - min(out$row) + !col_names_in_sheet
   nr <- max(out$row)
+  out$col <- out$col - min(out$col) + 1
+
+  types <- strsplit(col_types, split = '')[[1]]
+  ## TODO: only recycle if length 1
+  types <- rep_len(types, length.out = max(out$col))
+
+  ## drop cells in skipped cols
+  ## update types, col_names, and out$col accordingly
+  skipped_col <- types %in% c("-", "_")
+  if (any(skipped_col)) {
+    out <- out[!out$col %in% which(skipped_col), ]
+    out$col <- match(out$col, sort(unique(out$col)))
+    types <- types[!skipped_col]
+    if (is.character(col_names) && length(col_names) > length(types)) {
+      col_names <- col_names[!skipped_col]
+    }
+  }
   nc <- max(out$col)
 
   out$cell <- apply_type(out$cell)
 
-  if (has_col_names) {
+  if (is.logical(col_names)) {
     col_names <- character(length = nc)
+  }
+  if (col_names_in_sheet) {
     this <- out$row == 0
     col_names[out$col[this]] <- as_character(out$cell[this])
-    col_names <- tibble::tidy_names(col_names)
     out <- out[!this, ]
   }
-
-  types <- strsplit(col_types, split = '')[[1]]
-  types <- rep_len(types, length.out = nc)
+  col_names <- tibble::tidy_names(col_names)
 
   out_split <- map(seq_len(nc), ~ out[out$col == .x, ])
 

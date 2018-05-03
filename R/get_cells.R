@@ -2,12 +2,12 @@
 get_cells <- function(ss,
                       sheet = NULL,
                       range = NULL,
-                      has_col_names = TRUE,
+                      col_names_in_sheet = TRUE,
                       skip = 0, n_max = Inf) {
   ssid <- as_sheets_id(ss)
 
   ## sheet and range are vetted below, inside standardise_range()
-  ## TODO: check has_col_names
+  ## TODO: check col_names_in_sheet
   check_non_negative_integer(skip)
   check_non_negative_integer(n_max)
 
@@ -52,7 +52,7 @@ get_cells <- function(ss,
     ## this does NOT imply that every spreadsheet cell spanned by user's range
     ## is represented by a cell in 'out' --> rectangling must be robust to holes
   } else if (n_max < Inf) {
-    out <- enforce_n_max(out, n_max, has_col_names)
+    out <- enforce_n_max(out, n_max, col_names_in_sheet)
   }
   out
 
@@ -169,16 +169,16 @@ insert_shims <- function(df, range) {
   df
 }
 
-enforce_n_max <- function(out, n_max, has_col_names) {
-  row_max <- realize_n_max(n_max, out$row, has_col_names)
+enforce_n_max <- function(out, n_max, col_names_in_sheet) {
+  row_max <- realize_n_max(n_max, out$row, col_names_in_sheet)
   out[out$row <= row_max, ]
 }
 
-realize_n_max <- function(n_max, rows, has_col_names) {
+realize_n_max <- function(n_max, rows, col_names_in_sheet) {
   start_row <- min(rows)
   end_row <- max(rows)
   n_read <- end_row - start_row + 1
-  to_read <- n_max + has_col_names
+  to_read <- n_max + col_names_in_sheet
   if (n_read <= to_read) {
     Inf
   } else {

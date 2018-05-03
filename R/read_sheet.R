@@ -136,25 +136,6 @@ read_sheet <- function(ss,
   tibble::as_tibble(out_scratch)
 }
 
-## TO DO: move this physically and conceptually into coercing
-make_column <- function(df, shortcode, ..., nr) {
-  parsed <- parse(df$cell, shortcode, ...)
-  if (is.null(parsed)) {
-    return()
-  }
-  column <- switch(
-    shortcode,
-    ## TODO: do I need set timezone in any of these?
-    `T` = rep(NA, length.out = nr) %>% as.POSIXct(),
-    D   = rep(NA, length.out = nr) %>% as.Date(),
-    ## TODO: time of day not implemented yet
-    t   = rep(NA, length.out = nr) %>% as.POSIXct(),
-    vector(mode = typeof(parsed), length = nr)
-  )
-  column[df$row] <- parsed
-  column
-}
-
 check_col_names_and_types <- function(col_names, col_types) {
   if (is.null(col_types)) {
     return(invisible())

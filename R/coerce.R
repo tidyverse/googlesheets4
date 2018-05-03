@@ -16,7 +16,7 @@ parse <- function(x, shortcode, ...) {
     ## TODO: as_factor
     stop_glue("Not a recognized shortcode: {sq(shortcode)}")
   )
-  parse_fun(x$cell, ...)
+  parse_fun(x, ...)
 }
 
 ## TODO: WRONG this column should not exist in the result, it shouldn't just be

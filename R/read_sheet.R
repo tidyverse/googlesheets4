@@ -98,7 +98,7 @@ read_sheet <- function(ss,
 
 ## TO DO: move this physically and conceptually into coercing
 make_column <- function(df, shortcode, ..., nr) {
-  parsed <- parse(df, shortcode, ...)
+  parsed <- parse(df$cell, shortcode, ...)
   column <- switch(
     shortcode,
     ## TODO: do I need set timezone in any of these?

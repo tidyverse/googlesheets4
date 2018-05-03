@@ -68,8 +68,8 @@ read_sheet <- function(ss,
                        guess_max = min(1000, n_max)) {
   ## ss, sheet, range get checked inside get_cells()
   check_col_names(col_names)
-  col_types <- standardise_col_types(col_types)
-  check_col_names_and_types(col_names, col_types)
+  types <- standardise_col_types(col_types)
+  check_col_names_and_types(col_names, types)
   check_character(na)
   check_bool(trim_ws)
   ## skip and n_max get checked inside get_cells()
@@ -82,9 +82,6 @@ read_sheet <- function(ss,
     skip = skip, n_max = n_max
   )
 
-  # TODO: remove this, but can be nice during dev
-  #out <- add_loc(out)
-
   ## absolute spreadsheet coordinates no longer relevant
   ## update row, col to refer to location in output data frame
   ## row 0 holds cells designated as column names
@@ -93,18 +90,17 @@ read_sheet <- function(ss,
   nr <- max(out$row)
   out$col <- out$col - min(out$col) + 1
 
-  types <- strsplit(col_types, split = '')[[1]]
-  ## TODO: only recycle if length 1
+  ## TODO: only recycle if length 1 ... do I need another conformability check?
   types <- rep_len(types, length.out = max(out$col))
 
   ## drop cells in skipped cols
   ## update types, col_names, and out$col accordingly
-  skipped_col <- types %in% c("-", "_")
+  skipped_col <- types == "_"
   if (any(skipped_col)) {
     out <- out[!out$col %in% which(skipped_col), ]
     out$col <- match(out$col, sort(unique(out$col)))
     types <- types[!skipped_col]
-    if (is.character(col_names) && length(col_names) > length(types)) {
+    if (length(col_names) > length(types)) {
       col_names <- col_names[!skipped_col]
     }
   }
@@ -136,12 +132,8 @@ read_sheet <- function(ss,
   tibble::as_tibble(out_scratch)
 }
 
-check_col_names_and_types <- function(col_names, col_types) {
-  if (is.null(col_types)) {
-    return(invisible())
-  }
-  col_types_split <- strsplit(col_types, split = '')[[1]]
-  n_col_types <- sum(! col_types_split %in% c("-", "_"))
+check_col_names_and_types <- function(col_names, types) {
+  n_col_types <- sum(types !=  "_")
   if (length(col_names) <= 1 ||
       n_col_types  <= 1 ||
       length(col_names) == n_col_types) {
@@ -168,6 +160,13 @@ standardise_col_types <- function(col_types) {
   }
   check_string(col_types)
 
+  if (identical(col_types, "")) {
+    stop_glue(
+      "{bt('col_types')}, if provided, must be a string that contains at ",
+      "least one readr-style shortcode."
+    )
+  }
+
   accepted_codes <- "[-_\\?lidncTDt]+"
   ## for the moment, requires readr shortcodes
   ## will ultimately use new col spec work, possibly before release?
@@ -179,25 +178,24 @@ standardise_col_types <- function(col_types) {
   ## parse_integer   i
   ## parse_double    d
   ## parse_number    n
+  ## parse_datetime  T
+  ## parse_date      D
+  ## parse_time      t
   ## parse_character c
   ##
-  ## these will be very low-functioning until a format can be passed
-  ## parse_datetime(..., format = "??") T
-  ## parse_date(..., format = "??")     D
-  ## parse_time(..., format = "??")     t
-  ##
-  ## this has no shortcode (an oversight, issue opened)
-  ## parse_factor(..., levels = "??")   <NO SHORTCODE, OOPS>
-  ## convert to factor after import, for now
-
+  ## short codes I need now or soon that don't exist in readr
+  ## factor          f
+  ## list            L
+  ## duration        :
+  ## "raw" from API  * <-- shortcode is very experimental
   col_types_split <- strsplit(col_types, split = '')[[1]]
-  ## if col_types = "", col_types_split = character()
-  ok <- nzchar(col_types) && grepl(accepted_codes, col_types_split)
+  ok <- grepl(accepted_codes, col_types_split)
   if (!all(ok)) {
+    bad_codes <- glue_collapse(sq(col_types_split[!ok]), sep = ",")
     stop_glue(
-      "{bt('col_types')} must be a string of readr-style shortcodes.\n"
-      ## TODO: reveal the unrecognized shortcode?
+      "{bt('col_types')} must be a string of readr-style shortcodes:\n",
+      "  * Unrecognized codes: {bad_codes}"
     )
   }
-  col_types
+  gsub("-", "_", col_types_split)
 }

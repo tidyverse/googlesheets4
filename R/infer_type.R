@@ -7,13 +7,8 @@
 ##   * CELL_NUMERIC.XXX
 ##   * CELL_TEXT
 apply_type <- function(cell, na = "", trim_ws = TRUE) {
-  ## TODO: map_chr to get types as character vector
-  ## TODO: map again to apply type
-  ## TODO: set the class, don't append
-  map(cell, ~ structure(
-    .x,
-    class = c(infer_type(.x, na = na, trim_ws = trim_ws), class(.x))
-  ))
+  cell_types <- map_chr(cell, infer_type, na = na, trim_ws = trim_ws)
+  map2(cell, cell_types, ~ structure(.x, class = .y))
 }
 
 infer_type <- function(cell, na = "", trim_ws = TRUE) {

@@ -2,27 +2,50 @@
 #'
 #' WIP! The main read function of this package.
 #'
+#' Data in a skipped column is still requested from the API (we work in a
+#' rectangle, after all), but is not parsed into the data frame output. The
+#' `"list"` type requests a column that is a list of length 1 vectors, using the
+#' type guessing logic from `col_types = NULL`, but on a cell-by-cell basis.
+#' Shortcode refresher: `_` or `-` for skip, `?` for guess, `l` for logical, `i`
+#' for integer, `d` or `n` for double, `c` for character, `T` for POSIXct
+#' datetime, `D` for date, `t` for time-of-day (currently treated like a
+#' datetime). To be determined: factor, list, raw (meaning API payload, not raw
+#' in the usual R sense).
+#'
 #' @param ss Something that uniquely identifies a Google Sheet. Processed
 #'   through [as_sheets_id()].
 #' @param sheet Sheet to read. Either a string (the name of a sheet), or an
 #'   integer (the position of the sheet). Ignored if the sheet is specified via
 #'   `range`. If neither argument specifies the sheet, defaults to the first
-#'   visible sheet. *wording basically copied from readxl*
-#' @param range A cell range to read from, as described in FILL THIS IN
-#'   *wording basically copied copied from readxl*
-#' @param col_names column names
-#' @param col_types column types
-#' @param na na strings
-#' @param trim_ws whether to trim ws
-#' @param skip rows to skip
-#' @param n_max max data rows to read
-#' @param guess_max max rows to consult in column typing
+#'   visible sheet.
+#' @param range A cell range to read from, as described in FILL THIS IN.
+#' @param col_names `TRUE` to use the first row as column names, `FALSE` to get
+#'   default names, or a character vector to provide column names directly. In
+#'   all cases, names are processed through [tibble::tidy_names()]. If user
+#'   provides `col_types`, `col_names` can have one entry per column, i.e. have
+#'   the same length as `col_types`, or one entry per unskipped column.
+#' @param col_types column types Either `NULL` to guess all from the spreadsheet
+#'   or (TEMPORARY INTERFACE!!!) a string using readr shortcodes, with one
+#'   character or code per column. If exactly one `col_type` is specified, it is
+#'   recycled. See Details for more.
+#' @param na Character vector of strings to interpret as missing values. By
+#'   default, readxl treats blank cells as missing data.
+#' @param trim_ws Should leading and trailing whitespace be trimmed?
+#' @param skip Minimum number of rows to skip before reading anything, be it
+#'   column names or data. Leading empty rows are automatically skipped, so this
+#'   is a lower bound. Ignored if `range` is given.
+#' @param n_max Maximum number of data rows to read. Trailing empty rows are
+#'   automatically skipped, so this is an upper bound on the number of rows in
+#'   the returned tibble. Ignored if `range` is given.
+#' @param guess_max Maximum number of data rows to use for guessing column
+#'   types.
 #'
 #' @return a tibble
 #' @export
 #'
 #' @examples
 #' read_sheet(sheets_example("mini-gap"))
+#' read_sheet(sheets_example("mini-gap"), sheet = "Europe", col_types = "cciddd")
 #' test_sheet <- "1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM"
 #' read_sheet(test_sheet)
 #' read_sheet(test_sheet, skip = 2)
@@ -121,7 +144,7 @@ make_column <- function(df, shortcode, ..., nr) {
     D = as.Date(rep(NA, length.out = nr)),
     ## TODO: time of day not implemented yet
     t = as.POSIXct(rep(NA, length.out = nr)),
-    vector(mode = mode(parsed), length = nr)
+    vector(mode = typeof(parsed), length = nr)
   )
   column[df$row] <- parsed
   column

@@ -19,9 +19,7 @@ parse <- function(x, shortcode, ...) {
   parse_fun(x, ...)
 }
 
-## TODO: WRONG this column should not exist in the result, it shouldn't just be
-## filled with NAs
-as_skip <- function(cell, ...) purrr::rep_along(cell, NA)
+as_skip <- function(cell, ...) NULL
 
 ## TO DO: actually make each atom what it should be
 as_is <- function(cell, ...) cell

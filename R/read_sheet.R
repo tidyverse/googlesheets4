@@ -129,7 +129,9 @@ read_sheet <- function(ss,
     types,
     make_column,
     na = na, trim_ws = trim_ws, nr = nr
-  ) %>% purrr::set_names(col_names)
+  ) %>%
+    purrr::set_names(col_names) %>%
+    purrr::compact()
 
   tibble::as_tibble(out_scratch)
 }
@@ -137,13 +139,16 @@ read_sheet <- function(ss,
 ## TO DO: move this physically and conceptually into coercing
 make_column <- function(df, shortcode, ..., nr) {
   parsed <- parse(df$cell, shortcode, ...)
+  if (is.null(parsed)) {
+    return()
+  }
   column <- switch(
     shortcode,
     ## TODO: do I need set timezone in any of these?
-    `T` = as.POSIXct(rep(NA, length.out = nr)),
-    D = as.Date(rep(NA, length.out = nr)),
+    `T` = rep(NA, length.out = nr) %>% as.POSIXct(),
+    D   = rep(NA, length.out = nr) %>% as.Date(),
     ## TODO: time of day not implemented yet
-    t = as.POSIXct(rep(NA, length.out = nr)),
+    t   = rep(NA, length.out = nr) %>% as.POSIXct(),
     vector(mode = typeof(parsed), length = nr)
   )
   column[df$row] <- parsed

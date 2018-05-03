@@ -4,7 +4,10 @@
 ## CellType enum in readxl
 ##   * CELL_BLANK
 ##   * CELL_LOGICAL
-##   * CELL_NUMERIC.XXX
+##   * CELL_NUMERIC
+##   * CELL_DATE
+##   * CELL_TIME
+##   * CELL_DATETIME
 ##   * CELL_TEXT
 apply_type <- function(cell, na = "", trim_ws = TRUE) {
   cell_types <- map_chr(cell, infer_type, na = na, trim_ws = trim_ws)
@@ -77,18 +80,16 @@ extended_value <- c(
 )
 
 number_types <- c(
-        TEXT = "CELL_NUMERIC",
-      NUMBER = "CELL_NUMERIC",
-     PERCENT = "CELL_NUMERIC",
-    CURRENCY = "CELL_NUMERIC",
+  TEXT       = "CELL_NUMERIC",
+  NUMBER     = "CELL_NUMERIC",
+  PERCENT    = "CELL_NUMERIC",
+  CURRENCY   = "CELL_NUMERIC",
   SCIENTIFIC = "CELL_NUMERIC",
-  ## on the R side, at this time, all of the above will be treated as numeric
+  ## on the R side, all of the above are treated as numeric
   ## no current reason to distinguish them, for col type guessing or coercion
-  ## TODO: CELL_NUMERIC.DATE --> CELL_DATE etc.
-        DATE = "CELL_NUMERIC.DATE",
-        TIME = "CELL_NUMERIC.TIME",
-   DATE_TIME = "CELL_NUMERIC.DATE_TIME"
-  ## it IS conceivable that we have use of these distincions ... keep for now
+  DATE       = "CELL_DATE",
+  TIME       = "CELL_TIME",
+  DATE_TIME  = "CELL_DATETIME"
 )
 
 is_na_string <- function(x, na = "", trim_ws = TRUE) {

@@ -34,9 +34,9 @@ cell_content <- function(cell, na = "", trim_ws = TRUE) {
     CELL_BLANK = NA,
     CELL_LOGICAL = pluck(cell, "effectiveValue", "boolValue"),
     CELL_NUMERIC = pluck(cell, "effectiveValue", "numberValue"),
-    CELL_NUMERIC.DATE = NA_real_,
-    CELL_NUMERIC.TIME = NA_real_,
-    CELL_NUMERIC.DATE_TIME = NA_real_,
+    CELL_DATE = NA_real_,
+    CELL_TIME = NA_real_,
+    CELL_DATETIME = NA_real_,
     CELL_TEXT = cell %>%
       pluck("effectiveValue", "stringValue") %>%
       groom_text(na = na, trim_ws = trim_ws)
@@ -69,9 +69,9 @@ cell_content_datetime <- function(cell, na = "", trim_ws = TRUE) {
     CELL_BLANK = NA,
     CELL_LOGICAL = NA,
     CELL_NUMERIC = NA,
-    CELL_NUMERIC.DATE = pluck(cell, "effectiveValue", "numberValue"),
-    CELL_NUMERIC.TIME = pluck(cell, "effectiveValue", "numberValue"),
-    CELL_NUMERIC.DATE_TIME = pluck(cell, "effectiveValue", "numberValue"),
+    CELL_DATE = pluck(cell, "effectiveValue", "numberValue"),
+    CELL_TIME = pluck(cell, "effectiveValue", "numberValue"),
+    CELL_DATETIME = pluck(cell, "effectiveValue", "numberValue"),
     CELL_TEXT = NA
   )
 }
@@ -88,7 +88,7 @@ as_date <- function(cell, na = "", trim_ws = TRUE) {
   cell %>%
     map(cell_content_datetime, na = na, trim_ws = trim_ws) %>%
     map_dbl(as.double) %>%
-    as.Date(origin = "1899-12-30")
+    as.Date(origin = "1899-12-30", tz = "UTC")
 }
 
 ## TODO: not wired up yet (body is same as as_datetime)
@@ -97,7 +97,7 @@ as_time <- function(cell, na = "", trim_ws = TRUE) {
     map(cell_content_datetime, na = na, trim_ws = trim_ws) %>%
     map_dbl(as.double) %>%
     `*`(24 * 60 * 60) %>%
-    as.POSIXct(origin = "1899-12-30", tz = "GMT")
+    as.POSIXct(origin = "1899-12-30", tz = "UTC")
 }
 
 

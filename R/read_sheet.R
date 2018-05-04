@@ -167,29 +167,11 @@ standardise_col_types <- function(col_types) {
     )
   }
 
-  accepted_codes <- "[-_\\?lidncTDt]+"
-  ## for the moment, requires readr shortcodes
-  ## will ultimately use new col spec work, possibly before release?
-  ## in any case, this gets things moving
-  ##
-  ## col_skip()      _ or -
-  ## guess_parser    ?
-  ## parse_logical   l
-  ## parse_integer   i
-  ## parse_double    d
-  ## parse_number    n
-  ## parse_datetime  T
-  ## parse_date      D
-  ## parse_time      t
-  ## parse_character c
-  ##
-  ## short codes I need now or soon that don't exist in readr
-  ## factor          f
-  ## list            L
-  ## duration        :
-  ## "raw" from API  * <-- shortcode is very experimental
+
+  accepted_codes <- purrr::keep(names(.ctypes), nzchar)
+
   col_types_split <- strsplit(col_types, split = '')[[1]]
-  ok <- grepl(accepted_codes, col_types_split)
+  ok <- col_types_split %in% accepted_codes
   if (!all(ok)) {
     bad_codes <- glue_collapse(sq(col_types_split[!ok]), sep = ",")
     stop_glue(

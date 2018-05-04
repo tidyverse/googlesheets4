@@ -1,17 +1,50 @@
+## shortcode             Type can be   Type can be  Type can be
+##                       discovered    guessed for  imposed on
+##      type             from a cell   a column     a column
+.ctypes <- c(
+  `_` = "COL_SKIP",      # --          no           yes
+  `-` = "COL_SKIP",
+        "CELL_BLANK",    # yes         no           no
+  l   = "CELL_LOGICAL",  # yes         yes          yes
+  i   = "CELL_INTEGER",  # no          no           yes
+  d   = "CELL_NUMERIC",  # yes         yes          yes
+  n   = "CELL_NUMERIC",  #
+  D   = "CELL_DATE",     # yes         no           yes
+  t   = "CELL_TIME",     # yes         no           yes
+  `T` = "CELL_DATETIME", # yes         yes          yes
+  c   = "CELL_TEXT",     # yes         yes          yes
+  C   = "COL_CELL",      # --          no           yes
+  L   = "COL_LIST",      # --          yes          yes
+  `?` = "COL_GUESS"      # --          --           --
+)
+
+## TODO: add to above:
+## CELL_DURATION
+## COL_FACTOR
+
+## If discovered     Then guessed
+## cell type is:     col type is:
+## "CELL_BLANK"      "CELL_LOGICAL"
+## "CELL_LOGICAL"    "CELL_LOGICAL"
+## "CELL_NUMERIC"    "CELL_NUMERIC"
+## "CELL_DATE"       "CELL_DATETIME"
+## "CELL_TIME"       "CELL_DATETIME"
+## "CELL_DATETIME"   "CELL_DATETIME"
+## "CELL_TEXT"       "CELL_TEXT"
+
+## Guessed col type when combining
+## X + X --> X
+## X + Y --> "COL_LIST" with one exception:
+## CELL_LOGICAL + CELL_NUMERIC --> CELL_NUMERIC
+
 ## input: an instance of CellData
 ## https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#CellData
-## returns same, but adds one of the following as a class, inspired by
-## CellType enum in readxl
-##   * CELL_BLANK
-##   * CELL_LOGICAL
-##   * CELL_NUMERIC
-##   * CELL_DATE
-##   * CELL_TIME
-##   * CELL_DATETIME
-##   * CELL_TEXT
-apply_type <- function(cell, na = "", trim_ws = TRUE) {
-  cell_types <- map_chr(cell, infer_type, na = na, trim_ws = trim_ws)
-  map2(cell, cell_types, ~ structure(.x, class = .y))
+## returns same, but applies a class vector:
+##   [1] one of the CELL_* above, inspired by the CellType enum in readxl
+##   [2] SHEETS_CELL
+apply_type <- function(cell_list, na = "", trim_ws = TRUE) {
+  cell_types <- map_chr(cell_list, infer_type, na = na, trim_ws = trim_ws)
+  map2(cell_list, cell_types, ~ structure(.x, class = c(.y, "SHEETS_CELL")))
 }
 
 infer_type <- function(cell, na = "", trim_ws = TRUE) {

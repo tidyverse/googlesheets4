@@ -5,7 +5,7 @@ make_column <- function(df, shortcode, ..., nr) {
   }
   column <- switch(
     shortcode,
-    ## TODO: do I need set timezone in any of these?
+    ## TODO: do I need to set timezone in any of these?
     `T` = rep(NA, length.out = nr) %>% as.POSIXct(),
     D   = rep(NA, length.out = nr) %>% as.Date(),
     ## TODO: time of day not implemented yet
@@ -20,27 +20,29 @@ parse <- function(x, shortcode, ...) {
   stopifnot(is.character(shortcode))
   parse_fun <- switch(
     shortcode,
-    `-` =,
-    `_` = as_skip,
-    `?` = as_is,
-    l = as_logical,
-    i = as_integer,
-    d = ,
-    n = as_double,
-    c = as_character,
-    T = as_datetime,
-    D = as_date,
-    t = as_time,
-    ## TODO: as_factor
+    `-` =,          ## I've tried to eliminate '-' internally but still ...
+    `_` = as_skip,  ## also, skipped cols are not normally parsed but still ...
+    l   = as_logical,
+    i   = as_integer,
+    d   = ,
+    n   = as_double,
+    T   = as_datetime,
+    D   = as_date,
+    t   = as_time,
+    c   = as_character,
+    C   = as_cell,
+    L   = as_list,
+    ## TODO: factor, duration
     stop_glue("Not a recognized shortcode: {sq(shortcode)}")
   )
   parse_fun(x, ...)
 }
 
 as_skip <- function(cell, ...) NULL
+as_cell <- function(cell, ...) cell
 
-## TO DO: actually make each atom what it should be
-as_is <- function(cell, ...) cell
+## TO DO: write this!
+as_list <- as_cell
 
 ## prepare to coerce to logical, integer, double
 cell_content <- function(cell, na = "", trim_ws = TRUE) {

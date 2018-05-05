@@ -1,40 +1,49 @@
-make_column <- function(df, shortcode, ..., nr) {
-  parsed <- parse(df$cell, shortcode, ...)
+make_column <- function(df, ctype, ..., nr) {
+  ## must resolve COL_GUESS here (vs when parsing) because need to know ctype
+  ## here, when making the column
+  ctype <- resolve_col_type(df$cell, ctype)
+  parsed <- parse(df$cell, ctype, ...)
   if (is.null(parsed)) {
     return()
   }
   column <- switch(
-    shortcode,
-    ## TODO: do I need to set timezone in any of these?
-    `T` = rep(NA, length.out = nr) %>% as.POSIXct(),
-    D   = rep(NA, length.out = nr) %>% as.Date(),
-    ## TODO: time of day not implemented yet
-    t   = rep(NA, length.out = nr) %>% as.POSIXct(),
+    ctype,
+    ## TODO: think about whether I need to set timezone for DATE, DATETIME
+    CELL_DATE     = rep(NA, length.out = nr) %>% as.Date(),
+    ## TODO: time of day not really implemented yet
+    CELL_TIME     = rep(NA, length.out = nr) %>% as.POSIXct(),
+    CELL_DATETIME = rep(NA, length.out = nr) %>% as.POSIXct(),
     vector(mode = typeof(parsed), length = nr)
   )
   column[df$row] <- parsed
   column
 }
 
-parse <- function(x, shortcode, ...) {
-  stopifnot(is.character(shortcode))
+resolve_col_type <- function(cell, ctype) {
+  if (ctype != "COL_GUESS") {
+    return(ctype)
+  }
+  cell %>%
+    map_chr(~ class(.x)[[1]]) %>%
+    consensus_col_type()
+}
+
+parse <- function(x, ctype, ...) {
+  stopifnot(is_string(ctype))
   parse_fun <- switch(
-    shortcode,
-    `-` =,          ## I've tried to eliminate '-' internally but still ...
-    `_` = as_skip,  ## also, skipped cols are not normally parsed but still ...
-    l   = as_logical,
-    i   = as_integer,
-    d   = ,
-    n   = as_double,
-    T   = as_datetime,
-    D   = as_date,
-    t   = as_time,
-    c   = as_character,
-    C   = as_cell,
-    L   = as_list,
-    `?` = as_guess,
+    ctype,
+    COL_SKIP      = as_skip,
+    CELL_LOGICAL  = as_logical,
+    CELL_INTEGER  = as_integer,
+    CELL_NUMERIC  = as_double,
+    CELL_DATE     = as_date,
+    CELL_TIME     = as_time,
+    CELL_DATETIME = as_datetime,
+    CELL_TEXT     = as_character,
+    COL_CELL      = as_cell,
+    COL_LIST      = as_list,
     ## TODO: factor, duration
-    stop_glue("Not a recognized shortcode: {sq(shortcode)}")
+    stop_glue("Not a recognized column type: {sq(ctype)}")
   )
   if (inherits(x, "SHEETS_CELL")) {
     x <- list(x)
@@ -48,17 +57,8 @@ as_cell <- function(cell, ...) cell
 as_list <- function(cell, ...) {
   codes <- cell %>%
     map_chr(~ class(.x)[[1]]) %>%
-    guess_col_type() %>%
-    get_shortcode()
+    guess_col_type()
   map2(cell, codes, parse, ...)
-}
-
-as_guess <- function(cell, ...) {
-  code <- cell %>%
-    map_chr(~ class(.x)[[1]]) %>%
-    consensus_col_type() %>%
-    get_shortcode()
-  parse(cell, code, ...)
 }
 
 ## prepare to coerce to logical, integer, double

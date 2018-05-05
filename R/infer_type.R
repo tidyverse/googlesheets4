@@ -22,13 +22,8 @@
 ## CELL_DURATION
 ## COL_FACTOR
 
-## input:  col type
-## output: associated shortcode
-## Where needed? Summoning the right parser for individual cells when col
-## type = COL_LIST = "L"
-get_shortcode <- function(col_type) {
-  m <- match(col_type, .ctypes)
-  names(.ctypes[m])
+get_ctype <- function(shortcode) {
+  .ctypes[shortcode]
 }
 
 .cell_to_col_types <- c(

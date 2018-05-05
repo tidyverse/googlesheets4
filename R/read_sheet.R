@@ -46,6 +46,7 @@
 #' @examples
 #' read_sheet(sheets_example("mini-gap"))
 #' read_sheet(sheets_example("mini-gap"), sheet = "Europe", col_types = "cciddd")
+#' read_sheet(sheets_example("mini-gap"), sheet = 4, col_types = "c?ii-d")
 #' test_sheet <- "1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM"
 #' read_sheet(test_sheet)
 #' read_sheet(test_sheet, skip = 2)
@@ -55,6 +56,7 @@
 #' read_sheet(test_sheet, range = "B2:E5")
 #'
 #' ss <- sheets_example("deaths")
+#' read_sheet(ss, range = "A5:F15")
 #' range <- "A5:F15"
 #' col_types <- "ccilDD"
 #' #read_excel(readxl_example("deaths.xlsx"), range = "other!A5:F15")
@@ -68,8 +70,8 @@ read_sheet <- function(ss,
                        guess_max = min(1000, n_max)) {
   ## ss, sheet, range get checked inside get_cells()
   check_col_names(col_names)
-  types <- standardise_col_types(col_types)
-  check_col_names_and_types(col_names, types)
+  ctypes <- standardise_ctypes(col_types)
+  check_col_names_and_types(col_names, ctypes)
   check_character(na)
   check_bool(trim_ws)
   ## skip and n_max get checked inside get_cells()
@@ -91,16 +93,16 @@ read_sheet <- function(ss,
   out$col <- out$col - min(out$col) + 1
 
   ## TODO: only recycle if length 1 ... do I need another conformability check?
-  types <- rep_len(types, length.out = max(out$col))
+  ctypes <- rep_len(ctypes, length.out = max(out$col))
 
   ## drop cells in skipped cols
   ## update types, col_names, and out$col accordingly
-  skipped_col <- types == "_"
+  skipped_col <- ctypes == "COL_SKIP"
   if (any(skipped_col)) {
     out <- out[!out$col %in% which(skipped_col), ]
     out$col <- match(out$col, sort(unique(out$col)))
-    types <- types[!skipped_col]
-    if (length(col_names) > length(types)) {
+    ctypes <- ctypes[!skipped_col]
+    if (length(col_names) > length(ctypes)) {
       col_names <- col_names[!skipped_col]
     }
   }
@@ -122,7 +124,7 @@ read_sheet <- function(ss,
 
   out_scratch <- purrr::map2(
     out_split,
-    types,
+    ctypes,
     make_column,
     na = na, trim_ws = trim_ws, nr = nr
   ) %>%
@@ -132,8 +134,8 @@ read_sheet <- function(ss,
   tibble::as_tibble(out_scratch)
 }
 
-check_col_names_and_types <- function(col_names, types) {
-  n_col_types <- sum(types !=  "_")
+check_col_names_and_types <- function(col_names, ctypes) {
+  n_col_types <- sum(ctypes !=  "_")
   if (length(col_names) <= 1 ||
       n_col_types  <= 1 ||
       length(col_names) == n_col_types) {
@@ -154,10 +156,10 @@ check_col_names <- function(col_names) {
   check_character(col_names)
 }
 
-standardise_col_types <- function(col_types) {
-  if (length(col_types) < 1) {
-    return("?")
-  }
+## input:  a string of readr-style shortcodes
+## output: a vector of col types
+standardise_ctypes <- function(col_types) {
+  col_types <- col_types %||% "?"
   check_string(col_types)
 
   if (identical(col_types, "")) {
@@ -166,7 +168,6 @@ standardise_col_types <- function(col_types) {
       "least one readr-style shortcode."
     )
   }
-
 
   accepted_codes <- purrr::keep(names(.ctypes), nzchar)
 
@@ -179,5 +180,5 @@ standardise_col_types <- function(col_types) {
       "  * Unrecognized codes: {bad_codes}"
     )
   }
-  gsub("-", "_", col_types_split)
+  get_ctype(col_types_split)
 }

@@ -22,15 +22,26 @@
 ## CELL_DURATION
 ## COL_FACTOR
 
-## If discovered     Then guessed
-## cell type is:     col type is:
-## "CELL_BLANK"      "CELL_LOGICAL"
-## "CELL_LOGICAL"    "CELL_LOGICAL"
-## "CELL_NUMERIC"    "CELL_NUMERIC"
-## "CELL_DATE"       "CELL_DATETIME"
-## "CELL_TIME"       "CELL_DATETIME"
-## "CELL_DATETIME"   "CELL_DATETIME"
-## "CELL_TEXT"       "CELL_TEXT"
+.cell_to_col_types <- c(
+  ## If discovered Then guessed
+  ## cell type is: col type is:
+  CELL_BLANK     = "CELL_LOGICAL",
+  CELL_LOGICAL   = "CELL_LOGICAL",
+  CELL_NUMERIC   = "CELL_NUMERIC",
+  CELL_DATE      = "CELL_DATETIME",
+  CELL_TIME      = "CELL_DATETIME",
+  CELL_DATETIME  = "CELL_DATETIME",
+  CELL_TEXT      = "CELL_TEXT"
+)
+
+guess_col_type <- function(cell_type) {
+  .cell_to_col_types[cell_type]
+}
+
+.col_type_to_code <- function(col_type) {
+  m <- match(col_type, .ctypes)
+  names(.ctypes[m])
+}
 
 ## Guessed col type when combining
 ## X + X --> X

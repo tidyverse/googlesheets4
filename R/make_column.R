@@ -35,14 +35,22 @@ parse <- function(x, shortcode, ...) {
     ## TODO: factor, duration
     stop_glue("Not a recognized shortcode: {sq(shortcode)}")
   )
+  if (inherits(x, "SHEETS_CELL")) {
+    x <- list(x)
+  }
   parse_fun(x, ...)
 }
 
 as_skip <- function(cell, ...) NULL
 as_cell <- function(cell, ...) cell
 
-## TO DO: write this!
-as_list <- as_cell
+as_list <- function(cell, ...) {
+  codes <- cell %>%
+    map_chr(~ class(.x)[[1]]) %>%
+    guess_col_type() %>%
+    .col_type_to_code()
+  map2(cell, codes, parse, ...)
+}
 
 ## prepare to coerce to logical, integer, double
 cell_content <- function(cell, na = "", trim_ws = TRUE) {

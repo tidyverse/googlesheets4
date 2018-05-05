@@ -1,6 +1,6 @@
-## shortcode             Type can be   Type can be  Type can be
-##                       discovered    guessed for  imposed on
-##      type             from a cell   a column     a column
+##                       Type can be   Type can be  Type can be
+## shortcode             discovered    guessed for  imposed on
+##    = type             from a cell   a column     a column
 .ctypes <- c(
   `_` = "COL_SKIP",      # --          no           yes
   `-` = "COL_SKIP",
@@ -22,31 +22,66 @@
 ## CELL_DURATION
 ## COL_FACTOR
 
-.cell_to_col_types <- c(
-  ## If discovered Then guessed
-  ## cell type is: col type is:
-  CELL_BLANK     = "CELL_LOGICAL",
-  CELL_LOGICAL   = "CELL_LOGICAL",
-  CELL_NUMERIC   = "CELL_NUMERIC",
-  CELL_DATE      = "CELL_DATETIME",
-  CELL_TIME      = "CELL_DATETIME",
-  CELL_DATETIME  = "CELL_DATETIME",
-  CELL_TEXT      = "CELL_TEXT"
-)
-
-guess_col_type <- function(cell_type) {
-  .cell_to_col_types[cell_type]
-}
-
-.col_type_to_code <- function(col_type) {
+## input:  col type
+## output: associated shortcode
+## Where needed? Summoning the right parser for individual cells when col
+## type = COL_LIST = "L"
+get_shortcode <- function(col_type) {
   m <- match(col_type, .ctypes)
   names(.ctypes[m])
 }
 
-## Guessed col type when combining
+.cell_to_col_types <- c(
+  ## If discovered   Then guessed
+  ## cell type is:   col type is:
+  CELL_BLANK       = "CELL_LOGICAL",
+  CELL_LOGICAL     = "CELL_LOGICAL",
+  CELL_NUMERIC     = "CELL_NUMERIC",
+  CELL_DATE        = "CELL_DATETIME",
+  CELL_TIME        = "CELL_DATETIME",
+  CELL_DATETIME    = "CELL_DATETIME",
+  CELL_TEXT        = "CELL_TEXT"
+)
+
+## input:  discover-able cell type
+## output: guess-able col type
+## Where needed? Col type guessing when col type = COL_GUESS = "?", cell
+## conversion when col type = COL_LIST = "L"
+guess_col_type <- function(cell_type) {
+  .cell_to_col_types[cell_type]
+}
+
+## input:  two guess-able col types
+## output: one guess-able col type
 ## X + X --> X
 ## X + Y --> "COL_LIST" with one exception:
 ## CELL_LOGICAL + CELL_NUMERIC --> CELL_NUMERIC
+## CELL_BLANK is a useful construct internally, but this is conceived to work
+## on inputs that are *column* types, not *cell* types
+consensus_col_type <- function(col_type) {
+  g <- function(x, y) {
+    if (setequal(c(x, y), c("CELL_LOGICAL", "CELL_NUMERIC"))) {
+      return("CELL_NUMERIC")
+    }
+
+    if (x == y) {
+      return(x)
+    }
+
+    blank <- match("CELL_BLANK", c(x, y))
+    if (!is.na(blank)) {
+      return(c(x, y)[-blank])
+    }
+    "COL_LIST"
+  }
+
+  out <- Reduce(g, col_type, init = "CELL_BLANK")
+  if (out == "CELL_BLANK") {
+    "CELL_LOGICAL"
+  } else {
+    out
+  }
+}
 
 ## input: an instance of CellData
 ## https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#CellData

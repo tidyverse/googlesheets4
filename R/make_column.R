@@ -32,6 +32,7 @@ parse <- function(x, shortcode, ...) {
     c   = as_character,
     C   = as_cell,
     L   = as_list,
+    `?` = as_guess,
     ## TODO: factor, duration
     stop_glue("Not a recognized shortcode: {sq(shortcode)}")
   )
@@ -48,8 +49,16 @@ as_list <- function(cell, ...) {
   codes <- cell %>%
     map_chr(~ class(.x)[[1]]) %>%
     guess_col_type() %>%
-    .col_type_to_code()
+    get_shortcode()
   map2(cell, codes, parse, ...)
+}
+
+as_guess <- function(cell, ...) {
+  code <- cell %>%
+    map_chr(~ class(.x)[[1]]) %>%
+    consensus_col_type() %>%
+    get_shortcode()
+  parse(cell, code, ...)
 }
 
 ## prepare to coerce to logical, integer, double

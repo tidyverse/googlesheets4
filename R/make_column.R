@@ -6,14 +6,16 @@ make_column <- function(df, ctype, ..., nr) {
   if (is.null(parsed)) {
     return()
   }
+  fodder <- rep_len(NA, length.out = nr)
   column <- switch(
     ctype,
     ## TODO: think about whether I need to set timezone for DATE, DATETIME
-    CELL_DATE     = rep(NA, length.out = nr) %>% as.Date(),
+    CELL_DATE     = as.Date(fodder),
     ## TODO: time of day not really implemented yet
-    CELL_TIME     = rep(NA, length.out = nr) %>% as.POSIXct(),
-    CELL_DATETIME = rep(NA, length.out = nr) %>% as.POSIXct(),
-    vector(mode = typeof(parsed), length = nr)
+    CELL_TIME     = as.POSIXct(fodder),
+    CELL_DATETIME = as.POSIXct(fodder),
+    COL_LIST = vector(mode = "list", length = nr),
+    as.vector(fodder, mode = typeof(parsed))
   )
   column[df$row] <- parsed
   column

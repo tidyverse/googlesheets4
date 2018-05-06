@@ -17,6 +17,13 @@ check_length_one <- function(x, nm = deparse(substitute(x))) {
   x
 }
 
+check_has_length <- function(x, nm = deparse(substitute(x))) {
+  if (length(x) < 1) {
+    stop_glue("{bt(nm)} must have length greater than zero")
+  }
+  x
+}
+
 check_character <- function(x, nm = deparse(substitute(x))) {
   if (!is.character(x)) {
     stop_glue(

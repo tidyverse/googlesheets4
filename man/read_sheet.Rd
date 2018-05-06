@@ -66,6 +66,7 @@ in the usual R sense).
 \examples{
 read_sheet(sheets_example("mini-gap"))
 read_sheet(sheets_example("mini-gap"), sheet = "Europe", col_types = "cciddd")
+read_sheet(sheets_example("mini-gap"), sheet = 4, col_types = "c?ii-d")
 test_sheet <- "1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM"
 read_sheet(test_sheet)
 read_sheet(test_sheet, skip = 2)
@@ -75,6 +76,7 @@ read_sheet(test_sheet, range = "B2:C4")
 read_sheet(test_sheet, range = "B2:E5")
 
 ss <- sheets_example("deaths")
+read_sheet(ss, range = "A5:F15")
 range <- "A5:F15"
 col_types <- "ccilDD"
 #read_excel(readxl_example("deaths.xlsx"), range = "other!A5:F15")

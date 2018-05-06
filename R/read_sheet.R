@@ -71,9 +71,16 @@ read_sheet <- function(ss,
   ## ss, sheet, range get checked inside get_cells()
   check_col_names(col_names)
   ctypes <- standardise_ctypes(col_types)
-  check_col_names_and_types(col_names, ctypes)
+  if (is.character(col_names)) {
+    ctypes <- rep_ctypes(length(col_names), ctypes, "column names")
+    col_names <- filter_col_names(col_names, ctypes)
+    ## if column names were provided explicitly, this is now true
+    ## length(col_names) == length(ctypes[ctypes != "COL_SKIP"])
+  }
+
   check_character(na)
   check_bool(trim_ws)
+
   ## skip and n_max get checked inside get_cells()
   check_non_negative_integer(guess_max)
 
@@ -92,21 +99,30 @@ read_sheet <- function(ss,
   nr <- max(out$row)
   out$col <- out$col - min(out$col) + 1
 
-  ## TODO: only recycle if length 1 ... do I need another conformability check?
-  ctypes <- rep_len(ctypes, length.out = max(out$col))
+  if (is.logical(col_names)) {
+    ## if col_names is logical, this is first chance to check/set length of
+    ## ctypes, using the cell data
+    ctypes <- rep_ctypes(max(out$col), ctypes, "columns found in sheet")
+  }
 
-  ## drop cells in skipped cols
-  ## update types, col_names, and out$col accordingly
+  ## drop cells in skipped cols, update out$col and ctypes
   skipped_col <- ctypes == "COL_SKIP"
   if (any(skipped_col)) {
     out <- out[!out$col %in% which(skipped_col), ]
     out$col <- match(out$col, sort(unique(out$col)))
     ctypes <- ctypes[!skipped_col]
-    if (length(col_names) > length(ctypes)) {
-      col_names <- col_names[!skipped_col]
-    }
   }
   nc <- max(out$col)
+
+  ## if column names were provided explicitly, we need to check that length
+  ## of col_names (and, therefore, ctypes) == nc
+  if (is.character(col_names) && length(col_names) != nc) {
+    stop_glue(
+      "Length of {bt('col_names')} is not compatible with the data:\n",
+      "  * Expected {length(col_names)} un-skipped columns\n",
+      "  * But data has {nc} columns"
+    )
+  }
 
   out$cell <- apply_type(out$cell)
 
@@ -134,30 +150,17 @@ read_sheet <- function(ss,
   tibble::as_tibble(out_scratch)
 }
 
-check_col_names_and_types <- function(col_names, ctypes) {
-  n_col_types <- sum(ctypes !=  "_")
-  if (length(col_names) <= 1 ||
-      n_col_types  <= 1 ||
-      length(col_names) == n_col_types) {
-    return(invisible())
-  }
-  stop_glue(
-    "If column names are provided, there must be one name for each ",
-    "un-skipped column (no more, no less):\n",
-    "  * {length(col_names)} column names were provided\n",
-    "  * {n_col_types} columns are not skipped"
-  )
-}
-
+## helpers ---------------------------------------------------------------------
 check_col_names <- function(col_names) {
   if (is.logical(col_names)) {
     return(check_bool(col_names))
   }
   check_character(col_names)
+  check_has_length(col_names)
 }
 
-## input:  a string of readr-style shortcodes
-## output: a vector of col types
+## input:  a string of readr-style shortcodes or NULL
+## output: a vector of col types of length >= 1
 standardise_ctypes <- function(col_types) {
   col_types <- col_types %||% "?"
   check_string(col_types)
@@ -180,5 +183,38 @@ standardise_ctypes <- function(col_types) {
       "  * Unrecognized codes: {bad_codes}"
     )
   }
-  get_ctype(col_types_split)
+  ctypes <- get_ctype(col_types_split)
+  if (all(ctypes == "COL_SKIP")) {
+    stop_glue("{bt('col_types')} can't request that all columns be skipped")
+  }
+  ctypes
+}
+
+## makes sure there are n ctypes or n ctypes that are not COL_SKIP
+rep_ctypes <- function(n, ctypes, comparator) {
+  if (length(ctypes) == n) {
+    return(ctypes)
+  }
+  n_col_types <- sum(ctypes !=  "COL_SKIP")
+  if (n_col_types == n) {
+    return(ctypes)
+  }
+  if (length(ctypes) == 1) {
+    return(rep_len(ctypes, length.out = n))
+  }
+  stop_glue(
+    "Length of {bt('col_types')} is not compatible with {comparator}:\n",
+    "  * {length(ctypes)} column types specified\n",
+    "  * {n_col_types} un-skipped column types specified\n",
+    "  * But there are {n} {comparator}."
+  )
+}
+
+filter_col_names <- function(col_names, ctypes) {
+  stopifnot(length(col_names) <= length(ctypes))
+  if (length(col_names) == length(ctypes)) {
+    col_names[ctypes != "COL_SKIP"]
+  } else {
+    col_names
+  }
 }

@@ -1,7 +1,7 @@
-make_column <- function(df, ctype, ..., nr) {
+make_column <- function(df, ctype, ..., nr, guess_max = min(1000, nr)) {
   ## must resolve COL_GUESS here (vs when parsing) because need to know ctype
   ## here, when making the column
-  ctype <- resolve_col_type(df$cell, ctype)
+  ctype <- resolve_col_type(df$cell[df$row <= guess_max], ctype)
   parsed <- parse(df$cell, ctype, ...)
   if (is.null(parsed)) {
     return()

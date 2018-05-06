@@ -80,7 +80,6 @@ read_sheet <- function(ss,
 
   check_character(na)
   check_bool(trim_ws)
-
   ## skip and n_max get checked inside get_cells()
   check_non_negative_integer(guess_max)
 
@@ -142,7 +141,7 @@ read_sheet <- function(ss,
     out_split,
     ctypes,
     make_column,
-    na = na, trim_ws = trim_ws, nr = nr
+    na = na, trim_ws = trim_ws, nr = nr, guess_max = guess_max
   ) %>%
     purrr::set_names(col_names) %>%
     purrr::compact()

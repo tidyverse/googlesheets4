@@ -190,7 +190,7 @@ standardise_ctypes <- function(col_types) {
 }
 
 ## makes sure there are n ctypes or n ctypes that are not COL_SKIP
-rep_ctypes <- function(n, ctypes, comparator) {
+rep_ctypes <- function(n, ctypes, comparator = "n") {
   if (length(ctypes) == n) {
     return(ctypes)
   }
@@ -209,11 +209,10 @@ rep_ctypes <- function(n, ctypes, comparator) {
   )
 }
 
+## removes col_names for skipped columns
+## rep_ctypes() is called before and ensures that col_names and ctypes are
+## conformable (hence the non-user facing stopifnot())
 filter_col_names <- function(col_names, ctypes) {
   stopifnot(length(col_names) <= length(ctypes))
-  if (length(col_names) == length(ctypes)) {
-    col_names[ctypes != "COL_SKIP"]
-  } else {
-    col_names
-  }
+  col_names[ctypes != "COL_SKIP"]
 }

@@ -123,7 +123,7 @@ read_sheet <- function(ss,
     )
   }
 
-  out$cell <- apply_type(out$cell)
+  out$cell <- apply_ctype(out$cell)
 
   if (is.logical(col_names)) {
     col_names <- character(length = nc)
@@ -182,7 +182,7 @@ standardise_ctypes <- function(col_types) {
       "  * Unrecognized codes: {bad_codes}"
     )
   }
-  ctypes <- get_ctype(col_types_split)
+  ctypes <- ctype(col_types_split)
   if (all(ctypes == "COL_SKIP")) {
     stop_glue("{bt('col_types')} can't request that all columns be skipped")
   }

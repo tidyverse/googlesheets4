@@ -1,6 +1,10 @@
+## ctype = cell or column type
+## most types are valid for a cell or a column
+## however, a couple are valid only for cells or only for a column
+
 ##                       Type can be   Type can be  Type can be
 ## shortcode             discovered    guessed for  imposed on
-##    = type             from a cell   a column     a column
+##    = ctype            from a cell   a column     a column
 .ctypes <- c(
   `_` = "COL_SKIP",      # --          no           yes
   `-` = "COL_SKIP",
@@ -22,8 +26,28 @@
 ## CELL_DURATION
 ## COL_FACTOR
 
-get_ctype <- function(shortcode) {
-  .ctypes[shortcode]
+ctype <- function(x,  ...) {
+  UseMethod("ctype")
+}
+
+ctype.NULL <- function(x, ...) stop_glue("Cannot turn `NULL` into `ctype`.")
+
+ctype.SHEETS_CELL <- function(x, ...) class(x)[[1]]
+
+ctype.character <- function(x, ...) .ctypes[x]
+
+ctype.list <- function(x, ...) {
+  out <- rlang::rep_along(x, NA_character_)
+  is_SHEETS_CELL <- map_lgl(x, inherits, what = "SHEETS_CELL")
+  out[is_SHEETS_CELL] <- map_chr(x[is_SHEETS_CELL], ctype)
+  out
+}
+
+ctype.default <- function(x, ...) {
+  stop_glue_data(
+    list(x = glue_collapse(class(x), sep = "/")),
+    "Don't know how to coerce object of class {sq(x)} to ctype"
+  )
 }
 
 .cell_to_col_types <- c(
@@ -42,18 +66,16 @@ get_ctype <- function(shortcode) {
 ## output: guess-able col type
 ## Where needed? Col type guessing when col type = COL_GUESS = "?", cell
 ## conversion when col type = COL_LIST = "L"
-guess_col_type <- function(cell_type) {
-  .cell_to_col_types[cell_type]
-}
+guess_col_type <- function(ctype) .cell_to_col_types[ctype]
 
-## input:  two guess-able col types
-## output: one guess-able col type
-## X + X --> X
-## X + Y --> "COL_LIST" with one exception:
-## CELL_LOGICAL + CELL_NUMERIC --> CELL_NUMERIC
-## CELL_BLANK is a useful construct internally, but this is conceived to work
+##  input: vector of two ctypes
+## output: one ctype
+## c(X, X) --> X
+## c(X, Y) --> "COL_LIST" with one exception:
+## c("CELL_LOGICAL", "CELL_NUMERIC") --> "CELL_NUMERIC"
+## CELL_BLANK is useful internally, but this is conceived to work
 ## on inputs that are *column* types, not *cell* types
-consensus_col_type <- function(col_type) {
+consensus_col_type <- function(ctype) {
   g <- function(x, y) {
     if (setequal(c(x, y), c("CELL_LOGICAL", "CELL_NUMERIC"))) {
       return("CELL_NUMERIC")
@@ -70,7 +92,7 @@ consensus_col_type <- function(col_type) {
     "COL_LIST"
   }
 
-  out <- Reduce(g, col_type, init = "CELL_BLANK")
+  out <- Reduce(g, ctype, init = "CELL_BLANK")
   if (out == "CELL_BLANK") {
     "CELL_LOGICAL"
   } else {
@@ -83,12 +105,12 @@ consensus_col_type <- function(col_type) {
 ## returns same, but applies a class vector:
 ##   [1] one of the CELL_* above, inspired by the CellType enum in readxl
 ##   [2] SHEETS_CELL
-apply_type <- function(cell_list, na = "", trim_ws = TRUE) {
-  cell_types <- map_chr(cell_list, infer_type, na = na, trim_ws = trim_ws)
-  map2(cell_list, cell_types, ~ structure(.x, class = c(.y, "SHEETS_CELL")))
+apply_ctype <- function(cell_list, na = "", trim_ws = TRUE) {
+  ctypes <- map_chr(cell_list, infer_ctype, na = na, trim_ws = trim_ws)
+  map2(cell_list, ctypes, ~ structure(.x, class = c(.y, "SHEETS_CELL")))
 }
 
-infer_type <- function(cell, na = "", trim_ws = TRUE) {
+infer_ctype <- function(cell, na = "", trim_ws = TRUE) {
   ## Blank cell criteria
   ##   * cell is NULL or list()
   ##   * cell has no effectiveValue
@@ -100,7 +122,7 @@ infer_type <- function(cell, na = "", trim_ws = TRUE) {
     return("CELL_BLANK")
   }
 
-  effective_type <- extended_value[[names(cell[["effectiveValue"]])]]
+  effective_type <- .extended_value[[names(cell[["effectiveValue"]])]]
 
   if (effective_type == "error") {
     return("CELL_BLANK")
@@ -129,7 +151,7 @@ infer_type <- function(cell, na = "", trim_ws = TRUE) {
     ## for now, I punt on this
     .default = "NUMBER"
   )
-  number_types[[nf_type]]
+  .number_types[[nf_type]]
 }
 
 ## userEnteredValue and effectiveValue hold an instance of ExtendedValue
@@ -145,7 +167,7 @@ infer_type <- function(cell, na = "", trim_ws = TRUE) {
 #   },
 #   // End of list of possible types for union field value.
 # }
-extended_value <- c(
+.extended_value <- c(
    numberValue = "number",
    stringValue = "string",
      boolValue = "boolean",
@@ -153,7 +175,7 @@ extended_value <- c(
     errorValue = "error"
 )
 
-number_types <- c(
+.number_types <- c(
   TEXT       = "CELL_NUMERIC",
   NUMBER     = "CELL_NUMERIC",
   PERCENT    = "CELL_NUMERIC",

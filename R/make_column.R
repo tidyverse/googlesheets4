@@ -9,11 +9,10 @@ make_column <- function(df, ctype, ..., nr, guess_max = min(1000, nr)) {
   fodder <- rep_len(NA, length.out = nr)
   column <- switch(
     ctype,
-    ## TODO: think about whether I need to set timezone for DATE, DATETIME
-    CELL_DATE     = as.Date(fodder),
+    CELL_DATE     = as.Date(fodder, tz = "UTC"),
     ## TODO: time of day not really implemented yet
-    CELL_TIME     = as.POSIXct(fodder),
-    CELL_DATETIME = as.POSIXct(fodder),
+    CELL_TIME     = as.POSIXct(fodder, tz = "UTC"),
+    CELL_DATETIME = as.POSIXct(fodder, tz = "UTC"),
     COL_LIST = vector(mode = "list", length = nr),
     as.vector(fodder, mode = typeof(parsed))
   )
@@ -26,7 +25,8 @@ resolve_col_type <- function(cell, ctype) {
     return(ctype)
   }
   cell %>%
-    map_chr(~ class(.x)[[1]]) %>%
+    ctype() %>%
+    guess_col_type() %>%
     consensus_col_type()
 }
 
@@ -58,16 +58,15 @@ as_cell <- function(cell, ...) cell
 
 as_list <- function(cell, ...) {
   codes <- cell %>%
-    map_chr(~ class(.x)[[1]]) %>%
+    ctype() %>%
     guess_col_type()
   map2(cell, codes, parse, ...)
 }
 
 ## prepare to coerce to logical, integer, double
 cell_content <- function(cell, na = "", trim_ws = TRUE) {
-  cls <- class(cell)[1]
   switch(
-    cls,
+    ctype(cell),
     CELL_BLANK = NA,
     CELL_LOGICAL = pluck(cell, "effectiveValue", "boolValue"),
     CELL_NUMERIC = pluck(cell, "effectiveValue", "numberValue"),
@@ -100,9 +99,8 @@ as_double <- function(cell, na = "", trim_ws = TRUE) {
 
 ## prepare to coerce to date, time, datetime
 cell_content_datetime <- function(cell, na = "", trim_ws = TRUE) {
-  cls <- class(cell)[1]
   switch(
-    cls,
+    ctype(cell),
     CELL_BLANK = NA,
     CELL_LOGICAL = NA,
     CELL_NUMERIC = NA,
@@ -140,9 +138,8 @@ as_time <- function(cell, na = "", trim_ws = TRUE) {
 
 ## prepare to coerce to character
 cell_content_chr <- function(cell, na = "", trim_ws = TRUE) {
-  cls <- class(cell)[1]
   switch(
-    cls,
+    ctype(cell),
     CELL_BLANK = NA_character_,
     pluck(cell, "formattedValue")
   ) %>%

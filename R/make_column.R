@@ -9,10 +9,10 @@ make_column <- function(df, ctype, ..., nr, guess_max = min(1000, nr)) {
   fodder <- rep_len(NA, length.out = nr)
   column <- switch(
     ctype,
-    CELL_DATE     = as.Date(fodder, tz = "UTC"),
+    CELL_DATE     = as_Date(as.numeric(fodder)),
     ## TODO: time of day not really implemented yet
-    CELL_TIME     = as.POSIXct(fodder, tz = "UTC"),
-    CELL_DATETIME = as.POSIXct(fodder, tz = "UTC"),
+    CELL_TIME     = as_POSIXct(as.numeric(fodder)),
+    CELL_DATETIME = as_POSIXct(as.numeric(fodder)),
     COL_LIST = vector(mode = "list", length = nr),
     as.vector(fodder, mode = typeof(parsed))
   )
@@ -20,7 +20,7 @@ make_column <- function(df, ctype, ..., nr, guess_max = min(1000, nr)) {
   column
 }
 
-resolve_col_type <- function(cell, ctype) {
+resolve_col_type <- function(cell, ctype = "COL_GUESS") {
   if (ctype != "COL_GUESS") {
     return(ctype)
   }
@@ -116,14 +116,14 @@ as_datetime <- function(cell, na = "", trim_ws = TRUE) {
     map(cell_content_datetime, na = na, trim_ws = trim_ws) %>%
     map_dbl(as.double) %>%
     `*`(24 * 60 * 60) %>%
-    as.POSIXct(origin = "1899-12-30", tz = "UTC")
+    as_POSIXct()
 }
 
 as_date <- function(cell, na = "", trim_ws = TRUE) {
   cell %>%
     map(cell_content_datetime, na = na, trim_ws = trim_ws) %>%
     map_dbl(as.double) %>%
-    as.Date(origin = "1899-12-30", tz = "UTC")
+    as_Date()
 }
 
 ## TODO: not wired up yet (body is same as as_datetime)
@@ -132,7 +132,7 @@ as_time <- function(cell, na = "", trim_ws = TRUE) {
     map(cell_content_datetime, na = na, trim_ws = trim_ws) %>%
     map_dbl(as.double) %>%
     `*`(24 * 60 * 60) %>%
-    as.POSIXct(origin = "1899-12-30", tz = "UTC")
+    as_POSIXct()
 }
 
 
@@ -150,4 +150,12 @@ as_character <- function(cell, na = "", trim_ws = TRUE) {
   cell %>%
     map(cell_content_chr, na = na, trim_ws = trim_ws) %>%
     map_chr(as.character)
+}
+
+as_Date <- function(x = NA_real_, origin = "1899-12-30", tz = "UTC", ...) {
+  as.Date(x, origin = origin, tz = tz, ...)
+}
+
+as_POSIXct <- function(x = NA_real_, origin = "1899-12-30", tz = "UTC", ...) {
+  as.POSIXct(x, origin = origin, tz = tz, ...)
 }

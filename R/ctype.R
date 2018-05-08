@@ -32,7 +32,14 @@ ctype <- function(x,  ...) {
 
 ctype.NULL <- function(x, ...) stop_glue("Cannot turn `NULL` into `ctype`.")
 
-ctype.SHEETS_CELL <- function(x, ...) class(x)[[1]]
+ctype.SHEETS_CELL <- function(x, ...) {
+  out <- class(x)[[1]]
+  if (out %in% .ctypes) {
+    out
+  } else {
+    NA_character_
+  }
+}
 
 ctype.character <- function(x, ...) .ctypes[x]
 

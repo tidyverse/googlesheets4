@@ -55,6 +55,7 @@ ctype.default <- function(x, ...) {
   ## cell type is:   col type is:
   CELL_BLANK       = "CELL_LOGICAL",
   CELL_LOGICAL     = "CELL_LOGICAL",
+  CELL_INTEGER     = "CELL_NUMERIC",
   CELL_NUMERIC     = "CELL_NUMERIC",
   CELL_DATE        = "CELL_DATETIME",
   CELL_TIME        = "CELL_DATETIME",

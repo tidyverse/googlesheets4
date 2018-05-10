@@ -37,31 +37,37 @@ test_that("ctype() works on lists, when it should", {
   )
 })
 
-test_that("guess_col_type() doesn't just pass ctype through", {
+test_that("guess_parse_type() doesn't just pass ctype through", {
   ## there is no such thing as a "blank" column --> logical!
-  expect_equivalent(guess_col_type("CELL_BLANK"), "CELL_LOGICAL")
+  expect_equivalent(guess_parse_type("CELL_BLANK"), "CELL_LOGICAL")
   ## neither the API nor JSON has a proper way to convey integer-ness
-  expect_equivalent(guess_col_type("CELL_INTEGER"), "CELL_NUMERIC")
+  expect_equivalent(guess_parse_type("CELL_INTEGER"), "CELL_NUMERIC")
   ## conversion to date or time is lossy, so never guess that
-  expect_equivalent(guess_col_type("CELL_DATE"), "CELL_DATETIME")
-  expect_equivalent(guess_col_type("CELL_TIME"), "CELL_DATETIME")
+  expect_equivalent(guess_parse_type("CELL_DATE"), "CELL_DATETIME")
+  expect_equivalent(guess_parse_type("CELL_TIME"), "CELL_DATETIME")
 })
 
-test_that("consensus_col_type() works as promised", {
-  ## the only case of X + Y, X != Y that doesn't lead to COL_LIST
+test_that("consensus_col_type() implements our type coercion DAG", {
   expect_identical(
     consensus_col_type(c("CELL_LOGICAL", "CELL_NUMERIC")),
     "CELL_NUMERIC"
   )
   expect_identical(
-    consensus_col_type(c("CELL_NUMERIC", "CELL_LOGICAL")),
-    "CELL_NUMERIC"
+    consensus_col_type(c("CELL_TEXT", "CELL_TEXT")),
+    "CELL_TEXT"
   )
-  ## X + X leads to X
-  expect_identical(consensus_col_type(c("CELL_???", "CELL_???")), "CELL_???")
-  ## X + Y leads to COL_LIST
-  expect_identical(consensus_col_type(c("CELL_X", "CELL_Y")), "COL_LIST")
-  ## single input: typical ctype is passed through, special case for CELL_BLANK
-  expect_identical(consensus_col_type("CELL_X"), "CELL_X")
+  expect_identical(
+    consensus_col_type(c("CELL_LOGICAL", "CELL_DATE")),
+    "COL_LIST"
+  )
+  expect_identical(
+    consensus_col_type(c("CELL_TIME", "CELL_DATE")),
+    "CELL_DATETIME"
+  )
+  expect_identical(
+    consensus_col_type(c("CELL_TEXT", "CELL_BLANK")),
+    "CELL_TEXT"
+  )
+  expect_identical(consensus_col_type("CELL_TEXT"), "CELL_TEXT")
   expect_identical(consensus_col_type("CELL_BLANK"), "CELL_LOGICAL")
 })

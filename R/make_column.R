@@ -9,6 +9,7 @@ make_column <- function(df, ctype, ..., nr, guess_max = min(1000, nr)) {
   fodder <- rep_len(NA, length.out = nr)
   column <- switch(
     ctype,
+    ## NAs must be numeric in order to initialize datetimes with a timezone
     CELL_DATE     = as_Date(as.numeric(fodder)),
     ## TODO: time of day not really implemented yet
     CELL_TIME     = as_POSIXct(as.numeric(fodder)),
@@ -26,7 +27,6 @@ resolve_col_type <- function(cell, ctype = "COL_GUESS") {
   }
   cell %>%
     ctype() %>%
-    guess_col_type() %>%
     consensus_col_type()
 }
 
@@ -57,10 +57,10 @@ as_skip <- function(cell, ...) NULL
 as_cell <- function(cell, ...) cell
 
 as_list <- function(cell, ...) {
-  codes <- cell %>%
+  ctypes <- cell %>%
     ctype() %>%
-    guess_col_type()
-  map2(cell, codes, parse, ...)
+    guess_parse_type()
+  map2(cell, ctypes, parse, ...)
 }
 
 ## prepare to coerce to logical, integer, double

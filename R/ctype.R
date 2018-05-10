@@ -46,7 +46,8 @@ ctype.character <- function(x, ...) .ctypes[x]
 ctype.list <- function(x, ...) {
   out <- rlang::rep_along(x, NA_character_)
   is_SHEETS_CELL <- map_lgl(x, inherits, what = "SHEETS_CELL")
-  out[is_SHEETS_CELL] <- map_chr(x[is_SHEETS_CELL], ctype)
+  ##                                            ??? ctype ???
+  out[is_SHEETS_CELL] <- map_chr(x[is_SHEETS_CELL], ctype.SHEETS_CELL)
   out
 }
 
@@ -57,7 +58,7 @@ ctype.default <- function(x, ...) {
   )
 }
 
-.cell_to_col_types <- c(
+.cell_to_parse_types <- c(
   ## If discovered   Then guessed
   ## cell type is:   col type is:
   CELL_BLANK       = "CELL_LOGICAL",
@@ -70,37 +71,42 @@ ctype.default <- function(x, ...) {
   CELL_TEXT        = "CELL_TEXT"
 )
 
-## input:  discover-able cell type
+## input:  cell type, presumably discovered
 ## output: guess-able col type
-## Where needed? Col type guessing when col type = COL_GUESS = "?", cell
-## conversion when col type = COL_LIST = "L"
-guess_col_type <- function(ctype) .cell_to_col_types[ctype]
+## Where used? cell conversion when col type is COL_LIST == "L"
+guess_parse_type <- function(ctype) .cell_to_parse_types[ctype]
 
-##  input: vector of two ctypes
-## output: one ctype
-## c(X, X) --> X
-## c(X, Y) --> "COL_LIST" with one exception:
-## c("CELL_LOGICAL", "CELL_NUMERIC") --> "CELL_NUMERIC"
-## CELL_BLANK is useful internally, but this is conceived to work
-## on inputs that are *column* types, not *cell* types
+## input:  a ctype
+## output: vector of ctypes that can hold such input with no data loss, going
+##         from most generic (list) to most specific (type of that cell)
+## examples:
+## CELL_LOGICAL --> COL_LIST, CELL_NUMERIC, CELL_INTEGER, CELL_LOGICAL
+## CELL_TIME --> COL_LIST, CELL_DATETIME, CELL_TIME
+## CELL_BLANK --> NULL
+admissible_types <- function(x) {
+  z <- c(
+    CELL_LOGICAL  = "CELL_INTEGER",
+    CELL_INTEGER  = "CELL_NUMERIC",
+    CELL_NUMERIC  = "COL_LIST",
+    CELL_DATE     = "CELL_DATETIME",
+    CELL_TIME     = "CELL_DATETIME",
+    CELL_DATETIME = "COL_LIST",
+    CELL_TEXT     = "COL_LIST"
+  )
+  if (x[[1]] == "COL_LIST")  return(x)
+  if (! x[[1]] %in% names(z)) return()
+  c(admissible_types(z[[x[[1]]]]), x)
+}
+
+## find the most specific ctype that is admissible for a pair of ctypes
+## the limiting case is COL_LIST
+upper_type <- function(x, y) {
+  upper_bound(admissible_types(x), admissible_types(y)) %||% "CELL_BLANK"
+}
+
+## find the most specific ctype that is admissible for a set of ctypes
 consensus_col_type <- function(ctype) {
-  g <- function(x, y) {
-    if (setequal(c(x, y), c("CELL_LOGICAL", "CELL_NUMERIC"))) {
-      return("CELL_NUMERIC")
-    }
-
-    if (x == y) {
-      return(x)
-    }
-
-    blank <- match("CELL_BLANK", c(x, y))
-    if (!is.na(blank)) {
-      return(c(x, y)[-blank])
-    }
-    "COL_LIST"
-  }
-
-  out <- Reduce(g, ctype, init = "CELL_BLANK")
+  out <- Reduce(upper_type, unique(ctype), init = "CELL_BLANK")
   if (out == "CELL_BLANK") {
     "CELL_LOGICAL"
   } else {
@@ -199,4 +205,20 @@ infer_ctype <- function(cell, na = "", trim_ws = TRUE) {
 is_na_string <- function(x, na = "", trim_ws = TRUE) {
   fv <- if (trim_ws) ws_trim(x) else x
   any(fv == na)
+}
+
+## compares x[i] to y[i] and returns the last element where they are equal
+## example:
+## upper_bound(c("a", "b"), c("a", "b", "c")) is "b"
+upper_bound <- function(x, y) {
+  nx <- length(x)
+  ny <- length(y)
+  ## these brackets make covr happy
+  if (nx + ny == 0) {return()}
+  if (nx == 0) {return(y[[ny]])}
+  if (ny == 0) {return(x[[nx]])}
+  comp <- seq_len(min(nx, ny))
+  res <- x[comp] == y[comp]
+  if (!any(res)) return()
+  x[[max(which(res))]]
 }

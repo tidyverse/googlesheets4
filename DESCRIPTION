@@ -22,11 +22,12 @@ Imports:
     magrittr,
     purrr,
     rematch2,
+    rlang,
     tibble
 Suggests: 
     covr,
     testthat
-Remotes:  
+Remotes: 
     r-lib/gargle,
     tidyverse/glue
 ByteCompile: true

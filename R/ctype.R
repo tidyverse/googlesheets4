@@ -30,8 +30,10 @@ ctype <- function(x,  ...) {
   UseMethod("ctype")
 }
 
+#' @export
 ctype.NULL <- function(x, ...) stop_glue("Cannot turn `NULL` into `ctype`.")
 
+#' @export
 ctype.SHEETS_CELL <- function(x, ...) {
   out <- class(x)[[1]]
   if (out %in% .ctypes) {
@@ -41,16 +43,18 @@ ctype.SHEETS_CELL <- function(x, ...) {
   }
 }
 
+#' @export
 ctype.character <- function(x, ...) .ctypes[x]
 
+#' @export
 ctype.list <- function(x, ...) {
   out <- rlang::rep_along(x, NA_character_)
   is_SHEETS_CELL <- map_lgl(x, inherits, what = "SHEETS_CELL")
-  ##                                            ??? ctype ???
-  out[is_SHEETS_CELL] <- map_chr(x[is_SHEETS_CELL], ctype.SHEETS_CELL)
+  out[is_SHEETS_CELL] <- map_chr(x[is_SHEETS_CELL], ctype)
   out
 }
 
+#' @export
 ctype.default <- function(x, ...) {
   stop_glue_data(
     list(x = glue_collapse(class(x), sep = "/")),
@@ -117,7 +121,7 @@ consensus_col_type <- function(ctype) {
 ## input: an instance of CellData
 ## https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#CellData
 ## returns same, but applies a class vector:
-##   [1] one of the CELL_* above, inspired by the CellType enum in readxl
+##   [1] a ctype, inspired by the CellType enum in readxl
 ##   [2] SHEETS_CELL
 apply_ctype <- function(cell_list, na = "", trim_ws = TRUE) {
   ctypes <- map_chr(cell_list, infer_ctype, na = na, trim_ws = trim_ws)
@@ -218,6 +222,8 @@ upper_bound <- function(x, y) {
   if (nx == 0) {return(y[[ny]])}
   if (ny == 0) {return(x[[nx]])}
   comp <- seq_len(min(nx, ny))
+  ## TODO: if our DAG were more complicated, I think this would need to be
+  ## based on a set operation
   res <- x[comp] == y[comp]
   if (!any(res)) return()
   x[[max(which(res))]]

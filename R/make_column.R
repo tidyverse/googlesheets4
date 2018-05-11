@@ -27,6 +27,7 @@ resolve_col_type <- function(cell, ctype = "COL_GUESS") {
   }
   cell %>%
     ctype() %>%
+    guess_parse_type() %>%
     consensus_col_type()
 }
 

@@ -49,19 +49,19 @@ test_that("guess_parse_type() doesn't just pass ctype through", {
 
 test_that("consensus_col_type() implements our type coercion DAG", {
   expect_identical(
-    consensus_col_type(c("CELL_LOGICAL", "CELL_NUMERIC")),
-    "CELL_NUMERIC"
-  )
-  expect_identical(
     consensus_col_type(c("CELL_TEXT", "CELL_TEXT")),
     "CELL_TEXT"
+  )
+  expect_identical(
+    consensus_col_type(c("CELL_LOGICAL", "CELL_NUMERIC")),
+    "CELL_NUMERIC"
   )
   expect_identical(
     consensus_col_type(c("CELL_LOGICAL", "CELL_DATE")),
     "COL_LIST"
   )
   expect_identical(
-    consensus_col_type(c("CELL_TIME", "CELL_DATE")),
+    consensus_col_type(c("CELL_DATE", "CELL_DATETIME")),
     "CELL_DATETIME"
   )
   expect_identical(

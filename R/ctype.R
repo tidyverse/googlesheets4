@@ -26,6 +26,8 @@
 ## CELL_DURATION
 ## COL_FACTOR
 
+## this generic is "dumb": it only reports ctype
+## it doesn't implement any logic about guessing, coercion, etc.
 ctype <- function(x,  ...) {
   UseMethod("ctype")
 }
@@ -67,17 +69,22 @@ ctype.default <- function(x, ...) {
   ## cell type is:   col type is:
   CELL_BLANK       = "CELL_LOGICAL",
   CELL_LOGICAL     = "CELL_LOGICAL",
-  CELL_INTEGER     = "CELL_NUMERIC",
+  CELL_INTEGER     = "CELL_NUMERIC",  ## integers are jsonlite being helpful
   CELL_NUMERIC     = "CELL_NUMERIC",
-  CELL_DATE        = "CELL_DATETIME",
-  CELL_TIME        = "CELL_DATETIME",
+  CELL_DATE        = "CELL_DATETIME", ## "date" is just a format in Sheets
+  CELL_TIME        = "CELL_DATETIME", ## "time" is just a format in Sheets
   CELL_DATETIME    = "CELL_DATETIME",
   CELL_TEXT        = "CELL_TEXT"
 )
 
 ## input:  cell type, presumably discovered
 ## output: guess-able col type
-## Where used? cell conversion when col type is COL_LIST == "L"
+## Where do we use this?
+##   * Choosing cell-specific parser when col type is COL_LIST == "L"
+##   * Pre-processing cell types prior to forming a consensus for an entire
+##     column when col type is COL_GUESS = "?"
+## This is the where we store type-guessing fiddliness that is specific to
+## Google Sheets.
 guess_parse_type <- function(ctype) .cell_to_parse_types[ctype]
 
 ## input:  a ctype
@@ -85,16 +92,19 @@ guess_parse_type <- function(ctype) .cell_to_parse_types[ctype]
 ##         from most generic (list) to most specific (type of that cell)
 ## examples:
 ## CELL_LOGICAL --> COL_LIST, CELL_NUMERIC, CELL_INTEGER, CELL_LOGICAL
-## CELL_TIME --> COL_LIST, CELL_DATETIME, CELL_TIME
+## CELL_DATE --> COL_LIST, CELL_DATETIME, CELL_DATE
 ## CELL_BLANK --> NULL
 admissible_types <- function(x) {
   z <- c(
     CELL_LOGICAL  = "CELL_INTEGER",
     CELL_INTEGER  = "CELL_NUMERIC",
     CELL_NUMERIC  = "COL_LIST",
+
     CELL_DATE     = "CELL_DATETIME",
-    CELL_TIME     = "CELL_DATETIME",
     CELL_DATETIME = "COL_LIST",
+
+    CELL_TIME     = "COL_LIST",
+
     CELL_TEXT     = "COL_LIST"
   )
   if (x[[1]] == "COL_LIST")  return(x)
@@ -104,11 +114,14 @@ admissible_types <- function(x) {
 
 ## find the most specific ctype that is admissible for a pair of ctypes
 ## the limiting case is COL_LIST
+## HOWEVER use ctypes that are good for cells, i.e. "two blanks make a blank"
 upper_type <- function(x, y) {
   upper_bound(admissible_types(x), admissible_types(y)) %||% "CELL_BLANK"
 }
 
 ## find the most specific ctype that is admissible for a set of ctypes
+## HOWEVER use ctypes that are good for columns, i.e. "two blanks make a
+## logical"
 consensus_col_type <- function(ctype) {
   out <- Reduce(upper_type, unique(ctype), init = "CELL_BLANK")
   if (out == "CELL_BLANK") {

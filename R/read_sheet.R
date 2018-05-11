@@ -68,50 +68,97 @@ read_sheet <- function(ss,
                        na = "", trim_ws = TRUE,
                        skip = 0, n_max = Inf,
                        guess_max = min(1000, n_max)) {
-  ## ss, sheet, range get checked inside get_cells()
-  check_col_names(col_names)
-  ctypes <- standardise_ctypes(col_types)
-  if (is.character(col_names)) {
-    ctypes <- rep_ctypes(length(col_names), ctypes, "column names")
-    col_names <- filter_col_names(col_names, ctypes)
-    ## if column names were provided explicitly, this is now true
-    ## length(col_names) == length(ctypes[ctypes != "COL_SKIP"])
-  }
-
+  ## check these first, so we don't download cells in vain
+  col_spec <- standardise_col_spec(col_names, col_types)
   check_character(na)
   check_bool(trim_ws)
-  ## skip and n_max get checked inside get_cells()
   check_non_negative_integer(guess_max)
 
-  out <- get_cells(
+  ## params re: which cells to read are checked inside get_cells()
+  ## ss, sheet, range, skip, n_max
+  df <- get_cells(
     ss = ss,
     sheet = sheet, range = range,
-    col_names_in_sheet = isTRUE(col_names),
+    col_names_in_sheet = isTRUE(col_spec$col_names),
     skip = skip, n_max = n_max
   )
+
+  spread_sheet_impl_(
+    df,
+    col_spec = col_spec, na = na, trim_ws = trim_ws, guess_max = guess_max
+  )
+}
+
+#' Spread a data frame of cells into spreadsheet shape
+#'
+#' Reshapes a data frame of cells (probably the output of [sheets_cells()]) into
+#' another data frame, i.e., puts it back into the shape of the source
+#' spreadsheet. At the moment, this function exists primarily for testing
+#' reasons. The flagship function [read_sheet()] is what most users are looking
+#' for. It is basically [sheet_cells()] + [spread_sheet()].
+#'
+#' @inheritParams read_sheet
+#' @param df A data frame with one row per (nonempty) cell, integer variables
+#'   `row` and `column` (probably referring to location within the spreadsheet),
+#'   and a list-column `cell` of `SHEET_CELL` objects.
+#'
+#' @return A tibble in the shape of the original spreadsheet, but enforcing
+#'   user's wishes regarding column names, column types, `NA` strings, and
+#'   whitespace trimming.
+#' @export
+#'
+#' @examples
+#' df <- sheets_cells(sheets_example("mini-gap"))
+#' spread_sheet(df)
+#'
+#' # ^^ gets same result as ...
+#' read_sheet(sheets_example("mini-gap"))
+spread_sheet <- function(df,
+                         col_names = TRUE, col_types = NULL,
+                         na = "", trim_ws = TRUE,
+                         guess_max = min(1000, max(df$row))) {
+  col_spec <- standardise_col_spec(col_names, col_types)
+  check_character(na)
+  check_bool(trim_ws)
+  check_non_negative_integer(guess_max)
+
+  spread_sheet_impl_(
+    df,
+    col_spec = col_spec, na = na, trim_ws = trim_ws, guess_max = guess_max
+  )
+}
+
+spread_sheet_impl_ <- function(df,
+                               col_spec = list(
+                                 col_names = TRUE, col_types = NULL
+                               ),
+                               na = "", trim_ws = TRUE,
+                               guess_max = min(1000, max(df$row))) {
+  col_names <- col_spec$col_names
+  ctypes <- col_spec$ctypes
+  col_names_in_sheet <- isTRUE(col_names)
 
   ## absolute spreadsheet coordinates no longer relevant
   ## update row, col to refer to location in output data frame
   ## row 0 holds cells designated as column names
-  col_names_in_sheet <- isTRUE(col_names)
-  out$row <- out$row - min(out$row) + !col_names_in_sheet
-  nr <- max(out$row)
-  out$col <- out$col - min(out$col) + 1
+  df$row <- df$row - min(df$row) + !col_names_in_sheet
+  nr <- max(df$row)
+  df$col <- df$col - min(df$col) + 1
 
   if (is.logical(col_names)) {
     ## if col_names is logical, this is first chance to check/set length of
     ## ctypes, using the cell data
-    ctypes <- rep_ctypes(max(out$col), ctypes, "columns found in sheet")
+    ctypes <- rep_ctypes(max(df$col), ctypes, "columns found in sheet")
   }
 
-  ## drop cells in skipped cols, update out$col and ctypes
+  ## drop cells in skipped cols, update df$col and ctypes
   skipped_col <- ctypes == "COL_SKIP"
   if (any(skipped_col)) {
-    out <- out[!out$col %in% which(skipped_col), ]
-    out$col <- match(out$col, sort(unique(out$col)))
+    df <- df[!df$col %in% which(skipped_col), ]
+    df$col <- match(df$col, sort(unique(df$col)))
     ctypes <- ctypes[!skipped_col]
   }
-  nc <- max(out$col)
+  nc <- max(df$col)
 
   ## if column names were provided explicitly, we need to check that length
   ## of col_names (and, therefore, ctypes) == nc
@@ -123,22 +170,22 @@ read_sheet <- function(ss,
     )
   }
 
-  out$cell <- apply_ctype(out$cell)
+  df$cell <- apply_ctype(df$cell)
 
   if (is.logical(col_names)) {
     col_names <- character(length = nc)
   }
   if (col_names_in_sheet) {
-    this <- out$row == 0
-    col_names[out$col[this]] <- as_character(out$cell[this])
-    out <- out[!this, ]
+    this <- df$row == 0
+    col_names[df$col[this]] <- as_character(df$cell[this])
+    df <- df[!this, ]
   }
   col_names <- tibble::tidy_names(col_names)
 
-  out_split <- map(seq_len(nc), ~ out[out$col == .x, ])
+  df_split <- map(seq_len(nc), ~ df[df$col == .x, ])
 
   out_scratch <- purrr::map2(
-    out_split,
+    df_split,
     ctypes,
     make_column,
     na = na, trim_ws = trim_ws, nr = nr, guess_max = guess_max
@@ -150,6 +197,19 @@ read_sheet <- function(ss,
 }
 
 ## helpers ---------------------------------------------------------------------
+
+standardise_col_spec <- function(col_names, col_types) {
+  check_col_names(col_names)
+  ctypes <- standardise_ctypes(col_types)
+  if (is.character(col_names)) {
+    ctypes <- rep_ctypes(length(col_names), ctypes, "column names")
+    col_names <- filter_col_names(col_names, ctypes)
+    ## if column names were provided explicitly, this is now true
+    ## length(col_names) == length(ctypes[ctypes != "COL_SKIP"])
+  }
+  list(col_names = col_names, ctypes = ctypes)
+}
+
 check_col_names <- function(col_names) {
   if (is.logical(col_names)) {
     return(check_bool(col_names))
@@ -173,7 +233,7 @@ standardise_ctypes <- function(col_types) {
 
   accepted_codes <- purrr::keep(names(.ctypes), nzchar)
 
-  col_types_split <- strsplit(col_types, split = '')[[1]]
+  col_types_split <- strsplit(col_types, split = "")[[1]]
   ok <- col_types_split %in% accepted_codes
   if (!all(ok)) {
     bad_codes <- glue_collapse(sq(col_types_split[!ok]), sep = ",")
@@ -194,7 +254,7 @@ rep_ctypes <- function(n, ctypes, comparator = "n") {
   if (length(ctypes) == n) {
     return(ctypes)
   }
-  n_col_types <- sum(ctypes !=  "COL_SKIP")
+  n_col_types <- sum(ctypes != "COL_SKIP")
   if (n_col_types == n) {
     return(ctypes)
   }

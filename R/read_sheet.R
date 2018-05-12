@@ -1,6 +1,6 @@
 #' Read a Sheet into a data frame
 #'
-#' WIP! The main read function of this package.
+#' This is the main "read" function of this package.
 #'
 #' Data in a skipped column is still requested from the API (we work in a
 #' rectangle, after all), but is not parsed into the data frame output. The
@@ -88,6 +88,9 @@ read_sheet <- function(ss,
     col_spec = col_spec, na = na, trim_ws = trim_ws, guess_max = guess_max
   )
 }
+
+#' @export
+sheets_read <- read_sheet
 
 #' Spread a data frame of cells into spreadsheet shape
 #'

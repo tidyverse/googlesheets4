@@ -50,7 +50,7 @@ types.}
 a tibble
 }
 \description{
-WIP! The main read function of this package.
+This is the main "read" function of this package.
 }
 \details{
 Data in a skipped column is still requested from the API (we work in a

@@ -46,4 +46,7 @@ for. It is basically \code{\link[=sheet_cells]{sheet_cells()}} + \code{\link[=sp
 \examples{
 df <- sheets_cells(sheets_example("mini-gap"))
 spread_sheet(df)
+
+# ^^ gets same result as ...
+read_sheet(sheets_example("mini-gap"))
 }

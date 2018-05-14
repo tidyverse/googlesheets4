@@ -137,6 +137,7 @@ spread_sheet_impl_ <- function(df,
                                ),
                                na = "", trim_ws = TRUE,
                                guess_max = min(1000, max(df$row))) {
+  if (nrow(df) == 0) return(tibble::tibble())
   col_names <- col_spec$col_names
   ctypes <- col_spec$ctypes
   col_names_in_sheet <- isTRUE(col_names)

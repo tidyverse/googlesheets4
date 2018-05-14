@@ -133,6 +133,11 @@ range_from_skip <- function(skip = 0, sheet = NULL, sheet_df = NULL) {
 
 insert_shims <- function(df, range) {
   cl_range <- cellranger::as.cell_limits(range)
+  ## emulating behaviour of readxl
+  if (nrow(df) == 0) {
+    return(df)
+  }
+
 
   ## 1-based indices, referring to cell coordinates in the spreadsheet
   start_row <- cl_range$ul[[1]]

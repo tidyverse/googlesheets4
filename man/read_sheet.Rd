@@ -2,9 +2,14 @@
 % Please edit documentation in R/read_sheet.R
 \name{read_sheet}
 \alias{read_sheet}
+\alias{sheets_read}
 \title{Read a Sheet into a data frame}
 \usage{
 read_sheet(ss, sheet = NULL, range = NULL, col_names = TRUE,
+  col_types = NULL, na = "", trim_ws = TRUE, skip = 0, n_max = Inf,
+  guess_max = min(1000, n_max))
+
+sheets_read(ss, sheet = NULL, range = NULL, col_names = TRUE,
   col_types = NULL, na = "", trim_ws = TRUE, skip = 0, n_max = Inf,
   guess_max = min(1000, n_max))
 }

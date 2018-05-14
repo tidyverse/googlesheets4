@@ -41,7 +41,7 @@ Reshapes a data frame of cells (probably the output of \code{\link[=sheets_cells
 another data frame, i.e., puts it back into the shape of the source
 spreadsheet. At the moment, this function exists primarily for testing
 reasons. The flagship function \code{\link[=read_sheet]{read_sheet()}} is what most users are looking
-for. It is basically \code{\link[=sheet_cells]{sheet_cells()}} + \code{\link[=spread_sheet]{spread_sheet()}}.
+for. It is basically \code{\link[=sheets_cells]{sheets_cells()}} + \code{\link[=spread_sheet]{spread_sheet()}}.
 }
 \examples{
 df <- sheets_cells(sheets_example("mini-gap"))

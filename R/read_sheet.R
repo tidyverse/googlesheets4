@@ -89,6 +89,7 @@ read_sheet <- function(ss,
   )
 }
 
+#' @rdname read_sheet
 #' @export
 sheets_read <- read_sheet
 
@@ -98,7 +99,7 @@ sheets_read <- read_sheet
 #' another data frame, i.e., puts it back into the shape of the source
 #' spreadsheet. At the moment, this function exists primarily for testing
 #' reasons. The flagship function [read_sheet()] is what most users are looking
-#' for. It is basically [sheet_cells()] + [spread_sheet()].
+#' for. It is basically [sheets_cells()] + [spread_sheet()].
 #'
 #' @inheritParams read_sheet
 #' @param df A data frame with one row per (nonempty) cell, integer variables

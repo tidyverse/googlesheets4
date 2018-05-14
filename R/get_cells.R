@@ -132,12 +132,12 @@ range_from_skip <- function(skip = 0, sheet = NULL, sheet_df = NULL) {
 }
 
 insert_shims <- function(df, range) {
-  cl_range <- cellranger::as.cell_limits(range)
   ## emulating behaviour of readxl
   if (nrow(df) == 0) {
     return(df)
   }
 
+  cl_range <- limits_from_range(range)
 
   ## 1-based indices, referring to cell coordinates in the spreadsheet
   start_row <- cl_range$ul[[1]]
@@ -145,10 +145,10 @@ insert_shims <- function(df, range) {
   start_col <- cl_range$ul[[2]]
   end_col   <- cl_range$lr[[2]]
 
-  shim_up    <- start_row < min(df$row)
-  shim_left  <- start_col < min(df$col)
-  shim_down  <-   end_row > max(df$row)
-  shim_right <-   end_col > max(df$col)
+  shim_up    <- !is.na(start_row) && start_row < min(df$row)
+  shim_left  <- !is.na(start_col) && start_col < min(df$col)
+  shim_down  <- !is.na(end_row)   &&   end_row > max(df$row)
+  shim_right <- !is.na(end_col)   &&   end_col > max(df$col)
 
   ## add placeholder to establish upper left corner
   if (shim_up || shim_left) {

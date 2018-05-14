@@ -93,6 +93,7 @@ compound_rx <- glue("(?<sheet>^.+)!(?<range>{A1_char_class}+$)")
 letter_part <- "[$]?[A-Za-z]{1,3}"
 number_part <- "[$]?[0-9]{1,7}"
 A1_rx <- glue("^{letter_part}{number_part}$|^{letter_part}$|^{number_part}$")
+A1_decomp <- glue("(?<column>{letter_part})?(?<row>{number_part})?")
 
 ##              | output
 ##        input | sheet      range
@@ -127,4 +128,27 @@ parse_user_range <- function(x) {
   ## A, AA, AAA (strings of length less than 4) and
   ## 1, 12, ..., 1234567 (numbers with less than 8 digits)
   ## are not, I believe, valid ranges
+}
+
+limits_from_range <- function(x) {
+  x_split <- strsplit(x, ":")[[1]]
+  if (!length(x_split) %in% 1:2)   {stop_glue("Invalid range: {sq(x)}")}
+  if (!all(grepl(A1_rx, x_split))) {stop_glue("Invalid range: {sq(x)}")}
+  corners <- rematch2::re_match(x_split, A1_decomp)
+  if (any(is.na(corners$.match)))  {stop_glue("Invalid range: {sq(x)}")}
+  corners$column <- ifelse(nzchar(corners$column), corners$column, NA_character_)
+  corners$row <- ifelse(nzchar(corners$row), corners$row, NA_character_)
+  if (nrow(corners) == 1) {
+    corners <- corners[c(1, 1), ]
+  }
+  cellranger::cell_limits(
+    ul = c(
+      corners$row[1] %NA% NA_integer_,
+      cellranger::letter_to_num(corners$column[1]) %NA% NA_integer_
+    ),
+    lr = c(
+      corners$row[2] %NA% NA_integer_,
+      cellranger::letter_to_num(corners$column[2]) %NA% NA_integer_
+    )
+  )
 }

@@ -1,3 +1,5 @@
+`%NA%` <- function(x, y) if (is.na(x)) y else x
+
 is_string <- function(x) is.character(x) && length(x) == 1L
 
 is_integerish <- function(x) {

@@ -10,12 +10,17 @@ sheets_cells(ss, sheet = NULL, range = NULL)
 \item{ss}{Something that uniquely identifies a Google Sheet. Processed
 through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
-\item{sheet}{Sheet to read. Either a string (the name of a sheet), or an
-integer (the position of the sheet). Ignored if the sheet is specified via
-\code{range}. If neither argument specifies the sheet, defaults to the first
-visible sheet.}
+\item{sheet}{Sheet to read, as in "worksheet" or "tab". Either a string (the
+name of a sheet), or an integer (the position of the sheet). Ignored if the
+sheet is specified via \code{range}. If neither argument specifies the sheet,
+defaults to the first visible sheet.}
 
-\item{range}{A cell range to read from, as described in FILL THIS IN.}
+\item{range}{A cell range to read from, as described in \href{https://developers.google.com/sheets/api/guides/concepts#a1_notation}{Sheets A1 notation}.
+This is fairly standard spreadsheet range notation, although a bit
+different from Excel. Examples of valid ranges: \code{"Sheet1!A1:B2"},
+\code{"Sheet1!A:A"}, \code{"Sheet1!1:2"}, \code{"Sheet1!A5:A"}, \code{"A1:B2"}, \code{"Sheet1"}.
+Note this can be a sheet name, like \code{"Sheet1"}, or a named range, like
+\code{"sales_data"}, without any cell reference.}
 }
 \value{
 A tibble with one row per non-empty cell in the \code{range}. \emph{this might

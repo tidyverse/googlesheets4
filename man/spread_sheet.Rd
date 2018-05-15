@@ -15,18 +15,19 @@ and a list-column \code{cell} of \code{SHEET_CELL} objects.}
 \item{col_names}{\code{TRUE} to use the first row as column names, \code{FALSE} to get
 default names, or a character vector to provide column names directly. In
 all cases, names are processed through \code{\link[tibble:tidy_names]{tibble::tidy_names()}}. If user
-provides \code{col_types}, \code{col_names} can have one entry per column, i.e. have
-the same length as \code{col_types}, or one entry per unskipped column.}
+provides \code{col_types}, \code{col_names} can have one entry per column or one
+entry per unskipped column.}
 
 \item{col_types}{column types Either \code{NULL} to guess all from the spreadsheet
-or (TEMPORARY INTERFACE!!!) a string using readr shortcodes, with one
-character or code per column. If exactly one \code{col_type} is specified, it is
-recycled. See Details for more.}
+or a string of readr-style shortcodes, with one character or code per
+column. If exactly one \code{col_type} is specified, it is recycled. See Details
+for more.}
 
 \item{na}{Character vector of strings to interpret as missing values. By
 default, blank cells are treated as missing data.}
 
-\item{trim_ws}{Should leading and trailing whitespace be trimmed?}
+\item{trim_ws}{Logical. Should leading and trailing whitespace be trimmed
+from cell contents?}
 
 \item{guess_max}{Maximum number of data rows to use for guessing column
 types.}

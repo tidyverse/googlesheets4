@@ -1,36 +1,76 @@
 #' Read a Sheet into a data frame
 #'
-#' This is the main "read" function of this package.
+#' This is the main "read" function of the googlesheets4 package. The goal is
+#' that `read_sheet()` is to a Google Sheet as `readr::read_csv()` is to a csv
+#' file or `read_excel()` is to an Excel spreadsheet. It's still under
+#' development but is quite usable now. **Note that googlesheets4 is not wired
+#' up for auth yet (happening soon!)**, so at the moment the target Sheet must
+#' be readable by anyone with a link (see examples for how to accomplish via
+#' googledrive).
 #'
-#' Data in a skipped column is still requested from the API (we work in a
-#' rectangle, after all), but is not parsed into the data frame output. The
-#' `"list"` type requests a column that is a list of length 1 vectors, using the
-#' type guessing logic from `col_types = NULL`, but on a cell-by-cell basis.
-#' Shortcode refresher: `_` or `-` for skip, `?` for guess, `l` for logical, `i`
-#' for integer, `d` or `n` for double, `c` for character, `T` for POSIXct
-#' datetime, `D` for date, `t` for time-of-day (currently treated like a
-#' datetime). To be determined: factor, list, raw (meaning API payload, not raw
-#' in the usual R sense).
+#' @section Column specification:
+#'
+#'   Column types must be specified in a single string of readr-style short
+#'   codes, e.g. "cci?l" means "character, character, integer, guess, logical".
+#'   This is not where things will end up, but it gets the ball rolling in a way
+#'   that is consistent with readr.
+#'
+#'   Shortcodes for column types:
+
+#'   * `_` or `-`: Skip. Data in a skipped column is still requested from the
+#'   API (the high-level functions in this package are rectangle-oriented), but
+#'   is not parsed into the data frame output.
+#'   * `?`: Guess. A type is guessed for each cell and then a consensus type is
+#'   selected for each column. If no atomic type is suitable for all cells, a
+#'   list-column is created, in which each cell is converted to an R object of
+#'   "best" type". If no column types are specified, i.e. `col_types = NULL`,
+#'   all types are guessed.
+#'   * `l`: Logical.
+#'   * `i`: Integer. This type is never guessed from the data, because Sheets
+#'   have no formal cell type for integers.
+#'   * `d` or `n`: Numeric, in sense of "double".
+#'   * `D`: Date. This type is never guessed from the data, because date cells
+#'   are just serial datetimes that bear a "date" format.
+#'   * `t`: Time of day. This type is never guessed from the data, because time
+#'   cells are just serial datetimes that bear a "time" format. *Not implemented
+#'   yet; returns POSIXct.*
+#'   * `T`: Datetime, specifically POSIXct.
+#'   * `c`: Character.
+#'   * `C`: Cell. This type is unique to googlesheets4. This returns raw cell
+#'   data, as an R list, which consists of everything sent by the Sheets API for
+#'   that cell. Has S3 type of `"CELL_SOMETHING"` and `SHEETS_CELL`. Mostly
+#'   useful internally, but exposed for those who want direct access to, e.g.,
+#'   formulas and formats.
+#'   * `L`: List, as in "list-column". Each cell is a length-1 atomic vector of
+#'   its discovered type.
+#'   * *Still to come*: duration and factor.
 #'
 #' @param ss Something that uniquely identifies a Google Sheet. Processed
 #'   through [as_sheets_id()].
-#' @param sheet Sheet to read. Either a string (the name of a sheet), or an
-#'   integer (the position of the sheet). Ignored if the sheet is specified via
-#'   `range`. If neither argument specifies the sheet, defaults to the first
-#'   visible sheet.
-#' @param range A cell range to read from, as described in FILL THIS IN.
+#' @param sheet Sheet to read, as in "worksheet" or "tab". Either a string (the
+#'   name of a sheet), or an integer (the position of the sheet). Ignored if the
+#'   sheet is specified via `range`. If neither argument specifies the sheet,
+#'   defaults to the first visible sheet.
+#' @param range A cell range to read from, as described in [Sheets A1
+#'   notation](https://developers.google.com/sheets/api/guides/concepts#a1_notation).
+#'    This is fairly standard spreadsheet range notation, although a bit
+#'   different from Excel. Examples of valid ranges: `"Sheet1!A1:B2"`,
+#'   `"Sheet1!A:A"`, `"Sheet1!1:2"`, `"Sheet1!A5:A"`, `"A1:B2"`, `"Sheet1"`.
+#'   Note this can be a sheet name, like `"Sheet1"`, or a named range, like
+#'   `"sales_data"`, without any cell reference.
 #' @param col_names `TRUE` to use the first row as column names, `FALSE` to get
 #'   default names, or a character vector to provide column names directly. In
 #'   all cases, names are processed through [tibble::tidy_names()]. If user
-#'   provides `col_types`, `col_names` can have one entry per column, i.e. have
-#'   the same length as `col_types`, or one entry per unskipped column.
+#'   provides `col_types`, `col_names` can have one entry per column or one
+#'   entry per unskipped column.
 #' @param col_types column types Either `NULL` to guess all from the spreadsheet
-#'   or (TEMPORARY INTERFACE!!!) a string using readr shortcodes, with one
-#'   character or code per column. If exactly one `col_type` is specified, it is
-#'   recycled. See Details for more.
+#'   or a string of readr-style shortcodes, with one character or code per
+#'   column. If exactly one `col_type` is specified, it is recycled. See Details
+#'   for more.
 #' @param na Character vector of strings to interpret as missing values. By
 #'   default, blank cells are treated as missing data.
-#' @param trim_ws Should leading and trailing whitespace be trimmed?
+#' @param trim_ws Logical. Should leading and trailing whitespace be trimmed
+#'   from cell contents?
 #' @param skip Minimum number of rows to skip before reading anything, be it
 #'   column names or data. Leading empty rows are automatically skipped, so this
 #'   is a lower bound. Ignored if `range` is given.
@@ -40,7 +80,7 @@
 #' @param guess_max Maximum number of data rows to use for guessing column
 #'   types.
 #'
-#' @return a tibble
+#' @return A [tibble][tibble::tibble-package]
 #' @export
 #'
 #' @examples

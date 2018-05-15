@@ -17,28 +17,34 @@ sheets_read(ss, sheet = NULL, range = NULL, col_names = TRUE,
 \item{ss}{Something that uniquely identifies a Google Sheet. Processed
 through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
-\item{sheet}{Sheet to read. Either a string (the name of a sheet), or an
-integer (the position of the sheet). Ignored if the sheet is specified via
-\code{range}. If neither argument specifies the sheet, defaults to the first
-visible sheet.}
+\item{sheet}{Sheet to read, as in "worksheet" or "tab". Either a string (the
+name of a sheet), or an integer (the position of the sheet). Ignored if the
+sheet is specified via \code{range}. If neither argument specifies the sheet,
+defaults to the first visible sheet.}
 
-\item{range}{A cell range to read from, as described in FILL THIS IN.}
+\item{range}{A cell range to read from, as described in \href{https://developers.google.com/sheets/api/guides/concepts#a1_notation}{Sheets A1 notation}.
+This is fairly standard spreadsheet range notation, although a bit
+different from Excel. Examples of valid ranges: \code{"Sheet1!A1:B2"},
+\code{"Sheet1!A:A"}, \code{"Sheet1!1:2"}, \code{"Sheet1!A5:A"}, \code{"A1:B2"}, \code{"Sheet1"}.
+Note this can be a sheet name, like \code{"Sheet1"}, or a named range, like
+\code{"sales_data"}, without any cell reference.}
 
 \item{col_names}{\code{TRUE} to use the first row as column names, \code{FALSE} to get
 default names, or a character vector to provide column names directly. In
 all cases, names are processed through \code{\link[tibble:tidy_names]{tibble::tidy_names()}}. If user
-provides \code{col_types}, \code{col_names} can have one entry per column, i.e. have
-the same length as \code{col_types}, or one entry per unskipped column.}
+provides \code{col_types}, \code{col_names} can have one entry per column or one
+entry per unskipped column.}
 
 \item{col_types}{column types Either \code{NULL} to guess all from the spreadsheet
-or (TEMPORARY INTERFACE!!!) a string using readr shortcodes, with one
-character or code per column. If exactly one \code{col_type} is specified, it is
-recycled. See Details for more.}
+or a string of readr-style shortcodes, with one character or code per
+column. If exactly one \code{col_type} is specified, it is recycled. See Details
+for more.}
 
 \item{na}{Character vector of strings to interpret as missing values. By
 default, blank cells are treated as missing data.}
 
-\item{trim_ws}{Should leading and trailing whitespace be trimmed?}
+\item{trim_ws}{Logical. Should leading and trailing whitespace be trimmed
+from cell contents?}
 
 \item{skip}{Minimum number of rows to skip before reading anything, be it
 column names or data. Leading empty rows are automatically skipped, so this
@@ -52,22 +58,57 @@ the returned tibble. Ignored if \code{range} is given.}
 types.}
 }
 \value{
-a tibble
+A \link[tibble:tibble-package]{tibble}
 }
 \description{
-This is the main "read" function of this package.
+This is the main "read" function of the googlesheets4 package. The goal is
+that \code{read_sheet()} is to a Google Sheet as \code{readr::read_csv()} is to a csv
+file or \code{read_excel()} is to an Excel spreadsheet. It's still under
+development but is quite usable now. \strong{Note that googlesheets4 is not wired
+up for auth yet (happening soon!)}, so at the moment the target Sheet must
+be readable by anyone with a link (see examples for how to accomplish via
+googledrive).
 }
-\details{
-Data in a skipped column is still requested from the API (we work in a
-rectangle, after all), but is not parsed into the data frame output. The
-\code{"list"} type requests a column that is a list of length 1 vectors, using the
-type guessing logic from \code{col_types = NULL}, but on a cell-by-cell basis.
-Shortcode refresher: \code{_} or \code{-} for skip, \code{?} for guess, \code{l} for logical, \code{i}
-for integer, \code{d} or \code{n} for double, \code{c} for character, \code{T} for POSIXct
-datetime, \code{D} for date, \code{t} for time-of-day (currently treated like a
-datetime). To be determined: factor, list, raw (meaning API payload, not raw
-in the usual R sense).
+\section{Column specification}{
+
+
+Column types must be specified in a single string of readr-style short
+codes, e.g. "cci?l" means "character, character, integer, guess, logical".
+This is not where things will end up, but it gets the ball rolling in a way
+that is consistent with readr.
+
+Shortcodes for column types:
+\itemize{
+\item \code{_} or \code{-}: Skip. Data in a skipped column is still requested from the
+API (the high-level functions in this package are rectangle-oriented), but
+is not parsed into the data frame output.
+\item \code{?}: Guess. A type is guessed for each cell and then a consensus type is
+selected for each column. If no atomic type is suitable for all cells, a
+list-column is created, in which each cell is converted to an R object of
+"best" type". If no column types are specified, i.e. \code{col_types = NULL},
+all types are guessed.
+\item \code{l}: Logical.
+\item \code{i}: Integer. This type is never guessed from the data, because Sheets
+have no formal cell type for integers.
+\item \code{d} or \code{n}: Numeric, in sense of "double".
+\item \code{D}: Date. This type is never guessed from the data, because date cells
+are just serial datetimes that bear a "date" format.
+\item \code{t}: Time of day. This type is never guessed from the data, because time
+cells are just serial datetimes that bear a "time" format. \emph{Not implemented
+yet; returns POSIXct.}
+\item \code{T}: Datetime, specifically POSIXct.
+\item \code{c}: Character.
+\item \code{C}: Cell. This type is unique to googlesheets4. This returns raw cell
+data, as an R list, which consists of everything sent by the Sheets API for
+that cell. Has S3 type of \code{"CELL_SOMETHING"} and \code{SHEETS_CELL}. Mostly
+useful internally, but exposed for those who want direct access to, e.g.,
+formulas and formats.
+\item \code{L}: List, as in "list-column". Each cell is a length-1 atomic vector of
+its discovered type.
+\item \emph{Still to come}: duration and factor.
 }
+}
+
 \examples{
 read_sheet(sheets_example("mini-gap"))
 read_sheet(sheets_example("mini-gap"), sheet = "Europe", col_types = "cciddd")

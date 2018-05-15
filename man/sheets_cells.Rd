@@ -27,20 +27,20 @@ A tibble with one row per non-empty cell in the \code{range}. \emph{this might
 get dignified with a class?}
 }
 \description{
-WIP! A low-level function that is, however, meant to be exposed. Retrieves
-cell data and puts into a tibble with \code{row}, \code{column}, \code{loc}, and a \code{cell}
-list-column.
+This low-level function returns cell data in a tibble with integer variables
+\code{row} and \code{column} (referring to location with the Google Sheet), an A1-style
+reference \code{loc}, and a \code{cell} list-column. The flagship function
+\code{\link[=read_sheet]{read_sheet()}} is what most users are looking for. It is basically
+\code{sheets_cells()} (this function), followed by \code{\link[=spread_sheet]{spread_sheet()}}, which looks
+after reshaping and column typing.
 }
 \examples{
-sheets_cells(sheets_example("design-dates"))
-#sheets_cells(sheets_example("gapminder"))
-sheets_cells(sheets_example("mini-gap"))
-sheets_cells(sheets_example("ff"))
+sheets_cells(sheets_example("deaths"))
 
+\dontrun{
+## use tidyr::complete() if you want one row per cell, even if empty
 test_sheet <- "1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM"
-sheets_cells(test_sheet)
-sheets_cells(test_sheet, range = "date-timeofday-duration")
-x <- sheets_cells(test_sheet, range = "C2:D4")
-x
-#x \%>\% tidyr::complete(row, col, fill = list(cell = list(list())))
+(x <- sheets_cells(test_sheet, range = "C2:D4"))
+x \%>\% tidyr::complete(row, col, fill = list(cell = list(list())))
+}
 }

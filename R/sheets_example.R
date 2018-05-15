@@ -5,7 +5,7 @@
       "mini-gap" = "1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY",
             "ff" = "132Ij_8ggTKVLnLqCOM3ima6mV9F8rmY7HEcR-5hjWoQ",
   "design-dates" = "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU",
-        "deaths" = "1cMH-nYGhhYlBU3wbi9OQ0hJDJn5qb8_kIvfNsGmX7UQ"
+        "deaths" = "1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA"
 )
 
 #' Access IDs of example Sheets

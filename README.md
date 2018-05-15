@@ -19,8 +19,8 @@ package](https://cran.r-project.org/package=googlesheets).
 
 *Why **4**? Why googlesheets**4**? Did I miss googlesheets1 through 3?
 No. The idea is to name the package after the corresponding version of
-the Sheets API. In hindsight, the original googlesheets should have
-should have been googlesheets**3**.*
+the Sheets API. In hindsight, the original googlesheets should have been
+googlesheets**3**.*
 
 ## Installation
 
@@ -39,23 +39,82 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("tidyverse/googlesheets4")
 ```
 
-## Read a public Sheet
+## No auth yet\!
+
+Sorry, auth hasn’t been wired up yet, but that’s the next priority.
+Until then, you can only use googlesheets4 to access Sheets where
+sharing settings say: “anyone with a link can view”. `read_sheet()` has
+an example that shows googledrive calls to achieve this or you can do in
+the Sheets browser UI via *File \> Share …*.
+
+## Read a Sheet
+
+`read_sheet()` is the main “read” function and should evoke
+`readr::read_csv()` and `readxl::read_excel()`. It’s an alias for
+`sheets_read()` (most functions in googlesheets4 actually start with
+`sheets_`). googlesheets4 is pipe-friendly (and rexports `%>%`), but
+works just fine without the pipe.
+
+### Identify and read your own Sheet
+
+Let’s say you have a cheerful Google Sheet named “deaths”. If you want
+to access it by name, use googledrive to identify the document (capture
+its metadata, espcially file id). Pass the result to functions like
+`sheets_get()` (gets file metadata) or `read_sheet()` (gets cell data).
+
+``` r
+library(googledrive)
+library(googlesheets4)
+
+(deaths <- drive_get("deaths"))
+#> # A tibble: 1 x 4
+#>   name   path     id                                        drive_resource
+#>   <chr>  <chr>    <chr>                                     <list>        
+#> 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5… <list [33]>
+sheets_get(deaths)
+#>   Spreadsheet name: deaths
+#>                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA
+#>             Locale: en
+#>          Time zone: America/Los_Angeles
+#>        # of sheets: 2
+#> 
+#> (Sheet name): (Nominal extent in rows x columns)
+#>         arts: 1000 x 26
+#>        other: 1000 x 26
+```
+
+If you’re willing to deal with the sheet’s id, just provide that
+directly to googlesheets4 functions and omit googledrive.
+
+``` r
+sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
+#>   Spreadsheet name: deaths
+#>                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA
+#>             Locale: en
+#>          Time zone: America/Los_Angeles
+#>        # of sheets: 2
+#> 
+#> (Sheet name): (Nominal extent in rows x columns)
+#>         arts: 1000 x 26
+#>        other: 1000 x 26
+```
+
+Lesson: googledrive is the friendliest way to work with files on Google
+Drive, including those that are Google Sheets. You can refer to files by
+name. googlesheets4 is focused on operrations specific to Sheets and is
+more programming oriented. You must pass a file id or something that
+contains the file id.
+
+### Specifying which cells to read
+
+We’ve made a few Sheets easy to access via `sheets_example()`. Here we
+read from a mini-Gapminder Sheet to show some of the different ways to
+specify (work)sheet and cell ranges. Note also that `col_types` gives
+control of column types.
 
 ``` r
 library(googlesheets4)
 
-## read worksheets out of a spreadsheet with excerpts from the Gapminder data
-read_sheet(sheets_example("mini-gap"))
-#> Reading from 'test-gs-mini-gapminder'
-#> Range "'Africa'"
-#> # A tibble: 5 x 6
-#>   country      continent  year lifeExp     pop gdpPercap
-#>   <chr>        <chr>     <dbl>   <dbl>   <dbl>     <dbl>
-#> 1 Algeria      Africa     1952    43.1 9279525     2449.
-#> 2 Angola       Africa     1952    30.0 4232095     3521.
-#> 3 Benin        Africa     1952    38.2 1738315     1063.
-#> 4 Botswana     Africa     1952    47.6  442308      851.
-#> 5 Burkina Faso Africa     1952    32.0 4469979      543.
 read_sheet(sheets_example("mini-gap"), sheet = 2)
 #> Reading from 'test-gs-mini-gapminder'
 #> Range "'Americas'"
@@ -67,6 +126,7 @@ read_sheet(sheets_example("mini-gap"), sheet = 2)
 #> 3 Brazil    Americas   1952    50.9 56602560     2109.
 #> 4 Canada    Americas   1952    68.8 14785584    11367.
 #> 5 Chile     Americas   1952    54.7  6377619     3940.
+
 read_sheet(sheets_example("mini-gap"), sheet = "Oceania", n_max = 3)
 #> Reading from 'test-gs-mini-gapminder'
 #> Range "'Oceania'"
@@ -77,12 +137,28 @@ read_sheet(sheets_example("mini-gap"), sheet = "Oceania", n_max = 3)
 #> 2 New Zealand Oceania    1952    69.4 1994794    10557.
 #> 3 Australia   Oceania    1957    70.3 9712569    10950.
 
-## read from a Sheets version of an example from readxl
-## shows range support and column type specification, mixing types and "guess"
+read_sheet(sheets_example("deaths"), skip = 4, n_max = 10)
+#> Reading from 'deaths'
+#> Range "'arts'!5:1000"
+#> # A tibble: 10 x 6
+#>    Name               Profession   Age `Has kids` `Date of birth`    
+#>    <chr>              <chr>      <dbl> <lgl>      <dttm>             
+#>  1 David Bowie        musician      69 TRUE       1947-01-08 00:00:00
+#>  2 Carrie Fisher      actor         60 TRUE       1956-10-21 00:00:00
+#>  3 Chuck Berry        musician      90 TRUE       1926-10-18 00:00:00
+#>  4 Bill Paxton        actor         61 TRUE       1955-05-17 00:00:00
+#>  5 Prince             musician      57 TRUE       1958-06-07 00:00:00
+#>  6 Alan Rickman       actor         69 FALSE      1946-02-21 00:00:00
+#>  7 Florence Henderson actor         82 TRUE       1934-02-14 00:00:00
+#>  8 Harper Lee         author        89 FALSE      1926-04-28 00:00:00
+#>  9 Zsa Zsa Gábor      actor         99 TRUE       1917-02-06 00:00:00
+#> 10 George Michael     musician      53 FALSE      1963-06-25 00:00:00
+#> # ... with 1 more variable: `Date of death` <dttm>
+
 read_sheet(
   sheets_example("deaths"), range = "other!A5:F15", col_types = "?ci??D"
 )
-#> Reading from 'deaths.xlsx'
+#> Reading from 'deaths'
 #> Range "'other'!A5:F15"
 #> # A tibble: 10 x 6
 #>    Name    Profession   Age `Has kids` `Date of birth`     `Date of death`
@@ -99,34 +175,10 @@ read_sheet(
 #> 10 Pat Su… coach         64 TRUE       1952-06-14 00:00:00 2016-06-28
 ```
 
-`read_sheet()` is the main “read” function and should evoke
-`readr::read_csv()` and `readxl::read_excel()` for you. It’s an alias
-for `sheets_read()`, since most functions in googlesheets actually start
-with the `sheets_` prefix. googlesheets4 is pipe-friendly (and rexports
-`%>%`), but works just fine without the pipe.
-
-googlesheets4 draws on and complements / emulates other packages in the
-tidyverse:
-
-  - [googledrive](http://googledrive.tidyverse.org) already provides a
-    fully-featured interface to the Google Drive API. Any “whole file”
-    operations can already be accomplished *today* with googledrive:
-    upload or download or update a spreadsheet, copy, rename, move,
-    change permission, delete, etc. googledrive already supports OAuth2
-    and Team Drives.
-  - [readxl](https://github.com/tidyverse/readxl) is the tidyverse
-    package for reading Excel files (xls or xlsx) into an R data frame.
-    googlesheets4 takes cues from parts of the readxl interface,
-    especially around specifying which cells to read.
-  - [readr](http://readr.tidyverse.org) is the tidyverse package fro
-    reading delimited files (e.g., csv or tsv) into an R data frame.
-    googlesheets4 takes cues from readr with respect to column type
-    specification.
-
 ## Other functions
 
 googlesheets4 exposes Sheet metadata via `sheets_get()` and can also be
-used to access raw cell data (one row per cell) via `sheets_cell()`.
+used to access raw cell data (one row per cell) via `sheets_cells()`.
 That data can be post-processed with `spread_sheet()` to obtain the same
 data frame you get from `read_sheet()`.
 
@@ -145,19 +197,8 @@ sheets_get(sheets_example("mini-gap"))
 #>       Europe: 6 x 6
 #>      Oceania: 6 x 6
 
-sheets_get(sheets_example("deaths"))
-#>   Spreadsheet name: deaths.xlsx
-#>                 ID: 1cMH-nYGhhYlBU3wbi9OQ0hJDJn5qb8_kIvfNsGmX7UQ
-#>             Locale: en
-#>          Time zone: America/Los_Angeles
-#>        # of sheets: 2
-#> 
-#> (Sheet name): (Nominal extent in rows x columns)
-#>         arts: 1000 x 26
-#>        other: 1000 x 26
-
 (df <- sheets_cells(sheets_example("deaths"), range = "E5:E7"))
-#> Reading from 'deaths.xlsx'
+#> Reading from 'deaths'
 #> Range "E5:E7"
 #> # A tibble: 3 x 4
 #>     row   col loc   cell      
@@ -187,14 +228,15 @@ df$cell[[3]]
 #> $effectiveFormat$numberFormat$pattern
 #> [1] "M/D/YYYY"
 
-spread_sheet(df, col_types = "D")
+df %>% spread_sheet(col_types = "D")
 #> # A tibble: 2 x 1
 #>   `Date of birth`
 #>   <date>         
 #> 1 1947-01-08     
 #> 2 1956-10-21
+## is same as ...
 read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
-#> Reading from 'deaths.xlsx'
+#> Reading from 'deaths'
 #> Range "E5:E7"
 #> # A tibble: 2 x 1
 #>   `Date of birth`
@@ -208,6 +250,26 @@ read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 OAuth2
 
 Writing to Sheets
+
+## Context
+
+googlesheets4 draws on and complements / emulates other packages in the
+tidyverse:
+
+  - [googledrive](http://googledrive.tidyverse.org) already provides a
+    fully-featured interface to the Google Drive API. Any “whole file”
+    operations can already be accomplished *today* with googledrive:
+    upload or download or update a spreadsheet, copy, rename, move,
+    change permission, delete, etc. googledrive already supports OAuth2
+    and Team Drives.
+  - [readxl](http://readxl.tidyverse.org) is the tidyverse package for
+    reading Excel files (xls or xlsx) into an R data frame.
+    googlesheets4 takes cues from parts of the readxl interface,
+    especially around specifying which cells to read.
+  - [readr](http://readr.tidyverse.org) is the tidyverse package fro
+    reading delimited files (e.g., csv or tsv) into an R data frame.
+    googlesheets4 takes cues from readr with respect to column type
+    specification.
 
 *Please note that this project is released with a [Contributor Code of
 Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project

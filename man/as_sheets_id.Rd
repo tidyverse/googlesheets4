@@ -7,8 +7,8 @@
 as_sheets_id(x, ...)
 }
 \arguments{
-\item{x}{Something that uniquely identifies a Google Sheet (see below for
-anticipated inputs.}
+\item{x}{Something that uniquely identifies a Google Sheet: a \code{\link{sheets_id}},
+URL, or \code{\link[googledrive:dribble]{dribble}}.}
 
 \item{...}{Other arguments passed down to methods. (Not used.)}
 }

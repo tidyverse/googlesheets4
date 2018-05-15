@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • googlesheets4</title>
+<title>Make a Google Sheets API request — request_make • googlesheets4</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,7 +27,16 @@
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Make a Google Sheets API request — request_make" />
+<meta property="og:description" content="Low-level function to execute a Sheets API request. Most users
+should, instead, use higher-level wrappers that facilitate common tasks,
+such as reading or writing worksheets or cell ranges. The functions here
+are intended for internal use and for programming around the Sheets API.
+make_request() does very, very little: it calls an HTTP
+method, only adding the googlesheets4 user agent. Typically the input has
+been created with request_generate() or gargle::request_build() and the
+output is processed with process_response()." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -44,7 +53,7 @@
   </head>
 
   <body>
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -112,20 +121,54 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Make a Google Sheets API request</h1>
+    <small>Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/request_make.R'><code>R/request_make.R</code></a></small>
+    <div class="hidden name"><code>request_make.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
+    <p>Low-level function to execute a Sheets API request. Most users
+should, instead, use higher-level wrappers that facilitate common tasks,
+such as reading or writing worksheets or cell ranges. The functions here
+are intended for internal use and for programming around the Sheets API.</p>
+<p><code>make_request()</code> does very, very little: it calls an HTTP
+method, only adding the googlesheets4 user agent. Typically the input has
+been created with <code><a href='request_generate.html'>request_generate()</a></code> or <code><a href='http://www.rdocumentation.org/packages/gargle/topics/request_develop'>gargle::request_build()</a></code> and the
+output is processed with <code>process_response()</code>.</p>
 
-      <ul>
-        <li><a href="articles/googlesheets4-conventions.html">googlesheets4 conventions</a></li>
-        <li><a href="articles/googlesheets4-design-notes.html">googlesheets4 design notes</a></li>
-        <li><a href="articles/sheets-api-v4.html">Google Sheets API v4</a></li>
-        <li><a href="articles/sheets-auth-flow.html">Google Sheets API v4 Auth Flow</a></li>
-      </ul>
-    </div>
+    <pre class="usage"><span class='fu'>request_make</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>List. Holds the components for an HTTP request, presumably created
+with <code><a href='request_generate.html'>request_generate()</a></code> or <code><a href='http://www.rdocumentation.org/packages/gargle/topics/request_develop'>gargle::request_build()</a></code>. Must contain a
+<code>method</code> and <code>url</code>. If present, <code>body</code> and <code>token</code> are used.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Optional arguments passed through to the HTTP method.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Object of class <code>response</code> from httr.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other low-level API functions: <code><a href='request_generate.html'>request_generate</a></code>,
+  <code><a href='response_process.html'>response_process</a></code></p></div>
+
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
+    </ul>
+
   </div>
 </div>
 

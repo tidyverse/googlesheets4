@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • googlesheets4</title>
+<title>Coerce to a sheets_id object — as_sheets_id • googlesheets4</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,7 +27,23 @@
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Coerce to a sheets_id object — as_sheets_id" />
+<meta property="og:description" content="Converts various representations of a Google Sheet into a
+sheets_id object. Anticipated inputs:
+Spreadsheet id, "a string containing letters, numbers, and some special
+characters", typically 44 characters long, in our experience. Example:
+1qpyC0XzvTcKT6EISywvqESX3A0MwQoFDE8p-Bll4hps.
+A URL, from which we can excavate a spreadsheet or file id. Example: https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545.
+A one-row dribble, a "Drive tibble" used by the
+googledrive package. In general, a dribble can represent several files,
+one row per file. Since googlesheets4 is not vectorized over spreadsheets,
+we are only prepared to accept a one-row dribble.
+googledrive::drive_get("YOUR SHEET NAME")
+is a great way to look up a Sheet via its name.
+
+" />
+<meta property="og:description" content="This is a generic function." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -44,7 +60,7 @@
   </head>
 
   <body>
-    <div class="container template-article-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -112,20 +128,56 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+    <h1>Coerce to a sheets_id object</h1>
+    <small>Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_id.R'><code>R/sheets_id.R</code></a></small>
+    <div class="hidden name"><code>as_sheets_id.Rd</code></div>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
+    <p>Converts various representations of a Google Sheet into a
+<code><a href='sheets_id.html'>sheets_id</a></code> object. Anticipated inputs:</p><ul>
+<li><p>Spreadsheet id, "a string containing letters, numbers, and some special
+characters", typically 44 characters long, in our experience. Example:
+<code>1qpyC0XzvTcKT6EISywvqESX3A0MwQoFDE8p-Bll4hps</code>.</p></li>
+<li><p>A URL, from which we can excavate a spreadsheet or file id. Example: <a href='https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545'>https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545</a>.</p></li>
+<li><p>A one-row <code><a href='http://www.rdocumentation.org/packages/googledrive/topics/dribble'>dribble</a></code>, a "Drive tibble" used by the
+googledrive package. In general, a <code>dribble</code> can represent several files,
+one row per file. Since googlesheets4 is not vectorized over spreadsheets,
+we are only prepared to accept a one-row <code>dribble</code>.</p><ul>
+<li><p><code><a href='http://www.rdocumentation.org/packages/googledrive/topics/drive_get'>googledrive::drive_get("YOUR SHEET NAME")</a></code>
+is a great way to look up a Sheet via its name.</p></li>
+</ul></li>
+</ul>
+    <p>This is a generic function.</p>
 
-      <ul>
-        <li><a href="articles/googlesheets4-conventions.html">googlesheets4 conventions</a></li>
-        <li><a href="articles/googlesheets4-design-notes.html">googlesheets4 design notes</a></li>
-        <li><a href="articles/sheets-api-v4.html">Google Sheets API v4</a></li>
-        <li><a href="articles/sheets-auth-flow.html">Google Sheets API v4 Auth Flow</a></li>
-      </ul>
-    </div>
+    <pre class="usage"><span class='fu'>as_sheets_id</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Something that uniquely identifies a Google Sheet: a <code><a href='sheets_id.html'>sheets_id</a></code>,
+URL, or <code><a href='http://www.rdocumentation.org/packages/googledrive/topics/dribble'>dribble</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments passed down to methods. (Not used.)</p></td>
+    </tr>
+    </table>
+
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>as_sheets_id</span>(<span class='st'>"abc"</span>)</div><div class='output co'>#&gt; [1] "abc"
+#&gt; attr(,"class")
+#&gt; [1] "sheets_id" "drive_id" </div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
   </div>
 </div>
 

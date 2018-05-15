@@ -18,7 +18,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -27,8 +27,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../../index.html">googlesheets4</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../../index.html">googlesheets4</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -48,6 +52,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../../articles/articles/googlesheets4-conventions.html">googlesheets4 conventions</a>
+    </li>
+    <li>
       <a href="../../articles/articles/googlesheets4-design-notes.html">googlesheets4 design notes</a>
     </li>
     <li>
@@ -55,9 +62,6 @@
     </li>
     <li>
       <a href="../../articles/articles/sheets-auth-flow.html">Google Sheets API v4 Auth Flow</a>
-    </li>
-    <li>
-      <a href="../../articles/whatever.html">Imagine a vignette</a>
     </li>
   </ul>
 </li>
@@ -79,18 +83,18 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>googlesheets4 design notes</h1>
             
       
-      <small>Source: <a href="https:/github.com/tidyverse/googlesheets4/blob/master/vignettes/articles/googlesheets4-design-notes.Rmd"><code>vignettes/articles/googlesheets4-design-notes.Rmd</code></a></small>
+      <small>Source: <a href="https://github.com/tidyverse/googlesheets4/blob/master/vignettes/articles/googlesheets4-design-notes.Rmd"><code>vignettes/articles/googlesheets4-design-notes.Rmd</code></a></small>
+      <div class="hidden name"><code>googlesheets4-design-notes.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <p><em>This is useful to me and not necessarily for outside consumption.</em></p>
 <div id="peer-group" class="section level2">
 <h2 class="hasAnchor">
@@ -112,12 +116,12 @@
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_read">gs_read</a></span>(<span class="kw"><a href="http://www.rdocumentation.org/packages/googlesheets/topics/example-sheets">gs_gap</a></span>(), <span class="dt">ws =</span> <span class="st">"Europe"</span>, <span class="dt">n_max =</span> <span class="dv">4</span>, <span class="dt">col_types =</span> <span class="st">"cciddd"</span>)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; Accessing worksheet titled 'Europe'.</span></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt; # A tibble: 4 x 6</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt; 1 Albania Europe     1952    55.2 1282697.     1601.</span></a>
-<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; 2 Albania Europe     1957    59.3 1476505.     1942.</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; 3 Albania Europe     1962    64.8 1728137.     2313.</span></a>
-<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; 4 Albania Europe     1967    66.2 1984060.     2760.</span></a></code></pre></div>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt;   country continent  year lifeExp     pop gdpPercap</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt; 1 Albania Europe     1952    55.2 1282697     1601.</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt; 2 Albania Europe     1957    59.3 1476505     1942.</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; 3 Albania Europe     1962    64.8 1728137     2313.</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="co">#&gt; 4 Albania Europe     1967    66.2 1984060     2760.</span></a></code></pre></div>
 <p>readxl has its own col spec system, but it is slated to evolve towards readr. <code>col_types</code> is a character vector with one entry per column from these options: “skip”, “guess”, “logical”, “numeric”, “date”, “text” or “list”. It lacks some of readr’s output types and control: no integers (Excel itself has no concept of integer, but still), no factors, less variety wrt date/time/datetime. The “list” type is unique to readxl and is equally relevant to Google Sheets.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(readxl)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">(clippy &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/readxl/topics/read_excel">read_excel</a></span>(</a>
@@ -263,27 +267,27 @@
 #&gt;    as_entered         format    FORMATTED_VALUE   UNFORMATTED_VAL… FORMULA
 #&gt;    &lt;chr&gt;              &lt;chr&gt;     &lt;chr&gt;             &lt;chr&gt;            &lt;chr&gt;  
 #&gt;  1 3/10/2018 11:11:11 Date time 3/10/2018 11:11:… 43169.466099537  43169.…
-#&gt;  2 =TODAY()           automatic 3/18/2018         43177            =TODAY…
-#&gt;  3 =TODAY()           Date      3/18/2018         43177            =TODAY…
-#&gt;  4 =TODAY()           Time      12:00:00 AM       43177            =TODAY…
-#&gt;  5 =TODAY()           Date time 3/18/2018 0:00:00 43177            =TODAY…
-#&gt;  6 =TODAY()           Plain te… 43177             43177            =TODAY…
-#&gt;  7 =TODAY()           Number    43,177.00         43177            =TODAY…
-#&gt;  8 =TODAY()           "From \"… Sunday, March 18… 43177            =TODAY…
-#&gt;  9 =now()             automatic 3/18/2018 22:38:… 43177.9432969907 =now() 
-#&gt; 10 =now()             Date      3/18/2018         43177.9432969907 =now() 
-#&gt; 11 =now()             Time      10:38:21 PM       43177.9432969907 =now() 
-#&gt; 12 =now()             Date time 3/18/2018 22:38:… 43177.9432969907 =now() 
-#&gt; 13 =now()             Plain te… 43177.9433        43177.9432969907 =now() 
-#&gt; 14 =now()             Number    43,177.94         43177.9432969907 =now() 
-#&gt; 15 =now()             "From \"… Sunday, March 18… 43177.9432969907 =now() 
-#&gt; 16 =EDATE(A9, -4)     automatic 11/18/2017        43057            =EDATE…
-#&gt; 17 =EDATE(A9, -4)     Date      11/18/2017        43057            =EDATE…
-#&gt; 18 =EDATE(A9, -4)     Time      12:00:00 AM       43057            =EDATE…
-#&gt; 19 =EDATE(A9, -4)     Date time 11/18/2017 0:00:… 43057            =EDATE…
-#&gt; 20 =EDATE(A9, -4)     Plain te… 43057             43057            =EDATE…
-#&gt; 21 =EDATE(A9, -4)     Number    43,057.00         43057            =EDATE…
-#&gt; 22 =EDATE(A9, -4)     "From \"… Saturday, Novemb… 43057            =EDATE…
+#&gt;  2 =TODAY()           automatic 5/15/2018         43235            =TODAY…
+#&gt;  3 =TODAY()           Date      5/15/2018         43235            =TODAY…
+#&gt;  4 =TODAY()           Time      12:00:00 AM       43235            =TODAY…
+#&gt;  5 =TODAY()           Date time 5/15/2018 0:00:00 43235            =TODAY…
+#&gt;  6 =TODAY()           Plain te… 43235             43235            =TODAY…
+#&gt;  7 =TODAY()           Number    43,235.00         43235            =TODAY…
+#&gt;  8 =TODAY()           "From \"… Tuesday, May 15,… 43235            =TODAY…
+#&gt;  9 =now()             automatic 5/15/2018 12:29:… 43235.5204181366 =now() 
+#&gt; 10 =now()             Date      5/15/2018         43235.5204181366 =now() 
+#&gt; 11 =now()             Time      12:29:24 PM       43235.5204181366 =now() 
+#&gt; 12 =now()             Date time 5/15/2018 12:29:… 43235.5204181366 =now() 
+#&gt; 13 =now()             Plain te… 43235.52042       43235.5204181366 =now() 
+#&gt; 14 =now()             Number    43,235.52         43235.5204181366 =now() 
+#&gt; 15 =now()             "From \"… Tuesday, May 15,… 43235.5204181366 =now() 
+#&gt; 16 =EDATE(A9, -4)     automatic 1/15/2018         43115            =EDATE…
+#&gt; 17 =EDATE(A9, -4)     Date      1/15/2018         43115            =EDATE…
+#&gt; 18 =EDATE(A9, -4)     Time      12:00:00 AM       43115            =EDATE…
+#&gt; 19 =EDATE(A9, -4)     Date time 1/15/2018 0:00:00 43115            =EDATE…
+#&gt; 20 =EDATE(A9, -4)     Plain te… 43115             43115            =EDATE…
+#&gt; 21 =EDATE(A9, -4)     Number    43,115.00         43115            =EDATE…
+#&gt; 22 =EDATE(A9, -4)     "From \"… Monday, January … 43115            =EDATE…
 #&gt; 23 0.015              automatic 0.015             0.015            0.015  
 #&gt; 24 0.015              Percent   1.50%             0.015            0.015  
 #&gt; 25 1.5%               automatic 1.50%             0.015            0.015  
@@ -302,38 +306,38 @@
 <code>FORMULA</code> is same as above for formula cells and numbers entered as numbers. I note <code>FORMULA</code> is different in the case of the datetime that was typed in (first row).</li>
 </ul>
 <pre><code>#&gt; # A tibble: 30 x 5
-#&gt;    as_entered         format  FORMATTED_VALUE2  UNFORMATTED_VALU… FORMULA2
-#&gt;    &lt;chr&gt;              &lt;chr&gt;   &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;   
-#&gt;  1 3/10/2018 11:11:11 Date t… 3/10/2018 11:11:… 3/10/2018 11:11:… 3/10/20…
-#&gt;  2 =TODAY()           automa… 3/18/2018         3/18/2018         =TODAY()
-#&gt;  3 =TODAY()           Date    3/18/2018         3/18/2018         =TODAY()
-#&gt;  4 =TODAY()           Time    12:00:00 AM       12:00:00 AM       =TODAY()
-#&gt;  5 =TODAY()           Date t… 3/18/2018 0:00:00 3/18/2018 0:00:00 =TODAY()
-#&gt;  6 =TODAY()           Plain … 43177             43177             =TODAY()
-#&gt;  7 =TODAY()           Number  43,177.00         43177             =TODAY()
-#&gt;  8 =TODAY()           "From … Sunday, March 18… Sunday, March 18… =TODAY()
-#&gt;  9 =now()             automa… 3/18/2018 22:38:… 3/18/2018 22:38:… =now()  
-#&gt; 10 =now()             Date    3/18/2018         3/18/2018         =now()  
-#&gt; 11 =now()             Time    10:38:21 PM       10:38:21 PM       =now()  
-#&gt; 12 =now()             Date t… 3/18/2018 22:38:… 3/18/2018 22:38:… =now()  
-#&gt; 13 =now()             Plain … 43177.9433        43177.9432969907  =now()  
-#&gt; 14 =now()             Number  43,177.94         43177.9432969907  =now()  
-#&gt; 15 =now()             "From … Sunday, March 18… Sunday, March 18… =now()  
-#&gt; 16 =EDATE(A9, -4)     automa… 11/18/2017        11/18/2017        =EDATE(…
-#&gt; 17 =EDATE(A9, -4)     Date    11/18/2017        11/18/2017        =EDATE(…
-#&gt; 18 =EDATE(A9, -4)     Time    12:00:00 AM       12:00:00 AM       =EDATE(…
-#&gt; 19 =EDATE(A9, -4)     Date t… 11/18/2017 0:00:… 11/18/2017 0:00:… =EDATE(…
-#&gt; 20 =EDATE(A9, -4)     Plain … 43057             43057             =EDATE(…
-#&gt; 21 =EDATE(A9, -4)     Number  43,057.00         43057             =EDATE(…
-#&gt; 22 =EDATE(A9, -4)     "From … Saturday, Novemb… Saturday, Novemb… =EDATE(…
-#&gt; 23 0.015              automa… 0.015             0.015             0.015   
-#&gt; 24 0.015              Percent 1.50%             0.015             0.015   
-#&gt; 25 1.5%               automa… 1.50%             0.015             0.015   
-#&gt; 26 1234567890         automa… 1234567890        1234567890        1234567…
-#&gt; 27 1234567890         Scient… 1.23E+09          1234567890        1234567…
-#&gt; 28 $1.23              automa… $1.23             1.23              1.23    
-#&gt; 29 $1.23              Curren… $1                1.23              1.23    
-#&gt; 30 1.23               Curren… $1.23             1.23              1.23</code></pre>
+#&gt;    as_entered         format   FORMATTED_VALUE2  UNFORMATTED_VAL… FORMULA2
+#&gt;    &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt;             &lt;chr&gt;            &lt;chr&gt;   
+#&gt;  1 3/10/2018 11:11:11 Date ti… 3/10/2018 11:11:… 3/10/2018 11:11… 3/10/20…
+#&gt;  2 =TODAY()           automat… 5/15/2018         5/15/2018        =TODAY()
+#&gt;  3 =TODAY()           Date     5/15/2018         5/15/2018        =TODAY()
+#&gt;  4 =TODAY()           Time     12:00:00 AM       12:00:00 AM      =TODAY()
+#&gt;  5 =TODAY()           Date ti… 5/15/2018 0:00:00 5/15/2018 0:00:… =TODAY()
+#&gt;  6 =TODAY()           Plain t… 43235             43235            =TODAY()
+#&gt;  7 =TODAY()           Number   43,235.00         43235            =TODAY()
+#&gt;  8 =TODAY()           "From \… Tuesday, May 15,… Tuesday, May 15… =TODAY()
+#&gt;  9 =now()             automat… 5/15/2018 12:29:… 5/15/2018 12:29… =now()  
+#&gt; 10 =now()             Date     5/15/2018         5/15/2018        =now()  
+#&gt; 11 =now()             Time     12:29:24 PM       12:29:24 PM      =now()  
+#&gt; 12 =now()             Date ti… 5/15/2018 12:29:… 5/15/2018 12:29… =now()  
+#&gt; 13 =now()             Plain t… 43235.52042       43235.5204181366 =now()  
+#&gt; 14 =now()             Number   43,235.52         43235.5204181366 =now()  
+#&gt; 15 =now()             "From \… Tuesday, May 15,… Tuesday, May 15… =now()  
+#&gt; 16 =EDATE(A9, -4)     automat… 1/15/2018         1/15/2018        =EDATE(…
+#&gt; 17 =EDATE(A9, -4)     Date     1/15/2018         1/15/2018        =EDATE(…
+#&gt; 18 =EDATE(A9, -4)     Time     12:00:00 AM       12:00:00 AM      =EDATE(…
+#&gt; 19 =EDATE(A9, -4)     Date ti… 1/15/2018 0:00:00 1/15/2018 0:00:… =EDATE(…
+#&gt; 20 =EDATE(A9, -4)     Plain t… 43115             43115            =EDATE(…
+#&gt; 21 =EDATE(A9, -4)     Number   43,115.00         43115            =EDATE(…
+#&gt; 22 =EDATE(A9, -4)     "From \… Monday, January … Monday, January… =EDATE(…
+#&gt; 23 0.015              automat… 0.015             0.015            0.015   
+#&gt; 24 0.015              Percent  1.50%             0.015            0.015   
+#&gt; 25 1.5%               automat… 1.50%             0.015            0.015   
+#&gt; 26 1234567890         automat… 1234567890        1234567890       1234567…
+#&gt; 27 1234567890         Scienti… 1.23E+09          1234567890       1234567…
+#&gt; 28 $1.23              automat… $1.23             1.23             1.23    
+#&gt; 29 $1.23              Currenc… $1                1.23             1.23    
+#&gt; 30 1.23               Currency $1.23             1.23             1.23</code></pre>
 </div>
 <div id="spreadsheets-get" class="section level3">
 <h3 class="hasAnchor">
@@ -368,8 +372,8 @@
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;  $ userEnteredValue:List of 1</span></a>
 <a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;   ..$ formulaValue: chr "=TODAY()"</span></a>
 <a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;  $ effectiveValue  :List of 1</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   ..$ numberValue: int 43177</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;  $ formattedValue  : chr "3/18/2018"</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   ..$ numberValue: int 43235</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;  $ formattedValue  : chr "5/15/2018"</span></a>
 <a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;  $ effectiveFormat :List of 1</span></a>
 <a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt;   ..$ numberFormat:List of 1</span></a>
 <a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt;   .. ..$ type: chr "DATE"</span></a></code></pre></div>
@@ -401,76 +405,76 @@
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(formattedValue, <span class="kw">starts_with</span>(<span class="st">"user"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="ot">Inf</span>)</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; # A tibble: 31 x 3</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;    formattedValue                  userEnteredValue_n… userEnteredValue_v…</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;    &lt;chr&gt;                           &lt;chr&gt;               &lt;chr&gt;              </span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;  1 x                               stringValue         x                  </span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;  2 3/10/2018 11:11:11              numberValue         43169.466100       </span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;  3 3/18/2018                       formulaValue        =TODAY()           </span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;  4 3/18/2018                       formulaValue        =TODAY()           </span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt;  5 12:00:00 AM                     formulaValue        =TODAY()           </span></a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;  6 3/18/2018 0:00:00               formulaValue        =TODAY()           </span></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt;  7 43177                           formulaValue        =TODAY()           </span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt;  8 43,177.00                       formulaValue        =TODAY()           </span></a>
-<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt;  9 Sunday, March 18, 2018 at 12:0… formulaValue        =TODAY()           </span></a>
-<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt; 10 3/18/2018 22:38:21              formulaValue        =now()             </span></a>
-<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; 11 3/18/2018                       formulaValue        =now()             </span></a>
-<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; 12 10:38:21 PM                     formulaValue        =now()             </span></a>
-<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt; 13 3/18/2018 22:38:21              formulaValue        =now()             </span></a>
-<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; 14 43177.9433                      formulaValue        =now()             </span></a>
-<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; 15 43,177.94                       formulaValue        =now()             </span></a>
-<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; 16 Sunday, March 18, 2018 at 10:3… formulaValue        =now()             </span></a>
-<a class="sourceLine" id="cb8-23" data-line-number="23"><span class="co">#&gt; 17 11/18/2017                      formulaValue        =EDATE(A10, -4)    </span></a>
-<a class="sourceLine" id="cb8-24" data-line-number="24"><span class="co">#&gt; 18 11/18/2017                      formulaValue        =EDATE(A11, -4)    </span></a>
-<a class="sourceLine" id="cb8-25" data-line-number="25"><span class="co">#&gt; 19 12:00:00 AM                     formulaValue        =EDATE(A12, -4)    </span></a>
-<a class="sourceLine" id="cb8-26" data-line-number="26"><span class="co">#&gt; 20 11/18/2017 0:00:00              formulaValue        =EDATE(A13, -4)    </span></a>
-<a class="sourceLine" id="cb8-27" data-line-number="27"><span class="co">#&gt; 21 43057                           formulaValue        =EDATE(A14, -4)    </span></a>
-<a class="sourceLine" id="cb8-28" data-line-number="28"><span class="co">#&gt; 22 43,057.00                       formulaValue        =EDATE(A15, -4)    </span></a>
-<a class="sourceLine" id="cb8-29" data-line-number="29"><span class="co">#&gt; 23 Saturday, November 18, 2017 at… formulaValue        =EDATE(A16, -4)    </span></a>
-<a class="sourceLine" id="cb8-30" data-line-number="30"><span class="co">#&gt; 24 0.015                           numberValue         0.015000           </span></a>
-<a class="sourceLine" id="cb8-31" data-line-number="31"><span class="co">#&gt; 25 1.50%                           numberValue         0.015000           </span></a>
-<a class="sourceLine" id="cb8-32" data-line-number="32"><span class="co">#&gt; 26 1.50%                           numberValue         0.015000           </span></a>
-<a class="sourceLine" id="cb8-33" data-line-number="33"><span class="co">#&gt; 27 1234567890                      numberValue         1234567890         </span></a>
-<a class="sourceLine" id="cb8-34" data-line-number="34"><span class="co">#&gt; 28 1.23E+09                        numberValue         1234567890         </span></a>
-<a class="sourceLine" id="cb8-35" data-line-number="35"><span class="co">#&gt; 29 $1.23                           numberValue         1.230000           </span></a>
-<a class="sourceLine" id="cb8-36" data-line-number="36"><span class="co">#&gt; 30 $1                              numberValue         1.230000           </span></a>
-<a class="sourceLine" id="cb8-37" data-line-number="37"><span class="co">#&gt; 31 $1.23                           numberValue         1.230000</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;    formattedValue                 userEnteredValue_na… userEnteredValue_v…</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;    &lt;chr&gt;                          &lt;chr&gt;                &lt;chr&gt;              </span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;  1 x                              stringValue          x                  </span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;  2 3/10/2018 11:11:11             numberValue          43169.466100       </span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;  3 5/15/2018                      formulaValue         =TODAY()           </span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt;  4 5/15/2018                      formulaValue         =TODAY()           </span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt;  5 12:00:00 AM                    formulaValue         =TODAY()           </span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt;  6 5/15/2018 0:00:00              formulaValue         =TODAY()           </span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">#&gt;  7 43235                          formulaValue         =TODAY()           </span></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="co">#&gt;  8 43,235.00                      formulaValue         =TODAY()           </span></a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="co">#&gt;  9 Tuesday, May 15, 2018 at 12:0… formulaValue         =TODAY()           </span></a>
+<a class="sourceLine" id="cb8-16" data-line-number="16"><span class="co">#&gt; 10 5/15/2018 12:29:24             formulaValue         =now()             </span></a>
+<a class="sourceLine" id="cb8-17" data-line-number="17"><span class="co">#&gt; 11 5/15/2018                      formulaValue         =now()             </span></a>
+<a class="sourceLine" id="cb8-18" data-line-number="18"><span class="co">#&gt; 12 12:29:24 PM                    formulaValue         =now()             </span></a>
+<a class="sourceLine" id="cb8-19" data-line-number="19"><span class="co">#&gt; 13 5/15/2018 12:29:24             formulaValue         =now()             </span></a>
+<a class="sourceLine" id="cb8-20" data-line-number="20"><span class="co">#&gt; 14 43235.52042                    formulaValue         =now()             </span></a>
+<a class="sourceLine" id="cb8-21" data-line-number="21"><span class="co">#&gt; 15 43,235.52                      formulaValue         =now()             </span></a>
+<a class="sourceLine" id="cb8-22" data-line-number="22"><span class="co">#&gt; 16 Tuesday, May 15, 2018 at 12:2… formulaValue         =now()             </span></a>
+<a class="sourceLine" id="cb8-23" data-line-number="23"><span class="co">#&gt; 17 1/15/2018                      formulaValue         =EDATE(A10, -4)    </span></a>
+<a class="sourceLine" id="cb8-24" data-line-number="24"><span class="co">#&gt; 18 1/15/2018                      formulaValue         =EDATE(A11, -4)    </span></a>
+<a class="sourceLine" id="cb8-25" data-line-number="25"><span class="co">#&gt; 19 12:00:00 AM                    formulaValue         =EDATE(A12, -4)    </span></a>
+<a class="sourceLine" id="cb8-26" data-line-number="26"><span class="co">#&gt; 20 1/15/2018 0:00:00              formulaValue         =EDATE(A13, -4)    </span></a>
+<a class="sourceLine" id="cb8-27" data-line-number="27"><span class="co">#&gt; 21 43115                          formulaValue         =EDATE(A14, -4)    </span></a>
+<a class="sourceLine" id="cb8-28" data-line-number="28"><span class="co">#&gt; 22 43,115.00                      formulaValue         =EDATE(A15, -4)    </span></a>
+<a class="sourceLine" id="cb8-29" data-line-number="29"><span class="co">#&gt; 23 Monday, January 15, 2018 at 1… formulaValue         =EDATE(A16, -4)    </span></a>
+<a class="sourceLine" id="cb8-30" data-line-number="30"><span class="co">#&gt; 24 0.015                          numberValue          0.015000           </span></a>
+<a class="sourceLine" id="cb8-31" data-line-number="31"><span class="co">#&gt; 25 1.50%                          numberValue          0.015000           </span></a>
+<a class="sourceLine" id="cb8-32" data-line-number="32"><span class="co">#&gt; 26 1.50%                          numberValue          0.015000           </span></a>
+<a class="sourceLine" id="cb8-33" data-line-number="33"><span class="co">#&gt; 27 1234567890                     numberValue          1234567890         </span></a>
+<a class="sourceLine" id="cb8-34" data-line-number="34"><span class="co">#&gt; 28 1.23E+09                       numberValue          1234567890         </span></a>
+<a class="sourceLine" id="cb8-35" data-line-number="35"><span class="co">#&gt; 29 $1.23                          numberValue          1.230000           </span></a>
+<a class="sourceLine" id="cb8-36" data-line-number="36"><span class="co">#&gt; 30 $1                             numberValue          1.230000           </span></a>
+<a class="sourceLine" id="cb8-37" data-line-number="37"><span class="co">#&gt; 31 $1.23                          numberValue          1.230000</span></a></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">df <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw">select</span>(formattedValue, <span class="kw">starts_with</span>(<span class="st">"effectiveValue"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="ot">Inf</span>)</a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; # A tibble: 31 x 3</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt;    formattedValue                    effectiveValue_na… effectiveValue_va…</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt;    &lt;chr&gt;                             &lt;chr&gt;              &lt;chr&gt;             </span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt;  1 x                                 stringValue        x                 </span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;  2 3/10/2018 11:11:11                numberValue        43169.466100      </span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;  3 3/18/2018                         numberValue        43177             </span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt;  4 3/18/2018                         numberValue        43177             </span></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt;  5 12:00:00 AM                       numberValue        43177             </span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt;  6 3/18/2018 0:00:00                 numberValue        43177             </span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt;  7 43177                             numberValue        43177             </span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt;  8 43,177.00                         numberValue        43177             </span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt;  9 Sunday, March 18, 2018 at 12:00:… numberValue        43177             </span></a>
-<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; 10 3/18/2018 22:38:21                numberValue        43177.943297      </span></a>
-<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; 11 3/18/2018                         numberValue        43177.943297      </span></a>
-<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; 12 10:38:21 PM                       numberValue        43177.943297      </span></a>
-<a class="sourceLine" id="cb9-19" data-line-number="19"><span class="co">#&gt; 13 3/18/2018 22:38:21                numberValue        43177.943297      </span></a>
-<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">#&gt; 14 43177.9433                        numberValue        43177.943297      </span></a>
-<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="co">#&gt; 15 43,177.94                         numberValue        43177.943297      </span></a>
-<a class="sourceLine" id="cb9-22" data-line-number="22"><span class="co">#&gt; 16 Sunday, March 18, 2018 at 10:38:… numberValue        43177.943297      </span></a>
-<a class="sourceLine" id="cb9-23" data-line-number="23"><span class="co">#&gt; 17 11/18/2017                        numberValue        43057             </span></a>
-<a class="sourceLine" id="cb9-24" data-line-number="24"><span class="co">#&gt; 18 11/18/2017                        numberValue        43057             </span></a>
-<a class="sourceLine" id="cb9-25" data-line-number="25"><span class="co">#&gt; 19 12:00:00 AM                       numberValue        43057             </span></a>
-<a class="sourceLine" id="cb9-26" data-line-number="26"><span class="co">#&gt; 20 11/18/2017 0:00:00                numberValue        43057             </span></a>
-<a class="sourceLine" id="cb9-27" data-line-number="27"><span class="co">#&gt; 21 43057                             numberValue        43057             </span></a>
-<a class="sourceLine" id="cb9-28" data-line-number="28"><span class="co">#&gt; 22 43,057.00                         numberValue        43057             </span></a>
-<a class="sourceLine" id="cb9-29" data-line-number="29"><span class="co">#&gt; 23 Saturday, November 18, 2017 at 1… numberValue        43057             </span></a>
-<a class="sourceLine" id="cb9-30" data-line-number="30"><span class="co">#&gt; 24 0.015                             numberValue        0.015000          </span></a>
-<a class="sourceLine" id="cb9-31" data-line-number="31"><span class="co">#&gt; 25 1.50%                             numberValue        0.015000          </span></a>
-<a class="sourceLine" id="cb9-32" data-line-number="32"><span class="co">#&gt; 26 1.50%                             numberValue        0.015000          </span></a>
-<a class="sourceLine" id="cb9-33" data-line-number="33"><span class="co">#&gt; 27 1234567890                        numberValue        1234567890        </span></a>
-<a class="sourceLine" id="cb9-34" data-line-number="34"><span class="co">#&gt; 28 1.23E+09                          numberValue        1234567890        </span></a>
-<a class="sourceLine" id="cb9-35" data-line-number="35"><span class="co">#&gt; 29 $1.23                             numberValue        1.230000          </span></a>
-<a class="sourceLine" id="cb9-36" data-line-number="36"><span class="co">#&gt; 30 $1                                numberValue        1.230000          </span></a>
-<a class="sourceLine" id="cb9-37" data-line-number="37"><span class="co">#&gt; 31 $1.23                             numberValue        1.230000</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt;    formattedValue                   effectiveValue_name effectiveValue_va…</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt;    &lt;chr&gt;                            &lt;chr&gt;               &lt;chr&gt;             </span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt;  1 x                                stringValue         x                 </span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;  2 3/10/2018 11:11:11               numberValue         43169.466100      </span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;  3 5/15/2018                        numberValue         43235             </span></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt;  4 5/15/2018                        numberValue         43235             </span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt;  5 12:00:00 AM                      numberValue         43235             </span></a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt;  6 5/15/2018 0:00:00                numberValue         43235             </span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt;  7 43235                            numberValue         43235             </span></a>
+<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt;  8 43,235.00                        numberValue         43235             </span></a>
+<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt;  9 Tuesday, May 15, 2018 at 12:00:… numberValue         43235             </span></a>
+<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="co">#&gt; 10 5/15/2018 12:29:24               numberValue         43235.520418      </span></a>
+<a class="sourceLine" id="cb9-17" data-line-number="17"><span class="co">#&gt; 11 5/15/2018                        numberValue         43235.520418      </span></a>
+<a class="sourceLine" id="cb9-18" data-line-number="18"><span class="co">#&gt; 12 12:29:24 PM                      numberValue         43235.520418      </span></a>
+<a class="sourceLine" id="cb9-19" data-line-number="19"><span class="co">#&gt; 13 5/15/2018 12:29:24               numberValue         43235.520418      </span></a>
+<a class="sourceLine" id="cb9-20" data-line-number="20"><span class="co">#&gt; 14 43235.52042                      numberValue         43235.520418      </span></a>
+<a class="sourceLine" id="cb9-21" data-line-number="21"><span class="co">#&gt; 15 43,235.52                        numberValue         43235.520418      </span></a>
+<a class="sourceLine" id="cb9-22" data-line-number="22"><span class="co">#&gt; 16 Tuesday, May 15, 2018 at 12:29:… numberValue         43235.520418      </span></a>
+<a class="sourceLine" id="cb9-23" data-line-number="23"><span class="co">#&gt; 17 1/15/2018                        numberValue         43115             </span></a>
+<a class="sourceLine" id="cb9-24" data-line-number="24"><span class="co">#&gt; 18 1/15/2018                        numberValue         43115             </span></a>
+<a class="sourceLine" id="cb9-25" data-line-number="25"><span class="co">#&gt; 19 12:00:00 AM                      numberValue         43115             </span></a>
+<a class="sourceLine" id="cb9-26" data-line-number="26"><span class="co">#&gt; 20 1/15/2018 0:00:00                numberValue         43115             </span></a>
+<a class="sourceLine" id="cb9-27" data-line-number="27"><span class="co">#&gt; 21 43115                            numberValue         43115             </span></a>
+<a class="sourceLine" id="cb9-28" data-line-number="28"><span class="co">#&gt; 22 43,115.00                        numberValue         43115             </span></a>
+<a class="sourceLine" id="cb9-29" data-line-number="29"><span class="co">#&gt; 23 Monday, January 15, 2018 at 12:… numberValue         43115             </span></a>
+<a class="sourceLine" id="cb9-30" data-line-number="30"><span class="co">#&gt; 24 0.015                            numberValue         0.015000          </span></a>
+<a class="sourceLine" id="cb9-31" data-line-number="31"><span class="co">#&gt; 25 1.50%                            numberValue         0.015000          </span></a>
+<a class="sourceLine" id="cb9-32" data-line-number="32"><span class="co">#&gt; 26 1.50%                            numberValue         0.015000          </span></a>
+<a class="sourceLine" id="cb9-33" data-line-number="33"><span class="co">#&gt; 27 1234567890                       numberValue         1234567890        </span></a>
+<a class="sourceLine" id="cb9-34" data-line-number="34"><span class="co">#&gt; 28 1.23E+09                         numberValue         1234567890        </span></a>
+<a class="sourceLine" id="cb9-35" data-line-number="35"><span class="co">#&gt; 29 $1.23                            numberValue         1.230000          </span></a>
+<a class="sourceLine" id="cb9-36" data-line-number="36"><span class="co">#&gt; 30 $1                               numberValue         1.230000          </span></a>
+<a class="sourceLine" id="cb9-37" data-line-number="37"><span class="co">#&gt; 31 $1.23                            numberValue         1.230000</span></a></code></pre></div>
 <p><code>effectiveFormat</code>, if it exists, holds an instance of <code>CellFormat</code>. We only care about the sub-component <code>NumberFormat</code>. If it exists, <code>NumberFormat</code> has a <code>type</code> and possibly a <code>pattern</code>. Possible values for <code>type</code> of <code>NumberFormat</code>:</p>
 <ul>
 <li><code>TEXT</code></li>
@@ -490,27 +494,27 @@
 <a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt;    &lt;chr&gt;                  &lt;chr&gt;              &lt;chr&gt;                        </span></a>
 <a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt;  1 x                      &lt;NA&gt;               &lt;NA&gt;                         </span></a>
 <a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt;  2 3/10/2018 11:11:11     DATE_TIME          M/d/yyyy H:mm:ss             </span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt;  3 3/18/2018              DATE               &lt;NA&gt;                         </span></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt;  4 3/18/2018              DATE               M/d/yyyy                     </span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt;  3 5/15/2018              DATE               &lt;NA&gt;                         </span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt;  4 5/15/2018              DATE               M/d/yyyy                     </span></a>
 <a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt;  5 12:00:00 AM            TIME               h:mm:ss am/pm                </span></a>
-<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt;  6 3/18/2018 0:00:00      DATE_TIME          M/d/yyyy H:mm:ss             </span></a>
-<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt;  7 43177                  TEXT               &lt;NA&gt;                         </span></a>
-<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt;  8 43,177.00              NUMBER             #,##0.00                     </span></a>
-<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt;  9 Sunday, March 18, 201… DATE_TIME          "dddd\", \"mmmm\" \"d\", \"y…</span></a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 10 3/18/2018 22:38:21     DATE_TIME          &lt;NA&gt;                         </span></a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; 11 3/18/2018              DATE               M/d/yyyy                     </span></a>
-<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; 12 10:38:21 PM            TIME               h:mm:ss am/pm                </span></a>
-<a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; 13 3/18/2018 22:38:21     DATE_TIME          M/d/yyyy H:mm:ss             </span></a>
-<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt; 14 43177.9433             TEXT               &lt;NA&gt;                         </span></a>
-<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt; 15 43,177.94              NUMBER             #,##0.00                     </span></a>
-<a class="sourceLine" id="cb10-22" data-line-number="22"><span class="co">#&gt; 16 Sunday, March 18, 201… DATE_TIME          "dddd\", \"mmmm\" \"d\", \"y…</span></a>
-<a class="sourceLine" id="cb10-23" data-line-number="23"><span class="co">#&gt; 17 11/18/2017             DATE               &lt;NA&gt;                         </span></a>
-<a class="sourceLine" id="cb10-24" data-line-number="24"><span class="co">#&gt; 18 11/18/2017             DATE               M/d/yyyy                     </span></a>
+<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt;  6 5/15/2018 0:00:00      DATE_TIME          M/d/yyyy H:mm:ss             </span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt;  7 43235                  TEXT               &lt;NA&gt;                         </span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt;  8 43,235.00              NUMBER             #,##0.00                     </span></a>
+<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt;  9 Tuesday, May 15, 2018… DATE_TIME          "dddd\", \"mmmm\" \"d\", \"y…</span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt; 10 5/15/2018 12:29:24     DATE_TIME          &lt;NA&gt;                         </span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; 11 5/15/2018              DATE               M/d/yyyy                     </span></a>
+<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; 12 12:29:24 PM            TIME               h:mm:ss am/pm                </span></a>
+<a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; 13 5/15/2018 12:29:24     DATE_TIME          M/d/yyyy H:mm:ss             </span></a>
+<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt; 14 43235.52042            TEXT               &lt;NA&gt;                         </span></a>
+<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt; 15 43,235.52              NUMBER             #,##0.00                     </span></a>
+<a class="sourceLine" id="cb10-22" data-line-number="22"><span class="co">#&gt; 16 Tuesday, May 15, 2018… DATE_TIME          "dddd\", \"mmmm\" \"d\", \"y…</span></a>
+<a class="sourceLine" id="cb10-23" data-line-number="23"><span class="co">#&gt; 17 1/15/2018              DATE               &lt;NA&gt;                         </span></a>
+<a class="sourceLine" id="cb10-24" data-line-number="24"><span class="co">#&gt; 18 1/15/2018              DATE               M/d/yyyy                     </span></a>
 <a class="sourceLine" id="cb10-25" data-line-number="25"><span class="co">#&gt; 19 12:00:00 AM            TIME               h:mm:ss am/pm                </span></a>
-<a class="sourceLine" id="cb10-26" data-line-number="26"><span class="co">#&gt; 20 11/18/2017 0:00:00     DATE_TIME          M/d/yyyy H:mm:ss             </span></a>
-<a class="sourceLine" id="cb10-27" data-line-number="27"><span class="co">#&gt; 21 43057                  TEXT               &lt;NA&gt;                         </span></a>
-<a class="sourceLine" id="cb10-28" data-line-number="28"><span class="co">#&gt; 22 43,057.00              NUMBER             #,##0.00                     </span></a>
-<a class="sourceLine" id="cb10-29" data-line-number="29"><span class="co">#&gt; 23 Saturday, November 18… DATE_TIME          "dddd\", \"mmmm\" \"d\", \"y…</span></a>
+<a class="sourceLine" id="cb10-26" data-line-number="26"><span class="co">#&gt; 20 1/15/2018 0:00:00      DATE_TIME          M/d/yyyy H:mm:ss             </span></a>
+<a class="sourceLine" id="cb10-27" data-line-number="27"><span class="co">#&gt; 21 43115                  TEXT               &lt;NA&gt;                         </span></a>
+<a class="sourceLine" id="cb10-28" data-line-number="28"><span class="co">#&gt; 22 43,115.00              NUMBER             #,##0.00                     </span></a>
+<a class="sourceLine" id="cb10-29" data-line-number="29"><span class="co">#&gt; 23 Monday, January 15, 2… DATE_TIME          "dddd\", \"mmmm\" \"d\", \"y…</span></a>
 <a class="sourceLine" id="cb10-30" data-line-number="30"><span class="co">#&gt; 24 0.015                  &lt;NA&gt;               &lt;NA&gt;                         </span></a>
 <a class="sourceLine" id="cb10-31" data-line-number="31"><span class="co">#&gt; 25 1.50%                  PERCENT            0.00%                        </span></a>
 <a class="sourceLine" id="cb10-32" data-line-number="32"><span class="co">#&gt; 26 1.50%                  PERCENT            0.00%                        </span></a>
@@ -536,32 +540,33 @@
 <a class="sourceLine" id="cb11-7" data-line-number="7"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">str_detect</span>(val_df<span class="op">$</span>FORMULA, <span class="st">"now"</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb11-8" data-line-number="8"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>fla) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb11-9" data-line-number="9"><span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="ot">Inf</span>)</a>
-<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; # A tibble: 23 x 3</span></a>
-<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt;    ss_values_get                              ss_get                 same </span></a>
-<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt;    &lt;chr&gt;                                      &lt;chr&gt;                  &lt;lgl&gt;</span></a>
-<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="co">#&gt;  1 3/10/2018 11:11:11                         3/10/2018 11:11:11     TRUE </span></a>
-<a class="sourceLine" id="cb11-14" data-line-number="14"><span class="co">#&gt;  2 3/18/2018                                  3/18/2018              TRUE </span></a>
-<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt;  3 3/18/2018                                  3/18/2018              TRUE </span></a>
-<a class="sourceLine" id="cb11-16" data-line-number="16"><span class="co">#&gt;  4 12:00:00 AM                                12:00:00 AM            TRUE </span></a>
-<a class="sourceLine" id="cb11-17" data-line-number="17"><span class="co">#&gt;  5 3/18/2018 0:00:00                          3/18/2018 0:00:00      TRUE </span></a>
-<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#&gt;  6 43177                                      43177                  TRUE </span></a>
-<a class="sourceLine" id="cb11-19" data-line-number="19"><span class="co">#&gt;  7 43,177.00                                  43,177.00              TRUE </span></a>
-<a class="sourceLine" id="cb11-20" data-line-number="20"><span class="co">#&gt;  8 Sunday, March 18, 2018 at 12:00:00 AM      Sunday, March 18, 201… TRUE </span></a>
-<a class="sourceLine" id="cb11-21" data-line-number="21"><span class="co">#&gt;  9 11/18/2017                                 11/18/2017             TRUE </span></a>
-<a class="sourceLine" id="cb11-22" data-line-number="22"><span class="co">#&gt; 10 11/18/2017                                 11/18/2017             TRUE </span></a>
-<a class="sourceLine" id="cb11-23" data-line-number="23"><span class="co">#&gt; 11 12:00:00 AM                                12:00:00 AM            TRUE </span></a>
-<a class="sourceLine" id="cb11-24" data-line-number="24"><span class="co">#&gt; 12 11/18/2017 0:00:00                         11/18/2017 0:00:00     TRUE </span></a>
-<a class="sourceLine" id="cb11-25" data-line-number="25"><span class="co">#&gt; 13 43057                                      43057                  TRUE </span></a>
-<a class="sourceLine" id="cb11-26" data-line-number="26"><span class="co">#&gt; 14 43,057.00                                  43,057.00              TRUE </span></a>
-<a class="sourceLine" id="cb11-27" data-line-number="27"><span class="co">#&gt; 15 Saturday, November 18, 2017 at 12:00:00 AM Saturday, November 18… TRUE </span></a>
-<a class="sourceLine" id="cb11-28" data-line-number="28"><span class="co">#&gt; 16 0.015                                      0.015                  TRUE </span></a>
-<a class="sourceLine" id="cb11-29" data-line-number="29"><span class="co">#&gt; 17 1.50%                                      1.50%                  TRUE </span></a>
-<a class="sourceLine" id="cb11-30" data-line-number="30"><span class="co">#&gt; 18 1.50%                                      1.50%                  TRUE </span></a>
-<a class="sourceLine" id="cb11-31" data-line-number="31"><span class="co">#&gt; 19 1234567890                                 1234567890             TRUE </span></a>
-<a class="sourceLine" id="cb11-32" data-line-number="32"><span class="co">#&gt; 20 1.23E+09                                   1.23E+09               TRUE </span></a>
-<a class="sourceLine" id="cb11-33" data-line-number="33"><span class="co">#&gt; 21 $1.23                                      $1.23                  TRUE </span></a>
-<a class="sourceLine" id="cb11-34" data-line-number="34"><span class="co">#&gt; 22 $1                                         $1                     TRUE </span></a>
-<a class="sourceLine" id="cb11-35" data-line-number="35"><span class="co">#&gt; 23 $1.23                                      $1.23                  TRUE</span></a></code></pre></div>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; Warning: package 'bindrcpp' was built under R version 3.4.4</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; # A tibble: 23 x 3</span></a>
+<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt;    ss_values_get                           ss_get                    same </span></a>
+<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="co">#&gt;    &lt;chr&gt;                                   &lt;chr&gt;                     &lt;lgl&gt;</span></a>
+<a class="sourceLine" id="cb11-14" data-line-number="14"><span class="co">#&gt;  1 3/10/2018 11:11:11                      3/10/2018 11:11:11        TRUE </span></a>
+<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt;  2 5/15/2018                               5/15/2018                 TRUE </span></a>
+<a class="sourceLine" id="cb11-16" data-line-number="16"><span class="co">#&gt;  3 5/15/2018                               5/15/2018                 TRUE </span></a>
+<a class="sourceLine" id="cb11-17" data-line-number="17"><span class="co">#&gt;  4 12:00:00 AM                             12:00:00 AM               TRUE </span></a>
+<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#&gt;  5 5/15/2018 0:00:00                       5/15/2018 0:00:00         TRUE </span></a>
+<a class="sourceLine" id="cb11-19" data-line-number="19"><span class="co">#&gt;  6 43235                                   43235                     TRUE </span></a>
+<a class="sourceLine" id="cb11-20" data-line-number="20"><span class="co">#&gt;  7 43,235.00                               43,235.00                 TRUE </span></a>
+<a class="sourceLine" id="cb11-21" data-line-number="21"><span class="co">#&gt;  8 Tuesday, May 15, 2018 at 12:00:00 AM    Tuesday, May 15, 2018 at… TRUE </span></a>
+<a class="sourceLine" id="cb11-22" data-line-number="22"><span class="co">#&gt;  9 1/15/2018                               1/15/2018                 TRUE </span></a>
+<a class="sourceLine" id="cb11-23" data-line-number="23"><span class="co">#&gt; 10 1/15/2018                               1/15/2018                 TRUE </span></a>
+<a class="sourceLine" id="cb11-24" data-line-number="24"><span class="co">#&gt; 11 12:00:00 AM                             12:00:00 AM               TRUE </span></a>
+<a class="sourceLine" id="cb11-25" data-line-number="25"><span class="co">#&gt; 12 1/15/2018 0:00:00                       1/15/2018 0:00:00         TRUE </span></a>
+<a class="sourceLine" id="cb11-26" data-line-number="26"><span class="co">#&gt; 13 43115                                   43115                     TRUE </span></a>
+<a class="sourceLine" id="cb11-27" data-line-number="27"><span class="co">#&gt; 14 43,115.00                               43,115.00                 TRUE </span></a>
+<a class="sourceLine" id="cb11-28" data-line-number="28"><span class="co">#&gt; 15 Monday, January 15, 2018 at 12:00:00 AM Monday, January 15, 2018… TRUE </span></a>
+<a class="sourceLine" id="cb11-29" data-line-number="29"><span class="co">#&gt; 16 0.015                                   0.015                     TRUE </span></a>
+<a class="sourceLine" id="cb11-30" data-line-number="30"><span class="co">#&gt; 17 1.50%                                   1.50%                     TRUE </span></a>
+<a class="sourceLine" id="cb11-31" data-line-number="31"><span class="co">#&gt; 18 1.50%                                   1.50%                     TRUE </span></a>
+<a class="sourceLine" id="cb11-32" data-line-number="32"><span class="co">#&gt; 19 1234567890                              1234567890                TRUE </span></a>
+<a class="sourceLine" id="cb11-33" data-line-number="33"><span class="co">#&gt; 20 1.23E+09                                1.23E+09                  TRUE </span></a>
+<a class="sourceLine" id="cb11-34" data-line-number="34"><span class="co">#&gt; 21 $1.23                                   $1.23                     TRUE </span></a>
+<a class="sourceLine" id="cb11-35" data-line-number="35"><span class="co">#&gt; 22 $1                                      $1                        TRUE </span></a>
+<a class="sourceLine" id="cb11-36" data-line-number="36"><span class="co">#&gt; 23 $1.23                                   $1.23                     TRUE</span></a></code></pre></div>
 <p>TRUE. My use of the <code>now()</code> datetime formula in the example spreadsheet is regrettable here, hence those rows are filtered out.</p>
 <p>Claim: cell values returned by <code>spreadsheets.values.get</code> when <code>valueRenderOption = "UNFORMATTED_VALUE"</code> are same as <code>effectiveValue</code> from <code>spreadsheets.get</code>.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">tibble</span>(</a>
@@ -577,20 +582,20 @@
 <a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt;    ss_values_get   ss_get       same </span></a>
 <a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt;    &lt;chr&gt;           &lt;chr&gt;        &lt;lgl&gt;</span></a>
 <a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;  1 43169.466099537 43169.466100 FALSE</span></a>
-<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt;  2 43177           43177        TRUE </span></a>
-<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="co">#&gt;  3 43177           43177        TRUE </span></a>
-<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt;  4 43177           43177        TRUE </span></a>
-<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt;  5 43177           43177        TRUE </span></a>
-<a class="sourceLine" id="cb12-18" data-line-number="18"><span class="co">#&gt;  6 43177           43177        TRUE </span></a>
-<a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt;  7 43177           43177        TRUE </span></a>
-<a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt;  8 43177           43177        TRUE </span></a>
-<a class="sourceLine" id="cb12-21" data-line-number="21"><span class="co">#&gt;  9 43057           43057        TRUE </span></a>
-<a class="sourceLine" id="cb12-22" data-line-number="22"><span class="co">#&gt; 10 43057           43057        TRUE </span></a>
-<a class="sourceLine" id="cb12-23" data-line-number="23"><span class="co">#&gt; 11 43057           43057        TRUE </span></a>
-<a class="sourceLine" id="cb12-24" data-line-number="24"><span class="co">#&gt; 12 43057           43057        TRUE </span></a>
-<a class="sourceLine" id="cb12-25" data-line-number="25"><span class="co">#&gt; 13 43057           43057        TRUE </span></a>
-<a class="sourceLine" id="cb12-26" data-line-number="26"><span class="co">#&gt; 14 43057           43057        TRUE </span></a>
-<a class="sourceLine" id="cb12-27" data-line-number="27"><span class="co">#&gt; 15 43057           43057        TRUE </span></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt;  2 43235           43235        TRUE </span></a>
+<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="co">#&gt;  3 43235           43235        TRUE </span></a>
+<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt;  4 43235           43235        TRUE </span></a>
+<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt;  5 43235           43235        TRUE </span></a>
+<a class="sourceLine" id="cb12-18" data-line-number="18"><span class="co">#&gt;  6 43235           43235        TRUE </span></a>
+<a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt;  7 43235           43235        TRUE </span></a>
+<a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt;  8 43235           43235        TRUE </span></a>
+<a class="sourceLine" id="cb12-21" data-line-number="21"><span class="co">#&gt;  9 43115           43115        TRUE </span></a>
+<a class="sourceLine" id="cb12-22" data-line-number="22"><span class="co">#&gt; 10 43115           43115        TRUE </span></a>
+<a class="sourceLine" id="cb12-23" data-line-number="23"><span class="co">#&gt; 11 43115           43115        TRUE </span></a>
+<a class="sourceLine" id="cb12-24" data-line-number="24"><span class="co">#&gt; 12 43115           43115        TRUE </span></a>
+<a class="sourceLine" id="cb12-25" data-line-number="25"><span class="co">#&gt; 13 43115           43115        TRUE </span></a>
+<a class="sourceLine" id="cb12-26" data-line-number="26"><span class="co">#&gt; 14 43115           43115        TRUE </span></a>
+<a class="sourceLine" id="cb12-27" data-line-number="27"><span class="co">#&gt; 15 43115           43115        TRUE </span></a>
 <a class="sourceLine" id="cb12-28" data-line-number="28"><span class="co">#&gt; 16 0.015           0.015000     FALSE</span></a>
 <a class="sourceLine" id="cb12-29" data-line-number="29"><span class="co">#&gt; 17 0.015           0.015000     FALSE</span></a>
 <a class="sourceLine" id="cb12-30" data-line-number="30"><span class="co">#&gt; 18 0.015           0.015000     FALSE</span></a>
@@ -668,7 +673,7 @@
 <a class="sourceLine" id="cb14-18" data-line-number="18">  <span class="dt">base_url =</span> <span class="st">"https://sheets.googleapis.com"</span>,</a>
 <a class="sourceLine" id="cb14-19" data-line-number="19">  <span class="dt">key =</span> <span class="kw"><a href="http://www.rdocumentation.org/packages/gargle/topics/gargle_api_key">gargle_api_key</a></span>()</a>
 <a class="sourceLine" id="cb14-20" data-line-number="20">)</a>
-<a class="sourceLine" id="cb14-21" data-line-number="21">raw_resp &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/gargle/topics/request_make">request_make</a></span>(req)</a>
+<a class="sourceLine" id="cb14-21" data-line-number="21">raw_resp &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/request_make.html">request_make</a></span>(req)</a>
 <a class="sourceLine" id="cb14-22" data-line-number="22">ct &lt;-<span class="st"> </span>httr<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/httr/topics/content">content</a></span>(raw_resp)</a></code></pre></div>
 <p>Spreadsheet-level metadata:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">list</span>(</a>
@@ -727,8 +732,8 @@
 #&gt; $ enter_type      &lt;chr&gt; "numberValue", "stringValue", "formulaValue", ...
 #&gt; $ enter_value     &lt;list&gt; [43169.47, "3/10/2018 11:11:11", "=TODAY()", ...
 #&gt; $ effective_type  &lt;chr&gt; "numberValue", "stringValue", "numberValue", "...
-#&gt; $ effective_value &lt;list&gt; [43169.47, "3/10/2018 11:11:11", 43177, "=TOD...
-#&gt; $ formatted_value &lt;chr&gt; "3/10/2018 11:11:11", "3/10/2018 11:11:11", "3...
+#&gt; $ effective_value &lt;list&gt; [43169.47, "3/10/2018 11:11:11", 43235, "=TOD...
+#&gt; $ formatted_value &lt;chr&gt; "3/10/2018 11:11:11", "3/10/2018 11:11:11", "5...
 #&gt; $ format_type     &lt;chr&gt; "DATE_TIME", NA, "DATE", NA
 #&gt; $ format_pattern  &lt;chr&gt; "M/d/yyyy H:mm:ss", NA, NA, NA</code></pre>
 </div>
@@ -756,7 +761,7 @@
 <a class="sourceLine" id="cb20-2" data-line-number="2">(ss &lt;-<span class="st"> </span><span class="kw"><a href="http://www.rdocumentation.org/packages/googlesheets/topics/example-sheets">gs_gap</a></span>())</a>
 <a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co">#&gt;                   Spreadsheet title: test-gs-gapminder</span></a>
 <a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co">#&gt;                  Spreadsheet author: rpackagetest</span></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co">#&gt;   Date of googlesheets registration: 2018-03-20 00:31:02 GMT</span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co">#&gt;   Date of googlesheets registration: 2018-05-15 19:29:26 GMT</span></a>
 <a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co">#&gt;     Date of last spreadsheet update: 2015-04-22 18:27:11 GMT</span></a>
 <a class="sourceLine" id="cb20-7" data-line-number="7"><span class="co">#&gt;                          visibility: public</span></a>
 <a class="sourceLine" id="cb20-8" data-line-number="8"><span class="co">#&gt;                         permissions: rw</span></a>
@@ -784,11 +789,11 @@
 <a class="sourceLine" id="cb20-30" data-line-number="30"><span class="co">#&gt;   gdpPercap = col_double()</span></a>
 <a class="sourceLine" id="cb20-31" data-line-number="31"><span class="co">#&gt; )</span></a>
 <a class="sourceLine" id="cb20-32" data-line-number="32"><span class="co">#&gt; # A tibble: 3 x 6</span></a>
-<a class="sourceLine" id="cb20-33" data-line-number="33"><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></a>
-<a class="sourceLine" id="cb20-34" data-line-number="34"><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb20-35" data-line-number="35"><span class="co">#&gt; 1 Albania Europe    1952.    55.2 1282697.     1601.</span></a>
-<a class="sourceLine" id="cb20-36" data-line-number="36"><span class="co">#&gt; 2 Albania Europe    1957.    59.3 1476505.     1942.</span></a>
-<a class="sourceLine" id="cb20-37" data-line-number="37"><span class="co">#&gt; 3 Albania Europe    1962.    64.8 1728137.     2313.</span></a></code></pre></div>
+<a class="sourceLine" id="cb20-33" data-line-number="33"><span class="co">#&gt;   country continent  year lifeExp     pop gdpPercap</span></a>
+<a class="sourceLine" id="cb20-34" data-line-number="34"><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb20-35" data-line-number="35"><span class="co">#&gt; 1 Albania Europe     1952    55.2 1282697     1601.</span></a>
+<a class="sourceLine" id="cb20-36" data-line-number="36"><span class="co">#&gt; 2 Albania Europe     1957    59.3 1476505     1942.</span></a>
+<a class="sourceLine" id="cb20-37" data-line-number="37"><span class="co">#&gt; 3 Albania Europe     1962    64.8 1728137     2313.</span></a></code></pre></div>
 </li>
 <li><p>More glorified pointer. googledrive has a <code>dribble</code> object. A key feature is that it’s built to hold many files at once, as rows in the dribble. It has no notion of file type. Columns are file id, file title, and a hairy list-column.</p></li>
 <li><p>Persistent, mutable spreadsheet object. The (currently dormant) <a href="https://github.com/rsheets">rsheets effort</a> spec’d out a <em>linen object</em>: an R6 data structure to hold a spreadsheet. Rich Fitzjohn implemented it for Excel spreadsheets, but it was absolutely designed with Google Sheets in mind, too. The spreadsheet object has document-level metadata, holds individual worksheets, and can accomodate cell data and, even, formatting. The idea was to read everything out of the spreadsheet all at once and then work with the linen object for downstream operations. This supports, for example, shared infrastructure for dealing with common spreadsheet aggravations.</p></li>
@@ -822,7 +827,6 @@
 <p>In fact, in general <code><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_read">gs_read()</a></code> is a call to <code><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_read_cellfeed">gs_read_cellfeed()</a></code> followed by a call to <code><a href="http://www.rdocumentation.org/packages/googlesheets/topics/gs_reshape_cellfeed">gs_reshape_cellfeed()</a></code> (which reshapes and enforces col types). This seems like a good design, i.e. to expose the “one row per cell” form, but offer a nice wrapper that does the reshaping.</p>
 </div>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -854,6 +858,8 @@
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

@@ -18,7 +18,7 @@
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -27,8 +27,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../../index.html">googlesheets4</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../../index.html">googlesheets4</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -48,6 +52,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../../articles/articles/googlesheets4-conventions.html">googlesheets4 conventions</a>
+    </li>
+    <li>
       <a href="../../articles/articles/googlesheets4-design-notes.html">googlesheets4 design notes</a>
     </li>
     <li>
@@ -55,9 +62,6 @@
     </li>
     <li>
       <a href="../../articles/articles/sheets-auth-flow.html">Google Sheets API v4 Auth Flow</a>
-    </li>
-    <li>
-      <a href="../../articles/whatever.html">Imagine a vignette</a>
     </li>
   </ul>
 </li>
@@ -79,27 +83,27 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Google Sheets API v4</h1>
             
       
-      <small>Source: <a href="https:/github.com/tidyverse/googlesheets4/blob/master/vignettes/articles/sheets-api-v4.Rmd"><code>vignettes/articles/sheets-api-v4.Rmd</code></a></small>
+      <small>Source: <a href="https://github.com/tidyverse/googlesheets4/blob/master/vignettes/articles/sheets-api-v4.Rmd"><code>vignettes/articles/sheets-api-v4.Rmd</code></a></small>
+      <div class="hidden name"><code>sheets-api-v4.Rmd</code></div>
 
     </div>
 
     
     
-<div class="contents">
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(rprojroot)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(jsonlite)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw">library</span>(tidyverse)</a></code></pre></div>
-<pre><code>## ── Attaching packages ───────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ── Attaching packages ────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 2.2.1          ✔ purrr   0.2.4.9000
-## ✔ tibble  1.4.2          ✔ dplyr   0.7.4.9000
-## ✔ tidyr   0.7.2          ✔ stringr 1.3.0     
-## ✔ readr   1.1.1.9000     ✔ forcats 0.2.0</code></pre>
-<pre><code>## ── Conflicts ──────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✔ tibble  1.4.2.9001     ✔ dplyr   0.7.4.9000
+## ✔ tidyr   0.8.0          ✔ stringr 1.3.0     
+## ✔ readr   1.2.0          ✔ forcats 0.3.0</code></pre>
+<pre><code>## ── Conflicts ───────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter()  masks stats::filter()
 ## ✖ purrr::flatten() masks jsonlite::flatten()
 ## ✖ dplyr::lag()     masks stats::lag()</code></pre>
@@ -122,6 +126,16 @@
 <li>path: v4/spreadsheets/{spreadsheetId}</li>
 <li>parameters:
 <ul>
+<li>spreadsheetId:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: The spreadsheet to request.</li>
+</ul>
+</li>
 <li>ranges:
 <ul>
 <li>location: query</li>
@@ -142,14 +156,134 @@
 <li>description: True if grid data should be returned. This …</li>
 </ul>
 </li>
-<li>spreadsheetId:
+<li>upload_protocol:
 <ul>
-<li>location: path</li>
-<li>required: TRUE</li>
+<li>location: query</li>
+<li>required: NA</li>
 <li>type: string</li>
 <li>repeated: NA</li>
 <li>enum: NA</li>
-<li>description: The spreadsheet to request.</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
 </ul>
 </li>
 </ul>
@@ -180,6 +314,136 @@
 <li>description: The spreadsheet to request.</li>
 </ul>
 </li>
+<li>upload_protocol:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>scopes: drive, drive.file, spreadsheets</li>
@@ -196,7 +460,140 @@
 <li>id: spreadsheets.create</li>
 <li>httpMethod: POST</li>
 <li>path: v4/spreadsheets</li>
-<li>parameters: NA</li>
+<li>parameters:
+<ul>
+<li>upload_protocol:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>scopes: drive, drive.file, spreadsheets</li>
 <li>description: Creates a spreadsheet, returning the newly created sp…</li>
 <li>response: Spreadsheet</li>
@@ -221,6 +618,136 @@
 <li>repeated: NA</li>
 <li>enum: NA</li>
 <li>description: The spreadsheet to apply the updates to.</li>
+</ul>
+</li>
+<li>upload_protocol:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
 </ul>
 </li>
 </ul>
@@ -289,6 +816,136 @@
 <li>description: The ID of the spreadsheet to retrieve data …</li>
 </ul>
 </li>
+<li>upload_protocol:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>scopes: drive, drive.file, drive.readonly, spreadsheets, spre…</li>
@@ -327,6 +984,136 @@
 <li>description: The A1 notation of the values to clear.</li>
 </ul>
 </li>
+<li>upload_protocol:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>scopes: drive, drive.file, spreadsheets</li>
@@ -355,6 +1142,136 @@
 <li>description: The ID of the spreadsheet to update.</li>
 </ul>
 </li>
+<li>upload_protocol:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>scopes: drive, drive.file, spreadsheets</li>
@@ -373,26 +1290,6 @@
 <li>path: v4/spreadsheets/{spreadsheetId}/values/{range}:append</li>
 <li>parameters:
 <ul>
-<li>range:
-<ul>
-<li>location: path</li>
-<li>required: TRUE</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>enum: NA</li>
-<li>description: The A1 notation of a range to search for a …</li>
-</ul>
-</li>
-<li>includeValuesInResponse:
-<ul>
-<li>location: query</li>
-<li>required: NA</li>
-<li>type: boolean</li>
-<li>repeated: NA</li>
-<li>enum: NA</li>
-<li>description: Determines if the update response should in…</li>
-</ul>
-</li>
 <li>spreadsheetId:
 <ul>
 <li>location: path</li>
@@ -443,6 +1340,156 @@
 <li>description: Determines how dates, times, and durations …</li>
 </ul>
 </li>
+<li>range:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: The A1 notation of a range to search for a …</li>
+</ul>
+</li>
+<li>includeValuesInResponse:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Determines if the update response should in…</li>
+</ul>
+</li>
+<li>upload_protocol:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>scopes: drive, drive.file, spreadsheets</li>
@@ -469,6 +1516,136 @@
 <li>repeated: NA</li>
 <li>enum: NA</li>
 <li>description: The ID of the spreadsheet to retrieve data …</li>
+</ul>
+</li>
+<li>upload_protocol:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
 </ul>
 </li>
 </ul>
@@ -499,6 +1676,136 @@
 <li>description: The ID of the spreadsheet to update.</li>
 </ul>
 </li>
+<li>upload_protocol:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>scopes: drive, drive.file, spreadsheets</li>
@@ -517,26 +1824,6 @@
 <li>path: v4/spreadsheets/{spreadsheetId}/values/{range}</li>
 <li>parameters:
 <ul>
-<li>valueRenderOption:
-<ul>
-<li>location: query</li>
-<li>required: NA</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>enum: FORMATTED_VALUE UNFORMATTED_VALUE FORMULA</li>
-<li>description: How values should be represented in the out…</li>
-</ul>
-</li>
-<li>dateTimeRenderOption:
-<ul>
-<li>location: query</li>
-<li>required: NA</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>enum: SERIAL_NUMBER FORMATTED_STRING</li>
-<li>description: How dates, times, and durations should be r…</li>
-</ul>
-</li>
 <li>majorDimension:
 <ul>
 <li>location: query</li>
@@ -567,6 +1854,156 @@
 <li>description: The A1 notation of the values to retrieve.</li>
 </ul>
 </li>
+<li>valueRenderOption:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: FORMATTED_VALUE UNFORMATTED_VALUE FORMULA</li>
+<li>description: How values should be represented in the out…</li>
+</ul>
+</li>
+<li>dateTimeRenderOption:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: SERIAL_NUMBER FORMATTED_STRING</li>
+<li>description: How dates, times, and durations should be r…</li>
+</ul>
+</li>
+<li>upload_protocol:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>scopes: drive, drive.file, drive.readonly, spreadsheets, spre…</li>
@@ -574,6 +2011,164 @@
 <li>response: ValueRange</li>
 <li>parameterOrder: spreadsheetId, range</li>
 <li>request: NA</li>
+</ul>
+</div>
+<div id="spreadsheets-values-batchupdatebydatafilter" class="section level2">
+<h2 class="hasAnchor">
+<a href="#spreadsheets-values-batchupdatebydatafilter" class="anchor"></a>spreadsheets.values.batchUpdateByDataFilter</h2>
+<ul>
+<li>id: spreadsheets.values.batchUpdateByDataFilter</li>
+<li>httpMethod: POST</li>
+<li>path: v4/spreadsheets/{spreadsheetId}/values:batchUpdateByD…</li>
+<li>parameters:
+<ul>
+<li>spreadsheetId:
+<ul>
+<li>location: path</li>
+<li>required: TRUE</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: The ID of the spreadsheet to update.</li>
+</ul>
+</li>
+<li>upload_protocol:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>scopes: drive, drive.file, spreadsheets</li>
+<li>description: Sets values in one or more ranges of a spreadsheet. T…</li>
+<li>response: BatchUpdateValuesByDataFilterResponse</li>
+<li>parameterOrder: spreadsheetId</li>
+<li>request: BatchUpdateValuesByDataFilterRequest</li>
 </ul>
 </div>
 <div id="spreadsheets-values-update" class="section level2">
@@ -645,6 +2240,136 @@
 <li>description: Determines how dates, times, and durations …</li>
 </ul>
 </li>
+<li>upload_protocol:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>scopes: drive, drive.file, spreadsheets</li>
@@ -652,34 +2377,6 @@
 <li>response: UpdateValuesResponse</li>
 <li>parameterOrder: spreadsheetId, range</li>
 <li>request: ValueRange</li>
-</ul>
-</div>
-<div id="spreadsheets-values-batchupdatebydatafilter" class="section level2">
-<h2 class="hasAnchor">
-<a href="#spreadsheets-values-batchupdatebydatafilter" class="anchor"></a>spreadsheets.values.batchUpdateByDataFilter</h2>
-<ul>
-<li>id: spreadsheets.values.batchUpdateByDataFilter</li>
-<li>httpMethod: POST</li>
-<li>path: v4/spreadsheets/{spreadsheetId}/values:batchUpdateByD…</li>
-<li>parameters:
-<ul>
-<li>spreadsheetId:
-<ul>
-<li>location: path</li>
-<li>required: TRUE</li>
-<li>type: string</li>
-<li>repeated: NA</li>
-<li>enum: NA</li>
-<li>description: The ID of the spreadsheet to update.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>scopes: drive, drive.file, spreadsheets</li>
-<li>description: Sets values in one or more ranges of a spreadsheet. T…</li>
-<li>response: BatchUpdateValuesByDataFilterResponse</li>
-<li>parameterOrder: spreadsheetId</li>
-<li>request: BatchUpdateValuesByDataFilterRequest</li>
 </ul>
 </div>
 <div id="spreadsheets-values-batchupdate" class="section level2">
@@ -701,6 +2398,136 @@
 <li>description: The ID of the spreadsheet to update.</li>
 </ul>
 </li>
+<li>upload_protocol:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Upload protocol for media (e.g. “raw”, “mul…</li>
+</ul>
+</li>
+<li>prettyPrint:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Returns response with indentations and line…</li>
+</ul>
+</li>
+<li>uploadType:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Legacy upload protocol for media (e.g. “med…</li>
+</ul>
+</li>
+<li>fields:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Selector specifying which fields to include…</li>
+</ul>
+</li>
+<li>$.xgafv:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: 1 2</li>
+<li>description: V1 error format.</li>
+</ul>
+</li>
+<li>callback:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: JSONP</li>
+</ul>
+</li>
+<li>alt:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: json media proto</li>
+<li>description: Data format for response.</li>
+</ul>
+</li>
+<li>key:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: API key. Your API key identifies your proje…</li>
+</ul>
+</li>
+<li>access_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth access token.</li>
+</ul>
+</li>
+<li>quotaUser:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Available to use for quota purposes for ser…</li>
+</ul>
+</li>
+<li>pp:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: boolean</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: Pretty-print response.</li>
+</ul>
+</li>
+<li>oauth_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth 2.0 token for the current user.</li>
+</ul>
+</li>
+<li>bearer_token:
+<ul>
+<li>location: query</li>
+<li>required: NA</li>
+<li>type: string</li>
+<li>repeated: NA</li>
+<li>enum: NA</li>
+<li>description: OAuth bearer token.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>scopes: drive, drive.file, spreadsheets</li>
@@ -709,7 +2536,6 @@
 <li>parameterOrder: spreadsheetId</li>
 <li>request: BatchUpdateValuesRequest</li>
 </ul>
-</div>
 </div>
   </div>
 
@@ -731,8 +2557,8 @@
       <li><a href="#spreadsheets-values-batchgetbydatafilter">spreadsheets.values.batchGetByDataFilter</a></li>
       <li><a href="#spreadsheets-values-batchclear">spreadsheets.values.batchClear</a></li>
       <li><a href="#spreadsheets-values-get">spreadsheets.values.get</a></li>
-      <li><a href="#spreadsheets-values-update">spreadsheets.values.update</a></li>
       <li><a href="#spreadsheets-values-batchupdatebydatafilter">spreadsheets.values.batchUpdateByDataFilter</a></li>
+      <li><a href="#spreadsheets-values-update">spreadsheets.values.update</a></li>
       <li><a href="#spreadsheets-values-batchupdate">spreadsheets.values.batchUpdate</a></li>
       </ul>
 </div>
@@ -751,6 +2577,8 @@
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

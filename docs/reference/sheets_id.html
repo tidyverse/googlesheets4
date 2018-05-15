@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MIT License • googlesheets4</title>
+<title><code>sheets_id</code> object — sheets_id • googlesheets4</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -23,11 +23,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script>
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script>
+<script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="MIT License" />
+<meta property="og:title" content="<code>sheets_id</code> object — sheets_id" />
+<meta property="og:description" content="Holds a spreadsheet identifier, i.e. a string. This is what the
+Sheets and Drive APIs refer to as spreadsheetId and fileId,
+respectively. Any object of class sheets_id will also have the
+drive_id class, which is used by googledrive for
+the same purpose.
+This means you can pipe a sheets_id object straight into
+googledrive functions for all your Google Drive needs that have nothing
+to do with the file being a spreadsheet. Examples: examine or change file
+name, path, or permissions, copy the file, or visit it in a web browser." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -44,7 +54,7 @@
   </head>
 
   <body>
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -55,7 +65,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">googlesheets4</a>
+        <a class="navbar-link" href="../index.html">googlesheets4</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
       </span>
     </div>
@@ -63,13 +73,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -79,16 +89,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/articles/googlesheets4-conventions.html">googlesheets4 conventions</a>
+      <a href="../articles/articles/googlesheets4-conventions.html">googlesheets4 conventions</a>
     </li>
     <li>
-      <a href="articles/articles/googlesheets4-design-notes.html">googlesheets4 design notes</a>
+      <a href="../articles/articles/googlesheets4-design-notes.html">googlesheets4 design notes</a>
     </li>
     <li>
-      <a href="articles/articles/sheets-api-v4.html">Google Sheets API v4</a>
+      <a href="../articles/articles/sheets-api-v4.html">Google Sheets API v4</a>
     </li>
     <li>
-      <a href="articles/articles/sheets-auth-flow.html">Google Sheets API v4 Auth Flow</a>
+      <a href="../articles/articles/sheets-auth-flow.html">Google Sheets API v4 Auth Flow</a>
     </li>
   </ul>
 </li>
@@ -110,23 +120,43 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>MIT License</h1>
+    <h1><code>sheets_id</code> object</h1>
+    <small>Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_id.R'><code>R/sheets_id.R</code></a></small>
+    <div class="hidden name"><code>sheets_id.Rd</code></div>
     </div>
 
-<div id="mit-license" class="section level1">
+    <p>Holds a spreadsheet identifier, i.e. a string. This is what the
+Sheets and Drive APIs refer to as <code>spreadsheetId</code> and <code>fileId</code>,
+respectively. Any object of class <code>sheets_id</code> will also have the
+<code><a href='http://www.rdocumentation.org/packages/googledrive/topics/as_id'>drive_id</a></code> class, which is used by googledrive for
+the same purpose.</p>
+<p>This means you can pipe a <code>sheets_id</code> object straight into
+googledrive functions for all your Google Drive needs that have nothing
+to do with the file being a spreadsheet. Examples: examine or change file
+name, path, or permissions, copy the file, or visit it in a web browser.</p>
 
-<p>Copyright (c) 2018 RStudio</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-</div>
+
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='as_sheets_id.html'>as_sheets_id()</a></code></p></div>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>)</div><div class='output co'>#&gt; [1] "1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY"
+#&gt; attr(,"class")
+#&gt; [1] "sheets_id" "drive_id" </div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
-
 </div>
-
 
       <footer>
       <div class="copyright">

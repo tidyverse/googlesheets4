@@ -66,8 +66,8 @@ sheets_id <- function(x) {
 #'
 #' @description This is a generic function.
 #'
-#' @param x Something that uniquely identifies a Google Sheet (see below for
-#'   anticipated inputs.
+#' @param x Something that uniquely identifies a Google Sheet: a [`sheets_id`],
+#'   URL, or [`dribble`][googledrive::dribble].
 #' @param ... Other arguments passed down to methods. (Not used.)
 #' @export
 #' @examples

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MIT License • googlesheets4</title>
+<title>Visit Sheet in browser — sheets_browse • googlesheets4</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -23,11 +23,15 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script>
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script>
+<script src="../pkgdown.js"></script>
 
-<meta property="og:title" content="MIT License" />
+<meta property="og:title" content="Visit Sheet in browser — sheets_browse" />
+<meta property="og:description" content="Visits a Google Sheet in your default browser. TODO: Note that there is no
+provision for auth yet, so will only work for a Sheet that is readable to
+anyone." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -44,7 +48,7 @@
   </head>
 
   <body>
-    <div class="container template-title-body">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -55,7 +59,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">googlesheets4</a>
+        <a class="navbar-link" href="../index.html">googlesheets4</a>
         <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.0.0.9000</span>
       </span>
     </div>
@@ -63,13 +67,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -79,16 +83,16 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/articles/googlesheets4-conventions.html">googlesheets4 conventions</a>
+      <a href="../articles/articles/googlesheets4-conventions.html">googlesheets4 conventions</a>
     </li>
     <li>
-      <a href="articles/articles/googlesheets4-design-notes.html">googlesheets4 design notes</a>
+      <a href="../articles/articles/googlesheets4-design-notes.html">googlesheets4 design notes</a>
     </li>
     <li>
-      <a href="articles/articles/sheets-api-v4.html">Google Sheets API v4</a>
+      <a href="../articles/articles/sheets-api-v4.html">Google Sheets API v4</a>
     </li>
     <li>
-      <a href="articles/articles/sheets-auth-flow.html">Google Sheets API v4 Auth Flow</a>
+      <a href="../articles/articles/sheets-auth-flow.html">Google Sheets API v4 Auth Flow</a>
     </li>
   </ul>
 </li>
@@ -110,23 +114,49 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>MIT License</h1>
+    <h1>Visit Sheet in browser</h1>
+    <small>Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_browse.R'><code>R/sheets_browse.R</code></a></small>
+    <div class="hidden name"><code>sheets_browse.Rd</code></div>
     </div>
 
-<div id="mit-license" class="section level1">
+    <p>Visits a Google Sheet in your default browser. TODO: Note that there is no
+provision for auth yet, so will only work for a Sheet that is readable to
+anyone.</p>
 
-<p>Copyright (c) 2018 RStudio</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-</div>
+    <pre class="usage"><span class='fu'>sheets_browse</span>(<span class='no'>ss</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>ss</th>
+      <td><p>Something that uniquely identifies a Google Sheet. Processed
+through <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Character vector of file hyperlinks, from
+<code><a href='http://www.rdocumentation.org/packages/googledrive/topics/drive_link'>googledrive::drive_link()</a></code>, invisibly.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>sheets_browse</span>()
+<span class='co'># }</span></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
-
 </div>
-
 
       <footer>
       <div class="copyright">

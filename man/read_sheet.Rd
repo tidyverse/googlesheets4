@@ -35,10 +35,10 @@ all cases, names are processed through \code{\link[tibble:tidy_names]{tibble::ti
 provides \code{col_types}, \code{col_names} can have one entry per column or one
 entry per unskipped column.}
 
-\item{col_types}{column types Either \code{NULL} to guess all from the spreadsheet
-or a string of readr-style shortcodes, with one character or code per
-column. If exactly one \code{col_type} is specified, it is recycled. See Details
-for more.}
+\item{col_types}{Column types. Either \code{NULL} to guess all from the
+spreadsheet or a string of readr-style shortcodes, with one character or
+code per column. If exactly one \code{col_type} is specified, it is recycled.
+See Details for more.}
 
 \item{na}{Character vector of strings to interpret as missing values. By
 default, blank cells are treated as missing data.}
@@ -64,7 +64,7 @@ A \link[tibble:tibble-package]{tibble}
 This is the main "read" function of the googlesheets4 package. The goal is
 that \code{read_sheet()} is to a Google Sheet as \code{readr::read_csv()} is to a csv
 file or \code{read_excel()} is to an Excel spreadsheet. It's still under
-development but is quite usable now. \strong{Note that googlesheets4 is not wired
+development, but is quite usable now. \strong{Note that googlesheets4 is not wired
 up for auth yet (happening soon!)}, so at the moment the target Sheet must
 be readable by anyone with a link (see examples for how to accomplish via
 googledrive).
@@ -74,8 +74,9 @@ googledrive).
 
 Column types must be specified in a single string of readr-style short
 codes, e.g. "cci?l" means "character, character, integer, guess, logical".
-This is not where things will end up, but it gets the ball rolling in a way
-that is consistent with readr.
+This is not where googlesheets4's col spec will end up, but it gets the
+ball rolling in a way that is consistent with readr and doesn't reinvent
+any wheels.
 
 Shortcodes for column types:
 \itemize{
@@ -100,31 +101,35 @@ yet; returns POSIXct.}
 \item \code{c}: Character.
 \item \code{C}: Cell. This type is unique to googlesheets4. This returns raw cell
 data, as an R list, which consists of everything sent by the Sheets API for
-that cell. Has S3 type of \code{"CELL_SOMETHING"} and \code{SHEETS_CELL}. Mostly
+that cell. Has S3 type of \code{"CELL_SOMETHING"} and \code{"SHEETS_CELL"}. Mostly
 useful internally, but exposed for those who want direct access to, e.g.,
 formulas and formats.
 \item \code{L}: List, as in "list-column". Each cell is a length-1 atomic vector of
 its discovered type.
-\item \emph{Still to come}: duration and factor.
+\item \emph{Still to come}: duration (code will be \code{:}) and factor (code will be
+\code{f}).
 }
 }
 
 \examples{
-read_sheet(sheets_example("mini-gap"))
-read_sheet(sheets_example("mini-gap"), sheet = "Europe", col_types = "cciddd")
-read_sheet(sheets_example("mini-gap"), sheet = 4, col_types = "c?ii-d")
-test_sheet <- "1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM"
-read_sheet(test_sheet)
-read_sheet(test_sheet, skip = 2)
-read_sheet(test_sheet, n_max = 2)
-read_sheet(test_sheet, range = "A1:B2")
-read_sheet(test_sheet, range = "B2:C4")
-read_sheet(test_sheet, range = "B2:E5")
-
 ss <- sheets_example("deaths")
 read_sheet(ss, range = "A5:F15")
-range <- "A5:F15"
-col_types <- "ccilDD"
-#read_excel(readxl_example("deaths.xlsx"), range = "other!A5:F15")
 read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
+read_sheet(sheets_example("mini-gap"))
+read_sheet(
+  sheets_example("mini-gap"),
+  sheet = "Europe",
+  range = "A:D",
+  col_types = "ccid"
+)
+
+\dontrun{
+## converts a local Excel file to a Google Sheet
+## and shares it such that "anyone with a link can view"
+library(googledrive)
+local_xlsx <- readxl::readxl_example("deaths.xlsx")
+x <- drive_upload(local_xlsx, type = "spreadsheet")
+x <- drive_share(x, role = "reader", type = "anyone")
+drive_reveal(x, "permissions")
+}
 }

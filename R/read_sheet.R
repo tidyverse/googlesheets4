@@ -242,7 +242,7 @@ spread_sheet_impl_ <- function(df,
     na = na, trim_ws = trim_ws, nr = nr, guess_max = guess_max
   ) %>%
     purrr::set_names(col_names) %>%
-    purrr::compact()
+    purrr::discard(is.null)
 
   tibble::as_tibble(out_scratch)
 }

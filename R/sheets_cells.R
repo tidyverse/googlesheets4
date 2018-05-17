@@ -26,6 +26,7 @@ sheets_cells <- function(ss,
                          sheet = NULL,
                          range = NULL) {
   out <- get_cells(ss = ss, sheet = sheet, range = range)
+  out$cell <- apply_ctype(out$cell)
   add_loc(out)
 }
 

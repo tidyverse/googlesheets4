@@ -46,18 +46,21 @@ Sorry, auth hasn't been wired up yet, but that's the next priority. Until then, 
 
 ## Read a Sheet
 
-`read_sheet()` is the main "read" function and should evoke `readr::read_csv()` and `readxl::read_excel()`. It's an alias for `sheets_read()` (most functions in googlesheets4 actually start with `sheets_`). googlesheets4 is pipe-friendly (and rexports `%>%`), but works just fine without the pipe.
+`read_sheet()` is the main "read" function and should evoke `readr::read_csv()` and `readxl::read_excel()`. It's an alias for `sheets_read()` (most functions in googlesheets4 actually start with `sheets_`). googlesheets4 is pipe-friendly (and reexports `%>%`), but works just fine without the pipe.
 
-### Identify and read your own Sheet
+### Identify and access your own Sheet
 
-Let's say you have a cheerful Google Sheet named "deaths". If you want to access it by name, use googledrive to identify the document (capture its metadata, espcially file id). Pass the result to functions like `sheets_get()` (gets file metadata) or `read_sheet()` (gets cell data).
+Let's say you have a cheerful Google Sheet named "deaths". If you want to access it by name, use googledrive to identify the document (capture its metadata, especially file id). Pass the result to functions like `sheets_get()` (gets file metadata) or `read_sheet()` (gets cell data).
 
 ```{r}
 library(googledrive)
 library(googlesheets4)
 
 (deaths <- drive_get("deaths"))
+
 sheets_get(deaths)
+
+read_sheet(deaths, range = "A5:F8")
 ```
 
 If you're willing to deal with the sheet's id, just provide that directly to googlesheets4 functions and omit googledrive.
@@ -66,7 +69,7 @@ If you're willing to deal with the sheet's id, just provide that directly to goo
 sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
 ```
 
-Lesson: googledrive is the friendliest way to work with files on Google Drive, including those that are Google Sheets. You can refer to files by name. googlesheets4 is focused on operrations specific to Sheets and is more programming oriented. You must pass a file id or something that contains the file id.
+Lesson: googledrive is the friendliest way to work with files on Google Drive, including those that are Google Sheets. You can refer to files by name. googlesheets4 is focused on operations specific to Sheets and is more programming oriented. You must pass a file id or something that contains the file id.
 
 ### Specifying which cells to read
 

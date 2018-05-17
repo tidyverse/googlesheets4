@@ -52,14 +52,14 @@ the Sheets browser UI via *File \> Share …*.
 `read_sheet()` is the main “read” function and should evoke
 `readr::read_csv()` and `readxl::read_excel()`. It’s an alias for
 `sheets_read()` (most functions in googlesheets4 actually start with
-`sheets_`). googlesheets4 is pipe-friendly (and rexports `%>%`), but
+`sheets_`). googlesheets4 is pipe-friendly (and reexports `%>%`), but
 works just fine without the pipe.
 
-### Identify and read your own Sheet
+### Identify and access your own Sheet
 
 Let’s say you have a cheerful Google Sheet named “deaths”. If you want
 to access it by name, use googledrive to identify the document (capture
-its metadata, espcially file id). Pass the result to functions like
+its metadata, especially file id). Pass the result to functions like
 `sheets_get()` (gets file metadata) or `read_sheet()` (gets cell data).
 
 ``` r
@@ -71,6 +71,7 @@ library(googlesheets4)
 #>   name   path     id                                        drive_resource
 #>   <chr>  <chr>    <chr>                                     <list>        
 #> 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5… <list [33]>
+
 sheets_get(deaths)
 #>   Spreadsheet name: deaths
 #>                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA
@@ -81,6 +82,17 @@ sheets_get(deaths)
 #> (Sheet name): (Nominal extent in rows x columns)
 #>         arts: 1000 x 26
 #>        other: 1000 x 26
+
+read_sheet(deaths, range = "A5:F8")
+#> Reading from 'deaths'
+#> Range "A5:F8"
+#> # A tibble: 3 x 6
+#>   Name          Profession   Age `Has kids` `Date of birth`    
+#>   <chr>         <chr>      <dbl> <lgl>      <dttm>             
+#> 1 David Bowie   musician      69 TRUE       1947-01-08 00:00:00
+#> 2 Carrie Fisher actor         60 TRUE       1956-10-21 00:00:00
+#> 3 Chuck Berry   musician      90 TRUE       1926-10-18 00:00:00
+#> # ... with 1 more variable: `Date of death` <dttm>
 ```
 
 If you’re willing to deal with the sheet’s id, just provide that
@@ -101,7 +113,7 @@ sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
 
 Lesson: googledrive is the friendliest way to work with files on Google
 Drive, including those that are Google Sheets. You can refer to files by
-name. googlesheets4 is focused on operrations specific to Sheets and is
+name. googlesheets4 is focused on operations specific to Sheets and is
 more programming oriented. You must pass a file id or something that
 contains the file id.
 

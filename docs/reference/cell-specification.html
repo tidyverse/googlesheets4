@@ -28,11 +28,12 @@
 <script src="../pkgdown.js"></script>
 
 <meta property="og:title" content="Specify cells for reading — cell-specification" />
-<meta property="og:description" content="The range argument of read_excel()`` provides many ways to limit the read to a specific rectangle of cells. The simplest usage is to provide an Excel-like cell range, such asrange = "D12:F15"orrange =
-"R1C12:R6C15"`. The cell rectangle can be specified in various other ways,
-using helper functions. In all cases, cell range processing is handled by the
-cellranger package, where you can find full documentation for
-the functions used in the examples below." />
+<meta property="og:description" content="The range argument in read_sheet() or sheets_cells() is used to limit
+the read to a specific rectangle of cells. The Sheets v4 API only accepts
+ranges in A1 notation, but googlesheets4 accepts and converts a few
+alternative specifications provided by the functions in the
+cellranger package. Of course, you can always provide A1-style
+ranges directly to functions like read_sheet() or sheets_cells()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,70 +124,34 @@ the functions used in the examples below." />
     <div class="hidden name"><code>cell-specification.Rd</code></div>
     </div>
 
-    <p>The <code>range</code> argument of <code>read_excel()`` provides many ways to limit the read to a specific rectangle of cells. The simplest usage is to provide an Excel-like cell range, such as</code>range = "D12:F15"<code>or</code>range =
-"R1C12:R6C15"`. The cell rectangle can be specified in various other ways,
-using helper functions. In all cases, cell range processing is handled by the
-cellranger package, where you can find full documentation for
-the functions used in the examples below.</p>
+    <p>The <code>range</code> argument in <code><a href='read_sheet.html'>read_sheet()</a></code> or <code><a href='sheets_cells.html'>sheets_cells()</a></code> is used to limit
+the read to a specific rectangle of cells. The Sheets v4 API only accepts
+ranges in A1 notation, but googlesheets4 accepts and converts a few
+alternative specifications provided by the functions in the
+cellranger package. Of course, you can always provide A1-style
+ranges directly to functions like <code><a href='read_sheet.html'>read_sheet()</a></code> or <code><a href='sheets_cells.html'>sheets_cells()</a></code>.</p>
 
 
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>The cellranger package has full documentation on cell
-specification and offers additional functions for manipulating "A1:D10"
-style spreadsheet ranges. Here are the most relevant:</p><ul>
-<li><p><code><a href='http://www.rdocumentation.org/packages/cellranger/topics/cell_limits'>cellranger::cell_limits()</a></code></p></li>
-<li><p><code><a href='http://www.rdocumentation.org/packages/cellranger/topics/cell_rows'>cellranger::cell_rows()</a></code></p></li>
-<li><p><code><a href='http://www.rdocumentation.org/packages/cellranger/topics/cell_cols'>cellranger::cell_cols()</a></code></p></li>
-<li><p><code><a href='http://www.rdocumentation.org/packages/cellranger/topics/anchored'>cellranger::anchored()</a></code></p></li>
-</ul></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='no'>path</span> <span class='kw'>&lt;-</span> <span class='fu'>readxl_example</span>(<span class='st'>"geometry.xls"</span>)
-<span class='co'>## Rows 1 and 2 are empty (as are rows 7 and higher)</span>
-<span class='co'>## Column 1 aka "A" is empty (as are columns 5 of "E" and higher)</span>
-
-<span class='co'># By default, the populated data cells are "shrink-wrapped" into a</span>
-<span class='co'># minimal data frame</span>
-<span class='fu'>read_excel</span>(<span class='no'>path</span>)
-
-<span class='co'># Specific rectangle that is subset of populated cells, possibly improper</span>
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"B3:D6"</span>)
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"C3:D5"</span>)
-
-<span class='co'># Specific rectangle that forces inclusion of unpopulated cells</span>
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"A3:D5"</span>)
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"A4:E5"</span>)
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"C5:E7"</span>)
-
-<span class='co'># Anchor a rectangle of specified size at a particular cell</span>
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>anchored</span>(<span class='st'>"C4"</span>, <span class='kw'>dim</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>2</span>)), <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>)
 
 <span class='co'># Specify only the rows or only the columns</span>
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fl'>3</span>:<span class='fl'>6</span>))
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='st'>"C:D"</span>))
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fl'>2</span>))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fl'>1</span>:<span class='fl'>3</span>))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='st'>"C:D"</span>))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fl'>1</span>))
 
-<span class='co'># Specify exactly one row or column bound</span>
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fu'>c</span>(<span class='fl'>5</span>, <span class='fl'>NA</span>)))
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'>c</span>(<span class='st'>"C"</span>, <span class='fl'>NA</span>)))
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='fl'>2</span>)))
-
-<span class='co'># General open rectangles</span>
-<span class='co'># upper left = C4, everything else unspecified</span>
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_limits</span>(<span class='fu'>c</span>(<span class='fl'>4</span>, <span class='fl'>3</span>), <span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='fl'>NA</span>)))
-<span class='co'># upper right = D4, everything else unspecified</span>
-<span class='fu'>read_excel</span>(<span class='no'>path</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_limits</span>(<span class='fu'>c</span>(<span class='fl'>4</span>, <span class='fl'>NA</span>), <span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
+<span class='co'># Specify exactly upper bound on row or column</span>
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='st'>"D"</span>)))
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

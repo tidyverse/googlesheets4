@@ -163,11 +163,11 @@ read. Otherwise specify <code>range</code> as described in <a href='https://deve
 or using the helpers documented in <a href='cell-specification.html'>cell-specification</a>. Sheets uses
 fairly standard spreadsheet range notation, although a bit different from
 Excel. Examples of valid ranges: <code>"Sheet1!A1:B2"</code>, <code>"Sheet1!A:A"</code>,
-<code>"Sheet1!1:2"</code>, <code>"Sheet1!A5:A"</code>, <code>"A1:B2"</code>, <code>"Sheet1"</code>. Note this can be a
-sheet name, like <code>"Sheet1"</code>, or a named range, like <code>"sales_data"</code>, without
-any cell reference. Interpreted strictly, even if the range forces the
-inclusion of leading or trailing empty rows or columns. Takes precedence
-over <code>skip</code>, <code>n_max</code> and <code>sheet</code>.</p></td>
+<code>"Sheet1!1:2"</code>, <code>"Sheet1!A5:A"</code>, <code>"A1:B2"</code>, <code>"Sheet1"</code>. Interpreted
+strictly, even if the range forces the inclusion of leading, trailing, or
+embedded empty rows or columns. Takes precedence over <code>skip</code>, <code>n_max</code> and
+<code>sheet</code>. Note <code>range</code> can be a named range, like <code>"sales_data"</code>, without
+any cell reference.</p></td>
     </tr>
     <tr>
       <th>col_names</th>

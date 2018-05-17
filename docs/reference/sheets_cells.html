@@ -155,11 +155,11 @@ read. Otherwise specify <code>range</code> as described in <a href='https://deve
 or using the helpers documented in <a href='cell-specification.html'>cell-specification</a>. Sheets uses
 fairly standard spreadsheet range notation, although a bit different from
 Excel. Examples of valid ranges: <code>"Sheet1!A1:B2"</code>, <code>"Sheet1!A:A"</code>,
-<code>"Sheet1!1:2"</code>, <code>"Sheet1!A5:A"</code>, <code>"A1:B2"</code>, <code>"Sheet1"</code>. Note this can be a
-sheet name, like <code>"Sheet1"</code>, or a named range, like <code>"sales_data"</code>, without
-any cell reference. Interpreted strictly, even if the range forces the
-inclusion of leading or trailing empty rows or columns. Takes precedence
-over <code>skip</code>, <code>n_max</code> and <code>sheet</code>.</p></td>
+<code>"Sheet1!1:2"</code>, <code>"Sheet1!A5:A"</code>, <code>"A1:B2"</code>, <code>"Sheet1"</code>. Interpreted
+strictly, even if the range forces the inclusion of leading, trailing, or
+embedded empty rows or columns. Takes precedence over <code>skip</code>, <code>n_max</code> and
+<code>sheet</code>. Note <code>range</code> can be a named range, like <code>"sales_data"</code>, without
+any cell reference.</p></td>
     </tr>
     </table>
 
@@ -170,18 +170,18 @@ get dignified with a class?</em></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>sheets_cells</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>))</div><div class='output co'>#&gt; <span class='message'>Reading from 'deaths'</span></div><div class='output co'>#&gt; <span class='message'>Range "'arts'"</span></div><div class='output co'>#&gt; # A tibble: 82 x 4
-#&gt;      row   col loc   cell      
-#&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;    
-#&gt;  1     1     1 A1    &lt;list [3]&gt;
-#&gt;  2     2     1 A2    &lt;list [3]&gt;
-#&gt;  3     2     6 F2    &lt;list [3]&gt;
-#&gt;  4     3     1 A3    &lt;list [3]&gt;
-#&gt;  5     3     2 B3    &lt;list [3]&gt;
-#&gt;  6     3     3 C3    &lt;list [3]&gt;
-#&gt;  7     3     5 E3    &lt;list [3]&gt;
-#&gt;  8     3     6 F3    &lt;list [3]&gt;
-#&gt;  9     4     1 A4    &lt;list [3]&gt;
-#&gt; 10     4     2 B4    &lt;list [3]&gt;
+#&gt;      row   col loc   cell           
+#&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;         
+#&gt;  1     1     1 A1    &lt;S3: CELL_TEXT&gt;
+#&gt;  2     2     1 A2    &lt;S3: CELL_TEXT&gt;
+#&gt;  3     2     6 F2    &lt;S3: CELL_TEXT&gt;
+#&gt;  4     3     1 A3    &lt;S3: CELL_TEXT&gt;
+#&gt;  5     3     2 B3    &lt;S3: CELL_TEXT&gt;
+#&gt;  6     3     3 C3    &lt;S3: CELL_TEXT&gt;
+#&gt;  7     3     5 E3    &lt;S3: CELL_TEXT&gt;
+#&gt;  8     3     6 F3    &lt;S3: CELL_TEXT&gt;
+#&gt;  9     4     1 A4    &lt;S3: CELL_TEXT&gt;
+#&gt; 10     4     2 B4    &lt;S3: CELL_TEXT&gt;
 #&gt; # ... with 72 more rows</div><div class='input'>
 </div><span class='co'># NOT RUN {</span>
 <span class='co'>## use tidyr::complete() if you want one row per cell, even if empty</span>

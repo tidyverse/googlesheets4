@@ -154,8 +154,8 @@ insert_shims <- function(df, range) {
   if (shim_up || shim_left) {
     df <- tibble::add_row(
       df,
-      row = start_row,
-      col = start_col,
+      row = start_row %NA% min(df$row),
+      col = start_col %NA% min(df$col),
       cell = list(list()),
       .before = 1
     )
@@ -165,8 +165,8 @@ insert_shims <- function(df, range) {
   if (shim_down || shim_right) {
     df <- tibble::add_row(
       df,
-      row = end_row,
-      col = end_col,
+      row = end_row %NA% max(df$row),
+      col = end_col %NA% max(df$col),
       cell = list(list())
     )
   }

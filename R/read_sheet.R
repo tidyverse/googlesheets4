@@ -53,13 +53,17 @@
 #'   name of a sheet), or an integer (the position of the sheet). Ignored if the
 #'   sheet is specified via `range`. If neither argument specifies the sheet,
 #'   defaults to the first visible sheet.
-#' @param range A cell range to read from, as described in [Sheets A1
-#'   notation](https://developers.google.com/sheets/api/guides/concepts#a1_notation).
-#'    This is fairly standard spreadsheet range notation, although a bit
-#'   different from Excel. Examples of valid ranges: `"Sheet1!A1:B2"`,
-#'   `"Sheet1!A:A"`, `"Sheet1!1:2"`, `"Sheet1!A5:A"`, `"A1:B2"`, `"Sheet1"`.
-#'   Note this can be a sheet name, like `"Sheet1"`, or a named range, like
-#'   `"sales_data"`, without any cell reference.
+#' @param range A cell range to read from. If `NULL`, all non-empty cells are
+#'   read. Otherwise specify `range` as described in [Sheets A1
+#'   notation](https://developers.google.com/sheets/api/guides/concepts#a1_notation)
+#'    or using the helpers documented in [cell-specification]. Sheets uses
+#'   fairly standard spreadsheet range notation, although a bit different from
+#'   Excel. Examples of valid ranges: `"Sheet1!A1:B2"`, `"Sheet1!A:A"`,
+#'   `"Sheet1!1:2"`, `"Sheet1!A5:A"`, `"A1:B2"`, `"Sheet1"`. Note this can be a
+#'   sheet name, like `"Sheet1"`, or a named range, like `"sales_data"`, without
+#'   any cell reference. Interpreted strictly, even if the range forces the
+#'   inclusion of leading or trailing empty rows or columns. Takes precedence
+#'   over `skip`, `n_max` and `sheet`.
 #' @param col_names `TRUE` to use the first row as column names, `FALSE` to get
 #'   default names, or a character vector to provide column names directly. In
 #'   all cases, names are processed through [tibble::tidy_names()]. If user

@@ -28,7 +28,12 @@ make_range <- function(start_row, end_row, start_column, end_column,
 }
 
 standardise_range <- function(sheet = NULL, range = NULL, sheet_df = NULL) {
-  if (is.null(range)) {
+  ## a shim for cellranger input
+  ## TODO: decide whether to keep this and formalize or modify cellranger
+  if (inherits(range, what = "cell_limits")) {
+    sheet <- range$sheet %NA% sheet
+    range <- as_sheets_range(range)
+  } else if (is.null(range)) {
     sheet <- sheet %||% 1L
   } else {
     check_length_one(range)

@@ -27,11 +27,11 @@ read. Otherwise specify \code{range} as described in \href{https://developers.go
 or using the helpers documented in \link{cell-specification}. Sheets uses
 fairly standard spreadsheet range notation, although a bit different from
 Excel. Examples of valid ranges: \code{"Sheet1!A1:B2"}, \code{"Sheet1!A:A"},
-\code{"Sheet1!1:2"}, \code{"Sheet1!A5:A"}, \code{"A1:B2"}, \code{"Sheet1"}. Note this can be a
-sheet name, like \code{"Sheet1"}, or a named range, like \code{"sales_data"}, without
-any cell reference. Interpreted strictly, even if the range forces the
-inclusion of leading or trailing empty rows or columns. Takes precedence
-over \code{skip}, \code{n_max} and \code{sheet}.}
+\code{"Sheet1!1:2"}, \code{"Sheet1!A5:A"}, \code{"A1:B2"}, \code{"Sheet1"}. Interpreted
+strictly, even if the range forces the inclusion of leading, trailing, or
+embedded empty rows or columns. Takes precedence over \code{skip}, \code{n_max} and
+\code{sheet}. Note \code{range} can be a named range, like \code{"sales_data"}, without
+any cell reference.}
 
 \item{col_names}{\code{TRUE} to use the first row as column names, \code{FALSE} to get
 default names, or a character vector to provide column names directly. In

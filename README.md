@@ -278,7 +278,7 @@ tidyverse:
     reading Excel files (xls or xlsx) into an R data frame.
     googlesheets4 takes cues from parts of the readxl interface,
     especially around specifying which cells to read.
-  - [readr](http://readr.tidyverse.org) is the tidyverse package fro
+  - [readr](http://readr.tidyverse.org) is the tidyverse package for
     reading delimited files (e.g., csv or tsv) into an R data frame.
     googlesheets4 takes cues from readr with respect to column type
     specification.

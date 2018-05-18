@@ -107,23 +107,6 @@ cells <- function(x = list()) {
   out[!cell_is_empty, ]
 }
 
-
-range_from_skip <- function(skip = 0, sheet = NULL, sheet_df = NULL) {
-  sheet_i <- match(sheet %||% NA_character_, sheet_df$name)
-  max_row <- if (is.na(sheet_i)) {
-    max(sheet_df$grid_rows)
-  } else {
-    sheet_df$grid_rows[sheet_i]
-  }
-  if (skip + 1 > max_row) {
-    stop_glue(
-      "Sheet has {max_row} rows, but {bt('skip')} is only {skip}. ",
-      "Nothing to read."
-    )
-  }
-  as.character(glue("{skip + 1}:{max_row}"))
-}
-
 insert_shims <- function(df, range) {
   ## emulating behaviour of readxl
   if (nrow(df) == 0) {

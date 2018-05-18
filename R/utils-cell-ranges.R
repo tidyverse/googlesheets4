@@ -33,31 +33,45 @@ make_range <- function(start_row, end_row, start_column, end_column,
 ## output: list with components
 ##   * sheet name (or NULL)
 ##   * Sheets-API-ready A1 range string
+##   * cell_limits object reflecting user's range request
 form_range_spec <- function(sheet = NULL,
                             range = NULL,
                             skip = 0,
                             sheet_df = NULL) {
   if (is.null(range)) {
-    cell_limits <- cellranger::cell_rows(c(if (skip > 0) skip + 1 else NA, NA))
+    cell_limits <- cellranger::cell_limits()
+    api_limits <- cellranger::cell_rows(c(if (skip > 0) skip + 1 else NA, NA))
+    shim <- FALSE
   }
 
   ## ideally, this would be cellranger::as.cell_limits.character()
   ## but it cannot handle ranges like A:A or A5:A (yet?)
   if (is.character(range)) {
-    cell_limits <- parse_user_range(range)
+    cell_limits <- api_limits <- parse_user_range(range)
+    shim <- TRUE
   }
 
-  sheet        <- cell_limits$sheet %NA% sheet %||% 1L
+  if (inherits(range, what = "cell_limits")) {
+    cell_limits <- api_limits <- range
+    shim <- TRUE
+  }
+
+  sheet        <- api_limits$sheet %NA% sheet %||% 1L
   sheet        <- resolve_sheet(sheet, sheet_df)
   sheet_extent <- sheet_df[sheet_df$name == sheet, c("grid_rows", "grid_columns")]
-  cell_limits  <- resolve_cell_limits(cell_limits, sheet_extent)
+  api_limits  <- resolve_limits(api_limits, sheet_extent)
+
+  cell_range <- as_sheets_range(api_limits)
 
   list(
     sheet = sheet,
     ## this is a workaround for fact that cellranger::as.range() cannot
     ## make ranges like A:A or 1:4 (yet)
     ## also, the definitive source for sheet is not inside cell_limits
-    range = as_sheets_range(cell_limits)
+    range = cell_range,
+    api_range = paste0(c(sq_escape(sheet), cell_range), collapse = "!"),
+    shim = shim,
+    cell_limits = cell_limits
   )
 }
 
@@ -72,6 +86,16 @@ check_sheet <- function(sheet = NULL) {
     )
   }
   return(sheet)
+}
+
+check_range <- function(range = NULL) {
+  if (is.null(range) || inherits(range, what = "cell_limits")) return(range)
+  if (!is_string(range)) {
+    stop_glue(
+      "{bt('range')} must be NULL, a string, or a {bt('cell_limits')} object."
+    )
+  }
+  return(range)
 }
 
 ## sheet_df can be NULL iff is.character(sheet)
@@ -106,7 +130,7 @@ resolve_sheet <- function(sheet = NULL, sheet_df = NULL) {
   visible_sheets[[sheet]]
 }
 
-resolve_cell_limits <- function(cell_limits, sheet_extent) {
+resolve_limits <- function(cell_limits, sheet_extent) {
   ## we must modify cell_limits that have this property:
   ## let X be in {row, column}
   ## if start_X is specified, then end_X cannot be NA
@@ -114,10 +138,10 @@ resolve_cell_limits <- function(cell_limits, sheet_extent) {
   row_limits <- map_int(cell_limits[c("ul", "lr")], 1)
   col_limits <- map_int(cell_limits[c("ul", "lr")], 2)
   if (identical(is.na(row_limits), c(ul = FALSE, lr = TRUE))) {
-    cell_limits$lr[1] <- sheet_extent$grid_rows
+    cell_limits$lr[1] <- as.integer(sheet_extent$grid_rows)
   }
   if (identical(is.na(col_limits), c(ul = FALSE, lr = TRUE))) {
-    cell_limits$lr[2] <- sheet_extent$grid_columns
+    cell_limits$lr[2] <- as.integer(sheet_extent$grid_columns)
   }
   cell_limits
 }

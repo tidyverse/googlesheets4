@@ -64,8 +64,8 @@ test_that("resolve_sheet() errors for impossible numeric `sheet` input", {
 
 test_that("form_range_spec() prefers the sheet in `range` to `sheet`", {
   expect_identical(
-    form_range_spec(sheet = "nope", range = "yes!A5:A7"),
-    list(sheet = "yes", range = "A5:A7")
+    form_range_spec(sheet = "nope", range = "yes!A5:A7")[["sheet"]],
+    "yes"
   )
 })
 
@@ -73,11 +73,114 @@ test_that("form_range_spec() moves a named range from `range` to `sheet`", {
   ## if range has 3 or fewer characters, this will still fail (A, AA, AAA)
   ## TODO in code
   expect_identical(
-    form_range_spec(sheet = NULL, range = "beta"),
-    list(sheet = "beta", range = NULL)
+    form_range_spec(sheet = NULL, range = "beta")[["sheet"]],
+    "beta"
   )
   expect_identical(
-    form_range_spec(sheet = "nope", range = "beta"),
-    list(sheet = "beta", range = NULL)
+    form_range_spec(sheet = "nope", range = "beta")[["sheet"]],
+    "beta"
+  )
+})
+
+test_that("as_sheets_range() works when it should and vice versa", {
+  # numbering comes from
+  # tidyr::crossing(
+  #   start_row = c(NA, "start_row"), start_col = c(NA, "start_col"),
+  #   end_row = c(NA, "end_row"), end_col = c(NA, "end_col")
+  # )
+
+  ## nothing is specified
+  # 16 NA        NA        NA      NA
+  expect_null(as_sheets_range(cell_limits()))
+
+  ## end_row and end_col are specified --> lower right cell is fully specified
+  #  1 start_row start_col end_row end_col
+  #  5 start_row NA        end_row end_col
+  #  9 NA        start_col end_row end_col
+  # 13 NA        NA        end_row end_col
+  expect_identical(as_sheets_range(cell_limits(c(2, 2), c(3, 4))), "B2:D3")
+  expect_identical(as_sheets_range(cell_limits(c(2, NA), c(3, 4))), "A2:D3")
+  expect_identical(as_sheets_range(cell_limits(c(NA, 2), c(3, 4))), "B1:D3")
+  expect_identical(as_sheets_range(cell_limits(c(NA, NA), c(3, 4))), "A1:D3")
+
+  ## no cols specified, but end_row is
+  #  6 start_row NA        end_row NA
+  # 14 NA        NA        end_row NA
+  expect_identical(as_sheets_range(cell_limits(c(2, NA), c(5, NA))), "2:5")
+  expect_identical(as_sheets_range(cell_limits(c(NA, NA), c(5, NA))), "1:5")
+  ## no rows specified, but end_col is
+  # 11 NA        start_col NA      end_col
+  # 15 NA        NA        NA      end_col
+  expect_identical(as_sheets_range(cell_limits(c(NA, 2), c(NA, 5))), "B:E")
+  expect_identical(as_sheets_range(cell_limits(c(NA, NA), c(NA, 5))), "A:E")
+
+  #  2 start_row start_col end_row NA
+  #  3 start_row start_col NA      end_col
+  #  4 start_row start_col NA      NA
+  expect_error(as_sheets_range(cell_limits(c(1, 2), c(3, NA))), "Can't express")
+  expect_error(as_sheets_range(cell_limits(c(1, 2), c(NA, 3))), "Can't express")
+  expect_error(as_sheets_range(cell_limits(c(1, 2), c(NA, NA))), "Can't express")
+  #  7 start_row NA        NA      end_col
+  #  8 start_row NA        NA      NA
+  # 10 NA        start_col end_row NA
+  # 12 NA        start_col NA      NA
+  expect_error(as_sheets_range(cell_limits(c(1, NA), c(NA, 3))), "Can't express")
+  expect_error(as_sheets_range(cell_limits(c(1, NA), c(NA, NA))), "Can't express")
+  expect_error(as_sheets_range(cell_limits(c(NA, 2), c(3, NA))), "Can't express")
+  expect_error(as_sheets_range(cell_limits(c(NA, 2), c(NA, NA))), "Can't express")
+})
+
+test_that("resolve_limits() populates max row/col when min is specified", {
+  ## cell_limits that require no modification
+  unchanged <- list(
+    # 16 NA        NA        NA      NA
+    cell_limits(),
+    #  1 start_row start_col end_row end_col
+    #  5 start_row NA        end_row end_col
+    #  9 NA        start_col end_row end_col
+    # 13 NA        NA        end_row end_col
+    cell_limits(c(2, 2), c(3, 4)),
+    cell_limits(c(2, NA), c(3, 4)),
+    cell_limits(c(NA, 2), c(3, 4)),
+    cell_limits(c(NA, NA), c(3, 4)),
+    #  6 start_row NA        end_row NA
+    # 14 NA        NA        end_row NA
+    cell_limits(c(2, NA), c(5, NA)),
+    cell_limits(c(NA, NA), c(5, NA)),
+    ## no rows specified, but end_col is
+    # 11 NA        start_col NA      end_col
+    # 15 NA        NA        NA      end_col
+    cell_limits(c(NA, 2), c(NA, 5)),
+    cell_limits(c(NA, NA), c(NA, 5))
+  )
+  expect_identical(unchanged, map(unchanged, resolve_limits))
+
+  se <- list(grid_rows = 3, grid_columns = 3)
+  ref <- cell_limits(c(1, 2), c(3, 3))
+  #  2 start_row start_col end_row NA
+  #  3 start_row start_col NA      end_col
+  #  4 start_row start_col NA      NA
+  expect_identical(resolve_limits(cell_limits(c(1, 2), c(3, NA)), se), ref)
+  expect_identical(resolve_limits(cell_limits(c(1, 2), c(NA, 3)), se), ref)
+  expect_identical(resolve_limits(cell_limits(c(1, 2), c(NA, NA)), se), ref)
+  #  7 start_row NA        NA      end_col
+  #  8 start_row NA        NA      NA
+  # 10 NA        start_col end_row NA
+  # 12 NA        start_col NA      NA
+  expect_identical(
+    resolve_limits(cell_limits(c(1, NA), c(NA, 3)), se),
+    cell_limits(c(1, NA), c(3, 3))
+  )
+  expect_identical(
+    resolve_limits(cell_limits(c(1, NA), c(NA, NA)), se),
+    cell_limits(c(1, NA), c(3, NA))
+  )
+  expect_identical(
+    resolve_limits(cell_limits(c(NA, 2), c(3, NA)), se),
+    cell_limits(c(NA, 2), c(3, 3))
+  )
+  expect_identical(
+    resolve_limits(cell_limits(c(NA, 2), c(NA, NA)), se),
+    cell_limits(c(NA, 2), c(NA, 3))
   )
 })

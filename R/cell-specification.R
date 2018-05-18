@@ -2,10 +2,12 @@
 #'
 #' The `range` argument in [read_sheet()] or [sheets_cells()] is used to limit
 #' the read to a specific rectangle of cells. The Sheets v4 API only accepts
-#' ranges in A1 notation, but googlesheets4 accepts and converts a few
-#' alternative specifications provided by the functions in the
-#' [cellranger][cellranger] package. Of course, you can always provide A1-style
-#' ranges directly to functions like [read_sheet()] or [sheets_cells()].
+#' ranges in [A1
+#' notation](https://developers.google.com/sheets/api/guides/concepts#a1_notation),
+#' but googlesheets4 accepts and converts a few alternative specifications
+#' provided by the functions in the [cellranger][cellranger] package. Of course,
+#' you can always provide A1-style ranges directly to functions like
+#' [read_sheet()] or [sheets_cells()].
 #'
 #' @examples
 #' \dontrun{
@@ -16,9 +18,16 @@
 #' read_sheet(ss, range = cell_cols("C:D"))
 #' read_sheet(ss, range = cell_cols(1))
 #'
-#' # Specify exactly upper bound on row or column
+#' # Specify upper or lower bound on row or column
 #' read_sheet(ss, range = cell_rows(c(NA, 4)))
 #' read_sheet(ss, range = cell_cols(c(NA, "D")))
+#' read_sheet(ss, range = cell_rows(c(3, NA)))
+#' read_sheet(ss, range = cell_cols(c(2, NA)))
+#' read_sheet(ss, range = cell_cols(c("C", NA)))
+#'
+#' # Specify a partially open rectangle
+#' read_sheet(ss, range = cell_limits(c(2, 3), c(NA, NA)))
+#' read_sheet(ss, range = cell_limits(c(1, 2), c(NA, 4)))
 #' }
 #'
 #' @name cell-specification
@@ -54,6 +63,7 @@ NULL
 ## but some valid Sheets ranges imply NAs in the cell limits
 ## hence, this function must exist for now
 as_sheets_range <- function(x) {
+  stopifnot(inherits(x, what = "cell_limits"))
   ## this is not our definitive source of sheet
   x$sheet <- NA_character_
   limits <- x[c("ul", "lr")]
@@ -91,23 +101,19 @@ as_sheets_range <- function(x) {
     return(paste0(cellranger::num_to_letter(col_limits), collapse = ":"))
   }
 
-  ## in all remaining scenarios, we would need to use knowledge from the Sheet
-  ## in order to produce a valid A1 referencee :(
-  ## TODO: come back to this if there's evidence people want it
-  ## TODO: create a cellranger::cell_limits format method so this error message
-  ##       can convey more about user's input
+  ## in all remaining scenarios, we need knowledge re: Sheet extent
+  ## in order to produce a valid A1 reference
+  ## resolve_limits() makes sure that these forms don't exist
 
   ## shared property of what's left:
-  ## if start_X is specified, then so must end_X be
-  ## NAs in that position must be replaced with the relevant maximum extent,
-  ## row or col, from actual Sheet
+  ## let X be in {row, column}
+  ## start_X is specified, but end_X is NA
+
   #  2 start_row start_col end_row NA
   # 10 NA        start_col end_row NA
   #  3 start_row start_col NA      end_col
   #  7 start_row NA        NA      end_col
   #  4 start_row start_col NA      NA
-
-  ## start_X is specified --> must replace the NA in end_X with actual max
   #  8 start_row NA        NA      NA
   # 12 NA        start_col NA      NA
   stop_glue("Can't express the specified {bt('range')} as an A1 reference")

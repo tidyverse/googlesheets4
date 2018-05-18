@@ -6,7 +6,8 @@ get_cells <- function(ss,
                       skip = 0, n_max = Inf) {
   ssid <- as_sheets_id(ss)
 
-  ## sheet and range are vetted below, inside standardise_range()
+  check_sheet(sheet)
+  check_range(range)
   check_bool(col_names_in_sheet)
   check_non_negative_integer(skip)
   check_non_negative_integer(n_max)
@@ -19,24 +20,18 @@ get_cells <- function(ss,
 
   ## user's sheet, range, skip --> sheet name and cell range, suitable for API
   range_spec <- form_range_spec(sheet, range, skip, x$sheets)
-  ## TRUE iff user specified a cell range in `range`
-  shim <- !is.null(range) && !is.null(range_spec$range)
-
-  api_range <- as.character(
-    glue_collapse(c(sq_escape(range_spec$sheet), range_spec$range), sep = "!")
-  )
-  message_glue("Range {dq(api_range)}")
+  message_glue("Range {dq(range_spec$api_range)}")
 
   ## main GET -----------------------------------------------------------------
   resp <- sheets_cells_impl_(
     ssid,
-    ranges = api_range
+    ranges = range_spec$api_range
   )
   out <- cells(resp)
 
   ## enforce geometry on the cell data frame ----------------------------------
-  if (shim) {
-    out <- insert_shims(out, range_spec$range)
+  if (range_spec$shim) {
+    out <- insert_shims(out, range_spec$cell_limits)
     ## guarantee:
     ## every row and every column spanned by user's range is represented by at
     ## least one cell, (could be placeholders w/ no content from API, though)
@@ -107,19 +102,17 @@ cells <- function(x = list()) {
   out[!cell_is_empty, ]
 }
 
-insert_shims <- function(df, range) {
+insert_shims <- function(df, cell_limits) {
   ## emulating behaviour of readxl
   if (nrow(df) == 0) {
     return(df)
   }
 
-  cl_range <- limits_from_range(range)
-
   ## 1-based indices, referring to cell coordinates in the spreadsheet
-  start_row <- cl_range$ul[[1]]
-  end_row   <- cl_range$lr[[1]]
-  start_col <- cl_range$ul[[2]]
-  end_col   <- cl_range$lr[[2]]
+  start_row <- cell_limits$ul[[1]]
+  end_row   <- cell_limits$lr[[1]]
+  start_col <- cell_limits$ul[[2]]
+  end_col   <- cell_limits$lr[[2]]
 
   shim_up    <- !is.na(start_row) && start_row < min(df$row)
   shim_left  <- !is.na(start_col) && start_col < min(df$col)

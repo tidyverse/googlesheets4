@@ -18,85 +18,63 @@ cell_df <- tibble::tribble(
 )
 
 limitize <- function(df) {
-  c(
-    min_row = min(df$row), max_row = max(df$row),
-    min_col = min(df$col), max_col = max(df$col)
+  cell_limits(c(min(df$row), min(df$col)), c(max(df$row), max(df$col)))
+}
+
+expect_shim <- function(rg) {
+  expect_identical(
+    limitize(insert_shims(cell_df, parse_user_range(rg))),
+    parse_user_range(rg)
   )
 }
 
 test_that("observed data occupies range rectangle --> no shim needed", {
-  expect_identical(insert_shims(cell_df, range = "B2:D3"), cell_df)
+  expect_identical(
+    insert_shims(cell_df, cell_limits = parse_user_range("B2:D3")),
+    cell_df
+  )
 })
 
 test_that("can shim a single side", {
   ## up
-  expect_identical(
-    limitize(insert_shims(cell_df, range = "B1:D3")),
-    c(min_row = 1, max_row = 3, min_col = 2, max_col = 4)
-  )
+  expect_shim("B1:D3")
   ## down
-  expect_identical(
-    limitize(insert_shims(cell_df, range = "B2:D4")),
-    c(min_row = 2, max_row = 4, min_col = 2, max_col = 4)
-  )
+  expect_shim("B2:D4")
   ## left
-  expect_identical(
-    limitize(insert_shims(cell_df, range = "A2:D3")),
-    c(min_row = 2, max_row = 3, min_col = 1, max_col = 4)
-  )
+  expect_shim("A2:D3")
   ## right
-  expect_identical(
-    limitize(insert_shims(cell_df, range = "B2:E3")),
-    c(min_row = 2, max_row = 3, min_col = 2, max_col = 5)
-  )
+  expect_shim("B2:E3")
 })
 
 test_that("can shim two opposing sides", {
   ## row direction
-  expect_identical(
-    limitize(insert_shims(cell_df, range = "B1:D4")),
-    c(min_row = 1, max_row = 4, min_col = 2, max_col = 4)
-  )
+  expect_shim("B1:D4")
   ## col direction
-  expect_identical(
-    limitize(insert_shims(cell_df, range = "A2:E3")),
-    c(min_row = 2, max_row = 3, min_col = 1, max_col = 5)
-  )
+  expect_shim("A2:E3")
 })
 
 test_that("can shim on two perpendicular sides", {
   ## up and left
-  expect_identical(
-    limitize(insert_shims(cell_df, range = "A1:D3")),
-    c(min_row = 1, max_row = 3, min_col = 1, max_col = 4)
-  )
+  expect_shim("A1:D3")
   ## up and right
-  expect_identical(
-    limitize(insert_shims(cell_df, range = "B1:E3")),
-    c(min_row = 1, max_row = 3, min_col = 2, max_col = 5)
-  )
+  expect_shim("B1:E3")
   # down and left
-  expect_identical(
-    limitize(insert_shims(cell_df, range = "A2:D4")),
-    c(min_row = 2, max_row = 4, min_col = 1, max_col = 4)
-  )
+  expect_shim("A2:D4")
   # down and right
-  expect_identical(
-    limitize(insert_shims(cell_df, range = "B2:D4")),
-    c(min_row = 2, max_row = 4, min_col = 2, max_col = 4)
-  )
+  expect_shim("B2:E4")
 })
 
 test_that("can shim three sides", {
-  expect_identical(
-    limitize(insert_shims(cell_df, range = "B1:E4")),
-    c(min_row = 1, max_row = 4, min_col = 2, max_col = 5)
-  )
+  ## all but bottom
+  expect_shim("A1:E3")
+  ## all but left
+  expect_shim("B1:E4")
+  ## all but top
+  expect_shim("A2:E4")
+  ## all but right
+  expect_shim("A1:D4")
 })
 
 test_that("can shim four sides", {
-  expect_identical(
-    limitize(insert_shims(cell_df, range = "A1:E4")),
-    c(min_row = 1, max_row = 4, min_col = 1, max_col = 5)
-  )
+  expect_shim("A1:E4")
 })

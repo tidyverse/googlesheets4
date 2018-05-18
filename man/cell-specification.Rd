@@ -10,10 +10,11 @@
 \description{
 The \code{range} argument in \code{\link[=read_sheet]{read_sheet()}} or \code{\link[=sheets_cells]{sheets_cells()}} is used to limit
 the read to a specific rectangle of cells. The Sheets v4 API only accepts
-ranges in A1 notation, but googlesheets4 accepts and converts a few
-alternative specifications provided by the functions in the
-\link{cellranger} package. Of course, you can always provide A1-style
-ranges directly to functions like \code{\link[=read_sheet]{read_sheet()}} or \code{\link[=sheets_cells]{sheets_cells()}}.
+ranges in \href{https://developers.google.com/sheets/api/guides/concepts#a1_notation}{A1 notation},
+but googlesheets4 accepts and converts a few alternative specifications
+provided by the functions in the \link{cellranger} package. Of course,
+you can always provide A1-style ranges directly to functions like
+\code{\link[=read_sheet]{read_sheet()}} or \code{\link[=sheets_cells]{sheets_cells()}}.
 }
 \examples{
 \dontrun{
@@ -24,9 +25,16 @@ read_sheet(ss, range = cell_rows(1:3))
 read_sheet(ss, range = cell_cols("C:D"))
 read_sheet(ss, range = cell_cols(1))
 
-# Specify exactly upper bound on row or column
+# Specify upper or lower bound on row or column
 read_sheet(ss, range = cell_rows(c(NA, 4)))
 read_sheet(ss, range = cell_cols(c(NA, "D")))
+read_sheet(ss, range = cell_rows(c(3, NA)))
+read_sheet(ss, range = cell_cols(c(2, NA)))
+read_sheet(ss, range = cell_cols(c("C", NA)))
+
+# Specify a partially open rectangle
+read_sheet(ss, range = cell_limits(c(2, 3), c(NA, NA)))
+read_sheet(ss, range = cell_limits(c(1, 2), c(NA, 4)))
 }
 
 }

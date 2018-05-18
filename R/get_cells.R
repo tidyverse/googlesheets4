@@ -7,7 +7,7 @@ get_cells <- function(ss,
   ssid <- as_sheets_id(ss)
 
   ## sheet and range are vetted below, inside standardise_range()
-  ## TODO: check col_names_in_sheet
+  check_bool(col_names_in_sheet)
   check_non_negative_integer(skip)
   check_non_negative_integer(n_max)
 
@@ -17,20 +17,13 @@ get_cells <- function(ss,
 
   ## prepare range specification for API --------------------------------------
 
-  ## user's sheet, range --> our sheet, nominal_range
-  ## TODO: provide full cellranger-style flexibility
-  parsed_range <- standardise_range(sheet, range, x$sheets)
-  sheet <- parsed_range$sheet
-  nominal_range <- parsed_range$range
-  shim <- !is.null(nominal_range)
-
-  ## convert "skip 4 rows" into the range '4:ROW_MAX'
-  if (!shim && skip > 0) {
-    nominal_range <- range_from_skip(skip, sheet, x$sheets)
-  }
+  ## user's sheet, range, skip --> sheet name and cell range, suitable for API
+  range_spec <- form_range_spec(sheet, range, skip, x$sheets)
+  ## TRUE iff user specified a cell range in `range`
+  shim <- !is.null(range) && !is.null(range_spec$range)
 
   api_range <- as.character(
-    glue_collapse(c(sq_escape(sheet), nominal_range), sep = "!")
+    glue_collapse(c(sq_escape(range_spec$sheet), range_spec$range), sep = "!")
   )
   message_glue("Range {dq(api_range)}")
 
@@ -43,7 +36,7 @@ get_cells <- function(ss,
 
   ## enforce geometry on the cell data frame ----------------------------------
   if (shim) {
-    out <- insert_shims(out, nominal_range)
+    out <- insert_shims(out, range_spec$range)
     ## guarantee:
     ## every row and every column spanned by user's range is represented by at
     ## least one cell, (could be placeholders w/ no content from API, though)

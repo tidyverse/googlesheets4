@@ -24,93 +24,60 @@ test_that("sq_unescape() strips outer single quotes, de-duplicates inner", {
   )
 })
 
-test_that("standardise_range() falls back to first visible sheet (no range)", {
+test_that("resolve_sheet() errors for NULL or numeric sheet, if no sheet data", {
+  expect_error(resolve_sheet(), "no sheet metadata")
+  expect_error(resolve_sheet(sheet = 3), "no sheet metadata")
+})
+
+test_that("resolve_sheet() falls back to first visible sheet", {
   sdf <- tibble::tribble(
      ~ name, ~ visible,
     "alpha",     FALSE,
      "beta",     TRUE
   )
-  expect_identical(
-    standardise_range(sheet = NULL, range = NULL, sheet_df = sdf),
-    list(sheet = "beta", range = NULL)
-  )
+  expect_identical(resolve_sheet(sheet = NULL, sheet_df = sdf), "beta")
 })
 
-test_that("standardise_range() can look up a sheet by number", {
+test_that("resolve_sheet() can look up a sheet by number", {
   sdf <- tibble::tribble(
     ~ name,  ~ visible,
     "alpha",      TRUE,
-    "beta",      FALSE,
+     "beta",     FALSE,
     "gamma",     FALSE,
     "delta",      TRUE
   )
-  expect_identical(
-    standardise_range(sheet = 1, range = NULL, sheet_df = sdf),
-    list(sheet = "alpha", range = NULL)
-  )
-  expect_identical(
-    standardise_range(sheet = 2, range = NULL, sheet_df = sdf),
-    list(sheet = "delta", range = NULL)
-  )
+  expect_identical(resolve_sheet(sheet = 1, sheet_df = sdf), "alpha")
+  expect_identical(resolve_sheet(sheet = 2, sheet_df = sdf), "delta")
 })
 
-test_that("standardise_range() passes bare range through as range (no sheet)", {
-  expect_identical(
-    standardise_range(sheet = NULL, range = "A1"),
-    list(sheet = NULL, range = "A1")
-  )
-  expect_identical(
-    standardise_range(sheet = NULL, range = "A5:A"),
-    list(sheet = NULL, range = "A5:A")
-  )
-})
-
-test_that("standardise_range() prefers the sheet in `range` to `sheet`", {
-  expect_identical(
-    standardise_range(sheet = "nope", range = "yes!A5:A"),
-    list(sheet = "yes", range = "A5:A")
-  )
-})
-
-test_that("standardise_range() moves a named range from `range` to `sheet`", {
-  ## if range has 3 or fewer characters, this will still fail (A, AA, AAA)
-  ## TODO in code
-  expect_identical(
-    standardise_range(sheet = NULL, range = "beta"),
-    list(sheet = "beta", range = NULL)
-  )
-  expect_identical(
-    standardise_range(sheet = "nope", range = "beta"),
-    list(sheet = "beta", range = NULL)
-  )
-})
-
-test_that("standardise_range() errors for impossible numeric `sheet` input", {
+test_that("resolve_sheet() errors for impossible numeric `sheet` input", {
   sdf <- tibble::tibble(name = "a", visible = TRUE)
   expect_error(
-    standardise_range(sheet = -1, range = NULL, sheet_df = sdf),
+    resolve_sheet(sheet = -1, sheet_df = sdf),
     "Requested sheet number is -1"
   )
   expect_error(
-    standardise_range(sheet = 2, range = NULL, sheet_df = sdf),
+    resolve_sheet(sheet = 2, sheet_df = sdf),
     "Requested sheet number is 2"
   )
 })
 
-test_that("standardise_range() errors for numeric sheet, if no sheet data", {
-  expect_error(
-    standardise_range(sheet = 1, range = NULL, sheet_df = NULL),
-    "specified by number in the absence of"
+test_that("form_range_spec() prefers the sheet in `range` to `sheet`", {
+  expect_identical(
+    form_range_spec(sheet = "nope", range = "yes!A5:A7"),
+    list(sheet = "yes", range = "A5:A7")
   )
 })
 
-test_that("standardise_range() warns for numeric sheet, if only has range", {
-  expect_warning(
-    rg <- standardise_range(sheet = 2, range = "A1", sheet_df = NULL),
-    "Ignoring"
+test_that("form_range_spec() moves a named range from `range` to `sheet`", {
+  ## if range has 3 or fewer characters, this will still fail (A, AA, AAA)
+  ## TODO in code
+  expect_identical(
+    form_range_spec(sheet = NULL, range = "beta"),
+    list(sheet = "beta", range = NULL)
   )
   expect_identical(
-    rg,
-    list(sheet = NULL, range = "A1")
+    form_range_spec(sheet = "nope", range = "beta"),
+    list(sheet = "beta", range = NULL)
   )
 })

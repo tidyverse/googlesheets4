@@ -2,7 +2,7 @@
 
 noNA <- Negate(anyNA)
 allNA <- function(x) all(is.na(x))
-notNA <- function(x) Negate(is.na)
+notNA <- Negate(is.na)
 
 is_string <- function(x) is.character(x) && length(x) == 1L
 

@@ -48,14 +48,14 @@ NULL
 #' @rdname cell-specification
 NULL
 
-## shim around cellranger::as.range()!
+## shim around cellranger::as.range()
 ## I'm not sure if this is permanent or not?
 ## currently cellranger::as.range() does not tolerate any NAs
 ## but some valid Sheets ranges imply NAs in the cell limits
-## hence, this function
+## hence, this function must exist for now
 as_sheets_range <- function(x) {
-  stopifnot(inherits(x, "cell_limits"))
-  ## drop the cell_limits class and the `sheet` component
+  ## this is not our definitive source of sheet
+  x$sheet <- NA_character_
   limits <- x[c("ul", "lr")]
 
   ## "case numbers" refer to output produced by:

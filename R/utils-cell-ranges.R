@@ -17,6 +17,7 @@ sq_unescape <- function(x) {
   x
 }
 
+## the `...` are used to absorb extra variables when this is used inside pmap()
 make_range <- function(start_row, end_row, start_column, end_column,
                        sheet_name, ...) {
   cl <- cellranger::cell_limits(
@@ -27,70 +28,88 @@ make_range <- function(start_row, end_row, start_column, end_column,
   cellranger::as.range(cl, fo = "A1")
 }
 
-standardise_range <- function(sheet = NULL, range = NULL, sheet_df = NULL) {
-  ## a shim for cellranger input
-  ## TODO: decide whether to keep this and formalize or modify cellranger
-  if (inherits(range, what = "cell_limits")) {
-    sheet <- range$sheet %NA% sheet
-    range <- as_sheets_range(range)
-  } else if (is.null(range)) {
-    sheet <- sheet %||% 1L
-  } else {
-    check_length_one(range)
-    check_character(range)
-    parsed <- parse_user_range(range)
-    sheet <- parsed$sheet %||% sheet
-    range <- parsed$range
+## input: sheet, range, and skip from the user
+##        + data frame of sheet metadata
+## output: list with components
+##   * sheet name (or NULL)
+##   * Sheets-API-ready A1 range string
+form_range_spec <- function(sheet = NULL,
+                            range = NULL,
+                            skip = 0,
+                            sheet_df = NULL) {
+  if (is.null(range)) {
+    cell_limits <- cellranger::cell_rows(c(if (skip > 0) skip else NA, NA))
   }
 
-  if (!is.null(sheet)) {
-    check_length_one(sheet)
-    if (!is.character(sheet) && !is.numeric(sheet)) {
-      stop_glue(
-        "{bt('sheet')} must be either character (sheet name) or ",
-        "numeric (sheet number):\n",
-        "  * {bt('sheet')} has class {glue_collapse(class(sheet), sep = '/')}"
-      )
-    }
+  ## ideally, this would be cellranger::as.cell_limits.character()
+  ## but it cannot handle ranges like A:A or A5:A (yet?)
+  if (is.character(range)) {
+    cell_limits <- parse_user_range(range)
   }
-  ## range guaranteed to be NULL or unqualified cell ref or range
-  ## sheet guaranteed to be NULL, a number, or name of a sheet or named range
-  ## at least one of (sheet, range) guaranteed to be non-NULL
 
-  if (is.numeric(sheet) && is.null(sheet_df)) {
-    if (is.null(range)) {
-      ## we have nothing to send to the API as the range --> untenable
-      stop_glue(
-        "{bt('sheet')} specified by number in the absence of sheet data ",
-        "or a range."
-      )
-    }
-    warning_glue(
-      "{bt('sheet')} specified by number in the absence of sheet data. ",
-      "Ignoring."
+  sheet        <- cell_limits$sheet %NA% sheet %||% 1L
+  sheet        <- resolve_sheet(sheet, sheet_df)
+  ## TODO: extract MAX_ROW and MAX_COL from sheet and sheet_df
+  sheet_extent <- ""
+  cell_limits  <- resolve_cell_limits(cell_limits, sheet_extent)
+
+  list(
+    sheet = sheet,
+    ## this is a workaround for fact that cellranger::as.range() cannot
+    ## make ranges like A:A or 1:4 (yet)
+    ## also, the definitive source for sheet is not inside cell_limits
+    range = as_sheets_range(cell_limits)
+  )
+}
+
+check_sheet <- function(sheet = NULL) {
+  if (is.null(sheet)) return()
+  check_length_one(sheet)
+  if (!is.character(sheet) && !is.numeric(sheet)) {
+    stop_glue(
+      "{bt('sheet')} must be either character (sheet name) or ",
+      "numeric (sheet number):\n",
+      "  * {bt('sheet')} has class {glue_collapse(class(sheet), sep = '/')}"
     )
-    sheet <- NULL
+  }
+  return(sheet)
+}
+
+## sheet_df can be NULL iff is.character(sheet)
+## otherwise --> error
+## minimal sheet_df that works: tibble(name = "a", visible = TRUE)
+resolve_sheet <- function(sheet = NULL, sheet_df = NULL) {
+  check_sheet(sheet)
+  sheet <- sheet %||% 1L
+  if (is.character(sheet)) return(sheet)
+
+  if (is.null(sheet_df)) {
+    stop_glue(
+      "Need to look up the name of sheet in position {sheet}, but no sheet ",
+      "metadata was provided via {bt('sheet_df')}."
+    )
   }
 
-  if (is.numeric(sheet)) {
-    visible_sheets <- sheet_df$name[sheet_df$visible]
-    if (length(visible_sheets) < 1) {
-      stop_glue(
-        "No sheets are visible, therefore you must ",
-        "specify {bt('sheet')} explicitly and by name."
-      )
-    }
-    sheet <- as.integer(sheet)
-    if (!(sheet %in% seq_along(visible_sheets))) {
-      stop_glue(
-        "There are {length(visible_sheets)} visible sheets:\n",
-        "  * Requested sheet number is {sheet}"
-      )
-    }
-    sheet <- visible_sheets[[sheet]]
+  visible_sheets <- sheet_df$name[sheet_df$visible]
+  if (length(visible_sheets) < 1) {
+    stop_glue(
+      "No sheets are visible, therefore you must ",
+      "specify {bt('sheet')} explicitly and by name."
+    )
   }
+  sheet <- as.integer(sheet)
+  if (!(sheet %in% seq_along(visible_sheets))) {
+    stop_glue(
+      "There are {length(visible_sheets)} visible sheets:\n",
+      "  * Requested sheet number is {sheet}"
+    )
+  }
+  visible_sheets[[sheet]]
+}
 
-  list(sheet = sheet, range = range)
+resolve_cell_limits <- function(cell_limits, sheet_extent) {
+  ## TODO: write this function
+  cell_limits
 }
 
 A1_char_class <- "[a-zA-Z0-9:$]"
@@ -110,24 +129,30 @@ A1_decomp <- glue("(?<column>{letter_part})?(?<row>{number_part})?")
 ##
 ## Note: this function is NOT vectorized, x is scalar
 parse_user_range <- function(x) {
+  check_character(x)
+  check_length_one(x)
   ## match against <sheet name>!<A1 cell reference or range>?
   parsed <- rematch2::re_match(x, compound_rx)
 
   ## successful match (and parse)
-  if (!is.na(parsed$`.match`)) return(as.list(parsed[c("sheet", "range")]))
+  if (notNA(parsed$`.match`)) {
+    cell_limits <- limits_from_range(parsed$range)
+    cell_limits$sheet <- parsed$sheet
+    return(cell_limits)
+  }
 
   ## failed to match
   ## two possibilities:
   ##   * An A1 cell reference or range
   ##   * Name of a sheet or named region
   if (all(grepl(A1_rx, strsplit(x, split = ":")[[1]]))) {
-    list(sheet = NULL, range = x)
+    limits_from_range(x)
   } else {
     ## TO THINK: I am questioning if this should even be allowed
     ## perhaps you MUST use sheet argument for this, not range?
     ## to be clear: we're talking about passing a sheet name or name of a
     ## named range, without a '!A1:C4' type of range as suffix
-    list(sheet = x, range = NULL)
+    cell_limits(sheet = x)
   }
   ## TODO: above is still not sophisticated enough to detect that
   ## A, AA, AAA (strings of length less than 4) and

@@ -39,25 +39,25 @@ sheets_get_impl_ <- function(ssid,
 ## output: a list with S3 class `sheets_meta`
 sheets_spreadsheet <- function(x = list()) {
   ours_theirs <- list(
-     spreadsheet_id = "spreadsheetId",
+    spreadsheet_id  = "spreadsheetId",
     spreadsheet_url = "spreadsheetUrl",
-               name = list("properties", "title"),
-             locale = list("properties", "locale"),
-          time_zone = list("properties", "timeZone"),
-             sheets = integer(),
-       named_ranges = integer()
+    name            = list("properties", "title"),
+    locale          = list("properties", "locale"),
+    time_zone       = list("properties", "timeZone"),
+    sheets          = integer(),
+    named_ranges    = integer()
   )
   out <- map(ours_theirs, ~ pluck(x, .x))
 
   if (!is.null(x$sheets)) {
     p <- map(x$sheets, "properties")
     out$sheets <- tibble::tibble(
-              name = map_chr(p, "title"),
-             index = map_int(p, "index"),
-                id = map_chr(p, "sheetId"),
-              type = map_chr(p, "sheetType"),
-           visible = !map_lgl(p, "hidden", .default = FALSE),
-         grid_rows = map_int(p, c("gridProperties", "rowCount"), .default = NA),
+      name         = map_chr(p, "title"),
+      index        = map_int(p, "index"),
+      id           = map_chr(p, "sheetId"),
+      type         = map_chr(p, "sheetType"),
+      visible      = !map_lgl(p, "hidden", .default = FALSE),
+      grid_rows    = map_int(p, c("gridProperties", "rowCount"), .default = NA),
       grid_columns = map_int(p, c("gridProperties", "columnCount"), .default = NA)
     )
   }
@@ -65,21 +65,21 @@ sheets_spreadsheet <- function(x = list()) {
   if (!is.null(x$namedRanges)) {
     nr <- x$namedRanges
     out$named_ranges <- tibble::tibble(
-              name = map_chr(nr, "name"),
-             range = NA_character_,
-                id = map_chr(nr, "namedRangeId"),
-          sheet_id = map_chr(nr, c("range", "sheetId")),
-        sheet_name = NA_character_,
-        ## API sends zero-based row and column
-        ##   => we add one
-        ## API indices are half-open, i.e. [start, end)
-        ##   => we substract one from end_[row|column]
-        ## net effect
-        ##   => we add one to start_[row|column] but not to end_[row|column]
-         start_row = map_int(nr, c("range", "startRowIndex")) + 1L,
-           end_row = map_int(nr, c("range", "endRowIndex")),
+      name         = map_chr(nr, "name"),
+      range        = NA_character_,
+      id           = map_chr(nr, "namedRangeId"),
+      sheet_id     = map_chr(nr, c("range", "sheetId")),
+      sheet_name   = NA_character_,
+      ## API sends zero-based row and column
+      ##   => we add one
+      ## API indices are half-open, i.e. [start, end)
+      ##   => we substract one from end_[row|column]
+      ## net effect
+      ##   => we add one to start_[row|column] but not to end_[row|column]
+      start_row    = map_int(nr, c("range", "startRowIndex")) + 1L,
+      end_row      = map_int(nr, c("range", "endRowIndex")),
       start_column = map_int(nr, c("range", "startColumnIndex")) + 1L,
-        end_column = map_int(nr, c("range", "endColumnIndex"))
+      end_column   = map_int(nr, c("range", "endColumnIndex"))
     )
     out$named_ranges$sheet_name <- vlookup(
       out$named_ranges$sheet_id,

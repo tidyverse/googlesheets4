@@ -38,7 +38,7 @@ form_range_spec <- function(sheet = NULL,
                             skip = 0,
                             sheet_df = NULL) {
   if (is.null(range)) {
-    cell_limits <- cellranger::cell_rows(c(if (skip > 0) skip else NA, NA))
+    cell_limits <- cellranger::cell_rows(c(if (skip > 0) skip + 1 else NA, NA))
   }
 
   ## ideally, this would be cellranger::as.cell_limits.character()
@@ -49,8 +49,7 @@ form_range_spec <- function(sheet = NULL,
 
   sheet        <- cell_limits$sheet %NA% sheet %||% 1L
   sheet        <- resolve_sheet(sheet, sheet_df)
-  ## TODO: extract MAX_ROW and MAX_COL from sheet and sheet_df
-  sheet_extent <- ""
+  sheet_extent <- sheet_df[sheet_df$name == sheet, c("grid_rows", "grid_columns")]
   cell_limits  <- resolve_cell_limits(cell_limits, sheet_extent)
 
   list(
@@ -108,7 +107,18 @@ resolve_sheet <- function(sheet = NULL, sheet_df = NULL) {
 }
 
 resolve_cell_limits <- function(cell_limits, sheet_extent) {
-  ## TODO: write this function
+  ## we must modify cell_limits that have this property:
+  ## let X be in {row, column}
+  ## if start_X is specified, then end_X cannot be NA
+  ## NAs in that position must be replaced with the relevant maximum extent
+  row_limits <- map_int(cell_limits[c("ul", "lr")], 1)
+  col_limits <- map_int(cell_limits[c("ul", "lr")], 2)
+  if (identical(is.na(row_limits), c(ul = FALSE, lr = TRUE))) {
+    cell_limits$lr[1] <- sheet_extent$grid_rows
+  }
+  if (identical(is.na(col_limits), c(ul = FALSE, lr = TRUE))) {
+    cell_limits$lr[2] <- sheet_extent$grid_columns
+  }
   cell_limits
 }
 

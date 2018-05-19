@@ -47,12 +47,12 @@ sharing settings say: “anyone with a link can view”. `read_sheet()` has
 an example that shows googledrive calls to achieve this or you can do in
 the Sheets browser UI via *File \> Share …*.
 
-## Read a Sheet
+## `read_sheet()`
 
 `read_sheet()` is the main “read” function and should evoke
 `readr::read_csv()` and `readxl::read_excel()`. It’s an alias for
-`sheets_read()` (most functions in googlesheets4 actually start with
-`sheets_`). googlesheets4 is pipe-friendly (and reexports `%>%`), but
+`sheets_read()`. Most functions in googlesheets4 actually start with
+`sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`), but
 works just fine without the pipe.
 
 ### Identify and access your own Sheet
@@ -60,7 +60,8 @@ works just fine without the pipe.
 Let’s say you have a cheerful Google Sheet named “deaths”. If you want
 to access it by name, use googledrive to identify the document (capture
 its metadata, especially file id). Pass the result to functions like
-`sheets_get()` (gets file metadata) or `read_sheet()` (gets cell data).
+`sheets_get()` (gets file metadata) or `read_sheet()` (reads cells into
+a data frame).
 
 ``` r
 library(googledrive)
@@ -95,7 +96,7 @@ read_sheet(deaths, range = "A5:F8")
 #> # ... with 1 more variable: `Date of death` <dttm>
 ```
 
-If you’re willing to deal with the sheet’s id, just provide that
+If you’re willing to deal with the spreadsheet’s id, just provide that
 directly to googlesheets4 functions and omit googledrive.
 
 ``` r
@@ -117,7 +118,7 @@ name. googlesheets4 is focused on operations specific to Sheets and is
 more programming oriented. You must pass a file id or something that
 contains the file id.
 
-### Specifying which cells to read
+### Specify the range and column types
 
 We’ve made a few Sheets easy to access via `sheets_example()`. Here we
 read from a mini-Gapminder Sheet to show some of the different ways to
@@ -189,13 +190,11 @@ read_sheet(
 
 ## Other functions
 
-googlesheets4 exposes Sheet metadata via `sheets_get()` and can also be
-used to access raw cell data (one row per cell) via `sheets_cells()`.
-That data can be post-processed with `spread_sheet()` to obtain the same
-data frame you get from `read_sheet()`.
+`sheets_get()` exposes Sheet metadata. It has a nice print method, but
+there’s much more info in the object itself.
 
 ``` r
-sheets_get(sheets_example("mini-gap"))
+(mini_gap_meta <- sheets_get(sheets_example("mini-gap")))
 #>   Spreadsheet name: test-gs-mini-gapminder
 #>                 ID: 1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY
 #>             Locale: en_US
@@ -209,6 +208,32 @@ sheets_get(sheets_example("mini-gap"))
 #>       Europe: 6 x 6
 #>      Oceania: 6 x 6
 
+str(mini_gap_meta, max.level = 1)
+#> List of 7
+#>  $ spreadsheet_id : chr "1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY"
+#>  $ spreadsheet_url: chr "https://docs.google.com/spreadsheets/d/1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY/edit"
+#>  $ name           : chr "test-gs-mini-gapminder"
+#>  $ locale         : chr "en_US"
+#>  $ time_zone      : chr "Etc/GMT"
+#>  $ sheets         :Classes 'tbl_df', 'tbl' and 'data.frame': 5 obs. of  7 variables:
+#>  $ named_ranges   : NULL
+#>  - attr(*, "class")= chr [1:2] "sheets_meta" "list"
+
+mini_gap_meta$sheets
+#> # A tibble: 5 x 7
+#>   name     index id         type  visible grid_rows grid_columns
+#>   <chr>    <int> <chr>      <chr> <lgl>       <int>        <int>
+#> 1 Africa       0 2141688971 GRID  TRUE            6            6
+#> 2 Americas     1 2105295598 GRID  TRUE            6            6
+#> 3 Asia         2 1349264090 GRID  TRUE            6            6
+#> 4 Europe       3 1394602536 GRID  TRUE            6            6
+#> 5 Oceania      4 1167867454 GRID  TRUE            6            6
+```
+
+`sheets_cells()` returns a data frame with one row per cell and it gives
+access to raw cell data sent by the Sheets API.
+
+``` r
 (df <- sheets_cells(sheets_example("deaths"), range = "E5:E7"))
 #> Reading from 'deaths'
 #> Range "'arts'!E5:E7"
@@ -244,7 +269,13 @@ df$cell[[3]]
 #> 
 #> attr(,"class")
 #> [1] "CELL_DATE"   "SHEETS_CELL"
+```
 
+`spread_sheet()` converts data in the “one row per cell” form into the
+data frame you get from `read_sheet()`, which involves reshaping and
+column typing.
+
+``` r
 df %>% spread_sheet(col_types = "D")
 #> # A tibble: 2 x 1
 #>   `Date of birth`

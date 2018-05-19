@@ -7,8 +7,10 @@
 sheets_cells(ss, sheet = NULL, range = NULL)
 }
 \arguments{
-\item{ss}{Something that uniquely identifies a Google Sheet. Processed
-through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
+\item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
+which we can recover the ID, or a \code{\link[googledrive:dribble]{dribble}}, which
+is how googledrive represents Drive files. Processed through
+\code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
 \item{sheet}{Sheet to read, as in "worksheet" or "tab". Either a string (the
 name of a sheet), or an integer (the position of the sheet). Ignored if the

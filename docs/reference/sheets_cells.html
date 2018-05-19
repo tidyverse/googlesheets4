@@ -138,8 +138,10 @@ after reshaping and column typing.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ss</th>
-      <td><p>Something that uniquely identifies a Google Sheet. Processed
-through <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+      <td><p>Something that identifies a Google Sheet: its file ID, a URL from
+which we can recover the ID, or a <code><a href='http://www.rdocumentation.org/packages/googledrive/topics/dribble'>dribble</a></code>, which
+is how googledrive represents Drive files. Processed through
+<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
       <th>sheet</th>

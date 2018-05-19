@@ -7,17 +7,16 @@
 sheets_browse(ss)
 }
 \arguments{
-\item{ss}{Something that uniquely identifies a Google Sheet. Processed
-through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
+\item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
+which we can recover the ID, or a \code{\link[googledrive:dribble]{dribble}}, which
+is how googledrive represents Drive files. Processed through
+\code{\link[=as_sheets_id]{as_sheets_id()}}.}
 }
 \value{
-Character vector of file hyperlinks, from
-\code{\link[googledrive:drive_link]{googledrive::drive_link()}}, invisibly.
+The Sheet's browser URL, invisibly.
 }
 \description{
-Visits a Google Sheet in your default browser. TODO: Note that there is no
-provision for auth yet, so will only work for a Sheet that is readable to
-anyone.
+Visits a Google Sheet in your default browser.
 }
 \examples{
 \dontrun{

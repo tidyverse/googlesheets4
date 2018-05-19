@@ -1,18 +1,21 @@
 #' Visit Sheet in browser
 #'
-#' Visits a Google Sheet in your default browser. TODO: Note that there is no
-#' provision for auth yet, so will only work for a Sheet that is readable to
-#' anyone.
+#' Visits a Google Sheet in your default browser.
 #'
-#' @inheritParams sheets_cells
+#' @inheritParams read_sheet
 #'
-#' @return Character vector of file hyperlinks, from
-#'   [googledrive::drive_link()], invisibly.
+#' @return The Sheet's browser URL, invisibly.
 #' @export
 #' @examples
 #' \dontrun{
 #' sheets_example("mini-gap") %>% sheets_browse()
 #' }
 sheets_browse <- function(ss) {
-  googledrive::drive_browse(as_sheets_id(ss))
+  ## TO RECONSIDER AFTER AUTH: get the official link, if we're in auth state?
+  # googledrive::drive_browse(as_sheets_id(ss))
+  ssid <- as_sheets_id(ss)
+  url <- glue("https://docs.google.com/spreadsheets/d/{ssid}")
+  if (!interactive()) return(invisible(url))
+  utils::browseURL(url)
+  return(invisible(url))
 }

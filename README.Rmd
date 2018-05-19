@@ -44,13 +44,13 @@ devtools::install_github("tidyverse/googlesheets4")
 
 Sorry, auth hasn't been wired up yet, but that's the next priority. Until then, you can only use googlesheets4 to access Sheets where sharing settings say: "anyone with a link can view". `read_sheet()` has an example that shows googledrive calls to achieve this or you can do in the Sheets browser UI via *File > Share ...*.
 
-## Read a Sheet
+## `read_sheet()`
 
-`read_sheet()` is the main "read" function and should evoke `readr::read_csv()` and `readxl::read_excel()`. It's an alias for `sheets_read()` (most functions in googlesheets4 actually start with `sheets_`). googlesheets4 is pipe-friendly (and reexports `%>%`), but works just fine without the pipe.
+`read_sheet()` is the main "read" function and should evoke `readr::read_csv()` and `readxl::read_excel()`. It's an alias for `sheets_read()`. Most functions in googlesheets4 actually start with `sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`), but works just fine without the pipe.
 
 ### Identify and access your own Sheet
 
-Let's say you have a cheerful Google Sheet named "deaths". If you want to access it by name, use googledrive to identify the document (capture its metadata, especially file id). Pass the result to functions like `sheets_get()` (gets file metadata) or `read_sheet()` (gets cell data).
+Let's say you have a cheerful Google Sheet named "deaths". If you want to access it by name, use googledrive to identify the document (capture its metadata, especially file id). Pass the result to functions like `sheets_get()` (gets file metadata) or `read_sheet()` (reads cells into a data frame).
 
 ```{r}
 library(googledrive)
@@ -63,7 +63,7 @@ sheets_get(deaths)
 read_sheet(deaths, range = "A5:F8")
 ```
 
-If you're willing to deal with the sheet's id, just provide that directly to googlesheets4 functions and omit googledrive.
+If you're willing to deal with the spreadsheet's id, just provide that directly to googlesheets4 functions and omit googledrive.
 
 ```{r}
 sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
@@ -71,7 +71,7 @@ sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
 
 Lesson: googledrive is the friendliest way to work with files on Google Drive, including those that are Google Sheets. You can refer to files by name. googlesheets4 is focused on operations specific to Sheets and is more programming oriented. You must pass a file id or something that contains the file id.
 
-### Specifying which cells to read
+### Specify the range and column types
 
 We've made a few Sheets easy to access via `sheets_example()`. Here we read from a mini-Gapminder Sheet to show some of the different ways to specify (work)sheet and cell ranges. Note also that `col_types` gives control of column types.
 
@@ -91,19 +91,31 @@ read_sheet(
 
 ## Other functions
 
-googlesheets4 exposes Sheet metadata via `sheets_get()` and can also be used to access raw cell data (one row per cell) via `sheets_cells()`. That data can be post-processed with `spread_sheet()` to obtain the same data frame you get from `read_sheet()`.
+`sheets_get()` exposes Sheet metadata. It has a nice print method, but there's much more info in the object itself.
 
 ```{r}
-sheets_get(sheets_example("mini-gap"))
+(mini_gap_meta <- sheets_get(sheets_example("mini-gap")))
 
+str(mini_gap_meta, max.level = 1)
+
+mini_gap_meta$sheets
+```
+
+`sheets_cells()` returns a data frame with one row per cell and it gives access to raw cell data sent by the Sheets API.
+
+```{r}
 (df <- sheets_cells(sheets_example("deaths"), range = "E5:E7"))
 df$cell[[3]]
+```
 
+`spread_sheet()` converts data in the "one row per cell" form into the data frame you get from `read_sheet()`, which involves reshaping and column typing.
+
+```{r}
 df %>% spread_sheet(col_types = "D")
 ## is same as ...
 read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 ```
-  
+
 ## What's coming soon?
 
 OAuth2

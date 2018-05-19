@@ -28,9 +28,7 @@
 <script src="../pkgdown.js"></script>
 
 <meta property="og:title" content="Visit Sheet in browser — sheets_browse" />
-<meta property="og:description" content="Visits a Google Sheet in your default browser. TODO: Note that there is no
-provision for auth yet, so will only work for a Sheet that is readable to
-anyone." />
+<meta property="og:description" content="Visits a Google Sheet in your default browser." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,9 +119,7 @@ anyone." />
     <div class="hidden name"><code>sheets_browse.Rd</code></div>
     </div>
 
-    <p>Visits a Google Sheet in your default browser. TODO: Note that there is no
-provision for auth yet, so will only work for a Sheet that is readable to
-anyone.</p>
+    <p>Visits a Google Sheet in your default browser.</p>
 
     <pre class="usage"><span class='fu'>sheets_browse</span>(<span class='no'>ss</span>)</pre>
 
@@ -132,15 +128,16 @@ anyone.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ss</th>
-      <td><p>Something that uniquely identifies a Google Sheet. Processed
-through <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+      <td><p>Something that identifies a Google Sheet: its file ID, a URL from
+which we can recover the ID, or a <code><a href='http://www.rdocumentation.org/packages/googledrive/topics/dribble'>dribble</a></code>, which
+is how googledrive represents Drive files. Processed through
+<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Character vector of file hyperlinks, from
-<code><a href='http://www.rdocumentation.org/packages/googledrive/topics/drive_link'>googledrive::drive_link()</a></code>, invisibly.</p>
+    <p>The Sheet's browser URL, invisibly.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>

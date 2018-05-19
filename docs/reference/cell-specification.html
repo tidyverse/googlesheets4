@@ -30,10 +30,12 @@
 <meta property="og:title" content="Specify cells for reading — cell-specification" />
 <meta property="og:description" content="The range argument in read_sheet() or sheets_cells() is used to limit
 the read to a specific rectangle of cells. The Sheets v4 API only accepts
-ranges in A1 notation, but googlesheets4 accepts and converts a few
-alternative specifications provided by the functions in the
-cellranger package. Of course, you can always provide A1-style
-ranges directly to functions like read_sheet() or sheets_cells()." />
+ranges in
+A1 notation,
+but googlesheets4 accepts and converts a few alternative specifications
+provided by the functions in the cellranger package. Of course,
+you can always provide A1-style ranges directly to functions like
+read_sheet() or sheets_cells()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -126,10 +128,12 @@ ranges directly to functions like read_sheet() or sheets_cells()." />
 
     <p>The <code>range</code> argument in <code><a href='read_sheet.html'>read_sheet()</a></code> or <code><a href='sheets_cells.html'>sheets_cells()</a></code> is used to limit
 the read to a specific rectangle of cells. The Sheets v4 API only accepts
-ranges in A1 notation, but googlesheets4 accepts and converts a few
-alternative specifications provided by the functions in the
-cellranger package. Of course, you can always provide A1-style
-ranges directly to functions like <code><a href='read_sheet.html'>read_sheet()</a></code> or <code><a href='sheets_cells.html'>sheets_cells()</a></code>.</p>
+ranges in
+<a href='https://developers.google.com/sheets/api/guides/concepts#a1_notation'>A1 notation</a>,
+but googlesheets4 accepts and converts a few alternative specifications
+provided by the functions in the cellranger package. Of course,
+you can always provide A1-style ranges directly to functions like
+<code><a href='read_sheet.html'>read_sheet()</a></code> or <code><a href='sheets_cells.html'>sheets_cells()</a></code>.</p>
 
 
 
@@ -143,9 +147,16 @@ ranges directly to functions like <code><a href='read_sheet.html'>read_sheet()</
 <span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='st'>"C:D"</span>))
 <span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fl'>1</span>))
 
-<span class='co'># Specify exactly upper bound on row or column</span>
+<span class='co'># Specify upper or lower bound on row or column</span>
 <span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
 <span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='st'>"D"</span>)))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fu'>c</span>(<span class='fl'>3</span>, <span class='fl'>NA</span>)))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'>c</span>(<span class='fl'>2</span>, <span class='fl'>NA</span>)))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'>c</span>(<span class='st'>"C"</span>, <span class='fl'>NA</span>)))
+
+<span class='co'># Specify a partially open rectangle</span>
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_limits</span>(<span class='fu'>c</span>(<span class='fl'>2</span>, <span class='fl'>3</span>), <span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='fl'>NA</span>)))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_limits</span>(<span class='fu'>c</span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='fu'>c</span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>

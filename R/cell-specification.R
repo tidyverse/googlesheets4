@@ -2,8 +2,8 @@
 #'
 #' The `range` argument in [read_sheet()] or [sheets_cells()] is used to limit
 #' the read to a specific rectangle of cells. The Sheets v4 API only accepts
-#' ranges in [A1
-#' notation](https://developers.google.com/sheets/api/guides/concepts#a1_notation),
+#' ranges in
+#' [A1 notation](https://developers.google.com/sheets/api/guides/concepts#a1_notation),
 #' but googlesheets4 accepts and converts a few alternative specifications
 #' provided by the functions in the [cellranger][cellranger] package. Of course,
 #' you can always provide A1-style ranges directly to functions like

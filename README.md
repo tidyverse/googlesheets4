@@ -85,7 +85,7 @@ sheets_get(deaths)
 
 read_sheet(deaths, range = "A5:F8")
 #> Reading from 'deaths'
-#> Range "A5:F8"
+#> Range "'arts'!A5:F8"
 #> # A tibble: 3 x 6
 #>   Name          Profession   Age `Has kids` `Date of birth`    
 #>   <chr>         <chr>      <dbl> <lgl>      <dttm>             
@@ -211,13 +211,13 @@ sheets_get(sheets_example("mini-gap"))
 
 (df <- sheets_cells(sheets_example("deaths"), range = "E5:E7"))
 #> Reading from 'deaths'
-#> Range "E5:E7"
+#> Range "'arts'!E5:E7"
 #> # A tibble: 3 x 4
-#>     row   col loc   cell      
-#>   <int> <dbl> <chr> <list>    
-#> 1     5     5 E5    <list [3]>
-#> 2     6     5 E6    <list [4]>
-#> 3     7     5 E7    <list [4]>
+#>     row   col loc   cell           
+#>   <int> <dbl> <chr> <list>         
+#> 1     5     5 E5    <S3: CELL_TEXT>
+#> 2     6     5 E6    <S3: CELL_DATE>
+#> 3     7     5 E7    <S3: CELL_DATE>
 df$cell[[3]]
 #> $userEnteredValue
 #> $userEnteredValue$numberValue
@@ -239,6 +239,11 @@ df$cell[[3]]
 #> 
 #> $effectiveFormat$numberFormat$pattern
 #> [1] "M/D/YYYY"
+#> 
+#> 
+#> 
+#> attr(,"class")
+#> [1] "CELL_DATE"   "SHEETS_CELL"
 
 df %>% spread_sheet(col_types = "D")
 #> # A tibble: 2 x 1
@@ -249,7 +254,7 @@ df %>% spread_sheet(col_types = "D")
 ## is same as ...
 read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 #> Reading from 'deaths'
-#> Range "E5:E7"
+#> Range "'arts'!E5:E7"
 #> # A tibble: 2 x 1
 #>   `Date of birth`
 #>   <date>         

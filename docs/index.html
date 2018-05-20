@@ -118,7 +118,7 @@
 <div id="identify-and-access-your-own-sheet" class="section level3">
 <h3 class="hasAnchor">
 <a href="#identify-and-access-your-own-sheet" class="anchor"></a>Identify and access your own Sheet</h3>
-<p>Let’s say you have a cheerful Google Sheet named “deaths”. If you want to access it by name, use googledrive to identify the document (capture its metadata, especially file id). Pass the result to functions like <code><a href="reference/sheets_get.html">sheets_get()</a></code> (gets file metadata) or <code><a href="reference/read_sheet.html">read_sheet()</a></code> (reads cells into a data frame).</p>
+<p>Let’s say you have a cheerful Google Sheet named “deaths”. If you want to access it by name, use googledrive to identify the document (capture its metadata, especially file id). Pass the result to functions like <code><a href="reference/sheets_get.html">sheets_get()</a></code> (gets spreadsheet-specific metadata) or <code><a href="reference/read_sheet.html">read_sheet()</a></code> (reads cells into a data frame).</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(googledrive)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">library</span>(googlesheets4)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"></a>

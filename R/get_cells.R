@@ -114,10 +114,10 @@ insert_shims <- function(df, cell_limits) {
   start_col <- cell_limits$ul[[2]]
   end_col   <- cell_limits$lr[[2]]
 
-  shim_up    <- !is.na(start_row) && start_row < min(df$row)
-  shim_left  <- !is.na(start_col) && start_col < min(df$col)
-  shim_down  <- !is.na(end_row)   &&   end_row > max(df$row)
-  shim_right <- !is.na(end_col)   &&   end_col > max(df$col)
+  shim_up    <- notNA(start_row) && start_row < min(df$row)
+  shim_left  <- notNA(start_col) && start_col < min(df$col)
+  shim_down  <- notNA(end_row)   &&   end_row > max(df$row)
+  shim_right <- notNA(end_col)   &&   end_col > max(df$col)
 
   ## add placeholder to establish upper left corner
   if (shim_up || shim_left) {

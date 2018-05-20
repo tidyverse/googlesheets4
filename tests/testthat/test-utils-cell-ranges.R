@@ -62,6 +62,24 @@ test_that("resolve_sheet() errors for impossible numeric `sheet` input", {
   )
 })
 
+test_that("form_range_spec() can handle only a sheet / named range", {
+  expect_identical(
+    form_range_spec(sheet = "sheet")[["api_range"]],
+    "'sheet'"
+  )
+  expect_identical(
+    form_range_spec(range = "whatever")[["api_range"]],
+    "'whatever'"
+  )
+})
+
+test_that("form_range_spec() can handle cellranger input", {
+  expect_identical(
+    form_range_spec(sheet = "a", range = cell_rows(1:3))[["api_range"]],
+    "'a'!1:3"
+  )
+})
+
 test_that("form_range_spec() prefers the sheet in `range` to `sheet`", {
   expect_identical(
     form_range_spec(sheet = "nope", range = "yes!A5:A7")[["sheet"]],

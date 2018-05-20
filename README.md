@@ -60,8 +60,8 @@ works just fine without the pipe.
 Let’s say you have a cheerful Google Sheet named “deaths”. If you want
 to access it by name, use googledrive to identify the document (capture
 its metadata, especially file id). Pass the result to functions like
-`sheets_get()` (gets file metadata) or `read_sheet()` (reads cells into
-a data frame).
+`sheets_get()` (gets spreadsheet-specific metadata) or `read_sheet()`
+(reads cells into a data frame).
 
 ``` r
 library(googledrive)

@@ -23,14 +23,14 @@ limitize <- function(df) {
 
 expect_shim <- function(rg) {
   expect_identical(
-    limitize(insert_shims(cell_df, parse_user_range(rg))),
-    parse_user_range(rg)
+    limitize(insert_shims(cell_df, as_cell_limits(rg))),
+    as_cell_limits(rg)
   )
 }
 
 test_that("observed data occupies range rectangle --> no shim needed", {
   expect_identical(
-    insert_shims(cell_df, cell_limits = parse_user_range("B2:D3")),
+    insert_shims(cell_df, cell_limits = as_cell_limits("B2:D3")),
     cell_df
   )
 })

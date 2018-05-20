@@ -126,7 +126,7 @@ read_sheet <- function(ss,
   check_bool(trim_ws)
   check_non_negative_integer(guess_max)
 
-  ## params re: which cells to read are checked inside get_cells()
+  ## range spec params are checked inside get_cells():
   ## ss, sheet, range, skip, n_max
   df <- get_cells(
     ss = ss,

@@ -10,12 +10,14 @@
 \description{
 The \code{range} argument in \code{\link[=read_sheet]{read_sheet()}} or \code{\link[=sheets_cells]{sheets_cells()}} is used to limit
 the read to a specific rectangle of cells. The Sheets v4 API only accepts
-ranges in
-\href{https://developers.google.com/sheets/api/guides/concepts#a1_notation}{A1 notation},
+ranges in \href{https://developers.google.com/sheets/api/guides/concepts#a1_notation}{A1 notation},
 but googlesheets4 accepts and converts a few alternative specifications
 provided by the functions in the \link{cellranger} package. Of course,
 you can always provide A1-style ranges directly to functions like
-\code{\link[=read_sheet]{read_sheet()}} or \code{\link[=sheets_cells]{sheets_cells()}}.
+\code{\link[=read_sheet]{read_sheet()}} or \code{\link[=sheets_cells]{sheets_cells()}}. Why would you use the
+\link{cellranger} helpers? Some ranges are practically impossible to
+express in A1 notation, specifically when you want to describe rectangles
+with some bounds that are specified and others determined by the data.
 }
 \examples{
 \dontrun{

@@ -6,12 +6,12 @@
 \title{Read a Sheet into a data frame}
 \usage{
 read_sheet(ss, sheet = NULL, range = NULL, col_names = TRUE,
-  col_types = NULL, na = "", trim_ws = TRUE, skip = 0, n_max = Inf,
-  guess_max = min(1000, n_max))
+  col_types = NULL, na = "", trim_ws = TRUE, skip = 0,
+  n_max = Inf, guess_max = min(1000, n_max))
 
 sheets_read(ss, sheet = NULL, range = NULL, col_names = TRUE,
-  col_types = NULL, na = "", trim_ws = TRUE, skip = 0, n_max = Inf,
-  guess_max = min(1000, n_max))
+  col_types = NULL, na = "", trim_ws = TRUE, skip = 0,
+  n_max = Inf, guess_max = min(1000, n_max))
 }
 \arguments{
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from

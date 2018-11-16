@@ -1,3 +1,4 @@
+^internal$
 ^\.Rproj\.user$
 ^docs$
 ^_pkgdown\.yml$

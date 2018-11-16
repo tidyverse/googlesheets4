@@ -2,14 +2,7 @@ library(rprojroot)
 library(jsonlite)
 library(httr)
 library(tidyverse)
-
-## play with view() proposed by @jimhester
-is_sourced <- function() c("source", "sys.source") %in% vapply(sys.calls(), function(x) as.character(x[[1L]]), character(1))
-is_knitting <- function() !is.null(getOption("knitr.in.progress"))
-view <- function(x) {
-  if (interactive() && !is_sourced() && !is_knitting()) View(x)
-  invisible(x)
-}
+conflicted::conflict_prefer("flatten", "purrr")
 
 ## load the API spec, including download if necessary
 dd_cache <- find_package_root_file("data-raw") %>%
@@ -31,7 +24,7 @@ if (length(dd_cache) == 0) {
   json_fname <- rev(dd_cache)[1]
 }
 dd_content <- fromJSON(json_fname)
-view(dd_content)
+View(dd_content)
 
 dd_content[["baseUrl"]]
 ## "https://sheets.googleapis.com/"
@@ -54,7 +47,7 @@ names(values) <- map_chr(values, "id")
 
 ## catenate these two lists of methods
 endpoints <- c(spreadsheets, values)
-view(endpoints)
+View(endpoints)
 
 ## add API-wide params to all endpoints
 add_global_params <- function(x) {
@@ -72,7 +65,7 @@ edf <- endpoints %>%
   transpose(.names = nms) %>%
   simplify_all(.type = character(1)) %>%
   as_tibble()
-view(edf)
+View(edf)
 
 ## more processing is needed :(
 
@@ -87,7 +80,7 @@ edf <- edf %>%
 
 ## these look identical, are they?
 identical(edf$path, edf$flatPath)
-## drop flatPath
+## Yes! drop flatPath
 edf$flatPath <- NULL
 
 ## enforce my own variable order
@@ -106,7 +99,7 @@ edf$response <- edf$response %>%
   map_chr("$ref", .null = NA_character_)
 edf$request <- edf$request %>%
   map_chr("$ref", .null = NA_character_)
-view(edf)
+View(edf)
 
 ## tbh I'm not sure what 'parameterOrder' is good for?
 
@@ -122,8 +115,11 @@ params <- edf %>%
     )
   } %>%
   select(id, pname, parameters)
-# params$parameters %>% map(names) %>% reduce(union)
-nms <- c("location", "required", "type", "repeated", "enum", "description")
+#params$parameters %>% map(names) %>% reduce(union)
+nms <- c(
+  "location", "required", "type", "repeated", "description",
+  "enum", "enumDescriptions", "default"
+)
 
 ## tibble with one row per parameter
 ## variables method and pname keep track of endpoint and parameter name
@@ -138,9 +134,12 @@ params <- params %>%
     required = required %>% map(1, .null = NA) %>% flatten_lgl(),
     type = type %>% flatten_chr(),
     repeated = repeated %>% map(1, .null = NA) %>% flatten_lgl(),
-    enum = enum %>%  modify_if(is_null, ~ NA),
-    description = description %>% flatten_chr()
-  )
+    description = description %>% flatten_chr(),
+    enum = enum %>% modify_if(is_null, ~ NA)
+    #enumDescriptions = enumDescriptions %>% modify_if(is_null, ~ NA),
+    #default = default %>% map(1, .null = NA) %>% flatten_chr()
+  ) %>%
+  select(-enumDescriptions, -default)
 
 ## repack all the info for each parameter into a list
 repacked <- params %>%
@@ -161,7 +160,7 @@ edf <- edf %>%
   select(-parameters) %>%
   left_join(params) %>%
   select(id, httpMethod, path, parameters, everything())
-view(edf)
+View(edf)
 
 ## WE ARE DONE
 ## saving in various forms
@@ -178,7 +177,7 @@ saveRDS(edf, file = out_fname)
 elist <- edf %>%
   pmap(list) %>%
   set_names(edf$id)
-view(elist)
+View(elist)
 
 out_fname <- str_replace(
   json_fname,
@@ -194,6 +193,13 @@ elist %>%
   toJSON(pretty = TRUE) %>%
   writeLines(out_fname)
 
+## as csv, dropping the 'parameters' list-column
+out_fname <- str_replace(
+  json_fname,
+  "discovery-document.json",
+  "endpoints-list.csv")
+write_csv(select(edf, -parameters), path = out_fname)
+
 ## partial spec as list, i.e. keep only the variables I currently use to
 ## create the API
 ## rename to 'method', from 'httpMethod'
@@ -202,9 +208,9 @@ elist %>%
   pmap(list) %>%
   set_names(edf$id)
 attr(.endpoints, "base_url") <- dd_content$baseUrl
-view(.endpoints)
+View(.endpoints)
 
-devtools::use_data(.endpoints, internal = TRUE, overwrite = TRUE)
+usethis::use_data(.endpoints, internal = TRUE, overwrite = TRUE)
 
 ## TO CONSIDER:
 ## store schemas that seem very important, i.e. I might actually write

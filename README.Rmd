@@ -11,6 +11,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+googledrive::drive_auth(email = "jenny@rstudio.com")
 ```
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -52,7 +53,9 @@ Sorry, auth hasn't been wired up yet, but that's the next priority. Until then, 
 
 Let's say you have a cheerful Google Sheet named "deaths". If you want to access it by name, use googledrive to identify the document (capture its metadata, especially file id). Pass the result to functions like `sheets_get()` (gets spreadsheet-specific metadata) or `read_sheet()` (reads cells into a data frame).
 
-```{r}
+<!-- remove the 'message = 4' later -->
+
+```{r message=4}
 library(googledrive)
 library(googlesheets4)
 

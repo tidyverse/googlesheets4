@@ -63,15 +63,17 @@ its metadata, especially file id). Pass the result to functions like
 `sheets_get()` (gets spreadsheet-specific metadata) or `read_sheet()`
 (reads cells into a data frame).
 
+<!-- remove the 'message = 4' later -->
+
 ``` r
 library(googledrive)
 library(googlesheets4)
 
 (deaths <- drive_get("deaths"))
 #> # A tibble: 1 x 4
-#>   name   path     id                                        drive_resource
-#>   <chr>  <chr>    <chr>                                     <list>        
-#> 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5… <list [33]>
+#>   name   path     id                                         drive_resource
+#>   <chr>  <chr>    <chr>                                      <list>        
+#> 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5w… <list [33]>
 
 sheets_get(deaths)
 #>   Spreadsheet name: deaths
@@ -86,14 +88,12 @@ sheets_get(deaths)
 
 read_sheet(deaths, range = "A5:F8")
 #> Reading from 'deaths'
-#> Range "'arts'!A5:F8"
 #> # A tibble: 3 x 6
-#>   Name          Profession   Age `Has kids` `Date of birth`    
-#>   <chr>         <chr>      <dbl> <lgl>      <dttm>             
-#> 1 David Bowie   musician      69 TRUE       1947-01-08 00:00:00
-#> 2 Carrie Fisher actor         60 TRUE       1956-10-21 00:00:00
-#> 3 Chuck Berry   musician      90 TRUE       1926-10-18 00:00:00
-#> # ... with 1 more variable: `Date of death` <dttm>
+#>   Name  Profession   Age `Has kids` `Date of birth`     `Date of death`    
+#>   <chr> <chr>      <dbl> <lgl>      <dttm>              <dttm>             
+#> 1 Davi… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
+#> 2 Carr… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00
+#> 3 Chuc… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
 ```
 
 If you’re willing to deal with the spreadsheet’s id, just provide that
@@ -154,19 +154,19 @@ read_sheet(sheets_example("deaths"), skip = 4, n_max = 10)
 #> Reading from 'deaths'
 #> Range "'arts'!5:1000"
 #> # A tibble: 10 x 6
-#>    Name               Profession   Age `Has kids` `Date of birth`    
-#>    <chr>              <chr>      <dbl> <lgl>      <dttm>             
-#>  1 David Bowie        musician      69 TRUE       1947-01-08 00:00:00
-#>  2 Carrie Fisher      actor         60 TRUE       1956-10-21 00:00:00
-#>  3 Chuck Berry        musician      90 TRUE       1926-10-18 00:00:00
-#>  4 Bill Paxton        actor         61 TRUE       1955-05-17 00:00:00
-#>  5 Prince             musician      57 TRUE       1958-06-07 00:00:00
-#>  6 Alan Rickman       actor         69 FALSE      1946-02-21 00:00:00
-#>  7 Florence Henderson actor         82 TRUE       1934-02-14 00:00:00
-#>  8 Harper Lee         author        89 FALSE      1926-04-28 00:00:00
-#>  9 Zsa Zsa Gábor      actor         99 TRUE       1917-02-06 00:00:00
-#> 10 George Michael     musician      53 FALSE      1963-06-25 00:00:00
-#> # ... with 1 more variable: `Date of death` <dttm>
+#>    Name  Profession   Age `Has kids` `Date of birth`    
+#>    <chr> <chr>      <dbl> <lgl>      <dttm>             
+#>  1 Davi… musician      69 TRUE       1947-01-08 00:00:00
+#>  2 Carr… actor         60 TRUE       1956-10-21 00:00:00
+#>  3 Chuc… musician      90 TRUE       1926-10-18 00:00:00
+#>  4 Bill… actor         61 TRUE       1955-05-17 00:00:00
+#>  5 Prin… musician      57 TRUE       1958-06-07 00:00:00
+#>  6 Alan… actor         69 FALSE      1946-02-21 00:00:00
+#>  7 Flor… actor         82 TRUE       1934-02-14 00:00:00
+#>  8 Harp… author        89 FALSE      1926-04-28 00:00:00
+#>  9 Zsa … actor         99 TRUE       1917-02-06 00:00:00
+#> 10 Geor… musician      53 FALSE      1963-06-25 00:00:00
+#> # … with 1 more variable: `Date of death` <dttm>
 
 read_sheet(
   sheets_example("deaths"), range = "other!A5:F15", col_types = "?ci??D"
@@ -174,18 +174,18 @@ read_sheet(
 #> Reading from 'deaths'
 #> Range "'other'!A5:F15"
 #> # A tibble: 10 x 6
-#>    Name    Profession   Age `Has kids` `Date of birth`     `Date of death`
-#>    <chr>   <chr>      <int> <lgl>      <dttm>              <date>         
-#>  1 Vera R… scientist     88 TRUE       1928-07-23 00:00:00 2016-12-25     
-#>  2 Mohame… athlete       74 TRUE       1942-01-17 00:00:00 2016-06-03     
-#>  3 Morley… journalist    84 TRUE       1931-11-08 00:00:00 2016-05-19     
-#>  4 Fidel … politician    90 TRUE       1926-08-13 00:00:00 2016-11-25     
-#>  5 Antoni… lawyer        79 TRUE       1936-03-11 00:00:00 2016-02-13     
-#>  6 Jo Cox  politician    41 TRUE       1974-06-22 00:00:00 2016-06-16     
-#>  7 Janet … lawyer        78 FALSE      1938-07-21 00:00:00 2016-11-07     
-#>  8 Gwen I… journalist    61 FALSE      1955-09-29 00:00:00 2016-11-14     
-#>  9 John G… astronaut     95 TRUE       1921-07-28 00:00:00 2016-12-08     
-#> 10 Pat Su… coach         64 TRUE       1952-06-14 00:00:00 2016-06-28
+#>    Name     Profession   Age `Has kids` `Date of birth`     `Date of death`
+#>    <chr>    <chr>      <int> <lgl>      <dttm>              <date>         
+#>  1 Vera Ru… scientist     88 TRUE       1928-07-23 00:00:00 2016-12-25     
+#>  2 Mohamed… athlete       74 TRUE       1942-01-17 00:00:00 2016-06-03     
+#>  3 Morley … journalist    84 TRUE       1931-11-08 00:00:00 2016-05-19     
+#>  4 Fidel C… politician    90 TRUE       1926-08-13 00:00:00 2016-11-25     
+#>  5 Antonin… lawyer        79 TRUE       1936-03-11 00:00:00 2016-02-13     
+#>  6 Jo Cox   politician    41 TRUE       1974-06-22 00:00:00 2016-06-16     
+#>  7 Janet R… lawyer        78 FALSE      1938-07-21 00:00:00 2016-11-07     
+#>  8 Gwen If… journalist    61 FALSE      1955-09-29 00:00:00 2016-11-14     
+#>  9 John Gl… astronaut     95 TRUE       1921-07-28 00:00:00 2016-12-08     
+#> 10 Pat Sum… coach         64 TRUE       1952-06-14 00:00:00 2016-06-28
 ```
 
 ## Other functions

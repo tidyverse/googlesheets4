@@ -52,25 +52,26 @@
 request_generate <- function(endpoint = character(),
                              params = list(),
                              key = NULL,
-                             token = NULL) {
-
+                             token = sheets_token()) {
   ept <- .endpoints[[endpoint]]
   if (is.null(ept)) {
     stop_glue("\nEndpoint not recognized:\n  * {endpoint}")
   }
 
+  ## modifications specific to googlesheets4 package
+  params$key <- key %||% params$key %||% sheets_api_key()
+
   req <- gargle::request_develop(
     endpoint = ept,
     params = params,
-    base_url = "https://sheets.googleapis.com/"
+    base_url = attr(.endpoints, which = "base_url", exact = TRUE)
   )
   gargle::request_build(
-    method = req$method,
     path = req$path,
+    method = req$method,
     params = req$params,
     body = req$body,
-    base_url = req$base_url,
     token = token,
-    key = key %||% gargle::tidyverse_api_key()
+    base_url = req$base_url
   )
 }

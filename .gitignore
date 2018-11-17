@@ -4,7 +4,6 @@ internal
 .RData
 .Ruserdata
 inst/doc
-.httr-oauth*
 scratch.R
 *cache*
 old

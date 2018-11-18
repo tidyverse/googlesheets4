@@ -12,6 +12,7 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 googledrive::drive_auth(email = "jenny@rstudio.com")
+googlesheets4::sheets_auth(email = "jenny@rstudio.com")
 ```
 
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
@@ -40,10 +41,13 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("tidyverse/googlesheets4")
 ```
+## Auth
 
-## No auth yet!
+googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need.
 
-Sorry, auth hasn't been wired up yet, but that's the next priority. Until then, you can only use googlesheets4 to access Sheets where sharing settings say: "anyone with a link can view". `read_sheet()` has an example that shows googledrive calls to achieve this or you can do in the Sheets browser UI via *File > Share ...*.
+The `sheets_auth_*()` family of functions gives the user more control, in order to build more advanced workflows.
+
+For this README, we've logged into Google as a specific user in a hidden chunk. This OAuth flow is still under development and is expected to change.
 
 ## `read_sheet()`
 
@@ -51,7 +55,7 @@ Sorry, auth hasn't been wired up yet, but that's the next priority. Until then, 
 
 ### Identify and access your own Sheet
 
-Let's say you have a cheerful Google Sheet named "deaths". If you want to access it by name, use googledrive to identify the document (capture its metadata, especially file id). Pass the result to functions like `sheets_get()` (gets spreadsheet-specific metadata) or `read_sheet()` (reads cells into a data frame).
+Let's say you have a cheerful Google Sheet named "deaths". If you want to access it by name, use [googledrive](https://googledrive.tidyverse.org) to identify the document (capture its metadata, especially file id).
 
 <!-- remove the 'message = 4' later -->
 
@@ -60,7 +64,14 @@ library(googledrive)
 library(googlesheets4)
 
 (deaths <- drive_get("deaths"))
+```
 
+Pass the result to googlesheets4 functions such as:
+
+  * `sheets_get()`: gets spreadsheet-specific metadata
+  * `read_sheet()`: reads cells into a data frame
+
+```{r}
 sheets_get(deaths)
 
 read_sheet(deaths, range = "A5:F8")
@@ -72,11 +83,11 @@ If you're willing to deal with the spreadsheet's id, just provide that directly 
 sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
 ```
 
-Lesson: googledrive is the friendliest way to work with files on Google Drive, including those that are Google Sheets. You can refer to files by name. googlesheets4 is focused on operations specific to Sheets and is more programming oriented. You must pass a file id or something that contains the file id.
+Lesson: googledrive is the friendliest way to work with files on Google Drive, including files that are Google Sheets. You can refer to files by name. googlesheets4 is focused on operations specific to Sheets and is more programming oriented. You must pass a file id or something that contains the file id.
 
 ### Specify the range and column types
 
-We've made a few Sheets easy to access via `sheets_example()`. Here we read from a mini-Gapminder Sheet to show some of the different ways to specify (work)sheet and cell ranges. Note also that `col_types` gives control of column types.
+We've made a few world-readable Sheets easy to access via `sheets_example()`. Here we read from a mini-Gapminder Sheet to show some of the different ways to specify (work)sheet and cell ranges. Note also that `col_types` gives control of column types.
 
 ```{r}
 library(googlesheets4)
@@ -92,7 +103,46 @@ read_sheet(
 )
 ```
 
-## Other functions
+## Roundtripping with a private Sheet
+
+Here is a demo of putting the iris data into a new, private Sheet. Then reading it back into R and exporting as an Excel workbook. Then reading that back into R!
+
+First, put the iris data into a csv file.
+
+```{r}
+(iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
+write.csv(iris, iris_tempfile, row.names = FALSE)
+```
+
+Use `googledrive::drive_upload()` to upload the csv and simultaneously convert to a Sheet.
+
+```{r}
+(iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
+
+## visit the new Sheet in the browser, in an interactive session!
+drive_browse(iris_ss)
+```
+
+Read data from the private Sheet into R.
+```{r}
+read_sheet(iris_ss, range = "B1:D6")
+```
+
+Download the Sheet as an Excel workbook and read it back in via `readxl::read_excel()`.
+
+```{r}
+(iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
+drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
+readxl::read_excel(iris_xlsxfile)
+```
+
+Clean up.
+
+```{r}
+file.remove(iris_tempfile, iris_xlsxfile)
+```
+
+## Get Sheet metadata or detailed cell data
 
 `sheets_get()` exposes Sheet metadata. It has a nice print method, but there's much more info in the object itself.
 
@@ -119,9 +169,7 @@ df %>% spread_sheet(col_types = "D")
 read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 ```
 
-## What's coming soon?
-
-OAuth2
+## What's yet to come?
 
 Writing to Sheets
 

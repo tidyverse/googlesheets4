@@ -4,7 +4,7 @@
 \alias{sheets_deauth}
 \title{Suspend authorization}
 \usage{
-sheets_deauth(verbose = TRUE)
+sheets_deauth()
 }
 \description{
 Put googlesheets4 into a de-authorized state. Instead of sending a token,

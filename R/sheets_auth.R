@@ -60,7 +60,15 @@ sheets_auth <- function(email = NULL,
     cache = cache,
     use_oob = use_oob
   )
-  stopifnot(is_legit_token(cred, verbose = TRUE))
+  if (!is_legit_token(cred, verbose = TRUE)) {
+    stop(
+      "Can't get Google credentials.\n",
+      "Are you running googlesheets4 in a non-interactive session? Consider:\n",
+      "  * sheets_deauth() to prevent the attempt to get credentials.\n",
+      "  * Explictly use of sheets_auth() to provide auth instructions.\n",
+      call. = FALSE
+    )
+  }
   set_access_cred(cred)
   set_auth_active(TRUE)
 
@@ -85,7 +93,7 @@ sheets_auth <- function(email = NULL,
 #' sheets_email()
 #' sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
 #' }
-sheets_deauth <- function(verbose = TRUE) {
+sheets_deauth <- function() {
   set_auth_active(FALSE)
   set_access_cred(NULL)
 }

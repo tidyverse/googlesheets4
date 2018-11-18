@@ -92,6 +92,7 @@
 #' @export
 #'
 #' @examples
+#' \dontshow{sheets_deauth()}
 #' ss <- sheets_example("deaths")
 #' read_sheet(ss, range = "A5:F15")
 #' read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")

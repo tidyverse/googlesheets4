@@ -39,13 +39,18 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("tidyverse/googlesheets4")
 ```
 
-## No auth yet\!
+## Auth
 
-Sorry, auth hasn’t been wired up yet, but that’s the next priority.
-Until then, you can only use googlesheets4 to access Sheets where
-sharing settings say: “anyone with a link can view”. `read_sheet()` has
-an example that shows googledrive calls to achieve this or you can do in
-the Sheets browser UI via *File \> Share …*.
+googlesheets4 will, by default, help you interact with Sheets as an
+authenticated Google user. The package facilitates this process upon
+first need.
+
+The `sheets_auth_*()` family of functions gives the user more control,
+in order to build more advanced workflows.
+
+For this README, we’ve logged into Google as a specific user in a hidden
+chunk. This OAuth flow is still under development and is expected to
+change.
 
 ## `read_sheet()`
 
@@ -58,10 +63,9 @@ works just fine without the pipe.
 ### Identify and access your own Sheet
 
 Let’s say you have a cheerful Google Sheet named “deaths”. If you want
-to access it by name, use googledrive to identify the document (capture
-its metadata, especially file id). Pass the result to functions like
-`sheets_get()` (gets spreadsheet-specific metadata) or `read_sheet()`
-(reads cells into a data frame).
+to access it by name, use
+[googledrive](https://googledrive.tidyverse.org) to identify the
+document (capture its metadata, especially file id).
 
 <!-- remove the 'message = 4' later -->
 
@@ -74,7 +78,16 @@ library(googlesheets4)
 #>   name   path     id                                         drive_resource
 #>   <chr>  <chr>    <chr>                                      <list>        
 #> 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5w… <list [33]>
+```
 
+Pass the result to googlesheets4 functions such as:
+
+  - `sheets_get()`: gets spreadsheet-specific metadata
+  - `read_sheet()`: reads cells into a data frame
+
+<!-- end list -->
+
+``` r
 sheets_get(deaths)
 #>   Spreadsheet name: deaths
 #>                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA
@@ -88,6 +101,7 @@ sheets_get(deaths)
 
 read_sheet(deaths, range = "A5:F8")
 #> Reading from 'deaths'
+#> Range "'arts'!A5:F8"
 #> # A tibble: 3 x 6
 #>   Name  Profession   Age `Has kids` `Date of birth`     `Date of death`    
 #>   <chr> <chr>      <dbl> <lgl>      <dttm>              <dttm>             
@@ -113,17 +127,17 @@ sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
 ```
 
 Lesson: googledrive is the friendliest way to work with files on Google
-Drive, including those that are Google Sheets. You can refer to files by
+Drive, including files that are Google Sheets. You can refer to files by
 name. googlesheets4 is focused on operations specific to Sheets and is
 more programming oriented. You must pass a file id or something that
 contains the file id.
 
 ### Specify the range and column types
 
-We’ve made a few Sheets easy to access via `sheets_example()`. Here we
-read from a mini-Gapminder Sheet to show some of the different ways to
-specify (work)sheet and cell ranges. Note also that `col_types` gives
-control of column types.
+We’ve made a few world-readable Sheets easy to access via
+`sheets_example()`. Here we read from a mini-Gapminder Sheet to show
+some of the different ways to specify (work)sheet and cell ranges. Note
+also that `col_types` gives control of column types.
 
 ``` r
 library(googlesheets4)
@@ -188,7 +202,92 @@ read_sheet(
 #> 10 Pat Sum… coach         64 TRUE       1952-06-14 00:00:00 2016-06-28
 ```
 
-## Other functions
+## Roundtripping with a private Sheet
+
+Here is a demo of putting the iris data into a new, private Sheet. Then
+reading it back into R and exporting as an Excel workbook. Then reading
+that back into R\!
+
+First, put the iris data into a csv file.
+
+``` r
+(iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp3p5QYc/iris-18325120171a.csv"
+write.csv(iris, iris_tempfile, row.names = FALSE)
+```
+
+Use `googledrive::drive_upload()` to upload the csv and simultaneously
+convert to a Sheet.
+
+``` r
+(iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
+#> Local file:
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp3p5QYc/iris-18325120171a.csv
+#> uploaded into Drive file:
+#>   * iris-18325120171a: 1wKYF0ChbcxUJJm8LZbLwdTaOREjI6AJ7kO5SxR9MfmQ
+#> with MIME type:
+#>   * application/vnd.google-apps.spreadsheet
+#> # A tibble: 1 x 3
+#>   name              id                                       drive_resource
+#> * <chr>             <chr>                                    <list>        
+#> 1 iris-18325120171a 1wKYF0ChbcxUJJm8LZbLwdTaOREjI6AJ7kO5SxR… <list [33]>
+
+## visit the new Sheet in the browser, in an interactive session!
+drive_browse(iris_ss)
+```
+
+Read data from the private Sheet into R.
+
+``` r
+read_sheet(iris_ss, range = "B1:D6")
+#> Reading from 'iris-18325120171a'
+#> Range "'iris-18325120171a.csv'!B1:D6"
+#> # A tibble: 5 x 3
+#>   Sepal.Width Petal.Length Petal.Width
+#>         <dbl>        <dbl>       <dbl>
+#> 1         3.5          1.4         0.2
+#> 2         3            1.4         0.2
+#> 3         3.2          1.3         0.2
+#> 4         3.1          1.5         0.2
+#> 5         3.6          1.4         0.2
+```
+
+Download the Sheet as an Excel workbook and read it back in via
+`readxl::read_excel()`.
+
+``` r
+(iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp3p5QYc/iris-18325120171a.xlsx"
+drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
+#> File downloaded:
+#>   * iris-18325120171a
+#> Saved locally as:
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp3p5QYc/iris-18325120171a.xlsx
+readxl::read_excel(iris_xlsxfile)
+#> # A tibble: 150 x 5
+#>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#>           <dbl>       <dbl>        <dbl>       <dbl> <chr>  
+#>  1          5.1         3.5          1.4         0.2 setosa 
+#>  2          4.9         3            1.4         0.2 setosa 
+#>  3          4.7         3.2          1.3         0.2 setosa 
+#>  4          4.6         3.1          1.5         0.2 setosa 
+#>  5          5           3.6          1.4         0.2 setosa 
+#>  6          5.4         3.9          1.7         0.4 setosa 
+#>  7          4.6         3.4          1.4         0.3 setosa 
+#>  8          5           3.4          1.5         0.2 setosa 
+#>  9          4.4         2.9          1.4         0.2 setosa 
+#> 10          4.9         3.1          1.5         0.1 setosa 
+#> # … with 140 more rows
+```
+
+Clean up.
+
+``` r
+file.remove(iris_tempfile, iris_xlsxfile)
+#> [1] TRUE TRUE
+```
+
+## Get Sheet metadata or detailed cell data
 
 `sheets_get()` exposes Sheet metadata. It has a nice print method, but
 there’s much more info in the object itself.
@@ -211,7 +310,7 @@ there’s much more info in the object itself.
 str(mini_gap_meta, max.level = 1)
 #> List of 7
 #>  $ spreadsheet_id : chr "1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY"
-#>  $ spreadsheet_url: chr "https://docs.google.com/spreadsheets/d/1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY/edit"
+#>  $ spreadsheet_url: chr "https://docs.google.com/a/rstudio.com/spreadsheets/d/1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY/edit"
 #>  $ name           : chr "test-gs-mini-gapminder"
 #>  $ locale         : chr "en_US"
 #>  $ time_zone      : chr "Etc/GMT"
@@ -293,9 +392,7 @@ read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 #> 2 1956-10-21
 ```
 
-## What’s coming soon?
-
-OAuth2
+## What’s yet to come?
 
 Writing to Sheets
 

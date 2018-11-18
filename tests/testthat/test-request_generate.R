@@ -3,7 +3,8 @@ context("test-request_generate.R")
 test_that("can generate a basic request", {
   req <- request_generate(
     "spreadsheets.get",
-    list(spreadsheetId = "abc123")
+    list(spreadsheetId = "abc123"),
+    token = NULL
   )
   expect_identical(req$method, "GET")
   expect_match(

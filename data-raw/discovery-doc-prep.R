@@ -85,7 +85,10 @@ edf$flatPath <- NULL
 
 ## enforce my own variable order
 edf <- edf %>%
-  select(id, httpMethod, path, parameters, scopes, description, everything())
+  select(
+    id, httpMethod, path, parameters, scopes, description,
+    response, request, parameterOrder, everything()
+  )
 
 edf$scopes <- edf$scopes %>%
   map(~ gsub("https://www.googleapis.com/auth/", "", .)) %>%
@@ -210,7 +213,16 @@ write_csv(select(edf, -parameters), path = out_fname)
 attr(.endpoints, "base_url") <- dd_content$baseUrl
 View(.endpoints)
 
-usethis::use_data(.endpoints, internal = TRUE, overwrite = TRUE)
+## capture the relevant scopes
+.scopes <- dd_content %>%
+  pluck("auth", "oauth2", "scopes") %>%
+  map_chr("description") %>%
+  enframe() %>%
+  set_names(c("scope_full", "description")) %>%
+  mutate(scope = gsub("https://www.googleapis.com/auth/", "", scope_full)) %>%
+  select(scope, description, scope_full)
+
+usethis::use_data(.endpoints, .scopes, internal = TRUE, overwrite = TRUE)
 
 ## TO CONSIDER:
 ## store schemas that seem very important, i.e. I might actually write

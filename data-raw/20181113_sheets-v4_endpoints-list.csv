@@ -1,5 +1,5 @@
-id,httpMethod,path,scopes,description,request,parameterOrder,response
-spreadsheets.create,POST,v4/spreadsheets,"drive, drive.file, spreadsheets","Creates a spreadsheet, returning the newly created spreadsheet.",Spreadsheet,NA,Spreadsheet
+id,httpMethod,path,scopes,description,response,request,parameterOrder
+spreadsheets.create,POST,v4/spreadsheets,"drive, drive.file, spreadsheets","Creates a spreadsheet, returning the newly created spreadsheet.",Spreadsheet,Spreadsheet,NA
 spreadsheets.batchUpdate,POST,v4/spreadsheets/{spreadsheetId}:batchUpdate,"drive, drive.file, spreadsheets","Applies one or more updates to the spreadsheet.
 
 Each request is validated before
@@ -18,7 +18,7 @@ the spreadsheet will reflect exactly your changes after this completes,
 however it is guaranteed that the updates in the request will be
 applied together atomically. Your changes may be altered with respect to
 collaborator changes. If there are no collaborators, the spreadsheet
-should reflect your changes.",BatchUpdateSpreadsheetRequest,spreadsheetId,BatchUpdateSpreadsheetResponse
+should reflect your changes.",BatchUpdateSpreadsheetResponse,BatchUpdateSpreadsheetRequest,spreadsheetId
 spreadsheets.get,GET,v4/spreadsheets/{spreadsheetId},"drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly","Returns the spreadsheet at the given ID.
 The caller must specify the spreadsheet ID.
 
@@ -39,7 +39,7 @@ To retrieve only subsets of the spreadsheet, use the
 ranges URL parameter.
 Multiple ranges can be specified.  Limiting the range will
 return only the portions of the spreadsheet that intersect the requested
-ranges. Ranges are specified using A1 notation.",NA,spreadsheetId,Spreadsheet
+ranges. Ranges are specified using A1 notation.",Spreadsheet,NA,spreadsheetId
 spreadsheets.getByDataFilter,POST,v4/spreadsheets/{spreadsheetId}:getByDataFilter,"drive, drive.file, spreadsheets","Returns the spreadsheet at the given ID.
 The caller must specify the spreadsheet ID.
 
@@ -61,31 +61,18 @@ parameter to true.  If a field mask is set, the `includeGridData`
 parameter is ignored
 
 For large spreadsheets, it is recommended to retrieve only the specific
-fields of the spreadsheet that you want.",GetSpreadsheetByDataFilterRequest,spreadsheetId,Spreadsheet
-spreadsheets.values.get,GET,v4/spreadsheets/{spreadsheetId}/values/{range},"drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly","Returns a range of values from a spreadsheet.
-The caller must specify the spreadsheet ID and a range.",NA,"spreadsheetId, range",ValueRange
-spreadsheets.values.batchUpdateByDataFilter,POST,v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter,"drive, drive.file, spreadsheets","Sets values in one or more ranges of a spreadsheet.
-The caller must specify the spreadsheet ID,
-a valueInputOption, and one or more
-DataFilterValueRanges.",BatchUpdateValuesByDataFilterRequest,spreadsheetId,BatchUpdateValuesByDataFilterResponse
-spreadsheets.values.update,PUT,v4/spreadsheets/{spreadsheetId}/values/{range},"drive, drive.file, spreadsheets","Sets values in a range of a spreadsheet.
-The caller must specify the spreadsheet ID, range, and
-a valueInputOption.",ValueRange,"spreadsheetId, range",UpdateValuesResponse
-spreadsheets.values.batchUpdate,POST,v4/spreadsheets/{spreadsheetId}/values:batchUpdate,"drive, drive.file, spreadsheets","Sets values in one or more ranges of a spreadsheet.
-The caller must specify the spreadsheet ID,
-a valueInputOption, and one or more
-ValueRanges.",BatchUpdateValuesRequest,spreadsheetId,BatchUpdateValuesResponse
+fields of the spreadsheet that you want.",Spreadsheet,GetSpreadsheetByDataFilterRequest,spreadsheetId
 spreadsheets.values.batchGet,GET,v4/spreadsheets/{spreadsheetId}/values:batchGet,"drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly","Returns one or more ranges of values from a spreadsheet.
-The caller must specify the spreadsheet ID and one or more ranges.",NA,spreadsheetId,BatchGetValuesResponse
+The caller must specify the spreadsheet ID and one or more ranges.",BatchGetValuesResponse,NA,spreadsheetId
 spreadsheets.values.clear,POST,v4/spreadsheets/{spreadsheetId}/values/{range}:clear,"drive, drive.file, spreadsheets","Clears values from a spreadsheet.
 The caller must specify the spreadsheet ID and range.
 Only values are cleared -- all other properties of the cell (such as
-formatting, data validation, etc..) are kept.",ClearValuesRequest,"spreadsheetId, range",ClearValuesResponse
+formatting, data validation, etc..) are kept.",ClearValuesResponse,ClearValuesRequest,"spreadsheetId, range"
 spreadsheets.values.batchClearByDataFilter,POST,v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter,"drive, drive.file, spreadsheets","Clears one or more ranges of values from a spreadsheet.
 The caller must specify the spreadsheet ID and one or more
 DataFilters. Ranges matching any of the specified data
 filters will be cleared.  Only values are cleared -- all other properties
-of the cell (such as formatting, data validation, etc..) are kept.",BatchClearValuesByDataFilterRequest,spreadsheetId,BatchClearValuesByDataFilterResponse
+of the cell (such as formatting, data validation, etc..) are kept.",BatchClearValuesByDataFilterResponse,BatchClearValuesByDataFilterRequest,spreadsheetId
 spreadsheets.values.append,POST,v4/spreadsheets/{spreadsheetId}/values/{range}:append,"drive, drive.file, spreadsheets","Appends values to a spreadsheet. The input range is used to search for
 existing data and find a ""table"" within that range. Values will be
 appended to the next row of the table, starting with the first column of
@@ -99,12 +86,25 @@ The caller must specify the spreadsheet ID, range, and
 a valueInputOption.  The `valueInputOption` only
 controls how the input data will be added to the sheet (column-wise or
 row-wise), it does not influence what cell the data starts being written
-to.",ValueRange,"spreadsheetId, range",AppendValuesResponse
+to.",AppendValuesResponse,ValueRange,"spreadsheetId, range"
 spreadsheets.values.batchGetByDataFilter,POST,v4/spreadsheets/{spreadsheetId}/values:batchGetByDataFilter,"drive, drive.file, spreadsheets","Returns one or more ranges of values that match the specified data filters.
 The caller must specify the spreadsheet ID and one or more
 DataFilters.  Ranges that match any of the data filters in
-the request will be returned.",BatchGetValuesByDataFilterRequest,spreadsheetId,BatchGetValuesByDataFilterResponse
+the request will be returned.",BatchGetValuesByDataFilterResponse,BatchGetValuesByDataFilterRequest,spreadsheetId
 spreadsheets.values.batchClear,POST,v4/spreadsheets/{spreadsheetId}/values:batchClear,"drive, drive.file, spreadsheets","Clears one or more ranges of values from a spreadsheet.
 The caller must specify the spreadsheet ID and one or more ranges.
 Only values are cleared -- all other properties of the cell (such as
-formatting, data validation, etc..) are kept.",BatchClearValuesRequest,spreadsheetId,BatchClearValuesResponse
+formatting, data validation, etc..) are kept.",BatchClearValuesResponse,BatchClearValuesRequest,spreadsheetId
+spreadsheets.values.get,GET,v4/spreadsheets/{spreadsheetId}/values/{range},"drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly","Returns a range of values from a spreadsheet.
+The caller must specify the spreadsheet ID and a range.",ValueRange,NA,"spreadsheetId, range"
+spreadsheets.values.batchUpdateByDataFilter,POST,v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter,"drive, drive.file, spreadsheets","Sets values in one or more ranges of a spreadsheet.
+The caller must specify the spreadsheet ID,
+a valueInputOption, and one or more
+DataFilterValueRanges.",BatchUpdateValuesByDataFilterResponse,BatchUpdateValuesByDataFilterRequest,spreadsheetId
+spreadsheets.values.update,PUT,v4/spreadsheets/{spreadsheetId}/values/{range},"drive, drive.file, spreadsheets","Sets values in a range of a spreadsheet.
+The caller must specify the spreadsheet ID, range, and
+a valueInputOption.",UpdateValuesResponse,ValueRange,"spreadsheetId, range"
+spreadsheets.values.batchUpdate,POST,v4/spreadsheets/{spreadsheetId}/values:batchUpdate,"drive, drive.file, spreadsheets","Sets values in one or more ranges of a spreadsheet.
+The caller must specify the spreadsheet ID,
+a valueInputOption, and one or more
+ValueRanges.",BatchUpdateValuesResponse,BatchUpdateValuesRequest,spreadsheetId

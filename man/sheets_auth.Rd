@@ -5,6 +5,7 @@
 \title{Authorize googlesheets4}
 \usage{
 sheets_auth(email = NULL, path = NULL,
+  scopes = "https://www.googleapis.com/auth/spreadsheets",
   cache = getOption("gargle.oauth_cache"),
   use_oob = getOption("gargle.oob_default"))
 }
@@ -12,6 +13,8 @@ sheets_auth(email = NULL, path = NULL,
 \item{email}{Optional; email address associated with the desired Google user.}
 
 \item{path}{Optional; path to the downloaded JSON file for a service token.}
+
+\item{scopes}{Optional; scope(s) to use. See your choices at \href{https://developers.google.com/identity/protocols/googlescopes#sheetsv4}{OAuth 2.0 Scopes for Google APIs}.}
 
 \item{cache}{A logical value or a string. \code{TRUE} means to cache
 using the default cache file \code{.httr-oauth}, \code{FALSE} means
@@ -60,6 +63,11 @@ sheets_auth()
 
 ## force use of a token associated with a specific email
 sheets_auth(email = "jenny@example.com")
+
+## use a 'read only' scope, so it's impossible to edit or delete Sheets
+sheets_auth(
+  scopes = "https://www.googleapis.com/auth/spreadsheets.readonly"
+)
 
 ## use a service account token
 sheets_auth(path = "foofy-83ee9e7c9c48.json")

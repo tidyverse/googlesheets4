@@ -30,6 +30,9 @@
 #'
 #' @param email Optional; email address associated with the desired Google user.
 #' @param path Optional; path to the downloaded JSON file for a service token.
+#' @param scopes Optional; scope(s) to use. See your choices at [OAuth 2.0
+#'   Scopes for Google
+#'   APIs](https://developers.google.com/identity/protocols/googlescopes#sheetsv4).
 #' @inheritParams httr::oauth2.0_token
 #'
 #' @family auth functions
@@ -44,15 +47,21 @@
 #' ## force use of a token associated with a specific email
 #' sheets_auth(email = "jenny@example.com")
 #'
+#' ## use a 'read only' scope, so it's impossible to edit or delete Sheets
+#' sheets_auth(
+#'   scopes = "https://www.googleapis.com/auth/spreadsheets.readonly"
+#' )
+#'
 #' ## use a service account token
 #' sheets_auth(path = "foofy-83ee9e7c9c48.json")
 #' }
 sheets_auth <- function(email = NULL,
                         path = NULL,
+                        scopes = "https://www.googleapis.com/auth/spreadsheets",
                         cache = getOption("gargle.oauth_cache"),
                         use_oob = getOption("gargle.oob_default")) {
   cred <- gargle::token_fetch(
-    scopes = "https://www.googleapis.com/auth/drive",
+    scopes = scopes,
     app = sheets_oauth_app(),
     email = email,
     path = path,

@@ -2,20 +2,21 @@
 % Please edit documentation in R/sheets_auth.R
 \name{sheets_token}
 \alias{sheets_token}
-\title{Produce Google token}
+\title{Produce configured token}
 \usage{
 sheets_token()
 }
 \value{
-a \code{request} object (an S3 class provided by \link[httr:httr]{httr})
+A \code{request} object (an S3 class provided by \link[httr:httr]{httr}).
 }
 \description{
-For internal use or for those programming around the Sheets API. Produces a
-token prepared for use with \code{\link[=request_generate]{request_generate()}}. Most users do not need to
-handle tokens "by hand" or, even if they need some control, \code{\link[=sheets_auth]{sheets_auth()}}
-is what they need. If there is no current token, \code{\link[=sheets_auth]{sheets_auth()}} is called to
-either load from cache or initiate OAuth2.0 flow. If auth has been
-deactivated via \code{\link[=sheets_auth_config]{sheets_auth_config()}}, \code{sheets_token()} returns \code{NULL}.
+For internal use or for those programming around the Sheets API.
+Returns a token pre-processed with \code{\link[httr:config]{httr::config()}}. Most users
+do not need to handle tokens "by hand" or, even if they need some
+control, \code{\link[=sheets_auth]{sheets_auth()}} is what they need. If there is no current
+token, \code{\link[=sheets_auth]{sheets_auth()}} is called to either load from cache or
+initiate OAuth2.0 flow. If auth has been deactivated via
+\code{\link[=sheets_auth_config]{sheets_auth_config()}}, \code{sheets_token()} returns \code{NULL}.
 }
 \examples{
 \dontrun{
@@ -25,6 +26,9 @@ req <- request_generate(
   token = sheets_token()
 )
 req
+
+## get a bare access token for use with, e.g., curl on the command line
+sheets_token()$auth_token$credentials$access_token
 }
 }
 \seealso{

@@ -11,14 +11,14 @@
 #' @examples
 #' sheets_email()
 sheets_email <- function() {
-  if (!auth_active()) {
+  if (!.auth$auth_active) {
     message("googlesheets4: auth is inactive.")
     return(invisible())
   }
 
-  if (is.null(access_cred())) {
+  if (is.null(.auth$cred)) {
     message("Not logged in as any specific Google user.")
     return(invisible())
   }
-  access_cred()$email
+  .auth$cred$email
 }

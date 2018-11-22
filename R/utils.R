@@ -4,6 +4,8 @@ noNA <- Negate(anyNA)
 allNA <- function(x) all(is.na(x))
 notNA <- Negate(is.na)
 
+isFALSE <- function(x) identical(x, FALSE)
+
 is_string <- function(x) is.character(x) && length(x) == 1L
 
 is_integerish <- function(x) {

@@ -103,7 +103,6 @@ sheets_auth <- function(email = NULL,
 #' sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
 #' }
 sheets_deauth <- function() {
-  .auth$set_cred(NULL)
   .auth$set_auth_active(FALSE)
   return(invisible())
 }
@@ -205,7 +204,7 @@ sheets_auth_config <- function(app = NULL,
 #' req
 #' }
 sheets_token <- function() {
-  if (!.auth$auth_active) {
+  if (isFALSE(.auth$auth_active)) {
     return(NULL)
   }
   if (is.null(.auth$cred)) {

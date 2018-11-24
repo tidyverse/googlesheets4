@@ -28,7 +28,7 @@ Suggests:
     covr,
     testthat
 Remotes: 
-    r-lib/gargle@authstate,
+    r-lib/gargle,
     tidyverse/glue
 ByteCompile: true
 Encoding: UTF-8

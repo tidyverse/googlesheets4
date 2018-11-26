@@ -14,12 +14,12 @@ gargle_lookup_table <- list(
 
 #' Authorize googlesheets4
 #'
-#' @eval gargle:::PACKAGE_auth_description(gargle_lookup_table)
-#' @eval gargle:::PACKAGE_auth_details(gargle_lookup_table)
-#' @eval gargle:::PACKAGE_auth_params_email()
-#' @eval gargle:::PACKAGE_auth_params_path()
-#' @eval gargle:::PACKAGE_auth_params_scopes(gargle_lookup_table)
-#' @eval gargle:::PACKAGE_auth_params_cache_use_oob()
+#' @eval gargle:::PREFIX_auth_description(gargle_lookup_table)
+#' @eval gargle:::PREFIX_auth_details(gargle_lookup_table)
+#' @eval gargle:::PREFIX_auth_params_email()
+#' @eval gargle:::PREFIX_auth_params_path()
+#' @eval gargle:::PREFIX_auth_params_scopes(gargle_lookup_table)
+#' @eval gargle:::PREFIX_auth_params_cache_use_oob()
 #'
 #' @family auth functions
 #' @export
@@ -71,7 +71,7 @@ sheets_auth <- function(email = NULL,
 
 #' Suspend authorization
 #'
-#' @eval gargle:::PACKAGE_deauth_description(gargle_lookup_table)
+#' @eval gargle:::PREFIX_deauth_description(gargle_lookup_table)
 #'
 #' @family auth functions
 #' @export
@@ -88,8 +88,8 @@ sheets_deauth <- function() {
 
 #' Produce configured token
 #'
-#' @eval gargle:::PACKAGE_token_description(gargle_lookup_table)
-#' @eval gargle:::PACKAGE_token_return()
+#' @eval gargle:::PREFIX_token_description(gargle_lookup_table)
+#' @eval gargle:::PREFIX_token_return()
 #'
 #' @family low-level API functions
 #' @export
@@ -117,9 +117,9 @@ sheets_token <- function() {
 
 #' View or edit auth config
 #'
-#' @eval gargle:::PACKAGE_auth_config_description(gargle_lookup_table)
-#' @eval gargle:::PACKAGE_auth_config_params()
-#' @eval gargle:::PACKAGE_auth_config_return(gargle_lookup_table)
+#' @eval gargle:::PREFIX_auth_config_description(gargle_lookup_table)
+#' @eval gargle:::PREFIX_auth_config_params()
+#' @eval gargle:::PREFIX_auth_config_return(gargle_lookup_table)
 #'
 #' @family auth functions
 #' @export

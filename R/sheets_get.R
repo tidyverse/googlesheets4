@@ -47,7 +47,7 @@ sheets_spreadsheet <- function(x = list()) {
     sheets          = integer(),
     named_ranges    = integer()
   )
-  out <- map(ours_theirs, ~ pluck(x, .x))
+  out <- map(ours_theirs, ~ pluck(x, !!!.x))
 
   if (!is.null(x$sheets)) {
     p <- map(x$sheets, "properties")

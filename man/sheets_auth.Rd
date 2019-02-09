@@ -32,7 +32,7 @@ Authorize googlesheets4 to view and manage your Google Sheets. By default,
 you are directed to a web browser, asked to sign in to your Google
 account, and to grant googlesheets4 permission to operate on your behalf
 with Google Sheets. By default, these user credentials are cached in a
-file below your home directory, \code{~/.R/gargle/gargle-oauth}, from where
+folder below your home directory, \code{~/.R/gargle/gargle-oauth}, from where
 they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
 tokens are less likely to be synced to the cloud by accident.

@@ -24,7 +24,7 @@ sheets_get_impl_ <- function(ssid,
                              fields = NULL) {
   fields <- fields %||% "spreadsheetId,properties,spreadsheetUrl,sheets.properties,namedRanges"
   req <- request_generate(
-    "spreadsheets.get",
+    "sheets.spreadsheets.get",
     params = list(
       spreadsheetId = ssid,
       fields = fields

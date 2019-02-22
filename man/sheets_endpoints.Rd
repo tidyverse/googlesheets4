@@ -24,6 +24,6 @@ list is derived programmatically from the \href{https://www.googleapis.com/disco
 }
 \examples{
 str(sheets_endpoints(), max.level = 2)
-sheets_endpoints("spreadsheets.values.get")
+sheets_endpoints("sheets.spreadsheets.values.get")
 sheets_endpoints(4)
 }

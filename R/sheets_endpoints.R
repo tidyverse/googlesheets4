@@ -17,7 +17,7 @@
 #'
 #' @examples
 #' str(sheets_endpoints(), max.level = 2)
-#' sheets_endpoints("spreadsheets.values.get")
+#' sheets_endpoints("sheets.spreadsheets.values.get")
 #' sheets_endpoints(4)
 sheets_endpoints <- function(i = NULL) {
   if (is.null(i) || gargle::is_expose(i)) {

@@ -2,7 +2,7 @@ context("test-request_generate.R")
 
 test_that("can generate a basic request", {
   req <- request_generate(
-    "spreadsheets.get",
+    "sheets.spreadsheets.get",
     list(spreadsheetId = "abc123"),
     token = NULL
   )

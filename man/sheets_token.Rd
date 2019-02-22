@@ -21,7 +21,7 @@ initiate OAuth2.0 flow. If auth has been deactivated via
 \examples{
 \dontrun{
 req <- request_generate(
-  "spreadsheets.get",
+  "sheets.spreadsheets.get",
   list(spreadsheetId = "abc"),
   token = sheets_token()
 )

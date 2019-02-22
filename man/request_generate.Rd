@@ -52,7 +52,7 @@ remaining parameters into those destined for the body versus the query.
 \examples{
 \dontrun{
 req <- request_generate(
-  "spreadsheets.get",
+  "sheets.spreadsheets.get",
   list(spreadsheetId = "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU"),
   token = NULL
 )

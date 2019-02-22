@@ -96,7 +96,7 @@ sheets_deauth <- function() {
 #' @examples
 #' \dontrun{
 #' req <- request_generate(
-#'   "spreadsheets.get",
+#'   "sheets.spreadsheets.get",
 #'   list(spreadsheetId = "abc"),
 #'   token = sheets_token()
 #' )

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe operator — %&gt;% • googlesheets4</title>
+<title>Suspend authorization — sheets_deauth • googlesheets4</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,9 +31,15 @@
 
 
 
-<meta property="og:title" content="Pipe operator — %&gt;%" />
+<meta property="og:title" content="Suspend authorization — sheets_deauth" />
 
-<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
+<meta property="og:description" content="Put googlesheets4 into a de-authorized state. Instead of sending a token,
+googlesheets4 will send its API key. This can be used to access public
+files for which no Google sign-in is required. This is handy for using
+googlesheets4 in a non-interactive setting to make requests that do not
+require a token. It will prevent the attempt to obtain a token
+interactively in the browser. A built-in API key is used by default or
+the user can configure their own via sheets_auth_config()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,25 +127,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>Suspend authorization</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_auth.R'><code>R/sheets_auth.R</code></a></small>
+    <div class="hidden name"><code>sheets_deauth.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>See <code>magrittr::%&gt;%</code> for details.</p>
+    <p>Put googlesheets4 into a de-authorized state. Instead of sending a token,
+googlesheets4 will send its API key. This can be used to access public
+files for which no Google sign-in is required. This is handy for using
+googlesheets4 in a non-interactive setting to make requests that do not
+require a token. It will prevent the attempt to obtain a token
+interactively in the browser. A built-in API key is used by default or
+the user can configure their own via <code><a href='sheets_auth_config.html'>sheets_auth_config()</a></code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
+    <pre class="usage"><span class='fu'>sheets_deauth</span>()</pre>
         
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p>Other auth functions: <code><a href='sheets_auth_config.html'>sheets_auth_config</a></code>,
+  <code><a href='sheets_auth.html'>sheets_auth</a></code></p></div>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>sheets_deauth</span>()
+<span class='fu'><a href='sheets_email.html'>sheets_email</a></span>()
+<span class='fu'><a href='sheets_get.html'>sheets_get</a></span>(<span class='st'>"1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA"</span>)
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-                </ul>
+      
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

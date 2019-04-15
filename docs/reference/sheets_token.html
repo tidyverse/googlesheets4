@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe operator — %&gt;% • googlesheets4</title>
+<title>Produce configured token — sheets_token • googlesheets4</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,9 +31,15 @@
 
 
 
-<meta property="og:title" content="Pipe operator — %&gt;%" />
+<meta property="og:title" content="Produce configured token — sheets_token" />
 
-<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
+<meta property="og:description" content="For internal use or for those programming around the Sheets API.
+Returns a token pre-processed with httr::config(). Most users
+do not need to handle tokens &quot;by hand&quot; or, even if they need some
+control, sheets_auth() is what they need. If there is no current
+token, sheets_auth() is called to either load from cache or
+initiate OAuth2.0 flow. If auth has been deactivated via
+sheets_auth_config(), sheets_token() returns NULL." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,25 +127,59 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>Produce configured token</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_auth.R'><code>R/sheets_auth.R</code></a></small>
+    <div class="hidden name"><code>sheets_token.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>See <code>magrittr::%&gt;%</code> for details.</p>
+    <p>For internal use or for those programming around the Sheets API.
+Returns a token pre-processed with <code><a href='https://www.rdocumentation.org/packages/httr/topics/config'>httr::config()</a></code>. Most users
+do not need to handle tokens "by hand" or, even if they need some
+control, <code><a href='sheets_auth.html'>sheets_auth()</a></code> is what they need. If there is no current
+token, <code><a href='sheets_auth.html'>sheets_auth()</a></code> is called to either load from cache or
+initiate OAuth2.0 flow. If auth has been deactivated via
+<code><a href='sheets_auth_config.html'>sheets_auth_config()</a></code>, <code>sheets_token()</code> returns <code>NULL</code>.</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
+    <pre class="usage"><span class='fu'>sheets_token</span>()</pre>
         
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>A <code>request</code> object (an S3 class provided by <a href='https://www.rdocumentation.org/packages/httr/topics/httr-package'>httr</a>).</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Other low-level API functions: <code><a href='request_generate.html'>request_generate</a></code>,
+  <code><a href='request_make.html'>request_make</a></code>,
+  <code><a href='response_process.html'>response_process</a></code></p></div>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='request_generate.html'>request_generate</a></span>(
+  <span class='st'>"sheets.spreadsheets.get"</span>,
+  <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='kw'>spreadsheetId</span> <span class='kw'>=</span> <span class='st'>"abc"</span>),
+  <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'>sheets_token</span>()
+)
+<span class='no'>req</span>
+
+<span class='co'>## get a bare access token for use with, e.g., curl on the command line</span>
+<span class='fu'>sheets_token</span>()$<span class='no'>auth_token</span>$<span class='no'>credentials</span>$<span class='no'>access_token</span>
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+
+      <li><a href="#see-also">See also</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

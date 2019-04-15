@@ -153,7 +153,7 @@ get_values <- function(valueRenderOption = "FORMATTED_VALUE",
                        dateTimeRenderOption = "SERIAL_NUMBER",
                        spreadsheetId = "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU",
                        range = "Sheet1") {
-  req <- request_build(
+  req <- gargle::request_build(
     method = "GET",
     path = "v4/spreadsheets/{spreadsheetId}/values/{range}",
     params = list(
@@ -165,7 +165,7 @@ get_values <- function(valueRenderOption = "FORMATTED_VALUE",
     base_url = "https://sheets.googleapis.com",
     key = gargle_api_key()
   )
-  raw_resp <- request_make(req)
+  raw_resp <- gargle::request_make(req)
   httr::content(raw_resp)[["values"]]
 }
 
@@ -262,7 +262,7 @@ library(gargle)
 #file_id <- x$id
 file_id <- "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU"
 
-req <- request_build(
+req <- gargle::request_build(
   method = "GET",
   path = "v4/spreadsheets/{spreadsheetId}",
   params = list(
@@ -273,9 +273,9 @@ req <- request_build(
   base_url = "https://sheets.googleapis.com",
   key = gargle_api_key()
 )
-raw_resp <- request_make(req)
+raw_resp <- gargle::request_make(req)
 resp <- httr::content(raw_resp) %>%
-  pluck(list("sheets", 1, "data", 1, "rowData")) %>% 
+  pluck("sheets", 1, "data", 1, "rowData") %>% 
   map(list("values", 1))
 
 ## throw away some components that I have no use for, so I can still show
@@ -441,7 +441,7 @@ library(gargle)
 #file_id <- x$id
 file_id <- "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU"
 
-req <- request_build(
+req <- gargle::request_build(
   method = "GET",
   path = "v4/spreadsheets/{spreadsheetId}",
   params = list(
@@ -454,7 +454,7 @@ req <- request_build(
   base_url = "https://sheets.googleapis.com",
   key = gargle_api_key()
 )
-raw_resp <- request_make(req)
+raw_resp <- gargle::request_make(req)
 ct <- httr::content(raw_resp)
 ```
 
@@ -487,7 +487,7 @@ The cell data is found within `rowData`, one object per row and, within that, `v
 
 ```{r}
 resp <- ct %>%
-  pluck(list("sheets", 1, "data", 1, "rowData"))
+  pluck("sheets", 1, "data", 1, "rowData")
 str(resp, max.level = 3)
 ```
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pipe operator — %&gt;% • googlesheets4</title>
+<title>Get email of current user — sheets_email • googlesheets4</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -31,9 +31,13 @@
 
 
 
-<meta property="og:title" content="Pipe operator — %&gt;%" />
+<meta property="og:title" content="Get email of current user — sheets_email" />
 
-<meta property="og:description" content="See magrittr::%&amp;gt;% for details." />
+<meta property="og:description" content="Reveals email associated with the Google credential currently being used by
+googlesheets4 (if there is one). This is semi experimental, inspired by
+googledrive::drive_user(). The fate of this function to be determined by
+how scopes shake out and whether we create a way for googledrive and
+googlesheets4 to share a token." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,25 +125,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pipe operator</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/utils-pipe.R'><code>R/utils-pipe.R</code></a></small>
-    <div class="hidden name"><code>pipe.Rd</code></div>
+    <h1>Get email of current user</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_email.R'><code>R/sheets_email.R</code></a></small>
+    <div class="hidden name"><code>sheets_email.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>See <code>magrittr::%&gt;%</code> for details.</p>
+    <p>Reveals email associated with the Google credential currently being used by
+googlesheets4 (if there is one). This is semi experimental, inspired by
+<code><a href='https://www.rdocumentation.org/packages/googledrive/topics/drive_user'>googledrive::drive_user()</a></code>. The fate of this function to be determined by
+how scopes shake out and whether we create a way for googledrive and
+googlesheets4 to share a token.</p>
     
     </div>
 
-    <pre class="usage"><span class='no'>lhs</span> <span class='kw'>%&gt;%</span> <span class='no'>rhs</span></pre>
+    <pre class="usage"><span class='fu'>sheets_email</span>()</pre>
         
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>An email address or <code>NULL</code>.</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>sheets_email</span>()</div><div class='output co'>#&gt; <span class='message'>googlesheets4: auth is inactive.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

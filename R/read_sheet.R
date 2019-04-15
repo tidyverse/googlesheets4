@@ -87,6 +87,9 @@
 #'   the returned tibble. Ignored if `range` is given.
 #' @param guess_max Maximum number of data rows to use for guessing column
 #'   types.
+#' @param .name_repair Handling of column names. By default, googlesheets4
+#'   ensures column names are not empty and are unique. There is full support
+#'   for `.name_repair` as documented in [tibble::tibble()].
 #'
 #' @return A [tibble][tibble::tibble-package]
 #' @export
@@ -120,7 +123,8 @@ read_sheet <- function(ss,
                        col_names = TRUE, col_types = NULL,
                        na = "", trim_ws = TRUE,
                        skip = 0, n_max = Inf,
-                       guess_max = min(1000, n_max)) {
+                       guess_max = min(1000, n_max),
+                       .name_repair = "unique") {
   ## check these first, so we don't download cells in vain
   col_spec <- standardise_col_spec(col_names, col_types)
   check_character(na)
@@ -173,7 +177,8 @@ sheets_read <- read_sheet
 spread_sheet <- function(df,
                          col_names = TRUE, col_types = NULL,
                          na = "", trim_ws = TRUE,
-                         guess_max = min(1000, max(df$row))) {
+                         guess_max = min(1000, max(df$row)),
+                         .name_repair = "unique") {
   col_spec <- standardise_col_spec(col_names, col_types)
   check_character(na)
   check_bool(trim_ws)
@@ -181,7 +186,8 @@ spread_sheet <- function(df,
 
   spread_sheet_impl_(
     df,
-    col_spec = col_spec, na = na, trim_ws = trim_ws, guess_max = guess_max
+    col_spec = col_spec, na = na, trim_ws = trim_ws, guess_max = guess_max,
+    .name_repair = .name_repair
   )
 }
 
@@ -190,7 +196,8 @@ spread_sheet_impl_ <- function(df,
                                  col_names = TRUE, col_types = NULL
                                ),
                                na = "", trim_ws = TRUE,
-                               guess_max = min(1000, max(df$row))) {
+                               guess_max = min(1000, max(df$row)),
+                               .name_repair = "unique") {
   if (nrow(df) == 0) return(tibble::tibble())
   col_names <- col_spec$col_names
   ctypes <- col_spec$ctypes
@@ -238,7 +245,6 @@ spread_sheet_impl_ <- function(df,
     col_names[df$col[this]] <- as_character(df$cell[this])
     df <- df[!this, ]
   }
-  col_names <- tibble::tidy_names(col_names)
 
   df_split <- map(seq_len(nc), ~ df[df$col == .x, ])
 
@@ -251,7 +257,7 @@ spread_sheet_impl_ <- function(df,
     purrr::set_names(col_names) %>%
     purrr::discard(is.null)
 
-  tibble::as_tibble(out_scratch)
+  tibble::as_tibble(out_scratch, .name_repair = .name_repair)
 }
 
 ## helpers ---------------------------------------------------------------------

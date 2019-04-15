@@ -77,7 +77,7 @@ library(googlesheets4)
 #> # A tibble: 1 x 4
 #>   name   path     id                                         drive_resource
 #>   <chr>  <chr>    <chr>                                      <list>        
-#> 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5w… <list [33]>
+#> 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5w… <list [34]>
 ```
 
 Pass the result to googlesheets4 functions such as:
@@ -89,6 +89,7 @@ Pass the result to googlesheets4 functions such as:
 
 ``` r
 sheets_get(deaths)
+#> Auto-refreshing stale OAuth token.
 #>   Spreadsheet name: deaths
 #>                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA
 #>             Locale: en
@@ -212,7 +213,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp3p5QYc/iris-18325120171a.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpOTiE5M/iris-2373198ca035.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -222,15 +223,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp3p5QYc/iris-18325120171a.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpOTiE5M/iris-2373198ca035.csv
 #> uploaded into Drive file:
-#>   * iris-18325120171a: 1wKYF0ChbcxUJJm8LZbLwdTaOREjI6AJ7kO5SxR9MfmQ
+#>   * iris-2373198ca035: 1OSmYLikPez_hurMfaDKj4T5BrG1EWkTSzpGupbkrH9Y
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
 #>   name              id                                       drive_resource
 #> * <chr>             <chr>                                    <list>        
-#> 1 iris-18325120171a 1wKYF0ChbcxUJJm8LZbLwdTaOREjI6AJ7kO5SxR… <list [33]>
+#> 1 iris-2373198ca035 1OSmYLikPez_hurMfaDKj4T5BrG1EWkTSzpGupb… <list [34]>
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -240,8 +241,8 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-18325120171a'
-#> Range "'iris-18325120171a.csv'!B1:D6"
+#> Reading from 'iris-2373198ca035'
+#> Range "'iris-2373198ca035.csv'!B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
 #>         <dbl>        <dbl>       <dbl>
@@ -257,12 +258,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp3p5QYc/iris-18325120171a.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpOTiE5M/iris-2373198ca035.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-18325120171a
+#>   * iris-2373198ca035
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp3p5QYc/iris-18325120171a.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpOTiE5M/iris-2373198ca035.xlsx
 readxl::read_excel(iris_xlsxfile)
 #> # A tibble: 150 x 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -315,7 +316,7 @@ str(mini_gap_meta, max.level = 1)
 #>  $ locale         : chr "en_US"
 #>  $ time_zone      : chr "Etc/GMT"
 #>  $ sheets         :Classes 'tbl_df', 'tbl' and 'data.frame': 5 obs. of  7 variables:
-#>  $ named_ranges   : NULL
+#>  $ named_ranges   :List of 4
 #>  - attr(*, "class")= chr [1:2] "sheets_meta" "list"
 
 mini_gap_meta$sheets

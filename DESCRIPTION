@@ -15,7 +15,7 @@ Depends:
     R (>= 3.1)
 Imports: 
     cellranger,
-    gargle (>= 0.0.0.9001),
+    gargle (>= 0.0.0.9004),
     glue (>= 1.3.0),
     googledrive,
     httr,
@@ -23,7 +23,7 @@ Imports:
     purrr,
     rematch2,
     rlang,
-    tibble
+    tibble (>= 2.1.1)
 Suggests: 
     covr,
     testthat

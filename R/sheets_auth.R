@@ -1,6 +1,14 @@
 ## This file is the interface between googlesheets4 and the
 ## auth functionality in gargle.
 
+.auth <- gargle::AuthState$new(
+  package     = "googlesheets4",
+  app         = gargle::tidyverse_app(),
+  api_key     = gargle::tidyverse_api_key(),
+  auth_active = TRUE,
+  cred        = NULL
+)
+
 ## The roxygen comments for these functions are mostly generated from data
 ## in this list and template text maintained in gargle.
 gargle_lookup_table <- list(
@@ -83,7 +91,7 @@ sheets_auth <- function(email = NULL,
 #' }
 sheets_deauth <- function() {
   .auth$set_auth_active(FALSE)
-  return(invisible())
+  invisible()
 }
 
 #' Produce configured token
@@ -118,8 +126,9 @@ sheets_token <- function() {
 #' View or edit auth config
 #'
 #' @eval gargle:::PREFIX_auth_config_description(gargle_lookup_table)
-#' @eval gargle:::PREFIX_auth_config_params()
-#' @eval gargle:::PREFIX_auth_config_return(gargle_lookup_table)
+#' @eval gargle:::PREFIX_auth_config_params_except_key()
+#' @eval gargle:::PREFIX_auth_config_params_key()
+#' @eval gargle:::PREFIX_auth_config_return_with_key(gargle_lookup_table)
 #'
 #' @family auth functions
 #' @export

@@ -5,7 +5,8 @@
 \title{Spread a data frame of cells into spreadsheet shape}
 \usage{
 spread_sheet(df, col_names = TRUE, col_types = NULL, na = "",
-  trim_ws = TRUE, guess_max = min(1000, max(df$row)))
+  trim_ws = TRUE, guess_max = min(1000, max(df$row)),
+  .name_repair = "unique")
 }
 \arguments{
 \item{df}{A data frame with one row per (nonempty) cell, integer variables
@@ -31,6 +32,10 @@ from cell contents?}
 
 \item{guess_max}{Maximum number of data rows to use for guessing column
 types.}
+
+\item{.name_repair}{Handling of column names. By default, googlesheets4
+ensures column names are not empty and are unique. There is full support
+for \code{.name_repair} as documented in \code{\link[tibble:tibble]{tibble::tibble()}}.}
 }
 \value{
 A tibble in the shape of the original spreadsheet, but enforcing

@@ -48,7 +48,7 @@ are multiple cached tokens, this can clarify which one to use. It can
 also force googlesheets4 to switch from one identity to another. If
 there's no cached token for the email, this triggers a return to the
 browser to choose the identity and give consent.
-\item Load a service account token (as opposed to OAuth).
+\item Use a service account token.
 \item Specify non-default behavior re: token caching and out-of-bound
 authentication.
 }

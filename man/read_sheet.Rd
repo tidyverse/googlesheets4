@@ -7,11 +7,11 @@
 \usage{
 read_sheet(ss, sheet = NULL, range = NULL, col_names = TRUE,
   col_types = NULL, na = "", trim_ws = TRUE, skip = 0,
-  n_max = Inf, guess_max = min(1000, n_max))
+  n_max = Inf, guess_max = min(1000, n_max), .name_repair = "unique")
 
 sheets_read(ss, sheet = NULL, range = NULL, col_names = TRUE,
   col_types = NULL, na = "", trim_ws = TRUE, skip = 0,
-  n_max = Inf, guess_max = min(1000, n_max))
+  n_max = Inf, guess_max = min(1000, n_max), .name_repair = "unique")
 }
 \arguments{
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
@@ -62,6 +62,10 @@ the returned tibble. Ignored if \code{range} is given.}
 
 \item{guess_max}{Maximum number of data rows to use for guessing column
 types.}
+
+\item{.name_repair}{Handling of column names. By default, googlesheets4
+ensures column names are not empty and are unique. There is full support
+for \code{.name_repair} as documented in \code{\link[tibble:tibble]{tibble::tibble()}}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}

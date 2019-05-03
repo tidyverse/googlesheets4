@@ -17,6 +17,7 @@ gargle_lookup_table <- list(
   PRODUCT     = "Google Sheets",
   API         = "Sheets API",
   PREFIX      = "sheets",
+  AUTH_CONFIG_SOURCE = "tidyverse",
   SCOPES_LINK = "https://developers.google.com/identity/protocols/googlescopes#sheetsv4"
 )
 

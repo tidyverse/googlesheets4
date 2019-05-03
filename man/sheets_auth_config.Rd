@@ -13,12 +13,12 @@ sheets_api_key()
 sheets_oauth_app()
 }
 \arguments{
-\item{app}{OAuth app. Defaults to a tidyverse app.}
+\item{app}{OAuth app. Defaults to a {AUTH_CONFIG_SOURCE} app.}
 
 \item{path}{Path to the JSON file.}
 
-\item{api_key}{API key. Defaults to a tidyverse key. Necessary in order
-to make unauthorized "token-free" requests for public resources.}
+\item{api_key}{API key. Defaults to a {AUTH_CONFIG_SOURCE} key. Necessary in
+order to make unauthorized "token-free" requests for public resources.}
 }
 \value{
 \code{sheets_auth_config()}: An object of R6 class \code{AuthState},

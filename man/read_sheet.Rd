@@ -73,11 +73,8 @@ A \link[tibble:tibble-package]{tibble}
 \description{
 This is the main "read" function of the googlesheets4 package. The goal is
 that \code{read_sheet()} is to a Google Sheet as \code{readr::read_csv()} is to a csv
-file or \code{read_excel()} is to an Excel spreadsheet. It's still under
-development, but is quite usable now. \strong{Note that googlesheets4 is not wired
-up for auth yet (happening soon!)}, so at the moment the target Sheet must
-be readable by anyone with a link (see examples for how to accomplish via
-googledrive).
+file or \code{readxl::read_excel()} is to an Excel spreadsheet. It's still under
+development, but is quite usable now.
 }
 \section{Column specification}{
 
@@ -94,14 +91,14 @@ Shortcodes for column types:
 API (the high-level functions in this package are rectangle-oriented), but
 is not parsed into the data frame output.
 \item \code{?}: Guess. A type is guessed for each cell and then a consensus type is
-selected for each column. If no atomic type is suitable for all cells, a
+selected for the column. If no atomic type is suitable for all cells, a
 list-column is created, in which each cell is converted to an R object of
 "best" type". If no column types are specified, i.e. \code{col_types = NULL},
 all types are guessed.
 \item \code{l}: Logical.
 \item \code{i}: Integer. This type is never guessed from the data, because Sheets
 have no formal cell type for integers.
-\item \code{d} or \code{n}: Numeric, in sense of "double".
+\item \code{d} or \code{n}: Numeric, in the sense of "double".
 \item \code{D}: Date. This type is never guessed from the data, because date cells
 are just serial datetimes that bear a "date" format.
 \item \code{t}: Time of day. This type is never guessed from the data, because time

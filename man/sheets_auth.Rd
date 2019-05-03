@@ -17,15 +17,12 @@ sheets_auth(email = NULL, path = NULL,
 \item{scopes}{Optional; scope(s) to use. See your choices at
 \href{https://developers.google.com/identity/protocols/googlescopes#sheetsv4}{OAuth 2.0 Scopes for Google APIs}.}
 
-\item{cache}{A logical value or a string. \code{TRUE} means to cache using the
-default user-level cache file, \code{~/.R/gargle/gargle-oauth}, \code{FALSE} means
-don't cache, and \code{NA} means to guess using some sensible heuristics. A
-string means use the specified path as the cache file.}
+\item{cache}{Specifies the OAuth token cache. Defaults to the option named
+"gargle_oauth_cache", retrieved via \code{\link[=gargle_oauth_cache]{gargle_oauth_cache()}}.}
 
-\item{use_oob}{If \code{FALSE}, use a local webserver for the OAuth dance.
-Otherwise, provide a URL to the user and prompt for a validation code.
-Defaults to the option "gargle.oob_default" or \code{TRUE} if httpuv is not
-installed.}
+\item{use_oob}{Whether to prefer "out of band" authentication. Defaults to
+the option named "gargle_oob_default", retrieved via
+\code{\link[=gargle_oob_default]{gargle_oob_default()}}.}
 }
 \description{
 Authorize googlesheets4 to view and manage your Google Sheets. By default,

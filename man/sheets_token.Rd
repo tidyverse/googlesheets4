@@ -33,7 +33,6 @@ sheets_token()$auth_token$credentials$access_token
 }
 \seealso{
 Other low-level API functions: \code{\link{request_generate}},
-  \code{\link{request_make}},
-  \code{\link{response_process}}
+  \code{\link{request_make}}
 }
 \concept{low-level API functions}

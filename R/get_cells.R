@@ -62,7 +62,7 @@ sheets_cells_impl_ <- function(ssid,
     )
   )
   raw_resp <- request_make(req)
-  response_process(raw_resp)
+  gargle::response_process(raw_resp)
 }
 
 ## input: an instance of Spreadsheet

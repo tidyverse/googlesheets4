@@ -29,7 +29,6 @@ output is processed with \code{process_response()}.
 }
 \seealso{
 Other low-level API functions: \code{\link{request_generate}},
-  \code{\link{response_process}},
   \code{\link{sheets_token}}
 }
 \concept{low-level API functions}

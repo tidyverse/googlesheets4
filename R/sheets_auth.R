@@ -63,7 +63,7 @@ sheets_auth <- function(email = NULL,
     cache = cache,
     use_oob = use_oob
   )
-  if (!gargle::is_legit_token(cred, verbose = TRUE)) {
+  if (!inherits(cred, "Token2.0")) {
     stop(
       "Can't get Google credentials.\n",
       "Are you running googlesheets4 in a non-interactive session? Consider:\n",

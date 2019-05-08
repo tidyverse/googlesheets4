@@ -15,7 +15,7 @@ Depends:
     R (>= 3.2)
 Imports: 
     cellranger,
-    gargle (>= 0.0.0.9006),
+    gargle (>= 0.0.0.9007),
     glue (>= 1.3.0),
     googledrive,
     httr,
@@ -28,7 +28,7 @@ Suggests:
     covr,
     testthat
 Remotes: 
-    r-lib/gargle
+    r-lib/gargle@response-processing
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true

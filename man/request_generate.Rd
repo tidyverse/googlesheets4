@@ -64,7 +64,6 @@ req
 \code{\link[gargle:request_make]{gargle::request_make()}}
 
 Other low-level API functions: \code{\link{request_make}},
-  \code{\link{response_process}},
   \code{\link{sheets_token}}
 }
 \concept{low-level API functions}

@@ -20,7 +20,7 @@
 #' sheets_endpoints("sheets.spreadsheets.values.get")
 #' sheets_endpoints(4)
 sheets_endpoints <- function(i = NULL) {
-  if (is.null(i) || gargle::is_expose(i)) {
+  if (is.null(i)) {
     i <- seq_along(.endpoints)
   }
   .endpoints[i]

@@ -52,8 +52,8 @@ gargle_lookup_table <- list(
 sheets_auth <- function(email = NULL,
                         path = NULL,
                         scopes = "https://www.googleapis.com/auth/spreadsheets",
-                        cache = getOption("gargle.oauth_cache"),
-                        use_oob = getOption("gargle.oob_default")) {
+                        cache = gargle::gargle_oauth_cache(),
+                        use_oob = gargle::gargle_oob_default()) {
   cred <- gargle::token_fetch(
     scopes = scopes,
     app = .auth$app,

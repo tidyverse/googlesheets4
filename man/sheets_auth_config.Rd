@@ -13,11 +13,11 @@ sheets_api_key()
 sheets_oauth_app()
 }
 \arguments{
-\item{app}{OAuth app. Defaults to a {AUTH_CONFIG_SOURCE} app.}
+\item{app}{OAuth app. Defaults to a tidyverse app.}
 
 \item{path}{Path to the JSON file.}
 
-\item{api_key}{API key. Defaults to a {AUTH_CONFIG_SOURCE} key. Necessary in
+\item{api_key}{API key. Defaults to a tidyverse key. Necessary in
 order to make unauthorized "token-free" requests for public resources.}
 }
 \value{
@@ -51,7 +51,7 @@ project as described above and follow the instructions in
 currently configured API key and OAuth app, respectively.
 }
 \examples{
-## retrieve current config
+## this will print current config
 sheets_auth_config()
 
 if (require(httr)) {
@@ -69,9 +69,6 @@ if (require(httr)) {
 sheets_auth_config(
   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
 )
-
-sheets_api_key()
-sheets_oauth_app()
 
 sheets_auth_config(api_key = "123")
 sheets_api_key()

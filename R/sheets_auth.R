@@ -3,10 +3,7 @@
 
 .auth <- gargle::AuthState$new(
   package     = "googlesheets4",
-  app         = gargle::tidyverse_app(),
-  api_key     = gargle::tidyverse_api_key(),
-  auth_active = TRUE,
-  cred        = NULL
+  auth_active = TRUE
 )
 
 ## The roxygen comments for these functions are mostly generated from data
@@ -17,21 +14,18 @@ gargle_lookup_table <- list(
   PRODUCT     = "Google Sheets",
   API         = "Sheets API",
   PREFIX      = "sheets",
-  AUTH_CONFIG_SOURCE = "tidyverse",
-  SCOPES_LINK = "https://developers.google.com/identity/protocols/googlescopes#sheetsv4"
+  AUTH_CONFIG_SOURCE = "tidyverse"
 )
 
 #' Authorize googlesheets4
 #'
 #' @eval gargle:::PREFIX_auth_description(gargle_lookup_table)
 #' @eval gargle:::PREFIX_auth_details(gargle_lookup_table)
-#' @eval gargle:::PREFIX_auth_params_email()
-#' @eval gargle:::PREFIX_auth_params_path()
-#' @eval gargle:::PREFIX_auth_params_scopes(gargle_lookup_table)
-#' @eval gargle:::PREFIX_auth_params_cache_use_oob()
+#' @eval gargle:::PREFIX_auth_params()
 #'
 #' @family auth functions
 #' @export
+#'
 #' @examples
 #' \dontrun{
 #' ## load/refresh existing credentials, if available
@@ -53,29 +47,31 @@ sheets_auth <- function(email = NULL,
                         path = NULL,
                         scopes = "https://www.googleapis.com/auth/spreadsheets",
                         cache = gargle::gargle_oauth_cache(),
-                        use_oob = gargle::gargle_oob_default()) {
+                        use_oob = gargle::gargle_oob_default(),
+                        token = NULL) {
   cred <- gargle::token_fetch(
     scopes = scopes,
-    app = .auth$app,
+    app = sheets_oauth_app() %||% gargle::tidyverse_app(),
     email = email,
     path = path,
     package = "googlesheets4",
     cache = cache,
-    use_oob = use_oob
+    use_oob = use_oob,
+    token = token
   )
   if (!inherits(cred, "Token2.0")) {
     stop(
       "Can't get Google credentials.\n",
       "Are you running googlesheets4 in a non-interactive session? Consider:\n",
-      "  * sheets_deauth() to prevent the attempt to get credentials.\n",
-      "  * Call sheets_auth() directly with all necessary specifics.\n",
+      "  * `sheets_deauth()` to prevent the attempt to get credentials.\n",
+      "  * Call `sheets_auth()` directly with all necessary specifics.\n",
       call. = FALSE
     )
   }
   .auth$set_cred(cred)
   .auth$set_auth_active(TRUE)
 
-  return(invisible())
+  invisible()
 }
 
 #' Suspend authorization
@@ -88,10 +84,13 @@ sheets_auth <- function(email = NULL,
 #' \dontrun{
 #' sheets_deauth()
 #' sheets_email()
+#'
+#' # get metadata on the public 'deaths' spreadsheet
 #' sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
 #' }
 sheets_deauth <- function() {
   .auth$set_auth_active(FALSE)
+  .auth$set_cred(NULL)
   invisible()
 }
 
@@ -118,23 +117,38 @@ sheets_token <- function() {
   if (isFALSE(.auth$auth_active)) {
     return(NULL)
   }
-  if (is.null(.auth$cred)) {
+  if (!sheets_has_token()) {
     sheets_auth()
   }
   httr::config(token = .auth$cred)
 }
 
+#' Is there a token on hand?
+#'
+#' Reports whether googlesheets4 has stored a token, ready for use in downstream
+#' requests. Exists mostly for protecting examples that won't work in the
+#' absence of a token.
+#'
+#' @return Logical.
+#' @export
+#'
+#' @examples
+#' sheets_has_token()
+sheets_has_token <- function() {
+  inherits(.auth$cred, "Token2.0")
+}
+
 #' View or edit auth config
 #'
 #' @eval gargle:::PREFIX_auth_config_description(gargle_lookup_table)
-#' @eval gargle:::PREFIX_auth_config_params_except_key()
-#' @eval gargle:::PREFIX_auth_config_params_key()
+#' @eval gargle:::PREFIX_auth_config_params_except_key(gargle_lookup_table)
+#' @eval gargle:::PREFIX_auth_config_params_key(gargle_lookup_table)
 #' @eval gargle:::PREFIX_auth_config_return_with_key(gargle_lookup_table)
 #'
 #' @family auth functions
 #' @export
 #' @examples
-#' ## retrieve current config
+#' ## this will print current config
 #' sheets_auth_config()
 #'
 #' if (require(httr)) {
@@ -152,9 +166,6 @@ sheets_token <- function() {
 #' sheets_auth_config(
 #'   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
 #' )
-#'
-#' sheets_api_key()
-#' sheets_oauth_app()
 #'
 #' sheets_auth_config(api_key = "123")
 #' sheets_api_key()

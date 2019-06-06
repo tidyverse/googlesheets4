@@ -59,7 +59,8 @@ request_generate <- function(endpoint = character(),
   }
 
   ## modifications specific to googlesheets4 package
-  params$key <- key %||% params$key %||% sheets_api_key()
+  params$key <- key %||% params$key %||%
+    sheets_api_key() %||% gargle::tidyverse_api_key()
 
   req <- gargle::request_develop(
     endpoint = ept,

@@ -7,28 +7,50 @@
 sheets_auth(email = NULL, path = NULL,
   scopes = "https://www.googleapis.com/auth/spreadsheets",
   cache = gargle::gargle_oauth_cache(),
-  use_oob = gargle::gargle_oob_default())
+  use_oob = gargle::gargle_oob_default(), token = NULL)
 }
 \arguments{
-\item{email}{Optional; email address associated with the desired Google user.}
+\item{email}{Optional. Allows user to target a specific Google identity. If
+specified, this is used for token lookup, i.e. to determine if a suitable
+token is already available in the cache. If no such token is found, \code{email}
+is used to pre-select the targetted Google identity in the OAuth chooser.
+Note, however, that the email associated with a token when it's cached is
+always determined from the token itself, never from this argument. Use \code{NA}
+or \code{FALSE} to match nothing and force the OAuth dance in the browser. Use
+\code{TRUE} to allow email auto-discovery, if exactly one matching token is
+found in the cache. Defaults to the option named "gargle_oauth_email",
+retrieved by \code{\link[gargle:gargle_oauth_email]{gargle::gargle_oauth_email()}}.}
 
-\item{path}{Optional; path to the downloaded JSON file for a service token.}
+\item{path}{JSON identifying the service account, in one of the forms
+supported for the \code{txt} argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a
+file path or JSON string).}
 
-\item{scopes}{Optional; scope(s) to use. See your choices at
-\href{https://developers.google.com/identity/protocols/googlescopes#sheetsv4}{OAuth 2.0 Scopes for Google APIs}.}
+\item{scopes}{A character vector of scopes to request. Pick from those listed
+at \url{https://developers.google.com/identity/protocols/googlescopes}.
+
+For certain token flows, the
+\code{"https://www.googleapis.com/auth/userinfo.email"} scope is unconditionally
+included. This grants permission to retrieve the email address associated
+with a token; gargle uses this to index cached OAuth tokens. This grants no
+permission to view or send email. It is considered a low value scope and
+does not appear on the consent screen.}
 
 \item{cache}{Specifies the OAuth token cache. Defaults to the option named
-"gargle_oauth_cache", retrieved via \code{\link[=gargle_oauth_cache]{gargle_oauth_cache()}}.}
+"gargle_oauth_cache", retrieved via \code{\link[gargle:gargle_oauth_cache]{gargle::gargle_oauth_cache()}}.}
 
 \item{use_oob}{Whether to prefer "out of band" authentication. Defaults to
 the option named "gargle_oob_default", retrieved via
-\code{\link[=gargle_oob_default]{gargle_oob_default()}}.}
+\code{\link[gargle:gargle_oob_default]{gargle::gargle_oob_default()}}.}
+
+\item{token}{A token with class \link[httr:Token-class]{Token2.0}.}
 }
 \description{
-Authorize googlesheets4 to view and manage your Google Sheets. By default,
-you are directed to a web browser, asked to sign in to your Google
-account, and to grant googlesheets4 permission to operate on your behalf
-with Google Sheets. By default, these user credentials are cached in a
+Authorize googlesheets4 to view and manage your Google Sheets. This function is a
+wrapper around \code{\link[gargle:token_fetch]{gargle::token_fetch()}}.
+
+By default, you are directed to a web browser, asked to sign in to your
+Google account, and to grant googlesheets4 permission to operate on your
+behalf with Google Sheets. By default, these user credentials are cached in a
 folder below your home directory, \code{~/.R/gargle/gargle-oauth}, from where
 they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
@@ -46,12 +68,14 @@ also force googlesheets4 to switch from one identity to another. If
 there's no cached token for the email, this triggers a return to the
 browser to choose the identity and give consent.
 \item Use a service account token.
+\item Bring their own \link[httr:Token-class]{Token2.0}.
 \item Specify non-default behavior re: token caching and out-of-bound
 authentication.
 }
 
-For even deeper control over auth, use \code{\link[=sheets_auth_config]{sheets_auth_config()}} to use
-your own OAuth app or API key.
+For details on the many ways to find a token, see
+\code{\link[gargle:token_fetch]{gargle::token_fetch()}}. For deeper control over auth, use
+\code{\link[=sheets_auth_config]{sheets_auth_config()}} to bring your own OAuth app or API key.
 }
 \examples{
 \dontrun{

@@ -75,9 +75,9 @@ library(googlesheets4)
 
 (deaths <- drive_get("deaths"))
 #> # A tibble: 1 x 4
-#>   name   path     id                                         drive_resource
-#>   <chr>  <chr>    <chr>                                      <list>        
-#> 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5w… <list [34]>
+#>   name   path     id                                       drive_resource  
+#>   <chr>  <chr>    <chr>                                    <list>          
+#> 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z… <named list [34…
 ```
 
 Pass the result to googlesheets4 functions such as:
@@ -213,7 +213,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpOTiE5M/iris-2373198ca035.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp12BPNQ/iris-ab1bf6a9410.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -223,15 +223,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpOTiE5M/iris-2373198ca035.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp12BPNQ/iris-ab1bf6a9410.csv
 #> uploaded into Drive file:
-#>   * iris-2373198ca035: 1OSmYLikPez_hurMfaDKj4T5BrG1EWkTSzpGupbkrH9Y
+#>   * iris-ab1bf6a9410: 1lp-9gyZqufMhHR88YIlM1Iw9Rjls-5wrXzxbimD6Spw
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
-#>   name              id                                       drive_resource
-#> * <chr>             <chr>                                    <list>        
-#> 1 iris-2373198ca035 1OSmYLikPez_hurMfaDKj4T5BrG1EWkTSzpGupb… <list [34]>
+#>   name            id                                       drive_resource  
+#> * <chr>           <chr>                                    <list>          
+#> 1 iris-ab1bf6a94… 1lp-9gyZqufMhHR88YIlM1Iw9Rjls-5wrXzxbim… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -241,8 +241,8 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-2373198ca035'
-#> Range "'iris-2373198ca035.csv'!B1:D6"
+#> Reading from 'iris-ab1bf6a9410.csv'
+#> Range "'iris-ab1bf6a9410.csv'!B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
 #>         <dbl>        <dbl>       <dbl>
@@ -258,12 +258,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpOTiE5M/iris-2373198ca035.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp12BPNQ/iris-ab1bf6a9410.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-2373198ca035
+#>   * iris-ab1bf6a9410
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpOTiE5M/iris-2373198ca035.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp12BPNQ/iris-ab1bf6a9410.xlsx
 readxl::read_excel(iris_xlsxfile)
 #> # A tibble: 150 x 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -338,11 +338,11 @@ access to raw cell data sent by the Sheets API.
 #> Reading from 'deaths'
 #> Range "'arts'!E5:E7"
 #> # A tibble: 3 x 4
-#>     row   col loc   cell           
-#>   <int> <dbl> <chr> <list>         
-#> 1     5     5 E5    <S3: CELL_TEXT>
-#> 2     6     5 E6    <S3: CELL_DATE>
-#> 3     7     5 E7    <S3: CELL_DATE>
+#>     row   col loc   cell      
+#>   <int> <dbl> <chr> <list>    
+#> 1     5     5 E5    <CELL_TEX>
+#> 2     6     5 E6    <CELL_DAT>
+#> 3     7     5 E7    <CELL_DAT>
 df$cell[[3]]
 #> $userEnteredValue
 #> $userEnteredValue$numberValue
@@ -420,3 +420,5 @@ tidyverse:
 *Please note that this project is released with a [Contributor Code of
 Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project
 you agree to abide by its terms.*
+
+[Privacy policy](https://www.tidyverse.org/google_privacy_policy)

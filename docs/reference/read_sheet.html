@@ -22,8 +22,9 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -35,11 +36,8 @@
 
 <meta property="og:description" content="This is the main &quot;read&quot; function of the googlesheets4 package. The goal is
 that read_sheet() is to a Google Sheet as readr::read_csv() is to a csv
-file or read_excel() is to an Excel spreadsheet. It's still under
-development, but is quite usable now. Note that googlesheets4 is not wired
-up for auth yet (happening soon!), so at the moment the target Sheet must
-be readable by anyone with a link (see examples for how to accomplish via
-googledrive)." />
+file or readxl::read_excel() is to an Excel spreadsheet. It's still under
+development, but is quite usable now." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -136,21 +134,18 @@ googledrive)." />
     
     <p>This is the main "read" function of the googlesheets4 package. The goal is
 that <code>read_sheet()</code> is to a Google Sheet as <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code> is to a csv
-file or <code>read_excel()</code> is to an Excel spreadsheet. It's still under
-development, but is quite usable now. <strong>Note that googlesheets4 is not wired
-up for auth yet (happening soon!)</strong>, so at the moment the target Sheet must
-be readable by anyone with a link (see examples for how to accomplish via
-googledrive).</p>
+file or <code><a href='https://readxl.tidyverse.org/reference/read_excel.html'>readxl::read_excel()</a></code> is to an Excel spreadsheet. It's still under
+development, but is quite usable now.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>read_sheet</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>na</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>trim_ws</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Extremes'>min</a></span>(<span class='fl'>1000</span>, <span class='no'>n_max</span>), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)
+  <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='fl'>1000</span>, <span class='no'>n_max</span>), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)
 
 <span class='fu'>sheets_read</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>na</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>trim_ws</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Extremes'>min</a></span>(<span class='fl'>1000</span>, <span class='no'>n_max</span>), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</pre>
+  <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>, <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='fl'>1000</span>, <span class='no'>n_max</span>), <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -158,7 +153,7 @@ googledrive).</p>
     <tr>
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, or a <code><a href='https://www.rdocumentation.org/packages/googledrive/topics/dribble'>dribble</a></code>, which
+which we can recover the ID, or a <code><a href='https://rdrr.io/pkg/googledrive/man/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
 <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
@@ -249,14 +244,14 @@ any wheels.</p>
 API (the high-level functions in this package are rectangle-oriented), but
 is not parsed into the data frame output.</p></li>
 <li><p><code>?</code>: Guess. A type is guessed for each cell and then a consensus type is
-selected for each column. If no atomic type is suitable for all cells, a
+selected for the column. If no atomic type is suitable for all cells, a
 list-column is created, in which each cell is converted to an R object of
 "best" type". If no column types are specified, i.e. <code>col_types = NULL</code>,
 all types are guessed.</p></li>
 <li><p><code>l</code>: Logical.</p></li>
 <li><p><code>i</code>: Integer. This type is never guessed from the data, because Sheets
 have no formal cell type for integers.</p></li>
-<li><p><code>d</code> or <code>n</code>: Numeric, in sense of "double".</p></li>
+<li><p><code>d</code> or <code>n</code>: Numeric, in the sense of "double".</p></li>
 <li><p><code>D</code>: Date. This type is never guessed from the data, because date cells
 are just serial datetimes that bear a "date" format.</p></li>
 <li><p><code>t</code>: Time of day. This type is never guessed from the data, because time
@@ -325,11 +320,11 @@ its discovered type.</p></li>
 </div></span><span class='co'># NOT RUN {</span>
 <span class='co'>## converts a local Excel file to a Google Sheet</span>
 <span class='co'>## and shares it such that "anyone with a link can view"</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>googledrive</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>googledrive</span>)
 <span class='no'>local_xlsx</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readxl</span><span class='kw ns'>::</span><span class='fu'><a href='https://readxl.tidyverse.org/reference/readxl_example.html'>readxl_example</a></span>(<span class='st'>"deaths.xlsx"</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/googledrive/topics/drive_upload'>drive_upload</a></span>(<span class='no'>local_xlsx</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/googledrive/topics/drive_share'>drive_share</a></span>(<span class='no'>x</span>, <span class='kw'>role</span> <span class='kw'>=</span> <span class='st'>"reader"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"anyone"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/googledrive/topics/drive_reveal'>drive_reveal</a></span>(<span class='no'>x</span>, <span class='st'>"permissions"</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googledrive/man/drive_upload.html'>drive_upload</a></span>(<span class='no'>local_xlsx</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googledrive/man/drive_share.html'>drive_share</a></span>(<span class='no'>x</span>, <span class='kw'>role</span> <span class='kw'>=</span> <span class='st'>"reader"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"anyone"</span>)
+<span class='fu'><a href='https://rdrr.io/pkg/googledrive/man/drive_reveal.html'>drive_reveal</a></span>(<span class='no'>x</span>, <span class='st'>"permissions"</span>)
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -353,7 +348,7 @@ its discovered type.</p></li>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
 </div>
       </footer>
    </div>

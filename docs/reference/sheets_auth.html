@@ -22,8 +22,9 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -33,10 +34,11 @@
 
 <meta property="og:title" content="Authorize googlesheets4 — sheets_auth" />
 
-<meta property="og:description" content="Authorize googlesheets4 to view and manage your Google Sheets. By default,
-you are directed to a web browser, asked to sign in to your Google
-account, and to grant googlesheets4 permission to operate on your behalf
-with Google Sheets. By default, these user credentials are cached in a
+<meta property="og:description" content="Authorize googlesheets4 to view and manage your Google Sheets. This function is a
+wrapper around gargle::token_fetch().
+By default, you are directed to a web browser, asked to sign in to your
+Google account, and to grant googlesheets4 permission to operate on your
+behalf with Google Sheets. By default, these user credentials are cached in a
 folder below your home directory, ~/.R/gargle/gargle-oauth, from where
 they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
@@ -135,10 +137,11 @@ tokens are less likely to be synced to the cloud by accident." />
 
     <div class="ref-description">
     
-    <p>Authorize googlesheets4 to view and manage your Google Sheets. By default,
-you are directed to a web browser, asked to sign in to your Google
-account, and to grant googlesheets4 permission to operate on your behalf
-with Google Sheets. By default, these user credentials are cached in a
+    <p>Authorize googlesheets4 to view and manage your Google Sheets. This function is a
+wrapper around <code><a href='https://gargle.r-lib.org/reference/token_fetch.html'>gargle::token_fetch()</a></code>.</p>
+<p>By default, you are directed to a web browser, asked to sign in to your
+Google account, and to grant googlesheets4 permission to operate on your
+behalf with Google Sheets. By default, these user credentials are cached in a
 folder below your home directory, <code>~/.R/gargle/gargle-oauth</code>, from where
 they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
@@ -148,38 +151,56 @@ tokens are less likely to be synced to the cloud by accident.</p>
 
     <pre class="usage"><span class='fu'>sheets_auth</span>(<span class='kw'>email</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>scopes</span> <span class='kw'>=</span> <span class='st'>"https://www.googleapis.com/auth/spreadsheets"</span>,
-  <span class='kw'>cache</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"gargle.oauth_cache"</span>),
-  <span class='kw'>use_oob</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/options'>getOption</a></span>(<span class='st'>"gargle.oob_default"</span>))</pre>
+  <span class='kw'>cache</span> <span class='kw'>=</span> <span class='kw pkg'>gargle</span><span class='kw ns'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oauth_cache</a></span>(),
+  <span class='kw'>use_oob</span> <span class='kw'>=</span> <span class='kw pkg'>gargle</span><span class='kw ns'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oob_default</a></span>(), <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>email</th>
-      <td><p>Optional; email address associated with the desired Google user.</p></td>
+      <td><p>Optional. Allows user to target a specific Google identity. If
+specified, this is used for token lookup, i.e. to determine if a suitable
+token is already available in the cache. If no such token is found, <code>email</code>
+is used to pre-select the targetted Google identity in the OAuth chooser.
+Note, however, that the email associated with a token when it's cached is
+always determined from the token itself, never from this argument. Use <code>NA</code>
+or <code>FALSE</code> to match nothing and force the OAuth dance in the browser. Use
+<code>TRUE</code> to allow email auto-discovery, if exactly one matching token is
+found in the cache. Defaults to the option named "gargle_oauth_email",
+retrieved by <code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle::gargle_oauth_email()</a></code>.</p></td>
     </tr>
     <tr>
       <th>path</th>
-      <td><p>Optional; path to the downloaded JSON file for a service token.</p></td>
+      <td><p>JSON identifying the service account, in one of the forms
+supported for the <code>txt</code> argument of <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonlite::fromJSON()</a></code> (typically, a
+file path or JSON string).</p></td>
     </tr>
     <tr>
       <th>scopes</th>
-      <td><p>Optional; scope(s) to use. See your choices at
-<a href='https://developers.google.com/identity/protocols/googlescopes#sheetsv4'>OAuth 2.0 Scopes for Google APIs</a>.</p></td>
+      <td><p>A character vector of scopes to request. Pick from those listed
+at <a href='https://developers.google.com/identity/protocols/googlescopes'>https://developers.google.com/identity/protocols/googlescopes</a>.</p>
+<p>For certain token flows, the
+<code>"https://www.googleapis.com/auth/userinfo.email"</code> scope is unconditionally
+included. This grants permission to retrieve the email address associated
+with a token; gargle uses this to index cached OAuth tokens. This grants no
+permission to view or send email. It is considered a low value scope and
+does not appear on the consent screen.</p></td>
     </tr>
     <tr>
       <th>cache</th>
-      <td><p>A logical value or a string. <code>TRUE</code> means to cache using the
-default user-level cache file, <code>~/.R/gargle/gargle-oauth</code>, <code>FALSE</code> means
-don't cache, and <code>NA</code> means to guess using some sensible heuristics. A
-string means use the specified path as the cache file.</p></td>
+      <td><p>Specifies the OAuth token cache. Defaults to the option named
+"gargle_oauth_cache", retrieved via <code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle::gargle_oauth_cache()</a></code>.</p></td>
     </tr>
     <tr>
       <th>use_oob</th>
-      <td><p>If <code>FALSE</code>, use a local webserver for the OAuth dance.
-Otherwise, provide a URL to the user and prompt for a validation code.
-Defaults to the option "gargle.oob_default" or <code>TRUE</code> if httpuv is not
-installed.</p></td>
+      <td><p>Whether to prefer "out of band" authentication. Defaults to
+the option named "gargle_oob_default", retrieved via
+<code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle::gargle_oob_default()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>token</th>
+      <td><p>A token with class <a href='https://rdrr.io/pkg/httr/man/Token-class.html'>Token2.0</a>.</p></td>
     </tr>
     </table>
     
@@ -195,11 +216,13 @@ also force googlesheets4 to switch from one identity to another. If
 there's no cached token for the email, this triggers a return to the
 browser to choose the identity and give consent.</p></li>
 <li><p>Use a service account token.</p></li>
+<li><p>Bring their own <a href='https://rdrr.io/pkg/httr/man/Token-class.html'>Token2.0</a>.</p></li>
 <li><p>Specify non-default behavior re: token caching and out-of-bound
 authentication.</p></li>
 </ul>
-    <p>For even deeper control over auth, use <code><a href='sheets_auth_config.html'>sheets_auth_config()</a></code> to use
-your own OAuth app or API key.</p>
+    <p>For details on the many ways to find a token, see
+<code><a href='https://gargle.r-lib.org/reference/token_fetch.html'>gargle::token_fetch()</a></code>. For deeper control over auth, use
+<code><a href='sheets_auth_config.html'>sheets_auth_config()</a></code> to bring your own OAuth app or API key.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -246,7 +269,7 @@ your own OAuth app or API key.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
 </div>
       </footer>
    </div>

@@ -9,7 +9,7 @@
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Manage Google Spreadsheets from R using the Sheets API V4">
 <meta property="og:description" content="Interact with Google Sheets from R via the Sheets API v4.">
 <meta name="twitter:card" content="summary">
@@ -105,7 +105,7 @@
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">## install.packages("googlesheets4")</span></a></code></pre></div>
 <p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"tidyverse/googlesheets4"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb2-2" data-line-number="2">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/reexports.html">install_github</a></span>(<span class="st">"tidyverse/googlesheets4"</span>)</a></code></pre></div>
 </div>
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
@@ -116,7 +116,7 @@
 </div>
 <div id="read_sheet" class="section level2">
 <h2 class="hasAnchor">
-<a href="#read_sheet" class="anchor"></a><code><a href="reference/read_sheet.html">read_sheet()</a></code>
+<a href="#read_sheet" class="anchor"></a><code>read_sheet()</code>
 </h2>
 <p><code><a href="reference/read_sheet.html">read_sheet()</a></code> is the main “read” function and should evoke <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> and <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">readxl::read_excel()</a></code>. It’s an alias for <code><a href="reference/read_sheet.html">sheets_read()</a></code>. Most functions in googlesheets4 actually start with <code>sheets_</code>. googlesheets4 is pipe-friendly (and reexports <code>%&gt;%</code>), but works just fine without the pipe.</p>
 <div id="identify-and-access-your-own-sheet" class="section level3">
@@ -124,14 +124,14 @@
 <a href="#identify-and-access-your-own-sheet" class="anchor"></a>Identify and access your own Sheet</h3>
 <p>Let’s say you have a cheerful Google Sheet named “deaths”. If you want to access it by name, use <a href="https://googledrive.tidyverse.org">googledrive</a> to identify the document (capture its metadata, especially file id).</p>
 <!-- remove the 'message = 4' later -->
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(googledrive)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(googlesheets4)</a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googledrive)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googlesheets4)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">(deaths &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/googledrive/topics/drive_get">drive_get</a></span>(<span class="st">"deaths"</span>))</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">(deaths &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/googledrive/man/drive_get.html">drive_get</a></span>(<span class="st">"deaths"</span>))</a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; # A tibble: 1 x 4</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;   name   path     id                                         drive_resource</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                                      &lt;list&gt;        </span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5w… &lt;list [34]&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;   name   path     id                                       drive_resource  </span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                                    &lt;list&gt;          </span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z… &lt;named list [34…</span></a></code></pre></div>
 <p>Pass the result to googlesheets4 functions such as:</p>
 <ul>
 <li>
@@ -176,7 +176,7 @@
 <h3 class="hasAnchor">
 <a href="#specify-the-range-and-column-types" class="anchor"></a>Specify the range and column types</h3>
 <p>We’ve made a few world-readable Sheets easy to access via <code><a href="reference/sheets_example.html">sheets_example()</a></code>. Here we read from a mini-Gapminder Sheet to show some of the different ways to specify (work)sheet and cell ranges. Note also that <code>col_types</code> gives control of column types.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(googlesheets4)</a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googlesheets4)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(<span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"mini-gap"</span>), <span class="dt">sheet =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; Reading from 'test-gs-mini-gapminder'</span></a>
@@ -243,28 +243,28 @@
 <a href="#roundtripping-with-a-private-sheet" class="anchor"></a>Roundtripping with a private Sheet</h2>
 <p>Here is a demo of putting the iris data into a new, private Sheet. Then reading it back into R and exporting as an Excel workbook. Then reading that back into R!</p>
 <p>First, put the iris data into a csv file.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">(iris_tempfile &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempfile</a></span>(<span class="dt">pattern =</span> <span class="st">"iris-"</span>, <span class="dt">fileext =</span> <span class="st">".csv"</span>))</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpaC202e/iris-6f476314ccb2.csv"</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/write.table">write.csv</a></span>(iris, iris_tempfile, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p>Use <code><a href="https://www.rdocumentation.org/packages/googledrive/topics/drive_upload">googledrive::drive_upload()</a></code> to upload the csv and simultaneously convert to a Sheet.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">(iris_ss &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/googledrive/topics/drive_upload">drive_upload</a></span>(iris_tempfile, <span class="dt">type =</span> <span class="st">"spreadsheet"</span>))</a>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">(iris_tempfile &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>(<span class="dt">pattern =</span> <span class="st">"iris-"</span>, <span class="dt">fileext =</span> <span class="st">".csv"</span>))</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp0oVjLz/iris-b2bf69f1e69a.csv"</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(iris, iris_tempfile, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>Use <code><a href="https://rdrr.io/pkg/googledrive/man/drive_upload.html">googledrive::drive_upload()</a></code> to upload the csv and simultaneously convert to a Sheet.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">(iris_ss &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/pkg/googledrive/man/drive_upload.html">drive_upload</a></span>(iris_tempfile, <span class="dt">type =</span> <span class="st">"spreadsheet"</span>))</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; Local file:</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpaC202e/iris-6f476314ccb2.csv</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp0oVjLz/iris-b2bf69f1e69a.csv</span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; uploaded into Drive file:</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;   * iris-6f476314ccb2: 1CPDt8l3RQsK0w0w7VmZTRO63p2sK3fWZnVMwMLxZJDo</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;   * iris-b2bf69f1e69a: 1pROQIz1M6zcw4ozDwwHgc2ovelyzA_k83BBgAHrgUJk</span></a>
 <a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; with MIME type:</span></a>
 <a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;   * application/vnd.google-apps.spreadsheet</span></a>
 <a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;   name              id                                       drive_resource</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; * &lt;chr&gt;             &lt;chr&gt;                                    &lt;list&gt;        </span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; 1 iris-6f476314ccb2 1CPDt8l3RQsK0w0w7VmZTRO63p2sK3fWZnVMwML… &lt;list [34]&gt;</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;   name             id                                      drive_resource  </span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; * &lt;chr&gt;            &lt;chr&gt;                                   &lt;list&gt;          </span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; 1 iris-b2bf69f1e6… 1pROQIz1M6zcw4ozDwwHgc2ovelyzA_k83BBgA… &lt;named list [34…</span></a>
 <a class="sourceLine" id="cb8-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb8-13" data-line-number="13"><span class="co">## visit the new Sheet in the browser, in an interactive session!</span></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="kw"><a href="https://www.rdocumentation.org/packages/googledrive/topics/drive_browse">drive_browse</a></span>(iris_ss)</a></code></pre></div>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/pkg/googledrive/man/drive_browse.html">drive_browse</a></span>(iris_ss)</a></code></pre></div>
 <p>Read data from the private Sheet into R.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(iris_ss, <span class="dt">range =</span> <span class="st">"B1:D6"</span>)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; Reading from 'iris-6f476314ccb2'</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; Range "'iris-6f476314ccb2.csv'!B1:D6"</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; Reading from 'iris-b2bf69f1e69a'</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; Range "'iris-b2bf69f1e69a.csv'!B1:D6"</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; # A tibble: 5 x 3</span></a>
 <a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt;   Sepal.Width Petal.Length Petal.Width</span></a>
 <a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt;         &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span></a>
@@ -274,13 +274,13 @@
 <a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt; 4         3.1          1.5         0.2</span></a>
 <a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt; 5         3.6          1.4         0.2</span></a></code></pre></div>
 <p>Download the Sheet as an Excel workbook and read it back in via <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">readxl::read_excel()</a></code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">(iris_xlsxfile &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/grep">sub</a></span>(<span class="st">"[.]csv"</span>, <span class="st">".xlsx"</span>, iris_tempfile))</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpaC202e/iris-6f476314ccb2.xlsx"</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/googledrive/topics/drive_download">drive_download</a></span>(iris_ss, <span class="dt">path =</span> iris_xlsxfile, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">(iris_xlsxfile &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="st">"[.]csv"</span>, <span class="st">".xlsx"</span>, iris_tempfile))</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp0oVjLz/iris-b2bf69f1e69a.xlsx"</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/pkg/googledrive/man/drive_download.html">drive_download</a></span>(iris_ss, <span class="dt">path =</span> iris_xlsxfile, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; File downloaded:</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt;   * iris-6f476314ccb2</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt;   * iris-b2bf69f1e69a</span></a>
 <a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; Saved locally as:</span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt;   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpaC202e/iris-6f476314ccb2.xlsx</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt;   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp0oVjLz/iris-b2bf69f1e69a.xlsx</span></a>
 <a class="sourceLine" id="cb10-8" data-line-number="8">readxl<span class="op">::</span><span class="kw"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span>(iris_xlsxfile)</a>
 <a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; # A tibble: 150 x 5</span></a>
 <a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span></a>
@@ -297,7 +297,7 @@
 <a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt; 10          4.9         3.1          1.5         0.1 setosa </span></a>
 <a class="sourceLine" id="cb10-22" data-line-number="22"><span class="co">#&gt; # … with 140 more rows</span></a></code></pre></div>
 <p>Clean up.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/files">file.remove</a></span>(iris_tempfile, iris_xlsxfile)</a>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/files.html">file.remove</a></span>(iris_tempfile, iris_xlsxfile)</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; [1] TRUE TRUE</span></a></code></pre></div>
 </div>
 <div id="get-sheet-metadata-or-detailed-cell-data" class="section level2">
@@ -318,7 +318,7 @@
 <a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt;       Europe: 6 x 6</span></a>
 <a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;      Oceania: 6 x 6</span></a>
 <a class="sourceLine" id="cb12-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(mini_gap_meta, <span class="dt">max.level =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(mini_gap_meta, <span class="dt">max.level =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt; List of 7</span></a>
 <a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt;  $ spreadsheet_id : chr "1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY"</span></a>
 <a class="sourceLine" id="cb12-18" data-line-number="18"><span class="co">#&gt;  $ spreadsheet_url: chr "https://docs.google.com/a/rstudio.com/spreadsheets/d/1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY/edit"</span></a>
@@ -343,11 +343,11 @@
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; Reading from 'deaths'</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; Range "'arts'!E5:E7"</span></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt; # A tibble: 3 x 4</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;     row   col loc   cell           </span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;         </span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; 1     5     5 E5    &lt;S3: CELL_TEXT&gt;</span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; 2     6     5 E6    &lt;S3: CELL_DATE&gt;</span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; 3     7     5 E7    &lt;S3: CELL_DATE&gt;</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;     row   col loc   cell      </span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;    </span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; 1     5     5 E5    &lt;CELL_TEX&gt;</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt; 2     6     5 E6    &lt;CELL_DAT&gt;</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; 3     7     5 E7    &lt;CELL_DAT&gt;</span></a>
 <a class="sourceLine" id="cb13-10" data-line-number="10">df<span class="op">$</span>cell[[<span class="dv">3</span>]]</a>
 <a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt; $userEnteredValue</span></a>
 <a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt; $userEnteredValue$numberValue</span></a>
@@ -409,6 +409,7 @@
 <a href="http://readr.tidyverse.org">readr</a> is the tidyverse package for reading delimited files (e.g., csv or tsv) into an R data frame. googlesheets4 takes cues from readr with respect to column type specification.</li>
 </ul>
 <p><em>Please note that this project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</em></p>
+<p><a href="https://www.tidyverse.org/google_privacy_policy">Privacy policy</a></p>
 </div>
 </div>
   </div>
@@ -428,6 +429,13 @@
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
 <li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+</ul>
+</div>
+<div class="community">
+<h2>Community</h2>
+<ul class="list-unstyled">
+<li><a href="CONTRIBUTING.html">Contributing guide</a></li>
+<li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
 <div class="developers">
@@ -458,7 +466,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
 </div>
       </footer>
 </div>

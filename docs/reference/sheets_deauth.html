@@ -22,8 +22,9 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -34,8 +35,8 @@
 <meta property="og:title" content="Suspend authorization — sheets_deauth" />
 
 <meta property="og:description" content="Put googlesheets4 into a de-authorized state. Instead of sending a token,
-googlesheets4 will send its API key. This can be used to access public
-files for which no Google sign-in is required. This is handy for using
+googlesheets4 will send an API key. This can be used to access public
+resources for which no Google sign-in is required. This is handy for using
 googlesheets4 in a non-interactive setting to make requests that do not
 require a token. It will prevent the attempt to obtain a token
 interactively in the browser. A built-in API key is used by default or
@@ -135,8 +136,8 @@ the user can configure their own via sheets_auth_config()." />
     <div class="ref-description">
     
     <p>Put googlesheets4 into a de-authorized state. Instead of sending a token,
-googlesheets4 will send its API key. This can be used to access public
-files for which no Google sign-in is required. This is handy for using
+googlesheets4 will send an API key. This can be used to access public
+resources for which no Google sign-in is required. This is handy for using
 googlesheets4 in a non-interactive setting to make requests that do not
 require a token. It will prevent the attempt to obtain a token
 interactively in the browser. A built-in API key is used by default or
@@ -156,6 +157,8 @@ the user can configure their own via <code><a href='sheets_auth_config.html'>she
     <pre class="examples"><span class='co'># NOT RUN {</span>
 <span class='fu'>sheets_deauth</span>()
 <span class='fu'><a href='sheets_email.html'>sheets_email</a></span>()
+
+<span class='co'># get metadata on the public 'deaths' spreadsheet</span>
 <span class='fu'><a href='sheets_get.html'>sheets_get</a></span>(<span class='st'>"1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA"</span>)
 <span class='co'># }</span></pre>
   </div>
@@ -177,7 +180,7 @@ the user can configure their own via <code><a href='sheets_auth_config.html'>she
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
 </div>
       </footer>
    </div>

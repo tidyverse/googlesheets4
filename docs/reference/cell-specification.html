@@ -22,8 +22,9 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -162,15 +163,15 @@ with some bounds that are specified and others determined by the data.</p>
 <span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fl'>1</span>))
 
 <span class='co'># Specify upper or lower bound on row or column</span>
-<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
-<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"D"</span>)))
-<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>NA</span>)))
-<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>NA</span>)))
-<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"C"</span>, <span class='fl'>NA</span>)))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"D"</span>)))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>NA</span>)))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>NA</span>)))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"C"</span>, <span class='fl'>NA</span>)))
 
 <span class='co'># Specify a partially open rectangle</span>
-<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_limits</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>NA</span>)))
-<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_limits</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_limits</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>NA</span>)))
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_limits</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
@@ -190,7 +191,7 @@ with some bounds that are specified and others determined by the data.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.9100.</p>
 </div>
       </footer>
    </div>

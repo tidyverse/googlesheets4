@@ -13,7 +13,7 @@ resources for which no Google sign-in is required. This is handy for using
 googlesheets4 in a non-interactive setting to make requests that do not
 require a token. It will prevent the attempt to obtain a token
 interactively in the browser. A built-in API key is used by default or
-the user can configure their own via \code{\link[=sheets_auth_config]{sheets_auth_config()}}.
+the user can configure their own via \code{\link[=sheets_auth_configure]{sheets_auth_configure()}}.
 }
 \examples{
 \dontrun{
@@ -25,7 +25,7 @@ sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
 }
 }
 \seealso{
-Other auth functions: \code{\link{sheets_auth_config}},
+Other auth functions: \code{\link{sheets_auth_configure}},
   \code{\link{sheets_auth}}
 }
 \concept{auth functions}

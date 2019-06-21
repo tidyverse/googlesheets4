@@ -16,7 +16,7 @@ do not need to handle tokens "by hand" or, even if they need some
 control, \code{\link[=sheets_auth]{sheets_auth()}} is what they need. If there is no current
 token, \code{\link[=sheets_auth]{sheets_auth()}} is called to either load from cache or
 initiate OAuth2.0 flow. If auth has been deactivated via
-\code{\link[=sheets_auth_config]{sheets_auth_config()}}, \code{sheets_token()} returns \code{NULL}.
+\code{\link[=sheets_deauth]{sheets_deauth()}}, \code{sheets_token()} returns \code{NULL}.
 }
 \examples{
 \dontrun{
@@ -26,9 +26,6 @@ req <- request_generate(
   token = sheets_token()
 )
 req
-
-## get a bare access token for use with, e.g., curl on the command line
-sheets_token()$auth_token$credentials$access_token
 }
 }
 \seealso{

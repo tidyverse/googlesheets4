@@ -25,14 +25,11 @@
 #'   [Credentials, access, security, and
 #'   identity](https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279).
 #'   In order of precedence, these sources are consulted: the formal `key`
-#'   argument, a `key` parameter in `params`, a pre-configured API key fetched
-#'   via `sheets_api_key()` (nope, not set up yet). googlesheets4 ships with a
-#'   built-in key or users can override with their own via
-#'   `sheets_auth_config()` (nope, not set up yet).
+#'   argument, a `key` parameter in `params`, a user-configured API key set up
+#'   with [sheets_auth_configure()] and retrieved with [sheets_api_key()].
 #' @param token Set this to `NULL` to suppress the inclusion of a token. Note
-#'   that, if auth has been de-activated via `sheets_auth_config()`,
-#'   `sheets_token()` will actually return `NULL`. (none of that is implemented
-#'   yet)
+#'   that, if auth has been de-activated via [sheets_deauth()],
+#'   `sheets_token()` will actually return `NULL`.
 #'
 #' @return `list()`\cr Components are `method`, `url`, `body`, and `token`,
 #'   suitable as input for [request_make()].

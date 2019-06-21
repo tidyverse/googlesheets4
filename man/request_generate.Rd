@@ -18,15 +18,12 @@ the query, or the body.}
 for an API key in the absence of a token is explained in Google's document
 \href{https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279}{Credentials, access, security, and identity}.
 In order of precedence, these sources are consulted: the formal \code{key}
-argument, a \code{key} parameter in \code{params}, a pre-configured API key fetched
-via \code{sheets_api_key()} (nope, not set up yet). googlesheets4 ships with a
-built-in key or users can override with their own via
-\code{sheets_auth_config()} (nope, not set up yet).}
+argument, a \code{key} parameter in \code{params}, a user-configured API key set up
+with \code{\link[=sheets_auth_configure]{sheets_auth_configure()}} and retrieved with \code{\link[=sheets_api_key]{sheets_api_key()}}.}
 
 \item{token}{Set this to \code{NULL} to suppress the inclusion of a token. Note
-that, if auth has been de-activated via \code{sheets_auth_config()},
-\code{sheets_token()} will actually return \code{NULL}. (none of that is implemented
-yet)}
+that, if auth has been de-activated via \code{\link[=sheets_deauth]{sheets_deauth()}},
+\code{sheets_token()} will actually return \code{NULL}.}
 }
 \value{
 \code{list()}\cr Components are \code{method}, \code{url}, \code{body}, and \code{token},

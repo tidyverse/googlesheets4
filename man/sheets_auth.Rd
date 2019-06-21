@@ -75,7 +75,7 @@ authentication.
 
 For details on the many ways to find a token, see
 \code{\link[gargle:token_fetch]{gargle::token_fetch()}}. For deeper control over auth, use
-\code{\link[=sheets_auth_config]{sheets_auth_config()}} to bring your own OAuth app or API key.
+\code{\link[=sheets_auth_configure]{sheets_auth_configure()}} to bring your own OAuth app or API key.
 }
 \examples{
 \dontrun{
@@ -96,7 +96,7 @@ sheets_auth(path = "foofy-83ee9e7c9c48.json")
 }
 }
 \seealso{
-Other auth functions: \code{\link{sheets_auth_config}},
+Other auth functions: \code{\link{sheets_auth_configure}},
   \code{\link{sheets_deauth}}
 }
 \concept{auth functions}

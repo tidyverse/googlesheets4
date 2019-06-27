@@ -43,7 +43,7 @@ gargle_lookup_table <- list(
 #' ## use a service account token
 #' sheets_auth(path = "foofy-83ee9e7c9c48.json")
 #' }
-sheets_auth <- function(email = NULL,
+sheets_auth <- function(email = gargle::gargle_oauth_email(),
                         path = NULL,
                         scopes = "https://www.googleapis.com/auth/spreadsheets",
                         cache = gargle::gargle_oauth_cache(),

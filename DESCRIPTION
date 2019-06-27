@@ -15,7 +15,7 @@ Depends:
     R (>= 3.2)
 Imports: 
     cellranger,
-    gargle (>= 0.1.3.9000),
+    gargle (>= 0.1.3.9004),
     glue (>= 1.3.0),
     googledrive,
     httr,

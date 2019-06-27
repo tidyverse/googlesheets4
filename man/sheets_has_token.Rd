@@ -11,9 +11,13 @@ Logical.
 }
 \description{
 Reports whether googlesheets4 has stored a token, ready for use in downstream
-requests. Exists mostly for protecting examples that won't work in the
-absence of a token.
+requests.
 }
 \examples{
 sheets_has_token()
 }
+\seealso{
+Other low-level API functions: \code{\link{request_generate}},
+  \code{\link{request_make}}, \code{\link{sheets_token}}
+}
+\concept{low-level API functions}

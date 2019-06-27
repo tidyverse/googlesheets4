@@ -47,7 +47,7 @@ googlesheets4 will, by default, help you interact with Sheets as an authenticate
 
 The `sheets_auth_*()` family of functions gives the user more control, in order to build more advanced workflows.
 
-For this README, we've logged into Google as a specific user in a hidden chunk. This OAuth flow is still under development and is expected to change.
+For this README, we've logged into Google as a specific user in a hidden chunk.
 
 ## `read_sheet()`
 

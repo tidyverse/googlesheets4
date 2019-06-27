@@ -13,8 +13,7 @@ gargle_lookup_table <- list(
   YOUR_STUFF  = "your Google Sheets",
   PRODUCT     = "Google Sheets",
   API         = "Sheets API",
-  PREFIX      = "sheets",
-  AUTH_CONFIG_SOURCE = "tidyverse"
+  PREFIX      = "sheets"
 )
 
 #' Authorize googlesheets4
@@ -76,7 +75,7 @@ sheets_auth <- function(email = gargle::gargle_oauth_email(),
 
 #' Suspend authorization
 #'
-#' @eval gargle:::PREFIX_deauth_description(gargle_lookup_table)
+#' @eval gargle:::PREFIX_deauth_description_with_api_key(gargle_lookup_table)
 #'
 #' @family auth functions
 #' @export
@@ -122,11 +121,10 @@ sheets_token <- function() {
 
 #' Is there a token on hand?
 #'
-#' Reports whether googlesheets4 has stored a token, ready for use in downstream
-#' requests. Exists mostly for protecting examples that won't work in the
-#' absence of a token.
+#' @eval gargle:::PREFIX_has_token_description(gargle_lookup_table)
+#' @eval gargle:::PREFIX_has_token_return()
 #'
-#' @return Logical.
+#' @family low-level API functions
 #' @export
 #'
 #' @examples
@@ -135,33 +133,11 @@ sheets_has_token <- function() {
   inherits(.auth$cred, "Token2.0")
 }
 
-# TODO(jennybc): update roxygen header below when/if gargle supports
-# THING_auth_configure, instead of or in addition to THING_auth_config.
-
 #' Edit and view auth configuration
 #'
-#' @description
-#' These functions give more control over and visibility into the auth
-#' configuration than [sheets_auth()] does. `sheets_auth_configure()` lets the
-#' user specify their own:
-#' * OAuth app, which is used when obtaining a user token.
-#' * API key. If googlesheets4 is deauthorized via [sheets_deauth()], all
-#'   requests are sent with an API key in lieu of a token.
-#'
-#' See the vignette [How to get your own API
-#' credentials](https://gargle.r-lib.org/articles/get-api-credentials.html) for
-#' more. If the user does not configure these settings, internal defaults are
-#' used.
-#'
-#' @param app OAuth app, in the sense of [httr::oauth_app()].
-#' @inheritParams gargle::oauth_app_from_json
-#' @param api_key API key.
-#'
-#' @return
-#' * `sheets_auth_configure()`: An object of R6 class [gargle::AuthState],
-#'   invisibly.
-#' * `sheets_oauth_app()`: the current user-configured [httr::oauth_app()].
-#' * `sheets_api_key()`: the current user-configured API key.
+#' @eval gargle:::PREFIX_auth_configure_description(gargle_lookup_table)
+#' @eval gargle:::PREFIX_auth_configure_params()
+#' @eval gargle:::PREFIX_auth_configure_return(gargle_lookup_table)
 #'
 #' @family auth functions
 #' @export
@@ -209,19 +185,14 @@ sheets_auth_configure <- function(app, path, api_key) {
   stopifnot(missing(app) || is.null(app) || inherits(app, "oauth_app"))
 
   if (!missing(app) || !missing(path)) {
-    .auth$app <- app
+    .auth$set_app(app)
   }
 
   if (!missing(api_key)) {
-    .auth$api_key <- api_key
+    .auth$set_api_key(api_key)
   }
 
   invisible(.auth)
-
-  # switch to these once this is resolved and released
-  # https://github.com/r-lib/gargle/issues/82#issuecomment-502343745
-  #.auth$set_app(app)
-  #.auth$set_api_key(api_key)
 }
 
 #' @export

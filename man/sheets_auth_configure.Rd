@@ -15,7 +15,7 @@ sheets_oauth_app()
 \arguments{
 \item{app}{OAuth app, in the sense of \code{\link[httr:oauth_app]{httr::oauth_app()}}.}
 
-\item{path}{JSON downloaded from Google Developers Console, containing a
+\item{path}{JSON downloaded from Google Cloud Platform Console, containing a
 client id (aka key) and secret, in one of the forms supported for the \code{txt}
 argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a file path or JSON string).}
 
@@ -23,25 +23,29 @@ argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a 
 }
 \value{
 \itemize{
-\item \code{sheets_auth_configure()}: An object of R6 class \link[gargle:AuthState]{gargle::AuthState},
-invisibly.
-\item \code{sheets_oauth_app()}: the current user-configured \code{\link[httr:oauth_app]{httr::oauth_app()}}.
+\item \code{sheets_auth_configure()}: An object of R6 class
+\link[gargle:AuthState]{gargle::AuthState}, invisibly.
+\item \code{sheets_oauth_app()}: the current user-configured
+\code{\link[httr:oauth_app]{httr::oauth_app()}}.
 \item \code{sheets_api_key()}: the current user-configured API key.
 }
 }
 \description{
 These functions give more control over and visibility into the auth
-configuration than \code{\link[=sheets_auth]{sheets_auth()}} does. \code{sheets_auth_configure()} lets the
-user specify their own:
+configuration than \code{\link[=sheets_auth]{sheets_auth()}} does. \code{sheets_auth_configure()}
+lets the user specify their own:
 \itemize{
 \item OAuth app, which is used when obtaining a user token.
-\item API key. If googlesheets4 is deauthorized via \code{\link[=sheets_deauth]{sheets_deauth()}}, all
+\item API key. If googlesheets4 is de-authorized via \code{\link[=sheets_deauth]{sheets_deauth()}}, all
 requests are sent with an API key in lieu of a token.
+See the vignette
+\href{https://gargle.r-lib.org/articles/get-api-credentials.html}{How to get your own API credentials}
+for more.
+If the user does not configure these settings, internal defaults
+are used.
+\code{sheets_oauth_app()} and \code{sheets_api_key()} retrieve the
+currently configured OAuth app and API key, respectively.
 }
-
-See the vignette \href{https://gargle.r-lib.org/articles/get-api-credentials.html}{How to get your own API credentials} for
-more. If the user does not configure these settings, internal defaults are
-used.
 }
 \examples{
 # see and store the current user-configured OAuth app (probaby `NULL`)

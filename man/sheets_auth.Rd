@@ -4,7 +4,7 @@
 \alias{sheets_auth}
 \title{Authorize googlesheets4}
 \usage{
-sheets_auth(email = NULL, path = NULL,
+sheets_auth(email = gargle::gargle_oauth_email(), path = NULL,
   scopes = "https://www.googleapis.com/auth/spreadsheets",
   cache = gargle::gargle_oauth_cache(),
   use_oob = gargle::gargle_oob_default(), token = NULL)
@@ -42,7 +42,10 @@ does not appear on the consent screen.}
 the option named "gargle_oob_default", retrieved via
 \code{\link[gargle:gargle_oob_default]{gargle::gargle_oob_default()}}.}
 
-\item{token}{A token with class \link[httr:Token-class]{Token2.0}.}
+\item{token}{A token with class \link[httr:Token-class]{Token2.0} or an object of
+httr's class \code{request}, i.e. a token that has been prepared with
+\code{\link[httr:config]{httr::config()}} and has a \link[httr:Token-class]{Token2.0} in the
+\code{auth_token} component.}
 }
 \description{
 Authorize googlesheets4 to view and manage your Google Sheets. This function is a

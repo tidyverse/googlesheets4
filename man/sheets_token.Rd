@@ -15,8 +15,9 @@ Returns a token pre-processed with \code{\link[httr:config]{httr::config()}}. Mo
 do not need to handle tokens "by hand" or, even if they need some
 control, \code{\link[=sheets_auth]{sheets_auth()}} is what they need. If there is no current
 token, \code{\link[=sheets_auth]{sheets_auth()}} is called to either load from cache or
-initiate OAuth2.0 flow. If auth has been deactivated via
-\code{\link[=sheets_deauth]{sheets_deauth()}}, \code{sheets_token()} returns \code{NULL}.
+initiate OAuth2.0 flow.
+If auth has been deactivated via \code{\link[=sheets_deauth]{sheets_deauth()}}, \code{sheets_token()}
+returns \code{NULL}.
 }
 \examples{
 \dontrun{
@@ -30,6 +31,7 @@ req
 }
 \seealso{
 Other low-level API functions: \code{\link{request_generate}},
-  \code{\link{request_make}}
+  \code{\link{request_make}},
+  \code{\link{sheets_has_token}}
 }
 \concept{low-level API functions}

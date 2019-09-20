@@ -37,14 +37,12 @@ test_that("ctype() works on lists, when it should", {
   )
 })
 
-test_that("guess_parse_type() doesn't just pass ctype through", {
-  ## there is no such thing as a "blank" column --> logical!
-  expect_equivalent(guess_parse_type("CELL_BLANK"), "CELL_LOGICAL")
+test_that("effective_cell_type() doesn't just pass ctype through", {
   ## neither the API nor JSON has a proper way to convey integer-ness
-  expect_equivalent(guess_parse_type("CELL_INTEGER"), "CELL_NUMERIC")
+  expect_equivalent(effective_cell_type("CELL_INTEGER"), "CELL_NUMERIC")
   ## conversion to date or time is lossy, so never guess that
-  expect_equivalent(guess_parse_type("CELL_DATE"), "CELL_DATETIME")
-  expect_equivalent(guess_parse_type("CELL_TIME"), "CELL_DATETIME")
+  expect_equivalent(effective_cell_type("CELL_DATE"), "CELL_DATETIME")
+  expect_equivalent(effective_cell_type("CELL_TIME"), "CELL_DATETIME")
 })
 
 test_that("consensus_col_type() implements our type coercion DAG", {

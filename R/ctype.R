@@ -64,10 +64,10 @@ ctype.default <- function(x, ...) {
   )
 }
 
-.cell_to_parse_types <- c(
-  ## If discovered   Then guessed
-  ## cell type is:   col type is:
-  CELL_BLANK       = "CELL_LOGICAL",
+.discovered_to_effective_type <- c(
+  ## If discovered   Then effective
+  ## cell type is:   cell type is:
+  CELL_BLANK       = "CELL_BLANK",
   CELL_LOGICAL     = "CELL_LOGICAL",
   CELL_INTEGER     = "CELL_NUMERIC",  ## integers are jsonlite being helpful
   CELL_NUMERIC     = "CELL_NUMERIC",
@@ -78,14 +78,15 @@ ctype.default <- function(x, ...) {
 )
 
 ## input:  cell type, presumably discovered
-## output: guess-able col type
+## output: effective cell type
+##
 ## Where do we use this?
-##   * Choosing cell-specific parser when col type is COL_LIST == "L"
+##   * To choose cell-specific parser when col type is COL_LIST == "L"
 ##   * Pre-processing cell types prior to forming a consensus for an entire
 ##     column when col type is COL_GUESS = "?"
 ## This is the where we store type-guessing fiddliness that is specific to
 ## Google Sheets.
-guess_parse_type <- function(ctype) .cell_to_parse_types[ctype]
+effective_cell_type <- function(ctype) .discovered_to_effective_type[ctype]
 
 ## input:  a ctype
 ## output: vector of ctypes that can hold such input with no data loss, going
@@ -124,11 +125,11 @@ upper_type <- function(x, y) {
 ## logical"
 consensus_col_type <- function(ctype) {
   out <- Reduce(upper_type, unique(ctype), init = "CELL_BLANK")
-  if (out == "CELL_BLANK") {
-    "CELL_LOGICAL"
-  } else {
-    out
-  }
+  blank_to_logical(out)
+}
+
+blank_to_logical <- function(ctype) {
+  purrr::modify_if(ctype, ~ identical(.x, "CELL_BLANK"), ~ "CELL_LOGICAL")
 }
 
 ## input: an instance of CellData

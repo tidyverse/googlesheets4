@@ -58,6 +58,12 @@ folder below your home directory, \code{~/.R/gargle/gargle-oauth}, from where
 they can be automatically refreshed, as necessary. Storage at the user
 level means the same token can be used across multiple projects and
 tokens are less likely to be synced to the cloud by accident.
+
+If you are interacting with R from a web-based platform, like RStudio
+Server or Cloud, you need to use a variant of this flow, known as
+out-of-band auth ("oob"). If this does not happen automatically, you
+can request it yourself with \code{use_oob = TRUE} or, more persistently, by
+setting an option via \code{options(gargle_oob_default = TRUE)}.
 }
 \details{
 Most users, most of the time, do not need to call \code{sheets_auth()}
@@ -79,6 +85,7 @@ authentication.
 For details on the many ways to find a token, see
 \code{\link[gargle:token_fetch]{gargle::token_fetch()}}. For deeper control over auth, use
 \code{\link[=sheets_auth_configure]{sheets_auth_configure()}} to bring your own OAuth app or API key.
+Read more about gargle options, see \link[gargle:gargle_options]{gargle::gargle_options}.
 }
 \examples{
 \dontrun{

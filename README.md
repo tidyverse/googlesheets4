@@ -1,6 +1,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+# googlesheets4
+
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![Travis build
 status](https://travis-ci.org/tidyverse/googlesheets4.svg?branch=master)](https://travis-ci.org/tidyverse/googlesheets4)
@@ -8,8 +10,6 @@ status](https://travis-ci.org/tidyverse/googlesheets4.svg?branch=master)](https:
 status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googlesheets4?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googlesheets4)
 [![Coverage
 status](https://codecov.io/gh/tidyverse/googlesheets4/branch/master/graph/badge.svg)](https://codecov.io/github/tidyverse/googlesheets4?branch=master)
-
-# googlesheets4
 
 googlesheets4 provides an R interface to [Google
 Sheets](https://spreadsheets.google.com/) via the [Sheets API
@@ -21,6 +21,9 @@ package](https://cran.r-project.org/package=googlesheets).
 No. The idea is to name the package after the corresponding version of
 the Sheets API. In hindsight, the original googlesheets should have been
 googlesheets**3**.*
+
+The best source of information is alway the package website:
+<https://googlesheets4.tidyverse.org>
 
 ## Installation
 
@@ -245,7 +248,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpMebA2C/iris-73b57a343fad.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpSkmN4h/iris-8653534d8c67.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -255,15 +258,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpMebA2C/iris-73b57a343fad.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpSkmN4h/iris-8653534d8c67.csv
 #> uploaded into Drive file:
-#>   * iris-73b57a343fad: 1YMcbAgaeEFaGyCQXfYtbodAhhl7HT3iTF1GP1BfsRvE
+#>   * iris-8653534d8c67: 1ZmUp9JripwGs59XnQgE-x4bQkMS-zWhc4VqLAA4KSyM
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
 #>   name             id                                      drive_resource  
 #> * <chr>            <chr>                                   <list>          
-#> 1 iris-73b57a343f… 1YMcbAgaeEFaGyCQXfYtbodAhhl7HT3iTF1GP1… <named list [34…
+#> 1 iris-8653534d8c… 1ZmUp9JripwGs59XnQgE-x4bQkMS-zWhc4VqLA… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -273,8 +276,8 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-73b57a343fad'
-#> Range "'iris-73b57a343fad.csv'!B1:D6"
+#> Reading from 'iris-8653534d8c67'
+#> Range "'iris-8653534d8c67.csv'!B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
 #>         <dbl>        <dbl>       <dbl>
@@ -290,12 +293,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpMebA2C/iris-73b57a343fad.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpSkmN4h/iris-8653534d8c67.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-73b57a343fad
+#>   * iris-8653534d8c67
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpMebA2C/iris-73b57a343fad.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpSkmN4h/iris-8653534d8c67.xlsx
 readxl::read_excel(iris_xlsxfile)
 #> # A tibble: 150 x 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -320,7 +323,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-73b57a343fad: 1YMcbAgaeEFaGyCQXfYtbodAhhl7HT3iTF1GP1BfsRvE
+#>   * iris-8653534d8c67: 1ZmUp9JripwGs59XnQgE-x4bQkMS-zWhc4VqLAA4KSyM
 ```
 
 ## Get Sheet metadata or detailed cell data
@@ -439,17 +442,38 @@ But, if you need more granular control, such as writing to specific
 worksheets or cells, that requires the Sheets API. This is not yet
 implemented in googlesheets4, but will be.
 
+## Contributing
+
+If you’d like to contribute to the development of googlesheets4, please
+read [these
+guidelines](https://googlesheets4.tidyverse.org/CONTRIBUTING.html).
+
+Please note that the ‘googlesheets4’ project is released with a
+[Contributor Code of
+Conduct](https://googlesheets4.tidyverse.org/CODE_OF_CONDUCT.html). By
+contributing to this project, you agree to abide by its terms.
+
+## Privacy
+
+[Privacy policy](https://www.tidyverse.org/google_privacy_policy)
+
 ## Context
 
 googlesheets4 draws on and complements / emulates other packages in the
 tidyverse:
 
+  - [googlesheets](https://cran.r-project.org/package=googlesheets) is
+    the package that googlesheets4 is replacing. Main improvements in
+    googlesheets4: (1) wraps the current, most modern Sheets API; (2)
+    leans on googledrive for all “whole file” operations; and (3) uses
+    shared infrastructure for auth and more, from the gargle package.
+    Main deficiency: googlesheets4 doesn’t *write* yet.
   - [googledrive](http://googledrive.tidyverse.org) already provides a
     fully-featured interface to the Google Drive API. Any “whole file”
     operations can already be accomplished *today* with googledrive:
     upload or download or update a spreadsheet, copy, rename, move,
-    change permission, delete, etc. googledrive already supports OAuth2
-    and Team Drives.
+    change permission, delete, etc. googledrive already supports Team
+    Drives.
   - [readxl](http://readxl.tidyverse.org) is the tidyverse package for
     reading Excel files (xls or xlsx) into an R data frame.
     googlesheets4 takes cues from parts of the readxl interface,
@@ -458,9 +482,3 @@ tidyverse:
     reading delimited files (e.g., csv or tsv) into an R data frame.
     googlesheets4 takes cues from readr with respect to column type
     specification.
-
-*Please note that this project is released with a [Contributor Code of
-Conduct](.github/CODE_OF_CONDUCT.md). By participating in this project
-you agree to abide by its terms.*
-
-[Privacy policy](https://www.tidyverse.org/google_privacy_policy)

@@ -16,3 +16,4 @@
 ^README\.Rmd$
 ^\.github$
 ^\.github/ISSUE_TEMPLATE$
+^pkgdown$

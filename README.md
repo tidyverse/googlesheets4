@@ -45,11 +45,15 @@ googlesheets4 will, by default, help you interact with Sheets as an
 authenticated Google user. The package facilitates this process upon
 first need.
 
-The `sheets_auth_*()` family of functions gives the user more control,
-in order to build more advanced workflows.
+Users can take control of auth proactively via the `sheets_auth*()`
+family of functions, e.g. to specify your own OAuth app or service
+account token. Auth is actually handled by the gargle package
+(<https://gargle.r-lib.org>), similar to googledrive, bigrquery, and
+gmailr, and gargle’s documentation and articles are the definitive guide
+to more advanced topics.
 
-For this README, we’ve logged into Google as a specific user in a hidden
-chunk.
+For this overview, we’ve logged into Google as a specific user in a
+hidden chunk.
 
 ## `read_sheet()`
 
@@ -74,15 +78,16 @@ library(googlesheets4)
 
 (deaths <- drive_get("deaths"))
 #> # A tibble: 1 x 4
-#>   name   path     id                                         drive_resource
-#>   <chr>  <chr>    <chr>                                      <list>        
-#> 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5w… <list [34]>
+#>   name   path     id                                       drive_resource  
+#>   <chr>  <chr>    <chr>                                    <list>          
+#> 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z… <named list [35…
 ```
 
 Pass the result to googlesheets4 functions such as:
 
   - `sheets_get()`: gets spreadsheet-specific metadata
-  - `read_sheet()`: reads cells into a data frame
+  - `read_sheet()`: reads cells into a data frame. `sheets_read()` is an
+    alias for this.
 
 <!-- end list -->
 
@@ -109,8 +114,8 @@ read_sheet(deaths, range = "A5:F8")
 #> 3 Chuc… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
 ```
 
-If you’re willing to deal with the spreadsheet’s id, just provide that
-directly to googlesheets4 functions and omit googledrive.
+If you’re willing to refer to the spreadsheet by id (or URL), just
+provide that directly to googlesheets4 functions and omit googledrive.
 
 ``` r
 sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
@@ -123,24 +128,53 @@ sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
 #> (Sheet name): (Nominal extent in rows x columns)
 #>         arts: 1000 x 26
 #>        other: 1000 x 26
+
+# the URL also works
+sheets_get("https://docs.google.com/spreadsheets/d/1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA/edit#gid=1210215306")
+#>   Spreadsheet name: deaths
+#>                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA
+#>             Locale: en
+#>          Time zone: America/Los_Angeles
+#>        # of sheets: 2
+#> 
+#> (Sheet name): (Nominal extent in rows x columns)
+#>         arts: 1000 x 26
+#>        other: 1000 x 26
 ```
 
-Lesson: googledrive is the friendliest way to work with files on Google
-Drive, including files that are Google Sheets. You can refer to files by
-name. googlesheets4 is focused on operations specific to Sheets and is
-more programming oriented. You must pass a file id or something that
-contains the file id.
+Lesson: googledrive provides the user-friendliest way to refer to files
+on Google Drive, including files that are Google Sheets. googledrive
+lets you refer to files by name or path. googlesheets4 is focused on
+operations specific to Sheets and is more programming oriented. You must
+pass a file id or something that contains the file id, such as the URL
+or a `dribble` object obtained via googledrive.
 
 ### Specify the range and column types
 
 We’ve made a few world-readable Sheets easy to access via
-`sheets_example()`. Here we read from a mini-Gapminder Sheet to show
-some of the different ways to specify (work)sheet and cell ranges. Note
-also that `col_types` gives control of column types.
+`sheets_example()`.
 
 ``` r
 library(googlesheets4)
 
+sheets_example()
+#>                                      gapminder 
+#> "1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ" 
+#>                                       mini-gap 
+#> "1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY" 
+#>                                             ff 
+#> "132Ij_8ggTKVLnLqCOM3ima6mV9F8rmY7HEcR-5hjWoQ" 
+#>                                   design-dates 
+#> "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU" 
+#>                                         deaths 
+#> "1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA"
+```
+
+Here we read from a mini-Gapminder Sheet to show some of the different
+ways to specify (work)sheet and cell ranges. Note also that `col_types`
+gives control of column types, similar to `col_types` works in readr.
+
+``` r
 read_sheet(sheets_example("mini-gap"), sheet = 2)
 #> Reading from 'test-gs-mini-gapminder'
 #> Range "'Americas'"
@@ -211,7 +245,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmpn1iDEs/iris-14f22c696899.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpMebA2C/iris-73b57a343fad.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -221,15 +255,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmpn1iDEs/iris-14f22c696899.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpMebA2C/iris-73b57a343fad.csv
 #> uploaded into Drive file:
-#>   * iris-14f22c696899: 16WQ4oBp18egmsJ6ZMYj_dDzS1k5k5buOcvwwMVbvBpk
+#>   * iris-73b57a343fad: 1YMcbAgaeEFaGyCQXfYtbodAhhl7HT3iTF1GP1BfsRvE
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
-#>   name              id                                       drive_resource
-#> * <chr>             <chr>                                    <list>        
-#> 1 iris-14f22c696899 16WQ4oBp18egmsJ6ZMYj_dDzS1k5k5buOcvwwMV… <list [34]>
+#>   name             id                                      drive_resource  
+#> * <chr>            <chr>                                   <list>          
+#> 1 iris-73b57a343f… 1YMcbAgaeEFaGyCQXfYtbodAhhl7HT3iTF1GP1… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -239,8 +273,8 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-14f22c696899.csv'
-#> Range "'iris-14f22c696899.csv'!B1:D6"
+#> Reading from 'iris-73b57a343fad'
+#> Range "'iris-73b57a343fad.csv'!B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
 #>         <dbl>        <dbl>       <dbl>
@@ -256,12 +290,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmpn1iDEs/iris-14f22c696899.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpMebA2C/iris-73b57a343fad.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-14f22c696899
+#>   * iris-73b57a343fad
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmpn1iDEs/iris-14f22c696899.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpMebA2C/iris-73b57a343fad.xlsx
 readxl::read_excel(iris_xlsxfile)
 #> # A tibble: 150 x 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -284,6 +318,9 @@ Clean up.
 ``` r
 file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
+drive_rm(iris_ss)
+#> Files deleted:
+#>   * iris-73b57a343fad: 1YMcbAgaeEFaGyCQXfYtbodAhhl7HT3iTF1GP1BfsRvE
 ```
 
 ## Get Sheet metadata or detailed cell data
@@ -393,7 +430,14 @@ read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 
 ## What’s yet to come?
 
-Writing to Sheets
+Writing into Sheets. As shown above, googledrive can already be used to
+write into Sheets at the “whole file” level, because that is carried out
+via the Drive API. `googledrive::drive_upload()` and
+`googledrive::drive_update()` are very useful for this.
+
+But, if you need more granular control, such as writing to specific
+worksheets or cells, that requires the Sheets API. This is not yet
+implemented in googlesheets4, but will be.
 
 ## Context
 

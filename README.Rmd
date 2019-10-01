@@ -45,9 +45,9 @@ devtools::install_github("tidyverse/googlesheets4")
 
 googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need.
 
-The `sheets_auth_*()` family of functions gives the user more control, in order to build more advanced workflows.
+Users can take control of auth proactively via the `sheets_auth*()` family of functions, e.g. to specify your own OAuth app or service account token. Auth is actually handled by the gargle package (<https://gargle.r-lib.org>), similar to googledrive, bigrquery, and gmailr, and gargle's documentation and articles are the definitive guide to more advanced topics.
 
-For this README, we've logged into Google as a specific user in a hidden chunk.
+For this overview, we've logged into Google as a specific user in a hidden chunk.
 
 ## `read_sheet()`
 
@@ -69,7 +69,7 @@ library(googlesheets4)
 Pass the result to googlesheets4 functions such as:
 
   * `sheets_get()`: gets spreadsheet-specific metadata
-  * `read_sheet()`: reads cells into a data frame
+  * `read_sheet()`: reads cells into a data frame. `sheets_read()` is an alias for this.
 
 ```{r}
 sheets_get(deaths)
@@ -77,21 +77,30 @@ sheets_get(deaths)
 read_sheet(deaths, range = "A5:F8")
 ```
 
-If you're willing to deal with the spreadsheet's id, just provide that directly to googlesheets4 functions and omit googledrive.
+If you're willing to refer to the spreadsheet by id (or URL), just provide that directly to googlesheets4 functions and omit googledrive.
 
 ```{r}
 sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
+
+# the URL also works
+sheets_get("https://docs.google.com/spreadsheets/d/1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA/edit#gid=1210215306")
 ```
 
-Lesson: googledrive is the friendliest way to work with files on Google Drive, including files that are Google Sheets. You can refer to files by name. googlesheets4 is focused on operations specific to Sheets and is more programming oriented. You must pass a file id or something that contains the file id.
+Lesson: googledrive provides the user-friendliest way to refer to files on Google Drive, including files that are Google Sheets. googledrive lets you refer to files by name or path. googlesheets4 is focused on operations specific to Sheets and is more programming oriented. You must pass a file id or something that contains the file id, such as the URL or a `dribble` object obtained via googledrive.
 
 ### Specify the range and column types
 
-We've made a few world-readable Sheets easy to access via `sheets_example()`. Here we read from a mini-Gapminder Sheet to show some of the different ways to specify (work)sheet and cell ranges. Note also that `col_types` gives control of column types.
+We've made a few world-readable Sheets easy to access via `sheets_example()`.
 
 ```{r}
 library(googlesheets4)
 
+sheets_example()
+```
+
+Here we read from a mini-Gapminder Sheet to show some of the different ways to specify (work)sheet and cell ranges. Note also that `col_types` gives control of column types, similar to `col_types` works in readr.
+
+```{r}
 read_sheet(sheets_example("mini-gap"), sheet = 2)
 
 read_sheet(sheets_example("mini-gap"), sheet = "Oceania", n_max = 3)
@@ -140,6 +149,7 @@ Clean up.
 
 ```{r}
 file.remove(iris_tempfile, iris_xlsxfile)
+drive_rm(iris_ss)
 ```
 
 ## Get Sheet metadata or detailed cell data
@@ -171,7 +181,9 @@ read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 
 ## What's yet to come?
 
-Writing to Sheets
+Writing into Sheets. As shown above, googledrive can already be used to write into Sheets at the "whole file" level, because that is carried out via the Drive API. `googledrive::drive_upload()` and `googledrive::drive_update()` are very useful for this.
+
+But, if you need more granular control, such as writing to specific worksheets or cells, that requires the Sheets API. This is not yet implemented in googlesheets4, but will be.
 
 ## Context
 

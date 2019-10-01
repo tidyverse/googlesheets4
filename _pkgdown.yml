@@ -1,1 +1,15 @@
-destination: docs
+url: https://googlesheets4.tidyverse.org
+
+template:
+  package: tidytemplate
+
+home:
+  strip_header: true
+
+authors:
+  Jennifer Bryan:
+    href: https://jennybryan.org
+
+navbar:
+  components:
+    home: ~

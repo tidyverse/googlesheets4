@@ -26,6 +26,7 @@ Imports:
     tibble (>= 2.1.1)
 Suggests: 
     covr,
+    sodium,
     testthat
 ByteCompile: true
 Encoding: UTF-8

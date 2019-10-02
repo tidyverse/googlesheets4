@@ -1,5 +1,5 @@
 Package: googlesheets4
-Title: Manage Google Spreadsheets from R using the Sheets API V4
+Title: Manage Google Spreadsheets from R using the Sheets API v4
 Version: 0.0.0.9001
 Authors@R: c(
     person("Jennifer", "Bryan", , "jenny@rstudio.com", role = c("cre", "aut"),  

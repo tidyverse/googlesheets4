@@ -2,6 +2,13 @@ language: R
 cran: https://demo.rstudiopm.com/all/__linux__/xenial/latest
 cache: packages
 
+addons:
+  apt:
+    sources:
+    - sourceline: 'ppa:chris-lea/libsodium'
+    packages:
+    - libsodium-dev
+
 matrix:
   include:
     - r: release

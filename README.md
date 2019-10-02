@@ -145,12 +145,13 @@ sheets_get("https://docs.google.com/spreadsheets/d/1ESTf_tH08qzWwFYRC1NVWJjswtLd
 #>        other: 1000 x 26
 ```
 
-Lesson: googledrive provides the user-friendliest way to refer to files
-on Google Drive, including files that are Google Sheets. googledrive
-lets you refer to files by name or path. googlesheets4 is focused on
-operations specific to Sheets and is more programming oriented. You must
-pass a file id or something that contains the file id, such as the URL
-or a `dribble` object obtained via googledrive.
+Lesson: googledrive provides the most user-friendly way to refer to
+files on Google Drive, including files that are Google Sheets.
+googledrive lets you refer to files by name or path. googlesheets4 is
+focused on operations specific to Sheets and is more programming
+oriented. googlesheets4 requires a file id or something that contains
+the file id, such as the URL or a `dribble` object obtained via
+googledrive.
 
 ### Specify the range and column types
 

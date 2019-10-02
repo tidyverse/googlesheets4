@@ -129,7 +129,17 @@ where <code>type = "spreadsheet"</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='co'># see all your Sheets</span>
   <span class='fu'>sheets_list</span>()
+
+  <span class='co'># see 5 Sheets, prioritized by creation time</span>
+  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_list</span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='st'>"createdTime desc"</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>5</span>)
+  <span class='no'>x</span>
+
+  <span class='co'># hoist the creation date, using other packages in the tidyverse</span>
+  <span class='co'># x %&gt;%</span>
+  <span class='co'>#   tidyr::hoist(drive_resource, created_on = "createdTime") %&gt;%</span>
+  <span class='co'>#   dplyr::mutate(created_on = as.Date(created_on))</span>
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

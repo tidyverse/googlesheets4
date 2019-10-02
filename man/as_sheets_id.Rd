@@ -18,7 +18,7 @@ Converts various representations of a Google Sheet into a
 \itemize{
 \item Spreadsheet id, "a string containing letters, numbers, and some special
 characters", typically 44 characters long, in our experience. Example:
-\code{1qpyC0XzvTcKT6EISywvqESX3A0MwQoFDE8p-Bll4hps}.
+\verb{1qpyC0XzvTcKT6EISywvqESX3A0MwQoFDE8p-Bll4hps}.
 \item A URL, from which we can excavate a spreadsheet or file id. Example: \url{https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545}.
 \item A one-row \code{\link[googledrive:dribble]{dribble}}, a "Drive tibble" used by the
 \link{googledrive} package. In general, a \code{dribble} can represent several files,

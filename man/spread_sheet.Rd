@@ -4,9 +4,15 @@
 \alias{spread_sheet}
 \title{Spread a data frame of cells into spreadsheet shape}
 \usage{
-spread_sheet(df, col_names = TRUE, col_types = NULL, na = "",
-  trim_ws = TRUE, guess_max = min(1000, max(df$row)),
-  .name_repair = "unique")
+spread_sheet(
+  df,
+  col_names = TRUE,
+  col_types = NULL,
+  na = "",
+  trim_ws = TRUE,
+  guess_max = min(1000, max(df$row)),
+  .name_repair = "unique"
+)
 }
 \arguments{
 \item{df}{A data frame with one row per (nonempty) cell, integer variables

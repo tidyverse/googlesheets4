@@ -4,8 +4,12 @@
 \alias{request_generate}
 \title{Generate a Google Sheets API request}
 \usage{
-request_generate(endpoint = character(), params = list(), key = NULL,
-  token = sheets_token())
+request_generate(
+  endpoint = character(),
+  params = list(),
+  key = NULL,
+  token = sheets_token()
+)
 }
 \arguments{
 \item{endpoint}{Character. Nickname for one of the selected Sheets API v4
@@ -60,8 +64,8 @@ req
 \code{\link[gargle:request_develop]{gargle::request_develop()}}, \code{\link[gargle:request_build]{gargle::request_build()}},
 \code{\link[gargle:request_make]{gargle::request_make()}}
 
-Other low-level API functions: \code{\link{request_make}},
-  \code{\link{sheets_has_token}},
-  \code{\link{sheets_token}}
+Other low-level API functions: \code{\link{request_make}()},
+  \code{\link{sheets_has_token}()},
+  \code{\link{sheets_token}()}
 }
 \concept{low-level API functions}

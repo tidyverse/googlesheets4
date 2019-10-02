@@ -27,7 +27,7 @@ sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
 }
 }
 \seealso{
-Other auth functions: \code{\link{sheets_auth_configure}},
-  \code{\link{sheets_auth}}
+Other auth functions: \code{\link{sheets_auth_configure}()},
+  \code{\link{sheets_auth}()}
 }
 \concept{auth functions}

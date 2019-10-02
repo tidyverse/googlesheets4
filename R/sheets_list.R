@@ -12,7 +12,17 @@
 #'
 #' @examples
 #' if (interactive()) {
+#'   # see all your Sheets
 #'   sheets_list()
+#'
+#'   # see 5 Sheets, prioritized by creation time
+#'   x <- sheets_list(order_by = "createdTime desc", n_max = 5)
+#'   x
+#'
+#'   # hoist the creation date, using other packages in the tidyverse
+#'   # x %>%
+#'   #   tidyr::hoist(drive_resource, created_on = "createdTime") %>%
+#'   #   dplyr::mutate(created_on = as.Date(created_on))
 #' }
 sheets_list <- function(...) {
   googledrive::drive_find(..., type = "spreadsheet")

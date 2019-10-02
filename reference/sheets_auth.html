@@ -134,10 +134,14 @@ can request it yourself with <code>use_oob = TRUE</code> or, more persistently, 
 setting an option via <code><a href='https://rdrr.io/r/base/options.html'>options(gargle_oob_default = TRUE)</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_auth</span>(<span class='kw'>email</span> <span class='kw'>=</span> <span class='kw pkg'>gargle</span><span class='kw ns'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oauth_email</a></span>(), <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>sheets_auth</span>(
+  <span class='kw'>email</span> <span class='kw'>=</span> <span class='kw pkg'>gargle</span><span class='kw ns'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oauth_email</a></span>(),
+  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>scopes</span> <span class='kw'>=</span> <span class='st'>"https://www.googleapis.com/auth/spreadsheets"</span>,
   <span class='kw'>cache</span> <span class='kw'>=</span> <span class='kw pkg'>gargle</span><span class='kw ns'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oauth_cache</a></span>(),
-  <span class='kw'>use_oob</span> <span class='kw'>=</span> <span class='kw pkg'>gargle</span><span class='kw ns'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oob_default</a></span>(), <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>use_oob</span> <span class='kw'>=</span> <span class='kw pkg'>gargle</span><span class='kw ns'>::</span><span class='fu'><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oob_default</a></span>(),
+  <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -215,8 +219,8 @@ authentication.</p></li>
 Read more about gargle options, see <a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle::gargle_options</a>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other auth functions: <code><a href='sheets_auth_configure.html'>sheets_auth_configure</a></code>,
-  <code><a href='sheets_deauth.html'>sheets_deauth</a></code></p></div>
+    <div class='dont-index'><p>Other auth functions: <code><a href='sheets_auth_configure.html'>sheets_auth_configure</a>()</code>,
+  <code><a href='sheets_deauth.html'>sheets_deauth</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {

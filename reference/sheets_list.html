@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make a Google Sheets API request — request_make • googlesheets4</title>
+<title>List your Google Sheets — sheets_list • googlesheets4</title>
 
 
 <!-- jquery -->
@@ -34,15 +34,10 @@
 
 
 
-<meta property="og:title" content="Make a Google Sheets API request — request_make" />
-<meta property="og:description" content="Low-level function to execute a Sheets API request. Most users
-should, instead, use higher-level wrappers that facilitate common tasks,
-such as reading or writing worksheets or cell ranges. The functions here
-are intended for internal use and for programming around the Sheets API.
-make_request() does very, very little: it calls an HTTP
-method, only adding the googlesheets4 user agent. Typically the input has
-been created with request_generate() or gargle::request_build() and the
-output is processed with process_response()." />
+<meta property="og:title" content="List your Google Sheets — sheets_list" />
+<meta property="og:description" content="Lists your Google Sheets. This is a very thin wrapper around
+googledrive::drive_find(), that specifies you want to list Drive files
+where type = &quot;spreadsheet&quot;." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,55 +101,43 @@ output is processed with process_response()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make a Google Sheets API request</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/request_make.R'><code>R/request_make.R</code></a></small>
-    <div class="hidden name"><code>request_make.Rd</code></div>
+    <h1>List your Google Sheets</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_list.R'><code>R/sheets_list.R</code></a></small>
+    <div class="hidden name"><code>sheets_list.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Low-level function to execute a Sheets API request. Most users
-should, instead, use higher-level wrappers that facilitate common tasks,
-such as reading or writing worksheets or cell ranges. The functions here
-are intended for internal use and for programming around the Sheets API.</p>
-<p><code>make_request()</code> does very, very little: it calls an HTTP
-method, only adding the googlesheets4 user agent. Typically the input has
-been created with <code><a href='request_generate.html'>request_generate()</a></code> or <code><a href='https://gargle.r-lib.org/reference/request_develop.html'>gargle::request_build()</a></code> and the
-output is processed with <code>process_response()</code>.</p>
+    <p>Lists your Google Sheets. This is a very thin wrapper around
+<code><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>googledrive::drive_find()</a></code>, that specifies you want to list Drive files
+where <code>type = "spreadsheet"</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>request_make</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_list</span>(<span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>List. Holds the components for an HTTP request, presumably created
-with <code><a href='request_generate.html'>request_generate()</a></code> or <code><a href='https://gargle.r-lib.org/reference/request_develop.html'>gargle::request_build()</a></code>. Must contain a
-<code>method</code> and <code>url</code>. If present, <code>body</code> and <code>token</code> are used.</p></td>
-    </tr>
-    <tr>
       <th>...</th>
-      <td><p>Optional arguments passed through to the HTTP method.</p></td>
+      <td><p>Arguments (other than <code>type</code>, which is hard-wired as <code>type = "spreadsheet"</code>) that are passed along to <code><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>googledrive::drive_find()</a></code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Object of class <code>response</code> from httr.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <p>An object of class <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
 
-    <div class='dont-index'><p>Other low-level API functions: <code><a href='request_generate.html'>request_generate</a>()</code>,
-  <code><a href='sheets_has_token.html'>sheets_has_token</a>()</code>,
-  <code><a href='sheets_token.html'>sheets_token</a>()</code></p></div>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='fu'>sheets_list</span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

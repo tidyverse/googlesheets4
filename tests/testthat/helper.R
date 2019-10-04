@@ -1,6 +1,10 @@
 if (gargle:::secret_can_decrypt("googlesheets4")) {
   json <- gargle:::secret_read("googlesheets4", "googlesheets4-testing.json")
-  sheets_auth(path = rawToChar(json))
+  sheets_auth(
+    scopes = "https://www.googleapis.com/auth/drive",
+    path = rawToChar(json)
+  )
+  googledrive::drive_auth(token = sheets_token())
 }
 
 skip_if_no_token <- function() {

@@ -4,7 +4,7 @@ if (gargle:::secret_can_decrypt("googlesheets4")) {
 }
 
 skip_if_no_token <- function() {
-  testthat::skip_if_not(sheets_has_token(), "No Drive token")
+  testthat::skip_if_not(sheets_has_token(), "No Sheets token")
 }
 
 expect_error_free <- function(...) {

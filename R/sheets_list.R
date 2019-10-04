@@ -2,7 +2,8 @@
 #'
 #' Lists your Google Sheets. This is a very thin wrapper around
 #' [googledrive::drive_find()], that specifies you want to list Drive files
-#' where `type = "spreadsheet"`.
+#' where `type = "spreadsheet"`. Therefore, note that this will require auth
+#' for googledrive!
 #'
 #' @param ... Arguments (other than `type`, which is hard-wired as `type =
 #'   "spreadsheet"`) that are passed along to [googledrive::drive_find()].

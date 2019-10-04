@@ -15,7 +15,8 @@ An object of class \code{\link[googledrive]{dribble}}, a tibble with one row per
 \description{
 Lists your Google Sheets. This is a very thin wrapper around
 \code{\link[googledrive:drive_find]{googledrive::drive_find()}}, that specifies you want to list Drive files
-where \code{type = "spreadsheet"}.
+where \code{type = "spreadsheet"}. Therefore, note that this will require auth
+for googledrive!
 }
 \examples{
 if (interactive()) {

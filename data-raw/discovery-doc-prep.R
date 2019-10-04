@@ -17,6 +17,6 @@ methods <- methods %>% map(add_global_params, dd)
 
 .endpoints <- methods
 attr(.endpoints, "base_url") <- dd$rootUrl
-## View(.endpoints)
+# View(.endpoints)
 
 usethis::use_data(.endpoints, internal = TRUE, overwrite = TRUE)

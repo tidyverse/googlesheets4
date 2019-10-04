@@ -26,10 +26,14 @@ matrix:
       env: GOOGLESHEETS4_PASSWORD=''
       r_build_args: --no-build-vignettes
       r_check_args: --ignore-vignettes --no-examples
+      after_script:
+      - find . -name testthat.Rout | xargs cat
     - r: release
       env: GOOGLESHEETS4_PASSWORD=''
       r_build_args: --no-build-vignettes
       r_check_args: --ignore-vignettes --no-examples
+      after_script:
+      - find . -name testthat.Rout | xargs cat
     - r: oldrel
       env: GOOGLESHEETS4_PASSWORD=''
       r_build_args: --no-build-vignettes

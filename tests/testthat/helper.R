@@ -1,3 +1,12 @@
+if (gargle:::secret_can_decrypt("googlesheets4")) {
+  json <- gargle:::secret_read("googlesheets4", "googlesheets4-testing.json")
+  sheets_auth(path = rawToChar(json))
+}
+
+skip_if_no_token <- function() {
+  testthat::skip_if_not(sheets_has_token(), "No Drive token")
+}
+
 expect_error_free <- function(...) {
   expect_error(..., regexp = NA)
 }

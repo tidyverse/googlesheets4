@@ -27,18 +27,3 @@ ref <- function(pattern, ...) {
     paste0("* ", x, collapse = "\n")
   )
 }
-
-## use from testthat once > 2.0.0 is on CRAN
-skip_if_offline <- function(host = "r-project.org") {
-  skip_if_not_installed("curl")
-  ## workaround R devel's check for undeclared Suggests
-  ## I don't want to put curl in Suggests just for this
-  has_internet <- !is.null(
-    (get("nslookup", asNamespace("curl")))(host, error = FALSE)
-  )
-  ## nicer form but creates WARNING with R devel
-  # has_internet <- !is.null(curl::nslookup(host, error = FALSE))
-  if (!has_internet) {
-    skip("offline")
-  }
-}

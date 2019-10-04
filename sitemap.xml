@@ -64,6 +64,9 @@
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_token.html</loc>
   </url>
   <url>
+    <loc>https://googlesheets4.tidyverse.org/reference/sheets_user.html</loc>
+  </url>
+  <url>
     <loc>https://googlesheets4.tidyverse.org/reference/spread_sheet.html</loc>
   </url>
 </urlset>

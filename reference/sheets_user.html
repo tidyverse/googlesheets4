@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>googlesheets4: Manage Google Spreadsheets from R using the Sheets API v4 — googlesheets4-package • googlesheets4</title>
+<title>Get info on current user — sheets_user • googlesheets4</title>
 
 
 <!-- jquery -->
@@ -34,9 +34,9 @@
 
 
 
-<meta property="og:title" content="googlesheets4: Manage Google Spreadsheets from R using the Sheets API v4 — googlesheets4-package" />
-<meta property="og:description" content="Interact with Google Sheets from R via the Sheets
-    API v4." />
+<meta property="og:title" content="Get info on current user — sheets_user" />
+<meta property="og:description" content="Reveals the email address of the user associated with the current token.
+If no token has been loaded yet, this function does not initiate auth." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -100,40 +100,39 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>googlesheets4: Manage Google Spreadsheets from R using the Sheets API v4</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/googlesheets4-package.R'><code>R/googlesheets4-package.R</code></a></small>
-    <div class="hidden name"><code>googlesheets4-package.Rd</code></div>
+    <h1>Get info on current user</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_auth.R'><code>R/sheets_auth.R</code></a></small>
+    <div class="hidden name"><code>sheets_user.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Interact with Google Sheets from R via the Sheets
-    API v4.</p>
+    <p>Reveals the email address of the user associated with the current token.
+If no token has been loaded yet, this function does not initiate auth.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>sheets_user</span>()</pre>
 
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>An email address or, if no token has been loaded, <code>NULL</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='https://github.com/tidyverse/googlesheets4'>https://github.com/tidyverse/googlesheets4</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/tidyverse/googlesheets4/issues'>https://github.com/tidyverse/googlesheets4/issues</a></p></li>
-</ul>
+    <div class='dont-index'><p><code><a href='https://gargle.r-lib.org/reference/token-info.html'>gargle::token_userinfo()</a></code>, <code><a href='https://gargle.r-lib.org/reference/token-info.html'>gargle::token_email()</a></code>,
+<code><a href='https://gargle.r-lib.org/reference/token-info.html'>gargle::token_tokeninfo()</a></code></p></div>
 
-</div>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>sheets_user</span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#value">Value</a></li>
       <li><a href="#see-also">See also</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
-
-    <h2>Author</h2>
-    <p><strong>Maintainer</strong>: Jennifer Bryan <a href='mailto:jenny@rstudio.com'>jenny@rstudio.com</a> (<a href='https://orcid.org/0000-0002-6983-2759'>ORCID</a>)</p>
-<p>Other contributors:</p><ul>
-<li><p>RStudio [copyright holder, funder]</p></li>
-</ul>
-
 
   </div>
 </div>

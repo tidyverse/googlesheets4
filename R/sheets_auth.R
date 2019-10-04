@@ -202,3 +202,23 @@ sheets_api_key <- function() .auth$api_key
 #' @export
 #' @rdname sheets_auth_configure
 sheets_oauth_app <- function() .auth$app
+
+#' Get info on current user
+#'
+#' @eval gargle:::PREFIX_user_description()
+#' @eval gargle:::PREFIX_user_seealso()
+#' @eval gargle:::PREFIX_user_return()
+#'
+#' @export
+#' @examples
+#' \dontrun{
+#' sheets_user()
+#' }
+sheets_user <- function() {
+  if (sheets_has_token()) {
+    gargle::token_email(sheets_token())
+  } else {
+    message("Not logged in as any specific Google user.")
+    invisible()
+  }
+}

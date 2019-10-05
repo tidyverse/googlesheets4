@@ -55,8 +55,8 @@ account token. Auth is actually handled by the gargle package
 gmailr, and gargle’s documentation and articles are the definitive guide
 to more advanced topics.
 
-It is common to use googlesheets4 together with
-[googledrive](https://googledrive.tidyverse.org). See the article [Using
+It is common to use googlesheets4 together with the googledrive package
+(<https://googledrive.tidyverse.org>). See the article [Using
 googlesheets4 with
 googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html)
 for advice on how to streamline auth in this case.
@@ -102,7 +102,6 @@ Pass the result to googlesheets4 functions such as:
 
 ``` r
 sheets_get(deaths)
-#> Auto-refreshing stale OAuth token.
 #>   Spreadsheet name: deaths
 #>                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA
 #>             Locale: en
@@ -256,7 +255,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkMjwcQ/iris-820f1a0acf85.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp8ZyeEu/iris-83fc839a93b.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -266,15 +265,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkMjwcQ/iris-820f1a0acf85.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp8ZyeEu/iris-83fc839a93b.csv
 #> uploaded into Drive file:
-#>   * iris-820f1a0acf85: 1mgJjH-lzs7xf_1f7Rm6Z3A2YkmM-SbUprB6dKjVzFvE
+#>   * iris-83fc839a93b: 1JlqbNHrP9Qt68wnihX4kebzAdPXjJouvsiSgqaJt7io
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
-#>   name             id                                      drive_resource  
-#> * <chr>            <chr>                                   <list>          
-#> 1 iris-820f1a0acf… 1mgJjH-lzs7xf_1f7Rm6Z3A2YkmM-SbUprB6dK… <named list [34…
+#>   name            id                                       drive_resource  
+#> * <chr>           <chr>                                    <list>          
+#> 1 iris-83fc839a9… 1JlqbNHrP9Qt68wnihX4kebzAdPXjJouvsiSgqa… <named list [35…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -284,8 +283,8 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-820f1a0acf85'
-#> Range "'iris-820f1a0acf85.csv'!B1:D6"
+#> Reading from 'iris-83fc839a93b.csv'
+#> Range "'iris-83fc839a93b.csv'!B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
 #>         <dbl>        <dbl>       <dbl>
@@ -301,12 +300,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkMjwcQ/iris-820f1a0acf85.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp8ZyeEu/iris-83fc839a93b.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-820f1a0acf85
+#>   * iris-83fc839a93b
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkMjwcQ/iris-820f1a0acf85.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp8ZyeEu/iris-83fc839a93b.xlsx
 readxl::read_excel(iris_xlsxfile)
 #> # A tibble: 150 x 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -331,7 +330,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-820f1a0acf85: 1mgJjH-lzs7xf_1f7Rm6Z3A2YkmM-SbUprB6dKjVzFvE
+#>   * iris-83fc839a93b: 1JlqbNHrP9Qt68wnihX4kebzAdPXjJouvsiSgqaJt7io
 ```
 
 ## Get Sheet metadata or detailed cell data

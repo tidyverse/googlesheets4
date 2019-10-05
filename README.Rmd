@@ -26,28 +26,31 @@ googlesheets4 provides an R interface to [Google Sheets](https://spreadsheets.go
 
 *Why **4**? Why googlesheets**4**? Did I miss googlesheets1 through 3? No. The idea is to name the package after the corresponding version of the Sheets API. In hindsight, the original googlesheets should have been googlesheets**3**.*
 
-The best source of information is alway the package website: <https://googlesheets4.tidyverse.org>
+The best source of information is always the package website: <https://googlesheets4.tidyverse.org>
 
 ## Installation
 
 You can install the released version of googlesheets4 from [CRAN](https://CRAN.R-project.org) with:
 
-``` r
-## NO, NO YOU CANNOT
-## install.packages("googlesheets4")
+```{r, eval = FALSE}
+# NO, NO YOU CANNOT ... BUT SOON!
+# install.packages("googlesheets4")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
-``` r
+```{r, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("tidyverse/googlesheets4")
 ```
+
 ## Auth
 
 googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need.
 
 Users can take control of auth proactively via the `sheets_auth*()` family of functions, e.g. to specify your own OAuth app or service account token. Auth is actually handled by the gargle package (<https://gargle.r-lib.org>), similar to googledrive, bigrquery, and gmailr, and gargle's documentation and articles are the definitive guide to more advanced topics.
+
+It is common to use googlesheets4 together with [googledrive](https://googledrive.tidyverse.org). See the article [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html) for advice on how to streamline auth in this case.
 
 For this overview, we've logged into Google as a specific user in a hidden chunk.
 

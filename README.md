@@ -22,7 +22,7 @@ No. The idea is to name the package after the corresponding version of
 the Sheets API. In hindsight, the original googlesheets should have been
 googlesheets**3**.*
 
-The best source of information is alway the package website:
+The best source of information is always the package website:
 <https://googlesheets4.tidyverse.org>
 
 ## Installation
@@ -31,8 +31,8 @@ You can install the released version of googlesheets4 from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-## NO, NO YOU CANNOT
-## install.packages("googlesheets4")
+# NO, NO YOU CANNOT ... BUT SOON!
+# install.packages("googlesheets4")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
@@ -54,6 +54,12 @@ account token. Auth is actually handled by the gargle package
 (<https://gargle.r-lib.org>), similar to googledrive, bigrquery, and
 gmailr, and gargle’s documentation and articles are the definitive guide
 to more advanced topics.
+
+It is common to use googlesheets4 together with
+[googledrive](https://googledrive.tidyverse.org). See the article [Using
+googlesheets4 with
+googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html)
+for advice on how to streamline auth in this case.
 
 For this overview, we’ve logged into Google as a specific user in a
 hidden chunk.
@@ -96,6 +102,7 @@ Pass the result to googlesheets4 functions such as:
 
 ``` r
 sheets_get(deaths)
+#> Auto-refreshing stale OAuth token.
 #>   Spreadsheet name: deaths
 #>                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA
 #>             Locale: en
@@ -249,7 +256,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpSkmN4h/iris-8653534d8c67.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkMjwcQ/iris-820f1a0acf85.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -259,15 +266,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpSkmN4h/iris-8653534d8c67.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkMjwcQ/iris-820f1a0acf85.csv
 #> uploaded into Drive file:
-#>   * iris-8653534d8c67: 1ZmUp9JripwGs59XnQgE-x4bQkMS-zWhc4VqLAA4KSyM
+#>   * iris-820f1a0acf85: 1mgJjH-lzs7xf_1f7Rm6Z3A2YkmM-SbUprB6dKjVzFvE
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
 #>   name             id                                      drive_resource  
 #> * <chr>            <chr>                                   <list>          
-#> 1 iris-8653534d8c… 1ZmUp9JripwGs59XnQgE-x4bQkMS-zWhc4VqLA… <named list [34…
+#> 1 iris-820f1a0acf… 1mgJjH-lzs7xf_1f7Rm6Z3A2YkmM-SbUprB6dK… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -277,8 +284,8 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-8653534d8c67'
-#> Range "'iris-8653534d8c67.csv'!B1:D6"
+#> Reading from 'iris-820f1a0acf85'
+#> Range "'iris-820f1a0acf85.csv'!B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
 #>         <dbl>        <dbl>       <dbl>
@@ -294,12 +301,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpSkmN4h/iris-8653534d8c67.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkMjwcQ/iris-820f1a0acf85.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-8653534d8c67
+#>   * iris-820f1a0acf85
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpSkmN4h/iris-8653534d8c67.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkMjwcQ/iris-820f1a0acf85.xlsx
 readxl::read_excel(iris_xlsxfile)
 #> # A tibble: 150 x 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -324,7 +331,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-8653534d8c67: 1ZmUp9JripwGs59XnQgE-x4bQkMS-zWhc4VqLAA4KSyM
+#>   * iris-820f1a0acf85: 1mgJjH-lzs7xf_1f7Rm6Z3A2YkmM-SbUprB6dKjVzFvE
 ```
 
 ## Get Sheet metadata or detailed cell data

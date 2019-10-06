@@ -192,7 +192,7 @@ user's wishes regarding column names, column types, <code>NA</code> strings, and
 whitespace trimming.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_cells.html'>sheets_cells</a></span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))</div><div class='output co'>#&gt; <span class='message'>Reading from 'test-gs-mini-gapminder'</span></div><div class='output co'>#&gt; <span class='message'>Range "'Africa'"</span></div><div class='input'><span class='fu'>spread_sheet</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 6
+    <pre class="examples"><div class='input'><span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_cells.html'>sheets_cells</a></span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))</div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "'Africa'"</span></div><div class='input'><span class='fu'>spread_sheet</span>(<span class='no'>df</span>)</div><div class='output co'>#&gt; # A tibble: 5 x 6
 #&gt;   country      continent  year lifeExp     pop gdpPercap
 #&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
 #&gt; 1 Algeria      Africa     1952    43.1 9279525     2449.
@@ -201,7 +201,7 @@ whitespace trimming.</p>
 #&gt; 4 Botswana     Africa     1952    47.6  442308      851.
 #&gt; 5 Burkina Faso Africa     1952    32.0 4469979      543.</div><div class='input'>
 <span class='co'># ^^ gets same result as ...</span>
-<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))</div><div class='output co'>#&gt; <span class='message'>Reading from 'test-gs-mini-gapminder'</span></div><div class='output co'>#&gt; <span class='message'>Range "'Africa'"</span></div><div class='output co'>#&gt; # A tibble: 5 x 6
+<span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))</div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "'Africa'"</span></div><div class='output co'>#&gt; # A tibble: 5 x 6
 #&gt;   country      continent  year lifeExp     pop gdpPercap
 #&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
 #&gt; 1 Algeria      Africa     1952    43.1 9279525     2449.

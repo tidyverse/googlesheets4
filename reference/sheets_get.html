@@ -141,52 +141,12 @@ is how googledrive represents Drive files. Processed through
     <p>A list with S3 class <code>sheets_meta</code>, for printing purposes.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"design-dates"</span>))</div><div class='output co'>#&gt;   Spreadsheet name: googlesheets4-design-exploration
-#&gt;                 ID: 1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU
-#&gt;             Locale: en_US
-#&gt;          Time zone: America/Los_Angeles
-#&gt;        # of sheets: 10
-#&gt; 
-#&gt;                (Sheet name): (Nominal extent in rows x columns)
-#&gt;                      Sheet1: 1001 x 26
-#&gt; date_format_quoting_problem: 1000 x 26
-#&gt;                hidden_sheet: 1000 x 26
-#&gt;                named_ranges: 1000 x 26
-#&gt;                          ff: 1000 x 26
-#&gt;          cell-specification: 999 x 26
-#&gt;                   this:that: 1000 x 26
-#&gt;                          A2: 1000 x 26
-#&gt;           Jenny's S[h!e:e't: 1000 x 26
-#&gt;                       types: 1000 x 26</div><div class='input'><span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"gapminder"</span>))</div><div class='output co'>#&gt;   Spreadsheet name: test-gs-gapminder
-#&gt;                 ID: 1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ
-#&gt;             Locale: en_US
-#&gt;          Time zone: Etc/GMT
-#&gt;        # of sheets: 5
-#&gt; 
-#&gt; (Sheet name): (Nominal extent in rows x columns)
-#&gt;       Africa: 625 x 6
-#&gt;     Americas: 301 x 6
-#&gt;         Asia: 397 x 6
-#&gt;       Europe: 361 x 6
-#&gt;      Oceania: 25 x 6</div><div class='input'><span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))</div><div class='output co'>#&gt;   Spreadsheet name: test-gs-mini-gapminder
-#&gt;                 ID: 1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY
-#&gt;             Locale: en_US
-#&gt;          Time zone: Etc/GMT
-#&gt;        # of sheets: 5
-#&gt; 
-#&gt; (Sheet name): (Nominal extent in rows x columns)
-#&gt;       Africa: 6 x 6
-#&gt;     Americas: 6 x 6
-#&gt;         Asia: 6 x 6
-#&gt;       Europe: 6 x 6
-#&gt;      Oceania: 6 x 6</div><div class='input'><span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"ff"</span>))</div><div class='output co'>#&gt;   Spreadsheet name: gs-test-formula-formatting
-#&gt;                 ID: 132Ij_8ggTKVLnLqCOM3ima6mV9F8rmY7HEcR-5hjWoQ
-#&gt;             Locale: en_US
-#&gt;          Time zone: America/Los_Angeles
-#&gt;        # of sheets: 1
-#&gt; 
-#&gt; (Sheet name): (Nominal extent in rows x columns)
-#&gt;       Sheet1: 1000 x 25</div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
+  <span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"gapminder"</span>))
+  <span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))
+  <span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>))
+  <span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"chicken-sheet"</span>))
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

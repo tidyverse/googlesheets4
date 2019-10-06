@@ -306,7 +306,7 @@ its discovered type.</p></li>
 #&gt;  7 Janet Reno     lawyer        78 FALSE      1938-07-21      2016-11-07     
 #&gt;  8 Gwen Ifill     journalist    61 FALSE      1955-09-29      2016-11-14     
 #&gt;  9 John Glenn     astronaut     95 TRUE       1921-07-28      2016-12-08     
-#&gt; 10 Pat Summit     coach         64 TRUE       1952-06-14      2016-06-28     </div><div class='input'><span class='fu'>read_sheet</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))</div><div class='output co'>#&gt; <span class='message'>Reading from 'test-gs-mini-gapminder'</span></div><div class='output co'>#&gt; <span class='message'>Range "'Africa'"</span></div><div class='output co'>#&gt; # A tibble: 5 x 6
+#&gt; 10 Pat Summit     coach         64 TRUE       1952-06-14      2016-06-28     </div><div class='input'><span class='fu'>read_sheet</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))</div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "'Africa'"</span></div><div class='output co'>#&gt; # A tibble: 5 x 6
 #&gt;   country      continent  year lifeExp     pop gdpPercap
 #&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
 #&gt; 1 Algeria      Africa     1952    43.1 9279525     2449.
@@ -318,7 +318,7 @@ its discovered type.</p></li>
   <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"Europe"</span>,
   <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"A:D"</span>,
   <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='st'>"ccid"</span>
-)</div><div class='output co'>#&gt; <span class='message'>Reading from 'test-gs-mini-gapminder'</span></div><div class='output co'>#&gt; <span class='message'>Range "'Europe'!A:D"</span></div><div class='output co'>#&gt; # A tibble: 5 x 4
+)</div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "'Europe'!A:D"</span></div><div class='output co'>#&gt; # A tibble: 5 x 4
 #&gt;   country                continent  year lifeExp
 #&gt;   &lt;chr&gt;                  &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;
 #&gt; 1 Albania                Europe     1952    55.2

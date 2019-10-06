@@ -139,6 +139,14 @@
 <a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt; 3 Ginger            Rhode Islan… hen    Listen. We'll either die free chic…</span></a>
 <a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt; 4 Camilla the Chic… Chantecler   hen    Bawk, buck, ba-gawk.               </span></a>
 <a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt; 5 Ernie The Giant … Brahma       roost… Put Captain Solo in the cargo hold.</span></a></code></pre></div>
+<p>If you ever want to confirm the currently authenticated user, both packages provide a <code>*_user()</code> function that reveals some info:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_user.html">drive_user</a></span>()</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; Logged in as:</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt;   *  displayName: googlesheets4-docs@gargle-169921.iam.gserviceaccount.com</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt;   * emailAddress: googlesheets4-docs@gargle-169921.iam.gserviceaccount.com</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="kw"><a href="../../reference/sheets_user.html">sheets_user</a></span>()</a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; [1] "googlesheets4-docs@gargle-169921.iam.gserviceaccount.com"</span></a></code></pre></div>
+<p>We are using a service account to render this article. But if you’ve used the default OAuth flow, this should correspond to the email of the Google account you logged in with.</p>
 </div>
 <div id="auth-with-googlesheets4-first-then-googledrive" class="section level2">
 <h2 class="hasAnchor">
@@ -149,46 +157,46 @@
 <li>Tell googledrive to use the same token as googlesheets4.</li>
 </ul>
 <p>First attach both packages.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googlesheets4)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googledrive)</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; Attaching package: 'googledrive'</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; The following objects are masked from 'package:googlesheets4':</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt;     request_generate, request_make</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googlesheets4)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googledrive)</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; Attaching package: 'googledrive'</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; The following objects are masked from 'package:googlesheets4':</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;     request_generate, request_make</span></a></code></pre></div>
 <p>Do auth first with googlesheets4, specifying a Drive scope. Remember <code><a href="../../reference/sheets_auth.html">sheets_auth()</a></code> accepts additional arguments, e.g. to specify a Google identity via <code>email =</code> or to use a service account via <code>path =</code>. Then direct googledrive to use the same token as googlesheets4.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../../reference/sheets_auth.html">sheets_auth</a></span>(<span class="dt">scope =</span> <span class="st">"https://www.googleapis.com/auth/drive"</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">drive_auth</a></span>(<span class="dt">token =</span> <span class="kw"><a href="../../reference/sheets_token.html">sheets_token</a></span>())</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../../reference/sheets_auth.html">sheets_auth</a></span>(<span class="dt">scope =</span> <span class="st">"https://www.googleapis.com/auth/drive"</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">drive_auth</a></span>(<span class="dt">token =</span> <span class="kw"><a href="../../reference/sheets_token.html">sheets_token</a></span>())</a></code></pre></div>
 <p>Now you can use googledrive functions to list files or find them by name, path, or other property. Then, once you’ve identified the target file, use googlesheets4 to do spreadsheet-specific tasks.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="st">"chicken"</span>)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt;   name          id                                         drive_resource  </span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt;                                      &lt;list&gt;          </span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 1 chicken-sheet 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUg… &lt;named list [35…</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7">ss &lt;-<span class="st"> </span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"chicken-sheet"</span>)</a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="kw"><a href="../../reference/sheets_get.html">sheets_get</a></span>(ss)</a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt;   Spreadsheet name: chicken-sheet</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt;                 ID: 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt;             Locale: en_US</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt;          Time zone: America/Los_Angeles</span></a>
-<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt;        # of sheets: 1</span></a>
-<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt;  chicken.csv: 1000 x 26</span></a>
-<a class="sourceLine" id="cb6-18" data-line-number="18"></a>
-<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="kw"><a href="../../reference/read_sheet.html">read_sheet</a></span>(ss)</a>
-<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; Reading from 'chicken-sheet'</span></a>
-<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; Range "'chicken.csv'"</span></a>
-<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
-<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt;   chicken           breed        sex    motto                              </span></a>
-<a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;                              </span></a>
-<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="co">#&gt; 1 Foghorn Leghorn   Leghorn      roost… That's a joke, ah say, that's a jo…</span></a>
-<a class="sourceLine" id="cb6-26" data-line-number="26"><span class="co">#&gt; 2 Chicken Little    unknown      hen    The sky is falling!                </span></a>
-<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="co">#&gt; 3 Ginger            Rhode Islan… hen    Listen. We'll either die free chic…</span></a>
-<a class="sourceLine" id="cb6-28" data-line-number="28"><span class="co">#&gt; 4 Camilla the Chic… Chantecler   hen    Bawk, buck, ba-gawk.               </span></a>
-<a class="sourceLine" id="cb6-29" data-line-number="29"><span class="co">#&gt; 5 Ernie The Giant … Brahma       roost… Put Captain Solo in the cargo hold.</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="st">"chicken"</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;   name          id                                         drive_resource  </span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt;                                      &lt;list&gt;          </span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; 1 chicken-sheet 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUg… &lt;named list [35…</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">ss &lt;-<span class="st"> </span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"chicken-sheet"</span>)</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="kw"><a href="../../reference/sheets_get.html">sheets_get</a></span>(ss)</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt;   Spreadsheet name: chicken-sheet</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;                 ID: 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;             Locale: en_US</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt;          Time zone: America/Los_Angeles</span></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt;        # of sheets: 1</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt;  chicken.csv: 1000 x 26</span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="kw"><a href="../../reference/read_sheet.html">read_sheet</a></span>(ss)</a>
+<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; Reading from 'chicken-sheet'</span></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt; Range "'chicken.csv'"</span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt;   chicken           breed        sex    motto                              </span></a>
+<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;                              </span></a>
+<a class="sourceLine" id="cb7-25" data-line-number="25"><span class="co">#&gt; 1 Foghorn Leghorn   Leghorn      roost… That's a joke, ah say, that's a jo…</span></a>
+<a class="sourceLine" id="cb7-26" data-line-number="26"><span class="co">#&gt; 2 Chicken Little    unknown      hen    The sky is falling!                </span></a>
+<a class="sourceLine" id="cb7-27" data-line-number="27"><span class="co">#&gt; 3 Ginger            Rhode Islan… hen    Listen. We'll either die free chic…</span></a>
+<a class="sourceLine" id="cb7-28" data-line-number="28"><span class="co">#&gt; 4 Camilla the Chic… Chantecler   hen    Bawk, buck, ba-gawk.               </span></a>
+<a class="sourceLine" id="cb7-29" data-line-number="29"><span class="co">#&gt; 5 Ernie The Giant … Brahma       roost… Put Captain Solo in the cargo hold.</span></a></code></pre></div>
 </div>
 <div id="scope-savvy" class="section level2">
 <h2 class="hasAnchor">
@@ -196,32 +204,32 @@
 <p>If you only need “read” access to Drive or Sheets, the conservative thing to do is to specify a read-only scope. This is a great way to limit the damage anyone can do with the token – you or someone else – through carelessness or malice. If you are storing a token on a remote or shared location, it is wise to use the most conservative scope that still gets the job done.</p>
 <p>Here are various scopes relevant to googledrive and googlesheets4 and what they would allow.</p>
 <p><code>drive</code> scope allows reading and writing with Drive and Sheets APIs. This scope is the most powerful and, therefore, the most dangerous.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">PACKAGE_auth</span>(</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">  ...,</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="dt">scopes =</span> <span class="st">"https://www.googleapis.com/auth/drive"</span>,</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">  ...</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">)</a></code></pre></div>
-<p><code>drive.readonly</code> still allows file identification via Drive and can be combined with <code>spreadsheets</code> if you plan to edit, create, or delete Sheets (not explicitly supported yet in googlesheets4, but it will be).</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">PACKAGE_auth</span>(</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">  ...,</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="dt">scopes =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4">    <span class="st">"https://www.googleapis.com/auth/drive.readonly"</span>,</a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">    <span class="st">"https://www.googleapis.com/auth/spreadsheets"</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">  ),</a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">  ...</a>
-<a class="sourceLine" id="cb8-8" data-line-number="8">)</a></code></pre></div>
-<p>If you are just using Drive to identify Sheets and are only reading from those Sheets, the <code>drive.readonly</code> scope is sufficient and means you can’t modify anything by accident.</p>
+<a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="dt">scopes =</span> <span class="st">"https://www.googleapis.com/auth/drive"</span>,</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">  ...</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">)</a></code></pre></div>
+<p><code>drive.readonly</code> still allows file identification via Drive and can be combined with <code>spreadsheets</code> if you plan to edit, create, or delete Sheets (not explicitly supported yet in googlesheets4, but it will be).</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">PACKAGE_auth</span>(</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">  ...,</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="dt">scopes =</span> <span class="st">"https://www.googleapis.com/auth/drive.readonly"</span>,</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">  ...</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">)</a></code></pre></div>
-<p>If you are not using Drive at all, i.e. you always identify Sheets by file ID, and you are only reading from those Sheets, you only need googlesheets4 and <code>spreadsheets.readonly</code> is sufficient.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../../reference/sheets_auth.html">sheets_auth</a></span>(</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="dt">scopes =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4">    <span class="st">"https://www.googleapis.com/auth/drive.readonly"</span>,</a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">    <span class="st">"https://www.googleapis.com/auth/spreadsheets"</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6">  ),</a>
+<a class="sourceLine" id="cb9-7" data-line-number="7">  ...</a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">)</a></code></pre></div>
+<p>If you are just using Drive to identify Sheets and are only reading from those Sheets, the <code>drive.readonly</code> scope is sufficient and means you can’t modify anything by accident.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">PACKAGE_auth</span>(</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">  ...,</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">  <span class="dt">scopes =</span> <span class="st">"https://www.googleapis.com/auth/spreadsheets.readonly"</span>,</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">  <span class="dt">scopes =</span> <span class="st">"https://www.googleapis.com/auth/drive.readonly"</span>,</a>
 <a class="sourceLine" id="cb10-4" data-line-number="4">  ...</a>
 <a class="sourceLine" id="cb10-5" data-line-number="5">)</a></code></pre></div>
+<p>If you are not using Drive at all, i.e. you always identify Sheets by file ID, and you are only reading from those Sheets, you only need googlesheets4 and <code>spreadsheets.readonly</code> is sufficient.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="../../reference/sheets_auth.html">sheets_auth</a></span>(</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">  ...,</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">  <span class="dt">scopes =</span> <span class="st">"https://www.googleapis.com/auth/spreadsheets.readonly"</span>,</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">  ...</a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">)</a></code></pre></div>
 </div>
   </div>
 

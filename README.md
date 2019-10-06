@@ -161,13 +161,14 @@ googledrive.
 
 ### Specify the range and column types
 
-We’ve made a few world-readable Sheets easy to access via
-`sheets_example()`.
+We have a few world-readable Sheets to help with documentation,
+examples, and general messing around. `sheets_examples()` reveals all of
+them.
 
 ``` r
 library(googlesheets4)
 
-sheets_example()
+sheets_examples()
 #>                                      gapminder 
 #> "1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ" 
 #>                                       mini-gap 
@@ -177,8 +178,13 @@ sheets_example()
 #>                                   design-dates 
 #> "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU" 
 #>                                         deaths 
-#> "1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA"
+#> "1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA" 
+#> attr(,"class")
+#> [1] "sheets_id" "drive_id"
 ```
+
+Once you know the nickname of the example Sheet you want, use
+`sheets_example()` to refer to it.
 
 Here we read from a mini-Gapminder Sheet to show some of the different
 ways to specify (work)sheet and cell ranges. Note also that `col_types`
@@ -255,7 +261,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp8ZyeEu/iris-83fc839a93b.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpagdWeq/iris-9281314968d2.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -265,15 +271,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp8ZyeEu/iris-83fc839a93b.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpagdWeq/iris-9281314968d2.csv
 #> uploaded into Drive file:
-#>   * iris-83fc839a93b: 1JlqbNHrP9Qt68wnihX4kebzAdPXjJouvsiSgqaJt7io
+#>   * iris-9281314968d2: 1vqsOdbOJDPwHi59K5JMQ-62Bq4BLk13MEv2X4Ib4kIQ
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
-#>   name            id                                       drive_resource  
-#> * <chr>           <chr>                                    <list>          
-#> 1 iris-83fc839a9… 1JlqbNHrP9Qt68wnihX4kebzAdPXjJouvsiSgqa… <named list [35…
+#>   name             id                                      drive_resource  
+#> * <chr>            <chr>                                   <list>          
+#> 1 iris-9281314968… 1vqsOdbOJDPwHi59K5JMQ-62Bq4BLk13MEv2X4… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -283,8 +289,8 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-83fc839a93b.csv'
-#> Range "'iris-83fc839a93b.csv'!B1:D6"
+#> Reading from 'iris-9281314968d2'
+#> Range "'iris-9281314968d2.csv'!B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
 #>         <dbl>        <dbl>       <dbl>
@@ -300,12 +306,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp8ZyeEu/iris-83fc839a93b.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpagdWeq/iris-9281314968d2.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-83fc839a93b
+#>   * iris-9281314968d2
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp8ZyeEu/iris-83fc839a93b.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpagdWeq/iris-9281314968d2.xlsx
 readxl::read_excel(iris_xlsxfile)
 #> # A tibble: 150 x 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -330,7 +336,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-83fc839a93b: 1JlqbNHrP9Qt68wnihX4kebzAdPXjJouvsiSgqaJt7io
+#>   * iris-9281314968d2: 1vqsOdbOJDPwHi59K5JMQ-62Bq4BLk13MEv2X4Ib4kIQ
 ```
 
 ## Get Sheet metadata or detailed cell data

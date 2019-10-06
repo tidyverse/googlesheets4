@@ -95,13 +95,15 @@ Lesson: googledrive provides the most user-friendly way to refer to files on Goo
 
 ### Specify the range and column types
 
-We've made a few world-readable Sheets easy to access via `sheets_example()`.
+We have a few world-readable Sheets to help with documentation, examples, and general messing around. `sheets_examples()` reveals all of them.
 
 ```{r}
 library(googlesheets4)
 
-sheets_example()
+sheets_examples()
 ```
+
+Once you know the nickname of the example Sheet you want, use `sheets_example()` to refer to it.
 
 Here we read from a mini-Gapminder Sheet to show some of the different ways to specify (work)sheet and cell ranges. Note also that `col_types` gives control of column types, similar to `col_types` works in readr.
 

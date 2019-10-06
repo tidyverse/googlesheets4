@@ -1,12 +1,12 @@
-## TODO: ideally these would be actual Sheet names; currently not true
 ## TODO: consult remote key-value store for these? in case they change?
 .sheets_examples <- structure(
   c(
-     "gapminder" = "1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ",
-      "mini-gap" = "1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY",
-            "ff" = "132Ij_8ggTKVLnLqCOM3ima6mV9F8rmY7HEcR-5hjWoQ",
-  "design-dates" = "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU",
-        "deaths" = "1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA"
+                    "gapminder" = "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY",
+                     "mini-gap" = "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU",
+         "formulas-and-formats" = "1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms",
+    "cell-contents-and-formats" = "1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E",
+                       "deaths" = "1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg",
+                "chicken-sheet" = "1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU"
   ),
   class = c("sheets_id", "drive_id")
 )

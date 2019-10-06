@@ -9,10 +9,12 @@
 #' @export
 #'
 #' @examples
-#' sheets_get(sheets_example("design-dates"))
-#' sheets_get(sheets_example("gapminder"))
-#' sheets_get(sheets_example("mini-gap"))
-#' sheets_get(sheets_example("ff"))
+#' if (sheets_has_token()) {
+#'   sheets_get(sheets_example("gapminder"))
+#'   sheets_get(sheets_example("mini-gap"))
+#'   sheets_get(sheets_example("deaths"))
+#'   sheets_get(sheets_example("chicken-sheet"))
+#' }
 sheets_get <- function(ss) {
   resp <- sheets_get_impl_(as_sheets_id(ss))
   sheets_spreadsheet(resp)

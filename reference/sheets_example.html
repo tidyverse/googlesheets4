@@ -36,7 +36,7 @@
 
 <meta property="og:title" content="Access IDs of example Sheets — sheets_example" />
 <meta property="og:description" content="googlesheets4 ships with static IDs for some world-readable example Sheets
-for use in examples and documentation. This function make them easy to
+for use in examples and documentation. These functions make them easy to
 access by a nickname." />
 <meta name="twitter:card" content="summary" />
 
@@ -120,29 +120,34 @@ access by a nickname." />
 
     <div class="ref-description">
     <p>googlesheets4 ships with static IDs for some world-readable example Sheets
-for use in examples and documentation. This function make them easy to
+for use in examples and documentation. These functions make them easy to
 access by a nickname.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_example</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_example</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='fu'>sheets_examples</span>()))
+
+<span class='fu'>sheets_examples</span>()</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>Nickname of an example Sheet. If <code>NULL</code>, the examples are
-listed.</p></td>
+      <td><p>Nickname of an example Sheet.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Either a single <a href='sheets_id.html'>sheets_id</a> object or a named character vector of all
-built-in examples.</p>
+    
+<ul>
+<li><p><code>sheets_example()</code>: a single <a href='sheets_id.html'>sheets_id</a> object</p></li>
+<li><p><code>sheets_examples()</code>: a named character vector of all built-in examples</p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>sheets_example</span>()</div><div class='output co'>#&gt;                                      gapminder 
+    <pre class="examples"><div class='input'><span class='fu'>sheets_examples</span>()</div><div class='output co'>#&gt;                                      gapminder 
 #&gt; "1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ" 
 #&gt;                                       mini-gap 
 #&gt; "1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY" 
@@ -151,7 +156,10 @@ built-in examples.</p>
 #&gt;                                   design-dates 
 #&gt; "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU" 
 #&gt;                                         deaths 
-#&gt; "1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA" </div><div class='input'><span class='fu'>sheets_example</span>(<span class='st'>"gapminder"</span>)</div><div class='output co'>#&gt; [1] "1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ"
+#&gt; "1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA" 
+#&gt; attr(,"class")
+#&gt; [1] "sheets_id" "drive_id" </div><div class='input'>
+<span class='fu'>sheets_example</span>(<span class='st'>"gapminder"</span>)</div><div class='output co'>#&gt; [1] "1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ"
 #&gt; attr(,"class")
 #&gt; [1] "sheets_id" "drive_id" </div></pre>
   </div>

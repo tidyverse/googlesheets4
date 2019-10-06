@@ -100,7 +100,16 @@ sheets_get(ss)
 
 read_sheet(ss)
 ```
-  
+
+If you ever want to confirm the currently authenticated user, both packages provide a `*_user()` function that reveals some info:
+
+```{r}
+drive_user()
+sheets_user()
+```
+
+We are using a service account to render this article. But if you've used the default OAuth flow, this should correspond to the email of the Google account you logged in with.
+
 ```{r include = FALSE}
 sheets_deauth()
 drive_deauth()

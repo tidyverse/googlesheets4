@@ -5,14 +5,25 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, include = FALSE}
+can_decrypt <- gargle:::secret_can_decrypt("googlesheets4")
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  purl = can_decrypt,
+  eval = can_decrypt
 )
-googledrive::drive_auth(email = "jenny@rstudio.com")
-googlesheets4::sheets_auth(email = "jenny@rstudio.com")
+```
+
+```{r eval = !can_decrypt, echo = FALSE, comment = NA}
+message("No token available. Code chunks will not be evaluated.")
+```
+
+```{r readme-auth, include = FALSE}
+json <- gargle:::secret_read("googlesheets4", "googlesheets4-docs.json")
+googledrive::drive_auth(path = rawToChar(json))
+googlesheets4::sheets_auth(token = googledrive::drive_token())
 ```
 
 # googlesheets4
@@ -103,9 +114,9 @@ library(googlesheets4)
 sheets_examples()
 ```
 
-Once you know the nickname of the example Sheet you want, use `sheets_example()` to refer to it.
+Once you know the nickname of the example Sheet you want, use `sheets_example()` to get the ID of exactly 1 example file.
 
-Here we read from a mini-Gapminder Sheet to show some of the different ways to specify (work)sheet and cell ranges. Note also that `col_types` gives control of column types, similar to `col_types` works in readr.
+Here we read from the mini-Gapminder and `deaths` example Sheets to show some of the different ways to specify (work)sheet and cell ranges. Note also that `col_types` gives control of column types, similar to how `col_types` works in readr.
 
 ```{r}
 read_sheet(sheets_example("mini-gap"), sheet = 2)
@@ -149,7 +160,10 @@ Download the Sheet as an Excel workbook and read it back in via `readxl::read_ex
 ```{r}
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
-readxl::read_excel(iris_xlsxfile)
+
+if (requireNamespace("readxl", quietly = TRUE)) {
+  readxl::read_excel(iris_xlsxfile)  
+}
 ```
 
 Clean up.

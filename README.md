@@ -89,7 +89,7 @@ library(googlesheets4)
 #> # A tibble: 1 x 4
 #>   name   path     id                                       drive_resource  
 #>   <chr>  <chr>    <chr>                                    <list>          
-#> 1 deaths ~/deaths 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z… <named list [35…
+#> 1 deaths ~/deaths 1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6… <named list [34…
 ```
 
 Pass the result to googlesheets4 functions such as:
@@ -103,7 +103,7 @@ Pass the result to googlesheets4 functions such as:
 ``` r
 sheets_get(deaths)
 #>   Spreadsheet name: deaths
-#>                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA
+#>                 ID: 1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg
 #>             Locale: en
 #>          Time zone: America/Los_Angeles
 #>        # of sheets: 2
@@ -170,29 +170,32 @@ library(googlesheets4)
 
 sheets_examples()
 #>                                      gapminder 
-#> "1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ" 
+#> "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" 
 #>                                       mini-gap 
-#> "1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY" 
-#>                                             ff 
-#> "132Ij_8ggTKVLnLqCOM3ima6mV9F8rmY7HEcR-5hjWoQ" 
-#>                                   design-dates 
-#> "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU" 
+#> "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU" 
+#>                           formulas-and-formats 
+#> "1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms" 
+#>                      cell-contents-and-formats 
+#> "1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E" 
 #>                                         deaths 
-#> "1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA" 
+#> "1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg" 
+#>                                  chicken-sheet 
+#> "1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU" 
 #> attr(,"class")
 #> [1] "sheets_id" "drive_id"
 ```
 
 Once you know the nickname of the example Sheet you want, use
-`sheets_example()` to refer to it.
+`sheets_example()` to get the ID of exactly 1 example file.
 
-Here we read from a mini-Gapminder Sheet to show some of the different
-ways to specify (work)sheet and cell ranges. Note also that `col_types`
-gives control of column types, similar to `col_types` works in readr.
+Here we read from the mini-Gapminder and `deaths` example Sheets to show
+some of the different ways to specify (work)sheet and cell ranges. Note
+also that `col_types` gives control of column types, similar to how
+`col_types` works in readr.
 
 ``` r
 read_sheet(sheets_example("mini-gap"), sheet = 2)
-#> Reading from 'test-gs-mini-gapminder'
+#> Reading from 'mini-gap'
 #> Range "'Americas'"
 #> # A tibble: 5 x 6
 #>   country   continent  year lifeExp      pop gdpPercap
@@ -204,7 +207,7 @@ read_sheet(sheets_example("mini-gap"), sheet = 2)
 #> 5 Chile     Americas   1952    54.7  6377619     3940.
 
 read_sheet(sheets_example("mini-gap"), sheet = "Oceania", n_max = 3)
-#> Reading from 'test-gs-mini-gapminder'
+#> Reading from 'mini-gap'
 #> Range "'Oceania'"
 #> # A tibble: 3 x 6
 #>   country     continent  year lifeExp     pop gdpPercap
@@ -261,7 +264,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpagdWeq/iris-9281314968d2.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp9hoY9Y/iris-c73043de75f9.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -271,15 +274,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpagdWeq/iris-9281314968d2.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp9hoY9Y/iris-c73043de75f9.csv
 #> uploaded into Drive file:
-#>   * iris-9281314968d2: 1vqsOdbOJDPwHi59K5JMQ-62Bq4BLk13MEv2X4Ib4kIQ
+#>   * iris-c73043de75f9: 15KkOW8i3Y2OGp3-pHisP9mcQBnaJAqOkABoTaOE9YWc
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
 #>   name             id                                      drive_resource  
 #> * <chr>            <chr>                                   <list>          
-#> 1 iris-9281314968… 1vqsOdbOJDPwHi59K5JMQ-62Bq4BLk13MEv2X4… <named list [34…
+#> 1 iris-c73043de75… 15KkOW8i3Y2OGp3-pHisP9mcQBnaJAqOkABoTa… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -289,8 +292,8 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-9281314968d2'
-#> Range "'iris-9281314968d2.csv'!B1:D6"
+#> Reading from 'iris-c73043de75f9'
+#> Range "'iris-c73043de75f9.csv'!B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
 #>         <dbl>        <dbl>       <dbl>
@@ -306,13 +309,16 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpagdWeq/iris-9281314968d2.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp9hoY9Y/iris-c73043de75f9.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-9281314968d2
+#>   * iris-c73043de75f9
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpagdWeq/iris-9281314968d2.xlsx
-readxl::read_excel(iris_xlsxfile)
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp9hoY9Y/iris-c73043de75f9.xlsx
+
+if (requireNamespace("readxl", quietly = TRUE)) {
+  readxl::read_excel(iris_xlsxfile)  
+}
 #> # A tibble: 150 x 5
 #>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 #>           <dbl>       <dbl>        <dbl>       <dbl> <chr>  
@@ -336,7 +342,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-9281314968d2: 1vqsOdbOJDPwHi59K5JMQ-62Bq4BLk13MEv2X4Ib4kIQ
+#>   * iris-c73043de75f9: 15KkOW8i3Y2OGp3-pHisP9mcQBnaJAqOkABoTaOE9YWc
 ```
 
 ## Get Sheet metadata or detailed cell data
@@ -346,26 +352,26 @@ there’s much more info in the object itself.
 
 ``` r
 (mini_gap_meta <- sheets_get(sheets_example("mini-gap")))
-#>   Spreadsheet name: test-gs-mini-gapminder
-#>                 ID: 1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY
+#>   Spreadsheet name: mini-gap
+#>                 ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
 #>             Locale: en_US
-#>          Time zone: Etc/GMT
+#>          Time zone: America/Los_Angeles
 #>        # of sheets: 5
 #> 
 #> (Sheet name): (Nominal extent in rows x columns)
-#>       Africa: 6 x 6
-#>     Americas: 6 x 6
-#>         Asia: 6 x 6
-#>       Europe: 6 x 6
-#>      Oceania: 6 x 6
+#>       Africa: 1000 x 26
+#>     Americas: 1000 x 26
+#>         Asia: 1000 x 26
+#>       Europe: 1000 x 26
+#>      Oceania: 1000 x 26
 
 str(mini_gap_meta, max.level = 1)
 #> List of 7
-#>  $ spreadsheet_id : chr "1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY"
-#>  $ spreadsheet_url: chr "https://docs.google.com/a/rstudio.com/spreadsheets/d/1BMtx1V2pk2KG2HGANvvBOaZM4Jx1DUdRrFdEx-OJIGY/edit"
-#>  $ name           : chr "test-gs-mini-gapminder"
+#>  $ spreadsheet_id : chr "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU"
+#>  $ spreadsheet_url: chr "https://docs.google.com/spreadsheets/d/1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU/edit"
+#>  $ name           : chr "mini-gap"
 #>  $ locale         : chr "en_US"
-#>  $ time_zone      : chr "Etc/GMT"
+#>  $ time_zone      : chr "America/Los_Angeles"
 #>  $ sheets         :Classes 'tbl_df', 'tbl' and 'data.frame': 5 obs. of  7 variables:
 #>  $ named_ranges   :List of 4
 #>  - attr(*, "class")= chr [1:2] "sheets_meta" "list"
@@ -374,11 +380,11 @@ mini_gap_meta$sheets
 #> # A tibble: 5 x 7
 #>   name     index id         type  visible grid_rows grid_columns
 #>   <chr>    <int> <chr>      <chr> <lgl>       <int>        <int>
-#> 1 Africa       0 2141688971 GRID  TRUE            6            6
-#> 2 Americas     1 2105295598 GRID  TRUE            6            6
-#> 3 Asia         2 1349264090 GRID  TRUE            6            6
-#> 4 Europe       3 1394602536 GRID  TRUE            6            6
-#> 5 Oceania      4 1167867454 GRID  TRUE            6            6
+#> 1 Africa       0 100621440  GRID  TRUE         1000           26
+#> 2 Americas     1 817435836  GRID  TRUE         1000           26
+#> 3 Asia         2 1266941983 GRID  TRUE         1000           26
+#> 4 Europe       3 1387231494 GRID  TRUE         1000           26
+#> 5 Oceania      4 2067048155 GRID  TRUE         1000           26
 ```
 
 `sheets_cells()` returns a data frame with one row per cell and it gives

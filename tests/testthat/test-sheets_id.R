@@ -1,5 +1,3 @@
-context("test-sheets_id.R")
-
 test_that("can coerce simple strings and drive_id's to sheets_id", {
   expect_s3_class(as_sheets_id("123"), "sheets_id")
   expect_identical(as_sheets_id(as_sheets_id("123")), as_sheets_id("123"))

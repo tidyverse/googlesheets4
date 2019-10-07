@@ -1,5 +1,3 @@
-context("test-sheets_example.R")
-
 test_that("sheets_examples() lists all examples", {
   examples <- sheets_examples()
   expect_true(is.character(examples))

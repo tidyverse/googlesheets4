@@ -1,5 +1,3 @@
-context("argument checkers")
-
 test_that("col_names must be logical or character and have length", {
   expect_error(check_col_names(1:3), "must be character")
   expect_error(check_col_names(factor("a")), "must be character")

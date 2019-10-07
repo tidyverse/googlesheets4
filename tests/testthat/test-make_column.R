@@ -1,5 +1,3 @@
-context("test-make_column")
-
 test_that("resolve_col_type() passes `ctype` other than 'COL_GUESS' through", {
   expect_identical(resolve_col_type("a cell", "COL_ANYTHING"), "COL_ANYTHING")
 })

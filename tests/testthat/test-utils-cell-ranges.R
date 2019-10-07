@@ -1,5 +1,3 @@
-context("test-utils-cell-ranges.R")
-
 test_that("sq_escape() does nothing if string already single-quoted", {
   x <- c("'abc'", "'ab'c'", "''")
   expect_identical(sq_escape(x), x)

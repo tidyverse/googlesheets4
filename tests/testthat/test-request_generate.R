@@ -1,5 +1,3 @@
-context("test-request_generate.R")
-
 test_that("can generate a basic request", {
   req <- request_generate(
     "sheets.spreadsheets.get",

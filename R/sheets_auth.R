@@ -48,6 +48,11 @@ sheets_auth <- function(email = gargle::gargle_oauth_email(),
                         cache = gargle::gargle_oauth_cache(),
                         use_oob = gargle::gargle_oob_default(),
                         token = NULL) {
+  # I have called `sheets_auth(token = drive_token())` multiple times now,
+  # without attaching googledrive. Expose this error noisily, before it gets
+  # muffled by the `tryCatch()` treatment of `token_fetch()`.
+  force(token)
+
   cred <- gargle::token_fetch(
     scopes = scopes,
     app = sheets_oauth_app() %||% gargle::tidyverse_app(),

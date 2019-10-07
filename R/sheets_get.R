@@ -78,10 +78,10 @@ sheets_spreadsheet <- function(x = list()) {
       ##   => we substract one from end_[row|column]
       ## net effect
       ##   => we add one to start_[row|column] but not to end_[row|column]
-      start_row    = map_int(nr, c("range", "startRowIndex")) + 1L,
-      end_row      = map_int(nr, c("range", "endRowIndex")),
-      start_column = map_int(nr, c("range", "startColumnIndex")) + 1L,
-      end_column   = map_int(nr, c("range", "endColumnIndex"))
+      start_row    = map_int(nr, c("range", "startRowIndex"), .default = NA) + 1L,
+      end_row      = map_int(nr, c("range", "endRowIndex"), .default = NA),
+      start_column = map_int(nr, c("range", "startColumnIndex"), .default = NA) + 1L,
+      end_column   = map_int(nr, c("range", "endColumnIndex"), .default = NA)
     )
     out$named_ranges$sheet_name <- vlookup(
       out$named_ranges$sheet_id,

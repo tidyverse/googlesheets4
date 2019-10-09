@@ -33,7 +33,6 @@ test_that("qualified_A1 works", {
 })
 
 # resolve_sheet() ----
-
 test_that("resolve_sheet() is NULL in, NULL out", {
   expect_null(resolve_sheet())
 })
@@ -129,6 +128,24 @@ test_that("A1 range is detected, w/ or w/o sheet", {
   expect_identical(spec$A1_range, "1:2")
   expect_identical(spec$api_range, "'B'!1:2")
   expect_true(spec$shim)
+})
+
+test_that("skip is honored", {
+  spec <- as_range_spec(x = NULL, skip = 1)
+  expect_match(spec$api_range, "^2:[0-9]+$")
+  expect_s3_class(spec$cell_limits, "cell_limits")
+})
+
+test_that("cell_limits input works, w/ or w/o sheet", {
+  spec <- as_range_spec(cell_rows(1:2))
+  expect_identical(spec$api_range, "1:2")
+  expect_true(spec$shim)
+
+  spec <- as_range_spec(cell_rows(1:2), sheet = 3, sheet_names = LETTERS[1:3])
+  expect_identical(spec$api_range, "'C'!1:2")
+
+  spec <- as_range_spec(cell_rows(1:2), sheet = "B", sheet_names = LETTERS[1:3])
+  expect_identical(spec$api_range, "'B'!1:2")
 })
 
 test_that("invalid range is rejected", {

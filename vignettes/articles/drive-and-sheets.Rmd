@@ -22,36 +22,6 @@ knitr::opts_chunk$set(
 message("No token available. Code chunks will not be evaluated.")
 ```
 
-```{r drive-setup, eval = FALSE, include = FALSE}
-# This chunk contains code to setup all the files necessary for this document
-# to make sense, starting from a blank slate. Likewise, it contains code to
-# delete those same files.
-#
-# It is meant to be run occasionally, interactively, by a human maintainer.
-# So far, I can't think of anywhere better to put this.
-
-CLEAN <- SETUP <- FALSE
-
-json <- gargle:::secret_read("googlesheets4", "googlesheets4-docs.json")
-googledrive::drive_auth(path = rawToChar(json))
-
-if (isTRUE(SETUP)) {
-  name <- "chicken-sheet"
-  ss <- drive_find("chicken-sheet")
-  if (nrow(ss) < 1) {
-    chicken_sheet <- drive_upload(
-      drive_example("chicken.csv"),
-      name = name,
-      type = "spreadsheet"
-    )
-  }
-}
-
-if (isTRUE(CLEAN)) {
-  drive_rm("chicken-sheet")
-}
-```
-
 googlesheets4 wraps the Sheets API v4, which lets you read, write, and format data in Sheets. (Currently, googlesheets4 only supports *reading*, but writing will come in due course.) The Sheets API is very focused on spreadsheet-oriented data and metadata, i.e. (work)sheets and cells.
 
 The Sheets API offers practically no support for file-level operations, other than basic spreadsheet creation. We have to use the Drive API for this, which is wrapped by the googledrive package (<https://googledrive.tidyverse.org>).
@@ -84,9 +54,7 @@ sheets_auth(token = drive_token())
 ```
 
 ```{r include = FALSE}
-json <- gargle:::secret_read("googlesheets4", "googlesheets4-docs.json")
-drive_auth(path = rawToChar(json))
-sheets_auth(token = drive_token())
+googlesheets4:::sheets_auth_docs(drive = TRUE)
 ```
 
 Now you can use googledrive functions, like `googledrive::drive_find()` or `googledrive::drive_get()`, to list files or find them by name, path, or other property. Then, once you've identified the target file, use googlesheets4 to do spreadsheet-specific tasks.
@@ -139,12 +107,7 @@ drive_auth(token = sheets_token())
 ```
 
 ```{r include = FALSE}
-json <- gargle:::secret_read("googlesheets4", "googlesheets4-docs.json")
-sheets_auth(
-  scopes = "https://www.googleapis.com/auth/drive",
-  path = rawToChar(json)
-)
-googledrive::drive_auth(token = sheets_token())
+googlesheets4:::sheets_auth_docs(drive = TRUE)
 ```
 
 Now you can use googledrive functions to list files or find them by name, path, or other property. Then, once you've identified the target file, use googlesheets4 to do spreadsheet-specific tasks.

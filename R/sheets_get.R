@@ -71,7 +71,9 @@ sheets_spreadsheet <- function(x = list()) {
       name         = map_chr(nr, "name"),
       range        = NA_character_,
       id           = map_chr(nr, "namedRangeId"),
-      sheet_id     = map_chr(nr, c("range", "sheetId")),
+      # if there is only 1 sheet, sheetId might not be sent!
+      # https://github.com/tidyverse/googlesheets4/issues/29
+      sheet_id     = map_chr(nr, c("range", "sheetId"), .default = NA),
       sheet_name   = NA_character_,
       ## API sends zero-based row and column
       ##   => we add one
@@ -84,6 +86,12 @@ sheets_spreadsheet <- function(x = list()) {
       start_column = map_int(nr, c("range", "startColumnIndex"), .default = NA) + 1L,
       end_column   = map_int(nr, c("range", "endColumnIndex"), .default = NA)
     )
+    no_sheet <- is.na(out$named_ranges$sheet_id)
+    if (any(no_sheet)) {
+      # if no associated sheetId, assume it's the first (only?) sheet
+      # https://github.com/tidyverse/googlesheets4/issues/29
+      out$named_ranges$sheet_id[no_sheet] <- out$sheets$id[[1]]
+    }
     out$named_ranges$sheet_name <- vlookup(
       out$named_ranges$sheet_id,
       data = out$sheets,

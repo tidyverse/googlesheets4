@@ -54,6 +54,7 @@ sheets_spreadsheet <- function(x = list()) {
   if (!is.null(x$sheets)) {
     p <- map(x$sheets, "properties")
     out$sheets <- tibble::tibble(
+      # TODO: open question whether I should explicitly unescape here
       name         = map_chr(p, "title"),
       index        = map_int(p, "index"),
       id           = map_chr(p, "sheetId"),

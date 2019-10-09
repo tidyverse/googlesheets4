@@ -18,8 +18,11 @@ get_cells <- function(ss,
 
   ## prepare range specification for API --------------------------------------
 
-  ## user's sheet, range, skip --> sheet name and cell range, suitable for API
-  range_spec <- form_range_spec(sheet, range, skip, x$sheets)
+  ## user's range, sheet, skip --> qualified A1 range, suitable for API
+  range_spec <- as_range_spec(
+    range, sheet = sheet, skip = skip,
+    sheet_names = x$sheets$name, nr_names = x$named_ranges$name
+  )
   message_glue("Range {dq(range_spec$api_range)}")
 
   ## main GET -----------------------------------------------------------------
@@ -31,6 +34,8 @@ get_cells <- function(ss,
 
   ## enforce geometry on the cell data frame ----------------------------------
   if (range_spec$shim) {
+    range_spec$cell_limits <- range_spec$cell_limits %||%
+      as_cell_limits(range_spec$api_range)
     out <- insert_shims(out, range_spec$cell_limits)
     ## guarantee:
     ## every row and every column spanned by user's range is represented by at

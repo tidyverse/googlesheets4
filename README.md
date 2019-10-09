@@ -114,7 +114,7 @@ sheets_get(deaths)
 
 read_sheet(deaths, range = "A5:F8")
 #> Reading from 'deaths'
-#> Range "'arts'!A5:F8"
+#> Range "A5:F8"
 #> # A tibble: 3 x 6
 #>   Name  Profession   Age `Has kids` `Date of birth`     `Date of death`    
 #>   <chr> <chr>      <dbl> <lgl>      <dttm>              <dttm>             
@@ -138,7 +138,7 @@ sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
 #>         arts: 1000 x 26
 #>        other: 1000 x 26
 
-# the URL also works
+# a URL also works
 sheets_get("https://docs.google.com/spreadsheets/d/1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA/edit#gid=1210215306")
 #>   Spreadsheet name: deaths
 #>                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA
@@ -186,7 +186,13 @@ sheets_examples()
 ```
 
 Once you know the nickname of the example Sheet you want, use
-`sheets_example()` to get the ID of exactly 1 example file.
+`sheets_example()` to get the ID of exactly 1 example file. If you’d
+like to see it in the browser, use `sheets_browse()`:
+
+``` r
+sheets_example("deaths") %>% 
+  sheets_browse()
+```
 
 Here we read from the mini-Gapminder and `deaths` example Sheets to show
 some of the different ways to specify (work)sheet and cell ranges. Note
@@ -218,7 +224,7 @@ read_sheet(sheets_example("mini-gap"), sheet = "Oceania", n_max = 3)
 
 read_sheet(sheets_example("deaths"), skip = 4, n_max = 10)
 #> Reading from 'deaths'
-#> Range "'arts'!5:1000"
+#> Range "5:5000000"
 #> # A tibble: 10 x 6
 #>    Name  Profession   Age `Has kids` `Date of birth`    
 #>    <chr> <chr>      <dbl> <lgl>      <dttm>             
@@ -254,6 +260,43 @@ read_sheet(
 #> 10 Pat Sum… coach         64 TRUE       1952-06-14 00:00:00 2016-06-28
 ```
 
+If you looked at the `deaths` spreadsheet in the browser, you know that
+it has some of the typical features of real world spreadsheets: the main
+data rectangle has prose intended for human-consumption before and after
+it. That’s why we have to specify the range when we read from it.
+
+We’ve designated the data rectangles as [named
+ranges](https://support.google.com/docs/answer/63175?co=GENIE.Platform%3DDesktop&hl=en),
+which provides a very slick way to read them – definitely less brittle
+and mysterious than approaches like `range = "other!A5:F15"` or `skip
+= 4, n_max = 10`. A named range can be passed via the `range =`
+argument:
+
+``` r
+sheets_example("deaths") %>% 
+  read_sheet(range = "arts_data")
+#> Reading from 'deaths'
+#> Range "arts_data"
+#> # A tibble: 10 x 6
+#>    Name  Profession   Age `Has kids` `Date of birth`    
+#>    <chr> <chr>      <dbl> <lgl>      <dttm>             
+#>  1 Davi… musician      69 TRUE       1947-01-08 00:00:00
+#>  2 Carr… actor         60 TRUE       1956-10-21 00:00:00
+#>  3 Chuc… musician      90 TRUE       1926-10-18 00:00:00
+#>  4 Bill… actor         61 TRUE       1955-05-17 00:00:00
+#>  5 Prin… musician      57 TRUE       1958-06-07 00:00:00
+#>  6 Alan… actor         69 FALSE      1946-02-21 00:00:00
+#>  7 Flor… actor         82 TRUE       1934-02-14 00:00:00
+#>  8 Harp… author        89 FALSE      1926-04-28 00:00:00
+#>  9 Zsa … actor         99 TRUE       1917-02-06 00:00:00
+#> 10 Geor… musician      53 FALSE      1963-06-25 00:00:00
+#> # … with 1 more variable: `Date of death` <dttm>
+```
+
+The named ranges are part of the information returned by `sheets_get()`
+(although it’s currently not revealed by the print method
+[tidyverse/googlesheets4\#41](https://github.com/tidyverse/googlesheets4/issues/41)).
+
 ## Roundtripping with a private Sheet
 
 Here is a demo of putting the iris data into a new, private Sheet. Then
@@ -264,7 +307,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmpy3SmOo/iris-180d23d9a286c.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpcrCGdD/iris-18537600a8ebe.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -274,15 +317,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmpy3SmOo/iris-180d23d9a286c.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpcrCGdD/iris-18537600a8ebe.csv
 #> uploaded into Drive file:
-#>   * iris-180d23d9a286c: 10dpzmCrHzS19YdAUQ5ebHoy8h0chlxfwlcUSLz15vt0
+#>   * iris-18537600a8ebe: 1OiozqlSDX1bknmedN0iOjjT4ixQy7yGLbCrSA_ox6Bw
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
 #>   name              id                                     drive_resource  
 #> * <chr>             <chr>                                  <list>          
-#> 1 iris-180d23d9a28… 10dpzmCrHzS19YdAUQ5ebHoy8h0chlxfwlcUS… <named list [34…
+#> 1 iris-18537600a8e… 1OiozqlSDX1bknmedN0iOjjT4ixQy7yGLbCrS… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -292,8 +335,8 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-180d23d9a286c'
-#> Range "'iris-180d23d9a286c.csv'!B1:D6"
+#> Reading from 'iris-18537600a8ebe'
+#> Range "B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
 #>         <dbl>        <dbl>       <dbl>
@@ -309,12 +352,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmpy3SmOo/iris-180d23d9a286c.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpcrCGdD/iris-18537600a8ebe.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-180d23d9a286c
+#>   * iris-18537600a8ebe
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmpy3SmOo/iris-180d23d9a286c.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpcrCGdD/iris-18537600a8ebe.xlsx
 
 if (requireNamespace("readxl", quietly = TRUE)) {
   readxl::read_excel(iris_xlsxfile)  
@@ -342,7 +385,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-180d23d9a286c: 10dpzmCrHzS19YdAUQ5ebHoy8h0chlxfwlcUSLz15vt0
+#>   * iris-18537600a8ebe: 1OiozqlSDX1bknmedN0iOjjT4ixQy7yGLbCrSA_ox6Bw
 ```
 
 ## Get Sheet metadata or detailed cell data
@@ -351,40 +394,43 @@ drive_rm(iris_ss)
 there’s much more info in the object itself.
 
 ``` r
-(mini_gap_meta <- sheets_get(sheets_example("mini-gap")))
-#>   Spreadsheet name: mini-gap
-#>                 ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
-#>             Locale: en_US
+(deaths_meta <- sheets_example("deaths") %>% 
+   sheets_get())
+#>   Spreadsheet name: deaths
+#>                 ID: 1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg
+#>             Locale: en
 #>          Time zone: America/Los_Angeles
-#>        # of sheets: 5
+#>        # of sheets: 2
 #> 
 #> (Sheet name): (Nominal extent in rows x columns)
-#>       Africa: 1000 x 26
-#>     Americas: 1000 x 26
-#>         Asia: 1000 x 26
-#>       Europe: 1000 x 26
-#>      Oceania: 1000 x 26
+#>         arts: 1000 x 26
+#>        other: 1000 x 26
 
-str(mini_gap_meta, max.level = 1)
+str(deaths_meta, max.level = 1)
 #> List of 7
-#>  $ spreadsheet_id : chr "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU"
-#>  $ spreadsheet_url: chr "https://docs.google.com/spreadsheets/d/1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU/edit"
-#>  $ name           : chr "mini-gap"
-#>  $ locale         : chr "en_US"
+#>  $ spreadsheet_id : chr "1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg"
+#>  $ spreadsheet_url: chr "https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/edit"
+#>  $ name           : chr "deaths"
+#>  $ locale         : chr "en"
 #>  $ time_zone      : chr "America/Los_Angeles"
-#>  $ sheets         :Classes 'tbl_df', 'tbl' and 'data.frame': 5 obs. of  7 variables:
-#>  $ named_ranges   :List of 4
+#>  $ sheets         :Classes 'tbl_df', 'tbl' and 'data.frame': 2 obs. of  7 variables:
+#>  $ named_ranges   :Classes 'tbl_df', 'tbl' and 'data.frame': 2 obs. of  9 variables:
 #>  - attr(*, "class")= chr [1:2] "sheets_meta" "list"
 
-mini_gap_meta$sheets
-#> # A tibble: 5 x 7
-#>   name     index id         type  visible grid_rows grid_columns
-#>   <chr>    <int> <chr>      <chr> <lgl>       <int>        <int>
-#> 1 Africa       0 100621440  GRID  TRUE         1000           26
-#> 2 Americas     1 817435836  GRID  TRUE         1000           26
-#> 3 Asia         2 1266941983 GRID  TRUE         1000           26
-#> 4 Europe       3 1387231494 GRID  TRUE         1000           26
-#> 5 Oceania      4 2067048155 GRID  TRUE         1000           26
+deaths_meta$sheets
+#> # A tibble: 2 x 7
+#>   name  index id         type  visible grid_rows grid_columns
+#>   <chr> <int> <chr>      <chr> <lgl>       <int>        <int>
+#> 1 arts      0 1210215306 GRID  TRUE         1000           26
+#> 2 other     1 28655153   GRID  TRUE         1000           26
+
+deaths_meta$named_ranges
+#> # A tibble: 2 x 9
+#>   name  range id    sheet_id sheet_name start_row end_row start_column
+#>   <chr> <chr> <chr> <chr>    <chr>          <int>   <int>        <int>
+#> 1 arts… 'art… ndmz… 1210215… arts               5      15            1
+#> 2 othe… 'oth… r5yz… 28655153 other              5      15            1
+#> # … with 1 more variable: end_column <int>
 ```
 
 `sheets_cells()` returns a data frame with one row per cell and it gives
@@ -393,7 +439,7 @@ access to raw cell data sent by the Sheets API.
 ``` r
 (df <- sheets_cells(sheets_example("deaths"), range = "E5:E7"))
 #> Reading from 'deaths'
-#> Range "'arts'!E5:E7"
+#> Range "E5:E7"
 #> # A tibble: 3 x 4
 #>     row   col loc   cell      
 #>   <int> <dbl> <chr> <list>    
@@ -442,7 +488,7 @@ df %>% spread_sheet(col_types = "D")
 ## is same as ...
 read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 #> Reading from 'deaths'
-#> Range "'arts'!E5:E7"
+#> Range "E5:E7"
 #> # A tibble: 2 x 1
 #>   `Date of birth`
 #>   <date>         

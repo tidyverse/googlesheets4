@@ -21,9 +21,7 @@ message("No token available. Code chunks will not be evaluated.")
 ```
 
 ```{r readme-auth, include = FALSE}
-json <- gargle:::secret_read("googlesheets4", "googlesheets4-docs.json")
-googledrive::drive_auth(path = rawToChar(json))
-googlesheets4::sheets_auth(token = googledrive::drive_token())
+googlesheets4:::sheets_auth_docs()
 ```
 
 # googlesheets4

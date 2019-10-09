@@ -227,3 +227,31 @@ sheets_user <- function() {
     invisible()
   }
 }
+
+# unexported helpers that are nice for internal use ----
+sheets_auth_internal <- function(account = c("docs", "testing"),
+                                 scopes = NULL,
+                                 drive = TRUE) {
+  stopifnot(gargle:::secret_can_decrypt("googlesheets4"))
+  account <- match.arg(account)
+  filename <- glue("googlesheets4-{account}.json")
+  # TODO: revisit when I do PKG_scopes()
+  # https://github.com/r-lib/gargle/issues/103
+  scopes <- scopes %||% "https://www.googleapis.com/auth/drive"
+  json <- gargle:::secret_read("googlesheets4", filename)
+  sheets_auth(scopes = scopes, path = rawToChar(json))
+  print(sheets_user())
+  if (drive) {
+    googledrive::drive_auth(token = sheets_token())
+    print(googledrive::drive_user())
+  }
+  invisible(TRUE)
+}
+
+sheets_auth_docs <- function(scopes = NULL, drive = TRUE) {
+  sheets_auth_internal("docs", scopes = scopes, drive = drive)
+}
+
+sheets_auth_testing <- function(scopes = NULL, drive = TRUE) {
+  sheets_auth_internal("testing", scopes = scopes, drive = drive)
+}

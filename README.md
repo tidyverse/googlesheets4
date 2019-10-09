@@ -264,7 +264,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp9hoY9Y/iris-c73043de75f9.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmpy3SmOo/iris-180d23d9a286c.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -274,15 +274,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp9hoY9Y/iris-c73043de75f9.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmpy3SmOo/iris-180d23d9a286c.csv
 #> uploaded into Drive file:
-#>   * iris-c73043de75f9: 15KkOW8i3Y2OGp3-pHisP9mcQBnaJAqOkABoTaOE9YWc
+#>   * iris-180d23d9a286c: 10dpzmCrHzS19YdAUQ5ebHoy8h0chlxfwlcUSLz15vt0
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
-#>   name             id                                      drive_resource  
-#> * <chr>            <chr>                                   <list>          
-#> 1 iris-c73043de75… 15KkOW8i3Y2OGp3-pHisP9mcQBnaJAqOkABoTa… <named list [34…
+#>   name              id                                     drive_resource  
+#> * <chr>             <chr>                                  <list>          
+#> 1 iris-180d23d9a28… 10dpzmCrHzS19YdAUQ5ebHoy8h0chlxfwlcUS… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -292,8 +292,8 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-c73043de75f9'
-#> Range "'iris-c73043de75f9.csv'!B1:D6"
+#> Reading from 'iris-180d23d9a286c'
+#> Range "'iris-180d23d9a286c.csv'!B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
 #>         <dbl>        <dbl>       <dbl>
@@ -309,12 +309,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp9hoY9Y/iris-c73043de75f9.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmpy3SmOo/iris-180d23d9a286c.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-c73043de75f9
+#>   * iris-180d23d9a286c
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmp9hoY9Y/iris-c73043de75f9.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//Rtmpy3SmOo/iris-180d23d9a286c.xlsx
 
 if (requireNamespace("readxl", quietly = TRUE)) {
   readxl::read_excel(iris_xlsxfile)  
@@ -342,7 +342,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-c73043de75f9: 15KkOW8i3Y2OGp3-pHisP9mcQBnaJAqOkABoTaOE9YWc
+#>   * iris-180d23d9a286c: 10dpzmCrHzS19YdAUQ5ebHoy8h0chlxfwlcUSLz15vt0
 ```
 
 ## Get Sheet metadata or detailed cell data

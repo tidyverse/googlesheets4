@@ -1,3 +1,4 @@
+# sq_escape() and sq_unescape() ----
 test_that("sq_escape() does nothing if string already single-quoted", {
   x <- c("'abc'", "'ab'c'", "''")
   expect_identical(sq_escape(x), x)
@@ -22,181 +23,158 @@ test_that("sq_unescape() strips outer single quotes, de-duplicates inner", {
   )
 })
 
-test_that("resolve_sheet() errors for NULL or numeric sheet, if no sheet data", {
-  expect_error(resolve_sheet(), "no sheet metadata")
-  expect_error(resolve_sheet(sheet = 3), "no sheet metadata")
+# qualified_A1() ----
+test_that("qualified_A1 works", {
+  expect_identical(qualified_A1(), "")
+  expect_identical(qualified_A1("foo"), "'foo'")
+  expect_identical(qualified_A1("foo", "A1"), "'foo'!A1")
+  expect_identical(qualified_A1("'foo'"), "'foo'")
+  expect_identical(qualified_A1(A1_range = "A1"), "A1")
 })
 
-test_that("resolve_sheet() falls back to first visible sheet", {
-  sdf <- tibble::tribble(
-     ~ name, ~ visible,
-    "alpha",     FALSE,
-     "beta",     TRUE
-  )
-  expect_identical(resolve_sheet(sheet = NULL, sheet_df = sdf), "beta")
+# resolve_sheet() ----
+test_that("resolve_sheet() is NULL in, NULL out", {
+  expect_null(resolve_sheet())
 })
 
-test_that("resolve_sheet() can look up a sheet by number", {
-  sdf <- tibble::tribble(
-    ~ name,  ~ visible,
-    "alpha",      TRUE,
-     "beta",     FALSE,
-    "gamma",     FALSE,
-    "delta",      TRUE
-  )
-  expect_identical(resolve_sheet(sheet = 1, sheet_df = sdf), "alpha")
-  expect_identical(resolve_sheet(sheet = 2, sheet_df = sdf), "delta")
+test_that("resolve_sheet() requires sheet to be length-1 character or numeric", {
+  expect_error(resolve_sheet(c("a", "b")), "length 1")
+  expect_error(resolve_sheet(1:2), "length 1")
+  expect_error(resolve_sheet(TRUE), "must be either")
 })
 
-test_that("resolve_sheet() errors for impossible numeric `sheet` input", {
-  sdf <- tibble::tibble(name = "a", visible = TRUE)
+test_that("resolve_sheet() requires sheet names if given sheet number", {
+  expect_error(resolve_sheet(1), "no sheet names")
+})
+
+test_that("resolve_sheet() errors if number > length of names", {
+  nms <- c("a", "foo", "z")
+  expect_error(resolve_sheet(4, nms), "out-of-bounds")
+  expect_error(resolve_sheet(0, nms), "out-of-bounds")
+})
+
+test_that("resolve_sheet() does not require sheet names for character input", {
+  expect_identical(resolve_sheet("foo"), "foo")
+})
+
+test_that("resolve_sheet() consults sheet names, if given", {
+  nms <- c("a", "foo", "z")
+  expect_identical(resolve_sheet("foo", nms), "foo")
+  expect_error(resolve_sheet("nope", nms), "No sheet found")
+})
+
+# as_range_spec() ----
+test_that("as_range_spec() rejects hopeless input", {
+  expect_error(as_range_spec(3), "Don't know how")
+})
+
+test_that("as_range_spec() can deal with nothingness", {
+  spec <- as_range_spec(NULL)
+  expect_null(spec$api_range)
+})
+
+test_that("as_range_spec() partitions 'Sheet1!A1:B2'", {
+  spec <- as_range_spec("Sheet1!A1:B2")
+  # we always escape sheet names before sending to API
+  expect_identical(spec$api_range, "'Sheet1'!A1:B2")
+  expect_identical(spec$sheet_name, "Sheet1")
+  expect_identical(spec$A1_range, "A1:B2")
+  expect_true(spec$shim)
+
+  spec <- as_range_spec("'Sheet2'!A5:A")
+  expect_identical(spec$api_range, "'Sheet2'!A5:A")
+  # we always store unescaped name in range_spec
+  expect_identical(spec$sheet_name, "Sheet2")
+  expect_identical(spec$A1_range, "A5:A")
+  expect_true(spec$shim)
+})
+
+test_that("as_range_spec() seeks a named range, then a sheet name", {
+  nms <- c("a", "thingy", "z")
+
+  spec <- as_range_spec("thingy", nr_names = nms)
+  expect_identical(spec$api_range, "thingy")
+  expect_null(spec$sheet_name)
+  expect_identical(spec$named_range, "thingy")
+  expect_false(spec$shim)
+
+  spec <- as_range_spec("thingy", nr_names = nms, sheet_names = nms)
+  expect_identical(spec$api_range, "thingy")
+  expect_null(spec$sheet_name)
+  expect_identical(spec$named_range, "thingy")
+  expect_false(spec$shim)
+
+  spec <- as_range_spec("thingy", nr_names = letters[1:3], sheet_names = nms)
+  expect_identical(spec$api_range, "'thingy'")
+  expect_null(spec$named_range)
+  expect_identical(spec$sheet_name, "thingy")
+  expect_false(spec$shim)
+})
+
+test_that("A1 range is detected, w/ or w/o sheet", {
+  spec <- as_range_spec("1:2")
+  expect_identical(spec$A1_range, "1:2")
+  expect_identical(spec$api_range, "1:2")
+  expect_true(spec$shim)
+
+  spec <- as_range_spec("1:2", sheet = 3, sheet_names = LETTERS[1:3])
+  expect_identical(spec$sheet_name, "C")
+  expect_identical(spec$A1_range, "1:2")
+  expect_identical(spec$api_range, "'C'!1:2")
+  expect_true(spec$shim)
+
+  spec <- as_range_spec("1:2", sheet = "B", sheet_names = LETTERS[1:3])
+  expect_identical(spec$sheet_name, "B")
+  expect_identical(spec$A1_range, "1:2")
+  expect_identical(spec$api_range, "'B'!1:2")
+  expect_true(spec$shim)
+})
+
+test_that("skip is honored", {
+  spec <- as_range_spec(x = NULL, skip = 1)
+  expect_match(spec$api_range, "^2:[0-9]+$")
+  expect_s3_class(spec$cell_limits, "cell_limits")
+})
+
+test_that("cell_limits input works, w/ or w/o sheet", {
+  spec <- as_range_spec(cell_rows(1:2))
+  expect_identical(spec$api_range, "1:2")
+  expect_true(spec$shim)
+
+  spec <- as_range_spec(cell_rows(1:2), sheet = 3, sheet_names = LETTERS[1:3])
+  expect_identical(spec$api_range, "'C'!1:2")
+
+  spec <- as_range_spec(cell_rows(1:2), sheet = "B", sheet_names = LETTERS[1:3])
+  expect_identical(spec$api_range, "'B'!1:2")
+})
+
+test_that("invalid range is rejected", {
+  # no named ranges or sheet names for lookup --> interpret as A1
   expect_error(
-    resolve_sheet(sheet = -1, sheet_df = sdf),
-    "Requested sheet number is -1"
+    as_range_spec("thingy"),
+    "doesn't appear to be"
+  )
+
+  expect_error(
+    as_range_spec("thingy", nr_names = "nope", sheet_names = "nah"),
+    "doesn't appear to be"
+  )
+})
+
+test_that("unresolvable sheet raises error", {
+  expect_error(as_range_spec("A5:A", sheet = 3), "no sheet names")
+  expect_error(as_range_spec(x = NULL, sheet = 3), "no sheet names")
+  expect_error(
+    as_range_spec(x = NULL, sheet = "nope", sheet_names = LETTERS[1:3]),
+    "No sheet found"
   )
   expect_error(
-    resolve_sheet(sheet = 2, sheet_df = sdf),
-    "Requested sheet number is 2"
+    as_range_spec("A5:A", sheet = "nope", sheet_names = LETTERS[1:3]),
+    "No sheet found"
+  )
+  expect_error(
+    as_range_spec("nope!A5:A", sheet_names = LETTERS[1:3]),
+    "No sheet found"
   )
 })
 
-test_that("form_range_spec() can handle only a sheet / named range", {
-  expect_identical(
-    form_range_spec(sheet = "sheet")[["api_range"]],
-    "'sheet'"
-  )
-  expect_identical(
-    form_range_spec(range = "whatever")[["api_range"]],
-    "'whatever'"
-  )
-})
-
-test_that("form_range_spec() can handle cellranger input", {
-  expect_identical(
-    form_range_spec(sheet = "a", range = cell_rows(1:3))[["api_range"]],
-    "'a'!1:3"
-  )
-})
-
-test_that("form_range_spec() prefers the sheet in `range` to `sheet`", {
-  expect_identical(
-    form_range_spec(sheet = "nope", range = "yes!A5:A7")[["sheet"]],
-    "yes"
-  )
-})
-
-test_that("form_range_spec() moves a named range from `range` to `sheet`", {
-  ## if range has 3 or fewer characters, this will still fail (A, AA, AAA)
-  ## TODO in code
-  expect_identical(
-    form_range_spec(sheet = NULL, range = "beta")[["sheet"]],
-    "beta"
-  )
-  expect_identical(
-    form_range_spec(sheet = "nope", range = "beta")[["sheet"]],
-    "beta"
-  )
-})
-
-test_that("as_sheets_range() works when it should and vice versa", {
-  # numbering comes from
-  # tidyr::crossing(
-  #   start_row = c(NA, "start_row"), start_col = c(NA, "start_col"),
-  #   end_row = c(NA, "end_row"), end_col = c(NA, "end_col")
-  # )
-
-  ## nothing is specified
-  # 16 NA        NA        NA      NA
-  expect_null(as_sheets_range(cell_limits()))
-
-  ## end_row and end_col are specified --> lower right cell is fully specified
-  #  1 start_row start_col end_row end_col
-  #  5 start_row NA        end_row end_col
-  #  9 NA        start_col end_row end_col
-  # 13 NA        NA        end_row end_col
-  expect_identical(as_sheets_range(cell_limits(c(2, 2), c(3, 4))), "B2:D3")
-  expect_identical(as_sheets_range(cell_limits(c(2, NA), c(3, 4))), "A2:D3")
-  expect_identical(as_sheets_range(cell_limits(c(NA, 2), c(3, 4))), "B1:D3")
-  expect_identical(as_sheets_range(cell_limits(c(NA, NA), c(3, 4))), "A1:D3")
-
-  ## no cols specified, but end_row is
-  #  6 start_row NA        end_row NA
-  # 14 NA        NA        end_row NA
-  expect_identical(as_sheets_range(cell_limits(c(2, NA), c(5, NA))), "2:5")
-  expect_identical(as_sheets_range(cell_limits(c(NA, NA), c(5, NA))), "1:5")
-  ## no rows specified, but end_col is
-  # 11 NA        start_col NA      end_col
-  # 15 NA        NA        NA      end_col
-  expect_identical(as_sheets_range(cell_limits(c(NA, 2), c(NA, 5))), "B:E")
-  expect_identical(as_sheets_range(cell_limits(c(NA, NA), c(NA, 5))), "A:E")
-
-  #  2 start_row start_col end_row NA
-  #  3 start_row start_col NA      end_col
-  #  4 start_row start_col NA      NA
-  expect_error(as_sheets_range(cell_limits(c(1, 2), c(3, NA))), "Can't express")
-  expect_error(as_sheets_range(cell_limits(c(1, 2), c(NA, 3))), "Can't express")
-  expect_error(as_sheets_range(cell_limits(c(1, 2), c(NA, NA))), "Can't express")
-  #  7 start_row NA        NA      end_col
-  #  8 start_row NA        NA      NA
-  # 10 NA        start_col end_row NA
-  # 12 NA        start_col NA      NA
-  expect_error(as_sheets_range(cell_limits(c(1, NA), c(NA, 3))), "Can't express")
-  expect_error(as_sheets_range(cell_limits(c(1, NA), c(NA, NA))), "Can't express")
-  expect_error(as_sheets_range(cell_limits(c(NA, 2), c(3, NA))), "Can't express")
-  expect_error(as_sheets_range(cell_limits(c(NA, 2), c(NA, NA))), "Can't express")
-})
-
-test_that("resolve_limits() populates max row/col when min is specified", {
-  ## cell_limits that require no modification
-  unchanged <- list(
-    # 16 NA        NA        NA      NA
-    cell_limits(),
-    #  1 start_row start_col end_row end_col
-    #  5 start_row NA        end_row end_col
-    #  9 NA        start_col end_row end_col
-    # 13 NA        NA        end_row end_col
-    cell_limits(c(2, 2), c(3, 4)),
-    cell_limits(c(2, NA), c(3, 4)),
-    cell_limits(c(NA, 2), c(3, 4)),
-    cell_limits(c(NA, NA), c(3, 4)),
-    #  6 start_row NA        end_row NA
-    # 14 NA        NA        end_row NA
-    cell_limits(c(2, NA), c(5, NA)),
-    cell_limits(c(NA, NA), c(5, NA)),
-    ## no rows specified, but end_col is
-    # 11 NA        start_col NA      end_col
-    # 15 NA        NA        NA      end_col
-    cell_limits(c(NA, 2), c(NA, 5)),
-    cell_limits(c(NA, NA), c(NA, 5))
-  )
-  expect_identical(unchanged, map(unchanged, resolve_limits))
-
-  se <- list(grid_rows = 3, grid_columns = 3)
-  ref <- cell_limits(c(1, 2), c(3, 3))
-  #  2 start_row start_col end_row NA
-  #  3 start_row start_col NA      end_col
-  #  4 start_row start_col NA      NA
-  expect_identical(resolve_limits(cell_limits(c(1, 2), c(3, NA)), se), ref)
-  expect_identical(resolve_limits(cell_limits(c(1, 2), c(NA, 3)), se), ref)
-  expect_identical(resolve_limits(cell_limits(c(1, 2), c(NA, NA)), se), ref)
-  #  7 start_row NA        NA      end_col
-  #  8 start_row NA        NA      NA
-  # 10 NA        start_col end_row NA
-  # 12 NA        start_col NA      NA
-  expect_identical(
-    resolve_limits(cell_limits(c(1, NA), c(NA, 3)), se),
-    cell_limits(c(1, NA), c(3, 3))
-  )
-  expect_identical(
-    resolve_limits(cell_limits(c(1, NA), c(NA, NA)), se),
-    cell_limits(c(1, NA), c(3, NA))
-  )
-  expect_identical(
-    resolve_limits(cell_limits(c(NA, 2), c(3, NA)), se),
-    cell_limits(c(NA, 2), c(3, 3))
-  )
-  expect_identical(
-    resolve_limits(cell_limits(c(NA, 2), c(NA, NA)), se),
-    cell_limits(c(NA, 2), c(NA, 3))
-  )
-})

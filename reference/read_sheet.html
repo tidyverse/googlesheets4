@@ -115,7 +115,7 @@ development, but is quite usable now." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Read a Sheet into a data frame</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/read_sheet.R'><code>R/read_sheet.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_read.R'><code>R/sheets_read.R</code></a></small>
     <div class="hidden name"><code>read_sheet.Rd</code></div>
     </div>
 
@@ -282,7 +282,7 @@ its discovered type.</p></li>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='sheets_deauth.html'>sheets_deauth</a></span>()
 <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>)
-<span class='fu'>read_sheet</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"A5:F15"</span>)</div><div class='output co'>#&gt; <span class='message'>Reading from 'deaths'</span></div><div class='output co'>#&gt; <span class='message'>Range "'arts'!A5:F15"</span></div><div class='output co'>#&gt; # A tibble: 10 x 6
+<span class='fu'>read_sheet</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"A5:F15"</span>)</div><div class='output co'>#&gt; <span class='message'>Reading from 'deaths'</span></div><div class='output co'>#&gt; <span class='message'>Range "A5:F15"</span></div><div class='output co'>#&gt; # A tibble: 10 x 6
 #&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    
 #&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             
 #&gt;  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
@@ -306,7 +306,7 @@ its discovered type.</p></li>
 #&gt;  7 Janet Reno     lawyer        78 FALSE      1938-07-21      2016-11-07     
 #&gt;  8 Gwen Ifill     journalist    61 FALSE      1955-09-29      2016-11-14     
 #&gt;  9 John Glenn     astronaut     95 TRUE       1921-07-28      2016-12-08     
-#&gt; 10 Pat Summit     coach         64 TRUE       1952-06-14      2016-06-28     </div><div class='input'><span class='fu'>read_sheet</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))</div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "'Africa'"</span></div><div class='output co'>#&gt; # A tibble: 5 x 6
+#&gt; 10 Pat Summit     coach         64 TRUE       1952-06-14      2016-06-28     </div><div class='input'><span class='fu'>read_sheet</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))</div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; # A tibble: 5 x 6
 #&gt;   country      continent  year lifeExp     pop gdpPercap
 #&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;
 #&gt; 1 Algeria      Africa     1952    43.1 9279525     2449.

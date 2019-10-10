@@ -42,6 +42,12 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("tidyverse/googlesheets4")
 ```
 
+## Load googlesheets4
+
+``` r
+library(googlesheets4)
+```
+
 ## Auth
 
 googlesheets4 will, by default, help you interact with Sheets as an
@@ -64,8 +70,6 @@ sheets accessed via `sheets_examples()` and `sheets_example()`.
 Read everything:
 
 ``` r
-library(googlesheets4)
-
 sheets_example("chicken-sheet") %>% 
   read_sheet() # or use sheets_read()
 #> Reading from 'chicken-sheet'

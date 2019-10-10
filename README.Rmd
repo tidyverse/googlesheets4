@@ -43,6 +43,12 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("tidyverse/googlesheets4")
 ```
 
+## Load googlesheets4
+
+```{r}
+library(googlesheets4)
+```
+
 ## Auth
 
 googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need. For this overview, we've logged into Google as a specific user in a hidden chunk. For more about auth, visit the package website: [googlesheets4.tidyverse.org](https://googlesheets4.tidyverse.org).
@@ -56,8 +62,6 @@ We demonsrate basic functionality using some world-readable example sheets acces
 Read everything:
 
 ```{r}
-library(googlesheets4)
-
 sheets_example("chicken-sheet") %>% 
   read_sheet() # or use sheets_read()
 ```

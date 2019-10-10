@@ -1,9 +1,0 @@
-pandoc: 2.3.1
-pkgdown: 1.3.0.9100
-pkgdown_sha: 5a70d7edc6d7f09255c8e255c5ab044c7d25e72f
-articles:
-  googlesheets4-conventions: articles/googlesheets4-conventions.html
-  googlesheets4-design-notes: articles/googlesheets4-design-notes.html
-  sheets-api-v4: articles/sheets-api-v4.html
-  sheets-auth-flow: articles/sheets-auth-flow.html
-

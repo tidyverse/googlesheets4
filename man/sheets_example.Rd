@@ -2,24 +2,29 @@
 % Please edit documentation in R/sheets_example.R
 \name{sheets_example}
 \alias{sheets_example}
+\alias{sheets_examples}
 \title{Access IDs of example Sheets}
 \usage{
-sheets_example(name = NULL)
+sheets_example(name = names(sheets_examples()))
+
+sheets_examples()
 }
 \arguments{
-\item{name}{Nickname of an example Sheet. If \code{NULL}, the examples are
-listed.}
+\item{name}{Nickname of an example Sheet.}
 }
 \value{
-Either a single \link{sheets_id} object or a named character vector of all
-built-in examples.
+\itemize{
+\item \code{sheets_example()}: a single \link{sheets_id} object
+\item \code{sheets_examples()}: a named character vector of all built-in examples
+}
 }
 \description{
 googlesheets4 ships with static IDs for some world-readable example Sheets
-for use in examples and documentation. This function make them easy to
+for use in examples and documentation. These functions make them easy to
 access by a nickname.
 }
 \examples{
-sheets_example()
+sheets_examples()
+
 sheets_example("gapminder")
 }

@@ -4,9 +4,10 @@
 \name{googlesheets4-package}
 \alias{googlesheets4}
 \alias{googlesheets4-package}
-\title{googlesheets4: Manage Google Spreadsheets from R using the Sheets API V4}
+\title{googlesheets4: Manage Google Spreadsheets from R using the Sheets API v4}
 \description{
-Interact with Google Sheets from R via the Sheets API v4.
+Interact with Google Sheets from R via the Sheets
+    API v4.
 }
 \seealso{
 Useful links:
@@ -17,7 +18,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Jennifer Bryan \email{jenny@rstudio.com} (0000-0002-6983-2759)
+\strong{Maintainer}: Jennifer Bryan \email{jenny@rstudio.com} (\href{https://orcid.org/0000-0002-6983-2759}{ORCID})
 
 Other contributors:
 \itemize{

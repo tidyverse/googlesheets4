@@ -48,6 +48,11 @@ sheets_auth <- function(email = gargle::gargle_oauth_email(),
                         cache = gargle::gargle_oauth_cache(),
                         use_oob = gargle::gargle_oob_default(),
                         token = NULL) {
+  # I have called `sheets_auth(token = drive_token())` multiple times now,
+  # without attaching googledrive. Expose this error noisily, before it gets
+  # muffled by the `tryCatch()` treatment of `token_fetch()`.
+  force(token)
+
   cred <- gargle::token_fetch(
     scopes = scopes,
     app = sheets_oauth_app() %||% gargle::tidyverse_app(),
@@ -202,3 +207,51 @@ sheets_api_key <- function() .auth$api_key
 #' @export
 #' @rdname sheets_auth_configure
 sheets_oauth_app <- function() .auth$app
+
+#' Get info on current user
+#'
+#' @eval gargle:::PREFIX_user_description()
+#' @eval gargle:::PREFIX_user_seealso()
+#' @eval gargle:::PREFIX_user_return()
+#'
+#' @export
+#' @examples
+#' \dontrun{
+#' sheets_user()
+#' }
+sheets_user <- function() {
+  if (sheets_has_token()) {
+    gargle::token_email(sheets_token())
+  } else {
+    message("Not logged in as any specific Google user.")
+    invisible()
+  }
+}
+
+# unexported helpers that are nice for internal use ----
+sheets_auth_internal <- function(account = c("docs", "testing"),
+                                 scopes = NULL,
+                                 drive = TRUE) {
+  stopifnot(gargle:::secret_can_decrypt("googlesheets4"))
+  account <- match.arg(account)
+  filename <- glue("googlesheets4-{account}.json")
+  # TODO: revisit when I do PKG_scopes()
+  # https://github.com/r-lib/gargle/issues/103
+  scopes <- scopes %||% "https://www.googleapis.com/auth/drive"
+  json <- gargle:::secret_read("googlesheets4", filename)
+  sheets_auth(scopes = scopes, path = rawToChar(json))
+  print(sheets_user())
+  if (drive) {
+    googledrive::drive_auth(token = sheets_token())
+    print(googledrive::drive_user())
+  }
+  invisible(TRUE)
+}
+
+sheets_auth_docs <- function(scopes = NULL, drive = TRUE) {
+  sheets_auth_internal("docs", scopes = scopes, drive = drive)
+}
+
+sheets_auth_testing <- function(scopes = NULL, drive = TRUE) {
+  sheets_auth_internal("testing", scopes = scopes, drive = drive)
+}

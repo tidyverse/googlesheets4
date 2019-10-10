@@ -20,8 +20,10 @@ WIP. Name should maybe involve "meta" or "metadata"? OTOH there's an obvious
 connection to \code{\link[googledrive:drive_get]{googledrive::drive_get()}}.
 }
 \examples{
-sheets_get(sheets_example("design-dates"))
-sheets_get(sheets_example("gapminder"))
-sheets_get(sheets_example("mini-gap"))
-sheets_get(sheets_example("ff"))
+if (sheets_has_token()) {
+  sheets_get(sheets_example("gapminder"))
+  sheets_get(sheets_example("mini-gap"))
+  sheets_get(sheets_example("deaths"))
+  sheets_get(sheets_example("chicken-sheet"))
+}
 }

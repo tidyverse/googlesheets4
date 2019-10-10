@@ -1,9 +1,21 @@
+if (gargle:::secret_can_decrypt("googlesheets4")) {
+  capture.output(
+    sheets_auth_testing(drive = TRUE)
+  )
+} else {
+  sheets_deauth()
+}
+
+skip_if_no_token <- function() {
+  testthat::skip_if_not(sheets_has_token(), "No Sheets token")
+}
+
 expect_error_free <- function(...) {
   expect_error(..., regexp = NA)
 }
 
 .test_sheets <- c(
-  "googlesheets4-cell-tests" = "1cm4yJpHDmypXyJgvS9jRRRBI5f5GxctwLx5I-k2goxU"
+  "googlesheets4-cell-tests" = "1vDfXo-16OhUilaG_EwvDd1Dm4_NI0UKORwSLLpycSS0"
 )
 
 test_sheet <- function(name = "googlesheets4-cell-tests") {
@@ -26,19 +38,4 @@ ref <- function(pattern, ...) {
     "`pattern` identifies more than one test reference file:\n",
     paste0("* ", x, collapse = "\n")
   )
-}
-
-## use from testthat once > 2.0.0 is on CRAN
-skip_if_offline <- function(host = "r-project.org") {
-  skip_if_not_installed("curl")
-  ## workaround R devel's check for undeclared Suggests
-  ## I don't want to put curl in Suggests just for this
-  has_internet <- !is.null(
-    (get("nslookup", asNamespace("curl")))(host, error = FALSE)
-  )
-  ## nicer form but creates WARNING with R devel
-  # has_internet <- !is.null(curl::nslookup(host, error = FALSE))
-  if (!has_internet) {
-    skip("offline")
-  }
 }

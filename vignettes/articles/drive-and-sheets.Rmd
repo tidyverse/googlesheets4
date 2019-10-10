@@ -1,0 +1,179 @@
+---
+title: "Using googlesheets4 with googledrive"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{"Using googlesheets4 with googledrive"}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+can_decrypt <- gargle:::secret_can_decrypt("googlesheets4")
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  error = TRUE,
+  purl = can_decrypt,
+  eval = can_decrypt
+)
+```
+
+```{r eval = !can_decrypt, echo = FALSE, comment = NA}
+message("No token available. Code chunks will not be evaluated.")
+```
+
+googlesheets4 wraps the Sheets API v4, which lets you read, write, and format data in Sheets. (Currently, googlesheets4 only supports *reading*, but writing will come in due course.) The Sheets API is very focused on spreadsheet-oriented data and metadata, i.e. (work)sheets and cells.
+
+The Sheets API offers practically no support for file-level operations, other than basic spreadsheet creation. We have to use the Drive API for this, which is wrapped by the googledrive package (<https://googledrive.tidyverse.org>).
+
+Therefore, it is common to use googledrive and googlesheets4 together in a script or app.
+
+How does auth work in this case? The path of least resistance is to do nothing and just let each package deal with its own auth. This works fine! But it's a bit clunky and you need to make sure you're using the same Google identity (email) with each package/API.
+
+It can be nicer to be proactive about auth and use the same token for your googledrive and googlesheets4 work. Below we show a couple of ways to do this.
+
+## Auth with googledrive first, then googlesheets4
+
+Outline:
+
+  * Make sure auth happens first with googledrive, probably by calling `googledrive::drive_auth()` yourself. The default scope is `"https://www.googleapis.com/auth/drive"`, which is sufficient for all your Drive and Sheets work.
+  * Tell googlesheets4 to use the same token as googledrive.
+
+First attach both packages.
+
+```{r}
+library(googledrive)
+library(googlesheets4)
+```
+
+Do auth first with googledrive. Remember `googledrive::drive_auth()` accepts additional arguments, e.g. to specify a Google identity via `email =` or to use a service account via `path =`. Then direct googlesheets4 to use the same token as googledrive.
+
+```{r eval = FALSE}
+drive_auth()
+sheets_auth(token = drive_token())
+```
+
+```{r include = FALSE}
+googlesheets4:::sheets_auth_docs(drive = TRUE)
+```
+
+Now you can use googledrive functions, like `googledrive::drive_find()` or `googledrive::drive_get()`, to list files or find them by name, path, or other property. Then, once you've identified the target file, use googlesheets4 to do spreadsheet-specific tasks.
+
+```{r}
+drive_find("chicken")
+
+ss <- drive_get("chicken-sheet")
+
+sheets_get(ss)
+
+read_sheet(ss)
+```
+
+If you ever want to confirm the currently authenticated user, both packages provide a `*_user()` function that reveals some info:
+
+```{r}
+drive_user()
+sheets_user()
+```
+
+We are using a service account to render this article. But if you've used the default OAuth flow, this should correspond to the email of the Google account you logged in with.
+
+```{r include = FALSE}
+sheets_deauth()
+drive_deauth()
+detach("package:googledrive", character.only = TRUE)
+detach("package:googlesheets4", character.only = TRUE)
+```
+
+## Auth with googlesheets4 first, then googledrive
+
+Outline:
+
+  * Proactively auth with googlesheets4 and specify the `"https://www.googleapis.com/auth/drive"` scope. The default googlesheets4 scope is `"https://www.googleapis.com/auth/spreadsheets"`, which is insufficient for general work with the Drive API.
+  * Tell googledrive to use the same token as googlesheets4.
+
+First attach both packages.
+
+```{r}
+library(googlesheets4)
+library(googledrive)
+```
+
+Do auth first with googlesheets4, specifying a Drive scope. Remember `sheets_auth()` accepts additional arguments, e.g. to specify a Google identity via `email =` or to use a service account via `path =`. Then direct googledrive to use the same token as googlesheets4.
+
+```{r eval = FALSE}
+sheets_auth(scope = "https://www.googleapis.com/auth/drive")
+drive_auth(token = sheets_token())
+```
+
+```{r include = FALSE}
+googlesheets4:::sheets_auth_docs(drive = TRUE)
+```
+
+Now you can use googledrive functions to list files or find them by name, path, or other property. Then, once you've identified the target file, use googlesheets4 to do spreadsheet-specific tasks.
+
+```{r}
+drive_find("chicken")
+
+ss <- drive_get("chicken-sheet")
+
+sheets_get(ss)
+
+read_sheet(ss)
+```
+
+```{r include = FALSE}
+sheets_deauth()
+drive_deauth()
+detach("package:googledrive", character.only = TRUE)
+detach("package:googlesheets4", character.only = TRUE)
+```
+
+## Scope savvy
+
+If you only need "read" access to Drive or Sheets, the conservative thing to do is to specify a read-only scope. This is a great way to limit the damage anyone can do with the token -- you or someone else -- through carelessness or malice. If you are storing a token on a remote or shared location, it is wise to use the most conservative scope that still gets the job done.
+
+Here are various scopes relevant to googledrive and googlesheets4 and what they would allow.
+
+`drive` scope allows reading and writing with Drive and Sheets APIs. This scope is the most powerful and, therefore, the most dangerous.
+
+```{r eval = FALSE}
+PACKAGE_auth(
+  ...,
+  scopes = "https://www.googleapis.com/auth/drive",
+  ...
+)
+```
+
+`drive.readonly` still allows file identification via Drive and can be combined with `spreadsheets` if you plan to edit, create, or delete Sheets (not explicitly supported yet in googlesheets4, but it will be).
+
+```{r eval = FALSE}
+PACKAGE_auth(
+  ...,
+  scopes = c(
+    "https://www.googleapis.com/auth/drive.readonly",
+    "https://www.googleapis.com/auth/spreadsheets"
+  ),
+  ...
+)
+```
+
+If you are just using Drive to identify Sheets and are only reading from those Sheets, the `drive.readonly` scope is sufficient and means you can't modify anything by accident.
+
+```{r eval = FALSE}
+PACKAGE_auth(
+  ...,
+  scopes = "https://www.googleapis.com/auth/drive.readonly",
+  ...
+)
+```
+
+If you are not using Drive at all, i.e. you always identify Sheets by file ID, and you are only reading from those Sheets, you only need googlesheets4 and `spreadsheets.readonly` is sufficient.
+
+```{r eval = FALSE}
+sheets_auth(
+  ...,
+  scopes = "https://www.googleapis.com/auth/spreadsheets.readonly",
+  ...
+)
+```

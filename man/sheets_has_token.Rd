@@ -17,7 +17,8 @@ requests.
 sheets_has_token()
 }
 \seealso{
-Other low-level API functions: \code{\link{request_generate}},
-  \code{\link{request_make}}, \code{\link{sheets_token}}
+Other low-level API functions: \code{\link{request_generate}()},
+  \code{\link{request_make}()},
+  \code{\link{sheets_token}()}
 }
 \concept{low-level API functions}

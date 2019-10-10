@@ -1,5 +1,3 @@
-context("test-ctype")
-
 test_that("ctype() errors for unanticipated inputs", {
   expect_error(ctype(NULL), "Cannot turn")
   expect_error(ctype(data.frame(cell = "cell")), "Don't know how to coerce")

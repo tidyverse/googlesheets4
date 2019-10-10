@@ -1,5 +1,3 @@
-context("test-sheets_endpoints.R")
-
 test_that("endpoints can be retrieved en masse", {
   endpoints <- sheets_endpoints()
   expect_true(length(endpoints) >= 14)

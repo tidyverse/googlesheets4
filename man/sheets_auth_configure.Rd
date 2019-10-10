@@ -80,7 +80,7 @@ sheets_auth_configure(
 sheets_auth_configure(app = original_app, api_key = original_api_key)
 }
 \seealso{
-Other auth functions: \code{\link{sheets_auth}},
-  \code{\link{sheets_deauth}}
+Other auth functions: \code{\link{sheets_auth}()},
+  \code{\link{sheets_deauth}()}
 }
 \concept{auth functions}

@@ -9,10 +9,12 @@
 #' @export
 #'
 #' @examples
-#' sheets_get(sheets_example("design-dates"))
-#' sheets_get(sheets_example("gapminder"))
-#' sheets_get(sheets_example("mini-gap"))
-#' sheets_get(sheets_example("ff"))
+#' if (sheets_has_token()) {
+#'   sheets_get(sheets_example("gapminder"))
+#'   sheets_get(sheets_example("mini-gap"))
+#'   sheets_get(sheets_example("deaths"))
+#'   sheets_get(sheets_example("chicken-sheet"))
+#' }
 sheets_get <- function(ss) {
   resp <- sheets_get_impl_(as_sheets_id(ss))
   sheets_spreadsheet(resp)
@@ -52,6 +54,7 @@ sheets_spreadsheet <- function(x = list()) {
   if (!is.null(x$sheets)) {
     p <- map(x$sheets, "properties")
     out$sheets <- tibble::tibble(
+      # TODO: open question whether I should explicitly unescape here
       name         = map_chr(p, "title"),
       index        = map_int(p, "index"),
       id           = map_chr(p, "sheetId"),
@@ -68,7 +71,9 @@ sheets_spreadsheet <- function(x = list()) {
       name         = map_chr(nr, "name"),
       range        = NA_character_,
       id           = map_chr(nr, "namedRangeId"),
-      sheet_id     = map_chr(nr, c("range", "sheetId")),
+      # if there is only 1 sheet, sheetId might not be sent!
+      # https://github.com/tidyverse/googlesheets4/issues/29
+      sheet_id     = map_chr(nr, c("range", "sheetId"), .default = NA),
       sheet_name   = NA_character_,
       ## API sends zero-based row and column
       ##   => we add one
@@ -76,11 +81,17 @@ sheets_spreadsheet <- function(x = list()) {
       ##   => we substract one from end_[row|column]
       ## net effect
       ##   => we add one to start_[row|column] but not to end_[row|column]
-      start_row    = map_int(nr, c("range", "startRowIndex")) + 1L,
-      end_row      = map_int(nr, c("range", "endRowIndex")),
-      start_column = map_int(nr, c("range", "startColumnIndex")) + 1L,
-      end_column   = map_int(nr, c("range", "endColumnIndex"))
+      start_row    = map_int(nr, c("range", "startRowIndex"), .default = NA) + 1L,
+      end_row      = map_int(nr, c("range", "endRowIndex"), .default = NA),
+      start_column = map_int(nr, c("range", "startColumnIndex"), .default = NA) + 1L,
+      end_column   = map_int(nr, c("range", "endColumnIndex"), .default = NA)
     )
+    no_sheet <- is.na(out$named_ranges$sheet_id)
+    if (any(no_sheet)) {
+      # if no associated sheetId, assume it's the first (only?) sheet
+      # https://github.com/tidyverse/googlesheets4/issues/29
+      out$named_ranges$sheet_id[no_sheet] <- out$sheets$id[[1]]
+    }
     out$named_ranges$sheet_name <- vlookup(
       out$named_ranges$sheet_id,
       data = out$sheets,

@@ -1,5 +1,3 @@
-context("utils-sheet-geometry")
-
 # x = empty cell = not sent back by API
 # O = occupied cell = present in API payload
 #    A  B  C  D  E

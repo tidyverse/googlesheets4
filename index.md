@@ -6,8 +6,8 @@
 googlesheets4 provides an R interface to [Google
 Sheets](https://spreadsheets.google.com/) via the [Sheets API
 v4](https://developers.google.com/sheets/api/). It is a reboot of an
-earlier packaged called [googlesheets
-package](https://cran.r-project.org/package=googlesheets).
+earlier package called
+[googlesheets](https://cran.r-project.org/package=googlesheets).
 
 *Why **4**? Why googlesheets**4**? Did I miss googlesheets1 through 3?
 No. The idea is to name the package after the corresponding version of
@@ -40,13 +40,13 @@ first need.
 Users can take control of auth proactively via the `sheets_auth*()`
 family of functions, e.g. to specify your own OAuth app or service
 account token. Auth is actually handled by the gargle package
-(<https://gargle.r-lib.org>), similar to googledrive, bigrquery, and
-gmailr, and gargle’s documentation and articles are the definitive guide
-to more advanced topics.
+([gargle.r-lib.org](https://gargle.r-lib.org)), similar to googledrive,
+bigrquery, and gmailr, and gargle’s documentation and articles are the
+definitive guide to more advanced topics.
 
 It is common to use googlesheets4 together with the googledrive package
-(<https://googledrive.tidyverse.org>). See the article [Using
-googlesheets4 with
+([googledrive.tidyverse.org](https://googledrive.tidyverse.org)). See
+the article [Using googlesheets4 with
 googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html)
 for advice on how to streamline auth in this case.
 
@@ -298,7 +298,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpYBp4vk/iris-4fbd61c24d05.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpPFTsY1/iris-532a22e723b2.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -308,15 +308,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpYBp4vk/iris-4fbd61c24d05.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpPFTsY1/iris-532a22e723b2.csv
 #> uploaded into Drive file:
-#>   * iris-4fbd61c24d05: 1BfyPU8fugW6GxYlOqoVbTotlzNj-l9mUAlqqF9gQMpY
+#>   * iris-532a22e723b2: 12kBBr7O2ijCHnrhaFxVJj9612MQaWqQhq6KBxML3B7w
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
 #>   name             id                                      drive_resource  
 #> * <chr>            <chr>                                   <list>          
-#> 1 iris-4fbd61c24d… 1BfyPU8fugW6GxYlOqoVbTotlzNj-l9mUAlqqF… <named list [34…
+#> 1 iris-532a22e723… 12kBBr7O2ijCHnrhaFxVJj9612MQaWqQhq6KBx… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -326,7 +326,7 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-4fbd61c24d05'
+#> Reading from 'iris-532a22e723b2'
 #> Range "B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
@@ -343,12 +343,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpYBp4vk/iris-4fbd61c24d05.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpPFTsY1/iris-532a22e723b2.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-4fbd61c24d05
+#>   * iris-532a22e723b2
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpYBp4vk/iris-4fbd61c24d05.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpPFTsY1/iris-532a22e723b2.xlsx
 
 if (requireNamespace("readxl", quietly = TRUE)) {
   readxl::read_excel(iris_xlsxfile)  
@@ -376,7 +376,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-4fbd61c24d05: 1BfyPU8fugW6GxYlOqoVbTotlzNj-l9mUAlqqF9gQMpY
+#>   * iris-532a22e723b2: 12kBBr7O2ijCHnrhaFxVJj9612MQaWqQhq6KBxML3B7w
 ```
 
 ## Get Sheet metadata or detailed cell data

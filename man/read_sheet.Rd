@@ -139,17 +139,18 @@ its discovered type.
 }
 
 \examples{
-\dontshow{sheets_deauth()}
-ss <- sheets_example("deaths")
-read_sheet(ss, range = "A5:F15")
-read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
-read_sheet(sheets_example("mini-gap"))
-read_sheet(
-  sheets_example("mini-gap"),
-  sheet = "Europe",
-  range = "A:D",
-  col_types = "ccid"
-)
+if (sheets_has_token()) {
+  ss <- sheets_example("deaths")
+  read_sheet(ss, range = "A5:F15")
+  read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
+  read_sheet(sheets_example("mini-gap"))
+  read_sheet(
+    sheets_example("mini-gap"),
+    sheet = "Europe",
+    range = "A:D",
+    col_types = "ccid"
+  )
+}
 
 \dontrun{
 ## converts a local Excel file to a Google Sheet

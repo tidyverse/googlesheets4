@@ -2,8 +2,10 @@
 #'
 #' Lists your Google Sheets. This is a very thin wrapper around
 #' [googledrive::drive_find()], that specifies you want to list Drive files
-#' where `type = "spreadsheet"`. Therefore, note that this will require auth
-#' for googledrive!
+#' where `type = "spreadsheet"`. Therefore, note that this will require auth for
+#' googledrive! See the article [Using googlesheets4 with
+#' googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html)
+#' if you want to coordinate auth between googlesheets4 and googledrive.
 #'
 #' @param ... Arguments (other than `type`, which is hard-wired as `type =
 #'   "spreadsheet"`) that are passed along to [googledrive::drive_find()].
@@ -12,7 +14,7 @@
 #' @export
 #'
 #' @examples
-#' if (interactive()) {
+#' if (sheets_has_token()) {
 #'   # see all your Sheets
 #'   sheets_list()
 #'

@@ -16,10 +16,8 @@ is how googledrive represents Drive files. Processed through
 The Sheet's browser URL, invisibly.
 }
 \description{
-Visits a Google Sheet in your default browser.
+Visits a Google Sheet in your default browser, if session is interactive.
 }
 \examples{
-\dontrun{
 sheets_example("mini-gap") \%>\% sheets_browse()
-}
 }

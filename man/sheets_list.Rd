@@ -15,11 +15,12 @@ An object of class \code{\link[googledrive]{dribble}}, a tibble with one row per
 \description{
 Lists your Google Sheets. This is a very thin wrapper around
 \code{\link[googledrive:drive_find]{googledrive::drive_find()}}, that specifies you want to list Drive files
-where \code{type = "spreadsheet"}. Therefore, note that this will require auth
-for googledrive!
+where \code{type = "spreadsheet"}. Therefore, note that this will require auth for
+googledrive! See the article \href{https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html}{Using googlesheets4 with googledrive}
+if you want to coordinate auth between googlesheets4 and googledrive.
 }
 \examples{
-if (interactive()) {
+if (sheets_has_token()) {
   # see all your Sheets
   sheets_list()
 

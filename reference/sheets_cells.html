@@ -38,9 +38,10 @@
 <meta property="og:description" content="This low-level function returns cell data in a tibble with integer variables
 row and column (referring to location with the Google Sheet), an A1-style
 reference loc, and a cell list-column. The flagship function
-read_sheet() is what most users are looking for. It is basically
-sheets_cells() (this function), followed by spread_sheet(), which looks
-after reshaping and column typing." />
+read_sheet(), a.k.a. sheets_read(), is what most users are looking for.
+It is basically sheets_cells() (this function), followed by
+spread_sheet(), which looks after reshaping and column typing. But if you
+want the raw data from the API, use sheets_cells()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -125,9 +126,10 @@ after reshaping and column typing." />
     <p>This low-level function returns cell data in a tibble with integer variables
 <code>row</code> and <code>column</code> (referring to location with the Google Sheet), an A1-style
 reference <code>loc</code>, and a <code>cell</code> list-column. The flagship function
-<code><a href='read_sheet.html'>read_sheet()</a></code> is what most users are looking for. It is basically
-<code>sheets_cells()</code> (this function), followed by <code><a href='spread_sheet.html'>spread_sheet()</a></code>, which looks
-after reshaping and column typing.</p>
+<code><a href='read_sheet.html'>read_sheet()</a></code>, a.k.a. <code><a href='read_sheet.html'>sheets_read()</a></code>, is what most users are looking for.
+It is basically <code>sheets_cells()</code> (this function), followed by
+<code><a href='spread_sheet.html'>spread_sheet()</a></code>, which looks after reshaping and column typing. But if you
+want the raw data from the API, use <code>sheets_cells()</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sheets_cells</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -166,29 +168,14 @@ any cell reference.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble with one row per non-empty cell in the <code>range</code>. <em>this might
-get dignified with a class?</em></p>
+    <p>A tibble with one row per non-empty cell in the <code>range</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>sheets_cells</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>))</div><div class='output co'>#&gt; <span class='message'>Reading from 'deaths'</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; # A tibble: 82 x 4
-#&gt;      row   col loc   cell      
-#&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;    
-#&gt;  1     1     1 A1    &lt;CELL_TEX&gt;
-#&gt;  2     2     1 A2    &lt;CELL_TEX&gt;
-#&gt;  3     2     6 F2    &lt;CELL_TEX&gt;
-#&gt;  4     3     1 A3    &lt;CELL_TEX&gt;
-#&gt;  5     3     2 B3    &lt;CELL_TEX&gt;
-#&gt;  6     3     3 C3    &lt;CELL_TEX&gt;
-#&gt;  7     3     5 E3    &lt;CELL_TEX&gt;
-#&gt;  8     3     6 F3    &lt;CELL_TEX&gt;
-#&gt;  9     4     1 A4    &lt;CELL_TEX&gt;
-#&gt; 10     4     2 B4    &lt;CELL_TEX&gt;
-#&gt; # … with 72 more rows</div><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'>## use tidyr::complete() if you want one row per cell, even if empty</span>
-<span class='no'>test_sheet</span> <span class='kw'>&lt;-</span> <span class='st'>"1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM"</span>
-(<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_cells</span>(<span class='no'>test_sheet</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"C2:D4"</span>))
-<span class='no'>x</span> <span class='kw'>%&gt;%</span> <span class='kw pkg'>tidyr</span><span class='kw ns'>::</span><span class='fu'>complete</span>(<span class='no'>row</span>, <span class='no'>col</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>cell</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>())))
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
+  <span class='fu'>sheets_cells</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>), <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"arts_data"</span>)
+
+  <span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"cell-contents-and-formats"</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheets_cells</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"types!A2:A5"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

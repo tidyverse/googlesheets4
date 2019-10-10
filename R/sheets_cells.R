@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples
-#' if (sheets_has_token) {
+#' if (sheets_has_token()) {
 #'   sheets_cells(sheets_example("deaths"), range = "arts_data")
 #'
 #'   sheets_example("cell-contents-and-formats") %>%

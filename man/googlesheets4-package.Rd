@@ -4,10 +4,10 @@
 \name{googlesheets4-package}
 \alias{googlesheets4}
 \alias{googlesheets4-package}
-\title{googlesheets4: Manage Google Spreadsheets from R using the Sheets API v4}
+\title{googlesheets4: Access Google Sheets using the Sheets API v4}
 \description{
-Interact with Google Sheets from R via the Sheets
-    API v4.
+Interact with Google Sheets through the Sheets API v4
+    <https://developers.google.com/sheets/api>.
 }
 \seealso{
 Useful links:

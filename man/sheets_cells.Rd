@@ -41,7 +41,7 @@ It is basically \code{sheets_cells()} (this function), followed by
 want the raw data from the API, use \code{sheets_cells()}.
 }
 \examples{
-if (sheets_has_token) {
+if (sheets_has_token()) {
   sheets_cells(sheets_example("deaths"), range = "arts_data")
 
   sheets_example("cell-contents-and-formats") \%>\%

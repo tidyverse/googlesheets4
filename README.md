@@ -260,10 +260,12 @@ read_sheet(
 #> 10 Pat Sum… coach         64 TRUE       1952-06-14 00:00:00 2016-06-28
 ```
 
-If you looked at the `deaths` spreadsheet in the browser, you know that
-it has some of the typical features of real world spreadsheets: the main
-data rectangle has prose intended for human-consumption before and after
-it. That’s why we have to specify the range when we read from it.
+If you looked at the `deaths` spreadsheet in the browser (it’s
+[here](https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/edit#gid=1210215306)),
+you know that it has some of the typical features of real world
+spreadsheets: the main data rectangle has prose intended for
+human-consumption before and after it. That’s why we have to specify the
+range when we read from it.
 
 We’ve designated the data rectangles as [named
 ranges](https://support.google.com/docs/answer/63175?co=GENIE.Platform%3DDesktop&hl=en),
@@ -307,7 +309,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpcrCGdD/iris-18537600a8ebe.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpdfryxO/iris-25bb46fe64eb.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -317,15 +319,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpcrCGdD/iris-18537600a8ebe.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpdfryxO/iris-25bb46fe64eb.csv
 #> uploaded into Drive file:
-#>   * iris-18537600a8ebe: 1OiozqlSDX1bknmedN0iOjjT4ixQy7yGLbCrSA_ox6Bw
+#>   * iris-25bb46fe64eb: 1bMH1do1JLLcSlHcDWPooJsH3gQP1nFAEbM283GLleS4
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
-#>   name              id                                     drive_resource  
-#> * <chr>             <chr>                                  <list>          
-#> 1 iris-18537600a8e… 1OiozqlSDX1bknmedN0iOjjT4ixQy7yGLbCrS… <named list [34…
+#>   name             id                                      drive_resource  
+#> * <chr>            <chr>                                   <list>          
+#> 1 iris-25bb46fe64… 1bMH1do1JLLcSlHcDWPooJsH3gQP1nFAEbM283… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -335,7 +337,7 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-18537600a8ebe'
+#> Reading from 'iris-25bb46fe64eb'
 #> Range "B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
@@ -352,12 +354,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpcrCGdD/iris-18537600a8ebe.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpdfryxO/iris-25bb46fe64eb.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-18537600a8ebe
+#>   * iris-25bb46fe64eb
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpcrCGdD/iris-18537600a8ebe.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpdfryxO/iris-25bb46fe64eb.xlsx
 
 if (requireNamespace("readxl", quietly = TRUE)) {
   readxl::read_excel(iris_xlsxfile)  
@@ -385,7 +387,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-18537600a8ebe: 1OiozqlSDX1bknmedN0iOjjT4ixQy7yGLbCrSA_ox6Bw
+#>   * iris-25bb46fe64eb: 1bMH1do1JLLcSlHcDWPooJsH3gQP1nFAEbM283GLleS4
 ```
 
 ## Get Sheet metadata or detailed cell data

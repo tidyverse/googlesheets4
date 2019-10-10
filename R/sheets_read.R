@@ -139,7 +139,8 @@ read_sheet <- function(ss,
 
   spread_sheet_impl_(
     df,
-    col_spec = col_spec, na = na, trim_ws = trim_ws, guess_max = guess_max
+    col_spec = col_spec, na = na, trim_ws = trim_ws, guess_max = guess_max,
+    .name_repair = .name_repair
   )
 }
 

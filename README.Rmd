@@ -5,23 +5,13 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, include = FALSE}
-can_decrypt <- gargle:::secret_can_decrypt("googlesheets4")
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%",
-  purl = can_decrypt,
-  eval = can_decrypt
+  out.width = "100%"
 )
-```
-
-```{r eval = !can_decrypt, echo = FALSE, comment = NA}
-message("No token available. Code chunks will not be evaluated.")
-```
-
-```{r readme-auth, include = FALSE}
-googlesheets4:::sheets_auth_docs()
+googlesheets4::sheets_deauth()
 ```
 
 # googlesheets4
@@ -35,7 +25,7 @@ googlesheets4 provides an R interface to [Google Sheets](https://spreadsheets.go
 
 *Why **4**? Why googlesheets**4**? Did I miss googlesheets1 through 3? No. The idea is to name the package after the corresponding version of the Sheets API. In hindsight, the original googlesheets should have been googlesheets**3**.*
 
-The best source of information is always the package website: <https://googlesheets4.tidyverse.org>
+The best source of information is always the package website: [googlesheets4.tidyverse.org](https://googlesheets4.tidyverse.org) 
 
 ## Installation
 
@@ -55,171 +45,49 @@ devtools::install_github("tidyverse/googlesheets4")
 
 ## Auth
 
-googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need.
-
-Users can take control of auth proactively via the `sheets_auth*()` family of functions, e.g. to specify your own OAuth app or service account token. Auth is actually handled by the gargle package (<https://gargle.r-lib.org>), similar to googledrive, bigrquery, and gmailr, and gargle's documentation and articles are the definitive guide to more advanced topics.
-
-It is common to use googlesheets4 together with the googledrive package (<https://googledrive.tidyverse.org>). See the article [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html) for advice on how to streamline auth in this case.
-
-For this overview, we've logged into Google as a specific user in a hidden chunk.
+googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need. For this overview, we've logged into Google as a specific user in a hidden chunk. For more about auth, visit the package website: [googlesheets4.tidyverse.org](https://googlesheets4.tidyverse.org).
 
 ## `read_sheet()`
 
 `read_sheet()` is the main "read" function and should evoke `readr::read_csv()` and `readxl::read_excel()`. It's an alias for `sheets_read()`. Most functions in googlesheets4 actually start with `sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`), but works just fine without the pipe.
 
-### Identify and access your own Sheet
+We demonsrate basic functionality using some world-readable example sheets accessed via `sheets_examples()` and `sheets_example()`.
 
-Let's say you have a cheerful Google Sheet named "deaths". If you want to access it by name, use [googledrive](https://googledrive.tidyverse.org) to identify the document (capture its metadata, especially file id).
-
-<!-- remove the 'message = 4' later -->
-
-```{r message=4}
-library(googledrive)
-library(googlesheets4)
-
-(deaths <- drive_get("deaths"))
-```
-
-Pass the result to googlesheets4 functions such as:
-
-  * `sheets_get()`: gets spreadsheet-specific metadata
-  * `read_sheet()`: reads cells into a data frame. `sheets_read()` is an alias for this.
-
-```{r}
-sheets_get(deaths)
-
-read_sheet(deaths, range = "A5:F8")
-```
-
-If you're willing to refer to the spreadsheet by id (or URL), just provide that directly to googlesheets4 functions and omit googledrive.
-
-```{r}
-sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
-
-# a URL also works
-sheets_get("https://docs.google.com/spreadsheets/d/1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA/edit#gid=1210215306")
-```
-
-Lesson: googledrive provides the most user-friendly way to refer to files on Google Drive, including files that are Google Sheets. googledrive lets you refer to files by name or path. googlesheets4 is focused on operations specific to Sheets and is more programming oriented. googlesheets4 requires a file id or something that contains the file id, such as the URL or a `dribble` object obtained via googledrive.
-
-### Specify the range and column types
-
-We have a few world-readable Sheets to help with documentation, examples, and general messing around. `sheets_examples()` reveals all of them.
+Read everything:
 
 ```{r}
 library(googlesheets4)
 
-sheets_examples()
+sheets_example("chicken-sheet") %>% 
+  read_sheet() # or use sheets_read()
 ```
 
-Once you know the nickname of the example Sheet you want, use `sheets_example()` to get the ID of exactly 1 example file. If you'd like to see it in the browser, use `sheets_browse()`:
-
-```{r eval = FALSE}
-sheets_example("deaths") %>% 
-  sheets_browse()
-```
-
-Here we read from the mini-Gapminder and `deaths` example Sheets to show some of the different ways to specify (work)sheet and cell ranges. Note also that `col_types` gives control of column types, similar to how `col_types` works in readr.
-
-```{r}
-read_sheet(sheets_example("mini-gap"), sheet = 2)
-
-read_sheet(sheets_example("mini-gap"), sheet = "Oceania", n_max = 3)
-
-read_sheet(sheets_example("deaths"), skip = 4, n_max = 10)
-
-read_sheet(
-  sheets_example("deaths"), range = "other!A5:F15", col_types = "?ci??D"
-)
-```
-
-If you looked at the `deaths` spreadsheet in the browser (it's [here](https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/edit#gid=1210215306)), you know that it has some of the typical features of real world spreadsheets: the main data rectangle has prose intended for human-consumption before and after it. That's why we have to specify the range when we read from it.
-
-We've designated the data rectangles as [named ranges](https://support.google.com/docs/answer/63175?co=GENIE.Platform%3DDesktop&hl=en), which provides a very slick way to read them -- definitely less brittle and mysterious than approaches like `range = "other!A5:F15"` or `skip = 4, n_max = 10`. A named range can be passed via the `range =` argument:
-
+Read specific cells, from a specific sheet, using an A1-style notation:
 ```{r}
 sheets_example("deaths") %>% 
-  read_sheet(range = "arts_data")
+  read_sheet(range = "arts!A5:F15")
 ```
 
-The named ranges are part of the information returned by `sheets_get()` (although it's currently not revealed by the print method [tidyverse/googlesheets4#41](https://github.com/tidyverse/googlesheets4/issues/41)).
+Read from a named range or region and specify (some of the ) column types:
+```{r}
+sheets_example("deaths") %>% 
+  read_sheet(range = "arts_data", col_types = "??i?DD")
+```
 
-## Roundtripping with a private Sheet
-
-Here is a demo of putting the iris data into a new, private Sheet. Then reading it back into R and exporting as an Excel workbook. Then reading that back into R!
-
-First, put the iris data into a csv file.
+There are various ways to specify the target Sheet. The simplest, but ugliest, is to provide the URL.
 
 ```{r}
-(iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-write.csv(iris, iris_tempfile, row.names = FALSE)
+# url of the 'chicken-sheet' example
+url <- "https://docs.google.com/spreadsheets/d/1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU"
+read_sheet(url)
 ```
 
-Use `googledrive::drive_upload()` to upload the csv and simultaneously convert to a Sheet.
-
-```{r}
-(iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
-
-## visit the new Sheet in the browser, in an interactive session!
-drive_browse(iris_ss)
-```
-
-Read data from the private Sheet into R.
-```{r}
-read_sheet(iris_ss, range = "B1:D6")
-```
-
-Download the Sheet as an Excel workbook and read it back in via `readxl::read_excel()`.
-
-```{r}
-(iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
-
-if (requireNamespace("readxl", quietly = TRUE)) {
-  readxl::read_excel(iris_xlsxfile)  
-}
-```
-
-Clean up.
-
-```{r}
-file.remove(iris_tempfile, iris_xlsxfile)
-drive_rm(iris_ss)
-```
-
-## Get Sheet metadata or detailed cell data
-
-`sheets_get()` exposes Sheet metadata. It has a nice print method, but there's much more info in the object itself.
-
-```{r}
-(deaths_meta <- sheets_example("deaths") %>% 
-   sheets_get())
-
-str(deaths_meta, max.level = 1)
-
-deaths_meta$sheets
-
-deaths_meta$named_ranges
-```
-
-`sheets_cells()` returns a data frame with one row per cell and it gives access to raw cell data sent by the Sheets API.
-
-```{r}
-(df <- sheets_cells(sheets_example("deaths"), range = "E5:E7"))
-df$cell[[3]]
-```
-
-`spread_sheet()` converts data in the "one row per cell" form into the data frame you get from `read_sheet()`, which involves reshaping and column typing.
-
-```{r}
-df %>% spread_sheet(col_types = "D")
-## is same as ...
-read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
-```
+For more information, see the package website: [googlesheets4.tidyverse.org](https://googlesheets4.tidyverse.org).
 
 ## What's yet to come?
 
-Writing into Sheets. As shown above, googledrive can already be used to write into Sheets at the "whole file" level, because that is carried out via the Drive API. `googledrive::drive_upload()` and `googledrive::drive_update()` are very useful for this.
+Writing into Sheets. The googledrive package 
+([googledrive.tidyverse.org](https://googledrive.tidyverse.org)) can already be used to write into Sheets at the "whole file" level, because that is carried out via the Drive API. `googledrive::drive_upload()` and `googledrive::drive_update()` are very useful for this.
 
 But, if you need more granular control, such as writing to specific worksheets or cells, that requires the Sheets API. This is not yet implemented in googlesheets4, but will be.
 

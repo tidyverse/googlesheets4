@@ -18,3 +18,4 @@
 ^\.github/ISSUE_TEMPLATE$
 ^pkgdown$
 ^vignettes/articles$
+^index\.Rmd$

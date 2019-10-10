@@ -19,3 +19,4 @@
 ^pkgdown$
 ^vignettes/articles$
 ^index\.Rmd$
+^index\.md$

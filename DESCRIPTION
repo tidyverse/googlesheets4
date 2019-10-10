@@ -1,5 +1,5 @@
 Package: googlesheets4
-Title: Manage Google Spreadsheets from R using the Sheets API v4
+Title: Access Google Sheets using the Sheets API v4
 Version: 0.0.0.9001
 Authors@R: 
     c(person(given = "Jennifer",
@@ -9,8 +9,8 @@ Authors@R:
              comment = c(ORCID = "0000-0002-6983-2759")),
       person(given = "RStudio",
              role = c("cph", "fnd")))
-Description: Interact with Google Sheets from R via the Sheets
-    API v4.
+Description: Interact with Google Sheets through the Sheets API v4
+    <https://developers.google.com/sheets/api>.
 License: MIT + file LICENSE
 URL: https://github.com/tidyverse/googlesheets4
 BugReports: https://github.com/tidyverse/googlesheets4/issues

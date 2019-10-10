@@ -29,24 +29,22 @@ embedded empty rows or columns. Takes precedence over \code{skip}, \code{n_max} 
 any cell reference.}
 }
 \value{
-A tibble with one row per non-empty cell in the \code{range}. \emph{this might
-get dignified with a class?}
+A tibble with one row per non-empty cell in the \code{range}.
 }
 \description{
 This low-level function returns cell data in a tibble with integer variables
 \code{row} and \code{column} (referring to location with the Google Sheet), an A1-style
 reference \code{loc}, and a \code{cell} list-column. The flagship function
-\code{\link[=read_sheet]{read_sheet()}} is what most users are looking for. It is basically
-\code{sheets_cells()} (this function), followed by \code{\link[=spread_sheet]{spread_sheet()}}, which looks
-after reshaping and column typing.
+\code{\link[=read_sheet]{read_sheet()}}, a.k.a. \code{\link[=sheets_read]{sheets_read()}}, is what most users are looking for.
+It is basically \code{sheets_cells()} (this function), followed by
+\code{\link[=spread_sheet]{spread_sheet()}}, which looks after reshaping and column typing. But if you
+want the raw data from the API, use \code{sheets_cells()}.
 }
 \examples{
-sheets_cells(sheets_example("deaths"))
+if (sheets_has_token) {
+  sheets_cells(sheets_example("deaths"), range = "arts_data")
 
-\dontrun{
-## use tidyr::complete() if you want one row per cell, even if empty
-test_sheet <- "1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM"
-(x <- sheets_cells(test_sheet, range = "C2:D4"))
-x \%>\% tidyr::complete(row, col, fill = list(cell = list(list())))
+  sheets_example("cell-contents-and-formats") \%>\%
+    sheets_cells(range = "types!A2:A5")
 }
 }

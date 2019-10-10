@@ -3,24 +3,22 @@
 #' This low-level function returns cell data in a tibble with integer variables
 #' `row` and `column` (referring to location with the Google Sheet), an A1-style
 #' reference `loc`, and a `cell` list-column. The flagship function
-#' [read_sheet()] is what most users are looking for. It is basically
-#' `sheets_cells()` (this function), followed by [spread_sheet()], which looks
-#' after reshaping and column typing.
+#' [read_sheet()], a.k.a. [sheets_read()], is what most users are looking for.
+#' It is basically `sheets_cells()` (this function), followed by
+#' [spread_sheet()], which looks after reshaping and column typing. But if you
+#' want the raw data from the API, use `sheets_cells()`.
 #'
 #' @inheritParams read_sheet
 #'
-#' @return A tibble with one row per non-empty cell in the `range`. *this might
-#'   get dignified with a class?*
+#' @return A tibble with one row per non-empty cell in the `range`.
 #' @export
 #'
 #' @examples
-#' sheets_cells(sheets_example("deaths"))
+#' if (sheets_has_token) {
+#'   sheets_cells(sheets_example("deaths"), range = "arts_data")
 #'
-#' \dontrun{
-#' ## use tidyr::complete() if you want one row per cell, even if empty
-#' test_sheet <- "1J5gb0u8n3D2qx3O3rY28isnI5SD89attRwhWPWlkmDM"
-#' (x <- sheets_cells(test_sheet, range = "C2:D4"))
-#' x %>% tidyr::complete(row, col, fill = list(cell = list(list())))
+#'   sheets_example("cell-contents-and-formats") %>%
+#'     sheets_cells(range = "types!A2:A5")
 #' }
 sheets_cells <- function(ss,
                          sheet = NULL,

@@ -37,8 +37,9 @@
 <meta property="og:title" content="List your Google Sheets — sheets_list" />
 <meta property="og:description" content="Lists your Google Sheets. This is a very thin wrapper around
 googledrive::drive_find(), that specifies you want to list Drive files
-where type = &quot;spreadsheet&quot;. Therefore, note that this will require auth
-for googledrive!" />
+where type = &quot;spreadsheet&quot;. Therefore, note that this will require auth for
+googledrive! See the article Using googlesheets4 with googledrive
+if you want to coordinate auth between googlesheets4 and googledrive." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -122,8 +123,9 @@ for googledrive!" />
     <div class="ref-description">
     <p>Lists your Google Sheets. This is a very thin wrapper around
 <code><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>googledrive::drive_find()</a></code>, that specifies you want to list Drive files
-where <code>type = "spreadsheet"</code>. Therefore, note that this will require auth
-for googledrive!</p>
+where <code>type = "spreadsheet"</code>. Therefore, note that this will require auth for
+googledrive! See the article <a href='https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html'>Using googlesheets4 with googledrive</a>
+if you want to coordinate auth between googlesheets4 and googledrive.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sheets_list</span>(<span class='no'>...</span>)</pre>
@@ -142,7 +144,7 @@ for googledrive!</p>
     <p>An object of class <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
   <span class='co'># see all your Sheets</span>
   <span class='fu'>sheets_list</span>()
 

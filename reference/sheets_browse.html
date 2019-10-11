@@ -35,7 +35,7 @@
 
 
 <meta property="og:title" content="Visit Sheet in browser — sheets_browse" />
-<meta property="og:description" content="Visits a Google Sheet in your default browser." />
+<meta property="og:description" content="Visits a Google Sheet in your default browser, if session is interactive." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -117,7 +117,7 @@
     </div>
 
     <div class="ref-description">
-    <p>Visits a Google Sheet in your default browser.</p>
+    <p>Visits a Google Sheet in your default browser, if session is interactive.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sheets_browse</span>(<span class='no'>ss</span>)</pre>
@@ -139,9 +139,7 @@ is how googledrive represents Drive files. Processed through
     <p>The Sheet's browser URL, invisibly.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>sheets_browse</span>()
-}</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>) <span class='kw'>%&gt;%</span> <span class='fu'>sheets_browse</span>()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

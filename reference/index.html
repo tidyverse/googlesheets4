@@ -123,11 +123,61 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-read-cell-data" class="hasAnchor"><a href="#section-read-cell-data" class="anchor"></a>Read cell data</h2>
+          <p class="section-desc"><p>Import data from a Sheet into a local data frame</p></p>
         </th>
       </tr>
       <tr>
+        
+        <td>
+          <p><code><a href="read_sheet.html">read_sheet()</a></code> <code><a href="read_sheet.html">sheets_read()</a></code> </p>
+        </td>
+        <td><p>Read a Sheet into a data frame</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheets_cells.html">sheets_cells()</a></code> </p>
+        </td>
+        <td><p>Read cells from a Sheet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="spread_sheet.html">spread_sheet()</a></code> </p>
+        </td>
+        <td><p>Spread a data frame of cells into spreadsheet shape</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="cell-specification.html">cell-specification</a></code> </p>
+        </td>
+        <td><p>Specify cells for reading</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-metadata-on-sheets" class="hasAnchor"><a href="#section-metadata-on-sheets" class="anchor"></a>Metadata on Sheets</h2>
+          <p class="section-desc"><p>Helpers for accessing Sheets and their metadata</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="sheets_get.html">sheets_get()</a></code> </p>
+        </td>
+        <td><p>Get metadata for a spreadsheet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheets_list.html">sheets_list()</a></code> </p>
+        </td>
+        <td><p>List your Google Sheets</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheets_browse.html">sheets_browse()</a></code> </p>
+        </td>
+        <td><p>Visit Sheet in browser</p></td>
+      </tr><tr>
         
         <td>
           <p><code><a href="as_sheets_id.html">as_sheets_id()</a></code> </p>
@@ -136,16 +186,70 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="cell-specification.html">cell-specification</a></code> </p>
+          <p><code><a href="sheets_id.html">sheets_id</a></code> </p>
         </td>
-        <td><p>Specify cells for reading</p></td>
+        <td><p><code>sheets_id</code> object</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-example-sheets" class="hasAnchor"><a href="#section-example-sheets" class="anchor"></a>Example Sheets</h2>
+          <p class="section-desc"><p>World-readable Sheets to use in examples and reprexes</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="sheets_example.html">sheets_example()</a></code> <code><a href="sheets_example.html">sheets_examples()</a></code> </p>
+        </td>
+        <td><p>Access IDs of example Sheets</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-auth" class="hasAnchor"><a href="#section-auth" class="anchor"></a>Auth</h2>
+          <p class="section-desc"><p>Take explicit control of the googlesheets4 auth status or examine current state</p></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="sheets_auth.html">sheets_auth()</a></code> </p>
+        </td>
+        <td><p>Authorize googlesheets4</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="read_sheet.html">read_sheet()</a></code> <code><a href="read_sheet.html">sheets_read()</a></code> </p>
+          <p><code><a href="sheets_deauth.html">sheets_deauth()</a></code> </p>
         </td>
-        <td><p>Read a Sheet into a data frame</p></td>
+        <td><p>Suspend authorization</p></td>
       </tr><tr>
+        
+        <td>
+          <p><code><a href="sheets_user.html">sheets_user()</a></code> </p>
+        </td>
+        <td><p>Get info on current user</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheets_email.html">sheets_email()</a></code> </p>
+        </td>
+        <td><p>Get email of current user</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheets_auth_configure.html">sheets_auth_configure()</a></code> <code><a href="sheets_auth_configure.html">sheets_api_key()</a></code> <code><a href="sheets_auth_configure.html">sheets_oauth_app()</a></code> </p>
+        </td>
+        <td><p>Edit and view auth configuration</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-programming-around-the-sheets-api" class="hasAnchor"><a href="#section-programming-around-the-sheets-api" class="anchor"></a>Programming around the Sheets API</h2>
+          <p class="section-desc"><p>Low-level functions used internally and made available for programming</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="request_generate.html">request_generate()</a></code> </p>
@@ -160,57 +264,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_auth.html">sheets_auth()</a></code> </p>
+          <p><code><a href="sheets_token.html">sheets_token()</a></code> </p>
         </td>
-        <td><p>Authorize googlesheets4</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sheets_auth_configure.html">sheets_auth_configure()</a></code> <code><a href="sheets_auth_configure.html">sheets_api_key()</a></code> <code><a href="sheets_auth_configure.html">sheets_oauth_app()</a></code> </p>
-        </td>
-        <td><p>Edit and view auth configuration</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sheets_browse.html">sheets_browse()</a></code> </p>
-        </td>
-        <td><p>Visit Sheet in browser</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sheets_cells.html">sheets_cells()</a></code> </p>
-        </td>
-        <td><p>Read cells from a Sheet</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sheets_deauth.html">sheets_deauth()</a></code> </p>
-        </td>
-        <td><p>Suspend authorization</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sheets_email.html">sheets_email()</a></code> </p>
-        </td>
-        <td><p>Get email of current user</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sheets_endpoints.html">sheets_endpoints()</a></code> </p>
-        </td>
-        <td><p>List Sheets endpoints</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sheets_example.html">sheets_example()</a></code> <code><a href="sheets_example.html">sheets_examples()</a></code> </p>
-        </td>
-        <td><p>Access IDs of example Sheets</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sheets_get.html">sheets_get()</a></code> </p>
-        </td>
-        <td><p>Get metadata for a spreadsheet</p></td>
+        <td><p>Produce configured token</p></td>
       </tr><tr>
         
         <td>
@@ -220,33 +276,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_id.html">sheets_id</a></code> </p>
+          <p><code><a href="sheets_endpoints.html">sheets_endpoints()</a></code> </p>
         </td>
-        <td><p><code>sheets_id</code> object</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sheets_list.html">sheets_list()</a></code> </p>
-        </td>
-        <td><p>List your Google Sheets</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sheets_token.html">sheets_token()</a></code> </p>
-        </td>
-        <td><p>Produce configured token</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="sheets_user.html">sheets_user()</a></code> </p>
-        </td>
-        <td><p>Get info on current user</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="spread_sheet.html">spread_sheet()</a></code> </p>
-        </td>
-        <td><p>Spread a data frame of cells into spreadsheet shape</p></td>
+        <td><p>List Sheets endpoints</p></td>
       </tr>
     </tbody>
     </table>
@@ -255,7 +287,11 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-read-cell-data">Read cell data</a></li>
+      <li><a href="#section-metadata-on-sheets">Metadata on Sheets</a></li>
+      <li><a href="#section-example-sheets">Example Sheets</a></li>
+      <li><a href="#section-auth">Auth</a></li>
+      <li><a href="#section-programming-around-the-sheets-api">Programming around the Sheets API</a></li>
     </ul>
   </div>
 </div>

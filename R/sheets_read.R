@@ -168,11 +168,13 @@ sheets_read <- read_sheet
 #' @export
 #'
 #' @examples
-#' df <- sheets_cells(sheets_example("mini-gap"))
-#' spread_sheet(df)
+#' if (sheets_has_token()) {
+#'   df <- sheets_cells(sheets_example("mini-gap"))
+#'   spread_sheet(df)
 #'
-#' # ^^ gets same result as ...
-#' read_sheet(sheets_example("mini-gap"))
+#'   # ^^ gets same result as ...
+#'   read_sheet(sheets_example("mini-gap"))
+#' }
 spread_sheet <- function(df,
                          col_names = TRUE, col_types = NULL,
                          na = "", trim_ws = TRUE,

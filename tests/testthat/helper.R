@@ -1,4 +1,5 @@
-if (gargle:::secret_can_decrypt("googlesheets4")) {
+if (gargle:::secret_can_decrypt("googlesheets4") &&
+    !is.null(curl::nslookup("sheets.googleapis.com", error = FALSE))) {
   capture.output(
     sheets_auth_testing(drive = TRUE)
   )

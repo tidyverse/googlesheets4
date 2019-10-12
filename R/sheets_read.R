@@ -2,8 +2,7 @@
 #'
 #' This is the main "read" function of the googlesheets4 package. The goal is
 #' that `read_sheet()` is to a Google Sheet as `readr::read_csv()` is to a csv
-#' file or `readxl::read_excel()` is to an Excel spreadsheet. It's still under
-#' development, but is quite usable now.
+#' file or `readxl::read_excel()` is to an Excel spreadsheet.
 #'
 #' @section Column specification:
 #'
@@ -64,9 +63,8 @@
 #'   `sheet`. Note `range` can be a named range, like `"sales_data"`, without
 #'   any cell reference.
 #' @param col_names `TRUE` to use the first row as column names, `FALSE` to get
-#'   default names, or a character vector to provide column names directly. In
-#'   all cases, names are processed through [tibble::tidy_names()]. If user
-#'   provides `col_types`, `col_names` can have one entry per column or one
+#'   default names, or a character vector to provide column names directly. If
+#'   user provides `col_types`, `col_names` can have one entry per column or one
 #'   entry per unskipped column.
 #' @param col_types Column types. Either `NULL` to guess all from the
 #'   spreadsheet or a string of readr-style shortcodes, with one character or
@@ -79,9 +77,11 @@
 #' @param skip Minimum number of rows to skip before reading anything, be it
 #'   column names or data. Leading empty rows are automatically skipped, so this
 #'   is a lower bound. Ignored if `range` is given.
-#' @param n_max Maximum number of data rows to read. Trailing empty rows are
-#'   automatically skipped, so this is an upper bound on the number of rows in
-#'   the returned tibble. Ignored if `range` is given.
+#' @param n_max Maximum number of data rows to parse into the returned tibble.
+#'   Trailing empty rows are automatically skipped, so this is an upper bound on
+#'   the number of rows in the result. Ignored if `range` is given. `n_max` is
+#'   imposed locally, after reading all non-empty cells, so, if speed is an
+#'   issue, it is better to use `range`.
 #' @param guess_max Maximum number of data rows to use for guessing column
 #'   types.
 #' @param .name_repair Handling of column names. By default, googlesheets4
@@ -96,7 +96,8 @@
 #'   ss <- sheets_example("deaths")
 #'   read_sheet(ss, range = "A5:F15")
 #'   read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
-
+#'   read_sheet(ss, range = "arts_data", col_types = "ccilDD")
+#'
 #'   read_sheet(sheets_example("mini-gap"))
 #'   read_sheet(
 #'     sheets_example("mini-gap"),
@@ -104,16 +105,6 @@
 #'     range = "A:D",
 #'     col_types = "ccid"
 #'   )
-#' }
-#'
-#' \dontrun{
-#' ## converts a local Excel file to a Google Sheet
-#' ## and shares it such that "anyone with a link can view"
-#' library(googledrive)
-#' local_xlsx <- readxl::readxl_example("deaths.xlsx")
-#' x <- drive_upload(local_xlsx, type = "spreadsheet")
-#' x <- drive_share(x, role = "reader", type = "anyone")
-#' drive_reveal(x, "permissions")
 #' }
 read_sheet <- function(ss,
                        sheet = NULL,
@@ -151,11 +142,11 @@ sheets_read <- read_sheet
 
 #' Spread a data frame of cells into spreadsheet shape
 #'
-#' Reshapes a data frame of cells (probably the output of [sheets_cells()]) into
-#' another data frame, i.e., puts it back into the shape of the source
-#' spreadsheet. At the moment, this function exists primarily for testing
-#' reasons. The flagship function [read_sheet()] is what most users are looking
-#' for. It is basically [sheets_cells()] + [spread_sheet()].
+#' Reshapes a data frame of cells (presumably the output of [sheets_cells()])
+#' into another data frame, i.e., puts it back into the shape of the source
+#' spreadsheet. This function exists primarily for internal use and for testing.
+#' The flagship function [read_sheet()] is what most users are looking for. It
+#' is basically [sheets_cells()] + [spread_sheet()].
 #'
 #' @inheritParams read_sheet
 #' @param df A data frame with one row per (nonempty) cell, integer variables

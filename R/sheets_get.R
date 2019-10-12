@@ -1,7 +1,9 @@
-#' Get metadata for a spreadsheet
+#' Get Sheet metadata
 #'
-#' WIP. Name should maybe involve "meta" or "metadata"? OTOH there's an obvious
-#' connection to [googledrive::drive_get()].
+#' Retrieve spreadsheet-specific metadata, such as details on the individual
+#' (work)sheets or named ranges. Complements or extends
+#' [googledrive::drive_get()], which returns metadata that exists for any file
+#' on Drive.
 #'
 #' @inheritParams sheets_cells
 #'

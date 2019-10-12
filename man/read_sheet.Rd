@@ -56,9 +56,8 @@ embedded empty rows or columns. Takes precedence over \code{skip}, \code{n_max} 
 any cell reference.}
 
 \item{col_names}{\code{TRUE} to use the first row as column names, \code{FALSE} to get
-default names, or a character vector to provide column names directly. In
-all cases, names are processed through \code{\link[tibble:tidy_names]{tibble::tidy_names()}}. If user
-provides \code{col_types}, \code{col_names} can have one entry per column or one
+default names, or a character vector to provide column names directly. If
+user provides \code{col_types}, \code{col_names} can have one entry per column or one
 entry per unskipped column.}
 
 \item{col_types}{Column types. Either \code{NULL} to guess all from the
@@ -76,9 +75,11 @@ from cell contents?}
 column names or data. Leading empty rows are automatically skipped, so this
 is a lower bound. Ignored if \code{range} is given.}
 
-\item{n_max}{Maximum number of data rows to read. Trailing empty rows are
-automatically skipped, so this is an upper bound on the number of rows in
-the returned tibble. Ignored if \code{range} is given.}
+\item{n_max}{Maximum number of data rows to parse into the returned tibble.
+Trailing empty rows are automatically skipped, so this is an upper bound on
+the number of rows in the result. Ignored if \code{range} is given. \code{n_max} is
+imposed locally, after reading all non-empty cells, so, if speed is an
+issue, it is better to use \code{range}.}
 
 \item{guess_max}{Maximum number of data rows to use for guessing column
 types.}
@@ -93,8 +94,7 @@ A \link[tibble:tibble-package]{tibble}
 \description{
 This is the main "read" function of the googlesheets4 package. The goal is
 that \code{read_sheet()} is to a Google Sheet as \code{readr::read_csv()} is to a csv
-file or \code{readxl::read_excel()} is to an Excel spreadsheet. It's still under
-development, but is quite usable now.
+file or \code{readxl::read_excel()} is to an Excel spreadsheet.
 }
 \section{Column specification}{
 
@@ -143,6 +143,8 @@ if (sheets_has_token()) {
   ss <- sheets_example("deaths")
   read_sheet(ss, range = "A5:F15")
   read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
+  read_sheet(ss, range = "arts_data", col_types = "ccilDD")
+
   read_sheet(sheets_example("mini-gap"))
   read_sheet(
     sheets_example("mini-gap"),
@@ -150,15 +152,5 @@ if (sheets_has_token()) {
     range = "A:D",
     col_types = "ccid"
   )
-}
-
-\dontrun{
-## converts a local Excel file to a Google Sheet
-## and shares it such that "anyone with a link can view"
-library(googledrive)
-local_xlsx <- readxl::readxl_example("deaths.xlsx")
-x <- drive_upload(local_xlsx, type = "spreadsheet")
-x <- drive_share(x, role = "reader", type = "anyone")
-drive_reveal(x, "permissions")
 }
 }

@@ -20,9 +20,8 @@ spread_sheet(
 and a list-column \code{cell} of \code{SHEET_CELL} objects.}
 
 \item{col_names}{\code{TRUE} to use the first row as column names, \code{FALSE} to get
-default names, or a character vector to provide column names directly. In
-all cases, names are processed through \code{\link[tibble:tidy_names]{tibble::tidy_names()}}. If user
-provides \code{col_types}, \code{col_names} can have one entry per column or one
+default names, or a character vector to provide column names directly. If
+user provides \code{col_types}, \code{col_names} can have one entry per column or one
 entry per unskipped column.}
 
 \item{col_types}{Column types. Either \code{NULL} to guess all from the
@@ -49,11 +48,11 @@ user's wishes regarding column names, column types, \code{NA} strings, and
 whitespace trimming.
 }
 \description{
-Reshapes a data frame of cells (probably the output of \code{\link[=sheets_cells]{sheets_cells()}}) into
-another data frame, i.e., puts it back into the shape of the source
-spreadsheet. At the moment, this function exists primarily for testing
-reasons. The flagship function \code{\link[=read_sheet]{read_sheet()}} is what most users are looking
-for. It is basically \code{\link[=sheets_cells]{sheets_cells()}} + \code{\link[=spread_sheet]{spread_sheet()}}.
+Reshapes a data frame of cells (presumably the output of \code{\link[=sheets_cells]{sheets_cells()}})
+into another data frame, i.e., puts it back into the shape of the source
+spreadsheet. This function exists primarily for internal use and for testing.
+The flagship function \code{\link[=read_sheet]{read_sheet()}} is what most users are looking for. It
+is basically \code{\link[=sheets_cells]{sheets_cells()}} + \code{\link[=spread_sheet]{spread_sheet()}}.
 }
 \examples{
 if (sheets_has_token()) {

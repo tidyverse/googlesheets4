@@ -92,21 +92,21 @@ For details on the many ways to find a token, see
 Read more about gargle options, see \link[gargle:gargle_options]{gargle::gargle_options}.
 }
 \examples{
-\dontrun{
-## load/refresh existing credentials, if available
-## otherwise, go to browser for authentication and authorization
-sheets_auth()
+if (interactive()) {
+  # load/refresh existing credentials, if available
+  # otherwise, go to browser for authentication and authorization
+  sheets_auth()
 
-## force use of a token associated with a specific email
-sheets_auth(email = "jenny@example.com")
+  # force use of a token associated with a specific email
+  sheets_auth(email = "jenny@example.com")
 
-## use a 'read only' scope, so it's impossible to edit or delete Sheets
-sheets_auth(
-  scopes = "https://www.googleapis.com/auth/spreadsheets.readonly"
-)
+  # use a 'read only' scope, so it's impossible to edit or delete Sheets
+  sheets_auth(
+    scopes = "https://www.googleapis.com/auth/spreadsheets.readonly"
+  )
 
-## use a service account token
-sheets_auth(path = "foofy-83ee9e7c9c48.json")
+  # use a service account token
+  sheets_auth(path = "foofy-83ee9e7c9c48.json")
 }
 }
 \seealso{

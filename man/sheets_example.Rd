@@ -3,7 +3,7 @@
 \name{sheets_example}
 \alias{sheets_example}
 \alias{sheets_examples}
-\title{Access IDs of example Sheets}
+\title{File IDs of example Sheets}
 \usage{
 sheets_example(name = names(sheets_examples()))
 

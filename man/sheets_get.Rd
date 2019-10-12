@@ -2,7 +2,7 @@
 % Please edit documentation in R/sheets_get.R
 \name{sheets_get}
 \alias{sheets_get}
-\title{Get metadata for a spreadsheet}
+\title{Get Sheet metadata}
 \usage{
 sheets_get(ss)
 }
@@ -16,8 +16,10 @@ is how googledrive represents Drive files. Processed through
 A list with S3 class \code{sheets_meta}, for printing purposes.
 }
 \description{
-WIP. Name should maybe involve "meta" or "metadata"? OTOH there's an obvious
-connection to \code{\link[googledrive:drive_get]{googledrive::drive_get()}}.
+Retrieve spreadsheet-specific metadata, such as details on the individual
+(work)sheets or named ranges. Complements or extends
+\code{\link[googledrive:drive_get]{googledrive::drive_get()}}, which returns metadata that exists for any file
+on Drive.
 }
 \examples{
 if (sheets_has_token()) {

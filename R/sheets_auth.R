@@ -26,21 +26,21 @@ gargle_lookup_table <- list(
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' ## load/refresh existing credentials, if available
-#' ## otherwise, go to browser for authentication and authorization
-#' sheets_auth()
+#' if (interactive()) {
+#'   # load/refresh existing credentials, if available
+#'   # otherwise, go to browser for authentication and authorization
+#'   sheets_auth()
 #'
-#' ## force use of a token associated with a specific email
-#' sheets_auth(email = "jenny@example.com")
+#'   # force use of a token associated with a specific email
+#'   sheets_auth(email = "jenny@example.com")
 #'
-#' ## use a 'read only' scope, so it's impossible to edit or delete Sheets
-#' sheets_auth(
-#'   scopes = "https://www.googleapis.com/auth/spreadsheets.readonly"
-#' )
+#'   # use a 'read only' scope, so it's impossible to edit or delete Sheets
+#'   sheets_auth(
+#'     scopes = "https://www.googleapis.com/auth/spreadsheets.readonly"
+#'   )
 #'
-#' ## use a service account token
-#' sheets_auth(path = "foofy-83ee9e7c9c48.json")
+#'   # use a service account token
+#'   sheets_auth(path = "foofy-83ee9e7c9c48.json")
 #' }
 sheets_auth <- function(email = gargle::gargle_oauth_email(),
                         path = NULL,
@@ -85,12 +85,12 @@ sheets_auth <- function(email = gargle::gargle_oauth_email(),
 #' @family auth functions
 #' @export
 #' @examples
-#' \dontrun{
-#' sheets_deauth()
-#' sheets_email()
+#' if (interactive()) {
+#'   sheets_deauth()
+#'   sheets_user()
 #'
-#' # get metadata on the public 'deaths' spreadsheet
-#' sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
+#'   # get metadata on the public 'deaths' spreadsheet
+#'   sheets_get(sheets_example("deaths"))
 #' }
 sheets_deauth <- function() {
   .auth$set_auth_active(FALSE)

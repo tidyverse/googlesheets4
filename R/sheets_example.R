@@ -11,7 +11,7 @@
   class = c("sheets_id", "drive_id")
 )
 
-#' Access IDs of example Sheets
+#' File IDs of example Sheets
 #'
 #' googlesheets4 ships with static IDs for some world-readable example Sheets
 #' for use in examples and documentation. These functions make them easy to

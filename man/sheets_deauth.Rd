@@ -18,12 +18,12 @@ via \code{\link[=sheets_auth_configure]{sheets_auth_configure()}} and retrieve t
 In the absence of a user-configured key, a built-in default key is used.
 }
 \examples{
-\dontrun{
-sheets_deauth()
-sheets_email()
+if (interactive()) {
+  sheets_deauth()
+  sheets_user()
 
-# get metadata on the public 'deaths' spreadsheet
-sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
+  # get metadata on the public 'deaths' spreadsheet
+  sheets_get(sheets_example("deaths"))
 }
 }
 \seealso{

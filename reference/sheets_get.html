@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get metadata for a spreadsheet — sheets_get • googlesheets4</title>
+<title>Get Sheet metadata — sheets_get • googlesheets4</title>
 
 
 <!-- jquery -->
@@ -34,9 +34,11 @@
 
 
 
-<meta property="og:title" content="Get metadata for a spreadsheet — sheets_get" />
-<meta property="og:description" content="WIP. Name should maybe involve &quot;meta&quot; or &quot;metadata&quot;? OTOH there's an obvious
-connection to googledrive::drive_get()." />
+<meta property="og:title" content="Get Sheet metadata — sheets_get" />
+<meta property="og:description" content="Retrieve spreadsheet-specific metadata, such as details on the individual
+(work)sheets or named ranges. Complements or extends
+googledrive::drive_get(), which returns metadata that exists for any file
+on Drive." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -112,14 +114,16 @@ connection to googledrive::drive_get()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get metadata for a spreadsheet</h1>
+    <h1>Get Sheet metadata</h1>
     <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_get.R'><code>R/sheets_get.R</code></a></small>
     <div class="hidden name"><code>sheets_get.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>WIP. Name should maybe involve "meta" or "metadata"? OTOH there's an obvious
-connection to <code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>googledrive::drive_get()</a></code>.</p>
+    <p>Retrieve spreadsheet-specific metadata, such as details on the individual
+(work)sheets or named ranges. Complements or extends
+<code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>googledrive::drive_get()</a></code>, which returns metadata that exists for any file
+on Drive.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sheets_get</span>(<span class='no'>ss</span>)</pre>
@@ -146,7 +150,14 @@ is how googledrive represents Drive files. Processed through
   <span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))
   <span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>))
   <span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"chicken-sheet"</span>))
-}</div></pre>
+}</div><div class='output co'>#&gt;   Spreadsheet name: chicken-sheet
+#&gt;                 ID: 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU
+#&gt;             Locale: en_US
+#&gt;          Time zone: America/Los_Angeles
+#&gt;        # of sheets: 1
+#&gt; 
+#&gt; (Sheet name): (Nominal extent in rows x columns)
+#&gt;  chicken.csv: 1000 x 26</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

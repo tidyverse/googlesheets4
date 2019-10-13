@@ -145,12 +145,12 @@ In the absence of a user-configured key, a built-in default key is used.</p>
   <code><a href='sheets_auth.html'>sheets_auth</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>sheets_deauth</span>()
-<span class='fu'><a href='sheets_email.html'>sheets_email</a></span>()
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='fu'>sheets_deauth</span>()
+  <span class='fu'><a href='sheets_user.html'>sheets_user</a></span>()
 
-<span class='co'># get metadata on the public 'deaths' spreadsheet</span>
-<span class='fu'><a href='sheets_get.html'>sheets_get</a></span>(<span class='st'>"1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA"</span>)
+  <span class='co'># get metadata on the public 'deaths' spreadsheet</span>
+  <span class='fu'><a href='sheets_get.html'>sheets_get</a></span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>))
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

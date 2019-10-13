@@ -37,8 +37,7 @@
 <meta property="og:title" content="Read a Sheet into a data frame — read_sheet" />
 <meta property="og:description" content="This is the main &quot;read&quot; function of the googlesheets4 package. The goal is
 that read_sheet() is to a Google Sheet as readr::read_csv() is to a csv
-file or readxl::read_excel() is to an Excel spreadsheet. It's still under
-development, but is quite usable now." />
+file or readxl::read_excel() is to an Excel spreadsheet." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -122,8 +121,7 @@ development, but is quite usable now." />
     <div class="ref-description">
     <p>This is the main "read" function of the googlesheets4 package. The goal is
 that <code>read_sheet()</code> is to a Google Sheet as <code>readr::read_csv()</code> is to a csv
-file or <code>readxl::read_excel()</code> is to an Excel spreadsheet. It's still under
-development, but is quite usable now.</p>
+file or <code>readxl::read_excel()</code> is to an Excel spreadsheet.</p>
     </div>
 
     <pre class="usage"><span class='fu'>read_sheet</span>(
@@ -187,9 +185,8 @@ any cell reference.</p></td>
     <tr>
       <th>col_names</th>
       <td><p><code>TRUE</code> to use the first row as column names, <code>FALSE</code> to get
-default names, or a character vector to provide column names directly. In
-all cases, names are processed through <code><a href='https://tibble.tidyverse.org/reference/name-repair-retired.html'>tibble::tidy_names()</a></code>. If user
-provides <code>col_types</code>, <code>col_names</code> can have one entry per column or one
+default names, or a character vector to provide column names directly. If
+user provides <code>col_types</code>, <code>col_names</code> can have one entry per column or one
 entry per unskipped column.</p></td>
     </tr>
     <tr>
@@ -217,9 +214,11 @@ is a lower bound. Ignored if <code>range</code> is given.</p></td>
     </tr>
     <tr>
       <th>n_max</th>
-      <td><p>Maximum number of data rows to read. Trailing empty rows are
-automatically skipped, so this is an upper bound on the number of rows in
-the returned tibble. Ignored if <code>range</code> is given.</p></td>
+      <td><p>Maximum number of data rows to parse into the returned tibble.
+Trailing empty rows are automatically skipped, so this is an upper bound on
+the number of rows in the result. Ignored if <code>range</code> is given. <code>n_max</code> is
+imposed locally, after reading all non-empty cells, so, if speed is an
+issue, it is better to use <code>range</code>.</p></td>
     </tr>
     <tr>
       <th>guess_max</th>
@@ -284,6 +283,8 @@ its discovered type.</p></li>
   <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>)
   <span class='fu'>read_sheet</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"A5:F15"</span>)
   <span class='fu'>read_sheet</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"other!A5:F15"</span>, <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='st'>"ccilDD"</span>)
+  <span class='fu'>read_sheet</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"arts_data"</span>, <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='st'>"ccilDD"</span>)
+
   <span class='fu'>read_sheet</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))
   <span class='fu'>read_sheet</span>(
     <span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>),
@@ -291,17 +292,14 @@ its discovered type.</p></li>
     <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"A:D"</span>,
     <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='st'>"ccid"</span>
   )
-}
-
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'>## converts a local Excel file to a Google Sheet</span>
-<span class='co'>## and shares it such that "anyone with a link can view"</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>googledrive</span>)
-<span class='no'>local_xlsx</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>readxl</span><span class='kw ns'>::</span><span class='fu'>readxl_example</span>(<span class='st'>"deaths.xlsx"</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_upload.html'>drive_upload</a></span>(<span class='no'>local_xlsx</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"spreadsheet"</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_share.html'>drive_share</a></span>(<span class='no'>x</span>, <span class='kw'>role</span> <span class='kw'>=</span> <span class='st'>"reader"</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"anyone"</span>)
-<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_reveal.html'>drive_reveal</a></span>(<span class='no'>x</span>, <span class='st'>"permissions"</span>)
-}</div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Reading from 'deaths'</span></div><div class='output co'>#&gt; <span class='message'>Range "A5:F15"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'deaths'</span></div><div class='output co'>#&gt; <span class='message'>Range "'other'!A5:F15"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'deaths'</span></div><div class='output co'>#&gt; <span class='message'>Range "arts_data"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "'Europe'!A:D"</span></div><div class='output co'>#&gt; # A tibble: 5 x 4
+#&gt;   country                continent  year lifeExp
+#&gt;   &lt;chr&gt;                  &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;
+#&gt; 1 Albania                Europe     1952    55.2
+#&gt; 2 Austria                Europe     1952    66.8
+#&gt; 3 Belgium                Europe     1952    68  
+#&gt; 4 Bosnia and Herzegovina Europe     1952    53.8
+#&gt; 5 Bulgaria               Europe     1952    59.6</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

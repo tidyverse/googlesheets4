@@ -235,21 +235,21 @@ Read more about gargle options, see <a href='https://gargle.r-lib.org/reference/
   <code><a href='sheets_deauth.html'>sheets_deauth</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'>## load/refresh existing credentials, if available</span>
-<span class='co'>## otherwise, go to browser for authentication and authorization</span>
-<span class='fu'>sheets_auth</span>()
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='co'># load/refresh existing credentials, if available</span>
+  <span class='co'># otherwise, go to browser for authentication and authorization</span>
+  <span class='fu'>sheets_auth</span>()
 
-<span class='co'>## force use of a token associated with a specific email</span>
-<span class='fu'>sheets_auth</span>(<span class='kw'>email</span> <span class='kw'>=</span> <span class='st'>"jenny@example.com"</span>)
+  <span class='co'># force use of a token associated with a specific email</span>
+  <span class='fu'>sheets_auth</span>(<span class='kw'>email</span> <span class='kw'>=</span> <span class='st'>"jenny@example.com"</span>)
 
-<span class='co'>## use a 'read only' scope, so it's impossible to edit or delete Sheets</span>
-<span class='fu'>sheets_auth</span>(
-  <span class='kw'>scopes</span> <span class='kw'>=</span> <span class='st'>"https://www.googleapis.com/auth/spreadsheets.readonly"</span>
-)
+  <span class='co'># use a 'read only' scope, so it's impossible to edit or delete Sheets</span>
+  <span class='fu'>sheets_auth</span>(
+    <span class='kw'>scopes</span> <span class='kw'>=</span> <span class='st'>"https://www.googleapis.com/auth/spreadsheets.readonly"</span>
+  )
 
-<span class='co'>## use a service account token</span>
-<span class='fu'>sheets_auth</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"foofy-83ee9e7c9c48.json"</span>)
+  <span class='co'># use a service account token</span>
+  <span class='fu'>sheets_auth</span>(<span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"foofy-83ee9e7c9c48.json"</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

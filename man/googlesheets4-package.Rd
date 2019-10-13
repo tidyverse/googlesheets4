@@ -6,8 +6,8 @@
 \alias{googlesheets4-package}
 \title{googlesheets4: Access Google Sheets using the Sheets API v4}
 \description{
-Interact with Google Sheets through the Sheets API v4
-    <https://developers.google.com/sheets/api>.
+Interact with Google Sheets through the Sheets API
+    v4 <https://developers.google.com/sheets/api>.
 }
 \seealso{
 Useful links:

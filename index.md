@@ -100,6 +100,10 @@ sheets_get(deaths)
 #> (Sheet name): (Nominal extent in rows x columns)
 #>         arts: 1000 x 26
 #>        other: 1000 x 26
+#> 
+#> (Named range): (A1 range)    
+#>     arts_data: 'arts'!A5:F15 
+#>    other_data: 'other'!A5:F15
 
 read_sheet(deaths, range = "A5:F8")
 #> Reading from 'deaths'
@@ -126,6 +130,8 @@ sheets_get("1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA")
 #> (Sheet name): (Nominal extent in rows x columns)
 #>         arts: 1000 x 26
 #>        other: 1000 x 26
+#> 
+#> (Named range): (A1 range)
 
 # a URL also works
 sheets_get("https://docs.google.com/spreadsheets/d/1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA/edit#gid=1210215306")
@@ -138,6 +144,8 @@ sheets_get("https://docs.google.com/spreadsheets/d/1ESTf_tH08qzWwFYRC1NVWJjswtLd
 #> (Sheet name): (Nominal extent in rows x columns)
 #>         arts: 1000 x 26
 #>        other: 1000 x 26
+#> 
+#> (Named range): (A1 range)
 ```
 
 Lesson: googledrive provides the most user-friendly way to refer to
@@ -284,9 +292,8 @@ sheets_example("deaths") %>%
 #> # … with 1 more variable: `Date of death` <dttm>
 ```
 
-The named ranges are part of the information returned by `sheets_get()`
-(although it’s currently not revealed by the print method
-[tidyverse/googlesheets4\#41](https://github.com/tidyverse/googlesheets4/issues/41)).
+The named ranges, if any exist, are part of the information returned by
+`sheets_get()`.
 
 ## Roundtripping with a private Sheet
 
@@ -298,7 +305,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpPFTsY1/iris-532a22e723b2.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkbEQvz/iris-ee995e2d9872.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -308,15 +315,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpPFTsY1/iris-532a22e723b2.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkbEQvz/iris-ee995e2d9872.csv
 #> uploaded into Drive file:
-#>   * iris-532a22e723b2: 12kBBr7O2ijCHnrhaFxVJj9612MQaWqQhq6KBxML3B7w
+#>   * iris-ee995e2d9872: 1P_mBziZY98dLC3FIKJq_6ZNARN7fBwhqsHVzBUGfWUI
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
 #>   name             id                                      drive_resource  
 #> * <chr>            <chr>                                   <list>          
-#> 1 iris-532a22e723… 12kBBr7O2ijCHnrhaFxVJj9612MQaWqQhq6KBx… <named list [34…
+#> 1 iris-ee995e2d98… 1P_mBziZY98dLC3FIKJq_6ZNARN7fBwhqsHVzB… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -326,7 +333,7 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-532a22e723b2'
+#> Reading from 'iris-ee995e2d9872'
 #> Range "B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
@@ -343,12 +350,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpPFTsY1/iris-532a22e723b2.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkbEQvz/iris-ee995e2d9872.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-532a22e723b2
+#>   * iris-ee995e2d9872
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpPFTsY1/iris-532a22e723b2.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkbEQvz/iris-ee995e2d9872.xlsx
 
 if (requireNamespace("readxl", quietly = TRUE)) {
   readxl::read_excel(iris_xlsxfile)  
@@ -376,7 +383,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-532a22e723b2: 12kBBr7O2ijCHnrhaFxVJj9612MQaWqQhq6KBxML3B7w
+#>   * iris-ee995e2d9872: 1P_mBziZY98dLC3FIKJq_6ZNARN7fBwhqsHVzBUGfWUI
 ```
 
 ## Get Sheet metadata or detailed cell data
@@ -396,6 +403,10 @@ there’s much more info in the object itself.
 #> (Sheet name): (Nominal extent in rows x columns)
 #>         arts: 1000 x 26
 #>        other: 1000 x 26
+#> 
+#> (Named range): (A1 range)    
+#>     arts_data: 'arts'!A5:F15 
+#>    other_data: 'other'!A5:F15
 
 str(deaths_meta, max.level = 1)
 #> List of 7

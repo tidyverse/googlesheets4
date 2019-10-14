@@ -1,9 +1,8 @@
 #' Get Sheet metadata
 #'
 #' Retrieve spreadsheet-specific metadata, such as details on the individual
-#' (work)sheets or named ranges. Complements or extends
-#' [googledrive::drive_get()], which returns metadata that exists for any file
-#' on Drive.
+#' (work)sheets or named ranges. Complements [googledrive::drive_get()], which
+#' returns metadata that exists for any file on Drive.
 #'
 #' @inheritParams sheets_cells
 #'
@@ -127,9 +126,23 @@ format.sheets_meta <- function(x, ...) {
     "(Nominal extent in rows x columns)",
     glue_data(x$sheets, "{grid_rows} x {grid_columns}")
   )
-  sheets <- glue_data(list(col1 = col1, col2 = col2), "{col1}: {col2}")
+  meta <- c(
+    meta,
+    "",
+    glue_data(list(col1 = col1, col2 = col2), "{col1}: {col2}")
+  )
 
-  c(meta, "", sheets)
+  if (!is.null(x$named_ranges)) {
+    col1 <- fr(c("(Named range)", x$named_ranges$name))
+    col2 <- fl(c("(A1 range)", x$named_ranges$range))
+    meta <- c(
+      meta,
+      "",
+      glue_data(list(col1 = col1, col2 = col2), "{col1}: {col2}")
+    )
+  }
+
+  meta
 }
 
 #' @export

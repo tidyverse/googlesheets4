@@ -134,7 +134,7 @@ sheets_example("deaths") %>%
   read_sheet(range = "arts_data")
 ```
 
-The named ranges are part of the information returned by `sheets_get()` (although it's currently not revealed by the print method [tidyverse/googlesheets4#41](https://github.com/tidyverse/googlesheets4/issues/41)).
+The named ranges, if any exist, are part of the information returned by `sheets_get()`.
 
 ## Roundtripping with a private Sheet
 

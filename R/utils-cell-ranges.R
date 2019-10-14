@@ -162,13 +162,17 @@ as_range_spec.cell_limits <- function(x,
       sheet = sheet, range = x, sheet_names = sheet_names, shim = shim
     )
   )
-  out$cell_limits <- resolve_limits(x)
-  out$A1_range <- as_sheets_range(out$cell_limits)
+  out$cell_limits <- x
   if (!is.null(sheet)) {
     out$sheet_name <- resolve_sheet(sheet, sheet_names)
   }
+  out$api_range <- qualified_A1(
+    out$sheet_name,
+    # we replace some NAs with concrete extents here, for cell reading
+    # but note we use original cell_limits later, for shimming
+    as_sheets_range(resolve_limits(x))
+  )
   out$shim <- shim
-  out$api_range <- qualified_A1(out$sheet_name, out$A1_range)
   out
 }
 

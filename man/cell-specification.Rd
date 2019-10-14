@@ -32,11 +32,11 @@ if (sheets_has_token()) {
   read_sheet(ss, range = cell_rows(c(NA, 4)))
   read_sheet(ss, range = cell_cols(c(NA, "D")))
   read_sheet(ss, range = cell_rows(c(3, NA)))
-  # read_sheet(ss, range = cell_cols(c(2, NA)))
-  # read_sheet(ss, range = cell_cols(c("C", NA)))
+  read_sheet(ss, range = cell_cols(c(2, NA)))
+  read_sheet(ss, range = cell_cols(c("C", NA)))
 
   # Specify a partially open rectangle
-  # read_sheet(ss, range = cell_limits(c(2, 3), c(NA, NA)))
-  # read_sheet(ss, range = cell_limits(c(1, 2), c(NA, 4)))
+  read_sheet(ss, range = cell_limits(c(2, 3), c(NA, NA)), col_names = FALSE)
+  read_sheet(ss, range = cell_limits(c(1, 2), c(NA, 4)))
 }
 }

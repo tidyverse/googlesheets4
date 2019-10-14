@@ -154,26 +154,24 @@ with some bounds that are specified and others determined by the data.</p>
   <span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
   <span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"D"</span>)))
   <span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>NA</span>)))
-  <span class='co'># read_sheet(ss, range = cell_cols(c(2, NA)))</span>
-  <span class='co'># read_sheet(ss, range = cell_cols(c("C", NA)))</span>
+  <span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>NA</span>)))
+  <span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"C"</span>, <span class='fl'>NA</span>)))
 
   <span class='co'># Specify a partially open rectangle</span>
-  <span class='co'># read_sheet(ss, range = cell_limits(c(2, 3), c(NA, NA)))</span>
-  <span class='co'># read_sheet(ss, range = cell_limits(c(1, 2), c(NA, 4)))</span>
-}</div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "1:3"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "C:D"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "A:A"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "1:4"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "A:D"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "3:5000000"</span></div><div class='output co'>#&gt; # A tibble: 4,999,997 x 6
-#&gt;    Angola       Africa `1952` `30.015` `4232095` `3520.6103`
-#&gt;    &lt;chr&gt;        &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;
-#&gt;  1 Benin        Africa   1952     38.2   1738315       1063.
-#&gt;  2 Botswana     Africa   1952     47.6    442308        851.
-#&gt;  3 Burkina Faso Africa   1952     32.0   4469979        543.
-#&gt;  4 &lt;NA&gt;         &lt;NA&gt;       NA     NA          NA         NA 
-#&gt;  5 &lt;NA&gt;         &lt;NA&gt;       NA     NA          NA         NA 
-#&gt;  6 &lt;NA&gt;         &lt;NA&gt;       NA     NA          NA         NA 
-#&gt;  7 &lt;NA&gt;         &lt;NA&gt;       NA     NA          NA         NA 
-#&gt;  8 &lt;NA&gt;         &lt;NA&gt;       NA     NA          NA         NA 
-#&gt;  9 &lt;NA&gt;         &lt;NA&gt;       NA     NA          NA         NA 
-#&gt; 10 &lt;NA&gt;         &lt;NA&gt;       NA     NA          NA         NA 
-#&gt; # … with 4,999,987 more rows</div></pre>
+  <span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_limits</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>NA</span>)), <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'><a href='read_sheet.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_limits</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
+}</div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "1:3"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "C:D"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "A:A"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "1:4"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "A:D"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "3:5000000"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "B:ZZZ"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "C:ZZZ"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "C2:ZZZ5000000"</span></div><div class='output co'>#&gt; <span class='message'>New names:</span>
+#&gt; <span class='message'>* `` -&gt; ...1</span>
+#&gt; <span class='message'>* `` -&gt; ...2</span>
+#&gt; <span class='message'>* `` -&gt; ...3</span>
+#&gt; <span class='message'>* `` -&gt; ...4</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'mini-gap'</span></div><div class='output co'>#&gt; <span class='message'>Range "B1:D5000000"</span></div><div class='output co'>#&gt; # A tibble: 5 x 3
+#&gt;   continent  year lifeExp
+#&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+#&gt; 1 Africa     1952    43.1
+#&gt; 2 Africa     1952    30.0
+#&gt; 3 Africa     1952    38.2
+#&gt; 4 Africa     1952    47.6
+#&gt; 5 Africa     1952    32.0</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

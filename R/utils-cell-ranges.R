@@ -69,60 +69,40 @@ as_sheets_range <- function(x) {
   x <- resolve_limits(x)
   limits <- x[c("ul", "lr")]
 
-  ## "case numbers" refer to output produced by:
-  # tidyr::crossing(
-  #   start_row = c(NA, "start_row"), start_col = c(NA, "start_col"),
-  #   end_row = c(NA, "end_row"), end_col = c(NA, "end_col")
-  # )
+  if (noNA(unlist(limits))) {
+    return(cellranger::as.range(x, fo = "A1"))
+  }
 
-  ## end_row and end_col are specified --> lower right cell is fully specified
-  #  1 start_row start_col end_row end_col
-  #  5 start_row NA        end_row end_col
-  #  9 NA        start_col end_row end_col
-  # 13 NA        NA        end_row end_col
-  if (noNA(limits$lr)) return(cellranger::as.range(x, fo = "A1"))
+  # start of special handling:
+  # cellranger::as.range() returns NA for everything below here,
+  # but we can make valid A1 ranges for the Sheets API
 
-  ## start of special handling,
-  ## cellranger::as.range() returns NA for everything below here, but that's
-  ## not what I want
-
-  ## nothing is specified
-  # 16 NA        NA        NA      NA
-  if (allNA(unlist(limits))) return(NULL)
+  if (allNA(unlist(limits))) {
+    return(NULL)
+  }
 
   row_limits <- map_int(limits, 1)
   col_limits <- map_int(limits, 2)
 
-  ## no cols specified, but end_row is
-  #  6 start_row NA        end_row NA
-  # 14 NA        NA        end_row NA
-  if (allNA(col_limits) && notNA(row_limits[2])) {
+  if (allNA(col_limits) && noNA(row_limits)) {
     return(paste0(row_limits, collapse = ":"))
   }
-  ## no rows specified, but end_col is
-  # 11 NA        start_col NA      end_col
-  # 15 NA        NA        NA      end_col
   if (allNA(row_limits) && noNA(col_limits)) {
     return(paste0(cellranger::num_to_letter(col_limits), collapse = ":"))
   }
 
-  # in all remaining scenarios, you can't produce a valid Sheets A1 reference
-  # without replacing one or more NAs with something specific
-  #
-  # these should all be eliminated via pre-processing with resolve_limits()
-  #
-  # shared property of what's left:
-  # let X be in {row, column}
-  # start_X is specified, but end_X is NA
-  #
-  #  2 start_row start_col end_row NA
-  # 10 NA        start_col end_row NA
-  #  3 start_row start_col NA      end_col
-  #  7 start_row NA        NA      end_col
-  #  4 start_row start_col NA      NA
-  #  8 start_row NA        NA      NA
-  # 12 NA        start_col NA      NA
-  stop_glue("Can't express the specified {bt('range')} as an A1 reference")
+  if (noNA(limits$ul) && sum(is.na(limits$lr)) == 1) {
+    ul <- glue("{cellranger::num_to_letter(col_limits[1])}{row_limits[1]}")
+    lr <- cellranger::num_to_letter(col_limits[2]) %NA% row_limits[2]
+    return(paste0(c(ul, lr), collapse = ":"))
+  }
+
+  # if resolve_limits() is doing its job, we should never get here
+  stop_glue(
+    "Can't express these cell_limits as an A1 range:\n",
+    # cell_limits doesn't have a format method :(
+    utils::capture.output(print(x))
+  )
 }
 
 # think of cell_limits like so:

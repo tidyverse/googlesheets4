@@ -27,7 +27,8 @@ Imports:
     purrr,
     rematch2,
     rlang,
-    tibble (>= 2.1.1)
+    tibble (>= 2.1.1),
+    utils
 Suggests: 
     covr,
     knitr,

@@ -63,7 +63,10 @@ test_that("resolve_sheet() consults sheet names, if given", {
   expect_error(resolve_sheet("nope", nms), "No sheet found")
 })
 
-
+test_that("resolve_sheet() works with a number", {
+  nms <- c("a", "foo", "z")
+  expect_identical(resolve_sheet(2, nms), "foo")
+})
 
 # resolve_limits() ----
 test_that("resolve_limits() leaves these cases unchanged", {

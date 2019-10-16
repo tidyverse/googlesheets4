@@ -36,7 +36,7 @@ check_character <- function(x, nm = deparse(substitute(x))) {
   if (!is.character(x)) {
     stop_glue(
       "{bt(nm)} must be character:\n",
-      "  * {bt(nm)} has class {glue_collapse(class(x), sep = '/')}"
+      "  * {bt(nm)} has class {class_collapse(x)}"
     )
   }
   x
@@ -47,7 +47,7 @@ check_non_negative_integer <- function(i, nm = deparse(substitute(x))) {
       !is_integerish(i) || is.na(i) || i < 0) {
     stop_glue(
       "{bt(nm)} must be a positive integer:\n",
-      "  * {bt(nm)} has class {glue_collapse(class(x), sep = '/')}"
+      "  * {bt(nm)} has class {class_collapse(x)}"
     )
   }
   i
@@ -83,4 +83,8 @@ groom_text <- function(x, na = "", trim_ws = TRUE) {
     x <- ws_trim(x)
   }
   enforce_na(x, na)
+}
+
+class_collapse <- function(x) {
+  sq(glue_collapse(class(x), sep = '/'))
 }

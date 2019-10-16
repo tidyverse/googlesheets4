@@ -44,7 +44,7 @@ check_sheet <- function(sheet = NULL) {
     stop_glue(
       "{bt('sheet')} must be either character (sheet name) or ",
       "numeric (sheet number):\n",
-      "  * {bt('sheet')} has class {glue_collapse(class(sheet), sep = '/')}"
+      "  * {bt('sheet')} has class {class_collapse(sheet)}"
     )
   }
   return(sheet)

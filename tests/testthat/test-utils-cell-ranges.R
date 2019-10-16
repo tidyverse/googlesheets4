@@ -65,7 +65,7 @@ test_that("resolve_sheet() consults sheet names, if given", {
 
 # as_range_spec() ----
 test_that("as_range_spec() rejects hopeless input", {
-  expect_error(as_range_spec(3), "Don't know how")
+  expect_error(as_range_spec(3), "Can't make a range")
 })
 
 test_that("as_range_spec() can deal with nothingness", {

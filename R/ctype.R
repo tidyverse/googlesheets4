@@ -58,9 +58,8 @@ ctype.list <- function(x, ...) {
 
 #' @export
 ctype.default <- function(x, ...) {
-  stop_glue_data(
-    list(x = glue_collapse(class(x), sep = "/")),
-    "Don't know how to coerce object of class {sq(x)} to ctype"
+  stop_glue(
+    "Don't know how to coerce an object of class {class_collapse(x)} to 'ctype'"
   )
 }
 

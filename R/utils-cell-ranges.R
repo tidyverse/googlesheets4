@@ -66,6 +66,7 @@ as_sheets_range <- function(x) {
   # TODO: we don't show people providing sheet name via cell_limits
   #       so I proceed as if sheet is always specified elsewhere
   x$sheet <- NA_character_
+  x <- resolve_limits(x)
   limits <- x[c("ul", "lr")]
 
   ## "case numbers" refer to output produced by:
@@ -125,9 +126,11 @@ as_sheets_range <- function(x) {
 }
 
 # think of cell_limits like so:
-#    start_row          end_row
-#    start_col          end_col
-# if ^ is not NA, then ^ must not be NA either
+# ul = upper left  |  lr = lower right
+# -----------------+------------------
+#      start_row              end_row
+#      start_col              end_col
+# if start is specified, then so must be the end
 #
 # here we replace end_row or end_col in such cases with an actual number
 #
@@ -135,7 +138,7 @@ as_sheets_range <- function(x) {
 #   * `grid_rows` = max row extent
 #   * `grid_columns` = max col extent
 # probably obtained like so:
-# df ≤- sheets_get()$sheets
+# df <- sheets_get()$sheets
 # df[df$name == sheet, c("grid_rows", "grid_columns")]
 resolve_limits <- function(cell_limits, sheet_data = NULL) {
   # If no sheet_data, use theoretical maxima.
@@ -173,8 +176,10 @@ resolve_limits <- function(cell_limits, sheet_data = NULL) {
   cell_limits$ul[1] <- cell_limits$ul[1] %NA% 1L
   cell_limits$ul[2] <- cell_limits$ul[2] %NA% 1L
 
-  # populate col of lr
-  cell_limits$lr[2] <- cell_limits$lr[2] %NA% MAX_COL
+  if (all(is.na(cell_limits$lr))) {
+    # populate col of lr
+    cell_limits$lr[2] <- cell_limits$lr[2] %NA% MAX_COL
+  }
 
   cell_limits
 }

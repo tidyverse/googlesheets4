@@ -170,7 +170,7 @@ as_range_spec.cell_limits <- function(x,
     out$sheet_name,
     # we replace some NAs with concrete extents here, for cell reading
     # but note we use original cell_limits later, for shimming
-    as_sheets_range(resolve_limits(x))
+    as_sheets_range(x)
   )
   out$shim <- shim
   out

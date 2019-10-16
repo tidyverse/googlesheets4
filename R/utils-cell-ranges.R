@@ -56,11 +56,6 @@ qualified_A1 <- function(sheet_name = NULL, A1_range = NULL) {
   paste0(c(sq_escape(sheet_name), A1_range), collapse = "!")
 }
 
-# shim around cellranger::as.range()
-# I'm not sure if this is permanent or not?
-# currently cellranger::as.range() does not tolerate any NAs
-# but some valid Sheets ranges imply NAs in the cell limits
-# hence, this function must exist for now
 as_sheets_range <- function(x) {
   stopifnot(inherits(x, what = "cell_limits"))
   # TODO: we don't show people providing sheet name via cell_limits
@@ -73,9 +68,10 @@ as_sheets_range <- function(x) {
     return(cellranger::as.range(x, fo = "A1"))
   }
 
-  # start of special handling:
-  # cellranger::as.range() returns NA for everything below here,
-  # but we can make valid A1 ranges for the Sheets API
+  # cellranger::as.range() does the wrong thing for everything below here,
+  # i.e. returns NA
+  # But we can make valid A1 ranges for the Sheets API in many cases.
+  # Until cellranger is capable, we must do it in googlesheets4.
 
   if (allNA(unlist(limits))) {
     return(NULL)
@@ -92,7 +88,7 @@ as_sheets_range <- function(x) {
   }
 
   if (noNA(limits$ul) && sum(is.na(limits$lr)) == 1) {
-    ul <- glue("{cellranger::num_to_letter(col_limits[1])}{row_limits[1]}")
+    ul <- paste0(cellranger::num_to_letter(col_limits[1]), row_limits[1])
     lr <- cellranger::num_to_letter(col_limits[2]) %NA% row_limits[2]
     return(paste0(c(ul, lr), collapse = ":"))
   }
@@ -129,8 +125,7 @@ resolve_limits <- function(cell_limits, sheet_data = NULL) {
   MAX_COL <- sheet_data$grid_columns %||% 18278L
 
   limits <- c(cell_limits$ul, cell_limits$lr)
-  n_NA <- sum(is.na(limits))
-  if (n_NA == 0 || n_NA == 4) {
+  if (noNA(limits) || allNA(limits)) {
     # rectangle is completely specified or completely unspecified
     return(cell_limits)
   }
@@ -139,14 +134,14 @@ resolve_limits <- function(cell_limits, sheet_data = NULL) {
   clims <- function(cl) map_int(cl[c("ul", "lr")], 2)
 
   # i:j, ?:j, i:?
-  if (all(is.na(clims(cell_limits)))) {
+  if (allNA(clims(cell_limits))) {
     cell_limits$ul[1] <- cell_limits$ul[1] %NA% 1L
     cell_limits$lr[1] <- cell_limits$lr[1] %NA% MAX_ROW
     return(cell_limits)
   }
 
   # X:Y, ?:Y, X:?
-  if (all(is.na(rlims(cell_limits)))) {
+  if (allNA(rlims(cell_limits))) {
     cell_limits$ul[2] <- cell_limits$ul[2] %NA% 1L
     cell_limits$lr[2] <- cell_limits$lr[2] %NA% MAX_COL
     return(cell_limits)
@@ -156,7 +151,7 @@ resolve_limits <- function(cell_limits, sheet_data = NULL) {
   cell_limits$ul[1] <- cell_limits$ul[1] %NA% 1L
   cell_limits$ul[2] <- cell_limits$ul[2] %NA% 1L
 
-  if (all(is.na(cell_limits$lr))) {
+  if (allNA(cell_limits$lr)) {
     # populate col of lr
     cell_limits$lr[2] <- cell_limits$lr[2] %NA% MAX_COL
   }
@@ -202,7 +197,7 @@ limits_from_range <- function(x) {
   if (!length(x_split) %in% 1:2)   {stop_glue("Invalid range: {sq(x)}")}
   if (!all(grepl(A1_rx, x_split))) {stop_glue("Invalid range: {sq(x)}")}
   corners <- rematch2::re_match(x_split, A1_decomp)
-  if (any(is.na(corners$.match)))  {stop_glue("Invalid range: {sq(x)}")}
+  if (anyNA(corners$.match))  {stop_glue("Invalid range: {sq(x)}")}
   corners$column <- ifelse(nzchar(corners$column), corners$column, NA_character_)
   corners$row <- ifelse(nzchar(corners$row), corners$row, NA_character_)
   if (nrow(corners) == 1) {

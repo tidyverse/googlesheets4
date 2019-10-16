@@ -17,9 +17,8 @@ A list with S3 class \code{sheets_meta}, for printing purposes.
 }
 \description{
 Retrieve spreadsheet-specific metadata, such as details on the individual
-(work)sheets or named ranges. Complements or extends
-\code{\link[googledrive:drive_get]{googledrive::drive_get()}}, which returns metadata that exists for any file
-on Drive.
+(work)sheets or named ranges. Complements \code{\link[googledrive:drive_get]{googledrive::drive_get()}}, which
+returns metadata that exists for any file on Drive.
 }
 \examples{
 if (sheets_has_token()) {

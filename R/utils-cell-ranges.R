@@ -312,19 +312,41 @@ resolve_limits <- function(cell_limits, sheet_data = NULL) {
   # If no sheet_data, use theoretical maxima.
   # Rows: Max number of cells is 5 million. So that must be the maximum
   #       number of rows (imagine a spreadsheet with 1 sheet and 1 column).
-  # Columns: Max col is 'ZZZ' = 18278
-  MAX_ROW <- 5000000
-  MAX_COL <- 18278
+  # Columns: Max col is "ZZZ" = cellranger::letter_to_num("ZZZ") = 18278
+  MAX_ROW <- sheet_data$grid_rows    %||% 5000000L
+  MAX_COL <- sheet_data$grid_columns %||% 18278L
 
-  row_limits <- map_int(cell_limits[c("ul", "lr")], 1)
-  col_limits <- map_int(cell_limits[c("ul", "lr")], 2)
+  limits <- c(cell_limits$ul, cell_limits$lr)
+  n_NA <- sum(is.na(limits))
+  if (n_NA == 0 || n_NA == 4) {
+    # rectangle is completely specified or completely unspecified
+    return(cell_limits)
+  }
 
-  if (identical(is.na(row_limits), c(ul = FALSE, lr = TRUE))) {
-    cell_limits$lr[1] <- as.integer(sheet_data$grid_rows %||% MAX_ROW)
+  rlims <- function(cl) map_int(cl[c("ul", "lr")], 1)
+  clims <- function(cl) map_int(cl[c("ul", "lr")], 2)
+
+  # i:j, ?:j, i:?
+  if (all(is.na(clims(cell_limits)))) {
+    cell_limits$ul[1] <- cell_limits$ul[1] %NA% 1L
+    cell_limits$lr[1] <- cell_limits$lr[1] %NA% MAX_ROW
+    return(cell_limits)
   }
-  if (identical(is.na(col_limits), c(ul = FALSE, lr = TRUE))) {
-    cell_limits$lr[2] <- as.integer(sheet_data$grid_columns %||% MAX_COL)
+
+  # X:Y, ?:Y, X:?
+  if (all(is.na(rlims(cell_limits)))) {
+    cell_limits$ul[2] <- cell_limits$ul[2] %NA% 1L
+    cell_limits$lr[2] <- cell_limits$lr[2] %NA% MAX_COL
+    return(cell_limits)
   }
+
+  # complete ul
+  cell_limits$ul[1] <- cell_limits$ul[1] %NA% 1L
+  cell_limits$ul[2] <- cell_limits$ul[2] %NA% 1L
+
+  # populate col of lr
+  cell_limits$lr[2] <- cell_limits$lr[2] %NA% MAX_COL
+
   cell_limits
 }
 

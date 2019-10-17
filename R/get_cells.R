@@ -56,7 +56,7 @@ get_cells <- function(ss,
 sheets_cells_impl_ <- function(ssid,
                                ranges,
                                fields = NULL) {
-  fields <- fields %||% "spreadsheetId,properties,sheets.data(startRow,startColumn),sheets.data.rowData.values(formattedValue,userEnteredValue,effectiveValue,effectiveFormat.numberFormat)"
+  fields <- fields %||% "spreadsheetId,properties,sheets.data(startRow,startColumn),sheets.data.rowData.values(formattedValue,userEnteredValue,effectiveValue,effectiveFormat,userEnteredFormat)"
 
   req <- request_generate(
     "sheets.spreadsheets.get",

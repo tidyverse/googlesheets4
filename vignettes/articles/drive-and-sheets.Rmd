@@ -41,7 +41,7 @@ Outline:
 
 First attach both packages.
 
-```{r}
+```{r results = 'hide', message = FALSE}
 library(googledrive)
 library(googlesheets4)
 ```
@@ -94,7 +94,7 @@ Outline:
 
 First attach both packages.
 
-```{r}
+```{r results = 'hide', message = FALSE}
 library(googlesheets4)
 library(googledrive)
 ```

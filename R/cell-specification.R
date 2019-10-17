@@ -17,7 +17,7 @@
 #' @name cell-specification
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (sheets_has_token() && interactive()) {
 #'   ss <- sheets_example("mini-gap")
 #'
 #'   # Specify only the rows or only the columns

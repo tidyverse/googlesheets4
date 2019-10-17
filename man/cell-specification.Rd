@@ -20,7 +20,7 @@ express in A1 notation, specifically when you want to describe rectangles
 with some bounds that are specified and others determined by the data.
 }
 \examples{
-if (sheets_has_token()) {
+if (sheets_has_token() && interactive()) {
   ss <- sheets_example("mini-gap")
 
   # Specify only the rows or only the columns

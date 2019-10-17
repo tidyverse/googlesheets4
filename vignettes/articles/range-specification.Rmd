@@ -1,0 +1,85 @@
+---
+title: "Range specification"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Range specification}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This is a very short article that serves mostly as internal documentation of how googlesheets4 prepares the range when requesting cell data from the Sheets API. The main purpose is to publish the table below that shows how all possible combinations of row and cell limits are translated into an A1-style range.
+
+```{r include = FALSE}
+library(tidyverse)
+library(googlesheets4)
+```
+
+There are several ways to convey which cells you want to read in googlesheets4:
+
+  * `range` is the primary argument for this and takes precendence over all
+    others. `range` can be:
+      - an [A1-style spreadsheet range](https://developers.google.com/sheets/api/guides/concepts#a1_notation),
+        such as "A3:D7" or "arts!A5:F15")
+      - a named range, such as "arts"
+      - a `cell_limits` object made with helpers from the cellranger package
+      
+    The Sheets API defaults to "all non-empty cells" when no range is specified.
+  * `sheet` is an optional argument specifying sheet name or number. The Sheets
+    API defaults to "first visible sheet" when `sheet` is unspecified. Note that
+    a sheet name can also be conveyed via `range`, alone or along with a cell
+    range.
+  * `skip` and `n_max` are optional arguments that can place lower/upper bounds
+    on where we start reading or stop parsing.
+
+If a specific range is targetted, the Sheets API requires that this be specified as an A1-style range. Here is how all possible cell limits are converted to a valid range in the `GET` request for cell data. Depending on how the user expressed this range, googlesheets4 may do additional post-processing when parsing the cell data into the returned data frame.
+
+```{r echo = FALSE}
+library(tidyverse)
+library(googlesheets4)
+
+f <- function(start_col, start_row, end_col, end_row) {
+  cellranger::cell_limits(
+    ul = c(start_row, start_col), lr = c(end_row, end_col)
+  )
+}
+
+g <- function(col) {
+  ifelse(is.na(col), "?", cellranger::num_to_letter(col))
+}
+
+h <- function(row) ifelse(is.na(row), "?", row)
+
+foo <- function(start_col2, start_row2, end_col2, end_row2, ...) {
+  paste0(start_col2, start_row2, ":", end_col2, end_row2)
+}
+
+df <- crossing(
+  start_col = c(NA, 2), start_row = c(NA, 2),
+  end_col = c(NA, 4), end_row = c(NA, 4)
+)
+
+df <- df %>% 
+  mutate(cell_limits = pmap(., f)) %>% 
+  mutate(start_col2 = g(start_col), start_row2 = h(start_row)) %>% 
+  mutate(end_col2 = g(end_col), end_row2 = h(end_row)) %>% 
+  mutate(naive_range = pmap(., foo)) %>%
+  mutate(range = map(cell_limits, googlesheets4:::as_sheets_range),
+         range = map_chr(range, 1, .default = "&lt;NULL&gt;"))
+```
+
+```{r echo = FALSE}
+knitr::kable(
+  select(
+    df,
+    start_col, start_row, end_col, end_row,
+    naive_range, range)
+)
+```
+

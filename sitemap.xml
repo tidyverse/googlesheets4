@@ -49,6 +49,9 @@
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_example.html</loc>
   </url>
   <url>
+    <loc>https://googlesheets4.tidyverse.org/reference/sheets_find.html</loc>
+  </url>
+  <url>
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_get.html</loc>
   </url>
   <url>
@@ -56,9 +59,6 @@
   </url>
   <url>
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_id.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/reference/sheets_list.html</loc>
   </url>
   <url>
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_token.html</loc>

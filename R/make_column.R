@@ -40,7 +40,8 @@ parse <- function(x, ctype, ...) {
     CELL_INTEGER  = as_integer,
     CELL_NUMERIC  = as_double,
     CELL_DATE     = as_date,
-    CELL_TIME     = as_time,
+    # TODO: CELL_TIME not really implemented yet
+    CELL_TIME     = as_datetime,
     CELL_DATETIME = as_datetime,
     CELL_TEXT     = as_character,
     COL_CELL      = as_cell,
@@ -117,7 +118,7 @@ as_datetime <- function(cell, na = "", trim_ws = TRUE) {
   cell %>%
     map(cell_content_datetime, na = na, trim_ws = trim_ws) %>%
     map_dbl(as.double) %>%
-    `*`(24 * 60 * 60) %>%
+    map_dbl(`*`, 24 * 60 * 60) %>%
     as_POSIXct()
 }
 

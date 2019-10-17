@@ -21,4 +21,11 @@ test_that("slightly tricky `range`s work", {
   )
   expect_true(all(grepl("^[BC]", out$loc)))
   expect_true(all(grepl("[3-9]$", out$loc)))
+
+  out <- sheets_cells(
+    test_sheet("googlesheets4-cell-tests"),
+    range = "'range-experimentation'!B3:5"
+  )
+  expect_true(all(grepl("^[BCDE]", out$loc)))
+  expect_true(all(grepl("[345]$", out$loc)))
 })

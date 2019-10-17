@@ -28,7 +28,7 @@ reference:
       Helpers for accessing Sheets and their metadata
     contents:
       - sheets_get
-      - sheets_list
+      - sheets_find
       - sheets_browse
       - ends_with("sheets_id")
   - title: "Example Sheets"

@@ -1,6 +1,6 @@
-#' List your Google Sheets
+#' Find Google Sheets
 #'
-#' Lists your Google Sheets. This is a very thin wrapper around
+#' Finds your Google Sheets. This is a very thin wrapper around
 #' [googledrive::drive_find()], that specifies you want to list Drive files
 #' where `type = "spreadsheet"`. Therefore, note that this will require auth for
 #' googledrive! See the article [Using googlesheets4 with
@@ -16,10 +16,10 @@
 #' @examples
 #' if (sheets_has_token()) {
 #'   # see all your Sheets
-#'   sheets_list()
+#'   sheets_find()
 #'
 #'   # see 5 Sheets, prioritized by creation time
-#'   x <- sheets_list(order_by = "createdTime desc", n_max = 5)
+#'   x <- sheets_find(order_by = "createdTime desc", n_max = 5)
 #'   x
 #'
 #'   # hoist the creation date, using other packages in the tidyverse
@@ -27,6 +27,6 @@
 #'   #   tidyr::hoist(drive_resource, created_on = "createdTime") %>%
 #'   #   dplyr::mutate(created_on = as.Date(created_on))
 #' }
-sheets_list <- function(...) {
+sheets_find <- function(...) {
   googledrive::drive_find(..., type = "spreadsheet")
 }

@@ -129,13 +129,13 @@ as_date <- function(cell, na = "", trim_ws = TRUE) {
 }
 
 ## TODO: not wired up yet (body is same as as_datetime)
-as_time <- function(cell, na = "", trim_ws = TRUE) {
-  cell %>%
-    map(cell_content_datetime, na = na, trim_ws = trim_ws) %>%
-    map_dbl(as.double) %>%
-    `*`(24 * 60 * 60) %>%
-    as_POSIXct()
-}
+# as_time <- function(cell, na = "", trim_ws = TRUE) {
+#   cell %>%
+#     map(cell_content_datetime, na = na, trim_ws = trim_ws) %>%
+#     map_dbl(as.double) %>%
+#     `*`(24 * 60 * 60) %>%
+#     as_POSIXct()
+# }
 
 
 ## prepare to coerce to character

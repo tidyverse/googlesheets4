@@ -106,13 +106,13 @@ sheets_deauth <- function() {
 #' @family low-level API functions
 #' @export
 #' @examples
-#' \dontrun{
-#' req <- request_generate(
-#'   "sheets.spreadsheets.get",
-#'   list(spreadsheetId = "abc"),
-#'   token = sheets_token()
-#' )
-#' req
+#' if (sheets_has_token()) {
+#'   req <- request_generate(
+#'     "sheets.spreadsheets.get",
+#'     list(spreadsheetId = "abc"),
+#'     token = sheets_token()
+#'   )
+#'   req
 #' }
 sheets_token <- function() {
   if (isFALSE(.auth$auth_active)) {
@@ -216,9 +216,7 @@ sheets_oauth_app <- function() .auth$app
 #'
 #' @export
 #' @examples
-#' \dontrun{
 #' sheets_user()
-#' }
 sheets_user <- function() {
   if (sheets_has_token()) {
     gargle::token_email(sheets_token())

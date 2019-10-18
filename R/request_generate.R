@@ -38,14 +38,12 @@
 #' @seealso [gargle::request_develop()], [gargle::request_build()],
 #'   [gargle::request_make()]
 #' @examples
-#' \dontrun{
 #' req <- request_generate(
 #'   "sheets.spreadsheets.get",
-#'   list(spreadsheetId = "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU"),
+#'   list(spreadsheetId = sheets_example("deaths")),
 #'   token = NULL
 #' )
 #' req
-#' }
 request_generate <- function(endpoint = character(),
                              params = list(),
                              key = NULL,

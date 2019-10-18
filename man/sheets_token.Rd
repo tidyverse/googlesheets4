@@ -20,13 +20,13 @@ If auth has been deactivated via \code{\link[=sheets_deauth]{sheets_deauth()}}, 
 returns \code{NULL}.
 }
 \examples{
-\dontrun{
-req <- request_generate(
-  "sheets.spreadsheets.get",
-  list(spreadsheetId = "abc"),
-  token = sheets_token()
-)
-req
+if (sheets_has_token()) {
+  req <- request_generate(
+    "sheets.spreadsheets.get",
+    list(spreadsheetId = "abc"),
+    token = sheets_token()
+  )
+  req
 }
 }
 \seealso{

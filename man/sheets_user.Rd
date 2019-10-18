@@ -14,9 +14,7 @@ Reveals the email address of the user associated with the current token.
 If no token has been loaded yet, this function does not initiate auth.
 }
 \examples{
-\dontrun{
 sheets_user()
-}
 }
 \seealso{
 \code{\link[gargle:token_userinfo]{gargle::token_userinfo()}}, \code{\link[gargle:token_email]{gargle::token_email()}},

@@ -51,14 +51,12 @@ remaining parameters into those destined for the body versus the query.
 }
 }
 \examples{
-\dontrun{
 req <- request_generate(
   "sheets.spreadsheets.get",
-  list(spreadsheetId = "1xTUxWGcFLtDIHoYJ1WsjQuLmpUtBf--8Bcu5lQ302SU"),
+  list(spreadsheetId = sheets_example("deaths")),
   token = NULL
 )
 req
-}
 }
 \seealso{
 \code{\link[gargle:request_develop]{gargle::request_develop()}}, \code{\link[gargle:request_build]{gargle::request_build()}},

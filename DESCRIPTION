@@ -31,7 +31,6 @@ Imports:
     utils
 Suggests: 
     covr,
-    knitr,
     rmarkdown,
     sodium,
     testthat (>= 2.1.0)

@@ -135,7 +135,7 @@ It is basically <code>sheets_cells()</code> (this function), followed by
 want the raw data from the API, use <code>sheets_cells()</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_cells</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_cells</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,6 +166,20 @@ strictly, even if the range forces the inclusion of leading, trailing, or
 embedded empty rows or columns. Takes precedence over <code>skip</code>, <code>n_max</code> and
 <code>sheet</code>. Note <code>range</code> can be a named range, like <code>"sales_data"</code>, without
 any cell reference.</p></td>
+    </tr>
+    <tr>
+      <th>skip</th>
+      <td><p>Minimum number of rows to skip before reading anything, be it
+column names or data. Leading empty rows are automatically skipped, so this
+is a lower bound. Ignored if <code>range</code> is given.</p></td>
+    </tr>
+    <tr>
+      <th>n_max</th>
+      <td><p>Maximum number of data rows to parse into the returned tibble.
+Trailing empty rows are automatically skipped, so this is an upper bound on
+the number of rows in the result. Ignored if <code>range</code> is given. <code>n_max</code> is
+imposed locally, after reading all non-empty cells, so, if speed is an
+issue, it is better to use <code>range</code>.</p></td>
     </tr>
     </table>
 

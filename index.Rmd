@@ -75,10 +75,13 @@ library(googlesheets4)
 Pass the result to googlesheets4 functions such as:
 
   * `sheets_get()`: gets spreadsheet-specific metadata
+  * `sheets_sheets()`: reveals just the (work)sheet names
   * `read_sheet()`: reads cells into a data frame. `sheets_read()` is an alias for this.
 
 ```{r}
 sheets_get(deaths)
+
+sheets_sheets(deaths)
 
 read_sheet(deaths, range = "A5:F8")
 ```

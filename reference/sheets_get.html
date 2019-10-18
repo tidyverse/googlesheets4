@@ -36,8 +36,13 @@
 
 <meta property="og:title" content="Get Sheet metadata — sheets_get" />
 <meta property="og:description" content="Retrieve spreadsheet-specific metadata, such as details on the individual
-(work)sheets or named ranges. Complements googledrive::drive_get(), which
-returns metadata that exists for any file on Drive." />
+(work)sheets or named ranges.
+sheets_get() complements googledrive::drive_get(), which
+returns metadata that exists for any file on Drive.
+sheets_sheets() is a very focused function that only returns
+(work)sheet names.
+
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,11 +128,18 @@ returns metadata that exists for any file on Drive." />
 
     <div class="ref-description">
     <p>Retrieve spreadsheet-specific metadata, such as details on the individual
-(work)sheets or named ranges. Complements <code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>googledrive::drive_get()</a></code>, which
-returns metadata that exists for any file on Drive.</p>
+(work)sheets or named ranges.</p><ul>
+<li><p><code>sheets_get()</code> complements <code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>googledrive::drive_get()</a></code>, which
+returns metadata that exists for any file on Drive.</p></li>
+<li><p><code>sheets_sheets()</code> is a very focused function that only returns
+(work)sheet names.</p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_get</span>(<span class='no'>ss</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_get</span>(<span class='no'>ss</span>)
+
+<span class='fu'>sheets_sheets</span>(<span class='no'>ss</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -143,7 +155,13 @@ is how googledrive represents Drive files. Processed through
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list with S3 class <code>sheets_meta</code>, for printing purposes.</p>
+    
+<ul>
+<li><p><code>sheets_get()</code>: A list with S3 class <code>sheets_meta</code>, for printing
+purposes.</p></li>
+<li><p><code>sheets_sheets()</code>: A character vector.</p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
@@ -158,9 +176,9 @@ is how googledrive represents Drive files. Processed through
 #&gt;        # of sheets: 1
 #&gt; 
 #&gt; (Sheet name): (Nominal extent in rows x columns)
-#&gt;  chicken.csv: 1000 x 26
-#&gt; 
-#&gt; (Named range): (A1 range)</div></pre>
+#&gt;  chicken.csv: 1000 x 26</div><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
+  <span class='fu'>sheets_sheets</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>))
+}</div><div class='output co'>#&gt; [1] "arts"  "other"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -127,6 +127,8 @@
 <li>
 <code><a href="reference/sheets_get.html">sheets_get()</a></code>: gets spreadsheet-specific metadata</li>
 <li>
+<code><a href="reference/sheets_get.html">sheets_sheets()</a></code>: reveals just the (work)sheet names</li>
+<li>
 <code><a href="reference/read_sheet.html">read_sheet()</a></code>: reads cells into a data frame. <code><a href="reference/read_sheet.html">sheets_read()</a></code> is an alias for this.</li>
 </ul>
 <!-- end list --><div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/sheets_get.html">sheets_get</a></span>(deaths)</a>
@@ -144,15 +146,18 @@
 <a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt;     arts_data: 'arts'!A5:F15 </span></a>
 <a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt;    other_data: 'other'!A5:F15</span></a>
 <a class="sourceLine" id="cb4-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(deaths, <span class="dt">range =</span> <span class="st">"A5:F8"</span>)</a>
-<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; Reading from 'deaths'</span></a>
-<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; Range "A5:F8"</span></a>
-<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt; # A tibble: 3 x 6</span></a>
-<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt;   Name  Profession   Age `Has kids` `Date of birth`     `Date of death`    </span></a>
-<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span></a>
-<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; 1 Davi… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span></a>
-<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt; 2 Carr… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span></a>
-<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt; 3 Chuc… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="kw"><a href="reference/sheets_get.html">sheets_sheets</a></span>(deaths)</a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; [1] "arts"  "other"</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(deaths, <span class="dt">range =</span> <span class="st">"A5:F8"</span>)</a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt; Reading from 'deaths'</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt; Range "A5:F8"</span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; # A tibble: 3 x 6</span></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt;   Name  Profession   Age `Has kids` `Date of birth`     `Date of death`    </span></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">#&gt; 1 Davi… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span></a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt; 2 Carr… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="co">#&gt; 3 Chuc… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span></a></code></pre></div>
 <p>If you’re willing to refer to the spreadsheet by id (or URL), just provide that directly to googlesheets4 functions and omit googledrive.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="reference/sheets_get.html">sheets_get</a></span>(<span class="st">"1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA"</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt;   Spreadsheet name: deaths</span></a>
@@ -164,22 +169,18 @@
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
 <a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;         arts: 1000 x 26</span></a>
 <a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;        other: 1000 x 26</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; (Named range): (A1 range)</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co"># a URL also works</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="kw"><a href="reference/sheets_get.html">sheets_get</a></span>(<span class="st">"https://docs.google.com/spreadsheets/d/1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA/edit#gid=1210215306"</span>)</a>
-<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt;   Spreadsheet name: deaths</span></a>
-<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt;                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA</span></a>
-<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt;             Locale: en</span></a>
-<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt;          Time zone: America/Los_Angeles</span></a>
-<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt;        # of sheets: 2</span></a>
-<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb5-23" data-line-number="23"><span class="co">#&gt;         arts: 1000 x 26</span></a>
-<a class="sourceLine" id="cb5-24" data-line-number="24"><span class="co">#&gt;        other: 1000 x 26</span></a>
-<a class="sourceLine" id="cb5-25" data-line-number="25"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-26" data-line-number="26"><span class="co">#&gt; (Named range): (A1 range)</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co"># a URL also works</span></a>
+<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="kw"><a href="reference/sheets_get.html">sheets_get</a></span>(<span class="st">"https://docs.google.com/spreadsheets/d/1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA/edit#gid=1210215306"</span>)</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;   Spreadsheet name: deaths</span></a>
+<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt;                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA</span></a>
+<a class="sourceLine" id="cb5-16" data-line-number="16"><span class="co">#&gt;             Locale: en</span></a>
+<a class="sourceLine" id="cb5-17" data-line-number="17"><span class="co">#&gt;          Time zone: America/Los_Angeles</span></a>
+<a class="sourceLine" id="cb5-18" data-line-number="18"><span class="co">#&gt;        # of sheets: 2</span></a>
+<a class="sourceLine" id="cb5-19" data-line-number="19"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb5-20" data-line-number="20"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
+<a class="sourceLine" id="cb5-21" data-line-number="21"><span class="co">#&gt;         arts: 1000 x 26</span></a>
+<a class="sourceLine" id="cb5-22" data-line-number="22"><span class="co">#&gt;        other: 1000 x 26</span></a></code></pre></div>
 <p>Lesson: googledrive provides the most user-friendly way to refer to files on Google Drive, including files that are Google Sheets. googledrive lets you refer to files by name or path. googlesheets4 is focused on operations specific to Sheets and is more programming oriented. googlesheets4 requires a file id or something that contains the file id, such as the URL or a <code>dribble</code> object obtained via googledrive.</p>
 </div>
 <div id="specify-the-range-and-column-types" class="section level3">
@@ -294,26 +295,26 @@
 <p>Here is a demo of putting the iris data into a new, private Sheet. Then reading it back into R and exporting as an Excel workbook. Then reading that back into R!</p>
 <p>First, put the iris data into a csv file.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">(iris_tempfile &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>(<span class="dt">pattern =</span> <span class="st">"iris-"</span>, <span class="dt">fileext =</span> <span class="st">".csv"</span>))</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkbEQvz/iris-ee995e2d9872.csv"</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpnY8oOm/iris-88e022567c00.csv"</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(iris, iris_tempfile, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Use <code><a href="https://googledrive.tidyverse.org/reference/drive_upload.html">googledrive::drive_upload()</a></code> to upload the csv and simultaneously convert to a Sheet.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">(iris_ss &lt;-<span class="st"> </span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_upload.html">drive_upload</a></span>(iris_tempfile, <span class="dt">type =</span> <span class="st">"spreadsheet"</span>))</a>
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; Local file:</span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt;   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkbEQvz/iris-ee995e2d9872.csv</span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt;   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpnY8oOm/iris-88e022567c00.csv</span></a>
 <a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; uploaded into Drive file:</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt;   * iris-ee995e2d9872: 1P_mBziZY98dLC3FIKJq_6ZNARN7fBwhqsHVzBUGfWUI</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt;   * iris-88e022567c00: 1IH-3hkz3aSpnDZh_RCFZIniq601qLLdAVt6oYwaEn1I</span></a>
 <a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt; with MIME type:</span></a>
 <a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt;   * application/vnd.google-apps.spreadsheet</span></a>
 <a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
 <a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt;   name             id                                      drive_resource  </span></a>
 <a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; * &lt;chr&gt;            &lt;chr&gt;                                   &lt;list&gt;          </span></a>
-<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; 1 iris-ee995e2d98… 1P_mBziZY98dLC3FIKJq_6ZNARN7fBwhqsHVzB… &lt;named list [34…</span></a>
+<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; 1 iris-88e022567c… 1IH-3hkz3aSpnDZh_RCFZIniq601qLLdAVt6oY… &lt;named list [34…</span></a>
 <a class="sourceLine" id="cb11-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb11-13" data-line-number="13">## visit the new Sheet in the browser, in an interactive session!</a>
 <a class="sourceLine" id="cb11-14" data-line-number="14"><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_browse.html">drive_browse</a></span>(iris_ss)</a></code></pre></div>
 <p>Read data from the private Sheet into R.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(iris_ss, <span class="dt">range =</span> <span class="st">"B1:D6"</span>)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; Reading from 'iris-ee995e2d9872'</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; Reading from 'iris-88e022567c00'</span></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; Range "B1:D6"</span></a>
 <a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; # A tibble: 5 x 3</span></a>
 <a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt;   Sepal.Width Petal.Length Petal.Width</span></a>
@@ -325,12 +326,12 @@
 <a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; 5         3.6          1.4         0.2</span></a></code></pre></div>
 <p>Download the Sheet as an Excel workbook and read it back in via <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">readxl::read_excel()</a></code>.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">(iris_xlsxfile &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="st">"[.]csv"</span>, <span class="st">".xlsx"</span>, iris_tempfile))</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkbEQvz/iris-ee995e2d9872.xlsx"</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpnY8oOm/iris-88e022567c00.xlsx"</span></a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_download.html">drive_download</a></span>(iris_ss, <span class="dt">path =</span> iris_xlsxfile, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt; File downloaded:</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;   * iris-ee995e2d9872</span></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;   * iris-88e022567c00</span></a>
 <a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt; Saved locally as:</span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpkbEQvz/iris-ee995e2d9872.xlsx</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpnY8oOm/iris-88e022567c00.xlsx</span></a>
 <a class="sourceLine" id="cb13-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb13-9" data-line-number="9"><span class="cf">if</span> (<span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"readxl"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
 <a class="sourceLine" id="cb13-10" data-line-number="10">  readxl<span class="op">::</span><span class="kw"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span>(iris_xlsxfile)  </a>
@@ -354,7 +355,7 @@
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; [1] TRUE TRUE</span></a>
 <a class="sourceLine" id="cb14-3" data-line-number="3"><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(iris_ss)</a>
 <a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt; Files deleted:</span></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt;   * iris-ee995e2d9872: 1P_mBziZY98dLC3FIKJq_6ZNARN7fBwhqsHVzBUGfWUI</span></a></code></pre></div>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="co">#&gt;   * iris-88e022567c00: 1IH-3hkz3aSpnDZh_RCFZIniq601qLLdAVt6oYwaEn1I</span></a></code></pre></div>
 </div>
 <div id="get-sheet-metadata-or-detailed-cell-data" class="section level2">
 <h2 class="hasAnchor">

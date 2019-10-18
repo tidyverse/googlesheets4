@@ -35,8 +35,6 @@ Suggests:
     rmarkdown,
     sodium,
     testthat (>= 2.1.0)
-VignetteBuilder: 
-    knitr
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true

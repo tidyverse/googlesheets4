@@ -57,7 +57,7 @@ googlesheets4 will, by default, help you interact with Sheets as an authenticate
 
 `read_sheet()` is the main "read" function and should evoke `readr::read_csv()` and `readxl::read_excel()`. It's an alias for `sheets_read()`. Most functions in googlesheets4 actually start with `sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`), but works just fine without the pipe.
 
-We demonsrate basic functionality using some world-readable example sheets accessed via `sheets_examples()` and `sheets_example()`.
+We demonstrate basic functionality using some world-readable example sheets accessed via `sheets_examples()` and `sheets_example()`.
 
 Read everything:
 

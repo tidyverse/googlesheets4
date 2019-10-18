@@ -23,7 +23,7 @@ library(googlesheets4)
 
 There are several ways to convey which cells you want to read in googlesheets4:
 
-  * `range` is the primary argument for this and takes precendence over all
+  * `range` is the primary argument for this and takes precedence over all
     others. `range` can be:
       - an [A1-style spreadsheet range](https://developers.google.com/sheets/api/guides/concepts#a1_notation),
         such as "A3:D7" or "arts!A5:F15")
@@ -38,7 +38,7 @@ There are several ways to convey which cells you want to read in googlesheets4:
   * `skip` and `n_max` are optional arguments that can place lower/upper bounds
     on where we start reading or stop parsing.
 
-If a specific range is targetted, the Sheets API requires that this be specified as an A1-style range. Here is how all possible cell limits are converted to a valid range in the `GET` request for cell data. Depending on how the user expressed this range, googlesheets4 may do additional post-processing when parsing the cell data into the returned data frame.
+If a specific range is targeted, the Sheets API requires that this be specified as an A1-style range. Here is how all possible cell limits are converted to a valid range in the `GET` request for cell data. Depending on how the user expressed this range, googlesheets4 may do additional post-processing when parsing the cell data into the returned data frame.
 
 ```{r echo = FALSE}
 library(tidyverse)

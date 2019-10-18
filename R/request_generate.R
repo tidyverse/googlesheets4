@@ -12,7 +12,7 @@
 #'   It takes a nickname for an endpoint and:
 #'   * Uses the API spec to look up the `method`, `path`, and `base_url`.
 #'   * Checks `params` for validity and completeness with respect to the
-#'   endpoint. Uses `params` for URL endpoint subsitution and separates
+#'   endpoint. Uses `params` for URL endpoint substitution and separates
 #'   remaining parameters into those destined for the body versus the query.
 #'   * Adds an API key to the query if and only if `token = NULL`.
 #'

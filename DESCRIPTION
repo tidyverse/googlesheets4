@@ -33,9 +33,11 @@ Suggests:
     covr,
     rmarkdown,
     sodium,
+    spelling,
     testthat (>= 2.1.0)
 ByteCompile: true
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.99.9001

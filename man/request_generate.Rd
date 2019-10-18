@@ -45,7 +45,7 @@ It takes a nickname for an endpoint and:
 \itemize{
 \item Uses the API spec to look up the \code{method}, \code{path}, and \code{base_url}.
 \item Checks \code{params} for validity and completeness with respect to the
-endpoint. Uses \code{params} for URL endpoint subsitution and separates
+endpoint. Uses \code{params} for URL endpoint substitution and separates
 remaining parameters into those destined for the body versus the query.
 \item Adds an API key to the query if and only if \code{token = NULL}.
 }

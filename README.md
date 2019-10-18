@@ -64,7 +64,7 @@ user in a hidden chunk. For more about auth, visit the package website:
 `sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`), but
 works just fine without the pipe.
 
-We demonsrate basic functionality using some world-readable example
+We demonstrate basic functionality using some world-readable example
 sheets accessed via `sheets_examples()` and `sheets_example()`.
 
 Read everything:

@@ -165,18 +165,19 @@ purposes.</p></li>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
-  <span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"gapminder"</span>))
   <span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))
-  <span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>))
-  <span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"chicken-sheet"</span>))
-}</div><div class='output co'>#&gt;   Spreadsheet name: chicken-sheet
-#&gt;                 ID: 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU
+}</div><div class='output co'>#&gt;   Spreadsheet name: mini-gap
+#&gt;                 ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
 #&gt;             Locale: en_US
 #&gt;          Time zone: America/Los_Angeles
-#&gt;        # of sheets: 1
+#&gt;        # of sheets: 5
 #&gt; 
 #&gt; (Sheet name): (Nominal extent in rows x columns)
-#&gt;  chicken.csv: 1000 x 26</div><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
+#&gt;       Africa: 1000 x 26
+#&gt;     Americas: 1000 x 26
+#&gt;         Asia: 1000 x 26
+#&gt;       Europe: 1000 x 26
+#&gt;      Oceania: 1000 x 26</div><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
   <span class='fu'>sheets_sheets</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>))
 }</div><div class='output co'>#&gt; [1] "arts"  "other"</div></pre>
   </div>

@@ -80,7 +80,7 @@ as_range_spec.character <- function(x,
   m <- match(x, sheet_names)
   if (notNA(m)) {
     # Re-dispatch. Match already established, so no need to pass sheet names.
-    return(as_range_spec(x = NULL, sheet = x, skip = skip))
+    return(as_range_spec(NULL, sheet = x, skip = skip))
   }
 
   # range must be in A1 notation
@@ -123,22 +123,21 @@ as_range_spec.NULL <- function(x,
     )
   )
 
-  if (is.null(sheet)) {
-    if (skip < 1) {
+
+  if (skip < 1) {
+    if (is.null(sheet)) {
       return(out)
     } else {
-      return(
-        as_range_spec(
-          x = cell_rows(c(skip + 1, NA)),
-          sheet = sheet, sheet_names = sheet_names, shim = FALSE
-        )
-      )
+      out$sheet_name <- resolve_sheet(sheet, sheet_names)
+      out$api_range <- qualified_A1(out$sheet_name)
+      return(out)
     }
   }
 
-  out$sheet_name <- resolve_sheet(sheet, sheet_names)
-  out$api_range <- qualified_A1(out$sheet_name)
-  out
+  as_range_spec(
+    sheet = sheet, sheet_names = sheet_names,
+    cell_rows(c(skip + 1, NA)), shim = FALSE
+  )
 }
 
 ## as_range_spec.cell_limits ----

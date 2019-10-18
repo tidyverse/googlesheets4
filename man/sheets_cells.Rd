@@ -4,7 +4,7 @@
 \alias{sheets_cells}
 \title{Read cells from a Sheet}
 \usage{
-sheets_cells(ss, sheet = NULL, range = NULL)
+sheets_cells(ss, sheet = NULL, range = NULL, skip = 0, n_max = Inf)
 }
 \arguments{
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
@@ -27,6 +27,16 @@ strictly, even if the range forces the inclusion of leading, trailing, or
 embedded empty rows or columns. Takes precedence over \code{skip}, \code{n_max} and
 \code{sheet}. Note \code{range} can be a named range, like \code{"sales_data"}, without
 any cell reference.}
+
+\item{skip}{Minimum number of rows to skip before reading anything, be it
+column names or data. Leading empty rows are automatically skipped, so this
+is a lower bound. Ignored if \code{range} is given.}
+
+\item{n_max}{Maximum number of data rows to parse into the returned tibble.
+Trailing empty rows are automatically skipped, so this is an upper bound on
+the number of rows in the result. Ignored if \code{range} is given. \code{n_max} is
+imposed locally, after reading all non-empty cells, so, if speed is an
+issue, it is better to use \code{range}.}
 }
 \value{
 A tibble with one row per non-empty cell in the \code{range}.

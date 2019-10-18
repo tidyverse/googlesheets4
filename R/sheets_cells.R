@@ -22,8 +22,17 @@
 #' }
 sheets_cells <- function(ss,
                          sheet = NULL,
-                         range = NULL) {
-  out <- get_cells(ss = ss, sheet = sheet, range = range)
+                         range = NULL,
+                         skip = 0, n_max = Inf) {
+
+  ## range spec params are checked inside get_cells():
+  ## ss, sheet, range, skip, n_max
+  out <- get_cells(
+    ss = ss,
+    sheet = sheet, range = range,
+    skip = skip, n_max = n_max,
+    col_names_in_sheet = FALSE
+  )
   out$cell <- apply_ctype(out$cell)
   add_loc(out)
 }

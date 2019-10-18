@@ -46,9 +46,7 @@ sheets_spreadsheet <- function(x = list()) {
     spreadsheet_url = "spreadsheetUrl",
     name            = list("properties", "title"),
     locale          = list("properties", "locale"),
-    time_zone       = list("properties", "timeZone"),
-    sheets          = integer(),
-    named_ranges    = integer()
+    time_zone       = list("properties", "timeZone")
   )
   out <- map(ours_theirs, ~ pluck(x, !!!.x))
 

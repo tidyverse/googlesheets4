@@ -34,10 +34,7 @@ returns metadata that exists for any file on Drive.
 }
 \examples{
 if (sheets_has_token()) {
-  sheets_get(sheets_example("gapminder"))
   sheets_get(sheets_example("mini-gap"))
-  sheets_get(sheets_example("deaths"))
-  sheets_get(sheets_example("chicken-sheet"))
 }
 if (sheets_has_token()) {
   sheets_sheets(sheets_example("deaths"))

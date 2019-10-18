@@ -43,7 +43,6 @@ reference:
       - sheets_auth
       - sheets_deauth
       - sheets_user
-      - sheets_email
       - sheets_auth_configure
   - title: "Programming around the Sheets API"
     desc: >

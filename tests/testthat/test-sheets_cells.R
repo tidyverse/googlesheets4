@@ -1,5 +1,4 @@
 test_that("slightly tricky `range`s work", {
-  skip_on_cran()
   skip_if_offline()
   skip_if_no_token()
 

@@ -35,7 +35,7 @@
         <a class="navbar-brand" href="../../index.html">googlesheets4</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9001</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
         </div>
       </div>
     </div>
@@ -92,7 +92,7 @@
 <p>There are several ways to convey which cells you want to read in googlesheets4:</p>
 <ul>
 <li>
-<code>range</code> is the primary argument for this and takes precendence over all others. <code>range</code> can be:
+<code>range</code> is the primary argument for this and takes precedence over all others. <code>range</code> can be:
 <ul>
 <li>an <a href="https://developers.google.com/sheets/api/guides/concepts#a1_notation">A1-style spreadsheet range</a>, such as “A3:D7” or “arts!A5:F15”)</li>
 <li>a named range, such as “arts”</li>
@@ -104,7 +104,7 @@ The Sheets API defaults to “all non-empty cells” when no range is specified.
 <li>
 <code>skip</code> and <code>n_max</code> are optional arguments that can place lower/upper bounds on where we start reading or stop parsing.</li>
 </ul>
-<p>If a specific range is targetted, the Sheets API requires that this be specified as an A1-style range. Here is how all possible cell limits are converted to a valid range in the <code>GET</code> request for cell data. Depending on how the user expressed this range, googlesheets4 may do additional post-processing when parsing the cell data into the returned data frame.</p>
+<p>If a specific range is targeted, the Sheets API requires that this be specified as an A1-style range. Here is how all possible cell limits are converted to a valid range in the <code>GET</code> request for cell data. Depending on how the user expressed this range, googlesheets4 may do additional post-processing when parsing the cell data into the returned data frame.</p>
 <table class="table">
 <thead><tr class="header">
 <th align="right">start_col</th>

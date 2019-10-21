@@ -1,10 +1,5 @@
 ---
 title: "Using googlesheets4 with googledrive"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{"Using googlesheets4 with googledrive"}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include = FALSE}

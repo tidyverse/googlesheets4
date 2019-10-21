@@ -1,10 +1,5 @@
 ---
 title: "Range specification"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Range specification}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
@@ -23,11 +18,11 @@ library(googlesheets4)
 
 There are several ways to convey which cells you want to read in googlesheets4:
 
-  * `range` is the primary argument for this and takes precedence over all
-    others. `range` can be:
+  * `range` is the primary and most powerful argument for this and takes
+    precedence over all others. `range` can be:
       - an [A1-style spreadsheet range](https://developers.google.com/sheets/api/guides/concepts#a1_notation),
-        such as "A3:D7" or "arts!A5:F15")
-      - a named range, such as "arts"
+        with or without a sheet name, such as "A3:D7" or "arts!A5:F15"
+      - a named range, such as "arts_data"
       - a `cell_limits` object made with helpers from the cellranger package
       
     The Sheets API defaults to "all non-empty cells" when no range is specified.
@@ -82,4 +77,3 @@ knitr::kable(
     naive_range, range)
 )
 ```
-

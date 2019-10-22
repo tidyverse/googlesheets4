@@ -7,7 +7,13 @@
 \title{googlesheets4: Access Google Sheets using the Sheets API V4}
 \description{
 Interact with Google Sheets through the Sheets API
-    v4 <https://developers.google.com/sheets/api>.
+    v4 <https://developers.google.com/sheets/api>. "API" is an acronym for
+    "application programming interface"; the Sheets API allows users to
+    interact with Google Sheets programmatically, instead of via a web
+    browser. The "v4" refers to the fact that the Sheets API is currently
+    at version 4. This package helps the user to retrieve Sheet metatdata
+    and to read data out of specific worksheets or ranges into an R
+    object, such as a data frame.
 }
 \seealso{
 Useful links:

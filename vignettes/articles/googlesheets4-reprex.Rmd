@@ -28,7 +28,8 @@ library(googlesheets4)
 
 sheets_deauth()
 
-# your code goes here ... this is just an example
+# put the googlesheets4 code you want to reproduce below here
+# the following is just an example, replace it with your own code
 sheets_example("mini-gap") %>% 
   sheets_get()
 ```
@@ -57,7 +58,8 @@ library(googlesheets4)
 
 sheets_deauth()
 
-# your code goes here ... this is just an example
+# put the googlesheets4 code you want to reproduce below here
+# the following is just an example, replace it with your own code
 sheets_get("YOUR_SHEET_ID_OR_URL_GOES_HERE")
 ```
 
@@ -104,7 +106,8 @@ library(googlesheets4)
 sheets_auth(email = "jane_doe@example.com")
 ssid <- "some_very_long_string_of_letters_and_digits"
 
-# your googlesheets4 code goes below here
+# put the googlesheets4 code you want to reproduce below here
+# the following is just an example, replace it with your own code
 sheets_get(ssid)
 ```
 
@@ -119,7 +122,7 @@ sheets_auth(email = "jane_doe@example.com")
 ssid <- "some_very_long_string_of_letters_and_digits"
 
 #+ include = TRUE
-# your googlesheets4 code goes below here
+# put the googlesheets4 code you want to reproduce below here
+# the following is just an example, replace it with your own code
 sheets_get(ssid)
 ```
-

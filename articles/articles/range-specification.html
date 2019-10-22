@@ -55,6 +55,9 @@
       <a href="../../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
     </li>
     <li>
+      <a href="../../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
+    </li>
+    <li>
       <a href="../../articles/articles/range-specification.html">Range specification</a>
     </li>
   </ul>
@@ -92,10 +95,10 @@
 <p>There are several ways to convey which cells you want to read in googlesheets4:</p>
 <ul>
 <li>
-<code>range</code> is the primary argument for this and takes precedence over all others. <code>range</code> can be:
+<code>range</code> is the primary and most powerful argument for this and takes precedence over all others. <code>range</code> can be:
 <ul>
-<li>an <a href="https://developers.google.com/sheets/api/guides/concepts#a1_notation">A1-style spreadsheet range</a>, such as “A3:D7” or “arts!A5:F15”)</li>
-<li>a named range, such as “arts”</li>
+<li>an <a href="https://developers.google.com/sheets/api/guides/concepts#a1_notation">A1-style spreadsheet range</a>, with or without a sheet name, such as “A3:D7” or “arts!A5:F15”</li>
+<li>a named range, such as “arts_data”</li>
 <li>a <code>cell_limits</code> object made with helpers from the cellranger package</li>
 </ul>
 The Sheets API defaults to “all non-empty cells” when no range is specified.</li>

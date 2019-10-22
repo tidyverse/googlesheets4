@@ -70,6 +70,9 @@
     <loc>https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html</loc>
   </url>
   <url>
+    <loc>https://googlesheets4.tidyverse.org/articles/articles/googlesheets4-reprex.html</loc>
+  </url>
+  <url>
     <loc>https://googlesheets4.tidyverse.org/articles/articles/range-specification.html</loc>
   </url>
 </urlset>

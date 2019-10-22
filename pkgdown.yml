@@ -3,6 +3,7 @@ pkgdown: 1.4.1
 pkgdown_sha: ~
 articles:
   drive-and-sheets: articles/drive-and-sheets.html
+  googlesheets4-reprex: articles/googlesheets4-reprex.html
   range-specification: articles/range-specification.html
 urls:
   reference: https://googlesheets4.tidyverse.org/reference

@@ -104,10 +104,10 @@ Here's an example of a snippet suitable for `reprex::reprex()`, assuming the use
 library(googlesheets4)
 
 sheets_auth(email = "jane_doe@example.com")
-ssid <- "some_very_long_string_of_letters_and_digits"
 
 # put the googlesheets4 code you want to reproduce below here
 # the following is just an example, replace it with your own code
+ssid <- "some_very_long_string_of_letters_and_digits"
 sheets_get(ssid)
 ```
 

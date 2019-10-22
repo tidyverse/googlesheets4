@@ -67,7 +67,7 @@ sheets_get("YOUR_SHEET_ID_OR_URL_GOES_HERE")
 
 If you can't create a world-readable example Sheet, perhaps you can still share one with specific individuals, such as a package maintainer. How to share with specific user(s):
 
-  * In the browser: *Share* (big green button) > *Peaple* > *Enter names or email addresses*.
+  * In the browser: *Share* (big green button) > *People* > *Enter names or email addresses*.
   * Using googledrive:
   
     ```{r eval = FALSE}

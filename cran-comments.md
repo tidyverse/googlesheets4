@@ -1,7 +1,33 @@
 This is a resubmission.
 
 Original submission: 2018-10-18
-CRAN Review: 2019-10-22
+First CRAN Review: 2019-10-22
+
+Second submission: 2019-10-22
+Second CRAN Review: 2019-10-28
+
+The second reviewer brings up new things:
+
+> Please add small files needed for the examples in the inst/extdata
+> subfolder of your package and use system.file() to get the correct
+> package path. e.g. sheets_auth_configure.Rd
+>
+> \dontrun{} should be only used if the example really cannot be executed
+> (e.g. because of missing additional software, missing API keys, ...) by
+> the user. That's why wrapping examples in \dontrun{} adds the comment
+> ("# Not run:") as a warning for the user.
+> Does not seem necessary.
+> Please replace \dontrun with \donttest.
+
+I have added the requested file, below inst/extdata/, even though it must be
+filled with fake data. We cannot ship an actual OAuth client ID and secret
+inside a CRAN package this way. As documented for sheets_auth_configure(), the
+user has to obtain this JSON for themselves from Google Cloud Platform Console.
+But this JSON has valid structure and eliminates a \dontrun{}.
+
+---
+
+Response to the first review:
 
 The reviewer asked for more details in the description and to explain all acronyms. I have added:
 

@@ -204,23 +204,29 @@ argument of <code><a href='https://rdrr.io/pkg/jsonlite/man/fromJSON.html'>jsonl
   <span class='co'># bring your own app via client id (aka key) and secret</span>
   <span class='no'>google_app</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>httr</span><span class='kw ns'>::</span><span class='fu'><a href='https://httr.r-lib.org/reference/oauth_app.html'>oauth_app</a></span>(
     <span class='st'>"my-awesome-google-api-wrapping-package"</span>,
-    <span class='kw'>key</span> <span class='kw'>=</span> <span class='st'>"123456789.apps.googleusercontent.com"</span>,
-    <span class='kw'>secret</span> <span class='kw'>=</span> <span class='st'>"abcdefghijklmnopqrstuvwxyz"</span>
+    <span class='kw'>key</span> <span class='kw'>=</span> <span class='st'>"YOUR_CLIENT_ID_GOES_HERE"</span>,
+    <span class='kw'>secret</span> <span class='kw'>=</span> <span class='st'>"YOUR_SECRET_GOES_HERE"</span>
   )
-  <span class='no'>google_key</span> <span class='kw'>&lt;-</span> <span class='st'>"the-key-I-got-for-a-google-API"</span>
+  <span class='no'>google_key</span> <span class='kw'>&lt;-</span> <span class='st'>"YOUR_API_KEY"</span>
   <span class='fu'>sheets_auth_configure</span>(<span class='kw'>app</span> <span class='kw'>=</span> <span class='no'>google_app</span>, <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='no'>google_key</span>)
 
   <span class='co'># confirm the changes</span>
   <span class='fu'>sheets_oauth_app</span>()
   <span class='fu'>sheets_api_key</span>()
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: httr</span></div><div class='output co'>#&gt; [1] "the-key-I-got-for-a-google-API"</div><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'>## bring your own app via JSON downloaded from Google Developers Console</span>
-<span class='fu'>sheets_auth_configure</span>(
-  <span class='kw'>path</span> <span class='kw'>=</span> <span class='st'>"/path/to/the/JSON/you/downloaded/from/google/dev/console.json"</span>
-)
-}
 
+  <span class='co'># bring your own app via JSON downloaded from Google Developers Console</span>
+  <span class='co'># this file has the same structure as the JSON from Google</span>
+  <span class='no'>app_path</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(
+    <span class='st'>"extdata"</span>, <span class='st'>"fake-oauth-client-id-and-secret.json"</span>,
+    <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"googlesheets4"</span>
+  )
+  <span class='fu'>sheets_auth_configure</span>(<span class='kw'>path</span> <span class='kw'>=</span><span class='no'>app_path</span>)
+
+  <span class='co'># confirm the changes</span>
+  <span class='fu'>sheets_oauth_app</span>()
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: httr</span></div><div class='output co'>#&gt; &lt;oauth_app&gt; YOUR_PROJECT_ID_GOES_HERE
+#&gt;   key:    YOUR_CLIENT_ID_GOES_HERE
+#&gt;   secret: &lt;hidden&gt;</div><div class='input'>
 <span class='co'># restore original auth config</span>
 <span class='fu'>sheets_auth_configure</span>(<span class='kw'>app</span> <span class='kw'>=</span> <span class='no'>original_app</span>, <span class='kw'>api_key</span> <span class='kw'>=</span> <span class='no'>original_api_key</span>)</div></pre>
   </div>

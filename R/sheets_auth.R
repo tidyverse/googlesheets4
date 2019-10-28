@@ -157,22 +157,26 @@ sheets_has_token <- function() {
 #'   # bring your own app via client id (aka key) and secret
 #'   google_app <- httr::oauth_app(
 #'     "my-awesome-google-api-wrapping-package",
-#'     key = "123456789.apps.googleusercontent.com",
-#'     secret = "abcdefghijklmnopqrstuvwxyz"
+#'     key = "YOUR_CLIENT_ID_GOES_HERE",
+#'     secret = "YOUR_SECRET_GOES_HERE"
 #'   )
-#'   google_key <- "the-key-I-got-for-a-google-API"
+#'   google_key <- "YOUR_API_KEY"
 #'   sheets_auth_configure(app = google_app, api_key = google_key)
 #'
 #'   # confirm the changes
 #'   sheets_oauth_app()
 #'   sheets_api_key()
-#' }
 #'
-#' \dontrun{
-#' ## bring your own app via JSON downloaded from Google Developers Console
-#' sheets_auth_configure(
-#'   path = "/path/to/the/JSON/you/downloaded/from/google/dev/console.json"
-#' )
+#'   # bring your own app via JSON downloaded from Google Developers Console
+#'   # this file has the same structure as the JSON from Google
+#'   app_path <- system.file(
+#'     "extdata", "fake-oauth-client-id-and-secret.json",
+#'     package = "googlesheets4"
+#'   )
+#'   sheets_auth_configure(path =app_path)
+#'
+#'   # confirm the changes
+#'   sheets_oauth_app()
 #' }
 #'
 #' # restore original auth config

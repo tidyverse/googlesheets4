@@ -6,14 +6,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Contributing to googlesheets4 • googlesheets4</title>
+<title>Changelog • googlesheets4</title>
 
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
-<link href="tidyverse.css" rel="stylesheet">
+<link href="../tidyverse.css" rel="stylesheet">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
@@ -28,13 +28,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script>
-<link href="tidyverse-2.css" rel="stylesheet">
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script>
+<link href="../tidyverse-2.css" rel="stylesheet">
 
 
 
-<meta property="og:title" content="Contributing to googlesheets4" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -61,7 +61,7 @@
   </head>
 
   <body>
-    <div class="container template-title-body">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -74,7 +74,7 @@
       </button>
 
       <div class="navbar-brand-container">
-        <a class="navbar-brand" href="index.html">googlesheets4</a>
+        <a class="navbar-brand" href="../index.html">googlesheets4</a>
         <div class="info">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
           <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0.9000</span>
@@ -84,7 +84,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -94,18 +94,18 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
+      <a href="../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
     </li>
     <li>
-      <a href="articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
+      <a href="../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
     </li>
     <li>
-      <a href="articles/articles/range-specification.html">Range specification</a>
+      <a href="../articles/articles/range-specification.html">Range specification</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="news/index.html">Changelog</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
         <li>
   <a href="https://github.com/tidyverse/googlesheets4">
@@ -124,62 +124,38 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Contributing to googlesheets4</h1>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-<div id="contributing-to-googlesheets4" class="section level1">
-
-<p>This outlines how to propose a change to googlesheets4. For more detailed info about contributing to this, and other tidyverse packages, please see the <a href="https://rstd.io/tidy-contrib"><strong>development contributing guide</strong></a>.</p>
-<div id="fixing-typos" class="section level3">
-<h3 class="hasAnchor">
-<a href="#fixing-typos" class="anchor"></a>Fixing typos</h3>
-<p>Small typos or grammatical errors in documentation may be edited directly using the GitHub web interface, so long as the changes are made in the <em>source</em> file.</p>
+    <div id="googlesheets4-development-version" class="section level1">
+<h1 class="page-header">
+<a href="#googlesheets4-development-version" class="anchor"></a>googlesheets4 (development version)<small> Unreleased </small>
+</h1>
+</div>
+    <div id="googlesheets4-0-1-0" class="section level1">
+<h1 class="page-header">
+<a href="#googlesheets4-0-1-0" class="anchor"></a>googlesheets4 0.1.0<small> 2019-11-04 </small>
+</h1>
 <ul>
-<li>YES: you edit a roxygen comment in a <code>.R</code> file below <code>R/</code>.</li>
-<li>NO: you edit an <code>.Rd</code> file below <code>man/</code>.</li>
+<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 </ul>
 </div>
-<div id="prerequisites" class="section level3">
-<h3 class="hasAnchor">
-<a href="#prerequisites" class="anchor"></a>Prerequisites</h3>
-<p>Before you make a substantial pull request, you should always file an issue and make sure someone from the team agrees that it’s a problem. If you’ve found a bug, create an associated issue and illustrate the bug with a minimal <a href="https://www.tidyverse.org/help/#reprex">reprex</a>.</p>
-</div>
-<div id="pull-request-process" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pull-request-process" class="anchor"></a>Pull request process</h3>
-<ul>
-<li>We recommend that you create a Git branch for each pull request (PR).<br>
-</li>
-<li>Look at the Travis and AppVeyor build status before and after making changes. The <code>README</code> should contain badges for any continuous integration services used by the package.<br>
-</li>
-<li>New code should follow the tidyverse <a href="https://style.tidyverse.org">style guide</a>. You can use the <a href="https://CRAN.R-project.org/package=styler">styler</a> package to apply these styles, but please don’t restyle code that has nothing to do with your PR.<br>
-</li>
-<li>We use <a href="https://cran.r-project.org/package=roxygen2">roxygen2</a>, with <a href="https://cran.r-project.org/web/packages/roxygen2/vignettes/markdown.html">Markdown syntax</a>, for documentation.<br>
-</li>
-<li>We use <a href="https://cran.r-project.org/package=testthat">testthat</a>. Contributions with test cases included are easier to accept.<br>
-</li>
-<li>For user-facing changes, add a bullet to the top of <code>NEWS.md</code> below the current development version header describing the changes made followed by your GitHub username, and links to relevant issue(s)/PR(s).</li>
-</ul>
-</div>
-<div id="code-of-conduct" class="section level3">
-<h3 class="hasAnchor">
-<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h3>
-<p>Please note that the googlesheets4 project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project you agree to abide by its terms.</p>
-</div>
-<div id="see-tidyverse-development-contributing-guide" class="section level3">
-<h3 class="hasAnchor">
-<a href="#see-tidyverse-development-contributing-guide" class="anchor"></a>See tidyverse <a href="https://rstd.io/tidy-contrib">development contributing guide</a>
-</h3>
-<p>for further details.</p>
-</div>
-</div>
+  </div>
 
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <div id="tocnav">
+      <h2>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+        <li><a href="#googlesheets4-development-version">development version</a></li>
+        <li><a href="#googlesheets4-0-1-0">0.1.0</a></li>
+      </ul>
+    </div>
   </div>
 
 </div>
-
 
 
       <footer>

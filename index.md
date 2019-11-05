@@ -20,8 +20,7 @@ You can install the released version of googlesheets4 from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-# NO, NO YOU CANNOT ... BUT SOON!
-# install.packages("googlesheets4")
+install.packages("googlesheets4")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
@@ -305,7 +304,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpnY8oOm/iris-88e022567c00.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpO9k96x/iris-52c01686c65f.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -315,15 +314,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpnY8oOm/iris-88e022567c00.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpO9k96x/iris-52c01686c65f.csv
 #> uploaded into Drive file:
-#>   * iris-88e022567c00: 1IH-3hkz3aSpnDZh_RCFZIniq601qLLdAVt6oYwaEn1I
+#>   * iris-52c01686c65f: 1igNr3u_vfO7DyEDquqPHOyYCvZuTVZZEU-Gp9huONBQ
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
 #>   name             id                                      drive_resource  
 #> * <chr>            <chr>                                   <list>          
-#> 1 iris-88e022567c… 1IH-3hkz3aSpnDZh_RCFZIniq601qLLdAVt6oY… <named list [34…
+#> 1 iris-52c01686c6… 1igNr3u_vfO7DyEDquqPHOyYCvZuTVZZEU-Gp9… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -333,7 +332,7 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-88e022567c00'
+#> Reading from 'iris-52c01686c65f'
 #> Range "B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
@@ -350,12 +349,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpnY8oOm/iris-88e022567c00.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpO9k96x/iris-52c01686c65f.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-88e022567c00
+#>   * iris-52c01686c65f
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpnY8oOm/iris-88e022567c00.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpO9k96x/iris-52c01686c65f.xlsx
 
 if (requireNamespace("readxl", quietly = TRUE)) {
   readxl::read_excel(iris_xlsxfile)  
@@ -383,7 +382,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-88e022567c00: 1IH-3hkz3aSpnDZh_RCFZIniq601qLLdAVt6oYwaEn1I
+#>   * iris-52c01686c65f: 1igNr3u_vfO7DyEDquqPHOyYCvZuTVZZEU-Gp9huONBQ
 ```
 
 ## Get Sheet metadata or detailed cell data

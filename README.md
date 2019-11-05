@@ -3,13 +3,18 @@
 
 # googlesheets4
 
+<!-- badges: start -->
+
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/googlesheets4)](https://CRAN.R-project.org/package=googlesheets4)
 [![Travis build
 status](https://travis-ci.org/tidyverse/googlesheets4.svg?branch=master)](https://travis-ci.org/tidyverse/googlesheets4)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googlesheets4?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googlesheets4)
 [![Coverage
 status](https://codecov.io/gh/tidyverse/googlesheets4/branch/master/graph/badge.svg)](https://codecov.io/github/tidyverse/googlesheets4?branch=master)
+<!-- badges: end -->
 
 googlesheets4 provides an R interface to [Google
 Sheets](https://spreadsheets.google.com/) via the [Sheets API
@@ -31,8 +36,7 @@ You can install the released version of googlesheets4 from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-# NO, NO YOU CANNOT ... BUT SOON!
-# install.packages("googlesheets4")
+install.packages("googlesheets4")
 ```
 
 And the development version from [GitHub](https://github.com/) with:

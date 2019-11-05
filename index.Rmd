@@ -34,8 +34,7 @@ googlesheets4 provides an R interface to [Google Sheets](https://spreadsheets.go
 You can install the released version of googlesheets4 from [CRAN](https://CRAN.R-project.org) with:
 
 ```{r, eval = FALSE}
-# NO, NO YOU CANNOT ... BUT SOON!
-# install.packages("googlesheets4")
+install.packages("googlesheets4")
 ```
 
 And the development version from [GitHub](https://github.com/) with:

@@ -4,7 +4,7 @@
 \alias{request_make}
 \title{Make a Google Sheets API request}
 \usage{
-request_make(x, ...)
+request_make(x, ..., encode = c("json", "multipart", "form", "raw"))
 }
 \arguments{
 \item{x}{List. Holds the components for an HTTP request, presumably created
@@ -12,6 +12,11 @@ with \code{\link[=request_generate]{request_generate()}} or \code{\link[gargle:r
 \code{method} and \code{url}. If present, \code{body} and \code{token} are used.}
 
 \item{...}{Optional arguments passed through to the HTTP method.}
+
+\item{encode}{If the body is a named list, how should it be encoded? This is
+essentially the same as \code{encode} in all the \code{\link[httr:VERB]{httr::VERB()}}s, except we
+choose a different default: a default of \code{encode = "json"} is much more
+useful when calling Google APIs.}
 }
 \value{
 Object of class \code{response} from \link{httr}.

@@ -19,4 +19,8 @@ methods <- methods %>% map(add_global_params, dd)
 attr(.endpoints, "base_url") <- dd$rootUrl
 # View(.endpoints)
 
-usethis::use_data(.endpoints, internal = TRUE, overwrite = TRUE)
+# I'm exploring the pros/cons of working with these more properly, as opposed
+# to the "flattened" or "inlined" representation currently in .endpoints
+.schemas <- pluck(dd, "schemas")
+
+usethis::use_data(.endpoints, .schemas, internal = TRUE, overwrite = TRUE)

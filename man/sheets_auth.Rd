@@ -110,7 +110,8 @@ if (interactive()) {
 }
 }
 \seealso{
-Other auth functions: \code{\link{sheets_auth_configure}()},
-  \code{\link{sheets_deauth}()}
+Other auth functions: 
+\code{\link{sheets_auth_configure}()},
+\code{\link{sheets_deauth}()}
 }
 \concept{auth functions}

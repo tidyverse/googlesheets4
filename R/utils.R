@@ -13,9 +13,17 @@ is_integerish <- function(x) {
 }
 
 check_string <- function(x, nm = deparse(substitute(x))) {
-  check_character(x)
-  check_length_one(x)
+  check_character(x, nm = nm)
+  check_length_one(x, nm = nm)
   x
+}
+
+maybe_string <- function(x, nm = deparse(substitute(x))) {
+  if (is.null(x)) {
+    x
+  } else {
+    check_string(x, nm = nm)
+  }
 }
 
 check_length_one <- function(x, nm = deparse(substitute(x))) {

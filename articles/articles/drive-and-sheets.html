@@ -122,9 +122,9 @@
 <p>Now you can use googledrive functions, like <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> or <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">googledrive::drive_get()</a></code>, to list files or find them by name, path, or other property. Then, once you’ve identified the target file, use googlesheets4 to do spreadsheet-specific tasks.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="st">"chicken"</span>)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;   name          id                                         drive_resource  </span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt;                                      &lt;list&gt;          </span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; 1 chicken-sheet 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUg… &lt;named list [35…</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt;   name          id                                           drive_resource   </span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt;                                        &lt;list&gt;           </span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; 1 chicken-sheet 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU &lt;named list [35]&gt;</span></a>
 <a class="sourceLine" id="cb3-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb3-7" data-line-number="7">ss &lt;-<span class="st"> </span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"chicken-sheet"</span>)</a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"></a>
@@ -142,13 +142,13 @@
 <a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt; Reading from 'chicken-sheet'</span></a>
 <a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;   chicken           breed        sex    motto                              </span></a>
-<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;                              </span></a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt; 1 Foghorn Leghorn   Leghorn      roost… That's a joke, ah say, that's a jo…</span></a>
-<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt; 2 Chicken Little    unknown      hen    The sky is falling!                </span></a>
-<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt; 3 Ginger            Rhode Islan… hen    Listen. We'll either die free chic…</span></a>
-<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt; 4 Camilla the Chic… Chantecler   hen    Bawk, buck, ba-gawk.               </span></a>
-<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt; 5 Ernie The Giant … Brahma       roost… Put Captain Solo in the cargo hold.</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt;   chicken            breed         sex    motto                                 </span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                                 </span></a>
+<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt; 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…</span></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt; 2 Chicken Little     unknown       hen    The sky is falling!                   </span></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt; 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…</span></a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt; 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  </span></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">#&gt; 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.</span></a></code></pre></div>
 <p>If you ever want to confirm the currently authenticated user, both packages provide a <code>*_user()</code> function that reveals some info:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_user.html">drive_user</a></span>()</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; Logged in as:</span></a>
@@ -175,9 +175,9 @@
 <p>Now you can use googledrive functions to list files or find them by name, path, or other property. Then, once you’ve identified the target file, use googlesheets4 to do spreadsheet-specific tasks.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="st">"chicken"</span>)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; # A tibble: 1 x 3</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;   name          id                                         drive_resource  </span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt;                                      &lt;list&gt;          </span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; 1 chicken-sheet 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUg… &lt;named list [35…</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;   name          id                                           drive_resource   </span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt;                                        &lt;list&gt;           </span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt; 1 chicken-sheet 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU &lt;named list [35]&gt;</span></a>
 <a class="sourceLine" id="cb7-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb7-7" data-line-number="7">ss &lt;-<span class="st"> </span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"chicken-sheet"</span>)</a>
 <a class="sourceLine" id="cb7-8" data-line-number="8"></a>
@@ -195,13 +195,13 @@
 <a class="sourceLine" id="cb7-20" data-line-number="20"><span class="co">#&gt; Reading from 'chicken-sheet'</span></a>
 <a class="sourceLine" id="cb7-21" data-line-number="21"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb7-22" data-line-number="22"><span class="co">#&gt; # A tibble: 5 x 4</span></a>
-<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt;   chicken           breed        sex    motto                              </span></a>
-<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">#&gt;   &lt;chr&gt;             &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;                              </span></a>
-<a class="sourceLine" id="cb7-25" data-line-number="25"><span class="co">#&gt; 1 Foghorn Leghorn   Leghorn      roost… That's a joke, ah say, that's a jo…</span></a>
-<a class="sourceLine" id="cb7-26" data-line-number="26"><span class="co">#&gt; 2 Chicken Little    unknown      hen    The sky is falling!                </span></a>
-<a class="sourceLine" id="cb7-27" data-line-number="27"><span class="co">#&gt; 3 Ginger            Rhode Islan… hen    Listen. We'll either die free chic…</span></a>
-<a class="sourceLine" id="cb7-28" data-line-number="28"><span class="co">#&gt; 4 Camilla the Chic… Chantecler   hen    Bawk, buck, ba-gawk.               </span></a>
-<a class="sourceLine" id="cb7-29" data-line-number="29"><span class="co">#&gt; 5 Ernie The Giant … Brahma       roost… Put Captain Solo in the cargo hold.</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="co">#&gt;   chicken            breed         sex    motto                                 </span></a>
+<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                                 </span></a>
+<a class="sourceLine" id="cb7-25" data-line-number="25"><span class="co">#&gt; 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…</span></a>
+<a class="sourceLine" id="cb7-26" data-line-number="26"><span class="co">#&gt; 2 Chicken Little     unknown       hen    The sky is falling!                   </span></a>
+<a class="sourceLine" id="cb7-27" data-line-number="27"><span class="co">#&gt; 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…</span></a>
+<a class="sourceLine" id="cb7-28" data-line-number="28"><span class="co">#&gt; 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  </span></a>
+<a class="sourceLine" id="cb7-29" data-line-number="29"><span class="co">#&gt; 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.</span></a></code></pre></div>
 </div>
 <div id="scope-savvy" class="section level2">
 <h2 class="hasAnchor">

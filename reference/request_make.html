@@ -151,7 +151,7 @@ been created with <code><a href='request_generate.html'>request_generate()</a></
 output is processed with <code>process_response()</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>request_make</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>request_make</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>encode</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"json"</span>, <span class='st'>"multipart"</span>, <span class='st'>"form"</span>, <span class='st'>"raw"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -166,6 +166,13 @@ with <code><a href='request_generate.html'>request_generate()</a></code> or <cod
       <th>...</th>
       <td><p>Optional arguments passed through to the HTTP method.</p></td>
     </tr>
+    <tr>
+      <th>encode</th>
+      <td><p>If the body is a named list, how should it be encoded? This is
+essentially the same as <code>encode</code> in all the <code><a href='https://httr.r-lib.org/reference/VERB.html'>httr::VERB()</a></code>s, except we
+choose a different default: a default of <code>encode = "json"</code> is much more
+useful when calling Google APIs.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -173,9 +180,10 @@ with <code><a href='request_generate.html'>request_generate()</a></code> or <cod
     <p>Object of class <code>response</code> from httr.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other low-level API functions: <code><a href='request_generate.html'>request_generate</a>()</code>,
-  <code><a href='sheets_has_token.html'>sheets_has_token</a>()</code>,
-  <code><a href='sheets_token.html'>sheets_token</a>()</code></p></div>
+    <div class='dont-index'><p>Other low-level API functions: 
+<code><a href='request_generate.html'>request_generate</a>()</code>,
+<code><a href='sheets_has_token.html'>sheets_has_token</a>()</code>,
+<code><a href='sheets_token.html'>sheets_token</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

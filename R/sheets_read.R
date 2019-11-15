@@ -240,14 +240,14 @@ spread_sheet_impl_ <- function(df,
 
   df_split <- map(seq_len(nc), ~ df[df$col == .x, ])
 
-  out_scratch <- purrr::map2(
+  out_scratch <- map2(
     df_split,
     ctypes,
     make_column,
     na = na, trim_ws = trim_ws, nr = nr, guess_max = guess_max
   ) %>%
-    purrr::set_names(col_names) %>%
-    purrr::discard(is.null)
+    set_names(col_names) %>%
+    discard(is.null)
 
   tibble::as_tibble(out_scratch, .name_repair = .name_repair)
 }
@@ -287,7 +287,7 @@ standardise_ctypes <- function(col_types) {
     )
   }
 
-  accepted_codes <- purrr::keep(names(.ctypes), nzchar)
+  accepted_codes <- keep(names(.ctypes), nzchar)
 
   col_types_split <- strsplit(col_types, split = "")[[1]]
   ok <- col_types_split %in% accepted_codes

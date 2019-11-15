@@ -98,7 +98,7 @@ cells <- function(x = list()) {
       times = row_lengths
     ),
     col = start_column + sequence(row_lengths) - 1,
-    cell = purrr::flatten(row_data)
+    cell = flatten(row_data)
   )
 
   ## cells can be present, just because they bear a format (much like Excel)

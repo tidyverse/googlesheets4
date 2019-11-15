@@ -128,7 +128,7 @@ consensus_col_type <- function(ctype) {
 }
 
 blank_to_logical <- function(ctype) {
-  purrr::modify_if(ctype, ~ identical(.x, "CELL_BLANK"), ~ "CELL_LOGICAL")
+  modify_if(ctype, ~ identical(.x, "CELL_BLANK"), ~ "CELL_LOGICAL")
 }
 
 ## input: an instance of CellData

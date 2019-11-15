@@ -17,7 +17,7 @@ is how googledrive represents Drive files. Processed through
 }
 \value{
 \itemize{
-\item \code{sheets_get()}: A list with S3 class \code{sheets_meta}, for printing
+\item \code{sheets_get()}: A list with S3 class \code{sheets_Spreadsheet}, for printing
 purposes.
 \item \code{sheets_sheets()}: A character vector.
 }

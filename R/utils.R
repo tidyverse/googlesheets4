@@ -50,15 +50,23 @@ check_character <- function(x, nm = deparse(substitute(x))) {
   x
 }
 
-check_non_negative_integer <- function(i, nm = deparse(substitute(x))) {
+check_non_negative_integer <- function(i, nm = deparse(substitute(i))) {
   if (length(i) != 1 || !is.numeric(i) ||
       !is_integerish(i) || is.na(i) || i < 0) {
     stop_glue(
       "{bt(nm)} must be a positive integer:\n",
-      "  * {bt(nm)} has class {class_collapse(x)}"
+      "  * {bt(nm)} has class {class_collapse(i)}"
     )
   }
   i
+}
+
+maybe_non_negative_integer <- function(i, nm = deparse(substitute(i))) {
+  if (is.null(i)) {
+    i
+  } else {
+    check_non_negative_integer(i, nm = nm)
+  }
 }
 
 check_bool <- function(bool, nm = deparse(substitute(x))) {
@@ -66,6 +74,14 @@ check_bool <- function(bool, nm = deparse(substitute(x))) {
     stop_glue("{bt(nm)} must be either TRUE or FALSE")
   }
   bool
+}
+
+maybe_bool <- function(bool, nm = deparse(substitute(x))) {
+  if (is.null(bool)) {
+    bool
+  } else {
+    check_bool(bool, nm = nm)
+  }
 }
 
 vlookup <- function(this, data, key, value) {

@@ -19,7 +19,7 @@ validate_NamedRange <- function(x) {
   maybe_string(x$namedRangeId, "namedRangeId")
   maybe_string(x$name, "name")
 
-  # range is an instance of GridRange
+  validate_GridRange(x$range)
 
   x
 }

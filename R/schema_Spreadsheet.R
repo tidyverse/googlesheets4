@@ -1,10 +1,10 @@
 # https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#Spreadsheet
-new_Spreadsheet <- function(spreadsheetId = NULL,
-                            properties = NULL,
-                            sheets = NULL,
-                            namedRanges = NULL,
-                            spreadsheetUrl = NULL,
-                            developerMetadata = NULL) {
+Spreadsheet <- function(spreadsheetId = NULL,
+                        properties = NULL,
+                        sheets = NULL,
+                        namedRanges = NULL,
+                        spreadsheetUrl = NULL,
+                        developerMetadata = NULL) {
   x <- list(
     spreadsheetId = spreadsheetId,
     properties = properties,
@@ -13,37 +13,7 @@ new_Spreadsheet <- function(spreadsheetId = NULL,
     spreadsheetUrl = spreadsheetUrl,
     developerMetadata = developerMetadata
   )
-  structure(
-    validate_Spreadsheet(x),
-    class = "Spreadsheet"
-  )
-}
-
-validate_Spreadsheet <- function(x) {
-  maybe_string(x$spreadsheetId, "spreadsheetId")
-
-  if (!is.null(x$properties)) {
-    validate_SpreadsheetProperties(x$properties)
-  }
-
-  if (!is.null(x$sheets)) {
-    walk(x$sheets, validate_Sheet)
-  }
-
-  if (!is.null(x$namedRanges)) {
-    walk(x$namedRanges, validate_NamedRange)
-  }
-
-  maybe_string(x$spreadsheetUrl, "spreadsheetUrl")
-
-  # developerMetadata is an instance of DeveloperMetadata
-
-  x
-}
-
-Spreadsheet <- function(...) {
-  x <- new_Spreadsheet(...)
-  compact(x)
+  structure(x, class = "Spreadsheet")
 }
 
 #  input: instance of Spreadsheet, in the Sheets API sense, as a named list

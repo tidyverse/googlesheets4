@@ -6,7 +6,7 @@
 #' @seealso Wraps the `spreadsheets.create` endpoint:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create>
 #'
-#' @param title The title of the spreadsheet.
+#' @param name The name of the spreadsheet.
 #' @param ... Optional spreadsheet properties that can be set through this API
 #'   endpoint, such as locale and time zone.
 #' @param sheets Optional something something about the sheets. Will this just
@@ -28,13 +28,13 @@
 #'     timeZone = "Europe/Paris"
 #'   )
 #' }
-sheets_create <- function(title, ..., sheets = NULL) {
+sheets_create <- function(name, ..., sheets = NULL) {
+  # TODO: do I care that this loses the SpreadsheetProperties class?
+  ss_props <- compact(SpreadsheetProperties(title = name, ...))
   req <- request_generate(
     "sheets.spreadsheets.create",
     params = Spreadsheet(
-      properties = SpreadsheetProperties(
-        title = title,
-        ...)
+      properties = ss_props
     )
   )
   raw_resp <- request_make(req)

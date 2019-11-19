@@ -1,5 +1,8 @@
 `%NA%` <- function(x, y) if (is.na(x)) y else x
 
+# for development only
+str1 <- function(x, ...) utils::str(x, ..., max.level = 1)
+
 noNA <- Negate(anyNA)
 allNA <- function(x) all(is.na(x))
 notNA <- Negate(is.na)

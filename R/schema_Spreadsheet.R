@@ -1,6 +1,6 @@
 # https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#Spreadsheet
 Spreadsheet <- function(spreadsheetId = NULL,
-                        properties = NULL,
+                        properties = SpreadsheetProperties(),
                         sheets = NULL,
                         namedRanges = NULL,
                         spreadsheetUrl = NULL,
@@ -29,20 +29,9 @@ sheets_Spreadsheet <- function(x = list()) {
   out <- map(ours_theirs, ~ pluck(x, !!!.x))
 
   if (!is.null(x$sheets)) {
-    # TODO: refactor in terms of a to-be-created sheets_Sheet()? changes the
-    # angle of attack to Sheet-wise, whereas here I work property-wise
-    p <- map(x$sheets, "properties")
-    out$sheets <- tibble::tibble(
-      # TODO: open question whether I should explicitly unescape here
-      name         = map_chr(p, "title"),
-      index        = map_int(p, "index"),
-      id           = map_chr(p, "sheetId"),
-      type         = map_chr(p, "sheetType"),
-      visible      = !map_lgl(p, "hidden", .default = FALSE),
-      # TODO: refactor in terms of methods created around GridData?
-      grid_rows    = map_int(p, c("gridProperties", "rowCount"), .default = NA),
-      grid_columns = map_int(p, c("gridProperties", "columnCount"), .default = NA)
-    )
+    sheets <- map(x$sheets, ~ do.call(Sheet, .x))
+    sheets <- map(sheets, tibblify_Sheet)
+    out$sheets <- do.call(rbind, sheets)
   }
 
   if (!is.null(x$namedRanges)) {

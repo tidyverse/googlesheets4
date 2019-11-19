@@ -8,10 +8,10 @@ SpreadsheetProperties <- function(title,
   x <- list(
     title = title,
     locale = locale,
-    autoRecalc = autoRecalc,
+    autoRecalc = autoRecalc,                                    # enum
     timeZone = timeZone,
-    defaultFormat = defaultFormat,
-    iterativeCalculationSettings = iterativeCalculationSettings
+    defaultFormat = defaultFormat,                              # unimplemented schema
+    iterativeCalculationSettings = iterativeCalculationSettings # unimplemented schema
   )
-  structure(x, class = "SpreadsheetProperties")
+  structure(x, class = c("SpreadsheetProperties", "list"))
 }

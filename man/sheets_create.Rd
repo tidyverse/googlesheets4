@@ -4,10 +4,10 @@
 \alias{sheets_create}
 \title{Create a new Sheet}
 \usage{
-sheets_create(title, ..., sheets = NULL)
+sheets_create(name, ..., sheets = NULL)
 }
 \arguments{
-\item{title}{The title of the spreadsheet.}
+\item{name}{The name of the spreadsheet.}
 
 \item{...}{Optional spreadsheet properties that can be set through this API
 endpoint, such as locale and time zone.}

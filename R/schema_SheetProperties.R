@@ -17,7 +17,7 @@ SheetProperties <- function(sheetId = NULL,
     tabColor = tabColor,             # schema
     rightToLeft = rightToLeft
   )
-  structure(x, class = "SheetProperties")
+  structure(x, class = c("SheetProperties", "list"))
 }
 
 tibblify_SheetProperties <- function(x) {

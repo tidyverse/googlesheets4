@@ -31,11 +31,25 @@
 sheets_create <- function(name, ..., sheets = NULL) {
   # TODO: do I care that this loses the SpreadsheetProperties class?
   ss_props <- compact(SpreadsheetProperties(title = name, ...))
+  # ss_sheets <- list(
+  #   new_Sheet(iris, "yo"),
+  #   compact(Sheet(
+  #     properties = compact(SheetProperties(
+  #       title = "foofy",
+  #       gridProperties = list(rowCount = 3, columnCount = 5)
+  #     ))
+  #   ))
+  # )
+  ss_sheets <- NULL
+  if (!is.null(sheets)) {
+    ss_sheets <- unname(purrr::imap(sheets, as_Sheet))
+  }
   req <- request_generate(
     "sheets.spreadsheets.create",
-    params = Spreadsheet(
-      properties = ss_props
-    )
+    params = compact(Spreadsheet(
+      properties = ss_props,
+      sheets = ss_sheets
+    ))
   )
   raw_resp <- request_make(req)
   resp <- gargle::response_process(raw_resp)

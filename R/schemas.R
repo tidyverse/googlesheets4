@@ -1,4 +1,4 @@
-new_from_schema <- function(id, ...) {
+new <- function(id, ...) {
   schema <- .tidy_schemas[[id]]
   if (is.null(schema)) {
     rlang::abort(glue("Can't find a tidy schema with id {sq(id)}"))
@@ -49,7 +49,7 @@ patch.default <- function(x, ...) {
 
 patch.googlesheets4_schema <- function(x, ...) {
   dots <- rlang::list2(...)
-  new_from_schema(id_from_class(x), !!!utils::modifyList(x, dots))
+  new(id_from_class(x), !!!utils::modifyList(x, dots))
 }
 
 # tibblify ----

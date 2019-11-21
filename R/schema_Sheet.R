@@ -1,6 +1,6 @@
 #' @export
 tibblify.googlesheets4_Sheet <- function(x, ...) {
-  out <- tibblify(new_from_schema("SheetProperties", !!!x$properties))
+  out <- tibblify(new("SheetProperties", !!!x$properties))
   # TODO: come back to deal with `data`
   tibble::add_column(out, data = list(NULL))
 }
@@ -19,9 +19,9 @@ as_Sheet.default <- function(df, name) {
 #' @export
 as_Sheet.data.frame <- function(df, name) {
   check_string(name)
-  x <- new_from_schema(
+  x <- new(
     id = "Sheet",
-    properties = new_from_schema(
+    properties = new(
       id = "SheetProperties",
       title = name,
       # TODO: not making room for col_names here yet

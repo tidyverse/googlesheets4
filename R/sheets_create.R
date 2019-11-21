@@ -29,8 +29,8 @@
 #'   )
 #' }
 sheets_create <- function(name, ..., sheets = NULL) {
-  ss_body <- new_from_schema("Spreadsheet") %>%
-    patch(properties = new_from_schema(
+  ss_body <- new("Spreadsheet") %>%
+    patch(properties = new(
       id = "SpreadsheetProperties",
       title = name, ...
     ))

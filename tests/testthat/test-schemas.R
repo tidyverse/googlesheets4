@@ -54,6 +54,12 @@ test_that("patch() overwrites existing data", {
   expect_length(x, 1)
 })
 
+test_that("patch() can clear a property", {
+  x <- new("Spreadsheet", spreadsheetId = "abc")
+  x <- patch(x, spreadsheetId = NULL)
+  expect_null(x$spreadsheetId)
+})
+
 test_that("patch() retains classes", {
   x <- new("Spreadsheet")
   classes_in <- class(x)

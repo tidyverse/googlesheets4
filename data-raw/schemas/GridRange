@@ -1,0 +1,9 @@
+# GridRange  
+# A tibble: 5 x 6
+  property         type    instance_of array_of format enum            
+  <chr>            <chr>   <chr>       <chr>    <chr>  <list>          
+1 startRowIndex    integer <NA>        <NA>     int32  <tibble [0 × 2]>
+2 startColumnIndex integer <NA>        <NA>     int32  <tibble [0 × 2]>
+3 sheetId          integer <NA>        <NA>     int32  <tibble [0 × 2]>
+4 endRowIndex      integer <NA>        <NA>     int32  <tibble [0 × 2]>
+5 endColumnIndex   integer <NA>        <NA>     int32  <tibble [0 × 2]>

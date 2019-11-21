@@ -41,6 +41,15 @@ these <- c(
   map(schema_rectangle)
 # View(.tidy_schemas)
 
+fs::dir_create(here::here("data-raw", "schemas"))
+write_one <- function(data, id) {
+  sink(here::here("data-raw", "schemas", id))
+  cat("#", id, " \n")
+  print(data)
+  sink()
+}
+iwalk(.tidy_schemas, write_one)
+
 usethis::use_data(
   .endpoints, .schemas, .tidy_schemas,
   internal = TRUE, overwrite = TRUE

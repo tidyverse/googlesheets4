@@ -1,0 +1,12 @@
+# SheetProperties  
+# A tibble: 8 x 6
+  property       type    instance_of    array_of format enum            
+  <chr>          <chr>   <chr>          <chr>    <chr>  <list>          
+1 hidden         boolean <NA>           <NA>     <NA>   <tibble [0 × 2]>
+2 sheetType      enum    <NA>           <NA>     <NA>   <tibble [3 × 2]>
+3 gridProperties object  GridProperties <NA>     <NA>   <tibble [0 × 2]>
+4 title          string  <NA>           <NA>     <NA>   <tibble [0 × 2]>
+5 index          integer <NA>           <NA>     int32  <tibble [0 × 2]>
+6 tabColor       object  Color          <NA>     <NA>   <tibble [0 × 2]>
+7 sheetId        integer <NA>           <NA>     int32  <tibble [0 × 2]>
+8 rightToLeft    boolean <NA>           <NA>     <NA>   <tibble [0 × 2]>

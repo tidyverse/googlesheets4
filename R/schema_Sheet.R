@@ -16,6 +16,7 @@ as_Sheet.default <- function(df, name) {
   )
 }
 
+#' @export
 as_Sheet.data.frame <- function(df, name) {
   check_string(name)
   x <- new_from_schema(

@@ -1,21 +1,3 @@
-# https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#Spreadsheet
-Spreadsheet <- function(spreadsheetId = NULL,
-                        properties = SpreadsheetProperties(),
-                        sheets = NULL,
-                        namedRanges = NULL,
-                        spreadsheetUrl = NULL,
-                        developerMetadata = NULL) {
-  x <- list(
-    spreadsheetId = spreadsheetId,
-    properties = properties,
-    sheets = sheets,
-    namedRanges = namedRanges,
-    spreadsheetUrl = spreadsheetUrl,
-    developerMetadata = developerMetadata
-  )
-  structure(x, class = "Spreadsheet")
-}
-
 #  input: instance of Spreadsheet, in the Sheets API sense, as a named list
 # output: instance of sheets_Spreadsheet, which is how I want to hold this info
 sheets_Spreadsheet <- function(x = list()) {
@@ -29,8 +11,7 @@ sheets_Spreadsheet <- function(x = list()) {
   out <- map(ours_theirs, ~ pluck(x, !!!.x))
 
   if (!is.null(x$sheets)) {
-    sheets <- map(x$sheets, ~ do.call(Sheet, .x))
-    sheets <- map(sheets, tibblify_Sheet)
+    sheets <- map(x$sheets, tibblify_Sheet)
     out$sheets <- do.call(rbind, sheets)
   }
 

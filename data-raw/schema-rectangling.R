@@ -12,12 +12,12 @@ schema_rectangle <- function(s) {
 
   properties <- pluck(schema, "properties")
   scaffold <- list(
-    description = "Just a placeholder",
-    type = "scaffold",
-    "$ref" = "SCHEMA",
-    items = list("$ref" = "SCHEMA"),
-    format = "FORMAT",
-    enum = letters[1:3],
+    description      = "Just a placeholder",
+    type             = "scaffold",
+    "$ref"           = "SCHEMA",
+    items            = list("$ref" = "SCHEMA"),
+    format           = "FORMAT",
+    enum             = letters[1:3],
     enumDescriptions = LETTERS[1:3]
   )
   df <- tibble(properties = c(scaffold = list(scaffold), properties))
@@ -46,5 +46,6 @@ schema_rectangle <- function(s) {
     mutate(type = if_else(map_lgl(enum, ~ nrow(.x) > 0), "enum", type))
 
   df %>%
-    filter(property != "scaffold")
+    filter(property != "scaffold") %>%
+    arrange(property)
 }

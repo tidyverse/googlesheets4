@@ -9,6 +9,8 @@ new_from_schema <- function(id, ...) {
 
   structure(
     dots,
+    # explicit 'list' class is a bit icky but makes jsonlite happy
+    # in various vctrs futures, this could need revisiting
     class = c(id_as_class(id), "googlesheets4_schema", "list"),
     schema = schema
   )

@@ -2,6 +2,6 @@
 # A tibble: 3 x 6
   property     type   instance_of array_of format enum            
   <chr>        <chr>  <chr>       <chr>    <chr>  <list>          
-1 name         string <NA>        <NA>     <NA>   <tibble [0 × 2]>
-2 namedRangeId string <NA>        <NA>     <NA>   <tibble [0 × 2]>
-3 range        object GridRange   <NA>     <NA>   <tibble [0 × 2]>
+1 namedRangeId string <NA>        <NA>     <NA>   <tibble [0 × 2]>
+2 range        object GridRange   <NA>     <NA>   <tibble [0 × 2]>
+3 name         string <NA>        <NA>     <NA>   <tibble [0 × 2]>

@@ -45,6 +45,8 @@ schema_rectangle <- function(s) {
     rename(enum = new) %>%
     mutate(type = if_else(map_lgl(enum, ~ nrow(.x) > 0), "enum", type))
 
+  attr(df, "id") <- s
+
   df %>%
     filter(property != "scaffold") %>%
     arrange(property)

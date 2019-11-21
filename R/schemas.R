@@ -41,11 +41,22 @@ patch <- function(x, ...) {
 
 patch.default <- function(x, ...) {
   stop_glue("
-    Don't know how to {bt('patch()')} an object of class {class_collapse(x)}
+  Don't know how to {bt('patch()')} an object of class {class_collapse(x)}
   ")
 }
 
 patch.googlesheets4_schema <- function(x, ...) {
   dots <- rlang::list2(...)
   new_from_schema(id_from_class(x), !!!utils::modifyList(x, dots))
+}
+
+# tibblify ----
+tibblify <- function(x, ...) {
+  UseMethod("tibblify")
+}
+
+tibblify.default <- function(x, ...) {
+  stop_glue("
+    Don't know how to {bt('tibblify()')} an object of class {class_collapse(x)}
+  ")
 }

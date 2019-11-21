@@ -1,5 +1,6 @@
-tibblify_Sheet <- function(x) {
-  out <- tibblify_SheetProperties(new_from_schema("SheetProperties", !!!x$properties))
+#' @export
+tibblify.googlesheets4_Sheet <- function(x, ...) {
+  out <- tibblify(new_from_schema("SheetProperties", !!!x$properties))
   # TODO: come back to deal with `data`
   tibble::add_column(out, data = list(NULL))
 }

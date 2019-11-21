@@ -1,4 +1,5 @@
-tibblify_SheetProperties <- function(x) {
+#' @export
+tibblify.googlesheets4_SheetProperties <- function(x, ...) {
   # weird-looking workaround for the (current) lack of typed pluck()
   # revisit this when I depend on vctrs directly
   x <- list(x)

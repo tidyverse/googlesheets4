@@ -11,7 +11,8 @@ sheets_Spreadsheet <- function(x = list()) {
   out <- map(ours_theirs, ~ pluck(x, !!!.x))
 
   if (!is.null(x$sheets)) {
-    sheets <- map(x$sheets, tibblify_Sheet)
+    sheets <- map(x$sheets, ~ new_from_schema("Sheet", !!!.x))
+    sheets <- map(sheets, tibblify)
     out$sheets <- do.call(rbind, sheets)
   }
 

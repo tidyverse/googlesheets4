@@ -79,13 +79,13 @@ sheets_example("chicken-sheet") %>%
 #> Reading from 'chicken-sheet'
 #> 
 #> # A tibble: 5 x 4
-#>   chicken           breed        sex    motto                              
-#>   <chr>             <chr>        <chr>  <chr>                              
-#> 1 Foghorn Leghorn   Leghorn      roost… That's a joke, ah say, that's a jo…
-#> 2 Chicken Little    unknown      hen    The sky is falling!                
-#> 3 Ginger            Rhode Islan… hen    Listen. We'll either die free chic…
-#> 4 Camilla the Chic… Chantecler   hen    Bawk, buck, ba-gawk.               
-#> 5 Ernie The Giant … Brahma       roost… Put Captain Solo in the cargo hold.
+#>   chicken            breed         sex    motto                                 
+#>   <chr>              <chr>         <chr>  <chr>                                 
+#> 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…
+#> 2 Chicken Little     unknown       hen    The sky is falling!                   
+#> 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…
+#> 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  
+#> 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.
 ```
 
 Read specific cells, from a specific sheet, using an A1-style notation:
@@ -96,19 +96,18 @@ sheets_example("deaths") %>%
 #> Reading from 'deaths'
 #> Range "'arts'!A5:F15"
 #> # A tibble: 10 x 6
-#>    Name  Profession   Age `Has kids` `Date of birth`    
-#>    <chr> <chr>      <dbl> <lgl>      <dttm>             
-#>  1 Davi… musician      69 TRUE       1947-01-08 00:00:00
-#>  2 Carr… actor         60 TRUE       1956-10-21 00:00:00
-#>  3 Chuc… musician      90 TRUE       1926-10-18 00:00:00
-#>  4 Bill… actor         61 TRUE       1955-05-17 00:00:00
-#>  5 Prin… musician      57 TRUE       1958-06-07 00:00:00
-#>  6 Alan… actor         69 FALSE      1946-02-21 00:00:00
-#>  7 Flor… actor         82 TRUE       1934-02-14 00:00:00
-#>  8 Harp… author        89 FALSE      1926-04-28 00:00:00
-#>  9 Zsa … actor         99 TRUE       1917-02-06 00:00:00
-#> 10 Geor… musician      53 FALSE      1963-06-25 00:00:00
-#> # … with 1 more variable: `Date of death` <dttm>
+#>    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    
+#>    <chr>     <chr>      <dbl> <lgl>      <dttm>              <dttm>             
+#>  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
+#>  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00
+#>  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
+#>  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00
+#>  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00
+#>  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00
+#>  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00
+#>  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00
+#>  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00
+#> 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00
 ```
 
 Read from a named range or region and specify (some of the ) column
@@ -120,18 +119,18 @@ sheets_example("deaths") %>%
 #> Reading from 'deaths'
 #> Range "arts_data"
 #> # A tibble: 10 x 6
-#>    Name         Profession   Age `Has kids` `Date of birth` `Date of death`
-#>    <chr>        <chr>      <int> <lgl>      <date>          <date>         
-#>  1 David Bowie  musician      69 TRUE       1947-01-08      2016-01-10     
-#>  2 Carrie Fish… actor         60 TRUE       1956-10-21      2016-12-27     
-#>  3 Chuck Berry  musician      90 TRUE       1926-10-18      2017-03-18     
-#>  4 Bill Paxton  actor         61 TRUE       1955-05-17      2017-02-25     
-#>  5 Prince       musician      57 TRUE       1958-06-07      2016-04-21     
-#>  6 Alan Rickman actor         69 FALSE      1946-02-21      2016-01-14     
-#>  7 Florence He… actor         82 TRUE       1934-02-14      2016-11-24     
-#>  8 Harper Lee   author        89 FALSE      1926-04-28      2016-02-19     
-#>  9 Zsa Zsa Gáb… actor         99 TRUE       1917-02-06      2016-12-18     
-#> 10 George Mich… musician      53 FALSE      1963-06-25      2016-12-25
+#>    Name              Profession   Age `Has kids` `Date of birth` `Date of death`
+#>    <chr>             <chr>      <int> <lgl>      <date>          <date>         
+#>  1 David Bowie       musician      69 TRUE       1947-01-08      2016-01-10     
+#>  2 Carrie Fisher     actor         60 TRUE       1956-10-21      2016-12-27     
+#>  3 Chuck Berry       musician      90 TRUE       1926-10-18      2017-03-18     
+#>  4 Bill Paxton       actor         61 TRUE       1955-05-17      2017-02-25     
+#>  5 Prince            musician      57 TRUE       1958-06-07      2016-04-21     
+#>  6 Alan Rickman      actor         69 FALSE      1946-02-21      2016-01-14     
+#>  7 Florence Henders… actor         82 TRUE       1934-02-14      2016-11-24     
+#>  8 Harper Lee        author        89 FALSE      1926-04-28      2016-02-19     
+#>  9 Zsa Zsa Gábor     actor         99 TRUE       1917-02-06      2016-12-18     
+#> 10 George Michael    musician      53 FALSE      1963-06-25      2016-12-25
 ```
 
 There are various ways to specify the target Sheet. The simplest, but
@@ -144,13 +143,13 @@ read_sheet(url)
 #> Reading from 'chicken-sheet'
 #> 
 #> # A tibble: 5 x 4
-#>   chicken           breed        sex    motto                              
-#>   <chr>             <chr>        <chr>  <chr>                              
-#> 1 Foghorn Leghorn   Leghorn      roost… That's a joke, ah say, that's a jo…
-#> 2 Chicken Little    unknown      hen    The sky is falling!                
-#> 3 Ginger            Rhode Islan… hen    Listen. We'll either die free chic…
-#> 4 Camilla the Chic… Chantecler   hen    Bawk, buck, ba-gawk.               
-#> 5 Ernie The Giant … Brahma       roost… Put Captain Solo in the cargo hold.
+#>   chicken            breed         sex    motto                                 
+#>   <chr>              <chr>         <chr>  <chr>                                 
+#> 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…
+#> 2 Chicken Little     unknown       hen    The sky is falling!                   
+#> 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…
+#> 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  
+#> 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.
 ```
 
 For more information, see the package website:

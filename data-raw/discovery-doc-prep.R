@@ -60,8 +60,9 @@ these <- c(
 fs::dir_create(here::here("data-raw", "schemas"))
 write_one <- function(data, id) {
   sink(here::here("data-raw", "schemas", id))
+  withr::local_options(list(width = 150))
   cat("#", id, " \n")
-  print(data)
+  print(data, n = Inf, width = Inf)
   sink()
 }
 iwalk(.tidy_schemas, write_one)

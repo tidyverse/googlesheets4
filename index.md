@@ -75,9 +75,9 @@ library(googlesheets4)
 
 (deaths <- drive_get("deaths"))
 #> # A tibble: 1 x 4
-#>   name   path     id                                       drive_resource  
-#>   <chr>  <chr>    <chr>                                    <list>          
-#> 1 deaths ~/deaths 1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6… <named list [34…
+#>   name   path     id                                           drive_resource   
+#>   <chr>  <chr>    <chr>                                        <list>           
+#> 1 deaths ~/deaths 1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg <named list [34]>
 ```
 
 Pass the result to googlesheets4 functions such as:
@@ -112,11 +112,11 @@ read_sheet(deaths, range = "A5:F8")
 #> Reading from 'deaths'
 #> Range "A5:F8"
 #> # A tibble: 3 x 6
-#>   Name  Profession   Age `Has kids` `Date of birth`     `Date of death`    
-#>   <chr> <chr>      <dbl> <lgl>      <dttm>              <dttm>             
-#> 1 Davi… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
-#> 2 Carr… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00
-#> 3 Chuc… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
+#>   Name       Profession   Age `Has kids` `Date of birth`     `Date of death`    
+#>   <chr>      <chr>      <dbl> <lgl>      <dttm>              <dttm>             
+#> 1 David Bow… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
+#> 2 Carrie Fi… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00
+#> 3 Chuck Ber… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
 ```
 
 If you’re willing to refer to the spreadsheet by id (or URL), just
@@ -222,19 +222,18 @@ read_sheet(sheets_example("deaths"), skip = 4, n_max = 10)
 #> Reading from 'deaths'
 #> Range "5:5000000"
 #> # A tibble: 10 x 6
-#>    Name  Profession   Age `Has kids` `Date of birth`    
-#>    <chr> <chr>      <dbl> <lgl>      <dttm>             
-#>  1 Davi… musician      69 TRUE       1947-01-08 00:00:00
-#>  2 Carr… actor         60 TRUE       1956-10-21 00:00:00
-#>  3 Chuc… musician      90 TRUE       1926-10-18 00:00:00
-#>  4 Bill… actor         61 TRUE       1955-05-17 00:00:00
-#>  5 Prin… musician      57 TRUE       1958-06-07 00:00:00
-#>  6 Alan… actor         69 FALSE      1946-02-21 00:00:00
-#>  7 Flor… actor         82 TRUE       1934-02-14 00:00:00
-#>  8 Harp… author        89 FALSE      1926-04-28 00:00:00
-#>  9 Zsa … actor         99 TRUE       1917-02-06 00:00:00
-#> 10 Geor… musician      53 FALSE      1963-06-25 00:00:00
-#> # … with 1 more variable: `Date of death` <dttm>
+#>    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    
+#>    <chr>     <chr>      <dbl> <lgl>      <dttm>              <dttm>             
+#>  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
+#>  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00
+#>  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
+#>  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00
+#>  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00
+#>  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00
+#>  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00
+#>  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00
+#>  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00
+#> 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00
 
 read_sheet(
   sheets_example("deaths"), range = "other!A5:F15", col_types = "?ci??D"
@@ -242,18 +241,18 @@ read_sheet(
 #> Reading from 'deaths'
 #> Range "'other'!A5:F15"
 #> # A tibble: 10 x 6
-#>    Name     Profession   Age `Has kids` `Date of birth`     `Date of death`
-#>    <chr>    <chr>      <int> <lgl>      <dttm>              <date>         
-#>  1 Vera Ru… scientist     88 TRUE       1928-07-23 00:00:00 2016-12-25     
-#>  2 Mohamed… athlete       74 TRUE       1942-01-17 00:00:00 2016-06-03     
-#>  3 Morley … journalist    84 TRUE       1931-11-08 00:00:00 2016-05-19     
-#>  4 Fidel C… politician    90 TRUE       1926-08-13 00:00:00 2016-11-25     
-#>  5 Antonin… lawyer        79 TRUE       1936-03-11 00:00:00 2016-02-13     
-#>  6 Jo Cox   politician    41 TRUE       1974-06-22 00:00:00 2016-06-16     
-#>  7 Janet R… lawyer        78 FALSE      1938-07-21 00:00:00 2016-11-07     
-#>  8 Gwen If… journalist    61 FALSE      1955-09-29 00:00:00 2016-11-14     
-#>  9 John Gl… astronaut     95 TRUE       1921-07-28 00:00:00 2016-12-08     
-#> 10 Pat Sum… coach         64 TRUE       1952-06-14 00:00:00 2016-06-28
+#>    Name          Profession   Age `Has kids` `Date of birth`     `Date of death`
+#>    <chr>         <chr>      <int> <lgl>      <dttm>              <date>         
+#>  1 Vera Rubin    scientist     88 TRUE       1928-07-23 00:00:00 2016-12-25     
+#>  2 Mohamed Ali   athlete       74 TRUE       1942-01-17 00:00:00 2016-06-03     
+#>  3 Morley Safer  journalist    84 TRUE       1931-11-08 00:00:00 2016-05-19     
+#>  4 Fidel Castro  politician    90 TRUE       1926-08-13 00:00:00 2016-11-25     
+#>  5 Antonin Scal… lawyer        79 TRUE       1936-03-11 00:00:00 2016-02-13     
+#>  6 Jo Cox        politician    41 TRUE       1974-06-22 00:00:00 2016-06-16     
+#>  7 Janet Reno    lawyer        78 FALSE      1938-07-21 00:00:00 2016-11-07     
+#>  8 Gwen Ifill    journalist    61 FALSE      1955-09-29 00:00:00 2016-11-14     
+#>  9 John Glenn    astronaut     95 TRUE       1921-07-28 00:00:00 2016-12-08     
+#> 10 Pat Summit    coach         64 TRUE       1952-06-14 00:00:00 2016-06-28
 ```
 
 If you looked at the `deaths` spreadsheet in the browser (it’s
@@ -276,19 +275,18 @@ sheets_example("deaths") %>%
 #> Reading from 'deaths'
 #> Range "arts_data"
 #> # A tibble: 10 x 6
-#>    Name  Profession   Age `Has kids` `Date of birth`    
-#>    <chr> <chr>      <dbl> <lgl>      <dttm>             
-#>  1 Davi… musician      69 TRUE       1947-01-08 00:00:00
-#>  2 Carr… actor         60 TRUE       1956-10-21 00:00:00
-#>  3 Chuc… musician      90 TRUE       1926-10-18 00:00:00
-#>  4 Bill… actor         61 TRUE       1955-05-17 00:00:00
-#>  5 Prin… musician      57 TRUE       1958-06-07 00:00:00
-#>  6 Alan… actor         69 FALSE      1946-02-21 00:00:00
-#>  7 Flor… actor         82 TRUE       1934-02-14 00:00:00
-#>  8 Harp… author        89 FALSE      1926-04-28 00:00:00
-#>  9 Zsa … actor         99 TRUE       1917-02-06 00:00:00
-#> 10 Geor… musician      53 FALSE      1963-06-25 00:00:00
-#> # … with 1 more variable: `Date of death` <dttm>
+#>    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    
+#>    <chr>     <chr>      <dbl> <lgl>      <dttm>              <dttm>             
+#>  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
+#>  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00
+#>  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
+#>  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00
+#>  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00
+#>  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00
+#>  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00
+#>  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00
+#>  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00
+#> 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00
 ```
 
 The named ranges, if any exist, are part of the information returned by
@@ -304,7 +302,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpO9k96x/iris-52c01686c65f.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpxgbcIq/iris-1435e49144926.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -314,15 +312,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpO9k96x/iris-52c01686c65f.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpxgbcIq/iris-1435e49144926.csv
 #> uploaded into Drive file:
-#>   * iris-52c01686c65f: 1igNr3u_vfO7DyEDquqPHOyYCvZuTVZZEU-Gp9huONBQ
+#>   * iris-1435e49144926: 12tzp-ojdfdaEU_oHL4iVMHGkZOO2-jE1idzfaRQW88I
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
-#>   name             id                                      drive_resource  
-#> * <chr>            <chr>                                   <list>          
-#> 1 iris-52c01686c6… 1igNr3u_vfO7DyEDquqPHOyYCvZuTVZZEU-Gp9… <named list [34…
+#>   name               id                                         drive_resource  
+#> * <chr>              <chr>                                      <list>          
+#> 1 iris-1435e49144926 12tzp-ojdfdaEU_oHL4iVMHGkZOO2-jE1idzfaRQW… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -332,7 +330,7 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-52c01686c65f'
+#> Reading from 'iris-1435e49144926'
 #> Range "B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
@@ -349,12 +347,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpO9k96x/iris-52c01686c65f.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpxgbcIq/iris-1435e49144926.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-52c01686c65f
+#>   * iris-1435e49144926
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpO9k96x/iris-52c01686c65f.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpxgbcIq/iris-1435e49144926.xlsx
 
 if (requireNamespace("readxl", quietly = TRUE)) {
   readxl::read_excel(iris_xlsxfile)  
@@ -382,7 +380,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-52c01686c65f: 1igNr3u_vfO7DyEDquqPHOyYCvZuTVZZEU-Gp9huONBQ
+#>   * iris-1435e49144926: 12tzp-ojdfdaEU_oHL4iVMHGkZOO2-jE1idzfaRQW88I
 ```
 
 ## Get Sheet metadata or detailed cell data
@@ -414,16 +412,16 @@ str(deaths_meta, max.level = 1)
 #>  $ name           : chr "deaths"
 #>  $ locale         : chr "en"
 #>  $ time_zone      : chr "America/Los_Angeles"
-#>  $ sheets         :Classes 'tbl_df', 'tbl' and 'data.frame': 2 obs. of  7 variables:
+#>  $ sheets         :Classes 'tbl_df', 'tbl' and 'data.frame': 2 obs. of  8 variables:
 #>  $ named_ranges   :Classes 'tbl_df', 'tbl' and 'data.frame': 2 obs. of  9 variables:
-#>  - attr(*, "class")= chr [1:2] "sheets_meta" "list"
+#>  - attr(*, "class")= chr [1:2] "sheets_Spreadsheet" "list"
 
 deaths_meta$sheets
-#> # A tibble: 2 x 7
-#>   name  index id         type  visible grid_rows grid_columns
-#>   <chr> <int> <chr>      <chr> <lgl>       <int>        <int>
-#> 1 arts      0 1210215306 GRID  TRUE         1000           26
-#> 2 other     1 28655153   GRID  TRUE         1000           26
+#> # A tibble: 2 x 8
+#>   name  index         id type  visible grid_rows grid_columns data  
+#>   <chr> <int>      <int> <chr> <lgl>       <int>        <int> <list>
+#> 1 arts      0 1210215306 GRID  TRUE         1000           26 <NULL>
+#> 2 other     1   28655153 GRID  TRUE         1000           26 <NULL>
 
 deaths_meta$named_ranges
 #> # A tibble: 2 x 9

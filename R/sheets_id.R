@@ -56,18 +56,24 @@ sheets_id <- function(x) {
 #'   * Spreadsheet id, "a string containing letters, numbers, and some special
 #'   characters", typically 44 characters long, in our experience. Example:
 #'   `1qpyC0XzvTcKT6EISywvqESX3A0MwQoFDE8p-Bll4hps`.
-#'   * A URL, from which we can excavate a spreadsheet or file id. Example: <https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545>.
+#'   * A URL, from which we can excavate a spreadsheet or file id. Example:
+#'     <https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545>.
 #'   * A one-row [`dribble`][googledrive::dribble], a "Drive tibble" used by the
-#'   [googledrive] package. In general, a `dribble` can represent several files,
-#'   one row per file. Since googlesheets4 is not vectorized over spreadsheets,
-#'   we are only prepared to accept a one-row `dribble`.
-#'     - [`googledrive::drive_get("YOUR SHEET NAME")`][googledrive::drive_get()]
+#'     [googledrive] package. In general, a `dribble` can represent several
+#'     files, one row per file. Since googlesheets4 is not vectorized over
+#'     spreadsheets, we are only prepared to accept a one-row `dribble`.
+#'     - [`googledrive::drive_get("YOUR_SHEET_NAME")`][googledrive::drive_get()]
 #'     is a great way to look up a Sheet via its name.
+#'     - [`sheets_find("YOUR_SHEET_NAME")`][sheets_find()] is another good way
+#'     to get your hands on a Sheet.
+#'   * Spreadsheet meta data, as returned by, e.g., [sheets_get()]. Literally,
+#'     this is an object of class `sheets_Spreadsheet`.
 #'
 #' @description This is a generic function.
 #'
 #' @param x Something that uniquely identifies a Google Sheet: a [`sheets_id`],
-#'   URL, or [`dribble`][googledrive::dribble].
+#'   a URL, one-row [`dribble`][googledrive::dribble], or a
+#'   `sheets_Spreadsheet`.
 #' @param ... Other arguments passed down to methods. (Not used.)
 #' @export
 #' @examples
@@ -132,6 +138,11 @@ as_sheets_id.character <- function(x, ...) {
     )
   }
   sheets_id(out)
+}
+
+#' @export
+as_sheets_id.sheets_Spreadsheet <- function(x, ...) {
+  new_sheets_id(x$spreadsheet_id)
 }
 
 ## copied from googledrive

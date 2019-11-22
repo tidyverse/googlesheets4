@@ -12,9 +12,8 @@ sheets_create(name, ..., sheets = NULL)
 \item{...}{Optional spreadsheet properties that can be set through this API
 endpoint, such as locale and time zone.}
 
-\item{sheets}{Optional something something about the sheets. Will this just
-offer control over names? Alternatively there could be an interface that
-supports specifying data here.}
+\item{sheets}{Optional named list of data frames. One sheet is created for
+each data frame.}
 }
 \value{
 \itemize{
@@ -25,7 +24,9 @@ purposes.
 }
 \description{
 Creates an entirely new Sheet (spreadsheet or workbook). Offers some control
-over the initial set of sheets (worksheets or tabs).
+over the initial set of sheets (worksheets or tabs). CAUTION: this function
+is still being developed and, for example, currently sends all data as
+character.
 }
 \examples{
 if (sheets_has_token()) {
@@ -37,6 +38,11 @@ if (sheets_has_token()) {
     "sheets-create-demo-3",
     locale = "fr_FR",
     timeZone = "Europe/Paris"
+  )
+
+  sheets_create(
+    "sheets-create-demo-4",
+    sheets = list(iris = head(iris), mtcars = head(mtcars))
   )
 }
 }

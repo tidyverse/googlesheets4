@@ -5,7 +5,7 @@ new <- function(id, ...) {
   }
   dots <- rlang::list2(...)
 
-  check_against_schema(dots, schema = schema, id = id)
+  check_against_schema(dots, schema = schema)
 
   structure(
     dots,
@@ -17,11 +17,11 @@ new <- function(id, ...) {
 }
 
 # TODO: if it proves necessary, this could do more meaningful checks
-check_against_schema <- function(properties, schema, id) {
+check_against_schema <- function(properties, schema) {
   unexpected <- setdiff(names(properties), schema$property)
   if (length(unexpected) > 0) {
     msg <- glue("
-    Properties not recognized for the {sq(id)} schema:
+    Properties not recognized for the {sq(attr(schema, 'id'))} schema:
       * {glue_collapse(unexpected, sep = ', ')}
     ")
     rlang::abort(msg)
@@ -49,7 +49,9 @@ patch.default <- function(x, ...) {
 
 patch.googlesheets4_schema <- function(x, ...) {
   dots <- rlang::list2(...)
-  new(id_from_class(x), !!!utils::modifyList(x, dots))
+  check_against_schema(dots, schema = attr(x, "schema"))
+  x[names(dots)] <- dots
+  x
 }
 
 # tibblify ----

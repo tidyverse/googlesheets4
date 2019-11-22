@@ -27,7 +27,7 @@ check_against_schema <- function(x, schema = NULL) {
     ")
     rlang::abort(msg)
   }
-  invisible(x)
+  x
 }
 
 id_as_class <- function(id) glue("googlesheets4_{id}")

@@ -24,7 +24,11 @@ as_Sheet.data.frame <- function(df, name) {
     properties = new(
       id = "SheetProperties",
       title = name,
-      gridProperties = list(rowCount = nrow(df) + 1, columnCount = ncol(df))
+      gridProperties = list(
+        rowCount = nrow(df) + 1, # make room for column names
+        columnCount = ncol(df),
+        frozenRowCount = 1       # freeze top row
+      )
     ),
     data = list( # an array of instances of GridData
       list(

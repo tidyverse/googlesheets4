@@ -40,14 +40,19 @@ sheets_id object. Anticipated inputs:
 Spreadsheet id, &quot;a string containing letters, numbers, and some special
 characters&quot;, typically 44 characters long, in our experience. Example:
 1qpyC0XzvTcKT6EISywvqESX3A0MwQoFDE8p-Bll4hps.
-A URL, from which we can excavate a spreadsheet or file id. Example: https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545.
+A URL, from which we can excavate a spreadsheet or file id. Example:
+https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545.
 A one-row dribble, a &quot;Drive tibble&quot; used by the
-googledrive package. In general, a dribble can represent several files,
-one row per file. Since googlesheets4 is not vectorized over spreadsheets,
-we are only prepared to accept a one-row dribble.
-googledrive::drive_get(&quot;YOUR SHEET NAME&quot;)
+googledrive package. In general, a dribble can represent several
+files, one row per file. Since googlesheets4 is not vectorized over
+spreadsheets, we are only prepared to accept a one-row dribble.
+googledrive::drive_get(&quot;YOUR_SHEET_NAME&quot;)
 is a great way to look up a Sheet via its name.
+sheets_find(&quot;YOUR_SHEET_NAME&quot;) is another good way
+to get your hands on a Sheet.
 
+Spreadsheet meta data, as returned by, e.g., sheets_get(). Literally,
+this is an object of class sheets_Spreadsheet.
 
 
 This is a generic function." />
@@ -154,14 +159,19 @@ This is a generic function." />
 <li><p>Spreadsheet id, "a string containing letters, numbers, and some special
 characters", typically 44 characters long, in our experience. Example:
 <code>1qpyC0XzvTcKT6EISywvqESX3A0MwQoFDE8p-Bll4hps</code>.</p></li>
-<li><p>A URL, from which we can excavate a spreadsheet or file id. Example: <a href='https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545'>https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545</a>.</p></li>
+<li><p>A URL, from which we can excavate a spreadsheet or file id. Example:
+<a href='https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545'>https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545</a>.</p></li>
 <li><p>A one-row <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, a "Drive tibble" used by the
-googledrive package. In general, a <code>dribble</code> can represent several files,
-one row per file. Since googlesheets4 is not vectorized over spreadsheets,
-we are only prepared to accept a one-row <code>dribble</code>.</p><ul>
-<li><p><code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>googledrive::drive_get("YOUR SHEET NAME")</a></code>
+googledrive package. In general, a <code>dribble</code> can represent several
+files, one row per file. Since googlesheets4 is not vectorized over
+spreadsheets, we are only prepared to accept a one-row <code>dribble</code>.</p><ul>
+<li><p><code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>googledrive::drive_get("YOUR_SHEET_NAME")</a></code>
 is a great way to look up a Sheet via its name.</p></li>
+<li><p><code><a href='sheets_find.html'>sheets_find("YOUR_SHEET_NAME")</a></code> is another good way
+to get your hands on a Sheet.</p></li>
 </ul></li>
+<li><p>Spreadsheet meta data, as returned by, e.g., <code><a href='sheets_get.html'>sheets_get()</a></code>. Literally,
+this is an object of class <code>sheets_Spreadsheet</code>.</p></li>
 </ul>
 
 <p>This is a generic function.</p>
@@ -175,7 +185,8 @@ is a great way to look up a Sheet via its name.</p></li>
     <tr>
       <th>x</th>
       <td><p>Something that uniquely identifies a Google Sheet: a <code><a href='sheets_id.html'>sheets_id</a></code>,
-URL, or <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>.</p></td>
+a URL, one-row <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, or a
+<code>sheets_Spreadsheet</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>

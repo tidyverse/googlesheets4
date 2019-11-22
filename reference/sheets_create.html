@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Find Google Sheets — sheets_find • googlesheets4</title>
+<title>Create a new Sheet — sheets_create • googlesheets4</title>
 
 
 <!-- jquery -->
@@ -34,12 +34,11 @@
 
 
 
-<meta property="og:title" content="Find Google Sheets — sheets_find" />
-<meta property="og:description" content="Finds your Google Sheets. This is a very thin wrapper around
-googledrive::drive_find(), that specifies you want to list Drive files
-where type = &quot;spreadsheet&quot;. Therefore, note that this will require auth for
-googledrive! See the article Using googlesheets4 with googledrive
-if you want to coordinate auth between googlesheets4 and googledrive." />
+<meta property="og:title" content="Create a new Sheet — sheets_create" />
+<meta property="og:description" content="Creates an entirely new Sheet (spreadsheet or workbook). Offers some control
+over the initial set of sheets (worksheets or tabs). CAUTION: this function
+is still being developed and, for example, currently sends all data as
+character." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -132,61 +131,87 @@ if you want to coordinate auth between googlesheets4 and googledrive." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Find Google Sheets</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_find.R'><code>R/sheets_find.R</code></a></small>
-    <div class="hidden name"><code>sheets_find.Rd</code></div>
+    <h1>Create a new Sheet</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_create.R'><code>R/sheets_create.R</code></a></small>
+    <div class="hidden name"><code>sheets_create.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Finds your Google Sheets. This is a very thin wrapper around
-<code><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>googledrive::drive_find()</a></code>, that specifies you want to list Drive files
-where <code>type = "spreadsheet"</code>. Therefore, note that this will require auth for
-googledrive! See the article <a href='https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html'>Using googlesheets4 with googledrive</a>
-if you want to coordinate auth between googlesheets4 and googledrive.</p>
+    <p>Creates an entirely new Sheet (spreadsheet or workbook). Offers some control
+over the initial set of sheets (worksheets or tabs). CAUTION: this function
+is still being developed and, for example, currently sends all data as
+character.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_find</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_create</span>(<span class='no'>name</span>, <span class='no'>...</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>name</th>
+      <td><p>The name of the spreadsheet.</p></td>
+    </tr>
+    <tr>
       <th>...</th>
-      <td><p>Arguments (other than <code>type</code>, which is hard-wired as <code>type = "spreadsheet"</code>) that are passed along to <code><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>googledrive::drive_find()</a></code>.</p></td>
+      <td><p>Optional spreadsheet properties that can be set through this API
+endpoint, such as locale and time zone.</p></td>
+    </tr>
+    <tr>
+      <th>sheets</th>
+      <td><p>Optional named list of data frames. One sheet is created for
+each data frame.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
+    
+<ul>
+<li><p><code><a href='sheets_get.html'>sheets_get()</a></code>: A list with S3 class <code>sheets_Spreadsheet</code>, for printing
+purposes.</p></li>
+<li><p><code><a href='sheets_get.html'>sheets_sheets()</a></code>: A character vector.</p></li>
+</ul>
+
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Wraps the <code>spreadsheets.create</code> endpoint:</p><ul>
+<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create</a></p></li>
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
-  <span class='co'># see all your Sheets</span>
-  <span class='fu'>sheets_find</span>()
+  <span class='fu'>sheets_create</span>(<span class='st'>"sheets-create-demo-1"</span>)
 
-  <span class='co'># see 5 Sheets, prioritized by creation time</span>
-  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_find</span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='st'>"createdTime desc"</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>5</span>)
-  <span class='no'>x</span>
+  <span class='fu'>sheets_create</span>(<span class='st'>"sheets-create-demo-2"</span>, <span class='kw'>locale</span> <span class='kw'>=</span> <span class='st'>"en_CA"</span>)
 
-  <span class='co'># hoist the creation date, using other packages in the tidyverse</span>
-  <span class='co'># x %&gt;%</span>
-  <span class='co'>#   tidyr::hoist(drive_resource, created_on = "createdTime") %&gt;%</span>
-  <span class='co'>#   dplyr::mutate(created_on = as.Date(created_on))</span>
-}</div><div class='output co'>#&gt; # A tibble: 5 x 3
-#&gt;   name                id                                        drive_resource  
-#&gt; * &lt;chr&gt;               &lt;chr&gt;                                     &lt;list&gt;          
-#&gt; 1 sheets-create-demo… 14sqB5bsdb-dJzVWaUENl8cLFdB-jRVCvktHCytq… &lt;named list [34…
-#&gt; 2 sheets-create-demo… 1uamWGQOZVqrRTomHjXgILETtHkkdf8oUwJCIY-w… &lt;named list [34…
-#&gt; 3 sheets-create-demo… 18E-507rkHQ9UFrxzVbTHmlMYWlhoknC7TezaPTF… &lt;named list [34…
-#&gt; 4 sheets-create-demo… 16e7fuoiXzGNtW6o3BEYTZwj2bkAy9_BaBITmvv5… &lt;named list [34…
-#&gt; 5 sheets-create-demo… 1w42JeLYGpSvkyQhPB-0uKSfYxZ9o9b46AOSl-q0… &lt;named list [34…</div></pre>
+  <span class='fu'>sheets_create</span>(
+    <span class='st'>"sheets-create-demo-3"</span>,
+    <span class='kw'>locale</span> <span class='kw'>=</span> <span class='st'>"fr_FR"</span>,
+    <span class='kw'>timeZone</span> <span class='kw'>=</span> <span class='st'>"Europe/Paris"</span>
+  )
+
+  <span class='fu'>sheets_create</span>(
+    <span class='st'>"sheets-create-demo-4"</span>,
+    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>iris</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>iris</span>), <span class='kw'>mtcars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>mtcars</span>))
+  )
+}</div><div class='output co'>#&gt;   Spreadsheet name: sheets-create-demo-4
+#&gt;                 ID: 14sqB5bsdb-dJzVWaUENl8cLFdB-jRVCvktHCytqXSGg
+#&gt;             Locale: en_US
+#&gt;          Time zone: Etc/GMT
+#&gt;        # of sheets: 2
+#&gt; 
+#&gt; (Sheet name): (Nominal extent in rows x columns)
+#&gt;         iris: 7 x 5
+#&gt;       mtcars: 7 x 11</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -8,7 +8,23 @@ source(
 # gargle and join the other ingest helpers
 source(here::here("data-raw", "schema-rectangling.R"))
 
-x <- download_discovery_document("sheets:v4")
+existing <- list_discovery_documents("sheets")
+if (length(existing) > 1) {
+  rlang::warn("MULTIPLE DISCOVERY DOCUMENTS FOUND. FIX THIS!")
+}
+
+if (length(existing) < 1) {
+  rlang::inform("Downloading Discovery Document")
+  x <- download_discovery_document("sheets:v4")
+} else {
+  msg <- glue::glue("
+    Using existing Discovery Document:
+      * {existing}
+    ")
+  rlang::inform(msg)
+  x <- here::here("data-raw", existing)
+}
+
 dd <- read_discovery_document(x)
 
 methods      <- get_raw_methods(dd)

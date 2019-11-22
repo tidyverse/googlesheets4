@@ -1,0 +1,14 @@
+# CellData  
+# A tibble: 10 x 6
+   property          type   instance_of        array_of      format enum            
+   <chr>             <chr>  <chr>              <chr>         <chr>  <list>          
+ 1 dataValidation    object DataValidationRule <NA>          <NA>   <tibble [0 × 2]>
+ 2 effectiveFormat   object CellFormat         <NA>          <NA>   <tibble [0 × 2]>
+ 3 effectiveValue    object ExtendedValue      <NA>          <NA>   <tibble [0 × 2]>
+ 4 formattedValue    string <NA>               <NA>          <NA>   <tibble [0 × 2]>
+ 5 hyperlink         string <NA>               <NA>          <NA>   <tibble [0 × 2]>
+ 6 note              string <NA>               <NA>          <NA>   <tibble [0 × 2]>
+ 7 pivotTable        object PivotTable         <NA>          <NA>   <tibble [0 × 2]>
+ 8 textFormatRuns    array  <NA>               TextFormatRun <NA>   <tibble [0 × 2]>
+ 9 userEnteredFormat object CellFormat         <NA>          <NA>   <tibble [0 × 2]>
+10 userEnteredValue  object ExtendedValue      <NA>          <NA>   <tibble [0 × 2]>

@@ -50,7 +50,8 @@ these <- c(
   "SheetProperties",
   "NamedRange",
   "GridRange",
-  "RepeatCellRequest"
+  "RepeatCellRequest",
+  "CellData"
 )
 
 .tidy_schemas <- these %>%

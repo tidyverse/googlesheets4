@@ -8,7 +8,8 @@ as_sheets_id(x, ...)
 }
 \arguments{
 \item{x}{Something that uniquely identifies a Google Sheet: a \code{\link{sheets_id}},
-URL, or \code{\link[googledrive:dribble]{dribble}}.}
+a URL, one-row \code{\link[googledrive:dribble]{dribble}}, or a
+\code{sheets_Spreadsheet}.}
 
 \item{...}{Other arguments passed down to methods. (Not used.)}
 }
@@ -19,15 +20,20 @@ Converts various representations of a Google Sheet into a
 \item Spreadsheet id, "a string containing letters, numbers, and some special
 characters", typically 44 characters long, in our experience. Example:
 \verb{1qpyC0XzvTcKT6EISywvqESX3A0MwQoFDE8p-Bll4hps}.
-\item A URL, from which we can excavate a spreadsheet or file id. Example: \url{https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545}.
+\item A URL, from which we can excavate a spreadsheet or file id. Example:
+\url{https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545}.
 \item A one-row \code{\link[googledrive:dribble]{dribble}}, a "Drive tibble" used by the
-\link{googledrive} package. In general, a \code{dribble} can represent several files,
-one row per file. Since googlesheets4 is not vectorized over spreadsheets,
-we are only prepared to accept a one-row \code{dribble}.
+\link{googledrive} package. In general, a \code{dribble} can represent several
+files, one row per file. Since googlesheets4 is not vectorized over
+spreadsheets, we are only prepared to accept a one-row \code{dribble}.
 \itemize{
-\item \code{\link[googledrive:drive_get]{googledrive::drive_get("YOUR SHEET NAME")}}
+\item \code{\link[googledrive:drive_get]{googledrive::drive_get("YOUR_SHEET_NAME")}}
 is a great way to look up a Sheet via its name.
+\item \code{\link[=sheets_find]{sheets_find("YOUR_SHEET_NAME")}} is another good way
+to get your hands on a Sheet.
 }
+\item Spreadsheet meta data, as returned by, e.g., \code{\link[=sheets_get]{sheets_get()}}. Literally,
+this is an object of class \code{sheets_Spreadsheet}.
 }
 
 This is a generic function.

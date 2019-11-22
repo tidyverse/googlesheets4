@@ -65,3 +65,10 @@ test_that("dribble with one Sheet can be coerced", {
   d <- d[d$mime_type == "application/vnd.google-apps.spreadsheet", ]
   expect_s3_class(as_sheets_id(d), "sheets_id")
 })
+
+test_that("a sheets_Spreadsheet can be coerced", {
+  x <- new("Spreadsheet", spreadsheetId = "123")
+  out <- as_sheets_id(sheets_Spreadsheet(x))
+  expect_s3_class(out, "sheets_id")
+  expect_identical(out, as_sheets_id("123"))
+})

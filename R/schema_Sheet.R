@@ -24,8 +24,7 @@ as_Sheet.data.frame <- function(df, name) {
     properties = new(
       id = "SheetProperties",
       title = name,
-      # TODO: not making room for col_names here yet
-      gridProperties = list(rowCount = nrow(df), columnCount = ncol(df))
+      gridProperties = list(rowCount = nrow(df) + 1, columnCount = ncol(df))
     ),
     data = list( # an array of instances of GridData
       list(
@@ -36,7 +35,7 @@ as_Sheet.data.frame <- function(df, name) {
 }
 
 as_RowData <- function(df) {
-  df_rows <- transpose(df)
+  df_rows <- c(list(names(df)), transpose(df))
   make_row <- function(x) {
     map(x, ~ list(userEnteredValue = list(stringValue = as.character(.x))))
   }

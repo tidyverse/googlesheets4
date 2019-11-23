@@ -48,7 +48,23 @@ sheets_create <- function(name, ..., sheets = NULL) {
     "sheets.spreadsheets.create",
     params = ss_body
   )
-  raw_resp <- request_make(req)
-  resp <- gargle::response_process(raw_resp)
-  sheets_Spreadsheet(resp)
+  resp_raw <- request_make(req)
+  resp_create <- gargle::response_process(resp_raw)
+  out <- sheets_Spreadsheet(resp_create)
+
+  requests_style <- map(
+    out$sheets$id,
+    ~ list(repeatCell = style_header_row(sheetId = .x))
+  )
+  req <- request_generate(
+    "sheets.spreadsheets.batchUpdate",
+    params = list(
+      spreadsheetId = as_sheets_id(out),
+      requests = requests_style
+    )
+  )
+  resp_raw <- request_make(req)
+  resp_style <- gargle::response_process(resp_raw)
+
+  out
 }

@@ -1,0 +1,11 @@
+# TextFormat  
+# A tibble: 7 x 6
+  property        type    instance_of array_of format enum            
+  <chr>           <chr>   <chr>       <chr>    <chr>  <list>          
+1 bold            boolean <NA>        <NA>     <NA>   <tibble [0 × 2]>
+2 fontFamily      string  <NA>        <NA>     <NA>   <tibble [0 × 2]>
+3 fontSize        integer <NA>        <NA>     int32  <tibble [0 × 2]>
+4 foregroundColor object  Color       <NA>     <NA>   <tibble [0 × 2]>
+5 italic          boolean <NA>        <NA>     <NA>   <tibble [0 × 2]>
+6 strikethrough   boolean <NA>        <NA>     <NA>   <tibble [0 × 2]>
+7 underline       boolean <NA>        <NA>     <NA>   <tibble [0 × 2]>

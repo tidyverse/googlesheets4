@@ -51,7 +51,10 @@ these <- c(
   "NamedRange",
   "GridRange",
   "RepeatCellRequest",
-  "CellData"
+  "CellData",
+  "CellFormat",
+  "Color",
+  "TextFormat"
 )
 
 .tidy_schemas <- these %>%

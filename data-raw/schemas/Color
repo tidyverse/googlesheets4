@@ -1,0 +1,8 @@
+# Color  
+# A tibble: 4 x 6
+  property type   instance_of array_of format enum            
+  <chr>    <chr>  <chr>       <chr>    <chr>  <list>          
+1 alpha    number <NA>        <NA>     float  <tibble [0 × 2]>
+2 blue     number <NA>        <NA>     float  <tibble [0 × 2]>
+3 green    number <NA>        <NA>     float  <tibble [0 × 2]>
+4 red      number <NA>        <NA>     float  <tibble [0 × 2]>

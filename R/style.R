@@ -1,10 +1,11 @@
 # https://developers.google.com/sheets/api/samples/formatting#format_a_header_row
+# returns: an instance of RepeatCellRequest
 style_header_row <- function(row = 1,
                              sheetId = NULL,
                              backgroundColor = 0.92,
                              horizontalAlignment = "CENTER",
                              bold = TRUE) {
-  row <- row - 1 # indices are zero-based; these are half open: [start, end)
+  row <- row - 1 # indices are zero-based; intervals are half open: [start, end)
   grid_range <- new("GridRange", startRowIndex = row, endRowIndex = row + 1)
   if (!is.null(sheetId)) {
     grid_range <- patch(grid_range, sheetId = sheetId)

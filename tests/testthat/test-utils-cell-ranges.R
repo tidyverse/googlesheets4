@@ -29,7 +29,7 @@ test_that("qualified_A1 works", {
   expect_identical(qualified_A1("foo"), "'foo'")
   expect_identical(qualified_A1("foo", "A1"), "'foo'!A1")
   expect_identical(qualified_A1("'foo'"), "'foo'")
-  expect_identical(qualified_A1(A1_range = "A1"), "A1")
+  expect_identical(qualified_A1(cell_range = "A1"), "A1")
 })
 
 # resolve_sheet() ----

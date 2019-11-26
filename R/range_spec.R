@@ -5,8 +5,8 @@ new_range_spec <- function(...) {
     list(
       sheet_name  = l$sheet_name  %||% NULL,
       named_range = l$named_range %||% NULL,
+      cell_range  = l$cell_range  %||% NULL,
       A1_range    = l$A1_range    %||% NULL,
-      api_range   = l$api_range   %||% NULL,
       cell_limits = l$cell_limits %||% NULL,
       shim        = FALSE
     ),
@@ -61,8 +61,8 @@ as_range_spec.character <- function(x,
   # range looks like: Sheet1!A1:B2
   if (notNA(m[[".match"]])) {
     out$sheet_name <- resolve_sheet(m$sheet, sheet_names)
-    out$A1_range   <- m$range
-    out$api_range  <- qualified_A1(out$sheet_name, out$A1_range)
+    out$cell_range <- m$cell_range
+    out$A1_range   <- qualified_A1(out$sheet_name, out$cell_range)
     out$shim       <- TRUE
     return(out)
   }
@@ -70,7 +70,7 @@ as_range_spec.character <- function(x,
   # check if range matches a named range
   m <- match(x, nr_names)
   if (notNA(m)) {
-    out$api_range <- out$named_range <- x
+    out$A1_range <- out$named_range <- x
     return(out)
   }
 
@@ -92,11 +92,11 @@ as_range_spec.character <- function(x,
       "  * {sq(x)}"
     )
   }
-  out$A1_range <- x
+  out$cell_range <- x
   if (!is.null(sheet)) {
     out$sheet_name <- resolve_sheet(sheet, sheet_names)
   }
-  out$api_range <- qualified_A1(out$sheet_name, out$A1_range)
+  out$A1_range <- qualified_A1(out$sheet_name, out$cell_range)
   out$shim <- TRUE
   out
 }
@@ -129,7 +129,7 @@ as_range_spec.NULL <- function(x,
       return(out)
     } else {
       out$sheet_name <- resolve_sheet(sheet, sheet_names)
-      out$api_range <- qualified_A1(out$sheet_name)
+      out$A1_range <- qualified_A1(out$sheet_name)
       return(out)
     }
   }
@@ -165,7 +165,7 @@ as_range_spec.cell_limits <- function(x,
   if (!is.null(sheet)) {
     out$sheet_name <- resolve_sheet(sheet, sheet_names)
   }
-  out$api_range <- qualified_A1(
+  out$A1_range <- qualified_A1(
     out$sheet_name,
     # we replace some NAs with concrete extents here, for cell reading
     # but note we use original cell_limits later, for shimming

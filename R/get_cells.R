@@ -23,19 +23,19 @@ get_cells <- function(ss,
     range, sheet = sheet, skip = skip,
     sheet_names = x$sheets$name, nr_names = x$named_ranges$name
   )
-  message_glue("Range {dq(range_spec$api_range)}")
+  message_glue("Range {dq(range_spec$A1_range)}")
 
   ## main GET -----------------------------------------------------------------
   resp <- sheets_cells_impl_(
     ssid,
-    ranges = range_spec$api_range
+    ranges = range_spec$A1_range
   )
   out <- cells(resp)
 
   ## enforce geometry on the cell data frame ----------------------------------
   if (range_spec$shim) {
     range_spec$cell_limits <- range_spec$cell_limits %||%
-      as_cell_limits(range_spec$api_range)
+      as_cell_limits(range_spec$A1_range)
     out <- insert_shims(out, range_spec$cell_limits)
     ## guarantee:
     ## every row and every column spanned by user's range is represented by at

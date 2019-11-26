@@ -1,5 +1,5 @@
 A1_char_class <- "[a-zA-Z0-9:$]"
-compound_rx <- glue("(?<sheet>^.+)!(?<range>{A1_char_class}+$)")
+compound_rx <- glue("(?<sheet>^.+)!(?<cell_range>{A1_char_class}+$)")
 letter_part <- "[$]?[A-Za-z]{1,3}"
 number_part <- "[$]?[0-9]{1,7}"
 A1_rx <- glue("^{letter_part}{number_part}$|^{letter_part}$|^{number_part}$")
@@ -50,10 +50,10 @@ check_sheet <- function(sheet = NULL) {
   return(sheet)
 }
 
-qualified_A1 <- function(sheet_name = NULL, A1_range = NULL) {
+qualified_A1 <- function(sheet_name = NULL, cell_range = NULL) {
   # API docs: "For simplicity, it is safe to always surround the sheet name
   # with single quotes."
-  paste0(c(sq_escape(sheet_name), A1_range), collapse = "!")
+  paste0(c(sq_escape(sheet_name), cell_range), collapse = "!")
 }
 
 as_sheets_range <- function(x) {
@@ -168,7 +168,7 @@ as_cell_limits <- function(x) {
 
   ## successful match (and parse)
   if (notNA(parsed$`.match`)) {
-    cell_limits <- limits_from_range(parsed$range)
+    cell_limits <- limits_from_range(parsed$cell_range)
     cell_limits$sheet <- parsed$sheet
     return(cell_limits)
   }

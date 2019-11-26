@@ -54,7 +54,9 @@ these <- c(
   "CellData",
   "CellFormat",
   "Color",
-  "TextFormat"
+  "TextFormat",
+  "UpdateCellsRequest",
+  "GridCoordinate"
 )
 
 .tidy_schemas <- these %>%

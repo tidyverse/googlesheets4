@@ -1,3 +1,27 @@
+# useful to me during development
+sheets_range_spec <- function(ss,
+                              sheet = NULL,
+                              range = NULL,
+                              skip = 0) {
+  ssid <- as_sheets_id(ss)
+  check_sheet(sheet)
+  check_range(range)
+  check_non_negative_integer(skip)
+
+  # retrieve spreadsheet metadata ----------------------------------------------
+  x <- sheets_get(ssid)
+  message_glue("Spreadsheet name: {sq(x$name)}")
+
+  # range specification --------------------------------------------------------
+  range_spec <- as_range_spec(
+    range, sheet = sheet, skip = skip,
+    sheets_df = x$sheets, nr_df = x$named_ranges
+  )
+  message_glue("Range {dq(range_spec$A1_range)}")
+
+  range_spec
+}
+
 ## range_spec is an "internal-use only" S3 class ----
 new_range_spec <- function(...) {
   l <- rlang::list2(...)
@@ -174,4 +198,17 @@ as_range_spec.cell_limits <- function(x,
   )
   out$shim <- shim
   out
+}
+
+#' @export
+format.range_spec <- function(x, ...) {
+  is_df <- names(x) %in% c("sheets_df", "nr_df")
+  out <- x[!is_df]
+  glue("{fr(names(out))}: {out}")
+}
+
+#' @export
+print.range_spec <- function(x, ...) {
+ cat(format(x), sep = "\n")
+ invisible(x)
 }

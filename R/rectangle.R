@@ -1,12 +1,12 @@
-# low-tech typed version of tidyr::hoist() that is "list in, vector out"
-hoist_lgl <- function(.x, ..., .default = NA) {
-  map_lgl(.x, ..., .default = .default)
+# hack-y implementation of typed pluck with an NA default
+glean_lgl <- function(.x, ..., .default = NA) {
+  map_lgl(list(.x), ..., .default = .default)
 }
 
-hoist_chr <- function(.x, ..., .default = NA) {
-  map_chr(.x, ..., .default = .default)
+glean_chr <- function(.x, ..., .default = NA) {
+  map_chr(list(.x), ..., .default = .default)
 }
 
-hoist_int <- function(.x, ..., .default = NA) {
-  map_int(.x, ..., .default = .default)
+glean_int <- function(.x, ..., .default = NA) {
+  map_int(list(.x), ..., .default = .default)
 }

@@ -1,6 +1,6 @@
 ## range_spec is an "internal-use only" S3 class ----
 new_range_spec <- function(...) {
-  l <- list(...)
+  l <- rlang::list2(...)
   structure(
     list(
       sheet_name  = l$sheet_name  %||% NULL,

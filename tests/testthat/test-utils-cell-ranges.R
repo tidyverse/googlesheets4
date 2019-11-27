@@ -1,4 +1,9 @@
 # sq_escape() and sq_unescape() ----
+test_that("sq_escape() and sq_unescape() pass NULL through", {
+  expect_null(sq_escape(NULL))
+  expect_null(sq_unescape(NULL))
+})
+
 test_that("sq_escape() does nothing if string already single-quoted", {
   x <- c("'abc'", "'ab'c'", "''")
   expect_identical(sq_escape(x), x)

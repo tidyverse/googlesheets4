@@ -202,6 +202,7 @@ as_range_spec.cell_limits <- function(x,
 
 #' @export
 format.range_spec <- function(x, ...) {
+  # I generally don't need to see the metadata df's
   is_df <- names(x) %in% c("sheets_df", "nr_df")
   out <- x[!is_df]
   glue("{fr(names(out))}: {out}")

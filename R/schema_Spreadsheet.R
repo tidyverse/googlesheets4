@@ -17,42 +17,31 @@ sheets_Spreadsheet <- function(x = list()) {
   }
 
   if (!is.null(x$namedRanges)) {
-    # TODO: refactor in terms of a to-be-created sheets_NamedRange()? changes
-    # the angle of attack to NamedRange-wise, whereas here I work column-wise
-    nr <- x$namedRanges
-    out$named_ranges <- tibble::tibble(
-      name         = map_chr(nr, "name"),
-      range        = NA_character_,
-      id           = map_chr(nr, "namedRangeId"),
-      # if there is only 1 sheet, sheetId might not be sent!
-      # https://github.com/tidyverse/googlesheets4/issues/29
-      sheet_id     = map_chr(nr, c("range", "sheetId"), .default = NA),
-      sheet_name   = NA_character_,
-      # TODO: extract into functions re: GridRange?
-      ## API sends zero-based row and column
-      ##   => we add one
-      ## API indices are half-open, i.e. [start, end)
-      ##   => we substract one from end_[row|column]
-      ## net effect
-      ##   => we add one to start_[row|column] but not to end_[row|column]
-      start_row    = map_int(nr, c("range", "startRowIndex"), .default = NA) + 1L,
-      end_row      = map_int(nr, c("range", "endRowIndex"), .default = NA),
-      start_column = map_int(nr, c("range", "startColumnIndex"), .default = NA) + 1L,
-      end_column   = map_int(nr, c("range", "endColumnIndex"), .default = NA)
-    )
-    no_sheet <- is.na(out$named_ranges$sheet_id)
-    if (any(no_sheet)) {
-      # if no associated sheetId, assume it's the first (only?) sheet
-      # https://github.com/tidyverse/googlesheets4/issues/29
-      out$named_ranges$sheet_id[no_sheet] <- out$sheets$id[[1]]
+    named_ranges <- map(x$namedRanges, ~ new("NamedRange", !!!.x))
+    named_ranges <- map(named_ranges, tibblify)
+    named_ranges <- do.call(rbind, named_ranges)
+
+    # if there is only 1 sheet, sheetId might not be sent!
+    # https://github.com/tidyverse/googlesheets4/issues/29
+    needs_sheet_id <- is.na(named_ranges$sheet_id)
+    if (any(needs_sheet_id)) {
+      # if sheetId is missing, I assume it's the "first" sheet
+      # for some definition of "first"
+      first_sheet <- which.min(out$sheets$index)
+      named_ranges$sheet_id[needs_sheet_id] <- out$sheets$id[[first_sheet]]
     }
-    out$named_ranges$sheet_name <- vlookup(
-      out$named_ranges$sheet_id,
+    named_ranges$sheet_name <- vlookup(
+      named_ranges$sheet_id,
       data = out$sheets,
       key = "id",
       value = "name"
     )
-    out$named_ranges$range <- pmap_chr(out$named_ranges, make_range)
+    named_ranges$cell_range <- pmap_chr(named_ranges, make_cell_range)
+    named_ranges$A1_range <- qualified_A1(
+      named_ranges$sheet_name, named_ranges$cell_range
+    )
+
+    out$named_ranges <- named_ranges
   }
 
   structure(out, class = c("sheets_Spreadsheet", "list"))
@@ -87,7 +76,7 @@ format.sheets_Spreadsheet <- function(x, ...) {
 
   if (!is.null(x$named_ranges)) {
     col1 <- fr(c("(Named range)", x$named_ranges$name))
-    col2 <- fl(c("(A1 range)", x$named_ranges$range))
+    col2 <- fl(c("(A1 range)", x$named_ranges$A1_range))
     meta <- c(
       meta,
       "",

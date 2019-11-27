@@ -51,9 +51,16 @@ check_sheet <- function(sheet = NULL) {
 }
 
 qualified_A1 <- function(sheet_name = NULL, cell_range = NULL) {
+  n_missing <- is.null(sheet_name) + is.null(cell_range)
+  if (n_missing == 2) {
+    return("")
+  }
+  sep <- if (n_missing == 0) "!" else ""
   # API docs: "For simplicity, it is safe to always surround the sheet name
   # with single quotes."
-  paste0(c(sq_escape(sheet_name), cell_range), collapse = "!")
+  as.character(
+    glue("{sq_escape(sheet_name) %||% ''}{sep}{cell_range %||% ''}")
+  )
 }
 
 as_sheets_range <- function(x) {
@@ -225,19 +232,20 @@ check_range <- function(range = NULL) {
 }
 
 ## the `...` are used to absorb extra variables when this is used inside pmap()
-make_range <- function(start_row, end_row, start_column, end_column,
+make_cell_range <- function(start_row, end_row, start_column, end_column,
                        sheet_name, ...) {
   cl <- cellranger::cell_limits(
     ul = c(start_row, start_column),
     lr = c(end_row, end_column),
     sheet = sq(sheet_name)
   )
-  cellranger::as.range(cl, fo = "A1")
+  as_sheets_range(cl)
 }
 
 ## A pair of functions for the (un)escaping of spreadsheet names
 ## for use in range strings like 'Sheet1'!A2:D4
 sq_escape <- function(x) {
+  if (is.null(x)) return()
   ## if string already starts and ends with single quote, pass it through
   is_not_quoted <- !map_lgl(x, ~ grepl("^'.*'$", .x))
   ## duplicate each single quote and protect string with single quotes
@@ -246,6 +254,7 @@ sq_escape <- function(x) {
 }
 
 sq_unescape <- function(x) {
+  if (is.null(x)) return()
   ## only modify if string starts and ends with single quote
   is_quoted <- map_lgl(x, ~ grepl("^'.*'$", .x))
   ## strip leading and trailing single quote and substitute 1 single quote

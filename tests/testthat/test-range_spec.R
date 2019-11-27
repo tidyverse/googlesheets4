@@ -25,21 +25,25 @@ test_that("as_range_spec() partitions 'Sheet1!A1:B2'", {
 })
 
 test_that("as_range_spec() seeks a named range, then a sheet name", {
-  nms <- c("a", "thingy", "z")
+  nr_df <- tibble::tibble(name = c("a", "thingy", "z"))
 
-  spec <- as_range_spec("thingy", nr_names = nms)
+  spec <- as_range_spec("thingy", nr_df = nr_df)
   expect_identical(spec$A1_range, "thingy")
   expect_null(spec$sheet_name)
   expect_identical(spec$named_range, "thingy")
   expect_false(spec$shim)
 
-  spec <- as_range_spec("thingy", nr_names = nms, sheet_names = nms)
+  spec <- as_range_spec("thingy", nr_df = nr_df, sheets_df = nr_df)
   expect_identical(spec$A1_range, "thingy")
   expect_null(spec$sheet_name)
   expect_identical(spec$named_range, "thingy")
   expect_false(spec$shim)
 
-  spec <- as_range_spec("thingy", nr_names = letters[1:3], sheet_names = nms)
+  spec <- as_range_spec(
+    "thingy",
+    nr_df = tibble::tibble(name = letters[1:3]),
+    sheets_df = nr_df
+  )
   expect_identical(spec$A1_range, "'thingy'")
   expect_null(spec$named_range)
   expect_identical(spec$sheet_name, "thingy")
@@ -52,13 +56,14 @@ test_that("A1 range is detected, w/ or w/o sheet", {
   expect_identical(spec$A1_range, "1:2")
   expect_true(spec$shim)
 
-  spec <- as_range_spec("1:2", sheet = 3, sheet_names = LETTERS[1:3])
+  sheets_df <- tibble::tibble(name = LETTERS[1:3])
+  spec <- as_range_spec("1:2", sheet = 3, sheets_df = sheets_df)
   expect_identical(spec$sheet_name, "C")
   expect_identical(spec$cell_range, "1:2")
   expect_identical(spec$A1_range, "'C'!1:2")
   expect_true(spec$shim)
 
-  spec <- as_range_spec("1:2", sheet = "B", sheet_names = LETTERS[1:3])
+  spec <- as_range_spec("1:2", sheet = "B", sheets_df = sheets_df)
   expect_identical(spec$sheet_name, "B")
   expect_identical(spec$cell_range, "1:2")
   expect_identical(spec$A1_range, "'B'!1:2")
@@ -76,10 +81,11 @@ test_that("cell_limits input works, w/ or w/o sheet", {
   expect_identical(spec$A1_range, "1:2")
   expect_true(spec$shim)
 
-  spec <- as_range_spec(cell_rows(1:2), sheet = 3, sheet_names = LETTERS[1:3])
+  sheets_df <- tibble::tibble(name = LETTERS[1:3])
+  spec <- as_range_spec(cell_rows(1:2), sheet = 3, sheets_df = sheets_df)
   expect_identical(spec$A1_range, "'C'!1:2")
 
-  spec <- as_range_spec(cell_rows(1:2), sheet = "B", sheet_names = LETTERS[1:3])
+  spec <- as_range_spec(cell_rows(1:2), sheet = "B", sheets_df = sheets_df)
   expect_identical(spec$A1_range, "'B'!1:2")
 })
 
@@ -99,16 +105,17 @@ test_that("invalid range is rejected", {
 test_that("unresolvable sheet raises error", {
   expect_error(as_range_spec("A5:A", sheet = 3), "no sheet names")
   expect_error(as_range_spec(x = NULL, sheet = 3), "no sheet names")
+  sheets_df <- tibble::tibble(name = LETTERS[1:3])
   expect_error(
-    as_range_spec(x = NULL, sheet = "nope", sheet_names = LETTERS[1:3]),
+    as_range_spec(x = NULL, sheet = "nope", sheets_df = sheets_df),
     "No sheet found"
   )
   expect_error(
-    as_range_spec("A5:A", sheet = "nope", sheet_names = LETTERS[1:3]),
+    as_range_spec("A5:A", sheet = "nope", sheets_df = sheets_df),
     "No sheet found"
   )
   expect_error(
-    as_range_spec("nope!A5:A", sheet_names = LETTERS[1:3]),
+    as_range_spec("nope!A5:A", sheets_df = sheets_df),
     "No sheet found"
   )
 })

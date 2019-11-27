@@ -32,40 +32,40 @@ test_that("qualified_A1 works", {
   expect_identical(qualified_A1(cell_range = "A1"), "A1")
 })
 
-# resolve_sheet() ----
-test_that("resolve_sheet() is NULL in, NULL out", {
-  expect_null(resolve_sheet())
+# lookup_sheet_name() ----
+test_that("lookup_sheet_name() is NULL in, NULL out", {
+  expect_null(lookup_sheet_name())
 })
 
-test_that("resolve_sheet() requires sheet to be length-1 character or numeric", {
-  expect_error(resolve_sheet(c("a", "b")), "length 1")
-  expect_error(resolve_sheet(1:2), "length 1")
-  expect_error(resolve_sheet(TRUE), "must be either")
+test_that("lookup_sheet_name() requires sheet to be length-1 character or numeric", {
+  expect_error(lookup_sheet_name(c("a", "b")), "length 1")
+  expect_error(lookup_sheet_name(1:2), "length 1")
+  expect_error(lookup_sheet_name(TRUE), "must be either")
 })
 
-test_that("resolve_sheet() requires sheet names if given sheet number", {
-  expect_error(resolve_sheet(1), "no sheet names")
+test_that("lookup_sheet_name() requires sheet names if given sheet number", {
+  expect_error(lookup_sheet_name(1), "no sheet names")
 })
 
-test_that("resolve_sheet() errors if number is incompatible with sheet names", {
-  nms <- c("a", "foo", "z")
-  expect_error(resolve_sheet(4, nms), "out-of-bounds")
-  expect_error(resolve_sheet(0, nms), "out-of-bounds")
+test_that("lookup_sheet_name() errors if number is incompatible with sheet names", {
+  sheets_df <- tibble::tibble(name = c("a", "foo", "z"))
+  expect_error(lookup_sheet_name(4, sheets_df), "out-of-bounds")
+  expect_error(lookup_sheet_name(0, sheets_df), "out-of-bounds")
 })
 
-test_that("resolve_sheet() does not require sheet names for character input", {
-  expect_identical(resolve_sheet("foo"), "foo")
+test_that("lookup_sheet_name() does not require sheet names for character input", {
+  expect_identical(lookup_sheet_name("foo"), "foo")
 })
 
-test_that("resolve_sheet() consults sheet names, if given", {
-  nms <- c("a", "foo", "z")
-  expect_identical(resolve_sheet("foo", nms), "foo")
-  expect_error(resolve_sheet("nope", nms), "No sheet found")
+test_that("lookup_sheet_name() consults sheet names, if given", {
+  sheets_df <- tibble::tibble(name = c("a", "foo", "z"))
+  expect_identical(lookup_sheet_name("foo", sheets_df), "foo")
+  expect_error(lookup_sheet_name("nope", sheets_df), "No sheet found")
 })
 
-test_that("resolve_sheet() works with a number", {
-  nms <- c("a", "foo", "z")
-  expect_identical(resolve_sheet(2, nms), "foo")
+test_that("lookup_sheet_name() works with a number", {
+  sheets_df <- tibble::tibble(name = c("a", "foo", "z"))
+  expect_identical(lookup_sheet_name(2, sheets_df), "foo")
 })
 
 # resolve_limits() ----

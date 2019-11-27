@@ -5,7 +5,7 @@ number_part <- "[$]?[0-9]{1,7}"
 A1_rx <- glue("^{letter_part}{number_part}$|^{letter_part}$|^{number_part}$")
 A1_decomp <- glue("(?<column>{letter_part})?(?<row>{number_part})?")
 
-resolve_sheet <- function(sheet = NULL, sheet_names = NULL) {
+lookup_sheet_name <- function(sheet = NULL, sheets_df = NULL) {
   if (is.null(sheet)) {
     return()
   }
@@ -13,8 +13,8 @@ resolve_sheet <- function(sheet = NULL, sheet_names = NULL) {
 
   if (is.character(sheet)) {
     sheet <- sq_unescape(sheet)
-    if (length(sheet_names) > 0) {
-      m <- match(sheet, sheet_names)
+    if (!is.null(sheets_df) && nrow(sheets_df) > 0) {
+      m <- match(sheet, sheets_df$name)
       if (is.na(m)) {
         stop_glue("No sheet found with this name: {sq(sheet)}")
       }
@@ -22,17 +22,17 @@ resolve_sheet <- function(sheet = NULL, sheet_names = NULL) {
     return(sheet)
   }
 
-  if (length(sheet_names) < 1) {
+  if (is.null(sheets_df) || nrow(sheets_df) < 1) {
     stop_glue("Sheet specified by number, but no sheet names provided for lookup.")
   }
   m <- as.integer(sheet)
-  if (!(m %in% seq_along(sheet_names))) {
+  if (!(m %in% seq_len(nrow(sheets_df)))) {
     stop_glue(
-      "There are {length(sheet_names)} sheet names:\n",
+      "There are {nrow(sheets_df)} sheets:\n",
       "  * Requested sheet number is out-of-bounds: {m}"
     )
   }
-  sheet_names[[m]]
+  sheets_df$name[[m]]
 }
 
 check_sheet <- function(sheet = NULL) {

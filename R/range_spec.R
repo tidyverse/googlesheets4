@@ -8,9 +8,12 @@ new_range_spec <- function(...) {
       cell_range  = l$cell_range  %||% NULL,
       A1_range    = l$A1_range    %||% NULL,
       cell_limits = l$cell_limits %||% NULL,
-      shim        = FALSE
+      shim        = FALSE,
+      sheets_df   = l$sheets_df   %||% NULL,
+      nr_df       = l$nr_df       %||% NULL
     ),
-    .input = l$.input,
+    # useful when debugging range specification, but otherwise this is TMI
+    # .input = l$.input,
     class = "range_spec"
   )
 }
@@ -45,14 +48,14 @@ as_range_spec.character <- function(x,
                                     ...,
                                     sheet = NULL,
                                     skip = 0,
-                                    sheet_names = NULL,
-                                    nr_names = NULL) {
+                                    sheets_df = NULL,
+                                    nr_df = NULL) {
   check_length_one(x)
 
   out <- new_range_spec(
     .input = list(
       sheet = sheet, range = x, skip = skip,
-      sheet_names = sheet_names, nr_names = nr_names
+      sheets_df = sheets_df, nr_df = nr_df
     )
   )
 
@@ -60,7 +63,7 @@ as_range_spec.character <- function(x,
 
   # range looks like: Sheet1!A1:B2
   if (notNA(m[[".match"]])) {
-    out$sheet_name <- resolve_sheet(m$sheet, sheet_names)
+    out$sheet_name <- lookup_sheet_name(m$sheet, sheets_df)
     out$cell_range <- m$cell_range
     out$A1_range   <- qualified_A1(out$sheet_name, out$cell_range)
     out$shim       <- TRUE
@@ -68,7 +71,7 @@ as_range_spec.character <- function(x,
   }
 
   # check if range matches a named range
-  m <- match(x, nr_names)
+  m <- match(x, nr_df$name)
   if (notNA(m)) {
     out$A1_range <- out$named_range <- x
     return(out)
@@ -77,10 +80,10 @@ as_range_spec.character <- function(x,
   # check if range matches a sheet name
   # API docs: "When a named range conflicts with a sheet's name, the named range
   # is preferred."
-  m <- match(x, sheet_names)
+  m <- match(x, sheets_df$name)
   if (notNA(m)) {
-    # Re-dispatch. Match already established, so no need to pass sheet names.
-    return(as_range_spec(NULL, sheet = x, skip = skip))
+    # Re-dispatch as if provided as `sheet`. Which it should have been.
+    return(as_range_spec(NULL, sheet = x, skip = skip, sheets_df = sheets_df))
   }
 
   # range must be in A1 notation
@@ -94,7 +97,7 @@ as_range_spec.character <- function(x,
   }
   out$cell_range <- x
   if (!is.null(sheet)) {
-    out$sheet_name <- resolve_sheet(sheet, sheet_names)
+    out$sheet_name <- lookup_sheet_name(sheet, sheets_df)
   }
   out$A1_range <- qualified_A1(out$sheet_name, out$cell_range)
   out$shim <- TRUE
@@ -115,28 +118,26 @@ as_range_spec.NULL <- function(x,
                                ...,
                                sheet = NULL,
                                skip = 0,
-                               sheet_names = NULL) {
+                               sheets_df = NULL) {
   out <- new_range_spec(
     .input = list(
       sheet = sheet, range = x, skip = skip,
-      sheet_names = sheet_names
+      sheets_df = sheets_df
     )
   )
 
-
   if (skip < 1) {
-    if (is.null(sheet)) {
-      return(out)
-    } else {
-      out$sheet_name <- resolve_sheet(sheet, sheet_names)
+    if (!is.null(sheet)) {
+      out$sheet_name <- lookup_sheet_name(sheet, sheets_df)
       out$A1_range <- qualified_A1(out$sheet_name)
-      return(out)
     }
+    return(out)
   }
 
   as_range_spec(
-    sheet = sheet, sheet_names = sheet_names,
-    cell_rows(c(skip + 1, NA)), shim = FALSE
+    cell_rows(c(skip + 1, NA)),
+    sheet = sheet, sheets_df = sheets_df,
+    shim = FALSE
   )
 }
 
@@ -155,15 +156,15 @@ as_range_spec.cell_limits <- function(x,
                                       ...,
                                       shim = TRUE,
                                       sheet = NULL,
-                                      sheet_names = NULL) {
+                                      sheets_df = NULL) {
   out <- new_range_spec(
     .input = list(
-      sheet = sheet, range = x, sheet_names = sheet_names, shim = shim
+      sheet = sheet, range = x, sheets_df = sheets_df, shim = shim
     )
   )
   out$cell_limits <- x
   if (!is.null(sheet)) {
-    out$sheet_name <- resolve_sheet(sheet, sheet_names)
+    out$sheet_name <- lookup_sheet_name(sheet, sheets_df)
   }
   out$A1_range <- qualified_A1(
     out$sheet_name,

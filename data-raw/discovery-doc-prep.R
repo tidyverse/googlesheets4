@@ -57,7 +57,9 @@ these <- c(
   "TextFormat",
   "UpdateCellsRequest",
   "UpdateSheetPropertiesRequest",
-  "GridCoordinate"
+  "GridCoordinate",
+  "DeleteDimensionRequest",
+  "InsertDimensionRequest"
 )
 
 .tidy_schemas <- these %>%

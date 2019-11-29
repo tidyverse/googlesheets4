@@ -59,7 +59,7 @@ style_frozen_rows <- function(n = 1, sheetId) {
 # based on this, except I clear everything by sending 'fields = "*"'
 # https://developers.google.com/sheets/api/samples/sheet#clear_a_sheet_of_all_values_while_preserving_formats
 # returns: an instance of RepeatCellRequest
-style_clear_sheet <- function(sheetId = 0) {
+style_clear_sheet <- function(sheetId) {
   new(
     "RepeatCellRequest",
     range = new("GridRange", sheetId = sheetId),

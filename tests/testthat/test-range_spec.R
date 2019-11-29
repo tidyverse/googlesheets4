@@ -9,17 +9,18 @@ test_that("as_range_spec() can deal with nothingness", {
 })
 
 test_that("as_range_spec() partitions 'Sheet1!A1:B2'", {
-  spec <- as_range_spec("Sheet1!A1:B2")
+  sheets_df <- tibble::tibble(name = "Sheet1")
+  spec <- as_range_spec("Sheet1!A1:B2", sheets_df = sheets_df)
   # we always escape sheet names before sending to API
   expect_identical(spec$A1_range, "'Sheet1'!A1:B2")
   expect_identical(spec$sheet_name, "Sheet1")
   expect_identical(spec$cell_range, "A1:B2")
   expect_true(spec$shim)
 
-  spec <- as_range_spec("'Sheet2'!A5:A")
-  expect_identical(spec$A1_range, "'Sheet2'!A5:A")
+  spec <- as_range_spec("'Sheet1'!A5:A", sheets_df = sheets_df)
+  expect_identical(spec$A1_range, "'Sheet1'!A5:A")
   # we always store unescaped name in range_spec
-  expect_identical(spec$sheet_name, "Sheet2")
+  expect_identical(spec$sheet_name, "Sheet1")
   expect_identical(spec$cell_range, "A5:A")
   expect_true(spec$shim)
 })
@@ -103,8 +104,8 @@ test_that("invalid range is rejected", {
 })
 
 test_that("unresolvable sheet raises error", {
-  expect_error(as_range_spec("A5:A", sheet = 3), "no sheet names")
-  expect_error(as_range_spec(x = NULL, sheet = 3), "no sheet names")
+  expect_error(as_range_spec("A5:A", sheet = 3), "Can't look up")
+  expect_error(as_range_spec(x = NULL, sheet = 3), "Can't look up")
   sheets_df <- tibble::tibble(name = LETTERS[1:3])
   expect_error(
     as_range_spec(x = NULL, sheet = "nope", sheets_df = sheets_df),

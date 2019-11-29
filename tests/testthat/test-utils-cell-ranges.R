@@ -38,28 +38,16 @@ test_that("qualified_A1 works", {
 })
 
 # lookup_sheet_name() ----
-test_that("lookup_sheet_name() is NULL in, NULL out", {
-  expect_null(lookup_sheet_name())
-})
-
 test_that("lookup_sheet_name() requires sheet to be length-1 character or numeric", {
   expect_error(lookup_sheet_name(c("a", "b")), "length 1")
   expect_error(lookup_sheet_name(1:2), "length 1")
   expect_error(lookup_sheet_name(TRUE), "must be either")
 })
 
-test_that("lookup_sheet_name() requires sheet names if given sheet number", {
-  expect_error(lookup_sheet_name(1), "no sheet names")
-})
-
 test_that("lookup_sheet_name() errors if number is incompatible with sheet names", {
   sheets_df <- tibble::tibble(name = c("a", "foo", "z"))
   expect_error(lookup_sheet_name(4, sheets_df), "out-of-bounds")
   expect_error(lookup_sheet_name(0, sheets_df), "out-of-bounds")
-})
-
-test_that("lookup_sheet_name() does not require sheet names for character input", {
-  expect_identical(lookup_sheet_name("foo"), "foo")
 })
 
 test_that("lookup_sheet_name() consults sheet names, if given", {

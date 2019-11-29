@@ -7,6 +7,9 @@ A1_decomp <- glue("(?<column>{letter_part})?(?<row>{number_part})?")
 
 lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
   check_sheet(sheet)
+  if (is.null(sheets_df)) {
+    stop_glue("Can't look up, e.g., sheet name or id without sheet metadata")
+  }
 
   if (isTRUE(visible)) {
     sheets_df <- sheets_df[sheets_df$visible, ]

@@ -144,10 +144,7 @@ as_range_spec.NULL <- function(x,
                                skip = 0,
                                sheets_df = NULL) {
   out <- new_range_spec(
-    .input = list(
-      sheet = sheet, range = x, skip = skip,
-      sheets_df = sheets_df
-    )
+    .input = list(sheet = sheet, skip = skip, sheets_df = sheets_df)
   )
 
   if (skip < 1) {

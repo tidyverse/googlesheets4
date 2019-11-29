@@ -39,3 +39,31 @@ style_header_row <- function(row = 1,
     fields = fields
   )
 }
+
+# https://developers.google.com/sheets/api/samples/formatting#format_a_header_row
+# returns: an instance of RepeatCellRequest
+style_frozen_rows <- function(n = 1, sheetId) {
+  new(
+    "UpdateSheetPropertiesRequest",
+    properties = new(
+      "SheetProperties",
+      sheetId = sheetId,
+      gridProperties = list(
+        frozenRowCount = n
+      )
+    ),
+    fields = "gridProperties.frozenRowCount"
+  )
+}
+
+# based on this, except I clear everything by sending 'fields = "*"'
+# https://developers.google.com/sheets/api/samples/sheet#clear_a_sheet_of_all_values_while_preserving_formats
+# returns: an instance of RepeatCellRequest
+style_clear_sheet <- function(sheetId = 0) {
+  new(
+    "RepeatCellRequest",
+    range = new("GridRange", sheetId = sheetId),
+    fields = "*"
+  )
+}
+

@@ -5,26 +5,29 @@ number_part <- "[$]?[0-9]{1,7}"
 A1_rx <- glue("^{letter_part}{number_part}$|^{letter_part}$|^{number_part}$")
 A1_decomp <- glue("(?<column>{letter_part})?(?<row>{number_part})?")
 
-lookup_sheet_name <- function(sheet = NULL, sheets_df = NULL) {
-  if (is.null(sheet)) {
-    return()
-  }
+lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
   check_sheet(sheet)
+
+  if (isTRUE(visible)) {
+    sheets_df <- sheets_df[sheets_df$visible, ]
+  }
+
+  if (is.null(sheet)) {
+    first_sheet <- which.min(sheets_df$index)
+    return(as.list(sheets_df[first_sheet, ]))
+  }
+  # sheet is a string or an integer
 
   if (is.character(sheet)) {
     sheet <- sq_unescape(sheet)
-    if (!is.null(sheets_df) && nrow(sheets_df) > 0) {
-      m <- match(sheet, sheets_df$name)
-      if (is.na(m)) {
-        stop_glue("No sheet found with this name: {sq(sheet)}")
-      }
+    m <- match(sheet, sheets_df$name)
+    if (is.na(m)) {
+      stop_glue("No sheet found with this name: {sq(sheet)}")
     }
-    return(sheet)
+    return(as.list(sheets_df[m, ]))
   }
+  # sheet is an integer
 
-  if (is.null(sheets_df) || nrow(sheets_df) < 1) {
-    stop_glue("Sheet specified by number, but no sheet names provided for lookup.")
-  }
   m <- as.integer(sheet)
   if (!(m %in% seq_len(nrow(sheets_df)))) {
     stop_glue(
@@ -32,7 +35,19 @@ lookup_sheet_name <- function(sheet = NULL, sheets_df = NULL) {
       "  * Requested sheet number is out-of-bounds: {m}"
     )
   }
-  sheets_df$name[[m]]
+  as.list(sheets_df[m, ])
+}
+
+first_sheet <- function(sheets_df, visible = NA) {
+  s <- lookup_sheet(sheet = NULL, sheets_df = sheets_df, visible = visible)
+  s$id
+}
+
+first_visible <- function(sheets_df) first_sheet(sheets_df, visible = TRUE)
+
+lookup_sheet_name <- function(sheet, sheets_df) {
+  s <- lookup_sheet(sheet = sheet, sheets_df = sheets_df)
+  s$sheet_name
 }
 
 check_sheet <- function(sheet = NULL) {

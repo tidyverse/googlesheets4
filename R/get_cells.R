@@ -21,7 +21,7 @@ get_cells <- function(ss,
   ## user's range, sheet, skip --> qualified A1 range, suitable for API
   range_spec <- as_range_spec(
     range, sheet = sheet, skip = skip,
-    sheet_names = x$sheets$name, nr_names = x$named_ranges$name
+    sheets_df = x$sheets, nr_df = x$named_ranges
   )
   message_glue("Range {dq(range_spec$A1_range)}")
 

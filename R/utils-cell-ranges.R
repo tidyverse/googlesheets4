@@ -47,7 +47,7 @@ first_visible <- function(sheets_df) first_sheet(sheets_df, visible = TRUE)
 
 lookup_sheet_name <- function(sheet, sheets_df) {
   s <- lookup_sheet(sheet = sheet, sheets_df = sheets_df)
-  s$sheet_name
+  s$name
 }
 
 check_sheet <- function(sheet = NULL) {

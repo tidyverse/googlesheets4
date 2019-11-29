@@ -56,6 +56,7 @@ these <- c(
   "Color",
   "TextFormat",
   "UpdateCellsRequest",
+  "UpdateSheetPropertiesRequest",
   "GridCoordinate"
 )
 

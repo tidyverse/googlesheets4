@@ -1,0 +1,6 @@
+# UpdateSheetPropertiesRequest  
+# A tibble: 2 x 6
+  property   type   instance_of     array_of format           enum            
+  <chr>      <chr>  <chr>           <chr>    <chr>            <list>          
+1 fields     string <NA>            <NA>     google-fieldmask <tibble [0 × 2]>
+2 properties object SheetProperties <NA>     <NA>             <tibble [0 × 2]>

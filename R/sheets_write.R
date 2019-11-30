@@ -13,13 +13,13 @@ sheets_write <- function(data,
   message_glue("Writing to {sq(x$name)}")
 
   # capture sheet id and start row ---------------------------------------------
-  # `start` (or `range`) must be sent, even if `skip = 0`
   # we always send a sheet id
   # if we don't, the default is 0
   # but there's no guarantee that there is such a sheet id
   # it's more trouble to check for that than to just send a sheet id
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
   message_glue("Writing to sheet {dq(s$name)}")
+  # `start` (or `range`) must be sent, even if `skip = 0`
   start <- new("GridCoordinate", sheetId = s$id)
   if (skip > 0) {
     start <- patch(start, rowIndex = skip)
@@ -34,11 +34,20 @@ sheets_write <- function(data,
     fields = "userEnteredValue"
   )
 
+  # determine sheet dimensions that shrink wrap the data -----------------------
+  request_dims <- style_set_dimensions(
+    sheetId = s$id,
+    nrow = nrow(data) + 1 + skip, ncol = ncol(data),
+    sheets_df = x$sheets
+  )
+
   req <- request_generate(
     "sheets.spreadsheets.batchUpdate",
     params = list(
       spreadsheetId = ssid,
-      requests = list(
+      requests = rlang::list2(
+        # set dimensions
+        !!!request_dims,
         # clear existing data and formatting
         list(repeatCell = style_clear_sheet(s$id)),
         # write data

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Find Google Sheets — sheets_find • googlesheets4</title>
+<title>(Over)write new data into an existing sheet — write_sheet • googlesheets4</title>
 
 
 <!-- jquery -->
@@ -34,12 +34,14 @@
 
 
 
-<meta property="og:title" content="Find Google Sheets — sheets_find" />
-<meta property="og:description" content="Finds your Google Sheets. This is a very thin wrapper around
-googledrive::drive_find(), that specifies you want to list Drive files
-where type = &quot;spreadsheet&quot;. Therefore, note that this will require auth for
-googledrive! See the article Using googlesheets4 with googledrive
-if you want to coordinate auth between googlesheets4 and googledrive." />
+<meta property="og:title" content="(Over)write new data into an existing sheet — write_sheet" />
+<meta property="og:description" content="Updates an existing (work)sheet in an existing (spread)Sheet with a data
+frame. All pre-existing values, formats, and dimensions are cleared. The
+target sheet gets its new values and dimensions from data. Special
+formatting is applied to the header row, which holds column names, and the
+first skip + 1 rows are frozen (so, up to and including the header row).
+NOTE: this function is very alpha and currently writes everything as
+character." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -132,55 +134,87 @@ if you want to coordinate auth between googlesheets4 and googledrive." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Find Google Sheets</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_find.R'><code>R/sheets_find.R</code></a></small>
-    <div class="hidden name"><code>sheets_find.Rd</code></div>
+    <h1>(Over)write new data into an existing sheet</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_write.R'><code>R/sheets_write.R</code></a></small>
+    <div class="hidden name"><code>write_sheet.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Finds your Google Sheets. This is a very thin wrapper around
-<code><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>googledrive::drive_find()</a></code>, that specifies you want to list Drive files
-where <code>type = "spreadsheet"</code>. Therefore, note that this will require auth for
-googledrive! See the article <a href='https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html'>Using googlesheets4 with googledrive</a>
-if you want to coordinate auth between googlesheets4 and googledrive.</p>
+    <p>Updates an existing (work)sheet in an existing (spread)Sheet with a data
+frame. All pre-existing values, formats, and dimensions are cleared. The
+target sheet gets its new values and dimensions from <code>data</code>. Special
+formatting is applied to the header row, which holds column names, and the
+first <code>skip + 1</code> rows are frozen (so, up to and including the header row).
+<em>NOTE: this function is very alpha and currently writes everything as
+character.</em></p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_find</span>(<span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>write_sheet</span>(<span class='no'>data</span>, <span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>na</span> <span class='kw'>=</span> <span class='st'>""</span>)
+
+<span class='fu'>sheets_write</span>(<span class='no'>data</span>, <span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>na</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>...</th>
-      <td><p>Arguments (other than <code>type</code>, which is hard-wired as <code>type = "spreadsheet"</code>) that are passed along to <code><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>googledrive::drive_find()</a></code>.</p></td>
+      <th>data</th>
+      <td><p>A data frame.</p></td>
+    </tr>
+    <tr>
+      <th>ss</th>
+      <td><p>Something that identifies a Google Sheet: its file ID, a URL from
+which we can recover the ID, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+is how googledrive represents Drive files. Processed through
+<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>sheet</th>
+      <td><p>Sheet to write into, as in "worksheet" or "tab". Either a string
+(the name of a sheet), or an integer (the position of the sheet). If
+unspecified, defaults to the first sheet.</p></td>
+    </tr>
+    <tr>
+      <th>skip</th>
+      <td><p>Number of rows to leave empty before starting to write.</p></td>
+    </tr>
+    <tr>
+      <th>na</th>
+      <td><p>Not implemented yet.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An object of class <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, a tibble with one row per item.</p>
+    <p>Updated metadata for the (spread)Sheet <code>ss</code>, as an instance of S3
+class <code>sheets_Spreadsheet</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
-  <span class='co'># see all your Sheets</span>
-  <span class='fu'>sheets_find</span>()
+  <span class='co'># create a Sheet with some initial, placeholder data</span>
+  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(
+    <span class='st'>"sheets-write-demo"</span>,
+    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='kw'>omega</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>))
+  )
 
-  <span class='co'># see 5 Sheets, prioritized by creation time</span>
-  <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_find</span>(<span class='kw'>order_by</span> <span class='kw'>=</span> <span class='st'>"createdTime desc"</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>5</span>)
-  <span class='no'>x</span>
+  <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
+    <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>],
+    <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  )
 
-  <span class='co'># hoist the creation date, using other packages in the tidyverse</span>
-  <span class='co'># x %&gt;%</span>
-  <span class='co'>#   tidyr::hoist(drive_resource, created_on = "createdTime") %&gt;%</span>
-  <span class='co'>#   dplyr::mutate(created_on = as.Date(created_on))</span>
-}</div><div class='output co'>#&gt; # A tibble: 5 x 3
-#&gt;   name                id                                        drive_resource  
-#&gt; * &lt;chr&gt;               &lt;chr&gt;                                     &lt;list&gt;          
-#&gt; 1 sheets-create-demo… 1qVeGa6mBwq930GomFfbpE7sSYf7yZq1AGAq04va… &lt;named list [34…
-#&gt; 2 sheets-create-demo… 1rWKEXbH_WzOQ1_EixjShhQXxnLxAHlAnSVL-QnY… &lt;named list [34…
-#&gt; 3 sheets-create-demo… 144JU31F1dqcS4n8O8cuffyeWaxCuAKd_U8Oe4tS… &lt;named list [34…
-#&gt; 4 sheets-create-demo… 1YAHc9YHRJciLoBpEvwu_HoTyfTax5copsqzmHS0… &lt;named list [34…
-#&gt; 5 empty-tibble        1Qgg1FAb_VCmh8L-0ovBs1M0Vyi_sJQI5YW1rS5A… &lt;named list [34…</div></pre>
+  <span class='co'># write df into the first sheet</span>
+  (<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_write</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>df</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>))
+
+  <span class='co'># write mtcars into the sheet named 'omega'</span>
+  (<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_write</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"omega"</span>))
+
+  <span class='co'># view your magnificent creation in the browser</span>
+  <span class='co'># sheets_browse(ss)</span>
+
+  <span class='co'># clean up</span>
+  <span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"sheets-write-demo"</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>()
+}</div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-write-demo'</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "alpha"</span></div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-write-demo'</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "omega"</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
+#&gt; <span class='message'>  * sheets-write-demo: 1w-M1VU2XEjmKCm7Wdl2Kaks72wwUG7Wgbz4dnsovXPg</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

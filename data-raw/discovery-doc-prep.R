@@ -59,7 +59,8 @@ these <- c(
   "UpdateSheetPropertiesRequest",
   "GridCoordinate",
   "DeleteDimensionRequest",
-  "InsertDimensionRequest"
+  "InsertDimensionRequest",
+  "DimensionRange"
 )
 
 .tidy_schemas <- these %>%

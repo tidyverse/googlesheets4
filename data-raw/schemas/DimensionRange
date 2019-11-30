@@ -1,0 +1,8 @@
+# DimensionRange  
+# A tibble: 4 x 6
+  property   type    instance_of array_of format enum            
+  <chr>      <chr>   <chr>       <chr>    <chr>  <list>          
+1 dimension  enum    <NA>        <NA>     <NA>   <tibble [3 × 2]>
+2 endIndex   integer <NA>        <NA>     int32  <tibble [0 × 2]>
+3 sheetId    integer <NA>        <NA>     int32  <tibble [0 × 2]>
+4 startIndex integer <NA>        <NA>     int32  <tibble [0 × 2]>

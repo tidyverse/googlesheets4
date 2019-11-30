@@ -1,8 +1,56 @@
-sheets_write <- function(data,
-                         ss,
-                         sheet = NULL,
-                         skip = 0,
-                         na = "") {
+#' (Over)write new data into an existing sheet
+#'
+#' Updates an existing (work)sheet in an existing (spread)Sheet with a data
+#' frame. All pre-existing values, formats, and dimensions are cleared. The
+#' target sheet gets its new values and dimensions from `data`. Special
+#' formatting is applied to the header row, which holds column names, and the
+#' first `skip + 1` rows are frozen (so, up to and including the header row).
+#' *NOTE: this function is very alpha and currently writes everything as
+#' character.*
+#'
+#' @param data A data frame.
+#' @inheritParams read_sheet
+#' @param sheet Sheet to write into, as in "worksheet" or "tab". Either a string
+#'   (the name of a sheet), or an integer (the position of the sheet). If
+#'   unspecified, defaults to the first sheet.
+#' @param skip Number of rows to leave empty before starting to write.
+#' @param na Not implemented yet.
+#'
+#' @return Updated metadata for the (spread)Sheet `ss`, as an instance of S3
+#'   class `sheets_Spreadsheet`.
+#' @export
+#'
+#' @examples
+#' if (sheets_has_token()) {
+#'   # create a Sheet with some initial, placeholder data
+#'   ss <- sheets_create(
+#'     "sheets-write-demo",
+#'     sheets = list(alpha = data.frame(x = 1), omega = data.frame(x = 1))
+#'   )
+#'
+#'   df <- data.frame(
+#'     x = 1:3,
+#'     y = letters[1:3],
+#'     stringsAsFactors = FALSE
+#'   )
+#'
+#'   # write df into the first sheet
+#'   (ss <- sheets_write(data = df, ss = ss))
+#'
+#'   # write mtcars into the sheet named 'omega'
+#'   (ss <- sheets_write(data = mtcars, ss = ss, sheet = "omega"))
+#'
+#'   # view your magnificent creation in the browser
+#'   # sheets_browse(ss)
+#'
+#'   # clean up
+#'   sheets_find("sheets-write-demo") %>% googledrive::drive_rm()
+#' }
+write_sheet <- function(data,
+                        ss,
+                        sheet = NULL,
+                        skip = 0,
+                        na = "") {
   # https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest
   ssid <- as_sheets_id(ss)
   check_sheet(sheet)
@@ -64,6 +112,11 @@ sheets_write <- function(data,
 
   sheets_get(ssid)
 }
+
+
+#' @rdname write_sheet
+#' @export
+sheets_write <- write_sheet
 
 # docs on Sheets NA
 # https://support.google.com/docs/answer/3093359?hl=en

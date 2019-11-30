@@ -1,6 +1,6 @@
 # https://developers.google.com/sheets/api/samples/formatting#format_a_header_row
 # returns: an instance of RepeatCellRequest
-style_header_row <- function(row = 1,
+bureq_header_row <- function(row = 1,
                              sheetId = NULL,
                              backgroundColor = 0.92,
                              horizontalAlignment = "CENTER",
@@ -42,7 +42,7 @@ style_header_row <- function(row = 1,
 
 # https://developers.google.com/sheets/api/samples/formatting#format_a_header_row
 # returns: an instance of RepeatCellRequest
-style_frozen_rows <- function(n = 1, sheetId) {
+bureq_frozen_rows <- function(n = 1, sheetId) {
   new(
     "UpdateSheetPropertiesRequest",
     properties = new(
@@ -59,7 +59,7 @@ style_frozen_rows <- function(n = 1, sheetId) {
 # based on this, except I clear everything by sending 'fields = "*"'
 # https://developers.google.com/sheets/api/samples/sheet#clear_a_sheet_of_all_values_while_preserving_formats
 # returns: an instance of RepeatCellRequest
-style_clear_sheet <- function(sheetId) {
+bureq_clear_sheet <- function(sheetId) {
   new(
     "RepeatCellRequest",
     range = new("GridRange", sheetId = sheetId),
@@ -67,10 +67,10 @@ style_clear_sheet <- function(sheetId) {
   )
 }
 
-# TODO: it's increasingly clear that the 'style_*' prefix was a bad choice
 # https://developers.google.com/sheets/api/samples/rowcolumn#append_empty_rows_or_columns
 # https://developers.google.com/sheets/api/samples/rowcolumn#delete_rows_or_columns
-style_set_dimensions <- function(sheetId,
+# returns: a list of 0 or more instances of RepeatCellRequest
+bureq_set_dimensions <- function(sheetId,
                                  nrow = NULL, ncol = NULL,
                                  sheets_df) {
   m <- match(sheetId, sheets_df$id)

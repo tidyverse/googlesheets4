@@ -55,7 +55,7 @@ sheets_create <- function(name, ..., sheets = NULL) {
   if (!is.null(sheets)) {
     requests_style <- map(
       out$sheets$id,
-      ~ list(repeatCell = style_header_row(sheetId = .x))
+      ~ list(repeatCell = bureq_header_row(sheetId = .x))
     )
     req <- request_generate(
       "sheets.spreadsheets.batchUpdate",

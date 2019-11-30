@@ -35,7 +35,7 @@ sheets_write <- function(data,
   )
 
   # determine sheet dimensions that shrink wrap the data -----------------------
-  request_dims <- style_set_dimensions(
+  request_dims <- bureq_set_dimensions(
     sheetId = s$id,
     nrow = nrow(data) + 1 + skip, ncol = ncol(data),
     sheets_df = x$sheets
@@ -49,13 +49,13 @@ sheets_write <- function(data,
         # set dimensions
         !!!request_dims,
         # clear existing data and formatting
-        list(repeatCell = style_clear_sheet(s$id)),
+        list(repeatCell = bureq_clear_sheet(s$id)),
         # write data
         list(updateCells = request_values),
         # configure header row
         list(updateSheetProperties =
-               style_frozen_rows(n = skip + 1, sheetId = s$id)),
-        list(repeatCell = style_header_row(row = skip + 1, sheetId = s$id))
+               bureq_frozen_rows(n = skip + 1, sheetId = s$id)),
+        list(repeatCell = bureq_header_row(row = skip + 1, sheetId = s$id))
       )
     )
   )

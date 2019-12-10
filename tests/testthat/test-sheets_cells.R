@@ -1,4 +1,5 @@
 test_that("slightly tricky `range`s work", {
+  skip("broken until I restore the test Sheet :(")
   skip_if_offline()
   skip_if_no_token()
 

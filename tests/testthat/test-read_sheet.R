@@ -1,4 +1,5 @@
 test_that("read_sheet() does same old, same old", {
+  skip("broken until I restore the test Sheet :(")
   skip_if_offline()
   skip_if_no_token()
 

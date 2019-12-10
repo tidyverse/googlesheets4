@@ -27,6 +27,30 @@ test_sheet <- function(name = "googlesheets4-cell-tests") {
   new_sheets_id(.test_sheets[[m]])
 }
 
+test_sheet_create <- function(name = "googlesheets4-cell-tests") {
+  stopifnot(is_string(name))
+  user <- sheets_user()
+  if (!grepl("^googlesheets4-testing", user)) {
+    user <- sub("@.+$", "", user)
+    stop_glue("Must be auth'd as {sq('googlesheets4-testing')}, not {sq(user)}")
+  }
+
+  existing <- sheets_find()
+  m <- match(name, existing$name)
+  if (!is.na(m)) {
+    message_glue("Testing sheet named {sq(name)} already exists ... using that")
+    ssid <- as_sheets_id(existing$id[[m]])
+    # it's fiddly to check current sharing status, so just re-share
+    googlesheets4:::sheets_share(ssid)
+    return(ssid)
+  }
+
+  message_glue("Creating and sharing {sq(name)}")
+  ss <- sheets_create(name)
+  googlesheets4:::sheets_share(ss)
+  as_sheets_id(ss)
+}
+
 #' File IDs of example Sheets
 #'
 #' googlesheets4 ships with static IDs for some world-readable example Sheets

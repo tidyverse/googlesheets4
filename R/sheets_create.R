@@ -33,6 +33,9 @@
 #'     "sheets-create-demo-4",
 #'     sheets = list(iris = head(iris), mtcars = head(mtcars))
 #'   )
+#'
+#'   # clean up
+#'   sheets_find("sheets-create-demo") %>% googledrive::drive_trash()
 #' }
 sheets_create <- function(name, ..., sheets = NULL) {
   ss_body <- new("Spreadsheet") %>%

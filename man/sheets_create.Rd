@@ -44,6 +44,9 @@ if (sheets_has_token()) {
     "sheets-create-demo-4",
     sheets = list(iris = head(iris), mtcars = head(mtcars))
   )
+
+  # clean up
+  sheets_find("sheets-create-demo") \%>\% googledrive::drive_trash()
 }
 }
 \seealso{

@@ -72,3 +72,8 @@ test_that("a sheets_Spreadsheet can be coerced", {
   expect_s3_class(out, "sheets_id")
   expect_identical(out, as_sheets_id("123"))
 })
+
+test_that("as_id.sheets_Spreadsheet is just as_sheets_id()", {
+  x <- sheets_Spreadsheet(list(spreadsheetId = "123"))
+  expect_identical(googledrive::as_id(x), as_sheets_id(x))
+})

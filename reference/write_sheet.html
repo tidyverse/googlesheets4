@@ -36,8 +36,8 @@
 
 <meta property="og:title" content="(Over)write new data into an existing sheet — write_sheet" />
 <meta property="og:description" content="Updates an existing (work)sheet in an existing (spread)Sheet with a data
-frame. All pre-existing values, formats, and dimensions are cleared. The
-target sheet gets its new values and dimensions from data. Special
+frame. All pre-existing values, formats, and dimensions of the targeted sheet
+are cleared and it gets its new values and dimensions from data. Special
 formatting is applied to the header row, which holds column names, and the
 first skip + 1 rows are frozen (so, up to and including the header row).
 NOTE: this function is very alpha and currently writes everything as
@@ -141,8 +141,8 @@ character." />
 
     <div class="ref-description">
     <p>Updates an existing (work)sheet in an existing (spread)Sheet with a data
-frame. All pre-existing values, formats, and dimensions are cleared. The
-target sheet gets its new values and dimensions from <code>data</code>. Special
+frame. All pre-existing values, formats, and dimensions of the targeted sheet
+are cleared and it gets its new values and dimensions from <code>data</code>. Special
 formatting is applied to the header row, which holds column names, and the
 first <code>skip + 1</code> rows are frozen (so, up to and including the header row).
 <em>NOTE: this function is very alpha and currently writes everything as
@@ -214,7 +214,7 @@ class <code>sheets_Spreadsheet</code>.</p>
   <span class='co'># clean up</span>
   <span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"sheets-write-demo"</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>()
 }</div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-write-demo'</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "alpha"</span></div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-write-demo'</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "omega"</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * sheets-write-demo: 1w-M1VU2XEjmKCm7Wdl2Kaks72wwUG7Wgbz4dnsovXPg</span></div></pre>
+#&gt; <span class='message'>  * sheets-write-demo: 1VesC06W1_2i7S30aJeDchrn2q5nUQd7jwgukAtbXp4k</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -1,8 +1,8 @@
 #' (Over)write new data into an existing sheet
 #'
 #' Updates an existing (work)sheet in an existing (spread)Sheet with a data
-#' frame. All pre-existing values, formats, and dimensions are cleared. The
-#' target sheet gets its new values and dimensions from `data`. Special
+#' frame. All pre-existing values, formats, and dimensions of the targeted sheet
+#' are cleared and it gets its new values and dimensions from `data`. Special
 #' formatting is applied to the header row, which holds column names, and the
 #' first `skip + 1` rows are frozen (so, up to and including the header row).
 #' *NOTE: this function is very alpha and currently writes everything as

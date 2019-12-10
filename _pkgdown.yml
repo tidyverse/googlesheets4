@@ -15,13 +15,20 @@ navbar:
     home: ~
 
 reference:
-  - title: "Read cell data"
+  - title: "Read cells"
     desc: >
       Import data from a Sheet into a local data frame
     contents:
       - read_sheet
       - sheets_cells
       - spread_sheet
+      - cell-specification
+  - title: "Write cells"
+    desc: >
+      Write data from a local data frame into a Sheet
+    contents:
+      - write_sheet
+      - sheets_create
       - cell-specification
   - title: "Metadata on Sheets"
     desc: >
@@ -31,6 +38,11 @@ reference:
       - sheets_find
       - sheets_browse
       - ends_with("sheets_id")
+  - title: "Modify a Sheet"
+    desc: >
+      Make changes to a (spread)Sheet or to the (work)sheets it contains
+    contents:
+      - sheets_create
   - title: "Example Sheets"
     desc: >
       World-readable Sheets to use in examples and reprexes

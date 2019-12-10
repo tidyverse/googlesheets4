@@ -1,10 +1,10 @@
 ## this file represents the interface with the cellranger package
 
-#' Specify cells for reading
+#' Specify cells
 #'
-#' The `range` argument in [read_sheet()] or [sheets_cells()] is used to limit
-#' the read to a specific rectangle of cells. The Sheets v4 API only accepts
-#' ranges in [A1
+#' Many functions in googlesheets4 use a `range` argument to target specific
+#' cells. The Sheets v4 API expects user-specified ranges to be expressed via
+#' [its A1
 #' notation](https://developers.google.com/sheets/api/guides/concepts#a1_notation),
 #' but googlesheets4 accepts and converts a few alternative specifications
 #' provided by the functions in the [cellranger][cellranger] package. Of course,

@@ -11,6 +11,22 @@
   class = c("sheets_id", "drive_id")
 )
 
+.test_sheets <- structure(
+  c(
+    "googlesheets4-cell-tests" = "1XZFE6wdLNK0iXCOv22GOR0BJMd7hWxQ1-aGl1HMuhrI"
+  ),
+  class = c("sheets_id", "drive_id")
+)
+
+test_sheet <- function(name = "googlesheets4-cell-tests") {
+  stopifnot(is_string(name))
+  m <- match(name, names(.test_sheets))
+  if (is.na(m)) {
+    stop_glue("Unrecognized test sheet: {sq('name')}")
+  }
+  new_sheets_id(.test_sheets[[m]])
+}
+
 #' File IDs of example Sheets
 #'
 #' googlesheets4 ships with static IDs for some world-readable example Sheets

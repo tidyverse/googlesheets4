@@ -15,19 +15,6 @@ expect_error_free <- function(...) {
   expect_error(..., regexp = NA)
 }
 
-.test_sheets <- c(
-  "googlesheets4-cell-tests" = "1vDfXo-16OhUilaG_EwvDd1Dm4_NI0UKORwSLLpycSS0"
-)
-
-test_sheet <- function(name = "googlesheets4-cell-tests") {
-  stopifnot(is_string(name))
-  m <- match(name, names(.test_sheets))
-  if (is.na(m)) {
-    stop_glue("Unrecognized test sheet: {sq('name')}")
-  }
-  new_sheets_id(.test_sheets[[m]])
-}
-
 ref <- function(pattern, ...) {
   x <- list.files(testthat::test_path("ref"), pattern = pattern, ...)
   if (length(x) < 1) {

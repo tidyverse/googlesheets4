@@ -5,7 +5,7 @@ test_that("new() errors for non-existing id", {
 test_that("new() works (and doesn't require data)", {
   out <- new("Spreadsheet")
   expect_length(out, 0)
-  expect_s3_class(out, "googlesheets4_Spreadsheet")
+  expect_s3_class(out, "googlesheets4_schema_Spreadsheet")
   expect_s3_class(out, "googlesheets4_schema")
   expect_s3_class(attr(out, "schema"), "tbl_df")
 })

@@ -1,5 +1,5 @@
 #' @export
-tibblify.googlesheets4_NamedRange <- function(x, ...) {
+tibblify.googlesheets4_schema_NamedRange <- function(x, ...) {
   grid_range <- new("GridRange", !!!pluck(x, "range"))
   grid_range <- tibblify(grid_range)
 

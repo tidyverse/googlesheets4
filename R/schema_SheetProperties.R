@@ -1,5 +1,5 @@
 #' @export
-tibblify.googlesheets4_SheetProperties <- function(x, ...) {
+tibblify.googlesheets4_schema_SheetProperties <- function(x, ...) {
   tibble::tibble(
     # TODO: open question whether I should explicitly unescape title here
     name         =  glean_chr(x, "title"),

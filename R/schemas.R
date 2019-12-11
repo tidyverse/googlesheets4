@@ -30,11 +30,11 @@ check_against_schema <- function(x, schema = NULL) {
   x
 }
 
-id_as_class <- function(id) glue("googlesheets4_{id}")
+id_as_class <- function(id) glue("googlesheets4_schema_{id}")
 
 id_from_class <- function(x) {
-  m <- grep("^googlesheets4_", class(x), value = TRUE)[[1]]
-  sub("^googlesheets4_", "", m)
+  m <- grep("^googlesheets4_schema_", class(x), value = TRUE)[[1]]
+  sub("^googlesheets4_schema_", "", m)
 }
 
 # patch ----

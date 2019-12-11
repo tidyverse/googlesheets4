@@ -169,6 +169,7 @@ one_id <- function(x) {
 #' @param x An instance of `googlesheets4_spreadsheet`, which is returned by,
 #'   e.g., [sheets_get()].
 #' @inherit googledrive::as_id return
+#' @importFrom googledrive as_id
 #' @export
 #' @examples
 #' if (sheets_has_token()) {

@@ -4,7 +4,7 @@
 \alias{as_id.googlesheets4_spreadsheet}
 \title{Extract the file id from Sheet metadata}
 \usage{
-as_id.googlesheets4_spreadsheet(x, ...)
+\method{as_id}{googlesheets4_spreadsheet}(x, ...)
 }
 \arguments{
 \item{x}{An instance of \code{googlesheets4_spreadsheet}, which is returned by,

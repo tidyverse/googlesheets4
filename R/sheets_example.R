@@ -1,23 +1,17 @@
 ## TODO: consult remote key-value store for these? in case they change?
-.sheets_examples <- structure(
-  c(
-                    "gapminder" = "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY",
-                     "mini-gap" = "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU",
-         "formulas-and-formats" = "1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms",
-    "cell-contents-and-formats" = "1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E",
-                       "deaths" = "1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg",
-                "chicken-sheet" = "1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU"
-  ),
-  class = c("sheets_id", "drive_id")
-)
+.sheets_examples <- googledrive::as_id(c(
+                  "gapminder" = "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY",
+                   "mini-gap" = "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU",
+       "formulas-and-formats" = "1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms",
+  "cell-contents-and-formats" = "1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E",
+                     "deaths" = "1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg",
+              "chicken-sheet" = "1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU"
+))
 
-.test_sheets <- structure(
-  c(
-    "googlesheets4-cell-tests" = "1XZFE6wdLNK0iXCOv22GOR0BJMd7hWxQ1-aGl1HMuhrI",
-     "googlesheets4-col-types" = "1q-iRi1L3JugqHTtcjQ3DQOmOTuDnUsWi2AiG2eNyQkU"
-  ),
-  class = c("sheets_id", "drive_id")
-)
+.test_sheets <- googledrive::as_id(c(
+  "googlesheets4-cell-tests" = "1XZFE6wdLNK0iXCOv22GOR0BJMd7hWxQ1-aGl1HMuhrI",
+   "googlesheets4-col-types" = "1q-iRi1L3JugqHTtcjQ3DQOmOTuDnUsWi2AiG2eNyQkU"
+))
 
 test_sheet <- function(name = "googlesheets4-cell-tests") {
   stopifnot(is_string(name))
@@ -30,6 +24,7 @@ test_sheet <- function(name = "googlesheets4-cell-tests") {
 
 test_sheet_create <- function(name = "googlesheets4-cell-tests") {
   stopifnot(is_string(name))
+
   user <- sheets_user()
   if (!grepl("^googlesheets4-testing", user)) {
     user <- sub("@.+$", "", user)
@@ -38,19 +33,21 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
 
   existing <- sheets_find()
   m <- match(name, existing$name)
-  if (!is.na(m)) {
+  if (is.na(m)) {
+    message_glue("Creating {sq(name)}")
+    ss <- sheets_create(name)
+  } else {
     message_glue("Testing sheet named {sq(name)} already exists ... using that")
-    ssid <- as_sheets_id(existing$id[[m]])
-    # it's fiddly to check current sharing status, so just re-share
-    sheets_share(ssid)
-    return(ssid)
+    ss <- existing$id[[m]]
   }
+  ssid <- as_sheets_id(ss)
 
-  message_glue("Creating and sharing {sq(name)}")
-  ss <- sheets_create(name)
-  sheets_share(ss)
-  as_sheets_id(ss)
+  # it's fiddly to check current sharing status, so just re-share
+  message_glue("Making sure anyone with a link can read {sq(name)}")
+  sheets_share(ssid)
+  ssid
 }
+
 
 #' File IDs of example Sheets
 #'

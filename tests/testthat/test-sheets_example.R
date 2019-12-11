@@ -3,7 +3,6 @@ test_that("sheets_examples() lists all examples", {
   expect_true(is.character(examples))
   expect_true(length(examples) > 0)
   expect_true(is.character(names(examples)))
-  expect_s3_class(examples, "sheets_id")
   expect_s3_class(examples, "drive_id")
 })
 

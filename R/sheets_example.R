@@ -13,7 +13,8 @@
 
 .test_sheets <- structure(
   c(
-    "googlesheets4-cell-tests" = "1XZFE6wdLNK0iXCOv22GOR0BJMd7hWxQ1-aGl1HMuhrI"
+    "googlesheets4-cell-tests" = "1XZFE6wdLNK0iXCOv22GOR0BJMd7hWxQ1-aGl1HMuhrI",
+     "googlesheets4-col-types" = "1q-iRi1L3JugqHTtcjQ3DQOmOTuDnUsWi2AiG2eNyQkU"
   ),
   class = c("sheets_id", "drive_id")
 )
@@ -41,13 +42,13 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
     message_glue("Testing sheet named {sq(name)} already exists ... using that")
     ssid <- as_sheets_id(existing$id[[m]])
     # it's fiddly to check current sharing status, so just re-share
-    googlesheets4:::sheets_share(ssid)
+    sheets_share(ssid)
     return(ssid)
   }
 
   message_glue("Creating and sharing {sq(name)}")
   ss <- sheets_create(name)
-  googlesheets4:::sheets_share(ss)
+  sheets_share(ss)
   as_sheets_id(ss)
 }
 

@@ -1,5 +1,5 @@
 #' @export
-tibblify.googlesheets4_schema_GridRange <- function(x, ...) {
+as_tibble.googlesheets4_schema_GridRange <- function(x, ...) {
   tibble::tibble(
     # if there is only 1 sheet, sheetId might not be sent!
     # https://github.com/tidyverse/googlesheets4/issues/29

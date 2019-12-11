@@ -249,7 +249,7 @@ spread_sheet_impl_ <- function(df,
     set_names(col_names) %>%
     discard(is.null)
 
-  tibble::as_tibble(out_scratch, .name_repair = .name_repair)
+  as_tibble(out_scratch, .name_repair = .name_repair)
 }
 
 ## helpers ---------------------------------------------------------------------

@@ -12,13 +12,13 @@ new_googlesheets4_spreadsheet <- function(x = list()) {
 
   if (!is.null(x$sheets)) {
     sheets <- map(x$sheets, ~ new("Sheet", !!!.x))
-    sheets <- map(sheets, tibblify)
+    sheets <- map(sheets, as_tibble)
     out$sheets <- do.call(rbind, sheets)
   }
 
   if (!is.null(x$namedRanges)) {
     named_ranges <- map(x$namedRanges, ~ new("NamedRange", !!!.x))
-    named_ranges <- map(named_ranges, tibblify)
+    named_ranges <- map(named_ranges, as_tibble)
     named_ranges <- do.call(rbind, named_ranges)
 
     # if there is only 1 sheet, sheetId might not be sent!

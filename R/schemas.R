@@ -53,14 +53,3 @@ patch.googlesheets4_schema <- function(x, ...) {
   x[names(dots)] <- dots
   check_against_schema(x)
 }
-
-# tibblify ----
-tibblify <- function(x, ...) {
-  UseMethod("tibblify")
-}
-
-tibblify.default <- function(x, ...) {
-  stop_glue("
-    Don't know how to {bt('tibblify()')} an object of class {class_collapse(x)}
-  ")
-}

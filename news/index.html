@@ -135,6 +135,7 @@
 <a href="#googlesheets4-development-version" class="anchor"></a>googlesheets4 (development version)<small> Unreleased </small>
 </h1>
 <ul>
+<li><p>The S3 class <code>sheets_Spreadsheet</code> is renamed to <code>googlesheets4_spreadsheet</code>, a consequence of rationalizing all internal and external classes. <code>googlesheets4_spreadsheet</code> is the class that holds metadata for a Sheet and it is connected to the API’s <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet"><code>Spreadsheet</code></a> schema. The return value of <code><a href="../reference/sheets_get.html">sheets_get()</a></code> has this class.</p></li>
 <li><p><code><a href="../reference/write_sheet.html">sheets_write()</a></code> (also available as <code><a href="../reference/write_sheet.html">write_sheet()</a></code>) is a new function to write a data frame into an existing (work)sheet, inside an existing (spread)Sheet. <em>caution: function still under development</em></p></li>
 <li><p><code><a href="../reference/sheets_create.html">sheets_create()</a></code> is a new function to create a new Sheet and, optionally, write one or more data frames into it (<a href='https://github.com/tidyverse/googlesheets4/issues/61'>#61</a>). <em>caution: function still under development</em></p></li>
 </ul>

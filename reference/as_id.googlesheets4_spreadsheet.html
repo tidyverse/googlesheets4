@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>File IDs of example Sheets — sheets_example • googlesheets4</title>
+<title>Extract the file id from Sheet metadata — as_id.googlesheets4_spreadsheet • googlesheets4</title>
 
 
 <!-- jquery -->
@@ -34,10 +34,10 @@
 
 
 
-<meta property="og:title" content="File IDs of example Sheets — sheets_example" />
-<meta property="og:description" content="googlesheets4 ships with static IDs for some world-readable example Sheets
-for use in examples and documentation. These functions make them easy to
-access by a nickname." />
+<meta property="og:title" content="Extract the file id from Sheet metadata — as_id.googlesheets4_spreadsheet" />
+<meta property="og:description" content="This method implements googledrive::as_id() for the class used here to hold
+metadata for a Sheet. It just calls as_sheets_id(), but it's handy in case
+you forget that exists and hope that as_id() will &quot;just work&quot;." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -130,57 +130,43 @@ access by a nickname." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>File IDs of example Sheets</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_example.R'><code>R/sheets_example.R</code></a></small>
-    <div class="hidden name"><code>sheets_example.Rd</code></div>
+    <h1>Extract the file id from Sheet metadata</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_id.R'><code>R/sheets_id.R</code></a></small>
+    <div class="hidden name"><code>as_id.googlesheets4_spreadsheet.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>googlesheets4 ships with static IDs for some world-readable example Sheets
-for use in examples and documentation. These functions make them easy to
-access by a nickname.</p>
+    <p>This method implements <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>googledrive::as_id()</a></code> for the class used here to hold
+metadata for a Sheet. It just calls <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>, but it's handy in case
+you forget that exists and hope that <code>as_id()</code> will "just work".</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_example</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='fu'>sheets_examples</span>()))
-
-<span class='fu'>sheets_examples</span>()</pre>
+    <pre class="usage"><span class='fu'>as_id.googlesheets4_spreadsheet</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>name</th>
-      <td><p>Nickname of an example Sheet.</p></td>
+      <th>x</th>
+      <td><p>An instance of <code>googlesheets4_spreadsheet</code>, which is returned by,
+e.g., <code><a href='sheets_get.html'>sheets_get()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments passed down to methods. (Not used.)</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-<ul>
-<li><p><code>sheets_example()</code>: a single <a href='sheets_id.html'>sheets_id</a> object</p></li>
-<li><p><code>sheets_examples()</code>: a named character vector of all built-in examples</p></li>
-</ul>
-
+    <p>A character vector bearing the S3 class <code>drive_id</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>sheets_examples</span>()</div><div class='output co'>#&gt;                                      gapminder 
-#&gt; "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" 
-#&gt;                                       mini-gap 
-#&gt; "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU" 
-#&gt;                           formulas-and-formats 
-#&gt; "1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms" 
-#&gt;                      cell-contents-and-formats 
-#&gt; "1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E" 
-#&gt;                                         deaths 
-#&gt; "1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg" 
-#&gt;                                  chicken-sheet 
-#&gt; "1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU" 
-#&gt; attr(,"class")
-#&gt; [1] "drive_id"</div><div class='input'>
-<span class='fu'>sheets_example</span>(<span class='st'>"gapminder"</span>)</div><div class='output co'>#&gt; [1] "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"
-#&gt; attr(,"class")
-#&gt; [1] "sheets_id" "drive_id" </div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
+  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_get.html'>sheets_get</a></span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))
+  <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>ss</span>)
+  <span class='fu'>as_id</span>(<span class='no'>ss</span>)
+}</div><div class='output co'>#&gt; <span class='error'>Error in as_id(ss): could not find function "as_id"</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

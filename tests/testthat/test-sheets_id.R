@@ -66,14 +66,14 @@ test_that("dribble with one Sheet can be coerced", {
   expect_s3_class(as_sheets_id(d), "sheets_id")
 })
 
-test_that("a sheets_Spreadsheet can be coerced", {
+test_that("a googlesheets4_spreadsheet can be coerced", {
   x <- new("Spreadsheet", spreadsheetId = "123")
-  out <- as_sheets_id(sheets_Spreadsheet(x))
+  out <- as_sheets_id(new_googlesheets4_spreadsheet(x))
   expect_s3_class(out, "sheets_id")
   expect_identical(out, as_sheets_id("123"))
 })
 
-test_that("as_id.sheets_Spreadsheet is just as_sheets_id()", {
-  x <- sheets_Spreadsheet(list(spreadsheetId = "123"))
+test_that("as_id.googlesheets4_spreadsheet is just as_sheets_id()", {
+  x <- new_googlesheets4_spreadsheet(list(spreadsheetId = "123"))
   expect_identical(googledrive::as_id(x), as_sheets_id(x))
 })

@@ -1,6 +1,6 @@
-#  input: instance of Spreadsheet, in the Sheets API sense, as a named list
-# output: instance of sheets_Spreadsheet, which is how I want to hold this info
-sheets_Spreadsheet <- function(x = list()) {
+#  input: a named list, usually an instance of googlesheets4_schema_Spreadsheet
+# output: instance of googlesheets4_spreadsheet, which is actually useful
+new_googlesheets4_spreadsheet <- function(x = list()) {
   ours_theirs <- list(
     spreadsheet_id  = "spreadsheetId",
     spreadsheet_url = "spreadsheetUrl",
@@ -44,11 +44,11 @@ sheets_Spreadsheet <- function(x = list()) {
     out$named_ranges <- named_ranges
   }
 
-  structure(out, class = c("sheets_Spreadsheet", "list"))
+  structure(out, class = c("googlesheets4_spreadsheet", "list"))
 }
 
 #' @export
-format.sheets_Spreadsheet <- function(x, ...) {
+format.googlesheets4_spreadsheet <- function(x, ...) {
 
   meta <- glue_data(
     x,
@@ -88,7 +88,7 @@ format.sheets_Spreadsheet <- function(x, ...) {
 }
 
 #' @export
-print.sheets_Spreadsheet <- function(x, ...) {
+print.googlesheets4_spreadsheet <- function(x, ...) {
   cat(format(x), sep = "\n")
   invisible(x)
 }

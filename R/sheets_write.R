@@ -17,7 +17,7 @@
 #' @param na Not implemented yet.
 #'
 #' @return Updated metadata for the (spread)Sheet `ss`, as an instance of S3
-#'   class `sheets_Spreadsheet`.
+#'   class `googlesheets4_spreadsheet`.
 #' @export
 #'
 #' @examples

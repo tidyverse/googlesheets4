@@ -9,7 +9,7 @@ as_sheets_id(x, ...)
 \arguments{
 \item{x}{Something that uniquely identifies a Google Sheet: a \code{\link{sheets_id}},
 a URL, one-row \code{\link[googledrive:dribble]{dribble}}, or a
-\code{sheets_Spreadsheet}.}
+\code{googlesheets4_spreadsheet}.}
 
 \item{...}{Other arguments passed down to methods. (Not used.)}
 }
@@ -33,7 +33,7 @@ is a great way to look up a Sheet via its name.
 to get your hands on a Sheet.
 }
 \item Spreadsheet meta data, as returned by, e.g., \code{\link[=sheets_get]{sheets_get()}}. Literally,
-this is an object of class \code{sheets_Spreadsheet}.
+this is an object of class \code{googlesheets4_spreadsheet}.
 }
 
 This is a generic function.

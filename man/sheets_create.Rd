@@ -17,8 +17,8 @@ each data frame.}
 }
 \value{
 \itemize{
-\item \code{sheets_get()}: A list with S3 class \code{sheets_Spreadsheet}, for printing
-purposes.
+\item \code{sheets_get()}: A list with S3 class \code{googlesheets4_spreadsheet}, for
+printing purposes.
 \item \code{sheets_sheets()}: A character vector.
 }
 }

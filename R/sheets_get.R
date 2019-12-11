@@ -10,8 +10,8 @@
 #' @inheritParams read_sheet
 #'
 #' @return
-#'   * `sheets_get()`: A list with S3 class `sheets_Spreadsheet`, for printing
-#'     purposes.
+#'   * `sheets_get()`: A list with S3 class `googlesheets4_spreadsheet`, for
+#'     printing purposes.
 #'   * `sheets_sheets()`: A character vector.
 #' @export
 #'
@@ -21,7 +21,7 @@
 #' }
 sheets_get <- function(ss) {
   resp <- sheets_get_impl_(as_sheets_id(ss))
-  sheets_Spreadsheet(resp)
+  new_googlesheets4_spreadsheet(resp)
 }
 
 #' @export

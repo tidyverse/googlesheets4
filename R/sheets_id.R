@@ -67,13 +67,13 @@ sheets_id <- function(x) {
 #'     - [`sheets_find("YOUR_SHEET_NAME")`][sheets_find()] is another good way
 #'     to get your hands on a Sheet.
 #'   * Spreadsheet meta data, as returned by, e.g., [sheets_get()]. Literally,
-#'     this is an object of class `sheets_Spreadsheet`.
+#'     this is an object of class `googlesheets4_spreadsheet`.
 #'
 #' @description This is a generic function.
 #'
 #' @param x Something that uniquely identifies a Google Sheet: a [`sheets_id`],
 #'   a URL, one-row [`dribble`][googledrive::dribble], or a
-#'   `sheets_Spreadsheet`.
+#'   `googlesheets4_spreadsheet`.
 #' @param ... Other arguments passed down to methods. (Not used.)
 #' @export
 #' @examples
@@ -141,7 +141,7 @@ as_sheets_id.character <- function(x, ...) {
 }
 
 #' @export
-as_sheets_id.sheets_Spreadsheet <- function(x, ...) {
+as_sheets_id.googlesheets4_spreadsheet <- function(x, ...) {
   new_sheets_id(x$spreadsheet_id)
 }
 
@@ -166,8 +166,8 @@ one_id <- function(x) {
 #' you forget that exists and hope that `as_id()` will "just work".
 #'
 #' @inheritParams googledrive::as_id
-#' @param x An instance of `sheets_Spreadsheet`, which is returned by, e.g.,
-#'   [sheets_get()].
+#' @param x An instance of `googlesheets4_spreadsheet`, which is returned by,
+#'   e.g., [sheets_get()].
 #' @inherit googledrive::as_id return
 #' @export
 #' @examples
@@ -176,4 +176,4 @@ one_id <- function(x) {
 #'   class(ss)
 #'   as_id(ss)
 #' }
-as_id.sheets_Spreadsheet <- function(x, ...) as_sheets_id(x)
+as_id.googlesheets4_spreadsheet <- function(x, ...) as_sheets_id(x)

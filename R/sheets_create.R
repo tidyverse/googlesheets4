@@ -53,7 +53,7 @@ sheets_create <- function(name, ..., sheets = NULL) {
   )
   resp_raw <- request_make(req)
   resp_create <- gargle::response_process(resp_raw)
-  out <- sheets_Spreadsheet(resp_create)
+  out <- new_googlesheets4_spreadsheet(resp_create)
 
   if (!is.null(sheets)) {
     requests_style <- map(

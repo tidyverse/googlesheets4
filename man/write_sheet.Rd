@@ -27,7 +27,7 @@ unspecified, defaults to the first sheet.}
 }
 \value{
 Updated metadata for the (spread)Sheet \code{ss}, as an instance of S3
-class \code{sheets_Spreadsheet}.
+class \code{googlesheets4_spreadsheet}.
 }
 \description{
 Updates an existing (work)sheet in an existing (spread)Sheet with a data

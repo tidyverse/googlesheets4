@@ -227,7 +227,7 @@ spread_sheet_impl_ <- function(df,
     )
   }
 
-  df$cell <- apply_ctype(df$cell)
+  df$cell <- apply_ctype(df$cell, na = na, trim_ws = trim_ws)
 
   if (is.logical(col_names)) {
     col_names <- character(length = nc)

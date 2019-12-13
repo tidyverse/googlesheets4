@@ -35,13 +35,14 @@
 
 
 <meta property="og:title" content="Read cells from a Sheet — sheets_cells" />
-<meta property="og:description" content="This low-level function returns cell data in a tibble with integer variables
-row and column (referring to location with the Google Sheet), an A1-style
-reference loc, and a cell list-column. The flagship function
-read_sheet(), a.k.a. sheets_read(), is what most users are looking for.
-It is basically sheets_cells() (this function), followed by
-spread_sheet(), which looks after reshaping and column typing. But if you
-want the raw data from the API, use sheets_cells()." />
+<meta property="og:description" content="This low-level function returns cell data in a tibble with one row per cell.
+This tibble has integer variables row and column (referring to location
+with the Google Sheet), an A1-style reference loc, and a cell
+list-column. The flagship function read_sheet(), a.k.a. sheets_read(), is
+what most users are looking for, rather than sheets_cells(). read_sheet()
+is basically sheets_cells() (this function), followed by spread_sheet(),
+which looks after reshaping and column typing. But if you really want raw cell
+data from the API, sheets_cells() is for you!" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -140,16 +141,25 @@ want the raw data from the API, use sheets_cells()." />
     </div>
 
     <div class="ref-description">
-    <p>This low-level function returns cell data in a tibble with integer variables
-<code>row</code> and <code>column</code> (referring to location with the Google Sheet), an A1-style
-reference <code>loc</code>, and a <code>cell</code> list-column. The flagship function
-<code><a href='read_sheet.html'>read_sheet()</a></code>, a.k.a. <code><a href='read_sheet.html'>sheets_read()</a></code>, is what most users are looking for.
-It is basically <code>sheets_cells()</code> (this function), followed by
-<code><a href='spread_sheet.html'>spread_sheet()</a></code>, which looks after reshaping and column typing. But if you
-want the raw data from the API, use <code>sheets_cells()</code>.</p>
+    <p>This low-level function returns cell data in a tibble with one row per cell.
+This tibble has integer variables <code>row</code> and <code>column</code> (referring to location
+with the Google Sheet), an A1-style reference <code>loc</code>, and a <code>cell</code>
+list-column. The flagship function <code><a href='read_sheet.html'>read_sheet()</a></code>, a.k.a. <code><a href='read_sheet.html'>sheets_read()</a></code>, is
+what most users are looking for, rather than <code>sheets_cells()</code>. <code><a href='read_sheet.html'>read_sheet()</a></code>
+is basically <code>sheets_cells()</code> (this function), followed by <code><a href='spread_sheet.html'>spread_sheet()</a></code>,
+which looks after reshaping and column typing. But if you really want raw cell
+data from the API, <code>sheets_cells()</code> is for you!</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_cells</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_cells</span>(
+  <span class='no'>ss</span>,
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
+  <span class='kw'>cell_data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"full"</span>),
+  <span class='kw'>discard_empty</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -195,30 +205,61 @@ the number of rows in the result. Ignored if <code>range</code> is given. <code>
 imposed locally, after reading all non-empty cells, so, if speed is an
 issue, it is better to use <code>range</code>.</p></td>
     </tr>
+    <tr>
+      <th>cell_data</th>
+      <td><p>How much detail to get for each cell. <code>"default"</code> retrieves
+the fields actually used when googlesheets4 guesses or imposes cell and
+column types. <code>"full"</code> retrieves all fields in the <a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#CellData'><code>CellData</code> schema</a>.
+The main differences relate to cell formatting.</p></td>
+    </tr>
+    <tr>
+      <th>discard_empty</th>
+      <td><p>Whether to discard cells that have no data. Literally,
+we check for an <code>effectiveValue</code>, which is one of the fields in the
+<a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#CellData'><code>CellData</code> schema</a>.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble with one row per non-empty cell in the <code>range</code>.</p>
+    <p>A tibble with one row per cell in the <code>range</code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Wraps the <code>spreadsheets.get</code> endpoint: *
+<a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
   <span class='fu'>sheets_cells</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>), <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"arts_data"</span>)
 
-  <span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"cell-contents-and-formats"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>sheets_cells</span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"types!A2:A5"</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Reading from 'deaths'</span></div><div class='output co'>#&gt; <span class='message'>Range "arts_data"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'cell-contents-and-formats'</span></div><div class='output co'>#&gt; <span class='message'>Range "'types'!A2:A5"</span></div><div class='output co'>#&gt; # A tibble: 3 x 4
-#&gt;     row   col loc   cell      
-#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;    
-#&gt; 1     2     1 A2    &lt;CELL_LOG&gt;
-#&gt; 2     3     1 A3    &lt;CELL_LOG&gt;
-#&gt; 3     5     1 A5    &lt;CELL_NUM&gt;</div></pre>
+  <span class='co'># if you want detailed and exhaustive cell data, do this</span>
+  <span class='fu'>sheets_cells</span>(
+    <span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>),
+    <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"arts"</span>,
+    <span class='kw'>cell_data</span> <span class='kw'>=</span> <span class='st'>"full"</span>,
+    <span class='kw'>discard_empty</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  )
+}</div><div class='output co'>#&gt; <span class='message'>Reading from 'deaths'</span></div><div class='output co'>#&gt; <span class='message'>Range "arts_data"</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'deaths'</span></div><div class='output co'>#&gt; <span class='message'>Range "'arts'"</span></div><div class='output co'>#&gt; # A tibble: 98 x 4
+#&gt;      row   col loc   cell      
+#&gt;    &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;    
+#&gt;  1     1     1 A1    &lt;CELL_TEX&gt;
+#&gt;  2     2     1 A2    &lt;CELL_TEX&gt;
+#&gt;  3     2     2 B2    &lt;CELL_BLA&gt;
+#&gt;  4     2     3 C2    &lt;CELL_BLA&gt;
+#&gt;  5     2     4 D2    &lt;CELL_BLA&gt;
+#&gt;  6     2     5 E2    &lt;CELL_BLA&gt;
+#&gt;  7     2     6 F2    &lt;CELL_TEX&gt;
+#&gt;  8     3     1 A3    &lt;CELL_TEX&gt;
+#&gt;  9     3     2 B3    &lt;CELL_TEX&gt;
+#&gt; 10     3     3 C3    &lt;CELL_TEX&gt;
+#&gt; # … with 88 more rows</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

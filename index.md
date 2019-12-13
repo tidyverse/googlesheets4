@@ -178,7 +178,7 @@ sheets_examples()
 #>                                  chicken-sheet 
 #> "1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU" 
 #> attr(,"class")
-#> [1] "sheets_id" "drive_id"
+#> [1] "drive_id"
 ```
 
 Once you know the nickname of the example Sheet you want, use
@@ -302,7 +302,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpxgbcIq/iris-1435e49144926.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpLtvjR3/iris-14cda64a59238.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -312,15 +312,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpxgbcIq/iris-1435e49144926.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpLtvjR3/iris-14cda64a59238.csv
 #> uploaded into Drive file:
-#>   * iris-1435e49144926: 12tzp-ojdfdaEU_oHL4iVMHGkZOO2-jE1idzfaRQW88I
+#>   * iris-14cda64a59238: 1mozvYPgoEQrBN8uRd7ibHqRLubQO3XpB26jpPC0WvtY
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
 #>   name               id                                         drive_resource  
 #> * <chr>              <chr>                                      <list>          
-#> 1 iris-1435e49144926 12tzp-ojdfdaEU_oHL4iVMHGkZOO2-jE1idzfaRQW… <named list [34…
+#> 1 iris-14cda64a59238 1mozvYPgoEQrBN8uRd7ibHqRLubQO3XpB26jpPC0W… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -330,7 +330,7 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-1435e49144926'
+#> Reading from 'iris-14cda64a59238'
 #> Range "B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
@@ -347,12 +347,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpxgbcIq/iris-1435e49144926.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpLtvjR3/iris-14cda64a59238.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-1435e49144926
+#>   * iris-14cda64a59238
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpxgbcIq/iris-1435e49144926.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpLtvjR3/iris-14cda64a59238.xlsx
 
 if (requireNamespace("readxl", quietly = TRUE)) {
   readxl::read_excel(iris_xlsxfile)  
@@ -380,7 +380,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-1435e49144926: 12tzp-ojdfdaEU_oHL4iVMHGkZOO2-jE1idzfaRQW88I
+#>   * iris-14cda64a59238: 1mozvYPgoEQrBN8uRd7ibHqRLubQO3XpB26jpPC0WvtY
 ```
 
 ## Get Sheet metadata or detailed cell data
@@ -413,8 +413,8 @@ str(deaths_meta, max.level = 1)
 #>  $ locale         : chr "en"
 #>  $ time_zone      : chr "America/Los_Angeles"
 #>  $ sheets         :Classes 'tbl_df', 'tbl' and 'data.frame': 2 obs. of  8 variables:
-#>  $ named_ranges   :Classes 'tbl_df', 'tbl' and 'data.frame': 2 obs. of  9 variables:
-#>  - attr(*, "class")= chr [1:2] "sheets_Spreadsheet" "list"
+#>  $ named_ranges   :Classes 'tbl_df', 'tbl' and 'data.frame': 2 obs. of  10 variables:
+#>  - attr(*, "class")= chr [1:2] "googlesheets4_spreadsheet" "list"
 
 deaths_meta$sheets
 #> # A tibble: 2 x 8
@@ -424,12 +424,12 @@ deaths_meta$sheets
 #> 2 other     1   28655153 GRID  TRUE         1000           26 <NULL>
 
 deaths_meta$named_ranges
-#> # A tibble: 2 x 9
-#>   name  range id    sheet_id sheet_name start_row end_row start_column
-#>   <chr> <chr> <chr> <chr>    <chr>          <int>   <int>        <int>
-#> 1 arts… 'art… ndmz… 1210215… arts               5      15            1
-#> 2 othe… 'oth… r5yz… 28655153 other              5      15            1
-#> # … with 1 more variable: end_column <int>
+#> # A tibble: 2 x 10
+#>   name  id    sheet_id start_row end_row start_column end_column sheet_name
+#>   <chr> <chr>    <int>     <int>   <int>        <int>      <int> <chr>     
+#> 1 arts… ndmz…   1.21e9         5      15            1          6 arts      
+#> 2 othe… r5yz…   2.87e7         5      15            1          6 other     
+#> # … with 2 more variables: cell_range <chr>, A1_range <chr>
 ```
 
 `sheets_cells()` returns a data frame with one row per cell and it gives
@@ -446,11 +446,6 @@ access to raw cell data sent by the Sheets API.
 #> 2     6     5 E6    <CELL_DAT>
 #> 3     7     5 E7    <CELL_DAT>
 df$cell[[3]]
-#> $userEnteredValue
-#> $userEnteredValue$numberValue
-#> [1] 20749
-#> 
-#> 
 #> $effectiveValue
 #> $effectiveValue$numberValue
 #> [1] 20749

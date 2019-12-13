@@ -9,7 +9,7 @@
 ))
 
 .test_sheets <- googledrive::as_id(c(
-  "googlesheets4-cell-tests" = "1XZFE6wdLNK0iXCOv22GOR0BJMd7hWxQ1-aGl1HMuhrI",
+  "googlesheets4-cell-tests" = "1WRFIb11PJsNwx2tYBRn3uq8uHwWSI5ziSgbGjkOukmE",
    "googlesheets4-col-types" = "1q-iRi1L3JugqHTtcjQ3DQOmOTuDnUsWi2AiG2eNyQkU"
 ))
 

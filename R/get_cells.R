@@ -3,7 +3,9 @@ get_cells <- function(ss,
                       sheet = NULL,
                       range = NULL,
                       col_names_in_sheet = TRUE,
-                      skip = 0, n_max = Inf) {
+                      skip = 0, n_max = Inf,
+                      detail_level = c("default", "full"),
+                      discard_empty = TRUE) {
   ssid <- as_sheets_id(ss)
 
   check_sheet(sheet)
@@ -11,6 +13,8 @@ get_cells <- function(ss,
   check_bool(col_names_in_sheet)
   check_non_negative_integer(skip)
   check_non_negative_integer(n_max)
+  detail_level <- match.arg(detail_level)
+  check_bool(discard_empty)
 
   ## retrieve spreadsheet metadata --------------------------------------------
   x <- sheets_get(ssid)
@@ -31,8 +35,15 @@ get_cells <- function(ss,
   resp <- sheets_cells_impl_(
     ssid,
     ranges = effective_range,
+    detail_level = detail_level
   )
   out <- cells(resp)
+
+  if (discard_empty) {
+    # cells can be present, just because they bear a format (much like Excel)
+    cell_is_empty <- map_lgl(out$cell, ~ is.null(pluck(.x, "effectiveValue")))
+    out <- out[!cell_is_empty, ]
+  }
 
   ## enforce geometry on the cell data frame ----------------------------------
   if (range_spec$shim) {
@@ -52,12 +63,30 @@ get_cells <- function(ss,
   out
 }
 
-## I want a separate worker so there is a version of this available that
-## accepts `fields`, yet I don't want a user-facing function with `fields` arg
+# https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get
+# I want a separate worker so there is a version of this available that
+# accepts `fields` (or `includeGridData`), yet I don't want a user-facing
+# function that exposes those details
 sheets_cells_impl_ <- function(ssid,
                                ranges,
-                               fields = NULL) {
-  fields <- fields %||% "spreadsheetId,properties,sheets.data(startRow,startColumn),sheets.data.rowData.values(formattedValue,userEnteredValue,effectiveValue,effectiveFormat.numberFormat)"
+                               fields = NULL,
+                               detail_level = c("default", "full")) {
+  # there are 2 ways to control the level of detail re: cell data:
+  #   1. Supply a field mask. What we currently do.
+  #   2. Set `includeGridData` to true. This gets *everything* about the
+  #      Spreadsheet and the Sheet(s). So far, this seems like TMI.
+  detail_level <- match.arg(detail_level)
+  cell_mask <- switch(
+    detail_level,
+    "default" = ".values(effectiveValue,formattedValue,effectiveFormat.numberFormat)",
+    "full" = ""
+  )
+  default_fields <- c(
+    "spreadsheetId", "properties.title",
+    "sheets.properties(sheetId,title)",
+    glue("sheets.data(startRow,startColumn,rowData{cell_mask})")
+  )
+  fields <- fields %||% glue_collapse(default_fields, sep = ",")
 
   req <- request_generate(
     "sheets.spreadsheets.get",
@@ -93,7 +122,7 @@ cells <- function(x = list()) {
   row_lengths <- map_int(row_data, length)
   n_rows <- length(row_data)
 
-  out <- tibble::tibble(
+  tibble::tibble(
     row = rep.int(
       seq.int(from = start_row, length.out = n_rows),
       times = row_lengths
@@ -101,11 +130,6 @@ cells <- function(x = list()) {
     col = start_column + sequence(row_lengths) - 1,
     cell = flatten(row_data)
   )
-
-  ## cells can be present, just because they bear a format (much like Excel)
-  ## as in readxl, we only load cells with content
-  cell_is_empty <- map_lgl(out$cell, ~ is.null(pluck(.x, "effectiveValue")))
-  out[!cell_is_empty, ]
 }
 
 insert_shims <- function(df, cell_limits) {

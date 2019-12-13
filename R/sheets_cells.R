@@ -1,29 +1,50 @@
 #' Read cells from a Sheet
 #'
-#' This low-level function returns cell data in a tibble with integer variables
-#' `row` and `column` (referring to location with the Google Sheet), an A1-style
-#' reference `loc`, and a `cell` list-column. The flagship function
-#' [read_sheet()], a.k.a. [sheets_read()], is what most users are looking for.
-#' It is basically `sheets_cells()` (this function), followed by
-#' [spread_sheet()], which looks after reshaping and column typing. But if you
-#' want the raw data from the API, use `sheets_cells()`.
+#' This low-level function returns cell data in a tibble with one row per cell.
+#' This tibble has integer variables `row` and `column` (referring to location
+#' with the Google Sheet), an A1-style reference `loc`, and a `cell`
+#' list-column. The flagship function [read_sheet()], a.k.a. [sheets_read()], is
+#' what most users are looking for, rather than `sheets_cells()`. [read_sheet()]
+#' is basically `sheets_cells()` (this function), followed by [spread_sheet()],
+#' which looks after reshaping and column typing. But if you really want raw cell
+#' data from the API, `sheets_cells()` is for you!
 #'
 #' @inheritParams read_sheet
+#' @param cell_data How much detail to get for each cell. `"default"` retrieves
+#'   the fields actually used when googlesheets4 guesses or imposes cell and
+#'   column types. `"full"` retrieves all fields in the [`CellData`
+#'   schema](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#CellData).
+#'   The main differences relate to cell formatting.
+#' @param discard_empty Whether to discard cells that have no data. Literally,
+#'   we check for an `effectiveValue`, which is one of the fields in the
+#'   [`CellData`
+#'   schema](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#CellData).
 #'
-#' @return A tibble with one row per non-empty cell in the `range`.
+#' @seealso Wraps the `spreadsheets.get` endpoint: *
+#'   <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get>
+#'
+#' @return A tibble with one row per cell in the `range`.
 #' @export
 #'
 #' @examples
 #' if (sheets_has_token()) {
 #'   sheets_cells(sheets_example("deaths"), range = "arts_data")
 #'
-#'   sheets_example("cell-contents-and-formats") %>%
-#'     sheets_cells(range = "types!A2:A5")
+#'   # if you want detailed and exhaustive cell data, do this
+#'   sheets_cells(
+#'     sheets_example("deaths"),
+#'     sheet = "arts",
+#'     cell_data = "full",
+#'     discard_empty = FALSE
+#'   )
 #' }
 sheets_cells <- function(ss,
                          sheet = NULL,
                          range = NULL,
-                         skip = 0, n_max = Inf) {
+                         skip = 0, n_max = Inf,
+                         cell_data = c("default", "full"),
+                         discard_empty = TRUE) {
+  cell_data <- match.arg(cell_data)
 
   ## range spec params are checked inside get_cells():
   ## ss, sheet, range, skip, n_max
@@ -31,7 +52,9 @@ sheets_cells <- function(ss,
     ss = ss,
     sheet = sheet, range = range,
     skip = skip, n_max = n_max,
-    col_names_in_sheet = FALSE
+    col_names_in_sheet = FALSE,
+    detail_level = cell_data,
+    discard_empty = discard_empty
   )
   out$cell <- apply_ctype(out$cell)
   add_loc(out)

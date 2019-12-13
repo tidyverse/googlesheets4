@@ -4,7 +4,15 @@
 \alias{sheets_cells}
 \title{Read cells from a Sheet}
 \usage{
-sheets_cells(ss, sheet = NULL, range = NULL, skip = 0, n_max = Inf)
+sheets_cells(
+  ss,
+  sheet = NULL,
+  range = NULL,
+  skip = 0,
+  n_max = Inf,
+  cell_data = c("default", "full"),
+  discard_empty = TRUE
+)
 }
 \arguments{
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
@@ -37,24 +45,43 @@ Trailing empty rows are automatically skipped, so this is an upper bound on
 the number of rows in the result. Ignored if \code{range} is given. \code{n_max} is
 imposed locally, after reading all non-empty cells, so, if speed is an
 issue, it is better to use \code{range}.}
+
+\item{cell_data}{How much detail to get for each cell. \code{"default"} retrieves
+the fields actually used when googlesheets4 guesses or imposes cell and
+column types. \code{"full"} retrieves all fields in the \href{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#CellData}{\code{CellData} schema}.
+The main differences relate to cell formatting.}
+
+\item{discard_empty}{Whether to discard cells that have no data. Literally,
+we check for an \code{effectiveValue}, which is one of the fields in the
+\href{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#CellData}{\code{CellData} schema}.}
 }
 \value{
-A tibble with one row per non-empty cell in the \code{range}.
+A tibble with one row per cell in the \code{range}.
 }
 \description{
-This low-level function returns cell data in a tibble with integer variables
-\code{row} and \code{column} (referring to location with the Google Sheet), an A1-style
-reference \code{loc}, and a \code{cell} list-column. The flagship function
-\code{\link[=read_sheet]{read_sheet()}}, a.k.a. \code{\link[=sheets_read]{sheets_read()}}, is what most users are looking for.
-It is basically \code{sheets_cells()} (this function), followed by
-\code{\link[=spread_sheet]{spread_sheet()}}, which looks after reshaping and column typing. But if you
-want the raw data from the API, use \code{sheets_cells()}.
+This low-level function returns cell data in a tibble with one row per cell.
+This tibble has integer variables \code{row} and \code{column} (referring to location
+with the Google Sheet), an A1-style reference \code{loc}, and a \code{cell}
+list-column. The flagship function \code{\link[=read_sheet]{read_sheet()}}, a.k.a. \code{\link[=sheets_read]{sheets_read()}}, is
+what most users are looking for, rather than \code{sheets_cells()}. \code{\link[=read_sheet]{read_sheet()}}
+is basically \code{sheets_cells()} (this function), followed by \code{\link[=spread_sheet]{spread_sheet()}},
+which looks after reshaping and column typing. But if you really want raw cell
+data from the API, \code{sheets_cells()} is for you!
 }
 \examples{
 if (sheets_has_token()) {
   sheets_cells(sheets_example("deaths"), range = "arts_data")
 
-  sheets_example("cell-contents-and-formats") \%>\%
-    sheets_cells(range = "types!A2:A5")
+  # if you want detailed and exhaustive cell data, do this
+  sheets_cells(
+    sheets_example("deaths"),
+    sheet = "arts",
+    cell_data = "full",
+    discard_empty = FALSE
+  )
 }
+}
+\seealso{
+Wraps the \code{spreadsheets.get} endpoint: *
+\url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get}
 }

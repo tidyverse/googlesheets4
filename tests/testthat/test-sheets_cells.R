@@ -28,3 +28,32 @@ test_that("slightly tricky `range`s work", {
   expect_true(all(grepl("^[BCDE]", out$loc)))
   expect_true(all(grepl("[345]$", out$loc)))
 })
+
+# https://github.com/tidyverse/googlesheets4/issues/4
+test_that("full cell data and empties are within reach", {
+  skip_if_offline()
+  skip_if_no_token()
+
+  out <- sheets_cells(
+    test_sheet("googlesheets4-cell-tests"),
+    sheet = "empties-and-formats",
+    cell_data = "full", discard_empty = FALSE
+  )
+
+  # B2 is empty; make sure it's here
+  expect_true("B2" %in% out$loc)
+
+  # C2 is empty and orange; make sure it's here and format is available
+  expect_error_free(
+    cell <- out$cell[[which(out$loc == "C2")]]
+  )
+  expect_true(!is.null(cell$effectiveFormat))
+
+  # C1 bears a note
+  expect_error_free(
+    cell <- out$cell[[which(out$loc == "C1")]]
+  )
+  note <- cell$note
+  expect_true(!is.null(note))
+  expect_match(note, "Note")
+})

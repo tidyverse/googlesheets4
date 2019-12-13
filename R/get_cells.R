@@ -23,12 +23,14 @@ get_cells <- function(ss,
     range, sheet = sheet, skip = skip,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
-  message_glue("Range {dq(range_spec$A1_range)}")
+  # if we send no range, we get all cells from all sheets; not what we want
+  effective_range <- range_spec$A1_range %||% first_visible_name(x$sheets)
+  message_glue("Range {dq(effective_range)}")
 
   ## main GET -----------------------------------------------------------------
   resp <- sheets_cells_impl_(
     ssid,
-    ranges = range_spec$A1_range
+    ranges = effective_range,
   )
   out <- cells(resp)
 
@@ -48,7 +50,6 @@ get_cells <- function(ss,
     out <- enforce_n_max(out, n_max, col_names_in_sheet)
   }
   out
-
 }
 
 ## I want a separate worker so there is a version of this available that

@@ -42,11 +42,18 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
 }
 
 first_sheet <- function(sheets_df, visible = NA) {
-  s <- lookup_sheet(sheet = NULL, sheets_df = sheets_df, visible = visible)
-  s$id
+  lookup_sheet(sheet = NULL, sheets_df = sheets_df, visible = visible)
 }
 
 first_visible <- function(sheets_df) first_sheet(sheets_df, visible = TRUE)
+
+first_visible_id <- function(sheets_df) {
+  first_sheet(sheets_df, visible = TRUE)$id
+}
+
+first_visible_name <- function(sheets_df) {
+  first_sheet(sheets_df, visible = TRUE)$name
+}
 
 lookup_sheet_name <- function(sheet, sheets_df) {
   s <- lookup_sheet(sheet = sheet, sheets_df = sheets_df)

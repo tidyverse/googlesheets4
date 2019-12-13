@@ -25,10 +25,8 @@ new_googlesheets4_spreadsheet <- function(x = list()) {
     # https://github.com/tidyverse/googlesheets4/issues/29
     needs_sheet_id <- is.na(named_ranges$sheet_id)
     if (any(needs_sheet_id)) {
-      # if sheetId is missing, I assume it's the "first" sheet
-      # for some definition of "first"
-      first_sheet <- which.min(out$sheets$index)
-      named_ranges$sheet_id[needs_sheet_id] <- out$sheets$id[[first_sheet]]
+      # if sheetId is missing, I assume it's the "first" (visible?) sheet
+      named_ranges$sheet_id[needs_sheet_id] <- first_visible_id(out$sheets)
     }
     named_ranges$sheet_name <- vlookup(
       named_ranges$sheet_id,

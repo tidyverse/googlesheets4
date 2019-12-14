@@ -77,7 +77,7 @@ Read everything:
 sheets_example("chicken-sheet") %>% 
   read_sheet() # or use sheets_read()
 #> Reading from 'chicken-sheet'
-#> 
+#> Range "chicken.csv"
 #> # A tibble: 5 x 4
 #>   chicken            breed         sex    motto                                 
 #>   <chr>              <chr>         <chr>  <chr>                                 
@@ -141,7 +141,7 @@ ugliest, is to provide the URL.
 url <- "https://docs.google.com/spreadsheets/d/1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU"
 read_sheet(url)
 #> Reading from 'chicken-sheet'
-#> 
+#> Range "chicken.csv"
 #> # A tibble: 5 x 4
 #>   chicken            breed         sex    motto                                 
 #>   <chr>              <chr>         <chr>  <chr>                                 

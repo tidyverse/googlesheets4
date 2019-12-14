@@ -147,7 +147,7 @@ infer_ctype <- function(cell, na = "", trim_ws = TRUE) {
   ##   * cell has no effectiveValue
   ##   * formattedValue matches an `na` string
   if ( length(cell) == 0 ||
-       is.null(cell[["effectiveValue"]]) ||
+       length(cell[["effectiveValue"]]) == 0 ||
        is_na_string(cell[["formattedValue"]], na = na, trim_ws = trim_ws)
   ) {
     return("CELL_BLANK")

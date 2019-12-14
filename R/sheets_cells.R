@@ -32,8 +32,7 @@
 #'
 #'   # if you want detailed and exhaustive cell data, do this
 #'   sheets_cells(
-#'     sheets_example("deaths"),
-#'     sheet = "arts",
+#'     sheets_example("formulas-and-formats"),
 #'     cell_data = "full",
 #'     discard_empty = FALSE
 #'   )

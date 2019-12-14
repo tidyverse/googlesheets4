@@ -57,3 +57,22 @@ test_that("full cell data and empties are within reach", {
   expect_true(!is.null(note))
   expect_match(note, "Note")
 })
+
+# https://github.com/tidyverse/googlesheets4/issues/78
+test_that("formula cells are parsed based on effectiveValue", {
+  skip_if_offline()
+  skip_if_no_token()
+
+  out <- sheets_cells(
+    test_sheet("googlesheets4-cell-tests"),
+    sheet = "formulas",
+    range = "B:B",
+    cell_data = "full", discard_empty = FALSE
+  )
+
+  expect_s3_class(out$cell[[which(out$loc == "B2")]], "CELL_TEXT")
+  expect_s3_class(out$cell[[which(out$loc == "B3")]], "CELL_NUMERIC")
+  expect_s3_class(out$cell[[which(out$loc == "B4")]], "CELL_BLANK")
+  expect_s3_class(out$cell[[which(out$loc == "B5")]], "CELL_TEXT")
+  expect_s3_class(out$cell[[which(out$loc == "B6")]], "CELL_BLANK")
+})

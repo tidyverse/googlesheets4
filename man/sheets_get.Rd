@@ -2,12 +2,9 @@
 % Please edit documentation in R/sheets_get.R
 \name{sheets_get}
 \alias{sheets_get}
-\alias{sheets_sheets}
 \title{Get Sheet metadata}
 \usage{
 sheets_get(ss)
-
-sheets_sheets(ss)
 }
 \arguments{
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
@@ -28,15 +25,10 @@ Retrieve spreadsheet-specific metadata, such as details on the individual
 \itemize{
 \item \code{sheets_get()} complements \code{\link[googledrive:drive_get]{googledrive::drive_get()}}, which
 returns metadata that exists for any file on Drive.
-\item \code{sheets_sheets()} is a very focused function that only returns
-(work)sheet names.
 }
 }
 \examples{
 if (sheets_has_token()) {
   sheets_get(sheets_example("mini-gap"))
-}
-if (sheets_has_token()) {
-  sheets_sheets(sheets_example("deaths"))
 }
 }

@@ -2,9 +2,16 @@
 
 ### New functions and arguments
 
+* `sheets_create()` is a new function to create a new Sheet and, optionally, write one or more data frames into it (#61). *caution: function still under development*
+
 * `sheets_write()` (also available as `write_sheet()`) is a new function to write a data frame into an existing (work)sheet, inside an existing (spread)Sheet.  *caution: function still under development*
 
-* `sheets_create()` is a new function to create a new Sheet and, optionally, write one or more data frames into it (#61). *caution: function still under development*
+* There is a new family of `sheets_sheet_*()` functions that operate on the
+  (work)sheets inside an existing (spread)Sheet:
+  
+  - `sheets_sheet_data()` returns a tibble of metadata with one row per sheet.
+  - `sheets_sheet_names()` returns sheet names.
+  - `sheets_sheet_add()` adds a worksheet.
 
 * `sheets_cells()` gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But `sheets_cells(cell_data = "full", discard_empty = FALSE)` is now available if you want full cell data, including formatting, even for cells that have no value (#4).
 

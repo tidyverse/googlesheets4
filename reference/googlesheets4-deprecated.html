@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Sheet metadata — sheets_get • googlesheets4</title>
+<title>Deprecated functions — googlesheets4-deprecated • googlesheets4</title>
 
 
 <!-- jquery -->
@@ -34,13 +34,9 @@
 
 
 
-<meta property="og:title" content="Get Sheet metadata — sheets_get" />
-<meta property="og:description" content="Retrieve spreadsheet-specific metadata, such as details on the individual
-(work)sheets or named ranges.
-sheets_get() complements googledrive::drive_get(), which
-returns metadata that exists for any file on Drive.
-
-" />
+<meta property="og:title" content="Deprecated functions — googlesheets4-deprecated" />
+<meta property="og:description" content="Deprecated functions
+Use sheets_sheet_names() instead of sheets_sheets()." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -133,21 +129,17 @@ returns metadata that exists for any file on Drive.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get Sheet metadata</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_get.R'><code>R/sheets_get.R</code></a></small>
-    <div class="hidden name"><code>sheets_get.Rd</code></div>
+    <h1>Deprecated functions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/deprecated.R'><code>R/deprecated.R</code></a></small>
+    <div class="hidden name"><code>googlesheets4-deprecated.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Retrieve spreadsheet-specific metadata, such as details on the individual
-(work)sheets or named ranges.</p><ul>
-<li><p><code>sheets_get()</code> complements <code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>googledrive::drive_get()</a></code>, which
-returns metadata that exists for any file on Drive.</p></li>
-</ul>
-
+    <p>Deprecated functions</p>
+<p>Use <code><a href='sheets_sheet_data.html'>sheets_sheet_names()</a></code> instead of <code>sheets_sheets()</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_get</span>(<span class='no'>ss</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_sheets</span>(<span class='no'>ss</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,38 +153,12 @@ is how googledrive represents Drive files. Processed through
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-<ul>
-<li><p><code>sheets_get()</code>: A list with S3 class <code>googlesheets4_spreadsheet</code>, for
-printing purposes.</p></li>
-<li><p><code><a href='googlesheets4-deprecated.html'>sheets_sheets()</a></code>: A character vector.</p></li>
-</ul>
-
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
-  <span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))
-}</div><div class='output co'>#&gt;   Spreadsheet name: mini-gap
-#&gt;                 ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
-#&gt;             Locale: en_US
-#&gt;          Time zone: America/Los_Angeles
-#&gt;        # of sheets: 5
-#&gt; 
-#&gt; (Sheet name): (Nominal extent in rows x columns)
-#&gt;       Africa: 1000 x 26
-#&gt;     Americas: 1000 x 26
-#&gt;         Asia: 1000 x 26
-#&gt;       Europe: 1000 x 26
-#&gt;      Oceania: 1000 x 26</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

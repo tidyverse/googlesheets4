@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get Sheet metadata — sheets_get • googlesheets4</title>
+<title>Add a (work)sheet — sheets_sheet_add • googlesheets4</title>
 
 
 <!-- jquery -->
@@ -34,13 +34,8 @@
 
 
 
-<meta property="og:title" content="Get Sheet metadata — sheets_get" />
-<meta property="og:description" content="Retrieve spreadsheet-specific metadata, such as details on the individual
-(work)sheets or named ranges.
-sheets_get() complements googledrive::drive_get(), which
-returns metadata that exists for any file on Drive.
-
-" />
+<meta property="og:title" content="Add a (work)sheet — sheets_sheet_add" />
+<meta property="og:description" content="Adds a (work)sheet to an existing (spread)Sheet." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -133,21 +128,16 @@ returns metadata that exists for any file on Drive.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get Sheet metadata</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_get.R'><code>R/sheets_get.R</code></a></small>
-    <div class="hidden name"><code>sheets_get.Rd</code></div>
+    <h1>Add a (work)sheet</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_sheet_add.R'><code>R/sheets_sheet_add.R</code></a></small>
+    <div class="hidden name"><code>sheets_sheet_add.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Retrieve spreadsheet-specific metadata, such as details on the individual
-(work)sheets or named ranges.</p><ul>
-<li><p><code>sheets_get()</code> complements <code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>googledrive::drive_get()</a></code>, which
-returns metadata that exists for any file on Drive.</p></li>
-</ul>
-
+    <p>Adds a (work)sheet to an existing (spread)Sheet.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_get</span>(<span class='no'>ss</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_sheet_add</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -159,39 +149,69 @@ which we can recover the ID, or a <code><a href='https://googledrive.tidyverse.o
 is how googledrive represents Drive files. Processed through
 <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
+    <tr>
+      <th>sheet</th>
+      <td><p>A string providing the new sheet's name. If unspecified, Sheets
+autogenerates a name of the form "SheetN".</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Optional parameters to specify additional properties of the new
+sheet. Not relevant to most users. Specify fields of the <a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/sheets#SheetProperties'><code>SheetProperties</code> schema</a>
+in <code>name = value</code> form.</p></td>
+    </tr>
+    <tr>
+      <th>.before, .after</th>
+      <td><p>Optional specification of where to put the new sheet.
+Can be an existing sheet name or a position. If unspecified, Sheets puts
+the new sheet at the end.</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-<ul>
-<li><p><code>sheets_get()</code>: A list with S3 class <code>googlesheets4_spreadsheet</code>, for
-printing purposes.</p></li>
-<li><p><code><a href='googlesheets4-deprecated.html'>sheets_sheets()</a></code>: A character vector.</p></li>
-</ul>
+    <p><code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p>Makes an <code>AddSheetsRequest</code>:</p><ul>
+<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#addsheetrequest'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#addsheetrequest</a></p></li>
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
-  <span class='fu'>sheets_get</span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))
-}</div><div class='output co'>#&gt;   Spreadsheet name: mini-gap
-#&gt;                 ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
-#&gt;             Locale: en_US
-#&gt;          Time zone: America/Los_Angeles
-#&gt;        # of sheets: 5
-#&gt; 
-#&gt; (Sheet name): (Nominal extent in rows x columns)
-#&gt;       Africa: 1000 x 26
-#&gt;     Americas: 1000 x 26
-#&gt;         Asia: 1000 x 26
-#&gt;       Europe: 1000 x 26
-#&gt;      Oceania: 1000 x 26</div></pre>
+<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(<span class='st'>"add-sheets-to-me"</span>)
+
+<span class='co'># the only required argument is the target spreadsheet</span>
+<span class='no'>ss</span> <span class='kw'>%&gt;%</span> <span class='fu'>sheets_sheet_add</span>()
+
+<span class='co'># but you CAN specify sheet name and/or position</span>
+<span class='no'>ss</span> <span class='kw'>%&gt;%</span> <span class='fu'>sheets_sheet_add</span>(<span class='st'>"apple"</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='no'>ss</span> <span class='kw'>%&gt;%</span> <span class='fu'>sheets_sheet_add</span>(<span class='st'>"banana"</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='st'>"apple"</span>)
+
+<span class='co'># keeners can even specify additional sheet properties</span>
+<span class='no'>ss</span> <span class='kw'>%&gt;%</span>
+<span class='fu'>sheets_sheet_add</span>(
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"coconut"</span>,
+  <span class='kw'>gridProperties</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+              <span class='kw'>rowCount</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>columnCount</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>frozenRowCount</span> <span class='kw'>=</span> <span class='fl'>1</span>
+              )
+              )
+
+<span class='co'># get an overview of the sheets</span>
+<span class='fu'><a href='sheets_sheet_data.html'>sheets_sheet_data</a></span>(<span class='no'>ss</span>)
+
+<span class='co'># cleanup</span>
+<span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"add-sheets-to-me"</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>()
+}</div><div class='output co'>#&gt; <span class='message'>Adding a sheet</span></div><div class='output co'>#&gt; <span class='message'>Adding a sheet named 'apple' at position 2</span></div><div class='output co'>#&gt; <span class='message'>Adding a sheet named 'banana' at position 3</span></div><div class='output co'>#&gt; <span class='message'>Adding a sheet named 'coconut'</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
+#&gt; <span class='message'>  * add-sheets-to-me: 1vwr2msbGp712qYimSUMt1BwG3JCkavdgo9m6Uw_Y60o</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

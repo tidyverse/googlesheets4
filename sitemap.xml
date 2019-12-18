@@ -13,6 +13,9 @@
     <loc>https://googlesheets4.tidyverse.org/reference/cell-specification.html</loc>
   </url>
   <url>
+    <loc>https://googlesheets4.tidyverse.org/reference/googlesheets4-deprecated.html</loc>
+  </url>
+  <url>
     <loc>https://googlesheets4.tidyverse.org/reference/googlesheets4-package.html</loc>
   </url>
   <url>
@@ -62,6 +65,12 @@
   </url>
   <url>
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_id.html</loc>
+  </url>
+  <url>
+    <loc>https://googlesheets4.tidyverse.org/reference/sheets_sheet_add.html</loc>
+  </url>
+  <url>
+    <loc>https://googlesheets4.tidyverse.org/reference/sheets_sheet_data.html</loc>
   </url>
   <url>
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_token.html</loc>

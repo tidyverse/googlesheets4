@@ -39,8 +39,15 @@ schema_rectangle <- function(s) {
   df <- df %>%
     hoist(items, array_of = "$ref")
 
+  make_enum_tibble <- function(x, y) {
+    tibble(
+      enum     = x %||% character(),
+      enumDesc = y %||% character()
+    )
+  }
+
   df <- df %>%
-    mutate(new = map2(enum, enumDescriptions, ~ tibble(enum = .x, enumDesc = .y))) %>%
+    mutate(new = map2(enum, enumDescriptions, make_enum_tibble)) %>%
     select(-starts_with("enum")) %>%
     rename(enum = new) %>%
     mutate(type = if_else(map_lgl(enum, ~ nrow(.x) > 0), "enum", type))

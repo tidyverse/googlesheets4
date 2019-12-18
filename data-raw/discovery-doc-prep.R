@@ -60,7 +60,8 @@ these <- c(
   "GridCoordinate",
   "DeleteDimensionRequest",
   "InsertDimensionRequest",
-  "DimensionRange"
+  "DimensionRange",
+  "GridProperties"
 )
 
 .tidy_schemas <- these %>%

@@ -81,6 +81,8 @@ if (sheets_has_token()) {
 }
 }
 \seealso{
-Wraps the \code{spreadsheets.get} endpoint: *
-\url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get}
+Wraps the \code{spreadsheets.get} endpoint:
+\itemize{
+\item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get}
+}
 }

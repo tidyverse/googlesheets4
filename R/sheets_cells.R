@@ -20,8 +20,8 @@
 #'   [`CellData`
 #'   schema](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#CellData).
 #'
-#' @seealso Wraps the `spreadsheets.get` endpoint: *
-#'   <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get>
+#' @seealso Wraps the `spreadsheets.get` endpoint:
+#'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get>
 #'
 #' @return A tibble with one row per cell in the `range`.
 #' @export

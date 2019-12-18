@@ -40,7 +40,8 @@ Suggests:
     rmarkdown,
     sodium,
     spelling,
-    testthat (>= 2.1.0)
+    testthat (>= 2.1.0),
+    withr
 ByteCompile: true
 Encoding: UTF-8
 Language: en-US

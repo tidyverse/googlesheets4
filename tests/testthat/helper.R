@@ -27,3 +27,32 @@ ref <- function(pattern, ...) {
     paste0("* ", x, collapse = "\n")
   )
 }
+
+nm_fun <- function(context, user = Sys.info()["user"]) {
+  y <- purrr::compact(list(context, user))
+  function(x = NULL) as.character(glue::glue_collapse(c(x, y), sep = "-"))
+}
+
+scoped_temporary_ss <- function(name, ..., env = parent.frame()) {
+  existing <- sheets_find(name)
+  if (nrow(existing) > 0) {
+    stop_glue("A spreadsheet named {sq(name)} already exists.")
+  }
+
+  if (identical(env, globalenv())) {
+    message_glue(
+      "Creating a scratch Sheet called {sq(name)}.
+       Remove with {bt('googledrive::drive_trash(ss)')}"
+    )
+  } else {
+    withr::defer({
+      trash_me <- sheets_find(name)
+      if (nrow(trash_me) < 1) {
+        warning_glue("The spreadsheet named {sq(name)} already seems to be deleted.")
+      } else {
+        googledrive::drive_trash(trash_me)
+      }
+    }, envir = env)
+  }
+  sheets_create(name, ...)
+}

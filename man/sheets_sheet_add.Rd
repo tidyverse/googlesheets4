@@ -24,7 +24,7 @@ Can be an existing sheet name or a position. If unspecified, Sheets puts
 the new sheet at the end.}
 }
 \value{
-\code{ss}, as an instance of \code{\link{sheets_id}}
+The input \code{ss}, as an instance of \code{\link{sheets_id}}
 }
 \description{
 Adds a (work)sheet to an existing (spread)Sheet.
@@ -61,4 +61,8 @@ Makes an \code{AddSheetsRequest}:
 \itemize{
 \item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#addsheetrequest}
 }
+
+Other worksheet functions: 
+\code{\link{sheets_sheet_data}()}
 }
+\concept{worksheet functions}

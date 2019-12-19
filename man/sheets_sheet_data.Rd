@@ -32,3 +32,8 @@ if (sheets_has_token()) {
   sheets_sheet_names(ss)
 }
 }
+\seealso{
+Other worksheet functions: 
+\code{\link{sheets_sheet_add}()}
+}
+\concept{worksheet functions}

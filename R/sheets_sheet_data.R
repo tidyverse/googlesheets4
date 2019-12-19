@@ -9,7 +9,7 @@
 #'   * `sheets_sheet_data()`: A tibble with one row per (work)sheet.
 #'   * `sheets_sheet_names()`: A character vector of (work)sheet names.
 #' @export
-#'
+#' @family worksheet functions
 #' @examples
 #' if (sheets_has_token()) {
 #'   ss <- sheets_example("gapminder")

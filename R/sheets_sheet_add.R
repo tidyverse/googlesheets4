@@ -13,8 +13,9 @@
 #'   Can be an existing sheet name or a position. If unspecified, Sheets puts
 #'   the new sheet at the end.
 #'
-#' @return `ss`, as an instance of [`sheets_id`]
+#' @return The input `ss`, as an instance of [`sheets_id`]
 #' @export
+#' @family worksheet functions
 #' @seealso Makes an `AddSheetsRequest`:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#addsheetrequest>
 #'

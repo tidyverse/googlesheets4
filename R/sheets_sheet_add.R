@@ -50,9 +50,6 @@ sheets_sheet_add <- function(ss,
                              ...,
                              .before = NULL,
                              .after = NULL) {
-  #
-  # send an instance of SheetProperties
-
   ssid <- as_sheets_id(ss)
 
   maybe_string(sheet)

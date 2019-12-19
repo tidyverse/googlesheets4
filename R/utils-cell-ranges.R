@@ -60,19 +60,24 @@ lookup_sheet_name <- function(sheet, sheets_df) {
   s$name
 }
 
-check_sheet <- function(sheet = NULL) {
-  if (is.null(sheet)) {
-    return()
-  }
-  check_length_one(sheet)
+check_sheet <- function(sheet, nm = deparse(substitute(sheet))) {
+  check_length_one(sheet, nm = nm)
   if (!is.character(sheet) && !is.numeric(sheet)) {
     stop_glue(
-      "{bt('sheet')} must be either character (sheet name) or ",
+      "{bt(nm)} must be either character (sheet name) or ",
       "numeric (sheet number):\n",
-      "  * {bt('sheet')} has class {class_collapse(sheet)}"
+      "  * {bt(nm)} has class {class_collapse(sheet)}"
     )
   }
   return(sheet)
+}
+
+maybe_sheet <- function(sheet = NULL, nm = deparse(substitute(sheet))) {
+  if (is.null(sheet)) {
+    sheet
+  } else {
+    check_sheet(sheet, nm = nm)
+  }
 }
 
 qualified_A1 <- function(sheet_name = NULL, cell_range = NULL) {

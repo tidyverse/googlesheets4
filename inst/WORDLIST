@@ -5,6 +5,7 @@ AppVeyor
 auth
 Auth
 AuthState
+autogenerates
 bigrquery
 cci
 cellranger
@@ -33,6 +34,7 @@ readr
 readxl
 reprex
 Roundtripping
+SheetN
 shortcodes
 Shortcodes
 targetted

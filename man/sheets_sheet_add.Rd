@@ -31,29 +31,29 @@ Adds a (work)sheet to an existing (spread)Sheet.
 }
 \examples{
 if (sheets_has_token()) {
-ss <- sheets_create("add-sheets-to-me")
+  ss <- sheets_create("add-sheets-to-me")
 
-# the only required argument is the target spreadsheet
-ss \%>\% sheets_sheet_add()
+  # the only required argument is the target spreadsheet
+  ss \%>\% sheets_sheet_add()
 
-# but you CAN specify sheet name and/or position
-ss \%>\% sheets_sheet_add("apple", .after = 1)
-ss \%>\% sheets_sheet_add("banana", .after = "apple")
+  # but you CAN specify sheet name and/or position
+  ss \%>\% sheets_sheet_add("apple", .after = 1)
+  ss \%>\% sheets_sheet_add("banana", .after = "apple")
 
-# keeners can even specify additional sheet properties
-ss \%>\%
-sheets_sheet_add(
-  sheet = "coconut",
-  gridProperties = list(
-              rowCount = 3, columnCount = 6, frozenRowCount = 1
-              )
-              )
+  # keeners can even specify additional sheet properties
+  ss \%>\%
+    sheets_sheet_add(
+      sheet = "coconut",
+      gridProperties = list(
+        rowCount = 3, columnCount = 6, frozenRowCount = 1
+      )
+    )
 
-# get an overview of the sheets
-sheets_sheet_data(ss)
+  # get an overview of the sheets
+  sheets_sheet_data(ss)
 
-# cleanup
-sheets_find("add-sheets-to-me") \%>\% googledrive::drive_rm()
+  # cleanup
+  sheets_find("add-sheets-to-me") \%>\% googledrive::drive_rm()
 }
 }
 \seealso{
@@ -63,6 +63,7 @@ Makes an \code{AddSheetsRequest}:
 }
 
 Other worksheet functions: 
-\code{\link{sheets_sheet_data}()}
+\code{\link{sheets_sheet_data}()},
+\code{\link{sheets_sheet_delete}()}
 }
 \concept{worksheet functions}

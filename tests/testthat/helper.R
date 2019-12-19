@@ -42,7 +42,7 @@ scoped_temporary_ss <- function(name, ..., env = parent.frame()) {
   if (identical(env, globalenv())) {
     message_glue(
       "Creating a scratch Sheet called {sq(name)}.
-       Remove with {bt('googledrive::drive_trash(ss)')}"
+       Remove with {bt('googledrive::drive_trash(as_sheets_id(ss))')}"
     )
   } else {
     withr::defer({

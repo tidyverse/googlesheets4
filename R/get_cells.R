@@ -8,7 +8,7 @@ get_cells <- function(ss,
                       discard_empty = TRUE) {
   ssid <- as_sheets_id(ss)
 
-  check_sheet(sheet)
+  maybe_sheet(sheet)
   check_range(range)
   check_bool(col_names_in_sheet)
   check_non_negative_integer(skip)

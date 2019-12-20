@@ -3,10 +3,9 @@
 #' Deletes one or more (work)sheets from a (spread)Sheet.
 #'
 #' @inheritParams read_sheet
-#' @param sheet Something that specifies which sheet(s) to delete. A sheet can
-#'   be identified by name or by position. Multiple sheets can be deleted at
-#'   once by passing a vector, possibly even a list (to mix names and
-#'   positions).
+#' @param sheet Something that specifies which sheet(s) to delete. You can
+#'   identify a sheet by name or by position. To delete multiple sheets at once,
+#'   pass a vector, possibly even a list if you need to mix names and positions.
 #'
 #' @return The input `ss`, as an instance of [`sheets_id`]
 #' @export
@@ -16,25 +15,22 @@
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#' ss <- sheets_create("delete-sheets-from-me")
-#' sheets_sheet_add(ss, "alpha")
-#' sheets_sheet_add(ss, "beta")
-#' sheets_sheet_add(ss, "gamma")
-#' sheets_sheet_add(ss, "delta")
+#'   ss <- sheets_create("delete-sheets-from-me")
+#'   sheets_sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 #'
-#' # get an overview of the sheets
-#' sheets_sheet_data(ss)
+#'   # get an overview of the sheets
+#'   sheets_sheet_data(ss)
 #'
-#' # delete sheets
-#' sheets_sheet_delete(ss, 1)
-#' sheets_sheet_delete(ss, "gamma")
-#' sheets_sheet_delete(ss, list("alpha", 2))
+#'   # delete sheets
+#'   sheets_sheet_delete(ss, 1)
+#'   sheets_sheet_delete(ss, "gamma")
+#'   sheets_sheet_delete(ss, list("alpha", 2))
 #'
-#' # get an overview of the sheets
-#' sheets_sheet_data(ss)
+#'   # get an overview of the sheets
+#'   sheets_sheet_data(ss)
 #'
-#' # cleanup
-#' sheets_find("delete-sheets-from-me") %>% googledrive::drive_rm()
+#'   # cleanup
+#'   sheets_find("delete-sheets-from-me") %>% googledrive::drive_rm()
 #' }
 sheets_sheet_delete <- function(ss, sheet) {
   ssid <- as_sheets_id(ss)

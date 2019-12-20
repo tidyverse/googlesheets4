@@ -12,10 +12,9 @@ which we can recover the ID, or a \code{\link[googledrive:dribble]{dribble}}, wh
 is how googledrive represents Drive files. Processed through
 \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
-\item{sheet}{Something that specifies which sheet(s) to delete. A sheet can
-be identified by name or by position. Multiple sheets can be deleted at
-once by passing a vector, possibly even a list (to mix names and
-positions).}
+\item{sheet}{Something that specifies which sheet(s) to delete. You can
+identify a sheet by name or by position. To delete multiple sheets at once,
+pass a vector, possibly even a list if you need to mix names and positions.}
 }
 \value{
 The input \code{ss}, as an instance of \code{\link{sheets_id}}
@@ -25,25 +24,22 @@ Deletes one or more (work)sheets from a (spread)Sheet.
 }
 \examples{
 if (sheets_has_token()) {
-ss <- sheets_create("delete-sheets-from-me")
-sheets_sheet_add(ss, "alpha")
-sheets_sheet_add(ss, "beta")
-sheets_sheet_add(ss, "gamma")
-sheets_sheet_add(ss, "delta")
+  ss <- sheets_create("delete-sheets-from-me")
+  sheets_sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 
-# get an overview of the sheets
-sheets_sheet_data(ss)
+  # get an overview of the sheets
+  sheets_sheet_data(ss)
 
-# delete sheets
-sheets_sheet_delete(ss, 1)
-sheets_sheet_delete(ss, "gamma")
-sheets_sheet_delete(ss, list("alpha", 2))
+  # delete sheets
+  sheets_sheet_delete(ss, 1)
+  sheets_sheet_delete(ss, "gamma")
+  sheets_sheet_delete(ss, list("alpha", 2))
 
-# get an overview of the sheets
-sheets_sheet_data(ss)
+  # get an overview of the sheets
+  sheets_sheet_data(ss)
 
-# cleanup
-sheets_find("delete-sheets-from-me") \%>\% googledrive::drive_rm()
+  # cleanup
+  sheets_find("delete-sheets-from-me") \%>\% googledrive::drive_rm()
 }
 }
 \seealso{

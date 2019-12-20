@@ -46,6 +46,7 @@ as_range_spec <- function(x, ...) {
   UseMethod("as_range_spec")
 }
 
+#' @export
 as_range_spec.default <- function(x, ...) {
   stop_glue(
     "Can't make a range suitable for the Sheets API from the supplied ",

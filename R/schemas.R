@@ -42,12 +42,14 @@ patch <- function(x, ...) {
   UseMethod("patch")
 }
 
+#' @export
 patch.default <- function(x, ...) {
   stop_glue("
   Don't know how to {bt('patch()')} an object of class {class_collapse(x)}
   ")
 }
 
+#' @export
 patch.googlesheets4_schema <- function(x, ...) {
   dots <- rlang::list2(...)
   x[names(dots)] <- dots

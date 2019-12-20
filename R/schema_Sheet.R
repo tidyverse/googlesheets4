@@ -9,6 +9,7 @@ as_Sheet <- function(df, name) {
   UseMethod("as_Sheet")
 }
 
+#' @export
 as_Sheet.default <- function(df, name) {
   stop_glue(
     "Don't know how to make an instance of {bt('Sheet')} from something of ",

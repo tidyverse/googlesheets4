@@ -11,7 +11,8 @@
   
   - `sheets_sheet_data()` returns a tibble of metadata with one row per sheet.
   - `sheets_sheet_names()` returns sheet names.
-  - `sheets_sheet_add()` adds a worksheet.
+  - `sheets_sheet_add()` adds one or more sheets.
+  - `sheets_sheet_delete()` deletes one or more sheets.
 
 * `sheets_cells()` gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But `sheets_cells(cell_data = "full", discard_empty = FALSE)` is now available if you want full cell data, including formatting, even for cells that have no value (#4).
 

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add a (work)sheet — sheets_sheet_add • googlesheets4</title>
+<title>Add one or more (work)sheets — sheets_sheet_add • googlesheets4</title>
 
 
 <!-- jquery -->
@@ -34,8 +34,8 @@
 
 
 
-<meta property="og:title" content="Add a (work)sheet — sheets_sheet_add" />
-<meta property="og:description" content="Adds a (work)sheet to an existing (spread)Sheet." />
+<meta property="og:title" content="Add one or more (work)sheets — sheets_sheet_add" />
+<meta property="og:description" content="Adds one or more (work)sheets to an existing (spread)Sheet." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -128,13 +128,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add a (work)sheet</h1>
+    <h1>Add one or more (work)sheets</h1>
     <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_sheet_add.R'><code>R/sheets_sheet_add.R</code></a></small>
     <div class="hidden name"><code>sheets_sheet_add.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Adds a (work)sheet to an existing (spread)Sheet.</p>
+    <p>Adds one or more (work)sheets to an existing (spread)Sheet.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sheets_sheet_add</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -151,20 +151,22 @@ is how googledrive represents Drive files. Processed through
     </tr>
     <tr>
       <th>sheet</th>
-      <td><p>A string providing the new sheet's name. If unspecified, Sheets
-autogenerates a name of the form "SheetN".</p></td>
+      <td><p>One or more new sheet names. If unspecified, Sheets adds 1 sheet
+and autogenerates a name of the form "SheetN".</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>Optional parameters to specify additional properties of the new
-sheet. Not relevant to most users. Specify fields of the <a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/sheets#SheetProperties'><code>SheetProperties</code> schema</a>
+      <td><p>Optional parameters to specify additional properties, common to
+all of the new sheet(s). Not relevant to most users. Specify fields of the
+<a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/sheets#SheetProperties'><code>SheetProperties</code> schema</a>
 in <code>name = value</code> form.</p></td>
     </tr>
     <tr>
       <th>.before, .after</th>
-      <td><p>Optional specification of where to put the new sheet.
-Can be an existing sheet name or a position. If unspecified, Sheets puts
-the new sheet at the end.</p></td>
+      <td><p>Optional specification of where to put the new
+sheet(s). Can be an existing sheet name or a position. If unspecified,
+Sheets puts the new sheet(s) at the end. Specify, at most, one of <code>.before</code>
+and <code>.after</code> and, at most, a single string or number.</p></td>
     </tr>
     </table>
 
@@ -178,35 +180,42 @@ the new sheet at the end.</p></td>
 </ul>
 
 <p>Other worksheet functions: 
-<code><a href='sheets_sheet_data.html'>sheets_sheet_data</a>()</code></p></div>
+<code><a href='sheets_sheet_data.html'>sheets_sheet_data</a>()</code>,
+<code><a href='sheets_sheet_delete.html'>sheets_sheet_delete</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
-<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(<span class='st'>"add-sheets-to-me"</span>)
+  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(<span class='st'>"add-sheets-to-me"</span>)
 
-<span class='co'># the only required argument is the target spreadsheet</span>
-<span class='no'>ss</span> <span class='kw'>%&gt;%</span> <span class='fu'>sheets_sheet_add</span>()
+  <span class='co'># the only required argument is the target spreadsheet</span>
+  <span class='no'>ss</span> <span class='kw'>%&gt;%</span> <span class='fu'>sheets_sheet_add</span>()
 
-<span class='co'># but you CAN specify sheet name and/or position</span>
-<span class='no'>ss</span> <span class='kw'>%&gt;%</span> <span class='fu'>sheets_sheet_add</span>(<span class='st'>"apple"</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-<span class='no'>ss</span> <span class='kw'>%&gt;%</span> <span class='fu'>sheets_sheet_add</span>(<span class='st'>"banana"</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='st'>"apple"</span>)
+  <span class='co'># but you CAN specify sheet name and/or position</span>
+  <span class='no'>ss</span> <span class='kw'>%&gt;%</span> <span class='fu'>sheets_sheet_add</span>(<span class='st'>"apple"</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+  <span class='no'>ss</span> <span class='kw'>%&gt;%</span> <span class='fu'>sheets_sheet_add</span>(<span class='st'>"banana"</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='st'>"apple"</span>)
 
-<span class='co'># keeners can even specify additional sheet properties</span>
-<span class='no'>ss</span> <span class='kw'>%&gt;%</span>
-<span class='fu'>sheets_sheet_add</span>(
-  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"coconut"</span>,
-  <span class='kw'>gridProperties</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-              <span class='kw'>rowCount</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>columnCount</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>frozenRowCount</span> <span class='kw'>=</span> <span class='fl'>1</span>
-              )
-              )
+  <span class='co'># add multiple sheets at once</span>
+  <span class='no'>ss</span> <span class='kw'>%&gt;%</span> <span class='fu'>sheets_sheet_add</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"coconut"</span>, <span class='st'>"dragonfruit"</span>))
 
-<span class='co'># get an overview of the sheets</span>
-<span class='fu'><a href='sheets_sheet_data.html'>sheets_sheet_data</a></span>(<span class='no'>ss</span>)
+  <span class='co'># keeners can even specify additional sheet properties</span>
+  <span class='no'>ss</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheets_sheet_add</span>(
+      <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"eggplant"</span>,
+      <span class='kw'>.before</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+      <span class='kw'>gridProperties</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
+        <span class='kw'>rowCount</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>columnCount</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>frozenRowCount</span> <span class='kw'>=</span> <span class='fl'>1</span>
+      )
+    )
 
-<span class='co'># cleanup</span>
-<span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"add-sheets-to-me"</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Adding a sheet</span></div><div class='output co'>#&gt; <span class='message'>Adding a sheet named 'apple' at position 2</span></div><div class='output co'>#&gt; <span class='message'>Adding a sheet named 'banana' at position 3</span></div><div class='output co'>#&gt; <span class='message'>Adding a sheet named 'coconut'</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * add-sheets-to-me: 1cIMewWd69ie1KRGRKro5EiMpVXyuBr8IoRK4_yBZOLc</span></div></pre>
+  <span class='co'># get an overview of the sheets</span>
+  <span class='fu'><a href='sheets_sheet_data.html'>sheets_sheet_data</a></span>(<span class='no'>ss</span>)
+
+  <span class='co'># cleanup</span>
+  <span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"add-sheets-to-me"</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>()
+}</div><div class='output co'>#&gt; <span class='message'>Adding a sheet</span></div><div class='output co'>#&gt; <span class='message'>Adding a sheet named 'apple' at position 2</span></div><div class='output co'>#&gt; <span class='message'>Adding a sheet named 'banana' at position 3</span></div><div class='output co'>#&gt; <span class='message'>Adding these sheets:</span>
+#&gt; <span class='message'>* coconut</span>
+#&gt; <span class='message'>* dragonfruit</span></div><div class='output co'>#&gt; <span class='message'>Adding a sheet named 'eggplant' at position 1</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
+#&gt; <span class='message'>  * add-sheets-to-me: 1HL3epxjyLub8FDcrhOnPu4m3sIKxusUN1ZTkXMSp9pQ</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -53,6 +53,14 @@ check_character <- function(x, nm = deparse(substitute(x))) {
   x
 }
 
+maybe_character <- function(x, nm = deparse(substitute(x))) {
+  if (is.null(x)) {
+    x
+  } else {
+    check_character(x, nm = nm)
+  }
+}
+
 check_non_negative_integer <- function(i, nm = deparse(substitute(i))) {
   if (length(i) != 1 || !is.numeric(i) ||
       !is_integerish(i) || is.na(i) || i < 0) {

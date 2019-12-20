@@ -2,7 +2,7 @@
 % Please edit documentation in R/sheets_sheet_add.R
 \name{sheets_sheet_add}
 \alias{sheets_sheet_add}
-\title{Add a (work)sheet}
+\title{Add one or more (work)sheets}
 \usage{
 sheets_sheet_add(ss, sheet = NULL, ..., .before = NULL, .after = NULL)
 }
@@ -12,22 +12,24 @@ which we can recover the ID, or a \code{\link[googledrive:dribble]{dribble}}, wh
 is how googledrive represents Drive files. Processed through
 \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
-\item{sheet}{A string providing the new sheet's name. If unspecified, Sheets
-autogenerates a name of the form "SheetN".}
+\item{sheet}{One or more new sheet names. If unspecified, Sheets adds 1 sheet
+and autogenerates a name of the form "SheetN".}
 
-\item{...}{Optional parameters to specify additional properties of the new
-sheet. Not relevant to most users. Specify fields of the \href{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/sheets#SheetProperties}{\code{SheetProperties} schema}
+\item{...}{Optional parameters to specify additional properties, common to
+all of the new sheet(s). Not relevant to most users. Specify fields of the
+\href{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/sheets#SheetProperties}{\code{SheetProperties} schema}
 in \code{name = value} form.}
 
-\item{.before, .after}{Optional specification of where to put the new sheet.
-Can be an existing sheet name or a position. If unspecified, Sheets puts
-the new sheet at the end.}
+\item{.before, .after}{Optional specification of where to put the new
+sheet(s). Can be an existing sheet name or a position. If unspecified,
+Sheets puts the new sheet(s) at the end. Specify, at most, one of \code{.before}
+and \code{.after} and, at most, a single string or number.}
 }
 \value{
 The input \code{ss}, as an instance of \code{\link{sheets_id}}
 }
 \description{
-Adds a (work)sheet to an existing (spread)Sheet.
+Adds one or more (work)sheets to an existing (spread)Sheet.
 }
 \examples{
 if (sheets_has_token()) {
@@ -40,10 +42,14 @@ if (sheets_has_token()) {
   ss \%>\% sheets_sheet_add("apple", .after = 1)
   ss \%>\% sheets_sheet_add("banana", .after = "apple")
 
+  # add multiple sheets at once
+  ss \%>\% sheets_sheet_add(c("coconut", "dragonfruit"))
+
   # keeners can even specify additional sheet properties
   ss \%>\%
     sheets_sheet_add(
-      sheet = "coconut",
+      sheet = "eggplant",
+      .before = 1,
       gridProperties = list(
         rowCount = 3, columnCount = 6, frozenRowCount = 1
       )

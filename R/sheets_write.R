@@ -53,7 +53,7 @@ write_sheet <- function(data,
                         na = "") {
   # https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest
   ssid <- as_sheets_id(ss)
-  check_sheet(sheet)
+  maybe_sheet(sheet)
   check_non_negative_integer(skip)
 
   # retrieve spreadsheet metadata ----------------------------------------------

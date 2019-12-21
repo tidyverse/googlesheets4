@@ -80,3 +80,15 @@ as_CellData.Date <- function(x, .na = NULL) {
   map(x, add_format, fmt = list(type = "DATE", pattern = "yyyy-mm-dd"))
 }
 
+#' @export
+as_CellData.POSIXct <- function(x, .na = NULL) {
+  # 86400 = 60 * 60 * 24 = number of seconds in a day
+  x <- (unclass(x) / 86400) + 25569
+  x <- cell_data(x, val_type = "numberValue", .na = .na)
+  map(
+    x,
+    add_format,
+    fmt = list(type = "DATE_TIME", pattern = "yyyy-mm-ddThh:mm")
+  )
+}
+

@@ -83,7 +83,7 @@ library(googlesheets4)
 Pass the result to googlesheets4 functions such as:
 
   - `sheets_get()`: gets spreadsheet-specific metadata
-  - `sheets_sheets()`: reveals just the (work)sheet names
+  - `sheets_sheet_names()`: reveals just the (work)sheet names
   - `read_sheet()`: reads cells into a data frame. `sheets_read()` is an
     alias for this.
 
@@ -105,7 +105,7 @@ sheets_get(deaths)
 #>     arts_data: 'arts'!A5:F15 
 #>    other_data: 'other'!A5:F15
 
-sheets_sheets(deaths)
+sheets_sheet_names(deaths)
 #> [1] "arts"  "other"
 
 read_sheet(deaths, range = "A5:F8")
@@ -302,7 +302,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpLtvjR3/iris-14cda64a59238.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpoD5561/iris-852a465e8c3b.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -312,15 +312,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpLtvjR3/iris-14cda64a59238.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpoD5561/iris-852a465e8c3b.csv
 #> uploaded into Drive file:
-#>   * iris-14cda64a59238: 1mozvYPgoEQrBN8uRd7ibHqRLubQO3XpB26jpPC0WvtY
+#>   * iris-852a465e8c3b: 1AYQtE7ISnt7DQF3gXKD0u1pGB14nQyP8s7UMtPbnVWM
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
-#>   name               id                                         drive_resource  
-#> * <chr>              <chr>                                      <list>          
-#> 1 iris-14cda64a59238 1mozvYPgoEQrBN8uRd7ibHqRLubQO3XpB26jpPC0W… <named list [34…
+#>   name              id                                          drive_resource  
+#> * <chr>             <chr>                                       <list>          
+#> 1 iris-852a465e8c3b 1AYQtE7ISnt7DQF3gXKD0u1pGB14nQyP8s7UMtPbnV… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -330,7 +330,7 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-14cda64a59238'
+#> Reading from 'iris-852a465e8c3b'
 #> Range "B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
@@ -347,12 +347,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpLtvjR3/iris-14cda64a59238.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpoD5561/iris-852a465e8c3b.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-14cda64a59238
+#>   * iris-852a465e8c3b
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpLtvjR3/iris-14cda64a59238.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpoD5561/iris-852a465e8c3b.xlsx
 
 if (requireNamespace("readxl", quietly = TRUE)) {
   readxl::read_excel(iris_xlsxfile)  
@@ -380,7 +380,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-14cda64a59238: 1mozvYPgoEQrBN8uRd7ibHqRLubQO3XpB26jpPC0WvtY
+#>   * iris-852a465e8c3b: 1AYQtE7ISnt7DQF3gXKD0u1pGB14nQyP8s7UMtPbnVWM
 ```
 
 ## Get Sheet metadata or detailed cell data

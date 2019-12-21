@@ -79,7 +79,7 @@ write_sheet <- function(data,
     "UpdateCellsRequest",
     start = start,
     rows = as_RowData(data), # an array of instances of RowData
-    fields = "userEnteredValue"
+    fields = "userEnteredValue,userEnteredFormat"
   )
 
   # determine sheet dimensions that shrink wrap the data -----------------------

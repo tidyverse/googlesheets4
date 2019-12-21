@@ -65,3 +65,18 @@ as_CellData.list <- function(x, .na = NULL) {
 as_CellData.factor <- function(x, .na = NULL) {
   as_CellData(as.character(x), .na = .na)
 }
+
+add_format <- function(x, fmt) {
+  x[["userEnteredFormat"]] <- list(numberFormat = rlang::list2(!!!fmt))
+  x
+}
+
+#' @export
+as_CellData.Date <- function(x, .na = NULL) {
+  # 25569 = DATEVALUE("1970-01-01), i.e. Unix epoch as a serial date, when the
+  # date origin is December 30th 1899
+  x <- unclass(x) + 25569
+  x <- cell_data(x, val_type = "numberValue", .na = .na)
+  map(x, add_format, fmt = list(type = "DATE", pattern = "yyyy-mm-dd"))
+}
+

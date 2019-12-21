@@ -117,7 +117,3 @@ write_sheet <- function(data,
 #' @rdname write_sheet
 #' @export
 sheets_write <- write_sheet
-
-# docs on Sheets NA
-# https://support.google.com/docs/answer/3093359?hl=en
-# #N/A

@@ -40,31 +40,8 @@ as_Sheet.data.frame <- function(df, name) {
 }
 
 as_RowData <- function(df) {
-  df_rows <- c(list(names(df)), transpose(df))
-  make_row <- function(x) {
-    map(x, ~ list(userEnteredValue = list(stringValue = as.character(.x))))
-  }
-  map(df_rows, ~ list(values = make_row(unname(.x))))
-  # list(
-  #   list(     # row 1
-  #     values = list(
-  #       list( # row 1 cell 1
-  #         userEnteredValue = list(stringValue = "A1")
-  #       ),
-  #       list( # row 1 cell 2
-  #         userEnteredValue = list(stringValue = "B1")
-  #       )
-  #     )
-  #   ),
-  #   list(   # row 2
-  #     values = list(
-  #       list( # row 2 cell 1
-  #         userEnteredValue = list(stringValue = "A2")
-  #       ),
-  #       list( # row 2 cell 2
-  #         userEnteredValue = list(stringValue = "B2")
-  #       )
-  #     )
-  #   )
-  # )
+  df_cells <- modify(df, as_CellData)
+  df_rows <- pmap(df_cells, list)
+  df_rows <- c(list(as_CellData(names(df))), df_rows)
+  map(df_rows, ~ list(values = unname(.x)))
 }

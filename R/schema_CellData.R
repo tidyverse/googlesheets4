@@ -23,10 +23,8 @@ empty_cell <- function(..., .na = NULL) {
 
 cell_data <- function(x, val_type, .na = NULL) {
   force(val_type)
-  f <- function(y, ...) {
-    out <- list(y)
-    names(out) <- val_type
-    list(userEnteredValue = out)
+  f<- function(y, ...) {
+    list(userEnteredValue = rlang::list2(!!val_type := y))
   }
   purrr::map_if(x, rlang::is_na, empty_cell, .na = .na, .else = f)
 }
@@ -91,4 +89,3 @@ as_CellData.POSIXct <- function(x, .na = NULL) {
     fmt = list(type = "DATE_TIME", pattern = "yyyy-mm-ddThh:mm")
   )
 }
-

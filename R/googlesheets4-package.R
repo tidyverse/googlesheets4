@@ -4,4 +4,5 @@
 #'   compact transpose imap
 #' @importFrom rlang :=
 #' @importFrom tibble as_tibble
+#' @importFrom lifecycle deprecate_soft
 "_PACKAGE"

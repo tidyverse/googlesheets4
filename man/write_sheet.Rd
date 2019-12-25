@@ -5,9 +5,9 @@
 \alias{sheets_write}
 \title{(Over)write new data into an existing sheet}
 \usage{
-write_sheet(data, ss, sheet = NULL, skip = 0, na = "")
+write_sheet(data, ss, sheet = NULL, skip = 0)
 
-sheets_write(data, ss, sheet = NULL, skip = 0, na = "")
+sheets_write(data, ss, sheet = NULL, skip = 0)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -22,21 +22,19 @@ is how googledrive represents Drive files. Processed through
 unspecified, defaults to the first sheet.}
 
 \item{skip}{Number of rows to leave empty before starting to write.}
-
-\item{na}{Not implemented yet.}
 }
 \value{
 Updated metadata for the (spread)Sheet \code{ss}, as an instance of S3
 class \code{googlesheets4_spreadsheet}.
 }
 \description{
+\lifecycle{experimental}
+
 Updates an existing (work)sheet in an existing (spread)Sheet with a data
 frame. All pre-existing values, formats, and dimensions of the targeted sheet
 are cleared and it gets its new values and dimensions from \code{data}. Special
 formatting is applied to the header row, which holds column names, and the
 first \code{skip + 1} rows are frozen (so, up to and including the header row).
-\emph{NOTE: this function is very alpha and currently writes everything as
-character.}
 }
 \examples{
 if (sheets_has_token()) {

@@ -7,7 +7,7 @@
 sheets_create(name, ..., sheets = NULL)
 }
 \arguments{
-\item{name}{The name of the spreadsheet.}
+\item{name}{The name of the new spreadsheet.}
 
 \item{...}{Optional spreadsheet properties that can be set through this API
 endpoint, such as locale and time zone.}
@@ -16,17 +16,14 @@ endpoint, such as locale and time zone.}
 each data frame.}
 }
 \value{
-\itemize{
-\item \code{sheets_get()}: A list with S3 class \code{googlesheets4_spreadsheet}, for
-printing purposes.
-\item \code{sheets_sheets()}: A character vector.
-}
+A list with S3 class \code{googlesheets4_spreadsheet}, for printing
+purposes.
 }
 \description{
-Creates an entirely new Sheet (spreadsheet or workbook). Offers some control
-over the initial set of sheets (worksheets or tabs). CAUTION: this function
-is still being developed and, for example, currently sends all data as
-character.
+\lifecycle{experimental}
+
+Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook). Offers
+some control over the initial set of (work)sheets (a.k.a. "tabs").
 }
 \examples{
 if (sheets_has_token()) {

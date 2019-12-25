@@ -7,11 +7,11 @@
 #'
 #' @inheritParams read_sheet
 #'
-#' @return
-#'   * `sheets_get()`: A list with S3 class `googlesheets4_spreadsheet`, for
-#'     printing purposes.
-#'   * `sheets_sheets()`: A character vector.
+#' @return A list with S3 class `googlesheets4_spreadsheet`, for printing
+#'   purposes.
 #' @export
+#' @seealso Wraps the `spreadsheets.get` endpoint:
+#'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get>
 #'
 #' @examples
 #' if (sheets_has_token()) {

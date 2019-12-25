@@ -1,14 +1,15 @@
 #' Create a new Sheet
 #'
-#' Creates an entirely new Sheet (spreadsheet or workbook). Offers some control
-#' over the initial set of sheets (worksheets or tabs). CAUTION: this function
-#' is still being developed and, for example, currently sends all data as
-#' character.
+#' @description
+#' \lifecycle{experimental}
+#'
+#' Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook). Offers
+#' some control over the initial set of (work)sheets (a.k.a. "tabs").
 #'
 #' @seealso Wraps the `spreadsheets.create` endpoint:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create>
 #'
-#' @param name The name of the spreadsheet.
+#' @param name The name of the new spreadsheet.
 #' @param ... Optional spreadsheet properties that can be set through this API
 #'   endpoint, such as locale and time zone.
 #' @param sheets Optional named list of data frames. One sheet is created for
@@ -71,5 +72,5 @@ sheets_create <- function(name, ..., sheets = NULL) {
     resp_style <- gargle::response_process(resp_raw)
   }
 
-  out
+  invisible(as_sheets_id(out$spreadsheet_id))
 }

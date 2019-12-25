@@ -1,12 +1,13 @@
 #' (Over)write new data into an existing sheet
 #'
+#' @description
+#' \lifecycle{experimental}
+#'
 #' Updates an existing (work)sheet in an existing (spread)Sheet with a data
 #' frame. All pre-existing values, formats, and dimensions of the targeted sheet
 #' are cleared and it gets its new values and dimensions from `data`. Special
 #' formatting is applied to the header row, which holds column names, and the
 #' first `skip + 1` rows are frozen (so, up to and including the header row).
-#' *NOTE: this function is very alpha and currently writes everything as
-#' character.*
 #'
 #' @param data A data frame.
 #' @inheritParams read_sheet
@@ -14,7 +15,6 @@
 #'   (the name of a sheet), or an integer (the position of the sheet). If
 #'   unspecified, defaults to the first sheet.
 #' @param skip Number of rows to leave empty before starting to write.
-#' @param na Not implemented yet.
 #'
 #' @return Updated metadata for the (spread)Sheet `ss`, as an instance of S3
 #'   class `googlesheets4_spreadsheet`.
@@ -49,8 +49,7 @@
 write_sheet <- function(data,
                         ss,
                         sheet = NULL,
-                        skip = 0,
-                        na = "") {
+                        skip = 0) {
   # https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)

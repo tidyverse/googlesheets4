@@ -13,11 +13,8 @@ is how googledrive represents Drive files. Processed through
 \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 }
 \value{
-\itemize{
-\item \code{sheets_get()}: A list with S3 class \code{googlesheets4_spreadsheet}, for
-printing purposes.
-\item \code{sheets_sheets()}: A character vector.
-}
+A list with S3 class \code{googlesheets4_spreadsheet}, for printing
+purposes.
 }
 \description{
 Retrieve spreadsheet-specific metadata, such as details on the individual
@@ -30,5 +27,11 @@ returns metadata that exists for any file on Drive.
 \examples{
 if (sheets_has_token()) {
   sheets_get(sheets_example("mini-gap"))
+}
+}
+\seealso{
+Wraps the \code{spreadsheets.get} endpoint:
+\itemize{
+\item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get}
 }
 }

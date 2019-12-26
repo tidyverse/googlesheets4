@@ -43,10 +43,7 @@
 #'   * *Still to come*: duration (code will be `:`) and factor (code will be
 #'   `f`).
 #'
-#' @param ss Something that identifies a Google Sheet: its file ID, a URL from
-#'   which we can recover the ID, or a [`dribble`][googledrive::dribble], which
-#'   is how googledrive represents Drive files. Processed through
-#'   [as_sheets_id()].
+#' @template ss
 #' @param sheet Sheet to read, as in "worksheet" or "tab". Either a string (the
 #'   name of a sheet), or an integer (the position of the sheet). Ignored if the
 #'   sheet is specified via `range`. If neither argument specifies the sheet,

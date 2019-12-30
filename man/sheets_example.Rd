@@ -5,26 +5,30 @@
 \alias{sheets_examples}
 \title{File IDs of example Sheets}
 \usage{
-sheets_example(name = names(sheets_examples()))
+sheets_example(matches)
 
-sheets_examples()
+sheets_examples(matches)
 }
 \arguments{
-\item{name}{Nickname of an example Sheet.}
+\item{matches}{A regular expression that matches the nickname of the desired
+example Sheet(s). This argument is optional for \code{sheets_examples()} and, if
+provided, multiple matches are allowed. \code{sheets_example()} requires
+this argument and requires that there is exactly one match.}
 }
 \value{
 \itemize{
 \item \code{sheets_example()}: a single \link{sheets_id} object
-\item \code{sheets_examples()}: a named character vector of all built-in examples
+\item \code{sheets_examples()}: a named vector of all built-in examples, with class
+\code{\link[googledrive:as_id]{drive_id}}
 }
 }
 \description{
 googlesheets4 ships with static IDs for some world-readable example Sheets
 for use in examples and documentation. These functions make them easy to
-access by a nickname.
+access by their nicknames.
 }
 \examples{
 sheets_examples()
-
+sheets_examples("gap")
 sheets_example("gapminder")
 }

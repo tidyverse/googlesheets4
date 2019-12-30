@@ -155,7 +155,8 @@ returns metadata that exists for any file on Drive.</p></li>
     <tr>
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
+(returned by <code>sheets_get()</code>, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
 <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
@@ -163,13 +164,14 @@ is how googledrive represents Drive files. Processed through
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-<ul>
-<li><p><code>sheets_get()</code>: A list with S3 class <code>googlesheets4_spreadsheet</code>, for
-printing purposes.</p></li>
-<li><p><code><a href='googlesheets4-deprecated.html'>sheets_sheets()</a></code>: A character vector.</p></li>
-</ul>
+    <p>A list with S3 class <code>googlesheets4_spreadsheet</code>, for printing
+purposes.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <div class='dont-index'><p>Wraps the <code>spreadsheets.get</code> endpoint:</p><ul>
+<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get</a></p></li>
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
@@ -192,6 +194,7 @@ printing purposes.</p></li>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

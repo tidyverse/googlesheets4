@@ -145,15 +145,14 @@
     <tr>
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
+(returned by <code><a href='sheets_get.html'>sheets_get()</a></code>, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
 <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
       <th>sheet</th>
-      <td><p>Something that specifies which sheet(s) to delete. You can
-identify a sheet by name or by position. To delete multiple sheets at once,
-pass a vector, possibly even a list if you need to mix names and positions.</p></td>
+      <td><p>Sheet to delete, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. You can pass a vector to delete multiple sheets at once or even a list, if you need to mix names and positions.</p></td>
     </tr>
     </table>
 
@@ -197,7 +196,7 @@ pass a vector, possibly even a list if you need to mix names and positions.</p><
 #&gt; <span class='message'>* gamma</span></div><div class='output co'>#&gt; <span class='message'>Deleting these sheet(s) from 'delete-sheets-from-me':</span>
 #&gt; <span class='message'>* alpha</span>
 #&gt; <span class='message'>* beta</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * delete-sheets-from-me: 1FgjCluLHu_AUhGW4AQfeSR5wmdZj2Zqay5KaWdw-Eo0</span></div></pre>
+#&gt; <span class='message'>  * delete-sheets-from-me: 1PsYOAxTKOMCe1_c9toUEIg_WtuFeQDjpNXdQ4edLlrg</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

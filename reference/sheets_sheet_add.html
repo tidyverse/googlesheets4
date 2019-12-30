@@ -145,7 +145,8 @@
     <tr>
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
+(returned by <code><a href='sheets_get.html'>sheets_get()</a></code>, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
 <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
@@ -164,9 +165,9 @@ in <code>name = value</code> form.</p></td>
     <tr>
       <th>.before, .after</th>
       <td><p>Optional specification of where to put the new
-sheet(s). Can be an existing sheet name or a position. If unspecified,
-Sheets puts the new sheet(s) at the end. Specify, at most, one of <code>.before</code>
-and <code>.after</code> and, at most, a single string or number.</p></td>
+sheet(s). Specify, at most, one of <code>.before</code> and <code>.after</code>. Refer to an
+existing sheet by name (via a string) or by position (via a number). If
+unspecified, Sheets puts the new sheet(s) at the end.</p></td>
     </tr>
     </table>
 
@@ -215,7 +216,7 @@ and <code>.after</code> and, at most, a single string or number.</p></td>
 }</div><div class='output co'>#&gt; <span class='message'>Adding a sheet</span></div><div class='output co'>#&gt; <span class='message'>Adding a sheet named 'apple' at position 2</span></div><div class='output co'>#&gt; <span class='message'>Adding a sheet named 'banana' at position 3</span></div><div class='output co'>#&gt; <span class='message'>Adding these sheets:</span>
 #&gt; <span class='message'>* coconut</span>
 #&gt; <span class='message'>* dragonfruit</span></div><div class='output co'>#&gt; <span class='message'>Adding a sheet named 'eggplant' at position 1</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * add-sheets-to-me: 1jx0E9a1CYipc9dLwwA2IposrpetCk1GlXzxBAi1x_Q4</span></div></pre>
+#&gt; <span class='message'>  * add-sheets-to-me: 11DMUzlzb-WMOjqXCFTf3wXvyVhkSvLiyD6pVK3Hoc98</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

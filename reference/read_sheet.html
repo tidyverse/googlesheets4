@@ -175,16 +175,14 @@ file or <code><a href='https://readxl.tidyverse.org/reference/read_excel.html'>r
     <tr>
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
+(returned by <code><a href='sheets_get.html'>sheets_get()</a></code>, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
 <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
       <th>sheet</th>
-      <td><p>Sheet to read, as in "worksheet" or "tab". Either a string (the
-name of a sheet), or an integer (the position of the sheet). Ignored if the
-sheet is specified via <code>range</code>. If neither argument specifies the sheet,
-defaults to the first visible sheet.</p></td>
+      <td><p>Sheet to read, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Ignored if the sheet is specified via <code>range</code>. If neither argument specifies the sheet, defaults to the first visible sheet.</p></td>
     </tr>
     <tr>
       <th>range</th>
@@ -270,7 +268,7 @@ is not parsed into the data frame output.</p></li>
 <li><p><code>?</code>: Guess. A type is guessed for each cell and then a consensus type is
 selected for the column. If no atomic type is suitable for all cells, a
 list-column is created, in which each cell is converted to an R object of
-"best" type". If no column types are specified, i.e. <code>col_types = NULL</code>,
+"best" type. If no column types are specified, i.e. <code>col_types = NULL</code>,
 all types are guessed.</p></li>
 <li><p><code>l</code>: Logical.</p></li>
 <li><p><code>i</code>: Integer. This type is never guessed from the data, because Sheets

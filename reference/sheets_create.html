@@ -35,10 +35,9 @@
 
 
 <meta property="og:title" content="Create a new Sheet — sheets_create" />
-<meta property="og:description" content="Creates an entirely new Sheet (spreadsheet or workbook). Offers some control
-over the initial set of sheets (worksheets or tabs). CAUTION: this function
-is still being developed and, for example, currently sends all data as
-character." />
+<meta property="og:description" content="
+Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook). Offers
+some control over the initial set of (work)sheets (a.k.a. &quot;tabs&quot;)." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -137,10 +136,9 @@ character." />
     </div>
 
     <div class="ref-description">
-    <p>Creates an entirely new Sheet (spreadsheet or workbook). Offers some control
-over the initial set of sheets (worksheets or tabs). CAUTION: this function
-is still being developed and, for example, currently sends all data as
-character.</p>
+    <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
+<p>Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook). Offers
+some control over the initial set of (work)sheets (a.k.a. "tabs").</p>
     </div>
 
     <pre class="usage"><span class='fu'>sheets_create</span>(<span class='no'>name</span>, <span class='no'>...</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -150,7 +148,7 @@ character.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>name</th>
-      <td><p>The name of the spreadsheet.</p></td>
+      <td><p>The name of the new spreadsheet.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -166,13 +164,8 @@ each data frame.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-<ul>
-<li><p><code><a href='sheets_get.html'>sheets_get()</a></code>: A list with S3 class <code>googlesheets4_spreadsheet</code>, for
-printing purposes.</p></li>
-<li><p><code><a href='googlesheets4-deprecated.html'>sheets_sheets()</a></code>: A character vector.</p></li>
-</ul>
-
+    <p>A list with S3 class <code>googlesheets4_spreadsheet</code>, for printing
+purposes.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Wraps the <code>spreadsheets.create</code> endpoint:</p><ul>
@@ -200,10 +193,10 @@ printing purposes.</p></li>
   <span class='co'># clean up</span>
   <span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"sheets-create-demo"</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
 }</div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * sheets-create-demo-4: 1Iz33ELfPjS54kLdUdH1EptS-MUeeLIa74ZRrc5vHMH4</span>
-#&gt; <span class='message'>  * sheets-create-demo-3: 1RRHT6YMvo5uInNijrDT-jyg6Iw4w7rcms1DoJ-Zh85M</span>
-#&gt; <span class='message'>  * sheets-create-demo-2: 155MPLAakfjPt-yvShuZ44KcxFeaN5BOcpo_phWECq44</span>
-#&gt; <span class='message'>  * sheets-create-demo-1: 1SSr6o7bonnppAslS2hEnv33woSbkBn60qR28ap14SD0</span></div></pre>
+#&gt; <span class='message'>  * sheets-create-demo-4: 12Yc9fK9gnfdAj8lVEiyqBE0-sTYE89qwzUAOwvlRMjw</span>
+#&gt; <span class='message'>  * sheets-create-demo-3: 1mpO5NY_u0S8_ukgPi2mNEeG_3VJfjAGtbvqOl4bC--4</span>
+#&gt; <span class='message'>  * sheets-create-demo-2: 1bLS9r2XqqUyt0sKrdQqs-QKYAwOgskeL2xpla4_nZFc</span>
+#&gt; <span class='message'>  * sheets-create-demo-1: 1HAvpCPys9mhONioedvnad1h7ro8uDwlHT4jQMkAYPeU</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

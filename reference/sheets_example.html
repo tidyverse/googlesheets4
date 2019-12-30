@@ -37,7 +37,7 @@
 <meta property="og:title" content="File IDs of example Sheets — sheets_example" />
 <meta property="og:description" content="googlesheets4 ships with static IDs for some world-readable example Sheets
 for use in examples and documentation. These functions make them easy to
-access by a nickname." />
+access by their nicknames." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -138,19 +138,22 @@ access by a nickname." />
     <div class="ref-description">
     <p>googlesheets4 ships with static IDs for some world-readable example Sheets
 for use in examples and documentation. These functions make them easy to
-access by a nickname.</p>
+access by their nicknames.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_example</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='fu'>sheets_examples</span>()))
+    <pre class="usage"><span class='fu'>sheets_example</span>(<span class='no'>matches</span>)
 
-<span class='fu'>sheets_examples</span>()</pre>
+<span class='fu'>sheets_examples</span>(<span class='no'>matches</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>name</th>
-      <td><p>Nickname of an example Sheet.</p></td>
+      <th>matches</th>
+      <td><p>A regular expression that matches the nickname of the desired
+example Sheet(s). This argument is optional for <code>sheets_examples()</code> and, if
+provided, multiple matches are allowed. <code>sheets_example()</code> requires
+this argument and requires that there is exactly one match.</p></td>
     </tr>
     </table>
 
@@ -159,26 +162,32 @@ access by a nickname.</p>
     
 <ul>
 <li><p><code>sheets_example()</code>: a single <a href='sheets_id.html'>sheets_id</a> object</p></li>
-<li><p><code>sheets_examples()</code>: a named character vector of all built-in examples</p></li>
+<li><p><code>sheets_examples()</code>: a named vector of all built-in examples, with class
+<code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>drive_id</a></code></p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>sheets_examples</span>()</div><div class='output co'>#&gt;                                      gapminder 
-#&gt; "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" 
-#&gt;                                       mini-gap 
+    <pre class="examples"><div class='input'><span class='fu'>sheets_examples</span>()</div><div class='output co'>#&gt;                                       mini-gap 
 #&gt; "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU" 
-#&gt;                           formulas-and-formats 
-#&gt; "1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms" 
-#&gt;                      cell-contents-and-formats 
-#&gt; "1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E" 
+#&gt;                                      gapminder 
+#&gt; "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" 
 #&gt;                                         deaths 
 #&gt; "1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg" 
 #&gt;                                  chicken-sheet 
 #&gt; "1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU" 
+#&gt;                           formulas-and-formats 
+#&gt; "1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms" 
+#&gt;                      cell-contents-and-formats 
+#&gt; "1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E" 
 #&gt; attr(,"class")
-#&gt; [1] "drive_id"</div><div class='input'>
-<span class='fu'>sheets_example</span>(<span class='st'>"gapminder"</span>)</div><div class='output co'>#&gt; [1] "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"
+#&gt; [1] "drive_id"</div><div class='input'><span class='fu'>sheets_examples</span>(<span class='st'>"gap"</span>)</div><div class='output co'>#&gt;                                       mini-gap 
+#&gt; "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU" 
+#&gt;                                      gapminder 
+#&gt; "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" 
+#&gt; attr(,"class")
+#&gt; [1] "drive_id"</div><div class='input'><span class='fu'>sheets_example</span>(<span class='st'>"gapminder"</span>)</div><div class='output co'>#&gt;                                      gapminder 
+#&gt; "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" 
 #&gt; attr(,"class")
 #&gt; [1] "sheets_id" "drive_id" </div></pre>
   </div>

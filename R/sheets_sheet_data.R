@@ -3,7 +3,7 @@
 #' Reveals full metadata or just the names for the (work)sheets inside a
 #' (spread)Sheet.
 #'
-#' @inheritParams read_sheet
+#' @template ss
 #'
 #' @return
 #'   * `sheets_sheet_data()`: A tibble with one row per (work)sheet.
@@ -26,5 +26,3 @@ sheets_sheet_data <- function(ss) {
 sheets_sheet_names <- function(ss) {
   sheets_sheet_data(ss)$name
 }
-
-

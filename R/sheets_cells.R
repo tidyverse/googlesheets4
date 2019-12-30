@@ -9,7 +9,15 @@
 #' which looks after reshaping and column typing. But if you really want raw cell
 #' data from the API, `sheets_cells()` is for you!
 #'
-#' @inheritParams read_sheet
+#' @template ss
+#' @eval param_sheet(
+#'   action = "read",
+#'   "Ignored if the sheet is specified via `range`. If neither argument",
+#'   "specifies the sheet, defaults to the first visible sheet."
+#' )
+#' @template range
+#' @template skip-read
+#' @template n_max
 #' @param cell_data How much detail to get for each cell. `"default"` retrieves
 #'   the fields actually used when googlesheets4 guesses or imposes cell and
 #'   column types. `"full"` retrieves all fields in the [`CellData`

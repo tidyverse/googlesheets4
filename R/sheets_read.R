@@ -20,7 +20,7 @@
 #'   * `?`: Guess. A type is guessed for each cell and then a consensus type is
 #'   selected for the column. If no atomic type is suitable for all cells, a
 #'   list-column is created, in which each cell is converted to an R object of
-#'   "best" type". If no column types are specified, i.e. `col_types = NULL`,
+#'   "best" type. If no column types are specified, i.e. `col_types = NULL`,
 #'   all types are guessed.
 #'   * `l`: Logical.
 #'   * `i`: Integer. This type is never guessed from the data, because Sheets
@@ -43,22 +43,7 @@
 #'   * *Still to come*: duration (code will be `:`) and factor (code will be
 #'   `f`).
 #'
-#' @template ss
-#' @param sheet Sheet to read, as in "worksheet" or "tab". Either a string (the
-#'   name of a sheet), or an integer (the position of the sheet). Ignored if the
-#'   sheet is specified via `range`. If neither argument specifies the sheet,
-#'   defaults to the first visible sheet.
-#' @param range A cell range to read from. If `NULL`, all non-empty cells are
-#'   read. Otherwise specify `range` as described in [Sheets A1
-#'   notation](https://developers.google.com/sheets/api/guides/concepts#a1_notation)
-#'   or using the helpers documented in [cell-specification]. Sheets uses
-#'   fairly standard spreadsheet range notation, although a bit different from
-#'   Excel. Examples of valid ranges: `"Sheet1!A1:B2"`, `"Sheet1!A:A"`,
-#'   `"Sheet1!1:2"`, `"Sheet1!A5:A"`, `"A1:B2"`, `"Sheet1"`. Interpreted
-#'   strictly, even if the range forces the inclusion of leading, trailing, or
-#'   embedded empty rows or columns. Takes precedence over `skip`, `n_max` and
-#'   `sheet`. Note `range` can be a named range, like `"sales_data"`, without
-#'   any cell reference.
+#' @inheritParams sheets_cells
 #' @param col_names `TRUE` to use the first row as column names, `FALSE` to get
 #'   default names, or a character vector to provide column names directly. If
 #'   user provides `col_types`, `col_names` can have one entry per column or one
@@ -71,14 +56,6 @@
 #'   default, blank cells are treated as missing data.
 #' @param trim_ws Logical. Should leading and trailing whitespace be trimmed
 #'   from cell contents?
-#' @param skip Minimum number of rows to skip before reading anything, be it
-#'   column names or data. Leading empty rows are automatically skipped, so this
-#'   is a lower bound. Ignored if `range` is given.
-#' @param n_max Maximum number of data rows to parse into the returned tibble.
-#'   Trailing empty rows are automatically skipped, so this is an upper bound on
-#'   the number of rows in the result. Ignored if `range` is given. `n_max` is
-#'   imposed locally, after reading all non-empty cells, so, if speed is an
-#'   issue, it is better to use `range`.
 #' @param guess_max Maximum number of data rows to use for guessing column
 #'   types.
 #' @param .name_repair Handling of column names. By default, googlesheets4

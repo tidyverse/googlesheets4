@@ -13,9 +13,7 @@ which we can recover the ID, an instance of \code{googlesheets4_spreadsheet}
 is how googledrive represents Drive files. Processed through
 \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
-\item{sheet}{Something that specifies which sheet(s) to delete. You can
-identify a sheet by name or by position. To delete multiple sheets at once,
-pass a vector, possibly even a list if you need to mix names and positions.}
+\item{sheet}{Sheet to delete, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. You can pass a vector to delete multiple sheets at once or even a list, if you need to mix names and positions.}
 }
 \value{
 The input \code{ss}, as an instance of \code{\link{sheets_id}}

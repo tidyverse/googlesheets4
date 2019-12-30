@@ -10,10 +10,11 @@
 #' first `skip + 1` rows are frozen (so, up to and including the header row).
 #'
 #' @param data A data frame.
-#' @inheritParams read_sheet
-#' @param sheet Sheet to write into, as in "worksheet" or "tab". Either a string
-#'   (the name of a sheet), or an integer (the position of the sheet). If
-#'   unspecified, defaults to the first sheet.
+#' @template ss
+#' @eval param_sheet(
+#'   action = "write into",
+#'   "If unspecified, defaults to the first sheet."
+#' )
 #' @param skip Number of rows to leave empty before starting to write.
 #'
 #' @return Updated metadata for the (spread)Sheet `ss`, as an instance of S3

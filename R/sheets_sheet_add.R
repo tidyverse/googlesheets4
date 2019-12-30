@@ -2,7 +2,7 @@
 #'
 #' Adds one or more (work)sheets to an existing (spread)Sheet.
 #'
-#' @inheritParams read_sheet
+#' @template ss
 #' @param sheet One or more new sheet names. If unspecified, Sheets adds 1 sheet
 #'   and autogenerates a name of the form "SheetN".
 #' @param ... Optional parameters to specify additional properties, common to
@@ -11,9 +11,9 @@
 #'   schema](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/sheets#SheetProperties)
 #'    in `name = value` form.
 #' @param .before,.after Optional specification of where to put the new
-#'   sheet(s). Can be an existing sheet name or a position. If unspecified,
-#'   Sheets puts the new sheet(s) at the end. Specify, at most, one of `.before`
-#'   and `.after` and, at most, a single string or number.
+#'   sheet(s). Specify, at most, one of `.before` and `.after`. Refer to an
+#'   existing sheet by name (via a string) or by position (via a number). If
+#'   unspecified, Sheets puts the new sheet(s) at the end.
 #'
 #' @return The input `ss`, as an instance of [`sheets_id`]
 #' @export

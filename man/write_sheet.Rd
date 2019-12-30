@@ -18,9 +18,7 @@ which we can recover the ID, an instance of \code{googlesheets4_spreadsheet}
 is how googledrive represents Drive files. Processed through
 \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
-\item{sheet}{Sheet to write into, as in "worksheet" or "tab". Either a string
-(the name of a sheet), or an integer (the position of the sheet). If
-unspecified, defaults to the first sheet.}
+\item{sheet}{Sheet to write into, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. If unspecified, defaults to the first sheet.}
 
 \item{skip}{Number of rows to leave empty before starting to write.}
 }

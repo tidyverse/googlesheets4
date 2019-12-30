@@ -2,10 +2,12 @@
 #'
 #' Deletes one or more (work)sheets from a (spread)Sheet.
 #'
-#' @inheritParams read_sheet
-#' @param sheet Something that specifies which sheet(s) to delete. You can
-#'   identify a sheet by name or by position. To delete multiple sheets at once,
-#'   pass a vector, possibly even a list if you need to mix names and positions.
+#' @template ss
+#' @eval param_sheet(
+#'   action = "delete",
+#'   "You can pass a vector to delete multiple sheets at once or even a list,",
+#'   "if you need to mix names and positions."
+#' )
 #'
 #' @return The input `ss`, as an instance of [`sheets_id`]
 #' @export

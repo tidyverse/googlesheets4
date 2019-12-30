@@ -22,9 +22,9 @@ all of the new sheet(s). Not relevant to most users. Specify fields of the
 in \code{name = value} form.}
 
 \item{.before, .after}{Optional specification of where to put the new
-sheet(s). Can be an existing sheet name or a position. If unspecified,
-Sheets puts the new sheet(s) at the end. Specify, at most, one of \code{.before}
-and \code{.after} and, at most, a single string or number.}
+sheet(s). Specify, at most, one of \code{.before} and \code{.after}. Refer to an
+existing sheet by name (via a string) or by position (via a number). If
+unspecified, Sheets puts the new sheet(s) at the end.}
 }
 \value{
 The input \code{ss}, as an instance of \code{\link{sheets_id}}

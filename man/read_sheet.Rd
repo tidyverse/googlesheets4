@@ -40,10 +40,7 @@ which we can recover the ID, an instance of \code{googlesheets4_spreadsheet}
 is how googledrive represents Drive files. Processed through
 \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
-\item{sheet}{Sheet to read, as in "worksheet" or "tab". Either a string (the
-name of a sheet), or an integer (the position of the sheet). Ignored if the
-sheet is specified via \code{range}. If neither argument specifies the sheet,
-defaults to the first visible sheet.}
+\item{sheet}{Sheet to read, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Ignored if the sheet is specified via \code{range}. If neither argument specifies the sheet, defaults to the first visible sheet.}
 
 \item{range}{A cell range to read from. If \code{NULL}, all non-empty cells are
 read. Otherwise specify \code{range} as described in \href{https://developers.google.com/sheets/api/guides/concepts#a1_notation}{Sheets A1 notation}
@@ -114,7 +111,7 @@ is not parsed into the data frame output.
 \item \verb{?}: Guess. A type is guessed for each cell and then a consensus type is
 selected for the column. If no atomic type is suitable for all cells, a
 list-column is created, in which each cell is converted to an R object of
-"best" type". If no column types are specified, i.e. \code{col_types = NULL},
+"best" type. If no column types are specified, i.e. \code{col_types = NULL},
 all types are guessed.
 \item \code{l}: Logical.
 \item \code{i}: Integer. This type is never guessed from the data, because Sheets

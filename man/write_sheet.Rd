@@ -23,8 +23,7 @@ is how googledrive represents Drive files. Processed through
 \item{skip}{Number of rows to leave empty before starting to write.}
 }
 \value{
-Updated metadata for the (spread)Sheet \code{ss}, as an instance of S3
-class \code{googlesheets4_spreadsheet}.
+The input \code{ss}, as an instance of \code{\link{sheets_id}}
 }
 \description{
 \lifecycle{experimental}

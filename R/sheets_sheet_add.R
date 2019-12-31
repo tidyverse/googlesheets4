@@ -15,7 +15,8 @@
 #'   existing sheet by name (via a string) or by position (via a number). If
 #'   unspecified, Sheets puts the new sheet(s) at the end.
 #'
-#' @return The input `ss`, as an instance of [`sheets_id`]
+#' @template ss-return
+#'
 #' @export
 #' @family worksheet functions
 #' @seealso Makes an `AddSheetsRequest`:

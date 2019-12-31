@@ -16,8 +16,7 @@ endpoint, such as locale and time zone.}
 each data frame.}
 }
 \value{
-A list with S3 class \code{googlesheets4_spreadsheet}, for printing
-purposes.
+The input \code{ss}, as an instance of \code{\link{sheets_id}}
 }
 \description{
 \lifecycle{experimental}

@@ -15,7 +15,7 @@
 #' @param sheets Optional named list of data frames. One sheet is created for
 #'   each data frame.
 #'
-#' @inherit sheets_get return
+#' @template ss-return
 #' @export
 #'
 #' @examples

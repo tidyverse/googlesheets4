@@ -17,8 +17,7 @@
 #' )
 #' @param skip Number of rows to leave empty before starting to write.
 #'
-#' @return Updated metadata for the (spread)Sheet `ss`, as an instance of S3
-#'   class `googlesheets4_spreadsheet`.
+#' @template ss-return
 #' @export
 #'
 #' @examples
@@ -110,7 +109,7 @@ write_sheet <- function(data,
   resp_raw <- request_make(req)
   gargle::response_process(resp_raw)
 
-  sheets_get(ssid)
+  invisible(ssid)
 }
 
 

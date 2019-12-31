@@ -302,7 +302,7 @@ First, put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpAcwRzL/iris-1078e5eba066a.csv"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmphazdB3/iris-12fbc13d164fb.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -312,15 +312,15 @@ convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpAcwRzL/iris-1078e5eba066a.csv
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmphazdB3/iris-12fbc13d164fb.csv
 #> uploaded into Drive file:
-#>   * iris-1078e5eba066a: 1dX66H_HSvRpyKVKAX-iQtOCmXBM9D1Y2IEaLD4O6B-8
+#>   * iris-12fbc13d164fb: 1_wmNmoGIenheyzQQk86r4UCHJ2E226JobcFM8pYIph8
 #> with MIME type:
 #>   * application/vnd.google-apps.spreadsheet
 #> # A tibble: 1 x 3
 #>   name               id                                         drive_resource  
 #> * <chr>              <chr>                                      <list>          
-#> 1 iris-1078e5eba066a 1dX66H_HSvRpyKVKAX-iQtOCmXBM9D1Y2IEaLD4O6… <named list [34…
+#> 1 iris-12fbc13d164fb 1_wmNmoGIenheyzQQk86r4UCHJ2E226JobcFM8pYI… <named list [34…
 
 ## visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -330,7 +330,7 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-1078e5eba066a'
+#> Reading from 'iris-12fbc13d164fb'
 #> Range "B1:D6"
 #> # A tibble: 5 x 3
 #>   Sepal.Width Petal.Length Petal.Width
@@ -347,12 +347,12 @@ Download the Sheet as an Excel workbook and read it back in via
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpAcwRzL/iris-1078e5eba066a.xlsx"
+#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmphazdB3/iris-12fbc13d164fb.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#>   * iris-1078e5eba066a
+#>   * iris-12fbc13d164fb
 #> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpAcwRzL/iris-1078e5eba066a.xlsx
+#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmphazdB3/iris-12fbc13d164fb.xlsx
 
 if (requireNamespace("readxl", quietly = TRUE)) {
   readxl::read_excel(iris_xlsxfile)  
@@ -380,7 +380,7 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_rm(iris_ss)
 #> Files deleted:
-#>   * iris-1078e5eba066a: 1dX66H_HSvRpyKVKAX-iQtOCmXBM9D1Y2IEaLD4O6B-8
+#>   * iris-12fbc13d164fb: 1_wmNmoGIenheyzQQk86r4UCHJ2E226JobcFM8pYIph8
 ```
 
 ## Get Sheet metadata or detailed cell data
@@ -527,17 +527,17 @@ tidyverse:
     leans on googledrive for all “whole file” operations; and (3) uses
     shared infrastructure for auth and more, from the gargle package.
     Main deficiency: googlesheets4 doesn’t *write* yet.
-  - [googledrive](http://googledrive.tidyverse.org) already provides a
+  - [googledrive](https://googledrive.tidyverse.org) already provides a
     fully-featured interface to the Google Drive API. Any “whole file”
     operations can already be accomplished *today* with googledrive:
     upload or download or update a spreadsheet, copy, rename, move,
     change permission, delete, etc. googledrive already supports Team
     Drives.
-  - [readxl](http://readxl.tidyverse.org) is the tidyverse package for
+  - [readxl](https://readxl.tidyverse.org) is the tidyverse package for
     reading Excel files (xls or xlsx) into an R data frame.
     googlesheets4 takes cues from parts of the readxl interface,
     especially around specifying which cells to read.
-  - [readr](http://readr.tidyverse.org) is the tidyverse package for
+  - [readr](https://readr.tidyverse.org) is the tidyverse package for
     reading delimited files (e.g., csv or tsv) into an R data frame.
     googlesheets4 takes cues from readr with respect to column type
     specification.

@@ -193,17 +193,17 @@ tidyverse:
     leans on googledrive for all “whole file” operations; and (3) uses
     shared infrastructure for auth and more, from the gargle package.
     Main deficiency: googlesheets4 doesn’t *write* yet.
-  - [googledrive](http://googledrive.tidyverse.org) already provides a
+  - [googledrive](https://googledrive.tidyverse.org) already provides a
     fully-featured interface to the Google Drive API. Any “whole file”
     operations can already be accomplished *today* with googledrive:
     upload or download or update a spreadsheet, copy, rename, move,
     change permission, delete, etc. googledrive already supports Team
     Drives.
-  - [readxl](http://readxl.tidyverse.org) is the tidyverse package for
+  - [readxl](https://readxl.tidyverse.org) is the tidyverse package for
     reading Excel files (xls or xlsx) into an R data frame.
     googlesheets4 takes cues from parts of the readxl interface,
     especially around specifying which cells to read.
-  - [readr](http://readr.tidyverse.org) is the tidyverse package for
+  - [readr](https://readr.tidyverse.org) is the tidyverse package for
     reading delimited files (e.g., csv or tsv) into an R data frame.
     googlesheets4 takes cues from readr with respect to column type
     specification.

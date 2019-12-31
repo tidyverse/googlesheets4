@@ -4,7 +4,7 @@ library(googledrive)
 
 googlesheets4:::sheets_auth_testing()
 
-ss <- test_sheet_create()
+ss <- test_sheet_create("googlesheets4-cell-tests")
 sheets_browse(ss)
 
 n <- 5

@@ -13,13 +13,12 @@
    "googlesheets4-col-types" = "1q-iRi1L3JugqHTtcjQ3DQOmOTuDnUsWi2AiG2eNyQkU"
 ))
 
-test_sheet <- function(name = "googlesheets4-cell-tests") {
-  stopifnot(is_string(name))
-  m <- match(name, names(.test_sheets))
-  if (is.na(m)) {
-    stop_glue("Unrecognized test sheet: {sq('name')}")
-  }
-  new_sheets_id(.test_sheets[[m]])
+test_sheet <- function(matches = "googlesheets4-cell-tests") {
+  one_sheet(
+    needle    = matches,
+    haystack  = .test_sheets,
+    adjective = "test"
+  )
 }
 
 test_sheet_create <- function(name = "googlesheets4-cell-tests") {
@@ -48,6 +47,34 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
   ssid
 }
 
+many_sheets <- function(needle, haystack, adjective) {
+  out <- haystack
+
+  if (!missing(needle)) {
+    check_string(needle)
+    sel <- grepl(needle, names(out), ignore.case = TRUE)
+    if (!any(sel)) {
+      stop_glue("Can't find {adjective} Sheet that matches {dq(needle)}")
+    }
+    out <- googledrive::as_id(out[sel])
+  }
+
+  out
+}
+
+one_sheet <- function(needle, haystack, adjective) {
+  check_string(needle)
+  out <- many_sheets(needle = needle, haystack = haystack, adjective = adjective)
+  if (length(out) > 1) {
+    bullets <- glue_collapse(glue("  * {names(out)}"), last = "\n")
+    stop_glue("
+      Found multiple matching {adjective} Sheets:
+      {bullets}
+      Make the {bt('matches')} regular expression more specific.
+      ")
+  }
+  new_sheets_id(out)
+}
 
 #' File IDs of example Sheets
 #'
@@ -71,33 +98,19 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
 #' sheets_examples("gap")
 #' sheets_example("gapminder")
 sheets_example <- function(matches) {
-  check_string(matches)
-  out <- sheets_examples(matches)
-  if (length(out) > 1) {
-    bullets <- glue_collapse(glue("  * {names(out)}"), last = "\n")
-    stop_glue("
-      Found multiple matching example Sheets:
-      {bullets}
-      Make the {bt('matches')} regular expression more specific or \\
-      use {bt('sheets_examples()')} if you're OK with multiple matches.
-      ")
-  }
-  new_sheets_id(out)
+  one_sheet(
+    needle    = matches,
+    haystack  = .sheets_examples,
+    adjective = "example"
+  )
 }
 
 #' @rdname sheets_example
 #' @export
 sheets_examples <- function(matches) {
-  out <- .sheets_examples
-
-  if (!missing(matches)) {
-    check_string(matches)
-    sel <- grepl(matches, names(out), ignore.case = TRUE)
-    if (!any(sel)) {
-      stop_glue("Can't find an example Sheet that matches {dq(matches)}")
-    }
-    out <- googledrive::as_id(.sheets_examples[which(sel)])
-  }
-
-  out
+  many_sheets(
+    needle    = matches,
+    haystack  = .sheets_examples,
+    adjective = "example"
+  )
 }

@@ -17,6 +17,7 @@ test_that("read_sheet() honors `na`", {
 
   df <- read_sheet(
     test_sheet("googlesheets4-col-types"),
+    sheet = "NAs",
     na = c("", "NA", "Missing")
   )
   expect_true(all(vapply(df, is.double, logical(1))))

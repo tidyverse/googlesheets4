@@ -155,17 +155,17 @@ read_sheet(url)
 For more information, see the package website:
 [googlesheets4.tidyverse.org](https://googlesheets4.tidyverse.org).
 
-## What’s yet to come?
+## What’s still under development?
 
-Writing into Sheets. The googledrive package
-([googledrive.tidyverse.org](https://googledrive.tidyverse.org)) can
-already be used to write into Sheets at the “whole file” level, because
-that is carried out via the Drive API. `googledrive::drive_upload()` and
-`googledrive::drive_update()` are very useful for this.
+Writing into Sheets. Basic writing functionality is now in place via
+`sheets_create()` and `sheets_write()`, but this family of function is
+still in the development phase.
 
-But, if you need more granular control, such as writing to specific
-worksheets or cells, that requires the Sheets API. This is not yet
-implemented in googlesheets4, but will be.
+As always, remember that the googledrive package
+([googledrive.tidyverse.org](https://googledrive.tidyverse.org)) can be
+used to write into Sheets at the “whole file” level, for example, to
+upload a local `.csv` or `.xlsx` into a Sheet. See
+`googledrive::drive_upload()` and `googledrive::drive_update()`.
 
 ## Contributing
 
@@ -192,13 +192,13 @@ tidyverse:
     googlesheets4: (1) wraps the current, most modern Sheets API; (2)
     leans on googledrive for all “whole file” operations; and (3) uses
     shared infrastructure for auth and more, from the gargle package.
-    Main deficiency: googlesheets4 doesn’t *write* yet.
-  - [googledrive](https://googledrive.tidyverse.org) already provides a
-    fully-featured interface to the Google Drive API. Any “whole file”
-    operations can already be accomplished *today* with googledrive:
-    upload or download or update a spreadsheet, copy, rename, move,
-    change permission, delete, etc. googledrive already supports Team
-    Drives.
+    The v3 API wrapped by googlesheets goes offline in March 2020, at
+    which point the package must be retired.
+  - [googledrive](https://googledrive.tidyverse.org) provides a
+    fully-featured interface to the Google Drive API. Use googledrive
+    for all “whole file” operations: upload or download or update a
+    spreadsheet, copy, rename, move, change permission, delete, etc.
+    googledrive supports Team Drives.
   - [readxl](https://readxl.tidyverse.org) is the tidyverse package for
     reading Excel files (xls or xlsx) into an R data frame.
     googlesheets4 takes cues from parts of the readxl interface,

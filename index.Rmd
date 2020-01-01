@@ -69,7 +69,7 @@ We've made a few Sheets available to "anyone with a link", for use in examples a
 ```{r}
 sheets_examples()
 
-sheets_examples("gap")
+sheets_example("gap")
 ```
 
 `sheets_example()` requires a regular expression and returns exactly 1 Sheet ID (or throws an error):

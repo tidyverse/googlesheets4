@@ -19,7 +19,7 @@
 #'
 #' @export
 #' @family worksheet functions
-#' @seealso Makes an `AddSheetsRequest`:
+#' @seealso Makes an `AddSheetRequest`:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#addsheetrequest>
 #'
 #' @examples

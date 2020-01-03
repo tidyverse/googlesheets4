@@ -64,7 +64,7 @@ if (sheets_has_token()) {
 }
 }
 \seealso{
-Makes an \code{AddSheetsRequest}:
+Makes an \code{AddSheetRequest}:
 \itemize{
 \item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#addsheetrequest}
 }

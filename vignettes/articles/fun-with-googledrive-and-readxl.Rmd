@@ -1,0 +1,87 @@
+---
+title: "Fun with googledrive and readxl"
+---
+
+This article demonstrates how to use googlesheets4, googledrive, and readxl together. We demonstrate a roundtrip for data that starts and ends in R, but travels in spreadsheet form, via Google Sheets.
+
+```{r setup, include = FALSE}
+can_decrypt <- gargle:::secret_can_decrypt("googlesheets4")
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  error = TRUE,
+  purl = can_decrypt,
+  eval = can_decrypt
+)
+```
+
+```{r eval = !can_decrypt, echo = FALSE, comment = NA}
+message("No token available. Code chunks will not be evaluated.")
+```
+
+## Attach packages
+
+```{r}
+library(googlesheets4)
+library(googledrive)
+library(readxl)
+```
+
+## Auth
+
+```{r include = FALSE}
+googlesheets4:::sheets_auth_docs(drive = TRUE)
+```
+
+As a regular, interactive user, you can just let googlesheets4 prompt you for anything it needs re: auth.
+
+Since this article is compiled noninteractively on a server, we activate a service token here, in a hidden chunk. We are also using a shared token for Sheets and Drive. You can read how to do that in your own work in the article [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html).
+
+## Create a private Sheet from csv with the Drive API
+
+Put the iris data into a csv file.
+
+```{r}
+(iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
+write.csv(iris, iris_tempfile, row.names = FALSE)
+```
+
+Use `googledrive::drive_upload()` to upload the csv and simultaneously convert to a Sheet.
+
+```{r}
+(iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
+
+# visit the new Sheet in the browser, in an interactive session!
+drive_browse(iris_ss)
+```
+
+Read data from the private Sheet into R.
+```{r}
+read_sheet(iris_ss, range = "B1:D6")
+```
+
+## Create a local xlsx from a Sheet with the Drive API
+
+Download the Sheet as an Excel workbook.
+
+```{r}
+(iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
+drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
+```
+
+## Read xlsx with readxl
+
+Read the iris data back in via `readxl::read_excel()`.
+
+```{r}
+if (requireNamespace("readxl", quietly = TRUE)) {
+  readxl::read_excel(iris_xlsxfile)  
+}
+```
+
+## Clean up
+
+```{r}
+file.remove(iris_tempfile, iris_xlsxfile)
+drive_rm(iris_ss)
+```

@@ -97,7 +97,7 @@ sheets_create(
 
 #### Clean up
 
-Trash all the Sheets created above. This actually requires googledrive, since it is not possible to trash or delete Sheets through the Sheets API. When we did auth earlier, in a hidden chunk, we also authed simultaneously for Sheets and Drive. You can read how to do that in your ow work in the article [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html).
+Trash all the Sheets created above. This actually requires googledrive, since it is not possible to trash or delete Sheets through the Sheets API. When we did auth earlier, in a hidden chunk, we also authed simultaneously for Sheets and Drive. You can read how to do that in your own work in the article [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html).
 
 ```{r}
 sheets_find("write-sheets-demo") %>%

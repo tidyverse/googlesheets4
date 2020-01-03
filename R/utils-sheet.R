@@ -72,3 +72,42 @@ maybe_sheet <- function(sheet = NULL, nm = deparse(substitute(sheet))) {
     check_sheet(sheet, nm = nm)
   }
 }
+
+#' Normalize user input re: (work)sheet names and/or data
+#'
+#' @param sheets_quo Quosure containing user input re: how to populate
+#'   (work)sheets.
+#'
+#' @return A list with 2 equal-sized components, `name` and `value`. Size =
+#'   number of (work)sheets.
+#' @keywords internal
+#' @noRd
+enlist_sheets <- function(sheets_quo) {
+  sheets <- rlang::eval_tidy(sheets_quo)
+
+  null_along <- function(x) vector(mode = "list", length = length(x))
+
+  if (is.null(sheets)) {
+    return(NULL)
+  }
+
+  if (is.character(sheets)) {
+    return(list(name = sheets, value = null_along(sheets)))
+  }
+
+  if (rlang::quo_is_symbol(sheets_quo)) {
+    return(list(name = rlang::as_name(sheets_quo), value = list(sheets)))
+  }
+
+  if (inherits(sheets, "data.frame")) {
+    return(list(name = list(NULL), value = list(sheets)))
+  }
+
+  if (rlang::is_list(sheets)) {
+    nms <- if (rlang::is_named(sheets)) names(sheets) else null_along(sheets)
+    return(list(name = nms, value = unname(sheets)))
+  }
+
+  # we should never get here, so not a user-facing message
+  stop_glue("Invalid input for (work)sheet(s)")
+}

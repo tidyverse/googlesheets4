@@ -152,3 +152,33 @@ bureq_set_dimensions <- function(sheetId,
   out
 
 }
+
+# https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest
+bureq_set_grid_properties <- function(sheetId,
+                                      nrow = NULL, ncol = NULL,
+                                      frozenRowCount = 1) {
+  gp <- new("GridProperties")
+  if (!is.null(nrow)) {
+    gp <- patch(gp, rowCount = nrow)
+  }
+  if (!is.null(ncol)) {
+    gp <- patch(gp, columnCount = ncol)
+  }
+  if (!is.null(frozenRowCount) && frozenRowCount > 0) {
+    gp <- patch(gp, frozenRowCount = frozenRowCount)
+  }
+  if (length(gp) == 0) {
+    return(NULL)
+  }
+  fields <- glue("gridProperties({glue_collapse(names(gp), sep = ',')})")
+
+  new(
+    "UpdateSheetPropertiesRequest",
+    properties = new(
+      "SheetProperties",
+      sheetId = sheetId,
+      gridProperties = gp
+    ),
+    fields = fields
+  )
+}

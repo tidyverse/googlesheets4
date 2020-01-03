@@ -12,8 +12,10 @@ sheets_create(name, ..., sheets = NULL)
 \item{...}{Optional spreadsheet properties that can be set through this API
 endpoint, such as locale and time zone.}
 
-\item{sheets}{Optional named list of data frames. One sheet is created for
-each data frame.}
+\item{sheets}{Optional input for initializing (work)sheets. If unspecified,
+the Sheets API automatically creates an empty "Sheet1". You can provide a
+vector of sheet names, a data frame, or a (possibly named) list of data
+frames. See the examples.}
 }
 \value{
 The input \code{ss}, as an instance of \code{\link{sheets_id}}
@@ -21,8 +23,8 @@ The input \code{ss}, as an instance of \code{\link{sheets_id}}
 \description{
 \lifecycle{experimental}
 
-Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook). Offers
-some control over the initial set of (work)sheets (a.k.a. "tabs").
+Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook). Optionally,
+you can also provide names and/or data for the initial set of (work)sheets.
 }
 \examples{
 if (sheets_has_token()) {
@@ -38,6 +40,17 @@ if (sheets_has_token()) {
 
   sheets_create(
     "sheets-create-demo-4",
+    sheets = c("alpha", "beta")
+  )
+
+  my_data <- data.frame(x = 1)
+  sheets_create(
+    "sheets-create-demo-5",
+    sheets = my_data
+  )
+
+  sheets_create(
+    "sheets-create-demo-6",
     sheets = list(iris = head(iris), mtcars = head(mtcars))
   )
 

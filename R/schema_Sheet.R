@@ -44,15 +44,15 @@ as_Sheet.data.frame <- function(x, ...) {
 
   sp <- patch(
     sp,
-    gridProperties = list(
-      rowCount = nrow(x) + 1, # make room for column names
-      columnCount = ncol(x),
-      frozenRowCount = 1      # freeze top row
+    gridProperties = new(
+      "GridProperties",
+      rowCount       = nrow(x) + 1, # make room for column names
+      columnCount    = ncol(x),
     )
   )
 
   new(
-    id = "Sheet",
+    "Sheet",
     properties = sp,
     data = list( # an array of instances of GridData
       list(

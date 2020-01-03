@@ -5,12 +5,12 @@ as_tibble.googlesheets4_schema_Sheet <- function(x, ...) {
   tibble::add_column(out, data = list(NULL))
 }
 
-as_Sheet <- function(df, name) {
+as_Sheet <- function(x, ...) {
   UseMethod("as_Sheet")
 }
 
 #' @export
-as_Sheet.default <- function(df, name) {
+as_Sheet.default <- function(x, ...) {
   stop_glue(
     "Don't know how to make an instance of {bt('Sheet')} from something of ",
     "class {class_collapse(x)}."
@@ -18,22 +18,45 @@ as_Sheet.default <- function(df, name) {
 }
 
 #' @export
-as_Sheet.data.frame <- function(df, name) {
-  check_string(name)
-  x <- new(
+as_Sheet.NULL <- function(x, ...) {
+  return(new(id = "Sheet", properties = NULL))
+}
+
+#' @export
+as_Sheet.character <- function(x, ...) {
+  check_length_one(x)
+  dots <- rlang::list2(...)
+  out <- new(
     id = "Sheet",
     properties = new(
       id = "SheetProperties",
-      title = name,
-      gridProperties = list(
-        rowCount = nrow(df) + 1, # make room for column names
-        columnCount = ncol(df),
-        frozenRowCount = 1       # freeze top row
-      )
-    ),
+      title = x
+    )
+  )
+  patch(out, !!!dots)
+}
+
+#' @export
+as_Sheet.data.frame <- function(x, ...) {
+  # do first, so that gridProperties derived from x overwrite anything passed
+  # via `...`
+  sp <- new("SheetProperties", ...)
+
+  sp <- patch(
+    sp,
+    gridProperties = list(
+      rowCount = nrow(x) + 1, # make room for column names
+      columnCount = ncol(x),
+      frozenRowCount = 1      # freeze top row
+    )
+  )
+
+  new(
+    id = "Sheet",
+    properties = sp,
     data = list( # an array of instances of GridData
       list(
-        rowData = as_RowData(df) # an array of instances of RowData
+        rowData = as_RowData(x) # an array of instances of RowData
       )
     )
   )

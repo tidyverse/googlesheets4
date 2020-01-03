@@ -4,7 +4,7 @@
 \alias{sheets_create}
 \title{Create a new Sheet}
 \usage{
-sheets_create(name, ..., sheets = NULL)
+sheets_create(name = sheets_random(), ..., sheets = NULL)
 }
 \arguments{
 \item{name}{The name of the new spreadsheet.}

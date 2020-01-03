@@ -55,7 +55,7 @@
 #'   # clean up
 #'   sheets_find("sheets-create-demo") %>% googledrive::drive_trash()
 #' }
-sheets_create <- function(name, ..., sheets = NULL) {
+sheets_create <- function(name = sheets_random(), ..., sheets = NULL) {
   sheets       <- enlist_sheets(rlang::enquo(sheets))
   sheets_given <- !is.null(sheets)
   data_given   <- sheets_given && !is.null(unlist(sheets$value))
@@ -128,4 +128,20 @@ prepare_df <- function(sheet_id, df, skip = 0) {
     list(updateCells = request_values),
     list(repeatCell = bureq_header_row(sheetId = sheet_id, row = skip + 1))
   )
+}
+
+#' Generate a random Sheet name
+#'
+#' Generates a random name, suitable for a newly created Sheet, using
+#' [ids::adjective_animal()].
+#'
+#' @param n Number of names to generate.
+#'
+#' @return A character vector.
+#' @export
+#'
+#' @examples
+#' sheets_random()
+sheets_random <- function(n = 1) {
+  ids::adjective_animal(n = n, max_len = 10, style = "kebab")
 }

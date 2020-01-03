@@ -6,8 +6,12 @@
 #' Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook). Optionally,
 #' you can also provide names and/or data for the initial set of (work)sheets.
 #'
-#' @seealso Wraps the `spreadsheets.create` endpoint:
+#' @seealso
+#' Wraps the `spreadsheets.create` endpoint:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create>
+#'
+#' There is an article on writing Sheets:
+#'   * <https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html>
 #'
 #' @param name The name of the new spreadsheet.
 #' @param ... Optional spreadsheet properties that can be set through this API
@@ -17,7 +21,7 @@
 #'   vector of sheet names, a data frame, or a (possibly named) list of data
 #'   frames. See the examples.
 #'
-#' @template ss-return
+#' @return The ID of the new Sheet, as an instance of [`sheets_id`].
 #' @export
 #'
 #' @examples

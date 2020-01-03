@@ -1,0 +1,109 @@
+---
+title: "Write Sheets"
+---
+
+```{r setup, include = FALSE}
+can_decrypt <- gargle:::secret_can_decrypt("googlesheets4")
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  error = TRUE,
+  purl = can_decrypt,
+  eval = can_decrypt
+)
+```
+
+```{r eval = !can_decrypt, echo = FALSE, comment = NA}
+message("No token available. Code chunks will not be evaluated.")
+```
+
+## Attach googlesheets4
+
+```{r}
+library(googlesheets4)
+```
+
+## Auth
+
+As a regular, interactive user, you can just let googlesheets4 prompt you for anything it needs re: auth.
+
+Since this article is compiled noninteractively on a server, we activate a service token here, in a hidden chunk.
+
+
+```{r include = FALSE}
+googlesheets4:::sheets_auth_docs(drive = TRUE)
+```
+
+## `sheets_create()`
+
+Create a brand new Sheet with `sheets_create()`. The only required argument is the new Sheet's `name`.
+
+```{r}
+sheets_create("write-sheets-demo-1")
+```
+
+Every Sheet *must* have at least one (work)sheet, so Google Sheets automatically creates an empty "Sheet1".
+
+You can control the names and content of the initial (work)sheets by providing input with the `sheets` argument.
+
+### Send sheet names
+
+Use a character to specify the names of one or more empty sheets.
+
+```{r}
+sheets_create(
+  "write-sheets-demo-2",
+  sheets = c("alpha", "beta")
+)
+```
+
+### Send a data frame
+
+If you provide a data frame, it is used to populate the cells of a sheet and to set sheet dimensions (number of rows and columns). The header row also gets special treatment. The sheet inherits the name of the data frame, where possible.
+
+```{r}
+my_data <- data.frame(x = 1:3, y = letters[1:3])
+sheets_create(
+  "write-sheets-demo-3",
+  sheets = my_data
+)
+```
+
+### Send multiple data frames
+
+If you provide a list of data frames, each is used to populate the cells of one sheet and to set sheet dimensions (number of rows and columns). The header row also gets special treatment. The sheets inherit the names from the list, if it has names.
+
+```{r}
+my_data_frames <- list(iris = head(iris), chickwts = head(chickwts))
+sheets_create(
+  "write-sheets-demo-4",
+  sheets = my_data_frames
+)
+```
+
+### Write metadata
+
+Most users won't need to do this, but `sheets_create()` can set additional Sheet-level metadata, such as locale or time zone. To really make use of this feature, you need to read up on the [`spreadsheets.create` endpoint](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create).
+
+Notice how the default empty Sheet here is named "Feuille 1", since we request a French locale.
+
+```{r}
+sheets_create(
+  "write-sheets-demo-5",
+  locale = "fr_FR",
+  timeZone = "Europe/Paris"
+)
+```
+
+#### Clean up
+
+Trash all the Sheets created above. This actually requires googledrive, since it is not possible to trash or delete Sheets through the Sheets API. When we did auth earlier, in a hidden chunk, we also authed simultaneously for Sheets and Drive. You can read how to do that in your ow work in the article [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html).
+
+```{r}
+sheets_find("write-sheets-demo") %>%
+  googledrive::drive_trash()
+```
+
+## `write_sheet()`, a.k.a. `sheets_write()`
+
+*To be written after `sheets_write()` gets some upgrades.*

@@ -18,7 +18,7 @@ vector of sheet names, a data frame, or a (possibly named) list of data
 frames. See the examples.}
 }
 \value{
-The input \code{ss}, as an instance of \code{\link{sheets_id}}
+The ID of the new Sheet, as an instance of \code{\link{sheets_id}}.
 }
 \description{
 \lifecycle{experimental}
@@ -62,5 +62,10 @@ if (sheets_has_token()) {
 Wraps the \code{spreadsheets.create} endpoint:
 \itemize{
 \item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create}
+}
+
+There is an article on writing Sheets:
+\itemize{
+\item \url{https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html}
 }
 }

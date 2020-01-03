@@ -52,6 +52,7 @@ these <- c(
   "GridRange",
   "RepeatCellRequest",
   "CellData",
+  "RowData",
   "CellFormat",
   "Color",
   "TextFormat",

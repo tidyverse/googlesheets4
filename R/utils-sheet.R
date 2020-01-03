@@ -95,12 +95,12 @@ enlist_sheets <- function(sheets_quo) {
     return(list(name = sheets, value = null_along(sheets)))
   }
 
-  if (rlang::quo_is_symbol(sheets_quo)) {
-    return(list(name = rlang::as_name(sheets_quo), value = list(sheets)))
-  }
-
   if (inherits(sheets, "data.frame")) {
-    return(list(name = list(NULL), value = list(sheets)))
+    if (rlang::quo_is_symbol(sheets_quo)) {
+      return(list(name = rlang::as_name(sheets_quo), value = list(sheets)))
+    } else {
+      return(list(name = list(NULL), value = list(sheets)))
+    }
   }
 
   if (rlang::is_list(sheets)) {

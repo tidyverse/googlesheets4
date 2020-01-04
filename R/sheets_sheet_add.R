@@ -58,30 +58,36 @@ sheets_sheet_add <- function(ss,
                              .before = NULL,
                              .after = NULL) {
   ssid <- as_sheets_id(ss)
-
   maybe_character(sheet)
-  dots <- rlang::list2(...)
   index <- resolve_index(ssid, .before, .after)
 
-  msg <- make_addSheet_msg(sheet = sheet, index = index)
+  ss <- sheets_sheet_add_impl_(ssid, sheet_name = sheet, index = index, ...)
+  message_glue(glue_collapse(format(ss), sep = "\n"))
 
-  sheet <- sheet %||% list(NULL)
+  invisible(ssid)
+}
+
+sheets_sheet_add_impl_ <- function(ssid,
+                                   sheet_name = NULL,
+                                   index = NULL, ...) {
+  sheet_name <- sheet_name %||% list(NULL)
+  dots <- rlang::list2(...)
   requests <- map(
-    sheet,
+    sheet_name,
     ~ make_addSheet(title = .x, index = index, dots = dots)
   )
-
-  message(msg)
   req <- request_generate(
     "sheets.spreadsheets.batchUpdate",
     params = list(
       spreadsheetId = ssid,
-      requests = requests
+      requests = requests,
+      includeSpreadsheetInResponse = TRUE,
+      responseIncludeGridData = FALSE
     )
   )
   resp_raw <- request_make(req)
-  gargle::response_process(resp_raw)
-  invisible(ssid)
+  resp <- gargle::response_process(resp_raw)
+  new_googlesheets4_spreadsheet(resp$updatedSpreadsheet)
 }
 
 resolve_index <- function(ssid, .before = NULL, .after = NULL) {
@@ -123,31 +129,4 @@ make_addSheet <- function(title = NULL, index = NULL, dots = list()) {
   }
 
   list(addSheet = list(properties = sp))
-}
-
-# TODO: use cliapp; this is just faster for me today
-make_addSheet_msg <- function(sheet = NULL, index = NULL) {
-  if (!is.null(index)) {
-    # as far as the the API is concerned, index is zero-based
-    index <- index + 1
-  }
-  n <- max(length(sheet), 1)
-
-  if (n == 1) {
-    msg <- "Adding a sheet"
-    if (!is.null(sheet)) {
-      msg <- glue("{msg} named {sq(sheet)}")
-    }
-    if (!is.null(index)) {
-      msg <- glue("{msg} at position {index}")
-    }
-    return(msg)
-  }
-
-  pos <- if (is.null(index)) "" else glue(" at position {index}")
-  msg <- c(
-    glue("Adding these sheets{pos}:"),
-    glue("  * {sheet}\n")
-  )
-  glue_collapse(msg, sep = "\n")
 }

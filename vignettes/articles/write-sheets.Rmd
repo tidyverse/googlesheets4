@@ -27,10 +27,11 @@ library(googlesheets4)
 
 As a regular, interactive user, you can just let googlesheets4 prompt you for anything it needs re: auth.
 
-Since this article is compiled noninteractively on a server, we activate a service token here, in a hidden chunk.
+Since this article is compiled noninteractively on a server, we have arranged for googlesheets4 to use a service account token (not shown).
 
 ```{r include = FALSE}
-googlesheets4:::sheets_auth_docs(drive = TRUE)
+# happens in .onLoad() when IN_PKGDOWN, but need this for local dev/preview
+googlesheets4:::sheets_auth_docs(drive = TRUE)  
 ```
 
 ## `sheets_create()`
@@ -98,7 +99,7 @@ sheets_create(
 
 #### Clean up
 
-Trash all the Sheets created above. This actually requires googledrive, since it is not possible to trash or delete Sheets through the Sheets API. When we did auth earlier, in a hidden chunk, we also authed simultaneously for Sheets and Drive. You can read how to do that in your own work in the article [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html).
+Trash all the Sheets created above. This actually requires googledrive, since it is not possible to trash or delete Sheets through the Sheets API. In our hidden auth process, described earlier, we put a shared token into force for both Sheets and Drive. You can read how to do that in your own work in the article [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html).
 
 ```{r}
 sheets_find("write-sheets-demo") %>%
@@ -118,7 +119,7 @@ ss <- sheets_create(
 )
 ```
 
-`sheets_write()` can write a data frame into an existing sheet.
+`sheets_write()` can write a data frame into an existing sheet. Let's actually put the `chickwts` data into the sheet we initialized.
 
 ```{r}
 sheets_write(chickwts, ss = ss, sheet = "chickwts")

@@ -109,11 +109,7 @@
 <div id="attach-googlesheets4" class="section level2">
 <h2 class="hasAnchor">
 <a href="#attach-googlesheets4" class="anchor"></a>Attach googlesheets4</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googlesheets4)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">#&gt; [1] "googlesheets4-docs@gargle-169921.iam.gserviceaccount.com"</span></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">#&gt; Logged in as:</span></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">#&gt;   *  displayName: googlesheets4-docs@gargle-169921.iam.gserviceaccount.com</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">#&gt;   * emailAddress: googlesheets4-docs@gargle-169921.iam.gserviceaccount.com</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googlesheets4)</a></code></pre></div>
 </div>
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
@@ -128,7 +124,7 @@
 <p>Create a brand new Sheet with <code><a href="../../reference/sheets_create.html">sheets_create()</a></code>. You can specify the new Sheet’s <code>name</code> (or accept a randomly generated name).</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"write-sheets-demo-1"</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-1</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;                 ID: 1kmvECqDMKtcujU7w2pTpLdvJ0TKcoQown0pg4R3MG7k</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;                 ID: 1Dr3_5-hJcopGUP9QkycHrZaGaxUCbe4OR7aYOxOi4Cs</span></a>
 <a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;             Locale: en_US</span></a>
 <a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
 <a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;        # of sheets: 1</span></a>
@@ -146,7 +142,7 @@
 <a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="dt">sheets =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"alpha"</span>, <span class="st">"beta"</span>)</a>
 <a class="sourceLine" id="cb3-4" data-line-number="4">)</a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-2</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;                 ID: 1UGZrrB3kN9Ikn9u72jgzhVG2I1GcFYSlEvd3oX6f8m0</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;                 ID: 15vXVIL8_QMAeftkoHwZw4a3e0maUndyKOnwrjbXbYPo</span></a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;             Locale: en_US</span></a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
 <a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;        # of sheets: 2</span></a>
@@ -166,7 +162,7 @@
 <a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="dt">sheets =</span> my_data</a>
 <a class="sourceLine" id="cb4-5" data-line-number="5">)</a>
 <a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-3</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt;                 ID: 1nVx0WXt-PtUY5bJLKW0cl7ohETcmvi-45VISZT1Gs7k</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt;                 ID: 1S99uhHEvIV-HZRB9UphML6VIqKgAG6Arkjud7XX6x40</span></a>
 <a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt;             Locale: en_US</span></a>
 <a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
 <a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt;        # of sheets: 1</span></a>
@@ -184,7 +180,7 @@
 <a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="dt">sheets =</span> my_data_frames</a>
 <a class="sourceLine" id="cb5-5" data-line-number="5">)</a>
 <a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-4</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;                 ID: 1b1NUHrplLtLGpnVWgdiSR1N0Qte0GzaCxTEBBfOdbWo</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt;                 ID: 1__oGwzj4Uzm1jfqcnF0rByNI2KhEwt9eHp2Jv8dbOOA</span></a>
 <a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;             Locale: en_US</span></a>
 <a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
 <a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;        # of sheets: 2</span></a>
@@ -204,7 +200,7 @@
 <a class="sourceLine" id="cb6-4" data-line-number="4">  <span class="dt">timeZone =</span> <span class="st">"Europe/Paris"</span></a>
 <a class="sourceLine" id="cb6-5" data-line-number="5">)</a>
 <a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-5</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt;                 ID: 17RKSZBbiYb3Ky5EJ4El5hpM8M5DzetZg03INL8IMjWQ</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt;                 ID: 1_sJayH-Nwrkh8tX2hJVvc1ROlnEIikvZkOn6-4d-RsY</span></a>
 <a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt;             Locale: fr_FR</span></a>
 <a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt;          Time zone: Europe/Paris</span></a>
 <a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt;        # of sheets: 1</span></a>
@@ -218,11 +214,11 @@
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"write-sheets-demo"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; Files trashed:</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;   * write-sheets-demo-5: 17RKSZBbiYb3Ky5EJ4El5hpM8M5DzetZg03INL8IMjWQ</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;   * write-sheets-demo-4: 1b1NUHrplLtLGpnVWgdiSR1N0Qte0GzaCxTEBBfOdbWo</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   * write-sheets-demo-3: 1nVx0WXt-PtUY5bJLKW0cl7ohETcmvi-45VISZT1Gs7k</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;   * write-sheets-demo-2: 1UGZrrB3kN9Ikn9u72jgzhVG2I1GcFYSlEvd3oX6f8m0</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;   * write-sheets-demo-1: 1kmvECqDMKtcujU7w2pTpLdvJ0TKcoQown0pg4R3MG7k</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;   * write-sheets-demo-5: 1_sJayH-Nwrkh8tX2hJVvc1ROlnEIikvZkOn6-4d-RsY</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;   * write-sheets-demo-4: 1__oGwzj4Uzm1jfqcnF0rByNI2KhEwt9eHp2Jv8dbOOA</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   * write-sheets-demo-3: 1S99uhHEvIV-HZRB9UphML6VIqKgAG6Arkjud7XX6x40</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;   * write-sheets-demo-2: 15vXVIL8_QMAeftkoHwZw4a3e0maUndyKOnwrjbXbYPo</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;   * write-sheets-demo-1: 1Dr3_5-hJcopGUP9QkycHrZaGaxUCbe4OR7aYOxOi4Cs</span></a></code></pre></div>
 </div>
 </div>
 </div>
@@ -237,7 +233,7 @@
 <a class="sourceLine" id="cb8-3" data-line-number="3">  <span class="dt">sheets =</span> <span class="st">"chickwts"</span></a>
 <a class="sourceLine" id="cb8-4" data-line-number="4">)</a>
 <a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;                 ID: 1ptAfVbWPYX-Tx99kfE8qtHNMEueZiqQJrpiY4pqp35o</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;                 ID: 1CY7TX-MJ1uaPKvf0HtUZz-caz1xVZUCv5F4ARE3g6pk</span></a>
 <a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;             Locale: en_US</span></a>
 <a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
 <a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt;        # of sheets: 1</span></a>
@@ -249,7 +245,7 @@
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="co">#&gt; Writing to sheet "chickwts"</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt;                 ID: 1ptAfVbWPYX-Tx99kfE8qtHNMEueZiqQJrpiY4pqp35o</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co">#&gt;                 ID: 1CY7TX-MJ1uaPKvf0HtUZz-caz1xVZUCv5F4ARE3g6pk</span></a>
 <a class="sourceLine" id="cb9-6" data-line-number="6"><span class="co">#&gt;             Locale: en_US</span></a>
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt;        # of sheets: 1</span></a>
@@ -262,7 +258,7 @@
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; Writing to sheet "iris"</span></a>
 <a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt;                 ID: 1ptAfVbWPYX-Tx99kfE8qtHNMEueZiqQJrpiY4pqp35o</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt;                 ID: 1CY7TX-MJ1uaPKvf0HtUZz-caz1xVZUCv5F4ARE3g6pk</span></a>
 <a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt;             Locale: en_US</span></a>
 <a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
 <a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt;        # of sheets: 2</span></a>
@@ -276,7 +272,7 @@
 <a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></a>
 <a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; Writing to sheet "mtcars"</span></a>
 <a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></a>
-<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt;                 ID: 1ptAfVbWPYX-Tx99kfE8qtHNMEueZiqQJrpiY4pqp35o</span></a>
+<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt;                 ID: 1CY7TX-MJ1uaPKvf0HtUZz-caz1xVZUCv5F4ARE3g6pk</span></a>
 <a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt;             Locale: en_US</span></a>
 <a class="sourceLine" id="cb10-22" data-line-number="22"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
 <a class="sourceLine" id="cb10-23" data-line-number="23"><span class="co">#&gt;        # of sheets: 3</span></a>
@@ -290,7 +286,7 @@
 <a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></a>
 <a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; Writing to sheet "Sheet1"</span></a>
 <a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt;                 ID: 1ptAfVbWPYX-Tx99kfE8qtHNMEueZiqQJrpiY4pqp35o</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt;                 ID: 1CY7TX-MJ1uaPKvf0HtUZz-caz1xVZUCv5F4ARE3g6pk</span></a>
 <a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt;             Locale: en_US</span></a>
 <a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
 <a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt;        # of sheets: 4</span></a>
@@ -306,7 +302,7 @@
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"write-sheets-demo"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; Files trashed:</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt;   * write-sheets-demo-6: 1ptAfVbWPYX-Tx99kfE8qtHNMEueZiqQJrpiY4pqp35o</span></a></code></pre></div>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt;   * write-sheets-demo-6: 1CY7TX-MJ1uaPKvf0HtUZz-caz1xVZUCv5F4ARE3g6pk</span></a></code></pre></div>
 </div>
 </div>
   </div>

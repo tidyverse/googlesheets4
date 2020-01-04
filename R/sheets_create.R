@@ -110,12 +110,12 @@ prepare_df <- function(sheet_id, df, skip = 0) {
   if (skip > 0) {
     start <- patch(start, rowIndex = skip)
   }
-  request_values <- new(
+  request_values <- list(updateCells = new(
     "UpdateCellsRequest",
     start = start,
     rows = as_RowData(df), # an array of instances of RowData
     fields = "userEnteredValue,userEnteredFormat"
-  )
+  ))
 
   # set sheet dimenions and freeze top row -------------------------------------
   request_sheet_properties <- bureq_set_grid_properties(
@@ -123,10 +123,10 @@ prepare_df <- function(sheet_id, df, skip = 0) {
     nrow = nrow(df) + skip + 1, ncol = ncol(df), frozenRowCount = skip + 1
   )
 
-  rlang::list2(
-    list(updateSheetProperties = request_sheet_properties),
-    list(updateCells = request_values),
-    list(repeatCell = bureq_header_row(sheetId = sheet_id, row = skip + 1))
+  c(
+    list(request_sheet_properties),
+    list(request_values),
+    list(bureq_header_row(sheetId = sheet_id, row = skip + 1))
   )
 }
 

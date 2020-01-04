@@ -81,7 +81,7 @@ sheets_example("gapminder")
 If you'd like to see a Sheet in the browser, including our example Sheets, use `sheets_browse()`:
 
 ```{r eval = FALSE}
-sheets_example("deaths") %>% 
+sheets_example("deaths") %>%
   sheets_browse()
 ```
 
@@ -198,7 +198,7 @@ read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 
 *The writing functions are still under heavy development, so you can expect some refinements re: user interface and which function does what.*
 
-`sheets_create()` creates an entirely new Sheet and can, optionally, populate individual (work)sheets from a named list of data frames. Remember that `sheets_browse()` takes you to a Sheet in the browser.
+`sheets_create()` creates an entirely new Sheet and can, optionally, populate individual (work)sheets from one or more data frames. Remember that `sheets_browse()` takes you to a Sheet in the browser.
 
 ```{r}
 (ss <- sheets_create(
@@ -216,11 +216,22 @@ ss %>%
   sheets_sheet_add(sheet = "warpbreaks", .after = "anscombe")
 ```
 
-`sheets_write()`, also aliased to `write_sheet()`, writes a data frame into an existing (work)sheet within an existing (spread)Sheet *this is likely to get more flexible*`:
+`sheets_write()`, also aliased to `write_sheet()`, writes a data frame into a
+(work)sheet (possible pre-existing) within an existing (spread)Sheet *this is likely to get more flexible*. Here we send the `warpbreaks` data to the empty sheet we created above:
 
 ```{r}
 sheets_write(warpbreaks, ss, sheet = "warpbreaks")
+```
 
+We can also send data into a new sheet:
+
+```{r}
+sheets_write(iris, ss)
+```
+
+Overview of all the sheets:
+
+```{r}
 sheets_sheet_data(ss)
 ```
 

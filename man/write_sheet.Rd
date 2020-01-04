@@ -3,7 +3,7 @@
 \name{write_sheet}
 \alias{write_sheet}
 \alias{sheets_write}
-\title{(Over)write new data into an existing sheet}
+\title{(Over)write new data into a Sheet}
 \usage{
 write_sheet(data, ss, sheet = NULL, skip = 0)
 
@@ -18,7 +18,7 @@ which we can recover the ID, an instance of \code{googlesheets4_spreadsheet}
 is how googledrive represents Drive files. Processed through
 \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
-\item{sheet}{Sheet to write into, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. If unspecified, defaults to the first sheet.}
+\item{sheet}{Sheet to write into, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number.}
 
 \item{skip}{Number of rows to leave empty before starting to write.}
 }
@@ -28,11 +28,20 @@ The input \code{ss}, as an instance of \code{\link{sheets_id}}
 \description{
 \lifecycle{experimental}
 
-Updates an existing (work)sheet in an existing (spread)Sheet with a data
-frame. All pre-existing values, formats, and dimensions of the targeted sheet
-are cleared and it gets its new values and dimensions from \code{data}. Special
-formatting is applied to the header row, which holds column names, and the
-first \code{skip + 1} rows are frozen (so, up to and including the header row).
+Writes a data frame into a (work)sheet in an existing (spread)Sheet. If no
+\code{sheet} is specified or if \code{sheet} doesn't match an existing sheet name, a
+new sheet is created to receive the \code{data}. If \code{sheet} matches an existing
+sheet, it is effectively overwritten. All pre-existing values, formats, and
+dimensions of the targeted sheet are cleared and it gets new values and
+dimensions from \code{data}.
+
+In all cases, the target sheet is styled in a specific way:
+\itemize{
+\item Special formatting is applied to the header row, which holds column names.
+\item The first \code{skip + 1} rows are frozen (so, up to and including the header
+row).
+\item Sheet dimensions are set to "shrink wrap" the \code{data}.
+}
 }
 \examples{
 if (sheets_has_token()) {
@@ -44,15 +53,17 @@ if (sheets_has_token()) {
 
   df <- data.frame(
     x = 1:3,
-    y = letters[1:3],
-    stringsAsFactors = FALSE
+    y = letters[1:3]
   )
 
-  # write df into the first sheet
-  (ss <- sheets_write(data = df, ss = ss))
+  # write df into its own new sheet
+  sheets_write(df, ss = ss)
 
   # write mtcars into the sheet named 'omega'
-  (ss <- sheets_write(data = mtcars, ss = ss, sheet = "omega"))
+  sheets_write(mtcars, ss = ss, sheet = "omega")
+
+  # get an overview of the sheets
+  sheets_sheet_data(ss)
 
   # view your magnificent creation in the browser
   # sheets_browse(ss)

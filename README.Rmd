@@ -92,7 +92,7 @@ For more information, see the package website: [googlesheets4.tidyverse.org](htt
 
 ## What's still under development?
 
-Writing into Sheets. Basic writing functionality is now in place via `sheets_create()` and `sheets_write()`, but this family of function is still in the development phase.
+Writing into Sheets. Basic writing functionality is now in place via `sheets_create()` and `sheets_write()`, but this family of functions is still in the development phase.
 
 As always, remember that the googledrive package 
 ([googledrive.tidyverse.org](https://googledrive.tidyverse.org)) can be used to write into Sheets at the "whole file" level, for example, to upload a local `.csv` or `.xlsx` into a Sheet. See `googledrive::drive_upload()` and `googledrive::drive_update()`.

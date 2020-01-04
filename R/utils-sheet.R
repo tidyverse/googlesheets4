@@ -15,10 +15,17 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
   # sheet is a string or an integer
 
   if (is.character(sheet)) {
+    stop_sheet_not_found <- function(sheet) {
+      rlang::abort(
+        glue("No sheet found with this name: {sq(sheet)}"),
+        class = "googlesheets4_error_sheet_not_found",
+        sheet = sheet
+      )
+    }
     sheet <- sq_unescape(sheet)
     m <- match(sheet, sheets_df$name)
     if (is.na(m)) {
-      stop_glue("No sheet found with this name: {sq(sheet)}")
+      stop_sheet_not_found(sheet)
     }
     return(as.list(sheets_df[m, ]))
   }

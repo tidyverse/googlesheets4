@@ -1,20 +1,24 @@
-#' (Over)write new data into an existing sheet
+#' (Over)write new data into a Sheet
 #'
 #' @description
 #' \lifecycle{experimental}
 #'
-#' Updates an existing (work)sheet in an existing (spread)Sheet with a data
-#' frame. All pre-existing values, formats, and dimensions of the targeted sheet
-#' are cleared and it gets its new values and dimensions from `data`. Special
-#' formatting is applied to the header row, which holds column names, and the
-#' first `skip + 1` rows are frozen (so, up to and including the header row).
+#' Writes a data frame into a (work)sheet in an existing (spread)Sheet. If no
+#' `sheet` is specified or if `sheet` doesn't match an existing sheet name, a
+#' new sheet is created to receive the `data`. If `sheet` matches an existing
+#' sheet, it is effectively overwritten. All pre-existing values, formats, and
+#' dimensions of the targeted sheet are cleared and it gets new values and
+#' dimensions from `data`.
+#'
+#' In all cases, the target sheet is styled in a specific way:
+#'   * Special formatting is applied to the header row, which holds column names.
+#'   * The first `skip + 1` rows are frozen (so, up to and including the header
+#'     row).
+#'  * Sheet dimensions are set to "shrink wrap" the `data`.
 #'
 #' @param data A data frame.
 #' @template ss
-#' @eval param_sheet(
-#'   action = "write into",
-#'   "If unspecified, defaults to the first sheet."
-#' )
+#' @eval param_sheet(action = "write into")
 #' @param skip Number of rows to leave empty before starting to write.
 #'
 #' @template ss-return
@@ -30,15 +34,17 @@
 #'
 #'   df <- data.frame(
 #'     x = 1:3,
-#'     y = letters[1:3],
-#'     stringsAsFactors = FALSE
+#'     y = letters[1:3]
 #'   )
 #'
-#'   # write df into the first sheet
-#'   (ss <- sheets_write(data = df, ss = ss))
+#'   # write df into its own new sheet
+#'   sheets_write(df, ss = ss)
 #'
 #'   # write mtcars into the sheet named 'omega'
-#'   (ss <- sheets_write(data = mtcars, ss = ss, sheet = "omega"))
+#'   sheets_write(mtcars, ss = ss, sheet = "omega")
+#'
+#'   # get an overview of the sheets
+#'   sheets_sheet_data(ss)
 #'
 #'   # view your magnificent creation in the browser
 #'   # sheets_browse(ss)
@@ -50,7 +56,8 @@ write_sheet <- function(data,
                         ss,
                         sheet = NULL,
                         skip = 0) {
-  # https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest
+  data_quo <- rlang::enquo(data)
+  check_data_frame(data)
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   check_non_negative_integer(skip)
@@ -59,59 +66,62 @@ write_sheet <- function(data,
   x <- sheets_get(ssid)
   message_glue("Writing to {sq(x$name)}")
 
-  # capture sheet id and start row ---------------------------------------------
-  # we always send a sheet id
-  # if we don't, the default is 0
-  # but there's no guarantee that there is such a sheet id
-  # it's more trouble to check for that than to just send a sheet id
-  s <- lookup_sheet(sheet, sheets_df = x$sheets)
-  message_glue("Writing to sheet {dq(s$name)}")
-  # `start` (or `range`) must be sent, even if `skip = 0`
-  start <- new("GridCoordinate", sheetId = s$id)
-  if (skip > 0) {
-    start <- patch(start, rowIndex = skip)
-    message_glue("Starting at row {skip + 1}")
+  # no `sheet` ... but maybe we can name the sheet after the data --------------
+  if (is.null(sheet) && rlang::quo_is_symbol(data_quo)) {
+    candidate <- rlang::as_name(data_quo)
+    # accept proposed name iff it does not overwrite existing sheet
+    if (!is.null(candidate)) {
+      m <- match(candidate, x$sheets$name)
+      sheet <- if (is.na(m)) candidate else NULL
+    }
   }
 
-  # pack the data --------------------------------------------------------------
-  request_values <- new(
-    "UpdateCellsRequest",
-    start = start,
-    rows = as_RowData(data), # an array of instances of RowData
-    fields = "userEnteredValue,userEnteredFormat"
+  # initialize the batch update requests and the target sheet s ----------------
+  requests <- list()
+  s <- NULL
+
+  # ensure there's a target sheet, ready to receive data -----------------------
+  if (!is.null(sheet)) {
+    s <- tryCatch(
+      lookup_sheet(sheet, sheets_df = x$sheets),
+      googlesheets4_error_sheet_not_found = function(cnd) NULL
+    )
+  }
+  if (is.null(s)) {
+    x <- sheets_sheet_add_impl_(ssid, sheet_name = sheet)
+    s <- lookup_sheet(nrow(x$sheets), sheets_df = x$sheets)
+  } else {
+    # create request to clear the data and formatting in pre-existing sheet
+    requests <- c(
+      requests,
+      list(bureq_clear_sheet(s$id))
+    )
+  }
+  message_glue("Writing to sheet {dq(s$name)}")
+
+  # create request to write data frame into sheet ------------------------------
+  requests <- c(
+    requests,
+    prepare_df(s$id, data)
   )
 
-  # determine sheet dimensions that shrink wrap the data -----------------------
-  request_dims <- bureq_set_dimensions(
-    sheetId = s$id,
-    nrow = nrow(data) + 1 + skip, ncol = ncol(data),
-    sheets_df = x$sheets
-  )
-
+  # do it ----------------------------------------------------------------------
   req <- request_generate(
     "sheets.spreadsheets.batchUpdate",
     params = list(
       spreadsheetId = ssid,
-      requests = rlang::list2(
-        # set dimensions
-        !!!request_dims,
-        # clear existing data and formatting
-        list(repeatCell = bureq_clear_sheet(s$id)),
-        # write data
-        list(updateCells = request_values),
-        # configure header row
-        list(updateSheetProperties =
-               bureq_frozen_rows(n = skip + 1, sheetId = s$id)),
-        list(repeatCell = bureq_header_row(row = skip + 1, sheetId = s$id))
-      )
+      requests = requests,
+      includeSpreadsheetInResponse = TRUE,
+      responseIncludeGridData = FALSE
     )
   )
   resp_raw <- request_make(req)
-  gargle::response_process(resp_raw)
+  resp <- gargle::response_process(resp_raw)
+  ss <- new_googlesheets4_spreadsheet(resp$updatedSpreadsheet)
+  message_glue(glue_collapse(format(ss), sep = "\n"))
 
   invisible(ssid)
 }
-
 
 #' @rdname write_sheet
 #' @export

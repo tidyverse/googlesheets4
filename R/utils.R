@@ -15,6 +15,16 @@ is_integerish <- function(x) {
   floor(x) == x
 }
 
+check_data_frame <- function(x, nm = deparse(substitute(x))) {
+  if (!is.data.frame(x)) {
+    stop_glue(
+      "{bt(nm)} must be a data frame:\n",
+      "  * {bt(nm)} has class {class_collapse(x)}"
+    )
+  }
+  x
+}
+
 check_string <- function(x, nm = deparse(substitute(x))) {
   check_character(x, nm = nm)
   check_length_one(x, nm = nm)

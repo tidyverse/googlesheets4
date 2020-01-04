@@ -158,7 +158,7 @@ For more information, see the package website:
 ## What’s still under development?
 
 Writing into Sheets. Basic writing functionality is now in place via
-`sheets_create()` and `sheets_write()`, but this family of function is
+`sheets_create()` and `sheets_write()`, but this family of functions is
 still in the development phase.
 
 As always, remember that the googledrive package

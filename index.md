@@ -109,7 +109,7 @@ If you’d like to see a Sheet in the browser, including our example
 Sheets, use `sheets_browse()`:
 
 ``` r
-sheets_example("deaths") %>% 
+sheets_example("deaths") %>%
   sheets_browse()
 ```
 
@@ -337,97 +337,6 @@ sheets_example("deaths") %>%
 The named ranges, if any exist, are part of the information returned by
 `sheets_get()`.
 
-## Roundtripping with a private Sheet
-
-Here is a demo of putting the iris data into a new, private Sheet. Then
-reading it back into R and exporting as an Excel workbook. Then reading
-that back into R\!
-
-First, put the iris data into a csv file.
-
-``` r
-(iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpXH7RZV/iris-142c178200a13.csv"
-write.csv(iris, iris_tempfile, row.names = FALSE)
-```
-
-Use `googledrive::drive_upload()` to upload the csv and simultaneously
-convert to a Sheet.
-
-``` r
-(iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
-#> Local file:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpXH7RZV/iris-142c178200a13.csv
-#> uploaded into Drive file:
-#>   * iris-142c178200a13: 1sZx0XDItzBtkuYjo-ijL1plH8pQQLJnAJfI7zhCEYCA
-#> with MIME type:
-#>   * application/vnd.google-apps.spreadsheet
-#> # A tibble: 1 x 3
-#>   name               id                                         drive_resource  
-#> * <chr>              <chr>                                      <list>          
-#> 1 iris-142c178200a13 1sZx0XDItzBtkuYjo-ijL1plH8pQQLJnAJfI7zhCE… <named list [34…
-
-# visit the new Sheet in the browser, in an interactive session!
-drive_browse(iris_ss)
-```
-
-Read data from the private Sheet into R.
-
-``` r
-read_sheet(iris_ss, range = "B1:D6")
-#> Reading from 'iris-142c178200a13.csv'
-#> Range "B1:D6"
-#> # A tibble: 5 x 3
-#>   Sepal.Width Petal.Length Petal.Width
-#>         <dbl>        <dbl>       <dbl>
-#> 1         3.5          1.4         0.2
-#> 2         3            1.4         0.2
-#> 3         3.2          1.3         0.2
-#> 4         3.1          1.5         0.2
-#> 5         3.6          1.4         0.2
-```
-
-Download the Sheet as an Excel workbook and read it back in via
-`readxl::read_excel()`.
-
-``` r
-(iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpXH7RZV/iris-142c178200a13.xlsx"
-drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
-#> File downloaded:
-#>   * iris-142c178200a13
-#> Saved locally as:
-#>   * /var/folders/yx/3p5dt4jj1019st0x90vhm9rr0000gn/T//RtmpXH7RZV/iris-142c178200a13.xlsx
-
-if (requireNamespace("readxl", quietly = TRUE)) {
-  readxl::read_excel(iris_xlsxfile)  
-}
-#> # A tibble: 150 x 5
-#>    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
-#>           <dbl>       <dbl>        <dbl>       <dbl> <chr>  
-#>  1          5.1         3.5          1.4         0.2 setosa 
-#>  2          4.9         3            1.4         0.2 setosa 
-#>  3          4.7         3.2          1.3         0.2 setosa 
-#>  4          4.6         3.1          1.5         0.2 setosa 
-#>  5          5           3.6          1.4         0.2 setosa 
-#>  6          5.4         3.9          1.7         0.4 setosa 
-#>  7          4.6         3.4          1.4         0.3 setosa 
-#>  8          5           3.4          1.5         0.2 setosa 
-#>  9          4.4         2.9          1.4         0.2 setosa 
-#> 10          4.9         3.1          1.5         0.1 setosa 
-#> # … with 140 more rows
-```
-
-Clean up.
-
-``` r
-file.remove(iris_tempfile, iris_xlsxfile)
-#> [1] TRUE TRUE
-drive_rm(iris_ss)
-#> Files deleted:
-#>   * iris-142c178200a13: 1sZx0XDItzBtkuYjo-ijL1plH8pQQLJnAJfI7zhCEYCA
-```
-
 ## Sheet metadata
 
 `sheets_get()` exposes Sheet metadata. It has a nice print method, but
@@ -547,15 +456,24 @@ expect some refinements re: user interface and which function does
 what.*
 
 `sheets_create()` creates an entirely new Sheet and can, optionally,
-populate individual (work)sheets from a named list of data frames.
-Remember that `sheets_browse()` takes you to a Sheet in the browser.
+populate individual (work)sheets from one or more data frames. Remember
+that `sheets_browse()` takes you to a Sheet in the browser.
 
 ``` r
 (ss <- sheets_create(
   "cranky-squirrel",
   sheets = list(anscombe = anscombe, chickwts = chickwts)
 ))
-#> [1] "1Lo1IbsHdcgVEn4q4tu424E1jUnFpK-ZC4jv6HTapRnU"
+#> Spreadsheet name: cranky-squirrel
+#>                 ID: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU
+#>             Locale: en_US
+#>          Time zone: Etc/GMT
+#>        # of sheets: 2
+#> 
+#> (Sheet name): (Nominal extent in rows x columns)
+#>     anscombe: 12 x 8
+#>     chickwts: 72 x 2
+#> [1] "1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU"
 #> attr(,"class")
 #> [1] "sheets_id" "drive_id"
 
@@ -569,25 +487,69 @@ that deal with individual (work)sheets inside a (spread)Sheet.
 ``` r
 ss %>% 
   sheets_sheet_add(sheet = "warpbreaks", .after = "anscombe")
-#> Adding a sheet named 'warpbreaks' at position 2
+#> Spreadsheet name: cranky-squirrel
+#>                 ID: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU
+#>             Locale: en_US
+#>          Time zone: Etc/GMT
+#>        # of sheets: 3
+#> 
+#> (Sheet name): (Nominal extent in rows x columns)
+#>     anscombe: 12 x 8
+#>   warpbreaks: 1000 x 26
+#>     chickwts: 72 x 2
 ```
 
 `sheets_write()`, also aliased to `write_sheet()`, writes a data frame
-into an existing (work)sheet within an existing (spread)Sheet *this is
-likely to get more flexible*\`:
+into a (work)sheet (possible pre-existing) within an existing
+(spread)Sheet *this is likely to get more flexible*. Here we send the
+`warpbreaks` data to the empty sheet we created above:
 
 ``` r
 sheets_write(warpbreaks, ss, sheet = "warpbreaks")
 #> Writing to 'cranky-squirrel'
 #> Writing to sheet "warpbreaks"
+#> Spreadsheet name: cranky-squirrel
+#>                 ID: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU
+#>             Locale: en_US
+#>          Time zone: Etc/GMT
+#>        # of sheets: 3
+#> 
+#> (Sheet name): (Nominal extent in rows x columns)
+#>     anscombe: 12 x 8
+#>   warpbreaks: 55 x 3
+#>     chickwts: 72 x 2
+```
 
+We can also send data into a new sheet:
+
+``` r
+sheets_write(iris, ss)
+#> Writing to 'cranky-squirrel'
+#> Writing to sheet "iris"
+#> Spreadsheet name: cranky-squirrel
+#>                 ID: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU
+#>             Locale: en_US
+#>          Time zone: Etc/GMT
+#>        # of sheets: 4
+#> 
+#> (Sheet name): (Nominal extent in rows x columns)
+#>     anscombe: 12 x 8
+#>   warpbreaks: 55 x 3
+#>     chickwts: 72 x 2
+#>         iris: 151 x 5
+```
+
+Overview of all the sheets:
+
+``` r
 sheets_sheet_data(ss)
-#> # A tibble: 3 x 8
-#>   name       index        id type  visible grid_rows grid_columns data  
-#>   <chr>      <int>     <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 anscombe       0 415461871 GRID  TRUE           12            8 <NULL>
-#> 2 warpbreaks     1 510834040 GRID  TRUE           55            3 <NULL>
-#> 3 chickwts       2 961598162 GRID  TRUE           72            2 <NULL>
+#> # A tibble: 4 x 8
+#>   name       index         id type  visible grid_rows grid_columns data  
+#>   <chr>      <int>      <int> <chr> <lgl>       <int>        <int> <list>
+#> 1 anscombe       0 1011879982 GRID  TRUE           12            8 <NULL>
+#> 2 warpbreaks     1   90448705 GRID  TRUE           55            3 <NULL>
+#> 3 chickwts       2   36372874 GRID  TRUE           72            2 <NULL>
+#> 4 iris           3  285987085 GRID  TRUE          151            5 <NULL>
 ```
 
 Clean up.
@@ -595,7 +557,7 @@ Clean up.
 ``` r
 drive_rm(ss)
 #> Files deleted:
-#>   * cranky-squirrel: 1Lo1IbsHdcgVEn4q4tu424E1jUnFpK-ZC4jv6HTapRnU
+#>   * cranky-squirrel: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU
 ```
 
 ## Contributing

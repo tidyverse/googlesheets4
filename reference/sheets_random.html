@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • googlesheets4</title>
+<title>Generate a random Sheet name — sheets_random • googlesheets4</title>
 
 
 <!-- jquery -->
@@ -34,7 +34,10 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Generate a random Sheet name — sheets_random" />
+<meta property="og:description" content="Generates a random name, suitable for a newly created Sheet, using
+ids::adjective_animal()." />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -61,7 +64,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -132,79 +135,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Generate a random Sheet name</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_create.R'><code>R/sheets_create.R</code></a></small>
+    <div class="hidden name"><code>sheets_random.Rd</code></div>
     </div>
 
-    <div id="googlesheets4-development-version" class="section level1">
-<h1 class="page-header">
-<a href="#googlesheets4-development-version" class="anchor"></a>googlesheets4 (development version)<small> Unreleased </small>
-</h1>
-<div id="write-sheets" class="section level3">
-<h3 class="hasAnchor">
-<a href="#write-sheets" class="anchor"></a>Write Sheets</h3>
-<p>These functions are ready for use but are still under development. You can expect refinements to their interface and capabilities:</p>
-<ul>
-<li>
-<code><a href="../reference/sheets_create.html">sheets_create()</a></code> is a new function to create a new Sheet and, optionally, write one or more data frames into it (<a href='https://github.com/tidyverse/googlesheets4/issues/61'>#61</a>).</li>
-<li>
-<code><a href="../reference/write_sheet.html">sheets_write()</a></code> (also available as <code><a href="../reference/write_sheet.html">write_sheet()</a></code>) is a new function to write a data frame into a new or existing (work)sheet, inside an existing (spread)Sheet.</li>
-</ul>
-<p>More writing functionality is coming!</p>
-</div>
-<div id="other-new-functions-and-arguments" class="section level3">
-<h3 class="hasAnchor">
-<a href="#other-new-functions-and-arguments" class="anchor"></a>Other new functions and arguments</h3>
-<p>There is a new family of <code>sheets_sheet_*()</code> functions that operate on the (work)sheets inside an existing (spread)Sheet:</p>
-<ul>
-<li>
-<code><a href="../reference/sheets_sheet_data.html">sheets_sheet_data()</a></code> returns a tibble of metadata with one row per sheet.</li>
-<li>
-<code><a href="../reference/sheets_sheet_data.html">sheets_sheet_names()</a></code> returns sheet names.</li>
-<li>
-<code><a href="../reference/sheets_sheet_add.html">sheets_sheet_add()</a></code> adds one or more sheets.</li>
-<li>
-<code><a href="../reference/sheets_sheet_delete.html">sheets_sheet_delete()</a></code> deletes one or more sheets.</li>
-</ul>
-<p><code><a href="../reference/sheets_cells.html">sheets_cells()</a></code> gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But <code><a href="../reference/sheets_cells.html">sheets_cells(cell_data = "full", discard_empty = FALSE)</a></code> is now available if you want full cell data, including formatting, even for cells that have no value (<a href='https://github.com/tidyverse/googlesheets4/issues/4'>#4</a>).</p>
-</div>
-<div id="renamed-functions-and-classes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#renamed-functions-and-classes" class="anchor"></a>Renamed functions and classes</h3>
-<ul>
-<li><p><code><a href="../reference/googlesheets4-deprecated.html">sheets_sheets()</a></code> is now <code><a href="../reference/sheets_sheet_data.html">sheets_sheet_names()</a></code>, in order to fit into a coherent family of <code>sheets_sheet_*()</code> functions that deal with (work)sheets. <code><a href="../reference/googlesheets4-deprecated.html">sheets_sheets()</a></code> still exists but will be removed rather quickly since googlesheets4 is so new.</p></li>
-<li><p>The S3 class <code>sheets_Spreadsheet</code> is renamed to <code>googlesheets4_spreadsheet</code>, a consequence of rationalizing all internal and external classes. <code>googlesheets4_spreadsheet</code> is the class that holds metadata for a Sheet and it is connected to the API’s <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet"><code>Spreadsheet</code></a> schema. The return value of <code><a href="../reference/sheets_get.html">sheets_get()</a></code> has this class.</p></li>
-</ul>
-</div>
-<div id="bug-fixes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h3>
-<ul>
-<li>
-<code><a href="../reference/read_sheet.html">read_sheet()</a></code> passes its <code>na</code> argument down to the helpers that parse cells, so that <code>na</code> actually has the documented effect (<a href='https://github.com/tidyverse/googlesheets4/issues/73'>#73</a>).</li>
-</ul>
-</div>
-</div>
-    <div id="googlesheets4-0-1-0" class="section level1">
-<h1 class="page-header">
-<a href="#googlesheets4-0-1-0" class="anchor"></a>googlesheets4 0.1.0<small> 2019-11-04 </small>
-</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Generates a random name, suitable for a newly created Sheet, using
+<code><a href='https://rdrr.io/pkg/ids/man/adjective_animal.html'>ids::adjective_animal()</a></code>.</p>
+    </div>
 
+    <pre class="usage"><span class='fu'>sheets_random</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>n</th>
+      <td><p>Number of names to generate.</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A character vector.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>sheets_random</span>()</div><div class='output co'>#&gt; [1] "unfearing-guineafowl"</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#googlesheets4-development-version">development version</a></li>
-        <li><a href="#googlesheets4-0-1-0">0.1.0</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
+  </div>
 </div>
 
 

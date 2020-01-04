@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>(Over)write new data into an existing sheet — write_sheet • googlesheets4</title>
+<title>(Over)write new data into a Sheet — write_sheet • googlesheets4</title>
 
 
 <!-- jquery -->
@@ -34,13 +34,21 @@
 
 
 
-<meta property="og:title" content="(Over)write new data into an existing sheet — write_sheet" />
+<meta property="og:title" content="(Over)write new data into a Sheet — write_sheet" />
 <meta property="og:description" content="
-Updates an existing (work)sheet in an existing (spread)Sheet with a data
-frame. All pre-existing values, formats, and dimensions of the targeted sheet
-are cleared and it gets its new values and dimensions from data. Special
-formatting is applied to the header row, which holds column names, and the
-first skip + 1 rows are frozen (so, up to and including the header row)." />
+Writes a data frame into a (work)sheet in an existing (spread)Sheet. If no
+sheet is specified or if sheet doesn't match an existing sheet name, a
+new sheet is created to receive the data. If sheet matches an existing
+sheet, it is effectively overwritten. All pre-existing values, formats, and
+dimensions of the targeted sheet are cleared and it gets new values and
+dimensions from data.
+In all cases, the target sheet is styled in a specific way:
+Special formatting is applied to the header row, which holds column names.
+The first skip + 1 rows are frozen (so, up to and including the header
+row).
+Sheet dimensions are set to &quot;shrink wrap&quot; the data.
+
+" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -139,18 +147,26 @@ first skip + 1 rows are frozen (so, up to and including the header row)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>(Over)write new data into an existing sheet</h1>
+    <h1>(Over)write new data into a Sheet</h1>
     <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_write.R'><code>R/sheets_write.R</code></a></small>
     <div class="hidden name"><code>write_sheet.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
-<p>Updates an existing (work)sheet in an existing (spread)Sheet with a data
-frame. All pre-existing values, formats, and dimensions of the targeted sheet
-are cleared and it gets its new values and dimensions from <code>data</code>. Special
-formatting is applied to the header row, which holds column names, and the
-first <code>skip + 1</code> rows are frozen (so, up to and including the header row).</p>
+<p>Writes a data frame into a (work)sheet in an existing (spread)Sheet. If no
+<code>sheet</code> is specified or if <code>sheet</code> doesn't match an existing sheet name, a
+new sheet is created to receive the <code>data</code>. If <code>sheet</code> matches an existing
+sheet, it is effectively overwritten. All pre-existing values, formats, and
+dimensions of the targeted sheet are cleared and it gets new values and
+dimensions from <code>data</code>.</p>
+<p>In all cases, the target sheet is styled in a specific way:</p><ul>
+<li><p>Special formatting is applied to the header row, which holds column names.</p></li>
+<li><p>The first <code>skip + 1</code> rows are frozen (so, up to and including the header
+row).</p></li>
+<li><p>Sheet dimensions are set to "shrink wrap" the <code>data</code>.</p></li>
+</ul>
+
     </div>
 
     <pre class="usage"><span class='fu'>write_sheet</span>(<span class='no'>data</span>, <span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>0</span>)
@@ -174,7 +190,7 @@ is how googledrive represents Drive files. Processed through
     </tr>
     <tr>
       <th>sheet</th>
-      <td><p>Sheet to write into, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. If unspecified, defaults to the first sheet.</p></td>
+      <td><p>Sheet to write into, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number.</p></td>
     </tr>
     <tr>
       <th>skip</th>
@@ -196,15 +212,17 @@ is how googledrive represents Drive files. Processed through
 
   <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
     <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
-    <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>],
-    <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+    <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
   )
 
-  <span class='co'># write df into the first sheet</span>
-  (<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_write</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>df</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>))
+  <span class='co'># write df into its own new sheet</span>
+  <span class='fu'>sheets_write</span>(<span class='no'>df</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>)
 
   <span class='co'># write mtcars into the sheet named 'omega'</span>
-  (<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_write</span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>mtcars</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"omega"</span>))
+  <span class='fu'>sheets_write</span>(<span class='no'>mtcars</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"omega"</span>)
+
+  <span class='co'># get an overview of the sheets</span>
+  <span class='fu'><a href='sheets_sheet_data.html'>sheets_sheet_data</a></span>(<span class='no'>ss</span>)
 
   <span class='co'># view your magnificent creation in the browser</span>
   <span class='co'># sheets_browse(ss)</span>
@@ -212,15 +230,33 @@ is how googledrive represents Drive files. Processed through
   <span class='co'># clean up</span>
   <span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"sheets-write-demo"</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>()
 }</div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-write-demo</span>
-#&gt; <span class='message'>                ID: 1Sj6gHbj2ejfdx4Etz6eNTlgVANAvcEgbHKhbzQBcr8A</span>
+#&gt; <span class='message'>                ID: 1v07ZDawSIY8Ogj_7qaobCUmlJuqzw4_t0C1RvI0I89M</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 2</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
 #&gt; <span class='message'>       alpha: 2 x 1</span>
-#&gt; <span class='message'>       omega: 2 x 1</span></div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-write-demo'</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "alpha"</span></div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-write-demo'</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "omega"</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * sheets-write-demo: 1Sj6gHbj2ejfdx4Etz6eNTlgVANAvcEgbHKhbzQBcr8A</span></div></pre>
+#&gt; <span class='message'>       omega: 2 x 1</span></div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-write-demo'</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "df"</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-write-demo</span>
+#&gt; <span class='message'>                ID: 1v07ZDawSIY8Ogj_7qaobCUmlJuqzw4_t0C1RvI0I89M</span>
+#&gt; <span class='message'>            Locale: en_US</span>
+#&gt; <span class='message'>         Time zone: Etc/GMT</span>
+#&gt; <span class='message'>       # of sheets: 3</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
+#&gt; <span class='message'>       alpha: 2 x 1</span>
+#&gt; <span class='message'>       omega: 2 x 1</span>
+#&gt; <span class='message'>          df: 4 x 2</span></div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-write-demo'</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "omega"</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-write-demo</span>
+#&gt; <span class='message'>                ID: 1v07ZDawSIY8Ogj_7qaobCUmlJuqzw4_t0C1RvI0I89M</span>
+#&gt; <span class='message'>            Locale: en_US</span>
+#&gt; <span class='message'>         Time zone: Etc/GMT</span>
+#&gt; <span class='message'>       # of sheets: 3</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
+#&gt; <span class='message'>       alpha: 2 x 1</span>
+#&gt; <span class='message'>       omega: 33 x 11</span>
+#&gt; <span class='message'>          df: 4 x 2</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
+#&gt; <span class='message'>  * sheets-write-demo: 1v07ZDawSIY8Ogj_7qaobCUmlJuqzw4_t0C1RvI0I89M</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -147,7 +147,7 @@ you can also provide names and/or data for the initial set of (work)sheets." />
 you can also provide names and/or data for the initial set of (work)sheets.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_create</span>(<span class='no'>name</span>, <span class='no'>...</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_create</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='fu'><a href='sheets_random.html'>sheets_random</a></span>(), <span class='no'>...</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -215,28 +215,28 @@ frames. See the examples.</p></td>
   <span class='co'># clean up</span>
   <span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"sheets-create-demo"</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
 }</div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-create-demo-1</span>
-#&gt; <span class='message'>                ID: 1PYSUm09V6k2vIbhKp5SAQhIEECdHOBoSi9G3T6PL6v8</span>
+#&gt; <span class='message'>                ID: 1wUAXrrgI9-DYNt1_UO9hzA9nJ46agkehOIYsvFtmNHw</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 1</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
 #&gt; <span class='message'>      Sheet1: 1000 x 26</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-create-demo-2</span>
-#&gt; <span class='message'>                ID: 1U1syFHWaQ-Lp4w30kMoDNVpCW-ukirsox4p1g2ZoabU</span>
+#&gt; <span class='message'>                ID: 1FO_0B93dNArxdLZdok_NUjrHRNTyMezuOCSjCPv9ulo</span>
 #&gt; <span class='message'>            Locale: en_CA</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 1</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
 #&gt; <span class='message'>      Sheet1: 1000 x 26</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-create-demo-3</span>
-#&gt; <span class='message'>                ID: 1ke6SgrOXMYuTa8pca5JsPtJdUmOYtTb1EyZRVx_lwd8</span>
+#&gt; <span class='message'>                ID: 1-b7vUxa_3j2XXLW99oEXfdguT4LzgnsevxyWkBqvsG4</span>
 #&gt; <span class='message'>            Locale: fr_FR</span>
 #&gt; <span class='message'>         Time zone: Europe/Paris</span>
 #&gt; <span class='message'>       # of sheets: 1</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
 #&gt; <span class='message'>   Feuille 1: 1000 x 26</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-create-demo-4</span>
-#&gt; <span class='message'>                ID: 11fBD8UXaO4uZElbRdi5BxynqPxAL9l7K8ZIdEPE0rPE</span>
+#&gt; <span class='message'>                ID: 1mqZX_sMladW4LQymK7YuTd-00mPYHLQts5rcboP1Usk</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 2</span>
@@ -244,14 +244,14 @@ frames. See the examples.</p></td>
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
 #&gt; <span class='message'>       alpha: 1000 x 26</span>
 #&gt; <span class='message'>        beta: 1000 x 26</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-create-demo-5</span>
-#&gt; <span class='message'>                ID: 1EuV92ggYctHl2asvIfndDLd_du8HXfYFhM1c8E-uD9s</span>
+#&gt; <span class='message'>                ID: 1-OINqSgxUkxOWV-f6guoCJqRp8AO71qoH4lgTCR4c_g</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 1</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
 #&gt; <span class='message'>     my_data: 2 x 1</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-create-demo-6</span>
-#&gt; <span class='message'>                ID: 1Q7FUFnjyxlhRAYTJnzsehLrpqqXlaJX4PE8wiHa_R4E</span>
+#&gt; <span class='message'>                ID: 1UHTgeM4dS1oEfycmbeAxa5IsE8JSp4IaE_JPBhuYfVM</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 2</span>
@@ -259,12 +259,12 @@ frames. See the examples.</p></td>
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
 #&gt; <span class='message'>        iris: 7 x 5</span>
 #&gt; <span class='message'>      mtcars: 7 x 11</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * sheets-create-demo-6: 1Q7FUFnjyxlhRAYTJnzsehLrpqqXlaJX4PE8wiHa_R4E</span>
-#&gt; <span class='message'>  * sheets-create-demo-5: 1EuV92ggYctHl2asvIfndDLd_du8HXfYFhM1c8E-uD9s</span>
-#&gt; <span class='message'>  * sheets-create-demo-4: 11fBD8UXaO4uZElbRdi5BxynqPxAL9l7K8ZIdEPE0rPE</span>
-#&gt; <span class='message'>  * sheets-create-demo-3: 1ke6SgrOXMYuTa8pca5JsPtJdUmOYtTb1EyZRVx_lwd8</span>
-#&gt; <span class='message'>  * sheets-create-demo-2: 1U1syFHWaQ-Lp4w30kMoDNVpCW-ukirsox4p1g2ZoabU</span>
-#&gt; <span class='message'>  * sheets-create-demo-1: 1PYSUm09V6k2vIbhKp5SAQhIEECdHOBoSi9G3T6PL6v8</span></div></pre>
+#&gt; <span class='message'>  * sheets-create-demo-6: 1UHTgeM4dS1oEfycmbeAxa5IsE8JSp4IaE_JPBhuYfVM</span>
+#&gt; <span class='message'>  * sheets-create-demo-5: 1-OINqSgxUkxOWV-f6guoCJqRp8AO71qoH4lgTCR4c_g</span>
+#&gt; <span class='message'>  * sheets-create-demo-4: 1mqZX_sMladW4LQymK7YuTd-00mPYHLQts5rcboP1Usk</span>
+#&gt; <span class='message'>  * sheets-create-demo-3: 1-b7vUxa_3j2XXLW99oEXfdguT4LzgnsevxyWkBqvsG4</span>
+#&gt; <span class='message'>  * sheets-create-demo-2: 1FO_0B93dNArxdLZdok_NUjrHRNTyMezuOCSjCPv9ulo</span>
+#&gt; <span class='message'>  * sheets-create-demo-1: 1wUAXrrgI9-DYNt1_UO9hzA9nJ46agkehOIYsvFtmNHw</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

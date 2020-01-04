@@ -13,8 +13,8 @@ which we can recover the ID, an instance of \code{googlesheets4_spreadsheet}
 is how googledrive represents Drive files. Processed through
 \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
-\item{sheet}{One or more new sheet names. If unspecified, Sheets adds 1 sheet
-and autogenerates a name of the form "SheetN".}
+\item{sheet}{One or more new sheet names. If unspecified, one new sheet is
+added and Sheets autogenerates a name of the form "SheetN".}
 
 \item{...}{Optional parameters to specify additional properties, common to
 all of the new sheet(s). Not relevant to most users. Specify fields of the
@@ -30,7 +30,8 @@ unspecified, Sheets puts the new sheet(s) at the end.}
 The input \code{ss}, as an instance of \code{\link{sheets_id}}
 }
 \description{
-Adds one or more (work)sheets to an existing (spread)Sheet.
+Adds one or more (work)sheets to an existing (spread)Sheet. Note that sheet
+names must be unique.
 }
 \examples{
 if (sheets_has_token()) {

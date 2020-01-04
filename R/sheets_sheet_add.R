@@ -1,10 +1,11 @@
 #' Add one or more (work)sheets
 #'
-#' Adds one or more (work)sheets to an existing (spread)Sheet.
+#' Adds one or more (work)sheets to an existing (spread)Sheet. Note that sheet
+#' names must be unique.
 #'
 #' @template ss
-#' @param sheet One or more new sheet names. If unspecified, Sheets adds 1 sheet
-#'   and autogenerates a name of the form "SheetN".
+#' @param sheet One or more new sheet names. If unspecified, one new sheet is
+#'   added and Sheets autogenerates a name of the form "SheetN".
 #' @param ... Optional parameters to specify additional properties, common to
 #'   all of the new sheet(s). Not relevant to most users. Specify fields of the
 #'   [`SheetProperties`

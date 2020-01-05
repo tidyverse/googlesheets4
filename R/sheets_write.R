@@ -60,7 +60,7 @@
 #'   # sheets_browse(ss)
 #'
 #'   # clean up
-#'   sheets_find("sheets-write-demo") %>% googledrive::drive_rm()
+#'   googledrive::drive_rm(ss)
 #' }
 write_sheet <- function(data,
                         ss = NULL,

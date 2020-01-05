@@ -78,6 +78,6 @@ if (sheets_has_token()) {
   # sheets_browse(ss)
 
   # clean up
-  sheets_find("sheets-write-demo") \%>\% googledrive::drive_rm()
+  googledrive::drive_rm(ss)
 }
 }

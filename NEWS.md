@@ -9,8 +9,9 @@ These functions are ready for use but are still under development. You can expec
   * `sheets_write()` (also available as `write_sheet()`) is a new function to
     write a data frame into a new or existing (work)sheet, inside a new or
     existing (spread)Sheet.
+  * `sheets_append()` adds rows to the data in an existing sheet.
 
-More writing functionality is coming!
+More Sheet-editing functionality is coming!
 
 ### Other new functions and arguments
 

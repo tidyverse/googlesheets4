@@ -455,109 +455,119 @@ read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 expect some refinements re: user interface and which function does
 what.*
 
-`sheets_create()` creates an entirely new Sheet and can, optionally,
-populate individual (work)sheets from one or more data frames. Remember
-that `sheets_browse()` takes you to a Sheet in the browser.
+`sheets_write()` writes a data frame into a Sheet. The only required
+argument is the data.
 
 ``` r
-(ss <- sheets_create(
-  "cranky-squirrel",
-  sheets = list(anscombe = anscombe, chickwts = chickwts)
-))
-#> Spreadsheet name: cranky-squirrel
-#>                 ID: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54
+df <- data.frame(x = 1:3, y = letters[1:3])
+
+ss <- sheets_write(df)
+#> Spreadsheet name: technocrat-wildcat
+#>                 ID: 1lm1x3XqGRkG7Hi4XF2pHRIkMmj3FENaG2LSjWFPJCTI
+#>             Locale: en_US
+#>          Time zone: Etc/GMT
+#>        # of sheets: 1
+#> 
+#> (Sheet name): (Nominal extent in rows x columns)
+#>           df: 4 x 2
+```
+
+You’ll notice the new (spread)Sheet has a randomly generated name. If
+that is a problem, use `sheets_create()` instead, which affords more
+control over various aspects of the new Sheet.
+
+Let’s start over: we delete that Sheet and call `sheets_create()`, so we
+can specify the new Sheet’s name.
+
+``` r
+drive_rm(ss)
+#> Files deleted:
+#>   * technocrat-wildcat: 1lm1x3XqGRkG7Hi4XF2pHRIkMmj3FENaG2LSjWFPJCTI
+
+ss <- sheets_create("fluffy-bunny", sheets = df)
+#> Spreadsheet name: fluffy-bunny
+#>                 ID: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA
+#>             Locale: en_US
+#>          Time zone: Etc/GMT
+#>        # of sheets: 1
+#> 
+#> (Sheet name): (Nominal extent in rows x columns)
+#>           df: 4 x 2
+```
+
+`sheets_write()` can write to new or existing (work)sheets in this
+Sheet. Let’s write the `chickwts` data to a new sheet in `ss`.
+
+``` r
+sheets_write(chickwts, ss)
+#> Writing to 'fluffy-bunny'
+#> Writing to sheet "chickwts"
+#> Spreadsheet name: fluffy-bunny
+#>                 ID: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2
 #> 
 #> (Sheet name): (Nominal extent in rows x columns)
-#>     anscombe: 12 x 8
+#>           df: 4 x 2
 #>     chickwts: 72 x 2
-#> [1] "1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54"
-#> attr(,"class")
-#> [1] "sheets_id" "drive_id"
-
-sheets_browse(ss)
 ```
 
-`sheets_sheet_add()` adds a worksheet and, optionally, lets you specify
-where to put it. It’s part of a family of `sheets_sheet_*()` functions
-that deal with individual (work)sheets inside a (spread)Sheet.
+We can also use `sheets_write()` to replace the data in an existing
+sheet.
 
 ``` r
-ss %>% 
-  sheets_sheet_add(sheet = "warpbreaks", .after = "anscombe")
-#> Spreadsheet name: cranky-squirrel
-#>                 ID: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54
+sheets_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
+#> Writing to 'fluffy-bunny'
+#> Writing to sheet "df"
+#> Spreadsheet name: fluffy-bunny
+#>                 ID: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
-#>        # of sheets: 3
+#>        # of sheets: 2
 #> 
 #> (Sheet name): (Nominal extent in rows x columns)
-#>     anscombe: 12 x 8
-#>   warpbreaks: 1000 x 26
+#>           df: 8 x 2
 #>     chickwts: 72 x 2
 ```
 
-`sheets_write()`, also aliased to `write_sheet()`, writes a data frame
-into a (work)sheet within a (spread)Sheet. Here we send the `warpbreaks`
-data to the empty sheet we created above:
+`sheets_append()` adds one or more rows to an existing sheet.
 
 ``` r
-sheets_write(warpbreaks, ss, sheet = "warpbreaks")
-#> Writing to 'cranky-squirrel'
-#> Writing to sheet "warpbreaks"
-#> Spreadsheet name: cranky-squirrel
-#>                 ID: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54
+sheets_append(data.frame(x = 11, letters[11]), ss, sheet = "df")
+#> Writing to 'fluffy-bunny'
+#> Appending 1 row(s) to 'df'
+#> Spreadsheet name: fluffy-bunny
+#>                 ID: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
-#>        # of sheets: 3
+#>        # of sheets: 2
 #> 
 #> (Sheet name): (Nominal extent in rows x columns)
-#>     anscombe: 12 x 8
-#>   warpbreaks: 55 x 3
+#>           df: 9 x 2
 #>     chickwts: 72 x 2
 ```
 
-We can also send data into a new sheet:
+There is also a family of `sheets_sheet_*()` functions that do pure
+(work)sheet operations, such as add and delete.
 
-``` r
-sheets_write(iris, ss)
-#> Writing to 'cranky-squirrel'
-#> Writing to sheet "iris"
-#> Spreadsheet name: cranky-squirrel
-#>                 ID: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54
-#>             Locale: en_US
-#>          Time zone: Etc/GMT
-#>        # of sheets: 4
-#> 
-#> (Sheet name): (Nominal extent in rows x columns)
-#>     anscombe: 12 x 8
-#>   warpbreaks: 55 x 3
-#>     chickwts: 72 x 2
-#>         iris: 151 x 5
-```
-
-Overview of all the sheets:
+We take one last look at the sheets we created in `ss`, then clean up.
 
 ``` r
 sheets_sheet_data(ss)
-#> # A tibble: 4 x 8
-#>   name       index         id type  visible grid_rows grid_columns data  
-#>   <chr>      <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 anscombe       0 1216361390 GRID  TRUE           12            8 <NULL>
-#> 2 warpbreaks     1  334370669 GRID  TRUE           55            3 <NULL>
-#> 3 chickwts       2 1389146201 GRID  TRUE           72            2 <NULL>
-#> 4 iris           3  199684026 GRID  TRUE          151            5 <NULL>
-```
+#> # A tibble: 2 x 8
+#>   name     index         id type  visible grid_rows grid_columns data  
+#>   <chr>    <int>      <int> <chr> <lgl>       <int>        <int> <list>
+#> 1 df           0  282251880 GRID  TRUE            9            2 <NULL>
+#> 2 chickwts     1 1508572512 GRID  TRUE           72            2 <NULL>
 
-Clean up.
-
-``` r
 drive_rm(ss)
 #> Files deleted:
-#>   * cranky-squirrel: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54
+#>   * fluffy-bunny: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA
 ```
+
+See also the article [Write
+Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html).
 
 ## Contributing
 

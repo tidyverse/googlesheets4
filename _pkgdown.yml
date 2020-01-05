@@ -29,7 +29,7 @@ reference:
     contents:
       - write_sheet
       - sheets_create
-      - cell-specification
+      - sheets_append
   - title: "Metadata on Sheets"
     desc: >
       Helpers for accessing Sheets and their metadata

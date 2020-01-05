@@ -44,7 +44,7 @@ sheets_create("write-sheets-demo-1")
 
 Every Sheet *must* have at least one (work)sheet, so Google Sheets automatically creates an empty "Sheet1".
 
-You can control the names and content of the initial (work)sheets by providing input with the `sheets` argument.
+You can control the names and content of the initial (work)sheets with the `sheets` argument.
 
 ### Send sheet names
 
@@ -65,6 +65,7 @@ If you provide a data frame, it is used to populate the cells of a sheet and to 
 
 ```{r}
 my_data <- data.frame(x = 1:3, y = letters[1:3])
+
 sheets_create(
   "write-sheets-demo-3",
   sheets = my_data
@@ -77,6 +78,7 @@ If you provide a list of data frames, each is used to populate the cells of one 
 
 ```{r}
 my_data_frames <- list(iris = head(iris), chickwts = head(chickwts))
+
 sheets_create(
   "write-sheets-demo-4",
   sheets = my_data_frames
@@ -108,19 +110,30 @@ sheets_find("write-sheets-demo") %>%
 
 ## `write_sheet()`, a.k.a. `sheets_write()`
 
-`write_sheet()` is aliased to `sheets_write()` and (at least for now) writes data into an existing Sheet. Whereas `sheets_create()` emphasizes the *target Sheet*, `sheets_write()` emphasizes the *data you want to write*. It can create a new (work)sheet or overwrite an existing (work)sheet with new data.
+`write_sheet()` is aliased to `sheets_write()` and is meant to evoke `readr::write_csv()` or `writexl::write_xlsx()`. Whereas `sheets_create()` emphasizes the *target Sheet*, `sheets_write()` emphasizes the *data you want to write*.
 
-Let's create a Sheet to work with. We send one sheet name, to prevent the creation of "Sheet1", but we send no data.
+The only required argument for `sheets_write()` is the data.
 
 ```{r}
+df <- data.frame(x = 1:3, y = letters[1:3])
+
+ss <- sheets_write(df)
+```
+
+This creates a new (work)sheet inside a new (spread)Sheet and returns its ID. You'll notice the new Sheet has a randomly generated name. If that is a problem, use `sheets_create()` instead, which affords more control over various aspects of the new Sheet.
+
+Let's start over: we delete that Sheet and call `sheets_create()`, so we can specify the new Sheet's name. Then we'll modify it with `sheets_write()`. We send one sheet name, "chickwts", to prevent the creation of "Sheet1", but we send no data.
+
+```{r}
+drive_rm(ss)
+
 ss <- sheets_create(
   "write-sheets-demo-6",
   sheets = "chickwts"
 )
 ```
 
-`sheets_write()` can write a data frame into an existing sheet. Let's actually put the `chickwts` data into the sheet we initialized.
-
+`sheets_write()` allows us to write the actual `chickwts` data into the sheet by that name. 
 ```{r}
 sheets_write(chickwts, ss = ss, sheet = "chickwts")
 ```
@@ -139,6 +152,12 @@ If no sheet name is given and it can't be determined from `data`, a name of the 
 
 ```{r}
 sheets_write(data.frame(x = 1:2, y = 3:4), ss)
+```
+
+`sheets_append()` can add one or more rows of data to an existing Sheet.
+
+```{r}
+sheets_append(data.frame(x = 3, y = 5), ss, sheet = "Sheet1")
 ```
 
 #### Clean up

@@ -90,7 +90,7 @@ read_sheet(url)
 
 ## Writing Sheets
 
-Write to Sheets with `sheets_create()` and `sheets_write()`, which is aliased to `write_sheet()`, in a nod to functions like `readr::write_csv()` and `writexl::write_xlsx()`.
+Write to Sheets with `sheets_write()`, `sheets_create()`, and `sheets_append()`.
 
 The writing / modifying functionality is under very active development and is still taking shape. There is a dedicated article: [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html).
 

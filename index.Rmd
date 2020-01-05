@@ -198,48 +198,53 @@ read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 
 *The writing functions are still under heavy development, so you can expect some refinements re: user interface and which function does what.*
 
-`sheets_create()` creates an entirely new Sheet and can, optionally, populate individual (work)sheets from one or more data frames. Remember that `sheets_browse()` takes you to a Sheet in the browser.
+`sheets_write()` writes a data frame into a Sheet. The only required argument is the data.
 
 ```{r}
-(ss <- sheets_create(
-  "cranky-squirrel",
-  sheets = list(anscombe = anscombe, chickwts = chickwts)
-))
+df <- data.frame(x = 1:3, y = letters[1:3])
 
-sheets_browse(ss)
+ss <- sheets_write(df)
 ```
 
-`sheets_sheet_add()` adds a worksheet and, optionally, lets you specify where to put it. It's part of a family of `sheets_sheet_*()` functions that deal with individual (work)sheets inside a (spread)Sheet.
+You'll notice the new (spread)Sheet has a randomly generated name. If that is a problem, use `sheets_create()` instead, which affords more control over various aspects of the new Sheet.
 
-```{r}
-ss %>% 
-  sheets_sheet_add(sheet = "warpbreaks", .after = "anscombe")
-```
-
-`sheets_write()`, also aliased to `write_sheet()`, writes a data frame into a
-(work)sheet within a (spread)Sheet. Here we send the `warpbreaks` data to the empty sheet we created above:
-
-```{r}
-sheets_write(warpbreaks, ss, sheet = "warpbreaks")
-```
-
-We can also send data into a new sheet:
-
-```{r}
-sheets_write(iris, ss)
-```
-
-Overview of all the sheets:
-
-```{r}
-sheets_sheet_data(ss)
-```
-
-Clean up.
+Let's start over: we delete that Sheet and call `sheets_create()`, so we can specify the new Sheet's name.
 
 ```{r}
 drive_rm(ss)
+
+ss <- sheets_create("fluffy-bunny", sheets = df)
 ```
+
+`sheets_write()` can write to new or existing (work)sheets in this Sheet. Let's write the `chickwts` data to a new sheet in `ss`.
+
+```{r}
+sheets_write(chickwts, ss)
+```
+
+We can also use `sheets_write()` to replace the data in an existing sheet.
+
+```{r}
+sheets_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
+```
+
+`sheets_append()` adds one or more rows to an existing sheet.
+
+```{r}
+sheets_append(data.frame(x = 11, letters[11]), ss, sheet = "df")
+```
+
+There is also a family of `sheets_sheet_*()` functions that do pure (work)sheet operations, such as add and delete.
+
+We take one last look at the sheets we created in `ss`, then clean up.
+
+```{r}
+sheets_sheet_data(ss)
+
+drive_rm(ss)
+```
+
+See also the article [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html).
 
 ## Contributing
 

@@ -453,7 +453,7 @@
 <a class="sourceLine" id="cb16-3" data-line-number="3">  <span class="dt">sheets =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">anscombe =</span> anscombe, <span class="dt">chickwts =</span> chickwts)</a>
 <a class="sourceLine" id="cb16-4" data-line-number="4">))</a>
 <a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">#&gt; Spreadsheet name: cranky-squirrel</span></a>
-<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt;                 ID: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">#&gt;                 ID: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54</span></a>
 <a class="sourceLine" id="cb16-7" data-line-number="7"><span class="co">#&gt;             Locale: en_US</span></a>
 <a class="sourceLine" id="cb16-8" data-line-number="8"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
 <a class="sourceLine" id="cb16-9" data-line-number="9"><span class="co">#&gt;        # of sheets: 2</span></a>
@@ -461,7 +461,7 @@
 <a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
 <a class="sourceLine" id="cb16-12" data-line-number="12"><span class="co">#&gt;     anscombe: 12 x 8</span></a>
 <a class="sourceLine" id="cb16-13" data-line-number="13"><span class="co">#&gt;     chickwts: 72 x 2</span></a>
-<a class="sourceLine" id="cb16-14" data-line-number="14"><span class="co">#&gt; [1] "1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU"</span></a>
+<a class="sourceLine" id="cb16-14" data-line-number="14"><span class="co">#&gt; [1] "1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54"</span></a>
 <a class="sourceLine" id="cb16-15" data-line-number="15"><span class="co">#&gt; attr(,"class")</span></a>
 <a class="sourceLine" id="cb16-16" data-line-number="16"><span class="co">#&gt; [1] "sheets_id" "drive_id"</span></a>
 <a class="sourceLine" id="cb16-17" data-line-number="17"></a>
@@ -470,7 +470,7 @@
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">ss <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="reference/sheets_sheet_add.html">sheets_sheet_add</a></span>(<span class="dt">sheet =</span> <span class="st">"warpbreaks"</span>, <span class="dt">.after =</span> <span class="st">"anscombe"</span>)</a>
 <a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co">#&gt; Spreadsheet name: cranky-squirrel</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt;                 ID: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="co">#&gt;                 ID: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54</span></a>
 <a class="sourceLine" id="cb17-5" data-line-number="5"><span class="co">#&gt;             Locale: en_US</span></a>
 <a class="sourceLine" id="cb17-6" data-line-number="6"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
 <a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co">#&gt;        # of sheets: 3</span></a>
@@ -479,12 +479,12 @@
 <a class="sourceLine" id="cb17-10" data-line-number="10"><span class="co">#&gt;     anscombe: 12 x 8</span></a>
 <a class="sourceLine" id="cb17-11" data-line-number="11"><span class="co">#&gt;   warpbreaks: 1000 x 26</span></a>
 <a class="sourceLine" id="cb17-12" data-line-number="12"><span class="co">#&gt;     chickwts: 72 x 2</span></a></code></pre></div>
-<p><code><a href="reference/write_sheet.html">sheets_write()</a></code>, also aliased to <code><a href="reference/write_sheet.html">write_sheet()</a></code>, writes a data frame into a (work)sheet (possible pre-existing) within an existing (spread)Sheet <em>this is likely to get more flexible</em>. Here we send the <code>warpbreaks</code> data to the empty sheet we created above:</p>
+<p><code><a href="reference/write_sheet.html">sheets_write()</a></code>, also aliased to <code><a href="reference/write_sheet.html">write_sheet()</a></code>, writes a data frame into a (work)sheet within a (spread)Sheet. Here we send the <code>warpbreaks</code> data to the empty sheet we created above:</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="reference/write_sheet.html">sheets_write</a></span>(warpbreaks, ss, <span class="dt">sheet =</span> <span class="st">"warpbreaks"</span>)</a>
 <a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co">#&gt; Writing to 'cranky-squirrel'</span></a>
 <a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co">#&gt; Writing to sheet "warpbreaks"</span></a>
 <a class="sourceLine" id="cb18-4" data-line-number="4"><span class="co">#&gt; Spreadsheet name: cranky-squirrel</span></a>
-<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="co">#&gt;                 ID: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="co">#&gt;                 ID: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54</span></a>
 <a class="sourceLine" id="cb18-6" data-line-number="6"><span class="co">#&gt;             Locale: en_US</span></a>
 <a class="sourceLine" id="cb18-7" data-line-number="7"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
 <a class="sourceLine" id="cb18-8" data-line-number="8"><span class="co">#&gt;        # of sheets: 3</span></a>
@@ -498,7 +498,7 @@
 <a class="sourceLine" id="cb19-2" data-line-number="2"><span class="co">#&gt; Writing to 'cranky-squirrel'</span></a>
 <a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co">#&gt; Writing to sheet "iris"</span></a>
 <a class="sourceLine" id="cb19-4" data-line-number="4"><span class="co">#&gt; Spreadsheet name: cranky-squirrel</span></a>
-<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="co">#&gt;                 ID: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU</span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="co">#&gt;                 ID: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54</span></a>
 <a class="sourceLine" id="cb19-6" data-line-number="6"><span class="co">#&gt;             Locale: en_US</span></a>
 <a class="sourceLine" id="cb19-7" data-line-number="7"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
 <a class="sourceLine" id="cb19-8" data-line-number="8"><span class="co">#&gt;        # of sheets: 4</span></a>
@@ -513,14 +513,14 @@
 <a class="sourceLine" id="cb20-2" data-line-number="2"><span class="co">#&gt; # A tibble: 4 x 8</span></a>
 <a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co">#&gt;   name       index         id type  visible grid_rows grid_columns data  </span></a>
 <a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;      &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co">#&gt; 1 anscombe       0 1011879982 GRID  TRUE           12            8 &lt;NULL&gt;</span></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co">#&gt; 2 warpbreaks     1   90448705 GRID  TRUE           55            3 &lt;NULL&gt;</span></a>
-<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="co">#&gt; 3 chickwts       2   36372874 GRID  TRUE           72            2 &lt;NULL&gt;</span></a>
-<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="co">#&gt; 4 iris           3  285987085 GRID  TRUE          151            5 &lt;NULL&gt;</span></a></code></pre></div>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co">#&gt; 1 anscombe       0 1216361390 GRID  TRUE           12            8 &lt;NULL&gt;</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co">#&gt; 2 warpbreaks     1  334370669 GRID  TRUE           55            3 &lt;NULL&gt;</span></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="co">#&gt; 3 chickwts       2 1389146201 GRID  TRUE           72            2 &lt;NULL&gt;</span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="co">#&gt; 4 iris           3  199684026 GRID  TRUE          151            5 &lt;NULL&gt;</span></a></code></pre></div>
 <p>Clean up.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</a>
 <a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co">#&gt; Files deleted:</span></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="co">#&gt;   * cranky-squirrel: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU</span></a></code></pre></div>
+<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="co">#&gt;   * cranky-squirrel: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54</span></a></code></pre></div>
 </div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">

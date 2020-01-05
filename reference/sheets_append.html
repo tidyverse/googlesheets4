@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>(Over)write new data into a Sheet — write_sheet • googlesheets4</title>
+<title>Append rows to a sheet — sheets_append • googlesheets4</title>
 
 
 <!-- jquery -->
@@ -34,24 +34,9 @@
 
 
 
-<meta property="og:title" content="(Over)write new data into a Sheet — write_sheet" />
-<meta property="og:description" content="
-Writes a data frame into a (work)sheet inside a (spread)Sheet. The target
-sheet is styled as a table:
-Special formatting is applied to the header row, which holds column
-names.
-The first row (header row) is frozen.
-Sheet dimensions are set to &quot;shrink wrap&quot; the data.
-
-
-If no existing Sheet is specified via ss, this function delegates to
-sheets_create() and the new Sheet's name is randomly generated. If that's
-undesirable, call sheets_create() directly to get more control.
-If no sheet is specified or if sheet doesn't identify an existing sheet, a
-new sheet is added to receive the data. If sheet specifies an existing
-sheet, it is effectively overwritten. All pre-existing values, formats, and
-dimensions are cleared and the targeted sheet gets new values and dimensions
-from data." />
+<meta property="og:title" content="Append rows to a sheet — sheets_append" />
+<meta property="og:description" content="Adds new cells after the last row with data in a (work)sheet, inserting new
+rows into the sheet if necessary." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -150,34 +135,17 @@ from data." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>(Over)write new data into a Sheet</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_write.R'><code>R/sheets_write.R</code></a></small>
-    <div class="hidden name"><code>write_sheet.Rd</code></div>
+    <h1>Append rows to a sheet</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_append.R'><code>R/sheets_append.R</code></a></small>
+    <div class="hidden name"><code>sheets_append.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
-<p>Writes a data frame into a (work)sheet inside a (spread)Sheet. The target
-sheet is styled as a table:</p><ul>
-<li><p>Special formatting is applied to the header row, which holds column
-names.</p></li>
-<li><p>The first row (header row) is frozen.</p></li>
-<li><p>Sheet dimensions are set to "shrink wrap" the <code>data</code>.</p></li>
-</ul>
-
-<p>If no existing Sheet is specified via <code>ss</code>, this function delegates to
-<code><a href='sheets_create.html'>sheets_create()</a></code> and the new Sheet's name is randomly generated. If that's
-undesirable, call <code><a href='sheets_create.html'>sheets_create()</a></code> directly to get more control.</p>
-<p>If no <code>sheet</code> is specified or if <code>sheet</code> doesn't identify an existing sheet, a
-new sheet is added to receive the <code>data</code>. If <code>sheet</code> specifies an existing
-sheet, it is effectively overwritten. All pre-existing values, formats, and
-dimensions are cleared and the targeted sheet gets new values and dimensions
-from <code>data</code>.</p>
+    <p>Adds new cells after the last row with data in a (work)sheet, inserting new
+rows into the sheet if necessary.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_sheet</span>(<span class='no'>data</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>sheets_write</span>(<span class='no'>data</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_append</span>(<span class='no'>data</span>, <span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,90 +164,76 @@ is how googledrive represents Drive files. Processed through
     </tr>
     <tr>
       <th>sheet</th>
-      <td><p>Sheet to write into, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number.</p></td>
+      <td><p>Sheet to append to, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The input <code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p>Makes an <code>AppendCellsRequest</code>:</p><ul>
+<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AppendCellsRequest'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AppendCellsRequest</a></p></li>
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
-  <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
-    <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
-  )
+  <span class='co'># we will recreate the table of "other" deaths from this example Sheet</span>
+  (<span class='no'>deaths</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='read_sheet.html'>sheets_read</a></span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"other_data"</span>, <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='st'>"????DD"</span>))
 
-  <span class='co'># specify only a data frame, get a new Sheet, with a random name</span>
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_write</span>(<span class='no'>df</span>)
-  <span class='fu'><a href='read_sheet.html'>sheets_read</a></span>(<span class='no'>ss</span>)
+  <span class='co'># split the data into 3 pieces, which we will send separately</span>
+  <span class='no'>deaths_one</span> <span class='kw'>&lt;-</span> <span class='no'>deaths</span>[<span class='fl'>1</span>:<span class='fl'>5</span>, ]
+  <span class='no'>deaths_two</span> <span class='kw'>&lt;-</span> <span class='no'>deaths</span>[<span class='fl'>6</span>, ]
+  <span class='no'>deaths_three</span> <span class='kw'>&lt;-</span> <span class='no'>deaths</span>[<span class='fl'>7</span>:<span class='fl'>10</span>, ]
 
-  <span class='co'># clean up</span>
+  <span class='co'># create a Sheet and send the first chunk of data</span>
+  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(<span class='st'>"sheets-append-demo"</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>deaths</span> <span class='kw'>=</span> <span class='no'>deaths_one</span>))
+
+  <span class='co'># append a single row</span>
+  <span class='fu'>sheets_append</span>(<span class='no'>deaths_two</span>, <span class='no'>ss</span>)
+
+  <span class='co'># append remaining rows</span>
+  <span class='fu'>sheets_append</span>(<span class='no'>deaths_three</span>, <span class='no'>ss</span>)
+
+  <span class='co'># read and check against the original</span>
+  <span class='no'>deaths_replica</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_sheet.html'>sheets_read</a></span>(<span class='no'>ss</span>, <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='st'>"????DD"</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='no'>deaths</span>, <span class='no'>deaths_replica</span>)
+
+  <span class='co'># cleanup</span>
   <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>(<span class='no'>ss</span>)
-
-  <span class='co'># create a Sheet with some initial, placeholder data</span>
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(
-    <span class='st'>"sheets-write-demo"</span>,
-    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='kw'>omega</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>))
-  )
-
-  <span class='co'># write df into its own, new sheet</span>
-  <span class='fu'>sheets_write</span>(<span class='no'>df</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>)
-
-  <span class='co'># write mtcars into the sheet named "omega"</span>
-  <span class='fu'>sheets_write</span>(<span class='no'>mtcars</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"omega"</span>)
-
-  <span class='co'># get an overview of the sheets</span>
-  <span class='fu'><a href='sheets_sheet_data.html'>sheets_sheet_data</a></span>(<span class='no'>ss</span>)
-
-  <span class='co'># view your magnificent creation in the browser</span>
-  <span class='co'># sheets_browse(ss)</span>
-
-  <span class='co'># clean up</span>
-  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>(<span class='no'>ss</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: fiery-hart</span>
-#&gt; <span class='message'>                ID: 17fUvr1gCXzMyUGgfq4CTlS92UIqMfyhKcYZ6CQUA4qM</span>
+}</div><div class='output co'>#&gt; <span class='message'>Reading from 'deaths'</span></div><div class='output co'>#&gt; <span class='message'>Range "other_data"</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-append-demo</span>
+#&gt; <span class='message'>                ID: 1Y8dGV9ZMvaTkeURRW727Ai4MfcauztK7tN73vcNETRw</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 1</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
-#&gt; <span class='message'>          df: 4 x 2</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'fiery-hart'</span></div><div class='output co'>#&gt; <span class='message'>Range "df"</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * fiery-hart: 17fUvr1gCXzMyUGgfq4CTlS92UIqMfyhKcYZ6CQUA4qM</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-write-demo</span>
-#&gt; <span class='message'>                ID: 1u_7J3zPqE7-Z12uGUuJOw1hxPdPpKF40wiA4kwJE3rM</span>
+#&gt; <span class='message'>      deaths: 6 x 6</span></div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-append-demo'</span></div><div class='output co'>#&gt; <span class='message'>Appending 1 row(s) to 'deaths'</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-append-demo</span>
+#&gt; <span class='message'>                ID: 1Y8dGV9ZMvaTkeURRW727Ai4MfcauztK7tN73vcNETRw</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
-#&gt; <span class='message'>       # of sheets: 2</span>
+#&gt; <span class='message'>       # of sheets: 1</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
-#&gt; <span class='message'>       alpha: 2 x 1</span>
-#&gt; <span class='message'>       omega: 2 x 1</span></div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-write-demo'</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "df"</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-write-demo</span>
-#&gt; <span class='message'>                ID: 1u_7J3zPqE7-Z12uGUuJOw1hxPdPpKF40wiA4kwJE3rM</span>
+#&gt; <span class='message'>      deaths: 7 x 6</span></div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-append-demo'</span></div><div class='output co'>#&gt; <span class='message'>Appending 4 row(s) to 'deaths'</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-append-demo</span>
+#&gt; <span class='message'>                ID: 1Y8dGV9ZMvaTkeURRW727Ai4MfcauztK7tN73vcNETRw</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
-#&gt; <span class='message'>       # of sheets: 3</span>
+#&gt; <span class='message'>       # of sheets: 1</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
-#&gt; <span class='message'>       alpha: 2 x 1</span>
-#&gt; <span class='message'>       omega: 2 x 1</span>
-#&gt; <span class='message'>          df: 4 x 2</span></div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-write-demo'</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "omega"</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-write-demo</span>
-#&gt; <span class='message'>                ID: 1u_7J3zPqE7-Z12uGUuJOw1hxPdPpKF40wiA4kwJE3rM</span>
-#&gt; <span class='message'>            Locale: en_US</span>
-#&gt; <span class='message'>         Time zone: Etc/GMT</span>
-#&gt; <span class='message'>       # of sheets: 3</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
-#&gt; <span class='message'>       alpha: 2 x 1</span>
-#&gt; <span class='message'>       omega: 33 x 11</span>
-#&gt; <span class='message'>          df: 4 x 2</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * sheets-write-demo: 1u_7J3zPqE7-Z12uGUuJOw1hxPdPpKF40wiA4kwJE3rM</span></div></pre>
+#&gt; <span class='message'>      deaths: 11 x 6</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'sheets-append-demo'</span></div><div class='output co'>#&gt; <span class='message'>Range "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
+#&gt; <span class='message'>  * sheets-append-demo: 1Y8dGV9ZMvaTkeURRW727Ai4MfcauztK7tN73vcNETRw</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

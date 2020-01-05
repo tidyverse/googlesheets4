@@ -465,7 +465,7 @@ that `sheets_browse()` takes you to a Sheet in the browser.
   sheets = list(anscombe = anscombe, chickwts = chickwts)
 ))
 #> Spreadsheet name: cranky-squirrel
-#>                 ID: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU
+#>                 ID: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2
@@ -473,7 +473,7 @@ that `sheets_browse()` takes you to a Sheet in the browser.
 #> (Sheet name): (Nominal extent in rows x columns)
 #>     anscombe: 12 x 8
 #>     chickwts: 72 x 2
-#> [1] "1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU"
+#> [1] "1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54"
 #> attr(,"class")
 #> [1] "sheets_id" "drive_id"
 
@@ -488,7 +488,7 @@ that deal with individual (work)sheets inside a (spread)Sheet.
 ss %>% 
   sheets_sheet_add(sheet = "warpbreaks", .after = "anscombe")
 #> Spreadsheet name: cranky-squirrel
-#>                 ID: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU
+#>                 ID: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 3
@@ -500,16 +500,15 @@ ss %>%
 ```
 
 `sheets_write()`, also aliased to `write_sheet()`, writes a data frame
-into a (work)sheet (possible pre-existing) within an existing
-(spread)Sheet *this is likely to get more flexible*. Here we send the
-`warpbreaks` data to the empty sheet we created above:
+into a (work)sheet within a (spread)Sheet. Here we send the `warpbreaks`
+data to the empty sheet we created above:
 
 ``` r
 sheets_write(warpbreaks, ss, sheet = "warpbreaks")
 #> Writing to 'cranky-squirrel'
 #> Writing to sheet "warpbreaks"
 #> Spreadsheet name: cranky-squirrel
-#>                 ID: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU
+#>                 ID: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 3
@@ -527,7 +526,7 @@ sheets_write(iris, ss)
 #> Writing to 'cranky-squirrel'
 #> Writing to sheet "iris"
 #> Spreadsheet name: cranky-squirrel
-#>                 ID: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU
+#>                 ID: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 4
@@ -546,10 +545,10 @@ sheets_sheet_data(ss)
 #> # A tibble: 4 x 8
 #>   name       index         id type  visible grid_rows grid_columns data  
 #>   <chr>      <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 anscombe       0 1011879982 GRID  TRUE           12            8 <NULL>
-#> 2 warpbreaks     1   90448705 GRID  TRUE           55            3 <NULL>
-#> 3 chickwts       2   36372874 GRID  TRUE           72            2 <NULL>
-#> 4 iris           3  285987085 GRID  TRUE          151            5 <NULL>
+#> 1 anscombe       0 1216361390 GRID  TRUE           12            8 <NULL>
+#> 2 warpbreaks     1  334370669 GRID  TRUE           55            3 <NULL>
+#> 3 chickwts       2 1389146201 GRID  TRUE           72            2 <NULL>
+#> 4 iris           3  199684026 GRID  TRUE          151            5 <NULL>
 ```
 
 Clean up.
@@ -557,7 +556,7 @@ Clean up.
 ``` r
 drive_rm(ss)
 #> Files deleted:
-#>   * cranky-squirrel: 1yQnsFQlPa2WhDR200Oa4h-cP_poQlHgj0e-AMQm5uVU
+#>   * cranky-squirrel: 1XjDqL7mIjb6BwVGdrrhWw8XuRLNE2x1_5pdhOR4qE54
 ```
 
 ## Contributing

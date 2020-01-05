@@ -3,44 +3,54 @@
 #' @description
 #' \lifecycle{experimental}
 #'
-#' Writes a data frame into a (work)sheet in an existing (spread)Sheet. If no
-#' `sheet` is specified or if `sheet` doesn't match an existing sheet name, a
-#' new sheet is created to receive the `data`. If `sheet` matches an existing
-#' sheet, it is effectively overwritten. All pre-existing values, formats, and
-#' dimensions of the targeted sheet are cleared and it gets new values and
-#' dimensions from `data`.
+#' Writes a data frame into a (work)sheet inside a (spread)Sheet. The target
+#' sheet is styled as a table:
+#'   * Special formatting is applied to the header row, which holds column
+#'     names.
+#'   * The first row (header row) is frozen.
+#'   * Sheet dimensions are set to "shrink wrap" the `data`.
 #'
-#' In all cases, the target sheet is styled in a specific way:
-#'   * Special formatting is applied to the header row, which holds column names.
-#'   * The first `skip + 1` rows are frozen (so, up to and including the header
-#'     row).
-#'  * Sheet dimensions are set to "shrink wrap" the `data`.
+#' If no existing Sheet is specified via `ss`, this function delegates to
+#' [`sheets_create()`] and the new Sheet's name is randomly generated. If that's
+#' undesirable, call [`sheets_create()`] directly to get more control.
+#'
+#' If no `sheet` is specified or if `sheet` doesn't identify an existing sheet, a
+#' new sheet is added to receive the `data`. If `sheet` specifies an existing
+#' sheet, it is effectively overwritten. All pre-existing values, formats, and
+#' dimensions are cleared and the targeted sheet gets new values and dimensions
+#' from `data`.
 #'
 #' @param data A data frame.
 #' @template ss
 #' @eval param_sheet(action = "write into")
-#' @param skip Number of rows to leave empty before starting to write.
 #'
 #' @template ss-return
 #' @export
 #'
 #' @examples
 #' if (sheets_has_token()) {
+#'   df <- data.frame(
+#'     x = 1:3,
+#'     y = letters[1:3]
+#'   )
+#'
+#'   # specify only a data frame, get a new Sheet, with a random name
+#'   ss <- sheets_write(df)
+#'   sheets_read(ss)
+#'
+#'   # clean up
+#'   googledrive::drive_rm(ss)
+#'
 #'   # create a Sheet with some initial, placeholder data
 #'   ss <- sheets_create(
 #'     "sheets-write-demo",
 #'     sheets = list(alpha = data.frame(x = 1), omega = data.frame(x = 1))
 #'   )
 #'
-#'   df <- data.frame(
-#'     x = 1:3,
-#'     y = letters[1:3]
-#'   )
-#'
-#'   # write df into its own new sheet
+#'   # write df into its own, new sheet
 #'   sheets_write(df, ss = ss)
 #'
-#'   # write mtcars into the sheet named 'omega'
+#'   # write mtcars into the sheet named "omega"
 #'   sheets_write(mtcars, ss = ss, sheet = "omega")
 #'
 #'   # get an overview of the sheets
@@ -53,14 +63,28 @@
 #'   sheets_find("sheets-write-demo") %>% googledrive::drive_rm()
 #' }
 write_sheet <- function(data,
-                        ss,
-                        sheet = NULL,
-                        skip = 0) {
+                        ss = NULL,
+                        sheet = NULL) {
   data_quo <- rlang::enquo(data)
+  data <- rlang::eval_tidy(data_quo)
   check_data_frame(data)
+
+  # no Sheet provided --> call sheets_create() ---------------------------------
+  if (is.null(ss)) {
+    if (rlang::quo_is_symbol(data_quo)) {
+      sheet <- sheet %||% rlang::as_name(data_quo)
+    }
+    if (is.null(sheet)) {
+      return(sheets_create(sheets = data))
+    } else {
+      check_string(sheet)
+      return(sheets_create(sheets = rlang::list2(!!sheet := data)))
+    }
+  }
+
+  # finish checking inputs -----------------------------------------------------
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
-  check_non_negative_integer(skip)
 
   # retrieve spreadsheet metadata ----------------------------------------------
   x <- sheets_get(ssid)

@@ -88,13 +88,13 @@ url <- "https://docs.google.com/spreadsheets/d/1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNo
 read_sheet(url)
 ```
 
-For more information, see the package website: [googlesheets4.tidyverse.org](https://googlesheets4.tidyverse.org).
+## Writing Sheets
 
-## What's still under development?
+Write to Sheets with `sheets_create()` and `sheets_write()`, which is aliased to `write_sheet()`, in a nod to functions like `readr::write_csv()` and `writexl::write_xlsx()`.
 
-Writing into Sheets. Basic writing functionality is now in place via `sheets_create()` and `sheets_write()`, but this family of functions is still in the development phase.
+The writing / modifying functionality is under very active development and is still taking shape. There is a dedicated article: [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html).
 
-As always, remember that the googledrive package 
+Also note that the googledrive package 
 ([googledrive.tidyverse.org](https://googledrive.tidyverse.org)) can be used to write into Sheets at the "whole file" level, for example, to upload a local `.csv` or `.xlsx` into a Sheet. See `googledrive::drive_upload()` and `googledrive::drive_update()`.
 
 ## Contributing

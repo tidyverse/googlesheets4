@@ -7,8 +7,8 @@ These functions are ready for use but are still under development. You can expec
   * `sheets_create()` is a new function to create a new Sheet and, optionally,
     write one or more data frames into it (#61).
   * `sheets_write()` (also available as `write_sheet()`) is a new function to
-    write a data frame into a new or existing (work)sheet, inside an existing
-    (spread)Sheet.
+    write a data frame into a new or existing (work)sheet, inside a new or
+    existing (spread)Sheet.
 
 More writing functionality is coming!
 

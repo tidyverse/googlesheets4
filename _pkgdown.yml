@@ -37,12 +37,14 @@ reference:
       - sheets_get
       - sheets_find
       - sheets_browse
-      - ends_with("sheets_id")
+      - ends_with("_id")
+      - sheets_random
   - title: "Modify a Sheet"
     desc: >
       Make changes to a (spread)Sheet or to the (work)sheets it contains
     contents:
       - sheets_create
+      - starts_with("sheets_sheet")
   - title: "Example Sheets"
     desc: >
       World-readable Sheets to use in examples and reprexes

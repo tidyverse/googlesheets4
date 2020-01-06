@@ -17,13 +17,19 @@ knitr::opts_chunk$set(
 message("No token available. Code chunks will not be evaluated.")
 ```
 
-googlesheets4 wraps the Sheets API v4, which lets you read, write, and format data in Sheets. (Currently, googlesheets4 only supports *reading*, but writing will come in due course.) The Sheets API is very focused on spreadsheet-oriented data and metadata, i.e. (work)sheets and cells.
+## Why use googlesheets4 and googledrive together?
 
-The Sheets API offers practically no support for file-level operations, other than basic spreadsheet creation. We have to use the Drive API for this, which is wrapped by the googledrive package (<https://googledrive.tidyverse.org>).
+googlesheets4 wraps the Sheets API v4, which lets you read, write, and format data in Sheets. The Sheets API is very focused on spreadsheet-oriented data and metadata, i.e. (work)sheets and cells.
+
+The Sheets API offers practically no support for file-level operations, other than basic spreadsheet creation. There is no way to delete, copy, or rename a Sheet or to place it in a folder or to change its sharing permissions. We must use the Drive API for all of this, which is wrapped by the googledrive package (<https://googledrive.tidyverse.org>).
+
+Another reason to use the googlesheets4 and googledrive packages together is for ease of file (Sheet) identification. The googlesheets4 package requires you to specify the target Sheet by its ID, not by its *name*. That's because the underlying APIs only accept file IDs. But the googledrive package offers lots of support for navigating between human-friendly file names and their associated IDs. This support applies to all files on Drive and, specifically, to Sheets.
 
 Therefore, it is common to use googledrive and googlesheets4 together in a script or app.
 
-How does auth work in this case? The path of least resistance is to do nothing and just let each package deal with its own auth. This works fine! But it's a bit clunky and you need to make sure you're using the same Google identity (email) with each package/API.
+## Coordinating auth
+
+How does auth work if you're using googlesheets4 **and** googledrive? The path of least resistance is to do nothing and just let each package deal with its own auth. This works fine! But it's a bit clunky and you need to make sure you're using the same Google identity (email) with each package/API.
 
 It can be nicer to be proactive about auth and use the same token for your googledrive and googlesheets4 work. Below we show a couple of ways to do this.
 

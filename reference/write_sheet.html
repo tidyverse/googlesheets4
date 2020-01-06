@@ -8,6 +8,13 @@
 
 <title>(Over)write new data into a Sheet — write_sheet • googlesheets4</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -52,6 +59,7 @@ new sheet is added to receive the data. If sheet specifies an existing
 sheet, it is effectively overwritten. All pre-existing values, formats, and
 dimensions are cleared and the targeted sheet gets new values and dimensions
 from data." />
+<meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -239,15 +247,15 @@ is how googledrive represents Drive files. Processed through
   <span class='co'># clean up</span>
   <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>(<span class='no'>ss</span>)
 }</div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: fiery-hart</span>
-#&gt; <span class='message'>                ID: 17fUvr1gCXzMyUGgfq4CTlS92UIqMfyhKcYZ6CQUA4qM</span>
+#&gt; <span class='message'>                ID: 1W0RlhGoMJgDRQ6q7Oufifn3gtc5dxkRVGhg8FV-Z4PU</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 1</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
 #&gt; <span class='message'>          df: 4 x 2</span></div><div class='output co'>#&gt; <span class='message'>Reading from 'fiery-hart'</span></div><div class='output co'>#&gt; <span class='message'>Range "df"</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * fiery-hart: 17fUvr1gCXzMyUGgfq4CTlS92UIqMfyhKcYZ6CQUA4qM</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-write-demo</span>
-#&gt; <span class='message'>                ID: 1u_7J3zPqE7-Z12uGUuJOw1hxPdPpKF40wiA4kwJE3rM</span>
+#&gt; <span class='message'>  * fiery-hart: 1W0RlhGoMJgDRQ6q7Oufifn3gtc5dxkRVGhg8FV-Z4PU</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-write-demo</span>
+#&gt; <span class='message'>                ID: 1U1-GrY7f6GpPAo4ozmQkB-9e0MmjMOplDand2J8xEXw</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 2</span>
@@ -255,7 +263,7 @@ is how googledrive represents Drive files. Processed through
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
 #&gt; <span class='message'>       alpha: 2 x 1</span>
 #&gt; <span class='message'>       omega: 2 x 1</span></div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-write-demo'</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "df"</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-write-demo</span>
-#&gt; <span class='message'>                ID: 1u_7J3zPqE7-Z12uGUuJOw1hxPdPpKF40wiA4kwJE3rM</span>
+#&gt; <span class='message'>                ID: 1U1-GrY7f6GpPAo4ozmQkB-9e0MmjMOplDand2J8xEXw</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 3</span>
@@ -264,7 +272,7 @@ is how googledrive represents Drive files. Processed through
 #&gt; <span class='message'>       alpha: 2 x 1</span>
 #&gt; <span class='message'>       omega: 2 x 1</span>
 #&gt; <span class='message'>          df: 4 x 2</span></div><div class='output co'>#&gt; <span class='message'>Writing to 'sheets-write-demo'</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "omega"</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: sheets-write-demo</span>
-#&gt; <span class='message'>                ID: 1u_7J3zPqE7-Z12uGUuJOw1hxPdPpKF40wiA4kwJE3rM</span>
+#&gt; <span class='message'>                ID: 1U1-GrY7f6GpPAo4ozmQkB-9e0MmjMOplDand2J8xEXw</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 3</span>
@@ -273,7 +281,7 @@ is how googledrive represents Drive files. Processed through
 #&gt; <span class='message'>       alpha: 2 x 1</span>
 #&gt; <span class='message'>       omega: 33 x 11</span>
 #&gt; <span class='message'>          df: 4 x 2</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * sheets-write-demo: 1u_7J3zPqE7-Z12uGUuJOw1hxPdPpKF40wiA4kwJE3rM</span></div></pre>
+#&gt; <span class='message'>  * sheets-write-demo: 1U1-GrY7f6GpPAo4ozmQkB-9e0MmjMOplDand2J8xEXw</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

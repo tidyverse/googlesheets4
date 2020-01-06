@@ -8,6 +8,13 @@
 
 <title>Add one or more (work)sheets — sheets_sheet_add • googlesheets4</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -37,6 +44,7 @@
 <meta property="og:title" content="Add one or more (work)sheets — sheets_sheet_add" />
 <meta property="og:description" content="Adds one or more (work)sheets to an existing (spread)Sheet. Note that sheet
 names must be unique." />
+<meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -222,14 +230,14 @@ unspecified, Sheets puts the new sheet(s) at the end.</p></td>
   <span class='co'># cleanup</span>
   <span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"add-sheets-to-me"</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>()
 }</div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: add-sheets-to-me</span>
-#&gt; <span class='message'>                ID: 1c6UQ_BylXQ5kZWMTuG0OjL0u4hTFrhu_7xQA8vrNhPc</span>
+#&gt; <span class='message'>                ID: 1neWaIOBvW1UPKJnx9UkVmQdrq-Nq-rhTPYNgQySP8-k</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 1</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
 #&gt; <span class='message'>      Sheet1: 1000 x 26</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: add-sheets-to-me</span>
-#&gt; <span class='message'>                ID: 1c6UQ_BylXQ5kZWMTuG0OjL0u4hTFrhu_7xQA8vrNhPc</span>
+#&gt; <span class='message'>                ID: 1neWaIOBvW1UPKJnx9UkVmQdrq-Nq-rhTPYNgQySP8-k</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 2</span>
@@ -237,7 +245,7 @@ unspecified, Sheets puts the new sheet(s) at the end.</p></td>
 #&gt; <span class='message'>(Sheet name): (Nominal extent in rows x columns)</span>
 #&gt; <span class='message'>      Sheet1: 1000 x 26</span>
 #&gt; <span class='message'>      Sheet2: 1000 x 26</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: add-sheets-to-me</span>
-#&gt; <span class='message'>                ID: 1c6UQ_BylXQ5kZWMTuG0OjL0u4hTFrhu_7xQA8vrNhPc</span>
+#&gt; <span class='message'>                ID: 1neWaIOBvW1UPKJnx9UkVmQdrq-Nq-rhTPYNgQySP8-k</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 3</span>
@@ -246,7 +254,7 @@ unspecified, Sheets puts the new sheet(s) at the end.</p></td>
 #&gt; <span class='message'>      Sheet1: 1000 x 26</span>
 #&gt; <span class='message'>       apple: 1000 x 26</span>
 #&gt; <span class='message'>      Sheet2: 1000 x 26</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: add-sheets-to-me</span>
-#&gt; <span class='message'>                ID: 1c6UQ_BylXQ5kZWMTuG0OjL0u4hTFrhu_7xQA8vrNhPc</span>
+#&gt; <span class='message'>                ID: 1neWaIOBvW1UPKJnx9UkVmQdrq-Nq-rhTPYNgQySP8-k</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 4</span>
@@ -256,7 +264,7 @@ unspecified, Sheets puts the new sheet(s) at the end.</p></td>
 #&gt; <span class='message'>       apple: 1000 x 26</span>
 #&gt; <span class='message'>      banana: 1000 x 26</span>
 #&gt; <span class='message'>      Sheet2: 1000 x 26</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: add-sheets-to-me</span>
-#&gt; <span class='message'>                ID: 1c6UQ_BylXQ5kZWMTuG0OjL0u4hTFrhu_7xQA8vrNhPc</span>
+#&gt; <span class='message'>                ID: 1neWaIOBvW1UPKJnx9UkVmQdrq-Nq-rhTPYNgQySP8-k</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 6</span>
@@ -268,7 +276,7 @@ unspecified, Sheets puts the new sheet(s) at the end.</p></td>
 #&gt; <span class='message'>      Sheet2: 1000 x 26</span>
 #&gt; <span class='message'>     coconut: 1000 x 26</span>
 #&gt; <span class='message'> dragonfruit: 1000 x 26</span></div><div class='output co'>#&gt; <span class='message'>Spreadsheet name: add-sheets-to-me</span>
-#&gt; <span class='message'>                ID: 1c6UQ_BylXQ5kZWMTuG0OjL0u4hTFrhu_7xQA8vrNhPc</span>
+#&gt; <span class='message'>                ID: 1neWaIOBvW1UPKJnx9UkVmQdrq-Nq-rhTPYNgQySP8-k</span>
 #&gt; <span class='message'>            Locale: en_US</span>
 #&gt; <span class='message'>         Time zone: Etc/GMT</span>
 #&gt; <span class='message'>       # of sheets: 7</span>
@@ -281,7 +289,7 @@ unspecified, Sheets puts the new sheet(s) at the end.</p></td>
 #&gt; <span class='message'>      Sheet2: 1000 x 26</span>
 #&gt; <span class='message'>     coconut: 1000 x 26</span>
 #&gt; <span class='message'> dragonfruit: 1000 x 26</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * add-sheets-to-me: 1c6UQ_BylXQ5kZWMTuG0OjL0u4hTFrhu_7xQA8vrNhPc</span></div></pre>
+#&gt; <span class='message'>  * add-sheets-to-me: 1neWaIOBvW1UPKJnx9UkVmQdrq-Nq-rhTPYNgQySP8-k</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

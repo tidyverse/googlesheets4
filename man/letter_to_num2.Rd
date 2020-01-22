@@ -10,7 +10,7 @@ letter_to_num2(indexes)
 \item{indexes}{The character column specification ex. C:F}
 }
 \value{
-\code{(list)} A list of numeric vectors with the column numbers. If a series of column numbers the starting and ending index are returned.
+\code{(numeric)} A  numeric vector with the corresponding column index numbers. If a series of column numbers the starting and ending index are returned.
 }
 \description{
 This differs from cellranger::letter_to_num in that it accounts for series of columns ie B:D and the output is a list.

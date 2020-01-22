@@ -2,7 +2,7 @@
 #'
 #' This differs from cellranger::letter_to_num in that it accounts for series of columns ie B:D and the output is a list.
 #' @param indexes The character column specification ex. C:F
-#' @return \code{(list)} A list of numeric vectors with the column numbers. If a series of column numbers the starting and ending index are returned.
+#' @return \code{(numeric)} A  numeric vector with the corresponding column index numbers. If a series of column numbers the starting and ending index are returned.
 #' @examples
 #' \donttest{
 #' indexes <- c("a")

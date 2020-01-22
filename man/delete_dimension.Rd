@@ -34,7 +34,12 @@ Delete rows or columns of a specified sheet given a vector of row numbers, colum
 }
 \examples{
 \dontrun{
-delete_dimension(ss, "Sheet1", "c", c("A", "D:E"))
-delete_dimension(ss, "Sheet1", "r", c(1, 3:5))
+ss <- sheets_get("YOUR SPREADSHEET ID HERE")
+example_data <- data.frame(matrix(rep(as.double(2:10), times = 10), nrow = 9))
+example_data <- tibble::as_tibble(setNames(.example, LETTERS[1:10]))
+sheet <- "YOUR SHEET NAME HERE"
+write_sheet(example_data, ss, sheet)
+delete_dimension(ss, sheet, "c", c("A", "D:E"))
+delete_dimension(ss, sheet, "r", c(1, 3:5))
 }
 }

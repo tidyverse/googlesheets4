@@ -72,8 +72,8 @@ delete_dimension <- function(ss = NULL,
   if (!inherits(ss, "googlesheets4_spreadsheet")) {
     stop("Please supply googlesheets4_spreadsheet. See ?sheets_get")
   } else {
-    .ssid <- googlesheets4:::as_sheets_id(ss)
-    googlesheets4:::message_glue("Deleting from: \n Spreadsheet: {ss$name}")
+    .ssid <- as_sheets_id(ss)
+    message_glue("Deleting from: \n Spreadsheet: {ss$name}")
   }
     
   #Validate sheet and prepare as parameter to request:  Mon Jan 20 16:54:02 2020 ----
@@ -87,7 +87,7 @@ delete_dimension <- function(ss = NULL,
   if (class(.sheet) == "try-error" || is.null(.sheet) || length(.sheet) == 0) {
     stop("Please check the sheet parameter provided.")
   } else {
-    googlesheets4:::message_glue("sheet: {ss$sheets$name[ss$sheets$id == .sheet]}")
+    message_glue("sheet: {ss$sheets$name[ss$sheets$id == .sheet]}")
   }
   
   # ensure correct parameter syntax:  Tue Jan 21 16:29:12 2020 ----
@@ -169,7 +169,7 @@ delete_dimension <- function(ss = NULL,
     .resp <- gargle::response_process(.resp_raw)
   })
   
-  purrr::walk(indexes, ~ {googlesheets4:::message_glue("Deleting {.dimension} {.x}")})
+  purrr::walk(indexes, ~ {message_glue("Deleting {.dimension} {.x}")})
   
   invisible(ss)
 }

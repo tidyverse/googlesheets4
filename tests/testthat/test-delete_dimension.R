@@ -1,5 +1,5 @@
 .sheet <- "delete_dimension_tests"
-.ssid <- googlesheets4:::test_sheet_create(.sheet)
+.ssid <- test_sheet_create(.sheet)
 ss <- sheets_get(ssid)
 .example <- tibble::as_tibble(setNames(data.frame(matrix(rep(as.double(2:10), times = 10), nrow = 9)), LETTERS[1:10]))
 

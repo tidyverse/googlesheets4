@@ -18,19 +18,19 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - { os: windows-latest, r: '3.6', error_on: 'warning'}
-        - { os: macOS-latest, r: '3.6', GOOGLESHEETS4_PASSWORD: '${{secrets.GOOGLESHEETS4_PASSWORD}}', error_on: 'warning'}
-        - { os: macOS-latest, r: 'devel', error_on: 'warning'}
-        - { os: ubuntu-16.04, r: '3.2', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'error'}
-        - { os: ubuntu-16.04, r: '3.3', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
-        - { os: ubuntu-16.04, r: '3.4', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
-        - { os: ubuntu-16.04, r: '3.5', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
-        - { os: ubuntu-16.04, r: '3.6', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
+        - { os: windows-latest, r: '3.6', sheets_auth: GOOGLESHEETS4_NOAUTH, error_on: 'warning'}
+        - { os: macOS-latest, r: '3.6', sheets_auth: GOOGLESHEETS4_PASSWORD, error_on: 'warning'}
+        - { os: macOS-latest, r: 'devel', sheets_auth: GOOGLESHEETS4_NOAUTH, error_on: 'warning'}
+        - { os: ubuntu-16.04, r: '3.2', sheets_auth: GOOGLESHEETS4_NOAUTH, cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'error'}
+        - { os: ubuntu-16.04, r: '3.3', sheets_auth: GOOGLESHEETS4_NOAUTH, cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
+        - { os: ubuntu-16.04, r: '3.4', sheets_auth: GOOGLESHEETS4_NOAUTH, cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
+        - { os: ubuntu-16.04, r: '3.5', sheets_auth: GOOGLESHEETS4_NOAUTH, cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
+        - { os: ubuntu-16.04, r: '3.6', sheets_auth: GOOGLESHEETS4_NOAUTH, cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
-      GOOGLESHEETS4_PASSWORD: ${{ matrix.config.GOOGLESHEETS4_PASSWORD }}
+      GOOGLESHEETS4_PASSWORD: ${{ secrets[matrix.config.sheets_auth] }}
 
     steps:
       - uses: actions/checkout@v1

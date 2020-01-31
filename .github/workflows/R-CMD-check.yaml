@@ -18,18 +18,19 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - { os: windows-latest, r: '3.6'}
-        - { os: macOS-latest, r: '3.6'}
-        - { os: macOS-latest, r: 'devel'}
-        - { os: ubuntu-16.04, r: '3.2', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-        - { os: ubuntu-16.04, r: '3.3', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-        - { os: ubuntu-16.04, r: '3.4', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-        - { os: ubuntu-16.04, r: '3.5', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-        - { os: ubuntu-16.04, r: '3.6', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+        - { os: windows-latest, r: '3.6', error_on: 'warning'}
+        - { os: macOS-latest, r: '3.6', GOOGLESHEETS4_PASSWORD: '${{secrets.GOOGLESHEETS4_PASSWORD}}', error_on: 'warning'}
+        - { os: macOS-latest, r: 'devel', error_on: 'warning'}
+        - { os: ubuntu-16.04, r: '3.2', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'error'}
+        - { os: ubuntu-16.04, r: '3.3', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
+        - { os: ubuntu-16.04, r: '3.4', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
+        - { os: ubuntu-16.04, r: '3.5', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
+        - { os: ubuntu-16.04, r: '3.6', cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       CRAN: ${{ matrix.config.cran }}
+      GOOGLESHEETS4_PASSWORD: ${{ matrix.config.GOOGLESHEETS4_PASSWORD }}
 
     steps:
       - uses: actions/checkout@v1
@@ -64,7 +65,7 @@ jobs:
         run: Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))" -e "remotes::install_cran('rcmdcheck')" -e "remotes::install_cran('tidyverse')" -e "remotes::install_github('hadley/emo')"
 
       - name: Check
-        run: Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual', error_on = 'warning', check_dir = 'check')"
+        run: Rscript -e "rcmdcheck::rcmdcheck(args = '--no-manual --ignore-vignettes --no-examples', build_args = '--no-build-vignettes', error_on = ${{ matrix.config.error_on }}, check_dir = 'check')"
 
       - name: Upload check results
         if: failure()

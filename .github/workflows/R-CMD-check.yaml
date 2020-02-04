@@ -68,6 +68,7 @@ jobs:
         run: Rscript -e "rcmdcheck::rcmdcheck(args = c('--no-manual', '--ignore-vignettes', '--no-examples'), build_args = '--no-build-vignettes', error_on = '${{ matrix.config.error_on }}', check_dir = 'check')"
 
       - name: Upload check results
+        if: failure()
         uses: actions/upload-artifact@master
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results

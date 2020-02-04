@@ -1,0 +1,53 @@
+language: R
+cran: https://demo.rstudiopm.com/all/__linux__/xenial/latest
+cache: packages
+
+addons:
+  apt:
+    sources:
+    - sourceline: 'ppa:chris-lea/libsodium'
+    packages:
+    - libsodium-dev
+
+matrix:
+  include:
+    - r: release
+      after_success:
+      - Rscript -e 'covr::codecov()'
+      - find . -name testthat.Rout | xargs cat
+      after_failure:
+      - find . -name testthat.Rout | xargs cat
+      before_cache: Rscript -e 'remotes::install_cran("pkgdown")' -e 'remotes::install_github("tidyverse/tidytemplate")' -e 'remotes::install_cran("tidyverse")' -e 'remotes::install_github("hadley/emoe")'
+      deploy:
+        provider: script
+        script: Rscript -e 'pkgdown::deploy_site_github()'
+        skip_cleanup: true
+    - r: devel
+      env: GOOGLESHEETS4_PASSWORD=''
+      r_build_args: --no-build-vignettes
+      r_check_args: --ignore-vignettes --no-examples
+      after_script:
+      - find . -name testthat.Rout | xargs cat
+    - r: release
+      env: GOOGLESHEETS4_PASSWORD=''
+      r_build_args: --no-build-vignettes
+      r_check_args: --ignore-vignettes --no-examples
+      after_script:
+      - find . -name testthat.Rout | xargs cat
+    - r: oldrel
+      env: GOOGLESHEETS4_PASSWORD=''
+      r_build_args: --no-build-vignettes
+      r_check_args: --ignore-vignettes --no-examples
+    - r: 3.4
+      env: GOOGLESHEETS4_PASSWORD=''
+      r_build_args: --no-build-vignettes
+      r_check_args: --ignore-vignettes --no-examples
+    - r: 3.3
+      env: GOOGLESHEETS4_PASSWORD=''
+      r_build_args: --no-build-vignettes
+      r_check_args: --ignore-vignettes --no-examples
+    - r: 3.2
+      env: GOOGLESHEETS4_PASSWORD=''
+      warnings_are_errors: false
+      r_build_args: --no-build-vignettes
+      r_check_args: --ignore-vignettes --no-examples

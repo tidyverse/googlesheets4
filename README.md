@@ -10,6 +10,10 @@
 status](https://www.r-pkg.org/badges/version/googlesheets4)](https://CRAN.R-project.org/package=googlesheets4)
 [![R build
 status](https://github.com/tidyverse/googlesheets4/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googlesheets4)
+[![Travis build
+status](https://travis-ci.org/tidyverse/googlesheets4.svg?branch=master)](https://travis-ci.org/tidyverse/googlesheets4)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googlesheets4?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googlesheets4)
 [![Coverage
 status](https://codecov.io/gh/tidyverse/googlesheets4/branch/master/graph/badge.svg)](https://codecov.io/github/tidyverse/googlesheets4?branch=master)
 <!-- badges: end -->

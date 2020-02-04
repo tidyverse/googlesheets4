@@ -53,7 +53,10 @@ test_that("lookup_sheet_name() errors if number is incompatible with sheet names
 test_that("lookup_sheet_name() consults sheet names, if given", {
   sheets_df <- tibble::tibble(name = c("a", "foo", "z"))
   expect_identical(lookup_sheet_name("foo", sheets_df), "foo")
-  expect_error(lookup_sheet_name("nope", sheets_df), "No sheet found")
+  expect_error(
+    lookup_sheet_name("nope", sheets_df),
+    class = "googlesheets4_error_sheet_not_found"
+  )
 })
 
 test_that("lookup_sheet_name() works with a number", {

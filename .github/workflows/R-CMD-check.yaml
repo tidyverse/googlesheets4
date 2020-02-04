@@ -60,6 +60,8 @@ jobs:
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
+        run: brew install libsodium
 
       - name: Install dependencies
         run: Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))" -e "remotes::install_cran('rcmdcheck')" -e "remotes::install_cran('tidyverse')" -e "remotes::install_github('hadley/emo')"

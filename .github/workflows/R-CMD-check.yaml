@@ -74,7 +74,7 @@ jobs:
           path: check
 
       - name: Reveal testthat details
-        run: find . -name testthat.Rout | xargs cat
+        run: find . -name testthat.Rout -exec cat '{}' ';'
 
       - name: Test coverage
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'

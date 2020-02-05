@@ -116,7 +116,7 @@
 <div id="attach-googlesheets4" class="section level2">
 <h2 class="hasAnchor">
 <a href="#attach-googlesheets4" class="anchor"></a>Attach googlesheets4</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googlesheets4)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googlesheets4)</span></code></pre></div>
 </div>
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
@@ -129,105 +129,105 @@
 <a href="#sheets_create" class="anchor"></a><code>sheets_create()</code>
 </h2>
 <p>Create a brand new Sheet with <code><a href="../../reference/sheets_create.html">sheets_create()</a></code>. You can specify the new Sheet’s <code>name</code> (or accept a randomly generated name).</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"write-sheets-demo-1"</span>)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-1</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt;                 ID: 1JGaNnOxl-8jwCJVql5VWSxBgMuvN63TYrWqFBs4bT7w</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt;             Locale: en_US</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt;        # of sheets: 1</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt;       Sheet1: 1000 x 26</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"write-sheets-demo-1"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; Spreadsheet name: write-sheets-demo-1</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt;                 ID: 1d8_hhRh4rcsWn3p5KbMRwFDH3QXmKPm1IXd1jH9AmRU</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt;        # of sheets: 1</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt; </span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt;       Sheet1: 1000 x 26</span></span></code></pre></div>
 <p>Every Sheet <em>must</em> have at least one (work)sheet, so Google Sheets automatically creates an empty “Sheet1”.</p>
 <p>You can control the names and content of the initial (work)sheets with the <code>sheets</code> argument.</p>
 <div id="send-sheet-names" class="section level3">
 <h3 class="hasAnchor">
 <a href="#send-sheet-names" class="anchor"></a>Send sheet names</h3>
 <p>Use a character vector to specify the names of one or more empty sheets.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  <span class="st">"write-sheets-demo-2"</span>,</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="dt">sheets =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"alpha"</span>, <span class="st">"beta"</span>)</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-2</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt;                 ID: 1o0YwIiHA8Jvs0hStNJu3Mxkhn8y9AdBXW6yBgx2FnLI</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt;             Locale: en_US</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">#&gt;        # of sheets: 2</span></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt;        alpha: 1000 x 26</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#&gt;         beta: 1000 x 26</span></a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="st">"write-sheets-demo-2"</span>,</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">sheets =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"alpha"</span>, <span class="st">"beta"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; Spreadsheet name: write-sheets-demo-2</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;                 ID: 14NHTYN2Kf4y4rQV7yAc0KPNALjdgvwyt4XcsNJytc48</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;        # of sheets: 2</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; </span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt;        alpha: 1000 x 26</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt;         beta: 1000 x 26</span></span></code></pre></div>
 <p>These sheets have no values and get their dimensions from Sheets default behaviour.</p>
 </div>
 <div id="send-a-data-frame" class="section level3">
 <h3 class="hasAnchor">
 <a href="#send-a-data-frame" class="anchor"></a>Send a data frame</h3>
 <p>If you provide a data frame, it is used to populate the cells of a sheet and to set sheet dimensions (number of rows and columns). The header row also gets special treatment. The sheet inherits the name of the data frame, where possible.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">my_data &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="st">"write-sheets-demo-3"</span>,</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5">  <span class="dt">sheets =</span> my_data</a>
-<a class="sourceLine" id="cb4-6" data-line-number="6">)</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-3</span></a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt;                 ID: 1rBPFHqVDJZCNmd6bB8ZedU4E_6s4GjZ7oIP0rb5z9Kw</span></a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt;             Locale: en_US</span></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt;        # of sheets: 1</span></a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt;      my_data: 4 x 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>my_data &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(</span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="st">"write-sheets-demo-3"</span>,</span>
+<span id="cb4-5"><a href="#cb4-5"></a>  <span class="dt">sheets =</span> my_data</span>
+<span id="cb4-6"><a href="#cb4-6"></a>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; Spreadsheet name: write-sheets-demo-3</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt;                 ID: 15v7V2ln7sW3tfk_kXZgnQG07A_iJQ63JtaqavKLieDI</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt;        # of sheets: 1</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; </span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt;      my_data: 4 x 2</span></span></code></pre></div>
 </div>
 <div id="send-multiple-data-frames" class="section level3">
 <h3 class="hasAnchor">
 <a href="#send-multiple-data-frames" class="anchor"></a>Send multiple data frames</h3>
 <p>If you provide a list of data frames, each is used to populate the cells of one sheet and to set sheet dimensions (number of rows and columns). The header row also gets special treatment. The sheets inherit the names from the list, if it has names.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">my_data_frames &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">iris =</span> <span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(iris), <span class="dt">chickwts =</span> <span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(chickwts))</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="st">"write-sheets-demo-4"</span>,</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5">  <span class="dt">sheets =</span> my_data_frames</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6">)</a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-4</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt;                 ID: 1BxXHs1gof887JXQ4zLj186WiNNBZntE9AlBOM0Ia0Cg</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt;             Locale: en_US</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt;        # of sheets: 2</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt;         iris: 7 x 5</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="co">#&gt;     chickwts: 7 x 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>my_data_frames &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">iris =</span> <span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(iris), <span class="dt">chickwts =</span> <span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(chickwts))</span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(</span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="st">"write-sheets-demo-4"</span>,</span>
+<span id="cb5-5"><a href="#cb5-5"></a>  <span class="dt">sheets =</span> my_data_frames</span>
+<span id="cb5-6"><a href="#cb5-6"></a>)</span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; Spreadsheet name: write-sheets-demo-4</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt;                 ID: 1u-TVvnLReFxq-g3UMW_xgHyVHy6xyDVchJ4-ymqFtHw</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt;        # of sheets: 2</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; </span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt;         iris: 7 x 5</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt;     chickwts: 7 x 2</span></span></code></pre></div>
 </div>
 <div id="write-metadata" class="section level3">
 <h3 class="hasAnchor">
 <a href="#write-metadata" class="anchor"></a>Write metadata</h3>
 <p>Most users won’t need to do this, but <code><a href="../../reference/sheets_create.html">sheets_create()</a></code> can set additional Sheet-level metadata, such as locale or time zone. To really make use of this feature, you need to read up on the <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create"><code>spreadsheets.create</code> endpoint</a>.</p>
 <p>Notice how the default empty Sheet here is named “Feuille 1”, since we request a French locale.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="st">"write-sheets-demo-5"</span>,</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="dt">locale =</span> <span class="st">"fr_FR"</span>,</a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">  <span class="dt">timeZone =</span> <span class="st">"Europe/Paris"</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">)</a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-5</span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt;                 ID: 1E8VEDrsUoJjqXcfSBKbA-Pyp0KC_7XRsrlGBVUFvz9c</span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt;             Locale: fr_FR</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt;          Time zone: Europe/Paris</span></a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt;        # of sheets: 1</span></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt;    Feuille 1: 1000 x 26</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="st">"write-sheets-demo-5"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="dt">locale =</span> <span class="st">"fr_FR"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  <span class="dt">timeZone =</span> <span class="st">"Europe/Paris"</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>)</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; Spreadsheet name: write-sheets-demo-5</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;                 ID: 1TrnF24Ij2HTkw7EosmjFvKTEmc3rwFnR1VEujpV_fpM</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;             Locale: fr_FR</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;          Time zone: Europe/Paris</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;        # of sheets: 1</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt;    Feuille 1: 1000 x 26</span></span></code></pre></div>
 <div id="clean-up" class="section level4">
 <h4 class="hasAnchor">
 <a href="#clean-up" class="anchor"></a>Clean up</h4>
 <p>Trash all the Sheets created above. This actually requires googledrive, since it is not possible to trash or delete Sheets through the Sheets API. In our hidden auth process, described earlier, we put a shared token into force for both Sheets and Drive. You can read how to do that in your own work in the article <a href="https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"write-sheets-demo"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt; Files trashed:</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;   * write-sheets-demo-5: 1E8VEDrsUoJjqXcfSBKbA-Pyp0KC_7XRsrlGBVUFvz9c</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;   * write-sheets-demo-4: 1BxXHs1gof887JXQ4zLj186WiNNBZntE9AlBOM0Ia0Cg</span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;   * write-sheets-demo-3: 1rBPFHqVDJZCNmd6bB8ZedU4E_6s4GjZ7oIP0rb5z9Kw</span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;   * write-sheets-demo-2: 1o0YwIiHA8Jvs0hStNJu3Mxkhn8y9AdBXW6yBgx2FnLI</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;   * write-sheets-demo-1: 1JGaNnOxl-8jwCJVql5VWSxBgMuvN63TYrWqFBs4bT7w</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"write-sheets-demo"</span>) <span class="op">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()</span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; Files trashed:</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt;   * write-sheets-demo-5: 1TrnF24Ij2HTkw7EosmjFvKTEmc3rwFnR1VEujpV_fpM</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt;   * write-sheets-demo-4: 1u-TVvnLReFxq-g3UMW_xgHyVHy6xyDVchJ4-ymqFtHw</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt;   * write-sheets-demo-3: 15v7V2ln7sW3tfk_kXZgnQG07A_iJQ63JtaqavKLieDI</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt;   * write-sheets-demo-2: 14NHTYN2Kf4y4rQV7yAc0KPNALjdgvwyt4XcsNJytc48</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt;   * write-sheets-demo-1: 1d8_hhRh4rcsWn3p5KbMRwFDH3QXmKPm1IXd1jH9AmRU</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -237,112 +237,112 @@
 </h2>
 <p><code><a href="../../reference/write_sheet.html">write_sheet()</a></code> is aliased to <code><a href="../../reference/write_sheet.html">sheets_write()</a></code> and is meant to evoke <code><a href="https://readr.tidyverse.org/reference/write_delim.html">readr::write_csv()</a></code> or <code>writexl::write_xlsx()</code>. Whereas <code><a href="../../reference/sheets_create.html">sheets_create()</a></code> emphasizes the <em>target Sheet</em>, <code><a href="../../reference/write_sheet.html">sheets_write()</a></code> emphasizes the <em>data you want to write</em>.</p>
 <p>The only required argument for <code><a href="../../reference/write_sheet.html">sheets_write()</a></code> is the data.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">ss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(df)</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt; Spreadsheet name: jazzy-gemsbok</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;                 ID: 1JlktCGr_KIFkhBRUCOegcXrJbe-4et6-3YnDjRbwfyA</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt;             Locale: en_US</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt;        # of sheets: 1</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt;           df: 4 x 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>df &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</span>
+<span id="cb8-2"><a href="#cb8-2"></a></span>
+<span id="cb8-3"><a href="#cb8-3"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(df)</span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; Spreadsheet name: anachronic-woodstorks</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;                 ID: 1GqXQsbkXajgyn1xtChXz0NbGwaQhawMwkqElKgSPKEc</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;        # of sheets: 1</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; </span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt;           df: 4 x 2</span></span></code></pre></div>
 <p>This creates a new (work)sheet inside a new (spread)Sheet and returns its ID. You’ll notice the new Sheet has a randomly generated name. If that is a problem, use <code><a href="../../reference/sheets_create.html">sheets_create()</a></code> instead, which affords more control over various aspects of the new Sheet.</p>
 <p>Let’s start over: we delete that Sheet and call <code><a href="../../reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name. Then we’ll modify it with <code><a href="../../reference/write_sheet.html">sheets_write()</a></code>. We send one sheet name, “chickwts”, to prevent the creation of “Sheet1”, but we send no data.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">drive_rm</span>(ss)</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; Error in drive_rm(ss): could not find function "drive_rm"</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">ss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(</a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">  <span class="st">"write-sheets-demo-6"</span>,</a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">  <span class="dt">sheets =</span> <span class="st">"chickwts"</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">)</a>
-<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"><span class="co">#&gt;                 ID: 1zZ1yr6k21B77oJ35nUZ_TC8cGqM8EI7Bem38za9lDrA</span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co">#&gt;             Locale: en_US</span></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co">#&gt;        # of sheets: 1</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb9-15" data-line-number="15"><span class="co">#&gt;     chickwts: 1000 x 26</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">drive_rm</span>(ss)</span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; Error in drive_rm(ss): could not find function "drive_rm"</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(</span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="st">"write-sheets-demo-6"</span>,</span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="dt">sheets =</span> <span class="st">"chickwts"</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>)</span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;                 ID: 1FQjKL2ARMVLxkzhgpAoU_ckPBPdSZ15CmjQ5IvLA3QU</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt;        # of sheets: 1</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt; </span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt;     chickwts: 1000 x 26</span></span></code></pre></div>
 <p><code><a href="../../reference/write_sheet.html">sheets_write()</a></code> allows us to write the actual <code>chickwts</code> data into the sheet by that name.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(chickwts, <span class="dt">ss =</span> ss, <span class="dt">sheet =</span> <span class="st">"chickwts"</span>)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; Writing to sheet "chickwts"</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt;                 ID: 1zZ1yr6k21B77oJ35nUZ_TC8cGqM8EI7Bem38za9lDrA</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt;             Locale: en_US</span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt;        # of sheets: 1</span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt;     chickwts: 72 x 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(chickwts, <span class="dt">ss =</span> ss, <span class="dt">sheet =</span> <span class="st">"chickwts"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; Writing to sheet "chickwts"</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt;                 ID: 1FQjKL2ARMVLxkzhgpAoU_ckPBPdSZ15CmjQ5IvLA3QU</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt;        # of sheets: 1</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; </span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt;     chickwts: 72 x 2</span></span></code></pre></div>
 <p><code><a href="../../reference/write_sheet.html">sheets_write()</a></code> can also write data into a new sheet, if <code>sheet</code> implicitly or explicitly targets a non-existent sheet.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co"># explicitly make a new sheet named "iris"</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(iris, <span class="dt">ss =</span> ss, <span class="dt">sheet =</span> <span class="st">"iris"</span>)</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#&gt; Writing to sheet "iris"</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="co">#&gt;                 ID: 1zZ1yr6k21B77oJ35nUZ_TC8cGqM8EI7Bem38za9lDrA</span></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt;             Locale: en_US</span></a>
-<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
-<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="co">#&gt;        # of sheets: 2</span></a>
-<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb11-12" data-line-number="12"><span class="co">#&gt;     chickwts: 72 x 2</span></a>
-<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="co">#&gt;         iris: 151 x 5</span></a>
-<a class="sourceLine" id="cb11-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co"># implicitly make a new sheet named "mtcars"</span></a>
-<a class="sourceLine" id="cb11-16" data-line-number="16"><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(mtcars, <span class="dt">ss =</span> ss)</a>
-<a class="sourceLine" id="cb11-17" data-line-number="17"><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></a>
-<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#&gt; Writing to sheet "mtcars"</span></a>
-<a class="sourceLine" id="cb11-19" data-line-number="19"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></a>
-<a class="sourceLine" id="cb11-20" data-line-number="20"><span class="co">#&gt;                 ID: 1zZ1yr6k21B77oJ35nUZ_TC8cGqM8EI7Bem38za9lDrA</span></a>
-<a class="sourceLine" id="cb11-21" data-line-number="21"><span class="co">#&gt;             Locale: en_US</span></a>
-<a class="sourceLine" id="cb11-22" data-line-number="22"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
-<a class="sourceLine" id="cb11-23" data-line-number="23"><span class="co">#&gt;        # of sheets: 3</span></a>
-<a class="sourceLine" id="cb11-24" data-line-number="24"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb11-25" data-line-number="25"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb11-26" data-line-number="26"><span class="co">#&gt;     chickwts: 72 x 2</span></a>
-<a class="sourceLine" id="cb11-27" data-line-number="27"><span class="co">#&gt;         iris: 151 x 5</span></a>
-<a class="sourceLine" id="cb11-28" data-line-number="28"><span class="co">#&gt;       mtcars: 33 x 11</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># explicitly make a new sheet named "iris"</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(iris, <span class="dt">ss =</span> ss, <span class="dt">sheet =</span> <span class="st">"iris"</span>)</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; Writing to sheet "iris"</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt;                 ID: 1FQjKL2ARMVLxkzhgpAoU_ckPBPdSZ15CmjQ5IvLA3QU</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt;        # of sheets: 2</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt; </span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt;     chickwts: 72 x 2</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt;         iris: 151 x 5</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a></span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="co"># implicitly make a new sheet named "mtcars"</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(mtcars, <span class="dt">ss =</span> ss)</span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt; Writing to sheet "mtcars"</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt;                 ID: 1FQjKL2ARMVLxkzhgpAoU_ckPBPdSZ15CmjQ5IvLA3QU</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt;        # of sheets: 3</span></span>
+<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt; </span></span>
+<span id="cb11-25"><a href="#cb11-25"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb11-26"><a href="#cb11-26"></a><span class="co">#&gt;     chickwts: 72 x 2</span></span>
+<span id="cb11-27"><a href="#cb11-27"></a><span class="co">#&gt;         iris: 151 x 5</span></span>
+<span id="cb11-28"><a href="#cb11-28"></a><span class="co">#&gt;       mtcars: 33 x 11</span></span></code></pre></div>
 <p>If no sheet name is given and it can’t be determined from <code>data</code>, a name of the form “SheetN” is automatically generated by Sheets.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">y =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>), ss)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; Writing to sheet "Sheet1"</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt;                 ID: 1zZ1yr6k21B77oJ35nUZ_TC8cGqM8EI7Bem38za9lDrA</span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt;             Locale: en_US</span></a>
-<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
-<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt;        # of sheets: 4</span></a>
-<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt;     chickwts: 72 x 2</span></a>
-<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt;         iris: 151 x 5</span></a>
-<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt;       mtcars: 33 x 11</span></a>
-<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt;       Sheet1: 3 x 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">y =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>), ss)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; Writing to sheet "Sheet1"</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt;                 ID: 1FQjKL2ARMVLxkzhgpAoU_ckPBPdSZ15CmjQ5IvLA3QU</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt;        # of sheets: 4</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt; </span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co">#&gt;     chickwts: 72 x 2</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="co">#&gt;         iris: 151 x 5</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co">#&gt;       mtcars: 33 x 11</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="co">#&gt;       Sheet1: 3 x 2</span></span></code></pre></div>
 <p><code><a href="../../reference/sheets_append.html">sheets_append()</a></code> can add one or more rows of data to an existing Sheet.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="../../reference/sheets_append.html">sheets_append</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">5</span>), ss, <span class="dt">sheet =</span> <span class="st">"Sheet1"</span>)</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; Appending 1 row(s) to 'Sheet1'</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt;                 ID: 1zZ1yr6k21B77oJ35nUZ_TC8cGqM8EI7Bem38za9lDrA</span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;             Locale: en_US</span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt;          Time zone: Etc/GMT</span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;        # of sheets: 4</span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></a>
-<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="co">#&gt;     chickwts: 72 x 2</span></a>
-<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="co">#&gt;         iris: 151 x 5</span></a>
-<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="co">#&gt;       mtcars: 33 x 11</span></a>
-<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="co">#&gt;       Sheet1: 4 x 2</span></a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw"><a href="../../reference/sheets_append.html">sheets_append</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">5</span>), ss, <span class="dt">sheet =</span> <span class="st">"Sheet1"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt; Appending 1 row(s) to 'Sheet1'</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt; Spreadsheet name: write-sheets-demo-6</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt;                 ID: 1FQjKL2ARMVLxkzhgpAoU_ckPBPdSZ15CmjQ5IvLA3QU</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt;        # of sheets: 4</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt; </span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co">#&gt;     chickwts: 72 x 2</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co">#&gt;         iris: 151 x 5</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="co">#&gt;       mtcars: 33 x 11</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="co">#&gt;       Sheet1: 4 x 2</span></span></code></pre></div>
 <div id="clean-up-1" class="section level4">
 <h4 class="hasAnchor">
 <a href="#clean-up-1" class="anchor"></a>Clean up</h4>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"write-sheets-demo"</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="st">  </span>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt; Files trashed:</span></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="co">#&gt;   * write-sheets-demo-6: 1zZ1yr6k21B77oJ35nUZ_TC8cGqM8EI7Bem38za9lDrA</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"write-sheets-demo"</span>) <span class="op">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="st">  </span>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt; Files trashed:</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt;   * write-sheets-demo-6: 1FQjKL2ARMVLxkzhgpAoU_ckPBPdSZ15CmjQ5IvLA3QU</span></span></code></pre></div>
 </div>
 </div>
   </div>

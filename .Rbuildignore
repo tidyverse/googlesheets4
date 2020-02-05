@@ -2,9 +2,7 @@
 ^\.Rproj\.user$
 ^docs$
 ^_pkgdown\.yml$
-^\.travis\.yml$
 ^codecov\.yml$
-^appveyor\.yml$
 ^data-raw$
 ^man-roxygen$
 ^\.httr-oauth.*

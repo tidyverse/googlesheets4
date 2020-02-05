@@ -180,6 +180,25 @@ endpoints that are used internally by googlesheets4.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>sheets_endpoints</span>(), <span class='kw'>max.level</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; List of 17
+#&gt;  $ sheets.spreadsheets.get                           :List of 8
+#&gt;   ..$ id            : chr "sheets.spreadsheets.get"
+#&gt;   ..$ httpMethod    : chr "GET"
+#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}"
+#&gt;   ..$ parameters    :List of 14
+#&gt;   ..$ scopes        : chr "drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"
+#&gt;   ..$ description   : chr "Returns the spreadsheet at the given ID.\nThe caller must specify the spreadsheet ID.\n\nBy default, data withi"| __truncated__
+#&gt;   ..$ response      : chr "Spreadsheet"
+#&gt;   ..$ parameterOrder: chr "spreadsheetId"
+#&gt;  $ sheets.spreadsheets.getByDataFilter               :List of 9
+#&gt;   ..$ id            : chr "sheets.spreadsheets.getByDataFilter"
+#&gt;   ..$ httpMethod    : chr "POST"
+#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}:getByDataFilter"
+#&gt;   ..$ parameters    :List of 14
+#&gt;   ..$ scopes        : chr "drive, drive.file, spreadsheets"
+#&gt;   ..$ description   : chr "Returns the spreadsheet at the given ID.\nThe caller must specify the spreadsheet ID.\n\nThis method differs fr"| __truncated__
+#&gt;   ..$ request       : chr "GetSpreadsheetByDataFilterRequest"
+#&gt;   ..$ response      : chr "Spreadsheet"
+#&gt;   ..$ parameterOrder: chr "spreadsheetId"
 #&gt;  $ sheets.spreadsheets.create                        :List of 9
 #&gt;   ..$ id            : chr "sheets.spreadsheets.create"
 #&gt;   ..$ httpMethod    : chr "POST"
@@ -200,25 +219,16 @@ endpoints that are used internally by googlesheets4.</p>
 #&gt;   ..$ request       : chr "BatchUpdateSpreadsheetRequest"
 #&gt;   ..$ response      : chr "BatchUpdateSpreadsheetResponse"
 #&gt;   ..$ parameterOrder: chr "spreadsheetId"
-#&gt;  $ sheets.spreadsheets.get                           :List of 8
-#&gt;   ..$ id            : chr "sheets.spreadsheets.get"
-#&gt;   ..$ httpMethod    : chr "GET"
-#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}"
-#&gt;   ..$ parameters    :List of 14
-#&gt;   ..$ scopes        : chr "drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"
-#&gt;   ..$ description   : chr "Returns the spreadsheet at the given ID.\nThe caller must specify the spreadsheet ID.\n\nBy default, data withi"| __truncated__
-#&gt;   ..$ response      : chr "Spreadsheet"
-#&gt;   ..$ parameterOrder: chr "spreadsheetId"
-#&gt;  $ sheets.spreadsheets.getByDataFilter               :List of 9
-#&gt;   ..$ id            : chr "sheets.spreadsheets.getByDataFilter"
+#&gt;  $ sheets.spreadsheets.sheets.copyTo                 :List of 9
+#&gt;   ..$ id            : chr "sheets.spreadsheets.sheets.copyTo"
 #&gt;   ..$ httpMethod    : chr "POST"
-#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}:getByDataFilter"
+#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo"
 #&gt;   ..$ parameters    :List of 14
 #&gt;   ..$ scopes        : chr "drive, drive.file, spreadsheets"
-#&gt;   ..$ description   : chr "Returns the spreadsheet at the given ID.\nThe caller must specify the spreadsheet ID.\n\nThis method differs fr"| __truncated__
-#&gt;   ..$ request       : chr "GetSpreadsheetByDataFilterRequest"
-#&gt;   ..$ response      : chr "Spreadsheet"
-#&gt;   ..$ parameterOrder: chr "spreadsheetId"
+#&gt;   ..$ description   : chr "Copies a single sheet from a spreadsheet to another spreadsheet.\nReturns the properties of the newly created sheet."
+#&gt;   ..$ request       : chr "CopySheetToAnotherSpreadsheetRequest"
+#&gt;   ..$ response      : chr "SheetProperties"
+#&gt;   ..$ parameterOrder: chr [1:2] "spreadsheetId" "sheetId"
 #&gt;  $ sheets.spreadsheets.developerMetadata.search      :List of 9
 #&gt;   ..$ id            : chr "sheets.spreadsheets.developerMetadata.search"
 #&gt;   ..$ httpMethod    : chr "POST"
@@ -238,45 +248,6 @@ endpoints that are used internally by googlesheets4.</p>
 #&gt;   ..$ description   : chr "Returns the developer metadata with the specified ID.\nThe caller must specify the spreadsheet ID and the devel"| __truncated__
 #&gt;   ..$ response      : chr "DeveloperMetadata"
 #&gt;   ..$ parameterOrder: chr [1:2] "spreadsheetId" "metadataId"
-#&gt;  $ sheets.spreadsheets.values.batchGet               :List of 8
-#&gt;   ..$ id            : chr "sheets.spreadsheets.values.batchGet"
-#&gt;   ..$ httpMethod    : chr "GET"
-#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values:batchGet"
-#&gt;   ..$ parameters    :List of 16
-#&gt;   ..$ scopes        : chr "drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"
-#&gt;   ..$ description   : chr "Returns one or more ranges of values from a spreadsheet.\nThe caller must specify the spreadsheet ID and one or more ranges."
-#&gt;   ..$ response      : chr "BatchGetValuesResponse"
-#&gt;   ..$ parameterOrder: chr "spreadsheetId"
-#&gt;  $ sheets.spreadsheets.values.clear                  :List of 9
-#&gt;   ..$ id            : chr "sheets.spreadsheets.values.clear"
-#&gt;   ..$ httpMethod    : chr "POST"
-#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values/{range}:clear"
-#&gt;   ..$ parameters    :List of 13
-#&gt;   ..$ scopes        : chr "drive, drive.file, spreadsheets"
-#&gt;   ..$ description   : chr "Clears values from a spreadsheet.\nThe caller must specify the spreadsheet ID and range.\nOnly values are clear"| __truncated__
-#&gt;   ..$ request       : chr "ClearValuesRequest"
-#&gt;   ..$ response      : chr "ClearValuesResponse"
-#&gt;   ..$ parameterOrder: chr [1:2] "spreadsheetId" "range"
-#&gt;  $ sheets.spreadsheets.values.batchClearByDataFilter :List of 9
-#&gt;   ..$ id            : chr "sheets.spreadsheets.values.batchClearByDataFilter"
-#&gt;   ..$ httpMethod    : chr "POST"
-#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter"
-#&gt;   ..$ parameters    :List of 13
-#&gt;   ..$ scopes        : chr "drive, drive.file, spreadsheets"
-#&gt;   ..$ description   : chr "Clears one or more ranges of values from a spreadsheet.\nThe caller must specify the spreadsheet ID and one or "| __truncated__
-#&gt;   ..$ request       : chr "BatchClearValuesByDataFilterRequest"
-#&gt;   ..$ response      : chr "BatchClearValuesByDataFilterResponse"
-#&gt;   ..$ parameterOrder: chr "spreadsheetId"
-#&gt;  $ sheets.spreadsheets.values.append                 :List of 9
-#&gt;   ..$ id            : chr "sheets.spreadsheets.values.append"
-#&gt;   ..$ httpMethod    : chr "POST"
-#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values/{range}:append"
-#&gt;   ..$ parameters    :List of 21
-#&gt;   ..$ scopes        : chr "drive, drive.file, spreadsheets"
-#&gt;   ..$ description   : chr "Appends values to a spreadsheet. The input range is used to search for\nexisting data and find a \"table\" with"| __truncated__
-#&gt;   ..$ request       : chr "ValueRange"
-#&gt;   ..$ response      : chr "AppendValuesResponse"
-#&gt;   ..$ parameterOrder: chr [1:2] "spreadsheetId" "range"
 #&gt;  $ sheets.spreadsheets.values.batchGetByDataFilter   :List of 9
 #&gt;   ..$ id            : chr "sheets.spreadsheets.values.batchGetByDataFilter"
 #&gt;   ..$ httpMethod    : chr "POST"
@@ -336,16 +307,45 @@ endpoints that are used internally by googlesheets4.</p>
 #&gt;   ..$ request       : chr "BatchUpdateValuesRequest"
 #&gt;   ..$ response      : chr "BatchUpdateValuesResponse"
 #&gt;   ..$ parameterOrder: chr "spreadsheetId"
-#&gt;  $ sheets.spreadsheets.sheets.copyTo                 :List of 9
-#&gt;   ..$ id            : chr "sheets.spreadsheets.sheets.copyTo"
+#&gt;  $ sheets.spreadsheets.values.batchGet               :List of 8
+#&gt;   ..$ id            : chr "sheets.spreadsheets.values.batchGet"
+#&gt;   ..$ httpMethod    : chr "GET"
+#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values:batchGet"
+#&gt;   ..$ parameters    :List of 16
+#&gt;   ..$ scopes        : chr "drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"
+#&gt;   ..$ description   : chr "Returns one or more ranges of values from a spreadsheet.\nThe caller must specify the spreadsheet ID and one or more ranges."
+#&gt;   ..$ response      : chr "BatchGetValuesResponse"
+#&gt;   ..$ parameterOrder: chr "spreadsheetId"
+#&gt;  $ sheets.spreadsheets.values.clear                  :List of 9
+#&gt;   ..$ id            : chr "sheets.spreadsheets.values.clear"
 #&gt;   ..$ httpMethod    : chr "POST"
-#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/sheets/{sheetId}:copyTo"
-#&gt;   ..$ parameters    :List of 14
+#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values/{range}:clear"
+#&gt;   ..$ parameters    :List of 13
 #&gt;   ..$ scopes        : chr "drive, drive.file, spreadsheets"
-#&gt;   ..$ description   : chr "Copies a single sheet from a spreadsheet to another spreadsheet.\nReturns the properties of the newly created sheet."
-#&gt;   ..$ request       : chr "CopySheetToAnotherSpreadsheetRequest"
-#&gt;   ..$ response      : chr "SheetProperties"
-#&gt;   ..$ parameterOrder: chr [1:2] "spreadsheetId" "sheetId"</div><div class='input'><span class='fu'>sheets_endpoints</span>(<span class='st'>"sheets.spreadsheets.values.get"</span>)</div><div class='output co'>#&gt; $sheets.spreadsheets.values.get
+#&gt;   ..$ description   : chr "Clears values from a spreadsheet.\nThe caller must specify the spreadsheet ID and range.\nOnly values are clear"| __truncated__
+#&gt;   ..$ request       : chr "ClearValuesRequest"
+#&gt;   ..$ response      : chr "ClearValuesResponse"
+#&gt;   ..$ parameterOrder: chr [1:2] "spreadsheetId" "range"
+#&gt;  $ sheets.spreadsheets.values.batchClearByDataFilter :List of 9
+#&gt;   ..$ id            : chr "sheets.spreadsheets.values.batchClearByDataFilter"
+#&gt;   ..$ httpMethod    : chr "POST"
+#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter"
+#&gt;   ..$ parameters    :List of 13
+#&gt;   ..$ scopes        : chr "drive, drive.file, spreadsheets"
+#&gt;   ..$ description   : chr "Clears one or more ranges of values from a spreadsheet.\nThe caller must specify the spreadsheet ID and one or "| __truncated__
+#&gt;   ..$ request       : chr "BatchClearValuesByDataFilterRequest"
+#&gt;   ..$ response      : chr "BatchClearValuesByDataFilterResponse"
+#&gt;   ..$ parameterOrder: chr "spreadsheetId"
+#&gt;  $ sheets.spreadsheets.values.append                 :List of 9
+#&gt;   ..$ id            : chr "sheets.spreadsheets.values.append"
+#&gt;   ..$ httpMethod    : chr "POST"
+#&gt;   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values/{range}:append"
+#&gt;   ..$ parameters    :List of 21
+#&gt;   ..$ scopes        : chr "drive, drive.file, spreadsheets"
+#&gt;   ..$ description   : chr "Appends values to a spreadsheet. The input range is used to search for\nexisting data and find a \"table\" with"| __truncated__
+#&gt;   ..$ request       : chr "ValueRange"
+#&gt;   ..$ response      : chr "AppendValuesResponse"
+#&gt;   ..$ parameterOrder: chr [1:2] "spreadsheetId" "range"</div><div class='input'><span class='fu'>sheets_endpoints</span>(<span class='st'>"sheets.spreadsheets.values.get"</span>)</div><div class='output co'>#&gt; $sheets.spreadsheets.values.get
 #&gt; $sheets.spreadsheets.values.get$id
 #&gt; [1] "sheets.spreadsheets.values.get"
 #&gt; 
@@ -357,6 +357,9 @@ endpoints that are used internally by googlesheets4.</p>
 #&gt; 
 #&gt; $sheets.spreadsheets.values.get$parameters
 #&gt; $sheets.spreadsheets.values.get$parameters$majorDimension
+#&gt; $sheets.spreadsheets.values.get$parameters$majorDimension$description
+#&gt; [1] "The major dimension that results should use.\n\nFor example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`, then\nrequesting `range=A1:B2,majorDimension=ROWS` returns `[[1,2],[3,4]]`,\nwhereas requesting `range=A1:B2,majorDimension=COLUMNS` returns\n`[[1,3],[2,4]]`."
+#&gt; 
 #&gt; $sheets.spreadsheets.values.get$parameters$majorDimension$type
 #&gt; [1] "string"
 #&gt; 
@@ -365,9 +368,6 @@ endpoints that are used internally by googlesheets4.</p>
 #&gt; 
 #&gt; $sheets.spreadsheets.values.get$parameters$majorDimension$enum
 #&gt; [1] "DIMENSION_UNSPECIFIED" "ROWS"                  "COLUMNS"              
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$majorDimension$description
-#&gt; [1] "The major dimension that results should use.\n\nFor example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`,\nthen requesting `range=A1:B2,majorDimension=ROWS` will return\n`[[1,2],[3,4]]`,\nwhereas requesting `range=A1:B2,majorDimension=COLUMNS` will return\n`[[1,3],[2,4]]`."
 #&gt; 
 #&gt; 
 #&gt; $sheets.spreadsheets.values.get$parameters$spreadsheetId
@@ -399,17 +399,17 @@ endpoints that are used internally by googlesheets4.</p>
 #&gt; 
 #&gt; 
 #&gt; $sheets.spreadsheets.values.get$parameters$valueRenderOption
-#&gt; $sheets.spreadsheets.values.get$parameters$valueRenderOption$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$valueRenderOption$enum
-#&gt; [1] "FORMATTED_VALUE"   "UNFORMATTED_VALUE" "FORMULA"          
-#&gt; 
 #&gt; $sheets.spreadsheets.values.get$parameters$valueRenderOption$description
 #&gt; [1] "How values should be represented in the output.\nThe default render option is ValueRenderOption.FORMATTED_VALUE."
 #&gt; 
 #&gt; $sheets.spreadsheets.values.get$parameters$valueRenderOption$type
 #&gt; [1] "string"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$valueRenderOption$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$valueRenderOption$enum
+#&gt; [1] "FORMATTED_VALUE"   "UNFORMATTED_VALUE" "FORMULA"          
 #&gt; 
 #&gt; 
 #&gt; $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption
@@ -424,6 +424,122 @@ endpoints that are used internally by googlesheets4.</p>
 #&gt; 
 #&gt; $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption$enum
 #&gt; [1] "SERIAL_NUMBER"    "FORMATTED_STRING"
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$fields
+#&gt; $sheets.spreadsheets.values.get$parameters$fields$description
+#&gt; [1] "Selector specifying which fields to include in a partial response."
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$fields$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$fields$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$uploadType
+#&gt; $sheets.spreadsheets.values.get$parameters$uploadType$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$uploadType$description
+#&gt; [1] "Legacy upload protocol for media (e.g. \"media\", \"multipart\")."
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$uploadType$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$callback
+#&gt; $sheets.spreadsheets.values.get$parameters$callback$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$callback$description
+#&gt; [1] "JSONP"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$callback$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$oauth_token
+#&gt; $sheets.spreadsheets.values.get$parameters$oauth_token$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$oauth_token$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$oauth_token$description
+#&gt; [1] "OAuth 2.0 token for the current user."
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$`$.xgafv`
+#&gt; $sheets.spreadsheets.values.get$parameters$`$.xgafv`$description
+#&gt; [1] "V1 error format."
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$`$.xgafv`$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$`$.xgafv`$enumDescriptions
+#&gt; [1] "v1 error format" "v2 error format"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$`$.xgafv`$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$`$.xgafv`$enum
+#&gt; [1] "1" "2"
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$alt
+#&gt; $sheets.spreadsheets.values.get$parameters$alt$enumDescriptions
+#&gt; [1] "Responses with Content-Type of application/json"      
+#&gt; [2] "Media download with context-dependent Content-Type"   
+#&gt; [3] "Responses with Content-Type of application/x-protobuf"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$alt$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$alt$description
+#&gt; [1] "Data format for response."
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$alt$default
+#&gt; [1] "json"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$alt$enum
+#&gt; [1] "json"  "media" "proto"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$alt$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$access_token
+#&gt; $sheets.spreadsheets.values.get$parameters$access_token$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$access_token$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$access_token$description
+#&gt; [1] "OAuth access token."
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$key
+#&gt; $sheets.spreadsheets.values.get$parameters$key$description
+#&gt; [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$key$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$key$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$upload_protocol
+#&gt; $sheets.spreadsheets.values.get$parameters$upload_protocol$description
+#&gt; [1] "Upload protocol for media (e.g. \"raw\", \"multipart\")."
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$upload_protocol$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $sheets.spreadsheets.values.get$parameters$upload_protocol$location
+#&gt; [1] "query"
 #&gt; 
 #&gt; 
 #&gt; $sheets.spreadsheets.values.get$parameters$prettyPrint
@@ -451,122 +567,6 @@ endpoints that are used internally by googlesheets4.</p>
 #&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$fields
-#&gt; $sheets.spreadsheets.values.get$parameters$fields$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$fields$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$fields$description
-#&gt; [1] "Selector specifying which fields to include in a partial response."
-#&gt; 
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$uploadType
-#&gt; $sheets.spreadsheets.values.get$parameters$uploadType$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$uploadType$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$uploadType$description
-#&gt; [1] "Legacy upload protocol for media (e.g. \"media\", \"multipart\")."
-#&gt; 
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$`$.xgafv`
-#&gt; $sheets.spreadsheets.values.get$parameters$`$.xgafv`$description
-#&gt; [1] "V1 error format."
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$`$.xgafv`$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$`$.xgafv`$enumDescriptions
-#&gt; [1] "v1 error format" "v2 error format"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$`$.xgafv`$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$`$.xgafv`$enum
-#&gt; [1] "1" "2"
-#&gt; 
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$oauth_token
-#&gt; $sheets.spreadsheets.values.get$parameters$oauth_token$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$oauth_token$description
-#&gt; [1] "OAuth 2.0 token for the current user."
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$oauth_token$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$callback
-#&gt; $sheets.spreadsheets.values.get$parameters$callback$description
-#&gt; [1] "JSONP"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$callback$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$callback$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$alt
-#&gt; $sheets.spreadsheets.values.get$parameters$alt$enum
-#&gt; [1] "json"  "media" "proto"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$alt$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$alt$enumDescriptions
-#&gt; [1] "Responses with Content-Type of application/json"      
-#&gt; [2] "Media download with context-dependent Content-Type"   
-#&gt; [3] "Responses with Content-Type of application/x-protobuf"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$alt$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$alt$description
-#&gt; [1] "Data format for response."
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$alt$default
-#&gt; [1] "json"
-#&gt; 
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$key
-#&gt; $sheets.spreadsheets.values.get$parameters$key$description
-#&gt; [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$key$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$key$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$access_token
-#&gt; $sheets.spreadsheets.values.get$parameters$access_token$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$access_token$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$access_token$description
-#&gt; [1] "OAuth access token."
-#&gt; 
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$upload_protocol
-#&gt; $sheets.spreadsheets.values.get$parameters$upload_protocol$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$upload_protocol$description
-#&gt; [1] "Upload protocol for media (e.g. \"raw\", \"multipart\")."
-#&gt; 
-#&gt; $sheets.spreadsheets.values.get$parameters$upload_protocol$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; 
 #&gt; 
 #&gt; $sheets.spreadsheets.values.get$scopes
 #&gt; [1] "drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"
@@ -580,213 +580,240 @@ endpoints that are used internally by googlesheets4.</p>
 #&gt; $sheets.spreadsheets.values.get$parameterOrder
 #&gt; [1] "spreadsheetId" "range"        
 #&gt; 
-#&gt; </div><div class='input'><span class='fu'>sheets_endpoints</span>(<span class='fl'>4</span>)</div><div class='output co'>#&gt; $sheets.spreadsheets.getByDataFilter
-#&gt; $sheets.spreadsheets.getByDataFilter$id
-#&gt; [1] "sheets.spreadsheets.getByDataFilter"
+#&gt; </div><div class='input'><span class='fu'>sheets_endpoints</span>(<span class='fl'>4</span>)</div><div class='output co'>#&gt; $sheets.spreadsheets.batchUpdate
+#&gt; $sheets.spreadsheets.batchUpdate$id
+#&gt; [1] "sheets.spreadsheets.batchUpdate"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$httpMethod
+#&gt; $sheets.spreadsheets.batchUpdate$httpMethod
 #&gt; [1] "POST"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$path
-#&gt; /v4/spreadsheets/{spreadsheetId}:getByDataFilter
+#&gt; $sheets.spreadsheets.batchUpdate$path
+#&gt; /v4/spreadsheets/{spreadsheetId}:batchUpdate
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$spreadsheetId
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$spreadsheetId$location
+#&gt; $sheets.spreadsheets.batchUpdate$parameters
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$spreadsheetId
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$spreadsheetId$location
 #&gt; [1] "path"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$spreadsheetId$description
-#&gt; [1] "The spreadsheet to request."
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$spreadsheetId$description
+#&gt; [1] "The spreadsheet to apply the updates to."
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$spreadsheetId$required
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$spreadsheetId$required
 #&gt; [1] TRUE
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$spreadsheetId$type
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$spreadsheetId$type
 #&gt; [1] "string"
 #&gt; 
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$includeGridData
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$includeGridData$description
-#&gt; [1] "True if grid data should be returned.\nThis parameter is ignored if a field mask was set in the request."
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$includeSpreadsheetInResponse
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$includeSpreadsheetInResponse$description
+#&gt; [1] "Determines if the update response should include the spreadsheet\nresource."
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$includeGridData$type
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$includeSpreadsheetInResponse$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$includeGridData$location
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$includeSpreadsheetInResponse$location
 #&gt; [1] "body"
 #&gt; 
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$dataFilters
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$dataFilters$description
-#&gt; [1] "The DataFilters used to select which ranges to retrieve from\nthe spreadsheet."
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$responseRanges
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$responseRanges$description
+#&gt; [1] "Limits the ranges included in the response spreadsheet.\nMeaningful only if include_spreadsheet_response is 'true'."
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$dataFilters$type
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$responseRanges$type
 #&gt; [1] "array"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$dataFilters$items
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$dataFilters$items$`$ref`
-#&gt; [1] "DataFilter"
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$responseRanges$items
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$responseRanges$items$type
+#&gt; [1] "string"
 #&gt; 
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$dataFilters$location
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$responseRanges$location
 #&gt; [1] "body"
 #&gt; 
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$prettyPrint
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$prettyPrint$location
-#&gt; [1] "query"
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$responseIncludeGridData
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$responseIncludeGridData$description
+#&gt; [1] "True if grid data should be returned. Meaningful only if\nif include_spreadsheet_in_response is 'true'.\nThis parameter is ignored if a field mask was set in the request."
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$prettyPrint$description
-#&gt; [1] "Returns response with indentations and line breaks."
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$prettyPrint$type
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$responseIncludeGridData$type
 #&gt; [1] "boolean"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$prettyPrint$default
-#&gt; [1] "true"
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$responseIncludeGridData$location
+#&gt; [1] "body"
 #&gt; 
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$quotaUser
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$quotaUser$description
-#&gt; [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$requests
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$requests$description
+#&gt; [1] "A list of updates to apply to the spreadsheet.\nRequests will be applied in the order they are specified.\nIf any request is not valid, no requests will be applied."
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$quotaUser$type
-#&gt; [1] "string"
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$requests$type
+#&gt; [1] "array"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$quotaUser$location
-#&gt; [1] "query"
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$requests$items
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$requests$items$`$ref`
+#&gt; [1] "Request"
 #&gt; 
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$fields
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$fields$type
-#&gt; [1] "string"
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$requests$location
+#&gt; [1] "body"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$fields$location
-#&gt; [1] "query"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$fields$description
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$fields
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$fields$description
 #&gt; [1] "Selector specifying which fields to include in a partial response."
 #&gt; 
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$uploadType
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$uploadType$type
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$fields$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$uploadType$location
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$fields$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$uploadType$description
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$uploadType
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$uploadType$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$uploadType$description
 #&gt; [1] "Legacy upload protocol for media (e.g. \"media\", \"multipart\")."
 #&gt; 
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$`$.xgafv`
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$`$.xgafv`$description
-#&gt; [1] "V1 error format."
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$`$.xgafv`$type
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$uploadType$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$`$.xgafv`$enumDescriptions
-#&gt; [1] "v1 error format" "v2 error format"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$`$.xgafv`$location
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$callback
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$callback$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$`$.xgafv`$enum
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$callback$description
+#&gt; [1] "JSONP"
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$callback$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$oauth_token
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$oauth_token$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$oauth_token$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$oauth_token$description
+#&gt; [1] "OAuth 2.0 token for the current user."
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$`$.xgafv`
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$`$.xgafv`$description
+#&gt; [1] "V1 error format."
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$`$.xgafv`$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$`$.xgafv`$enumDescriptions
+#&gt; [1] "v1 error format" "v2 error format"
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$`$.xgafv`$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$`$.xgafv`$enum
 #&gt; [1] "1" "2"
 #&gt; 
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$oauth_token
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$oauth_token$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$oauth_token$description
-#&gt; [1] "OAuth 2.0 token for the current user."
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$oauth_token$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$callback
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$callback$description
-#&gt; [1] "JSONP"
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$callback$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$callback$location
-#&gt; [1] "query"
-#&gt; 
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$alt
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$alt$enum
-#&gt; [1] "json"  "media" "proto"
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$alt$type
-#&gt; [1] "string"
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$alt$enumDescriptions
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$alt
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$alt$enumDescriptions
 #&gt; [1] "Responses with Content-Type of application/json"      
 #&gt; [2] "Media download with context-dependent Content-Type"   
 #&gt; [3] "Responses with Content-Type of application/x-protobuf"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$alt$location
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$alt$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$alt$description
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$alt$description
 #&gt; [1] "Data format for response."
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$alt$default
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$alt$default
 #&gt; [1] "json"
 #&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$alt$enum
+#&gt; [1] "json"  "media" "proto"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$key
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$key$description
-#&gt; [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$key$type
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$alt$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$key$location
-#&gt; [1] "query"
 #&gt; 
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$access_token
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$access_token$type
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$access_token
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$access_token$type
 #&gt; [1] "string"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$access_token$location
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$access_token$location
 #&gt; [1] "query"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$access_token$description
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$access_token$description
 #&gt; [1] "OAuth access token."
 #&gt; 
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$upload_protocol
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$upload_protocol$location
-#&gt; [1] "query"
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$key
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$key$description
+#&gt; [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$upload_protocol$description
-#&gt; [1] "Upload protocol for media (e.g. \"raw\", \"multipart\")."
-#&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameters$upload_protocol$type
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$key$type
 #&gt; [1] "string"
 #&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$key$location
+#&gt; [1] "query"
 #&gt; 
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$scopes
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$upload_protocol
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$upload_protocol$description
+#&gt; [1] "Upload protocol for media (e.g. \"raw\", \"multipart\")."
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$upload_protocol$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$upload_protocol$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$prettyPrint
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$prettyPrint$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$prettyPrint$description
+#&gt; [1] "Returns response with indentations and line breaks."
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$prettyPrint$type
+#&gt; [1] "boolean"
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$prettyPrint$default
+#&gt; [1] "true"
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$quotaUser
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$quotaUser$description
+#&gt; [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$quotaUser$type
+#&gt; [1] "string"
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$parameters$quotaUser$location
+#&gt; [1] "query"
+#&gt; 
+#&gt; 
+#&gt; 
+#&gt; $sheets.spreadsheets.batchUpdate$scopes
 #&gt; [1] "drive, drive.file, spreadsheets"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$description
-#&gt; [1] "Returns the spreadsheet at the given ID.\nThe caller must specify the spreadsheet ID.\n\nThis method differs from GetSpreadsheet in that it allows selecting\nwhich subsets of spreadsheet data to return by specifying a\ndataFilters parameter.\nMultiple DataFilters can be specified.  Specifying one or\nmore data filters will return the portions of the spreadsheet that\nintersect ranges matched by any of the filters.\n\nBy default, data within grids will not be returned.\nYou can include grid data one of two ways:\n\n* Specify a field mask listing your desired fields using the `fields` URL\nparameter in HTTP\n\n* Set the includeGridData\nparameter to true.  If a field mask is set, the `includeGridData`\nparameter is ignored\n\nFor large spreadsheets, it is recommended to retrieve only the specific\nfields of the spreadsheet that you want."
+#&gt; $sheets.spreadsheets.batchUpdate$description
+#&gt; [1] "Applies one or more updates to the spreadsheet.\n\nEach request is validated before\nbeing applied. If any request is not valid then the entire request will\nfail and nothing will be applied.\n\nSome requests have replies to\ngive you some information about how\nthey are applied. The replies will mirror the requests.  For example,\nif you applied 4 updates and the 3rd one had a reply, then the\nresponse will have 2 empty replies, the actual reply, and another empty\nreply, in that order.\n\nDue to the collaborative nature of spreadsheets, it is not guaranteed that\nthe spreadsheet will reflect exactly your changes after this completes,\nhowever it is guaranteed that the updates in the request will be\napplied together atomically. Your changes may be altered with respect to\ncollaborator changes. If there are no collaborators, the spreadsheet\nshould reflect your changes."
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$request
-#&gt; [1] "GetSpreadsheetByDataFilterRequest"
+#&gt; $sheets.spreadsheets.batchUpdate$request
+#&gt; [1] "BatchUpdateSpreadsheetRequest"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$response
-#&gt; [1] "Spreadsheet"
+#&gt; $sheets.spreadsheets.batchUpdate$response
+#&gt; [1] "BatchUpdateSpreadsheetResponse"
 #&gt; 
-#&gt; $sheets.spreadsheets.getByDataFilter$parameterOrder
+#&gt; $sheets.spreadsheets.batchUpdate$parameterOrder
 #&gt; [1] "spreadsheetId"
 #&gt; 
 #&gt; </div></pre>

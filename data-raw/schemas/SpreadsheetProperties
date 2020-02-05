@@ -1,10 +1,11 @@
 # SpreadsheetProperties  
-# A tibble: 6 x 6
+# A tibble: 7 x 6
   property                     type   instance_of                  array_of format enum            
   <chr>                        <chr>  <chr>                        <chr>    <chr>  <list>          
 1 autoRecalc                   enum   <NA>                         <NA>     <NA>   <tibble [4 × 2]>
 2 defaultFormat                object CellFormat                   <NA>     <NA>   <tibble [0 × 2]>
 3 iterativeCalculationSettings object IterativeCalculationSettings <NA>     <NA>   <tibble [0 × 2]>
 4 locale                       string <NA>                         <NA>     <NA>   <tibble [0 × 2]>
-5 timeZone                     string <NA>                         <NA>     <NA>   <tibble [0 × 2]>
-6 title                        string <NA>                         <NA>     <NA>   <tibble [0 × 2]>
+5 spreadsheetTheme             object SpreadsheetTheme             <NA>     <NA>   <tibble [0 × 2]>
+6 timeZone                     string <NA>                         <NA>     <NA>   <tibble [0 × 2]>
+7 title                        string <NA>                         <NA>     <NA>   <tibble [0 × 2]>

@@ -1,15 +1,16 @@
 # CellFormat  
-# A tibble: 11 x 6
+# A tibble: 12 x 6
    property             type   instance_of  array_of format enum            
    <chr>                <chr>  <chr>        <chr>    <chr>  <list>          
  1 backgroundColor      object Color        <NA>     <NA>   <tibble [0 × 2]>
- 2 borders              object Borders      <NA>     <NA>   <tibble [0 × 2]>
- 3 horizontalAlignment  enum   <NA>         <NA>     <NA>   <tibble [4 × 2]>
- 4 hyperlinkDisplayType enum   <NA>         <NA>     <NA>   <tibble [3 × 2]>
- 5 numberFormat         object NumberFormat <NA>     <NA>   <tibble [0 × 2]>
- 6 padding              object Padding      <NA>     <NA>   <tibble [0 × 2]>
- 7 textDirection        enum   <NA>         <NA>     <NA>   <tibble [3 × 2]>
- 8 textFormat           object TextFormat   <NA>     <NA>   <tibble [0 × 2]>
- 9 textRotation         object TextRotation <NA>     <NA>   <tibble [0 × 2]>
-10 verticalAlignment    enum   <NA>         <NA>     <NA>   <tibble [4 × 2]>
-11 wrapStrategy         enum   <NA>         <NA>     <NA>   <tibble [5 × 2]>
+ 2 backgroundColorStyle object ColorStyle   <NA>     <NA>   <tibble [0 × 2]>
+ 3 borders              object Borders      <NA>     <NA>   <tibble [0 × 2]>
+ 4 horizontalAlignment  enum   <NA>         <NA>     <NA>   <tibble [4 × 2]>
+ 5 hyperlinkDisplayType enum   <NA>         <NA>     <NA>   <tibble [3 × 2]>
+ 6 numberFormat         object NumberFormat <NA>     <NA>   <tibble [0 × 2]>
+ 7 padding              object Padding      <NA>     <NA>   <tibble [0 × 2]>
+ 8 textDirection        enum   <NA>         <NA>     <NA>   <tibble [3 × 2]>
+ 9 textFormat           object TextFormat   <NA>     <NA>   <tibble [0 × 2]>
+10 textRotation         object TextRotation <NA>     <NA>   <tibble [0 × 2]>
+11 verticalAlignment    enum   <NA>         <NA>     <NA>   <tibble [4 × 2]>
+12 wrapStrategy         enum   <NA>         <NA>     <NA>   <tibble [5 × 2]>

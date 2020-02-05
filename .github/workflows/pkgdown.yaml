@@ -9,7 +9,7 @@ jobs:
     runs-on: macOS-latest
 
     env:
-      GOOGLESHEETS4_PASSWORD: ${{ secrets[GOOGLESHEETS4_PASSWORD] }}
+      GOOGLESHEETS4_PASSWORD: ${{ secrets.GOOGLESHEETS4_PASSWORD }}
 
     steps:
       - uses: actions/checkout@master

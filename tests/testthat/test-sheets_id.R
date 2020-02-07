@@ -31,11 +31,6 @@ test_that("id can be dug out of a URL", {
 
 test_that("invalid URL produces error", {
   expect_error(as_sheets_id("https://www.r-project.org"), "does not match")
-
-  expect_identical(
-    as_sheets_id("https://docs.google.com/spreadsheets/d/abc123/edit#gid=123"),
-    as_sheets_id("abc123")
-  )
 })
 
 # how I created the reference dribble, which represents two files:

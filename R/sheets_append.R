@@ -1,7 +1,7 @@
 #' Append rows to a sheet
 #'
-#' Adds new cells after the last row with data in a (work)sheet, inserting new
-#' rows into the sheet if necessary.
+#' Adds one or more new rows after the last row with data in a (work)sheet,
+#' increasing the row dimension of the sheet if necessary.
 #'
 #' @param data A data frame.
 #' @template ss
@@ -9,6 +9,7 @@
 #'
 #' @template ss-return
 #' @export
+
 #' @seealso Makes an `AppendCellsRequest`:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AppendCellsRequest>
 #'
@@ -55,14 +56,11 @@ sheets_append <- function(data, ss, sheet = 1) {
     params = list(
       spreadsheetId = ssid,
       requests = prepare_rows(s$id, data),
-      includeSpreadsheetInResponse = TRUE,
       responseIncludeGridData = FALSE
     )
   )
   resp_raw <- request_make(req)
-  resp <- gargle::response_process(resp_raw)
-  ss <- new_googlesheets4_spreadsheet(resp$updatedSpreadsheet)
-  message_glue(glue_collapse(format(ss), sep = "\n"))
+  gargle::response_process(resp_raw)
 
   invisible(ssid)
 }

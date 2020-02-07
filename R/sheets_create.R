@@ -3,8 +3,9 @@
 #' @description
 #' \lifecycle{experimental}
 #'
-#' Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook). Optionally,
-#' you can also provide names and/or data for the initial set of (work)sheets.
+#' Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook).
+#' Optionally, you can also provide names and/or data for the initial set of
+#' (work)sheets.
 #'
 #' @seealso
 #' Wraps the `spreadsheets.create` endpoint:
@@ -21,7 +22,7 @@
 #'   vector of sheet names, a data frame, or a (possibly named) list of data
 #'   frames. See the examples.
 #'
-#' @return The ID of the new Sheet, as an instance of [`sheets_id`].
+#' @template ss-return
 #' @export
 #'
 #' @examples
@@ -80,7 +81,6 @@ sheets_create <- function(name = sheets_random(), ..., sheets = NULL) {
   ssid <- as_sheets_id(ss)
 
   if (!data_given) {
-    message_glue(glue_collapse(format(ss), sep = "\n"))
     return(invisible(ssid))
   }
 
@@ -91,14 +91,11 @@ sheets_create <- function(name = sheets_random(), ..., sheets = NULL) {
     params = list(
       spreadsheetId = ssid,
       requests = request_populate_sheets,
-      includeSpreadsheetInResponse = TRUE,
       responseIncludeGridData = FALSE
     )
   )
   resp_raw <- request_make(req)
-  resp_sheets <- gargle::response_process(resp_raw)
-  ss <- new_googlesheets4_spreadsheet(resp_sheets$updatedSpreadsheet)
-  message_glue(glue_collapse(format(ss), sep = "\n"))
+  gargle::response_process(resp_raw)
 
   invisible(ssid)
 }

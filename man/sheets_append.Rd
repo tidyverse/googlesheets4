@@ -21,8 +21,8 @@ is how googledrive represents Drive files. Processed through
 The input \code{ss}, as an instance of \code{\link{sheets_id}}
 }
 \description{
-Adds new cells after the last row with data in a (work)sheet, inserting new
-rows into the sheet if necessary.
+Adds one or more new rows after the last row with data in a (work)sheet,
+increasing the row dimension of the sheet if necessary.
 }
 \examples{
 if (sheets_has_token()) {

@@ -18,13 +18,14 @@ vector of sheet names, a data frame, or a (possibly named) list of data
 frames. See the examples.}
 }
 \value{
-The ID of the new Sheet, as an instance of \code{\link{sheets_id}}.
+The input \code{ss}, as an instance of \code{\link{sheets_id}}
 }
 \description{
 \lifecycle{experimental}
 
-Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook). Optionally,
-you can also provide names and/or data for the initial set of (work)sheets.
+Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook).
+Optionally, you can also provide names and/or data for the initial set of
+(work)sheets.
 }
 \examples{
 if (sheets_has_token()) {

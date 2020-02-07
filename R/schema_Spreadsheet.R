@@ -8,7 +8,7 @@ new_googlesheets4_spreadsheet <- function(x = list()) {
     locale          = list("properties", "locale"),
     time_zone       = list("properties", "timeZone")
   )
-  out <- map(ours_theirs, ~ pluck(x, !!!.x))
+  out <- map(ours_theirs, ~ pluck(x, !!!.x, .default = "<unknown>"))
 
   if (!is.null(x$sheets)) {
     sheets <- map(x$sheets, ~ new("Sheet", !!!.x))
@@ -55,22 +55,24 @@ format.googlesheets4_spreadsheet <- function(x, ...) {
                     ID: {spreadsheet_id}
                 Locale: {locale}
              Time zone: {time_zone}
-           # of sheets: {nrow(x$sheets)}
+           # of sheets: {nrow(x$sheets) %||% '<unknown>'}
     ",
     .sep = "\n"
   )
   meta <- strsplit(meta, split = "\n")[[1]]
 
-  col1 <- fr(c("(Sheet name)", x$sheets$name))
-  col2 <- c(
-    "(Nominal extent in rows x columns)",
-    glue_data(x$sheets, "{grid_rows} x {grid_columns}")
-  )
-  meta <- c(
-    meta,
-    "",
-    glue_data(list(col1 = col1, col2 = col2), "{col1}: {col2}")
-  )
+  if (!is.null(x$sheets)) {
+    col1 <- fr(c("(Sheet name)", x$sheets$name))
+    col2 <- c(
+      "(Nominal extent in rows x columns)",
+      glue_data(x$sheets, "{grid_rows} x {grid_columns}")
+    )
+    meta <- c(
+      meta,
+      "",
+      glue_data(list(col1 = col1, col2 = col2), "{col1}: {col2}")
+    )
+  }
 
   if (!is.null(x$named_ranges)) {
     col1 <- fr(c("(Named range)", x$named_ranges$name))

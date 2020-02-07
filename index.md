@@ -34,7 +34,8 @@ devtools::install_github("tidyverse/googlesheets4")
 
 googlesheets4 will, by default, help you interact with Sheets as an
 authenticated Google user. The package facilitates this process upon
-first need.
+first need. If you don’t need to access private Sheets, use
+`sheets_deauth()` to indicate there is no need for a token.
 
 Users can take control of auth proactively via the `sheets_auth*()`
 family of functions, e.g., to specify your own OAuth app or service
@@ -95,14 +96,23 @@ sheets_examples("gap")
 ```
 
 `sheets_example()` requires a regular expression and returns exactly 1
-Sheet ID (or throws an error):
+Sheet ID (or throws an error). The print method attempts to reveal the
+Sheet metadata available via `sheets_get()`::
 
 ``` r
 sheets_example("gapminder")
-#>                                      gapminder 
-#> "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" 
-#> attr(,"class")
-#> [1] "sheets_id" "drive_id"
+#>   Spreadsheet name: gapminder
+#>                 ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY
+#>             Locale: en_US
+#>          Time zone: America/Los_Angeles
+#>        # of sheets: 5
+#> 
+#> (Sheet name): (Nominal extent in rows x columns)
+#>       Africa: 1000 x 26
+#>     Americas: 1000 x 26
+#>         Asia: 1000 x 26
+#>       Europe: 1000 x 26
+#>      Oceania: 1000 x 26
 ```
 
 If you’d like to see a Sheet in the browser, including our example
@@ -159,7 +169,8 @@ library(googledrive)
 
 Pass the result to googlesheets4 functions such as:
 
-  - `sheets_get()`: gets spreadsheet-specific metadata
+  - `sheets_get()`: returns spreadsheet-specific metadata. This is also
+    revealed whenever you print a `sheets_id` object.
   - `sheets_sheet_names()`: reveals just the (work)sheet names
   - `read_sheet()`: reads cells into a data frame. `sheets_read()` is an
     alias for this.
@@ -462,14 +473,6 @@ argument is the data.
 df <- data.frame(x = 1:3, y = letters[1:3])
 
 ss <- sheets_write(df)
-#> Spreadsheet name: technocrat-wildcat
-#>                 ID: 1lm1x3XqGRkG7Hi4XF2pHRIkMmj3FENaG2LSjWFPJCTI
-#>             Locale: en_US
-#>          Time zone: Etc/GMT
-#>        # of sheets: 1
-#> 
-#> (Sheet name): (Nominal extent in rows x columns)
-#>           df: 4 x 2
 ```
 
 You’ll notice the new (spread)Sheet has a randomly generated name. If
@@ -482,17 +485,9 @@ can specify the new Sheet’s name.
 ``` r
 drive_rm(ss)
 #> Files deleted:
-#>   * technocrat-wildcat: 1lm1x3XqGRkG7Hi4XF2pHRIkMmj3FENaG2LSjWFPJCTI
+#>   * checkable-cat: 1_ZOyq_AmGHQhAkWGTSdRiFBt9YXaMAZYaF8e86JnuH0
 
 ss <- sheets_create("fluffy-bunny", sheets = df)
-#> Spreadsheet name: fluffy-bunny
-#>                 ID: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA
-#>             Locale: en_US
-#>          Time zone: Etc/GMT
-#>        # of sheets: 1
-#> 
-#> (Sheet name): (Nominal extent in rows x columns)
-#>           df: 4 x 2
 ```
 
 `sheets_write()` can write to new or existing (work)sheets in this
@@ -502,15 +497,6 @@ Sheet. Let’s write the `chickwts` data to a new sheet in `ss`.
 sheets_write(chickwts, ss)
 #> Writing to 'fluffy-bunny'
 #> Writing to sheet "chickwts"
-#> Spreadsheet name: fluffy-bunny
-#>                 ID: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA
-#>             Locale: en_US
-#>          Time zone: Etc/GMT
-#>        # of sheets: 2
-#> 
-#> (Sheet name): (Nominal extent in rows x columns)
-#>           df: 4 x 2
-#>     chickwts: 72 x 2
 ```
 
 We can also use `sheets_write()` to replace the data in an existing
@@ -520,15 +506,6 @@ sheet.
 sheets_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
 #> Writing to 'fluffy-bunny'
 #> Writing to sheet "df"
-#> Spreadsheet name: fluffy-bunny
-#>                 ID: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA
-#>             Locale: en_US
-#>          Time zone: Etc/GMT
-#>        # of sheets: 2
-#> 
-#> (Sheet name): (Nominal extent in rows x columns)
-#>           df: 8 x 2
-#>     chickwts: 72 x 2
 ```
 
 `sheets_append()` adds one or more rows to an existing sheet.
@@ -537,15 +514,6 @@ sheets_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
 sheets_append(data.frame(x = 11, letters[11]), ss, sheet = "df")
 #> Writing to 'fluffy-bunny'
 #> Appending 1 row(s) to 'df'
-#> Spreadsheet name: fluffy-bunny
-#>                 ID: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA
-#>             Locale: en_US
-#>          Time zone: Etc/GMT
-#>        # of sheets: 2
-#> 
-#> (Sheet name): (Nominal extent in rows x columns)
-#>           df: 9 x 2
-#>     chickwts: 72 x 2
 ```
 
 There is also a family of `sheets_sheet_*()` functions that do pure
@@ -558,12 +526,12 @@ sheets_sheet_data(ss)
 #> # A tibble: 2 x 8
 #>   name     index         id type  visible grid_rows grid_columns data  
 #>   <chr>    <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 df           0  282251880 GRID  TRUE            9            2 <NULL>
-#> 2 chickwts     1 1508572512 GRID  TRUE           72            2 <NULL>
+#> 1 df           0 1324803376 GRID  TRUE            9            2 <NULL>
+#> 2 chickwts     1 1352070819 GRID  TRUE           72            2 <NULL>
 
 drive_rm(ss)
 #> Files deleted:
-#>   * fluffy-bunny: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA
+#>   * fluffy-bunny: 1s1yw3oV5aKSCZbtPiVuHZq9V0ifYtbf_rdx1mDR8chw
 ```
 
 See also the article [Write

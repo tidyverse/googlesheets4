@@ -46,7 +46,7 @@ devtools::install_github("tidyverse/googlesheets4")
 
 ## Auth
 
-googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need.
+googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need. If you don't need to access private Sheets, use `sheets_deauth()` to indicate there is no need for a token.
 
 Users can take control of auth proactively via the `sheets_auth*()` family of functions, e.g., to specify your own OAuth app or service account token or to explicitly deactivate auth. Auth is actually handled by the gargle package ([gargle.r-lib.org](https://gargle.r-lib.org)), similar to googledrive, bigrquery, and gmailr, and gargle's documentation and articles are the definitive guide to more advanced topics.
 
@@ -72,7 +72,7 @@ sheets_examples()
 sheets_examples("gap")
 ```
 
-`sheets_example()` requires a regular expression and returns exactly 1 Sheet ID (or throws an error):
+`sheets_example()` requires a regular expression and returns exactly 1 Sheet ID (or throws an error). The print method attempts to reveal the Sheet metadata available via `sheets_get()`::
 
 ```{r}
 sheets_example("gapminder")
@@ -110,7 +110,8 @@ library(googledrive)
 
 Pass the result to googlesheets4 functions such as:
 
-  * `sheets_get()`: gets spreadsheet-specific metadata
+  * `sheets_get()`: returns spreadsheet-specific metadata. This is also revealed
+    whenever you print a `sheets_id` object.
   * `sheets_sheet_names()`: reveals just the (work)sheet names
   * `read_sheet()`: reads cells into a data frame. `sheets_read()` is an alias for this.
 

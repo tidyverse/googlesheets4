@@ -1,21 +1,27 @@
 #' `sheets_id` object
 #'
-#' @description Holds a spreadsheet identifier, i.e. a string. This is what the
-#'   Sheets and Drive APIs refer to as `spreadsheetId` and `fileId`,
-#'   respectively. Any object of class `sheets_id` will also have the
-#'   [`drive_id`][googledrive::as_id] class, which is used by [googledrive] for
-#'   the same purpose.
+#' @description A `sheets_id` is a spreadsheet identifier, i.e. a string. This
+#'   is what the Sheets and Drive APIs refer to as `spreadsheetId` and `fileId`,
+#'   respectively. When you print a `sheets_id`, we attempt to reveal its
+#'   current metadata (via `sheets_get()`). This can fail for a variety of
+#'   reasons (e.g. if you're offline), but the `sheets_id` is always revealed
+#'   and is returned, invisibly.
 #'
-#' @description This means you can pipe a `sheets_id` object straight into
-#'   [googledrive] functions for all your Google Drive needs that have nothing
-#'   to do with the file being a spreadsheet. Examples: examine or change file
-#'   name, path, or permissions, copy the file, or visit it in a web browser.
+#'   Any object of class `sheets_id` will also have the
+#'   [`drive_id`][googledrive::as_id] class, which is used by [googledrive] for
+#'   the same purpose. This means you can pipe a `sheets_id` object straight
+#'   into [googledrive] functions for all your Google Drive needs that have
+#'   nothing to do with the file being a spreadsheet. Examples: examine or
+#'   change file name, path, or permissions, copy the file, or visit it in a web
+#'   browser.
 #'
 #' @name sheets_id
 #' @seealso [as_sheets_id()]
 #'
 #' @examples
-#' sheets_example("mini-gap")
+#' if (sheets_has_token()) {
+#'   sheets_example("mini-gap")
+#' }
 NULL
 
 ## implementing sheets_id as advised here:
@@ -178,3 +184,30 @@ one_id <- function(x) {
 #'   as_id(ss)
 #' }
 as_id.googlesheets4_spreadsheet <- function(x, ...) as_sheets_id(x)
+
+#' @export
+format.sheets_id <- function(x, ...) {
+  meta <- tryCatch(
+    rlang::with_abort(sheets_get(x)),
+    rlang_error = function(e) e
+  )
+
+  if (inherits(meta, "googlesheets4_spreadsheet")) {
+    return(format(meta))
+  }
+
+  # meta is an error, i.e. sheets_get() failed
+  out <- new_googlesheets4_spreadsheet(list(spreadsheetId = x))
+  c(
+    format(out),
+    "",
+    "Unable to get metadata for this Sheet. Error details:",
+    meta$message
+  )
+}
+
+#' @export
+print.sheets_id <- function(x, ...) {
+  cat(format(x), sep = "\n")
+  invisible(x)
+}

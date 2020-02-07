@@ -63,7 +63,6 @@ sheets_sheet_add <- function(ss,
   index <- resolve_index(ssid, .before, .after)
 
   ss <- sheets_sheet_add_impl_(ssid, sheet_name = sheet, index = index, ...)
-  message_glue(glue_collapse(format(ss), sep = "\n"))
 
   invisible(ssid)
 }

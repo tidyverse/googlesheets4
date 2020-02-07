@@ -16,7 +16,7 @@
 #'
 #' If no `sheet` is specified or if `sheet` doesn't identify an existing sheet, a
 #' new sheet is added to receive the `data`. If `sheet` specifies an existing
-#' sheet, it is effectively overwritten. All pre-existing values, formats, and
+#' sheet, it is effectively overwritten! All pre-existing values, formats, and
 #' dimensions are cleared and the targeted sheet gets new values and dimensions
 #' from `data`.
 #'
@@ -135,14 +135,11 @@ write_sheet <- function(data,
     params = list(
       spreadsheetId = ssid,
       requests = requests,
-      includeSpreadsheetInResponse = TRUE,
       responseIncludeGridData = FALSE
     )
   )
   resp_raw <- request_make(req)
-  resp <- gargle::response_process(resp_raw)
-  ss <- new_googlesheets4_spreadsheet(resp$updatedSpreadsheet)
-  message_glue(glue_collapse(format(ss), sep = "\n"))
+  gargle::response_process(resp_raw)
 
   invisible(ssid)
 }

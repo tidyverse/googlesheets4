@@ -41,7 +41,7 @@ undesirable, call \code{\link[=sheets_create]{sheets_create()}} directly to get 
 
 If no \code{sheet} is specified or if \code{sheet} doesn't identify an existing sheet, a
 new sheet is added to receive the \code{data}. If \code{sheet} specifies an existing
-sheet, it is effectively overwritten. All pre-existing values, formats, and
+sheet, it is effectively overwritten! All pre-existing values, formats, and
 dimensions are cleared and the targeted sheet gets new values and dimensions
 from \code{data}.
 }

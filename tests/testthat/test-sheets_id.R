@@ -72,3 +72,70 @@ test_that("as_id.googlesheets4_spreadsheet is just as_sheets_id()", {
   x <- new_googlesheets4_spreadsheet(list(spreadsheetId = "123"))
   expect_identical(googledrive::as_id(x), as_sheets_id(x))
 })
+
+## sheets_id print method ----
+
+test_that("sheets_id print method reveals metadata", {
+  skip_if_offline()
+  skip_if_no_token()
+
+  verify_output(
+    test_path("ref", "sheets-id-print-with-token.txt"),
+    print(sheets_example("mini-gap"))
+  )
+})
+
+test_that("sheets_id print method doesn't error for nonexistent ID", {
+  skip_if_offline()
+  skip_if_no_token()
+
+  expect_error_free(format(as_sheets_id("12345")))
+
+  verify_output(
+    test_path("ref", "sheets-id-print-nonexistent.txt"),
+    print(as_sheets_id("12345"))
+  )
+})
+
+test_that("can print public sheets_id if deauth'd", {
+  skip_if_offline()
+  skip_on_cran()
+
+  original_cred <- .auth$get_cred()
+  original_auth_active <- .auth$auth_active
+  withr::defer({
+    .auth$set_cred(original_cred)
+    .auth$set_auth_active(original_auth_active)
+  })
+
+  sheets_deauth()
+
+  verify_output(
+    test_path("ref", "sheets-id-print-deauthed.txt"),
+    print(sheets_example("mini-gap"))
+  )
+})
+
+test_that("sheets_id print does not error for lack of cred", {
+  skip_if_offline()
+  skip_on_cran()
+
+  original_cred <- .auth$get_cred()
+  original_auth_active <- .auth$auth_active
+  withr::defer({
+    .auth$set_cred(original_cred)
+    .auth$set_auth_active(original_auth_active)
+  })
+  withr::local_options(list(gargle_oauth_cache = FALSE))
+
+  # typical initial state: auth_active, but no token yet
+  .auth$clear_cred()
+  .auth$set_auth_active(TRUE)
+
+  expect_error_free(format(sheets_example("mini-gap")))
+
+  verify_output(
+    test_path("ref", "sheets-id-print-no-cred.txt"),
+    print(sheets_example("mini-gap"))
+  )
+})

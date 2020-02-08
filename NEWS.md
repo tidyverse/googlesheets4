@@ -30,6 +30,10 @@ There is a new family of `sheets_sheet_*()` functions that operate on the (work)
 
 * The S3 class `sheets_Spreadsheet` is renamed to `googlesheets4_spreadsheet`, a consequence of rationalizing all internal and external classes. `googlesheets4_spreadsheet` is the class that holds metadata for a Sheet and it is connected to the API's [`Spreadsheet`](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet) schema. The return value of `sheets_get()` has this class.
 
+### Printing a Sheet ID
+
+The print method for `sheets_id` objects now attempts to reveal the current Sheet metadata available via `sheets_get()`. The means that printing can lead to an attempt to initiate auth, unless `sheets_deauth()` has been called. However, `sheets_id` printing should never lead to an actual error condition, although it may reveal information from caught errors.
+
 ### Bug fixes
 
 * `read_sheet()` passes its `na` argument down to the helpers that parse cells, so that `na` actually has the documented effect (#73).

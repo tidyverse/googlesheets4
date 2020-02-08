@@ -1,0 +1,15 @@
+> print(sheets_example("mini-gap"))
+  Spreadsheet name: <unknown>
+                ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
+            Locale: <unknown>
+         Time zone: <unknown>
+       # of sheets: <unknown>
+
+Unable to get metadata for this Sheet. Error details:
+Can't get Google credentials.
+Are you running googlesheets4 in a non-interactive session? Consider:
+  * `sheets_deauth()` to prevent the attempt to get credentials.
+  * Call `sheets_auth()` directly with all necessary specifics.
+See gargle's "Non-interactive auth" vignette for more details:
+https://gargle.r-lib.org/articles/non-interactive-auth.html
+

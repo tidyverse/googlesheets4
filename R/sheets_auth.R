@@ -69,6 +69,8 @@ sheets_auth <- function(email = gargle::gargle_oauth_email(),
       "Are you running googlesheets4 in a non-interactive session? Consider:\n",
       "  * `sheets_deauth()` to prevent the attempt to get credentials.\n",
       "  * Call `sheets_auth()` directly with all necessary specifics.\n",
+      "See gargle's \"Non-interactive auth\" vignette for more details:\n",
+      "https://gargle.r-lib.org/articles/non-interactive-auth.html",
       call. = FALSE
     )
   }

@@ -129,7 +129,7 @@
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
 <a href="#auth" class="anchor"></a>Auth</h2>
-<p>googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need.</p>
+<p>googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need. If you don’t need to access private Sheets, use <code><a href="reference/sheets_deauth.html">sheets_deauth()</a></code> to indicate there is no need for a token.</p>
 <p>Users can take control of auth proactively via the <code>sheets_auth*()</code> family of functions, e.g., to specify your own OAuth app or service account token or to explicitly deactivate auth. Auth is actually handled by the gargle package (<a href="https://gargle.r-lib.org">gargle.r-lib.org</a>), similar to googledrive, bigrquery, and gmailr, and gargle’s documentation and articles are the definitive guide to more advanced topics.</p>
 <p>It is common to use googlesheets4 together with the googledrive package (<a href="https://googledrive.tidyverse.org">googledrive.tidyverse.org</a>). See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a> for advice on how to streamline auth in this case.</p>
 <p>For this overview, we’ve logged into Google as a specific user in a hidden chunk.</p>
@@ -168,12 +168,20 @@
 <span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" </span></span>
 <span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; attr(,"class")</span></span>
 <span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt; [1] "drive_id"</span></span></code></pre></div>
-<p><code><a href="reference/sheets_example.html">sheets_example()</a></code> requires a regular expression and returns exactly 1 Sheet ID (or throws an error):</p>
+<p><code><a href="reference/sheets_example.html">sheets_example()</a></code> requires a regular expression and returns exactly 1 Sheet ID (or throws an error). The print method attempts to reveal the Sheet metadata available via <code><a href="reference/sheets_get.html">sheets_get()</a></code>::</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt;                                      gapminder </span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" </span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; attr(,"class")</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; [1] "sheets_id" "drive_id"</span></span></code></pre></div>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt;   Spreadsheet name: gapminder</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;                 ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;          Time zone: America/Los_Angeles</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;        # of sheets: 5</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; </span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt;       Africa: 1000 x 26</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt;     Americas: 1000 x 26</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt;         Asia: 1000 x 26</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt;       Europe: 1000 x 26</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt;      Oceania: 1000 x 26</span></span></code></pre></div>
 <p>If you’d like to see a Sheet in the browser, including our example Sheets, use <code><a href="reference/sheets_browse.html">sheets_browse()</a></code>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="op">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw"><a href="reference/sheets_browse.html">sheets_browse</a></span>()</span></code></pre></div>
@@ -211,7 +219,7 @@
 <p>Pass the result to googlesheets4 functions such as:</p>
 <ul>
 <li>
-<code><a href="reference/sheets_get.html">sheets_get()</a></code>: gets spreadsheet-specific metadata</li>
+<code><a href="reference/sheets_get.html">sheets_get()</a></code>: returns spreadsheet-specific metadata. This is also revealed whenever you print a <code>sheets_id</code> object.</li>
 <li>
 <code><a href="reference/sheets_sheet_data.html">sheets_sheet_names()</a></code>: reveals just the (work)sheet names</li>
 <li>
@@ -457,81 +465,38 @@
 <p><code><a href="reference/write_sheet.html">sheets_write()</a></code> writes a data frame into a Sheet. The only required argument is the data.</p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>df &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</span>
 <span id="cb16-2"><a href="#cb16-2"></a></span>
-<span id="cb16-3"><a href="#cb16-3"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="reference/write_sheet.html">sheets_write</a></span>(df)</span>
-<span id="cb16-4"><a href="#cb16-4"></a><span class="co">#&gt; Spreadsheet name: technocrat-wildcat</span></span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="co">#&gt;                 ID: 1lm1x3XqGRkG7Hi4XF2pHRIkMmj3FENaG2LSjWFPJCTI</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="co">#&gt;             Locale: en_US</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="co">#&gt;        # of sheets: 1</span></span>
-<span id="cb16-9"><a href="#cb16-9"></a><span class="co">#&gt; </span></span>
-<span id="cb16-10"><a href="#cb16-10"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span id="cb16-11"><a href="#cb16-11"></a><span class="co">#&gt;           df: 4 x 2</span></span></code></pre></div>
+<span id="cb16-3"><a href="#cb16-3"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="reference/write_sheet.html">sheets_write</a></span>(df)</span></code></pre></div>
 <p>You’ll notice the new (spread)Sheet has a randomly generated name. If that is a problem, use <code><a href="reference/sheets_create.html">sheets_create()</a></code> instead, which affords more control over various aspects of the new Sheet.</p>
 <p>Let’s start over: we delete that Sheet and call <code><a href="reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="co">#&gt;   * technocrat-wildcat: 1lm1x3XqGRkG7Hi4XF2pHRIkMmj3FENaG2LSjWFPJCTI</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="co">#&gt;   * checkable-cat: 1_ZOyq_AmGHQhAkWGTSdRiFBt9YXaMAZYaF8e86JnuH0</span></span>
 <span id="cb17-4"><a href="#cb17-4"></a></span>
-<span id="cb17-5"><a href="#cb17-5"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="dt">sheets =</span> df)</span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="co">#&gt; Spreadsheet name: fluffy-bunny</span></span>
-<span id="cb17-7"><a href="#cb17-7"></a><span class="co">#&gt;                 ID: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA</span></span>
-<span id="cb17-8"><a href="#cb17-8"></a><span class="co">#&gt;             Locale: en_US</span></span>
-<span id="cb17-9"><a href="#cb17-9"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
-<span id="cb17-10"><a href="#cb17-10"></a><span class="co">#&gt;        # of sheets: 1</span></span>
-<span id="cb17-11"><a href="#cb17-11"></a><span class="co">#&gt; </span></span>
-<span id="cb17-12"><a href="#cb17-12"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span id="cb17-13"><a href="#cb17-13"></a><span class="co">#&gt;           df: 4 x 2</span></span></code></pre></div>
+<span id="cb17-5"><a href="#cb17-5"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="dt">sheets =</span> df)</span></code></pre></div>
 <p><code><a href="reference/write_sheet.html">sheets_write()</a></code> can write to new or existing (work)sheets in this Sheet. Let’s write the <code>chickwts</code> data to a new sheet in <code>ss</code>.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw"><a href="reference/write_sheet.html">sheets_write</a></span>(chickwts, ss)</span>
 <span id="cb18-2"><a href="#cb18-2"></a><span class="co">#&gt; Writing to 'fluffy-bunny'</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="co">#&gt; Writing to sheet "chickwts"</span></span>
-<span id="cb18-4"><a href="#cb18-4"></a><span class="co">#&gt; Spreadsheet name: fluffy-bunny</span></span>
-<span id="cb18-5"><a href="#cb18-5"></a><span class="co">#&gt;                 ID: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA</span></span>
-<span id="cb18-6"><a href="#cb18-6"></a><span class="co">#&gt;             Locale: en_US</span></span>
-<span id="cb18-7"><a href="#cb18-7"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
-<span id="cb18-8"><a href="#cb18-8"></a><span class="co">#&gt;        # of sheets: 2</span></span>
-<span id="cb18-9"><a href="#cb18-9"></a><span class="co">#&gt; </span></span>
-<span id="cb18-10"><a href="#cb18-10"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span id="cb18-11"><a href="#cb18-11"></a><span class="co">#&gt;           df: 4 x 2</span></span>
-<span id="cb18-12"><a href="#cb18-12"></a><span class="co">#&gt;     chickwts: 72 x 2</span></span></code></pre></div>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="co">#&gt; Writing to sheet "chickwts"</span></span></code></pre></div>
 <p>We can also use <code><a href="reference/write_sheet.html">sheets_write()</a></code> to replace the data in an existing sheet.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw"><a href="reference/write_sheet.html">sheets_write</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">10</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">10</span>]), ss, <span class="dt">sheet =</span> <span class="st">"df"</span>)</span>
 <span id="cb19-2"><a href="#cb19-2"></a><span class="co">#&gt; Writing to 'fluffy-bunny'</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="co">#&gt; Writing to sheet "df"</span></span>
-<span id="cb19-4"><a href="#cb19-4"></a><span class="co">#&gt; Spreadsheet name: fluffy-bunny</span></span>
-<span id="cb19-5"><a href="#cb19-5"></a><span class="co">#&gt;                 ID: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA</span></span>
-<span id="cb19-6"><a href="#cb19-6"></a><span class="co">#&gt;             Locale: en_US</span></span>
-<span id="cb19-7"><a href="#cb19-7"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
-<span id="cb19-8"><a href="#cb19-8"></a><span class="co">#&gt;        # of sheets: 2</span></span>
-<span id="cb19-9"><a href="#cb19-9"></a><span class="co">#&gt; </span></span>
-<span id="cb19-10"><a href="#cb19-10"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span id="cb19-11"><a href="#cb19-11"></a><span class="co">#&gt;           df: 8 x 2</span></span>
-<span id="cb19-12"><a href="#cb19-12"></a><span class="co">#&gt;     chickwts: 72 x 2</span></span></code></pre></div>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="co">#&gt; Writing to sheet "df"</span></span></code></pre></div>
 <p><code><a href="reference/sheets_append.html">sheets_append()</a></code> adds one or more rows to an existing sheet.</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw"><a href="reference/sheets_append.html">sheets_append</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">11</span>, letters[<span class="dv">11</span>]), ss, <span class="dt">sheet =</span> <span class="st">"df"</span>)</span>
 <span id="cb20-2"><a href="#cb20-2"></a><span class="co">#&gt; Writing to 'fluffy-bunny'</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="co">#&gt; Appending 1 row(s) to 'df'</span></span>
-<span id="cb20-4"><a href="#cb20-4"></a><span class="co">#&gt; Spreadsheet name: fluffy-bunny</span></span>
-<span id="cb20-5"><a href="#cb20-5"></a><span class="co">#&gt;                 ID: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA</span></span>
-<span id="cb20-6"><a href="#cb20-6"></a><span class="co">#&gt;             Locale: en_US</span></span>
-<span id="cb20-7"><a href="#cb20-7"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
-<span id="cb20-8"><a href="#cb20-8"></a><span class="co">#&gt;        # of sheets: 2</span></span>
-<span id="cb20-9"><a href="#cb20-9"></a><span class="co">#&gt; </span></span>
-<span id="cb20-10"><a href="#cb20-10"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span id="cb20-11"><a href="#cb20-11"></a><span class="co">#&gt;           df: 9 x 2</span></span>
-<span id="cb20-12"><a href="#cb20-12"></a><span class="co">#&gt;     chickwts: 72 x 2</span></span></code></pre></div>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co">#&gt; Appending 1 row(s) to 'df'</span></span></code></pre></div>
 <p>There is also a family of <code>sheets_sheet_*()</code> functions that do pure (work)sheet operations, such as add and delete.</p>
 <p>We take one last look at the sheets we created in <code>ss</code>, then clean up.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw"><a href="reference/sheets_sheet_data.html">sheets_sheet_data</a></span>(ss)</span>
 <span id="cb21-2"><a href="#cb21-2"></a><span class="co">#&gt; # A tibble: 2 x 8</span></span>
 <span id="cb21-3"><a href="#cb21-3"></a><span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span></span>
 <span id="cb21-4"><a href="#cb21-4"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt; 1 df           0  282251880 GRID  TRUE            9            2 &lt;NULL&gt;</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#&gt; 2 chickwts     1 1508572512 GRID  TRUE           72            2 &lt;NULL&gt;</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt; 1 df           0 1324803376 GRID  TRUE            9            2 &lt;NULL&gt;</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#&gt; 2 chickwts     1 1352070819 GRID  TRUE           72            2 &lt;NULL&gt;</span></span>
 <span id="cb21-7"><a href="#cb21-7"></a></span>
 <span id="cb21-8"><a href="#cb21-8"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
 <span id="cb21-9"><a href="#cb21-9"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb21-10"><a href="#cb21-10"></a><span class="co">#&gt;   * fluffy-bunny: 1f_N4jDCaOxoFf8_61b63vNK-wEpKE7Xou29c1EiUwlA</span></span></code></pre></div>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="co">#&gt;   * fluffy-bunny: 1s1yw3oV5aKSCZbtPiVuHZq9V0ifYtbf_rdx1mDR8chw</span></span></code></pre></div>
 <p>See also the article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a>.</p>
 </div>
 <div id="contributing" class="section level2">

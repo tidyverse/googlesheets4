@@ -200,10 +200,19 @@ this argument and requires that there is exactly one match.</p></td>
 #&gt;                                      gapminder 
 #&gt; "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" 
 #&gt; attr(,"class")
-#&gt; [1] "drive_id"</div><div class='input'><span class='fu'>sheets_example</span>(<span class='st'>"gapminder"</span>)</div><div class='output co'>#&gt;                                      gapminder 
-#&gt; "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" 
-#&gt; attr(,"class")
-#&gt; [1] "sheets_id" "drive_id" </div></pre>
+#&gt; [1] "drive_id"</div><div class='input'><span class='fu'>sheets_example</span>(<span class='st'>"gapminder"</span>)</div><div class='output co'>#&gt;   Spreadsheet name: &lt;unknown&gt;
+#&gt;                 ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY
+#&gt;             Locale: &lt;unknown&gt;
+#&gt;          Time zone: &lt;unknown&gt;
+#&gt;        # of sheets: &lt;unknown&gt;
+#&gt; 
+#&gt; Unable to get metadata for this Sheet. Error details:
+#&gt; Can't get Google credentials.
+#&gt; Are you running googlesheets4 in a non-interactive session? Consider:
+#&gt;   * `sheets_deauth()` to prevent the attempt to get credentials.
+#&gt;   * Call `sheets_auth()` directly with all necessary specifics.
+#&gt; See gargle's "Non-interactive auth" vignette for more details:
+#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

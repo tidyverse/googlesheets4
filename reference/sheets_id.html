@@ -42,15 +42,19 @@
 
 
 <meta property="og:title" content="<code>sheets_id</code> object — sheets_id" />
-<meta property="og:description" content="Holds a spreadsheet identifier, i.e. a string. This is what the
-Sheets and Drive APIs refer to as spreadsheetId and fileId,
-respectively. Any object of class sheets_id will also have the
+<meta property="og:description" content="A sheets_id is a spreadsheet identifier, i.e. a string. This
+is what the Sheets and Drive APIs refer to as spreadsheetId and fileId,
+respectively. When you print a sheets_id, we attempt to reveal its
+current metadata (via sheets_get()). This can fail for a variety of
+reasons (e.g. if you're offline), but the sheets_id is always revealed
+and is returned, invisibly.
+Any object of class sheets_id will also have the
 drive_id class, which is used by googledrive for
-the same purpose.
-This means you can pipe a sheets_id object straight into
-googledrive functions for all your Google Drive needs that have nothing
-to do with the file being a spreadsheet. Examples: examine or change file
-name, path, or permissions, copy the file, or visit it in a web browser." />
+the same purpose. This means you can pipe a sheets_id object straight
+into googledrive functions for all your Google Drive needs that have
+nothing to do with the file being a spreadsheet. Examples: examine or
+change file name, path, or permissions, copy the file, or visit it in a web
+browser." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -156,15 +160,19 @@ name, path, or permissions, copy the file, or visit it in a web browser." />
     </div>
 
     <div class="ref-description">
-    <p>Holds a spreadsheet identifier, i.e. a string. This is what the
-Sheets and Drive APIs refer to as <code>spreadsheetId</code> and <code>fileId</code>,
-respectively. Any object of class <code>sheets_id</code> will also have the
+    <p>A <code>sheets_id</code> is a spreadsheet identifier, i.e. a string. This
+is what the Sheets and Drive APIs refer to as <code>spreadsheetId</code> and <code>fileId</code>,
+respectively. When you print a <code>sheets_id</code>, we attempt to reveal its
+current metadata (via <code><a href='sheets_get.html'>sheets_get()</a></code>). This can fail for a variety of
+reasons (e.g. if you're offline), but the <code>sheets_id</code> is always revealed
+and is returned, invisibly.</p>
+<p>Any object of class <code>sheets_id</code> will also have the
 <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>drive_id</a></code> class, which is used by googledrive for
-the same purpose.</p>
-<p>This means you can pipe a <code>sheets_id</code> object straight into
-googledrive functions for all your Google Drive needs that have nothing
-to do with the file being a spreadsheet. Examples: examine or change file
-name, path, or permissions, copy the file, or visit it in a web browser.</p>
+the same purpose. This means you can pipe a <code>sheets_id</code> object straight
+into googledrive functions for all your Google Drive needs that have
+nothing to do with the file being a spreadsheet. Examples: examine or
+change file name, path, or permissions, copy the file, or visit it in a web
+browser.</p>
     </div>
 
 
@@ -174,10 +182,9 @@ name, path, or permissions, copy the file, or visit it in a web browser.</p>
     <div class='dont-index'><p><code><a href='as_sheets_id.html'>as_sheets_id()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>)</div><div class='output co'>#&gt;                                       mini-gap 
-#&gt; "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU" 
-#&gt; attr(,"class")
-#&gt; [1] "sheets_id" "drive_id" </div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
+  <span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

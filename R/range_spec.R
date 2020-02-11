@@ -1,10 +1,10 @@
 # useful to me during development
-sheets_range_spec <- function(ss,
-                              sheet = NULL,
-                              range = NULL,
-                              skip = 0) {
+sheets_A1_range <- function(ss,
+                            sheet = NULL,
+                            range = NULL,
+                            skip = 0) {
   ssid <- as_sheets_id(ss)
-  check_sheet(sheet)
+  maybe_sheet(sheet)
   check_range(range)
   check_non_negative_integer(skip)
 
@@ -17,7 +17,8 @@ sheets_range_spec <- function(ss,
     range, sheet = sheet, skip = skip,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
-  message_glue("Range {dq(range_spec$A1_range)}")
+  A1_range <- as_A1_range(range_spec)
+  message_glue("A1 range {dq(A1_range)}")
 
   range_spec
 }
@@ -30,7 +31,6 @@ new_range_spec <- function(...) {
       sheet_name  = l$sheet_name  %||% NULL,
       named_range = l$named_range %||% NULL,
       cell_range  = l$cell_range  %||% NULL,
-      A1_range    = l$A1_range    %||% NULL,
       cell_limits = l$cell_limits %||% NULL,
       shim        = FALSE,
       sheets_df   = l$sheets_df   %||% NULL,
@@ -90,7 +90,6 @@ as_range_spec.character <- function(x,
   if (notNA(m[[".match"]])) {
     out$sheet_name <- lookup_sheet_name(m$sheet, sheets_df)
     out$cell_range <- m$cell_range
-    out$A1_range   <- qualified_A1(out$sheet_name, out$cell_range)
     out$shim       <- TRUE
     return(out)
   }
@@ -98,7 +97,7 @@ as_range_spec.character <- function(x,
   # check if range matches a named range
   m <- match(x, nr_df$name)
   if (notNA(m)) {
-    out$A1_range <- out$named_range <- x
+    out$named_range <- x
     return(out)
   }
 
@@ -124,7 +123,6 @@ as_range_spec.character <- function(x,
   if (!is.null(sheet)) {
     out$sheet_name <- lookup_sheet_name(sheet, sheets_df)
   }
-  out$A1_range <- qualified_A1(out$sheet_name, out$cell_range)
   out$shim <- TRUE
   out
 }
@@ -151,7 +149,6 @@ as_range_spec.NULL <- function(x,
   if (skip < 1) {
     if (!is.null(sheet)) {
       out$sheet_name <- lookup_sheet_name(sheet, sheets_df)
-      out$A1_range <- qualified_A1(out$sheet_name)
     }
     return(out)
   }
@@ -188,26 +185,33 @@ as_range_spec.cell_limits <- function(x,
   if (!is.null(sheet)) {
     out$sheet_name <- lookup_sheet_name(sheet, sheets_df)
   }
-  out$A1_range <- qualified_A1(
-    out$sheet_name,
-    # we replace some NAs with concrete extents here, for cell reading
-    # but note we use original cell_limits later, for shimming
-    as_sheets_range(x)
-  )
   out$shim <- shim
   out
 }
 
 #' @export
 format.range_spec <- function(x, ...) {
-  # I generally don't need to see the metadata df's
   is_df <- names(x) %in% c("sheets_df", "nr_df")
-  out <- x[!is_df]
-  glue("{fr(names(out))}: {out}")
+  x[is_df & !map_lgl(x, is.null)] <- "<provided>"
+  glue("{fr(names(x))}: {x}")
 }
 
 #' @export
 print.range_spec <- function(x, ...) {
  cat(format(x), sep = "\n")
  invisible(x)
+}
+
+as_A1_range <- function(x) {
+  stopifnot(inherits(x, "range_spec"))
+
+  if (!is.null(x$named_range)) {
+    return(x$named_range)
+  }
+
+  if (!is.null(x$cell_limits)) {
+    x$cell_range <- as_sheets_range(x$cell_limits)
+  }
+
+  qualified_A1(x$sheet_name, x$cell_range)
 }

@@ -30,7 +30,7 @@ test_that("sq_unescape() strips outer single quotes, de-duplicates inner", {
 
 # qualified_A1() ----
 test_that("qualified_A1 works", {
-  expect_identical(qualified_A1(), "")
+  expect_null(qualified_A1())
   expect_identical(qualified_A1("foo"), "'foo'")
   expect_identical(qualified_A1("foo", "A1"), "'foo'!A1")
   expect_identical(qualified_A1("'foo'"), "'foo'")

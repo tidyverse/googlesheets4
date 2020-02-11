@@ -108,11 +108,11 @@ sheets_example("gapminder")
 #>        # of sheets: 5
 #> 
 #> (Sheet name): (Nominal extent in rows x columns)
-#>       Africa: 1000 x 26
-#>     Americas: 1000 x 26
-#>         Asia: 1000 x 26
-#>       Europe: 1000 x 26
-#>      Oceania: 1000 x 26
+#>       Africa: 625 x 6
+#>     Americas: 301 x 6
+#>         Asia: 397 x 6
+#>       Europe: 361 x 6
+#>      Oceania: 25 x 6
 ```
 
 If you’d like to see a Sheet in the browser, including our example
@@ -485,7 +485,7 @@ can specify the new Sheet’s name.
 ``` r
 drive_rm(ss)
 #> Files deleted:
-#>   * checkable-cat: 1_ZOyq_AmGHQhAkWGTSdRiFBt9YXaMAZYaF8e86JnuH0
+#>   * deranged-bellsnake: 11dFPE2Z2xZUZ4mrF8ze62oC2GcFSXQC1Xe1QRKJdjfk
 
 ss <- sheets_create("fluffy-bunny", sheets = df)
 ```
@@ -526,12 +526,12 @@ sheets_sheet_data(ss)
 #> # A tibble: 2 x 8
 #>   name     index         id type  visible grid_rows grid_columns data  
 #>   <chr>    <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 df           0 1324803376 GRID  TRUE            9            2 <NULL>
-#> 2 chickwts     1 1352070819 GRID  TRUE           72            2 <NULL>
+#> 1 df           0  369947376 GRID  TRUE            9            2 <NULL>
+#> 2 chickwts     1 1309565055 GRID  TRUE           72            2 <NULL>
 
 drive_rm(ss)
 #> Files deleted:
-#>   * fluffy-bunny: 1s1yw3oV5aKSCZbtPiVuHZq9V0ifYtbf_rdx1mDR8chw
+#>   * fluffy-bunny: 1OQBdNQSxkiyqRK4Ezj-y4JRDpceyg7vD01KkTOm-MkM
 ```
 
 See also the article [Write

@@ -71,7 +71,9 @@ Makes an \code{AddSheetRequest}:
 }
 
 Other worksheet functions: 
+\code{\link{sheets_sheet_copy}()},
 \code{\link{sheets_sheet_data}()},
-\code{\link{sheets_sheet_delete}()}
+\code{\link{sheets_sheet_delete}()},
+\code{\link{sheets_sheet_rename}()}
 }
 \concept{worksheet functions}

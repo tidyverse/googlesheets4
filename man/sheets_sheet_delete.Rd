@@ -49,6 +49,8 @@ Makes an \code{DeleteSheetsRequest}:
 
 Other worksheet functions: 
 \code{\link{sheets_sheet_add}()},
-\code{\link{sheets_sheet_data}()}
+\code{\link{sheets_sheet_copy}()},
+\code{\link{sheets_sheet_data}()},
+\code{\link{sheets_sheet_rename}()}
 }
 \concept{worksheet functions}

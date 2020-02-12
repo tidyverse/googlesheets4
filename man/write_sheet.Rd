@@ -3,7 +3,7 @@
 \name{write_sheet}
 \alias{write_sheet}
 \alias{sheets_write}
-\title{(Over)write new data into a Sheet}
+\title{(Over)write new data into a worksheet}
 \usage{
 write_sheet(data, ss = NULL, sheet = NULL)
 

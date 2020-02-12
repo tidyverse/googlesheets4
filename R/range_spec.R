@@ -78,9 +78,9 @@ as_range_spec.character <- function(x,
   check_length_one(x)
 
   out <- new_range_spec(
+    sheets_df = sheets_df, nr_df = nr_df,
     .input = list(
-      sheet = sheet, range = x, skip = skip,
-      sheets_df = sheets_df, nr_df = nr_df
+      sheet = sheet, range = x, skip = skip
     )
   )
 
@@ -143,7 +143,8 @@ as_range_spec.NULL <- function(x,
                                skip = 0,
                                sheets_df = NULL) {
   out <- new_range_spec(
-    .input = list(sheet = sheet, skip = skip, sheets_df = sheets_df)
+    sheets_df = sheets_df,
+    .input = list(sheet = sheet, skip = skip)
   )
 
   if (skip < 1) {
@@ -177,9 +178,8 @@ as_range_spec.cell_limits <- function(x,
                                       sheet = NULL,
                                       sheets_df = NULL) {
   out <- new_range_spec(
-    .input = list(
-      sheet = sheet, range = x, sheets_df = sheets_df, shim = shim
-    )
+    sheets_df = sheets_df,
+    .input = list(sheet = sheet, range = x, shim = shim)
   )
   out$cell_limits <- x
   if (!is.null(sheet)) {

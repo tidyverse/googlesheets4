@@ -1,4 +1,4 @@
-#' (Over)write new data into a Sheet
+#' (Over)write new data into a worksheet
 #'
 #' @description
 #' \lifecycle{experimental}

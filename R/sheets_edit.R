@@ -99,15 +99,24 @@ sheets_edit <- function(ss,
 }
 
 looks_like_start <- function(x) {
-  if (is.na(x$endRowIndex %||% NA) &&
-      is.na(x$endColumnIndex %||% NA)) {
+  # make implicit missing data explicit
+  x <- new("GridRange",
+           startRowIndex    = x$startRowIndex    %||% NA,
+           startColumnIndex = x$startColumnIndex %||% NA,
+           endRowIndex      = x$endRowIndex      %||% NA,
+           endColumnIndex   = x$endColumnIndex   %||% NA
+  )
+
+  if (is.na(x$endRowIndex) && is.na(x$endColumnIndex)) {
     return(TRUE)
   }
 
-  row_index_diff <- x$endRowIndex - x$startRowIndex
-  col_index_diff <- x$endColumnIndex - x$startColumnIndex
-  if (row_index_diff == 1 && col_index_diff == 1) {
-    return(TRUE)
+  if (noNA(x)) {
+    row_index_diff <- x$endRowIndex - x$startRowIndex
+    col_index_diff <- x$endColumnIndex - x$startColumnIndex
+    if (row_index_diff == 1 && col_index_diff == 1) {
+      return(TRUE)
+    }
   }
 
   FALSE

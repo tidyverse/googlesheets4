@@ -81,3 +81,9 @@ if (sheets_has_token()) {
   googledrive::drive_rm(ss)
 }
 }
+\seealso{
+Other write functions: 
+\code{\link{sheets_append}()},
+\code{\link{sheets_edit}()}
+}
+\concept{write functions}

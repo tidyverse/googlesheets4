@@ -26,6 +26,7 @@
 #'
 #' @template ss-return
 #' @export
+#' @family write functions
 #'
 #' @examples
 #' if (sheets_has_token()) {

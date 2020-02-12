@@ -17,16 +17,19 @@ is how googledrive represents Drive files. Processed through
 
 \item{sheet}{Sheet to write into, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Ignored if the sheet is specified via \code{range}. If neither argument specifies the sheet, defaults to the first visible sheet.}
 
-\item{range}{A cell range to read from. If \code{NULL}, all non-empty cells are
-read. Otherwise specify \code{range} as described in \href{https://developers.google.com/sheets/api/guides/concepts#a1_notation}{Sheets A1 notation}
-or using the helpers documented in \link{cell-specification}. Sheets uses
-fairly standard spreadsheet range notation, although a bit different from
-Excel. Examples of valid ranges: \code{"Sheet1!A1:B2"}, \code{"Sheet1!A:A"},
-\code{"Sheet1!1:2"}, \code{"Sheet1!A5:A"}, \code{"A1:B2"}, \code{"Sheet1"}. Interpreted
-strictly, even if the range forces the inclusion of leading, trailing, or
-embedded empty rows or columns. Takes precedence over \code{skip}, \code{n_max} and
-\code{sheet}. Note \code{range} can be a named range, like \code{"sales_data"}, without
-any cell reference.}
+\item{range}{Where to write. This \code{range} argument has important similarities
+and differences to \code{range} elsewhere (e.g. \code{\link[=sheets_read]{sheets_read()}}):
+\itemize{
+\item Similarities: Can be a cell range, using A1 notation ("A1:D3") or using
+the helpers in \code{\link{cell-specification}}. Can combine sheet name and cell
+range ("Sheet1!A5:A") or refer to a sheet by name (\code{range = "Sheet1"},
+although \code{sheet = "Sheet1"} is preferred).
+\item Difference: Can NOT be a named range.
+\item Difference: \code{range} can be interpreted as the \emph{start} of the target
+rectangle (the upper left corner) or, more literally, as the actual
+target rectangle. We send it as the start when FILL THIS IN and as the
+range when FILL THIS IN.
+}}
 
 \item{col_names}{Logical, indicating whether to send the column names of
 \code{data}.}
@@ -36,24 +39,31 @@ The input \code{ss}, as an instance of \code{\link{sheets_id}}
 }
 \description{
 \lifecycle{experimental}
+
 Writes a data frame into a range. Main differences from \code{\link[=sheets_write]{sheets_write()}}:
 \itemize{
-\item The edited cells are not explicitly formatted or styled as a table.
-Nothing special is done re: a header row or freezing rows.
-\item (Work)sheet dimensions are not changed.
+\item The edited rectangle is not explicitly styled as a table.
+Nothing special is done re: formatting a header row or freezing rows.
+\item Column names can be suppressed. This means that, although \code{data} must
+be a data frame (at least for now), \code{sheets_edit()} can actually be used
+to write arbitrary data.
+\item The dimensions of the target (work)sheet are not changed.
 \item The target (spread)Sheet and (work)sheet must already exist. There is no
 ability to create a Sheet or add a worksheet.
 }
+
+If you just want to add rows to an existing table, the function you probably
+want is \code{\link[=sheets_append]{sheets_append()}}.
 }
 \examples{
 if (sheets_has_token()) {
+  # create a Sheet with some initial, empty (work)sheets
+  (ss <- sheets_create("sheets-edit-demo", sheets = c("alpha", "beta")))
+
   df <- data.frame(
     x = 1:3,
     y = letters[1:3]
   )
-
-  # create a Sheet with some initial, placeholder data
-  (ss <- sheets_create("sheets-edit-demo", sheets = "alpha"))
 
   #  write df somewhere other than the "upper left corner"
   sheets_edit(ss, data = df, range = "D6")
@@ -61,7 +71,32 @@ if (sheets_has_token()) {
   # view your magnificent creation in the browser
   # sheets_browse(ss)
 
+  # send data of disparate types to a 1-row rectangle
+  dat <- tibble::tibble(
+    string = "string",
+    logical = TRUE,
+    datetime = Sys.time()
+  )
+  sheets_edit(ss, data = dat, sheet = "beta", col_names = FALSE)
+
+  # send data of disparate types to a 1-column rectangle
+  dat <- tibble::tibble(
+    x = list(Sys.time(), FALSE, "string")
+  )
+  sheets_edit(ss, data = dat, range = "beta!C5", col_names = FALSE)
+
   # clean up
   googledrive::drive_rm(ss)
 }
 }
+\seealso{
+Makes an \code{UpdateCellsRequest}:
+\itemize{
+\item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest}
+}
+
+Other write functions: 
+\code{\link{sheets_append}()},
+\code{\link{write_sheet}()}
+}
+\concept{write functions}

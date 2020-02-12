@@ -1,14 +1,20 @@
-# https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest
-
 #' (Over)write new data into a range
 #'
-#' @description \lifecycle{experimental}
+#' @description
+#' \lifecycle{experimental}
+#'
 #' Writes a data frame into a range. Main differences from [sheets_write()]:
-#'   * The edited cells are not explicitly formatted or styled as a table.
-#'     Nothing special is done re: a header row or freezing rows.
-#'   * (Work)sheet dimensions are not changed.
+#'   * The edited rectangle is not explicitly styled as a table.
+#'     Nothing special is done re: formatting a header row or freezing rows.
+#'   * Column names can be suppressed. This means that, although `data` must
+#'     be a data frame (at least for now), `sheets_edit()` can actually be used
+#'     to write arbitrary data.
+#'   * The dimensions of the target (work)sheet are not changed.
 #'   * The target (spread)Sheet and (work)sheet must already exist. There is no
 #'     ability to create a Sheet or add a worksheet.
+#'
+#' If you just want to add rows to an existing table, the function you probably
+#' want is [sheets_append()].
 #'
 #' @template ss
 #' @param data A data frame.
@@ -17,29 +23,55 @@
 #'   "Ignored if the sheet is specified via `range`. If neither argument",
 #'   "specifies the sheet, defaults to the first visible sheet."
 #' )
-#' @template range
-
+#' @param range Where to write. This `range` argument has important similarities
+#'   and differences to `range` elsewhere (e.g. [sheets_read()]):
+#'   * Similarities: Can be a cell range, using A1 notation ("A1:D3") or using
+#'     the helpers in [`cell-specification`]. Can combine sheet name and cell
+#'     range ("Sheet1!A5:A") or refer to a sheet by name (`range = "Sheet1"`,
+#'     although `sheet = "Sheet1"` is preferred).
+#'   * Difference: Can NOT be a named range.
+#'   * Difference: `range` can be interpreted as the *start* of the target
+#'     rectangle (the upper left corner) or, more literally, as the actual
+#'     target rectangle. We send it as the start when FILL THIS IN and as the
+#'     range when FILL THIS IN.
 #' @param col_names Logical, indicating whether to send the column names of
 #'   `data`.
 #'
 #' @template ss-return
 #' @export
+#' @family write functions
+#' @seealso Makes an `UpdateCellsRequest`:
+#'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest>
 #'
 #' @examples
 #' if (sheets_has_token()) {
+#'   # create a Sheet with some initial, empty (work)sheets
+#'   (ss <- sheets_create("sheets-edit-demo", sheets = c("alpha", "beta")))
+#'
 #'   df <- data.frame(
 #'     x = 1:3,
 #'     y = letters[1:3]
 #'   )
-#'
-#'   # create a Sheet with some initial, placeholder data
-#'   (ss <- sheets_create("sheets-edit-demo", sheets = "alpha"))
 #'
 #'   #  write df somewhere other than the "upper left corner"
 #'   sheets_edit(ss, data = df, range = "D6")
 #'
 #'   # view your magnificent creation in the browser
 #'   # sheets_browse(ss)
+#'
+#'   # send data of disparate types to a 1-row rectangle
+#'   dat <- tibble::tibble(
+#'     string = "string",
+#'     logical = TRUE,
+#'     datetime = Sys.time()
+#'   )
+#'   sheets_edit(ss, data = dat, sheet = "beta", col_names = FALSE)
+#'
+#'   # send data of disparate types to a 1-column rectangle
+#'   dat <- tibble::tibble(
+#'     x = list(Sys.time(), FALSE, "string")
+#'   )
+#'   sheets_edit(ss, data = dat, range = "beta!C5", col_names = FALSE)
 #'
 #'   # clean up
 #'   googledrive::drive_rm(ss)

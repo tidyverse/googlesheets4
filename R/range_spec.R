@@ -69,6 +69,7 @@ as_range_spec.default <- function(x, ...) {
 #         A1:B2         ****
 # Sheet1  A1:B2         ****
 # 3       A1:B2         ****
+#' @export
 as_range_spec.character <- function(x,
                                     ...,
                                     sheet = NULL,
@@ -137,6 +138,7 @@ as_range_spec.character <- function(x,
 # Sheet1 / 2  0     Send sheet name.
 #             >0    Express skip request in cell_limits object and re-dispatch.
 # Sheet1 / 2  >0    <same as previous>
+#' @export
 as_range_spec.NULL <- function(x,
                                ...,
                                sheet = NULL,
@@ -172,6 +174,7 @@ as_range_spec.NULL <- function(x,
 #                           "first visible sheet".
 # Sheet1 / 2  cell_limits   Resolve sheet name, make A1 range, send combined
 #                           result.
+#' @export
 as_range_spec.cell_limits <- function(x,
                                       ...,
                                       shim = TRUE,

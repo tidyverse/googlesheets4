@@ -57,4 +57,9 @@ Makes an \code{AppendCellsRequest}:
 \itemize{
 \item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AppendCellsRequest}
 }
+
+Other write functions: 
+\code{\link{sheets_edit}()},
+\code{\link{write_sheet}()}
 }
+\concept{write functions}

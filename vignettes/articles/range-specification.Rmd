@@ -9,36 +9,158 @@ knitr::opts_chunk$set(
 )
 ```
 
-This is a very short article that serves mostly as internal documentation of how googlesheets4 prepares the range when requesting cell data from the Sheets API. The main purpose is to publish the table below that shows how all possible combinations of row and cell limits are translated into an A1-style range.
+This is article serves mostly as internal documentation of how various representations of cell ranges relate to each other in googlesheets4.
 
-```{r include = FALSE}
+```{r, R.options = list(tidyverse.quiet = TRUE)}
 library(tidyverse)
 library(googlesheets4)
+
+sheets_deauth()
 ```
 
-There are several ways to convey which cells you want to read in googlesheets4:
+# User-specified range
 
-  * `range` is the primary and most powerful argument for this and takes
-    precedence over all others. `range` can be:
+Several googlesheets4 functions allow the user to specify which cells to read or write. This range specification comes via the `sheet`, `range`, and (possibly) `skip` arguments. Examples of functions with this interface: `sheets_read()`, `sheets_cells()`, and `sheets_edit()`.
+
+  * `range` is the primary and most powerful argument and takes precedence over
+    all others. `range` can be:
       - an [A1-style spreadsheet range](https://developers.google.com/sheets/api/guides/concepts#a1_notation),
         with or without a sheet name, such as "A3:D7" or "arts!A5:F15"
+      - a (work)sheet name, such as "arts"
       - a named range, such as "arts_data"
       - a `cell_limits` object made with helpers from the cellranger package
-      
-    The Sheets API defaults to "all non-empty cells" when no range is specified.
-  * `sheet` is an optional argument specifying sheet name or number. The Sheets
-    API defaults to "first visible sheet" when `sheet` is unspecified. Note that
-    a sheet name can also be conveyed via `range`, alone or along with a cell
-    range.
-  * `skip` and `n_max` are optional arguments that can place lower/upper bounds
-    on where we start reading or stop parsing.
+  * `sheet` can be used to specify a (work)sheet by name, such as "arts", or
+    by position, such as 3
+  * `skip` is an optional argument that appears in `sheets_read()` and 
+    `sheets_cells()`, to be compatible with functions like `read.table()`,
+    `readr::read_delim()`, and `readxl::read_excel()`.
+    
+(You might think `n_max` should also be mentioned here, but for technical reasons, in general, `n_max` can only be enforced after we've read data. So it's not part of the range ingest problem.)
 
-If a specific range is targeted, the Sheets API requires that this be specified as an A1-style range. Here is how all possible cell limits are converted to a valid range in the `GET` request for cell data. Depending on how the user expressed this range, googlesheets4 may do additional post-processing when parsing the cell data into the returned data frame.
+Loose ends and hangnails:
+
+  * The story around (work)sheet visibility is muddy. But I'm letting that be,
+    because I have yet to have a user interaction that had anything to do with
+    sheet (in)visibility.
+  * The problem of a completely unspecified range. In a very hand-wavy sense,
+    "no range" means "all cells" or "all non-empty cells" or "all non-empty cells in the first (visible?) sheet". That is obviously very imprecise, which
+    means that I have to think about how to handle "no range" for each
+    individual endpoint or function. Sometimes I inject some info (such as the
+    first visible worksheet), so we don't retrieve data that we will just throw away. This is all very special case-y right now.
+  * `cell_limits` objects can hold sheet information and I have made no
+    arrangements for that.
+  * Should `sheets_edit()` have a skip argument, just for internal consistency?
+
+# Range spec
+
+`range_spec` is an internal S3 class that is typically used inside any function that accepts the `(sheet, range, skip)` trio.
+
+We need some sort of intermediate storage, in order to translate between the various ways the user can express their range and the requirements of different Sheets API endpoints (which differ more than you'd expect!). We generally require metadata about the associated Sheet in order to form a `range_spec`, because we potentially need to lookup the (work)`sheet` by position or determine whether a name refers to a named range or a (work)`sheet`.
+
+The internal generic `as_range_spec()` dispatches on primary argument `x`, which maps to `range`. Its job is to transform user-supplied `(sheet, range, skip)` into:
+
+  * `sheet_name`: (Work)sheet name, can be `NULL`.
+  * `named_range`: Name of range, can be `NULL`. But if not `NULL`, then this is
+    the complete specification of the range, i.e. it cannot be combined with any
+    other information.
+  * `cell_range` and/or `cell_limits`: Ways to specify a rectangle of cells, can
+    be `NULL`. If user specifies `skip`, that is re-expressed as `cell_limits`. At intake, at most one of `cell_range` and `cell_limits` is populated. But internally, we might populate one from the other, as we prepare the range to
+    meet the requirements of a specific API endpoint.
+  * `shim`: indicates whether the user specified a specific cell rectangle
+     (`shim = TRUE`) or we filled in some specifics pragmatically
+     (`shim = FALSE`), which is necessary to express some partially open
+     rectangles in A1-notation. This aspect of the user-supplied data needs to
+     be retained to inform downstream post-processing.
+  * (`sheets_df` and `nr_df` are retained in a `range_spec`, if they were
+    provided to `as_range_spec()`.)
+  * Loose end: I wonder if `range_spec` should have a field for (work)sheet id.
+  
+Here's how various user-specified ranges are stored as a `range_spec`.
+
+```{r include = FALSE}
+df <- read_csv('
+    "sheet",                          "range", "skip"
+     "NULL",                           "NULL",    "0"
+   "Africa",                           "NULL",    "0"
+        "4",                           "NULL",    "0"
+     "NULL",                           "NULL",    "2"
+   "Africa",                           "NULL",    "3"
+        "4",                           "NULL",    "4"
+"<ignored>",                     "Asia!A1:B2",    "0"
+"<ignored>",                         "canada",    "0"
+"<ignored>",                         "Europe",    "3"
+     "NULL",                          "A1:B2",    "0"
+  "Oceania",                          "A1:B2",    "0"
+        "2",                          "A1:B2",    "0"
+     "NULL", "cell_limits(c(2, 3), c(NA, 5))",   "0"
+ "Americas", "cell_limits(c(2, 3), c(NA, 5))",   "0"
+')
+
+escape_brackets <- function(x) {
+  #str_replace_all(x, c("<" = "\\\\<", ">" = "\\\\>"))
+  str_replace_all(x, c("<" = "&lt;", ">" = "&gt;"))
+}
+
+formatize <- function(x) paste(escape_brackets(format(x)), collapse = "<br>")
+```
+
+```{r include = FALSE}
+ss <- sheets_example("gapminder")
+ss_meta <- sheets_get(ss)
+
+df <- df %>% 
+  mutate(
+    sheet_orig = escape_brackets(sheet),
+    range_orig = range,
+    sheet = map(sheet, parse_guess),
+    range = map(range, parse_guess)
+  )
+df$sheet[df$sheet == "NULL"] <- list(NULL)
+df$range[df$range == "NULL"] <- list(NULL)
+df$range <- modify_at(
+  df$range,
+  str_which(df$range_orig, "^cell_limits"),
+  ~ eval(parse(text = .x))
+)
+
+df <- df %>%
+  rename(x = range) %>% # make the generic happy
+  mutate(range_spec = pmap(.,
+    googlesheets4:::as_range_spec,
+    sheets_df = ss_meta$sheets,
+    nr_df     = ss_meta$named_ranges
+  )) %>% 
+  rename(range = x)
+```
 
 ```{r echo = FALSE}
-library(tidyverse)
-library(googlesheets4)
+df %>% 
+  select(-sheet, -range) %>% 
+  rename(range = range_orig, sheet = sheet_orig) %>% 
+  mutate(range_spec = map_chr(range_spec, formatize)) %>% 
+  select(sheet, range, skip, everything()) %>% 
+  knitr::kable()
+```
 
+## Cell rectangles
+
+When a `range_spec` is first formed, it may hold specifics for a cell rectangle, although it does not have to. This info appears in one of these fields:
+
+  * `cell_range`: an [A1-style spreadsheet range](https://developers.google.com/sheets/api/guides/concepts#a1_notation),
+    with NO sheet information
+    - Examples: "A4", "D:G", "3:7", "B3:H", "C4:G16"
+  * a `cell_limits` object, in the cellranger sense
+    - Example: `cell_limits(ul = c(2, 3), lr = c(NA, 5)))`
+  
+A `cell_limits` object is, overall, a much more sane way to hold this information, because explicit `NA`s can be used to convey unboundedness. Some types of unboundedness simply can't be conveyed in A1 notation, even though those partially open rectangles are as legitimate as those that can be recorded in A1 notation.
+
+In any case, between user expectations and API idiosyncrasies, we have to be able to translate between `cell_range` and `cell_limits`.
+
+### A1 range from `cell_limits`
+
+The reading functions `sheets_read()` and `sheets_cells()` hit the `sheets.spreadsheets.get` endpoint. Bizarrely, this endpoint requires the range to be specified in A1-notation. If the user specifies the cell rectangle in A1-notation, things are easy and we essentially just pass that along. But users can describe certain partially open cell rectangles via `cell_limits` that can't be literally expressed in A1-notation. The table below shows how all possible combinations of row and cell limits are translated into an A1-style range, using technical limits on the number of rows and columns in a Google Sheet.
+
+```{r echo = FALSE}
 f <- function(start_col, start_row, end_col, end_row) {
   cellranger::cell_limits(
     ul = c(start_row, start_col), lr = c(end_row, end_col)
@@ -77,3 +199,73 @@ knitr::kable(
     naive_range, range)
 )
 ```
+
+### `cell_limits` from A1 range
+
+When editing a sheet, we send an [`UpdateCellsRequest`](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest), which takes the location of the write via a *union field*. We must send one of the following:
+
+  * `start`: An instance of `GridCoordinate` which identifies one cell. This is
+    where the write starts and the cells hit are determined by the structure of
+    the accompanying `RowData`. Think of `start` as specifying the upper left
+    corner of a target rectangle. Fields:
+    - `sheetId`: ID of the (work)sheet. The only required field.
+    - `rowIndex`: Zero-based row index.  Unspecified means 0.
+    - `columnIndex`: Zero-based column index.  Unspecified means 0.
+  * `range`: An instance of `GridRange` which identifies a rectangle of cells.
+    Fields:
+    - `sheetId`: ID of the (work)sheet. The only required field.
+    - `startRowIndex`: Zero-based inclusive start row. Unspecified means 0.
+    - `endRowIndex`: Zero-based exclusive end row. Unspecified means unbounded.
+    - `startColumnIndex`: Zero-based inclusive start column. Unspecified means
+      0.
+    - `endColumnIndex`: Zero-based exclusive end column. Unspecified means
+      unbounded.
+    
+    All the start/end row/column indices are optional. If omitted, it means
+    the rectangle is unbounded on that side. Unbounded on the left or top is
+    boring, because that just amounts to starting at the first row or column.
+    But unbounded on the right or bottom is a more interesting scenario because of this:
+    
+    If the `RowData` doesn't cover the entire `range` rectangle, the targetted
+    cells that don't receive new data are cleared, according to the accompanying
+    field mask in `fields`.
+
+`sheets_edit()` is the only writing function in googlesheets4 that lets the user target a specific range. This function is why we need the ability to convert A1-notation to `cell_limits` and to decide whether user's range should be sent via `start` or `range`. `sheets_write()`, `sheets_create()`, and `sheets_append()` all offer a higher-level API, focused on the holistic management of (work)sheets that hold a single data table.
+
+Here's a table that translates the A1-style ranges created above into `cell_limits`. Some scenarios are covered more than once in this input, because above we were tackling a different (harder) problem. But that's harmless and these inputs are good, in terms of covering all relevant scenarios. Note I dropped the row corresponding to "no input".
+
+```{r, include = FALSE}
+# apparently I didn't know about format methods when I wrote cellranger :(
+formaticate <- function(x) escape_brackets(capture.output(print(x)))
+```
+
+```{r echo = FALSE}
+df %>%
+  select(range) %>% 
+  filter(!str_detect(range, "NULL")) %>% 
+  mutate(cell_limits = map(range, googlesheets4:::limits_from_range)) %>% 
+  mutate(cell_limits = map_chr(cell_limits, formaticate)) %>% 
+  knitr::kable()
+```
+
+How to decide whether to send user's range via `start` or `range`? Possible scenarios for `(sheet, range)` (remember: so far, `sheets_edit()` doesn't offer `skip`):
+
+  * `sheet` not given: populate with first (visible) sheet.
+  * No `range`: Send sheet ID as `GridCoordinate` via `start`. We will
+    overwrite data (and usually formats) in cells covered by the accompanying
+    `data`. But we don't touch the rest of the sheet. Why not send as `range`?
+    That feels too aggressive because it clears the data (and usually formats)
+    of any cells in the sheet that are not covered by the `data`. But if user wants that, there's always `sheets_write()`.
+  * `range` as A1 notation: Re-express it as `cell_limits`.
+  * `range` as `cell_limits` breaks down into a couple scenarios:
+    - `cell_limits` contains at least 1 `NA`: send as `GridRange` via `range`.
+      Analysis of the "all `NA`" edge case: we send just the sheet ID as a
+      `GridRange`, so we will clear the targeted fields for the whole sheet.
+      This seems OK here, because no one can do this by accident, i.e. you
+      have to go out of your way to make an explicit `cell_limits` object
+      containing only `NA`s. Why would you do this instead of `sheets_write()`?
+      Maybe you need to suppress the inclusion of `col_names` or you don't
+      like the table formatting applied by `sheets_write()`.
+    - `cell_limits` has no `NA`s: If rectangle includes more than 1 cell, send
+      as `GridRange` via `range`. If rectangle is exactly 1 cell, send as
+      `GridCoordinate` via `start`.

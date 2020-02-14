@@ -28,7 +28,7 @@ get_cells <- function(ss,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   # if we send no range, we get all cells from all sheets; not what we want
-  effective_range <- range_spec$A1_range %||% first_visible_name(x$sheets)
+  effective_range <- as_A1_range(range_spec) %||% first_visible_name(x$sheets)
   message_glue("Range {dq(effective_range)}")
 
   ## main GET -----------------------------------------------------------------
@@ -48,7 +48,7 @@ get_cells <- function(ss,
   ## enforce geometry on the cell data frame ----------------------------------
   if (range_spec$shim) {
     range_spec$cell_limits <- range_spec$cell_limits %||%
-      as_cell_limits(range_spec$A1_range)
+      as_cell_limits(effective_range)
     out <- insert_shims(out, range_spec$cell_limits)
     ## guarantee:
     ## every row and every column spanned by user's range is represented by at

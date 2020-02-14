@@ -8,7 +8,7 @@ A1_decomp <- glue("(?<column>{letter_part})?(?<row>{number_part})?")
 qualified_A1 <- function(sheet_name = NULL, cell_range = NULL) {
   n_missing <- is.null(sheet_name) + is.null(cell_range)
   if (n_missing == 2) {
-    return("")
+    return()
   }
   sep <- if (n_missing == 0) "!" else ""
   # API docs: "For simplicity, it is safe to always surround the sheet name

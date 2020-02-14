@@ -9,6 +9,7 @@
 #'
 #' @template ss-return
 #' @export
+#' @family write functions
 
 #' @seealso Makes an `AppendCellsRequest`:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AppendCellsRequest>

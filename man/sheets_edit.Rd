@@ -23,12 +23,11 @@ and differences to \code{range} elsewhere (e.g. \code{\link[=sheets_read]{sheets
 \item Similarities: Can be a cell range, using A1 notation ("A1:D3") or using
 the helpers in \code{\link{cell-specification}}. Can combine sheet name and cell
 range ("Sheet1!A5:A") or refer to a sheet by name (\code{range = "Sheet1"},
-although \code{sheet = "Sheet1"} is preferred).
+although \code{sheet = "Sheet1"} is preferred for clarity).
 \item Difference: Can NOT be a named range.
 \item Difference: \code{range} can be interpreted as the \emph{start} of the target
 rectangle (the upper left corner) or, more literally, as the actual
-target rectangle. We send it as the start when FILL THIS IN and as the
-range when FILL THIS IN.
+target rectangle. See the "Range specification" section for details.
 }}
 
 \item{col_names}{Logical, indicating whether to send the column names of
@@ -47,7 +46,9 @@ Nothing special is done re: formatting a header row or freezing rows.
 \item Column names can be suppressed. This means that, although \code{data} must
 be a data frame (at least for now), \code{sheets_edit()} can actually be used
 to write arbitrary data.
-\item The dimensions of the target (work)sheet are not changed.
+\item The dimensions of the target (work)sheet are not changed (this will
+probably get relaxed, so we can enlarge a sheet, if necessary, to
+accommodate the \code{data}).
 \item The target (spread)Sheet and (work)sheet must already exist. There is no
 ability to create a Sheet or add a worksheet.
 }
@@ -55,6 +56,28 @@ ability to create a Sheet or add a worksheet.
 If you just want to add rows to an existing table, the function you probably
 want is \code{\link[=sheets_append]{sheets_append()}}.
 }
+\section{Range specification}{
+
+The \code{range} argument of \code{sheets_edit()} is special, because the Sheets API
+can implement it in 2 different ways:
+\itemize{
+\item If \code{range} represents exactly 1 cell, like "B3", it is taken as the
+\emph{start} (or upper left corner) of the targeted cell rectangle. The edited
+cells are determined implicitly by the extent of the \code{data} we are
+writing. This frees you from doing fiddly range computations based on the
+dimensions of the \code{data} you are sending.
+\item If \code{range} describes a rectangle with multiple cells, it is interpreted
+as the \emph{actual} rectangle to edit. It is possible to describe a rectangle
+that is unbounded on the right (e.g. "B2:4"), on the bottom (e.g.
+"A4:C"), or on both the right and the bottom
+(e.g. \code{cell_limits(c(2, 3), c(NA, NA))}. Note that \strong{all cells} inside
+the rectangle receive updated data and format. Important implication: if
+the \code{data} object isn't big enough to fill the target rectangle, the cells
+that don't receive new data are effectively cleared, i.e. the
+existing value and format are deleted.
+}
+}
+
 \examples{
 if (sheets_has_token()) {
   # create a Sheet with some initial, empty (work)sheets

@@ -9,12 +9,32 @@
 #'   * Column names can be suppressed. This means that, although `data` must
 #'     be a data frame (at least for now), `sheets_edit()` can actually be used
 #'     to write arbitrary data.
-#'   * The dimensions of the target (work)sheet are not changed.
+#'   * The dimensions of the target (work)sheet are not changed (this will
+#'     probably get relaxed, so we can enlarge a sheet, if necessary, to
+#'     accommodate the `data`).
 #'   * The target (spread)Sheet and (work)sheet must already exist. There is no
 #'     ability to create a Sheet or add a worksheet.
 #'
 #' If you just want to add rows to an existing table, the function you probably
 #' want is [sheets_append()].
+#'
+#' @section Range specification:
+#' The `range` argument of `sheets_edit()` is special, because the Sheets API
+#' can implement it in 2 different ways:
+#'   * If `range` represents exactly 1 cell, like "B3", it is taken as the
+#'     *start* (or upper left corner) of the targeted cell rectangle. The edited
+#'     cells are determined implicitly by the extent of the `data` we are
+#'     writing. This frees you from doing fiddly range computations based on the
+#'     dimensions of the `data` you are sending.
+#'  * If `range` describes a rectangle with multiple cells, it is interpreted
+#'    as the *actual* rectangle to edit. It is possible to describe a rectangle
+#'    that is unbounded on the right (e.g. "B2:4"), on the bottom (e.g.
+#'    "A4:C"), or on both the right and the bottom
+#'    (e.g. `cell_limits(c(2, 3), c(NA, NA))`. Note that **all cells** inside
+#'    the rectangle receive updated data and format. Important implication: if
+#'    the `data` object isn't big enough to fill the target rectangle, the cells
+#'    that don't receive new data are effectively cleared, i.e. the
+#'    existing value and format are deleted.
 #'
 #' @template ss
 #' @param data A data frame.
@@ -28,12 +48,11 @@
 #'   * Similarities: Can be a cell range, using A1 notation ("A1:D3") or using
 #'     the helpers in [`cell-specification`]. Can combine sheet name and cell
 #'     range ("Sheet1!A5:A") or refer to a sheet by name (`range = "Sheet1"`,
-#'     although `sheet = "Sheet1"` is preferred).
+#'     although `sheet = "Sheet1"` is preferred for clarity).
 #'   * Difference: Can NOT be a named range.
 #'   * Difference: `range` can be interpreted as the *start* of the target
 #'     rectangle (the upper left corner) or, more literally, as the actual
-#'     target rectangle. We send it as the start when FILL THIS IN and as the
-#'     range when FILL THIS IN.
+#'     target rectangle. See the "Range specification" section for details.
 #' @param col_names Logical, indicating whether to send the column names of
 #'   `data`.
 #'
@@ -90,29 +109,24 @@ sheets_edit <- function(ss,
   x <- sheets_get(ssid)
   message_glue("Editing {sq(x$name)}")
 
-  s <- lookup_sheet(sheet, sheets_df = x$sheets)
+  # determine (work)sheet ------------------------------------------------------
+  range_spec <- as_range_spec(
+    range, sheet = sheet,
+    sheets_df = x$sheets, nr_df = x$named_ranges
+  )
+  range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
   # why dq() here but sq() above?
-  message_glue("Writing to sheet {dq(s$name)}")
+  message_glue("Writing to sheet {dq(range_spec$sheet_name)}")
 
   # pack the data, specify field mask ------------------------------------------
-  # https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest
   bureq <- new(
     "UpdateCellsRequest",
     rows = as_RowData(data, col_names = col_names),
     fields = "userEnteredValue,userEnteredFormat",
   )
 
-  # sort out start vs range ----------------------------------------------------
-  range_spec <- as_range_spec(
-    range, sheet = s$name,
-    sheets_df = x$sheets, nr_df = x$named_ranges
-  )
-  grid_range <- as_GridRange(range_spec)
-  if (looks_like_start(grid_range)) {
-    loc <- list(start = as_GridCoordinate(range_spec))
-  } else {
-    loc <- list(range = grid_range)
-  }
+  # package the write location as `start` or `range` ---------------------------
+  loc <- prepare_loc(range_spec)
   bureq <- patch(bureq, !!!loc)
 
   # do it ----------------------------------------------------------------------
@@ -130,36 +144,27 @@ sheets_edit <- function(ss,
   invisible(ssid)
 }
 
-looks_like_start <- function(x) {
-  # make implicit missing data explicit
-  x <- new("GridRange",
-           startRowIndex    = x$startRowIndex    %||% NA,
-           startColumnIndex = x$startColumnIndex %||% NA,
-           endRowIndex      = x$endRowIndex      %||% NA,
-           endColumnIndex   = x$endColumnIndex   %||% NA
-  )
+prepare_loc <- function(x) {
+  if (is.null(x$cell_limits)) {
+    if (is.null(x$cell_range)) {
+      return(list(start = as_GridCoordinate(x)))
+    }
+    x$cell_limits <- limits_from_range(x$cell_range)
+  }
 
-  if (is.na(x$endRowIndex) && is.na(x$endColumnIndex)) {
+  if (more_than_one_cell(x$cell_limits)) {
+    list(range = as_GridRange(x))
+  } else {
+    list(start = as_GridCoordinate(x))
+  }
+}
+
+more_than_one_cell <- function(cl) {
+  if (anyNA(cl$ul) || anyNA(cl$lr)) {
     return(TRUE)
   }
 
-  if (noNA(x)) {
-    row_index_diff <- x$endRowIndex - x$startRowIndex
-    col_index_diff <- x$endColumnIndex - x$startColumnIndex
-    if (row_index_diff == 1 && col_index_diff == 1) {
-      return(TRUE)
-    }
-  }
-
-  FALSE
+  nrows <- cl$lr[1] - cl$ul[1] + 1
+  ncols <- cl$lr[2] - cl$ul[2] + 1
+  nrows > 1 || ncols > 1
 }
-
-# gs_edit_cells <- function(ss, ws = 1, input = '', anchor = 'A1',
-#                           byrow = FALSE, col_names = NULL, trim = FALSE,
-#                           verbose = TRUE) {
-
-# ideally we would (offer to?) clear the cells we're about to write to
-# e.g. clear formatting
-# but I don't necessarily know which cells we are writing to (at least, not
-# without doing some extra work)
-

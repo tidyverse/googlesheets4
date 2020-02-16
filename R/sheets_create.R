@@ -114,7 +114,7 @@ prepare_df <- function(sheet_id, df, skip = 0) {
     fields = "userEnteredValue,userEnteredFormat"
   ))
 
-  # set sheet dimenions and freeze top row -------------------------------------
+  # set sheet dimensions and freeze top row -------------------------------------
   request_sheet_properties <- bureq_set_grid_properties(
     sheetId = sheet_id,
     nrow = nrow(df) + skip + 1, ncol = ncol(df), frozenRowCount = skip + 1

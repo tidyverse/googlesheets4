@@ -18,7 +18,7 @@ sheets_A1_range <- function(ss,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   A1_range <- as_A1_range(range_spec)
-  message_glue("A1 range {dq(A1_range)}")
+  message_glue("A1 range {sq(A1_range)}")
 
   range_spec
 }

@@ -122,7 +122,7 @@ write_sheet <- function(data,
       list(bureq_clear_sheet(s$id))
     )
   }
-  message_glue("Writing to sheet {dq(s$name)}")
+  message_glue("Writing to sheet {sq(s$name)}")
 
   # create request to write data frame into sheet ------------------------------
   requests <- c(

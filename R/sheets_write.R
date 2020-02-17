@@ -20,7 +20,11 @@
 #' dimensions are cleared and the targeted sheet gets new values and dimensions
 #' from `data`.
 #'
-#' @param data A data frame.
+#' @param data A data frame. If it has zero rows, we send one empty pseudo-row
+#'   of data, so that we can apply the usual table styling. This empty row goes
+#'   away (gets filled, actually) the first time you send more data with
+#'   [sheets_append()].
+
 #' @template ss
 #' @eval param_sheet(action = "write into")
 #'

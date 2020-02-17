@@ -9,11 +9,11 @@
 #'   * Column names can be suppressed. This means that, although `data` must
 #'     be a data frame (at least for now), `sheets_edit()` can actually be used
 #'     to write arbitrary data.
-#'   * The dimensions of the target (work)sheet are not changed (this will
-#'     probably get relaxed, so we can enlarge a sheet, if necessary, to
-#'     accommodate the `data`).
 #'   * The target (spread)Sheet and (work)sheet must already exist. There is no
 #'     ability to create a Sheet or add a worksheet.
+#'
+#' `sheets_edit()` adds rows and/or columns to the sheet, if it is necessary in
+#' order to write `data` to the user-specified `range`.
 #'
 #' If you just want to add rows to an existing table, the function you probably
 #' want is [sheets_append()].
@@ -59,7 +59,10 @@
 #' @template ss-return
 #' @export
 #' @family write functions
-#' @seealso Makes an `UpdateCellsRequest`:
+#' @seealso
+#' If sheet size needs to change, makes an `UpdateSheetPropertiesRequest`:
+#'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest>
+#' The main data write is done via an `UpdateCellsRequest`:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest>
 #'
 #' @examples
@@ -115,27 +118,46 @@ sheets_edit <- function(ss,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
-  # why dq() here but sq() above?
-  message_glue("Writing to sheet {dq(range_spec$sheet_name)}")
+  message_glue("Writing to sheet {sq(range_spec$sheet_name)}")
+
+  # initialize the batch update requests; store details on target sheet s ------
+  requests <- list()
+  s <- lookup_sheet(range_spec$sheet_name , sheets_df = x$sheets)
+
+  # package the write location as `start` or `range` ---------------------------
+  loc <- prepare_loc(range_spec)
+
+  # figure out if we need to resize the sheet ----------------------------------
+  dims_needed <- prepare_dims(loc, data, col_names)
+  resize_req <- prepare_resize_request(
+    s,
+    nrow_needed = dims_needed$nrow,
+    ncol_needed = dims_needed$ncol,
+    exact = FALSE
+  )
+
+  if (!is.null(resize_req)) {
+    message_glue(
+      "Changing dims: ({s$grid_rows} x {s$grid_columns}) --> ({dims_needed$nrow} x {dims_needed$ncol})"
+    )
+    requests <- c(requests, list(resize_req))
+  }
 
   # pack the data, specify field mask ------------------------------------------
-  bureq <- new(
+  data_req <- new(
     "UpdateCellsRequest",
     rows = as_RowData(data, col_names = col_names),
     fields = "userEnteredValue,userEnteredFormat",
   )
-
-  # package the write location as `start` or `range` ---------------------------
-  loc <- prepare_loc(range_spec)
-  bureq <- patch(bureq, !!!loc)
+  data_req <- patch(data_req, !!!loc)
+  requests <- c(requests, list(list(updateCells = data_req)))
 
   # do it ----------------------------------------------------------------------
   req <- request_generate(
     "sheets.spreadsheets.batchUpdate",
     params = list(
       spreadsheetId = ssid,
-      requests = list(list(updateCells = bureq)),
-      responseIncludeGridData = FALSE
+      requests = requests
     )
   )
   resp_raw <- request_make(req)
@@ -167,4 +189,28 @@ more_than_one_cell <- function(cl) {
   nrows <- cl$lr[1] - cl$ul[1] + 1
   ncols <- cl$lr[2] - cl$ul[2] + 1
   nrows > 1 || ncols > 1
+}
+
+prepare_dims <- function(write_loc, data, col_names) {
+  # Here it is actually useful to us that the row and column indices inside
+  # `write_loc` are zero-indexed. Recall that:
+  #   * `start` is an instance of GridCoordinate
+  #   * `range` is an instance of GridRange
+  if (rlang::has_name(write_loc, "start")) {
+    return(list(
+      nrow = (write_loc$start$rowIndex    %||% 0) + nrow(data) + col_names,
+      ncol = (write_loc$start$columnIndex %||% 0) + ncol(data)
+    ))
+  }
+
+  # we must be writing to a `range`
+  # take explicit end indices literally
+  # otherwise infer from start indices + size of `data`
+  gr <- write_loc$range
+  list(
+    nrow = gr$endRowIndex %||%
+      ((gr$startRowIndex %||% 0) + nrow(data) + col_names),
+    ncol = gr$endColumnIndex %||%
+      ((gr$startColumnIndex %||% 0) + ncol(data))
+  )
 }

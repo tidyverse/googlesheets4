@@ -18,10 +18,10 @@ is how googledrive represents Drive files. Processed through
 \item{nrow, ncol}{Desired number of rows or columns, respectively. The default
 of \code{NULL} means to leave unchanged.}
 
-\item{Logical, }{indicating whether to impose \code{nrow} and \code{ncol} exactly or to
-treat them as lower bounds. If \code{exact = FALSE}, \code{sheets_sheet_resize()} can
-only add cells. If \code{exact = TRUE}, cells can be deleted and their contents
-are lost.}
+\item{exact}{Logical, indicating whether to impose \code{nrow} and \code{ncol} exactly
+or to treat them as lower bounds. If \code{exact = FALSE},
+\code{sheets_sheet_resize()} can only add cells. If \code{exact = TRUE}, cells can be
+deleted and their contents are lost.}
 }
 \value{
 The input \code{ss}, as an instance of \code{\link{sheets_id}}
@@ -37,7 +37,7 @@ if (sheets_has_token()) {
   # see (work)sheet dims
   sheets_sheet_data(ss)
 
-  # no resize
+  # no resize occurs
   sheets_sheet_resize(ss, nrow = 2, ncol = 6)
 
   # reduce sheet size
@@ -45,10 +45,11 @@ if (sheets_has_token()) {
 
   # add rows
   sheets_sheet_resize(ss, nrow = 7)
+
   # add columns
   sheets_sheet_resize(ss, ncol = 10)
 
-  # add both
+  # add rows and columns
   sheets_sheet_resize(ss, nrow = 9, ncol = 12)
 
   # re-inspect (work)sheet dims

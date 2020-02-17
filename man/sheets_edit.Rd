@@ -46,12 +46,12 @@ Nothing special is done re: formatting a header row or freezing rows.
 \item Column names can be suppressed. This means that, although \code{data} must
 be a data frame (at least for now), \code{sheets_edit()} can actually be used
 to write arbitrary data.
-\item The dimensions of the target (work)sheet are not changed (this will
-probably get relaxed, so we can enlarge a sheet, if necessary, to
-accommodate the \code{data}).
 \item The target (spread)Sheet and (work)sheet must already exist. There is no
 ability to create a Sheet or add a worksheet.
 }
+
+\code{sheets_edit()} adds rows and/or columns to the sheet, if it is necessary in
+order to write \code{data} to the user-specified \code{range}.
 
 If you just want to add rows to an existing table, the function you probably
 want is \code{\link[=sheets_append]{sheets_append()}}.
@@ -113,8 +113,10 @@ if (sheets_has_token()) {
 }
 }
 \seealso{
-Makes an \code{UpdateCellsRequest}:
+If sheet size needs to change, makes an \code{UpdateSheetPropertiesRequest}:
 \itemize{
+\item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest}
+The main data write is done via an \code{UpdateCellsRequest}:
 \item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest}
 }
 

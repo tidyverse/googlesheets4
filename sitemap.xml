@@ -52,6 +52,9 @@
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_deauth.html</loc>
   </url>
   <url>
+    <loc>https://googlesheets4.tidyverse.org/reference/sheets_edit.html</loc>
+  </url>
+  <url>
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_endpoints.html</loc>
   </url>
   <url>
@@ -80,6 +83,9 @@
   </url>
   <url>
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_sheet_delete.html</loc>
+  </url>
+  <url>
+    <loc>https://googlesheets4.tidyverse.org/reference/sheets_sheet_resize.html</loc>
   </url>
   <url>
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_token.html</loc>

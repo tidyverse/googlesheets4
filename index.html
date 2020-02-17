@@ -177,11 +177,11 @@
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;        # of sheets: 5</span></span>
 <span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; </span></span>
 <span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt;       Africa: 1000 x 26</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt;     Americas: 1000 x 26</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt;         Asia: 1000 x 26</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt;       Europe: 1000 x 26</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt;      Oceania: 1000 x 26</span></span></code></pre></div>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt;       Africa: 625 x 6</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt;     Americas: 301 x 6</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt;         Asia: 397 x 6</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt;       Europe: 361 x 6</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt;      Oceania: 25 x 6</span></span></code></pre></div>
 <p>If you’d like to see a Sheet in the browser, including our example Sheets, use <code><a href="reference/sheets_browse.html">sheets_browse()</a></code>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="op">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw"><a href="reference/sheets_browse.html">sheets_browse</a></span>()</span></code></pre></div>
@@ -470,7 +470,7 @@
 <p>Let’s start over: we delete that Sheet and call <code><a href="reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="co">#&gt;   * checkable-cat: 1_ZOyq_AmGHQhAkWGTSdRiFBt9YXaMAZYaF8e86JnuH0</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="co">#&gt;   * deranged-bellsnake: 11dFPE2Z2xZUZ4mrF8ze62oC2GcFSXQC1Xe1QRKJdjfk</span></span>
 <span id="cb17-4"><a href="#cb17-4"></a></span>
 <span id="cb17-5"><a href="#cb17-5"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="dt">sheets =</span> df)</span></code></pre></div>
 <p><code><a href="reference/write_sheet.html">sheets_write()</a></code> can write to new or existing (work)sheets in this Sheet. Let’s write the <code>chickwts</code> data to a new sheet in <code>ss</code>.</p>
@@ -491,12 +491,12 @@
 <span id="cb21-2"><a href="#cb21-2"></a><span class="co">#&gt; # A tibble: 2 x 8</span></span>
 <span id="cb21-3"><a href="#cb21-3"></a><span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span></span>
 <span id="cb21-4"><a href="#cb21-4"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt; 1 df           0 1324803376 GRID  TRUE            9            2 &lt;NULL&gt;</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#&gt; 2 chickwts     1 1352070819 GRID  TRUE           72            2 &lt;NULL&gt;</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt; 1 df           0  369947376 GRID  TRUE            9            2 &lt;NULL&gt;</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#&gt; 2 chickwts     1 1309565055 GRID  TRUE           72            2 &lt;NULL&gt;</span></span>
 <span id="cb21-7"><a href="#cb21-7"></a></span>
 <span id="cb21-8"><a href="#cb21-8"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
 <span id="cb21-9"><a href="#cb21-9"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb21-10"><a href="#cb21-10"></a><span class="co">#&gt;   * fluffy-bunny: 1s1yw3oV5aKSCZbtPiVuHZq9V0ifYtbf_rdx1mDR8chw</span></span></code></pre></div>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="co">#&gt;   * fluffy-bunny: 1OQBdNQSxkiyqRK4Ezj-y4JRDpceyg7vD01KkTOm-MkM</span></span></code></pre></div>
 <p>See also the article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a>.</p>
 </div>
 <div id="contributing" class="section level2">

@@ -36,7 +36,8 @@ Imports:
     rematch2,
     rlang,
     tibble (>= 2.1.1),
-    utils
+    utils,
+    vctrs
 Suggests: 
     covr,
     rmarkdown,

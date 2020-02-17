@@ -101,6 +101,13 @@ sheets_create <- function(name = sheets_random(), ..., sheets = NULL) {
 }
 
 prepare_df <- function(sheet_id, df, skip = 0) {
+  # if df is a 0-row data frame, we must send a 1-row data frame of NAs in order
+  # to shrink wrap the data and freeze the top row
+  # https://github.com/tidyverse/googlesheets4/issues/92
+  if (nrow(df) == 0) {
+    df <- vctrs::vec_init(df, n = 1)
+  }
+
   # pack the data --------------------------------------------------------------
   # `start` (or `range`) must be sent, even if `skip = 0`
   start <- new("GridCoordinate", sheetId = sheet_id)

@@ -11,9 +11,9 @@
 #'     to write arbitrary data.
 #'   * The target (spread)Sheet and (work)sheet must already exist. There is no
 #'     ability to create a Sheet or add a worksheet.
-#'
-#' `sheets_edit()` adds rows and/or columns to the sheet, if it is necessary in
-#' order to write `data` to the user-specified `range`.
+#'   * The target sheet dimensions are not "trimmed" to shrink-wrap the `data`.
+#'     However, the sheet might gain rows and/or columns, in order to write
+#'     `data` to the user-specified `range`.
 #'
 #' If you just want to add rows to an existing table, the function you probably
 #' want is [sheets_append()].
@@ -53,8 +53,11 @@
 #'   * Difference: `range` can be interpreted as the *start* of the target
 #'     rectangle (the upper left corner) or, more literally, as the actual
 #'     target rectangle. See the "Range specification" section for details.
-#' @param col_names Logical, indicating whether to send the column names of
+#' @param col_names Logical, indicates whether to send the column names of
 #'   `data`.
+#' @param reformat Logical, indicates whether to reformat the edited cells.
+#'   Currently googlesheets4 provides no real support for formatting, so
+#'   `reformat = TRUE` effectively means that edited cells become unformatted.
 #'
 #' @template ss-return
 #' @export
@@ -62,6 +65,7 @@
 #' @seealso
 #' If sheet size needs to change, makes an `UpdateSheetPropertiesRequest`:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest>
+#'
 #' The main data write is done via an `UpdateCellsRequest`:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest>
 #'
@@ -102,12 +106,14 @@ sheets_edit <- function(ss,
                         data,
                         sheet = NULL,
                         range = NULL,
-                        col_names = TRUE) { # not sure about this default
+                        col_names = TRUE, # not sure about this default
+                        reformat = TRUE) {
   ssid <- as_sheets_id(ss)
   check_data_frame(data)
   maybe_sheet(sheet)
   check_range(range)
   check_bool(col_names)
+  check_bool(reformat)
 
   x <- sheets_get(ssid)
   message_glue("Editing {sq(x$name)}")
@@ -144,10 +150,11 @@ sheets_edit <- function(ss,
   }
 
   # pack the data, specify field mask ------------------------------------------
+  fields <- if (reformat) "userEnteredValue,userEnteredFormat" else "userEnteredValue"
   data_req <- new(
     "UpdateCellsRequest",
     rows = as_RowData(data, col_names = col_names),
-    fields = "userEnteredValue,userEnteredFormat",
+    fields = fields
   )
   data_req <- patch(data_req, !!!loc)
   requests <- c(requests, list(list(updateCells = data_req)))

@@ -4,7 +4,14 @@
 \alias{sheets_edit}
 \title{(Over)write new data into a range}
 \usage{
-sheets_edit(ss, data, sheet = NULL, range = NULL, col_names = TRUE)
+sheets_edit(
+  ss,
+  data,
+  sheet = NULL,
+  range = NULL,
+  col_names = TRUE,
+  reformat = TRUE
+)
 }
 \arguments{
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
@@ -30,8 +37,12 @@ rectangle (the upper left corner) or, more literally, as the actual
 target rectangle. See the "Range specification" section for details.
 }}
 
-\item{col_names}{Logical, indicating whether to send the column names of
+\item{col_names}{Logical, indicates whether to send the column names of
 \code{data}.}
+
+\item{reformat}{Logical, indicates whether to reformat the edited cells.
+Currently googlesheets4 provides no real support for formatting, so
+\code{reformat = TRUE} effectively means that edited cells become unformatted.}
 }
 \value{
 The input \code{ss}, as an instance of \code{\link{sheets_id}}
@@ -48,10 +59,10 @@ be a data frame (at least for now), \code{sheets_edit()} can actually be used
 to write arbitrary data.
 \item The target (spread)Sheet and (work)sheet must already exist. There is no
 ability to create a Sheet or add a worksheet.
+\item The target sheet dimensions are not "trimmed" to shrink-wrap the \code{data}.
+However, the sheet might gain rows and/or columns, in order to write
+\code{data} to the user-specified \code{range}.
 }
-
-\code{sheets_edit()} adds rows and/or columns to the sheet, if it is necessary in
-order to write \code{data} to the user-specified \code{range}.
 
 If you just want to add rows to an existing table, the function you probably
 want is \code{\link[=sheets_append]{sheets_append()}}.
@@ -116,7 +127,10 @@ if (sheets_has_token()) {
 If sheet size needs to change, makes an \code{UpdateSheetPropertiesRequest}:
 \itemize{
 \item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest}
+}
+
 The main data write is done via an \code{UpdateCellsRequest}:
+\itemize{
 \item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest}
 }
 

@@ -93,7 +93,7 @@ write_sheet <- function(data,
 
   # retrieve spreadsheet metadata ----------------------------------------------
   x <- sheets_get(ssid)
-  message_glue("Writing to {sq(x$name)}")
+  message_glue("Writing to {dq(x$name)}")
 
   # no `sheet` ... but maybe we can name the sheet after the data --------------
   if (is.null(sheet) && rlang::quo_is_symbol(data_quo)) {
@@ -126,7 +126,7 @@ write_sheet <- function(data,
       list(bureq_clear_sheet(s$id))
     )
   }
-  message_glue("Writing to sheet {sq(s$name)}")
+  message_glue("Writing to sheet {dq(s$name)}")
 
   # create request to write data frame into sheet ------------------------------
   requests <- c(

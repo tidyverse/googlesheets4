@@ -17,7 +17,7 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
   if (is.character(sheet)) {
     stop_sheet_not_found <- function(sheet) {
       rlang::abort(
-        glue("No sheet found with this name: {sq(sheet)}"),
+        glue("No sheet found with this name: {dq(sheet)}"),
         class = "googlesheets4_error_sheet_not_found",
         sheet = sheet
       )

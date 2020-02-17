@@ -10,7 +10,7 @@ sheets_A1_range <- function(ss,
 
   # retrieve spreadsheet metadata ----------------------------------------------
   x <- sheets_get(ssid)
-  message_glue("Spreadsheet name: {sq(x$name)}")
+  message_glue("Spreadsheet name: {dq(x$name)}")
 
   # range specification --------------------------------------------------------
   range_spec <- as_range_spec(
@@ -18,7 +18,7 @@ sheets_A1_range <- function(ss,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   A1_range <- as_A1_range(range_spec)
-  message_glue("A1 range {sq(A1_range)}")
+  message_glue("A1 range {dq(A1_range)}")
 
   range_spec
 }
@@ -117,7 +117,7 @@ as_range_spec.character <- function(x,
     stop_glue(
       "{bt('range')} doesn't appear to be a range in A1 notation, a named ",
       "range, or a sheet name:\n",
-      "  * {sq(x)}"
+      "  * {dq(x)}"
     )
   }
   out$cell_range <- x

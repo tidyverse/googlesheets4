@@ -44,7 +44,7 @@ sheets_sheet_delete <- function(ss, sheet) {
   # capture sheet ids ----------------------------------------------------------
   s <- map(sheet, ~ lookup_sheet(.x, sheets_df = x$sheets))
   msg <- glue("  * {map_chr(s, 'name')}\n")
-  msg <- c(glue("Deleting these sheet(s) from {sq(x$name)}:"), msg)
+  msg <- c(glue("Deleting these sheet(s) from {dq(x$name)}:"), msg)
   message_collapse(msg)
 
   sid <- map(s, "id")

@@ -47,10 +47,10 @@ sheets_append <- function(data, ss, sheet = 1) {
   check_sheet(sheet)
 
   x <- sheets_get(ssid)
-  message_glue("Writing to {sq(x$name)}")
+  message_glue("Writing to {dq(x$name)}")
 
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
-  message_glue("Appending {nrow(data)} row(s) to {sq(s$name)}")
+  message_glue("Appending {nrow(data)} row(s) to {dq(s$name)}")
 
   req <- request_generate(
     "sheets.spreadsheets.batchUpdate",

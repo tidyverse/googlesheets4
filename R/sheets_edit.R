@@ -116,7 +116,7 @@ sheets_edit <- function(ss,
   check_bool(reformat)
 
   x <- sheets_get(ssid)
-  message_glue("Editing {sq(x$name)}")
+  message_glue("Editing {dq(x$name)}")
 
   # determine (work)sheet ------------------------------------------------------
   range_spec <- as_range_spec(
@@ -124,7 +124,7 @@ sheets_edit <- function(ss,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
-  message_glue("Writing to sheet {sq(range_spec$sheet_name)}")
+  message_glue("Writing to sheet {dq(range_spec$sheet_name)}")
 
   # initialize the batch update requests; store details on target sheet s ------
   requests <- list()

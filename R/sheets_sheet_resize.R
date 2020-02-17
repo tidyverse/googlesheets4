@@ -57,7 +57,7 @@ sheets_sheet_resize <- function(ss,
 
   x <- sheets_get(ssid)
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
-  message_glue("Resizing sheet {sq(s$name)} in {sq(x$name)}")
+  message_glue("Resizing sheet {dq(s$name)} in {dq(x$name)}")
 
   bureq <- prepare_resize_request(s, nrow_needed = nrow, ncol_needed = ncol, exact = exact)
 

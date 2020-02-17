@@ -27,7 +27,7 @@ test_that("sheets_sheet_delete() works", {
     sheets_sheet_delete(ss, list("alpha", 2))
   )
 
-  sheets_df <- sheets_sheet_data(ss)
+  sheets_df <- sheets_sheet_properties(ss)
 
   expect_identical(sheets_df$name, "delta")
 })

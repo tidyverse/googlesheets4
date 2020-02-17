@@ -58,7 +58,7 @@ if (sheets_has_token()) {
     )
 
   # get an overview of the sheets
-  sheets_sheet_data(ss)
+  sheets_sheet_properties(ss)
 
   # cleanup
   sheets_find("add-sheets-to-me") \%>\% googledrive::drive_rm()
@@ -71,8 +71,8 @@ Makes an \code{AddSheetRequest}:
 }
 
 Other worksheet functions: 
-\code{\link{sheets_sheet_data}()},
 \code{\link{sheets_sheet_delete}()},
+\code{\link{sheets_sheet_properties}()},
 \code{\link{sheets_sheet_resize}()}
 }
 \concept{worksheet functions}

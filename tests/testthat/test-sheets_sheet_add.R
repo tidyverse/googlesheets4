@@ -42,7 +42,7 @@ test_that("sheets_sheet_add() works", {
     )
   )
 
-  sheets_df <- sheets_sheet_data(ss)
+  sheets_df <- sheets_sheet_properties(ss)
 
   expect_identical(
     sheets_df$name,

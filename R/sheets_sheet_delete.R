@@ -21,7 +21,7 @@
 #'   sheets_sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 #'
 #'   # get an overview of the sheets
-#'   sheets_sheet_data(ss)
+#'   sheets_sheet_properties(ss)
 #'
 #'   # delete sheets
 #'   sheets_sheet_delete(ss, 1)
@@ -29,7 +29,7 @@
 #'   sheets_sheet_delete(ss, list("alpha", 2))
 #'
 #'   # get an overview of the sheets
-#'   sheets_sheet_data(ss)
+#'   sheets_sheet_properties(ss)
 #'
 #'   # cleanup
 #'   sheets_find("delete-sheets-from-me") %>% googledrive::drive_rm()

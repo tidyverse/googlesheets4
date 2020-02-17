@@ -35,7 +35,7 @@ if (sheets_has_token()) {
   (ss <- sheets_create("sheets-resize-demo"))
 
   # see (work)sheet dims
-  sheets_sheet_data(ss)
+  sheets_sheet_properties(ss)
 
   # no resize occurs
   sheets_sheet_resize(ss, nrow = 2, ncol = 6)
@@ -53,7 +53,7 @@ if (sheets_has_token()) {
   sheets_sheet_resize(ss, nrow = 9, ncol = 12)
 
   # re-inspect (work)sheet dims
-  sheets_sheet_data(ss)
+  sheets_sheet_properties(ss)
 
   googledrive::drive_rm(ss)
 }
@@ -66,7 +66,7 @@ Makes an \code{UpdateSheetPropertiesRequest}:
 
 Other worksheet functions: 
 \code{\link{sheets_sheet_add}()},
-\code{\link{sheets_sheet_data}()},
-\code{\link{sheets_sheet_delete}()}
+\code{\link{sheets_sheet_delete}()},
+\code{\link{sheets_sheet_properties}()}
 }
 \concept{worksheet functions}

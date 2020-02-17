@@ -48,7 +48,7 @@
 #'     )
 #'
 #'   # get an overview of the sheets
-#'   sheets_sheet_data(ss)
+#'   sheets_sheet_properties(ss)
 #'
 #'   # cleanup
 #'   sheets_find("add-sheets-to-me") %>% googledrive::drive_rm()
@@ -94,7 +94,7 @@ resolve_index <- function(ssid, .before = NULL, .after = NULL) {
   if (is.null(.before) && is.null(.after)) {
     return(NULL)
   }
-  sheets_df <- sheets_sheet_data(ssid)
+  sheets_df <- sheets_sheet_properties(ssid)
 
   if (is.null(.after)) {
     s <- lookup_sheet(.before, sheets_df = sheets_df)

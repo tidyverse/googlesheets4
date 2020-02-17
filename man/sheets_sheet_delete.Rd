@@ -27,7 +27,7 @@ if (sheets_has_token()) {
   sheets_sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 
   # get an overview of the sheets
-  sheets_sheet_data(ss)
+  sheets_sheet_properties(ss)
 
   # delete sheets
   sheets_sheet_delete(ss, 1)
@@ -35,7 +35,7 @@ if (sheets_has_token()) {
   sheets_sheet_delete(ss, list("alpha", 2))
 
   # get an overview of the sheets
-  sheets_sheet_data(ss)
+  sheets_sheet_properties(ss)
 
   # cleanup
   sheets_find("delete-sheets-from-me") \%>\% googledrive::drive_rm()
@@ -49,7 +49,7 @@ Makes an \code{DeleteSheetsRequest}:
 
 Other worksheet functions: 
 \code{\link{sheets_sheet_add}()},
-\code{\link{sheets_sheet_data}()},
+\code{\link{sheets_sheet_properties}()},
 \code{\link{sheets_sheet_resize}()}
 }
 \concept{worksheet functions}

@@ -113,6 +113,9 @@ sheets_example("gapminder")
 #>         Asia: 397 x 6
 #>       Europe: 361 x 6
 #>      Oceania: 25 x 6
+#> 
+#> (Named range): (A1 range)        
+#>        canada: 'Americas'!A38:F49
 ```
 
 If you’d like to see a Sheet in the browser, including our example
@@ -138,7 +141,7 @@ time.
 sheets_example("mini-gap") %>% 
   read_sheet()
 #> Reading from 'mini-gap'
-#> Range "Africa"
+#> Range 'Africa'
 #> # A tibble: 5 x 6
 #>   country      continent  year lifeExp     pop gdpPercap
 #>   <chr>        <chr>     <dbl>   <dbl>   <dbl>     <dbl>
@@ -198,7 +201,7 @@ sheets_sheet_names(deaths)
 
 read_sheet(deaths, range = "A5:F8")
 #> Reading from 'deaths'
-#> Range "A5:F8"
+#> Range 'A5:F8'
 #> # A tibble: 3 x 6
 #>   Name       Profession   Age `Has kids` `Date of birth`     `Date of death`    
 #>   <chr>      <chr>      <dbl> <lgl>      <dttm>              <dttm>             
@@ -254,7 +257,7 @@ also that `col_types` gives control of column types, similar to how
 ``` r
 read_sheet(sheets_example("mini-gap"), sheet = 2)
 #> Reading from 'mini-gap'
-#> Range "'Americas'"
+#> Range '\'Americas\''
 #> # A tibble: 5 x 6
 #>   country   continent  year lifeExp      pop gdpPercap
 #>   <chr>     <chr>     <dbl>   <dbl>    <dbl>     <dbl>
@@ -266,7 +269,7 @@ read_sheet(sheets_example("mini-gap"), sheet = 2)
 
 read_sheet(sheets_example("mini-gap"), sheet = "Oceania", n_max = 3)
 #> Reading from 'mini-gap'
-#> Range "'Oceania'"
+#> Range '\'Oceania\''
 #> # A tibble: 3 x 6
 #>   country     continent  year lifeExp     pop gdpPercap
 #>   <chr>       <chr>     <dbl>   <dbl>   <dbl>     <dbl>
@@ -276,7 +279,7 @@ read_sheet(sheets_example("mini-gap"), sheet = "Oceania", n_max = 3)
 
 read_sheet(sheets_example("deaths"), skip = 4, n_max = 10)
 #> Reading from 'deaths'
-#> Range "5:5000000"
+#> Range '5:5000000'
 #> # A tibble: 10 x 6
 #>    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    
 #>    <chr>     <chr>      <dbl> <lgl>      <dttm>              <dttm>             
@@ -295,7 +298,7 @@ read_sheet(
   sheets_example("deaths"), range = "other!A5:F15", col_types = "?ci??D"
 )
 #> Reading from 'deaths'
-#> Range "'other'!A5:F15"
+#> Range '\'other\'!A5:F15'
 #> # A tibble: 10 x 6
 #>    Name          Profession   Age `Has kids` `Date of birth`     `Date of death`
 #>    <chr>         <chr>      <int> <lgl>      <dttm>              <date>         
@@ -329,7 +332,7 @@ argument:
 sheets_example("deaths") %>% 
   read_sheet(range = "arts_data")
 #> Reading from 'deaths'
-#> Range "arts_data"
+#> Range 'arts_data'
 #> # A tibble: 10 x 6
 #>    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    
 #>    <chr>     <chr>      <dbl> <lgl>      <dttm>              <dttm>             
@@ -405,7 +408,7 @@ access to raw cell data sent by the Sheets API.
 ``` r
 (df <- sheets_cells(sheets_example("deaths"), range = "E5:E7"))
 #> Reading from 'deaths'
-#> Range "E5:E7"
+#> Range 'E5:E7'
 #> # A tibble: 3 x 4
 #>     row   col loc   cell      
 #>   <int> <dbl> <chr> <list>    
@@ -452,7 +455,7 @@ df %>% spread_sheet(col_types = "D")
 ## is same as ...
 read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 #> Reading from 'deaths'
-#> Range "E5:E7"
+#> Range 'E5:E7'
 #> # A tibble: 2 x 1
 #>   `Date of birth`
 #>   <date>         
@@ -485,7 +488,7 @@ can specify the new Sheet’s name.
 ``` r
 drive_rm(ss)
 #> Files deleted:
-#>   * deranged-bellsnake: 11dFPE2Z2xZUZ4mrF8ze62oC2GcFSXQC1Xe1QRKJdjfk
+#>   * cockeyed-nurseshark: 1on5cD3lg_rDpX-4j1ukBoecha2rUYMbU66Y9zSddmhU
 
 ss <- sheets_create("fluffy-bunny", sheets = df)
 ```
@@ -496,7 +499,7 @@ Sheet. Let’s write the `chickwts` data to a new sheet in `ss`.
 ``` r
 sheets_write(chickwts, ss)
 #> Writing to 'fluffy-bunny'
-#> Writing to sheet "chickwts"
+#> Writing to sheet 'chickwts'
 ```
 
 We can also use `sheets_write()` to replace the data in an existing
@@ -505,7 +508,7 @@ sheet.
 ``` r
 sheets_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
 #> Writing to 'fluffy-bunny'
-#> Writing to sheet "df"
+#> Writing to sheet 'df'
 ```
 
 `sheets_append()` adds one or more rows to an existing sheet.
@@ -522,16 +525,16 @@ There is also a family of `sheets_sheet_*()` functions that do pure
 We take one last look at the sheets we created in `ss`, then clean up.
 
 ``` r
-sheets_sheet_data(ss)
+sheets_sheet_properties(ss)
 #> # A tibble: 2 x 8
 #>   name     index         id type  visible grid_rows grid_columns data  
 #>   <chr>    <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 df           0  369947376 GRID  TRUE            9            2 <NULL>
-#> 2 chickwts     1 1309565055 GRID  TRUE           72            2 <NULL>
+#> 1 df           0 1442873589 GRID  TRUE            9            2 <NULL>
+#> 2 chickwts     1  636082063 GRID  TRUE           72            2 <NULL>
 
 drive_rm(ss)
 #> Files deleted:
-#>   * fluffy-bunny: 1OQBdNQSxkiyqRK4Ezj-y4JRDpceyg7vD01KkTOm-MkM
+#>   * fluffy-bunny: 1zM5-iQspVyngGchDfmbh4BoA-Li4BkWaxn_kYlzU66I
 ```
 
 See also the article [Write

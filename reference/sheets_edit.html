@@ -51,10 +51,11 @@ be a data frame (at least for now), sheets_edit() can actually be used
 to write arbitrary data.
 The target (spread)Sheet and (work)sheet must already exist. There is no
 ability to create a Sheet or add a worksheet.
+The target sheet dimensions are not &quot;trimmed&quot; to shrink-wrap the data.
+However, the sheet might gain rows and/or columns, in order to write
+data to the user-specified range.
 
 
-sheets_edit() adds rows and/or columns to the sheet, if it is necessary in
-order to write data to the user-specified range.
 If you just want to add rows to an existing table, the function you probably
 want is sheets_append()." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
@@ -171,15 +172,23 @@ be a data frame (at least for now), <code>sheets_edit()</code> can actually be u
 to write arbitrary data.</p></li>
 <li><p>The target (spread)Sheet and (work)sheet must already exist. There is no
 ability to create a Sheet or add a worksheet.</p></li>
+<li><p>The target sheet dimensions are not "trimmed" to shrink-wrap the <code>data</code>.
+However, the sheet might gain rows and/or columns, in order to write
+<code>data</code> to the user-specified <code>range</code>.</p></li>
 </ul>
 
-<p><code>sheets_edit()</code> adds rows and/or columns to the sheet, if it is necessary in
-order to write <code>data</code> to the user-specified <code>range</code>.</p>
 <p>If you just want to add rows to an existing table, the function you probably
 want is <code><a href='sheets_append.html'>sheets_append()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_edit</span>(<span class='no'>ss</span>, <span class='no'>data</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_edit</span>(
+  <span class='no'>ss</span>,
+  <span class='no'>data</span>,
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -216,8 +225,14 @@ target rectangle. See the "Range specification" section for details.</p></li>
     </tr>
     <tr>
       <th>col_names</th>
-      <td><p>Logical, indicating whether to send the column names of
+      <td><p>Logical, indicates whether to send the column names of
 <code>data</code>.</p></td>
+    </tr>
+    <tr>
+      <th>reformat</th>
+      <td><p>Logical, indicates whether to reformat the edited cells.
+Currently googlesheets4 provides no real support for formatting, so
+<code>reformat = TRUE</code> effectively means that edited cells become unformatted.</p></td>
     </tr>
     </table>
 
@@ -249,8 +264,10 @@ existing value and format are deleted.</p></li>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>If sheet size needs to change, makes an <code>UpdateSheetPropertiesRequest</code>:</p><ul>
-<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest</a>
-The main data write is done via an <code>UpdateCellsRequest</code>:</p></li>
+<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest</a></p></li>
+</ul>
+
+<p>The main data write is done via an <code>UpdateCellsRequest</code>:</p><ul>
 <li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest</a></p></li>
 </ul>
 

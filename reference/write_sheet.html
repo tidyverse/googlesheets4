@@ -192,7 +192,10 @@ from <code>data</code>.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>data</th>
-      <td><p>A data frame.</p></td>
+      <td><p>A data frame. If it has zero rows, we send one empty pseudo-row
+of data, so that we can apply the usual table styling. This empty row goes
+away (gets filled, actually) the first time you send more data with
+<code><a href='sheets_append.html'>sheets_append()</a></code>.</p></td>
     </tr>
     <tr>
       <th>ss</th>

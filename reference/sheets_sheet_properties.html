@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>(Over)write new data into a worksheet — write_sheet • googlesheets4</title>
+<title>Get data about (work)sheets — sheets_sheet_properties • googlesheets4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -41,24 +41,9 @@
 
 
 
-<meta property="og:title" content="(Over)write new data into a worksheet — write_sheet" />
-<meta property="og:description" content="
-Writes a data frame into a (work)sheet inside a (spread)Sheet. The target
-sheet is styled as a table:
-Special formatting is applied to the header row, which holds column
-names.
-The first row (header row) is frozen.
-Sheet dimensions are set to &quot;shrink wrap&quot; the data.
-
-
-If no existing Sheet is specified via ss, this function delegates to
-sheets_create() and the new Sheet's name is randomly generated. If that's
-undesirable, call sheets_create() directly to get more control.
-If no sheet is specified or if sheet doesn't identify an existing sheet, a
-new sheet is added to receive the data. If sheet specifies an existing
-sheet, it is effectively overwritten! All pre-existing values, formats, and
-dimensions are cleared and the targeted sheet gets new values and dimensions
-from data." />
+<meta property="og:title" content="Get data about (work)sheets — sheets_sheet_properties" />
+<meta property="og:description" content="Reveals full metadata or just the names for the (work)sheets inside a
+(spread)Sheet." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -158,45 +143,23 @@ from data." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>(Over)write new data into a worksheet</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_write.R'><code>R/sheets_write.R</code></a></small>
-    <div class="hidden name"><code>write_sheet.Rd</code></div>
+    <h1>Get data about (work)sheets</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_sheet_properties.R'><code>R/sheets_sheet_properties.R</code></a></small>
+    <div class="hidden name"><code>sheets_sheet_properties.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
-<p>Writes a data frame into a (work)sheet inside a (spread)Sheet. The target
-sheet is styled as a table:</p><ul>
-<li><p>Special formatting is applied to the header row, which holds column
-names.</p></li>
-<li><p>The first row (header row) is frozen.</p></li>
-<li><p>Sheet dimensions are set to "shrink wrap" the <code>data</code>.</p></li>
-</ul>
-
-<p>If no existing Sheet is specified via <code>ss</code>, this function delegates to
-<code><a href='sheets_create.html'>sheets_create()</a></code> and the new Sheet's name is randomly generated. If that's
-undesirable, call <code><a href='sheets_create.html'>sheets_create()</a></code> directly to get more control.</p>
-<p>If no <code>sheet</code> is specified or if <code>sheet</code> doesn't identify an existing sheet, a
-new sheet is added to receive the <code>data</code>. If <code>sheet</code> specifies an existing
-sheet, it is effectively overwritten! All pre-existing values, formats, and
-dimensions are cleared and the targeted sheet gets new values and dimensions
-from <code>data</code>.</p>
+    <p>Reveals full metadata or just the names for the (work)sheets inside a
+(spread)Sheet.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>write_sheet</span>(<span class='no'>data</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>sheets_sheet_properties</span>(<span class='no'>ss</span>)
 
-<span class='fu'>sheets_write</span>(<span class='no'>data</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>sheets_sheet_names</span>(<span class='no'>ss</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>data</th>
-      <td><p>A data frame. If it has zero rows, we send one empty pseudo-row
-of data, so that we can apply the usual table styling. This empty row goes
-away (gets filled, actually) the first time you send more data with
-<code><a href='sheets_append.html'>sheets_append()</a></code>.</p></td>
-    </tr>
     <tr>
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
@@ -205,55 +168,28 @@ which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</cod
 is how googledrive represents Drive files. Processed through
 <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
-    <tr>
-      <th>sheet</th>
-      <td><p>Sheet to write into, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The input <code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
+    
+<ul>
+<li><p><code>sheets_sheet_properties()</code>: A tibble with one row per (work)sheet.</p></li>
+<li><p><code>sheets_sheet_names()</code>: A character vector of (work)sheet names.</p></li>
+</ul>
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other write functions: 
-<code><a href='sheets_append.html'>sheets_append</a>()</code>,
-<code><a href='sheets_edit.html'>sheets_edit</a>()</code></p></div>
+    <div class='dont-index'><p>Other worksheet functions: 
+<code><a href='sheets_sheet_add.html'>sheets_sheet_add</a>()</code>,
+<code><a href='sheets_sheet_delete.html'>sheets_sheet_delete</a>()</code>,
+<code><a href='sheets_sheet_resize.html'>sheets_sheet_resize</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
-  <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
-    <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
-  )
-
-  <span class='co'># specify only a data frame, get a new Sheet, with a random name</span>
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_write</span>(<span class='no'>df</span>)
-  <span class='fu'><a href='read_sheet.html'>sheets_read</a></span>(<span class='no'>ss</span>)
-
-  <span class='co'># clean up</span>
-  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>(<span class='no'>ss</span>)
-
-  <span class='co'># create a Sheet with some initial, placeholder data</span>
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(
-    <span class='st'>"sheets-write-demo"</span>,
-    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='kw'>omega</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>))
-  )
-
-  <span class='co'># write df into its own, new sheet</span>
-  <span class='fu'>sheets_write</span>(<span class='no'>df</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>)
-
-  <span class='co'># write mtcars into the sheet named "omega"</span>
-  <span class='fu'>sheets_write</span>(<span class='no'>mtcars</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"omega"</span>)
-
-  <span class='co'># get an overview of the sheets</span>
-  <span class='fu'><a href='sheets_sheet_properties.html'>sheets_sheet_properties</a></span>(<span class='no'>ss</span>)
-
-  <span class='co'># view your magnificent creation in the browser</span>
-  <span class='co'># sheets_browse(ss)</span>
-
-  <span class='co'># clean up</span>
-  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>(<span class='no'>ss</span>)
+  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"gapminder"</span>)
+  <span class='fu'>sheets_sheet_properties</span>(<span class='no'>ss</span>)
+  <span class='fu'>sheets_sheet_names</span>(<span class='no'>ss</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

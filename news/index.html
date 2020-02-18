@@ -169,9 +169,9 @@
 <p>There is a new family of <code>sheets_sheet_*()</code> functions that operate on the (work)sheets inside an existing (spread)Sheet:</p>
 <ul>
 <li>
-<code><a href="../reference/sheets_sheet_data.html">sheets_sheet_data()</a></code> returns a tibble of metadata with one row per sheet.</li>
+<code>sheets_sheet_data()</code> returns a tibble of metadata with one row per sheet.</li>
 <li>
-<code><a href="../reference/sheets_sheet_data.html">sheets_sheet_names()</a></code> returns sheet names.</li>
+<code><a href="../reference/sheets_sheet_properties.html">sheets_sheet_names()</a></code> returns sheet names.</li>
 <li>
 <code><a href="../reference/sheets_sheet_add.html">sheets_sheet_add()</a></code> adds one or more sheets.</li>
 <li>
@@ -183,7 +183,7 @@
 <h3 class="hasAnchor">
 <a href="#renamed-functions-and-classes" class="anchor"></a>Renamed functions and classes</h3>
 <ul>
-<li><p><code><a href="../reference/googlesheets4-deprecated.html">sheets_sheets()</a></code> is now <code><a href="../reference/sheets_sheet_data.html">sheets_sheet_names()</a></code>, in order to fit into a coherent family of <code>sheets_sheet_*()</code> functions that deal with (work)sheets. <code><a href="../reference/googlesheets4-deprecated.html">sheets_sheets()</a></code> still exists but will be removed rather quickly since googlesheets4 is so new.</p></li>
+<li><p><code><a href="../reference/googlesheets4-deprecated.html">sheets_sheets()</a></code> is now <code><a href="../reference/sheets_sheet_properties.html">sheets_sheet_names()</a></code>, in order to fit into a coherent family of <code>sheets_sheet_*()</code> functions that deal with (work)sheets. <code><a href="../reference/googlesheets4-deprecated.html">sheets_sheets()</a></code> still exists but will be removed rather quickly since googlesheets4 is so new.</p></li>
 <li><p>The S3 class <code>sheets_Spreadsheet</code> is renamed to <code>googlesheets4_spreadsheet</code>, a consequence of rationalizing all internal and external classes. <code>googlesheets4_spreadsheet</code> is the class that holds metadata for a Sheet and it is connected to the API’s <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet"><code>Spreadsheet</code></a> schema. The return value of <code><a href="../reference/sheets_get.html">sheets_get()</a></code> has this class.</p></li>
 </ul>
 </div>

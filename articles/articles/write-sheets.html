@@ -181,11 +181,11 @@
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"write-sheets-demo"</span>) <span class="op">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()</span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; Files trashed:</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt;   * write-sheets-demo-5: 1UP36dCj2JQhGjdweQwawaSTXJH81x6U9ONa-1qioG0Y</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt;   * write-sheets-demo-4: 1jxQLUrLT1B3RpahKstHrCHbAIZPgK5wB5MfGte5y4Qc</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt;   * write-sheets-demo-3: 1Bzj01ZRp7nrjglY8oaXlwc1n0831Sqe_hZ1qYZMoYl8</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt;   * write-sheets-demo-2: 1iC-T6nbKBIiguqUu8Bq7ZGtck6KVC_metaaYjwezSGs</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt;   * write-sheets-demo-1: 1s-0bys9YuQQ0Ys0KPe7xgsYOjKbZqq4ZSzbEbV0ywTg</span></span></code></pre></div>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt;   * write-sheets-demo-5: 1FxZ0Yh70reXeNw0ztrB-qkCSqC1IJJtNA1c7NH18_Ko</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt;   * write-sheets-demo-4: 1uutzNeYe1HAABnm0OuqyNGlsyqygcIlgU0Yr_WWS6xY</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt;   * write-sheets-demo-3: 1tC1qDgZS_zzVbo6Kku7VbQfaHsfO0iotJhhotr3cS4A</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt;   * write-sheets-demo-2: 1e0yMgL3Qcdk_GdusL9CdS3rM-DdLNvO8dO25sqjTB44</span></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt;   * write-sheets-demo-1: 1_f3me_ppZNUoKJLSPowIkh6Ldu9gghYglq6SN3D7ZJ4</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -209,33 +209,33 @@
 <span id="cb9-7"><a href="#cb9-7"></a>)</span></code></pre></div>
 <p><code><a href="../../reference/write_sheet.html">sheets_write()</a></code> allows us to write the actual <code>chickwts</code> data into the sheet by that name.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(chickwts, <span class="dt">ss =</span> ss, <span class="dt">sheet =</span> <span class="st">"chickwts"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; Writing to sheet 'chickwts'</span></span></code></pre></div>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; Writing to "write-sheets-demo-6"</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; Writing to sheet "chickwts"</span></span></code></pre></div>
 <p><code><a href="../../reference/write_sheet.html">sheets_write()</a></code> can also write data into a new sheet, if <code>sheet</code> implicitly or explicitly targets a non-existent sheet.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># explicitly make a new sheet named "iris"</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(iris, <span class="dt">ss =</span> ss, <span class="dt">sheet =</span> <span class="st">"iris"</span>)</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; Writing to sheet 'iris'</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; Writing to "write-sheets-demo-6"</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; Writing to sheet "iris"</span></span>
 <span id="cb11-5"><a href="#cb11-5"></a></span>
 <span id="cb11-6"><a href="#cb11-6"></a><span class="co"># implicitly make a new sheet named "mtcars"</span></span>
 <span id="cb11-7"><a href="#cb11-7"></a><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(mtcars, <span class="dt">ss =</span> ss)</span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt; Writing to sheet 'mtcars'</span></span></code></pre></div>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; Writing to "write-sheets-demo-6"</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt; Writing to sheet "mtcars"</span></span></code></pre></div>
 <p>If no sheet name is given and it can’t be determined from <code>data</code>, a name of the form “SheetN” is automatically generated by Sheets.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="../../reference/write_sheet.html">sheets_write</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">2</span>, <span class="dt">y =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>), ss)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; Writing to sheet 'Sheet1'</span></span></code></pre></div>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt; Writing to "write-sheets-demo-6"</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; Writing to sheet "Sheet1"</span></span></code></pre></div>
 <p><code><a href="../../reference/sheets_append.html">sheets_append()</a></code> can add one or more rows of data to an existing Sheet.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw"><a href="../../reference/sheets_append.html">sheets_append</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">3</span>, <span class="dt">y =</span> <span class="dv">5</span>), ss, <span class="dt">sheet =</span> <span class="st">"Sheet1"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; Writing to 'write-sheets-demo-6'</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt; Appending 1 row(s) to 'Sheet1'</span></span></code></pre></div>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; Writing to "write-sheets-demo-6"</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt; Appending 1 row(s) to "Sheet1"</span></span></code></pre></div>
 <div id="clean-up-1" class="section level4">
 <h4 class="hasAnchor">
 <a href="#clean-up-1" class="anchor"></a>Clean up</h4>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"write-sheets-demo"</span>) <span class="op">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="st">  </span>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()</span>
 <span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt; Files trashed:</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt;   * write-sheets-demo-6: 1yRACUSsk9A0s_FxXX8LsnBL8mKiKMWqshgb7fDuZghk</span></span></code></pre></div>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt;   * write-sheets-demo-6: 13MLRQXa3ttGiwJUWWIw_rgSOo-fzk4G3QNrqqCPbPHA</span></span></code></pre></div>
 </div>
 </div>
   </div>

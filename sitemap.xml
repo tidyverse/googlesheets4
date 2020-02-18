@@ -79,10 +79,10 @@
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_sheet_add.html</loc>
   </url>
   <url>
-    <loc>https://googlesheets4.tidyverse.org/reference/sheets_sheet_data.html</loc>
+    <loc>https://googlesheets4.tidyverse.org/reference/sheets_sheet_delete.html</loc>
   </url>
   <url>
-    <loc>https://googlesheets4.tidyverse.org/reference/sheets_sheet_delete.html</loc>
+    <loc>https://googlesheets4.tidyverse.org/reference/sheets_sheet_properties.html</loc>
   </url>
   <url>
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_sheet_resize.html</loc>

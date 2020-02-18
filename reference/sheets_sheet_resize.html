@@ -193,8 +193,8 @@ deleted and their contents are lost.</p></td>
 
 <p>Other worksheet functions: 
 <code><a href='sheets_sheet_add.html'>sheets_sheet_add</a>()</code>,
-<code><a href='sheets_sheet_data.html'>sheets_sheet_data</a>()</code>,
-<code><a href='sheets_sheet_delete.html'>sheets_sheet_delete</a>()</code></p></div>
+<code><a href='sheets_sheet_delete.html'>sheets_sheet_delete</a>()</code>,
+<code><a href='sheets_sheet_properties.html'>sheets_sheet_properties</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
@@ -202,7 +202,7 @@ deleted and their contents are lost.</p></td>
   (<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(<span class='st'>"sheets-resize-demo"</span>))
 
   <span class='co'># see (work)sheet dims</span>
-  <span class='fu'><a href='sheets_sheet_data.html'>sheets_sheet_data</a></span>(<span class='no'>ss</span>)
+  <span class='fu'><a href='sheets_sheet_properties.html'>sheets_sheet_properties</a></span>(<span class='no'>ss</span>)
 
   <span class='co'># no resize occurs</span>
   <span class='fu'>sheets_sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>6</span>)
@@ -220,7 +220,7 @@ deleted and their contents are lost.</p></td>
   <span class='fu'>sheets_sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>9</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>12</span>)
 
   <span class='co'># re-inspect (work)sheet dims</span>
-  <span class='fu'><a href='sheets_sheet_data.html'>sheets_sheet_data</a></span>(<span class='no'>ss</span>)
+  <span class='fu'><a href='sheets_sheet_properties.html'>sheets_sheet_properties</a></span>(<span class='no'>ss</span>)
 
   <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>(<span class='no'>ss</span>)
 }</div></pre>

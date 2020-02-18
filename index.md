@@ -140,8 +140,8 @@ time.
 ``` r
 sheets_example("mini-gap") %>% 
   read_sheet()
-#> Reading from 'mini-gap'
-#> Range 'Africa'
+#> Reading from "mini-gap"
+#> Range "Africa"
 #> # A tibble: 5 x 6
 #>   country      continent  year lifeExp     pop gdpPercap
 #>   <chr>        <chr>     <dbl>   <dbl>   <dbl>     <dbl>
@@ -200,8 +200,8 @@ sheets_sheet_names(deaths)
 #> [1] "arts"  "other"
 
 read_sheet(deaths, range = "A5:F8")
-#> Reading from 'deaths'
-#> Range 'A5:F8'
+#> Reading from "deaths"
+#> Range "A5:F8"
 #> # A tibble: 3 x 6
 #>   Name       Profession   Age `Has kids` `Date of birth`     `Date of death`    
 #>   <chr>      <chr>      <dbl> <lgl>      <dttm>              <dttm>             
@@ -256,8 +256,8 @@ also that `col_types` gives control of column types, similar to how
 
 ``` r
 read_sheet(sheets_example("mini-gap"), sheet = 2)
-#> Reading from 'mini-gap'
-#> Range '\'Americas\''
+#> Reading from "mini-gap"
+#> Range "'Americas'"
 #> # A tibble: 5 x 6
 #>   country   continent  year lifeExp      pop gdpPercap
 #>   <chr>     <chr>     <dbl>   <dbl>    <dbl>     <dbl>
@@ -268,8 +268,8 @@ read_sheet(sheets_example("mini-gap"), sheet = 2)
 #> 5 Chile     Americas   1952    54.7  6377619     3940.
 
 read_sheet(sheets_example("mini-gap"), sheet = "Oceania", n_max = 3)
-#> Reading from 'mini-gap'
-#> Range '\'Oceania\''
+#> Reading from "mini-gap"
+#> Range "'Oceania'"
 #> # A tibble: 3 x 6
 #>   country     continent  year lifeExp     pop gdpPercap
 #>   <chr>       <chr>     <dbl>   <dbl>   <dbl>     <dbl>
@@ -278,8 +278,8 @@ read_sheet(sheets_example("mini-gap"), sheet = "Oceania", n_max = 3)
 #> 3 Australia   Oceania    1957    70.3 9712569    10950.
 
 read_sheet(sheets_example("deaths"), skip = 4, n_max = 10)
-#> Reading from 'deaths'
-#> Range '5:5000000'
+#> Reading from "deaths"
+#> Range "5:5000000"
 #> # A tibble: 10 x 6
 #>    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    
 #>    <chr>     <chr>      <dbl> <lgl>      <dttm>              <dttm>             
@@ -297,8 +297,8 @@ read_sheet(sheets_example("deaths"), skip = 4, n_max = 10)
 read_sheet(
   sheets_example("deaths"), range = "other!A5:F15", col_types = "?ci??D"
 )
-#> Reading from 'deaths'
-#> Range '\'other\'!A5:F15'
+#> Reading from "deaths"
+#> Range "'other'!A5:F15"
 #> # A tibble: 10 x 6
 #>    Name          Profession   Age `Has kids` `Date of birth`     `Date of death`
 #>    <chr>         <chr>      <int> <lgl>      <dttm>              <date>         
@@ -331,8 +331,8 @@ argument:
 ``` r
 sheets_example("deaths") %>% 
   read_sheet(range = "arts_data")
-#> Reading from 'deaths'
-#> Range 'arts_data'
+#> Reading from "deaths"
+#> Range "arts_data"
 #> # A tibble: 10 x 6
 #>    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    
 #>    <chr>     <chr>      <dbl> <lgl>      <dttm>              <dttm>             
@@ -407,8 +407,8 @@ access to raw cell data sent by the Sheets API.
 
 ``` r
 (df <- sheets_cells(sheets_example("deaths"), range = "E5:E7"))
-#> Reading from 'deaths'
-#> Range 'E5:E7'
+#> Reading from "deaths"
+#> Range "E5:E7"
 #> # A tibble: 3 x 4
 #>     row   col loc   cell      
 #>   <int> <dbl> <chr> <list>    
@@ -454,8 +454,8 @@ df %>% spread_sheet(col_types = "D")
 #> 2 1956-10-21
 ## is same as ...
 read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
-#> Reading from 'deaths'
-#> Range 'E5:E7'
+#> Reading from "deaths"
+#> Range "E5:E7"
 #> # A tibble: 2 x 1
 #>   `Date of birth`
 #>   <date>         
@@ -476,6 +476,15 @@ argument is the data.
 df <- data.frame(x = 1:3, y = letters[1:3])
 
 ss <- sheets_write(df)
+ss
+#>   Spreadsheet name: smoggy-mudpuppy
+#>                 ID: 1TYyEv4zREoqZXQ7GFhRyLSsrs5vw6hpUIlUWISOhObs
+#>             Locale: en_US
+#>          Time zone: Etc/GMT
+#>        # of sheets: 1
+#> 
+#> (Sheet name): (Nominal extent in rows x columns)
+#>           df: 4 x 2
 ```
 
 You’ll notice the new (spread)Sheet has a randomly generated name. If
@@ -488,7 +497,7 @@ can specify the new Sheet’s name.
 ``` r
 drive_rm(ss)
 #> Files deleted:
-#>   * cockeyed-nurseshark: 1on5cD3lg_rDpX-4j1ukBoecha2rUYMbU66Y9zSddmhU
+#>   * smoggy-mudpuppy: 1TYyEv4zREoqZXQ7GFhRyLSsrs5vw6hpUIlUWISOhObs
 
 ss <- sheets_create("fluffy-bunny", sheets = df)
 ```
@@ -498,8 +507,8 @@ Sheet. Let’s write the `chickwts` data to a new sheet in `ss`.
 
 ``` r
 sheets_write(chickwts, ss)
-#> Writing to 'fluffy-bunny'
-#> Writing to sheet 'chickwts'
+#> Writing to "fluffy-bunny"
+#> Writing to sheet "chickwts"
 ```
 
 We can also use `sheets_write()` to replace the data in an existing
@@ -507,16 +516,16 @@ sheet.
 
 ``` r
 sheets_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
-#> Writing to 'fluffy-bunny'
-#> Writing to sheet 'df'
+#> Writing to "fluffy-bunny"
+#> Writing to sheet "df"
 ```
 
 `sheets_append()` adds one or more rows to an existing sheet.
 
 ``` r
 sheets_append(data.frame(x = 11, letters[11]), ss, sheet = "df")
-#> Writing to 'fluffy-bunny'
-#> Appending 1 row(s) to 'df'
+#> Writing to "fluffy-bunny"
+#> Appending 1 row(s) to "df"
 ```
 
 There is also a family of `sheets_sheet_*()` functions that do pure
@@ -529,12 +538,12 @@ sheets_sheet_properties(ss)
 #> # A tibble: 2 x 8
 #>   name     index         id type  visible grid_rows grid_columns data  
 #>   <chr>    <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 df           0 1442873589 GRID  TRUE            9            2 <NULL>
-#> 2 chickwts     1  636082063 GRID  TRUE           72            2 <NULL>
+#> 1 df           0 1433227345 GRID  TRUE            9            2 <NULL>
+#> 2 chickwts     1  196114035 GRID  TRUE           72            2 <NULL>
 
 drive_rm(ss)
 #> Files deleted:
-#>   * fluffy-bunny: 1zM5-iQspVyngGchDfmbh4BoA-Li4BkWaxn_kYlzU66I
+#>   * fluffy-bunny: 1vlj2dQnRPgaIZXy187qibTMFllJ319B6Gs23QH4ZRH8
 ```
 
 See also the article [Write

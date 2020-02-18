@@ -89,9 +89,15 @@ read_sheet(url)
 
 ## Writing Sheets
 
-Write to Sheets with `sheets_write()`, `sheets_create()`, and `sheets_append()`.
+Write to Sheets with `sheets_write()`, `sheets_create()`, `sheets_edit()`, and `sheets_append()`. Here's a summary of what each function does best:
 
-The writing / modifying functionality is under very active development and is still taking shape. There is a dedicated article: [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html).
+  * `sheets_create()` is the most powerful function for creating an entirely new
+    Sheet.
+  * `sheets_write()` is focused on populating a (work)sheet with a data frame.
+  * `sheets_edit()` is for editing a specific cell range.
+  * `sheet_append()` adds rows to a (work)sheet that holds a data table.
+
+The writing / modifying functionality is under very active development. See the dedicated article for the latest: [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html).
 
 Also note that the googledrive package 
 ([googledrive.tidyverse.org](https://googledrive.tidyverse.org)) can be used to write into Sheets at the "whole file" level, for example, to upload a local `.csv` or `.xlsx` into a Sheet. See `googledrive::drive_upload()` and `googledrive::drive_update()`.

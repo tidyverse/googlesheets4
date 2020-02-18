@@ -74,7 +74,7 @@ Read everything:
 ``` r
 sheets_example("chicken-sheet") %>% 
   read_sheet() # or use sheets_read()
-#> Reading from 'chicken-sheet'
+#> Reading from "chicken-sheet"
 #> Range "chicken.csv"
 #> # A tibble: 5 x 4
 #>   chicken            breed         sex    motto                                 
@@ -91,7 +91,7 @@ Read specific cells, from a specific sheet, using an A1-style notation:
 ``` r
 sheets_example("deaths") %>% 
   read_sheet(range = "arts!A5:F15")
-#> Reading from 'deaths'
+#> Reading from "deaths"
 #> Range "'arts'!A5:F15"
 #> # A tibble: 10 x 6
 #>    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    
@@ -114,7 +114,7 @@ types:
 ``` r
 sheets_example("deaths") %>% 
   read_sheet(range = "arts_data", col_types = "??i?DD")
-#> Reading from 'deaths'
+#> Reading from "deaths"
 #> Range "arts_data"
 #> # A tibble: 10 x 6
 #>    Name              Profession   Age `Has kids` `Date of birth` `Date of death`
@@ -138,7 +138,7 @@ ugliest, is to provide the URL.
 # url of the 'chicken-sheet' example
 url <- "https://docs.google.com/spreadsheets/d/1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU"
 read_sheet(url)
-#> Reading from 'chicken-sheet'
+#> Reading from "chicken-sheet"
 #> Range "chicken.csv"
 #> # A tibble: 5 x 4
 #>   chicken            breed         sex    motto                                 
@@ -152,11 +152,19 @@ read_sheet(url)
 
 ## Writing Sheets
 
-Write to Sheets with `sheets_write()`, `sheets_create()`, and
-`sheets_append()`.
+Write to Sheets with `sheets_write()`, `sheets_create()`,
+`sheets_edit()`, and `sheets_append()`. Here’s a summary of what each
+function does best:
 
-The writing / modifying functionality is under very active development
-and is still taking shape. There is a dedicated article: [Write
+  - `sheets_create()` is the most powerful function for creating an
+    entirely new Sheet.
+  - `sheets_write()` is focused on populating a (work)sheet with a data
+    frame.
+  - `sheets_edit()` is for editing a specific cell range.
+  - `sheet_append()` adds rows to a (work)sheet that holds a data table.
+
+The writing / modifying functionality is under very active development.
+See the dedicated article for the latest: [Write
 Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html).
 
 Also note that the googledrive package

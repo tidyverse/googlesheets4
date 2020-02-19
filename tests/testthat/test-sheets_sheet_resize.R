@@ -1,0 +1,60 @@
+test_that("prepare_resize_request() works for resize & no resize", {
+  n <- 3
+  m <- 5
+  sheet_info <- list(grid_rows = n, grid_columns = m)
+
+  # (n - 1, n, n + 1) x (m - 1, m, m + 1) x (TRUE, FALSE)
+  # 3 * 3 * 2 = 18 combinations
+
+  # exact = FALSE
+  df <- expand.grid(nrow_needed = n + -1:1, ncol_needed = m + -1:1, exact = FALSE)
+  req <- pmap(df, prepare_resize_request, sheet_info = sheet_info)
+  grid_properties <- purrr::map(
+    req,
+    c("updateSheetProperties", "properties", "gridProperties")
+  )
+
+  # sheet is big enough --> no resize request
+  purrr::walk(
+    grid_properties[df$nrow_needed <= n & df$ncol_needed <= m],
+    expect_null
+  )
+
+  # not enough rows
+  purrr::walk(
+    grid_properties[df$nrow_needed > n],
+    ~ expect_true(rlang::has_name(.x, "rowCount"))
+  )
+
+  # not enough columns
+  purrr::walk(
+    grid_properties[df$ncol_needed > m],
+    ~ expect_true(rlang::has_name(.x, "columnCount"))
+  )
+
+  # exact = TRUE
+  df <- expand.grid(nrow_needed = n + -1:1, ncol_needed = m + -1:1, exact = TRUE)
+  req <- pmap(df, prepare_resize_request, sheet_info = sheet_info)
+  grid_properties <- purrr::map(
+    req,
+    c("updateSheetProperties", "properties", "gridProperties")
+  )
+
+  # sheet has correct size --> no resize request
+  purrr::walk(
+    grid_properties[df$nrow_needed == n & df$ncol_needed == m],
+    expect_null
+  )
+
+  # not enough rows or too many rows
+  purrr::walk(
+    grid_properties[df$nrow_needed != n],
+    ~ expect_true(rlang::has_name(.x, "rowCount"))
+  )
+
+  # not enough columns or too many columns
+  purrr::walk(
+    grid_properties[df$ncol_needed != m],
+    ~ expect_true(rlang::has_name(.x, "columnCount"))
+  )
+})

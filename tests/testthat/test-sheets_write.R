@@ -13,8 +13,9 @@ test_that("sheets_write() writes what it should", {
   )
   dat$factor <- factor(dat$factor)
 
-  ss <- scoped_temporary_ss(me_(), sheets = list(dat))
-  x <- sheets_read(ss, col_types = "C")
+  ss <- scoped_temporary_ss(me_())
+  sheets_write(dat, ss)
+  x <- sheets_read(ss, sheet = "dat", col_types = "C")
 
   # the main interesting bit to test is whether we successfully sent
   # correct value for the date and datetime, with a sane (= ISO 8601) format

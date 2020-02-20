@@ -1,13 +1,50 @@
-test_that("read_sheet() does same old, same old", {
-  skip("broken until I restore the test Sheet :(")
+test_that("read_sheet() works and discovers reasonable types", {
   skip_if_offline()
   skip_if_no_token()
 
-  expect_known_value(
-    # https://github.com/tidyverse/dplyr/issues/2751
-    as.data.frame(read_sheet(test_sheet("googlesheets4-cell-tests"))),
-    ref("googlesheets4-cell-tests.rds")
+  dat <- sheets_read(
+    test_sheet("googlesheets4-col-types"),
+    sheet = "lots-of-types"
   )
+  expect_type(    dat$logical,   "logical")
+  expect_type(    dat$character, "character")
+  expect_type(    dat$factor,    "character")
+  expect_type(    dat$integer,   "double")
+  expect_type(    dat$double,    "double")
+  expect_s3_class(dat$date,      "POSIXct")
+  expect_s3_class(dat$datetime,  "POSIXct")
+})
+
+test_that("read_sheet() enacts user-specified coltypes", {
+  skip_if_offline()
+  skip_if_no_token()
+
+  dat <- sheets_read(
+    test_sheet("googlesheets4-col-types"),
+    sheet = "lots-of-types",
+    col_types = "lccinDT"
+  )
+  expect_type(    dat$logical,   "logical")
+  expect_type(    dat$character, "character")
+  expect_type(    dat$factor,    "character") # TODO: revisit when 'f' means factor
+  expect_type(    dat$integer,   "integer")
+  expect_type(    dat$double,    "double")
+  expect_s3_class(dat$date,      "Date")
+  expect_s3_class(dat$datetime,  "POSIXct")
+})
+
+test_that("read_sheet() can skip columns", {
+  skip_if_offline()
+  skip_if_no_token()
+
+  dat <- sheets_read(
+    test_sheet("googlesheets4-col-types"),
+    sheet = "lots-of-types",
+    col_types = "?-_-_-?"
+  )
+  expect_equal(ncol(dat), 2)
+  expect_type(    dat$logical,   "logical")
+  expect_s3_class(dat$datetime,  "POSIXct")
 })
 
 # https://github.com/tidyverse/googlesheets4/issues/73

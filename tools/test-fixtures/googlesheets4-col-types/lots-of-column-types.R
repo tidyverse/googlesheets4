@@ -7,8 +7,6 @@ library(tidyverse)
 ss <- test_sheet_create("googlesheets4-col-types")
 sheets_browse(ss)
 
-x <- as.Date(c("2003-06-06", "1982-12-05", "2014-02-14", "1999-08-27"))
-
 df <- tibble(
   logical = c(TRUE, FALSE, NA, TRUE),
   character = c("apple", "banana", "cherry", "durian"),

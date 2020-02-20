@@ -86,6 +86,10 @@ as_CellData.POSIXct <- function(x, .na = NULL) {
   map(
     x,
     add_format,
-    fmt = list(type = "DATE_TIME", pattern = "yyyy-mm-ddThh:mm")
+    # I decided that going with R's default format was more important than
+    # a militant stance re: ISO 8601
+    # the space (vs. a 'T') between date and time is "blessed" in RFC 3339
+    # https://tools.ietf.org/html/rfc3339#section-5.6
+    fmt = list(type = "DATE_TIME", pattern = "yyyy-mm-dd hh:mm:ss")
   )
 }

@@ -2,7 +2,7 @@
 me_ <- nm_fun("TEST-sheets_edit")
 
 # ---- tests ----
-test_that("sheets_sheet_edit() works", {
+test_that("sheets_edit() works", {
   skip_if_offline()
   skip_if_no_token()
 
@@ -16,24 +16,30 @@ test_that("sheets_sheet_edit() works", {
   # this is intentional below: refer to sheet in various ways
 
   # write into existing cells --> no size change
-  sheets_edit(ss, data[1:2, ])
+  sheets_edit(ss, data[3:2, ])
   props <- sheets_sheet_properties(ss)
   expect_equal(props$grid_rows, n + 1)
   expect_equal(props$grid_columns, m)
+  df <- read_sheet(ss)
+  expect_identical(df[1, ], df[3, ])
 
   # write into non-existing cells --> sheet must grow
   sheets_edit(ss, data, range = "foo!F5")
   props <- sheets_sheet_properties(ss)
   expect_equal(props$grid_rows, (5 - 1) + n + 1)
   expect_equal(props$grid_columns, (which(LETTERS == "F") - 1) + m)
+  df <- read_sheet(ss, range = cell_cols(c("F", NA)))
+  expect_equal(df, data)
 
   # write into existing and non-existing cells --> need new columns
   sheets_edit(ss, data[1:3], sheet = "foo", range = "I2:K5")
   props <- sheets_sheet_properties(ss)
   expect_equal(props$grid_columns, (which(LETTERS == "K")))
+  df <- read_sheet(ss, range = "I2:K5")
+  expect_equal(df, data[1:3])
 })
 
-# ---- helperss ----
+# ---- helpers ----
 test_that("prepare_loc() makes the right call re: `start` vs. `range`", {
   expect_loc <- function(x, loc) {
     sheets_df <- tibble::tibble(name = "Sheet1", index = 0)

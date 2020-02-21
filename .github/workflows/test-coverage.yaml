@@ -1,8 +1,9 @@
 on:
   schedule:
-    # * is a special character in YAML so you have to quote this string
-    # I hope this runs in about 20 mins YOLO
-    - cron:  '40 16 * * *'
+    # * is a special character in YAML so we have to quote this string
+    # 3am Pacific = 11am UTC
+    # https://crontab.guru is your friend
+    - cron:  '0 3 * * *'
 
 name: Test-coverage
 

@@ -2,7 +2,7 @@ on:
   schedule:
     # * is a special character in YAML so you have to quote this string
     # I hope this runs in about 20 mins YOLO
-    - cron:  '30 17 * * *'
+    - cron:  '40 16 * * *'
 
 name: Test-coverage
 

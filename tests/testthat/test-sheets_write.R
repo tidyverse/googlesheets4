@@ -13,7 +13,7 @@ test_that("sheets_write() writes what it should", {
   )
   dat$factor <- factor(dat$factor)
 
-  ss <- scoped_temporary_ss(me_())
+  ss <- scoped_temporary_ss(me_("datetimes"))
   sheets_write(dat, ss)
   x <- sheets_read(ss, sheet = "dat", col_types = "C")
 
@@ -42,4 +42,26 @@ test_that("sheets_write() writes what it should", {
     purrr::pluck(x, "datetime", 1, "effectiveFormat", "numberFormat", "pattern"),
     "yyyy-mm-dd hh:mm:ss"
   )
+})
+
+test_that("sheets_write() can figure out (work)sheet name", {
+  foofy <- data.frame(x = 1:3, y = letters[1:3])
+
+  ss <- scoped_temporary_ss(me_("sheetnames"))
+
+  # get (work)sheet name from data frame's name
+  sheets_write(foofy, ss)
+  expect_equal(tail(sheets_sheet_names(ss), 1), "foofy")
+
+  # we don't clobber existing (work)sheet if name was inferred
+  sheets_write(foofy, ss)
+  expect_equal(tail(sheets_sheet_names(ss), 1), "Sheet2")
+
+  # we do write into existing (work)sheet if name is explicitly given
+  sheets_write(foofy, ss, sheet = "foofy")
+  expect_setequal(sheets_sheet_names(ss), c("Sheet1", "Sheet2", "foofy"))
+
+  # we do write into existing (work)sheet if position is explicitly given
+  sheets_write(foofy, ss, sheet = 2)
+  expect_setequal(sheets_sheet_names(ss), c("Sheet1", "Sheet2", "foofy"))
 })

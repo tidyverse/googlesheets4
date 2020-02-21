@@ -1,28 +1,3 @@
-# useful to me during development
-sheets_A1_range <- function(ss,
-                            sheet = NULL,
-                            range = NULL,
-                            skip = 0) {
-  ssid <- as_sheets_id(ss)
-  maybe_sheet(sheet)
-  check_range(range)
-  check_non_negative_integer(skip)
-
-  # retrieve spreadsheet metadata ----------------------------------------------
-  x <- sheets_get(ssid)
-  message_glue("Spreadsheet name: {dq(x$name)}")
-
-  # range specification --------------------------------------------------------
-  range_spec <- as_range_spec(
-    range, sheet = sheet, skip = skip,
-    sheets_df = x$sheets, nr_df = x$named_ranges
-  )
-  A1_range <- as_A1_range(range_spec)
-  message_glue("A1 range {dq(A1_range)}")
-
-  range_spec
-}
-
 ## range_spec is an "internal-use only" S3 class ----
 new_range_spec <- function(...) {
   l <- rlang::list2(...)
@@ -218,3 +193,29 @@ as_A1_range <- function(x) {
 
   qualified_A1(x$sheet_name, x$cell_range)
 }
+
+# has been useful during development, at times
+# sheets_A1_range <- function(ss,
+#                             sheet = NULL,
+#                             range = NULL,
+#                             skip = 0) {
+#   ssid <- as_sheets_id(ss)
+#   maybe_sheet(sheet)
+#   check_range(range)
+#   check_non_negative_integer(skip)
+#
+#   # retrieve spreadsheet metadata ----------------------------------------------
+#   x <- sheets_get(ssid)
+#   message_glue("Spreadsheet name: {dq(x$name)}")
+#
+#   # range specification --------------------------------------------------------
+#   range_spec <- as_range_spec(
+#     range, sheet = sheet, skip = skip,
+#     sheets_df = x$sheets, nr_df = x$named_ranges
+#   )
+#   A1_range <- as_A1_range(range_spec)
+#   message_glue("A1 range {dq(A1_range)}")
+#
+#   range_spec
+# }
+

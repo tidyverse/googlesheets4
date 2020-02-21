@@ -1,14 +1,17 @@
-> print(sheets_example("mini-gap"))
-  Spreadsheet name: mini-gap
-                ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
+> print(sheets_example("gapminder"))
+  Spreadsheet name: gapminder
+                ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY
             Locale: en_US
          Time zone: America/Los_Angeles
        # of sheets: 5
 
 (Sheet name): (Nominal extent in rows x columns)
-      Africa: 6 x 6
-    Americas: 6 x 6
-        Asia: 6 x 6
-      Europe: 6 x 6
-     Oceania: 6 x 6
+      Africa: 625 x 6
+    Americas: 301 x 6
+        Asia: 397 x 6
+      Europe: 361 x 6
+     Oceania: 25 x 6
+
+(Named range): (A1 range)        
+       canada: 'Americas'!A38:F49
 

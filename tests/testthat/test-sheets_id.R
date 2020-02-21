@@ -81,7 +81,7 @@ test_that("sheets_id print method reveals metadata", {
 
   verify_output(
     test_path("ref", "sheets-id-print-with-token.txt"),
-    print(sheets_example("mini-gap"))
+    print(sheets_example("gapminder"))
   )
 })
 

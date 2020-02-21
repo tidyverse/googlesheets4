@@ -1,3 +1,20 @@
+# ---- nm_fun ----
+me_ <- nm_fun("TEST-sheets_sheet_resize")
+
+# ---- tests ----
+test_that("sheets_sheet_resize() works", {
+  ss <- scoped_temporary_ss(me_())
+
+  # no resize occurs
+  expect_message(sheets_sheet_resize(ss, nrow = 2, ncol = 6), "No need")
+
+  # reduce sheet size
+  sheets_sheet_resize(ss, nrow = 5, ncol = 7, exact = TRUE)
+  props <- sheets_sheet_properties(ss)
+  expect_equal(props$grid_rows, 5)
+  expect_equal(props$grid_columns, 7)
+})
+
 test_that("prepare_resize_request() works for resize & no resize", {
   n <- 3
   m <- 5

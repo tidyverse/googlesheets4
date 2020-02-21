@@ -3,6 +3,9 @@ me_ <- nm_fun("TEST-sheets_sheet_resize")
 
 # ---- tests ----
 test_that("sheets_sheet_resize() works", {
+  skip_if_offline()
+  skip_if_no_token()
+
   ss <- scoped_temporary_ss(me_())
 
   # no resize occurs

@@ -45,6 +45,9 @@ test_that("sheets_write() writes what it should", {
 })
 
 test_that("sheets_write() can figure out (work)sheet name", {
+  skip_if_offline()
+  skip_if_no_token()
+
   foofy <- data.frame(x = 1:3, y = letters[1:3])
 
   ss <- scoped_temporary_ss(me_("sheetnames"))

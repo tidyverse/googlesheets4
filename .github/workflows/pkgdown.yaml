@@ -12,7 +12,7 @@ jobs:
       GOOGLESHEETS4_PASSWORD: ${{ secrets.GOOGLESHEETS4_PASSWORD }}
 
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@master
       - uses: r-lib/actions/setup-pandoc@master
 

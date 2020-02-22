@@ -45,7 +45,8 @@
 <meta property="og:description" content="
 Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook).
 Optionally, you can also provide names and/or data for the initial set of
-(work)sheets." />
+(work)sheets. Any initial data provided via sheets is styled as a table,
+as described in sheets_write()." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -157,7 +158,8 @@ Optionally, you can also provide names and/or data for the initial set of
     <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
 <p>Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook).
 Optionally, you can also provide names and/or data for the initial set of
-(work)sheets.</p>
+(work)sheets. Any initial data provided via <code>sheets</code> is styled as a table,
+as described in <code><a href='write_sheet.html'>sheets_write()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sheets_create</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='fu'><a href='sheets_random.html'>sheets_random</a></span>(), <span class='no'>...</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>

@@ -53,14 +53,14 @@ https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit#gid=SHEET_ID
 
 Notice that this URL contains a (spread)Sheet ID and a (work)sheet ID. This URL happens to link to [the official example Sheet that holds Gapminder data](https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077).
 
-googlesheets4 accepts such a URL as the `ss` (think "spreadsheet") argument of many functions:
+googlesheets4 accepts such a URL as the `ss` argument (think "spreadsheet") of many functions:
 
 ```{r}
 ugly_url <- "https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"
 sheets_read(ugly_url)
 ```
 
-At this time, although the URL specifies both a (spread)Sheet and a (work)sheet, we only extract the Sheet ID.
+At this time, although the URL may contain both a (spread)Sheet and a (work)sheet, we only extract the (spread)Sheet ID. If the function targets a specific (work)sheet, that is typically specified via arguments like `range` or `sheet` or a default of "first (visible) sheet".
 
 These URLs are not particularly nice to look at in your code, though.
 
@@ -95,7 +95,7 @@ ssid <- "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"
 sheets_read(ssid)
 ```
 
-Note this demonstration that the Sheet ID also works when provided as a plain, old string, i.e. it is does not **have** to have the `sheets_id` class.
+Note this demonstration that the Sheet ID also works when provided as a plain, old string, i.e. it does not **have** to have the `sheets_id` class. In some contexts, you might even prefer this, in order to bypass the special printing behaviour for `sheets_id`.
 
 When the Sheet is specified via a character string, googlesheets4 assumes it is a Sheet ID (or an ID-containing URL). This is NOT the case for googledrive, which assumes a character string is a file name or path. Therefore, for maximum happiness, in a mixed googlesheets4 / googledrive workflow, it's a good idea to be explicit and declare a string to be a Sheet ID, when that is the case.
 
@@ -110,7 +110,7 @@ If your script or app targets a specific Sheet, the most efficient and robust wa
 
 A big feature of the googledrive package is the ability to navigate between human-friendly file names and machine-friendly file IDs. Both the Drive and Sheets APIs require the use of IDs, so the illusion that you can identify a Drive file by name is provided by the googledrive package. (A Google Sheet is just a special case of a Drive file ... a file that happens to be a spreadsheet.)
 
-If you need to refer to a Sheet by name, i.e. if you need to lookup its file ID based on its name, you must use the googledrive package for that. There are other reasons for using these two packages together: the Sheets API has an intentionally narrow focus on spreadsheet operations, involving worksheets and cells. General whole-file operations, like copy / rename / move / share, must be done via the Drive API and, within R, via googledrive.
+If you need to refer to a Sheet by name, i.e. if you need to lookup its file ID based on its name, you must use the googledrive package for that. There are other reasons for using these two packages together: the Sheets API has an intentionally narrow focus on spreadsheet operations involving worksheets and cells. General whole-file operations, like copy / rename / move / share, must be done via the Drive API and, within R, via googledrive.
 
 It's time to attach googledrive (in addition to the already-attached googlesheets4):
 
@@ -146,6 +146,8 @@ Two important things to note:
     auth prompts and **make sure you auth as the same user** with googledrive
     and googlesheets4. Once you get tired of doing auth for both packages,
     read the article [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html). Coordinated auth should get even easier in the future.
+    - In our hidden auth here, we have taken special measures to use a shared
+      token for googledrive and googlesheets4.
   * Remember to use `drive_get()` on a Sheet name **that you have**. If you
     don't have a Sheet named "gapminder", the code above won't yield anything.
     As a rough rule of thumb, if you don't see it at [spreadsheets.google.com](http://spreadsheets.google.com), you can't
@@ -167,7 +169,4 @@ This is so handy that we've made `sheets_find()` in googlesheets4, which is a sh
 sheets_find()
 ```
 
-See the examples for `googledrive::drive_find()` and `sheets_find()` for more ideas about how to search Drive effectively for your Sheets.
-
-
-
+See the examples for `drive_find()` and `sheets_find()` for more ideas about how to search Drive effectively for your Sheets.

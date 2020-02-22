@@ -3,6 +3,7 @@ pkgdown: 1.4.1.9000
 pkgdown_sha: 732fb5b9ccc0ef87a73dfd0772ae661a4039b2a8
 articles:
   drive-and-sheets: articles/drive-and-sheets.html
+  find-identify-sheets: articles/find-identify-sheets.html
   fun-with-googledrive-and-readxl: articles/fun-with-googledrive-and-readxl.html
   googlesheets4-reprex: articles/googlesheets4-reprex.html
   range-specification: articles/range-specification.html

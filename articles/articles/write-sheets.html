@@ -68,6 +68,9 @@
       <a href="../../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
     </li>
     <li>
+      <a href="../../articles/articles/find-identify-sheets.html">Find and Identify Sheets</a>
+    </li>
+    <li>
       <a href="../../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
     </li>
     <li>
@@ -139,7 +142,10 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="../../reference/sheets_create.html">sheets_create</a></span>(</span>
 <span id="cb3-2"><a href="#cb3-2"></a>  <span class="st">"write-sheets-demo-2"</span>,</span>
 <span id="cb3-3"><a href="#cb3-3"></a>  <span class="dt">sheets =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"alpha"</span>, <span class="st">"beta"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4"></a>)</span></code></pre></div>
+<span id="cb3-4"><a href="#cb3-4"></a>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; Error: Server error: (503) UNAVAILABLE</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;   * Service unavailable. Typically the server is down.</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt;   * The service is currently unavailable.</span></span></code></pre></div>
 <p>These sheets have no values and get their dimensions from Sheets default behaviour.</p>
 </div>
 <div id="send-a-data-frame" class="section level3">
@@ -181,11 +187,10 @@
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"write-sheets-demo"</span>) <span class="op">%&gt;%</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()</span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; Files trashed:</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt;   * write-sheets-demo-5: 1S15UKc6Hs0umKqLOrxNzfl5L-SSMG-sZ0oj0iF7QCcg</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt;   * write-sheets-demo-4: 1QpxGmuMJi3Ce1kgU033HbqoezN0MtX8O6QusvuklgCA</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt;   * write-sheets-demo-3: 1Xvmp_Wnk7TLxHc4K9V-eNRhZ8M0XfuwtkC8SjU2yS0k</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt;   * write-sheets-demo-2: 12mS5SPHXZVrv0cdvt_FIbeMjfMAAP5xeSQxlxNm7wqo</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt;   * write-sheets-demo-1: 1YwYIqQULDVAgvBL-f_D0ROpmW-RrsKgIInPZdQlKyM8</span></span></code></pre></div>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt;   * write-sheets-demo-5: 1--sR14SjU9CpsW3p_IRnCwynWEbvIUEq7__mCjy69Fs</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt;   * write-sheets-demo-4: 1RtDnQjRscEr0Rgo2zd1yj2vQSdjKdHBH6nk3_nxoEvQ</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt;   * write-sheets-demo-3: 1eGhIta7Byll8SbPEH5-49rvDMADFeEBsetL2QSqMsUo</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt;   * write-sheets-demo-1: 14xlCFI638xmm0WOpjIgr7aG_akzxgP4sQ702f-_c0No</span></span></code></pre></div>
 </div>
 </div>
 </div>
@@ -235,7 +240,7 @@
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"write-sheets-demo"</span>) <span class="op">%&gt;%</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="st">  </span>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()</span>
 <span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt; Files trashed:</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt;   * write-sheets-demo-6: 1rFur3CcsMuCw8-5uHBALvb6prji5cJGo5E-sxYDdxD0</span></span></code></pre></div>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt;   * write-sheets-demo-6: 15gkcRAZavoiROkpeHkqgUH89CUsxCKZ8VZrI7duSqU8</span></span></code></pre></div>
 </div>
 </div>
   </div>

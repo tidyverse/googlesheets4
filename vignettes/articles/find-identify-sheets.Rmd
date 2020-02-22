@@ -1,0 +1,173 @@
+---
+title: "Find and Identify Sheets"
+---
+
+```{r setup, include = FALSE}
+can_decrypt <- gargle:::secret_can_decrypt("googlesheets4")
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  error = TRUE,
+  purl = can_decrypt,
+  eval = can_decrypt
+)
+options(tibble.print_min = 4L, tibble.print_max = 4L)
+```
+
+```{r eval = !can_decrypt, echo = FALSE, comment = NA}
+message("No token available. Code chunks will not be evaluated.")
+```
+
+There are many ways to get your hands on your Sheets, in order to work with them via googlesheets4. They basically range from "ugly, but low effort" to "more humane, but more effort".
+
+## Attach googlesheets4
+
+```{r}
+library(googlesheets4)
+```
+
+## Auth
+
+As a regular, interactive user, you can just let googlesheets4 prompt you for anything it needs re: auth.
+
+Since this article is compiled noninteractively on a server, we have arranged for googlesheets4 to use a service account token (not shown).
+
+```{r include = FALSE}
+# happens in .onLoad() when IN_PKGDOWN, but need this for local dev/preview
+googlesheets4:::sheets_auth_docs(drive = TRUE)  
+```
+
+## Use a URL
+
+When you visit a Sheet in the browser, you can copy that URL to your clipboard. Such URLs look something like this:
+
+```
+https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077
+```
+
+which breaks down like this:
+
+```
+https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit#gid=SHEET_ID
+```
+
+Notice that this URL contains a (spread)Sheet ID and a (work)sheet ID. (This URL happens to link to the official example Sheet that holds Gapminder data.)
+
+googlesheets4 accepts such a URL as the `ss` (think "spreadsheet") argument of many functions:
+
+```{r}
+ugly_url <- "https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"
+sheets_read(ugly_url)
+```
+
+At this time, although the URL specifies both a (spread)Sheet and a (work)sheet, we only extract the Sheet ID.
+
+These URLs are not particularly nice to look at in your code, though.
+
+## Use a Sheet ID
+
+You can extract the Sheet ID from a URL with `as_sheets_id()` (which is what we are doing internally to make the URL work in the first place):
+
+```{r}
+ssid <- as_sheets_id(ugly_url)
+class(ssid)
+unclass(ssid)
+```
+
+`as_sheets_id()` is a generic function, which means it knows what to do with a few different types of input. For character string input, `as_sheets_id()` passes a string through, unless it looks like a URL. If it looks like a URL, we use a regular expression to extract the Sheet ID. The returned string bears the classes `sheets_id` and `drive_id` (for playing nicely with googledrive).
+
+Why did we call `unclass(ssid)` above to see the naked Sheet ID? Because, by default, when you print an instance of `sheets_id`, we attempt to show you some current metadata about the Sheet.
+
+```{r}
+ssid
+```
+
+googlesheets4 accepts such a Sheet ID as the `ss` ("spreadsheet") argument of many functions:
+
+```{r}
+sheets_read(ssid)
+```
+
+I think in a script or app that will endure for a while it is better to refer to a Sheet by its ID than by its URL. The Sheet ID is nicer to look at, it is complete, it is minimal.
+
+```{r}
+ssid <- "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"
+sheets_read(ssid)
+```
+
+Note this demonstration that the Sheet ID also works when provided as a plain, old string, i.e. it is does not **have** to have the `sheets_id` class.
+
+When the Sheet is specified via a character string, googlesheets4 assumes it is a Sheet ID (or an ID-containing URL). This is NOT the case for googledrive, which assumes a character string is a file name or path. Therefore, for maximum happiness, in a mixed googlesheets4 / googledrive workflow, it's a good idea to be explicit and declare a string to be a Sheet ID, when that is the case.
+
+```{r}
+ssid <- as_sheets_id("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
+sheets_read(ssid)
+```
+
+If your script or app targets a specific Sheet, the most efficient and robust way to address it is by its ID.
+
+## Use the Sheet's name (uses googledrive)
+
+A big feature of the googledrive package is the ability to navigate between human-friendly file names and machine-friendly file IDs. Both the Drive and Sheets APIs require the use of IDs, so the illusion that you can identify a Drive file by name is provided by the googledrive package. (A Google Sheet is just a special case of a Drive file ... a file that happens to be a spreadsheet.)
+
+If you need to refer to a Sheet by name, i.e. if you need to lookup its file ID based on its name, you must use the googledrive package for that. There are other reasons for using these two packages together: the Sheets API has an intentionally narrow focus on spreadsheet operations, involving worksheets and cells. General whole-file operations, like copy / rename / move / share, must be done via the Drive API and, within R, via googledrive.
+
+It's time to attach googledrive (in addition to the already-attached googlesheets4):
+
+```{r, message = FALSE}
+library(googledrive)
+```
+
+The Sheet we've been working with is named "gapminder" (and is owned by the account we've logged in as here). We can use `googledrive::drive_get()` to identify a file by name:
+
+```{r}
+(gap_dribble <- drive_get("gapminder"))
+```
+
+`drive_get()` returns a `dribble`, a "Drive tibble", where each row holds info on a Drive file. `as_sheets_id()` also accepts a one-row `dribble`, so we can get right into our normal googlesheets4 workflows:
+
+```{r}
+gap_id <- as_sheets_id(gap_dribble)
+unclass(gap_id)
+gap_id
+```
+
+Since we generally call `as-sheets_id()` on whatever the user provides as `ss`, you can even pass `gap_dribble` straight into googlesheets4 functions.
+
+```{r}
+sheets_sheet_properties(gap_dribble)
+```
+
+
+Two important things to note:
+
+  * Auth: googledrive requires auth for functions like `drive_get()` and
+    `drive_find()` (see below). At first, you can just react to the interactive
+    auth prompts and **make sure you auth as the same user** with googledrive
+    and googlesheets4. Once you get tired of doing auth for both packages,
+    read the article [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html). Coordinated auth should get even easier in the future.
+  * Remember to use `drive_get()` on a Sheet name **that you have**. If you
+    don't have a Sheet named "gapminder", the code above won't yield anything.
+    As a rough rule of thumb, if you don't see it at [spreadsheets.google.com](http://spreadsheets.google.com), you can't
+    `drive_get()` it either.
+
+## List your Sheets (uses googledrive)
+
+What if you want to see all of your Sheets? Or all the Sheets with "gap" in their name?
+
+`googledrive::drive_find()` is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:
+
+```{r}
+drive_find(type = "spreadsheet")
+```
+
+This is so handy that we've made `sheets_find()` in googlesheets4, which is a shortcut for `drive_find(type = "spreadsheet")`:
+
+```{r}
+sheets_find()
+```
+
+See the examples for `googledrive::drive_find()` and `sheets_find()` for more ideas about how to search Drive effectively for your Sheets.
+
+
+

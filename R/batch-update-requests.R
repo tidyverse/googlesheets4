@@ -80,3 +80,33 @@ bureq_set_grid_properties <- function(sheetId,
     fields = fields
   ))
 }
+
+# https://developers.google.com/sheets/api/samples/rowcolumn#automatically_resize_a_column
+# https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AutoResizeDimensionsRequest
+bureq_auto_resize_dimensions <- function(sheetId,
+                                         dimension = c("COLUMNS", "ROWS"),
+                                         start = NULL,
+                                         end = NULL) {
+  dimension <- match.arg(dimension)
+  # https://developers.google.com/sheets/api/reference/rest/v4/DimensionRange
+  # A range along a single dimension on a sheet. All indexes are zero-based.
+  # Indexes are half open: the start index is inclusive and the end index is
+  # exclusive. Missing indexes indicate the range is unbounded on that side.
+  dimension_range <- new(
+    "DimensionRange",
+    sheetId = sheetId,
+    dimension = dimension
+  )
+  if (!is.null(start)) {
+    check_non_negative_integer(start)
+    dimension_range <- patch(start = start)
+  }
+  if (!is.null(end)) {
+    check_non_negative_integer(end)
+    dimension_range <- patch(end = end)
+  }
+  list(autoResizeDimensions = new(
+    "AutoResizeDimensionsRequest",
+    dimensions = dimension_range
+  ))
+}

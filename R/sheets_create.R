@@ -5,7 +5,8 @@
 #'
 #' Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook).
 #' Optionally, you can also provide names and/or data for the initial set of
-#' (work)sheets.
+#' (work)sheets. Any initial data provided via `sheets` is styled as a table,
+#' as described in [sheets_write()].
 #'
 #' @seealso
 #' Wraps the `spreadsheets.create` endpoint:
@@ -130,7 +131,8 @@ prepare_df <- function(sheet_id, df, skip = 0) {
   c(
     list(request_sheet_properties),
     list(request_values),
-    list(bureq_header_row(sheetId = sheet_id, row = skip + 1))
+    list(bureq_header_row(sheetId = sheet_id, row = skip + 1)),
+    list(bureq_auto_resize_dimensions(sheetId = sheet_id, dimension = "COLUMNS"))
   )
 }
 

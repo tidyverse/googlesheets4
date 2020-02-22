@@ -25,7 +25,8 @@ The input \code{ss}, as an instance of \code{\link{sheets_id}}
 
 Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook).
 Optionally, you can also provide names and/or data for the initial set of
-(work)sheets.
+(work)sheets. Any initial data provided via \code{sheets} is styled as a table,
+as described in \code{\link[=sheets_write]{sheets_write()}}.
 }
 \examples{
 if (sheets_has_token()) {

@@ -14,19 +14,18 @@ status](https://github.com/tidyverse/googlesheets4/workflows/R-CMD-check/badge.s
 status](https://codecov.io/gh/tidyverse/googlesheets4/branch/master/graph/badge.svg)](https://codecov.io/github/tidyverse/googlesheets4?branch=master)
 <!-- badges: end -->
 
+## Overview
+
 googlesheets4 provides an R interface to [Google
 Sheets](https://spreadsheets.google.com/) via the [Sheets API
-v4](https://developers.google.com/sheets/api/). It is a reboot of the
-existing [googlesheets
-package](https://cran.r-project.org/package=googlesheets).
+v4](https://developers.google.com/sheets/api/). It is a reboot of an
+earlier package called
+[googlesheets](https://cran.r-project.org/package=googlesheets).
 
 *Why **4**? Why googlesheets**4**? Did I miss googlesheets1 through 3?
 No. The idea is to name the package after the corresponding version of
 the Sheets API. In hindsight, the original googlesheets should have been
 googlesheets**3**.*
-
-The best source of information is always the package website:
-[googlesheets4.tidyverse.org](https://googlesheets4.tidyverse.org)
 
 ## Installation
 
@@ -44,134 +43,134 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("tidyverse/googlesheets4")
 ```
 
-## Load googlesheets4
+## Auth
+
+googlesheets4 will, by default, help you interact with Sheets as an
+authenticated Google user. The package facilitates this process upon
+first need. If you don’t need to access private Sheets, use
+`sheets_deauth()` to indicate there is no need for a token. See the
+article [googlesheets4
+auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html)
+for more.
+
+For this overview, we’ve logged into Google as a specific user in a
+hidden chunk.
+
+## Attach googlesheets4
 
 ``` r
 library(googlesheets4)
 ```
 
-## Auth
-
-googlesheets4 will, by default, help you interact with Sheets as an
-authenticated Google user. The package facilitates this process upon
-first need. For this overview, we’ve logged into Google as a specific
-user in a hidden chunk. For more about auth, visit the package website:
-[googlesheets4.tidyverse.org](https://googlesheets4.tidyverse.org).
-
-## `read_sheet()`
+## Read
 
 `read_sheet()` is the main “read” function and should evoke
 `readr::read_csv()` and `readxl::read_excel()`. It’s an alias for
-`sheets_read()`. Most functions in googlesheets4 actually start with
-`sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`), but
-works just fine without the pipe.
+`sheets_read()`, because most functions in googlesheets4 actually start
+with `sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`),
+but works just fine without the pipe.
 
-We demonstrate basic functionality using some world-readable example
-sheets accessed via `sheets_examples()` and `sheets_example()`.
-
-Read everything:
+Read from a URL, a Sheet ID, or a googledrive-produced `dribble`. These
+all achieve the same thing:
 
 ``` r
-sheets_example("chicken-sheet") %>% 
-  read_sheet() # or use sheets_read()
-#> Reading from "chicken-sheet"
-#> Range "chicken.csv"
-#> # A tibble: 5 x 4
-#>   chicken            breed         sex    motto                                 
-#>   <chr>              <chr>         <chr>  <chr>                                 
-#> 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…
-#> 2 Chicken Little     unknown       hen    The sky is falling!                   
-#> 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…
-#> 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  
-#> 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.
+read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077")
+#> Reading from "gapminder"
+#> Range "Africa"
+#> # A tibble: 624 x 6
+#>   country continent  year lifeExp      pop gdpPercap
+#>   <chr>   <chr>     <dbl>   <dbl>    <dbl>     <dbl>
+#> 1 Algeria Africa     1952    43.1  9279525     2449.
+#> 2 Algeria Africa     1957    45.7 10270856     3014.
+#> 3 Algeria Africa     1962    48.3 11000948     2551.
+#> 4 Algeria Africa     1967    51.4 12760499     3247.
+#> 5 Algeria Africa     1972    54.5 14760787     4183.
+#> # … with 619 more rows
+
+read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
+#> Reading from "gapminder"
+#> Range "Africa"
+#> # A tibble: 624 x 6
+#>   country continent  year lifeExp      pop gdpPercap
+#>   <chr>   <chr>     <dbl>   <dbl>    <dbl>     <dbl>
+#> 1 Algeria Africa     1952    43.1  9279525     2449.
+#> 2 Algeria Africa     1957    45.7 10270856     3014.
+#> 3 Algeria Africa     1962    48.3 11000948     2551.
+#> 4 Algeria Africa     1967    51.4 12760499     3247.
+#> 5 Algeria Africa     1972    54.5 14760787     4183.
+#> # … with 619 more rows
+
+googledrive::drive_get("gapminder") %>% 
+  sheets_read()
+#> Reading from "gapminder"
+#> Range "Africa"
+#> # A tibble: 624 x 6
+#>   country continent  year lifeExp      pop gdpPercap
+#>   <chr>   <chr>     <dbl>   <dbl>    <dbl>     <dbl>
+#> 1 Algeria Africa     1952    43.1  9279525     2449.
+#> 2 Algeria Africa     1957    45.7 10270856     3014.
+#> 3 Algeria Africa     1962    48.3 11000948     2551.
+#> 4 Algeria Africa     1967    51.4 12760499     3247.
+#> 5 Algeria Africa     1972    54.5 14760787     4183.
+#> # … with 619 more rows
 ```
 
-Read specific cells, from a specific sheet, using an A1-style notation:
+## Write
+
+`sheets_create()` creates a brand new (spread)Sheet and can optionally
+send some initial data.
 
 ``` r
-sheets_example("deaths") %>% 
-  read_sheet(range = "arts!A5:F15")
-#> Reading from "deaths"
-#> Range "'arts'!A5:F15"
-#> # A tibble: 10 x 6
-#>    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    
-#>    <chr>     <chr>      <dbl> <lgl>      <dttm>              <dttm>             
-#>  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00
-#>  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00
-#>  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00
-#>  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00
-#>  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00
-#>  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00
-#>  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00
-#>  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00
-#>  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00
-#> 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00
+(ss <- sheets_create("fluffy-bunny", sheets = list(flowers = head(iris))))
+#>   Spreadsheet name: fluffy-bunny
+#>                 ID: 18rx-V15FzVM6BZtuV0HLmE7eBS7JbiDrR1BswMFcplE
+#>             Locale: en_US
+#>          Time zone: Etc/GMT
+#>        # of sheets: 1
+#> 
+#> (Sheet name): (Nominal extent in rows x columns)
+#>      flowers: 7 x 5
 ```
 
-Read from a named range or region and specify (some of the ) column
-types:
+`sheets_write()` (over)writes a whole data frame into a (work)sheet
+within a (spread)Sheet.
 
 ``` r
-sheets_example("deaths") %>% 
-  read_sheet(range = "arts_data", col_types = "??i?DD")
-#> Reading from "deaths"
-#> Range "arts_data"
-#> # A tibble: 10 x 6
-#>    Name              Profession   Age `Has kids` `Date of birth` `Date of death`
-#>    <chr>             <chr>      <int> <lgl>      <date>          <date>         
-#>  1 David Bowie       musician      69 TRUE       1947-01-08      2016-01-10     
-#>  2 Carrie Fisher     actor         60 TRUE       1956-10-21      2016-12-27     
-#>  3 Chuck Berry       musician      90 TRUE       1926-10-18      2017-03-18     
-#>  4 Bill Paxton       actor         61 TRUE       1955-05-17      2017-02-25     
-#>  5 Prince            musician      57 TRUE       1958-06-07      2016-04-21     
-#>  6 Alan Rickman      actor         69 FALSE      1946-02-21      2016-01-14     
-#>  7 Florence Henders… actor         82 TRUE       1934-02-14      2016-11-24     
-#>  8 Harper Lee        author        89 FALSE      1926-04-28      2016-02-19     
-#>  9 Zsa Zsa Gábor     actor         99 TRUE       1917-02-06      2016-12-18     
-#> 10 George Michael    musician      53 FALSE      1963-06-25      2016-12-25
+head(mtcars) %>% 
+  sheets_write(ss, sheet = "autos")
+#> Writing to "fluffy-bunny"
+#> Writing to sheet "autos"
+ss
+#>   Spreadsheet name: fluffy-bunny
+#>                 ID: 18rx-V15FzVM6BZtuV0HLmE7eBS7JbiDrR1BswMFcplE
+#>             Locale: en_US
+#>          Time zone: Etc/GMT
+#>        # of sheets: 2
+#> 
+#> (Sheet name): (Nominal extent in rows x columns)
+#>      flowers: 7 x 5
+#>        autos: 7 x 11
 ```
 
-There are various ways to specify the target Sheet. The simplest, but
-ugliest, is to provide the URL.
+`sheets_edit()` and `sheets_append()` are more writing functions that
+are useful in specific situations.
 
-``` r
-# url of the 'chicken-sheet' example
-url <- "https://docs.google.com/spreadsheets/d/1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU"
-read_sheet(url)
-#> Reading from "chicken-sheet"
-#> Range "chicken.csv"
-#> # A tibble: 5 x 4
-#>   chicken            breed         sex    motto                                 
-#>   <chr>              <chr>         <chr>  <chr>                                 
-#> 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…
-#> 2 Chicken Little     unknown       hen    The sky is falling!                   
-#> 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…
-#> 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  
-#> 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.
-```
+## Where to learn more
 
-## Writing Sheets
+Learn more about googlesheets4 by reading articles and function docs:
 
-Write to Sheets with `sheets_write()`, `sheets_create()`,
-`sheets_edit()`, and `sheets_append()`. Here’s a summary of what each
-function does best:
-
-  - `sheets_create()` is the most powerful function for creating an
-    entirely new Sheet.
-  - `sheets_write()` is focused on populating a (work)sheet with a data
-    frame.
-  - `sheets_edit()` is for editing a specific cell range.
-  - `sheet_append()` adds rows to a (work)sheet that holds a data table.
-
-The writing / modifying functionality is under very active development.
-See the dedicated article for the latest: [Write
-Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html).
-
-Also note that the googledrive package
-([googledrive.tidyverse.org](https://googledrive.tidyverse.org)) can be
-used to write into Sheets at the “whole file” level, for example, to
-upload a local `.csv` or `.xlsx` into a Sheet. See
-`googledrive::drive_upload()` and `googledrive::drive_update()`.
+  - [Get started](articles/googlesheets4.html)
+  - [googlesheets4 auth](articles/articles/auth.html)
+  - [Find and Identify
+    Sheets](articles/articles/find-identify-sheets.html)
+  - [Write Sheets](articles/articles/write-sheets.html)
+  - [Using googlesheets4 with
+    googledrive](articles/articles/drive-and-sheets.html)
+  - [Fun with googledrive and
+    readxl](articles/articles/fun-with-googledrive-and-readxl.html)
+  - [How to create a googlesheets4
+    reprex](articles/articles/googlesheets4-reprex.html)
+  - [All the functions](reference)
 
 ## Contributing
 
@@ -179,7 +178,7 @@ If you’d like to contribute to the development of googlesheets4, please
 read [these
 guidelines](https://googlesheets4.tidyverse.org/CONTRIBUTING.html).
 
-Please note that the ‘googlesheets4’ project is released with a
+Please note that the googlesheets4 project is released with a
 [Contributor Code of
 Conduct](https://googlesheets4.tidyverse.org/CODE_OF_CONDUCT.html). By
 contributing to this project, you agree to abide by its terms.
@@ -201,10 +200,10 @@ tidyverse:
     The v3 API wrapped by googlesheets goes offline in March 2020, at
     which point the package must be retired.
   - [googledrive](https://googledrive.tidyverse.org) provides a
-    fully-featured interface to the Google Drive API. Use googledrive
-    for all “whole file” operations: upload or download or update a
-    spreadsheet, copy, rename, move, change permission, delete, etc.
-    googledrive supports Team Drives.
+    fully-featured interface to the Google Drive API. Any “whole file”
+    operations can be accomplished with googledrive: upload or download
+    or update a spreadsheet, copy, rename, move, change permission,
+    delete, etc. googledrive supports Team Drives.
   - [readxl](https://readxl.tidyverse.org) is the tidyverse package for
     reading Excel files (xls or xlsx) into an R data frame.
     googlesheets4 takes cues from parts of the readxl interface,

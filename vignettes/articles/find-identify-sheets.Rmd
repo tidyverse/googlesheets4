@@ -11,7 +11,7 @@ knitr::opts_chunk$set(
   purl = can_decrypt,
   eval = can_decrypt
 )
-options(tibble.print_min = 4L, tibble.print_max = 5L)
+options(tibble.print_min = 5L, tibble.print_max = 5L)
 ```
 
 ```{r eval = !can_decrypt, echo = FALSE, comment = NA}

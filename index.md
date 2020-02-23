@@ -35,21 +35,10 @@ devtools::install_github("tidyverse/googlesheets4")
 googlesheets4 will, by default, help you interact with Sheets as an
 authenticated Google user. The package facilitates this process upon
 first need. If you don’t need to access private Sheets, use
-`sheets_deauth()` to indicate there is no need for a token.
-
-Users can take control of auth proactively via the `sheets_auth*()`
-family of functions, e.g., to specify your own OAuth app or service
-account token or to explicitly deactivate auth. Auth is actually handled
-by the gargle package ([gargle.r-lib.org](https://gargle.r-lib.org)),
-similar to googledrive, bigrquery, and gmailr, and gargle’s
-documentation and articles are the definitive guide to more advanced
-topics.
-
-It is common to use googlesheets4 together with the googledrive package
-([googledrive.tidyverse.org](https://googledrive.tidyverse.org)). See
-the article [Using googlesheets4 with
-googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html)
-for advice on how to streamline auth in this case.
+`sheets_deauth()` to indicate there is no need for a token. See the
+article [googlesheets4
+auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html)
+for more.
 
 For this overview, we’ve logged into Google as a specific user in a
 hidden chunk.
@@ -97,7 +86,7 @@ sheets_examples("gap")
 
 `sheets_example()` requires a regular expression and returns exactly 1
 Sheet ID (or throws an error). The print method attempts to reveal the
-Sheet metadata available via `sheets_get()`::
+Sheet metadata available via `sheets_get()`:
 
 ``` r
 sheets_example("gapminder")
@@ -477,8 +466,8 @@ df <- data.frame(x = 1:3, y = letters[1:3])
 
 ss <- sheets_write(df)
 ss
-#>   Spreadsheet name: smoggy-mudpuppy
-#>                 ID: 1TYyEv4zREoqZXQ7GFhRyLSsrs5vw6hpUIlUWISOhObs
+#>   Spreadsheet name: timeless-huemul
+#>                 ID: 16k9frZHn19g0TLMOzHy6ODOEEYPintSS2yopA6XKyyE
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -497,7 +486,7 @@ can specify the new Sheet’s name.
 ``` r
 drive_rm(ss)
 #> Files deleted:
-#>   * smoggy-mudpuppy: 1TYyEv4zREoqZXQ7GFhRyLSsrs5vw6hpUIlUWISOhObs
+#>   * timeless-huemul: 16k9frZHn19g0TLMOzHy6ODOEEYPintSS2yopA6XKyyE
 
 ss <- sheets_create("fluffy-bunny", sheets = df)
 ```
@@ -538,12 +527,12 @@ sheets_sheet_properties(ss)
 #> # A tibble: 2 x 8
 #>   name     index         id type  visible grid_rows grid_columns data  
 #>   <chr>    <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 df           0 1433227345 GRID  TRUE            9            2 <NULL>
-#> 2 chickwts     1  196114035 GRID  TRUE           72            2 <NULL>
+#> 1 df           0 1235667151 GRID  TRUE            9            2 <NULL>
+#> 2 chickwts     1  977887719 GRID  TRUE           72            2 <NULL>
 
 drive_rm(ss)
 #> Files deleted:
-#>   * fluffy-bunny: 1vlj2dQnRPgaIZXy187qibTMFllJ319B6Gs23QH4ZRH8
+#>   * fluffy-bunny: 16BrZw7g4lYk4G3huknWhIlFzt3Eeq5C2aH_1bN1vuC8
 ```
 
 See also the article [Write

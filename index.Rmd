@@ -68,7 +68,7 @@ sheets_examples()
 sheets_examples("gap")
 ```
 
-`sheets_example()` requires a regular expression and returns exactly 1 Sheet ID (or throws an error). The print method attempts to reveal the Sheet metadata available via `sheets_get()`::
+`sheets_example()` requires a regular expression and returns exactly 1 Sheet ID (or throws an error). The print method attempts to reveal the Sheet metadata available via `sheets_get()`:
 
 ```{r}
 sheets_example("gapminder")

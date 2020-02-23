@@ -65,6 +65,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../../articles/articles/auth.html">googlesheets4 auth</a>
+    </li>
+    <li>
       <a href="../../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
     </li>
     <li>
@@ -136,7 +139,7 @@
 <p>which breaks down like this:</p>
 <pre><code>https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/edit#gid=SHEET_ID</code></pre>
 <p>Notice that this URL contains a (spread)Sheet ID and a (work)sheet ID. This URL happens to link to <a href="https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077">the official example Sheet that holds Gapminder data</a>.</p>
-<p>googlesheets4 accepts such a URL as the <code>ss</code> (think “spreadsheet”) argument of many functions:</p>
+<p>googlesheets4 accepts such a URL as the <code>ss</code> argument (think “spreadsheet”) of many functions:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>ugly_url &lt;-<span class="st"> "https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw"><a href="../../reference/read_sheet.html">sheets_read</a></span>(ugly_url)</span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Reading from "gapminder"</span></span>
@@ -149,7 +152,7 @@
 <span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span></span>
 <span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span></span>
 <span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; # … with 620 more rows</span></span></code></pre></div>
-<p>At this time, although the URL specifies both a (spread)Sheet and a (work)sheet, we only extract the Sheet ID.</p>
+<p>At this time, although the URL may contain both a (spread)Sheet and a (work)sheet, we only extract the (spread)Sheet ID. If the function targets a specific (work)sheet, that is typically specified via arguments like <code>range</code> or <code>sheet</code> or a default of “first (visible) sheet”.</p>
 <p>These URLs are not particularly nice to look at in your code, though.</p>
 </div>
 <div id="use-a-sheet-id" class="section level2">
@@ -204,7 +207,7 @@
 <span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span></span>
 <span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span></span>
 <span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; # … with 620 more rows</span></span></code></pre></div>
-<p>Note this demonstration that the Sheet ID also works when provided as a plain, old string, i.e. it is does not <strong>have</strong> to have the <code>sheets_id</code> class.</p>
+<p>Note this demonstration that the Sheet ID also works when provided as a plain, old string, i.e. it does not <strong>have</strong> to have the <code>sheets_id</code> class. In some contexts, you might even prefer this, in order to bypass the special printing behaviour for <code>sheets_id</code>.</p>
 <p>When the Sheet is specified via a character string, googlesheets4 assumes it is a Sheet ID (or an ID-containing URL). This is NOT the case for googledrive, which assumes a character string is a file name or path. Therefore, for maximum happiness, in a mixed googlesheets4 / googledrive workflow, it’s a good idea to be explicit and declare a string to be a Sheet ID, when that is the case.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>ssid &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/as_sheets_id.html">as_sheets_id</a></span>(<span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span>)</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="kw"><a href="../../reference/read_sheet.html">sheets_read</a></span>(ssid)</span>
@@ -224,7 +227,7 @@
 <h2 class="hasAnchor">
 <a href="#use-the-sheets-name-uses-googledrive" class="anchor"></a>Use the Sheet’s name (uses googledrive)</h2>
 <p>A big feature of the googledrive package is the ability to navigate between human-friendly file names and machine-friendly file IDs. Both the Drive and Sheets APIs require the use of IDs, so the illusion that you can identify a Drive file by name is provided by the googledrive package. (A Google Sheet is just a special case of a Drive file … a file that happens to be a spreadsheet.)</p>
-<p>If you need to refer to a Sheet by name, i.e. if you need to lookup its file ID based on its name, you must use the googledrive package for that. There are other reasons for using these two packages together: the Sheets API has an intentionally narrow focus on spreadsheet operations, involving worksheets and cells. General whole-file operations, like copy / rename / move / share, must be done via the Drive API and, within R, via googledrive.</p>
+<p>If you need to refer to a Sheet by name, i.e. if you need to lookup its file ID based on its name, you must use the googledrive package for that. There are other reasons for using these two packages together: the Sheets API has an intentionally narrow focus on spreadsheet operations involving worksheets and cells. General whole-file operations, like copy / rename / move / share, must be done via the Drive API and, within R, via googledrive.</p>
 <p>It’s time to attach googledrive (in addition to the already-attached googlesheets4):</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googledrive)</span></code></pre></div>
 <p>The Sheet we’ve been working with is named “gapminder” (and is owned by the account we’ve logged in as here). We can use <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">googledrive::drive_get()</a></code> to identify a file by name:</p>
@@ -265,7 +268,11 @@
 <span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt; # … with 1 more row</span></span></code></pre></div>
 <p>Two important things to note:</p>
 <ul>
-<li>googledrive requires auth for functions like <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get()</a></code> and <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> (see below). At first, you can just react to the interactive auth prompts and <strong>make sure you auth as the same user</strong> with googledrive and googlesheets4. Once you get tired of doing auth for both packages, read the article <a href="https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>. Coordinated auth should get even easier in the future.</li>
+<li>googledrive requires auth for functions like <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get()</a></code> and <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> (see below). At first, you can just react to the interactive auth prompts and <strong>make sure you auth as the same user</strong> with googledrive and googlesheets4. Once you get tired of doing auth for both packages, read the article <a href="https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>. Coordinated auth should get even easier in the future.
+<ul>
+<li>In our hidden auth here, we have taken special measures to use a shared token for googledrive and googlesheets4.</li>
+</ul>
+</li>
 <li>Remember to use <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get()</a></code> on a Sheet name <strong>that you have</strong>. If you don’t have a Sheet named “gapminder”, the code above won’t yield anything. As a rough rule of thumb, if you don’t see it at <a href="http://spreadsheets.google.com">spreadsheets.google.com</a>, you can’t <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get()</a></code> it either.</li>
 </ul>
 </div>
@@ -275,25 +282,25 @@
 <p>What if you want to see all of your Sheets? Or all the Sheets with “gap” in their name?</p>
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"spreadsheet"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="co">#&gt; # A tibble: 7 x 3</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co">#&gt; # A tibble: 8 x 3</span></span>
 <span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt;   name               id                                         drive_resource  </span></span>
 <span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt; 1 fraternal-xenurine 1nQek_3szZ5G0KJInBF6S4XtMErfu60lkJukwpif8… &lt;named list [34…</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="co">#&gt; 2 mini-gap           1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9… &lt;named list [35…</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="co">#&gt; 3 gapminder          1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrA… &lt;named list [35…</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="co">#&gt; 4 chicken-sheet      1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUg… &lt;named list [35…</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="co">#&gt; # … with 3 more rows</span></span></code></pre></div>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt; 1 fatfaced-clingfish 1PFGAc-4OI2rr8JOh53KXq_FBKSrFU147ToyoiMV5… &lt;named list [34…</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co">#&gt; 2 fraternal-xenurine 1nQek_3szZ5G0KJInBF6S4XtMErfu60lkJukwpif8… &lt;named list [34…</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">#&gt; 3 mini-gap           1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9… &lt;named list [35…</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co">#&gt; 4 gapminder          1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrA… &lt;named list [35…</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co">#&gt; # … with 4 more rows</span></span></code></pre></div>
 <p>This is so handy that we’ve made <code><a href="../../reference/sheets_find.html">sheets_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw"><a href="../../reference/sheets_find.html">sheets_find</a></span>()</span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="co">#&gt; # A tibble: 7 x 3</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co">#&gt; # A tibble: 8 x 3</span></span>
 <span id="cb15-3"><a href="#cb15-3"></a><span class="co">#&gt;   name               id                                         drive_resource  </span></span>
 <span id="cb15-4"><a href="#cb15-4"></a><span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="co">#&gt; 1 fraternal-xenurine 1nQek_3szZ5G0KJInBF6S4XtMErfu60lkJukwpif8… &lt;named list [34…</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="co">#&gt; 2 mini-gap           1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9… &lt;named list [35…</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a><span class="co">#&gt; 3 gapminder          1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrA… &lt;named list [35…</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="co">#&gt; 4 chicken-sheet      1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUg… &lt;named list [35…</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="co">#&gt; # … with 3 more rows</span></span></code></pre></div>
-<p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> and <code><a href="../../reference/sheets_find.html">sheets_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="co">#&gt; 1 fatfaced-clingfish 1PFGAc-4OI2rr8JOh53KXq_FBKSrFU147ToyoiMV5… &lt;named list [34…</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="co">#&gt; 2 fraternal-xenurine 1nQek_3szZ5G0KJInBF6S4XtMErfu60lkJukwpif8… &lt;named list [34…</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="co">#&gt; 3 mini-gap           1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9… &lt;named list [35…</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="co">#&gt; 4 gapminder          1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrA… &lt;named list [35…</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="co">#&gt; # … with 4 more rows</span></span></code></pre></div>
+<p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/sheets_find.html">sheets_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </div>
 

@@ -72,6 +72,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/articles/auth.html">googlesheets4 auth</a>
+    </li>
+    <li>
       <a href="articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
     </li>
     <li>
@@ -132,9 +135,7 @@
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
 <a href="#auth" class="anchor"></a>Auth</h2>
-<p>googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need. If you don’t need to access private Sheets, use <code><a href="reference/sheets_deauth.html">sheets_deauth()</a></code> to indicate there is no need for a token.</p>
-<p>Users can take control of auth proactively via the <code>sheets_auth*()</code> family of functions, e.g., to specify your own OAuth app or service account token or to explicitly deactivate auth. Auth is actually handled by the gargle package (<a href="https://gargle.r-lib.org">gargle.r-lib.org</a>), similar to googledrive, bigrquery, and gmailr, and gargle’s documentation and articles are the definitive guide to more advanced topics.</p>
-<p>It is common to use googlesheets4 together with the googledrive package (<a href="https://googledrive.tidyverse.org">googledrive.tidyverse.org</a>). See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a> for advice on how to streamline auth in this case.</p>
+<p>googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need. If you don’t need to access private Sheets, use <code><a href="reference/sheets_deauth.html">sheets_deauth()</a></code> to indicate there is no need for a token. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/auth.html">googlesheets4 auth</a> for more.</p>
 <p>For this overview, we’ve logged into Google as a specific user in a hidden chunk.</p>
 </div>
 <div id="attach-googlesheets4" class="section level2">
@@ -171,7 +172,7 @@
 <span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" </span></span>
 <span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; attr(,"class")</span></span>
 <span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt; [1] "drive_id"</span></span></code></pre></div>
-<p><code><a href="reference/sheets_example.html">sheets_example()</a></code> requires a regular expression and returns exactly 1 Sheet ID (or throws an error). The print method attempts to reveal the Sheet metadata available via <code><a href="reference/sheets_get.html">sheets_get()</a></code>::</p>
+<p><code><a href="reference/sheets_example.html">sheets_example()</a></code> requires a regular expression and returns exactly 1 Sheet ID (or throws an error). The print method attempts to reveal the Sheet metadata available via <code><a href="reference/sheets_get.html">sheets_get()</a></code>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt;   Spreadsheet name: gapminder</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;                 ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY</span></span>
@@ -473,8 +474,8 @@
 <span id="cb16-2"><a href="#cb16-2"></a></span>
 <span id="cb16-3"><a href="#cb16-3"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="reference/write_sheet.html">sheets_write</a></span>(df)</span>
 <span id="cb16-4"><a href="#cb16-4"></a>ss</span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="co">#&gt;   Spreadsheet name: smoggy-mudpuppy</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="co">#&gt;                 ID: 1TYyEv4zREoqZXQ7GFhRyLSsrs5vw6hpUIlUWISOhObs</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="co">#&gt;   Spreadsheet name: timeless-huemul</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="co">#&gt;                 ID: 16k9frZHn19g0TLMOzHy6ODOEEYPintSS2yopA6XKyyE</span></span>
 <span id="cb16-7"><a href="#cb16-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
 <span id="cb16-8"><a href="#cb16-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
 <span id="cb16-9"><a href="#cb16-9"></a><span class="co">#&gt;        # of sheets: 1</span></span>
@@ -485,7 +486,7 @@
 <p>Let’s start over: we delete that Sheet and call <code><a href="reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="co">#&gt;   * smoggy-mudpuppy: 1TYyEv4zREoqZXQ7GFhRyLSsrs5vw6hpUIlUWISOhObs</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="co">#&gt;   * timeless-huemul: 16k9frZHn19g0TLMOzHy6ODOEEYPintSS2yopA6XKyyE</span></span>
 <span id="cb17-4"><a href="#cb17-4"></a></span>
 <span id="cb17-5"><a href="#cb17-5"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="dt">sheets =</span> df)</span></code></pre></div>
 <p><code><a href="reference/write_sheet.html">sheets_write()</a></code> can write to new or existing (work)sheets in this Sheet. Let’s write the <code>chickwts</code> data to a new sheet in <code>ss</code>.</p>
@@ -506,12 +507,12 @@
 <span id="cb21-2"><a href="#cb21-2"></a><span class="co">#&gt; # A tibble: 2 x 8</span></span>
 <span id="cb21-3"><a href="#cb21-3"></a><span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span></span>
 <span id="cb21-4"><a href="#cb21-4"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt; 1 df           0 1433227345 GRID  TRUE            9            2 &lt;NULL&gt;</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#&gt; 2 chickwts     1  196114035 GRID  TRUE           72            2 &lt;NULL&gt;</span></span>
+<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt; 1 df           0 1235667151 GRID  TRUE            9            2 &lt;NULL&gt;</span></span>
+<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#&gt; 2 chickwts     1  977887719 GRID  TRUE           72            2 &lt;NULL&gt;</span></span>
 <span id="cb21-7"><a href="#cb21-7"></a></span>
 <span id="cb21-8"><a href="#cb21-8"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
 <span id="cb21-9"><a href="#cb21-9"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb21-10"><a href="#cb21-10"></a><span class="co">#&gt;   * fluffy-bunny: 1vlj2dQnRPgaIZXy187qibTMFllJ319B6Gs23QH4ZRH8</span></span></code></pre></div>
+<span id="cb21-10"><a href="#cb21-10"></a><span class="co">#&gt;   * fluffy-bunny: 16BrZw7g4lYk4G3huknWhIlFzt3Eeq5C2aH_1bN1vuC8</span></span></code></pre></div>
 <p>See also the article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a>.</p>
 </div>
 <div id="contributing" class="section level2">

@@ -62,6 +62,9 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
 <li>
+  <a href="articles/googlesheets4.html">Get started</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -115,7 +118,9 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="googlesheets4" class="section level1">
+<div id="googlesheets4-" class="section level1">
+
+<!-- badges: start -->
 
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
@@ -143,383 +148,101 @@
 <a href="#attach-googlesheets4" class="anchor"></a>Attach googlesheets4</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googlesheets4)</span></code></pre></div>
 </div>
-<div id="example-sheets-and-sheets_browse" class="section level2">
+<div id="read" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example-sheets-and-sheets_browse" class="anchor"></a>Example Sheets and <code>sheets_browse()</code>
-</h2>
-<p>We’ve made a few Sheets available to “anyone with a link”, for use in examples and docs. Two helper functions make it easy to get your hands on these file IDs.</p>
-<p><code><a href="reference/sheets_example.html">sheets_examples()</a></code> lists all the example Sheets and it can also filter by matching names to a regular expression:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="reference/sheets_example.html">sheets_examples</a></span>()</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt;                                       mini-gap </span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU" </span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt;                                      gapminder </span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" </span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt;                                         deaths </span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; "1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg" </span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt;                                  chicken-sheet </span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; "1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU" </span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt;                           formulas-and-formats </span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; "1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms" </span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt;                      cell-contents-and-formats </span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; "1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E" </span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt; attr(,"class")</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt; [1] "drive_id"</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="kw"><a href="reference/sheets_example.html">sheets_examples</a></span>(<span class="st">"gap"</span>)</span>
-<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt;                                       mini-gap </span></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt; "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU" </span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt;                                      gapminder </span></span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY" </span></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; attr(,"class")</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt; [1] "drive_id"</span></span></code></pre></div>
-<p><code><a href="reference/sheets_example.html">sheets_example()</a></code> requires a regular expression and returns exactly 1 Sheet ID (or throws an error). The print method attempts to reveal the Sheet metadata available via <code><a href="reference/sheets_get.html">sheets_get()</a></code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt;   Spreadsheet name: gapminder</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;                 ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY</span></span>
+<a href="#read" class="anchor"></a>Read</h2>
+<p><code><a href="reference/read_sheet.html">read_sheet()</a></code> is the main “read” function and should evoke <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> and <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">readxl::read_excel()</a></code>. It’s an alias for <code><a href="reference/read_sheet.html">sheets_read()</a></code>, because most functions in googlesheets4 actually start with <code>sheets_</code>. googlesheets4 is pipe-friendly (and reexports <code><a href="reference/pipe.html">%&gt;%</a></code>), but works just fine without the pipe.</p>
+<p>Read from a URL, a Sheet ID, or a googledrive-produced <code>dribble</code>. These all achieve the same thing:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(<span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Reading from "gapminder"</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Range "Africa"</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; # A tibble: 624 x 6</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; # … with 619 more rows</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a></span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(<span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span>)</span>
+<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt; Reading from "gapminder"</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt; Range "Africa"</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt; # A tibble: 624 x 6</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span></span>
+<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span></span>
+<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span></span>
+<span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span></span>
+<span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span></span>
+<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt; # … with 619 more rows</span></span>
+<span id="cb4-26"><a href="#cb4-26"></a></span>
+<span id="cb4-27"><a href="#cb4-27"></a>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"gapminder"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb4-28"><a href="#cb4-28"></a><span class="st">  </span><span class="kw"><a href="reference/read_sheet.html">sheets_read</a></span>()</span>
+<span id="cb4-29"><a href="#cb4-29"></a><span class="co">#&gt; Reading from "gapminder"</span></span>
+<span id="cb4-30"><a href="#cb4-30"></a><span class="co">#&gt; Range "Africa"</span></span>
+<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt; # A tibble: 624 x 6</span></span>
+<span id="cb4-32"><a href="#cb4-32"></a><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></span>
+<span id="cb4-33"><a href="#cb4-33"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span></span>
+<span id="cb4-35"><a href="#cb4-35"></a><span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span></span>
+<span id="cb4-36"><a href="#cb4-36"></a><span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span></span>
+<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span></span>
+<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span></span>
+<span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt; # … with 619 more rows</span></span></code></pre></div>
+</div>
+<div id="write" class="section level2">
+<h2 class="hasAnchor">
+<a href="#write" class="anchor"></a>Write</h2>
+<p><code><a href="reference/sheets_create.html">sheets_create()</a></code> creates a brand new (spread)Sheet and can optionally send some initial data.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>(ss &lt;-<span class="st"> </span><span class="kw"><a href="reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="dt">sheets =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">flowers =</span> <span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(iris))))</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;                 ID: 18rx-V15FzVM6BZtuV0HLmE7eBS7JbiDrR1BswMFcplE</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;             Locale: en_US</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;          Time zone: America/Los_Angeles</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;        # of sheets: 5</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;        # of sheets: 1</span></span>
 <span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; </span></span>
 <span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt;       Africa: 625 x 6</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt;     Americas: 301 x 6</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt;         Asia: 397 x 6</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt;       Europe: 361 x 6</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt;      Oceania: 25 x 6</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; </span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt; (Named range): (A1 range)        </span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="co">#&gt;        canada: 'Americas'!A38:F49</span></span></code></pre></div>
-<p>If you’d like to see a Sheet in the browser, including our example Sheets, use <code><a href="reference/sheets_browse.html">sheets_browse()</a></code>:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw"><a href="reference/sheets_browse.html">sheets_browse</a></span>()</span></code></pre></div>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt;      flowers: 7 x 5</span></span></code></pre></div>
+<p><code><a href="reference/write_sheet.html">sheets_write()</a></code> (over)writes a whole data frame into a (work)sheet within a (spread)Sheet.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(mtcars) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw"><a href="reference/write_sheet.html">sheets_write</a></span>(ss, <span class="dt">sheet =</span> <span class="st">"autos"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; Writing to "fluffy-bunny"</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; Writing to sheet "autos"</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>ss</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;                 ID: 18rx-V15FzVM6BZtuV0HLmE7eBS7JbiDrR1BswMFcplE</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;        # of sheets: 2</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt;      flowers: 7 x 5</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt;        autos: 7 x 11</span></span></code></pre></div>
+<p><code><a href="reference/sheets_edit.html">sheets_edit()</a></code> and <code><a href="reference/sheets_append.html">sheets_append()</a></code> are more writing functions that are useful in specific situations.</p>
 </div>
-<div id="read_sheet" class="section level2">
+<div id="where-to-learn-more" class="section level2">
 <h2 class="hasAnchor">
-<a href="#read_sheet" class="anchor"></a><code>read_sheet()</code>
-</h2>
-<p><code><a href="reference/read_sheet.html">read_sheet()</a></code> is the main “read” function and should evoke <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> and <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">readxl::read_excel()</a></code>. It’s an alias for <code><a href="reference/read_sheet.html">sheets_read()</a></code>, because most functions in googlesheets4 actually start with <code>sheets_</code>. googlesheets4 is pipe-friendly (and reexports <code><a href="reference/pipe.html">%&gt;%</a></code>), but works just fine without the pipe.</p>
-<p><code><a href="reference/read_sheet.html">read_sheet()</a></code> is designed to “just work”, for most people, most of the time.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"mini-gap"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>()</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co">#&gt; Reading from "mini-gap"</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; Range "Africa"</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt; # A tibble: 5 x 6</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co">#&gt;   country      continent  year lifeExp     pop gdpPercap</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co">#&gt; 1 Algeria      Africa     1952    43.1 9279525     2449.</span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="co">#&gt; 2 Angola       Africa     1952    30.0 4232095     3521.</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; 3 Benin        Africa     1952    38.2 1738315     1063.</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; 4 Botswana     Africa     1952    47.6  442308      851.</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; 5 Burkina Faso Africa     1952    32.0 4469979      543.</span></span></code></pre></div>
-<div id="identify-and-access-your-own-sheet" class="section level3">
-<h3 class="hasAnchor">
-<a href="#identify-and-access-your-own-sheet" class="anchor"></a>Identify and access your own Sheet</h3>
-<p>Let’s say you have a cheerful Sheet named “deaths”. If you want to access it by name, use <a href="https://googledrive.tidyverse.org">googledrive</a> to identify the document (capture its metadata, especially file ID).</p>
-<!-- remove the 'message = 3' later -->
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googledrive)</span>
-<span id="cb8-2"><a href="#cb8-2"></a></span>
-<span id="cb8-3"><a href="#cb8-3"></a>(deaths &lt;-<span class="st"> </span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"deaths"</span>))</span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; # A tibble: 1 x 4</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;   name   path     id                                           drive_resource   </span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;                                        &lt;list&gt;           </span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; 1 deaths ~/deaths 1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg &lt;named list [34]&gt;</span></span></code></pre></div>
-<p>Pass the result to googlesheets4 functions such as:</p>
+<a href="#where-to-learn-more" class="anchor"></a>Where to learn more</h2>
+<p>Learn more about googlesheets4 by reading articles and function docs:</p>
 <ul>
-<li>
-<code><a href="reference/sheets_get.html">sheets_get()</a></code>: returns spreadsheet-specific metadata. This is also revealed whenever you print a <code>sheets_id</code> object.</li>
-<li>
-<code><a href="reference/sheets_sheet_properties.html">sheets_sheet_names()</a></code>: reveals just the (work)sheet names</li>
-<li>
-<code><a href="reference/read_sheet.html">read_sheet()</a></code>: reads cells into a data frame. <code><a href="reference/read_sheet.html">sheets_read()</a></code> is an alias for this.</li>
+<li><a href="articles/googlesheets4.html">Get started</a></li>
+<li><a href="articles/articles/auth.html">googlesheets4 auth</a></li>
+<li><a href="articles/articles/find-identify-sheets.html">Find and Identify Sheets</a></li>
+<li><a href="articles/articles/write-sheets.html">Write Sheets</a></li>
+<li><a href="articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a></li>
+<li><a href="articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a></li>
+<li><a href="articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a></li>
+<li><a href="reference">All the functions</a></li>
 </ul>
-<!-- end list --><div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw"><a href="reference/sheets_get.html">sheets_get</a></span>(deaths)</span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt;   Spreadsheet name: deaths</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;                 ID: 1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;             Locale: en</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt;          Time zone: America/Los_Angeles</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt;        # of sheets: 2</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; </span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;         arts: 1000 x 26</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;        other: 1000 x 26</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt; </span></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt; (Named range): (A1 range)    </span></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt;     arts_data: 'arts'!A5:F15 </span></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt;    other_data: 'other'!A5:F15</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a></span>
-<span id="cb9-16"><a href="#cb9-16"></a><span class="kw"><a href="reference/sheets_sheet_properties.html">sheets_sheet_names</a></span>(deaths)</span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#&gt; [1] "arts"  "other"</span></span>
-<span id="cb9-18"><a href="#cb9-18"></a></span>
-<span id="cb9-19"><a href="#cb9-19"></a><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(deaths, <span class="dt">range =</span> <span class="st">"A5:F8"</span>)</span>
-<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt; Reading from "deaths"</span></span>
-<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt; Range "A5:F8"</span></span>
-<span id="cb9-22"><a href="#cb9-22"></a><span class="co">#&gt; # A tibble: 3 x 6</span></span>
-<span id="cb9-23"><a href="#cb9-23"></a><span class="co">#&gt;   Name       Profession   Age `Has kids` `Date of birth`     `Date of death`    </span></span>
-<span id="cb9-24"><a href="#cb9-24"></a><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span></span>
-<span id="cb9-25"><a href="#cb9-25"></a><span class="co">#&gt; 1 David Bow… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span></span>
-<span id="cb9-26"><a href="#cb9-26"></a><span class="co">#&gt; 2 Carrie Fi… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span></span>
-<span id="cb9-27"><a href="#cb9-27"></a><span class="co">#&gt; 3 Chuck Ber… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span></span></code></pre></div>
-<p>If you’re willing to refer to the spreadsheet by ID (or URL), just provide that directly to googlesheets4 functions and omit googledrive from the workflow.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="reference/sheets_get.html">sheets_get</a></span>(<span class="st">"1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA"</span>)</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt;   Spreadsheet name: deaths</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt;                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt;             Locale: en</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt;          Time zone: America/Los_Angeles</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt;        # of sheets: 2</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; </span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt;         arts: 1000 x 26</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt;        other: 1000 x 26</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="co"># a URL also works</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="kw"><a href="reference/sheets_get.html">sheets_get</a></span>(<span class="st">"https://docs.google.com/spreadsheets/d/1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA/edit#gid=1210215306"</span>)</span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt;   Spreadsheet name: deaths</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt;                 ID: 1ESTf_tH08qzWwFYRC1NVWJjswtLdZn9EGw5e3Z5wMzA</span></span>
-<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt;             Locale: en</span></span>
-<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt;          Time zone: America/Los_Angeles</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt;        # of sheets: 2</span></span>
-<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; </span></span>
-<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt;         arts: 1000 x 26</span></span>
-<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#&gt;        other: 1000 x 26</span></span></code></pre></div>
-<p>Lesson: googledrive provides the most user-friendly way to refer to files on Google Drive, including files that are Google Sheets. googledrive lets you refer to files by name or path. googlesheets4 is focused on operations specific to Sheets and is more programming oriented. googlesheets4 requires a file ID or something that contains the file ID, such as the URL or a <code>dribble</code> object obtained via googledrive.</p>
-</div>
-<div id="specify-the-range-and-column-types" class="section level3">
-<h3 class="hasAnchor">
-<a href="#specify-the-range-and-column-types" class="anchor"></a>Specify the range and column types</h3>
-<p>Here we read from the mini-Gapminder and <code>deaths</code> example Sheets to show some of the different ways to specify (work)sheet and cell ranges. Note also that <code>col_types</code> gives control of column types, similar to how <code>col_types</code> works in readr.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(<span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"mini-gap"</span>), <span class="dt">sheet =</span> <span class="dv">2</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; Reading from "mini-gap"</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; Range "'Americas'"</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt; # A tibble: 5 x 6</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt;   country   continent  year lifeExp      pop gdpPercap</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt; 1 Argentina Americas   1952    62.5 17876956     5911.</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; 2 Bolivia   Americas   1952    40.4  2883315     2677.</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt; 3 Brazil    Americas   1952    50.9 56602560     2109.</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt; 4 Canada    Americas   1952    68.8 14785584    11367.</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt; 5 Chile     Americas   1952    54.7  6377619     3940.</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a></span>
-<span id="cb11-13"><a href="#cb11-13"></a><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(<span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"mini-gap"</span>), <span class="dt">sheet =</span> <span class="st">"Oceania"</span>, <span class="dt">n_max =</span> <span class="dv">3</span>)</span>
-<span id="cb11-14"><a href="#cb11-14"></a><span class="co">#&gt; Reading from "mini-gap"</span></span>
-<span id="cb11-15"><a href="#cb11-15"></a><span class="co">#&gt; Range "'Oceania'"</span></span>
-<span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; # A tibble: 3 x 6</span></span>
-<span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt;   country     continent  year lifeExp     pop gdpPercap</span></span>
-<span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; 1 Australia   Oceania    1952    69.1 8691212    10040.</span></span>
-<span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt; 2 New Zealand Oceania    1952    69.4 1994794    10557.</span></span>
-<span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt; 3 Australia   Oceania    1957    70.3 9712569    10950.</span></span>
-<span id="cb11-22"><a href="#cb11-22"></a></span>
-<span id="cb11-23"><a href="#cb11-23"></a><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(<span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="dt">skip =</span> <span class="dv">4</span>, <span class="dt">n_max =</span> <span class="dv">10</span>)</span>
-<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt; Reading from "deaths"</span></span>
-<span id="cb11-25"><a href="#cb11-25"></a><span class="co">#&gt; Range "5:5000000"</span></span>
-<span id="cb11-26"><a href="#cb11-26"></a><span class="co">#&gt; # A tibble: 10 x 6</span></span>
-<span id="cb11-27"><a href="#cb11-27"></a><span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span></span>
-<span id="cb11-28"><a href="#cb11-28"></a><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span></span>
-<span id="cb11-29"><a href="#cb11-29"></a><span class="co">#&gt;  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span></span>
-<span id="cb11-30"><a href="#cb11-30"></a><span class="co">#&gt;  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span></span>
-<span id="cb11-31"><a href="#cb11-31"></a><span class="co">#&gt;  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span></span>
-<span id="cb11-32"><a href="#cb11-32"></a><span class="co">#&gt;  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00</span></span>
-<span id="cb11-33"><a href="#cb11-33"></a><span class="co">#&gt;  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00</span></span>
-<span id="cb11-34"><a href="#cb11-34"></a><span class="co">#&gt;  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00</span></span>
-<span id="cb11-35"><a href="#cb11-35"></a><span class="co">#&gt;  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00</span></span>
-<span id="cb11-36"><a href="#cb11-36"></a><span class="co">#&gt;  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00</span></span>
-<span id="cb11-37"><a href="#cb11-37"></a><span class="co">#&gt;  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00</span></span>
-<span id="cb11-38"><a href="#cb11-38"></a><span class="co">#&gt; 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00</span></span>
-<span id="cb11-39"><a href="#cb11-39"></a></span>
-<span id="cb11-40"><a href="#cb11-40"></a><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(</span>
-<span id="cb11-41"><a href="#cb11-41"></a>  <span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="dt">range =</span> <span class="st">"other!A5:F15"</span>, <span class="dt">col_types =</span> <span class="st">"?ci??D"</span></span>
-<span id="cb11-42"><a href="#cb11-42"></a>)</span>
-<span id="cb11-43"><a href="#cb11-43"></a><span class="co">#&gt; Reading from "deaths"</span></span>
-<span id="cb11-44"><a href="#cb11-44"></a><span class="co">#&gt; Range "'other'!A5:F15"</span></span>
-<span id="cb11-45"><a href="#cb11-45"></a><span class="co">#&gt; # A tibble: 10 x 6</span></span>
-<span id="cb11-46"><a href="#cb11-46"></a><span class="co">#&gt;    Name          Profession   Age `Has kids` `Date of birth`     `Date of death`</span></span>
-<span id="cb11-47"><a href="#cb11-47"></a><span class="co">#&gt;    &lt;chr&gt;         &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;date&gt;         </span></span>
-<span id="cb11-48"><a href="#cb11-48"></a><span class="co">#&gt;  1 Vera Rubin    scientist     88 TRUE       1928-07-23 00:00:00 2016-12-25     </span></span>
-<span id="cb11-49"><a href="#cb11-49"></a><span class="co">#&gt;  2 Mohamed Ali   athlete       74 TRUE       1942-01-17 00:00:00 2016-06-03     </span></span>
-<span id="cb11-50"><a href="#cb11-50"></a><span class="co">#&gt;  3 Morley Safer  journalist    84 TRUE       1931-11-08 00:00:00 2016-05-19     </span></span>
-<span id="cb11-51"><a href="#cb11-51"></a><span class="co">#&gt;  4 Fidel Castro  politician    90 TRUE       1926-08-13 00:00:00 2016-11-25     </span></span>
-<span id="cb11-52"><a href="#cb11-52"></a><span class="co">#&gt;  5 Antonin Scal… lawyer        79 TRUE       1936-03-11 00:00:00 2016-02-13     </span></span>
-<span id="cb11-53"><a href="#cb11-53"></a><span class="co">#&gt;  6 Jo Cox        politician    41 TRUE       1974-06-22 00:00:00 2016-06-16     </span></span>
-<span id="cb11-54"><a href="#cb11-54"></a><span class="co">#&gt;  7 Janet Reno    lawyer        78 FALSE      1938-07-21 00:00:00 2016-11-07     </span></span>
-<span id="cb11-55"><a href="#cb11-55"></a><span class="co">#&gt;  8 Gwen Ifill    journalist    61 FALSE      1955-09-29 00:00:00 2016-11-14     </span></span>
-<span id="cb11-56"><a href="#cb11-56"></a><span class="co">#&gt;  9 John Glenn    astronaut     95 TRUE       1921-07-28 00:00:00 2016-12-08     </span></span>
-<span id="cb11-57"><a href="#cb11-57"></a><span class="co">#&gt; 10 Pat Summit    coach         64 TRUE       1952-06-14 00:00:00 2016-06-28</span></span></code></pre></div>
-<p>If you looked at the <code>deaths</code> spreadsheet in the browser (it’s <a href="https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/edit#gid=1210215306">here</a>), you know that it has some of the typical features of real world spreadsheets: the main data rectangle has prose intended for human-consumption before and after it. That’s why we have to specify the range when we read from it.</p>
-<p>We’ve designated the data rectangles as <a href="https://support.google.com/docs/answer/63175?co=GENIE.Platform%3DDesktop&amp;hl=en">named ranges</a>, which provides a very slick way to read them – definitely less brittle and mysterious than approaches like <code>range = "other!A5:F15"</code> or <code>skip = 4, n_max = 10</code>. A named range can be passed via the <code>range =</code> argument:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="st">  </span><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(<span class="dt">range =</span> <span class="st">"arts_data"</span>)</span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; Reading from "deaths"</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt; Range "arts_data"</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt; # A tibble: 10 x 6</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt;  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt;  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="co">#&gt;  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="co">#&gt;  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="co">#&gt;  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00</span></span>
-<span id="cb12-13"><a href="#cb12-13"></a><span class="co">#&gt;  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00</span></span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="co">#&gt;  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00</span></span>
-<span id="cb12-15"><a href="#cb12-15"></a><span class="co">#&gt;  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00</span></span>
-<span id="cb12-16"><a href="#cb12-16"></a><span class="co">#&gt;  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00</span></span>
-<span id="cb12-17"><a href="#cb12-17"></a><span class="co">#&gt; 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00</span></span></code></pre></div>
-<p>The named ranges, if any exist, are part of the information returned by <code><a href="reference/sheets_get.html">sheets_get()</a></code>.</p>
-</div>
-</div>
-<div id="sheet-metadata" class="section level2">
-<h2 class="hasAnchor">
-<a href="#sheet-metadata" class="anchor"></a>Sheet metadata</h2>
-<p><code><a href="reference/sheets_get.html">sheets_get()</a></code> exposes Sheet metadata. It has a nice print method, but there’s much more info in the object itself.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>(deaths_meta &lt;-<span class="st"> </span><span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="st">   </span><span class="kw"><a href="reference/sheets_get.html">sheets_get</a></span>())</span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt;   Spreadsheet name: deaths</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt;                 ID: 1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt;             Locale: en</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt;          Time zone: America/Los_Angeles</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt;        # of sheets: 2</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt; </span></span>
-<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt;         arts: 1000 x 26</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a><span class="co">#&gt;        other: 1000 x 26</span></span>
-<span id="cb13-12"><a href="#cb13-12"></a><span class="co">#&gt; </span></span>
-<span id="cb13-13"><a href="#cb13-13"></a><span class="co">#&gt; (Named range): (A1 range)    </span></span>
-<span id="cb13-14"><a href="#cb13-14"></a><span class="co">#&gt;     arts_data: 'arts'!A5:F15 </span></span>
-<span id="cb13-15"><a href="#cb13-15"></a><span class="co">#&gt;    other_data: 'other'!A5:F15</span></span>
-<span id="cb13-16"><a href="#cb13-16"></a></span>
-<span id="cb13-17"><a href="#cb13-17"></a><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(deaths_meta, <span class="dt">max.level =</span> <span class="dv">1</span>)</span>
-<span id="cb13-18"><a href="#cb13-18"></a><span class="co">#&gt; List of 7</span></span>
-<span id="cb13-19"><a href="#cb13-19"></a><span class="co">#&gt;  $ spreadsheet_id : chr "1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg"</span></span>
-<span id="cb13-20"><a href="#cb13-20"></a><span class="co">#&gt;  $ spreadsheet_url: chr "https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/edit"</span></span>
-<span id="cb13-21"><a href="#cb13-21"></a><span class="co">#&gt;  $ name           : chr "deaths"</span></span>
-<span id="cb13-22"><a href="#cb13-22"></a><span class="co">#&gt;  $ locale         : chr "en"</span></span>
-<span id="cb13-23"><a href="#cb13-23"></a><span class="co">#&gt;  $ time_zone      : chr "America/Los_Angeles"</span></span>
-<span id="cb13-24"><a href="#cb13-24"></a><span class="co">#&gt;  $ sheets         :Classes 'tbl_df', 'tbl' and 'data.frame': 2 obs. of  8 variables:</span></span>
-<span id="cb13-25"><a href="#cb13-25"></a><span class="co">#&gt;  $ named_ranges   :Classes 'tbl_df', 'tbl' and 'data.frame': 2 obs. of  10 variables:</span></span>
-<span id="cb13-26"><a href="#cb13-26"></a><span class="co">#&gt;  - attr(*, "class")= chr [1:2] "googlesheets4_spreadsheet" "list"</span></span>
-<span id="cb13-27"><a href="#cb13-27"></a></span>
-<span id="cb13-28"><a href="#cb13-28"></a>deaths_meta<span class="op">$</span>sheets</span>
-<span id="cb13-29"><a href="#cb13-29"></a><span class="co">#&gt; # A tibble: 2 x 8</span></span>
-<span id="cb13-30"><a href="#cb13-30"></a><span class="co">#&gt;   name  index         id type  visible grid_rows grid_columns data  </span></span>
-<span id="cb13-31"><a href="#cb13-31"></a><span class="co">#&gt;   &lt;chr&gt; &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span></span>
-<span id="cb13-32"><a href="#cb13-32"></a><span class="co">#&gt; 1 arts      0 1210215306 GRID  TRUE         1000           26 &lt;NULL&gt;</span></span>
-<span id="cb13-33"><a href="#cb13-33"></a><span class="co">#&gt; 2 other     1   28655153 GRID  TRUE         1000           26 &lt;NULL&gt;</span></span>
-<span id="cb13-34"><a href="#cb13-34"></a></span>
-<span id="cb13-35"><a href="#cb13-35"></a>deaths_meta<span class="op">$</span>named_ranges</span>
-<span id="cb13-36"><a href="#cb13-36"></a><span class="co">#&gt; # A tibble: 2 x 10</span></span>
-<span id="cb13-37"><a href="#cb13-37"></a><span class="co">#&gt;   name  id    sheet_id start_row end_row start_column end_column sheet_name</span></span>
-<span id="cb13-38"><a href="#cb13-38"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;int&gt;     &lt;int&gt;   &lt;int&gt;        &lt;int&gt;      &lt;int&gt; &lt;chr&gt;     </span></span>
-<span id="cb13-39"><a href="#cb13-39"></a><span class="co">#&gt; 1 arts… ndmz…   1.21e9         5      15            1          6 arts      </span></span>
-<span id="cb13-40"><a href="#cb13-40"></a><span class="co">#&gt; 2 othe… r5yz…   2.87e7         5      15            1          6 other     </span></span>
-<span id="cb13-41"><a href="#cb13-41"></a><span class="co">#&gt; # … with 2 more variables: cell_range &lt;chr&gt;, A1_range &lt;chr&gt;</span></span></code></pre></div>
-</div>
-<div id="detailed-cell-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#detailed-cell-data" class="anchor"></a>Detailed cell data</h2>
-<p><code><a href="reference/sheets_cells.html">sheets_cells()</a></code> returns a data frame with one row per cell and it gives access to raw cell data sent by the Sheets API.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>(df &lt;-<span class="st"> </span><span class="kw"><a href="reference/sheets_cells.html">sheets_cells</a></span>(<span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="dt">range =</span> <span class="st">"E5:E7"</span>))</span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="co">#&gt; Reading from "deaths"</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt; Range "E5:E7"</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt; # A tibble: 3 x 4</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt;     row   col loc   cell      </span></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;list&gt;    </span></span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="co">#&gt; 1     5     5 E5    &lt;CELL_TEX&gt;</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="co">#&gt; 2     6     5 E6    &lt;CELL_DAT&gt;</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="co">#&gt; 3     7     5 E7    &lt;CELL_DAT&gt;</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a>df<span class="op">$</span>cell[[<span class="dv">3</span>]]</span>
-<span id="cb14-11"><a href="#cb14-11"></a><span class="co">#&gt; $effectiveValue</span></span>
-<span id="cb14-12"><a href="#cb14-12"></a><span class="co">#&gt; $effectiveValue$numberValue</span></span>
-<span id="cb14-13"><a href="#cb14-13"></a><span class="co">#&gt; [1] 20749</span></span>
-<span id="cb14-14"><a href="#cb14-14"></a><span class="co">#&gt; </span></span>
-<span id="cb14-15"><a href="#cb14-15"></a><span class="co">#&gt; </span></span>
-<span id="cb14-16"><a href="#cb14-16"></a><span class="co">#&gt; $formattedValue</span></span>
-<span id="cb14-17"><a href="#cb14-17"></a><span class="co">#&gt; [1] "10/21/1956"</span></span>
-<span id="cb14-18"><a href="#cb14-18"></a><span class="co">#&gt; </span></span>
-<span id="cb14-19"><a href="#cb14-19"></a><span class="co">#&gt; $effectiveFormat</span></span>
-<span id="cb14-20"><a href="#cb14-20"></a><span class="co">#&gt; $effectiveFormat$numberFormat</span></span>
-<span id="cb14-21"><a href="#cb14-21"></a><span class="co">#&gt; $effectiveFormat$numberFormat$type</span></span>
-<span id="cb14-22"><a href="#cb14-22"></a><span class="co">#&gt; [1] "DATE"</span></span>
-<span id="cb14-23"><a href="#cb14-23"></a><span class="co">#&gt; </span></span>
-<span id="cb14-24"><a href="#cb14-24"></a><span class="co">#&gt; $effectiveFormat$numberFormat$pattern</span></span>
-<span id="cb14-25"><a href="#cb14-25"></a><span class="co">#&gt; [1] "M/D/YYYY"</span></span>
-<span id="cb14-26"><a href="#cb14-26"></a><span class="co">#&gt; </span></span>
-<span id="cb14-27"><a href="#cb14-27"></a><span class="co">#&gt; </span></span>
-<span id="cb14-28"><a href="#cb14-28"></a><span class="co">#&gt; </span></span>
-<span id="cb14-29"><a href="#cb14-29"></a><span class="co">#&gt; attr(,"class")</span></span>
-<span id="cb14-30"><a href="#cb14-30"></a><span class="co">#&gt; [1] "CELL_DATE"   "SHEETS_CELL"</span></span></code></pre></div>
-<p>Specify <code>cell_data = "full", discard_empty = FALSE</code> to get even more data if you, for example, need access to cell formulas or formatting.</p>
-<p><code><a href="reference/spread_sheet.html">spread_sheet()</a></code> 😉 converts data in the “one row per cell” form into the data frame you get from <code><a href="reference/read_sheet.html">read_sheet()</a></code>, which involves reshaping and column typing.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/spread_sheet.html">spread_sheet</a></span>(<span class="dt">col_types =</span> <span class="st">"D"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="co">#&gt; # A tibble: 2 x 1</span></span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="co">#&gt;   `Date of birth`</span></span>
-<span id="cb15-4"><a href="#cb15-4"></a><span class="co">#&gt;   &lt;date&gt;         </span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="co">#&gt; 1 1947-01-08     </span></span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="co">#&gt; 2 1956-10-21</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a><span class="co">## is same as ...</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(<span class="kw"><a href="reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="dt">range =</span> <span class="st">"E5:E7"</span>, <span class="dt">col_types =</span><span class="st">"D"</span>)</span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="co">#&gt; Reading from "deaths"</span></span>
-<span id="cb15-10"><a href="#cb15-10"></a><span class="co">#&gt; Range "E5:E7"</span></span>
-<span id="cb15-11"><a href="#cb15-11"></a><span class="co">#&gt; # A tibble: 2 x 1</span></span>
-<span id="cb15-12"><a href="#cb15-12"></a><span class="co">#&gt;   `Date of birth`</span></span>
-<span id="cb15-13"><a href="#cb15-13"></a><span class="co">#&gt;   &lt;date&gt;         </span></span>
-<span id="cb15-14"><a href="#cb15-14"></a><span class="co">#&gt; 1 1947-01-08     </span></span>
-<span id="cb15-15"><a href="#cb15-15"></a><span class="co">#&gt; 2 1956-10-21</span></span></code></pre></div>
-</div>
-<div id="writing-sheets" class="section level2">
-<h2 class="hasAnchor">
-<a href="#writing-sheets" class="anchor"></a>Writing Sheets</h2>
-<p><em>The writing functions are still under heavy development, so you can expect some refinements re: user interface and which function does what.</em></p>
-<p><code><a href="reference/write_sheet.html">sheets_write()</a></code> writes a data frame into a Sheet. The only required argument is the data.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>df &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">y =</span> letters[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>])</span>
-<span id="cb16-2"><a href="#cb16-2"></a></span>
-<span id="cb16-3"><a href="#cb16-3"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="reference/write_sheet.html">sheets_write</a></span>(df)</span>
-<span id="cb16-4"><a href="#cb16-4"></a>ss</span>
-<span id="cb16-5"><a href="#cb16-5"></a><span class="co">#&gt;   Spreadsheet name: timeless-huemul</span></span>
-<span id="cb16-6"><a href="#cb16-6"></a><span class="co">#&gt;                 ID: 16k9frZHn19g0TLMOzHy6ODOEEYPintSS2yopA6XKyyE</span></span>
-<span id="cb16-7"><a href="#cb16-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
-<span id="cb16-8"><a href="#cb16-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
-<span id="cb16-9"><a href="#cb16-9"></a><span class="co">#&gt;        # of sheets: 1</span></span>
-<span id="cb16-10"><a href="#cb16-10"></a><span class="co">#&gt; </span></span>
-<span id="cb16-11"><a href="#cb16-11"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span id="cb16-12"><a href="#cb16-12"></a><span class="co">#&gt;           df: 4 x 2</span></span></code></pre></div>
-<p>You’ll notice the new (spread)Sheet has a randomly generated name. If that is a problem, use <code><a href="reference/sheets_create.html">sheets_create()</a></code> instead, which affords more control over various aspects of the new Sheet.</p>
-<p>Let’s start over: we delete that Sheet and call <code><a href="reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
-<span id="cb17-2"><a href="#cb17-2"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a><span class="co">#&gt;   * timeless-huemul: 16k9frZHn19g0TLMOzHy6ODOEEYPintSS2yopA6XKyyE</span></span>
-<span id="cb17-4"><a href="#cb17-4"></a></span>
-<span id="cb17-5"><a href="#cb17-5"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="dt">sheets =</span> df)</span></code></pre></div>
-<p><code><a href="reference/write_sheet.html">sheets_write()</a></code> can write to new or existing (work)sheets in this Sheet. Let’s write the <code>chickwts</code> data to a new sheet in <code>ss</code>.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw"><a href="reference/write_sheet.html">sheets_write</a></span>(chickwts, ss)</span>
-<span id="cb18-2"><a href="#cb18-2"></a><span class="co">#&gt; Writing to "fluffy-bunny"</span></span>
-<span id="cb18-3"><a href="#cb18-3"></a><span class="co">#&gt; Writing to sheet "chickwts"</span></span></code></pre></div>
-<p>We can also use <code><a href="reference/write_sheet.html">sheets_write()</a></code> to replace the data in an existing sheet.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw"><a href="reference/write_sheet.html">sheets_write</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">10</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">10</span>]), ss, <span class="dt">sheet =</span> <span class="st">"df"</span>)</span>
-<span id="cb19-2"><a href="#cb19-2"></a><span class="co">#&gt; Writing to "fluffy-bunny"</span></span>
-<span id="cb19-3"><a href="#cb19-3"></a><span class="co">#&gt; Writing to sheet "df"</span></span></code></pre></div>
-<p><code><a href="reference/sheets_append.html">sheets_append()</a></code> adds one or more rows to an existing sheet.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw"><a href="reference/sheets_append.html">sheets_append</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">11</span>, letters[<span class="dv">11</span>]), ss, <span class="dt">sheet =</span> <span class="st">"df"</span>)</span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="co">#&gt; Writing to "fluffy-bunny"</span></span>
-<span id="cb20-3"><a href="#cb20-3"></a><span class="co">#&gt; Appending 1 row(s) to "df"</span></span></code></pre></div>
-<p>There is also a family of <code>sheets_sheet_*()</code> functions that do pure (work)sheet operations, such as add and delete.</p>
-<p>We take one last look at the sheets we created in <code>ss</code>, then clean up.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw"><a href="reference/sheets_sheet_properties.html">sheets_sheet_properties</a></span>(ss)</span>
-<span id="cb21-2"><a href="#cb21-2"></a><span class="co">#&gt; # A tibble: 2 x 8</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span></span>
-<span id="cb21-4"><a href="#cb21-4"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span></span>
-<span id="cb21-5"><a href="#cb21-5"></a><span class="co">#&gt; 1 df           0 1235667151 GRID  TRUE            9            2 &lt;NULL&gt;</span></span>
-<span id="cb21-6"><a href="#cb21-6"></a><span class="co">#&gt; 2 chickwts     1  977887719 GRID  TRUE           72            2 &lt;NULL&gt;</span></span>
-<span id="cb21-7"><a href="#cb21-7"></a></span>
-<span id="cb21-8"><a href="#cb21-8"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
-<span id="cb21-9"><a href="#cb21-9"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb21-10"><a href="#cb21-10"></a><span class="co">#&gt;   * fluffy-bunny: 16BrZw7g4lYk4G3huknWhIlFzt3Eeq5C2aH_1bN1vuC8</span></span></code></pre></div>
-<p>See also the article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a>.</p>
 </div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
 <p>If you’d like to contribute to the development of googlesheets4, please read <a href="https://googlesheets4.tidyverse.org/CONTRIBUTING.html">these guidelines</a>.</p>
-<p>Please note that the ‘googlesheets4’ project is released with a <a href="https://googlesheets4.tidyverse.org/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
+<p>Please note that the googlesheets4 project is released with a <a href="https://googlesheets4.tidyverse.org/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 <div id="privacy" class="section level2">
 <h2 class="hasAnchor">
@@ -534,7 +257,7 @@
 <li>
 <a href="https://cran.r-project.org/package=googlesheets">googlesheets</a> is the package that googlesheets4 is replacing. Main improvements in googlesheets4: (1) wraps the current, most modern Sheets API; (2) leans on googledrive for all “whole file” operations; and (3) uses shared infrastructure for auth and more, from the gargle package. The v3 API wrapped by googlesheets goes offline in March 2020, at which point the package must be retired.</li>
 <li>
-<a href="https://googledrive.tidyverse.org">googledrive</a> already provides a fully-featured interface to the Google Drive API. Any “whole file” operations can already be accomplished <em>today</em> with googledrive: upload or download or update a spreadsheet, copy, rename, move, change permission, delete, etc. googledrive already supports Team Drives.</li>
+<a href="https://googledrive.tidyverse.org">googledrive</a> provides a fully-featured interface to the Google Drive API. Any “whole file” operations can be accomplished with googledrive: upload or download or update a spreadsheet, copy, rename, move, change permission, delete, etc. googledrive supports Team Drives.</li>
 <li>
 <a href="https://readxl.tidyverse.org">readxl</a> is the tidyverse package for reading Excel files (xls or xlsx) into an R data frame. googlesheets4 takes cues from parts of the readxl interface, especially around specifying which cells to read.</li>
 <li>
@@ -580,7 +303,16 @@
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="lifecycle"></a></li>
+<li><a href="https://CRAN.R-project.org/package=googlesheets4"><img src="https://www.r-pkg.org/badges/version/googlesheets4" alt="CRAN status"></a></li>
+<li><a href="https://github.com/tidyverse/googlesheets4/actions"><img src="https://github.com/tidyverse/googlesheets4/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/github/tidyverse/googlesheets4?branch=master"><img src="https://codecov.io/gh/tidyverse/googlesheets4/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 

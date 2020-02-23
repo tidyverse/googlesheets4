@@ -9,6 +9,7 @@ articles:
   googlesheets4-reprex: articles/googlesheets4-reprex.html
   range-specification: articles/range-specification.html
   write-sheets: articles/write-sheets.html
+  googlesheets4: googlesheets4.html
 urls:
   reference: https://googlesheets4.tidyverse.org/reference
   article: https://googlesheets4.tidyverse.org/articles

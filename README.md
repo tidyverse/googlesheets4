@@ -131,7 +131,7 @@ send some initial data.
 ``` r
 (ss <- sheets_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1H1UhgVNfga5ix7MDrwOGE-kH2XLp41QMesxEdyihQ7I
+#>                 ID: 1Pv0BpZuMqAzd0mli-WVH0MjWjvCkBcWqVaQpVKKJs2k
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -150,7 +150,7 @@ head(mtcars) %>%
 #> Writing to sheet "autos"
 ss
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1H1UhgVNfga5ix7MDrwOGE-kH2XLp41QMesxEdyihQ7I
+#>                 ID: 1Pv0BpZuMqAzd0mli-WVH0MjWjvCkBcWqVaQpVKKJs2k
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2
@@ -173,6 +173,8 @@ for more about writing to Sheets.
     auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html)
   - [Find and Identify
     Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html)
+  - [Read
+    Sheets](https://googlesheets4.tidyverse.org/articles/articles/read-sheets.html)
   - [Write
     Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html)
   - [Using googlesheets4 with

@@ -93,6 +93,9 @@
       <a href="articles/articles/range-specification.html">Range specification</a>
     </li>
     <li>
+      <a href="articles/articles/read-sheets.html">Read Sheets</a>
+    </li>
+    <li>
       <a href="articles/articles/write-sheets.html">Write Sheets</a>
     </li>
   </ul>
@@ -192,6 +195,7 @@
 <span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span></span>
 <span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span></span>
 <span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt; # … with 619 more rows</span></span></code></pre></div>
+<p>See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Find and Identify Sheets</a> for more about specifying the Sheet you want to address. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Read Sheets</a> for more about reading from specific sheets or ranges, setting column type, and getting low-level cell data.</p>
 </div>
 <div id="write" class="section level2">
 <h2 class="hasAnchor">
@@ -199,7 +203,7 @@
 <p><code><a href="reference/sheets_create.html">sheets_create()</a></code> creates a brand new (spread)Sheet and can optionally send some initial data.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>(ss &lt;-<span class="st"> </span><span class="kw"><a href="reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="dt">sheets =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">flowers =</span> <span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(iris))))</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;                 ID: 18rx-V15FzVM6BZtuV0HLmE7eBS7JbiDrR1BswMFcplE</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;                 ID: 1H1UhgVNfga5ix7MDrwOGE-kH2XLp41QMesxEdyihQ7I</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;             Locale: en_US</span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;        # of sheets: 1</span></span>
@@ -213,7 +217,7 @@
 <span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; Writing to sheet "autos"</span></span>
 <span id="cb6-5"><a href="#cb6-5"></a>ss</span>
 <span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;                 ID: 18rx-V15FzVM6BZtuV0HLmE7eBS7JbiDrR1BswMFcplE</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;                 ID: 1H1UhgVNfga5ix7MDrwOGE-kH2XLp41QMesxEdyihQ7I</span></span>
 <span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;             Locale: en_US</span></span>
 <span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
 <span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;        # of sheets: 2</span></span>
@@ -221,21 +225,20 @@
 <span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
 <span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt;      flowers: 7 x 5</span></span>
 <span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt;        autos: 7 x 11</span></span></code></pre></div>
-<p><code><a href="reference/sheets_edit.html">sheets_edit()</a></code> and <code><a href="reference/sheets_append.html">sheets_append()</a></code> are more writing functions that are useful in specific situations.</p>
+<p><code><a href="reference/sheets_edit.html">sheets_edit()</a></code> and <code><a href="reference/sheets_append.html">sheets_append()</a></code> are additional writing functions that are useful in specific situations. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> for more about writing to Sheets.</p>
 </div>
 <div id="where-to-learn-more" class="section level2">
 <h2 class="hasAnchor">
 <a href="#where-to-learn-more" class="anchor"></a>Where to learn more</h2>
-<p>Learn more about googlesheets4 by reading articles and function docs:</p>
 <ul>
-<li><a href="articles/googlesheets4.html">Get started</a></li>
-<li><a href="articles/articles/auth.html">googlesheets4 auth</a></li>
-<li><a href="articles/articles/find-identify-sheets.html">Find and Identify Sheets</a></li>
-<li><a href="articles/articles/write-sheets.html">Write Sheets</a></li>
-<li><a href="articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a></li>
-<li><a href="articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a></li>
-<li><a href="articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a></li>
-<li><a href="reference">All the functions</a></li>
+<li><a href="https://googlesheets4.tidyverse.org/articles/googlesheets4.html">Get started</a></li>
+<li><a href="https://googlesheets4.tidyverse.org/articles/articles/auth.html">googlesheets4 auth</a></li>
+<li><a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Find and Identify Sheets</a></li>
+<li><a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a></li>
+<li><a href="https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a></li>
+<li><a href="https://googlesheets4.tidyverse.org/articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a></li>
+<li><a href="https://googlesheets4.tidyverse.org/articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a></li>
+<li><a href="https://googlesheets4.tidyverse.org/reference/index.html">All the functions!</a></li>
 </ul>
 </div>
 <div id="contributing" class="section level2">

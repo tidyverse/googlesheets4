@@ -8,6 +8,7 @@ articles:
   fun-with-googledrive-and-readxl: articles/fun-with-googledrive-and-readxl.html
   googlesheets4-reprex: articles/googlesheets4-reprex.html
   range-specification: articles/range-specification.html
+  read-sheets: articles/read-sheets.html
   write-sheets: articles/write-sheets.html
   googlesheets4: googlesheets4.html
 urls:

@@ -115,6 +115,10 @@ googledrive::drive_get("gapminder") %>%
 #> # … with 619 more rows
 ```
 
+See the article [Find and Identify
+Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html)
+for more about specifying the Sheet you want to address.
+
 ## Write
 
 `sheets_create()` creates a brand new (spread)Sheet and can optionally
@@ -123,7 +127,7 @@ send some initial data.
 ``` r
 (ss <- sheets_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 18rx-V15FzVM6BZtuV0HLmE7eBS7JbiDrR1BswMFcplE
+#>                 ID: 1Kz3kgWrLhmuFzqqYYVKXCQVYIb53wnAR3WLYdB6-wKg
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -142,7 +146,7 @@ head(mtcars) %>%
 #> Writing to sheet "autos"
 ss
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 18rx-V15FzVM6BZtuV0HLmE7eBS7JbiDrR1BswMFcplE
+#>                 ID: 1Kz3kgWrLhmuFzqqYYVKXCQVYIb53wnAR3WLYdB6-wKg
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2
@@ -152,25 +156,29 @@ ss
 #>        autos: 7 x 11
 ```
 
-`sheets_edit()` and `sheets_append()` are more writing functions that
-are useful in specific situations.
+`sheets_edit()` and `sheets_append()` are additional writing functions
+that are useful in specific situations. See the article [Write
+Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html)
+for more about writing to Sheets.
 
 ## Where to learn more
 
-Learn more about googlesheets4 by reading articles and function docs:
-
-  - [Get started](articles/googlesheets4.html)
-  - [googlesheets4 auth](articles/articles/auth.html)
+  - [Get
+    started](https://googlesheets4.tidyverse.org/articles/googlesheets4.html)
+  - [googlesheets4
+    auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html)
   - [Find and Identify
-    Sheets](articles/articles/find-identify-sheets.html)
-  - [Write Sheets](articles/articles/write-sheets.html)
+    Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html)
+  - [Write
+    Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html)
   - [Using googlesheets4 with
-    googledrive](articles/articles/drive-and-sheets.html)
+    googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html)
   - [Fun with googledrive and
-    readxl](articles/articles/fun-with-googledrive-and-readxl.html)
+    readxl](https://googlesheets4.tidyverse.org/articles/articles/fun-with-googledrive-and-readxl.html)
   - [How to create a googlesheets4
-    reprex](articles/articles/googlesheets4-reprex.html)
-  - [All the functions](reference)
+    reprex](https://googlesheets4.tidyverse.org/articles/articles/googlesheets4-reprex.html)
+  - [All the
+    functions\!](https://googlesheets4.tidyverse.org/reference/index.html)
 
 ## Contributing
 

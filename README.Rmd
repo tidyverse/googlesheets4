@@ -83,6 +83,8 @@ googledrive::drive_get("gapminder") %>%
   sheets_read()
 ```
 
+See the article [Find and Identify Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html) for more about specifying the Sheet you want to address.
+
 ## Write
 
 `sheets_create()` creates a brand new (spread)Sheet and can optionally send some initial data.
@@ -99,7 +101,7 @@ head(mtcars) %>%
 ss
 ```
 
-`sheets_edit()` and `sheets_append()` are more writing functions that are useful in specific situations.
+`sheets_edit()` and `sheets_append()` are additional writing functions that are useful in specific situations. See the article [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html) for more about writing to Sheets.
 
 ```{r include = FALSE}
 googledrive::drive_rm(ss)
@@ -107,16 +109,14 @@ googledrive::drive_rm(ss)
 
 ## Where to learn more
 
-Learn more about googlesheets4 by reading articles and function docs:
-
-  * [Get started](articles/googlesheets4.html)
-  * [googlesheets4 auth](articles/articles/auth.html)
-  * [Find and Identify Sheets](articles/articles/find-identify-sheets.html)
-  * [Write Sheets](articles/articles/write-sheets.html)
-  * [Using googlesheets4 with googledrive](articles/articles/drive-and-sheets.html)
-  * [Fun with googledrive and readxl](articles/articles/fun-with-googledrive-and-readxl.html)
-  * [How to create a googlesheets4 reprex](articles/articles/googlesheets4-reprex.html)
-  * [All the functions](reference)
+  * [Get started](https://googlesheets4.tidyverse.org/articles/googlesheets4.html)
+  * [googlesheets4 auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html)
+  * [Find and Identify Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html)
+  * [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html)
+  * [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html)
+  * [Fun with googledrive and readxl](https://googlesheets4.tidyverse.org/articles/articles/fun-with-googledrive-and-readxl.html)
+  * [How to create a googlesheets4 reprex](https://googlesheets4.tidyverse.org/articles/articles/googlesheets4-reprex.html)
+  * [All the functions!](https://googlesheets4.tidyverse.org/reference/index.html)
 
 ## Contributing
 

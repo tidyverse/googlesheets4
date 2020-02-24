@@ -26,6 +26,9 @@ googlesheets4:::sheets_auth_docs()
 library(googlesheets4)
 ```
 
+This article takes a quick tour of the main features of googlesheets4. 
+Remember to see [the articles](https://googlesheets4.tidyverse.org/articles/index.html) for more detailed treatment of all these topics and more.
+
 ## `read_sheet()`, a.k.a. `sheets_read()`
 
 `read_sheet()` is the main "read" function and should evoke `readr::read_csv()` and `readxl::read_excel()`. It's an alias for `sheets_read()`, because most functions in googlesheets4 actually start with `sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`), but works just fine without the pipe.
@@ -55,7 +58,7 @@ drive_get("gapminder") %>%
 
 Note that the name-based approach above will only work if **you** have access to a Sheet named "gapminder". Sheet names cannot be used as absolute identifiers; only a Sheet ID can play that role.
 
-For more Sheet identification concepts and strategies, see the article [Find and Identify Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html). See the article [Read Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html) for more about reading from specific sheets or ranges, setting column type, and getting low-level cell data.
+For more Sheet identification concepts and strategies, see the article [Find and Identify Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html). See the article [Read Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html) for more about reading from a specific (work)sheet or ranges, setting column type, and getting low-level cell data.
 
 ## Example Sheets and `sheets_browse()`
 
@@ -92,9 +95,11 @@ sheets_sheet_properties(ss)
 sheets_sheet_names(ss)
 ```
 
-`sheets_sheet_properties()` and `sheets_sheet_names()` are two members of a family of functions for dealing with the (work)sheets within a (spread)Sheet.
+`sheets_sheet_properties()` and `sheets_sheet_names()` are two members of a larger family of functions for dealing with the (work)sheets within a (spread)Sheet.
 
 The metadata exposed by `sheets_get()` is also revealed whenever you print an object that is known to be a `sheets_id` (an S3 class we use to make Sheet IDs).
+
+`sheets_get()` is related to `googledrive::drive_get()`. Both functions return metadata about a file on Google Drive, such as its ID and name. However, `sheets_get()` reveals additional metadata that is specific to Drive files that happen to be Sheets, such as info about worksheets and named ranges.
 
 ## Writing Sheets
 
@@ -114,28 +119,34 @@ You'll notice the new (spread)Sheet has a randomly generated name. If that is a 
 Let's start over: we delete that Sheet and call `sheets_create()`, so we can specify the new Sheet's name.
 
 ```{r}
-drive_rm(ss)
+googledrive::drive_rm(ss)
 
 ss <- sheets_create("fluffy-bunny", sheets = df)
+ss
 ```
 
 `sheets_write()` can write to new or existing (work)sheets in this Sheet. Let's write the `chickwts` data to a new sheet in `ss`.
 
 ```{r}
 sheets_write(chickwts, ss)
+ss
 ```
 
 We can also use `sheets_write()` to replace the data in an existing sheet.
 
 ```{r}
 sheets_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
+ss
 ```
 
 `sheets_append()` adds one or more rows to an existing sheet.
 
 ```{r}
 sheets_append(data.frame(x = 11, letters[11]), ss, sheet = "df")
+ss
 ```
+
+`sheets_edit()` makes it possible to write arbitrary data, into an arbitrary range. It has a very different "feel" from `sheets_create()`, `sheets_write()`, and `sheets_append()`, all of which assume we're writing or growing a table of data in a (work)sheet. `sheets_edit()` make fewer assumptions about what it's writing and why.
 
 There is also a family of `sheets_sheet_*()` functions that do pure (work)sheet operations, such as add and delete.
 
@@ -144,13 +155,7 @@ We take one last look at the sheets we created in `ss`, then clean up.
 ```{r}
 sheets_sheet_properties(ss)
 
-drive_rm(ss)
+googledrive::drive_rm(ss)
 ```
 
-*Exists but is not demonstrated here yet `sheets_edit()`, for writing into an arbitrary range.*
-
-See also the article [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html).
-
-## Where to learn more
-
-Remember to see [the articles](https://googlesheets4.tidyverse.org/articles/index.html) for more detailed treatment of various topics.
+The article [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html) has even more detail.

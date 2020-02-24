@@ -292,26 +292,26 @@
 <p>What if you want to see all of your Sheets? Or all the Sheets with “gap” in their name?</p>
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="dt">type =</span> <span class="st">"spreadsheet"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="co">#&gt; # A tibble: 11 x 3</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co">#&gt; # A tibble: 12 x 3</span></span>
 <span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt;   name                id                                        drive_resource  </span></span>
 <span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt; * &lt;chr&gt;               &lt;chr&gt;                                     &lt;list&gt;          </span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt; 1 sisterlike-waterdo… 1pTJIhOn9fb75dXgYJ2RKro4DEALWBsbqE2J70ub… &lt;named list [34…</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="co">#&gt; 2 fluffy-bunny        1dY4O2yAFOaTQONMcGyODczAedQ6tXR2sN2IfM-X… &lt;named list [34…</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="co">#&gt; 3 hyacinth-chafer     1Ok8G8hmPpzukVvBqLXENgy9ldDTgQDq9O5bjxwT… &lt;named list [34…</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="co">#&gt; 4 fatfaced-clingfish  1PFGAc-4OI2rr8JOh53KXq_FBKSrFU147ToyoiMV… &lt;named list [34…</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="co">#&gt; 5 fraternal-xenurine  1nQek_3szZ5G0KJInBF6S4XtMErfu60lkJukwpif… &lt;named list [34…</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a><span class="co">#&gt; # … with 6 more rows</span></span></code></pre></div>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt; 1 fatfaced-malamute   19-ATUyhXtmtDfmc7JEy1tRnj5ztBRZ0rafFG7J-… &lt;named list [34…</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co">#&gt; 2 sisterlike-waterdo… 1pTJIhOn9fb75dXgYJ2RKro4DEALWBsbqE2J70ub… &lt;named list [34…</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">#&gt; 3 fluffy-bunny        1dY4O2yAFOaTQONMcGyODczAedQ6tXR2sN2IfM-X… &lt;named list [34…</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co">#&gt; 4 hyacinth-chafer     1Ok8G8hmPpzukVvBqLXENgy9ldDTgQDq9O5bjxwT… &lt;named list [34…</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co">#&gt; 5 fatfaced-clingfish  1PFGAc-4OI2rr8JOh53KXq_FBKSrFU147ToyoiMV… &lt;named list [34…</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="co">#&gt; # … with 7 more rows</span></span></code></pre></div>
 <p>This is so handy that we’ve made <code><a href="../../reference/sheets_find.html">sheets_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw"><a href="../../reference/sheets_find.html">sheets_find</a></span>()</span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="co">#&gt; # A tibble: 11 x 3</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="co">#&gt; # A tibble: 12 x 3</span></span>
 <span id="cb15-3"><a href="#cb15-3"></a><span class="co">#&gt;   name                id                                        drive_resource  </span></span>
 <span id="cb15-4"><a href="#cb15-4"></a><span class="co">#&gt; * &lt;chr&gt;               &lt;chr&gt;                                     &lt;list&gt;          </span></span>
-<span id="cb15-5"><a href="#cb15-5"></a><span class="co">#&gt; 1 sisterlike-waterdo… 1pTJIhOn9fb75dXgYJ2RKro4DEALWBsbqE2J70ub… &lt;named list [34…</span></span>
-<span id="cb15-6"><a href="#cb15-6"></a><span class="co">#&gt; 2 fluffy-bunny        1dY4O2yAFOaTQONMcGyODczAedQ6tXR2sN2IfM-X… &lt;named list [34…</span></span>
-<span id="cb15-7"><a href="#cb15-7"></a><span class="co">#&gt; 3 hyacinth-chafer     1Ok8G8hmPpzukVvBqLXENgy9ldDTgQDq9O5bjxwT… &lt;named list [34…</span></span>
-<span id="cb15-8"><a href="#cb15-8"></a><span class="co">#&gt; 4 fatfaced-clingfish  1PFGAc-4OI2rr8JOh53KXq_FBKSrFU147ToyoiMV… &lt;named list [34…</span></span>
-<span id="cb15-9"><a href="#cb15-9"></a><span class="co">#&gt; 5 fraternal-xenurine  1nQek_3szZ5G0KJInBF6S4XtMErfu60lkJukwpif… &lt;named list [34…</span></span>
-<span id="cb15-10"><a href="#cb15-10"></a><span class="co">#&gt; # … with 6 more rows</span></span></code></pre></div>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="co">#&gt; 1 fatfaced-malamute   19-ATUyhXtmtDfmc7JEy1tRnj5ztBRZ0rafFG7J-… &lt;named list [34…</span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="co">#&gt; 2 sisterlike-waterdo… 1pTJIhOn9fb75dXgYJ2RKro4DEALWBsbqE2J70ub… &lt;named list [34…</span></span>
+<span id="cb15-7"><a href="#cb15-7"></a><span class="co">#&gt; 3 fluffy-bunny        1dY4O2yAFOaTQONMcGyODczAedQ6tXR2sN2IfM-X… &lt;named list [34…</span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="co">#&gt; 4 hyacinth-chafer     1Ok8G8hmPpzukVvBqLXENgy9ldDTgQDq9O5bjxwT… &lt;named list [34…</span></span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="co">#&gt; 5 fatfaced-clingfish  1PFGAc-4OI2rr8JOh53KXq_FBKSrFU147ToyoiMV… &lt;named list [34…</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="co">#&gt; # … with 7 more rows</span></span></code></pre></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/sheets_find.html">sheets_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </div>

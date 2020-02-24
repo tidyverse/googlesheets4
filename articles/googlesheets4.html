@@ -245,8 +245,8 @@
 <span id="cb8-2"><a href="#cb8-2"></a></span>
 <span id="cb8-3"><a href="#cb8-3"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="../reference/write_sheet.html">sheets_write</a></span>(df)</span>
 <span id="cb8-4"><a href="#cb8-4"></a>ss</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;   Spreadsheet name: changeful-foxterrier</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;                 ID: 1m0Ig8T8Ej1BiZDyUrR7AgbPlnvCMQNwc4NTnnTPJ8ZU</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;   Spreadsheet name: beggarly-seaslug</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;                 ID: 1BYBz3PDWekqrsoySH-O530yVI5NlWBz9ZnHZRyHQEBg</span></span>
 <span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
 <span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
 <span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt;        # of sheets: 1</span></span>
@@ -257,7 +257,7 @@
 <p>Let’s start over: we delete that Sheet and call <code><a href="../reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;   * changeful-foxterrier: 1m0Ig8T8Ej1BiZDyUrR7AgbPlnvCMQNwc4NTnnTPJ8ZU</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;   * beggarly-seaslug: 1BYBz3PDWekqrsoySH-O530yVI5NlWBz9ZnHZRyHQEBg</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a></span>
 <span id="cb9-5"><a href="#cb9-5"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="dt">sheets =</span> df)</span></code></pre></div>
 <p><code><a href="../reference/write_sheet.html">sheets_write()</a></code> can write to new or existing (work)sheets in this Sheet. Let’s write the <code>chickwts</code> data to a new sheet in <code>ss</code>.</p>
@@ -278,12 +278,12 @@
 <span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; # A tibble: 2 x 8</span></span>
 <span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span></span>
 <span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt; 1 df           0 1660423787 GRID  TRUE            9            2 &lt;NULL&gt;</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt; 2 chickwts     1  822139507 GRID  TRUE           72            2 &lt;NULL&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt; 1 df           0 1687836334 GRID  TRUE            9            2 &lt;NULL&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt; 2 chickwts     1  660008551 GRID  TRUE           72            2 &lt;NULL&gt;</span></span>
 <span id="cb13-7"><a href="#cb13-7"></a></span>
 <span id="cb13-8"><a href="#cb13-8"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
 <span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt;   * fluffy-bunny: 1I6DnWr0KvkvMw-DyFe7tlidPEe9_Zp6XHIVK1KqYi2g</span></span></code></pre></div>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt;   * fluffy-bunny: 1O-nnrgFFtw4F82NOK3X7AxwWhxv84Nssck8LXdTq7MY</span></span></code></pre></div>
 <p><em>Exists but is not demonstrated here yet <code><a href="../reference/sheets_edit.html">sheets_edit()</a></code>, for writing into an arbitrary range.</em></p>
 <p>See also the article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a>.</p>
 </div>

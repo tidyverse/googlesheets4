@@ -245,8 +245,8 @@
 <span id="cb8-2"><a href="#cb8-2"></a></span>
 <span id="cb8-3"><a href="#cb8-3"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="../reference/write_sheet.html">sheets_write</a></span>(df)</span>
 <span id="cb8-4"><a href="#cb8-4"></a>ss</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;   Spreadsheet name: beggarly-seaslug</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;                 ID: 1BYBz3PDWekqrsoySH-O530yVI5NlWBz9ZnHZRyHQEBg</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;   Spreadsheet name: floral-ocelot</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;                 ID: 1gL6DxZ78d7Sn2k4Ax1PLcPCYgHKEsgDVXofiuaYEuJ0</span></span>
 <span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
 <span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
 <span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt;        # of sheets: 1</span></span>
@@ -257,33 +257,41 @@
 <p>Let’s start over: we delete that Sheet and call <code><a href="../reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;   * beggarly-seaslug: 1BYBz3PDWekqrsoySH-O530yVI5NlWBz9ZnHZRyHQEBg</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;   * floral-ocelot: 1gL6DxZ78d7Sn2k4Ax1PLcPCYgHKEsgDVXofiuaYEuJ0</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a></span>
-<span id="cb9-5"><a href="#cb9-5"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="dt">sheets =</span> df)</span></code></pre></div>
+<span id="cb9-5"><a href="#cb9-5"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="dt">sheets =</span> df)</span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; Error: Server error: (500) INTERNAL</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt;   * Internal server error. Typically a server bug.</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;   * Internal error encountered.</span></span></code></pre></div>
 <p><code><a href="../reference/write_sheet.html">sheets_write()</a></code> can write to new or existing (work)sheets in this Sheet. Let’s write the <code>chickwts</code> data to a new sheet in <code>ss</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="../reference/write_sheet.html">sheets_write</a></span>(chickwts, ss)</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; Writing to "fluffy-bunny"</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; Writing to sheet "chickwts"</span></span></code></pre></div>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; Error: Client error: (404) NOT_FOUND</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt;   * A specified resource is not found, or the request is rejected by undisclosed reasons, such as whitelisting.</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt;   * Requested entity was not found.</span></span></code></pre></div>
 <p>We can also use <code><a href="../reference/write_sheet.html">sheets_write()</a></code> to replace the data in an existing sheet.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw"><a href="../reference/write_sheet.html">sheets_write</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">10</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">10</span>]), ss, <span class="dt">sheet =</span> <span class="st">"df"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; Writing to "fluffy-bunny"</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; Writing to sheet "df"</span></span></code></pre></div>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; Error: Client error: (404) NOT_FOUND</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt;   * A specified resource is not found, or the request is rejected by undisclosed reasons, such as whitelisting.</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt;   * Requested entity was not found.</span></span></code></pre></div>
 <p><code><a href="../reference/sheets_append.html">sheets_append()</a></code> adds one or more rows to an existing sheet.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="../reference/sheets_append.html">sheets_append</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">11</span>, letters[<span class="dv">11</span>]), ss, <span class="dt">sheet =</span> <span class="st">"df"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt; Writing to "fluffy-bunny"</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; Appending 1 row(s) to "df"</span></span></code></pre></div>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt; Error: Client error: (404) NOT_FOUND</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt;   * A specified resource is not found, or the request is rejected by undisclosed reasons, such as whitelisting.</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt;   * Requested entity was not found.</span></span></code></pre></div>
 <p>There is also a family of <code>sheets_sheet_*()</code> functions that do pure (work)sheet operations, such as add and delete.</p>
 <p>We take one last look at the sheets we created in <code>ss</code>, then clean up.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw"><a href="../reference/sheets_sheet_properties.html">sheets_sheet_properties</a></span>(ss)</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; # A tibble: 2 x 8</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt; 1 df           0 1687836334 GRID  TRUE            9            2 &lt;NULL&gt;</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt; 2 chickwts     1  660008551 GRID  TRUE           72            2 &lt;NULL&gt;</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
-<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt;   * fluffy-bunny: 1O-nnrgFFtw4F82NOK3X7AxwWhxv84Nssck8LXdTq7MY</span></span></code></pre></div>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; Error: Client error: (404) NOT_FOUND</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt;   * A specified resource is not found, or the request is rejected by undisclosed reasons, such as whitelisting.</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt;   * Requested entity was not found.</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
+<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt; Error: Client error: (404) Not Found</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt;   *       domain: global</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt;   *       reason: notFound</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt;   *      message: File not found: 1gL6DxZ78d7Sn2k4Ax1PLcPCYgHKEsgDVXofiuaYEuJ0.</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="co">#&gt;   * locationType: parameter</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="co">#&gt;   *     location: fileId</span></span></code></pre></div>
 <p><em>Exists but is not demonstrated here yet <code><a href="../reference/sheets_edit.html">sheets_edit()</a></code>, for writing into an arbitrary range.</em></p>
 <p>See also the article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a>.</p>
 </div>

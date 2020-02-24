@@ -83,7 +83,7 @@ googledrive::drive_get("gapminder") %>%
   sheets_read()
 ```
 
-See the article [Find and Identify Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html) for more about specifying the Sheet you want to address.
+See the article [Find and Identify Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html) for more about specifying the Sheet you want to address. See the article [Read Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html) for more about reading from specific sheets or ranges, setting column type, and getting low-level cell data.
 
 ## Write
 

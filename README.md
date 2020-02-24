@@ -117,7 +117,11 @@ googledrive::drive_get("gapminder") %>%
 
 See the article [Find and Identify
 Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html)
-for more about specifying the Sheet you want to address.
+for more about specifying the Sheet you want to address. See the article
+[Read
+Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html)
+for more about reading from specific sheets or ranges, setting column
+type, and getting low-level cell data.
 
 ## Write
 
@@ -127,7 +131,7 @@ send some initial data.
 ``` r
 (ss <- sheets_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1Kz3kgWrLhmuFzqqYYVKXCQVYIb53wnAR3WLYdB6-wKg
+#>                 ID: 1H1UhgVNfga5ix7MDrwOGE-kH2XLp41QMesxEdyihQ7I
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -146,7 +150,7 @@ head(mtcars) %>%
 #> Writing to sheet "autos"
 ss
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1Kz3kgWrLhmuFzqqYYVKXCQVYIb53wnAR3WLYdB6-wKg
+#>                 ID: 1H1UhgVNfga5ix7MDrwOGE-kH2XLp41QMesxEdyihQ7I
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2

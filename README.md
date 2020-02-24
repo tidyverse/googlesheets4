@@ -46,9 +46,8 @@ devtools::install_github("tidyverse/googlesheets4")
 ## Auth
 
 googlesheets4 will, by default, help you interact with Sheets as an
-authenticated Google user. The package facilitates this process upon
-first need. If you don’t need to access private Sheets, use
-`sheets_deauth()` to indicate there is no need for a token. See the
+authenticated Google user. If you don’t need to access private Sheets,
+use `sheets_deauth()` to indicate there is no need for a token. See the
 article [googlesheets4
 auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html)
 for more.
@@ -70,8 +69,9 @@ library(googlesheets4)
 with `sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`),
 but works just fine without the pipe.
 
-Read from a URL, a Sheet ID, or a googledrive-produced `dribble`. These
-all achieve the same thing:
+Read from a URL, a Sheet ID, or a
+[`dribble`](https://googledrive.tidyverse.org/reference/dribble.html)
+produced by the googledrive package. These all achieve the same thing:
 
 ``` r
 read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077")
@@ -131,7 +131,7 @@ send some initial data.
 ``` r
 (ss <- sheets_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1Pv0BpZuMqAzd0mli-WVH0MjWjvCkBcWqVaQpVKKJs2k
+#>                 ID: 1Gl1dCldb7VWKE0B-p5RrhZfPRvZklkSNnln4nWpr5CA
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -150,7 +150,7 @@ head(mtcars) %>%
 #> Writing to sheet "autos"
 ss
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1Pv0BpZuMqAzd0mli-WVH0MjWjvCkBcWqVaQpVKKJs2k
+#>                 ID: 1Gl1dCldb7VWKE0B-p5RrhZfPRvZklkSNnln4nWpr5CA
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2

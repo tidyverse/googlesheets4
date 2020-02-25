@@ -163,14 +163,14 @@
 <span id="cb3-7"><a href="#cb3-7"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"chicken-sheet"</span>)</span>
 <span id="cb3-8"><a href="#cb3-8"></a></span>
 <span id="cb3-9"><a href="#cb3-9"></a><span class="kw"><a href="../../reference/sheets_get.html">sheets_get</a></span>(ss)</span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; </span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; Error details:</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt;   Spreadsheet name: chicken-sheet</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt;                 ID: 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt;          Time zone: America/Los_Angeles</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt;        # of sheets: 1</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; </span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt;  chicken.csv: 1000 x 26</span></span>
 <span id="cb3-18"><a href="#cb3-18"></a></span>
 <span id="cb3-19"><a href="#cb3-19"></a><span class="kw"><a href="../../reference/read_sheet.html">read_sheet</a></span>(ss)</span>
 <span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; Reading from "chicken-sheet"</span></span>

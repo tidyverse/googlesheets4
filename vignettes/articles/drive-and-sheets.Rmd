@@ -146,7 +146,7 @@ PACKAGE_auth(
 )
 ```
 
-`drive.readonly` still allows file identification via Drive and can be combined with `spreadsheets` if you plan to edit, create, or delete Sheets (not explicitly supported yet in googlesheets4, but it will be).
+`drive.readonly` still allows file identification via Drive and can be combined with `spreadsheets` if you plan to edit, create, or delete Sheets.
 
 ```{r eval = FALSE}
 PACKAGE_auth(

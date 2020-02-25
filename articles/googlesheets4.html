@@ -192,14 +192,14 @@
 <span id="cb5-2"><a href="#cb5-2"></a><span class="st">  </span><span class="kw"><a href="../reference/read_sheet.html">sheets_read</a></span>()</span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; Reading from "chicken-sheet"</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; Range "chicken.csv"</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; </span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; Error details:</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></span></code></pre></div>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; # A tibble: 5 x 4</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;   chicken            breed         sex    motto                                 </span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                                 </span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; 2 Chicken Little     unknown       hen    The sky is falling!                   </span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt; 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt; 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  </span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.</span></span></code></pre></div>
 <p>If you’d like to see a Sheet in the browser, including our example Sheets, use <code><a href="../reference/sheets_browse.html">sheets_browse()</a></code>:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="op">%&gt;%</span></span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw"><a href="../reference/sheets_browse.html">sheets_browse</a></span>()</span></code></pre></div>
@@ -247,138 +247,85 @@
 <span id="cb8-2"><a href="#cb8-2"></a></span>
 <span id="cb8-3"><a href="#cb8-3"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="../reference/write_sheet.html">sheets_write</a></span>(df)</span>
 <span id="cb8-4"><a href="#cb8-4"></a>ss</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;   Spreadsheet name: &lt;unknown&gt;</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;                 ID: 1TOL85KnWpZS-r1OpYGK0psFUeITSac9C4xPNwwi7mmQ</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;             Locale: &lt;unknown&gt;</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;          Time zone: &lt;unknown&gt;</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt;        # of sheets: &lt;unknown&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;   Spreadsheet name: youthful-minibeast</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;                 ID: 1fC5Yyipb9VOfG2dScMogdxlY_-kMQA05G6OjoWxDhnk</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt;        # of sheets: 1</span></span>
 <span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; </span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; Unable to get metadata for this Sheet. Error details:</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; Client error: (429) RESOURCE_EXHAUSTED</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; </span></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt; Error details:</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span></span>
-<span id="cb8-19"><a href="#cb8-19"></a><span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></span></code></pre></div>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt;           df: 4 x 2</span></span></code></pre></div>
 <p>You’ll notice the new (spread)Sheet has a randomly generated name. If that is a problem, use <code><a href="../reference/sheets_create.html">sheets_create()</a></code> instead, which affords more control over various aspects of the new Sheet.</p>
 <p>Let’s start over: we delete that Sheet and call <code><a href="../reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;   * above-salamander: 1TOL85KnWpZS-r1OpYGK0psFUeITSac9C4xPNwwi7mmQ</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;   * youthful-minibeast: 1fC5Yyipb9VOfG2dScMogdxlY_-kMQA05G6OjoWxDhnk</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a></span>
 <span id="cb9-5"><a href="#cb9-5"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="dt">sheets =</span> df)</span>
 <span id="cb9-6"><a href="#cb9-6"></a>ss</span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt;   Spreadsheet name: &lt;unknown&gt;</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;                 ID: 1wKG1y7e9B4KcplFfEtjl6iYqOGeiGoHdiciDZXx0aUk</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;             Locale: &lt;unknown&gt;</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;          Time zone: &lt;unknown&gt;</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;        # of sheets: &lt;unknown&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;                 ID: 1r56hhKQdY1DnsKBHUmnr_a7BvRQtw119R3dr_lHm5Ww</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;        # of sheets: 1</span></span>
 <span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt; </span></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt; Unable to get metadata for this Sheet. Error details:</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; Client error: (429) RESOURCE_EXHAUSTED</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="co">#&gt; </span></span>
-<span id="cb9-18"><a href="#cb9-18"></a><span class="co">#&gt; Error details:</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a><span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span></span>
-<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></span></code></pre></div>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt;           df: 4 x 2</span></span></code></pre></div>
 <p><code><a href="../reference/write_sheet.html">sheets_write()</a></code> can write to new or existing (work)sheets in this Sheet. Let’s write the <code>chickwts</code> data to a new sheet in <code>ss</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="../reference/write_sheet.html">sheets_write</a></span>(chickwts, ss)</span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; </span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; Error details:</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a>ss</span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt;   Spreadsheet name: &lt;unknown&gt;</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt;                 ID: 1wKG1y7e9B4KcplFfEtjl6iYqOGeiGoHdiciDZXx0aUk</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt;             Locale: &lt;unknown&gt;</span></span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt;          Time zone: &lt;unknown&gt;</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt;        # of sheets: &lt;unknown&gt;</span></span>
-<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; </span></span>
-<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; Unable to get metadata for this Sheet. Error details:</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt; Client error: (429) RESOURCE_EXHAUSTED</span></span>
-<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span></span>
-<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span></span>
-<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt; </span></span>
-<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#&gt; Error details:</span></span>
-<span id="cb10-23"><a href="#cb10-23"></a><span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span></span>
-<span id="cb10-24"><a href="#cb10-24"></a><span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span></span>
-<span id="cb10-25"><a href="#cb10-25"></a><span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></span></code></pre></div>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">#&gt; Writing to "fluffy-bunny"</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; Writing to sheet "chickwts"</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a>ss</span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt;                 ID: 1r56hhKQdY1DnsKBHUmnr_a7BvRQtw119R3dr_lHm5Ww</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt;        # of sheets: 2</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; </span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt;           df: 4 x 2</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt;     chickwts: 72 x 2</span></span></code></pre></div>
 <p>We can also use <code><a href="../reference/write_sheet.html">sheets_write()</a></code> to replace the data in an existing sheet.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw"><a href="../reference/write_sheet.html">sheets_write</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">4</span><span class="op">:</span><span class="dv">10</span>, letters[<span class="dv">4</span><span class="op">:</span><span class="dv">10</span>]), ss, <span class="dt">sheet =</span> <span class="st">"df"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span></span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt; </span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt; Error details:</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a>ss</span>
-<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt;   Spreadsheet name: &lt;unknown&gt;</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt;                 ID: 1wKG1y7e9B4KcplFfEtjl6iYqOGeiGoHdiciDZXx0aUk</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt;             Locale: &lt;unknown&gt;</span></span>
-<span id="cb11-14"><a href="#cb11-14"></a><span class="co">#&gt;          Time zone: &lt;unknown&gt;</span></span>
-<span id="cb11-15"><a href="#cb11-15"></a><span class="co">#&gt;        # of sheets: &lt;unknown&gt;</span></span>
-<span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; </span></span>
-<span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; Unable to get metadata for this Sheet. Error details:</span></span>
-<span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt; Client error: (429) RESOURCE_EXHAUSTED</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span></span>
-<span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span></span>
-<span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt; </span></span>
-<span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt; Error details:</span></span>
-<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span></span>
-<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span></span>
-<span id="cb11-25"><a href="#cb11-25"></a><span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></span></code></pre></div>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co">#&gt; Writing to "fluffy-bunny"</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; Writing to sheet "df"</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>ss</span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt;                 ID: 1r56hhKQdY1DnsKBHUmnr_a7BvRQtw119R3dr_lHm5Ww</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt;        # of sheets: 2</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt; </span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt;           df: 8 x 2</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt;     chickwts: 72 x 2</span></span></code></pre></div>
 <p><code><a href="../reference/sheets_append.html">sheets_append()</a></code> adds one or more rows to an existing sheet.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="../reference/sheets_append.html">sheets_append</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">x =</span> <span class="dv">11</span>, letters[<span class="dv">11</span>]), ss, <span class="dt">sheet =</span> <span class="st">"df"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt; </span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt; Error details:</span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></span>
-<span id="cb12-10"><a href="#cb12-10"></a>ss</span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="co">#&gt;   Spreadsheet name: &lt;unknown&gt;</span></span>
-<span id="cb12-12"><a href="#cb12-12"></a><span class="co">#&gt;                 ID: 1wKG1y7e9B4KcplFfEtjl6iYqOGeiGoHdiciDZXx0aUk</span></span>
-<span id="cb12-13"><a href="#cb12-13"></a><span class="co">#&gt;             Locale: &lt;unknown&gt;</span></span>
-<span id="cb12-14"><a href="#cb12-14"></a><span class="co">#&gt;          Time zone: &lt;unknown&gt;</span></span>
-<span id="cb12-15"><a href="#cb12-15"></a><span class="co">#&gt;        # of sheets: &lt;unknown&gt;</span></span>
-<span id="cb12-16"><a href="#cb12-16"></a><span class="co">#&gt; </span></span>
-<span id="cb12-17"><a href="#cb12-17"></a><span class="co">#&gt; Unable to get metadata for this Sheet. Error details:</span></span>
-<span id="cb12-18"><a href="#cb12-18"></a><span class="co">#&gt; Client error: (429) RESOURCE_EXHAUSTED</span></span>
-<span id="cb12-19"><a href="#cb12-19"></a><span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span></span>
-<span id="cb12-20"><a href="#cb12-20"></a><span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span></span>
-<span id="cb12-21"><a href="#cb12-21"></a><span class="co">#&gt; </span></span>
-<span id="cb12-22"><a href="#cb12-22"></a><span class="co">#&gt; Error details:</span></span>
-<span id="cb12-23"><a href="#cb12-23"></a><span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span></span>
-<span id="cb12-24"><a href="#cb12-24"></a><span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span></span>
-<span id="cb12-25"><a href="#cb12-25"></a><span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></span></code></pre></div>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt; Writing to "fluffy-bunny"</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; Appending 1 row(s) to "df"</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>ss</span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt;                 ID: 1r56hhKQdY1DnsKBHUmnr_a7BvRQtw119R3dr_lHm5Ww</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt;        # of sheets: 2</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co">#&gt; </span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="co">#&gt;           df: 9 x 2</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co">#&gt;     chickwts: 72 x 2</span></span></code></pre></div>
 <p><code><a href="../reference/sheets_edit.html">sheets_edit()</a></code> makes it possible to write arbitrary data, into an arbitrary range. It has a very different “feel” from <code><a href="../reference/sheets_create.html">sheets_create()</a></code>, <code><a href="../reference/write_sheet.html">sheets_write()</a></code>, and <code><a href="../reference/sheets_append.html">sheets_append()</a></code>, all of which assume we’re writing or growing a table of data in a (work)sheet. <code><a href="../reference/sheets_edit.html">sheets_edit()</a></code> make fewer assumptions about what it’s writing and why.</p>
 <p>There is also a family of <code>sheets_sheet_*()</code> functions that do pure (work)sheet operations, such as add and delete.</p>
 <p>We take one last look at the sheets we created in <code>ss</code>, then clean up.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw"><a href="../reference/sheets_sheet_properties.html">sheets_sheet_properties</a></span>(ss)</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt; </span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt; Error details:</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a></span>
-<span id="cb13-11"><a href="#cb13-11"></a>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
-<span id="cb13-12"><a href="#cb13-12"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb13-13"><a href="#cb13-13"></a><span class="co">#&gt;   * fluffy-bunny: 1wKG1y7e9B4KcplFfEtjl6iYqOGeiGoHdiciDZXx0aUk</span></span></code></pre></div>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; # A tibble: 2 x 8</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt;   name     index        id type  visible grid_rows grid_columns data  </span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt; 1 df           0 432910649 GRID  TRUE            9            2 &lt;NULL&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt; 2 chickwts     1 795256574 GRID  TRUE           72            2 &lt;NULL&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a></span>
+<span id="cb13-8"><a href="#cb13-8"></a>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt; Files deleted:</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt;   * fluffy-bunny: 1r56hhKQdY1DnsKBHUmnr_a7BvRQtw119R3dr_lHm5Ww</span></span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

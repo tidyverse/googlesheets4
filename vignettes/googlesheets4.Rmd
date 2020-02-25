@@ -1,5 +1,5 @@
 ---
-output: github_document
+title: "Get started with googlesheets4"
 ---
 
 ```{r setup, include = FALSE}

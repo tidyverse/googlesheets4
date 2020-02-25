@@ -255,7 +255,7 @@ sheets_find("sheets-append-demo") %>%
 
 We focus here on the geometry of `sheets_edit()`, i.e. which cells are edited.
 
-In a hidden chunk, we've created a demo Sheet `ss_edit` and we've filled the cells with "-". We've also created `read_this()`, a wrapper around `sheets_read()` that sets `col_names = FALSE` and names columns by letter.
+In a hidden chunk, we've created a demo Sheet `ss_edit` and we've filled the cells with "-". We've also created `read_this()`, a wrapper around `sheets_read()` that names columns by letter, like spreadsheets do.
 
 ```{r include = FALSE}
 library(tidyverse)

@@ -143,7 +143,7 @@
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
 <a href="#auth" class="anchor"></a>Auth</h2>
-<p>googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need. If you don’t need to access private Sheets, use <code><a href="reference/sheets_deauth.html">sheets_deauth()</a></code> to indicate there is no need for a token. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/auth.html">googlesheets4 auth</a> for more.</p>
+<p>googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. If you don’t need to access private Sheets, use <code><a href="reference/sheets_deauth.html">sheets_deauth()</a></code> to indicate there is no need for a token. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/auth.html">googlesheets4 auth</a> for more.</p>
 <p>For this overview, we’ve logged into Google as a specific user in a hidden chunk.</p>
 </div>
 <div id="attach-googlesheets4" class="section level2">
@@ -155,7 +155,7 @@
 <h2 class="hasAnchor">
 <a href="#read" class="anchor"></a>Read</h2>
 <p><code><a href="reference/read_sheet.html">read_sheet()</a></code> is the main “read” function and should evoke <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> and <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">readxl::read_excel()</a></code>. It’s an alias for <code><a href="reference/read_sheet.html">sheets_read()</a></code>, because most functions in googlesheets4 actually start with <code>sheets_</code>. googlesheets4 is pipe-friendly (and reexports <code><a href="reference/pipe.html">%&gt;%</a></code>), but works just fine without the pipe.</p>
-<p>Read from a URL, a Sheet ID, or a googledrive-produced <code>dribble</code>. These all achieve the same thing:</p>
+<p>Read from a URL, a Sheet ID, or a <a href="https://googledrive.tidyverse.org/reference/dribble.html"><code>dribble</code></a> produced by the googledrive package. These all achieve the same thing:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="reference/read_sheet.html">read_sheet</a></span>(<span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Reading from "gapminder"</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Range "Africa"</span></span>
@@ -203,7 +203,7 @@
 <p><code><a href="reference/sheets_create.html">sheets_create()</a></code> creates a brand new (spread)Sheet and can optionally send some initial data.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>(ss &lt;-<span class="st"> </span><span class="kw"><a href="reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="dt">sheets =</span> <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">flowers =</span> <span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(iris))))</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;                 ID: 1Pv0BpZuMqAzd0mli-WVH0MjWjvCkBcWqVaQpVKKJs2k</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;                 ID: 1Gl1dCldb7VWKE0B-p5RrhZfPRvZklkSNnln4nWpr5CA</span></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;             Locale: en_US</span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;        # of sheets: 1</span></span>
@@ -217,7 +217,7 @@
 <span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; Writing to sheet "autos"</span></span>
 <span id="cb6-5"><a href="#cb6-5"></a>ss</span>
 <span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;                 ID: 1Pv0BpZuMqAzd0mli-WVH0MjWjvCkBcWqVaQpVKKJs2k</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;                 ID: 1Gl1dCldb7VWKE0B-p5RrhZfPRvZklkSNnln4nWpr5CA</span></span>
 <span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;             Locale: en_US</span></span>
 <span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
 <span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;        # of sheets: 2</span></span>

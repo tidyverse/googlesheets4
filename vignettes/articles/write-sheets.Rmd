@@ -17,11 +17,25 @@ knitr::opts_chunk$set(
 message("No token available. Code chunks will not be evaluated.")
 ```
 
-## Attach googlesheets4
-
 ```{r}
 library(googlesheets4)
 ```
+
+Basic Sheet writing is shown in the [Get started](https://googlesheets4.tidyverse.org/articles/googlesheets4.html) article. Here we explore the different uses for the writing functions:
+
+  * `sheets_create()` emphasizes the creation of a new (spread)Sheet.
+    - But it can create (work)sheets and write data.
+  * `sheets_write()` emphasizes writing a data frame into a (work)sheet.
+    - But it can create a new (spread)Sheet or a new (work)sheet.
+  * `sheets_append()` is about adding rows to an existing data table.
+  * `sheets_create()`, `sheets_write()`, and `sheets_append()` implement
+    holistic operations for representing a single R data frame as a table in
+    a (work)sheet within a Google Sheet.
+    - `sheets_create()` and `sheets_write()` both impose this mentality via
+      specific formatting, such as special treatment of the column header row.
+    - All 3 functions aim to shrink-wrap the data.
+  * `sheets_edit()` is the one function that helps you write arbitrary data
+    into an arbitrary range, although it is still oriented around a data frame.
 
 ## Auth
 
@@ -39,7 +53,8 @@ googlesheets4:::sheets_auth_docs(drive = TRUE)
 Create a brand new Sheet with `sheets_create()`. You can specify the new Sheet's `name` (or accept a randomly generated name).
 
 ```{r}
-sheets_create("write-sheets-demo-1")
+ss1 <- sheets_create("sheets-create-demo-1")
+ss1
 ```
 
 Every Sheet *must* have at least one (work)sheet, so Google Sheets automatically creates an empty "Sheet1".
@@ -51,10 +66,11 @@ You can control the names and content of the initial (work)sheets with the `shee
 Use a character vector to specify the names of one or more empty sheets.
 
 ```{r}
-sheets_create(
-  "write-sheets-demo-2",
+ss2 <- sheets_create(
+  "sheets-create-demo-2",
   sheets = c("alpha", "beta")
 )
+ss2
 ```
 
 These sheets have no values and get their dimensions from Sheets default behaviour.
@@ -66,10 +82,11 @@ If you provide a data frame, it is used to populate the cells of a sheet and to 
 ```{r}
 my_data <- data.frame(x = 1:3, y = letters[1:3])
 
-sheets_create(
-  "write-sheets-demo-3",
+ss3 <- sheets_create(
+  "sheets-create-demo-3",
   sheets = my_data
 )
+ss3
 ```
 
 ### Send multiple data frames
@@ -79,10 +96,11 @@ If you provide a list of data frames, each is used to populate the cells of one 
 ```{r}
 my_data_frames <- list(iris = head(iris), chickwts = head(chickwts))
 
-sheets_create(
-  "write-sheets-demo-4",
+ss4 <- sheets_create(
+  "sheets-create-demo-4",
   sheets = my_data_frames
 )
+ss4
 ```
 
 ### Write metadata
@@ -92,19 +110,22 @@ Most users won't need to do this, but `sheets_create()` can set additional Sheet
 Notice how the default empty Sheet here is named "Feuille 1", since we request a French locale.
 
 ```{r}
-sheets_create(
-  "write-sheets-demo-5",
+ss5 <- sheets_create(
+  "sheets-create-demo-5",
   locale = "fr_FR",
   timeZone = "Europe/Paris"
 )
+ss5
 ```
 
-#### Clean up
+I would only do this if you have specific evidence that the default behaviour with respect to locale and time zone is problematic for your use case.
+
+### Clean up
 
 Trash all the Sheets created above. This actually requires googledrive, since it is not possible to trash or delete Sheets through the Sheets API. In our hidden auth process, described earlier, we put a shared token into force for both Sheets and Drive. You can read how to do that in your own work in the article [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html).
 
 ```{r}
-sheets_find("write-sheets-demo") %>%
+sheets_find("sheets-create-demo") %>%
   googledrive::drive_trash()
 ```
 
@@ -117,7 +138,8 @@ The only required argument for `sheets_write()` is the data.
 ```{r}
 df <- data.frame(x = 1:3, y = letters[1:3])
 
-ss <- sheets_write(df)
+random_ss <- sheets_write(df)
+random_ss
 ```
 
 This creates a new (work)sheet inside a new (spread)Sheet and returns its ID. You'll notice the new Sheet has a randomly generated name. If that is a problem, use `sheets_create()` instead, which affords more control over various aspects of the new Sheet.
@@ -125,44 +147,229 @@ This creates a new (work)sheet inside a new (spread)Sheet and returns its ID. Yo
 Let's start over: we delete that Sheet and call `sheets_create()`, so we can specify the new Sheet's name. Then we'll modify it with `sheets_write()`. We send one sheet name, "chickwts", to prevent the creation of "Sheet1", but we send no data.
 
 ```{r}
-drive_rm(ss)
+googledrive::drive_rm(random_ss)
 
-ss <- sheets_create(
-  "write-sheets-demo-6",
+ss1 <- sheets_create(
+  "write-sheets-demo-1",
   sheets = "chickwts"
 )
+ss1
 ```
 
 `sheets_write()` allows us to write the actual `chickwts` data into the sheet by that name. 
 ```{r}
-sheets_write(chickwts, ss = ss, sheet = "chickwts")
+sheets_write(chickwts, ss = ss1, sheet = "chickwts")
+ss1
 ```
 
 `sheets_write()` can also write data into a new sheet, if `sheet` implicitly or explicitly targets a non-existent sheet.
 
 ```{r}
 # explicitly make a new sheet named "iris"
-sheets_write(iris, ss = ss, sheet = "iris")
+sheets_write(iris, ss = ss1, sheet = "iris")
 
 # implicitly make a new sheet named "mtcars"
-sheets_write(mtcars, ss = ss)
+sheets_write(mtcars, ss = ss1)
 ```
 
 If no sheet name is given and it can't be determined from `data`, a name of the form "SheetN" is automatically generated by Sheets.
 
 ```{r}
-sheets_write(data.frame(x = 1:2, y = 3:4), ss)
+sheets_write(data.frame(x = 1:2, y = 3:4), ss = ss1)
+ss1
 ```
 
-`sheets_append()` can add one or more rows of data to an existing Sheet.
-
-```{r}
-sheets_append(data.frame(x = 3, y = 5), ss, sheet = "Sheet1")
-```
-
-#### Clean up
+### Clean up
 
 ```{r}
 sheets_find("write-sheets-demo") %>%
+  googledrive::drive_trash()
+```
+
+## `sheets_append()`
+
+`sheets_append()` can add one or more rows of data to an existing (work)sheet.
+
+Let's recreate the table of "other" deaths from an example Sheet, but without the annoying text above and below the data. First we bring that data into a local data frame and chop it into pieces.
+
+```{r}
+(deaths <- sheets_example("deaths") %>%
+   sheets_read(range = "other_data", col_types = "????DD"))
+
+deaths_zero  <- deaths[integer(), ] # "scaffolding" data frame with 0 rows
+deaths_one   <- deaths[1:5, ] 
+deaths_two   <- deaths[6, ]
+deaths_three <- deaths[7:10, ]
+```
+
+We use `sheets_create()` to create a new (spread)Sheet and initialize a new (work)sheet with the "deaths" column headers, but no data. A second empty row is created (it must be, in order for us to freeze the top row), but it will soon be filled when we append.
+
+```{r}
+ss <- sheets_create("sheets-append-demo", sheets = list(deaths = deaths_zero))
+ss
+```
+
+If you're following along, I recommend you open this Sheet in a web browser with `sheets_browse()` and revisit as we go along, to see how the initial empty row gets consumed and how additional rows are added to the targetted sheet automatically.
+
+```{r}
+sheets_browse(ss)
+```
+
+Send the data, one or more rows at a time. Keep inspecting in the browser if you're doing this yourself.
+
+```{r}
+ss
+
+# send several rows
+sheets_append(deaths_one, ss)
+ss
+
+# send a single row
+sheets_append(deaths_two, ss)
+ss
+
+# send remaining rows
+sheets_append(deaths_three, ss)
+ss
+```
+
+Now the big reveal: have we successfully rebuilt that data through incremental updates?
+
+```{r}
+deaths_replica <- sheets_read(ss, col_types = "????DD")
+identical(deaths, deaths_replica)
+```
+
+Gosh I hope that's still `TRUE` as it was the last time I checked this article!
+
+### Clean up
+
+```{r}
+sheets_find("sheets-append-demo") %>%
+  googledrive::drive_trash()
+```
+
+## `sheets_edit()`
+
+`sheets_edit()` is the least opinionated writing function. It writes data into a range. It does no explicit formatting, although it can effectively apply formatting by *clearing* existing formats via `reformat = TRUE` (the default).
+
+We focus here on the geometry of `sheets_edit()`, i.e. which cells are edited.
+
+In a hidden chunk, we've created a demo Sheet `ss_edit` and we've filled the cells with "-". We've also created `read_this()`, a wrapper around `sheets_read()` that sets `col_names = FALSE` and names columns by letter.
+
+```{r include = FALSE}
+library(tidyverse)
+
+n <-  7
+
+clear <- function(n) {
+  suppressMessages(
+    as_tibble(matrix("-", nrow = n, ncol = n), .name_repair = "unique")
+  )
+}
+
+populate <- function(ss, sheet = NULL, range = NULL, col_names = FALSE) {
+  suppressMessages(
+    sheets_edit(clear(n), ss = ss, sheet = sheet, range = range, col_names = col_names)
+  )
+}
+
+read_this <- function(ss) {
+  sheets_read(
+    ss = ss,
+    col_names = FALSE,
+    .name_repair = ~ LETTERS[seq_along(.x)]
+  )
+}
+
+ss_edit <- sheets_create("sheets-edit-demo")
+#googlesheets4:::sheets_share(ss_edit) %>% sheets_browse()
+sheets_sheet_resize(ss_edit, nrow = n, ncol = n, exact = TRUE)
+populate(ss_edit)
+```
+
+Here's the initial state of `ss_edit`:
+
+```{r}
+read_this(ss_edit)
+```
+
+`df` is a small data frame we'll send as the `data` argument of `sheets_edit()`:
+
+```{r}
+(df <- tibble(V1 = head(LETTERS,3), V2 = tail(LETTERS, 3)))
+```
+
+If we do not specify the range, `df` is written into the upper left corner and only affects cells spanned by `df`. To see where we've written, focus on the cells are NOT "x".
+
+```{r}
+sheets_edit(ss_edit, data = df) %>% read_this()
+```
+
+(Here, and between all subsequent chunks, we reset `ss_edit` to its initial state.)
+
+```{r, include = FALSE}
+populate(ss_edit)
+```
+
+If we target a **single cell** with `range`, it specifies the upper left corner of the target area. The cells written are determined by the extent of the data.
+
+```{r}
+sheets_edit(ss_edit, data = df, range = "C2") %>% read_this()
+```
+
+```{r, include = FALSE}
+populate(ss_edit)
+```
+
+If `range` specifies multiple cells (it can even be unbounded on some sides), it is taken literally and all covered cells are written. If `range` is larger than the data, this results in some cells being *cleared* of their values. In this example, the `range` is "too big" for the data, so the remaining cells are cleared of their existing "-" value.
+
+```{r}
+sheets_edit(ss_edit, data = df, range = "D4:G7") %>% read_this()
+```
+
+```{r, include = FALSE}
+populate(ss_edit)
+```
+
+Here's another case where the `range` is bigger than it needs to be and it's unbounded on the bottom and top:
+
+```{r}
+sheets_edit(ss_edit, data = df, range = "B:E") %>% read_this()
+```
+
+```{r, include = FALSE}
+populate(ss_edit)
+```
+
+Here's another `range` that's unbounded on the left and "too big":
+
+```{r}
+sheets_edit(ss_edit, data = df, range = "B2:6") %>% read_this()
+```
+
+```{r, include = FALSE}
+populate(ss_edit)
+```
+
+The target sheet will be expanded, if necessary, if and only if `range` is a single cell (i.e. it gives the upper left corner).
+
+```{r}
+sheets_edit(ss_edit, data = df, range = "G6") %>% read_this()
+```
+
+Although the `data` argument of `sheets_edit()` must be a data frame, note that this does not actually limit what you can write:
+
+ * Use `col_names = FALSE` to suppress sending the column names.
+ * By definition, each variable of a data frame can be of different type.
+ * By using a list-column, each row of a data frame column can be of different
+   type.
+   
+The examples for `sheets_edit()` show writing data of disparate type to a 1-row or a 1-column region.
+
+### Clean up
+
+```{r}
+sheets_find("sheets-edit-demo") %>%
   googledrive::drive_trash()
 ```

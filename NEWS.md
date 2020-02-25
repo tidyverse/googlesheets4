@@ -2,7 +2,7 @@
 
 ### Write Sheets
 
-These functions are ready for use but are still under development. You can expect refinements to their interface and capabilities:
+These functions are ready for use but are still considered experimental and may see more refinements to their interface and capabilities:
 
   * `sheets_create()` is a new function to create a new Sheet and, optionally,
     write one or more data frames into it (#61).
@@ -10,8 +10,7 @@ These functions are ready for use but are still under development. You can expec
     write a data frame into a new or existing (work)sheet, inside a new or
     existing (spread)Sheet.
   * `sheets_append()` adds rows to the data in an existing sheet.
-
-More Sheet-editing functionality is coming!
+  * `sheets_edit()` writes to a range.
 
 ### Other new functions and arguments
 

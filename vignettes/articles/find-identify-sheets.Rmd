@@ -82,7 +82,9 @@ Why did we call `unclass(ssid)` above to see the naked Sheet ID? Because, by def
 ssid
 ```
 
-googlesheets4 accepts such a Sheet ID as the `ss` ("spreadsheet") argument of many functions:
+This is the same metadata you'll see when you call `sheets_get()` (but you must call `sheets_get()` explicitly if you want to *store* the returned metadata).
+
+googlesheets4 also accepts a Sheet ID as the `ss` argument of many functions:
 
 ```{r}
 sheets_read(ssid)
@@ -95,7 +97,7 @@ ssid <- "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"
 sheets_read(ssid)
 ```
 
-Note this demonstration that the Sheet ID also works when provided as a plain, old string, i.e. it does not **have** to have the `sheets_id` class. In some contexts, you might even prefer this, in order to bypass the special printing behaviour for `sheets_id`.
+Note this demonstration that a Sheet ID also works when provided as a plain, old string, i.e. it does not **have** to have the `sheets_id` class. In some contexts, you might even prefer to store it as a string, in order to bypass the special printing behaviour for `sheets_id`.
 
 When the Sheet is specified via a character string, googlesheets4 assumes it is a Sheet ID (or an ID-containing URL). This is NOT the case for googledrive, which assumes a character string is a file name or path. Therefore, for maximum happiness, in a mixed googlesheets4 / googledrive workflow, it's a good idea to be explicit and declare a string to be a Sheet ID, when that is the case.
 
@@ -110,7 +112,7 @@ If your script or app targets a specific Sheet, the most efficient and robust wa
 
 A big feature of the googledrive package is the ability to navigate between human-friendly file names and machine-friendly file IDs. Both the Drive and Sheets APIs require the use of IDs, so the illusion that you can identify a Drive file by name is provided by the googledrive package. (A Google Sheet is just a special case of a Drive file ... a file that happens to be a spreadsheet.)
 
-If you need to refer to a Sheet by name, i.e. if you need to lookup its file ID based on its name, you must use the googledrive package for that. There are other reasons for using these two packages together: the Sheets API has an intentionally narrow focus on spreadsheet operations involving worksheets and cells. General whole-file operations, like copy / rename / move / share, must be done via the Drive API and, within R, via googledrive.
+If you need to refer to a Sheet by name, i.e. if you need to lookup its file ID based on its name, you must use the googledrive package for that. There are other reasons for using these two packages together: the Sheets API has an intentionally narrow focus on spreadsheet operations involving worksheets and cells. General whole-file operations, like copy / rename / move / share, must be done via the Drive API and, within R, via googledrive. See the article [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html) for more.
 
 It's time to attach googledrive (in addition to the already-attached googlesheets4):
 
@@ -118,13 +120,15 @@ It's time to attach googledrive (in addition to the already-attached googlesheet
 library(googledrive)
 ```
 
-The Sheet we've been working with is named "gapminder" (and is owned by the account we've logged in as here). We can use `googledrive::drive_get()` to identify a file by name:
+(In our hidden auth chunk, we actually put a shared token into force for both googlesheets4 and googledrive, anticipating this moment.)
+
+The Sheet we've been working with is named "gapminder" and is owned by the account we've logged in as here. We can use `googledrive::drive_get()` to identify a file by name:
 
 ```{r}
 (gap_dribble <- drive_get("gapminder"))
 ```
 
-`drive_get()` returns a `dribble`, a "Drive tibble", where each row holds info on a Drive file. `as_sheets_id()` also accepts a one-row `dribble`, so we can get right into our normal googlesheets4 workflows:
+`drive_get()` returns a [`dribble`](https://googledrive.tidyverse.org/reference/dribble.html), a "Drive tibble", where each row holds info on a Drive file. `as_sheets_id()` also accepts a one-row `dribble`, so we can get right into our normal googlesheets4 workflows:
 
 ```{r}
 gap_id <- as_sheets_id(gap_dribble)

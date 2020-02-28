@@ -14,6 +14,11 @@ cell_df <- tibble::tribble(
       3,     2,   "B3",
       3,     3,   "C3"
 )
+# cell has to be a list-column for the tibble::add_row() in insert_shims()
+# to work, with increased type-strictness coming to tibble v3.0
+# TODO: maybe use an even more realistic cell-type of object here, when the
+# helpers are better
+cell_df$cell <- as.list(cell_df$cell)
 
 limitize <- function(df) {
   cell_limits(c(min(df$row), min(df$col)), c(max(df$row), max(df$col)))

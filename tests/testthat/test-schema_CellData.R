@@ -26,3 +26,10 @@ test_that("add_format() works", {
   expect_identical(out$a, "a")
   expect_identical(out$userEnteredFormat, list(numberFormat = fmt))
 })
+
+test_that("as_CellData() doesn't add extra nesting to list-cols", {
+  expect_identical(
+    as_CellData(c("a", "b")),
+    as_CellData(list("a", "b"))
+  )
+})

@@ -56,7 +56,7 @@ as_CellData.numeric <- function(x, .na = NULL) {
 
 #' @export
 as_CellData.list <- function(x, .na = NULL) {
-  map(x, as_CellData, .na = .na)
+  flatten(map(x, as_CellData, .na = .na))
 }
 
 #' @export

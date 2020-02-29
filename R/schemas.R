@@ -17,8 +17,8 @@ new <- function(id, ...) {
 }
 
 # TODO: if it proves necessary, this could do more meaningful checks
-check_against_schema <- function(x, schema = NULL) {
-  schema <- schema %||% attr(x, "schema")
+check_against_schema <- function(x, schema = NULL, id = NA) {
+  schema <- schema %||% .tidy_schemas[[id]] %||% attr(x, "schema")
   unexpected <- setdiff(names(x), schema$property)
   if (length(unexpected) > 0) {
     msg <- glue("

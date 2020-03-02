@@ -32,12 +32,13 @@ Imports:
     ids,
     lifecycle,
     magrittr,
+    methods,
     purrr,
     rematch2,
     rlang,
     tibble (>= 2.1.1),
     utils,
-    vctrs
+    vctrs (>= 0.2.3)
 Suggests: 
     covr,
     rmarkdown,

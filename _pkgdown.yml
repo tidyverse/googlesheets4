@@ -31,6 +31,7 @@ reference:
       - sheets_create
       - sheets_append
       - sheets_edit
+      - googlesheets4_formula
   - title: "Metadata on Sheets"
     desc: >
       Helpers for accessing Sheets and their metadata

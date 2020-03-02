@@ -29,12 +29,12 @@ as_CellData.default <- function(x, .na = NULL) {
   )
 }
 
-# I want to centralize what value we send for NA, even though -- for now, at
+# I want to centralize what we send for NA, even though -- for now, at
 # least -- I have not exposed this in user-facing functions. You could imagine
 # generalizing to allow user to request we send #N/A instead of an empty cell.
 # More about #N/A:
 # https://support.google.com/docs/answer/3093359?hl=en
-empty_cell <- function(..., .na = NULL) {
+empty_cell <- function(.na = NULL) {
   if (is.null(.na)) {
     new_CellData(userEnteredValue = NA)
   } else {
@@ -88,6 +88,8 @@ as_CellData.numeric <- function(x, .na = NULL) {
 #' @export
 as_CellData.list <- function(x, .na = NULL) {
   out <- map(x, as_CellData, .na = .na)
+  # awkwardness possibly solved by using vctrs to create an S3 class for
+  # CellData ... but not pursuing at this time
   needs_flatten <- !map_lgl(x, is_CellData)
   out[needs_flatten] <- flatten(out[needs_flatten])
   out
@@ -95,7 +97,7 @@ as_CellData.list <- function(x, .na = NULL) {
 
 #' @export
 as_CellData.googlesheets4_formula <- function(x, .na = NULL) {
-  cell_data(x, val_type = "formulaValue", .na = .na)
+  cell_data(vec_data(x), val_type = "formulaValue", .na = .na)
 }
 
 add_format <- function(x, fmt) {

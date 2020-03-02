@@ -1,4 +1,3 @@
-’
 api
 API's
 auth
@@ -16,6 +15,7 @@ datetimes
 de
 Feuille
 funder
+gapminder
 Gapminder
 gmailr
 googledrive
@@ -48,6 +48,7 @@ unboundedness
 unformatted
 unskipped
 UpdateSheetPropertiesRequest
+vctrs
 vectorized
 xls
 xlsx

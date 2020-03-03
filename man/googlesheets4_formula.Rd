@@ -34,6 +34,7 @@ summaries <- tibble::tribble(
 
 # explicitly declare a column as `googlesheets4_formula`
 summaries$summaries <- googlesheets4_formula(summaries$summaries)
+summaries
 
 sheets_edit(ss, data = summaries, range = "C1", reformat = FALSE)
 
@@ -43,6 +44,7 @@ miscellany <- tibble::tribble(
        "image", "=IMAGE(\"https://www.google.com/images/srpr/logo3w.png\")"
 )
 miscellany$example <- googlesheets4_formula(miscellany$example)
+miscellany
 
 sheets_write(miscellany, ss = ss)
 

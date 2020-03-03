@@ -33,6 +33,7 @@ new_googlesheets4_formula <- function(x = character()) {
 #'
 #' # explicitly declare a column as `googlesheets4_formula`
 #' summaries$summaries <- googlesheets4_formula(summaries$summaries)
+#' summaries
 #'
 #' sheets_edit(ss, data = summaries, range = "C1", reformat = FALSE)
 #'
@@ -42,6 +43,7 @@ new_googlesheets4_formula <- function(x = character()) {
 #'        "image", "=IMAGE(\"https://www.google.com/images/srpr/logo3w.png\")"
 #' )
 #' miscellany$example <- googlesheets4_formula(miscellany$example)
+#' miscellany
 #'
 #' sheets_write(miscellany, ss = ss)
 #'

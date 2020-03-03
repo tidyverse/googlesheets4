@@ -32,9 +32,13 @@ As a regular, interactive user, you can just let googlesheets4 prompt you for an
 
 Since this article is compiled noninteractively on a server, we have arranged for googlesheets4 to use a service account token (not shown).
 
+
 ```{r include = FALSE}
 # happens in .onLoad() when IN_PKGDOWN, but need this for local dev/preview
-googlesheets4:::sheets_auth_docs(drive = TRUE)  
+googlesheets4:::sheets_auth_docs(drive = TRUE) 
+
+# attempt to reduce quota exhaustion problems
+if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(10)
 ```
 
 ## Use a URL

@@ -87,7 +87,9 @@ if (sheets_has_token()) {
 }
 \seealso{
 Other write functions: 
+\code{\link{googlesheets4_formula}},
 \code{\link{sheets_append}()},
+\code{\link{sheets_create}()},
 \code{\link{sheets_edit}()}
 }
 \concept{write functions}

@@ -15,6 +15,7 @@ new_googlesheets4_formula <- function(x = character()) {
 #'
 #' @return An S3 vector of class `googlesheets4_formula`.
 #' @export
+#' @family write functions
 #'
 #' @examples
 #' if (sheets_has_token()) {

@@ -50,3 +50,11 @@ sheets_write(miscellany, ss = ss)
 googledrive::drive_trash(ss)
 }
 }
+\seealso{
+Other write functions: 
+\code{\link{sheets_append}()},
+\code{\link{sheets_create}()},
+\code{\link{sheets_edit}()},
+\code{\link{write_sheet}()}
+}
+\concept{write functions}

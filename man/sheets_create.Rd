@@ -70,4 +70,11 @@ There is an article on writing Sheets:
 \itemize{
 \item \url{https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html}
 }
+
+Other write functions: 
+\code{\link{googlesheets4_formula}},
+\code{\link{sheets_append}()},
+\code{\link{sheets_edit}()},
+\code{\link{write_sheet}()}
 }
+\concept{write functions}

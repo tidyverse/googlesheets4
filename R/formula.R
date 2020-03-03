@@ -55,7 +55,6 @@ googlesheets4_formula <- function(x = character()) {
   new_googlesheets4_formula(x)
 }
 
-#' @importFrom methods setOldClass
 methods::setOldClass(c("googlesheets4_formula", "vctrs_vctr"))
 
 #' @export

@@ -62,7 +62,7 @@ vec_ptype_abbr.googlesheets4_formula <- function(x, ...) {
   "fmla"
 }
 
-#' non-user-facing vctrs methods for googlesheets4_formula
+#' Internal vctrs methods for googlesheets4_formula
 #' @keywords internal
 #' @name googlesheets4_formula-vctrs
 NULL

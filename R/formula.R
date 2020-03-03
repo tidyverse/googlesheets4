@@ -12,7 +12,6 @@ new_googlesheets4_formula <- function(x = character()) {
 #' package](https://vctrs.r-lib.org/articles/s3-vector.html).
 #'
 #' @param x Character.
-#' @param ... Not used
 #'
 #' @return An S3 vector of class `googlesheets4_formula`.
 #' @export
@@ -51,12 +50,6 @@ new_googlesheets4_formula <- function(x = character()) {
 googlesheets4_formula <- function(x = character()) {
   x <- vec_cast(x, character())
   new_googlesheets4_formula(x)
-}
-
-#' @export
-#' @rdname googlesheets4_formula
-as_googlesheets4_formula <- function(x) {
-  vec_cast(x, new_googlesheets4_formula())
 }
 
 #' @importFrom methods setOldClass

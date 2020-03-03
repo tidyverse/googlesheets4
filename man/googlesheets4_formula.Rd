@@ -2,17 +2,12 @@
 % Please edit documentation in R/formula.R
 \name{googlesheets4_formula}
 \alias{googlesheets4_formula}
-\alias{as_googlesheets4_formula}
 \title{\code{googlesheets4_formula} class}
 \usage{
 googlesheets4_formula(x = character())
-
-as_googlesheets4_formula(x)
 }
 \arguments{
 \item{x}{Character.}
-
-\item{...}{Not used}
 }
 \value{
 An S3 vector of class \code{googlesheets4_formula}.

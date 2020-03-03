@@ -4,13 +4,13 @@
 \alias{googlesheets4_formula-vctrs}
 \alias{vec_ptype2.googlesheets4_formula}
 \alias{vec_cast.googlesheets4_formula}
-\title{non-user-facing vctrs methods for googlesheets4_formula}
+\title{Internal vctrs methods for googlesheets4_formula}
 \usage{
 \method{vec_ptype2}{googlesheets4_formula}(x, y, ...)
 
 \method{vec_cast}{googlesheets4_formula}(x, to, ...)
 }
 \description{
-non-user-facing vctrs methods for googlesheets4_formula
+Internal vctrs methods for googlesheets4_formula
 }
 \keyword{internal}

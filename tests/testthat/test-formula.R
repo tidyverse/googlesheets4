@@ -3,7 +3,7 @@ test_that("constructors return length-0 vector when called with no arguments", {
   expect_length(googlesheets4_formula(), 0)
 })
 
-test_that("low-level constructor error for non-character input", {
+test_that("low-level constructor errors for non-character input", {
   expect_error(
     new_googlesheets4_formula(1:3),
     class = "vctrs_error_assert_ptype"

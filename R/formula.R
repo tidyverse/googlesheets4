@@ -12,8 +12,6 @@ new_googlesheets4_formula <- function(x = character()) {
 #' package](https://vctrs.r-lib.org/articles/s3-vector.html).
 #'
 #' @param x Character.
-#' @inheritParams vctrs::vec_cast
-#' @inheritParams vctrs::vec_ptype2
 #' @param ... Not used
 #'
 #' @return An S3 vector of class `googlesheets4_formula`.
@@ -55,26 +53,34 @@ googlesheets4_formula <- function(x = character()) {
   new_googlesheets4_formula(x)
 }
 
+#' @export
+#' @rdname googlesheets4_formula
+as_googlesheets4_formula <- function(x) {
+  vec_cast(x, new_googlesheets4_formula())
+}
+
 #' @importFrom methods setOldClass
 methods::setOldClass(c("googlesheets4_formula", "vctrs_vctr"))
-
-#' @rdname googlesheets4_formula
-#' @export
-is_googlesheets4_formula <- function(x) {
-  inherits(x, "googlesheets4_formula")
-}
 
 #' @export
 vec_ptype_abbr.googlesheets4_formula <- function(x, ...) {
   "fmla"
 }
 
+#' non-user-facing vctrs methods for googlesheets4_formula
+#' @keywords internal
+#' @name googlesheets4_formula-vctrs
+NULL
+
+#' @method vec_ptype2 googlesheets4_formula
+#' @export vec_ptype2.googlesheets4_formula
 #' @export
-#' @rdname googlesheets4_formula
+#' @rdname googlesheets4_formula-vctrs
 vec_ptype2.googlesheets4_formula <- function(x, y, ...) {
   UseMethod("vec_ptype2.googlesheets4_formula", y)
 }
 
+#' @method vec_ptype2.googlesheets4_formula default
 #' @export
 vec_ptype2.googlesheets4_formula.default <- function(x, y,
                                                      ...,
@@ -82,46 +88,48 @@ vec_ptype2.googlesheets4_formula.default <- function(x, y,
   vctrs::vec_default_ptype2(x, y, x_arg = x_arg, y_arg = y_arg)
 }
 
+#' @method vec_ptype2.googlesheets4_formula googlesheets4_formula
 #' @export
 vec_ptype2.googlesheets4_formula.googlesheets4_formula <- function(x, y, ...) {
   new_googlesheets4_formula()
 }
 
+#' @method vec_ptype2.googlesheets4_formula character
 #' @export
 vec_ptype2.googlesheets4_formula.character <- function(x, y, ...) character()
 
+#' @method vec_ptype2.character googlesheets4_formula
 #' @export
-#' @rdname googlesheets4_formula
 vec_ptype2.character.googlesheets4_formula <- function(x, y, ...) character()
 
+#' @method vec_cast googlesheets4_formula
+#' @export vec_cast.googlesheets4_formula
 #' @export
-#' @rdname googlesheets4_formula
+#' @rdname googlesheets4_formula-vctrs
 vec_cast.googlesheets4_formula <- function(x, to, ...) {
   UseMethod("vec_cast.googlesheets4_formula")
 }
 
+#' @method vec_cast.googlesheets4_formula default
 #' @export
 vec_cast.googlesheets4_formula.default <- function(x, to, ...) {
   vctrs::vec_default_cast(x, to)
 }
 
+#' @method vec_cast.googlesheets4_formula googlesheets4_formula
 #' @export
 vec_cast.googlesheets4_formula.googlesheets4_formula <- function(x, to, ...) {
   x
 }
 
+#' @method vec_cast.googlesheets4_formula character
 #' @export
 vec_cast.googlesheets4_formula.character <- function(x, to, ...) {
   googlesheets4_formula(x)
 }
 
+#' @method vec_cast.character googlesheets4_formula
 #' @export
 vec_cast.character.googlesheets4_formula <- function(x, to, ...) {
   vec_data(x)
-}
-
-#' @rdname googlesheets4_formula
-#' @export
-as_googlesheets4_formula <- function(x) {
-  vec_cast(x, new_googlesheets4_formula())
 }

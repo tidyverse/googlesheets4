@@ -2,33 +2,17 @@
 % Please edit documentation in R/formula.R
 \name{googlesheets4_formula}
 \alias{googlesheets4_formula}
-\alias{is_googlesheets4_formula}
-\alias{vec_ptype2.googlesheets4_formula}
-\alias{vec_ptype2.character.googlesheets4_formula}
-\alias{vec_cast.googlesheets4_formula}
 \alias{as_googlesheets4_formula}
 \title{\code{googlesheets4_formula} class}
 \usage{
 googlesheets4_formula(x = character())
-
-is_googlesheets4_formula(x)
-
-vec_ptype2.googlesheets4_formula(x, y, ...)
-
-vec_ptype2.character.googlesheets4_formula(x, y, ...)
-
-vec_cast.googlesheets4_formula(x, to, ...)
 
 as_googlesheets4_formula(x)
 }
 \arguments{
 \item{x}{Character.}
 
-\item{y}{Vector types.}
-
 \item{...}{Not used}
-
-\item{to}{Type to cast to. If \code{NULL}, \code{x} will be returned as is.}
 }
 \value{
 An S3 vector of class \code{googlesheets4_formula}.

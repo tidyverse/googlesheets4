@@ -1,8 +1,3 @@
-new_googlesheets4_formula <- function(x = character()) {
-  vec_assert(x, character())
-  new_vctr(x, class = "googlesheets4_formula")
-}
-
 test_that("constructors return length-0 vector when called with no arguments", {
   expect_length(new_googlesheets4_formula(), 0)
   expect_length(googlesheets4_formula(), 0)

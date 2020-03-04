@@ -80,7 +80,7 @@ vec_ptype2.googlesheets4_formula <- function(x, y, ...) {
 vec_ptype2.googlesheets4_formula.default <- function(x, y,
                                                      ...,
                                                      x_arg = "x", y_arg = "y") {
-  vctrs::vec_default_ptype2(x, y, x_arg = x_arg, y_arg = y_arg)
+  vec_default_ptype2(x, y, x_arg = x_arg, y_arg = y_arg)
 }
 
 #' @method vec_ptype2.googlesheets4_formula googlesheets4_formula
@@ -108,7 +108,7 @@ vec_cast.googlesheets4_formula <- function(x, to, ...) {
 #' @method vec_cast.googlesheets4_formula default
 #' @export
 vec_cast.googlesheets4_formula.default <- function(x, to, ...) {
-  vctrs::vec_default_cast(x, to)
+  vec_default_cast(x, to)
 }
 
 #' @method vec_cast.googlesheets4_formula googlesheets4_formula

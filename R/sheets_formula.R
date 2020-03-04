@@ -1,9 +1,9 @@
-new_googlesheets4_formula <- function(x = character()) {
+new_formula <- function(x = character()) {
   vec_assert(x, character())
   new_vctr(x, class = "googlesheets4_formula")
 }
 
-#' `googlesheets4_formula` class
+#' Class for Google Sheets formulas
 #'
 #' In order to write a formula into Google Sheets, you need to store it as an
 #' object of class `googlesheets4_formula`. This is how we distinguish a
@@ -32,7 +32,7 @@ new_googlesheets4_formula <- function(x = character()) {
 #' )
 #'
 #' # explicitly declare a column as `googlesheets4_formula`
-#' summaries$summaries <- googlesheets4_formula(summaries$summaries)
+#' summaries$summaries <- sheets_formula(summaries$summaries)
 #' summaries
 #'
 #' sheets_edit(ss, data = summaries, range = "C1", reformat = FALSE)
@@ -42,7 +42,7 @@ new_googlesheets4_formula <- function(x = character()) {
 #'   "hyperlink", "=HYPERLINK(\"http://www.google.com/\",\"Google\")",
 #'        "image", "=IMAGE(\"https://www.google.com/images/srpr/logo3w.png\")"
 #' )
-#' miscellany$example <- googlesheets4_formula(miscellany$example)
+#' miscellany$example <- sheets_formula(miscellany$example)
 #' miscellany
 #'
 #' sheets_write(miscellany, ss = ss)
@@ -50,9 +50,9 @@ new_googlesheets4_formula <- function(x = character()) {
 #' # clean up
 #' googledrive::drive_trash(ss)
 #' }
-googlesheets4_formula <- function(x = character()) {
+sheets_formula <- function(x = character()) {
   x <- vec_cast(x, character())
-  new_googlesheets4_formula(x)
+  new_formula(x)
 }
 
 methods::setOldClass(c("googlesheets4_formula", "vctrs_vctr"))
@@ -62,15 +62,10 @@ vec_ptype_abbr.googlesheets4_formula <- function(x, ...) {
   "fmla"
 }
 
-#' Internal vctrs methods for googlesheets4_formula
-#' @keywords internal
-#' @name googlesheets4_formula-vctrs
-NULL
-
 #' @method vec_ptype2 googlesheets4_formula
 #' @export vec_ptype2.googlesheets4_formula
 #' @export
-#' @rdname googlesheets4_formula-vctrs
+#' @rdname googlesheets4-vctrs
 vec_ptype2.googlesheets4_formula <- function(x, y, ...) {
   UseMethod("vec_ptype2.googlesheets4_formula", y)
 }
@@ -86,7 +81,7 @@ vec_ptype2.googlesheets4_formula.default <- function(x, y,
 #' @method vec_ptype2.googlesheets4_formula googlesheets4_formula
 #' @export
 vec_ptype2.googlesheets4_formula.googlesheets4_formula <- function(x, y, ...) {
-  new_googlesheets4_formula()
+  new_formula()
 }
 
 #' @method vec_ptype2.googlesheets4_formula character
@@ -100,7 +95,7 @@ vec_ptype2.character.googlesheets4_formula <- function(x, y, ...) character()
 #' @method vec_cast googlesheets4_formula
 #' @export vec_cast.googlesheets4_formula
 #' @export
-#' @rdname googlesheets4_formula-vctrs
+#' @rdname googlesheets4-vctrs
 vec_cast.googlesheets4_formula <- function(x, to, ...) {
   UseMethod("vec_cast.googlesheets4_formula")
 }
@@ -120,7 +115,7 @@ vec_cast.googlesheets4_formula.googlesheets4_formula <- function(x, to, ...) {
 #' @method vec_cast.googlesheets4_formula character
 #' @export
 vec_cast.googlesheets4_formula.character <- function(x, to, ...) {
-  googlesheets4_formula(x)
+  sheets_formula(x)
 }
 
 #' @method vec_cast.character googlesheets4_formula

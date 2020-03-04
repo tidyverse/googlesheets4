@@ -72,9 +72,9 @@ There is an article on writing Sheets:
 }
 
 Other write functions: 
-\code{\link{googlesheets4_formula}},
 \code{\link{sheets_append}()},
 \code{\link{sheets_edit}()},
+\code{\link{sheets_formula}()},
 \code{\link{write_sheet}()}
 }
 \concept{write functions}

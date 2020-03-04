@@ -19,6 +19,9 @@
     <loc>https://googlesheets4.tidyverse.org/reference/googlesheets4-package.html</loc>
   </url>
   <url>
+    <loc>https://googlesheets4.tidyverse.org/reference/googlesheets4-vctrs.html</loc>
+  </url>
+  <url>
     <loc>https://googlesheets4.tidyverse.org/reference/pipe.html</loc>
   </url>
   <url>
@@ -62,6 +65,9 @@
   </url>
   <url>
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_find.html</loc>
+  </url>
+  <url>
+    <loc>https://googlesheets4.tidyverse.org/reference/sheets_formula.html</loc>
   </url>
   <url>
     <loc>https://googlesheets4.tidyverse.org/reference/sheets_get.html</loc>

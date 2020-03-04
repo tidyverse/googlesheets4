@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • googlesheets4</title>
+<title>Internal vctrs methods — googlesheets4-vctrs • googlesheets4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -41,7 +41,8 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="Internal vctrs methods — googlesheets4-vctrs" />
+<meta property="og:description" content="Internal vctrs methods" />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -70,7 +71,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -153,89 +154,30 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+    <h1>Internal vctrs methods</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/googlesheets4-package.R'><code>R/googlesheets4-package.R</code></a>, <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_formula.R'><code>R/sheets_formula.R</code></a></small>
+    <div class="hidden name"><code>googlesheets4-vctrs.Rd</code></div>
     </div>
 
-    <div id="googlesheets4-development-version" class="section level1">
-<h1 class="page-header">
-<a href="#googlesheets4-development-version" class="anchor"></a>googlesheets4 (development version)<small> Unreleased </small>
-</h1>
-<div id="write-sheets" class="section level3">
-<h3 class="hasAnchor">
-<a href="#write-sheets" class="anchor"></a>Write Sheets</h3>
-<p>These functions are ready for use but are still considered experimental and may see more refinements to their interface and capabilities:</p>
-<ul>
-<li>
-<code><a href="../reference/sheets_create.html">sheets_create()</a></code> is a new function to create a new Sheet and, optionally, write one or more data frames into it (<a href='https://github.com/tidyverse/googlesheets4/issues/61'>#61</a>).</li>
-<li>
-<code><a href="../reference/write_sheet.html">sheets_write()</a></code> (also available as <code><a href="../reference/write_sheet.html">write_sheet()</a></code>) is a new function to write a data frame into a new or existing (work)sheet, inside a new or existing (spread)Sheet.</li>
-<li>
-<code><a href="../reference/sheets_append.html">sheets_append()</a></code> adds rows to the data in an existing sheet.</li>
-<li>
-<code><a href="../reference/sheets_edit.html">sheets_edit()</a></code> writes to a range.</li>
-</ul>
-</div>
-<div id="other-new-functions-and-arguments" class="section level3">
-<h3 class="hasAnchor">
-<a href="#other-new-functions-and-arguments" class="anchor"></a>Other new functions and arguments</h3>
-<p>There is a new family of <code>sheets_sheet_*()</code> functions that operate on the (work)sheets inside an existing (spread)Sheet:</p>
-<ul>
-<li>
-<code><a href="../reference/sheets_sheet_properties.html">sheets_sheet_properties()</a></code> returns a tibble of metadata with one row per sheet.</li>
-<li>
-<code><a href="../reference/sheets_sheet_properties.html">sheets_sheet_names()</a></code> returns sheet names.</li>
-<li>
-<code><a href="../reference/sheets_sheet_add.html">sheets_sheet_add()</a></code> adds one or more sheets.</li>
-<li>
-<code><a href="../reference/sheets_sheet_delete.html">sheets_sheet_delete()</a></code> deletes one or more sheets.</li>
-<li>
-<code><a href="../reference/sheets_sheet_resize.html">sheets_sheet_resize()</a></code> changes the number of rows or columns in a sheet.</li>
-</ul>
-<p><code><a href="../reference/sheets_cells.html">sheets_cells()</a></code> gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But <code><a href="../reference/sheets_cells.html">sheets_cells(cell_data = "full", discard_empty = FALSE)</a></code> is now available if you want full cell data, including formatting, even for cells that have no value (<a href='https://github.com/tidyverse/googlesheets4/issues/4'>#4</a>).</p>
-</div>
-<div id="renamed-functions-and-classes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#renamed-functions-and-classes" class="anchor"></a>Renamed functions and classes</h3>
-<ul>
-<li><p><code><a href="../reference/googlesheets4-deprecated.html">sheets_sheets()</a></code> is now <code><a href="../reference/sheets_sheet_properties.html">sheets_sheet_names()</a></code>, in order to fit into a coherent family of <code>sheets_sheet_*()</code> functions that deal with (work)sheets. <code><a href="../reference/googlesheets4-deprecated.html">sheets_sheets()</a></code> still exists but will be removed rather quickly since googlesheets4 is so new.</p></li>
-<li><p>The S3 class <code>sheets_Spreadsheet</code> is renamed to <code>googlesheets4_spreadsheet</code>, a consequence of rationalizing all internal and external classes. <code>googlesheets4_spreadsheet</code> is the class that holds metadata for a Sheet and it is connected to the API’s <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet"><code>Spreadsheet</code></a> schema. The return value of <code><a href="../reference/sheets_get.html">sheets_get()</a></code> has this class.</p></li>
-</ul>
-</div>
-<div id="printing-a-sheet-id" class="section level3">
-<h3 class="hasAnchor">
-<a href="#printing-a-sheet-id" class="anchor"></a>Printing a Sheet ID</h3>
-<p>The print method for <code>sheets_id</code> objects now attempts to reveal the current Sheet metadata available via <code><a href="../reference/sheets_get.html">sheets_get()</a></code>. The means that printing can lead to an attempt to initiate auth, unless <code><a href="../reference/sheets_deauth.html">sheets_deauth()</a></code> has been called. However, <code>sheets_id</code> printing should never lead to an actual error condition, although it may reveal information from caught errors.</p>
-</div>
-<div id="bug-fixes" class="section level3">
-<h3 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h3>
-<ul>
-<li>
-<code><a href="../reference/read_sheet.html">read_sheet()</a></code> passes its <code>na</code> argument down to the helpers that parse cells, so that <code>na</code> actually has the documented effect (<a href='https://github.com/tidyverse/googlesheets4/issues/73'>#73</a>).</li>
-</ul>
-</div>
-</div>
-    <div id="googlesheets4-010" class="section level1">
-<h1 class="page-header">
-<a href="#googlesheets4-010" class="anchor"></a>googlesheets4 0.1.0<small> 2019-11-04 </small>
-</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul>
-</div>
-  </div>
+    <div class="ref-description">
+    <p>Internal vctrs methods</p>
+    </div>
 
+    <pre class="usage"><span class='co'># S3 method for googlesheets4_formula</span>
+<span class='fu'>vec_ptype2</span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for googlesheets4_formula</span>
+<span class='fu'>vec_cast</span>(<span class='no'>x</span>, <span class='no'>to</span>, <span class='no'>...</span>)</pre>
+
+
+
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#googlesheets4-development-version">development version</a></li>
-        <li><a href="#googlesheets4-010">0.1.0</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+    </ul>
 
+  </div>
 </div>
 
 

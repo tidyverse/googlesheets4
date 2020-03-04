@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> • googlesheets4</title>
+<title>Get started with googlesheets4 • googlesheets4</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../tidyverse-2.css" rel="stylesheet">
-<meta property="og:title" content="">
+<meta property="og:title" content="Get started with googlesheets4">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png">
 <meta name="twitter:card" content="summary">
@@ -115,7 +115,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1></h1>
+      <h1>Get started with googlesheets4</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/tidyverse/googlesheets4/blob/master/vignettes/googlesheets4.Rmd"><code>vignettes/googlesheets4.Rmd</code></a></small>
@@ -247,8 +247,8 @@
 <span id="cb8-2"><a href="#cb8-2"></a></span>
 <span id="cb8-3"><a href="#cb8-3"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="../reference/write_sheet.html">sheets_write</a></span>(df)</span>
 <span id="cb8-4"><a href="#cb8-4"></a>ss</span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;   Spreadsheet name: official-cirriped</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;                 ID: 1VqIvgWvi1mv2958ewkW9ySh1D2Av1mCyIn1zFzmKNw4</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;   Spreadsheet name: unacidic-angora</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;                 ID: 1x_YRnFNJU-PrtP2ZZECLJNc5HaXtcJXJQbqr6bh04QU</span></span>
 <span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
 <span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
 <span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt;        # of sheets: 1</span></span>
@@ -259,12 +259,12 @@
 <p>Let’s start over: we delete that Sheet and call <code><a href="../reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;   * official-cirriped: 1VqIvgWvi1mv2958ewkW9ySh1D2Av1mCyIn1zFzmKNw4</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co">#&gt;   * unacidic-angora: 1x_YRnFNJU-PrtP2ZZECLJNc5HaXtcJXJQbqr6bh04QU</span></span>
 <span id="cb9-4"><a href="#cb9-4"></a></span>
 <span id="cb9-5"><a href="#cb9-5"></a>ss &lt;-<span class="st"> </span><span class="kw"><a href="../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="dt">sheets =</span> df)</span>
 <span id="cb9-6"><a href="#cb9-6"></a>ss</span>
 <span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;                 ID: 1Xoqpq9AWIvSLHMqVZyBoFyCVKELi5AMNIpQ8A25oox4</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;                 ID: 1QKrXYmolN_T6vH8Wg_FUFU7z9a0epwKIlgW20lceOkQ</span></span>
 <span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;             Locale: en_US</span></span>
 <span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
 <span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;        # of sheets: 1</span></span>
@@ -277,7 +277,7 @@
 <span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; Writing to sheet "chickwts"</span></span>
 <span id="cb10-4"><a href="#cb10-4"></a>ss</span>
 <span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt;                 ID: 1Xoqpq9AWIvSLHMqVZyBoFyCVKELi5AMNIpQ8A25oox4</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt;                 ID: 1QKrXYmolN_T6vH8Wg_FUFU7z9a0epwKIlgW20lceOkQ</span></span>
 <span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
 <span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
 <span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt;        # of sheets: 2</span></span>
@@ -291,7 +291,7 @@
 <span id="cb11-3"><a href="#cb11-3"></a><span class="co">#&gt; Writing to sheet "df"</span></span>
 <span id="cb11-4"><a href="#cb11-4"></a>ss</span>
 <span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt;                 ID: 1Xoqpq9AWIvSLHMqVZyBoFyCVKELi5AMNIpQ8A25oox4</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt;                 ID: 1QKrXYmolN_T6vH8Wg_FUFU7z9a0epwKIlgW20lceOkQ</span></span>
 <span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
 <span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
 <span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt;        # of sheets: 2</span></span>
@@ -305,7 +305,7 @@
 <span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; Appending 1 row(s) to "df"</span></span>
 <span id="cb12-4"><a href="#cb12-4"></a>ss</span>
 <span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt;                 ID: 1Xoqpq9AWIvSLHMqVZyBoFyCVKELi5AMNIpQ8A25oox4</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt;                 ID: 1QKrXYmolN_T6vH8Wg_FUFU7z9a0epwKIlgW20lceOkQ</span></span>
 <span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt;             Locale: en_US</span></span>
 <span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt;          Time zone: Etc/GMT</span></span>
 <span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt;        # of sheets: 2</span></span>
@@ -318,14 +318,14 @@
 <p>We take one last look at the sheets we created in <code>ss</code>, then clean up.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw"><a href="../reference/sheets_sheet_properties.html">sheets_sheet_properties</a></span>(ss)</span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="co">#&gt; # A tibble: 2 x 8</span></span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt; 1 df           0  298229329 GRID  TRUE            9            2 &lt;NULL&gt;</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt; 2 chickwts     1 1174696042 GRID  TRUE           72            2 &lt;NULL&gt;</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt;   name     index        id type  visible grid_rows grid_columns data  </span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt; 1 df           0 903572458 GRID  TRUE            9            2 &lt;NULL&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt; 2 chickwts     1  89690838 GRID  TRUE           72            2 &lt;NULL&gt;</span></span>
 <span id="cb13-7"><a href="#cb13-7"></a></span>
 <span id="cb13-8"><a href="#cb13-8"></a>googledrive<span class="op">::</span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(ss)</span>
 <span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt;   * fluffy-bunny: 1Xoqpq9AWIvSLHMqVZyBoFyCVKELi5AMNIpQ8A25oox4</span></span></code></pre></div>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt;   * fluffy-bunny: 1QKrXYmolN_T6vH8Wg_FUFU7z9a0epwKIlgW20lceOkQ</span></span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

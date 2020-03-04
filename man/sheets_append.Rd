@@ -59,7 +59,9 @@ Makes an \code{AppendCellsRequest}:
 }
 
 Other write functions: 
+\code{\link{sheets_create}()},
 \code{\link{sheets_edit}()},
+\code{\link{sheets_formula}()},
 \code{\link{write_sheet}()}
 }
 \concept{write functions}

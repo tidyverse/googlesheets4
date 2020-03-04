@@ -88,6 +88,8 @@ if (sheets_has_token()) {
 \seealso{
 Other write functions: 
 \code{\link{sheets_append}()},
-\code{\link{sheets_edit}()}
+\code{\link{sheets_create}()},
+\code{\link{sheets_edit}()},
+\code{\link{sheets_formula}()}
 }
 \concept{write functions}

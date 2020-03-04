@@ -25,6 +25,7 @@
 #'
 #' @template ss-return
 #' @export
+#' @family write functions
 #'
 #' @examples
 #' if (sheets_has_token()) {
@@ -106,7 +107,7 @@ prepare_df <- function(sheet_id, df, skip = 0) {
   # to shrink wrap the data and freeze the top row
   # https://github.com/tidyverse/googlesheets4/issues/92
   if (nrow(df) == 0) {
-    df <- vctrs::vec_init(df, n = 1)
+    df <- vec_init(df, n = 1)
   }
 
   # pack the data --------------------------------------------------------------

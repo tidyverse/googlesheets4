@@ -1,3 +1,22 @@
+# Why not `new("CellData", ...)`? It seems excessive to store the schema as
+# an attribute for each cell. Possibly a premature concern.
+new_CellData <- function(...) {
+  # explicit 'list' class is a bit icky but it makes jsonlite happy
+  structure(rlang::list2(...), class = c(
+    "googlesheets4_schema_CellData", "googlesheets4_schema", "list"
+  ))
+}
+
+# Use this instead of `new_CellData()` when (light) validation makes sense.
+CellData <- function(...) {
+  dots <- rlang::list2(...)
+  stopifnot(rlang::is_dictionaryish(dots))
+  check_against_schema(dots, id = "CellData")
+  new_CellData(...)
+}
+
+is_CellData <- function(x) inherits(x, "googlesheets4_schema_CellData")
+
 as_CellData <- function(x, .na = NULL) {
   UseMethod("as_CellData")
 }
@@ -10,33 +29,40 @@ as_CellData.default <- function(x, .na = NULL) {
   )
 }
 
-# I want to centralize what value we send for NA, even though -- for now, at
+# I want to centralize what we send for NA, even though -- for now, at
 # least -- I have not exposed this in user-facing functions. You could imagine
 # generalizing to allow user to request we send #N/A instead of an empty cell.
 # More about #N/A:
 # https://support.google.com/docs/answer/3093359?hl=en
-# Currently this is sort of possible:
-# as_CellData(c(TRUE, FALSE, NA), .na = list(formulaValue = "=NA()"))
-empty_cell <- function(..., .na = NULL) {
-  .na %||% list(userEnteredValue = NA)
+empty_cell <- function(.na = NULL) {
+  if (is.null(.na)) {
+    new_CellData(userEnteredValue = NA)
+  } else {
+    CellData(!!!.na)
+  }
 }
 
+# Note that this always returns a **list** of instances of
+# googlesheets4_schema_CellData
+# of the same length as x.
 cell_data <- function(x, val_type, .na = NULL) {
   force(val_type)
-  f<- function(y, ...) {
-    list(userEnteredValue = rlang::list2(!!val_type := y))
+  f <- function(y) {
+    new_CellData(userEnteredValue = rlang::list2(!!val_type := y))
   }
-  purrr::map_if(x, rlang::is_na, empty_cell, .na = .na, .else = f)
+  out <- map(x, f)
+  out[is.na(x)] <- list(empty_cell(.na = .na))
+  out
 }
-
-# Possibly premature worrying, but I'm not using new("CellData", ...) because
-# storing the tidy schema as an attribute for each cell seems excessive.
-# That would look something like this for logical:
-# map(x, ~ new("CellData", userEnteredValue = list(boolValue = .x)))
 
 #' @export
 as_CellData.NULL <- function(x, .na = NULL) {
   empty_cell(.na)
+}
+
+#' @export
+as_CellData.googlesheets4_schema_CellData <- function(x, .na = NULL) {
+  x
 }
 
 #' @export
@@ -50,18 +76,28 @@ as_CellData.character <- function(x, .na = NULL) {
 }
 
 #' @export
+as_CellData.factor <- function(x, .na = NULL) {
+  as_CellData(as.character(x), .na = .na)
+}
+
+#' @export
 as_CellData.numeric <- function(x, .na = NULL) {
   cell_data(x, val_type = "numberValue", .na = .na)
 }
 
 #' @export
 as_CellData.list <- function(x, .na = NULL) {
-  flatten(map(x, as_CellData, .na = .na))
+  out <- map(x, as_CellData, .na = .na)
+  # awkwardness possibly solved by using vctrs to create an S3 class for
+  # CellData ... but not pursuing at this time
+  needs_flatten <- !map_lgl(x, is_CellData)
+  out[needs_flatten] <- flatten(out[needs_flatten])
+  out
 }
 
 #' @export
-as_CellData.factor <- function(x, .na = NULL) {
-  as_CellData(as.character(x), .na = .na)
+as_CellData.googlesheets4_formula <- function(x, .na = NULL) {
+  cell_data(vec_data(x), val_type = "formulaValue", .na = .na)
 }
 
 add_format <- function(x, fmt) {
@@ -92,4 +128,22 @@ as_CellData.POSIXct <- function(x, .na = NULL) {
     # https://tools.ietf.org/html/rfc3339#section-5.6
     fmt = list(type = "DATE_TIME", pattern = "yyyy-mm-dd hh:mm:ss")
   )
+}
+
+# Currently (overly) focused on userEnteredValue, because I am thinking about
+# writing. But with a reading focus, one would want to see effectiveValue.
+format.googlesheets4_schema_CellData <- function(x, ...) {
+  # TODO: convey something about userEnteredFormat?
+  user_entered_value <- pluck(x, "userEnteredValue")
+  if (is.null(user_entered_value) || is.na(user_entered_value)) {
+    return("--no userEnteredValue --")
+  }
+  nm <- pluck(user_entered_value, names)
+  fval <- format(user_entered_value)
+  as.character(glue("{nm}: {fval}"))
+}
+
+print.googlesheets4_schema_CellData <- function(x, ...) {
+  header <- as.character(glue("<CellData>"))
+  cat(c(header, format(x)), sep = "\n")
 }

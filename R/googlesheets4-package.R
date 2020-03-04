@@ -4,5 +4,12 @@
 #'   compact transpose imap
 #' @importFrom rlang :=
 #' @importFrom tibble as_tibble
+#' @import vctrs
 #' @importFrom lifecycle deprecate_soft
 "_PACKAGE"
+
+#' Internal vctrs methods
+#'
+#' @keywords internal
+#' @name googlesheets4-vctrs
+NULL

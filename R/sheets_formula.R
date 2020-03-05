@@ -22,6 +22,7 @@ new_formula <- function(x = character()) {
 #' dat <- data.frame(X = c(1, 5, 3, 2, 4, 6))
 #'
 #' ss <- sheets_write(dat)
+#' ss
 #'
 #' summaries <- tibble::tribble(
 #'        ~ desc, ~ summaries,
@@ -40,7 +41,7 @@ new_formula <- function(x = character()) {
 #' miscellany <- tibble::tribble(
 #'        ~ desc, ~ example,
 #'   "hyperlink", "=HYPERLINK(\"http://www.google.com/\",\"Google\")",
-#'        "image", "=IMAGE(\"https://www.google.com/images/srpr/logo3w.png\")"
+#'       "image", "=IMAGE(\"https://www.google.com/images/srpr/logo3w.png\")"
 #' )
 #' miscellany$example <- sheets_formula(miscellany$example)
 #' miscellany

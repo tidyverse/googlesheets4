@@ -376,3 +376,37 @@ The examples for `sheets_edit()` show writing data of disparate type to a 1-row 
 sheets_find("sheets-edit-demo") %>%
   googledrive::drive_trash()
 ```
+
+## Write formulas
+
+All the writing functions can write *formulas* into cells, if you indicate this in the R object you are writing, i.e. in the data frame. The `sheets_formula()` function marks a character vector as containing Sheets formulas, as opposed to regular character strings.
+
+Here's a demo that also shows off using the Google Translate API inside a Sheet.
+
+```{r}
+lang_dat <- tibble::tribble(
+       ~ english, ~ to,
+       "    dog", "es",
+   "hello world", "ko",
+  "baby turtles", "th" 
+)
+lang_dat$translated <- sheets_formula(
+  '=GoogleTranslate(INDIRECT("R[0]C[-2]", FALSE), "en", INDIRECT("R[0]C[-1]", FALSE))'
+)
+
+(ss <- sheets_create("sheets-formula-demo", sheets = lang_dat))
+```
+
+Now we can read the data back out, complete with translations!
+
+```{r}
+sheets_read(ss)
+```
+
+### Clean up
+
+```{r}
+sheets_find("sheets-formula-demo") %>%
+  googledrive::drive_trash()
+```
+

@@ -44,7 +44,8 @@
 <meta property="og:title" content="Auto-resize columns or rows — sheets_auto_resize_dims" />
 <meta property="og:description" content="Applies automatic resizing to either columns or rows of a (work)sheet. The
 width or height of targeted columns or rows, respectively, is determined
-from the current cell contents." />
+from the current cell contents. This only affects the appearance of a Sheet
+in the browser and doesn't affect its values in any way." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -157,14 +158,15 @@ from the current cell contents." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Auto-resize columns or rows</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_auto_resize.R'><code>R/sheets_auto_resize.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_auto_resize_dims.R'><code>R/sheets_auto_resize_dims.R</code></a></small>
     <div class="hidden name"><code>sheets_auto_resize_dims.Rd</code></div>
     </div>
 
     <div class="ref-description">
     <p>Applies automatic resizing to either columns or rows of a (work)sheet. The
 width or height of targeted columns or rows, respectively, is determined
-from the current cell contents.</p>
+from the current cell contents. This only affects the appearance of a Sheet
+in the browser and doesn't affect its values in any way.</p>
     </div>
 
     <pre class="usage"><span class='fu'>sheets_auto_resize_dims</span>(
@@ -206,9 +208,7 @@ to request auto-resize for all columns or all rows.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    
-
-
+    <p>The input <code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Makes an <code>AutoResizeDimensionsRequest</code>: *
@@ -216,28 +216,30 @@ to request auto-resize for all columns or all rows.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>4</span>, <span class='fl'>6</span>))
+<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+  <span class='kw'>fruit</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"date"</span>, <span class='st'>"lime"</span>, <span class='st'>"pear"</span>, <span class='st'>"plum"</span>)
+)
 
 <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='write_sheet.html'>sheets_write</a></span>(<span class='no'>dat</span>)
 <span class='no'>ss</span>
 
-<span class='no'>summaries</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span>(
-       ~ <span class='no'>desc</span>, ~ <span class='no'>summaries</span>,
-        <span class='st'>"max"</span>, <span class='st'>"=max(A:A)"</span>,
-        <span class='st'>"sum"</span>, <span class='st'>"=sum(A:A)"</span>,
-        <span class='st'>"min"</span>, <span class='st'>"=min(A:A)"</span>,
-  <span class='st'>"sparkline"</span>, <span class='st'>"=SPARKLINE(A:A, {\"color\", \"blue\"})"</span>
+<span class='co'># open in the browser</span>
+<span class='fu'><a href='sheets_browse.html'>sheets_browse</a></span>(<span class='no'>ss</span>)
+
+<span class='co'># shrink column A to fit the short fruit names</span>
+<span class='fu'>sheets_auto_resize_dims</span>(<span class='no'>ss</span>)
+
+<span class='co'># send some longer fruit names</span>
+<span class='no'>dat2</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+  <span class='kw'>fruit</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cucumber"</span>, <span class='st'>"honeydew"</span>)
 )
-<span class='no'>summaries</span>$<span class='no'>summaries</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_formula.html'>sheets_formula</a></span>(<span class='no'>summaries</span>$<span class='no'>summaries</span>)
+<span class='fu'><a href='sheets_append.html'>sheets_append</a></span>(<span class='no'>dat2</span>, <span class='no'>ss</span>)
+<span class='co'># in the browser, see that column A is now too narrow to show the data</span>
 
-<span class='fu'><a href='sheets_edit.html'>sheets_edit</a></span>(<span class='no'>ss</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>summaries</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"C1"</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+<span class='fu'>sheets_auto_resize_dims</span>(<span class='no'>ss</span>)
+<span class='co'># in the browser, see the column A reveals all the data now</span>
 
-<span class='no'>tall_stuff</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"a\nb\nc\nd"</span>
-)
-<span class='fu'><a href='sheets_edit.html'>sheets_edit</a></span>(<span class='no'>ss</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>tall_stuff</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"Sheet1!B9"</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='fu'>sheets_auto_resize</span>(<span class='no'>ss</span>)
+<span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>(<span class='no'>ss</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

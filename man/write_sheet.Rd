@@ -36,7 +36,6 @@ sheet is styled as a table:
 names.
 \item The first row (header row) is frozen.
 \item Sheet dimensions are set to "shrink wrap" the \code{data}.
-\item Columns are set to auto-resize, based on cell content.
 }
 
 If no existing Sheet is specified via \code{ss}, this function delegates to

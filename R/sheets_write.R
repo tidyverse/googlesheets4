@@ -9,7 +9,6 @@
 #'     names.
 #'   * The first row (header row) is frozen.
 #'   * Sheet dimensions are set to "shrink wrap" the `data`.
-#'   * Columns are set to auto-resize, based on cell content.
 #'
 #' If no existing Sheet is specified via `ss`, this function delegates to
 #' [`sheets_create()`] and the new Sheet's name is randomly generated. If that's

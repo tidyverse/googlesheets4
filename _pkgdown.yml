@@ -47,6 +47,11 @@ reference:
     contents:
       - sheets_create
       - starts_with("sheets_sheet")
+  - title: "Formatting and aesthetics"
+    desc: >
+      Change how a Sheet appears in the browser UI
+    contents:
+      - sheets_auto_resize_dims
   - title: "Example Sheets"
     desc: >
       World-readable Sheets to use in examples and reprexes

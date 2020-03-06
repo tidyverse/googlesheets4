@@ -132,8 +132,7 @@ prepare_df <- function(sheet_id, df, skip = 0) {
   c(
     list(request_sheet_properties),
     list(request_values),
-    list(bureq_header_row(sheetId = sheet_id, row = skip + 1)),
-    list(bureq_auto_resize_dimensions(sheetId = sheet_id, dimension = "COLUMNS"))
+    list(bureq_header_row(sheetId = sheet_id, row = skip + 1))
   )
 }
 

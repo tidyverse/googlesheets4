@@ -97,13 +97,13 @@ bureq_auto_resize_dimensions <- function(sheetId,
     sheetId = sheetId,
     dimension = dimension
   )
-  if (!is.null(start)) {
+  if (!is.null(start) && notNA(start)) {
     check_non_negative_integer(start)
-    dimension_range <- patch(start = start)
+    dimension_range <- patch(dimension_range, startIndex = start - 1)
   }
-  if (!is.null(end)) {
+  if (!is.null(end) && notNA(end)) {
     check_non_negative_integer(end)
-    dimension_range <- patch(end = end)
+    dimension_range <- patch(dimension_range, endIndex = end)
   }
   list(autoResizeDimensions = new(
     "AutoResizeDimensionsRequest",

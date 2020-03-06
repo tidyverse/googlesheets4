@@ -70,20 +70,20 @@
 write_sheet <- function(data,
                         ss = NULL,
                         sheet = NULL) {
-  data_quo <- rlang::enquo(data)
-  data <- rlang::eval_tidy(data_quo)
+  data_quo <- enquo(data)
+  data <- eval_tidy(data_quo)
   check_data_frame(data)
 
   # no Sheet provided --> call sheets_create() ---------------------------------
   if (is.null(ss)) {
-    if (rlang::quo_is_symbol(data_quo)) {
-      sheet <- sheet %||% rlang::as_name(data_quo)
+    if (quo_is_symbol(data_quo)) {
+      sheet <- sheet %||% as_name(data_quo)
     }
     if (is.null(sheet)) {
       return(sheets_create(sheets = data))
     } else {
       check_string(sheet)
-      return(sheets_create(sheets = rlang::list2(!!sheet := data)))
+      return(sheets_create(sheets = list2(!!sheet := data)))
     }
   }
 
@@ -96,8 +96,8 @@ write_sheet <- function(data,
   message_glue("Writing to {dq(x$name)}")
 
   # no `sheet` ... but maybe we can name the sheet after the data --------------
-  if (is.null(sheet) && rlang::quo_is_symbol(data_quo)) {
-    candidate <- rlang::as_name(data_quo)
+  if (is.null(sheet) && quo_is_symbol(data_quo)) {
+    candidate <- as_name(data_quo)
     # accept proposed name iff it does not overwrite existing sheet
     if (!is.null(candidate)) {
       m <- match(candidate, x$sheets$name)

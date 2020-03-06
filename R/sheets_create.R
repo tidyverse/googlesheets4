@@ -59,7 +59,7 @@
 #'   sheets_find("sheets-create-demo") %>% googledrive::drive_trash()
 #' }
 sheets_create <- function(name = sheets_random(), ..., sheets = NULL) {
-  sheets       <- enlist_sheets(rlang::enquo(sheets))
+  sheets       <- enlist_sheets(enquo(sheets))
   sheets_given <- !is.null(sheets)
   data_given   <- sheets_given && !is.null(unlist(sheets$value))
 
@@ -87,7 +87,7 @@ sheets_create <- function(name = sheets_random(), ..., sheets = NULL) {
   }
 
   request_populate_sheets <- map2(ss$sheets$id, sheets$value, prepare_df)
-  request_populate_sheets <- flatten(request_populate_sheets)
+  request_populate_sheets <- purrr::flatten(request_populate_sheets)
   req <- request_generate(
     "sheets.spreadsheets.batchUpdate",
     params = list(

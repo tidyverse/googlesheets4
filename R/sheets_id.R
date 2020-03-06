@@ -188,7 +188,7 @@ as_id.googlesheets4_spreadsheet <- function(x, ...) as_sheets_id(x)
 #' @export
 format.sheets_id <- function(x, ...) {
   meta <- tryCatch(
-    rlang::with_abort(sheets_get(x)),
+    with_abort(sheets_get(x)),
     rlang_error = function(e) e
   )
 

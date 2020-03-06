@@ -71,7 +71,7 @@ sheets_sheet_add_impl_ <- function(ssid,
                                    sheet_name = NULL,
                                    index = NULL, ...) {
   sheet_name <- sheet_name %||% list(NULL)
-  dots <- rlang::list2(...)
+  dots <- list2(...)
   requests <- map(
     sheet_name,
     ~ make_addSheet(title = .x, index = index, dots = dots)

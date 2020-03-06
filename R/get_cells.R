@@ -128,7 +128,7 @@ cells <- function(x = list()) {
       times = row_lengths
     ),
     col = start_column + sequence(row_lengths) - 1,
-    cell = flatten(row_data)
+    cell = purrr::flatten(row_data)
   )
 }
 

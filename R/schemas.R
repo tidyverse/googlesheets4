@@ -1,9 +1,9 @@
 new <- function(id, ...) {
   schema <- .tidy_schemas[[id]]
   if (is.null(schema)) {
-    rlang::abort(glue("Can't find a tidy schema with id {sq(id)}"))
+    abort(glue("Can't find a tidy schema with id {sq(id)}"))
   }
-  dots <- rlang::list2(...)
+  dots <- list2(...)
 
   check_against_schema(dots, schema = schema)
 
@@ -25,7 +25,7 @@ check_against_schema <- function(x, schema = NULL, id = NA) {
     Properties not recognized for the {sq(attr(schema, 'id'))} schema:
       * {glue_collapse(unexpected, sep = ', ')}
     ")
-    rlang::abort(msg)
+    abort(msg)
   }
   x
 }
@@ -51,7 +51,7 @@ patch.default <- function(x, ...) {
 
 #' @export
 patch.googlesheets4_schema <- function(x, ...) {
-  dots <- rlang::list2(...)
+  dots <- list2(...)
   x[names(dots)] <- dots
   check_against_schema(x)
 }

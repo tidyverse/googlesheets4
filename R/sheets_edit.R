@@ -203,7 +203,7 @@ prepare_dims <- function(write_loc, data, col_names) {
   # `write_loc` are zero-indexed. Recall that:
   #   * `start` is an instance of GridCoordinate
   #   * `range` is an instance of GridRange
-  if (rlang::has_name(write_loc, "start")) {
+  if (has_name(write_loc, "start")) {
     return(list(
       nrow = (write_loc$start$rowIndex    %||% 0) + nrow(data) + col_names,
       ncol = (write_loc$start$columnIndex %||% 0) + ncol(data)

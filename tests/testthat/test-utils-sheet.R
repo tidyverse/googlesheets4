@@ -3,7 +3,7 @@ test_that("enlist_sheets() works", {
   df1 <- data.frame(x = 1L)
   df2 <- data.frame(x = 2L)
   df_list <- list(df1 = df1, df2 = df2)
-  f <- function(sheets = NULL) enlist_sheets(rlang::enquo(sheets))
+  f <- function(sheets = NULL) enlist_sheets(enquo(sheets))
 
   expect_null(f())
   expect_identical(

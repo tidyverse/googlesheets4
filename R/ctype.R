@@ -50,7 +50,7 @@ ctype.character <- function(x, ...) .ctypes[x]
 
 #' @export
 ctype.list <- function(x, ...) {
-  out <- rlang::rep_along(x, NA_character_)
+  out <- rep_along(x, NA_character_)
   is_SHEETS_CELL <- map_lgl(x, inherits, what = "SHEETS_CELL")
   out[is_SHEETS_CELL] <- map_chr(x[is_SHEETS_CELL], ctype)
   out

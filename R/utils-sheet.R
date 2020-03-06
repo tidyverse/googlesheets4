@@ -16,7 +16,7 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
 
   if (is.character(sheet)) {
     stop_sheet_not_found <- function(sheet) {
-      rlang::abort(
+      abort(
         glue("No sheet found with this name: {dq(sheet)}"),
         class = "googlesheets4_error_sheet_not_found",
         sheet = sheet
@@ -90,7 +90,7 @@ maybe_sheet <- function(sheet = NULL, nm = deparse(substitute(sheet))) {
 #' @keywords internal
 #' @noRd
 enlist_sheets <- function(sheets_quo) {
-  sheets <- rlang::eval_tidy(sheets_quo)
+  sheets <- eval_tidy(sheets_quo)
 
   null_along <- function(x) vector(mode = "list", length = length(x))
 
@@ -103,15 +103,15 @@ enlist_sheets <- function(sheets_quo) {
   }
 
   if (inherits(sheets, "data.frame")) {
-    if (rlang::quo_is_symbol(sheets_quo)) {
-      return(list(name = rlang::as_name(sheets_quo), value = list(sheets)))
+    if (quo_is_symbol(sheets_quo)) {
+      return(list(name = as_name(sheets_quo), value = list(sheets)))
     } else {
       return(list(name = list(NULL), value = list(sheets)))
     }
   }
 
-  if (rlang::is_list(sheets)) {
-    nms <- if (rlang::is_named(sheets)) names(sheets) else null_along(sheets)
+  if (is_list(sheets)) {
+    nms <- if (is_named(sheets)) names(sheets) else null_along(sheets)
     return(list(name = nms, value = unname(sheets)))
   }
 

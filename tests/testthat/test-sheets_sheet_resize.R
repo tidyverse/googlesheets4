@@ -43,13 +43,13 @@ test_that("prepare_resize_request() works for resize & no resize", {
   # not enough rows
   purrr::walk(
     grid_properties[df$nrow_needed > n],
-    ~ expect_true(rlang::has_name(.x, "rowCount"))
+    ~ expect_true(has_name(.x, "rowCount"))
   )
 
   # not enough columns
   purrr::walk(
     grid_properties[df$ncol_needed > m],
-    ~ expect_true(rlang::has_name(.x, "columnCount"))
+    ~ expect_true(has_name(.x, "columnCount"))
   )
 
   # exact = TRUE
@@ -69,12 +69,12 @@ test_that("prepare_resize_request() works for resize & no resize", {
   # not enough rows or too many rows
   purrr::walk(
     grid_properties[df$nrow_needed != n],
-    ~ expect_true(rlang::has_name(.x, "rowCount"))
+    ~ expect_true(has_name(.x, "rowCount"))
   )
 
   # not enough columns or too many columns
   purrr::walk(
     grid_properties[df$ncol_needed != m],
-    ~ expect_true(rlang::has_name(.x, "columnCount"))
+    ~ expect_true(has_name(.x, "columnCount"))
   )
 })

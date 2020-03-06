@@ -13,7 +13,7 @@ sheets_browse <- function(ss) {
   # googledrive::drive_browse(as_sheets_id(ss))
   ssid <- as_sheets_id(ss)
   url <- glue("https://docs.google.com/spreadsheets/d/{ssid}")
-  if (!rlang::is_interactive()) return(invisible(url))
+  if (!is_interactive()) return(invisible(url))
   utils::browseURL(url)
   return(invisible(url))
 }

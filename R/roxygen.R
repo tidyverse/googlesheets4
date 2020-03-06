@@ -8,7 +8,7 @@ param_sheet <- function(action, ...) {
     You can identify a sheet by name, with a string, or by position, \\
     with a number.
     ")
-  dots <- rlang::list2(...)
+  dots <- list2(...)
   if (length(dots) > 0) {
     template <- c(template, dots)
   }

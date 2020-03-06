@@ -6,7 +6,7 @@ expect_empty_cell <- function(object) {
 expect_cell_value <- function(object, nm, val) {
   expect_equal(
     object[["userEnteredValue"]],
-    rlang::list2(!!nm := val)
+    list2(!!nm := val)
   )
 }
 

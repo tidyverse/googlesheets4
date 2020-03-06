@@ -19,7 +19,7 @@
 #'   be either `"columns"` (the default) or `"rows"`. This is the simplest way
 #'   to request auto-resize for all columns or all rows.
 #'
-#' @return
+#' @template ss-return
 #' @export
 #' @family formatting functions
 #' @seealso Makes an `AutoResizeDimensionsRequest`: *

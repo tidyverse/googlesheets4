@@ -25,7 +25,7 @@ as_Sheet.NULL <- function(x, ...) {
 #' @export
 as_Sheet.character <- function(x, ...) {
   check_length_one(x)
-  dots <- rlang::list2(...)
+  dots <- list2(...)
   out <- new(
     id = "Sheet",
     properties = new(

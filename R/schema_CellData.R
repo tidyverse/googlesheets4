@@ -2,15 +2,15 @@
 # an attribute for each cell. Possibly a premature concern.
 new_CellData <- function(...) {
   # explicit 'list' class is a bit icky but it makes jsonlite happy
-  structure(rlang::list2(...), class = c(
+  structure(list2(...), class = c(
     "googlesheets4_schema_CellData", "googlesheets4_schema", "list"
   ))
 }
 
 # Use this instead of `new_CellData()` when (light) validation makes sense.
 CellData <- function(...) {
-  dots <- rlang::list2(...)
-  stopifnot(rlang::is_dictionaryish(dots))
+  dots <- list2(...)
+  stopifnot(is_dictionaryish(dots))
   check_against_schema(dots, id = "CellData")
   new_CellData(...)
 }
@@ -48,7 +48,7 @@ empty_cell <- function(.na = NULL) {
 cell_data <- function(x, val_type, .na = NULL) {
   force(val_type)
   f <- function(y) {
-    new_CellData(userEnteredValue = rlang::list2(!!val_type := y))
+    new_CellData(userEnteredValue = list2(!!val_type := y))
   }
   out <- map(x, f)
   out[is.na(x)] <- list(empty_cell(.na = .na))
@@ -91,7 +91,7 @@ as_CellData.list <- function(x, .na = NULL) {
   # awkwardness possibly solved by using vctrs to create an S3 class for
   # CellData ... but not pursuing at this time
   needs_flatten <- !map_lgl(x, is_CellData)
-  out[needs_flatten] <- flatten(out[needs_flatten])
+  out[needs_flatten] <- purrr::flatten(out[needs_flatten])
   out
 }
 
@@ -101,7 +101,7 @@ as_CellData.googlesheets4_formula <- function(x, .na = NULL) {
 }
 
 add_format <- function(x, fmt) {
-  x[["userEnteredFormat"]] <- list(numberFormat = rlang::list2(!!!fmt))
+  x[["userEnteredFormat"]] <- list(numberFormat = list2(!!!fmt))
   x
 }
 

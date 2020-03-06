@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Class for Google Sheets formulas — sheets_formula • googlesheets4</title>
+<title>Auto-resize columns or rows — sheets_auto_resize_dims • googlesheets4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -41,11 +41,10 @@
 
 
 
-<meta property="og:title" content="Class for Google Sheets formulas — sheets_formula" />
-<meta property="og:description" content="In order to write a formula into Google Sheets, you need to store it as an
-object of class googlesheets4_formula. This is how we distinguish a
-&quot;regular&quot; character string from a string that should be interpreted as a
-formula. googlesheets4_formula is an S3 class implemented using the vctrs package." />
+<meta property="og:title" content="Auto-resize columns or rows — sheets_auto_resize_dims" />
+<meta property="og:description" content="Applies automatic resizing to either columns or rows of a (work)sheet. The
+width or height of targeted columns or rows, respectively, is determined
+from the current cell contents." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -157,39 +156,63 @@ formula. googlesheets4_formula is an S3 class implemented using the vctrs packag
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Class for Google Sheets formulas</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_formula.R'><code>R/sheets_formula.R</code></a></small>
-    <div class="hidden name"><code>sheets_formula.Rd</code></div>
+    <h1>Auto-resize columns or rows</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_auto_resize.R'><code>R/sheets_auto_resize.R</code></a></small>
+    <div class="hidden name"><code>sheets_auto_resize_dims.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>In order to write a formula into Google Sheets, you need to store it as an
-object of class <code>googlesheets4_formula</code>. This is how we distinguish a
-"regular" character string from a string that should be interpreted as a
-formula. <code>googlesheets4_formula</code> is an S3 class implemented using the <a href='https://vctrs.r-lib.org/articles/s3-vector.html'>vctrs package</a>.</p>
+    <p>Applies automatic resizing to either columns or rows of a (work)sheet. The
+width or height of targeted columns or rows, respectively, is determined
+from the current cell contents.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_formula</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>())</pre>
+    <pre class="usage"><span class='fu'>sheets_auto_resize_dims</span>(
+  <span class='no'>ss</span>,
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>dimension</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"columns"</span>, <span class='st'>"rows"</span>)
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Character.</p></td>
+      <th>ss</th>
+      <td><p>Something that identifies a Google Sheet: its file ID, a URL from
+which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
+(returned by <code><a href='sheets_get.html'>sheets_get()</a></code>, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+is how googledrive represents Drive files. Processed through
+<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+    </tr>
+    <tr>
+      <th>sheet</th>
+      <td><p>Sheet to modify, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Ignored if the sheet is specified via <code>range</code>. If neither argument specifies the sheet, defaults to the first visible sheet.</p></td>
+    </tr>
+    <tr>
+      <th>range</th>
+      <td><p>Which columns or rows to resize. Optional. If you want to resize
+all columns or all rows, use <code>dimension</code> instead. All the usual <code>range</code>
+specifications are accepted, but the targeted range must specify only
+columns (e.g. "B:F") or only rows (e.g. "2:7").</p></td>
+    </tr>
+    <tr>
+      <th>dimension</th>
+      <td><p>Ignored if <code>range</code> is given. If consulted, <code>dimension</code> must
+be either <code>"columns"</code> (the default) or <code>"rows"</code>. This is the simplest way
+to request auto-resize for all columns or all rows.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An S3 vector of class <code>googlesheets4_formula</code>.</p>
+    
+
+
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Other write functions: 
-<code><a href='sheets_append.html'>sheets_append</a>()</code>,
-<code><a href='sheets_create.html'>sheets_create</a>()</code>,
-<code><a href='sheets_edit.html'>sheets_edit</a>()</code>,
-<code><a href='write_sheet.html'>write_sheet</a>()</code></p></div>
+    <div class='dont-index'><p>Makes an <code>AutoResizeDimensionsRequest</code>: *
+<a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#autoresizedimensionsrequest'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#autoresizedimensionsrequest</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
@@ -205,25 +228,16 @@ formula. <code>googlesheets4_formula</code> is an S3 class implemented using the
         <span class='st'>"min"</span>, <span class='st'>"=min(A:A)"</span>,
   <span class='st'>"sparkline"</span>, <span class='st'>"=SPARKLINE(A:A, {\"color\", \"blue\"})"</span>
 )
-
-<span class='co'># explicitly declare a column as `googlesheets4_formula`</span>
-<span class='no'>summaries</span>$<span class='no'>summaries</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_formula</span>(<span class='no'>summaries</span>$<span class='no'>summaries</span>)
-<span class='no'>summaries</span>
+<span class='no'>summaries</span>$<span class='no'>summaries</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_formula.html'>sheets_formula</a></span>(<span class='no'>summaries</span>$<span class='no'>summaries</span>)
 
 <span class='fu'><a href='sheets_edit.html'>sheets_edit</a></span>(<span class='no'>ss</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>summaries</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"C1"</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='no'>miscellany</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span>(
-       ~ <span class='no'>desc</span>, ~ <span class='no'>example</span>,
-  <span class='st'>"hyperlink"</span>, <span class='st'>"=HYPERLINK(\"http://www.google.com/\",\"Google\")"</span>,
-      <span class='st'>"image"</span>, <span class='st'>"=IMAGE(\"https://www.google.com/images/srpr/logo3w.png\")"</span>
+<span class='no'>tall_stuff</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"a\nb\nc\nd"</span>
 )
-<span class='no'>miscellany</span>$<span class='no'>example</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_formula</span>(<span class='no'>miscellany</span>$<span class='no'>example</span>)
-<span class='no'>miscellany</span>
+<span class='fu'><a href='sheets_edit.html'>sheets_edit</a></span>(<span class='no'>ss</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>tall_stuff</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"Sheet1!B9"</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-<span class='fu'><a href='write_sheet.html'>sheets_write</a></span>(<span class='no'>miscellany</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>)
-
-<span class='co'># clean up</span>
-<span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>(<span class='no'>ss</span>)
+<span class='fu'>sheets_auto_resize</span>(<span class='no'>ss</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

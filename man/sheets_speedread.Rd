@@ -10,7 +10,6 @@ sheets_speedread(
   range = NULL,
   skip = 0,
   ...,
-  .url = c("export", "datasource"),
   .method = c("vroom", "readr")
 )
 }
@@ -40,8 +39,6 @@ is a lower bound. Ignored if \code{range} is given.}
 
 \item{...}{Passed along to \code{vroom::vroom()} or \code{readr::read_csv()}.}
 
-\item{.url}{Whether to use the \code{"export"} (default) or \code{"datasource"} URL.}
-
 \item{.method}{Whether to process the CSV data with \code{vroom::vroom()}
 (default) or \code{readr::read_csv()}.}
 }
@@ -50,12 +47,14 @@ A \link[tibble:tibble-package]{tibble}
 }
 \description{
 This function uses a quick-and-dirty method to read a Sheet that bypasses the
-Sheets API entirely. It can be much faster than \code{\link[=sheets_read]{sheets_read()}} -- noticeably
-so for "large" spreadsheets. \code{sheets_speedread()} forms a special URL that
-reads Sheet values via CSV, then sends that data through vroom or readr.
-Here are the limitations we must accept to get faster reading:
+Sheets API and, instead, parses a CSV representation of the data. This can be
+much faster than \code{\link[=sheets_read]{sheets_read()}} -- noticeably so for "large" spreadsheets.
+There are real downsides, though, so we recommend this approach only when the
+speed difference justifies it. Here are the limitations we must accept to get
+faster reading:
 \itemize{
-\item Only cell values are available, not formats.
+\item Only formatted cell values are available, not underlying values or details
+on the formats.
 \item We can't target a named range as the \code{range}.
 \item We have no access to the data type of a cell, i.e. we don't know that it's
 logical, numeric, or datetime. That must be re-discovered based on the
@@ -64,118 +63,39 @@ CSV data (or specified by the user).
 which may lead to behaviour that differs from other functions in
 googlesheets4.
 }
+
+Note that the Sheets API is still used to retrieve metadata on the target
+Sheet, in order to support range specification.
 }
-\section{The export URL}{
-
-
-The export URL supports various query parameters. We always send
-\code{format=csv} and, optionally, \code{gid=SHEET_ID} and/or \code{range=A2:D5} (\code{range}
-must really be cell range in this case, not a sheet name or named range):\preformatted{# here is the base URL:
-https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/export
-
-# examples of the query part
-?format=csv
-?format=csv?range=CELL_RANGE
-?format=csv?gid=SHEET_ID
-?format=csv?range=A1_range?gid=SHEET_ID
-}
-
-The export URL supports the use of a bearer token in the Authorization
-header.
-
-Gist of various query parameters that work for the export URL, with special
-emphasis on the PDF format, which doesn't help us:
-\itemize{
-\item \url{https://gist.github.com/Spencer-Easton/78f9867a691e549c9c70}
-}
-}
-
-\section{The datasource URL}{
-
-
-The "Chart Tools datasource protocol" is another way to access values in
-Sheets, designed to make Sheets play nicely with the Google Charts API. We
-can use the datasource URL as another way to get data as CSV (or JSON,
-etc.). It is more powerful than the export URL, in that it supports an
-entire SQL-like query language.
-
-The datasource URL does not appear to work with an Authorization header.
-Instead, we must send an access token as part of the query.
-
-Stack Overflow answer that links to various pages re: the "Chart Tools
-datasource protocol"
-\itemize{
-\item \url{https://stackoverflow.com/a/33727897/2825349}
-}
-
-The most important link is about "Query Source Ranges":
-\itemize{
-\item \url{https://developers.google.com/chart/interactive/docs/spreadsheets#queryurlformat}
-}
-
-Examples of datasource URLs\preformatted{# here is the base URL:
-https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/gviz/tq
-
-# examples of the query part
-?tqx=out:csv&sheet=\{sheet_name\}
-?range=A1:C4
-?headers=N
-?gid=N
-}
-
-A readr issue that demonstrates sending an Authorization header
-\itemize{
-\item \url{https://github.com/tidyverse/readr/issues/935}
-}
-}
-
 \examples{
 # Using the large NBA sheet from
 # https://github.com/tidyverse/googlesheets4/issues/122
 spreadsheet_id <- "1mnWcn7bd7obaXd05rnXrEtgzMBLdy7ctsYvlQM52W00"
 (ss <- as_sheets_id(spreadsheet_id))
 
-sheets_speedread(ss, .url = "export", .method = "vroom")
-sheets_speedread(ss, .url = "export", .method = "readr")
-sheets_speedread(ss, .url = "datasource", .method = "vroom")
-sheets_speedread(ss, .url = "datasource", .method = "readr")
-
-if (FALSE) {
-library(bench)
-bnch <- bench::mark(
-  sheets_speedread(ss, .url = "export", .method = "vroom"),
-  sheets_speedread(ss, .url = "export", .method = "readr"),
-  sheets_speedread(ss, .url = "datasource", .method = "vroom"),
-  sheets_speedread(ss, .url = "datasource", .method = "readr"),
-  iterations = 5,
-  check = FALSE
-)
-bnch
-}
+sheets_speedread(ss, .method = "vroom")
+sheets_speedread(ss, .method = "readr")
 
 # prove that we can send a cell range, sheet, and col spec through ...
-(df <- sheets_speedread(
-  sheets_example("deaths"),
-  sheet = "other",
-  range = "A5:F15",
-  col_types = vroom::cols(
-    Age = vroom::col_integer(),
-    `Date of birth` = vroom::col_date("\%m/\%d/\%Y"),
-    `Date of death` = vroom::col_date("\%m/\%d/\%Y")
-  ),
-  .method = "vroom"
-))
+if (require("vroom")) {
+  sheets_speedread(
+    sheets_example("deaths"),
+    sheet = "other",
+    range = "A5:F15",
+    col_types = cols(
+      Age = col_integer(),
+      `Date of birth` = col_date("\%m/\%d/\%Y"),
+      `Date of death` = col_date("\%m/\%d/\%Y")
+    ),
+    .method = "vroom"
+  )
+}
 
-
-if (FALSE) {
-# write a private Sheet
+if (sheets_has_token()) {
+# write a Sheet that, by default, is NOT world-readable
 (ss <- sheets_write(iris))
 
-# read via 'export' URL (sends a bearer token)
 sheets_speedread(ss, .url = "export")
-
-# read via 'datasource' URL (access token goes as query param)
-sheets_speedread(ss, .url = "datasource")
 
 # clean up
 googledrive::drive_trash(ss)

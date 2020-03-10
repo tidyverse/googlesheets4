@@ -2,9 +2,17 @@
 % Please edit documentation in R/sheets_speedread.R
 \name{sheets_speedread}
 \alias{sheets_speedread}
-\title{Read Sheet as csv}
+\title{Read Sheet as CSV}
 \usage{
-sheets_speedread(ss, sheet = NULL, range = NULL, skip = 0, ...)
+sheets_speedread(
+  ss,
+  sheet = NULL,
+  range = NULL,
+  skip = 0,
+  ...,
+  .url = c("export", "datasource"),
+  .method = c("vroom", "readr")
+)
 }
 \arguments{
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
@@ -30,34 +38,69 @@ any cell reference.}
 column names or data. Leading empty rows are automatically skipped, so this
 is a lower bound. Ignored if \code{range} is given.}
 
-\item{...}{Passed along to \code{vroom::vroom()}.}
+\item{...}{Passed along to \code{vroom::vroom()} or \code{readr::read_csv()}.}
+
+\item{.url}{Whether to use the \code{"export"} (default) or \code{"datasource"} URL.}
+
+\item{.method}{Whether to process the CSV data with \code{vroom::vroom()}
+(default) or \code{readr::read_csv()}.}
 }
 \value{
-
+A \link[tibble:tibble-package]{tibble}
 }
 \description{
-The \code{export} URL supports various query parameters. We exploit \code{format=csv}
-and, optionally, \code{gid=SHEET_ID} and/or \code{range=A2:D5} (\code{range} must really be
-cell range in this case, not a sheet name or named range):\preformatted{# here is the base URL:
+This function uses a quick-and-dirty method to read a Sheet that bypasses the
+Sheets API entirely. It can be much faster than \code{\link[=sheets_read]{sheets_read()}} -- noticeably
+so for "large" spreadsheets. \code{sheets_speedread()} forms a special URL that
+reads Sheet values via CSV, then sends that data through vroom or readr.
+Here are the limitations we must accept to get faster reading:
+\itemize{
+\item Only cell values are available, not formats.
+\item We can't target a named range as the \code{range}.
+\item We have no access to the data type of a cell, i.e. we don't know that it's
+logical, numeric, or datetime. That must be re-discovered based on the
+CSV data (or specified by the user).
+\item Auth and error handling have to be handled a bit differently internally,
+which may lead to behaviour that differs from other functions in
+googlesheets4.
+}
+}
+\section{The export URL}{
+
+
+The export URL supports various query parameters. We always send
+\code{format=csv} and, optionally, \code{gid=SHEET_ID} and/or \code{range=A2:D5} (\code{range}
+must really be cell range in this case, not a sheet name or named range):\preformatted{# here is the base URL:
 https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/export
 
 # examples of the query part
 ?format=csv
-?format=csv?range=A1_range
+?format=csv?range=CELL_RANGE
 ?format=csv?gid=SHEET_ID
 ?format=csv?range=A1_range?gid=SHEET_ID
 }
 
-Handy gist of various query parameters that work for the \code{export} URL, with
-special attention to the PDF format:
+The export URL supports the use of a bearer token in the Authorization
+header.
+
+Gist of various query parameters that work for the export URL, with special
+emphasis on the PDF format, which doesn't help us:
 \itemize{
 \item \url{https://gist.github.com/Spencer-Easton/78f9867a691e549c9c70}
 }
+}
+
+\section{The datasource URL}{
+
 
 The "Chart Tools datasource protocol" is another way to access values in
 Sheets, designed to make Sheets play nicely with the Google Charts API. We
-can use the datasource URL as another way to get data as CSV (or JSON, etc.).
-It is more powerful than the \code{export} URL.
+can use the datasource URL as another way to get data as CSV (or JSON,
+etc.). It is more powerful than the export URL, in that it supports an
+entire SQL-like query language.
+
+The datasource URL does not appear to work with an Authorization header.
+Instead, we must send an access token as part of the query.
 
 Stack Overflow answer that links to various pages re: the "Chart Tools
 datasource protocol"
@@ -70,7 +113,7 @@ The most important link is about "Query Source Ranges":
 \item \url{https://developers.google.com/chart/interactive/docs/spreadsheets#queryurlformat}
 }
 
-Examples of such URLs\preformatted{# here is the base URL:
+Examples of datasource URLs\preformatted{# here is the base URL:
 https://docs.google.com/spreadsheets/d/SPREADSHEET_ID/gviz/tq
 
 # examples of the query part
@@ -85,130 +128,56 @@ A readr issue that demonstrates sending an Authorization header
 \item \url{https://github.com/tidyverse/readr/issues/935}
 }
 }
+
 \examples{
-# exploring the export URL
-base_url_template <- "https://docs.google.com/spreadsheets/d/{spreadsheet_id}/export"
-
-(spreadsheet_id <- unclass(sheets_example("deaths")))
-(deaths_url <- glue::glue(base_url_template))
-meta <- sheets_get(spreadsheet_id)
-other_sheet_id <- vlookup("other", meta$sheets, "name", "id")
-deaths_range <- "A5:F15"
-
-# send no extras
-query <- list(format = "csv")
-(url <- httr::modify_url(deaths_url, query = query))
-readr::read_csv(url)
-vroom::vroom(url)
-
-# send an A1 cell range (reads first sheet)
-query <- list(format = "csv", range = deaths_range)
-(url <- httr::modify_url(deaths_url, query = query))
-readr::read_csv(url)
-vroom::vroom(url)
-
-# send gid of a worksheet
-query <- list(format = "csv", gid = other_sheet_id)
-(url <- httr::modify_url(deaths_url, query = query))
-readr::read_csv(url)
-vroom::vroom(url)
-
-# send cell range and gid of a worksheet
-query <- list(format = "csv", gid = other_sheet_id, range = deaths_range)
-(url <- httr::modify_url(deaths_url, query = query))
-readr::read_csv(url)
-vroom::vroom(url)
-
-# can you send a (work)sheet name via range?
-query <- list(format = "csv", range = "other")
-(url <- httr::modify_url(deaths_url, query = query))
-readr::read_csv(url)
-# Error in open.connection(con, "rb") : HTTP error 400.
-# NO THIS DOES NOT WORK
-
-# can you send a named range via range?
-query <- list(format = "csv", range = "other_data")
-url <- httr::modify_url(deaths_url, query = query)
-readr::read_csv(url)
-# Error in open.connection(con, "rb") : HTTP error 400.
-# NO THIS DOES NOT WORK
-
-# exploring access via the Chart Tools datasource protocol
-base_url_template <- "https://docs.google.com/spreadsheets/d/{spreadsheet_id}/gviz/tq"
-
-(spreadsheet_id <- unclass(sheets_example("deaths")))
-(deaths_url <- glue::glue(base_url_template))
-meta <- sheets_get(spreadsheet_id)
-other_sheet_id <- vlookup("other", meta$sheets, "name", "id")
-deaths_range <- "A5:F15"
-
-# send no extras
-query <- list(tqx = "out:csv")
-(url <- httr::modify_url(deaths_url, query = query))
-readr::read_csv(url)
-vroom::vroom(url)
-# very interesting treatment of the header and footer rows!
-
-# send a sheet id
-query <- list(tqx = "out:csv", gid = other_sheet_id)
-(url <- httr::modify_url(deaths_url, query = query))
-readr::read_csv(url)
-vroom::vroom(url)
-
-# specify headers rows
-query <- list(tqx = "out:csv", headers = 5)
-(url <- httr::modify_url(deaths_url, query = query))
-readr::read_csv(url)
-vroom::vroom(url)
-# seems to be same result as letting it discover header rows
-
-# send cell range
-query <- list(tqx = "out:csv", range = deaths_range)
-(url <- httr::modify_url(deaths_url, query = query))
-readr::read_csv(url)
-vroom::vroom(url)
-# WORKS
-
-# send named range
-query <- list(tqx = "out:csv", range = "arts_data")
-(url <- httr::modify_url(deaths_url, query = query))
-readr::read_csv(url)
-vroom::vroom(url)
-# DOES NOT SEEM TO WORK
-
-# send sheet name
-query <- list(tqx = "out:csv", sheet = "other")
-(url <- httr::modify_url(deaths_url, query = query))
-readr::read_csv(url)
-vroom::vroom(url)
-# WORKS (other than header/footer weirdness)
-
-# quick speed test with Sheet from
+# Using the large NBA sheet from
 # https://github.com/tidyverse/googlesheets4/issues/122
-(spreadsheet_id <- "1mnWcn7bd7obaXd05rnXrEtgzMBLdy7ctsYvlQM52W00")
+spreadsheet_id <- "1mnWcn7bd7obaXd05rnXrEtgzMBLdy7ctsYvlQM52W00"
+(ss <- as_sheets_id(spreadsheet_id))
 
-export_url_template <- "https://docs.google.com/spreadsheets/d/{spreadsheet_id}/export"
-(nba_export_url <- glue::glue(export_url_template))
-query <- list(format = "csv")
-(nba_export_url <- httr::modify_url(nba_export_url, query = query))
-readr::read_csv(nba_export_url) # 56,765 x 23
-vroom::vroom(nba_export_url)    # 56,765 x 23
+sheets_speedread(ss, .url = "export", .method = "vroom")
+sheets_speedread(ss, .url = "export", .method = "readr")
+sheets_speedread(ss, .url = "datasource", .method = "vroom")
+sheets_speedread(ss, .url = "datasource", .method = "readr")
 
-datasource_url_template <- "https://docs.google.com/spreadsheets/d/{spreadsheet_id}/gviz/tq"
-(nba_datasource_url <- glue::glue(datasource_url_template))
-query <- list(tqx = "out:csv")
-(nba_datasource_url <- httr::modify_url(nba_datasource_url, query = query))
-readr::read_csv(nba_datasource_url) # 56,765 x 23
-vroom::vroom(nba_datasource_url)    # 56,765 x 23
-
+if (FALSE) {
 library(bench)
 bnch <- bench::mark(
-  readr::read_csv(nba_export_url),
-  vroom::vroom(nba_export_url),
-  readr::read_csv(nba_datasource_url),
-  vroom::vroom(nba_datasource_url),
-  iterations = 1,
+  sheets_speedread(ss, .url = "export", .method = "vroom"),
+  sheets_speedread(ss, .url = "export", .method = "readr"),
+  sheets_speedread(ss, .url = "datasource", .method = "vroom"),
+  sheets_speedread(ss, .url = "datasource", .method = "readr"),
+  iterations = 5,
   check = FALSE
 )
 bnch
+}
+
+# prove that we can send a cell range, sheet, and col spec through ...
+(df <- sheets_speedread(
+  sheets_example("deaths"),
+  sheet = "other",
+  range = "A5:F15",
+  col_types = vroom::cols(
+    Age = vroom::col_integer(),
+    `Date of birth` = vroom::col_date("\%m/\%d/\%Y"),
+    `Date of death` = vroom::col_date("\%m/\%d/\%Y")
+  ),
+  .method = "vroom"
+))
+
+
+if (FALSE) {
+# write a private Sheet
+(ss <- sheets_write(iris))
+
+# read via 'export' URL (sends a bearer token)
+sheets_speedread(ss, .url = "export")
+
+# read via 'datasource' URL (access token goes as query param)
+sheets_speedread(ss, .url = "datasource")
+
+# clean up
+googledrive::drive_trash(ss)
+}
 }

@@ -110,10 +110,7 @@ sheets_speedread <- function(ss,
   )
   message_glue("Export URL: {req$url}")
 
-  tmp <- tempfile()
-  on.exit(unlink(tmp), add = TRUE)
-  response <- httr::GET(req$url, httr::write_disk(tmp), config = token)
+  response <- httr::GET(req$url, config = token)
   stopifnot(identical(httr::http_type(response), "text/csv"))
-
-  readr::read_csv(tmp, ...)
+  readr::read_csv(httr::content(response, type = "raw"), ...)
 }

@@ -4,14 +4,7 @@
 \alias{sheets_speedread}
 \title{Read Sheet as CSV}
 \usage{
-sheets_speedread(
-  ss,
-  sheet = NULL,
-  range = NULL,
-  skip = 0,
-  ...,
-  .method = c("vroom", "readr")
-)
+sheets_speedread(ss, sheet = NULL, range = NULL, skip = 0, ...)
 }
 \arguments{
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
@@ -37,10 +30,7 @@ any cell reference.}
 column names or data. Leading empty rows are automatically skipped, so this
 is a lower bound. Ignored if \code{range} is given.}
 
-\item{...}{Passed along to \code{vroom::vroom()} or \code{readr::read_csv()}.}
-
-\item{.method}{Whether to process the CSV data with \code{vroom::vroom()}
-(default) or \code{readr::read_csv()}.}
+\item{...}{Passed along to \code{readr::read_csv()}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
@@ -72,12 +62,10 @@ Sheet, in order to support range specification.
 # https://github.com/tidyverse/googlesheets4/issues/122
 spreadsheet_id <- "1mnWcn7bd7obaXd05rnXrEtgzMBLdy7ctsYvlQM52W00"
 (ss <- as_sheets_id(spreadsheet_id))
-
-sheets_speedread(ss, .method = "vroom")
-sheets_speedread(ss, .method = "readr")
+sheets_speedread(ss)
 
 # prove that we can send a cell range, sheet, and col spec through ...
-if (require("vroom")) {
+if (require("readr")) {
   sheets_speedread(
     sheets_example("deaths"),
     sheet = "other",
@@ -86,8 +74,7 @@ if (require("vroom")) {
       Age = col_integer(),
       `Date of birth` = col_date("\%m/\%d/\%Y"),
       `Date of death` = col_date("\%m/\%d/\%Y")
-    ),
-    .method = "vroom"
+    )
   )
 }
 
@@ -95,7 +82,7 @@ if (sheets_has_token()) {
 # write a Sheet that, by default, is NOT world-readable
 (ss <- sheets_write(iris))
 
-sheets_speedread(ss, .url = "export")
+sheets_speedread(ss)
 
 # clean up
 googledrive::drive_trash(ss)

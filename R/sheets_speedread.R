@@ -21,9 +21,7 @@
 #' Sheet, in order to support range specification.
 #'
 #' @inheritParams sheets_cells
-#' @param .method Whether to process the CSV data with `vroom::vroom()`
-#'   (default) or `readr::read_csv()`.
-#' @param ... Passed along to `vroom::vroom()` or `readr::read_csv()`.
+#' @param ... Passed along to `readr::read_csv()`.
 #'
 #' @return A [tibble][tibble::tibble-package]
 #' @export
@@ -33,12 +31,10 @@
 #' # https://github.com/tidyverse/googlesheets4/issues/122
 #' spreadsheet_id <- "1mnWcn7bd7obaXd05rnXrEtgzMBLdy7ctsYvlQM52W00"
 #' (ss <- as_sheets_id(spreadsheet_id))
-#'
-#' sheets_speedread(ss, .method = "vroom")
-#' sheets_speedread(ss, .method = "readr")
+#' sheets_speedread(ss)
 #'
 #' # prove that we can send a cell range, sheet, and col spec through ...
-#' if (require("vroom")) {
+#' if (require("readr")) {
 #'   sheets_speedread(
 #'     sheets_example("deaths"),
 #'     sheet = "other",
@@ -47,8 +43,7 @@
 #'       Age = col_integer(),
 #'       `Date of birth` = col_date("%m/%d/%Y"),
 #'       `Date of death` = col_date("%m/%d/%Y")
-#'     ),
-#'     .method = "vroom"
+#'     )
 #'   )
 #' }
 #'
@@ -56,7 +51,7 @@
 #' # write a Sheet that, by default, is NOT world-readable
 #' (ss <- sheets_write(iris))
 #'
-#' sheets_speedread(ss, .url = "export")
+#' sheets_speedread(ss)
 #'
 #' # clean up
 #' googledrive::drive_trash(ss)
@@ -65,15 +60,11 @@ sheets_speedread <- function(ss,
                              sheet = NULL,
                              range = NULL,
                              skip = 0,
-                             ...,
-                             .method = c("vroom", "readr")) {
-  .method <- match.arg(.method)
-  stop_for_pkg <- function(pkg) {
-    if (!requireNamespace(pkg, quietly = TRUE)) {
-      stop_glue("The {pkg} package must be installed to use {bt('sheets_speedread()'}")
-    }
+                             ...) {
+
+  if (!requireNamespace("readr", quietly = TRUE)) {
+    stop_glue("The readr package must be installed to use {bt('sheets_speedread()'}")
   }
-  stop_for_pkg(.method)
 
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
@@ -110,7 +101,7 @@ sheets_speedread <- function(ss,
   }
   message_glue("Reading from {dq(x$name)}{sheet_msg}{range_msg}")
 
-  token <- sheets_token()
+  token <- sheets_token() %||% list()
 
   req <- gargle::request_build(
     path = "spreadsheets/d/{spreadsheet_id}/{path}",
@@ -119,21 +110,10 @@ sheets_speedread <- function(ss,
   )
   message_glue("Export URL: {req$url}")
 
-  if (is.null(token)) {
-    if (.method == "vroom") {
-      return(vroom::vroom(req$url, delim = ",", ...))
-    } else { # .method == "readr"
-      return(readr::read_csv(req$url, ...))
-    }
-  }
-
-  # we must have a token
-  response <- httr::GET(req$url, config = token)
+  tmp <- tempfile()
+  on.exit(unlink(tmp), add = TRUE)
+  response <- httr::GET(req$url, httr::write_disk(tmp), config = token)
   stopifnot(identical(httr::http_type(response), "text/csv"))
-  csv <- httr::content(response, as = "text", encoding = "UTF-8")
-  if (.method == "vroom") {
-    vroom::vroom(csv, delim = ",", ...)
-  } else {
-    readr::read_csv(csv, ...)
-  }
+
+  readr::read_csv(tmp, ...)
 }

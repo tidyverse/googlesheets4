@@ -64,130 +64,15 @@
 #'     idTeam = vroom::col_character(),
 #'     idPlayer = vroom::col_character()
 #'   ),
-#'   .url = "export"
+#'   .url = "datasource"
 #' ))
-#'
-#' # exploring the export URL
-#' base_url_template <- "https://docs.google.com/spreadsheets/d/{spreadsheet_id}/export"
-#'
-#' (spreadsheet_id <- unclass(sheets_example("deaths")))
-#' (deaths_url <- glue::glue(base_url_template))
-#' meta <- sheets_get(spreadsheet_id)
-#' other_sheet_id <- vlookup("other", meta$sheets, "name", "id")
-#' deaths_range <- "A5:F15"
-#'
-#' # send no extras
-#' query <- list(format = "csv")
-#' (url <- httr::modify_url(deaths_url, query = query))
-#' readr::read_csv(url)
-#' vroom::vroom(url)
-#'
-#' # send an A1 cell range (reads first sheet)
-#' query <- list(format = "csv", range = deaths_range)
-#' (url <- httr::modify_url(deaths_url, query = query))
-#' readr::read_csv(url)
-#' vroom::vroom(url)
-#'
-#' # send gid of a worksheet
-#' query <- list(format = "csv", gid = other_sheet_id)
-#' (url <- httr::modify_url(deaths_url, query = query))
-#' readr::read_csv(url)
-#' vroom::vroom(url)
-#'
-#' # send cell range and gid of a worksheet
-#' query <- list(format = "csv", gid = other_sheet_id, range = deaths_range)
-#' (url <- httr::modify_url(deaths_url, query = query))
-#' readr::read_csv(url)
-#' vroom::vroom(url)
-#'
-#' # can you send a (work)sheet name via range?
-#' query <- list(format = "csv", range = "other")
-#' (url <- httr::modify_url(deaths_url, query = query))
-#' readr::read_csv(url)
-#' # Error in open.connection(con, "rb") : HTTP error 400.
-#' # NO THIS DOES NOT WORK
-#'
-#' # can you send a named range via range?
-#' query <- list(format = "csv", range = "other_data")
-#' url <- httr::modify_url(deaths_url, query = query)
-#' readr::read_csv(url)
-#' # Error in open.connection(con, "rb") : HTTP error 400.
-#' # NO THIS DOES NOT WORK
-#'
-#' # exploring access via the Chart Tools datasource protocol
-#' base_url_template <- "https://docs.google.com/spreadsheets/d/{spreadsheet_id}/gviz/tq"
-#'
-#' (spreadsheet_id <- unclass(sheets_example("deaths")))
-#' (deaths_url <- glue::glue(base_url_template))
-#' meta <- sheets_get(spreadsheet_id)
-#' other_sheet_id <- vlookup("other", meta$sheets, "name", "id")
-#' deaths_range <- "A5:F15"
-#'
-#' # send no extras
-#' query <- list(tqx = "out:csv")
-#' (url <- httr::modify_url(deaths_url, query = query))
-#' readr::read_csv(url)
-#' vroom::vroom(url)
-#' # very interesting treatment of the header and footer rows!
-#'
-#' # send a sheet id
-#' query <- list(tqx = "out:csv", gid = other_sheet_id)
-#' (url <- httr::modify_url(deaths_url, query = query))
-#' readr::read_csv(url)
-#' vroom::vroom(url)
-#'
-#' # specify headers rows
-#' query <- list(tqx = "out:csv", headers = 5)
-#' (url <- httr::modify_url(deaths_url, query = query))
-#' readr::read_csv(url)
-#' vroom::vroom(url)
-#' # seems to be same result as letting it discover header rows
-#'
-#' # send cell range
-#' query <- list(tqx = "out:csv", range = deaths_range)
-#' (url <- httr::modify_url(deaths_url, query = query))
-#' readr::read_csv(url)
-#' vroom::vroom(url)
-#' # WORKS
-#'
-#' # send named range
-#' query <- list(tqx = "out:csv", range = "arts_data")
-#' (url <- httr::modify_url(deaths_url, query = query))
-#' readr::read_csv(url)
-#' vroom::vroom(url)
-#' # DOES NOT SEEM TO WORK
-#'
-#' # send sheet name
-#' query <- list(tqx = "out:csv", sheet = "other")
-#' (url <- httr::modify_url(deaths_url, query = query))
-#' readr::read_csv(url)
-#' vroom::vroom(url)
-#' # WORKS (other than header/footer weirdness)
-#'
-#' # quick speed test with Sheet from
-#' # https://github.com/tidyverse/googlesheets4/issues/122
-#' (spreadsheet_id <- "1mnWcn7bd7obaXd05rnXrEtgzMBLdy7ctsYvlQM52W00")
-#'
-#' export_url_template <- "https://docs.google.com/spreadsheets/d/{spreadsheet_id}/export"
-#' (nba_export_url <- glue::glue(export_url_template))
-#' query <- list(format = "csv")
-#' (nba_export_url <- httr::modify_url(nba_export_url, query = query))
-#' readr::read_csv(nba_export_url) # 56,765 x 23
-#' vroom::vroom(nba_export_url)    # 56,765 x 23
-#'
-#' datasource_url_template <- "https://docs.google.com/spreadsheets/d/{spreadsheet_id}/gviz/tq"
-#' (nba_datasource_url <- glue::glue(datasource_url_template))
-#' query <- list(tqx = "out:csv")
-#' (nba_datasource_url <- httr::modify_url(nba_datasource_url, query = query))
-#' readr::read_csv(nba_datasource_url) # 56,765 x 23
-#' vroom::vroom(nba_datasource_url)    # 56,765 x 23
 #'
 #' library(bench)
 #' bnch <- bench::mark(
-#'   readr::read_csv(nba_export_url),
-#'   vroom::vroom(nba_export_url),
-#'   readr::read_csv(nba_datasource_url),
-#'   vroom::vroom(nba_datasource_url),
+#'   sheets_speedread(ss, .url = "export"),
+#'   sheets_speedread(ss, .url = "datasource"),
+#'   #readr::read_csv(nba_export_url),
+#'   #readr::read_csv(nba_datasource_url),
 #'   iterations = 1,
 #'   check = FALSE
 #' )

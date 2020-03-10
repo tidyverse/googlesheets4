@@ -46,7 +46,6 @@ Suggests:
     sodium,
     spelling,
     testthat (>= 2.1.0),
-    vroom,
     withr
 RdMacros: 
     lifecycle

@@ -23,20 +23,17 @@
 #' [sheets_deauth()] has put googlesheets4 into a de-authorized state.
 #'
 #' @inheritParams sheets_cells
-#' @param ... Passed along to `readr::read_csv()`.
+#' @param ... Passed along to the CSV parsing function (currently
+#'   `readr::read_csv()`).
 #'
 #' @return A [tibble][tibble::tibble-package]
 #' @export
 #'
 #' @examples
-#' # Using the large NBA sheet from
-#' # https://github.com/tidyverse/googlesheets4/issues/122
-#' spreadsheet_id <- "1mnWcn7bd7obaXd05rnXrEtgzMBLdy7ctsYvlQM52W00"
-#' (ss <- as_sheets_id(spreadsheet_id))
-#' sheets_speedread(ss)
+#' if (sheets_has_token()) {
 #'
-#' # prove that we can send a cell range, sheet, and col spec through ...
-#' if (require("readr")) {
+#'   if (require("readr")) {
+#'   # since cell type is not available, use readr's col type specification
 #'   sheets_speedread(
 #'     sheets_example("deaths"),
 #'     sheet = "other",
@@ -49,10 +46,10 @@
 #'   )
 #' }
 #'
-#' if (sheets_has_token()) {
 #' # write a Sheet that, by default, is NOT world-readable
 #' (ss <- sheets_write(iris))
 #'
+#' # demo that sheets_speedread() sends a token, which is why we can read this
 #' sheets_speedread(ss)
 #'
 #' # clean up

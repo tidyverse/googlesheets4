@@ -30,7 +30,8 @@ any cell reference.}
 column names or data. Leading empty rows are automatically skipped, so this
 is a lower bound. Ignored if \code{range} is given.}
 
-\item{...}{Passed along to \code{readr::read_csv()}.}
+\item{...}{Passed along to the CSV parsing function (currently
+\code{readr::read_csv()}).}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}
@@ -60,14 +61,10 @@ sends an auth token with the request, unless a previous call to
 \code{\link[=sheets_deauth]{sheets_deauth()}} has put googlesheets4 into a de-authorized state.
 }
 \examples{
-# Using the large NBA sheet from
-# https://github.com/tidyverse/googlesheets4/issues/122
-spreadsheet_id <- "1mnWcn7bd7obaXd05rnXrEtgzMBLdy7ctsYvlQM52W00"
-(ss <- as_sheets_id(spreadsheet_id))
-sheets_speedread(ss)
+if (sheets_has_token()) {
 
-# prove that we can send a cell range, sheet, and col spec through ...
-if (require("readr")) {
+  if (require("readr")) {
+  # since cell type is not available, use readr's col type specification
   sheets_speedread(
     sheets_example("deaths"),
     sheet = "other",
@@ -80,10 +77,10 @@ if (require("readr")) {
   )
 }
 
-if (sheets_has_token()) {
 # write a Sheet that, by default, is NOT world-readable
 (ss <- sheets_write(iris))
 
+# demo that sheets_speedread() sends a token, which is why we can read this
 sheets_speedread(ss)
 
 # clean up

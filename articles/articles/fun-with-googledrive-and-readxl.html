@@ -149,26 +149,26 @@
 <a href="#create-a-private-sheet-from-csv-with-the-drive-api" class="anchor"></a>Create a private Sheet from csv with the Drive API</h2>
 <p>Put the iris data into a csv file.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>(iris_tempfile &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>(<span class="dt">pattern =</span> <span class="st">"iris-"</span>, <span class="dt">fileext =</span> <span class="st">".csv"</span>))</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRygK5p/iris-2e544430a92e.csv"</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp7FmG09/iris-d6c489d824f.csv"</span></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(iris, iris_tempfile, <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <p>Use <code><a href="https://googledrive.tidyverse.org/reference/drive_upload.html">googledrive::drive_upload()</a></code> to upload the csv and simultaneously convert to a Sheet.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>(iris_ss &lt;-<span class="st"> </span><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_upload.html">drive_upload</a></span>(iris_tempfile, <span class="dt">type =</span> <span class="st">"spreadsheet"</span>))</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; Local file:</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt;   * /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRygK5p/iris-2e544430a92e.csv</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt;   * /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp7FmG09/iris-d6c489d824f.csv</span></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; uploaded into Drive file:</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt;   * iris-2e544430a92e: 1B3bjLlH5LZMrZwt_SHJ0ns_MHl9xG0pJA42J7cIFpNU</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt;   * iris-d6c489d824f: 1DYFqyA1rSdhZFYGIOnTUOMuOnUDY60_nWkkR3DrhKas</span></span>
 <span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; with MIME type:</span></span>
 <span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt;   * application/vnd.google-apps.spreadsheet</span></span>
 <span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; # A tibble: 1 x 3</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;   name              id                                          drive_resource  </span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; * &lt;chr&gt;             &lt;chr&gt;                                       &lt;list&gt;          </span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; 1 iris-2e544430a92e 1B3bjLlH5LZMrZwt_SHJ0ns_MHl9xG0pJA42J7cIFp… &lt;named list [34…</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;   name             id                                           drive_resource  </span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; * &lt;chr&gt;            &lt;chr&gt;                                        &lt;list&gt;          </span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; 1 iris-d6c489d824f 1DYFqyA1rSdhZFYGIOnTUOMuOnUDY60_nWkkR3DrhKas &lt;named list [34…</span></span>
 <span id="cb3-12"><a href="#cb3-12"></a></span>
 <span id="cb3-13"><a href="#cb3-13"></a><span class="co"># visit the new Sheet in the browser, in an interactive session!</span></span>
 <span id="cb3-14"><a href="#cb3-14"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_browse.html">drive_browse</a></span>(iris_ss)</span></code></pre></div>
 <p>Read data from the private Sheet into R.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="../../reference/read_sheet.html">read_sheet</a></span>(iris_ss, <span class="dt">range =</span> <span class="st">"B1:D6"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Reading from "iris-2e544430a92e"</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Reading from "iris-d6c489d824f.csv"</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Range "B1:D6"</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; # A tibble: 5 x 3</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt;   Sepal.Width Petal.Length Petal.Width</span></span>
@@ -184,12 +184,12 @@
 <a href="#create-a-local-xlsx-from-a-sheet-with-the-drive-api" class="anchor"></a>Create a local xlsx from a Sheet with the Drive API</h2>
 <p>Download the Sheet as an Excel workbook.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>(iris_xlsxfile &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="st">"[.]csv"</span>, <span class="st">".xlsx"</span>, iris_tempfile))</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRygK5p/iris-2e544430a92e.xlsx"</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp7FmG09/iris-d6c489d824f.xlsx"</span></span>
 <span id="cb5-3"><a href="#cb5-3"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_download.html">drive_download</a></span>(iris_ss, <span class="dt">path =</span> iris_xlsxfile, <span class="dt">overwrite =</span> <span class="ot">TRUE</span>)</span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; File downloaded:</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;   * iris-2e544430a92e</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;   * iris-d6c489d824f</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; Saved locally as:</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt;   * /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpRygK5p/iris-2e544430a92e.xlsx</span></span></code></pre></div>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt;   * /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp7FmG09/iris-d6c489d824f.xlsx</span></span></code></pre></div>
 </div>
 <div id="read-xlsx-with-readxl" class="section level2">
 <h2 class="hasAnchor">
@@ -220,7 +220,7 @@
 <span id="cb7-2"><a href="#cb7-2"></a><span class="co">#&gt; [1] TRUE TRUE</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="kw"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(iris_ss)</span>
 <span id="cb7-4"><a href="#cb7-4"></a><span class="co">#&gt; Files deleted:</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt;   * iris-2e544430a92e: 1B3bjLlH5LZMrZwt_SHJ0ns_MHl9xG0pJA42J7cIFpNU</span></span></code></pre></div>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co">#&gt;   * iris-d6c489d824f: 1DYFqyA1rSdhZFYGIOnTUOMuOnUDY60_nWkkR3DrhKas</span></span></code></pre></div>
 </div>
   </div>
 

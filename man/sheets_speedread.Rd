@@ -55,7 +55,9 @@ googlesheets4.
 }
 
 Note that the Sheets API is still used to retrieve metadata on the target
-Sheet, in order to support range specification.
+Sheet, in order to support range specification. \code{sheets_speedread()} also
+sends an auth token with the request, unless a previous call to
+\code{\link[=sheets_deauth]{sheets_deauth()}} has put googlesheets4 into a de-authorized state.
 }
 \examples{
 # Using the large NBA sheet from

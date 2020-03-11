@@ -18,7 +18,9 @@
 #'   googlesheets4.
 #'
 #' Note that the Sheets API is still used to retrieve metadata on the target
-#' Sheet, in order to support range specification.
+#' Sheet, in order to support range specification. `sheets_speedread()` also
+#' sends an auth token with the request, unless a previous call to
+#' [sheets_deauth()] has put googlesheets4 into a de-authorized state.
 #'
 #' @inheritParams sheets_cells
 #' @param ... Passed along to `readr::read_csv()`.

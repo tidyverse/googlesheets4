@@ -114,5 +114,6 @@ sheets_speedread <- function(ss,
 
   response <- httr::GET(req$url, config = token)
   stopifnot(identical(httr::http_type(response), "text/csv"))
-  readr::read_csv(httr::content(response, type = "raw"), ...)
+  #readr::read_csv(httr::content(response, type = "raw"), ...)
+  vroom::vroom(httr::content(response, type = "raw"), ...)
 }

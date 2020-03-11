@@ -386,7 +386,7 @@ Here's a demo that also shows off using the Google Translate API inside a Sheet.
 ```{r}
 lang_dat <- tibble::tribble(
        ~ english, ~ to,
-       "    dog", "es",
+           "dog", "es",
    "hello world", "ko",
   "baby turtles", "th" 
 )

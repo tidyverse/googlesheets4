@@ -21,6 +21,8 @@ There is a new family of `sheets_sheet_*()` functions that operate on the (work)
   * `sheets_sheet_add()` adds one or more sheets.
   * `sheets_sheet_delete()` deletes one or more sheets.
   * `sheets_sheet_resize()` changes the number of rows or columns in a sheet.
+  
+`sheets_speedread()` provides a quick-and-dirty for reading a Sheet using its "export=csv" URL.
 
 `sheets_cells()` gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But `sheets_cells(cell_data = "full", discard_empty = FALSE)` is now available if you want full cell data, including formatting, even for cells that have no value (#4).
 

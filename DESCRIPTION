@@ -41,6 +41,7 @@ Imports:
     vctrs (>= 0.2.3)
 Suggests: 
     covr,
+    readr,
     rmarkdown,
     sodium,
     spelling,

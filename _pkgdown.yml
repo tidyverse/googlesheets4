@@ -20,6 +20,7 @@ reference:
       Import data from a Sheet into a local data frame
     contents:
       - read_sheet
+      - sheets_speedread
       - sheets_cells
       - spread_sheet
       - cell-specification

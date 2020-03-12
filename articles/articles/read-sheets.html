@@ -267,6 +267,120 @@
 <span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; 1 1947-01-08     </span></span>
 <span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt; 2 1956-10-21</span></span></code></pre></div>
 </div>
+<div id="when-speed-matters" class="section level2">
+<h2 class="hasAnchor">
+<a href="#when-speed-matters" class="anchor"></a>When speed matters</h2>
+<p>If your Sheet is so large that the speed of <code><a href="../../reference/read_sheet.html">sheets_read()</a></code> is causing problems, consider <code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code>. It uses a special URL that allows a Sheet to be read as comma-separated values (CSV). Access via this URL doesn’t use the Sheets API (although <code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> still makes an API call to retrieve Sheet metadata). As an example, on a Sheet with around 57,000 rows and 25 columns (over 1.4 million cells), <code>sheets_speadread()</code> takes ~5 seconds, whereas <code><a href="../../reference/read_sheet.html">sheets_read()</a></code> takes closer to 3 minutes. Why wouldn’t we always take the faster option?!? Because the speed difference is imperceptible for many Sheets and there are some downsides (described later).</p>
+<p><code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> has much the same interface as <code><a href="../../reference/read_sheet.html">sheets_read()</a></code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw"><a href="../../reference/sheets_speedread.html">sheets_speedread</a></span>(<span class="dt">sheet =</span> <span class="st">"Oceania"</span>, <span class="dt">n_max =</span> <span class="dv">3</span>)</span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; Reading from "gapminder", "Oceania" sheet</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; Export URL: https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=1796776040</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; Parsed with column specification:</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; cols(</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;   country = col_character(),</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;   continent = col_character(),</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;   year = col_double(),</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;   lifeExp = col_double(),</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt;   pop = col_double(),</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt;   gdpPercap = col_double()</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; )</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; # A tibble: 3 x 6</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt;   country   continent  year lifeExp      pop gdpPercap</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; 1 Australia Oceania    1952    69.1  8691212    10040.</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt; 2 Australia Oceania    1957    70.3  9712569    10950.</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt; 3 Australia Oceania    1962    70.9 10794968    12217.</span></span></code></pre></div>
+<p>The output above reveals that, under the hood, <code>sheets_speadread()</code> calls an external function for CSV parsing (currently <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code>, but it is likely to switch to <code>vroom::vroom()</code>). An important consequence is that all arguments around column type specification are passed along to the CSV-parsing function. Here is a demo using readr-style column specification:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw"><a href="../../reference/sheets_speedread.html">sheets_speedread</a></span>(</span>
+<span id="cb7-3"><a href="#cb7-3"></a>    <span class="dt">range =</span> <span class="st">"other!A5:F15"</span>,</span>
+<span id="cb7-4"><a href="#cb7-4"></a>    <span class="dt">col_types =</span> readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/cols.html">cols</a></span>(</span>
+<span id="cb7-5"><a href="#cb7-5"></a>      <span class="dt">Age =</span> readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_integer</a></span>(),</span>
+<span id="cb7-6"><a href="#cb7-6"></a>      <span class="st">`</span><span class="dt">Date of birth</span><span class="st">`</span> =<span class="st"> </span>readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/parse_datetime.html">col_date</a></span>(<span class="st">"%m/%d/%Y"</span>),</span>
+<span id="cb7-7"><a href="#cb7-7"></a>      <span class="st">`</span><span class="dt">Date of death</span><span class="st">`</span> =<span class="st"> </span>readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/parse_datetime.html">col_date</a></span>(<span class="st">"%m/%d/%Y"</span>)</span>
+<span id="cb7-8"><a href="#cb7-8"></a>    )</span>
+<span id="cb7-9"><a href="#cb7-9"></a>  )</span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; Reading from "deaths", "other" sheet, range "A5:F15"</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; Export URL: https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/export?format=csv&amp;range=A5%3AF15&amp;gid=28655153</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; # A tibble: 10 x 6</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt;    Name           Profession   Age `Has kids` `Date of birth` `Date of death`</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;date&gt;          &lt;date&gt;         </span></span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt;  1 Vera Rubin     scientist     88 TRUE       1928-07-23      2016-12-25     </span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt;  2 Mohamed Ali    athlete       74 TRUE       1942-01-17      2016-06-03     </span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt;  3 Morley Safer   journalist    84 TRUE       1931-11-08      2016-05-19     </span></span>
+<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt;  4 Fidel Castro   politician    90 TRUE       1926-08-13      2016-11-25     </span></span>
+<span id="cb7-19"><a href="#cb7-19"></a><span class="co">#&gt;  5 Antonin Scalia lawyer        79 TRUE       1936-03-11      2016-02-13     </span></span>
+<span id="cb7-20"><a href="#cb7-20"></a><span class="co">#&gt;  6 Jo Cox         politician    41 TRUE       1974-06-22      2016-06-16     </span></span>
+<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#&gt;  7 Janet Reno     lawyer        78 FALSE      1938-07-21      2016-11-07     </span></span>
+<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#&gt;  8 Gwen Ifill     journalist    61 FALSE      1955-09-29      2016-11-14     </span></span>
+<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#&gt;  9 John Glenn     astronaut     95 TRUE       1921-07-28      2016-12-08     </span></span>
+<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; 10 Pat Summit     coach         64 TRUE       1952-06-14      2016-06-28</span></span></code></pre></div>
+<p>Compare that to how we would read the same data with <code><a href="../../reference/read_sheet.html">sheets_read()</a></code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="dt">range =</span> <span class="st">"other_data"</span>, <span class="dt">col_types =</span> <span class="st">"??i?DD"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; Reading from "deaths"</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; Range "other_data"</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; # A tibble: 10 x 6</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;    Name           Profession   Age `Has kids` `Date of birth` `Date of death`</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;date&gt;          &lt;date&gt;         </span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;  1 Vera Rubin     scientist     88 TRUE       1928-07-23      2016-12-25     </span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt;  2 Mohamed Ali    athlete       74 TRUE       1942-01-17      2016-06-03     </span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt;  3 Morley Safer   journalist    84 TRUE       1931-11-08      2016-05-19     </span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt;  4 Fidel Castro   politician    90 TRUE       1926-08-13      2016-11-25     </span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt;  5 Antonin Scalia lawyer        79 TRUE       1936-03-11      2016-02-13     </span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt;  6 Jo Cox         politician    41 TRUE       1974-06-22      2016-06-16     </span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt;  7 Janet Reno     lawyer        78 FALSE      1938-07-21      2016-11-07     </span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt;  8 Gwen Ifill     journalist    61 FALSE      1955-09-29      2016-11-14     </span></span>
+<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt;  9 John Glenn     astronaut     95 TRUE       1921-07-28      2016-12-08     </span></span>
+<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt; 10 Pat Summit     coach         64 TRUE       1952-06-14      2016-06-28</span></span></code></pre></div>
+<p>This example highlights two important differences:</p>
+<ul>
+<li>
+<code>range = "other!A5:F15"</code> versus <code>range = "other_data"</code>: <code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> can’t access a named range, whereas <code><a href="../../reference/read_sheet.html">sheets_read()</a></code> can.</li>
+<li>
+<code><a href="https://readr.tidyverse.org/reference/parse_datetime.html">readr::col_date("%m/%d/%Y")</a></code> vs <code>D</code>: <code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> must parse a character representation of all cell data, including datetimes, whereas <code><a href="../../reference/read_sheet.html">sheets_read()</a></code> has access to the actual cell data and its type.</li>
+</ul>
+<p>What’s the speed difference for something like the Africa sheet in the “gapminder” example Sheet? (around 625 rows x 6 columns, or 3700 cells)</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/sheets_speedread.html">sheets_speedread</a></span>(<span class="dt">sheet =</span> <span class="st">"Africa"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>)</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; Reading from "gapminder", "Africa" sheet</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; Export URL: https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=780868077</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; Parsed with column specification:</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; cols(</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;   country = col_character(),</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;   continent = col_character(),</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;   year = col_double(),</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;   lifeExp = col_double(),</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt;   pop = col_double(),</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt;   gdpPercap = col_double()</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; )</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt;    user  system elapsed </span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt;   0.034   0.001   0.428</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(</span>
+<span id="cb9-18"><a href="#cb9-18"></a>  <span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="dt">sheet =</span> <span class="st">"Africa"</span>)</span>
+<span id="cb9-19"><a href="#cb9-19"></a>)</span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt; Reading from "gapminder"</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt; Range "'Africa'"</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="co">#&gt;    user  system elapsed </span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="co">#&gt;   0.591   0.017   0.925</span></span></code></pre></div>
+<p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
+<p>Summary of how to think about <code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> vs <code><a href="../../reference/read_sheet.html">sheets_read()</a></code>:</p>
+<ul>
+<li>Both use auth (literally, send a token), unless there was a prior to call to <code><a href="../../reference/sheets_deauth.html">sheets_deauth()</a></code>.</li>
+<li>
+<code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> is faster, but it’s not noticeable for typical Sheets.</li>
+<li>
+<code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> uses readr-style column type specification, which is actually more flexible than what <code><a href="../../reference/read_sheet.html">sheets_read()</a></code> currently does. In future googlesheets4 releases, we will adopt readr-style column type specification.</li>
+<li>
+<code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> requires more detailed column type specification, because it cannot access unformatted cell data and the actual cell type, as <code><a href="../../reference/read_sheet.html">sheets_read()</a></code> can.</li>
+<li>
+<code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> can’t access full cell data, e.g., formatting.</li>
+<li>
+<code>sheets_speedrad()</code> can’t work with named ranges.</li>
+</ul>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -278,6 +392,7 @@
 <li><a href="#auth">Auth</a></li>
       <li><a href="#specify-the-range-and-column-types">Specify the range and column types</a></li>
       <li><a href="#detailed-cell-data">Detailed cell data</a></li>
+      <li><a href="#when-speed-matters">When speed matters</a></li>
       </ul>
 </div>
       </div>

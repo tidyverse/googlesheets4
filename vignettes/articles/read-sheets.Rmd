@@ -82,3 +82,71 @@ df %>% spread_sheet(col_types = "D")
 ## is same as ...
 read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 ```
+
+## When speed matters
+
+If your Sheet is so large that the speed of `sheets_read()` is causing problems, consider `sheets_speedread()`. It uses a special URL that allows a Sheet to be read as comma-separated values (CSV). Access via this URL doesn't use the Sheets API (although `sheets_speedread()` still makes an API call to retrieve Sheet metadata). As an example, on a Sheet with around 57,000 rows and 25 columns (over 1.4 million cells), `sheets_speadread()` takes ~5 seconds, whereas `sheets_read()` takes closer to 3 minutes. Why wouldn't we always take the faster option?!? Because the speed difference is imperceptible for many Sheets and there are some downsides (described later).
+
+`sheets_speedread()` has much the same interface as `sheets_read()`.
+
+```{r}
+sheets_example("gapminder") %>% 
+  sheets_speedread(sheet = "Oceania", n_max = 3)
+```
+
+The output above reveals that, under the hood, `sheets_speadread()` calls an external function for CSV parsing (currently `readr::read_csv()`, but it is likely to switch to `vroom::vroom()`). An important consequence is that all arguments around column type specification are passed along to the CSV-parsing function. Here is a demo using readr-style column specification:
+
+```{r}
+sheets_example("deaths") %>% 
+  sheets_speedread(
+    range = "other!A5:F15",
+    col_types = readr::cols(
+      Age = readr::col_integer(),
+      `Date of birth` = readr::col_date("%m/%d/%Y"),
+      `Date of death` = readr::col_date("%m/%d/%Y")
+    )
+  )
+```
+
+Compare that to how we would read the same data with `sheets_read()`:
+
+```{r}
+sheets_example("deaths") %>% 
+  sheets_read(range = "other_data", col_types = "??i?DD")
+```
+
+This example highlights two important differences:
+
+  * `range = "other!A5:F15"` versus `range = "other_data"`: `sheets_speedread()`
+    can't access a named range, whereas `sheets_read()` can.
+  * `readr::col_date("%m/%d/%Y")` vs `D`: `sheets_speedread()` must parse a
+    character representation of all cell data, including datetimes, whereas 
+    `sheets_read()` has access to the actual cell data and its type.
+
+What's the speed difference for something like the Africa sheet in the
+"gapminder" example Sheet? (around 625 rows x 6 columns, or 3700 cells)
+
+```{r}
+system.time(
+  sheets_example("gapminder") %>% sheets_speedread(sheet = "Africa")
+)
+system.time(
+  sheets_example("gapminder") %>% sheets_read(sheet = "Africa")
+)
+```
+
+The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.
+
+Summary of how to think about `sheets_speedread()` vs `sheets_read()`:
+
+  * Both use auth (literally, send a token), unless there was a prior to call to
+    `sheets_deauth()`.
+  * `sheets_speedread()` is faster, but it's not noticeable for typical Sheets.
+  * `sheets_speedread()` uses readr-style column type specification, which is
+    actually more flexible than what `sheets_read()` currently does. In future
+    googlesheets4 releases, we will adopt readr-style column type specification.
+  * `sheets_speedread()` requires more detailed column type specification,
+    because it cannot access unformatted cell data and the actual cell type, as
+    `sheets_read()` can.
+  * `sheets_speedread()` can't access full cell data, e.g., formatting.
+  * `sheets_speedrad()` can't work with named ranges.

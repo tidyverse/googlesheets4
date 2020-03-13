@@ -64,6 +64,7 @@ sheets_create <- function(name = sheets_random(), ..., sheets = NULL) {
   data_given   <- sheets_given && !is.null(unlist(sheets$value))
 
   # create the (spread)Sheet ---------------------------------------------------
+  message_glue("Creating new Sheet: {dq(name)}")
   ss_body <- new("Spreadsheet") %>%
     patch(properties = new(
       id = "SpreadsheetProperties",

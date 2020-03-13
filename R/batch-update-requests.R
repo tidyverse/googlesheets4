@@ -26,7 +26,7 @@ bureq_header_row <- function(row = 1,
       bold = bold
     )
   )
-  cell_data <- new("CellData", userEnteredFormat = cell_format)
+  cell_data <- new_CellData(userEnteredFormat = cell_format)
   top_field <- names(cell_data)
   fields <- as.character(glue(
     "{top_field}({glue_collapse(names(pluck(cell_data, top_field)), sep = ',')})"

@@ -17,8 +17,17 @@ new <- function(id, ...) {
 }
 
 # TODO: if it proves necessary, this could do more meaningful checks
-check_against_schema <- function(x, schema = NULL, id = NA) {
-  schema <- schema %||% .tidy_schemas[[id]] %||% attr(x, "schema")
+check_against_schema <- function(x, schema = NULL, id = NA_character_) {
+  schema <- schema %||%
+    .tidy_schemas[[id %|% id_from_class(x)]] %||%
+    attr(x, "schema")
+  if (is.null(schema)) {
+    msg <- glue("
+    Trying to check an object of class {class_collapse(x)}, \\
+    but can't get a schema.
+    ")
+    abort(msg)
+  }
   unexpected <- setdiff(names(x), schema$property)
   if (length(unexpected) > 0) {
     msg <- glue("

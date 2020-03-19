@@ -67,3 +67,14 @@ test_that("patch() retains classes", {
   classes_out <- class(x)
   expect_identical(classes_in, classes_out)
 })
+
+test_that("check_against_schema() errors when no schema can be found", {
+  x <- structure(
+    list(google_thing = "a"),
+    class = c("googlesheets4_schema_SomeThing", "googlesheets4_schema", "list")
+  )
+  expect_error(
+    check_against_schema(x),
+    "can't get a schema"
+  )
+})

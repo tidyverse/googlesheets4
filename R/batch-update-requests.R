@@ -27,10 +27,11 @@ bureq_header_row <- function(row = 1,
     )
   )
   cell_data <- new_CellData(userEnteredFormat = cell_format)
-  top_field <- names(cell_data)
-  fields <- as.character(glue(
-    "{top_field}({glue_collapse(names(pluck(cell_data, top_field)), sep = ',')})"
-  ))
+  # hard-coding because we really do want to reset child properties not
+  # explicitly set here
+  # example: TextFormat's other children, like fontFamily or underline
+  # example: Color's other child, alpha
+  fields <- "userEnteredFormat(horizontalAlignment,backgroundColor,textFormat)"
 
   list(repeatCell = new(
     "RepeatCellRequest",

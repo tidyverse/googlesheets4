@@ -110,7 +110,9 @@ cells <- function(x = list()) {
   start_row <- (pluck(x, "sheets", 1, "data", 1, "startRow") %||% 0) + 1
   start_column <- (pluck(x, "sheets", 1, "data", 1, "startColumn") %||% 0) + 1
 
-  ## TODO: deal with the merged cells
+  # TODO: make this an as_tibble method?
+  # TODO: deal with the merged cells
+  # TODO: ensure this returns integer columns where appropriate
 
   row_data <- x %>%
     pluck("sheets", 1, "data", 1, "rowData") %>%
@@ -137,6 +139,8 @@ insert_shims <- function(df, cell_limits) {
   if (nrow(df) == 0) {
     return(df)
   }
+  df$row <- as.integer(df$row)
+  df$col <- as.integer(df$col)
 
   ## 1-based indices, referring to cell coordinates in the spreadsheet
   start_row <- cell_limits$ul[[1]]
@@ -153,8 +157,8 @@ insert_shims <- function(df, cell_limits) {
   if (shim_up || shim_left) {
     df <- tibble::add_row(
       df,
-      row = start_row %NA% min(df$row),
-      col = start_col %NA% min(df$col),
+      row = start_row %|% min(df$row),
+      col = start_col %|% min(df$col),
       cell = list(list()),
       .before = 1
     )
@@ -164,8 +168,8 @@ insert_shims <- function(df, cell_limits) {
   if (shim_down || shim_right) {
     df <- tibble::add_row(
       df,
-      row = end_row %NA% max(df$row),
-      col = end_col %NA% max(df$col),
+      row = end_row %|% max(df$row),
+      col = end_col %|% max(df$col),
       cell = list(list())
     )
   }

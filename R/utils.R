@@ -1,5 +1,3 @@
-`%NA%` <- function(x, y) if (is.na(x)) y else x
-
 # for development only
 str1 <- function(x, ...) utils::str(x, ..., max.level = 1)
 

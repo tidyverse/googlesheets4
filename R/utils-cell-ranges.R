@@ -51,7 +51,11 @@ as_sheets_range <- function(x) {
 
   if (noNA(limits$ul) && sum(is.na(limits$lr)) == 1) {
     ul <- paste0(cellranger::num_to_letter(col_limits[1]), row_limits[1])
-    lr <- cellranger::num_to_letter(col_limits[2]) %NA% row_limits[2]
+    lr <- if (is.na(col_limits[2])) {
+      row_limits[2]
+    } else {
+      cellranger::num_to_letter(col_limits[2])
+    }
     return(paste0(c(ul, lr), collapse = ":"))
   }
 
@@ -97,25 +101,25 @@ resolve_limits <- function(cell_limits, sheet_data = NULL) {
 
   # i:j, ?:j, i:?
   if (allNA(clims(cell_limits))) {
-    cell_limits$ul[1] <- cell_limits$ul[1] %NA% 1L
-    cell_limits$lr[1] <- cell_limits$lr[1] %NA% MAX_ROW
+    cell_limits$ul[1] <- cell_limits$ul[1] %|% 1L
+    cell_limits$lr[1] <- cell_limits$lr[1] %|% MAX_ROW
     return(cell_limits)
   }
 
   # X:Y, ?:Y, X:?
   if (allNA(rlims(cell_limits))) {
-    cell_limits$ul[2] <- cell_limits$ul[2] %NA% 1L
-    cell_limits$lr[2] <- cell_limits$lr[2] %NA% MAX_COL
+    cell_limits$ul[2] <- cell_limits$ul[2] %|% 1L
+    cell_limits$lr[2] <- cell_limits$lr[2] %|% MAX_COL
     return(cell_limits)
   }
 
   # complete ul
-  cell_limits$ul[1] <- cell_limits$ul[1] %NA% 1L
-  cell_limits$ul[2] <- cell_limits$ul[2] %NA% 1L
+  cell_limits$ul[1] <- cell_limits$ul[1] %|% 1L
+  cell_limits$ul[2] <- cell_limits$ul[2] %|% 1L
 
   if (allNA(cell_limits$lr)) {
     # populate col of lr
-    cell_limits$lr[2] <- cell_limits$lr[2] %NA% MAX_COL
+    cell_limits$lr[2] <- cell_limits$lr[2] %|% MAX_COL
   }
 
   cell_limits
@@ -162,17 +166,18 @@ limits_from_range <- function(x) {
   if (anyNA(corners$.match))  {stop_glue("Invalid range: {sq(x)}")}
   corners$column <- ifelse(nzchar(corners$column), corners$column, NA_character_)
   corners$row <- ifelse(nzchar(corners$row), corners$row, NA_character_)
+  corners$row <- as.integer(corners$row)
   if (nrow(corners) == 1) {
     corners <- corners[c(1, 1), ]
   }
   cellranger::cell_limits(
     ul = c(
-      corners$row[1] %NA% NA_integer_,
-      cellranger::letter_to_num(corners$column[1]) %NA% NA_integer_
+      corners$row[1] %|% NA_integer_,
+      cellranger::letter_to_num(corners$column[1]) %|% NA_integer_
     ),
     lr = c(
-      corners$row[2] %NA% NA_integer_,
-      cellranger::letter_to_num(corners$column[2]) %NA% NA_integer_
+      corners$row[2] %|% NA_integer_,
+      cellranger::letter_to_num(corners$column[2]) %|% NA_integer_
     )
   )
 }

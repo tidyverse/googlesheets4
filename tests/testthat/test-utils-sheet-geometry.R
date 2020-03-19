@@ -14,6 +14,9 @@ cell_df <- tibble::tribble(
       3,     2,   "B3",
       3,     3,   "C3"
 )
+# row and col should really be integer
+cell_df$row <- as.integer(cell_df$row)
+cell_df$col <- as.integer(cell_df$col)
 # cell has to be a list-column for the tibble::add_row() in insert_shims()
 # to work, with increased type-strictness coming to tibble v3.0
 # TODO: maybe use an even more realistic cell-type of object here, when the

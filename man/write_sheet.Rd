@@ -22,6 +22,10 @@ is how googledrive represents Drive files. Processed through
 \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
 \item{sheet}{Sheet to write into, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number.}
+
+\item{reformat}{Logical, indicates whether to reformat the affected cells.
+Currently googlesheets4 provides no real support for formatting, so
+\code{reformat = TRUE} effectively means that edited cells become unformatted.}
 }
 \value{
 The input \code{ss}, as an instance of \code{\link{sheets_id}}

@@ -9,3 +9,4 @@ scratch.R
 old
 docs/
 *.xlsx
+pkgdown

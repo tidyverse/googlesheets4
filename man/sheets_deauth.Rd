@@ -27,7 +27,8 @@ if (interactive()) {
 }
 }
 \seealso{
-Other auth functions: \code{\link{sheets_auth_configure}()},
-  \code{\link{sheets_auth}()}
+Other auth functions: 
+\code{\link{sheets_auth_configure}()},
+\code{\link{sheets_auth}()}
 }
 \concept{auth functions}

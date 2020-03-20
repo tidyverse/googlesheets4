@@ -28,8 +28,9 @@ been created with \code{\link[=request_generate]{request_generate()}} or \code{\
 output is processed with \code{process_response()}.
 }
 \seealso{
-Other low-level API functions: \code{\link{request_generate}()},
-  \code{\link{sheets_has_token}()},
-  \code{\link{sheets_token}()}
+Other low-level API functions: 
+\code{\link{request_generate}()},
+\code{\link{sheets_has_token}()},
+\code{\link{sheets_token}()}
 }
 \concept{low-level API functions}

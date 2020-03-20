@@ -62,8 +62,9 @@ req
 \code{\link[gargle:request_develop]{gargle::request_develop()}}, \code{\link[gargle:request_build]{gargle::request_build()}},
 \code{\link[gargle:request_make]{gargle::request_make()}}
 
-Other low-level API functions: \code{\link{request_make}()},
-  \code{\link{sheets_has_token}()},
-  \code{\link{sheets_token}()}
+Other low-level API functions: 
+\code{\link{request_make}()},
+\code{\link{sheets_has_token}()},
+\code{\link{sheets_token}()}
 }
 \concept{low-level API functions}

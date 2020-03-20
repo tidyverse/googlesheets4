@@ -107,7 +107,7 @@ any wheels.
 
 Shortcodes for column types:
 \itemize{
-\item \verb{_} or \verb{-}: Skip. Data in a skipped column is still requested from the
+\item \verb{_} or \code{-}: Skip. Data in a skipped column is still requested from the
 API (the high-level functions in this package are rectangle-oriented), but
 is not parsed into the data frame output.
 \item \verb{?}: Guess. A type is guessed for each cell and then a consensus type is
@@ -133,7 +133,7 @@ useful internally, but exposed for those who want direct access to, e.g.,
 formulas and formats.
 \item \code{L}: List, as in "list-column". Each cell is a length-1 atomic vector of
 its discovered type.
-\item \emph{Still to come}: duration (code will be \verb{:}) and factor (code will be
+\item \emph{Still to come}: duration (code will be \code{:}) and factor (code will be
 \code{f}).
 }
 }

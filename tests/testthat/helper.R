@@ -16,7 +16,7 @@ expect_error_free <- function(...) {
 }
 
 .test_sheets <- c(
-  "googlesheets4-cell-tests" = "1vDfXo-16OhUilaG_EwvDd1Dm4_NI0UKORwSLLpycSS0"
+  "googlesheets4-cell-tests" = "1WRFIb11PJsNwx2tYBRn3uq8uHwWSI5ziSgbGjkOukmE"
 )
 
 test_sheet <- function(name = "googlesheets4-cell-tests") {

@@ -40,6 +40,11 @@ The print method for `sheets_id` objects now attempts to reveal the current Shee
 
 * `read_sheet()` passes its `na` argument down to the helpers that parse cells, so that `na` actually has the documented effect (#73).
 
+# googlesheets4 0.1.1
+
+* Patch release to modify a test fixture, to be compatible with tibble v3.0.
+  Related to tibble's increased type strictness.
+
 # googlesheets4 0.1.0
 
 * Added a `NEWS.md` file to track changes to the package.

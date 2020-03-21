@@ -19,9 +19,6 @@ googlesheets4::sheets_deauth()
 <!-- badges: start -->
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/googlesheets4)](https://CRAN.R-project.org/package=googlesheets4)
-[![Travis build status](https://travis-ci.org/tidyverse/googlesheets4.svg?branch=master)](https://travis-ci.org/tidyverse/googlesheets4)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/tidyverse/googlesheets4?branch=master&svg=true)](https://ci.appveyor.com/project/tidyverse/googlesheets4)
-[![Coverage status](https://codecov.io/gh/tidyverse/googlesheets4/branch/master/graph/badge.svg)](https://codecov.io/github/tidyverse/googlesheets4?branch=master)
 <!-- badges: end -->
 
 googlesheets4 provides an R interface to [Google Sheets](https://spreadsheets.google.com/) via the [Sheets API v4](https://developers.google.com/sheets/api/). It is a reboot of the existing [googlesheets package](https://cran.r-project.org/package=googlesheets).

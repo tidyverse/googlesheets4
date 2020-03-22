@@ -55,9 +55,7 @@
 #'     target rectangle. See the "Range specification" section for details.
 #' @param col_names Logical, indicates whether to send the column names of
 #'   `data`.
-#' @param reformat Logical, indicates whether to reformat the edited cells.
-#'   Currently googlesheets4 provides no real support for formatting, so
-#'   `reformat = TRUE` effectively means that edited cells become unformatted.
+#' @template reformat
 #'
 #' @template ss-return
 #' @export

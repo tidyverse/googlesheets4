@@ -40,7 +40,7 @@ target rectangle. See the "Range specification" section for details.
 \item{col_names}{Logical, indicates whether to send the column names of
 \code{data}.}
 
-\item{reformat}{Logical, indicates whether to reformat the edited cells.
+\item{reformat}{Logical, indicates whether to reformat the affected cells.
 Currently googlesheets4 provides no real support for formatting, so
 \code{reformat = TRUE} effectively means that edited cells become unformatted.}
 }

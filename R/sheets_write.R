@@ -27,7 +27,6 @@
 
 #' @template ss
 #' @eval param_sheet(action = "write into")
-#' @template reformat
 #' @template ss-return
 #' @export
 #' @family write functions

@@ -78,3 +78,16 @@ test_that("check_against_schema() errors when no schema can be found", {
     "can't get a schema"
   )
 })
+
+test_that("id_from_class() works when schema class is present", {
+  x <- structure(
+    list(google_thing = "a"),
+    class = c("googlesheets4_schema_SomeThing", "googlesheets4_schema", "list")
+  )
+  expect_equal(id_from_class(x), "SomeThing")
+})
+
+test_that("id_from_class() returns NA when schema class is absent", {
+  x <- structure(list(google_thing = "a"), class = "list")
+  expect_equal(id_from_class(x), NA_character_)
+})

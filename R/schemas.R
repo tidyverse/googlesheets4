@@ -42,8 +42,12 @@ check_against_schema <- function(x, schema = NULL, id = NA_character_) {
 id_as_class <- function(id) glue("googlesheets4_schema_{id}")
 
 id_from_class <- function(x) {
-  m <- grep("^googlesheets4_schema_", class(x), value = TRUE)[[1]]
-  sub("^googlesheets4_schema_", "", m)
+  m <- grepl("^googlesheets4_schema_", class(x))
+  if (!any(m)) {
+    return(NA_character_)
+  }
+  m <- which(m)[1]
+  sub("^googlesheets4_schema_", "", class(x)[m])
 }
 
 # patch ----

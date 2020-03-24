@@ -67,7 +67,7 @@ jobs:
      - name: Install libsodium on devel macOS
        if: runner.os == 'macOS' && matrix.config.r == 'devel'
        run: brew install libsodium
-x
+
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)

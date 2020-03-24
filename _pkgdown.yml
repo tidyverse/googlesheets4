@@ -42,6 +42,7 @@ reference:
       - sheets_find
       - sheets_browse
       - ends_with("_id")
+      - as_id.googlesheets4_spreadsheet
       - sheets_random
   - title: "Modify a Sheet"
     desc: >

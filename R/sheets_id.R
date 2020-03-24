@@ -185,7 +185,7 @@ one_id <- function(x) {
 #' if (sheets_has_token()) {
 #'   ss <- sheets_get(sheets_example("mini-gap"))
 #'   class(ss)
-#'   as_id(ss)
+#'   googledrive::as_id(ss)
 #' }
 as_id.googlesheets4_spreadsheet <- function(x, ...) as_sheets_id(x)
 

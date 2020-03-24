@@ -28,6 +28,6 @@ if (identical(Sys.getenv("IN_PKGDOWN"), "true")) {
 if (sheets_has_token()) {
   ss <- sheets_get(sheets_example("mini-gap"))
   class(ss)
-  as_id(ss)
+  googledrive::as_id(ss)
 }
 }

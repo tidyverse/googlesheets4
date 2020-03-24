@@ -15,11 +15,6 @@ If no token has been loaded yet, this function does not initiate auth.
 }
 \examples{
 sheets_user()
-
-require("sodium")
-Sys.getenv("IN_PKGDOWN")
-gargle:::secret_can_decrypt("googlesheets4")
-curl::nslookup("sheets.googleapis.com", error = FALSE)
 }
 \seealso{
 \code{\link[gargle:token_userinfo]{gargle::token_userinfo()}}, \code{\link[gargle:token_email]{gargle::token_email()}},

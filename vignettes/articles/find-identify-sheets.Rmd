@@ -38,7 +38,7 @@ Since this article is compiled noninteractively on a server, we have arranged fo
 googlesheets4:::sheets_auth_docs(drive = TRUE) 
 
 # attempt to reduce quota exhaustion problems
-if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(10)
+if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(20)
 ```
 
 ## Use a URL

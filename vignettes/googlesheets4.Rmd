@@ -159,11 +159,3 @@ googledrive::drive_rm(ss)
 ```
 
 The article [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html) has even more detail.
-
-```{r}
-require("sodium")
-Sys.getenv("IN_PKGDOWN")
-gargle:::secret_can_decrypt("googlesheets4")
-curl::nslookup("sheets.googleapis.com", error = FALSE)
-```
-

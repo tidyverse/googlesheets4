@@ -21,10 +21,6 @@ metadata for a Sheet. It just calls \code{\link[=as_sheets_id]{as_sheets_id()}},
 you forget that exists and hope that \code{as_id()} will "just work".
 }
 \examples{
-if (identical(Sys.getenv("IN_PKGDOWN"), "true")) {
-  #googlesheets4:::sheets_auth_docs(drive = TRUE)
-}
-
 if (sheets_has_token()) {
   ss <- sheets_get(sheets_example("mini-gap"))
   class(ss)

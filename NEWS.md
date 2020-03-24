@@ -12,7 +12,8 @@ These functions are ready for use but are still considered experimental and may 
   * `sheets_append()` adds rows to the data in an existing sheet.
   * `sheets_edit()` writes to a range.
   * `sheets_flood()` "floods" all cells in a range with the same content.
-
+    `sheets_clear()` is a wrapper for the special case of clearing cell values.
+  
 ### Other new functions and arguments
 
 There is a new family of `sheets_sheet_*()` functions that operate on the (work)sheets inside an existing (spread)Sheet:

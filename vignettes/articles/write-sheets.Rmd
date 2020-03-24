@@ -415,8 +415,7 @@ sheets_find("sheets-formula-demo") %>%
 
 ## `sheets_flood()`
 
-`sheets_flood()` "floods" all cells in a range with common content. By default, it floods them with no content, i.e. it clears cells of their existing value and format.
-
+`sheets_flood()` "floods" all cells in a range with common content. By default, it floods them with no content, i.e. it clears cells of their existing value and format. Note that `sheets_clear()` is a convenience wrapper for this special case. 
 First, we create a data frame and initialize a new Sheet with that data.
 
 ```{r}

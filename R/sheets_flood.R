@@ -1,7 +1,9 @@
-#' Flood a range of cells
+#' Flood or clear a range of cells
 #'
-#' This function "floods" a range of cells with the same value, which might be
-#' *nothing* (so: clears existing value), and optionally clears any formatting.
+#' `sheets_flood()` "floods" a range of cells with the same content.
+#' `sheets_clear()` is a wrapper that handles the common special case of
+#' clearing the cell value. Both functions, by default, also clear the format,
+#' but this can be soecified via `reformat`.
 #'
 #' @template ss
 #' @eval param_sheet(action = "write into")
@@ -13,8 +15,7 @@
 #' @template ss-return
 #' @export
 #' @family write functions
-#' @seealso
-#' Makes a `RepeatCellRequest`:
+#' @seealso Makes a `RepeatCellRequest`:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#repeatcellrequest>
 #'
 #' @examples
@@ -50,6 +51,10 @@
 #'     )
 #'   )
 #'   sheets_flood(ss, range = "I:J", cell = blue_background)
+#'
+#'   # sheets_clear() is a shortcut where `cell = NULL` always
+#'   sheets_clear(ss, range = "9:9")
+#'   sheets_clear(ss, range = "10:10", reformat = FALSE)
 #'
 #'   # clean up
 #'   googledrive::drive_trash(ss)
@@ -105,4 +110,18 @@ sheets_flood <- function(ss,
   gargle::response_process(resp_raw)
 
   invisible(ssid)
+}
+
+#' @rdname sheets_flood
+#' @export
+sheets_clear <- function(ss,
+                         sheet = NULL,
+                         range = NULL,
+                         reformat = TRUE) {
+  sheets_flood(
+    ss = ss,
+    sheet = sheet,
+    range = range,
+    reformat = reformat
+  )
 }

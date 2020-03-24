@@ -2,9 +2,12 @@
 % Please edit documentation in R/sheets_flood.R
 \name{sheets_flood}
 \alias{sheets_flood}
-\title{Flood a range of cells}
+\alias{sheets_clear}
+\title{Flood or clear a range of cells}
 \usage{
 sheets_flood(ss, sheet = NULL, range = NULL, cell = NULL, reformat = TRUE)
+
+sheets_clear(ss, sheet = NULL, range = NULL, reformat = TRUE)
 }
 \arguments{
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
@@ -37,8 +40,10 @@ Currently googlesheets4 provides no real support for formatting, so
 The input \code{ss}, as an instance of \code{\link{sheets_id}}
 }
 \description{
-This function "floods" a range of cells with the same value, which might be
-\emph{nothing} (so: clears existing value), and optionally clears any formatting.
+\code{sheets_flood()} "floods" a range of cells with the same content.
+\code{sheets_clear()} is a wrapper that handles the common special case of
+clearing the cell value. Both functions, by default, also clear the format,
+but this can be soecified via \code{reformat}.
 }
 \examples{
 if (sheets_has_token()) {
@@ -73,6 +78,10 @@ if (sheets_has_token()) {
     )
   )
   sheets_flood(ss, range = "I:J", cell = blue_background)
+
+  # sheets_clear() is a shortcut where `cell = NULL` always
+  sheets_clear(ss, range = "9:9")
+  sheets_clear(ss, range = "10:10", reformat = FALSE)
 
   # clean up
   googledrive::drive_trash(ss)

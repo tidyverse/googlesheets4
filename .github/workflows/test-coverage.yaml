@@ -5,7 +5,7 @@ on:
     # https://crontab.guru is your friend
     - cron:  '0 11 * * *'
 
-name: Test-coverage
+name: test-coverage
 
 jobs:
   test-coverage:
@@ -16,19 +16,31 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - uses: r-lib/actions/setup-r@master
 
-      - name: Install macOS system dependencies
-        run: brew install libsodium
+      - uses: r-lib/actions/setup-pandoc@master
+
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), "depends.Rds", version = 2)
+        shell: Rscript {0}
+
+      - name: Cache R packages
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: macOS-r-3.6-${{ hashFiles('depends.Rds') }}
+          restore-keys: macOS-r-3.6-
 
       - name: Install dependencies
         run: |
-          Rscript -e 'install.packages("remotes")' \
-                  -e 'remotes::install_deps(dependencies = TRUE)'
-
-      - name: Install package
-        run: R CMD INSTALL .
+          install.packages(c("remotes"))
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("covr")
+        shell: Rscript {0}
 
       - name: Test coverage
-        run: |
-          Rscript -e 'covr::codecov(token = "${{secrets.CODECOV_TOKEN}}")'
+        run: covr::codecov()
+        shell: Rscript {0}

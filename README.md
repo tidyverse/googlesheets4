@@ -10,8 +10,8 @@
 status](https://www.r-pkg.org/badges/version/googlesheets4)](https://CRAN.R-project.org/package=googlesheets4)
 [![R build
 status](https://github.com/tidyverse/googlesheets4/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googlesheets4/actions)
-[![Coverage
-status](https://codecov.io/gh/tidyverse/googlesheets4/branch/master/graph/badge.svg)](https://codecov.io/github/tidyverse/googlesheets4?branch=master)
+[![Codecov test
+coverage](https://codecov.io/gh/tidyverse/googlesheets4/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/googlesheets4?branch=master)
 <!-- badges: end -->
 
 ## Overview
@@ -130,8 +130,9 @@ send some initial data.
 
 ``` r
 (ss <- sheets_create("fluffy-bunny", sheets = list(flowers = head(iris))))
+#> Creating new Sheet: "fluffy-bunny"
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1Gl1dCldb7VWKE0B-p5RrhZfPRvZklkSNnln4nWpr5CA
+#>                 ID: 1hlQJdgx7Eh6kKfijQm7fKQTDq6nOBzx1l517zHFwi5s
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -150,7 +151,7 @@ head(mtcars) %>%
 #> Writing to sheet "autos"
 ss
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1Gl1dCldb7VWKE0B-p5RrhZfPRvZklkSNnln4nWpr5CA
+#>                 ID: 1hlQJdgx7Eh6kKfijQm7fKQTDq6nOBzx1l517zHFwi5s
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2

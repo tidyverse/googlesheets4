@@ -18,18 +18,18 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        - { os: windows-latest, r: '3.6', sheets_auth: GOOGLESHEETS4_NOAUTH, error_on: 'warning'}
-        - { os: macOS-latest, r: '3.6', sheets_auth: GOOGLESHEETS4_PASSWORD, error_on: 'warning'}
-        - { os: macOS-latest, r: 'devel', sheets_auth: GOOGLESHEETS4_NOAUTH, error_on: 'warning'}
-        - { os: ubuntu-16.04, r: '3.2', sheets_auth: GOOGLESHEETS4_NOAUTH, cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'error'}
-        - { os: ubuntu-16.04, r: '3.3', sheets_auth: GOOGLESHEETS4_NOAUTH, cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
-        - { os: ubuntu-16.04, r: '3.4', sheets_auth: GOOGLESHEETS4_NOAUTH, cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
-        - { os: ubuntu-16.04, r: '3.5', sheets_auth: GOOGLESHEETS4_NOAUTH, cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
-        - { os: ubuntu-16.04, r: '3.6', sheets_auth: GOOGLESHEETS4_NOAUTH, cran: "https://demo.rstudiopm.com/all/__linux__/xenial/latest", error_on: 'warning'}
+          - {os: windows-latest, r: '3.6', sheets_auth: GOOGLESHEETS4_NOAUTH}
+          - {os: macOS-latest, r: '3.6', sheets_auth: GOOGLESHEETS4_PASSWORD}
+          - {os: macOS-latest, r: 'devel', sheets_auth: GOOGLESHEETS4_NOAUTH}
+          - {os: ubuntu-16.04, r: '3.2', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - {os: ubuntu-16.04, r: '3.3', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - {os: ubuntu-16.04, r: '3.4', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - {os: ubuntu-16.04, r: '3.5', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - {os: ubuntu-16.04, r: '3.6', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      CRAN: ${{ matrix.config.cran }}
+      RSPM: ${{ matrix.config.rspm }}
       GOOGLESHEETS4_PASSWORD: ${{ secrets[matrix.config.sheets_auth] }}
 
     steps:
@@ -42,7 +42,10 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@master
 
       - name: Query dependencies
-        run: Rscript -e "install.packages('remotes')" -e "saveRDS(remotes::dev_package_deps(dependencies = TRUE), 'depends.Rds', version = 2)"
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), "depends.Rds", version = 2)
+        shell: Rscript {0}
 
       - name: Cache R packages
         if: runner.os != 'Windows'
@@ -52,7 +55,7 @@ jobs:
           key: ${{ runner.os }}-r-${{ matrix.config.r }}-${{ hashFiles('depends.Rds') }}
           restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-
 
-      - name: Install linux system dependencies
+      - name: Install system dependencies
         if: runner.os == 'Linux'
         env:
           RHUB_PLATFORM: linux-x86_64-ubuntu-gcc
@@ -61,15 +64,21 @@ jobs:
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
 
-      - name: Install macOS system dependencies
-        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
-        run: brew install libsodium
-
+     - name: Install libsodium on devel macOS
+       if: runner.os == 'macOS' && matrix.config.r == 'devel'
+       run: brew install libsodium
+x
       - name: Install dependencies
-        run: Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))" -e "remotes::install_cran('rcmdcheck')" -e "remotes::install_cran('tidyverse')" -e "remotes::install_github('hadley/emo')"
+        run: |
+          remotes::install_deps(dependencies = TRUE)
+          remotes::install_cran("rcmdcheck")
+          remotes::install_cran("tidyverse")
+          remotes::install_github("hadley/emo")
+        shell: Rscript {0}
 
       - name: Check
-        run: Rscript -e "rcmdcheck::rcmdcheck(args = c('--no-manual', '--ignore-vignettes', '--no-examples'), build_args = '--no-build-vignettes', error_on = '${{ matrix.config.error_on }}', check_dir = 'check')"
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--ignore-vignettes", "--no-examples"), build_args = "--no-build-vignettes", error_on = "${{ matrix.config.error_on }}", check_dir = "check")
+        shell: Rscript {0}
 
       - name: Upload check results
         if: failure()

@@ -43,7 +43,7 @@ The input \code{ss}, as an instance of \code{\link{sheets_id}}
 \code{sheets_flood()} "floods" a range of cells with the same content.
 \code{sheets_clear()} is a wrapper that handles the common special case of
 clearing the cell value. Both functions, by default, also clear the format,
-but this can be soecified via \code{reformat}.
+but this can be specified via \code{reformat}.
 }
 \examples{
 if (sheets_has_token()) {

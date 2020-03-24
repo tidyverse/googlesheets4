@@ -3,7 +3,7 @@
 #' `sheets_flood()` "floods" a range of cells with the same content.
 #' `sheets_clear()` is a wrapper that handles the common special case of
 #' clearing the cell value. Both functions, by default, also clear the format,
-#' but this can be soecified via `reformat`.
+#' but this can be specified via `reformat`.
 #'
 #' @template ss
 #' @eval param_sheet(action = "write into")

@@ -18,7 +18,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
 <script src="../../pkgdown.js"></script><link href="../../tidyverse-2.css" rel="stylesheet">
 <meta property="og:title" content="Read Sheets">
-<meta property="og:description" content="">
+<meta property="og:description" content="googlesheets4">
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -32,7 +32,7 @@
   gtag('config', 'UA-115082821-1');
 </script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -97,7 +97,7 @@
   <a href="../../news/index.html">Changelog</a>
 </li>
         <li>
-  <a href="https://github.com/tidyverse/googlesheets4">
+  <a href="https://github.com/tidyverse/googlesheets4/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -115,7 +115,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Read Sheets</h1>
+      <h1 data-toc-skip>Read Sheets</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/tidyverse/googlesheets4/blob/master/vignettes/articles/read-sheets.Rmd"><code>vignettes/articles/read-sheets.Rmd</code></a></small>
@@ -125,7 +125,7 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(googlesheets4)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googlesheets4</span>)</pre></body></html></div>
 <p>Basic Sheet reading is shown in the <a href="https://googlesheets4.tidyverse.org/articles/googlesheets4.html">Get started</a> article. Here we show how to target a specific (work)sheet or cell range, how to deal with column types, and how to get detailed cell data.</p>
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
@@ -137,203 +137,203 @@
 <h2 class="hasAnchor">
 <a href="#specify-the-range-and-column-types" class="anchor"></a>Specify the range and column types</h2>
 <p>Here we read from the “mini-gap” and “deaths” example Sheets to show some of the different ways to specify (work)sheet and cell ranges. Note also that <code>col_types</code> gives control of column types, similar to how <code>col_types</code> works in readr and readxl.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="../../reference/read_sheet.html">read_sheet</a></span>(<span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"mini-gap"</span>), <span class="dt">sheet =</span> <span class="dv">2</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; Reading from "mini-gap"</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt; Range "'Americas'"</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; # A tibble: 5 x 6</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt;   country   continent  year lifeExp      pop gdpPercap</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt; 1 Argentina Americas   1952    62.5 17876956     5911.</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; 2 Bolivia   Americas   1952    40.4  2883315     2677.</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; 3 Brazil    Americas   1952    50.9 56602560     2109.</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; 4 Canada    Americas   1952    68.8 14785584    11367.</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; 5 Chile     Americas   1952    54.7  6377619     3940.</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="kw"><a href="../../reference/read_sheet.html">read_sheet</a></span>(<span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"mini-gap"</span>), <span class="dt">sheet =</span> <span class="st">"Oceania"</span>, <span class="dt">n_max =</span> <span class="dv">3</span>)</span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt; Reading from "mini-gap"</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; Range "'Oceania'"</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co">#&gt; # A tibble: 3 x 6</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="co">#&gt;   country     continent  year lifeExp     pop gdpPercap</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#&gt; 1 Australia   Oceania    1952    69.1 8691212    10040.</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#&gt; 2 New Zealand Oceania    1952    69.4 1994794    10557.</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="co">#&gt; 3 Australia   Oceania    1957    70.3 9712569    10950.</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a></span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="kw"><a href="../../reference/read_sheet.html">read_sheet</a></span>(<span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="dt">skip =</span> <span class="dv">4</span>, <span class="dt">n_max =</span> <span class="dv">10</span>)</span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="co">#&gt; Reading from "deaths"</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="co">#&gt; Range "5:5000000"</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a><span class="co">#&gt; # A tibble: 10 x 6</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a><span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span></span>
-<span id="cb2-28"><a href="#cb2-28"></a><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span></span>
-<span id="cb2-29"><a href="#cb2-29"></a><span class="co">#&gt;  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span></span>
-<span id="cb2-30"><a href="#cb2-30"></a><span class="co">#&gt;  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a><span class="co">#&gt;  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span></span>
-<span id="cb2-32"><a href="#cb2-32"></a><span class="co">#&gt;  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00</span></span>
-<span id="cb2-33"><a href="#cb2-33"></a><span class="co">#&gt;  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00</span></span>
-<span id="cb2-34"><a href="#cb2-34"></a><span class="co">#&gt;  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00</span></span>
-<span id="cb2-35"><a href="#cb2-35"></a><span class="co">#&gt;  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00</span></span>
-<span id="cb2-36"><a href="#cb2-36"></a><span class="co">#&gt;  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00</span></span>
-<span id="cb2-37"><a href="#cb2-37"></a><span class="co">#&gt;  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00</span></span>
-<span id="cb2-38"><a href="#cb2-38"></a><span class="co">#&gt; 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00</span></span>
-<span id="cb2-39"><a href="#cb2-39"></a></span>
-<span id="cb2-40"><a href="#cb2-40"></a><span class="kw"><a href="../../reference/read_sheet.html">read_sheet</a></span>(</span>
-<span id="cb2-41"><a href="#cb2-41"></a>  <span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="dt">range =</span> <span class="st">"other!A5:F15"</span>, <span class="dt">col_types =</span> <span class="st">"?ci??D"</span></span>
-<span id="cb2-42"><a href="#cb2-42"></a>)</span>
-<span id="cb2-43"><a href="#cb2-43"></a><span class="co">#&gt; Reading from "deaths"</span></span>
-<span id="cb2-44"><a href="#cb2-44"></a><span class="co">#&gt; Range "'other'!A5:F15"</span></span>
-<span id="cb2-45"><a href="#cb2-45"></a><span class="co">#&gt; # A tibble: 10 x 6</span></span>
-<span id="cb2-46"><a href="#cb2-46"></a><span class="co">#&gt;    Name          Profession   Age `Has kids` `Date of birth`     `Date of death`</span></span>
-<span id="cb2-47"><a href="#cb2-47"></a><span class="co">#&gt;    &lt;chr&gt;         &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;date&gt;         </span></span>
-<span id="cb2-48"><a href="#cb2-48"></a><span class="co">#&gt;  1 Vera Rubin    scientist     88 TRUE       1928-07-23 00:00:00 2016-12-25     </span></span>
-<span id="cb2-49"><a href="#cb2-49"></a><span class="co">#&gt;  2 Mohamed Ali   athlete       74 TRUE       1942-01-17 00:00:00 2016-06-03     </span></span>
-<span id="cb2-50"><a href="#cb2-50"></a><span class="co">#&gt;  3 Morley Safer  journalist    84 TRUE       1931-11-08 00:00:00 2016-05-19     </span></span>
-<span id="cb2-51"><a href="#cb2-51"></a><span class="co">#&gt;  4 Fidel Castro  politician    90 TRUE       1926-08-13 00:00:00 2016-11-25     </span></span>
-<span id="cb2-52"><a href="#cb2-52"></a><span class="co">#&gt;  5 Antonin Scal… lawyer        79 TRUE       1936-03-11 00:00:00 2016-02-13     </span></span>
-<span id="cb2-53"><a href="#cb2-53"></a><span class="co">#&gt;  6 Jo Cox        politician    41 TRUE       1974-06-22 00:00:00 2016-06-16     </span></span>
-<span id="cb2-54"><a href="#cb2-54"></a><span class="co">#&gt;  7 Janet Reno    lawyer        78 FALSE      1938-07-21 00:00:00 2016-11-07     </span></span>
-<span id="cb2-55"><a href="#cb2-55"></a><span class="co">#&gt;  8 Gwen Ifill    journalist    61 FALSE      1955-09-29 00:00:00 2016-11-14     </span></span>
-<span id="cb2-56"><a href="#cb2-56"></a><span class="co">#&gt;  9 John Glenn    astronaut     95 TRUE       1921-07-28 00:00:00 2016-12-08     </span></span>
-<span id="cb2-57"><a href="#cb2-57"></a><span class="co">#&gt; 10 Pat Summit    coach         64 TRUE       1952-06-14 00:00:00 2016-06-28</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../../reference/read_sheet.html">read_sheet</a></span>(<span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"mini-gap"</span>), <span class="kw">sheet</span> <span class="kw">=</span> <span class="fl">2</span>)
+<span class="co">#&gt; Reading from "mini-gap"</span>
+<span class="co">#&gt; Range "'Americas'"</span>
+<span class="co">#&gt; # A tibble: 5 x 6</span>
+<span class="co">#&gt;   country   continent  year lifeExp      pop gdpPercap</span>
+<span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 Argentina Americas   1952    62.5 17876956     5911.</span>
+<span class="co">#&gt; 2 Bolivia   Americas   1952    40.4  2883315     2677.</span>
+<span class="co">#&gt; 3 Brazil    Americas   1952    50.9 56602560     2109.</span>
+<span class="co">#&gt; 4 Canada    Americas   1952    68.8 14785584    11367.</span>
+<span class="co">#&gt; 5 Chile     Americas   1952    54.7  6377619     3940.</span>
+
+<span class="fu"><a href="../../reference/read_sheet.html">read_sheet</a></span>(<span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"mini-gap"</span>), <span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"Oceania"</span>, <span class="kw">n_max</span> <span class="kw">=</span> <span class="fl">3</span>)
+<span class="co">#&gt; Reading from "mini-gap"</span>
+<span class="co">#&gt; Range "'Oceania'"</span>
+<span class="co">#&gt; # A tibble: 3 x 6</span>
+<span class="co">#&gt;   country     continent  year lifeExp     pop gdpPercap</span>
+<span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 Australia   Oceania    1952    69.1 8691212    10040.</span>
+<span class="co">#&gt; 2 New Zealand Oceania    1952    69.4 1994794    10557.</span>
+<span class="co">#&gt; 3 Australia   Oceania    1957    70.3 9712569    10950.</span>
+
+<span class="fu"><a href="../../reference/read_sheet.html">read_sheet</a></span>(<span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="kw">skip</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">n_max</span> <span class="kw">=</span> <span class="fl">10</span>)
+<span class="co">#&gt; Reading from "deaths"</span>
+<span class="co">#&gt; Range "5:5000000"</span>
+<span class="co">#&gt; # A tibble: 10 x 6</span>
+<span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span>
+<span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span>
+<span class="co">#&gt;  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span>
+<span class="co">#&gt;  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span>
+<span class="co">#&gt;  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span>
+<span class="co">#&gt;  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00</span>
+<span class="co">#&gt;  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00</span>
+<span class="co">#&gt;  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00</span>
+<span class="co">#&gt;  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00</span>
+<span class="co">#&gt;  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00</span>
+<span class="co">#&gt;  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00</span>
+<span class="co">#&gt; 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00</span>
+
+<span class="fu"><a href="../../reference/read_sheet.html">read_sheet</a></span>(
+  <span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="kw">range</span> <span class="kw">=</span> <span class="st">"other!A5:F15"</span>, <span class="kw">col_types</span> <span class="kw">=</span> <span class="st">"?ci??D"</span>
+)
+<span class="co">#&gt; Reading from "deaths"</span>
+<span class="co">#&gt; Range "'other'!A5:F15"</span>
+<span class="co">#&gt; # A tibble: 10 x 6</span>
+<span class="co">#&gt;    Name          Profession   Age `Has kids` `Date of birth`     `Date of death`</span>
+<span class="co">#&gt;    &lt;chr&gt;         &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;date&gt;         </span>
+<span class="co">#&gt;  1 Vera Rubin    scientist     88 TRUE       1928-07-23 00:00:00 2016-12-25     </span>
+<span class="co">#&gt;  2 Mohamed Ali   athlete       74 TRUE       1942-01-17 00:00:00 2016-06-03     </span>
+<span class="co">#&gt;  3 Morley Safer  journalist    84 TRUE       1931-11-08 00:00:00 2016-05-19     </span>
+<span class="co">#&gt;  4 Fidel Castro  politician    90 TRUE       1926-08-13 00:00:00 2016-11-25     </span>
+<span class="co">#&gt;  5 Antonin Scal… lawyer        79 TRUE       1936-03-11 00:00:00 2016-02-13     </span>
+<span class="co">#&gt;  6 Jo Cox        politician    41 TRUE       1974-06-22 00:00:00 2016-06-16     </span>
+<span class="co">#&gt;  7 Janet Reno    lawyer        78 FALSE      1938-07-21 00:00:00 2016-11-07     </span>
+<span class="co">#&gt;  8 Gwen Ifill    journalist    61 FALSE      1955-09-29 00:00:00 2016-11-14     </span>
+<span class="co">#&gt;  9 John Glenn    astronaut     95 TRUE       1921-07-28 00:00:00 2016-12-08     </span>
+<span class="co">#&gt; 10 Pat Summit    coach         64 TRUE       1952-06-14 00:00:00 2016-06-28</span></pre></body></html></div>
 <p>If you looked at the “deaths” spreadsheet in the browser (it’s <a href="https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/edit#gid=1210215306">here</a>), you know that it has some of the typical features of real world spreadsheets: the main data rectangle has prose intended for human-consumption before and after it. That’s why we have to specify the range when we read from it.</p>
 <p>We’ve designated the data rectangles as <a href="https://support.google.com/docs/answer/63175?co=GENIE.Platform%3DDesktop&amp;hl=en">named ranges</a>, which provides a very slick way to read them – definitely less brittle and mysterious than approaches like <code>range = "other!A5:F15"</code> or <code>skip = 4, n_max = 10</code>. A named range can be passed via the <code>range =</code> argument:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="st">  </span><span class="kw"><a href="../../reference/read_sheet.html">read_sheet</a></span>(<span class="dt">range =</span> <span class="st">"arts_data"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; Reading from "deaths"</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; Range "arts_data"</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; # A tibble: 10 x 6</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt;  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt;  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt;  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt;  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt;  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt;  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt;  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../../reference/read_sheet.html">read_sheet</a></span>(<span class="kw">range</span> <span class="kw">=</span> <span class="st">"arts_data"</span>)
+<span class="co">#&gt; Reading from "deaths"</span>
+<span class="co">#&gt; Range "arts_data"</span>
+<span class="co">#&gt; # A tibble: 10 x 6</span>
+<span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span>
+<span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span>
+<span class="co">#&gt;  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span>
+<span class="co">#&gt;  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span>
+<span class="co">#&gt;  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span>
+<span class="co">#&gt;  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00</span>
+<span class="co">#&gt;  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00</span>
+<span class="co">#&gt;  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00</span>
+<span class="co">#&gt;  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00</span>
+<span class="co">#&gt;  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00</span>
+<span class="co">#&gt;  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00</span>
+<span class="co">#&gt; 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00</span></pre></body></html></div>
 <p>The named ranges, if any exist, are part of the information returned by <code><a href="../../reference/sheets_get.html">sheets_get()</a></code>.</p>
 </div>
 <div id="detailed-cell-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#detailed-cell-data" class="anchor"></a>Detailed cell data</h2>
 <p><code><a href="../../reference/sheets_cells.html">sheets_cells()</a></code> returns a data frame with one row per cell and it gives access to raw cell data sent by the Sheets API.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>(df &lt;-<span class="st"> </span><span class="kw"><a href="../../reference/sheets_cells.html">sheets_cells</a></span>(<span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="dt">range =</span> <span class="st">"E5:E7"</span>))</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Reading from "deaths"</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Range "E5:E7"</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; # A tibble: 3 x 4</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt;     row   col loc   cell      </span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;list&gt;    </span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; 1     5     5 E5    &lt;CELL_TEX&gt;</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; 2     6     5 E6    &lt;CELL_DAT&gt;</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; 3     7     5 E7    &lt;CELL_DAT&gt;</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a>df<span class="op">$</span>cell[[<span class="dv">3</span>]]</span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; $effectiveValue</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; $effectiveValue$numberValue</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; [1] 20749</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt; </span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt; </span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt; $formattedValue</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt; [1] "10/21/1956"</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt; </span></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt; $effectiveFormat</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt; $effectiveFormat$numberFormat</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; $effectiveFormat$numberFormat$type</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; [1] "DATE"</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt; </span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt; $effectiveFormat$numberFormat$pattern</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt; [1] "M/D/YYYY"</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a><span class="co">#&gt; </span></span>
-<span id="cb4-27"><a href="#cb4-27"></a><span class="co">#&gt; </span></span>
-<span id="cb4-28"><a href="#cb4-28"></a><span class="co">#&gt; </span></span>
-<span id="cb4-29"><a href="#cb4-29"></a><span class="co">#&gt; attr(,"class")</span></span>
-<span id="cb4-30"><a href="#cb4-30"></a><span class="co">#&gt; [1] "CELL_DATE"   "SHEETS_CELL"</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><html><body><pre class="r">(<span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sheets_cells.html">sheets_cells</a></span>(<span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="kw">range</span> <span class="kw">=</span> <span class="st">"E5:E7"</span>))
+<span class="co">#&gt; Reading from "deaths"</span>
+<span class="co">#&gt; Range "E5:E7"</span>
+<span class="co">#&gt; # A tibble: 3 x 4</span>
+<span class="co">#&gt;     row   col loc   cell      </span>
+<span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;list&gt;    </span>
+<span class="co">#&gt; 1     5     5 E5    &lt;CELL_TEX&gt;</span>
+<span class="co">#&gt; 2     6     5 E6    &lt;CELL_DAT&gt;</span>
+<span class="co">#&gt; 3     7     5 E7    &lt;CELL_DAT&gt;</span>
+<span class="no">df</span>$<span class="no">cell</span><span class="kw">[[</span><span class="fl">3</span>]]
+<span class="co">#&gt; $effectiveValue</span>
+<span class="co">#&gt; $effectiveValue$numberValue</span>
+<span class="co">#&gt; [1] 20749</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $formattedValue</span>
+<span class="co">#&gt; [1] "10/21/1956"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $effectiveFormat</span>
+<span class="co">#&gt; $effectiveFormat$numberFormat</span>
+<span class="co">#&gt; $effectiveFormat$numberFormat$type</span>
+<span class="co">#&gt; [1] "DATE"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $effectiveFormat$numberFormat$pattern</span>
+<span class="co">#&gt; [1] "M/D/YYYY"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; attr(,"class")</span>
+<span class="co">#&gt; [1] "CELL_DATE"   "SHEETS_CELL"</span></pre></body></html></div>
 <p>Specify <code>cell_data = "full", discard_empty = FALSE</code> to get even more data if you, for example, need access to cell formulas or formatting.</p>
 <p><code><a href="../../reference/spread_sheet.html">spread_sheet()</a></code> 😉 converts data in the “one row per cell” form into the data frame you get from <code><a href="../../reference/read_sheet.html">read_sheet()</a></code>, which involves reshaping and column typing.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/spread_sheet.html">spread_sheet</a></span>(<span class="dt">col_types =</span> <span class="st">"D"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">#&gt; # A tibble: 2 x 1</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt;   `Date of birth`</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;   &lt;date&gt;         </span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt; 1 1947-01-08     </span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt; 2 1956-10-21</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">## is same as ...</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="kw"><a href="../../reference/read_sheet.html">read_sheet</a></span>(<span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="dt">range =</span> <span class="st">"E5:E7"</span>, <span class="dt">col_types =</span><span class="st">"D"</span>)</span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; Reading from "deaths"</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt; Range "E5:E7"</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt; # A tibble: 2 x 1</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt;   `Date of birth`</span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt;   &lt;date&gt;         </span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt; 1 1947-01-08     </span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt; 2 1956-10-21</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">df</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/spread_sheet.html">spread_sheet</a></span>(<span class="kw">col_types</span> <span class="kw">=</span> <span class="st">"D"</span>)
+<span class="co">#&gt; # A tibble: 2 x 1</span>
+<span class="co">#&gt;   `Date of birth`</span>
+<span class="co">#&gt;   &lt;date&gt;         </span>
+<span class="co">#&gt; 1 1947-01-08     </span>
+<span class="co">#&gt; 2 1956-10-21</span>
+<span class="co">## is same as ...</span>
+<span class="fu"><a href="../../reference/read_sheet.html">read_sheet</a></span>(<span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="kw">range</span> <span class="kw">=</span> <span class="st">"E5:E7"</span>, <span class="kw">col_types</span> <span class="kw">=</span><span class="st">"D"</span>)
+<span class="co">#&gt; Reading from "deaths"</span>
+<span class="co">#&gt; Range "E5:E7"</span>
+<span class="co">#&gt; # A tibble: 2 x 1</span>
+<span class="co">#&gt;   `Date of birth`</span>
+<span class="co">#&gt;   &lt;date&gt;         </span>
+<span class="co">#&gt; 1 1947-01-08     </span>
+<span class="co">#&gt; 2 1956-10-21</span></pre></body></html></div>
 </div>
 <div id="when-speed-matters" class="section level2">
 <h2 class="hasAnchor">
 <a href="#when-speed-matters" class="anchor"></a>When speed matters</h2>
 <p>If your Sheet is so large that the speed of <code><a href="../../reference/read_sheet.html">sheets_read()</a></code> is causing problems, consider <code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code>. It uses a special URL that allows a Sheet to be read as comma-separated values (CSV). Access via this URL doesn’t use the Sheets API (although <code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> still makes an API call to retrieve Sheet metadata). As an example, on a Sheet with around 57,000 rows and 25 columns (over 1.4 million cells), <code>sheets_speadread()</code> takes ~5 seconds, whereas <code><a href="../../reference/read_sheet.html">sheets_read()</a></code> takes closer to 3 minutes. Why wouldn’t we always take the faster option?!? Because the speed difference is imperceptible for many Sheets and there are some downsides (described later).</p>
 <p><code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> has much the same interface as <code><a href="../../reference/read_sheet.html">sheets_read()</a></code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw"><a href="../../reference/sheets_speedread.html">sheets_speedread</a></span>(<span class="dt">sheet =</span> <span class="st">"Oceania"</span>, <span class="dt">n_max =</span> <span class="dv">3</span>)</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; Reading from "gapminder", "Oceania" sheet</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; Export URL: https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=1796776040</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; Parsed with column specification:</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; cols(</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt;   country = col_character(),</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;   continent = col_character(),</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;   year = col_double(),</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt;   lifeExp = col_double(),</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt;   pop = col_double(),</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt;   gdpPercap = col_double()</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; )</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; # A tibble: 3 x 6</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt;   country   continent  year lifeExp      pop gdpPercap</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; 1 Australia Oceania    1952    69.1  8691212    10040.</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt; 2 Australia Oceania    1957    70.3  9712569    10950.</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt; 3 Australia Oceania    1962    70.9 10794968    12217.</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../../reference/sheets_speedread.html">sheets_speedread</a></span>(<span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"Oceania"</span>, <span class="kw">n_max</span> <span class="kw">=</span> <span class="fl">3</span>)
+<span class="co">#&gt; Reading from "gapminder", "Oceania" sheet</span>
+<span class="co">#&gt; Export URL: https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=1796776040</span>
+<span class="co">#&gt; Parsed with column specification:</span>
+<span class="co">#&gt; cols(</span>
+<span class="co">#&gt;   country = col_character(),</span>
+<span class="co">#&gt;   continent = col_character(),</span>
+<span class="co">#&gt;   year = col_double(),</span>
+<span class="co">#&gt;   lifeExp = col_double(),</span>
+<span class="co">#&gt;   pop = col_double(),</span>
+<span class="co">#&gt;   gdpPercap = col_double()</span>
+<span class="co">#&gt; )</span>
+<span class="co">#&gt; # A tibble: 3 x 6</span>
+<span class="co">#&gt;   country   continent  year lifeExp      pop gdpPercap</span>
+<span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 Australia Oceania    1952    69.1  8691212    10040.</span>
+<span class="co">#&gt; 2 Australia Oceania    1957    70.3  9712569    10950.</span>
+<span class="co">#&gt; 3 Australia Oceania    1962    70.9 10794968    12217.</span></pre></body></html></div>
 <p>The output above reveals that, under the hood, <code>sheets_speadread()</code> calls an external function for CSV parsing (currently <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code>, but it is likely to switch to <code>vroom::vroom()</code>). An important consequence is that all arguments around column type specification are passed along to the CSV-parsing function. Here is a demo using readr-style column specification:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw"><a href="../../reference/sheets_speedread.html">sheets_speedread</a></span>(</span>
-<span id="cb7-3"><a href="#cb7-3"></a>    <span class="dt">range =</span> <span class="st">"other!A5:F15"</span>,</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    <span class="dt">col_types =</span> readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/cols.html">cols</a></span>(</span>
-<span id="cb7-5"><a href="#cb7-5"></a>      <span class="dt">Age =</span> readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_integer</a></span>(),</span>
-<span id="cb7-6"><a href="#cb7-6"></a>      <span class="st">`</span><span class="dt">Date of birth</span><span class="st">`</span> =<span class="st"> </span>readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/parse_datetime.html">col_date</a></span>(<span class="st">"%m/%d/%Y"</span>),</span>
-<span id="cb7-7"><a href="#cb7-7"></a>      <span class="st">`</span><span class="dt">Date of death</span><span class="st">`</span> =<span class="st"> </span>readr<span class="op">::</span><span class="kw"><a href="https://readr.tidyverse.org/reference/parse_datetime.html">col_date</a></span>(<span class="st">"%m/%d/%Y"</span>)</span>
-<span id="cb7-8"><a href="#cb7-8"></a>    )</span>
-<span id="cb7-9"><a href="#cb7-9"></a>  )</span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co">#&gt; Reading from "deaths", "other" sheet, range "A5:F15"</span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co">#&gt; Export URL: https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/export?format=csv&amp;range=A5%3AF15&amp;gid=28655153</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="co">#&gt; # A tibble: 10 x 6</span></span>
-<span id="cb7-13"><a href="#cb7-13"></a><span class="co">#&gt;    Name           Profession   Age `Has kids` `Date of birth` `Date of death`</span></span>
-<span id="cb7-14"><a href="#cb7-14"></a><span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;date&gt;          &lt;date&gt;         </span></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="co">#&gt;  1 Vera Rubin     scientist     88 TRUE       1928-07-23      2016-12-25     </span></span>
-<span id="cb7-16"><a href="#cb7-16"></a><span class="co">#&gt;  2 Mohamed Ali    athlete       74 TRUE       1942-01-17      2016-06-03     </span></span>
-<span id="cb7-17"><a href="#cb7-17"></a><span class="co">#&gt;  3 Morley Safer   journalist    84 TRUE       1931-11-08      2016-05-19     </span></span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="co">#&gt;  4 Fidel Castro   politician    90 TRUE       1926-08-13      2016-11-25     </span></span>
-<span id="cb7-19"><a href="#cb7-19"></a><span class="co">#&gt;  5 Antonin Scalia lawyer        79 TRUE       1936-03-11      2016-02-13     </span></span>
-<span id="cb7-20"><a href="#cb7-20"></a><span class="co">#&gt;  6 Jo Cox         politician    41 TRUE       1974-06-22      2016-06-16     </span></span>
-<span id="cb7-21"><a href="#cb7-21"></a><span class="co">#&gt;  7 Janet Reno     lawyer        78 FALSE      1938-07-21      2016-11-07     </span></span>
-<span id="cb7-22"><a href="#cb7-22"></a><span class="co">#&gt;  8 Gwen Ifill     journalist    61 FALSE      1955-09-29      2016-11-14     </span></span>
-<span id="cb7-23"><a href="#cb7-23"></a><span class="co">#&gt;  9 John Glenn     astronaut     95 TRUE       1921-07-28      2016-12-08     </span></span>
-<span id="cb7-24"><a href="#cb7-24"></a><span class="co">#&gt; 10 Pat Summit     coach         64 TRUE       1952-06-14      2016-06-28</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../../reference/sheets_speedread.html">sheets_speedread</a></span>(
+    <span class="kw">range</span> <span class="kw">=</span> <span class="st">"other!A5:F15"</span>,
+    <span class="kw">col_types</span> <span class="kw">=</span> <span class="kw pkg">readr</span><span class="kw ns">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html">cols</a></span>(
+      <span class="kw">Age</span> <span class="kw">=</span> <span class="kw pkg">readr</span><span class="kw ns">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_atomic.html">col_integer</a></span>(),
+      <span class="kw">`Date of birth`</span> <span class="kw">=</span> <span class="kw pkg">readr</span><span class="kw ns">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_datetime.html">col_date</a></span>(<span class="st">"%m/%d/%Y"</span>),
+      <span class="kw">`Date of death`</span> <span class="kw">=</span> <span class="kw pkg">readr</span><span class="kw ns">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_datetime.html">col_date</a></span>(<span class="st">"%m/%d/%Y"</span>)
+    )
+  )
+<span class="co">#&gt; Reading from "deaths", "other" sheet, range "A5:F15"</span>
+<span class="co">#&gt; Export URL: https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/export?format=csv&amp;range=A5%3AF15&amp;gid=28655153</span>
+<span class="co">#&gt; # A tibble: 10 x 6</span>
+<span class="co">#&gt;    Name           Profession   Age `Has kids` `Date of birth` `Date of death`</span>
+<span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;date&gt;          &lt;date&gt;         </span>
+<span class="co">#&gt;  1 Vera Rubin     scientist     88 TRUE       1928-07-23      2016-12-25     </span>
+<span class="co">#&gt;  2 Mohamed Ali    athlete       74 TRUE       1942-01-17      2016-06-03     </span>
+<span class="co">#&gt;  3 Morley Safer   journalist    84 TRUE       1931-11-08      2016-05-19     </span>
+<span class="co">#&gt;  4 Fidel Castro   politician    90 TRUE       1926-08-13      2016-11-25     </span>
+<span class="co">#&gt;  5 Antonin Scalia lawyer        79 TRUE       1936-03-11      2016-02-13     </span>
+<span class="co">#&gt;  6 Jo Cox         politician    41 TRUE       1974-06-22      2016-06-16     </span>
+<span class="co">#&gt;  7 Janet Reno     lawyer        78 FALSE      1938-07-21      2016-11-07     </span>
+<span class="co">#&gt;  8 Gwen Ifill     journalist    61 FALSE      1955-09-29      2016-11-14     </span>
+<span class="co">#&gt;  9 John Glenn     astronaut     95 TRUE       1921-07-28      2016-12-08     </span>
+<span class="co">#&gt; 10 Pat Summit     coach         64 TRUE       1952-06-14      2016-06-28</span></pre></body></html></div>
 <p>Compare that to how we would read the same data with <code><a href="../../reference/read_sheet.html">sheets_read()</a></code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="dt">range =</span> <span class="st">"other_data"</span>, <span class="dt">col_types =</span> <span class="st">"??i?DD"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; Reading from "deaths"</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; Range "other_data"</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; # A tibble: 10 x 6</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;    Name           Profession   Age `Has kids` `Date of birth` `Date of death`</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;date&gt;          &lt;date&gt;         </span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;  1 Vera Rubin     scientist     88 TRUE       1928-07-23      2016-12-25     </span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt;  2 Mohamed Ali    athlete       74 TRUE       1942-01-17      2016-06-03     </span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt;  3 Morley Safer   journalist    84 TRUE       1931-11-08      2016-05-19     </span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt;  4 Fidel Castro   politician    90 TRUE       1926-08-13      2016-11-25     </span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt;  5 Antonin Scalia lawyer        79 TRUE       1936-03-11      2016-02-13     </span></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt;  6 Jo Cox         politician    41 TRUE       1974-06-22      2016-06-16     </span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt;  7 Janet Reno     lawyer        78 FALSE      1938-07-21      2016-11-07     </span></span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt;  8 Gwen Ifill     journalist    61 FALSE      1955-09-29      2016-11-14     </span></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt;  9 John Glenn     astronaut     95 TRUE       1921-07-28      2016-12-08     </span></span>
-<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt; 10 Pat Summit     coach         64 TRUE       1952-06-14      2016-06-28</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="kw">range</span> <span class="kw">=</span> <span class="st">"other_data"</span>, <span class="kw">col_types</span> <span class="kw">=</span> <span class="st">"??i?DD"</span>)
+<span class="co">#&gt; Reading from "deaths"</span>
+<span class="co">#&gt; Range "other_data"</span>
+<span class="co">#&gt; # A tibble: 10 x 6</span>
+<span class="co">#&gt;    Name           Profession   Age `Has kids` `Date of birth` `Date of death`</span>
+<span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;date&gt;          &lt;date&gt;         </span>
+<span class="co">#&gt;  1 Vera Rubin     scientist     88 TRUE       1928-07-23      2016-12-25     </span>
+<span class="co">#&gt;  2 Mohamed Ali    athlete       74 TRUE       1942-01-17      2016-06-03     </span>
+<span class="co">#&gt;  3 Morley Safer   journalist    84 TRUE       1931-11-08      2016-05-19     </span>
+<span class="co">#&gt;  4 Fidel Castro   politician    90 TRUE       1926-08-13      2016-11-25     </span>
+<span class="co">#&gt;  5 Antonin Scalia lawyer        79 TRUE       1936-03-11      2016-02-13     </span>
+<span class="co">#&gt;  6 Jo Cox         politician    41 TRUE       1974-06-22      2016-06-16     </span>
+<span class="co">#&gt;  7 Janet Reno     lawyer        78 FALSE      1938-07-21      2016-11-07     </span>
+<span class="co">#&gt;  8 Gwen Ifill     journalist    61 FALSE      1955-09-29      2016-11-14     </span>
+<span class="co">#&gt;  9 John Glenn     astronaut     95 TRUE       1921-07-28      2016-12-08     </span>
+<span class="co">#&gt; 10 Pat Summit     coach         64 TRUE       1952-06-14      2016-06-28</span></pre></body></html></div>
 <p>This example highlights two important differences:</p>
 <ul>
 <li>
@@ -342,29 +342,29 @@
 <code><a href="https://readr.tidyverse.org/reference/parse_datetime.html">readr::col_date("%m/%d/%Y")</a></code> vs <code>D</code>: <code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> must parse a character representation of all cell data, including datetimes, whereas <code><a href="../../reference/read_sheet.html">sheets_read()</a></code> has access to the actual cell data and its type.</li>
 </ul>
 <p>What’s the speed difference for something like the Africa sheet in the “gapminder” example Sheet? (around 625 rows x 6 columns, or 3700 cells)</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(</span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/sheets_speedread.html">sheets_speedread</a></span>(<span class="dt">sheet =</span> <span class="st">"Africa"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3"></a>)</span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; Reading from "gapminder", "Africa" sheet</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; Export URL: https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=780868077</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; Parsed with column specification:</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; cols(</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt;   country = col_character(),</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt;   continent = col_character(),</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt;   year = col_double(),</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt;   lifeExp = col_double(),</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt;   pop = col_double(),</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt;   gdpPercap = col_double()</span></span>
-<span id="cb9-14"><a href="#cb9-14"></a><span class="co">#&gt; )</span></span>
-<span id="cb9-15"><a href="#cb9-15"></a><span class="co">#&gt;    user  system elapsed </span></span>
-<span id="cb9-16"><a href="#cb9-16"></a><span class="co">#&gt;   0.032   0.001   0.946</span></span>
-<span id="cb9-17"><a href="#cb9-17"></a><span class="kw"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(</span>
-<span id="cb9-18"><a href="#cb9-18"></a>  <span class="kw"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="dt">sheet =</span> <span class="st">"Africa"</span>)</span>
-<span id="cb9-19"><a href="#cb9-19"></a>)</span>
-<span id="cb9-20"><a href="#cb9-20"></a><span class="co">#&gt; Reading from "gapminder"</span></span>
-<span id="cb9-21"><a href="#cb9-21"></a><span class="co">#&gt; Range "'Africa'"</span></span>
-<span id="cb9-22"><a href="#cb9-22"></a><span class="co">#&gt;    user  system elapsed </span></span>
-<span id="cb9-23"><a href="#cb9-23"></a><span class="co">#&gt;   0.567   0.020   1.218</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(
+  <span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/sheets_speedread.html">sheets_speedread</a></span>(<span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"Africa"</span>)
+)
+<span class="co">#&gt; Reading from "gapminder", "Africa" sheet</span>
+<span class="co">#&gt; Export URL: https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=780868077</span>
+<span class="co">#&gt; Parsed with column specification:</span>
+<span class="co">#&gt; cols(</span>
+<span class="co">#&gt;   country = col_character(),</span>
+<span class="co">#&gt;   continent = col_character(),</span>
+<span class="co">#&gt;   year = col_double(),</span>
+<span class="co">#&gt;   lifeExp = col_double(),</span>
+<span class="co">#&gt;   pop = col_double(),</span>
+<span class="co">#&gt;   gdpPercap = col_double()</span>
+<span class="co">#&gt; )</span>
+<span class="co">#&gt;    user  system elapsed </span>
+<span class="co">#&gt;   0.045   0.001   0.658</span>
+<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(
+  <span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"Africa"</span>)
+)
+<span class="co">#&gt; Reading from "gapminder"</span>
+<span class="co">#&gt; Range "'Africa'"</span>
+<span class="co">#&gt;    user  system elapsed </span>
+<span class="co">#&gt;   0.676   0.026   1.299</span></pre></body></html></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> vs <code><a href="../../reference/read_sheet.html">sheets_read()</a></code>:</p>
 <ul>
@@ -383,19 +383,11 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#auth">Auth</a></li>
-      <li><a href="#specify-the-range-and-column-types">Specify the range and column types</a></li>
-      <li><a href="#detailed-cell-data">Detailed cell data</a></li>
-      <li><a href="#when-speed-matters">When speed matters</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 

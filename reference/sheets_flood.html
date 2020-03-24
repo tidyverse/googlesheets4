@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Flood a range of cells — sheets_flood • googlesheets4</title>
+<title>Flood or clear a range of cells — sheets_flood • googlesheets4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -41,9 +41,11 @@
 
 
 
-<meta property="og:title" content="Flood a range of cells — sheets_flood" />
-<meta property="og:description" content="This function &quot;floods&quot; a range of cells with the same value, which might be
-nothing (so: clears existing value), and optionally clears any formatting." />
+<meta property="og:title" content="Flood or clear a range of cells — sheets_flood" />
+<meta property="og:description" content="sheets_flood() &quot;floods&quot; a range of cells with the same content.
+sheets_clear() is a wrapper that handles the common special case of
+clearing the cell value. Both functions, by default, also clear the format,
+but this can be soecified via reformat." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -155,17 +157,21 @@ nothing (so: clears existing value), and optionally clears any formatting." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Flood a range of cells</h1>
+    <h1>Flood or clear a range of cells</h1>
     <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_flood.R'><code>R/sheets_flood.R</code></a></small>
     <div class="hidden name"><code>sheets_flood.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function "floods" a range of cells with the same value, which might be
-<em>nothing</em> (so: clears existing value), and optionally clears any formatting.</p>
+    <p><code>sheets_flood()</code> "floods" a range of cells with the same content.
+<code>sheets_clear()</code> is a wrapper that handles the common special case of
+clearing the cell value. Both functions, by default, also clear the format,
+but this can be soecified via <code>reformat</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_flood</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cell</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_flood</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cell</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+<span class='fu'>sheets_clear</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -257,6 +263,10 @@ Currently googlesheets4 provides no real support for formatting, so
     )
   )
   <span class='fu'>sheets_flood</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"I:J"</span>, <span class='kw'>cell</span> <span class='kw'>=</span> <span class='no'>blue_background</span>)
+
+  <span class='co'># sheets_clear() is a shortcut where `cell = NULL` always</span>
+  <span class='fu'>sheets_clear</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"9:9"</span>)
+  <span class='fu'>sheets_clear</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"10:10"</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
   <span class='co'># clean up</span>
   <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>(<span class='no'>ss</span>)

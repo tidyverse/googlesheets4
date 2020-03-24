@@ -148,17 +148,14 @@
 <p>googlesheets4 accepts such a URL as the <code>ss</code> argument (think “spreadsheet”) of many functions:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>ugly_url &lt;-<span class="st"> "https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw"><a href="../../reference/read_sheet.html">sheets_read</a></span>(ugly_url)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Reading from "gapminder"</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; Range "Africa"</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; # A tibble: 624 x 6</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; # … with 619 more rows</span></span></code></pre></div>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; </span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; Error details:</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></span></code></pre></div>
 <p>At this time, although the URL may contain both a (spread)Sheet and a (work)sheet, we only extract the (spread)Sheet ID. If the function targets a specific (work)sheet, that is typically specified via arguments like <code>range</code> or <code>sheet</code> or a default of “first (visible) sheet”.</p>
 <p>These URLs are not particularly nice to look at in your code, though.</p>
 </div>

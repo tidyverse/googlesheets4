@@ -64,10 +64,6 @@ jobs:
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
 
-      - name: Install libsodium on devel macOS
-        if: runner.os == 'macOS' && matrix.config.r == 'devel'
-        run: brew install libsodium
-
       - name: Install dependencies
         run: |
           remotes::install_deps(dependencies = TRUE)

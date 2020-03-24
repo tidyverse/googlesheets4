@@ -65,8 +65,8 @@ jobs:
           sudo -s eval "$sysreqs"
 
       - name: Install libsodium on devel macOS
-       if: runner.os == 'macOS' && matrix.config.r == 'devel'
-       run: brew install libsodium
+        if: runner.os == 'macOS' && matrix.config.r == 'devel'
+        run: brew install libsodium
 
       - name: Install dependencies
         run: |

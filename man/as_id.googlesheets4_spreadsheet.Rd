@@ -22,7 +22,7 @@ you forget that exists and hope that \code{as_id()} will "just work".
 }
 \examples{
 if (identical(Sys.getenv("IN_PKGDOWN"), "true")) {
-  sheets_auth_docs(drive = TRUE)
+  googlesheets4:::sheets_auth_docs(drive = TRUE)
 }
 
 if (sheets_has_token()) {

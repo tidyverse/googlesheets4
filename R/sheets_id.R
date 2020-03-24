@@ -179,7 +179,7 @@ one_id <- function(x) {
 #' @export
 #' @examples
 #' if (identical(Sys.getenv("IN_PKGDOWN"), "true")) {
-#'   sheets_auth_docs(drive = TRUE)
+#'   googlesheets4:::sheets_auth_docs(drive = TRUE)
 #' }
 #'
 #' if (sheets_has_token()) {

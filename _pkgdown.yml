@@ -32,6 +32,7 @@ reference:
       - sheets_create
       - sheets_append
       - sheets_edit
+      - sheets_flood
       - sheets_formula
   - title: "Metadata on Sheets"
     desc: >

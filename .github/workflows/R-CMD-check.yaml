@@ -21,7 +21,7 @@ jobs:
           - {os: windows-latest, r: '3.6', sheets_auth: GOOGLESHEETS4_NOAUTH}
           - {os: macOS-latest, r: '3.6', sheets_auth: GOOGLESHEETS4_PASSWORD}
           - {os: macOS-latest, r: 'devel', sheets_auth: GOOGLESHEETS4_NOAUTH}
-          - {os: ubuntu-16.04, r: '3.2', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          #- {os: ubuntu-16.04, r: '3.2', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
           - {os: ubuntu-16.04, r: '3.3', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
           - {os: ubuntu-16.04, r: '3.4', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
           - {os: ubuntu-16.04, r: '3.5', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}

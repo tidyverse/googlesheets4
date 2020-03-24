@@ -189,7 +189,10 @@ e.g., <code><a href='sheets_get.html'>sheets_get()</a></code>.</p></td>
     <p>A character vector bearing the S3 class <code>drive_id</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"IN_PKGDOWN"</span>), <span class='st'>"true"</span>)) {
+  <span class='fu'>sheets_auth_docs</span>(<span class='kw'>drive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+}</div><div class='output co'>#&gt; <span class='error'>Error in sheets_auth_docs(drive = TRUE): could not find function "sheets_auth_docs"</span></div><div class='input'>
+<span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
   <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_get.html'>sheets_get</a></span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))
   <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>ss</span>)
   <span class='fu'>as_id</span>(<span class='no'>ss</span>)

@@ -357,14 +357,14 @@
 <span class="co">#&gt;   gdpPercap = col_double()</span>
 <span class="co">#&gt; )</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.042   0.002   0.614</span>
+<span class="co">#&gt;   0.226   0.005   0.831</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(
   <span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"Africa"</span>)
 )
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "'Africa'"</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.700   0.038   1.394</span></pre></body></html></div>
+<span class="co">#&gt;   1.508   0.083   2.291</span></pre></body></html></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> vs <code><a href="../../reference/read_sheet.html">sheets_read()</a></code>:</p>
 <ul>

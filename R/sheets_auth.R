@@ -223,6 +223,11 @@ sheets_oauth_app <- function() .auth$app
 #' @export
 #' @examples
 #' sheets_user()
+#'
+#' require("sodium")
+#' Sys.getenv("IN_PKGDOWN")
+#' gargle:::secret_can_decrypt("googlesheets4")
+#' curl::nslookup("sheets.googleapis.com", error = FALSE)
 sheets_user <- function() {
   if (sheets_has_token()) {
     gargle::token_email(sheets_token())

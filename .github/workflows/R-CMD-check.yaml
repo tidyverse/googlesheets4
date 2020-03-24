@@ -77,7 +77,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Check
-        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--ignore-vignettes", "--no-examples"), build_args = "--no-build-vignettes", error_on = "${{ matrix.config.error_on }}", check_dir = "check")
+        run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--ignore-vignettes", "--no-examples"), build_args = "--no-build-vignettes", check_dir = "check")
         shell: Rscript {0}
 
       - name: Upload check results

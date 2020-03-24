@@ -178,6 +178,10 @@ one_id <- function(x) {
 #' @importFrom googledrive as_id
 #' @export
 #' @examples
+#' if (identical(Sys.getenv("IN_PKGDOWN"), "true")) {
+#'   sheets_auth_docs(drive = TRUE)
+#' }
+#'
 #' if (sheets_has_token()) {
 #'   ss <- sheets_get(sheets_example("mini-gap"))
 #'   class(ss)

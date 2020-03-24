@@ -89,6 +89,7 @@ Other write functions:
 \code{\link{sheets_append}()},
 \code{\link{sheets_create}()},
 \code{\link{sheets_edit}()},
+\code{\link{sheets_flood}()},
 \code{\link{sheets_formula}()}
 }
 \concept{write functions}

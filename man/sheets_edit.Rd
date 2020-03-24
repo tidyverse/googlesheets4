@@ -137,6 +137,7 @@ The main data write is done via an \code{UpdateCellsRequest}:
 Other write functions: 
 \code{\link{sheets_append}()},
 \code{\link{sheets_create}()},
+\code{\link{sheets_flood}()},
 \code{\link{sheets_formula}()},
 \code{\link{write_sheet}()}
 }

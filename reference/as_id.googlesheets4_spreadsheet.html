@@ -190,16 +190,24 @@ e.g., <code><a href='sheets_get.html'>sheets_get()</a></code>.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"IN_PKGDOWN"</span>), <span class='st'>"true"</span>)) {
-  <span class='kw pkg'>googlesheets4</span><span class='kw ns'>:::</span><span class='fu'>sheets_auth_docs</span>(<span class='kw'>drive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
-}</div><div class='output co'>#&gt; [1] "googlesheets4-docs@gargle-169921.iam.gserviceaccount.com"
-#&gt; Logged in as:
-#&gt;   *  displayName: googlesheets4-docs@gargle-169921.iam.gserviceaccount.com
-#&gt;   * emailAddress: googlesheets4-docs@gargle-169921.iam.gserviceaccount.com</div><div class='input'>
+  <span class='co'>#googlesheets4:::sheets_auth_docs(drive = TRUE)</span>
+}</div><div class='output co'>#&gt; NULL</div><div class='input'>
 <span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
   <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_get.html'>sheets_get</a></span>(<span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"mini-gap"</span>))
   <span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span>(<span class='no'>ss</span>)
-  <span class='fu'>as_id</span>(<span class='no'>ss</span>)
-}</div><div class='output co'>#&gt; <span class='error'>Error in as_id(ss): could not find function "as_id"</span></div></pre>
+  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/as_id.html'>as_id</a></span>(<span class='no'>ss</span>)
+}</div><div class='output co'>#&gt;   Spreadsheet name: mini-gap
+#&gt;                 ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
+#&gt;             Locale: en_US
+#&gt;          Time zone: America/Los_Angeles
+#&gt;        # of sheets: 5
+#&gt; 
+#&gt; (Sheet name): (Nominal extent in rows x columns)
+#&gt;       Africa: 6 x 6
+#&gt;     Americas: 6 x 6
+#&gt;         Asia: 6 x 6
+#&gt;       Europe: 6 x 6
+#&gt;      Oceania: 6 x 6</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

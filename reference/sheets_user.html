@@ -177,7 +177,8 @@ If no token has been loaded yet, this function does not initiate auth.</p>
 <code><a href='https://gargle.r-lib.org/reference/token-info.html'>gargle::token_tokeninfo()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>sheets_user</span>()</div><div class='output co'>#&gt; <span class='message'>Not logged in as any specific Google user.</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>sheets_user</span>()</div><div class='output co'>#&gt; <span class='message'>Not logged in as any specific Google user.</span></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'>"sodium"</span>)</div><div class='output co'>#&gt; <span class='message'>Loading required package: sodium</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Sys.getenv.html'>Sys.getenv</a></span>(<span class='st'>"IN_PKGDOWN"</span>)</div><div class='output co'>#&gt; [1] "true"</div><div class='input'><span class='kw pkg'>gargle</span><span class='kw ns'>:::</span><span class='fu'>secret_can_decrypt</span>(<span class='st'>"googlesheets4"</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'><span class='kw pkg'>curl</span><span class='kw ns'>::</span><span class='fu'><a href='https://jeroen.cran.dev/curl/reference/nslookup.html'>nslookup</a></span>(<span class='st'>"sheets.googleapis.com"</span>, <span class='kw'>error</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='output co'>#&gt; [1] "74.125.21.95"</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

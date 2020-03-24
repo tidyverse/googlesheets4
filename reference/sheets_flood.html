@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a new Sheet — sheets_create • googlesheets4</title>
+<title>Flood a range of cells — sheets_flood • googlesheets4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -41,12 +41,9 @@
 
 
 
-<meta property="og:title" content="Create a new Sheet — sheets_create" />
-<meta property="og:description" content="
-Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook).
-Optionally, you can also provide names and/or data for the initial set of
-(work)sheets. Any initial data provided via sheets is styled as a table,
-as described in sheets_write()." />
+<meta property="og:title" content="Flood a range of cells — sheets_flood" />
+<meta property="og:description" content="This function &quot;floods&quot; a range of cells with the same value, which might be
+nothing (so: clears existing value), and optionally clears any formatting." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -158,39 +155,56 @@ as described in sheets_write()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a new Sheet</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_create.R'><code>R/sheets_create.R</code></a></small>
-    <div class="hidden name"><code>sheets_create.Rd</code></div>
+    <h1>Flood a range of cells</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_flood.R'><code>R/sheets_flood.R</code></a></small>
+    <div class="hidden name"><code>sheets_flood.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
-<p>Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook).
-Optionally, you can also provide names and/or data for the initial set of
-(work)sheets. Any initial data provided via <code>sheets</code> is styled as a table,
-as described in <code><a href='write_sheet.html'>sheets_write()</a></code>.</p>
+    <p>This function "floods" a range of cells with the same value, which might be
+<em>nothing</em> (so: clears existing value), and optionally clears any formatting.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_create</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='fu'><a href='sheets_random.html'>sheets_random</a></span>(), <span class='no'>...</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_flood</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cell</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>name</th>
-      <td><p>The name of the new spreadsheet.</p></td>
+      <th>ss</th>
+      <td><p>Something that identifies a Google Sheet: its file ID, a URL from
+which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
+(returned by <code><a href='sheets_get.html'>sheets_get()</a></code>, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+is how googledrive represents Drive files. Processed through
+<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Optional spreadsheet properties that can be set through this API
-endpoint, such as locale and time zone.</p></td>
+      <th>sheet</th>
+      <td><p>Sheet to write into, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number.</p></td>
     </tr>
     <tr>
-      <th>sheets</th>
-      <td><p>Optional input for initializing (work)sheets. If unspecified,
-the Sheets API automatically creates an empty "Sheet1". You can provide a
-vector of sheet names, a data frame, or a (possibly named) list of data
-frames. See the examples.</p></td>
+      <th>range</th>
+      <td><p>A cell range to read from. If <code>NULL</code>, all non-empty cells are
+read. Otherwise specify <code>range</code> as described in <a href='https://developers.google.com/sheets/api/guides/concepts#a1_notation'>Sheets A1 notation</a>
+or using the helpers documented in <a href='cell-specification.html'>cell-specification</a>. Sheets uses
+fairly standard spreadsheet range notation, although a bit different from
+Excel. Examples of valid ranges: <code>"Sheet1!A1:B2"</code>, <code>"Sheet1!A:A"</code>,
+<code>"Sheet1!1:2"</code>, <code>"Sheet1!A5:A"</code>, <code>"A1:B2"</code>, <code>"Sheet1"</code>. Interpreted
+strictly, even if the range forces the inclusion of leading, trailing, or
+embedded empty rows or columns. Takes precedence over <code>skip</code>, <code>n_max</code> and
+<code>sheet</code>. Note <code>range</code> can be a named range, like <code>"sales_data"</code>, without
+any cell reference.</p></td>
+    </tr>
+    <tr>
+      <th>cell</th>
+      <td><p>The value to fill the cells in the <code>range</code> with. If unspecified,
+the default of <code>NULL</code> results in clearing the existing value.</p></td>
+    </tr>
+    <tr>
+      <th>reformat</th>
+      <td><p>Logical, indicates whether to reformat the affected cells.
+Currently googlesheets4 provides no real support for formatting, so
+<code>reformat = TRUE</code> effectively means that edited cells become unformatted.</p></td>
     </tr>
     </table>
 
@@ -199,51 +213,53 @@ frames. See the examples.</p></td>
     <p>The input <code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Wraps the <code>spreadsheets.create</code> endpoint:</p><ul>
-<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create</a></p></li>
-</ul>
-
-<p>There is an article on writing Sheets:</p><ul>
-<li><p><a href='https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html'>https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html</a></p></li>
+    <div class='dont-index'><p>Makes a <code>RepeatCellRequest</code>:</p><ul>
+<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#repeatcellrequest'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#repeatcellrequest</a></p></li>
 </ul>
 
 <p>Other write functions: 
 <code><a href='sheets_append.html'>sheets_append</a>()</code>,
+<code><a href='sheets_create.html'>sheets_create</a>()</code>,
 <code><a href='sheets_edit.html'>sheets_edit</a>()</code>,
-<code><a href='sheets_flood.html'>sheets_flood</a>()</code>,
 <code><a href='sheets_formula.html'>sheets_formula</a>()</code>,
 <code><a href='write_sheet.html'>write_sheet</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
-  <span class='fu'>sheets_create</span>(<span class='st'>"sheets-create-demo-1"</span>)
+  <span class='co'># create a data frame to use as initial data</span>
+  <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>10</span>
+  <span class='no'>columns</span> <span class='kw'>&lt;-</span> <span class='no'>LETTERS</span>[<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='no'>n</span>)]
+  <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='no'>columns</span>) <span class='kw'>&lt;-</span> <span class='no'>columns</span>
+  <span class='no'>f</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>(<span class='no'>number</span>, <span class='no'>letter</span>) <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>letter</span>, <span class='no'>number</span>)
+  <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/outer.html'>outer</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_len</a></span>(<span class='no'>n</span>) + <span class='fl'>1</span>, <span class='no'>columns</span>, <span class='no'>f</span>), <span class='kw'>stringsAsFactors</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-  <span class='fu'>sheets_create</span>(<span class='st'>"sheets-create-demo-2"</span>, <span class='kw'>locale</span> <span class='kw'>=</span> <span class='st'>"en_CA"</span>)
+  <span class='co'># create Sheet</span>
+  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(<span class='st'>"sheets-flood-example"</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>df</span>))
 
-  <span class='fu'>sheets_create</span>(
-    <span class='st'>"sheets-create-demo-3"</span>,
-    <span class='kw'>locale</span> <span class='kw'>=</span> <span class='st'>"fr_FR"</span>,
-    <span class='kw'>timeZone</span> <span class='kw'>=</span> <span class='st'>"Europe/Paris"</span>
+  <span class='co'># default behavior (`cell = NULL`): clear value and format</span>
+  <span class='fu'>sheets_flood</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"A1:B3"</span>)
+
+  <span class='co'># clear value but preserve format</span>
+  <span class='fu'>sheets_flood</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"C1:D3"</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+
+  <span class='co'># send new value</span>
+  <span class='fu'>sheets_flood</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"4:5"</span>, <span class='kw'>cell</span> <span class='kw'>=</span> <span class='st'>";-)"</span>)
+
+  <span class='co'># send formatting</span>
+  <span class='co'># WARNING: use these unexported, internal functions at your own risk!</span>
+  <span class='co'># This not (yet) officially supported, but it's possible.</span>
+  <span class='no'>blue_background</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>googlesheets4</span><span class='kw ns'>:::</span><span class='fu'>CellData</span>(
+    <span class='kw'>userEnteredFormat</span> <span class='kw'>=</span> <span class='kw pkg'>googlesheets4</span><span class='kw ns'>:::</span><span class='fu'>new</span>(
+      <span class='st'>"CellFormat"</span>,
+      <span class='kw'>backgroundColor</span> <span class='kw'>=</span> <span class='kw pkg'>googlesheets4</span><span class='kw ns'>:::</span><span class='fu'>new</span>(
+        <span class='st'>"Color"</span>, <span class='kw'>red</span> <span class='kw'>=</span> <span class='fl'>159</span>/<span class='fl'>255</span>, <span class='kw'>green</span> <span class='kw'>=</span> <span class='fl'>183</span>/<span class='fl'>255</span>, <span class='kw'>blue</span> <span class='kw'>=</span> <span class='fl'>196</span>/<span class='fl'>255</span>
+      )
+    )
   )
-
-  <span class='fu'>sheets_create</span>(
-    <span class='st'>"sheets-create-demo-4"</span>,
-    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha"</span>, <span class='st'>"beta"</span>)
-  )
-
-  <span class='no'>my_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-  <span class='fu'>sheets_create</span>(
-    <span class='st'>"sheets-create-demo-5"</span>,
-    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='no'>my_data</span>
-  )
-
-  <span class='fu'>sheets_create</span>(
-    <span class='st'>"sheets-create-demo-6"</span>,
-    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>iris</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>iris</span>), <span class='kw'>mtcars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>mtcars</span>))
-  )
+  <span class='fu'>sheets_flood</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"I:J"</span>, <span class='kw'>cell</span> <span class='kw'>=</span> <span class='no'>blue_background</span>)
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"sheets-create-demo"</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>(<span class='no'>ss</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

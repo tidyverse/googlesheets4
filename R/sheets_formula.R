@@ -56,7 +56,8 @@ sheets_formula <- function(x = character()) {
   new_formula(x)
 }
 
-methods::setOldClass(c("googlesheets4_formula", "vctrs_vctr"))
+#' @importFrom methods setOldClass
+setOldClass(c("googlesheets4_formula", "vctrs_vctr"))
 
 #' @export
 vec_ptype_abbr.googlesheets4_formula <- function(x, ...) {

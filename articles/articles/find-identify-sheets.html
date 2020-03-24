@@ -294,26 +294,26 @@
 <p>What if you want to see all of your Sheets? Or all the Sheets with “gap” in their name?</p>
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"spreadsheet"</span>)
-<span class="co">#&gt; # A tibble: 17 x 3</span>
+<span class="co">#&gt; # A tibble: 16 x 3</span>
 <span class="co">#&gt;   name               id                                         drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 write-sheets-demo… 1dAwMcD9Iid3FKzHzraE1XB1b-Q2VwRHhnlUZEgog… &lt;named list [33…</span>
-<span class="co">#&gt; 2 phonolite-coyote   1crxUInxIw-mV3rX75IIyy1V-s6Vt8QG_eOSJFrQO… &lt;named list [34…</span>
-<span class="co">#&gt; 3 sheets-resize-demo 10yXUGTkn2ECf7jo3yC5B7PQinRIVYP-ajXrlVPQ8… &lt;named list [34…</span>
-<span class="co">#&gt; 4 duncish-swellfish  19EiM9FXNuooVBDrNnMbn97f7x3NgZJm4PIw7vOWe… &lt;named list [34…</span>
-<span class="co">#&gt; 5 agreed-tiger       1kIzATqbMDd1AYHHoRUxyHsjbbLpDerjPnmujPAXH… &lt;named list [34…</span>
-<span class="co">#&gt; # … with 12 more rows</span></pre></body></html></div>
+<span class="co">#&gt; 1 phonolite-coyote   1crxUInxIw-mV3rX75IIyy1V-s6Vt8QG_eOSJFrQO… &lt;named list [34…</span>
+<span class="co">#&gt; 2 sheets-resize-demo 10yXUGTkn2ECf7jo3yC5B7PQinRIVYP-ajXrlVPQ8… &lt;named list [34…</span>
+<span class="co">#&gt; 3 duncish-swellfish  19EiM9FXNuooVBDrNnMbn97f7x3NgZJm4PIw7vOWe… &lt;named list [34…</span>
+<span class="co">#&gt; 4 agreed-tiger       1kIzATqbMDd1AYHHoRUxyHsjbbLpDerjPnmujPAXH… &lt;named list [34…</span>
+<span class="co">#&gt; 5 fatfaced-malamute  19-ATUyhXtmtDfmc7JEy1tRnj5ztBRZ0rafFG7J-W… &lt;named list [34…</span>
+<span class="co">#&gt; # … with 11 more rows</span></pre></body></html></div>
 <p>This is so handy that we’ve made <code><a href="../../reference/sheets_find.html">sheets_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_find.html">sheets_find</a></span>()
-<span class="co">#&gt; # A tibble: 17 x 3</span>
+<span class="co">#&gt; # A tibble: 16 x 3</span>
 <span class="co">#&gt;   name               id                                         drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 write-sheets-demo… 1dAwMcD9Iid3FKzHzraE1XB1b-Q2VwRHhnlUZEgog… &lt;named list [33…</span>
-<span class="co">#&gt; 2 phonolite-coyote   1crxUInxIw-mV3rX75IIyy1V-s6Vt8QG_eOSJFrQO… &lt;named list [34…</span>
-<span class="co">#&gt; 3 sheets-resize-demo 10yXUGTkn2ECf7jo3yC5B7PQinRIVYP-ajXrlVPQ8… &lt;named list [34…</span>
-<span class="co">#&gt; 4 duncish-swellfish  19EiM9FXNuooVBDrNnMbn97f7x3NgZJm4PIw7vOWe… &lt;named list [34…</span>
-<span class="co">#&gt; 5 agreed-tiger       1kIzATqbMDd1AYHHoRUxyHsjbbLpDerjPnmujPAXH… &lt;named list [34…</span>
-<span class="co">#&gt; # … with 12 more rows</span></pre></body></html></div>
+<span class="co">#&gt; 1 phonolite-coyote   1crxUInxIw-mV3rX75IIyy1V-s6Vt8QG_eOSJFrQO… &lt;named list [34…</span>
+<span class="co">#&gt; 2 sheets-resize-demo 10yXUGTkn2ECf7jo3yC5B7PQinRIVYP-ajXrlVPQ8… &lt;named list [34…</span>
+<span class="co">#&gt; 3 duncish-swellfish  19EiM9FXNuooVBDrNnMbn97f7x3NgZJm4PIw7vOWe… &lt;named list [34…</span>
+<span class="co">#&gt; 4 agreed-tiger       1kIzATqbMDd1AYHHoRUxyHsjbbLpDerjPnmujPAXH… &lt;named list [34…</span>
+<span class="co">#&gt; 5 fatfaced-malamute  19-ATUyhXtmtDfmc7JEy1tRnj5ztBRZ0rafFG7J-W… &lt;named list [34…</span>
+<span class="co">#&gt; # … with 11 more rows</span></pre></body></html></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/sheets_find.html">sheets_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </div>

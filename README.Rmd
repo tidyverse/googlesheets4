@@ -72,13 +72,23 @@ library(googlesheets4)
 
 `read_sheet()` is the main "read" function and should evoke `readr::read_csv()` and `readxl::read_excel()`. It's an alias for `sheets_read()`, because most functions in googlesheets4 actually start with `sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`), but works just fine without the pipe.
 
-Read from a URL, a Sheet ID, or a [`dribble`](https://googledrive.tidyverse.org/reference/dribble.html) produced by the googledrive package. These all achieve the same thing:
+Read from
+
+  * a URL
+  * a Sheet ID
+  * a [`dribble`](https://googledrive.tidyverse.org/reference/dribble.html)
+    produced by the googledrive package, which can lookup by file name
+
+These all achieve the same thing:
 
 ```{r}
+# URL
 read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077")
 
+# Sheet ID
 read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 
+# a googledrive "dribble"
 googledrive::drive_get("gapminder") %>% 
   sheets_read()
 ```
@@ -133,7 +143,11 @@ Please note that the googlesheets4 project is released with a [Contributor Code 
 
 googlesheets4 draws on and complements / emulates other packages in the tidyverse:
 
-  * [googlesheets](https://cran.r-project.org/package=googlesheets) is the package that googlesheets4 is replacing. Main improvements in googlesheets4: (1) wraps the current, most modern Sheets API; (2) leans on googledrive for all "whole file" operations; and (3) uses shared infrastructure for auth and more, from the gargle package. The v3 API wrapped by googlesheets goes offline in March 2020, at which point the package must be retired.
+  * [googlesheets](https://cran.r-project.org/package=googlesheets) is the package that googlesheets4 replaces. Main improvements in googlesheets4: (1) wraps the current, most modern Sheets API; (2) leaves all "whole file"
+  operations to googledrive; and (3) uses shared infrastructure for auth and more, from the gargle package. The v3 API wrapped by googlesheets is deprecated. [Starting in April/May 2020](https://cloud.google.com/blog/products/g-suite/migrate-your-apps-use-latest-sheets-api),
+  features will gradually be disabled and it's anticipated the API will fully
+  shutdown in September 2020. At that point, the original googlesheets
+  package must be retired.
   * [googledrive](https://googledrive.tidyverse.org) provides a fully-featured interface to the Google Drive API. Any "whole file" operations can be accomplished with googledrive: upload or download or update a spreadsheet, copy, rename, move, change permission, delete, etc. googledrive supports Team Drives.
   * [readxl](https://readxl.tidyverse.org) is the tidyverse package for reading Excel files (xls or xlsx) into an R data frame. googlesheets4 takes cues from parts of the readxl interface, especially around specifying which cells to read.
   * [readr](https://readr.tidyverse.org) is the tidyverse package for reading delimited files (e.g., csv or tsv) into an R data frame. googlesheets4 takes cues from readr with respect to column type specification.

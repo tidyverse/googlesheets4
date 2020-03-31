@@ -69,11 +69,18 @@ library(googlesheets4)
 with `sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`),
 but works just fine without the pipe.
 
-Read from a URL, a Sheet ID, or a
-[`dribble`](https://googledrive.tidyverse.org/reference/dribble.html)
-produced by the googledrive package. These all achieve the same thing:
+Read from
+
+  - a URL
+  - a Sheet ID
+  - a
+    [`dribble`](https://googledrive.tidyverse.org/reference/dribble.html)
+    produced by the googledrive package, which can lookup by file name
+
+These all achieve the same thing:
 
 ``` r
+# URL
 read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077")
 #> Reading from "gapminder"
 #> Range "Africa"
@@ -87,6 +94,7 @@ read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2d
 #> 5 Algeria Africa     1972    54.5 14760787     4183.
 #> # … with 619 more rows
 
+# Sheet ID
 read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 #> Reading from "gapminder"
 #> Range "Africa"
@@ -100,6 +108,7 @@ read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 #> 5 Algeria Africa     1972    54.5 14760787     4183.
 #> # … with 619 more rows
 
+# a googledrive "dribble"
 googledrive::drive_get("gapminder") %>% 
   sheets_read()
 #> Reading from "gapminder"
@@ -132,7 +141,7 @@ send some initial data.
 (ss <- sheets_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> Creating new Sheet: "fluffy-bunny"
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1hlQJdgx7Eh6kKfijQm7fKQTDq6nOBzx1l517zHFwi5s
+#>                 ID: 1PZhWuDisiOsj2CKnUDgJyRVGRxvYhyb9NVJRoYhtZ78
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -151,7 +160,7 @@ head(mtcars) %>%
 #> Writing to sheet "autos"
 ss
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1hlQJdgx7Eh6kKfijQm7fKQTDq6nOBzx1l517zHFwi5s
+#>                 ID: 1PZhWuDisiOsj2CKnUDgJyRVGRxvYhyb9NVJRoYhtZ78
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2
@@ -208,12 +217,15 @@ googlesheets4 draws on and complements / emulates other packages in the
 tidyverse:
 
   - [googlesheets](https://cran.r-project.org/package=googlesheets) is
-    the package that googlesheets4 is replacing. Main improvements in
+    the package that googlesheets4 replaces. Main improvements in
     googlesheets4: (1) wraps the current, most modern Sheets API; (2)
-    leans on googledrive for all “whole file” operations; and (3) uses
+    leaves all “whole file” operations to googledrive; and (3) uses
     shared infrastructure for auth and more, from the gargle package.
-    The v3 API wrapped by googlesheets goes offline in March 2020, at
-    which point the package must be retired.
+    The v3 API wrapped by googlesheets is deprecated. [Starting in
+    April/May 2020](https://cloud.google.com/blog/products/g-suite/migrate-your-apps-use-latest-sheets-api),
+    features will gradually be disabled and it’s anticipated the API
+    will fully shutdown in September 2020. At that point, the original
+    googlesheets package must be retired.
   - [googledrive](https://googledrive.tidyverse.org) provides a
     fully-featured interface to the Google Drive API. Any “whole file”
     operations can be accomplished with googledrive: upload or download

@@ -12,19 +12,22 @@ These functions are ready for use but are still considered experimental and may 
   * `sheets_append()` adds rows to the data in an existing sheet.
   * `sheets_edit()` writes to a range.
   * `sheets_flood()` "floods" all cells in a range with the same content.
-    `sheets_clear()` is a wrapper for the special case of clearing cell values.
+    `sheets_clear()` is a wrapper around `sheets_flood()` for the special case
+     of clearing cell values.
+  * `sheets_delete()` deletes a range of cells.
   
 ### Other new functions and arguments
 
 There is a new family of `sheets_sheet_*()` functions that operate on the (work)sheets inside an existing (spread)Sheet:
   
-  * `sheets_sheet_properties()` returns a tibble of metadata with one row per sheet.
+  * `sheets_sheet_properties()` returns a tibble of metadata with one row per
+     sheet.
   * `sheets_sheet_names()` returns sheet names.
   * `sheets_sheet_add()` adds one or more sheets.
   * `sheets_sheet_delete()` deletes one or more sheets.
   * `sheets_sheet_resize()` changes the number of rows or columns in a sheet.
   
-`sheets_speedread()` provides a quick-and-dirty for reading a Sheet using its "export=csv" URL.
+`sheets_speedread()` provides a quick-and-dirty method for reading a Sheet using its "export=csv" URL.
 
 `sheets_cells()` gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But `sheets_cells(cell_data = "full", discard_empty = FALSE)` is now available if you want full cell data, including formatting, even for cells that have no value (#4).
 

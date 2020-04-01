@@ -39,6 +39,8 @@ Basic Sheet writing is shown in the [Get started](https://googlesheets4.tidyvers
   * `sheets_flood()` writes common content into all of the cells in a range.
     - An important special case is *clearing* a range of cells of their
       existing values and, optionally, formatting.
+  * `sheets_delete()` deletes a range of cells and shifts other cells into the
+    deleted area.
 
 ## Auth
 
@@ -48,7 +50,7 @@ Since this article is compiled noninteractively on a server, we have arranged fo
 
 ```{r include = FALSE}
 # happens in .onLoad() when IN_PKGDOWN, but need this for local dev/preview
-googlesheets4:::sheets_auth_docs(drive = TRUE) 
+googlesheets4:::sheets_auth_docs(drive = TRUE)
 
 # attempt to reduce quota exhaustion problems
 if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(20)
@@ -454,5 +456,56 @@ sheets_read(ss)
 
 ```{r}
 sheets_find("sheets-flood-demo") %>%
+  googledrive::drive_trash()
+```
+
+## `sheets_delete()`
+
+`sheets_deletes()` deletes a range of cells and shifts other cells into the deleted area. If you're trying to delete an entire (work)sheet or change its actual dimensions or extent, you should, instead, use `sheets_sheet_delete()` or
+`sheets_sheet_resize()`.
+
+First, we create a data frame and initialize a new Sheet with that data.
+
+```{r}
+n <- 4
+columns <- LETTERS[seq_len(n)]
+names(columns) <- columns
+f <- function(number, letter) paste0(letter, number)
+df <- as.data.frame(outer(seq_len(n) + 1, columns, f), stringsAsFactors = FALSE)
+
+ss <- sheets_create("sheets-delete-demo", sheets = list(df))
+```
+
+To begin, each cell holds its A1-coordinates as its value. If you viewed this in the browser, you'd see the header row has some special formatting, including a gray background.
+
+```{r}
+sheets_read(ss)
+```
+
+Let's delete some rows.
+
+```{r}
+sheets_delete(ss, range = "2:3")
+sheets_read(ss)
+```
+
+Let's delete a column.
+
+```{r}
+sheets_delete(ss, range = "C")
+sheets_read(ss)
+```
+
+Let's delete a bounded cell range. Since it's unclear how to fill this space, we must specify `shift`. We'll fill the space by shifting remaining cells to the left. Remember that `range` continues to refer to actual rows and columns and, due to our deletions, no longer match with the values which reflect the original locations.
+
+```{r}
+sheets_delete(ss, range = "B2:B3", shift = "left")
+sheets_read(ss)
+```
+
+### Clean up
+
+```{r}
+sheets_find("sheets-delete-demo") %>%
   googledrive::drive_trash()
 ```

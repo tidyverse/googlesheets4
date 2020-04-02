@@ -175,7 +175,9 @@
 <li>
 <code><a href="../reference/sheets_edit.html">sheets_edit()</a></code> writes to a range.</li>
 <li>
-<code><a href="../reference/sheets_flood.html">sheets_flood()</a></code> “floods” all cells in a range with the same content. <code><a href="../reference/sheets_flood.html">sheets_clear()</a></code> is a wrapper for the special case of clearing cell values.</li>
+<code><a href="../reference/sheets_flood.html">sheets_flood()</a></code> âfloodsâ all cells in a range with the same content. <code><a href="../reference/sheets_flood.html">sheets_clear()</a></code> is a wrapper around <code><a href="../reference/sheets_flood.html">sheets_flood()</a></code> for the special case of clearing cell values.</li>
+<li>
+<code><a href="../reference/sheets_delete.html">sheets_delete()</a></code> deletes a range of cells.</li>
 </ul>
 </div>
 <div id="other-new-functions-and-arguments" class="section level3">
@@ -194,7 +196,7 @@
 <li>
 <code><a href="../reference/sheets_sheet_resize.html">sheets_sheet_resize()</a></code> changes the number of rows or columns in a sheet.</li>
 </ul>
-<p><code><a href="../reference/sheets_speedread.html">sheets_speedread()</a></code> provides a quick-and-dirty for reading a Sheet using its “export=csv” URL.</p>
+<p><code><a href="../reference/sheets_speedread.html">sheets_speedread()</a></code> provides a quick-and-dirty method for reading a Sheet using its âexport=csvâ URL.</p>
 <p><code><a href="../reference/sheets_cells.html">sheets_cells()</a></code> gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But <code><a href="../reference/sheets_cells.html">sheets_cells(cell_data = "full", discard_empty = FALSE)</a></code> is now available if you want full cell data, including formatting, even for cells that have no value (<a href='https://github.com/tidyverse/googlesheets4/issues/4'>#4</a>).</p>
 </div>
 <div id="renamed-functions-and-classes" class="section level3">
@@ -202,7 +204,7 @@
 <a href="#renamed-functions-and-classes" class="anchor"></a>Renamed functions and classes</h3>
 <ul>
 <li><p><code><a href="../reference/googlesheets4-deprecated.html">sheets_sheets()</a></code> is now <code><a href="../reference/sheets_sheet_properties.html">sheets_sheet_names()</a></code>, in order to fit into a coherent family of <code>sheets_sheet_*()</code> functions that deal with (work)sheets. <code><a href="../reference/googlesheets4-deprecated.html">sheets_sheets()</a></code> still exists but will be removed rather quickly since googlesheets4 is so new.</p></li>
-<li><p>The S3 class <code>sheets_Spreadsheet</code> is renamed to <code>googlesheets4_spreadsheet</code>, a consequence of rationalizing all internal and external classes. <code>googlesheets4_spreadsheet</code> is the class that holds metadata for a Sheet and it is connected to the API’s <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet"><code>Spreadsheet</code></a> schema. The return value of <code><a href="../reference/sheets_get.html">sheets_get()</a></code> has this class.</p></li>
+<li><p>The S3 class <code>sheets_Spreadsheet</code> is renamed to <code>googlesheets4_spreadsheet</code>, a consequence of rationalizing all internal and external classes. <code>googlesheets4_spreadsheet</code> is the class that holds metadata for a Sheet and it is connected to the APIâs <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet"><code>Spreadsheet</code></a> schema. The return value of <code><a href="../reference/sheets_get.html">sheets_get()</a></code> has this class.</p></li>
 </ul>
 </div>
 <div id="printing-a-sheet-id" class="section level3">
@@ -224,7 +226,7 @@
 <a href="#googlesheets4-011" class="anchor"></a>googlesheets4 0.1.1<small> 2020-03-21 </small>
 </h1>
 <ul>
-<li>Patch release to modify a test fixture, to be compatible with tibble v3.0. Related to tibble’s increased type strictness.</li>
+<li>Patch release to modify a test fixture, to be compatible with tibble v3.0. Related to tibbleâs increased type strictness.</li>
 </ul>
 </div>
     <div id="googlesheets4-010" class="section level1">

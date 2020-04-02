@@ -129,7 +129,7 @@
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p>googlesheets4 provides an R interface to <a href="https://spreadsheets.google.com/">Google Sheets</a> via the <a href="https://developers.google.com/sheets/api/">Sheets API v4</a>. It is a reboot of an earlier package called <a href="https://cran.r-project.org/package=googlesheets">googlesheets</a>.</p>
-<p><em>Why <strong>4</strong>? Why googlesheets<strong>4</strong>? Did I miss googlesheets1 through 3? No. The idea is to name the package after the corresponding version of the Sheets API. In hindsight, the original googlesheets should have been googlesheets<strong>3</strong>.</em></p>
+<p><em>Why <strong>4</strong>? Why googlesheets<strong>4</strong>? Did I miss googlesheets1 through 3? No.Â The idea is to name the package after the corresponding version of the Sheets API. In hindsight, the original googlesheets should have been googlesheets<strong>3</strong>.</em></p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -143,8 +143,8 @@
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
 <a href="#auth" class="anchor"></a>Auth</h2>
-<p>googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. If you don’t need to access private Sheets, use <code><a href="reference/sheets_deauth.html">sheets_deauth()</a></code> to indicate there is no need for a token. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/auth.html">googlesheets4 auth</a> for more.</p>
-<p>For this overview, we’ve logged into Google as a specific user in a hidden chunk.</p>
+<p>googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. If you donât need to access private Sheets, use <code><a href="reference/sheets_deauth.html">sheets_deauth()</a></code> to indicate there is no need for a token. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/auth.html">googlesheets4 auth</a> for more.</p>
+<p>For this overview, weâve logged into Google as a specific user in a hidden chunk.</p>
 </div>
 <div id="attach-googlesheets4" class="section level2">
 <h2 class="hasAnchor">
@@ -154,7 +154,7 @@
 <div id="read" class="section level2">
 <h2 class="hasAnchor">
 <a href="#read" class="anchor"></a>Read</h2>
-<p><code><a href="reference/read_sheet.html">read_sheet()</a></code> is the main “read” function and should evoke <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> and <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">readxl::read_excel()</a></code>. It’s an alias for <code><a href="reference/read_sheet.html">sheets_read()</a></code>, because most functions in googlesheets4 actually start with <code>sheets_</code>. googlesheets4 is pipe-friendly (and reexports <code><a href="reference/pipe.html">%&gt;%</a></code>), but works just fine without the pipe.</p>
+<p><code><a href="reference/read_sheet.html">read_sheet()</a></code> is the main âreadâ function and should evoke <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> and <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">readxl::read_excel()</a></code>. Itâs an alias for <code><a href="reference/read_sheet.html">sheets_read()</a></code>, because most functions in googlesheets4 actually start with <code>sheets_</code>. googlesheets4 is pipe-friendly (and reexports <code><a href="reference/pipe.html">%&gt;%</a></code>), but works just fine without the pipe.</p>
 <p>Read from</p>
 <ul>
 <li>a URL</li>
@@ -174,7 +174,7 @@
 <span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
 <span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
 <span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span>
+<span class="co">#&gt; # â¦ with 619 more rows</span>
 
 <span class="co"># Sheet ID</span>
 <span class="fu"><a href="reference/read_sheet.html">read_sheet</a></span>(<span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span>)
@@ -188,7 +188,7 @@
 <span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
 <span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
 <span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span>
+<span class="co">#&gt; # â¦ with 619 more rows</span>
 
 <span class="co"># a googledrive "dribble"</span>
 <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"gapminder"</span>) <span class="kw">%&gt;%</span>
@@ -203,7 +203,7 @@
 <span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
 <span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
 <span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span></pre></div>
+<span class="co">#&gt; # â¦ with 619 more rows</span></pre></div>
 <p>See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Find and Identify Sheets</a> for more about specifying the Sheet you want to address. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Read Sheets</a> for more about reading from specific sheets or ranges, setting column type, and getting low-level cell data.</p>
 </div>
 <div id="write" class="section level2">
@@ -255,7 +255,7 @@
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">
 <a href="#contributing" class="anchor"></a>Contributing</h2>
-<p>If you’d like to contribute to the development of googlesheets4, please read <a href="https://googlesheets4.tidyverse.org/CONTRIBUTING.html">these guidelines</a>.</p>
+<p>If youâd like to contribute to the development of googlesheets4, please read <a href="https://googlesheets4.tidyverse.org/CONTRIBUTING.html">these guidelines</a>.</p>
 <p>Please note that the googlesheets4 project is released with a <a href="https://googlesheets4.tidyverse.org/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 <div id="privacy" class="section level2">
@@ -269,9 +269,9 @@
 <p>googlesheets4 draws on and complements / emulates other packages in the tidyverse:</p>
 <ul>
 <li>
-<a href="https://cran.r-project.org/package=googlesheets">googlesheets</a> is the package that googlesheets4 replaces. Main improvements in googlesheets4: (1) wraps the current, most modern Sheets API; (2) leaves all “whole file” operations to googledrive; and (3) uses shared infrastructure for auth and more, from the gargle package. The v3 API wrapped by googlesheets is deprecated. <a href="https://cloud.google.com/blog/products/g-suite/migrate-your-apps-use-latest-sheets-api">Starting in April/May 2020</a>, features will gradually be disabled and it’s anticipated the API will fully shutdown in September 2020. At that point, the original googlesheets package must be retired.</li>
+<a href="https://cran.r-project.org/package=googlesheets">googlesheets</a> is the package that googlesheets4 replaces. Main improvements in googlesheets4: (1) wraps the current, most modern Sheets API; (2) leaves all âwhole fileâ operations to googledrive; and (3) uses shared infrastructure for auth and more, from the gargle package. The v3 API wrapped by googlesheets is deprecated. <a href="https://cloud.google.com/blog/products/g-suite/migrate-your-apps-use-latest-sheets-api">Starting in April/May 2020</a>, features will gradually be disabled and itâs anticipated the API will fully shutdown in September 2020. At that point, the original googlesheets package must be retired.</li>
 <li>
-<a href="https://googledrive.tidyverse.org">googledrive</a> provides a fully-featured interface to the Google Drive API. Any “whole file” operations can be accomplished with googledrive: upload or download or update a spreadsheet, copy, rename, move, change permission, delete, etc. googledrive supports Team Drives.</li>
+<a href="https://googledrive.tidyverse.org">googledrive</a> provides a fully-featured interface to the Google Drive API. Any âwhole fileâ operations can be accomplished with googledrive: upload or download or update a spreadsheet, copy, rename, move, change permission, delete, etc. googledrive supports Team Drives.</li>
 <li>
 <a href="https://readxl.tidyverse.org">readxl</a> is the tidyverse package for reading Excel files (xls or xlsx) into an R data frame. googlesheets4 takes cues from parts of the readxl interface, especially around specifying which cells to read.</li>
 <li>

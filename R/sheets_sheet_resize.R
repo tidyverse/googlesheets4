@@ -2,7 +2,7 @@
 #'
 #' Changes the number of rows and/or columns in a (work)sheet.
 #'
-#' @template ss
+#' @eval param_ss()
 #' @eval param_sheet(action = "resize")
 #' @param nrow,ncol Desired number of rows or columns, respectively. The default
 #'   of `NULL` means to leave unchanged.

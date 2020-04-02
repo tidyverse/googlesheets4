@@ -25,7 +25,7 @@
 #'   away (gets filled, actually) the first time you send more data with
 #'   [sheets_append()].
 
-#' @template ss
+#' @eval param_ss()
 #' @eval param_sheet(action = "write into")
 #' @template ss-return
 #' @export

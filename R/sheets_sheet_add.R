@@ -3,7 +3,7 @@
 #' Adds one or more (work)sheets to an existing (spread)Sheet. Note that sheet
 #' names must be unique.
 #'
-#' @template ss
+#' @eval param_ss()
 #' @param sheet One or more new sheet names. If unspecified, one new sheet is
 #'   added and Sheets autogenerates a name of the form "SheetN".
 #' @param ... Optional parameters to specify additional properties, common to

@@ -5,7 +5,7 @@
 #'   * `sheets_get()` complements [googledrive::drive_get()], which
 #'     returns metadata that exists for any file on Drive.
 #'
-#' @template ss
+#' @eval param_ss()
 #'
 #' @return A list with S3 class `googlesheets4_spreadsheet`, for printing
 #'   purposes.

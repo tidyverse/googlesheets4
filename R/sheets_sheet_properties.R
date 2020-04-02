@@ -3,7 +3,7 @@
 #' Reveals full metadata or just the names for the (work)sheets inside a
 #' (spread)Sheet.
 #'
-#' @template ss
+#' @eval param_ss()
 #'
 #' @return
 #'   * `sheets_sheet_properties()`: A tibble with one row per (work)sheet.

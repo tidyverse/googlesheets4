@@ -6,7 +6,7 @@
 #'   * To delete an entire (work)sheet, use [sheets_sheet_delete()].
 #'   * To change the dimensions of a (work)sheet, use [sheets_sheet_resize()].
 #'
-#' @template ss
+#' @eval param_ss()
 #' @eval param_sheet(
 #'   action = "delete",
 #'   "Ignored if the sheet is specified via `range`. If neither argument",

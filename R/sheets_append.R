@@ -4,7 +4,7 @@
 #' increasing the row dimension of the sheet if necessary.
 #'
 #' @param data A data frame.
-#' @template ss
+#' @eval param_ss()
 #' @eval param_sheet(action = "append to")
 #'
 #' @template ss-return

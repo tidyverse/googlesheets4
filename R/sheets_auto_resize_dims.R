@@ -5,7 +5,7 @@
 #' from the current cell contents. This only affects the appearance of a Sheet
 #' in the browser and doesn't affect its values in any way.
 #'
-#' @template ss
+#' @eval param_ss()
 #' @eval param_sheet(
 #'   action = "modify",
 #'   "Ignored if the sheet is specified via `range`. If neither argument",

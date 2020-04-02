@@ -9,7 +9,7 @@
 #' which looks after reshaping and column typing. But if you really want raw cell
 #' data from the API, `sheets_cells()` is for you!
 #'
-#' @template ss
+#' @eval param_ss()
 #' @eval param_sheet(
 #'   action = "read",
 #'   "Ignored if the sheet is specified via `range`. If neither argument",

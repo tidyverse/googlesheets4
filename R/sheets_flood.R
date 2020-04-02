@@ -5,7 +5,7 @@
 #' clearing the cell value. Both functions, by default, also clear the format,
 #' but this can be specified via `reformat`.
 #'
-#' @template ss
+#' @eval param_ss()
 #' @eval param_sheet(action = "write into")
 #' @template range
 #' @param cell The value to fill the cells in the `range` with. If unspecified,

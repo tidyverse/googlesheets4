@@ -2,7 +2,7 @@
 #'
 #' Deletes one or more (work)sheets from a (spread)Sheet.
 #'
-#' @template ss
+#' @eval param_ss()
 #' @eval param_sheet(
 #'   action = "delete",
 #'   "You can pass a vector to delete multiple sheets at once or even a list,",

@@ -36,7 +36,7 @@
 #'    that don't receive new data are effectively cleared, i.e. the
 #'    existing value and format are deleted.
 #'
-#' @template ss
+#' @eval param_ss()
 #' @param data A data frame.
 #' @eval param_sheet(
 #'   action = "write into",

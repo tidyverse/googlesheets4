@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Class for Google Sheets formulas — sheets_formula • googlesheets4</title>
+<title>Create useful spreadsheet filler — sheets_fodder • googlesheets4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -41,11 +41,17 @@
 
 
 
-<meta property="og:title" content="Class for Google Sheets formulas — sheets_formula" />
-<meta property="og:description" content="In order to write a formula into Google Sheets, you need to store it as an
-object of class googlesheets4_formula. This is how we distinguish a
-&quot;regular&quot; character string from a string that should be interpreted as a
-formula. googlesheets4_formula is an S3 class implemented using the vctrs package." />
+<meta property="og:title" content="Create useful spreadsheet filler — sheets_fodder" />
+<meta property="og:description" content="Creates a data frame that is useful for filling a spreadsheet, when you just
+need a sheet to experiment with. The data frame has n rows and m columns
+with these properties:
+Column names match what Sheets displays: &quot;A&quot;, &quot;B&quot;, &quot;C&quot;, and so on.
+Inner cell values reflect the coordinates where each value will land in
+the sheet, in A1-notation. So the first row is &quot;B2&quot;, &quot;C2&quot;, and so on.
+Note that this n-row data frame will occupy n + 1 rows in the sheet,
+because the column names occupy the first row.
+
+" />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -157,77 +163,60 @@ formula. googlesheets4_formula is an S3 class implemented using the vctrs packag
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Class for Google Sheets formulas</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_formula.R'><code>R/sheets_formula.R</code></a></small>
-    <div class="hidden name"><code>sheets_formula.Rd</code></div>
+    <h1>Create useful spreadsheet filler</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_fodder.R'><code>R/sheets_fodder.R</code></a></small>
+    <div class="hidden name"><code>sheets_fodder.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>In order to write a formula into Google Sheets, you need to store it as an
-object of class <code>googlesheets4_formula</code>. This is how we distinguish a
-"regular" character string from a string that should be interpreted as a
-formula. <code>googlesheets4_formula</code> is an S3 class implemented using the <a href='https://vctrs.r-lib.org/articles/s3-vector.html'>vctrs package</a>.</p>
+    <p>Creates a data frame that is useful for filling a spreadsheet, when you just
+need a sheet to experiment with. The data frame has <code>n</code> rows and <code>m</code> columns
+with these properties:</p><ul>
+<li><p>Column names match what Sheets displays: "A", "B", "C", and so on.</p></li>
+<li><p>Inner cell values reflect the coordinates where each value will land in
+the sheet, in A1-notation. So the first row is "B2", "C2", and so on.
+Note that this <code>n</code>-row data frame will occupy <code>n + 1</code> rows in the sheet,
+because the column names occupy the first row.</p></li>
+</ul>
+
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_formula</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>())</pre>
+    <pre class="usage"><span class='fu'>sheets_fodder</span>(<span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>m</span> <span class='kw'>=</span> <span class='no'>n</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>Character.</p></td>
+      <th>n</th>
+      <td><p>Number of rows.</p></td>
+    </tr>
+    <tr>
+      <th>m</th>
+      <td><p>Number of columns.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>An S3 vector of class <code>googlesheets4_formula</code>.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p>Other write functions: 
-<code><a href='sheets_append.html'>sheets_append</a>()</code>,
-<code><a href='sheets_create.html'>sheets_create</a>()</code>,
-<code><a href='sheets_delete.html'>sheets_delete</a>()</code>,
-<code><a href='sheets_edit.html'>sheets_edit</a>()</code>,
-<code><a href='sheets_flood.html'>sheets_flood</a>()</code>,
-<code><a href='write_sheet.html'>write_sheet</a>()</code></p></div>
+    <p>A data frame of character vectors.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
-<span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>X</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>4</span>, <span class='fl'>6</span>))
-
-<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='write_sheet.html'>sheets_write</a></span>(<span class='no'>dat</span>)
-<span class='no'>ss</span>
-
-<span class='no'>summaries</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span>(
-       ~ <span class='no'>desc</span>, ~ <span class='no'>summaries</span>,
-        <span class='st'>"max"</span>, <span class='st'>"=max(A:A)"</span>,
-        <span class='st'>"sum"</span>, <span class='st'>"=sum(A:A)"</span>,
-        <span class='st'>"min"</span>, <span class='st'>"=min(A:A)"</span>,
-  <span class='st'>"sparkline"</span>, <span class='st'>"=SPARKLINE(A:A, {\"color\", \"blue\"})"</span>
-)
-
-<span class='co'># explicitly declare a column as `googlesheets4_formula`</span>
-<span class='no'>summaries</span>$<span class='no'>summaries</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_formula</span>(<span class='no'>summaries</span>$<span class='no'>summaries</span>)
-<span class='no'>summaries</span>
-
-<span class='fu'><a href='sheets_edit.html'>sheets_edit</a></span>(<span class='no'>ss</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>summaries</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"C1"</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-
-<span class='no'>miscellany</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span>(
-       ~ <span class='no'>desc</span>, ~ <span class='no'>example</span>,
-  <span class='st'>"hyperlink"</span>, <span class='st'>"=HYPERLINK(\"http://www.google.com/\",\"Google\")"</span>,
-      <span class='st'>"image"</span>, <span class='st'>"=IMAGE(\"https://www.google.com/images/srpr/logo3w.png\")"</span>
-)
-<span class='no'>miscellany</span>$<span class='no'>example</span> <span class='kw'>&lt;-</span> <span class='fu'>sheets_formula</span>(<span class='no'>miscellany</span>$<span class='no'>example</span>)
-<span class='no'>miscellany</span>
-
-<span class='fu'><a href='write_sheet.html'>sheets_write</a></span>(<span class='no'>miscellany</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>)
-
-<span class='co'># clean up</span>
-<span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>(<span class='no'>ss</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "fiery-hart"</span></div><div class='output co'>#&gt; <span class='message'>Editing "fiery-hart"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "dat"</span></div><div class='output co'>#&gt; <span class='message'>Changing dims: (7 x 1) --&gt; (7 x 4)</span></div><div class='output co'>#&gt; <span class='message'>Writing to "fiery-hart"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "miscellany"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * fiery-hart: 1_C2kgUgFTw0mw955l4Y3sv0zKFp3tKbd0vSFHT8e3Y4</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>sheets_fodder</span>()</div><div class='output co'>#&gt;      A   B   C   D   E   F   G   H   I   J
+#&gt; 1   A2  B2  C2  D2  E2  F2  G2  H2  I2  J2
+#&gt; 2   A3  B3  C3  D3  E3  F3  G3  H3  I3  J3
+#&gt; 3   A4  B4  C4  D4  E4  F4  G4  H4  I4  J4
+#&gt; 4   A5  B5  C5  D5  E5  F5  G5  H5  I5  J5
+#&gt; 5   A6  B6  C6  D6  E6  F6  G6  H6  I6  J6
+#&gt; 6   A7  B7  C7  D7  E7  F7  G7  H7  I7  J7
+#&gt; 7   A8  B8  C8  D8  E8  F8  G8  H8  I8  J8
+#&gt; 8   A9  B9  C9  D9  E9  F9  G9  H9  I9  J9
+#&gt; 9  A10 B10 C10 D10 E10 F10 G10 H10 I10 J10
+#&gt; 10 A11 B11 C11 D11 E11 F11 G11 H11 I11 J11</div><div class='input'><span class='fu'>sheets_fodder</span>(<span class='fl'>5</span>, <span class='fl'>3</span>)</div><div class='output co'>#&gt;    A  B  C
+#&gt; 1 A2 B2 C2
+#&gt; 2 A3 B3 C3
+#&gt; 3 A4 B4 C4
+#&gt; 4 A5 B5 C5
+#&gt; 5 A6 B6 C6</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

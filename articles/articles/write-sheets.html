@@ -174,15 +174,11 @@
 <p>Create a brand new Sheet with <code><a href="../../reference/sheets_create.html">sheets_create()</a></code>. You can specify the new Sheet’s <code>name</code> (or accept a randomly generated name).</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">ss1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"sheets-create-demo-1"</span>)
 <span class="co">#&gt; Creating new Sheet: "sheets-create-demo-1"</span>
+<span class="co">#&gt; Error: Server error: (503) UNAVAILABLE</span>
+<span class="co">#&gt;   * Service unavailable. Typically the server is down.</span>
+<span class="co">#&gt;   * The service is currently unavailable.</span>
 <span class="no">ss1</span>
-<span class="co">#&gt;   Spreadsheet name: sheets-create-demo-1</span>
-<span class="co">#&gt;                 ID: 1PMJo2YgnDuFyxCEfL-aIRvRLS2HmTSRhggXMaOnJFzA</span>
-<span class="co">#&gt;             Locale: en_US</span>
-<span class="co">#&gt;          Time zone: Etc/GMT</span>
-<span class="co">#&gt;        # of sheets: 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;       Sheet1: 1000 x 26</span></pre></body></html></div>
+<span class="co">#&gt; Error in eval(expr, envir, enclos): object 'ss1' not found</span></pre></body></html></div>
 <p>Every Sheet <em>must</em> have at least one (work)sheet, so Google Sheets automatically creates an empty “Sheet1”.</p>
 <p>You can control the names and content of the initial (work)sheets with the <code>sheets</code> argument.</p>
 <div id="send-sheet-names" class="section level3">
@@ -196,7 +192,7 @@
 <span class="co">#&gt; Creating new Sheet: "sheets-create-demo-2"</span>
 <span class="no">ss2</span>
 <span class="co">#&gt;   Spreadsheet name: sheets-create-demo-2</span>
-<span class="co">#&gt;                 ID: 1pm3zzmkzbHMGcFGlStyDRn_MZWgxLiREqioktVAFViU</span>
+<span class="co">#&gt;                 ID: 103UmzhDGoTWEGgL2LaUemBOfEfhMltblgaADGYvyJ9E</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>
@@ -219,7 +215,7 @@
 <span class="co">#&gt; Creating new Sheet: "sheets-create-demo-3"</span>
 <span class="no">ss3</span>
 <span class="co">#&gt;   Spreadsheet name: sheets-create-demo-3</span>
-<span class="co">#&gt;                 ID: 1-xsxVoFLxtiaNUnz5XhLCitkIMOPOM6I_cBBg7YOIKw</span>
+<span class="co">#&gt;                 ID: 1Y77VRWILLlAGXojNFTICU81rtmpGsDEfEB4nnJyTEWE</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -240,7 +236,7 @@
 <span class="co">#&gt; Creating new Sheet: "sheets-create-demo-4"</span>
 <span class="no">ss4</span>
 <span class="co">#&gt;   Spreadsheet name: sheets-create-demo-4</span>
-<span class="co">#&gt;                 ID: 15dpBSIyO_rEM9EQipqC6-Os7udy-_73ii8IAVFvgN3I</span>
+<span class="co">#&gt;                 ID: 1BOfw6wn2xzOocRkllXK768ku2Up3Skr9nSxNsaJs6ms</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>
@@ -262,7 +258,7 @@
 <span class="co">#&gt; Creating new Sheet: "sheets-create-demo-5"</span>
 <span class="no">ss5</span>
 <span class="co">#&gt;   Spreadsheet name: sheets-create-demo-5</span>
-<span class="co">#&gt;                 ID: 1ELfGzC1_5yXunr-rQeHDNhN-8aFAr5OoI6pDY87TasY</span>
+<span class="co">#&gt;                 ID: 1F-XLHZnXDqpWOqwPkbIByICQSIof9bzYc0UWKHjZ8RM</span>
 <span class="co">#&gt;             Locale: fr_FR</span>
 <span class="co">#&gt;          Time zone: Europe/Paris</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -278,11 +274,15 @@
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"sheets-create-demo"</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-create-demo-5: 1ELfGzC1_5yXunr-rQeHDNhN-8aFAr5OoI6pDY87TasY</span>
-<span class="co">#&gt;   * sheets-create-demo-4: 15dpBSIyO_rEM9EQipqC6-Os7udy-_73ii8IAVFvgN3I</span>
-<span class="co">#&gt;   * sheets-create-demo-3: 1-xsxVoFLxtiaNUnz5XhLCitkIMOPOM6I_cBBg7YOIKw</span>
-<span class="co">#&gt;   * sheets-create-demo-2: 1pm3zzmkzbHMGcFGlStyDRn_MZWgxLiREqioktVAFViU</span>
-<span class="co">#&gt;   * sheets-create-demo-1: 1PMJo2YgnDuFyxCEfL-aIRvRLS2HmTSRhggXMaOnJFzA</span></pre></body></html></div>
+<span class="co">#&gt;   * sheets-create-demo-5: 1F-XLHZnXDqpWOqwPkbIByICQSIof9bzYc0UWKHjZ8RM</span>
+<span class="co">#&gt;   * sheets-create-demo-4: 1BOfw6wn2xzOocRkllXK768ku2Up3Skr9nSxNsaJs6ms</span>
+<span class="co">#&gt;   * sheets-create-demo-3: 1Y77VRWILLlAGXojNFTICU81rtmpGsDEfEB4nnJyTEWE</span>
+<span class="co">#&gt;   * sheets-create-demo-2: 103UmzhDGoTWEGgL2LaUemBOfEfhMltblgaADGYvyJ9E</span>
+<span class="co">#&gt;   * sheets-create-demo-5: 1GN3oWHh747IUd_8UB34FdwwqfiABfOg_MiI_zLm9J3Y</span>
+<span class="co">#&gt;   * sheets-create-demo-4: 1YD_Ek_SjPDVG1gJuJoh7r-wH9EkXJ1okEuryIACzmJc</span>
+<span class="co">#&gt;   * sheets-create-demo-3: 1G_AUhU_LBshaSryPn7AdAh03YvYbrpsqybIM9AlWMsE</span>
+<span class="co">#&gt;   * sheets-create-demo-2: 1o8oYXd0OL5Knvs3JdA8_14LEOh-W4Bjn5RsFdO4ioMw</span>
+<span class="co">#&gt;   * sheets-create-demo-1: 10kYeKsSBDLKiP_qqAdBFI4Ba2L9QpW80BVB6REfdccs</span></pre></body></html></div>
 </div>
 </div>
 <div id="write_sheet-a-k-a--sheets_write" class="section level2">
@@ -294,10 +294,10 @@
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">letters</span>[<span class="fl">1</span>:<span class="fl">3</span>])
 
 <span class="no">random_ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/write_sheet.html">sheets_write</a></span>(<span class="no">df</span>)
-<span class="co">#&gt; Creating new Sheet: "global-puppy"</span>
+<span class="co">#&gt; Creating new Sheet: "curvy-warthog"</span>
 <span class="no">random_ss</span>
-<span class="co">#&gt;   Spreadsheet name: global-puppy</span>
-<span class="co">#&gt;                 ID: 1UzmFWE3WqaAH34cceoFUv0JytxjWLFodfvzjmJw_9XU</span>
+<span class="co">#&gt;   Spreadsheet name: curvy-warthog</span>
+<span class="co">#&gt;                 ID: 1cO9Ra3BpYeO_kZSSmIJSNsnAVyKF4v5Cr5a5S869aKs</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -308,7 +308,7 @@
 <p>Let’s start over: we delete that Sheet and call <code><a href="../../reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name. Then we’ll modify it with <code><a href="../../reference/write_sheet.html">sheets_write()</a></code>. We send one sheet name, “chickwts”, to prevent the creation of “Sheet1”, but we send no data.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(<span class="no">random_ss</span>)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * global-puppy: 1UzmFWE3WqaAH34cceoFUv0JytxjWLFodfvzjmJw_9XU</span>
+<span class="co">#&gt;   * curvy-warthog: 1cO9Ra3BpYeO_kZSSmIJSNsnAVyKF4v5Cr5a5S869aKs</span>
 
 <span class="no">ss1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sheets_create.html">sheets_create</a></span>(
   <span class="st">"write-sheets-demo-1"</span>,
@@ -317,7 +317,7 @@
 <span class="co">#&gt; Creating new Sheet: "write-sheets-demo-1"</span>
 <span class="no">ss1</span>
 <span class="co">#&gt;   Spreadsheet name: write-sheets-demo-1</span>
-<span class="co">#&gt;                 ID: 1ivqbx9Yhpodegv6W3dc0Su3kHSrsWQlYZz_PCUjAAqY</span>
+<span class="co">#&gt;                 ID: 1DNd1KwnYmKjbbBdiUg_2ZkeDKtgc4iHZ2d2mRhfEoAE</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -330,7 +330,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="no">ss1</span>
 <span class="co">#&gt;   Spreadsheet name: write-sheets-demo-1</span>
-<span class="co">#&gt;                 ID: 1ivqbx9Yhpodegv6W3dc0Su3kHSrsWQlYZz_PCUjAAqY</span>
+<span class="co">#&gt;                 ID: 1DNd1KwnYmKjbbBdiUg_2ZkeDKtgc4iHZ2d2mRhfEoAE</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -353,7 +353,7 @@
 <span class="co">#&gt; Writing to sheet "Sheet1"</span>
 <span class="no">ss1</span>
 <span class="co">#&gt;   Spreadsheet name: write-sheets-demo-1</span>
-<span class="co">#&gt;                 ID: 1ivqbx9Yhpodegv6W3dc0Su3kHSrsWQlYZz_PCUjAAqY</span>
+<span class="co">#&gt;                 ID: 1DNd1KwnYmKjbbBdiUg_2ZkeDKtgc4iHZ2d2mRhfEoAE</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 4</span>
@@ -369,7 +369,7 @@
 <div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"write-sheets-demo"</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * write-sheets-demo-1: 1ivqbx9Yhpodegv6W3dc0Su3kHSrsWQlYZz_PCUjAAqY</span></pre></body></html></div>
+<span class="co">#&gt;   * write-sheets-demo-1: 1DNd1KwnYmKjbbBdiUg_2ZkeDKtgc4iHZ2d2mRhfEoAE</span></pre></body></html></div>
 </div>
 </div>
 <div id="sheets_append" class="section level2">
@@ -405,7 +405,7 @@
 <span class="co">#&gt; Creating new Sheet: "sheets-append-demo"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;                 ID: 1YSufMATl-mAjChxFYdIhwyWcIJARaL8UCBj5enOQqeA</span>
+<span class="co">#&gt;                 ID: 1YMGyIsT1IYj8sQCbqVKj_igNTN93kSpbfyVNNprSBoc</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -417,7 +417,7 @@
 <p>Send the data, one or more rows at a time. Keep inspecting in the browser if you’re doing this yourself.</p>
 <div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;                 ID: 1YSufMATl-mAjChxFYdIhwyWcIJARaL8UCBj5enOQqeA</span>
+<span class="co">#&gt;                 ID: 1YMGyIsT1IYj8sQCbqVKj_igNTN93kSpbfyVNNprSBoc</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -431,7 +431,7 @@
 <span class="co">#&gt; Appending 5 row(s) to "deaths"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;                 ID: 1YSufMATl-mAjChxFYdIhwyWcIJARaL8UCBj5enOQqeA</span>
+<span class="co">#&gt;                 ID: 1YMGyIsT1IYj8sQCbqVKj_igNTN93kSpbfyVNNprSBoc</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -445,7 +445,7 @@
 <span class="co">#&gt; Appending 1 row(s) to "deaths"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;                 ID: 1YSufMATl-mAjChxFYdIhwyWcIJARaL8UCBj5enOQqeA</span>
+<span class="co">#&gt;                 ID: 1YMGyIsT1IYj8sQCbqVKj_igNTN93kSpbfyVNNprSBoc</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -459,7 +459,7 @@
 <span class="co">#&gt; Appending 4 row(s) to "deaths"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;                 ID: 1YSufMATl-mAjChxFYdIhwyWcIJARaL8UCBj5enOQqeA</span>
+<span class="co">#&gt;                 ID: 1YMGyIsT1IYj8sQCbqVKj_igNTN93kSpbfyVNNprSBoc</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -479,7 +479,7 @@
 <div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"sheets-append-demo"</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-append-demo: 1YSufMATl-mAjChxFYdIhwyWcIJARaL8UCBj5enOQqeA</span></pre></body></html></div>
+<span class="co">#&gt;   * sheets-append-demo: 1YMGyIsT1IYj8sQCbqVKj_igNTN93kSpbfyVNNprSBoc</span></pre></body></html></div>
 </div>
 </div>
 <div id="sheets_edit" class="section level2">
@@ -673,7 +673,7 @@
 <div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"sheets-edit-demo"</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-edit-demo: 1Cd3U96Gvhe2o1ARwqb_SQX52ZuH81S0l6Q-vA_TWut4</span></pre></body></html></div>
+<span class="co">#&gt;   * sheets-edit-demo: 1uexuYizK-5rMKYC5-aDWSOkZwa2Tyo-_hZ8w_20xLOc</span></pre></body></html></div>
 </div>
 </div>
 <div id="write-formulas" class="section level2">
@@ -694,7 +694,7 @@
 (<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"sheets-formula-demo"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="no">lang_dat</span>))
 <span class="co">#&gt; Creating new Sheet: "sheets-formula-demo"</span>
 <span class="co">#&gt;   Spreadsheet name: sheets-formula-demo</span>
-<span class="co">#&gt;                 ID: 1ff_j7p98ldFvSxF3FCWVvB2ZSaauMoxgYPYNvf6dFuc</span>
+<span class="co">#&gt;                 ID: 1zVFmkr5Su0B5_1bGhmjBc1L3T9sRsRgFKY2QNl90qbY</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -717,7 +717,7 @@
 <div class="sourceCode" id="cb31"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"sheets-formula-demo"</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-formula-demo: 1ff_j7p98ldFvSxF3FCWVvB2ZSaauMoxgYPYNvf6dFuc</span></pre></body></html></div>
+<span class="co">#&gt;   * sheets-formula-demo: 1zVFmkr5Su0B5_1bGhmjBc1L3T9sRsRgFKY2QNl90qbY</span></pre></body></html></div>
 </div>
 </div>
 <div id="sheets_flood" class="section level2">
@@ -725,14 +725,17 @@
 <a href="#sheets_flood" class="anchor"></a><code>sheets_flood()</code>
 </h2>
 <p><code><a href="../../reference/sheets_flood.html">sheets_flood()</a></code> “floods” all cells in a range with common content. By default, it floods them with no content, i.e. it clears cells of their existing value and format. Note that <code><a href="../../reference/sheets_flood.html">sheets_clear()</a></code> is a convenience wrapper for this special case. First, we create a data frame and initialize a new Sheet with that data.</p>
-<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">n</span> <span class="kw">&lt;-</span> <span class="fl">10</span>
-<span class="no">columns</span> <span class="kw">&lt;-</span> <span class="no">LETTERS</span>[<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="no">n</span>)]
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">columns</span>) <span class="kw">&lt;-</span> <span class="no">columns</span>
-<span class="no">f</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">number</span>, <span class="no">letter</span>) <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">letter</span>, <span class="no">number</span>)
-<span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/outer.html">outer</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="no">n</span>) + <span class="fl">1</span>, <span class="no">columns</span>, <span class="no">f</span>), <span class="kw">stringsAsFactors</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-
-<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"sheets-flood-demo"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">df</span>))
-<span class="co">#&gt; Creating new Sheet: "sheets-flood-demo"</span></pre></body></html></div>
+<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sheets_fodder.html">sheets_fodder</a></span>(<span class="fl">10</span>)
+(<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"sheets-flood-demo"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">df</span>)))
+<span class="co">#&gt; Creating new Sheet: "sheets-flood-demo"</span>
+<span class="co">#&gt;   Spreadsheet name: sheets-flood-demo</span>
+<span class="co">#&gt;                 ID: 1Lv9RYp-H8h3s5e8EGshO6gUXYXb-Sa42w-lEy5U2Gbc</span>
+<span class="co">#&gt;             Locale: en_US</span>
+<span class="co">#&gt;          Time zone: Etc/GMT</span>
+<span class="co">#&gt;        # of sheets: 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
+<span class="co">#&gt;       Sheet1: 11 x 10</span></pre></body></html></div>
 <p>To begin, each cell holds its A1-coordinates as its value. If you viewed this in the browser, you’d see the header row has some special formatting, including a gray background.</p>
 <div class="sourceCode" id="cb33"><html><body><pre class="r"><span class="fu"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Reading from "sheets-flood-demo"</span>
@@ -803,7 +806,7 @@
 <div class="sourceCode" id="cb36"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"sheets-flood-demo"</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-flood-demo: 1G1DIm58l-SBusEo-Klhog0tQrPGdHg4iAa8seI6Z1Qc</span></pre></body></html></div>
+<span class="co">#&gt;   * sheets-flood-demo: 1Lv9RYp-H8h3s5e8EGshO6gUXYXb-Sa42w-lEy5U2Gbc</span></pre></body></html></div>
 </div>
 </div>
 <div id="sheets_delete" class="section level2">
@@ -812,14 +815,17 @@
 </h2>
 <p><code>sheets_deletes()</code> deletes a range of cells and shifts other cells into the deleted area. If you’re trying to delete an entire (work)sheet or change its actual dimensions or extent, you should, instead, use <code><a href="../../reference/sheets_sheet_delete.html">sheets_sheet_delete()</a></code> or <code><a href="../../reference/sheets_sheet_resize.html">sheets_sheet_resize()</a></code>. If you just want to clear values or formats, use <code><a href="../../reference/sheets_flood.html">sheets_clear()</a></code>.</p>
 <p>First, we create a data frame and initialize a new Sheet with that data.</p>
-<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="no">n</span> <span class="kw">&lt;-</span> <span class="fl">4</span>
-<span class="no">columns</span> <span class="kw">&lt;-</span> <span class="no">LETTERS</span>[<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="no">n</span>)]
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">columns</span>) <span class="kw">&lt;-</span> <span class="no">columns</span>
-<span class="no">f</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">number</span>, <span class="no">letter</span>) <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="no">letter</span>, <span class="no">number</span>)
-<span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/outer.html">outer</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span>(<span class="no">n</span>) + <span class="fl">1</span>, <span class="no">columns</span>, <span class="no">f</span>), <span class="kw">stringsAsFactors</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
-
-<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"sheets-delete-demo"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">df</span>))
-<span class="co">#&gt; Creating new Sheet: "sheets-delete-demo"</span></pre></body></html></div>
+<div class="sourceCode" id="cb37"><html><body><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sheets_fodder.html">sheets_fodder</a></span>(<span class="fl">4</span>)
+(<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"sheets-delete-demo"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">df</span>)))
+<span class="co">#&gt; Creating new Sheet: "sheets-delete-demo"</span>
+<span class="co">#&gt;   Spreadsheet name: sheets-delete-demo</span>
+<span class="co">#&gt;                 ID: 15DLl5pg3TyH9apbFNKKgPKXc1jL6RlLwU9GgAEO0HIw</span>
+<span class="co">#&gt;             Locale: en_US</span>
+<span class="co">#&gt;          Time zone: Etc/GMT</span>
+<span class="co">#&gt;        # of sheets: 1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
+<span class="co">#&gt;       Sheet1: 5 x 4</span></pre></body></html></div>
 <p>To begin, each cell holds its A1-coordinates as its value. If you viewed this in the browser, you’d see the header row has some special formatting, including a gray background.</p>
 <div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="fu"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Reading from "sheets-delete-demo"</span>
@@ -873,7 +879,7 @@
 <div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_find.html">sheets_find</a></span>(<span class="st">"sheets-delete-demo"</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-delete-demo: 1RrQz0Dfoaaf7ILv3ZDliJA7052PgLbgvv8GL2Y-XxeU</span></pre></body></html></div>
+<span class="co">#&gt;   * sheets-delete-demo: 15DLl5pg3TyH9apbFNKKgPKXc1jL6RlLwU9GgAEO0HIw</span></pre></body></html></div>
 </div>
 </div>
   </div>

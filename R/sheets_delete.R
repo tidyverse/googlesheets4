@@ -1,8 +1,10 @@
 #' Delete cells
 #'
-#' Deletes a range of cells and shifts other cells into the deleted area. If you
-#' want to delete an entire (work)sheet, use [sheets_sheet_delete()]. If you
-#' want to change the dimensions of a (work)sheet, use [sheets_sheet_resize()].
+#' Deletes a range of cells and shifts other cells into the deleted area. There
+#' are several related tasks that are done by other functions:
+#'   * To clear cells of their value and/or format, use [sheets_clear()].
+#'   * To delete an entire (work)sheet, use [sheets_sheet_delete()].
+#'   * To change the dimensions of a (work)sheet, use [sheets_sheet_resize()].
 #'
 #' @template ss
 #' @eval param_sheet(

@@ -36,9 +36,13 @@ surrounding cells up or to the left.}
 The input \code{ss}, as an instance of \code{\link{sheets_id}}
 }
 \description{
-Deletes a range of cells and shifts other cells into the deleted area. If you
-want to delete an entire (work)sheet, use \code{\link[=sheets_sheet_delete]{sheets_sheet_delete()}}. If you
-want to change the dimensions of a (work)sheet, use \code{\link[=sheets_sheet_resize]{sheets_sheet_resize()}}.
+Deletes a range of cells and shifts other cells into the deleted area. There
+are several related tasks that are done by other functions:
+\itemize{
+\item To clear cells of their value and/or format, use \code{\link[=sheets_clear]{sheets_clear()}}.
+\item To delete an entire (work)sheet, use \code{\link[=sheets_sheet_delete]{sheets_sheet_delete()}}.
+\item To change the dimensions of a (work)sheet, use \code{\link[=sheets_sheet_resize]{sheets_sheet_resize()}}.
+}
 }
 \examples{
 if (sheets_has_token()) {

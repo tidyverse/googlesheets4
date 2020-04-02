@@ -33,6 +33,11 @@ reference:
       - sheets_append
       - sheets_edit
       - sheets_flood
+  - title: "Data preparation"
+    desc: >
+      Helpers for preparing data to write into Sheets
+    contents:
+      - sheets_fodder
       - sheets_formula
   - title: "Metadata on Sheets"
     desc: >
@@ -49,6 +54,7 @@ reference:
       Make changes to a (spread)Sheet or to the (work)sheets it contains
     contents:
       - sheets_create
+      - sheets_delete
       - starts_with("sheets_sheet")
   - title: "Formatting and aesthetics"
     desc: >

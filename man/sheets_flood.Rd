@@ -48,11 +48,7 @@ but this can be specified via \code{reformat}.
 \examples{
 if (sheets_has_token()) {
   # create a data frame to use as initial data
-  n <- 10
-  columns <- LETTERS[seq_len(n)]
-  names(columns) <- columns
-  f <- function(number, letter) paste0(letter, number)
-  df <- as.data.frame(outer(seq_len(n) + 1, columns, f), stringsAsFactors = FALSE)
+  df <- sheets_fodder(10)
 
   # create Sheet
   ss <- sheets_create("sheets-flood-example", sheets = list(df))

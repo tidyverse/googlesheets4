@@ -421,13 +421,8 @@ sheets_find("sheets-formula-demo") %>%
 First, we create a data frame and initialize a new Sheet with that data.
 
 ```{r}
-n <- 10
-columns <- LETTERS[seq_len(n)]
-names(columns) <- columns
-f <- function(number, letter) paste0(letter, number)
-df <- as.data.frame(outer(seq_len(n) + 1, columns, f), stringsAsFactors = FALSE)
-
-ss <- sheets_create("sheets-flood-demo", sheets = list(df))
+df <- sheets_fodder(10)
+(ss <- sheets_create("sheets-flood-demo", sheets = list(df)))
 ```
 
 To begin, each cell holds its A1-coordinates as its value. If you viewed this in the browser, you'd see the header row has some special formatting, including a gray background.
@@ -467,13 +462,8 @@ sheets_find("sheets-flood-demo") %>%
 First, we create a data frame and initialize a new Sheet with that data.
 
 ```{r}
-n <- 4
-columns <- LETTERS[seq_len(n)]
-names(columns) <- columns
-f <- function(number, letter) paste0(letter, number)
-df <- as.data.frame(outer(seq_len(n) + 1, columns, f), stringsAsFactors = FALSE)
-
-ss <- sheets_create("sheets-delete-demo", sheets = list(df))
+df <- sheets_fodder(4)
+(ss <- sheets_create("sheets-delete-demo", sheets = list(df)))
 ```
 
 To begin, each cell holds its A1-coordinates as its value. If you viewed this in the browser, you'd see the header row has some special formatting, including a gray background.

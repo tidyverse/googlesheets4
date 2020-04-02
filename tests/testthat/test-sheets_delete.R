@@ -6,13 +6,7 @@ test_that("sheets_delete() works", {
   skip_if_offline()
   skip_if_no_token()
 
-  # create a data frame to use as initial data
-  n <- 4
-  columns <- LETTERS[seq_len(n)]
-  names(columns) <- columns
-  f <- function(number, letter) paste0(letter, number)
-  df <- as.data.frame(outer(seq_len(n) + 1, columns, f), stringsAsFactors = FALSE)
-
+  df <- sheets_fodder(4)
   ss <- scoped_temporary_ss(me_(), sheets = list(df))
 
   sheets_delete(ss, range = "2:3")

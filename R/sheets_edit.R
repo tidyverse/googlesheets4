@@ -141,8 +141,14 @@ sheets_edit <- function(ss,
   )
 
   if (!is.null(resize_req)) {
+    new_dims <- pluck(
+      resize_req,
+      "updateSheetProperties", "properties", "gridProperties"
+    )
     message_glue(
-      "Changing dims: ({s$grid_rows} x {s$grid_columns}) --> ({dims_needed$nrow} x {dims_needed$ncol})"
+      "Changing dims: ({s$grid_rows} x {s$grid_columns}) --> \\
+       ({new_dims$rowCount %||% s$grid_rows} x \\
+       {new_dims$columnCount %||% s$grid_columns})"
     )
     requests <- c(requests, list(resize_req))
   }

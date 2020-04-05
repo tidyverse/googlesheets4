@@ -65,7 +65,8 @@ these <- c(
   "GridProperties",
   "AppendCellsRequest",
   "AutoResizeDimensionsRequest",
-  "DeleteRangeRequest"
+  "DeleteRangeRequest",
+  "DuplicateSheetRequest"
 )
 
 .tidy_schemas <- these %>%

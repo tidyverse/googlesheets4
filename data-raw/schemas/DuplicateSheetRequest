@@ -1,0 +1,8 @@
+# DuplicateSheetRequest  
+# A tibble: 4 x 6
+  property         type    instance_of array_of format enum            
+  <chr>            <chr>   <chr>       <chr>    <chr>  <list>          
+1 insertSheetIndex integer <NA>        <NA>     int32  <tibble [0 × 2]>
+2 newSheetId       integer <NA>        <NA>     int32  <tibble [0 × 2]>
+3 newSheetName     string  <NA>        <NA>     <NA>   <tibble [0 × 2]>
+4 sourceSheetId    integer <NA>        <NA>     int32  <tibble [0 × 2]>

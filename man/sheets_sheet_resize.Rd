@@ -66,6 +66,7 @@ Makes an \code{UpdateSheetPropertiesRequest}:
 
 Other worksheet functions: 
 \code{\link{sheets_sheet_add}()},
+\code{\link{sheets_sheet_copy}()},
 \code{\link{sheets_sheet_delete}()},
 \code{\link{sheets_sheet_properties}()}
 }

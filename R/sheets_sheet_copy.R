@@ -30,6 +30,9 @@
 #' `spreadsheets.sheets/copyTo` endpoint:
 #' * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.sheets/copyTo>
 #'
+#' and possibly makes a subsequent `UpdateSheetPropertiesRequest`:
+#'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest>
+#'
 #' @examples
 #' if (sheets_has_token()) {
 #'   ss_aaa <- sheets_create(
@@ -55,11 +58,10 @@
 #'
 #'   # copies 'chickwts' sheet from first Sheet to second WITH a specific name
 #'   # and into a specific location
-#'   # NOTE: NAME ANd LOCATION PART NOT IMPLEMENTED YET
 #'   ss_aaa %>%
 #'     sheets_sheet_copy(
 #'       "chickwts",
-#'       to_ss = ss_bbb, to_sheet = "chicks-two", .after = 0
+#'       to_ss = ss_bbb, to_sheet = "chicks-two", .before = 1
 #'     )
 #'
 #'   # clean up
@@ -145,6 +147,8 @@ sheets_sheet_copy_external <- function(from_ssid,
                                        .after = NULL) {
   from_x <- sheets_get(from_ssid)
   to_x   <- sheets_get(to_ssid)
+  maybe_string(to_sheet, "sheets_sheet_copy")
+
   from_s <- lookup_sheet(from_sheet, sheets_df = from_x$sheets)
   message_glue(
     "Copying sheet {dq(from_s$name)} from {dq(from_x$name)} to {dq(to_x$name)}"
@@ -160,7 +164,43 @@ sheets_sheet_copy_external <- function(from_ssid,
   )
   resp_raw <- request_make(req)
   to_s <- gargle::response_process(resp_raw)
-  message_glue("Copied as {dq(to_s$title)}")
+
+  # early exit if no need to relocate and/or rename copied sheet
+  index <- resolve_index(to_x$sheets, .before, .after)
+  if (is.null(index) && is.null(to_sheet)) {
+    message_glue("Copied as {dq(to_s$title)}")
+    return(invisible(to_ssid))
+  }
+
+  sp <- new(
+    "SheetProperties",
+    sheetId = to_s$sheetId
+  )
+
+  if (!is.null(to_sheet)) {
+    sp <- patch(sp, title = to_sheet)
+  }
+
+  if (!is.null(index)) {
+    sp <- patch(sp, index = index)
+  }
+
+  update_req <- new(
+    "UpdateSheetPropertiesRequest",
+    properties = sp,
+    fields = gargle::field_mask(sp)
+  )
+
+  req <- request_generate(
+    "sheets.spreadsheets.batchUpdate",
+    params = list(
+      spreadsheetId = to_ssid,
+      requests = list(updateSheetProperties = update_req)
+    )
+  )
+  resp_raw <- request_make(req)
+  gargle::response_process(resp_raw)
+  message_glue("Copied as {dq(to_sheet)}")
 
   invisible(to_ssid)
 }

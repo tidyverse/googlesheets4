@@ -67,7 +67,9 @@ googledrive::drive_trash(ss)
 }
 }
 \seealso{
-Makes an \code{AutoResizeDimensionsRequest}: *
-\url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#autoresizedimensionsrequest}
+Makes an \code{AutoResizeDimensionsRequest}:
+\itemize{
+\item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#autoresizedimensionsrequest}
+}
 }
 \concept{formatting functions}

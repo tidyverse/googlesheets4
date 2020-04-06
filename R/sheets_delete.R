@@ -29,8 +29,8 @@
 #' @template ss-return
 #' @export
 #' @family write functions
-#' @seealso Mmakes a `DeleteRangeRequest`: *
-#'   <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteRangeRequest>
+#' @seealso Makes a `DeleteRangeRequest`:
+#' * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteRangeRequest>
 #'
 #' @examples
 #' if (sheets_has_token()) {

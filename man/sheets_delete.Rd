@@ -66,8 +66,10 @@ if (sheets_has_token()) {
 }
 }
 \seealso{
-Mmakes a \code{DeleteRangeRequest}: *
-\url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteRangeRequest}
+Makes a \code{DeleteRangeRequest}:
+\itemize{
+\item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteRangeRequest}
+}
 
 Other write functions: 
 \code{\link{sheets_append}()},

@@ -22,8 +22,8 @@
 #' @template ss-return
 #' @export
 #' @family formatting functions
-#' @seealso Makes an `AutoResizeDimensionsRequest`: *
-#'   <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#autoresizedimensionsrequest>
+#' @seealso Makes an `AutoResizeDimensionsRequest`:
+#' * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#autoresizedimensionsrequest>
 #'
 #' @examples
 #' if (sheets_has_token()) {

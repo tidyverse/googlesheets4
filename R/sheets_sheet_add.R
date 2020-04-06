@@ -60,7 +60,8 @@ sheets_sheet_add <- function(ss,
                              .after = NULL) {
   ssid <- as_sheets_id(ss)
   maybe_character(sheet)
-  index <- resolve_index(ssid, .before, .after)
+  x <- sheets_get(ssid)
+  index <- resolve_index(x$sheets, .before, .after)
 
   ss <- sheets_sheet_add_impl_(ssid, sheet_name = sheet, index = index, ...)
 
@@ -90,11 +91,10 @@ sheets_sheet_add_impl_ <- function(ssid,
   new_googlesheets4_spreadsheet(resp$updatedSpreadsheet)
 }
 
-resolve_index <- function(ssid, .before = NULL, .after = NULL) {
+resolve_index <- function(sheets_df, .before = NULL, .after = NULL) {
   if (is.null(.before) && is.null(.after)) {
     return(NULL)
   }
-  sheets_df <- sheets_sheet_properties(ssid)
 
   if (is.null(.after)) {
     s <- lookup_sheet(.before, sheets_df = sheets_df)

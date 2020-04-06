@@ -21,8 +21,7 @@ all of the new sheet(s). Not relevant to most users. Specify fields of the
 \href{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/sheets#SheetProperties}{\code{SheetProperties} schema}
 in \code{name = value} form.}
 
-\item{.before, .after}{Optional specification of where to put the new sheet(s). Specify, at most, one of \code{.before} and \code{.after}. Refer to an existing sheet by name (via a string) or by position (via a number). If
-unspecified, Sheets puts the new sheet(s) at the end.}
+\item{.before, .after}{Optional specification of where to put the new sheet(s). Specify, at most, one of \code{.before} and \code{.after}. Refer to an existing sheet by name (via a string) or by position (via a number). If unspecified, Sheets puts the new sheet(s) at the end.}
 }
 \value{
 The input \code{ss}, as an instance of \code{\link{sheets_id}}

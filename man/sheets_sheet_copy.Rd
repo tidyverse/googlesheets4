@@ -32,8 +32,7 @@ name would violate this, Google also de-duplicates it for you, meaning you
 could conceivably end up with "Copy of blah 2". If you have better ideas
 about sheet names, specify \code{to_sheet}.}
 
-\item{.before, .after}{Optional specification of where to put the new sheet. Specify, at most, one of \code{.before} and \code{.after}. Refer to an existing sheet by name (via a string) or by position (via a number). If
-unspecified, Sheets puts the new sheet at the end.}
+\item{.before, .after}{Optional specification of where to put the new sheet. Specify, at most, one of \code{.before} and \code{.after}. Refer to an existing sheet by name (via a string) or by position (via a number). If unspecified, Sheets puts the new sheet at the end.}
 }
 \value{
 The receiving Sheet, \verb{to_ ss}, as an instance of \code{\link{sheets_id}}.

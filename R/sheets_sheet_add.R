@@ -11,10 +11,7 @@
 #'   [`SheetProperties`
 #'   schema](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/sheets#SheetProperties)
 #'    in `name = value` form.
-#' @param .before,.after Optional specification of where to put the new
-#'   sheet(s). Specify, at most, one of `.before` and `.after`. Refer to an
-#'   existing sheet by name (via a string) or by position (via a number). If
-#'   unspecified, Sheets puts the new sheet(s) at the end.
+#' @eval param_before_after("sheet(s)")
 #'
 #' @template ss-return
 #'

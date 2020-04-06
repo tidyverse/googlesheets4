@@ -25,16 +25,15 @@ is how googledrive represents Drive files. Processed through
 \item{to_ss}{The Sheet to copy \emph{to}. Accepts all the same types of input as
 \code{from_ss}, which is also what this defaults to, if unspecified.}
 
-\item{to_sheet}{Not implemented yet. But once it is: Name of the new sheet,
-as a string. If you don't specify this, Google generates a name, along the
-line of "Copy of blah". Note that sheet names must be unique within a
-Sheet, so if the automatic name would violate this, Google also
-de-duplicates it for you, e.g. "Copy of blah 2". If you have strong
-opinions about these matters, you should specify \code{to_sheet}.}
+\item{to_sheet}{Optional. Name of the new sheet, as a string. If you don't
+specify this, Google generates a name, along the lines of "Copy of blah".
+Note that sheet names must be unique within a Sheet, so if the automatic
+name would violate this, Google also de-duplicates it for you, meaning you
+could conceivably end up with "Copy of blah 2". If you have better ideas
+about sheet names, specify \code{to_sheet}.}
 
-\item{.before}{Not implemented yet.}
-
-\item{.after}{Not implemented yet.}
+\item{.before, .after}{Optional specification of where to put the new sheet. Specify, at most, one of \code{.before} and \code{.after}. Refer to an existing sheet by name (via a string) or by position (via a number). If
+unspecified, Sheets puts the new sheet at the end.}
 }
 \value{
 The receiving Sheet, \verb{to_ ss}, as an instance of \code{\link{sheets_id}}.
@@ -62,16 +61,16 @@ if (sheets_has_token()) {
   ss_bbb <- sheets_create("sheets-sheet-copy-demo-bbb")
 
   # copy 'chickwts' sheet from first Sheet to second
+  # accept auto-generated name and default location
   ss_aaa \%>\%
     sheets_sheet_copy("chickwts", to_ss = ss_bbb)
 
-  # copies 'chickwts' sheet from first Sheet to second WITH a specific name
-  # and into a specific location
-  # NOTE: NAME ANd LOCATION PART NOT IMPLEMENTED YET
+  # copy 'chickwts' sheet from first Sheet to second,
+  # WITH a specific name and into a specific location
   ss_aaa \%>\%
     sheets_sheet_copy(
       "chickwts",
-      to_ss = ss_bbb, to_sheet = "chicks-two", .after = 0
+      to_ss = ss_bbb, to_sheet = "chicks-two", .before = 1
     )
 
   # clean up
@@ -89,6 +88,11 @@ If the copy is from one Sheet to another, wraps the
 \code{spreadsheets.sheets/copyTo} endpoint:
 \itemize{
 \item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.sheets/copyTo}
+}
+
+and possibly makes a subsequent \code{UpdateSheetPropertiesRequest}:
+\itemize{
+\item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest}
 }
 
 Other worksheet functions: 

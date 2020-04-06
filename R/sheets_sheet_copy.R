@@ -10,14 +10,13 @@
 #' )
 #' @param to_ss The Sheet to copy *to*. Accepts all the same types of input as
 #'   `from_ss`, which is also what this defaults to, if unspecified.
-#' @param to_sheet Not implemented yet. But once it is: Name of the new sheet,
-#'   as a string. If you don't specify this, Google generates a name, along the
-#'   line of "Copy of blah". Note that sheet names must be unique within a
-#'   Sheet, so if the automatic name would violate this, Google also
-#'   de-duplicates it for you, e.g. "Copy of blah 2". If you have strong
-#'   opinions about these matters, you should specify `to_sheet`.
-#' @param .before Not implemented yet.
-#' @param .after Not implemented yet.
+#' @param to_sheet Optional. Name of the new sheet, as a string. If you don't
+#'   specify this, Google generates a name, along the lines of "Copy of blah".
+#'   Note that sheet names must be unique within a Sheet, so if the automatic
+#'   name would violate this, Google also de-duplicates it for you, meaning you
+#'   could conceivably end up with "Copy of blah 2". If you have better ideas
+#'   about sheet names, specify `to_sheet`.
+#' @eval param_before_after("sheet")
 #'
 #' @return The receiving Sheet, `to_ ss`, as an instance of [`sheets_id`].
 #' @export
@@ -53,11 +52,12 @@
 #'   ss_bbb <- sheets_create("sheets-sheet-copy-demo-bbb")
 #'
 #'   # copy 'chickwts' sheet from first Sheet to second
+#'   # accept auto-generated name and default location
 #'   ss_aaa %>%
 #'     sheets_sheet_copy("chickwts", to_ss = ss_bbb)
 #'
-#'   # copies 'chickwts' sheet from first Sheet to second WITH a specific name
-#'   # and into a specific location
+#'   # copy 'chickwts' sheet from first Sheet to second,
+#'   # WITH a specific name and into a specific location
 #'   ss_aaa %>%
 #'     sheets_sheet_copy(
 #'       "chickwts",

@@ -31,3 +31,13 @@ param_sheet <- function(..., action, pname = "sheet") {
   }
   glue_collapse(template, sep = " ")
 }
+
+param_before_after <- function(sheet_text) {
+  glue("
+    @param .before,.after \\
+    Optional specification of where to put the new {sheet_text}. \\
+    Specify, at most, one of `.before` and `.after`. Refer to an existing \\
+    sheet by name (via a string) or by position (via a number). If
+    unspecified, Sheets puts the new {sheet_text} at the end.
+    ")
+}

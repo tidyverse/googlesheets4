@@ -53,6 +53,10 @@ request_generate <- function(endpoint = character(),
     stop_glue("\nEndpoint not recognized:\n  * {endpoint}")
   }
 
+  # if there are problems in `params`, such as a nonexistent item,
+  # let's complain now
+  force(params)
+
   ## modifications specific to googlesheets4 package
   params$key <- key %||% params$key %||%
     sheets_api_key() %||% gargle::tidyverse_api_key()

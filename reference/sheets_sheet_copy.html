@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Change the size of a (work)sheet — sheets_sheet_resize • googlesheets4</title>
+<title>Copy a (work)sheet — sheets_sheet_copy • googlesheets4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -41,8 +41,8 @@
 
 
 
-<meta property="og:title" content="Change the size of a (work)sheet — sheets_sheet_resize" />
-<meta property="og:description" content="Changes the number of rows and/or columns in a (work)sheet." />
+<meta property="og:title" content="Copy a (work)sheet — sheets_sheet_copy" />
+<meta property="og:description" content="Copies a (work)sheet, within its current (spread)Sheet or to another Sheet." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -154,22 +154,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Change the size of a (work)sheet</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_sheet_resize.R'><code>R/sheets_sheet_resize.R</code></a></small>
-    <div class="hidden name"><code>sheets_sheet_resize.Rd</code></div>
+    <h1>Copy a (work)sheet</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_sheet_copy.R'><code>R/sheets_sheet_copy.R</code></a></small>
+    <div class="hidden name"><code>sheets_sheet_copy.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Changes the number of rows and/or columns in a (work)sheet.</p>
+    <p>Copies a (work)sheet, within its current (spread)Sheet or to another Sheet.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_sheet_copy</span>(
+  <span class='no'>from_ss</span>,
+  <span class='kw'>from_sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>to_ss</span> <span class='kw'>=</span> <span class='no'>from_ss</span>,
+  <span class='kw'>to_sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ss</th>
+      <th>from_ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
 (returned by <code><a href='sheets_get.html'>sheets_get()</a></code>, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
@@ -177,67 +184,92 @@ is how googledrive represents Drive files. Processed through
 <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
-      <th>sheet</th>
-      <td><p>Sheet to resize, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number.</p></td>
+      <th>from_sheet</th>
+      <td><p>Sheet to copy, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Defaults to the first visible sheet.</p></td>
     </tr>
     <tr>
-      <th>nrow, ncol</th>
-      <td><p>Desired number of rows or columns, respectively. The default
-of <code>NULL</code> means to leave unchanged.</p></td>
+      <th>to_ss</th>
+      <td><p>The Sheet to copy <em>to</em>. Accepts all the same types of input as
+<code>from_ss</code>, which is also what this defaults to, if unspecified.</p></td>
     </tr>
     <tr>
-      <th>exact</th>
-      <td><p>Logical, indicating whether to impose <code>nrow</code> and <code>ncol</code> exactly
-or to treat them as lower bounds. If <code>exact = FALSE</code>,
-<code>sheets_sheet_resize()</code> can only add cells. If <code>exact = TRUE</code>, cells can be
-deleted and their contents are lost.</p></td>
+      <th>to_sheet</th>
+      <td><p>Optional. Name of the new sheet, as a string. If you don't
+specify this, Google generates a name, along the lines of "Copy of blah".
+Note that sheet names must be unique within a Sheet, so if the automatic
+name would violate this, Google also de-duplicates it for you, meaning you
+could conceivably end up with "Copy of blah 2". If you have better ideas
+about sheet names, specify <code>to_sheet</code>.</p></td>
+    </tr>
+    <tr>
+      <th>.before, .after</th>
+      <td><p>Optional specification of where to put the new sheet. Specify, at most, one of <code>.before</code> and <code>.after</code>. Refer to an existing sheet by name (via a string) or by position (via a number). If
+unspecified, Sheets puts the new sheet at the end.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The input <code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
+    <p>The receiving Sheet, <code>to_ ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Makes an <code>UpdateSheetPropertiesRequest</code>:</p><ul>
-<li><p>&lt;# https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest&gt;</p></li>
+    <div class='dont-index'><p>If the copy happens within one Sheet, makes a <code>DuplicateSheetRequest</code>:</p><ul>
+<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#duplicatesheetrequest'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#duplicatesheetrequest</a></p></li>
+</ul>
+
+<p>If the copy is from one Sheet to another, wraps the
+<code>spreadsheets.sheets/copyTo</code> endpoint:</p><ul>
+<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.sheets/copyTo'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets.sheets/copyTo</a></p></li>
+</ul>
+
+<p>and possibly makes a subsequent <code>UpdateSheetPropertiesRequest</code>:</p><ul>
+<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest</a></p></li>
 </ul>
 
 <p>Other worksheet functions: 
 <code><a href='sheets_sheet_add.html'>sheets_sheet_add</a>()</code>,
-<code><a href='sheets_sheet_copy.html'>sheets_sheet_copy</a>()</code>,
 <code><a href='sheets_sheet_delete.html'>sheets_sheet_delete</a>()</code>,
-<code><a href='sheets_sheet_properties.html'>sheets_sheet_properties</a>()</code></p></div>
+<code><a href='sheets_sheet_properties.html'>sheets_sheet_properties</a>()</code>,
+<code><a href='sheets_sheet_resize.html'>sheets_sheet_resize</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
-  <span class='co'># create a Sheet with the default initial worksheet</span>
-  (<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(<span class='st'>"sheets-resize-demo"</span>))
+  <span class='no'>ss_aaa</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(
+    <span class='st'>"sheets-sheet-copy-demo-aaa"</span>,
+    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>iris</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>iris</span>), <span class='kw'>chickwts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>chickwts</span>))
+  )
 
-  <span class='co'># see (work)sheet dims</span>
-  <span class='fu'><a href='sheets_sheet_properties.html'>sheets_sheet_properties</a></span>(<span class='no'>ss</span>)
+  <span class='co'># copy 'iris' sheet within existing Sheet, accept autogenerated name</span>
+  <span class='no'>ss_aaa</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheets_sheet_copy</span>()
 
-  <span class='co'># no resize occurs</span>
-  <span class='fu'>sheets_sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>6</span>)
+  <span class='co'># copy 'iris' sheet within existing Sheet</span>
+  <span class='co'># specify new sheet's name and location</span>
+  <span class='no'>ss_aaa</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheets_sheet_copy</span>(<span class='kw'>to_sheet</span> <span class='kw'>=</span> <span class='st'>"iris-the-sequel"</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
-  <span class='co'># reduce sheet size</span>
-  <span class='fu'>sheets_sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='co'># make a second Sheet</span>
+  <span class='no'>ss_bbb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(<span class='st'>"sheets-sheet-copy-demo-bbb"</span>)
 
-  <span class='co'># add rows</span>
-  <span class='fu'>sheets_sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>7</span>)
+  <span class='co'># copy 'chickwts' sheet from first Sheet to second</span>
+  <span class='co'># accept auto-generated name and default location</span>
+  <span class='no'>ss_aaa</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheets_sheet_copy</span>(<span class='st'>"chickwts"</span>, <span class='kw'>to_ss</span> <span class='kw'>=</span> <span class='no'>ss_bbb</span>)
 
-  <span class='co'># add columns</span>
-  <span class='fu'>sheets_sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+  <span class='co'># copy 'chickwts' sheet from first Sheet to second,</span>
+  <span class='co'># WITH a specific name and into a specific location</span>
+  <span class='no'>ss_aaa</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheets_sheet_copy</span>(
+      <span class='st'>"chickwts"</span>,
+      <span class='kw'>to_ss</span> <span class='kw'>=</span> <span class='no'>ss_bbb</span>, <span class='kw'>to_sheet</span> <span class='kw'>=</span> <span class='st'>"chicks-two"</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='fl'>1</span>
+    )
 
-  <span class='co'># add rows and columns</span>
-  <span class='fu'>sheets_sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>9</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>12</span>)
-
-  <span class='co'># re-inspect (work)sheet dims</span>
-  <span class='fu'><a href='sheets_sheet_properties.html'>sheets_sheet_properties</a></span>(<span class='no'>ss</span>)
-
-  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>(<span class='no'>ss</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheets-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheets-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>No need to change existing dims (1000 x 26)</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheets-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Changing dims: (1000 x 26) --&gt; (5 x 7)</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheets-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Changing dims: (5 x 7) --&gt; (7 x 7)</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheets-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Changing dims: (7 x 7) --&gt; (7 x 10)</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheets-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Changing dims: (7 x 10) --&gt; (9 x 12)</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * sheets-resize-demo: 1HUGAreP4Y8f3JQMC71APf-jP5NJWELckfi6CMBSFnHA</span></div></pre>
+  <span class='co'># clean up</span>
+  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='st'>"sheets-sheet-copy-demo"</span>) <span class='kw'>%&gt;%</span>
+    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheets-sheet-copy-demo-aaa"</span></div><div class='output co'>#&gt; <span class='message'>Duplicating sheet "iris" in "sheets-sheet-copy-demo-aaa"</span></div><div class='output co'>#&gt; <span class='message'>Copied as "Copy of iris"</span></div><div class='output co'>#&gt; <span class='message'>Duplicating sheet "Copy of iris" in "sheets-sheet-copy-demo-aaa"</span></div><div class='output co'>#&gt; <span class='message'>Copied as "iris-the-sequel"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheets-sheet-copy-demo-bbb"</span></div><div class='output co'>#&gt; <span class='message'>Copying sheet "chickwts" from "sheets-sheet-copy-demo-aaa" to "sheets-sheet-copy-demo-bbb"</span></div><div class='output co'>#&gt; <span class='message'>Copied as "Copy of chickwts"</span></div><div class='output co'>#&gt; <span class='message'>Copying sheet "chickwts" from "sheets-sheet-copy-demo-aaa" to "sheets-sheet-copy-demo-bbb"</span></div><div class='output co'>#&gt; <span class='message'>Copied as "chicks-two"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * sheets-sheet-copy-demo-bbb: 1mi1wAYczsDMUgfuM-tfOPfoXI8Zv2E4Z2hOV0qkdlM4</span>
+#&gt; <span class='message'>  * sheets-sheet-copy-demo-aaa: 1E8KvWdk4NbJ9WewVJnG5IfDVwl7MUVvrMu-6zKSRNvM</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

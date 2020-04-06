@@ -192,9 +192,7 @@ in <code>name = value</code> form.</p></td>
     </tr>
     <tr>
       <th>.before, .after</th>
-      <td><p>Optional specification of where to put the new
-sheet(s). Specify, at most, one of <code>.before</code> and <code>.after</code>. Refer to an
-existing sheet by name (via a string) or by position (via a number). If
+      <td><p>Optional specification of where to put the new sheet(s). Specify, at most, one of <code>.before</code> and <code>.after</code>. Refer to an existing sheet by name (via a string) or by position (via a number). If
 unspecified, Sheets puts the new sheet(s) at the end.</p></td>
     </tr>
     </table>
@@ -209,6 +207,7 @@ unspecified, Sheets puts the new sheet(s) at the end.</p></td>
 </ul>
 
 <p>Other worksheet functions: 
+<code><a href='sheets_sheet_copy.html'>sheets_sheet_copy</a>()</code>,
 <code><a href='sheets_sheet_delete.html'>sheets_sheet_delete</a>()</code>,
 <code><a href='sheets_sheet_properties.html'>sheets_sheet_properties</a>()</code>,
 <code><a href='sheets_sheet_resize.html'>sheets_sheet_resize</a>()</code></p></div>
@@ -243,7 +242,7 @@ unspecified, Sheets puts the new sheet(s) at the end.</p></td>
   <span class='co'># cleanup</span>
   <span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"add-sheets-to-me"</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>()
 }</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * add-sheets-to-me: 16nYZMssaThb5OX-IulSyH1J6HFsqu7jSetLPANUt52c</span></div></pre>
+#&gt; <span class='message'>  * add-sheets-to-me: 1gh9ty3W4f7UBKwmWG0u0yXLOllv87wdi8WVYv_is-rA</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

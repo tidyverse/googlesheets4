@@ -4,6 +4,7 @@ new <- function(id, ...) {
     abort(glue("Can't find a tidy schema with id {sq(id)}"))
   }
   dots <- list2(...)
+  dots <- discard(dots, is.null)
 
   check_against_schema(dots, schema = schema)
 
@@ -28,6 +29,7 @@ check_against_schema <- function(x, schema = NULL, id = NA_character_) {
     ")
     abort(msg)
   }
+  stopifnot(is_dictionaryish(x))
   unexpected <- setdiff(names(x), schema$property)
   if (length(unexpected) > 0) {
     msg <- glue("
@@ -65,6 +67,7 @@ patch.default <- function(x, ...) {
 #' @export
 patch.googlesheets4_schema <- function(x, ...) {
   dots <- list2(...)
+  dots <- discard(dots, is.null)
   x[names(dots)] <- dots
   check_against_schema(x)
 }

@@ -26,6 +26,11 @@ test_that("new() rejects data not expected for schema", {
   )
 })
 
+test_that("new() ignores NULL-valued inputs", {
+  out <- new("GridRange", sheetId = 123, startRowIndex = 2, endRowIndex = NULL)
+  expect_false(has_name(out, "endRowIndex"))
+})
+
 test_that("patch() fails informatively for non-schema input", {
   expect_error(patch(1), "Don't know how")
 })
@@ -54,18 +59,18 @@ test_that("patch() overwrites existing data", {
   expect_length(x, 1)
 })
 
-test_that("patch() can clear a property", {
-  x <- new("Spreadsheet", spreadsheetId = "abc")
-  x <- patch(x, spreadsheetId = NULL)
-  expect_null(x$spreadsheetId)
-})
-
 test_that("patch() retains classes", {
   x <- new("Spreadsheet")
   classes_in <- class(x)
   x <- patch(x, spreadsheetId = "abc")
   classes_out <- class(x)
   expect_identical(classes_in, classes_out)
+})
+
+test_that("patch() ignores NULL-valued inputs", {
+  out <- new("GridRange", sheetId = 123) %>%
+    patch(startRowIndex = 2, endRowIndex = NULL)
+  expect_false(has_name(out, "endRowIndex"))
 })
 
 test_that("check_against_schema() errors when no schema can be found", {
@@ -85,6 +90,16 @@ test_that("id_from_class() works when schema class is present", {
     class = c("googlesheets4_schema_SomeThing", "googlesheets4_schema", "list")
   )
   expect_equal(id_from_class(x), "SomeThing")
+})
+
+test_that("check_against_schema() errors if names aren't unique", {
+  expect_error(
+    check_against_schema(
+      list(spreadsheetId = "abc", spreadsheetId = "def"),
+      id = "Spreadsheet"
+    ),
+    "is_dictionaryish(x) is not TRUE", fixed = TRUE
+  )
 })
 
 test_that("id_from_class() returns NA when schema class is absent", {

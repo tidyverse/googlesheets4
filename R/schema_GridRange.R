@@ -57,6 +57,6 @@ as_GridRange.range_spec <- function(x, ...) {
     startColumnIndex = x$cell_limits$ul[2] - 1,
     endColumnIndex   = x$cell_limits$lr[2]
   )
-  cl <- purrr::discard(cl, is.na)
+  cl <- discard(cl, is.na)
   patch(out, !!!cl)
 }

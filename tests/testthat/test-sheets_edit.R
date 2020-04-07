@@ -42,7 +42,7 @@ test_that("sheets_edit() works", {
 # ---- helpers ----
 test_that("prepare_loc() makes the right call re: `start` vs. `range`", {
   expect_loc <- function(x, loc) {
-    sheets_df <- tibble::tibble(name = "Sheet1", index = 0)
+    sheets_df <- tibble::tibble(name = "Sheet1", index = 0, id = 123)
     out <- prepare_loc(as_range_spec(x, sheets_df = sheets_df))
     expect_named(out, loc)
   }

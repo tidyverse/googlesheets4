@@ -65,11 +65,10 @@ sheets_create <- function(name = sheets_random(), ..., sheets = NULL) {
 
   # create the (spread)Sheet ---------------------------------------------------
   message_glue("Creating new Sheet: {dq(name)}")
-  ss_body <- new("Spreadsheet") %>%
-    patch(properties = new(
-      id = "SpreadsheetProperties",
-      title = name, ...
-    ))
+  ss_body <- new(
+    "Spreadsheet",
+    properties = new("SpreadsheetProperties", title = name, ...)
+  )
   if (sheets_given) {
     ss_body <- ss_body %>%
       patch(sheets = map(sheets$name, as_Sheet))

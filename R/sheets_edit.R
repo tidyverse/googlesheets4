@@ -158,9 +158,9 @@ sheets_edit <- function(ss,
   data_req <- new(
     "UpdateCellsRequest",
     rows = as_RowData(data, col_names = col_names),
-    fields = fields
+    fields = fields,
+    !!!loc
   )
-  data_req <- patch(data_req, !!!loc)
   requests <- c(requests, list(list(updateCells = data_req)))
 
   # do it ----------------------------------------------------------------------

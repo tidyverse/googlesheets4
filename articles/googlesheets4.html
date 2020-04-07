@@ -136,38 +136,44 @@
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/read_sheet.html">sheets_read</a></span>(<span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span>)
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
+<span class="co">#&gt; # A tibble: 624 x 6</span>
+<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
+<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
+<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
+<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
+<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
+<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
+<span class="co">#&gt; # … with 619 more rows</span></pre></body></html></div>
 <p>However, these URLs are not pleasant to work with. More often, you will want to identify a Sheet by its ID:</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/read_sheet.html">sheets_read</a></span>(<span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span>)
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
+<span class="co">#&gt; Reading from "gapminder"</span>
+<span class="co">#&gt; Range "Africa"</span>
+<span class="co">#&gt; # A tibble: 624 x 6</span>
+<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
+<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
+<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
+<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
+<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
+<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
+<span class="co">#&gt; # … with 619 more rows</span></pre></body></html></div>
 <p>or by its name, which requires an assist from the googledrive package (<a href="https://googledrive.tidyverse.org">googledrive.tidyverse.org</a>):</p>
 <!-- remove the 'message = i' later -->
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googledrive</span>)
 
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"gapminder"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/read_sheet.html">sheets_read</a></span>()
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
+<span class="co">#&gt; Range "Africa"</span>
+<span class="co">#&gt; # A tibble: 624 x 6</span>
+<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
+<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
+<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
+<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
+<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
+<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
+<span class="co">#&gt; # … with 619 more rows</span></pre></body></html></div>
 <p>Note that the name-based approach above will only work if <strong>you</strong> have access to a Sheet named “gapminder”. Sheet names cannot be used as absolute identifiers; only a Sheet ID can play that role.</p>
 <p>For more Sheet identification concepts and strategies, see the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Find and Identify Sheets</a>. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Read Sheets</a> for more about reading from a specific (work)sheet or ranges, setting column type, and getting low-level cell data.</p>
 </div>
@@ -220,24 +226,14 @@
 <span class="co">#&gt;    other_data: 'other'!A5:F15</span>
 
 <span class="fu"><a href="../reference/sheets_sheet_properties.html">sheets_sheet_properties</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span>
+<span class="co">#&gt; # A tibble: 2 x 8</span>
+<span class="co">#&gt;   name  index         id type  visible grid_rows grid_columns data  </span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
+<span class="co">#&gt; 1 arts      0 1210215306 GRID  TRUE         1000           26 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 other     1   28655153 GRID  TRUE         1000           26 &lt;NULL&gt;</span>
 
 <span class="fu"><a href="../reference/sheets_sheet_properties.html">sheets_sheet_names</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
+<span class="co">#&gt; [1] "arts"  "other"</span></pre></body></html></div>
 <p><code><a href="../reference/sheets_sheet_properties.html">sheets_sheet_properties()</a></code> and <code><a href="../reference/sheets_sheet_properties.html">sheets_sheet_names()</a></code> are two members of a larger family of functions for dealing with the (work)sheets within a (spread)Sheet.</p>
 <p>The metadata exposed by <code><a href="../reference/sheets_get.html">sheets_get()</a></code> is also revealed whenever you print an object that is known to be a <code>sheets_id</code> (an S3 class we use to make Sheet IDs).</p>
 <p><code><a href="../reference/sheets_get.html">sheets_get()</a></code> is related to <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">googledrive::drive_get()</a></code>. Both functions return metadata about a file on Google Drive, such as its ID and name. However, <code><a href="../reference/sheets_get.html">sheets_get()</a></code> reveals additional metadata that is specific to Drive files that happen to be Sheets, such as info about worksheets and named ranges.</p>
@@ -250,10 +246,10 @@
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">letters</span>[<span class="fl">1</span>:<span class="fl">3</span>])
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/write_sheet.html">sheets_write</a></span>(<span class="no">df</span>)
-<span class="co">#&gt; Creating new Sheet: "halfwhite-elephant"</span>
+<span class="co">#&gt; Creating new Sheet: "ruinous-salamander"</span>
 <span class="no">ss</span>
-<span class="co">#&gt;   Spreadsheet name: halfwhite-elephant</span>
-<span class="co">#&gt;                 ID: 1icHfIDr7Hl1k4-uLs2P0a6JYenoQtBHF-tBr4h9J_Y0</span>
+<span class="co">#&gt;   Spreadsheet name: ruinous-salamander</span>
+<span class="co">#&gt;                 ID: 1YgP8Ekt1Xlf2yhn4zKlDZV17ORKzneEqCYIn3aTcVuo</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -264,120 +260,74 @@
 <p>Let’s start over: we delete that Sheet and call <code><a href="../reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * halfwhite-elephant: 1icHfIDr7Hl1k4-uLs2P0a6JYenoQtBHF-tBr4h9J_Y0</span>
+<span class="co">#&gt;   * ruinous-salamander: 1YgP8Ekt1Xlf2yhn4zKlDZV17ORKzneEqCYIn3aTcVuo</span>
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="no">df</span>)
 <span class="co">#&gt; Creating new Sheet: "fluffy-bunny"</span>
 <span class="no">ss</span>
-<span class="co">#&gt;   Spreadsheet name: &lt;unknown&gt;</span>
-<span class="co">#&gt;                 ID: 1kM3vTId-iqH0Uyl5jDxeynyi54QGPSj-p2Nuj-6ECWU</span>
-<span class="co">#&gt;             Locale: &lt;unknown&gt;</span>
-<span class="co">#&gt;          Time zone: &lt;unknown&gt;</span>
-<span class="co">#&gt;        # of sheets: &lt;unknown&gt;</span>
+<span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
+<span class="co">#&gt;                 ID: 14tata1U5zVYxTmUoL7nu51b20plfKAUE27zCakkATVs</span>
+<span class="co">#&gt;             Locale: en_US</span>
+<span class="co">#&gt;          Time zone: Etc/GMT</span>
+<span class="co">#&gt;        # of sheets: 1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Unable to get metadata for this Sheet. Error details:</span>
-<span class="co">#&gt; Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
+<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
+<span class="co">#&gt;           df: 4 x 2</span></pre></body></html></div>
 <p><code><a href="../reference/write_sheet.html">sheets_write()</a></code> can write to new or existing (work)sheets in this Sheet. Let’s write the <code>chickwts</code> data to a new sheet in <code>ss</code>.</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="../reference/write_sheet.html">sheets_write</a></span>(<span class="no">chickwts</span>, <span class="no">ss</span>)
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span>
+<span class="co">#&gt; Writing to "fluffy-bunny"</span>
+<span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="no">ss</span>
-<span class="co">#&gt;   Spreadsheet name: &lt;unknown&gt;</span>
-<span class="co">#&gt;                 ID: 1kM3vTId-iqH0Uyl5jDxeynyi54QGPSj-p2Nuj-6ECWU</span>
-<span class="co">#&gt;             Locale: &lt;unknown&gt;</span>
-<span class="co">#&gt;          Time zone: &lt;unknown&gt;</span>
-<span class="co">#&gt;        # of sheets: &lt;unknown&gt;</span>
+<span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
+<span class="co">#&gt;                 ID: 14tata1U5zVYxTmUoL7nu51b20plfKAUE27zCakkATVs</span>
+<span class="co">#&gt;             Locale: en_US</span>
+<span class="co">#&gt;          Time zone: Etc/GMT</span>
+<span class="co">#&gt;        # of sheets: 2</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Unable to get metadata for this Sheet. Error details:</span>
-<span class="co">#&gt; Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
+<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
+<span class="co">#&gt;           df: 4 x 2</span>
+<span class="co">#&gt;     chickwts: 72 x 2</span></pre></body></html></div>
 <p>We can also use <code><a href="../reference/write_sheet.html">sheets_write()</a></code> to replace the data in an existing sheet.</p>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../reference/write_sheet.html">sheets_write</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">4</span>:<span class="fl">10</span>, <span class="no">letters</span>[<span class="fl">4</span>:<span class="fl">10</span>]), <span class="no">ss</span>, <span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"df"</span>)
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span>
+<span class="co">#&gt; Writing to "fluffy-bunny"</span>
+<span class="co">#&gt; Writing to sheet "df"</span>
 <span class="no">ss</span>
-<span class="co">#&gt;   Spreadsheet name: &lt;unknown&gt;</span>
-<span class="co">#&gt;                 ID: 1kM3vTId-iqH0Uyl5jDxeynyi54QGPSj-p2Nuj-6ECWU</span>
-<span class="co">#&gt;             Locale: &lt;unknown&gt;</span>
-<span class="co">#&gt;          Time zone: &lt;unknown&gt;</span>
-<span class="co">#&gt;        # of sheets: &lt;unknown&gt;</span>
+<span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
+<span class="co">#&gt;                 ID: 14tata1U5zVYxTmUoL7nu51b20plfKAUE27zCakkATVs</span>
+<span class="co">#&gt;             Locale: en_US</span>
+<span class="co">#&gt;          Time zone: Etc/GMT</span>
+<span class="co">#&gt;        # of sheets: 2</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Unable to get metadata for this Sheet. Error details:</span>
-<span class="co">#&gt; Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
+<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
+<span class="co">#&gt;           df: 8 x 2</span>
+<span class="co">#&gt;     chickwts: 72 x 2</span></pre></body></html></div>
 <p><code><a href="../reference/sheets_append.html">sheets_append()</a></code> adds one or more rows to an existing sheet.</p>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="../reference/sheets_append.html">sheets_append</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">11</span>, <span class="no">letters</span>[<span class="fl">11</span>]), <span class="no">ss</span>, <span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"df"</span>)
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span>
+<span class="co">#&gt; Writing to "fluffy-bunny"</span>
+<span class="co">#&gt; Appending 1 row(s) to "df"</span>
 <span class="no">ss</span>
-<span class="co">#&gt;   Spreadsheet name: &lt;unknown&gt;</span>
-<span class="co">#&gt;                 ID: 1kM3vTId-iqH0Uyl5jDxeynyi54QGPSj-p2Nuj-6ECWU</span>
-<span class="co">#&gt;             Locale: &lt;unknown&gt;</span>
-<span class="co">#&gt;          Time zone: &lt;unknown&gt;</span>
-<span class="co">#&gt;        # of sheets: &lt;unknown&gt;</span>
+<span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
+<span class="co">#&gt;                 ID: 14tata1U5zVYxTmUoL7nu51b20plfKAUE27zCakkATVs</span>
+<span class="co">#&gt;             Locale: en_US</span>
+<span class="co">#&gt;          Time zone: Etc/GMT</span>
+<span class="co">#&gt;        # of sheets: 2</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Unable to get metadata for this Sheet. Error details:</span>
-<span class="co">#&gt; Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
+<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
+<span class="co">#&gt;           df: 9 x 2</span>
+<span class="co">#&gt;     chickwts: 72 x 2</span></pre></body></html></div>
 <p><code><a href="../reference/sheets_edit.html">sheets_edit()</a></code> makes it possible to write arbitrary data, into an arbitrary range. It has a very different “feel” from <code><a href="../reference/sheets_create.html">sheets_create()</a></code>, <code><a href="../reference/write_sheet.html">sheets_write()</a></code>, and <code><a href="../reference/sheets_append.html">sheets_append()</a></code>, all of which assume we’re writing or growing a table of data in a (work)sheet. <code><a href="../reference/sheets_edit.html">sheets_edit()</a></code> make fewer assumptions about what it’s writing and why.</p>
 <p>There is also a family of <code>sheets_sheet_*()</code> functions that do pure (work)sheet operations, such as add and delete.</p>
 <p>We take one last look at the sheets we created in <code>ss</code>, then clean up.</p>
 <div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/sheets_sheet_properties.html">sheets_sheet_properties</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span>
+<span class="co">#&gt; # A tibble: 2 x 8</span>
+<span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
+<span class="co">#&gt; 1 df           0  975661342 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 1809290939 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * fluffy-bunny: 1kM3vTId-iqH0Uyl5jDxeynyi54QGPSj-p2Nuj-6ECWU</span></pre></body></html></div>
+<span class="co">#&gt;   * fluffy-bunny: 14tata1U5zVYxTmUoL7nu51b20plfKAUE27zCakkATVs</span></pre></body></html></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

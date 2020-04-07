@@ -246,10 +246,10 @@
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">letters</span>[<span class="fl">1</span>:<span class="fl">3</span>])
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/write_sheet.html">sheets_write</a></span>(<span class="no">df</span>)
-<span class="co">#&gt; Creating new Sheet: "silken-nandine"</span>
+<span class="co">#&gt; Creating new Sheet: "presolar-indiancow"</span>
 <span class="no">ss</span>
-<span class="co">#&gt;   Spreadsheet name: silken-nandine</span>
-<span class="co">#&gt;                 ID: 1VSvRYYb1TYLfOV-CQ48ALINuu_PNdQvO6Vez6SVMpwI</span>
+<span class="co">#&gt;   Spreadsheet name: presolar-indiancow</span>
+<span class="co">#&gt;                 ID: 1X-jU_Qd4qZkX91Hazauw0IQMcWQ0dXNYpOdq8SwofPo</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -260,13 +260,13 @@
 <p>Let’s start over: we delete that Sheet and call <code><a href="../reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * silken-nandine: 1VSvRYYb1TYLfOV-CQ48ALINuu_PNdQvO6Vez6SVMpwI</span>
+<span class="co">#&gt;   * presolar-indiancow: 1X-jU_Qd4qZkX91Hazauw0IQMcWQ0dXNYpOdq8SwofPo</span>
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="no">df</span>)
 <span class="co">#&gt; Creating new Sheet: "fluffy-bunny"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 10SEY6LZrrY9kyRd6YLC72rC_xFCKRzd15LirEKeYMAU</span>
+<span class="co">#&gt;                 ID: 11fi4GN4HFgLoThWweN0c3X1PHqG9p6Z2GYrTdDXDuKE</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -279,7 +279,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 10SEY6LZrrY9kyRd6YLC72rC_xFCKRzd15LirEKeYMAU</span>
+<span class="co">#&gt;                 ID: 11fi4GN4HFgLoThWweN0c3X1PHqG9p6Z2GYrTdDXDuKE</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>
@@ -293,7 +293,7 @@
 <span class="co">#&gt; Writing to sheet "df"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 10SEY6LZrrY9kyRd6YLC72rC_xFCKRzd15LirEKeYMAU</span>
+<span class="co">#&gt;                 ID: 11fi4GN4HFgLoThWweN0c3X1PHqG9p6Z2GYrTdDXDuKE</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>
@@ -307,7 +307,7 @@
 <span class="co">#&gt; Appending 1 row(s) to "df"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 10SEY6LZrrY9kyRd6YLC72rC_xFCKRzd15LirEKeYMAU</span>
+<span class="co">#&gt;                 ID: 11fi4GN4HFgLoThWweN0c3X1PHqG9p6Z2GYrTdDXDuKE</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>
@@ -322,12 +322,12 @@
 <span class="co">#&gt; # A tibble: 2 x 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 1583818582 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1  424502558 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 1 df           0 2136239270 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1  638790510 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * fluffy-bunny: 10SEY6LZrrY9kyRd6YLC72rC_xFCKRzd15LirEKeYMAU</span></pre></body></html></div>
+<span class="co">#&gt;   * fluffy-bunny: 11fi4GN4HFgLoThWweN0c3X1PHqG9p6Z2GYrTdDXDuKE</span></pre></body></html></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

@@ -59,8 +59,13 @@ sheets_sheet_add <- function(ss,
   maybe_character(sheet)
   x <- sheets_get(ssid)
   index <- resolve_index(x$sheets, .before, .after)
+  message_glue("Adding sheet(s) in {dq(x$name)}")
 
   ss <- sheets_sheet_add_impl_(ssid, sheet_name = sheet, index = index, ...)
+
+  new_sheet_names <- setdiff(ss$sheets$name, x$sheets$name)
+  new_sheet_names <- paste0(dq(new_sheet_names), collapse = ", ")
+  message_glue("New sheet(s): {new_sheet_names}")
 
   invisible(ssid)
 }

@@ -108,21 +108,13 @@ sheets_sheet_copy_internal <- function(ssid,
   s <- lookup_sheet(from_sheet, sheets_df = x$sheets)
   message_glue("Duplicating sheet {dq(s$name)} in {dq(x$name)}")
 
+  index <- resolve_index(x$sheets, .before = .before, .after = .after)
   dup_request <- new(
     "DuplicateSheetRequest",
-    sourceSheetId =s$id
+    sourceSheetId =s$id,
+    insertSheetIndex = index,
+    newSheetName = to_sheet
   )
-  if (!is.null(.before) || !is.null(.after)) {
-    dup_request <- patch(
-      dup_request,
-      insertSheetIndex = resolve_index(
-        x$sheets, .before = .before, .after = .after
-      )
-    )
-  }
-  if (!is.null(to_sheet)) {
-    dup_request <- patch(dup_request, newSheetName = to_sheet)
-  }
 
   req <- request_generate(
     "sheets.spreadsheets.batchUpdate",
@@ -174,16 +166,10 @@ sheets_sheet_copy_external <- function(from_ssid,
 
   sp <- new(
     "SheetProperties",
-    sheetId = to_s$sheetId
+    sheetId = to_s$sheetId,
+    title = to_sheet,
+    index = index
   )
-
-  if (!is.null(to_sheet)) {
-    sp <- patch(sp, title = to_sheet)
-  }
-
-  if (!is.null(index)) {
-    sp <- patch(sp, index = index)
-  }
 
   update_req <- new(
     "UpdateSheetPropertiesRequest",

@@ -116,19 +116,6 @@ make_addSheet <- function(title = NULL, index = NULL, dots = list()) {
     return(list(addSheet = NULL))
   }
 
-  sp <- new("SheetProperties")
-
-  # do first, so that title and index (derived from formal args sheet, .before,
-  # .after) overwrite anything passed via `...`
-  sp <- patch(sp, !!!dots)
-
-  if (!is.null(title)) {
-    sp <- patch(sp, title = title)
-  }
-
-  if (!is.null(index)) {
-    sp <- patch(sp, index = index)
-  }
-
+  sp <- new("SheetProperties", title = title, index = index, !!!dots)
   list(addSheet = list(properties = sp))
 }

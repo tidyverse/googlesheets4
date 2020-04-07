@@ -6,10 +6,12 @@ bureq_header_row <- function(row = 1,
                              horizontalAlignment = "CENTER",
                              bold = TRUE) {
   row <- row - 1 # indices are zero-based; intervals are half open: [start, end)
-  grid_range <- new("GridRange", startRowIndex = row, endRowIndex = row + 1)
-  if (!is.null(sheetId)) {
-    grid_range <- patch(grid_range, sheetId = sheetId)
-  }
+  grid_range <- new(
+    "GridRange",
+    startRowIndex = row,
+    endRowIndex = row + 1,
+    sheetId = sheetId
+  )
 
   cell_format <- new(
     "CellFormat",
@@ -56,29 +58,19 @@ bureq_clear_sheet <- function(sheetId) {
 bureq_set_grid_properties <- function(sheetId,
                                       nrow = NULL, ncol = NULL,
                                       frozenRowCount = 1) {
-  gp <- new("GridProperties")
-  if (!is.null(nrow)) {
-    gp <- patch(gp, rowCount = nrow)
-  }
-  if (!is.null(ncol)) {
-    gp <- patch(gp, columnCount = ncol)
-  }
+  gp <- new("GridProperties", rowCount = nrow, columnCount = ncol)
   if (!is.null(frozenRowCount) && frozenRowCount > 0) {
     gp <- patch(gp, frozenRowCount = frozenRowCount)
   }
   if (length(gp) == 0) {
     return(NULL)
   }
-  fields <- glue("gridProperties({glue_collapse(names(gp), sep = ',')})")
 
+  sp <- new("SheetProperties", sheetId = sheetId, gridProperties = gp)
   list(updateSheetProperties = new(
     "UpdateSheetPropertiesRequest",
-    properties = new(
-      "SheetProperties",
-      sheetId = sheetId,
-      gridProperties = gp
-    ),
-    fields = fields
+    properties = sp,
+    fields = gargle::field_mask(sp)
   ))
 }
 

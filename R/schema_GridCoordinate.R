@@ -13,10 +13,9 @@ as_GridCoordinate.default <- function(x, ...) {
 #' @export
 as_GridCoordinate.range_spec <- function(x, ..., strict = TRUE) {
   grid_range <- as_GridRange(x)
-  out <- new("GridCoordinate", sheetId = grid_range$sheetId)
 
   if (identical(names(grid_range), "sheetId")) {
-    return(out)
+    return(new("GridCoordinate", sheetId = grid_range$sheetId))
   }
 
   if (strict) {
@@ -30,11 +29,11 @@ as_GridCoordinate.range_spec <- function(x, ..., strict = TRUE) {
     }
   }
 
-  if (notNA(grid_range$startRowIndex %||% NA)) {
-    out <- patch(out, rowIndex = grid_range$startRowIndex)
-  }
-  if (notNA(grid_range$startColumnIndex %||% NA)) {
-    out <- patch(out, columnIndex = grid_range$startColumnIndex)
-  }
-  out
+  grid_range <- grid_range %>% discard(is.null) %>% discard(is.na)
+  new(
+    "GridCoordinate",
+    sheetId = grid_range$sheetId,
+    rowIndex = grid_range$startRowIndex,
+    columnIndex = grid_range$startColumnIndex
+  )
 }

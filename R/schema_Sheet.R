@@ -25,15 +25,11 @@ as_Sheet.NULL <- function(x, ...) {
 #' @export
 as_Sheet.character <- function(x, ...) {
   check_length_one(x)
-  dots <- list2(...)
-  out <- new(
-    id = "Sheet",
-    properties = new(
-      id = "SheetProperties",
-      title = x
-    )
+  new(
+    "Sheet",
+    properties = new(id = "SheetProperties", title = x),
+    ...
   )
-  patch(out, !!!dots)
 }
 
 #' @export

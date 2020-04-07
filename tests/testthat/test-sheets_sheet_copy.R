@@ -6,8 +6,6 @@ test_that("internal copy works", {
   skip_if_offline()
   skip_if_no_token()
 
-  ss <- scoped_temporary_ss(me_())
-
   ss <- scoped_temporary_ss(
     me_("internal"),
     sheets = list(iris = head(iris), chickwts = head(chickwts))

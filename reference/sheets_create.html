@@ -17,22 +17,26 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
 <!-- Bootstrap -->
 <link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -89,7 +93,7 @@ as described in sheets_write()." />
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
-        <div class="info">
+        <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
           <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
         </div>
@@ -246,12 +250,12 @@ frames. See the examples.</p></td>
   <span class='co'># clean up</span>
   <span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"sheets-create-demo"</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
 }</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheets-create-demo-1"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheets-create-demo-2"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheets-create-demo-3"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheets-create-demo-4"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheets-create-demo-5"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheets-create-demo-6"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * sheets-create-demo-6: 1toZC7PT2H19z78krohsbX3b0W4noKkjOFkmiFkK4-Nw</span>
-#&gt; <span class='message'>  * sheets-create-demo-5: 1xYuJfz98LtiUo1h442yhGTJS60agycStavPIoYhmiO4</span>
-#&gt; <span class='message'>  * sheets-create-demo-4: 1Gb7x2ZLviN3Ht6uPJCPFAmZRfOaKDFFAXrDlfacS-Ww</span>
-#&gt; <span class='message'>  * sheets-create-demo-3: 1tPMJD2cBjUTPoYV9dMe78Nu3E5ByjtBKOZhXypiJjjE</span>
-#&gt; <span class='message'>  * sheets-create-demo-2: 1HdeBUs3Xad4MBGA3WAB_Wv3DBnrJCTczt-o8HsKhGRg</span>
-#&gt; <span class='message'>  * sheets-create-demo-1: 1SIncVsRjpKWqXtPhy9kQ5IeGnXpZOL3-1ZUamV7k8T0</span></div></pre>
+#&gt; <span class='message'>  * sheets-create-demo-6: 1Zowpn1_SKDsVXpWHCFEhlbmeriXVtZyVUaQugjk2sO0</span>
+#&gt; <span class='message'>  * sheets-create-demo-5: 1iiEy06GnwpYgqY6Cn3C-MOm6tYRIn6btqhl3WGSbatQ</span>
+#&gt; <span class='message'>  * sheets-create-demo-4: 1cvre-pxk_mHYMlNZIpWO6tkKOjtA3b2QJ3P3EeAzmXQ</span>
+#&gt; <span class='message'>  * sheets-create-demo-3: 1ttWHl4BmSaaN3e0BAT9qTvjnem9OXcHqGYctU1LXlKM</span>
+#&gt; <span class='message'>  * sheets-create-demo-2: 113rpK8gUOaN2k1Gwd8fT2gJaJVH5tOAHyqKMpmQ5ANQ</span>
+#&gt; <span class='message'>  * sheets-create-demo-1: 1mZiE-xX1iK5050KzwJueQirMC2nBh-SRJgvMNJ_TwmE</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

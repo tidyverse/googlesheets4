@@ -12,10 +12,11 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../../tidyverse.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../../bootstrap-toc.css">
+<script src="../../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
 <script src="../../pkgdown.js"></script><link href="../../tidyverse-2.css" rel="stylesheet">
 <meta property="og:title" content="Read Sheets">
 <meta property="og:description" content="googlesheets4">
@@ -46,7 +47,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../../index.html">googlesheets4</a>
-        <div class="info">
+        <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
           <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
         </div>
@@ -160,21 +161,14 @@
 <span class="co">#&gt; 3 Australia   Oceania    1957    70.3 9712569    10950.</span>
 
 <span class="fu"><a href="../../reference/read_sheet.html">read_sheet</a></span>(<span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="kw">skip</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">n_max</span> <span class="kw">=</span> <span class="fl">10</span>)
-<span class="co">#&gt; Reading from "deaths"</span>
-<span class="co">#&gt; Range "5:5000000"</span>
-<span class="co">#&gt; # A tibble: 10 x 6</span>
-<span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span>
-<span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span>
-<span class="co">#&gt;  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span>
-<span class="co">#&gt;  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span>
-<span class="co">#&gt;  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span>
-<span class="co">#&gt;  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00</span>
-<span class="co">#&gt;  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00</span>
-<span class="co">#&gt;  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00</span>
-<span class="co">#&gt;  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00</span>
-<span class="co">#&gt;  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00</span>
-<span class="co">#&gt;  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00</span>
-<span class="co">#&gt; 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00</span>
+<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
+<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Error details:</span>
+<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
+<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
+<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span>
 
 <span class="fu"><a href="../../reference/read_sheet.html">read_sheet</a></span>(
   <span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>), <span class="kw">range</span> <span class="kw">=</span> <span class="st">"other!A5:F15"</span>, <span class="kw">col_types</span> <span class="kw">=</span> <span class="st">"?ci??D"</span>
@@ -357,14 +351,14 @@
 <span class="co">#&gt;   gdpPercap = col_double()</span>
 <span class="co">#&gt; )</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.057   0.001   0.284</span>
+<span class="co">#&gt;   0.068   0.002   0.604</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(
   <span class="fu"><a href="../../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"gapminder"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"Africa"</span>)
 )
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "'Africa'"</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.621   0.020   0.865</span></pre></body></html></div>
+<span class="co">#&gt;   0.713   0.023   1.336</span></pre></body></html></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/sheets_speedread.html">sheets_speedread()</a></code> vs <code><a href="../../reference/read_sheet.html">sheets_read()</a></code>:</p>
 <ul>

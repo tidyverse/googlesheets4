@@ -12,10 +12,11 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../tidyverse.css" rel="stylesheet">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="../tidyverse.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><link href="../tidyverse-2.css" rel="stylesheet">
 <meta property="og:title" content="Get started with googlesheets4">
 <meta property="og:description" content="googlesheets4">
@@ -46,7 +47,7 @@
 
       <div class="navbar-brand-container">
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
-        <div class="info">
+        <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
           <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
         </div>
@@ -165,14 +166,15 @@
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"gapminder"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/read_sheet.html">sheets_read</a></span>()
 <span class="co">#&gt; Range "Africa"</span>
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
+<span class="co">#&gt; # A tibble: 624 x 6</span>
+<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
+<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
+<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
+<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
+<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
+<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
+<span class="co">#&gt; # … with 619 more rows</span></pre></body></html></div>
 <p>Note that the name-based approach above will only work if <strong>you</strong> have access to a Sheet named “gapminder”. Sheet names cannot be used as absolute identifiers; only a Sheet ID can play that role.</p>
 <p>For more Sheet identification concepts and strategies, see the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Find and Identify Sheets</a>. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Read Sheets</a> for more about reading from a specific (work)sheet or ranges, setting column type, and getting low-level cell data.</p>
 </div>
@@ -189,16 +191,14 @@
 </ul>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"chicken-sheet"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/read_sheet.html">sheets_read</a></span>()
-<span class="co">#&gt; Reading from "chicken-sheet"</span>
-<span class="co">#&gt; Range "chicken.csv"</span>
-<span class="co">#&gt; # A tibble: 5 x 4</span>
-<span class="co">#&gt;   chicken            breed         sex    motto                                 </span>
-<span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                                 </span>
-<span class="co">#&gt; 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…</span>
-<span class="co">#&gt; 2 Chicken Little     unknown       hen    The sky is falling!                   </span>
-<span class="co">#&gt; 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…</span>
-<span class="co">#&gt; 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  </span>
-<span class="co">#&gt; 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.</span></pre></body></html></div>
+<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
+<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Error details:</span>
+<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
+<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
+<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
 <p>If you’d like to see a Sheet in the browser, including our example Sheets, use <code><a href="../reference/sheets_browse.html">sheets_browse()</a></code>:</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/sheets_browse.html">sheets_browse</a></span>()</pre></body></html></div>
@@ -245,34 +245,27 @@
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">letters</span>[<span class="fl">1</span>:<span class="fl">3</span>])
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/write_sheet.html">sheets_write</a></span>(<span class="no">df</span>)
-<span class="co">#&gt; Creating new Sheet: "doggoned-pomeranian"</span>
+<span class="co">#&gt; Creating new Sheet: "moonlit-chupacabra"</span>
 <span class="no">ss</span>
-<span class="co">#&gt;   Spreadsheet name: &lt;unknown&gt;</span>
-<span class="co">#&gt;                 ID: 1S51NV3BZs0ZdoDF_ovkOVzFsBLv3V1gCUc6n7Ili8Is</span>
-<span class="co">#&gt;             Locale: &lt;unknown&gt;</span>
-<span class="co">#&gt;          Time zone: &lt;unknown&gt;</span>
-<span class="co">#&gt;        # of sheets: &lt;unknown&gt;</span>
+<span class="co">#&gt;   Spreadsheet name: moonlit-chupacabra</span>
+<span class="co">#&gt;                 ID: 1OzK0IgTAQO2dA7aRbq-E2zQghpJuKv6dc7aNvovT0hI</span>
+<span class="co">#&gt;             Locale: en_US</span>
+<span class="co">#&gt;          Time zone: Etc/GMT</span>
+<span class="co">#&gt;        # of sheets: 1</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Unable to get metadata for this Sheet. Error details:</span>
-<span class="co">#&gt; Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
+<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
+<span class="co">#&gt;           df: 4 x 2</span></pre></body></html></div>
 <p>You’ll notice the new (spread)Sheet has a randomly generated name. If that is a problem, use <code><a href="../reference/sheets_create.html">sheets_create()</a></code> instead, which affords more control over various aspects of the new Sheet.</p>
 <p>Let’s start over: we delete that Sheet and call <code><a href="../reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * doggoned-pomeranian: 1S51NV3BZs0ZdoDF_ovkOVzFsBLv3V1gCUc6n7Ili8Is</span>
+<span class="co">#&gt;   * moonlit-chupacabra: 1OzK0IgTAQO2dA7aRbq-E2zQghpJuKv6dc7aNvovT0hI</span>
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="no">df</span>)
 <span class="co">#&gt; Creating new Sheet: "fluffy-bunny"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1Elne2pOMezLblwIA5oV_I1rwC4YADclHTF-jTShNgB8</span>
+<span class="co">#&gt;                 ID: 1C-SG7XGHlf-tYXx3kY6RNkcABOoq8nQEh-zwfdu185g</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -285,7 +278,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1Elne2pOMezLblwIA5oV_I1rwC4YADclHTF-jTShNgB8</span>
+<span class="co">#&gt;                 ID: 1C-SG7XGHlf-tYXx3kY6RNkcABOoq8nQEh-zwfdu185g</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>
@@ -299,7 +292,7 @@
 <span class="co">#&gt; Writing to sheet "df"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1Elne2pOMezLblwIA5oV_I1rwC4YADclHTF-jTShNgB8</span>
+<span class="co">#&gt;                 ID: 1C-SG7XGHlf-tYXx3kY6RNkcABOoq8nQEh-zwfdu185g</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>
@@ -313,7 +306,7 @@
 <span class="co">#&gt; Appending 1 row(s) to "df"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1Elne2pOMezLblwIA5oV_I1rwC4YADclHTF-jTShNgB8</span>
+<span class="co">#&gt;                 ID: 1C-SG7XGHlf-tYXx3kY6RNkcABOoq8nQEh-zwfdu185g</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>
@@ -328,12 +321,12 @@
 <span class="co">#&gt; # A tibble: 2 x 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 1024804441 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 1364793506 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 1 df           0  628127258 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 1872212173 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * fluffy-bunny: 1Elne2pOMezLblwIA5oV_I1rwC4YADclHTF-jTShNgB8</span></pre></body></html></div>
+<span class="co">#&gt;   * fluffy-bunny: 1C-SG7XGHlf-tYXx3kY6RNkcABOoq8nQEh-zwfdu185g</span></pre></body></html></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

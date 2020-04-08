@@ -4,7 +4,12 @@
 \alias{sheets_sheet_relocate}
 \title{Relocate one or more (work)sheets}
 \usage{
-sheets_sheet_relocate(ss, sheet, .before = NULL, .after = NULL)
+sheets_sheet_relocate(
+  ss,
+  sheet,
+  .before = if (is.null(.after)) 1,
+  .after = NULL
+)
 }
 \arguments{
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
@@ -15,31 +20,32 @@ is how googledrive represents Drive files. Processed through
 
 \item{sheet}{Sheet to relocate, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. You can pass a vector to move multiple sheets at once or even a list, if you need to mix names and positions.}
 
-\item{.before, .after}{Optional specification of where to put the new sheet. Specify, at most, one of \code{.before} and \code{.after}. Refer to an existing sheet by name (via a string) or by position (via a number). If unspecified, Sheets puts the new sheet at the end.}
+\item{.before, .after}{Specification of where to locate the sheets(s)
+identified by \code{sheet}. Exactly one of \code{.before} and \code{.after} must be
+specified. Refer to an existing sheet by name (via a string) or by position
+(via a number).}
 }
 \value{
 The input \code{ss}, as an instance of \code{\link{sheets_id}}
 }
 \description{
-Move (work)sheets around within a (spread)Sheet. The results are most
+Move (work)sheets around within a (spread)Sheet. The outcome is most
 predictable for these common and simple use cases:
 \itemize{
-\item Move a single sheet.
-\item Move multiple sheets to the front with \code{.before = 1}.
+\item Reorder and move one or more sheets to the front.
+\item Move a single sheet to a specific (but arbitrary) location.
 \item Move multiple sheets to the back with \code{.after = 100} (\code{.after} can be
 any number greater than or equal to the number of sheets).
-\item Exhaustively list existing sheets in a new order and specify .\code{before = 1}.
 }
 
-If your relocating is more complicated and you are puzzled by the results,
-express it as a sequence of simpler calls to \code{sheets_sheet_relocate()}.
+If your relocation task is more complicated and you are puzzled by the
+result, break it into a sequence of simpler calls to
+\code{sheets_sheet_relocate()}.
 }
 \examples{
 if (sheets_has_token()) {
-  ss <- sheets_create(
-    "sheets-sheet-relocate-demo",
-    sheets = c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot")
-  )
+  sheet_names <- c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot")
+  ss <- sheets_create("sheets-sheet-relocate-demo", sheets = sheet_names)
   sheets_sheet_names(ss)
 
   # move one sheet, forwards then backwards
@@ -50,18 +56,17 @@ if (sheets_has_token()) {
     sheets_sheet_relocate("echo", .after = "delta") \%>\%
     sheets_sheet_names()
 
-  # move multiple sheets to the front
+  # reorder and move multiple sheets to the front
   ss \%>\%
-    sheets_sheet_relocate(list("foxtrot", 4), .before = 1) \%>\%
+    sheets_sheet_relocate(list("foxtrot", 4)) \%>\%
     sheets_sheet_names()
 
-  # exhaustively list all sheets in a desired order
-  new_order <- rev(c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot"))
+  # put the sheets back in the original order
   ss \%>\%
-    sheets_sheet_relocate(new_order, .before = 1) \%>\%
+    sheets_sheet_relocate(sheet_names) \%>\%
     sheets_sheet_names()
 
-  # move multiple sheets to the back
+  # reorder and move multiple sheets to the back
   ss \%>\%
     sheets_sheet_relocate(c("bravo", "alfa", "echo"), .after = 10) \%>\%
     sheets_sheet_names()

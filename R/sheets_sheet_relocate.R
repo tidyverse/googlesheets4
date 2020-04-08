@@ -1,16 +1,16 @@
 #' Relocate one or more (work)sheets
 #'
 #' @description
-#' Move (work)sheets around within a (spread)Sheet. The results are most
+#' Move (work)sheets around within a (spread)Sheet. The outcome is most
 #' predictable for these common and simple use cases:
-#' * Move a single sheet.
-#' * Move multiple sheets to the front with `.before = 1`.
+#' * Reorder and move one or more sheets to the front.
+#' * Move a single sheet to a specific (but arbitrary) location.
 #' * Move multiple sheets to the back with `.after = 100` (`.after` can be
 #'   any number greater than or equal to the number of sheets).
-#' * Exhaustively list existing sheets in a new order and specify .`before = 1`.
 #'
-#' If your relocating is more complicated and you are puzzled by the results,
-#' express it as a sequence of simpler calls to `sheets_sheet_relocate()`.
+#' If your relocation task is more complicated and you are puzzled by the
+#' result, break it into a sequence of simpler calls to
+#' `sheets_sheet_relocate()`.
 #'
 #' @eval param_ss()
 #' @eval param_sheet(
@@ -18,7 +18,10 @@
 #'   "You can pass a vector to move multiple sheets at once or even a list,",
 #'   "if you need to mix names and positions."
 #' )
-#' @eval param_before_after("sheet")
+#' @param .before,.after Specification of where to locate the sheets(s)
+#'   identified by `sheet`. Exactly one of `.before` and `.after` must be
+#'   specified. Refer to an existing sheet by name (via a string) or by position
+#'   (via a number).
 #'
 #' @template ss-return
 #' @export
@@ -29,10 +32,8 @@
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#'   ss <- sheets_create(
-#'     "sheets-sheet-relocate-demo",
-#'     sheets = c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot")
-#'   )
+#'   sheet_names <- c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot")
+#'   ss <- sheets_create("sheets-sheet-relocate-demo", sheets = sheet_names)
 #'   sheets_sheet_names(ss)
 #'
 #'   # move one sheet, forwards then backwards
@@ -43,18 +44,17 @@
 #'     sheets_sheet_relocate("echo", .after = "delta") %>%
 #'     sheets_sheet_names()
 #'
-#'   # move multiple sheets to the front
+#'   # reorder and move multiple sheets to the front
 #'   ss %>%
-#'     sheets_sheet_relocate(list("foxtrot", 4), .before = 1) %>%
+#'     sheets_sheet_relocate(list("foxtrot", 4)) %>%
 #'     sheets_sheet_names()
 #'
-#'   # exhaustively list all sheets in a desired order
-#'   new_order <- rev(c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot"))
+#'   # put the sheets back in the original order
 #'   ss %>%
-#'     sheets_sheet_relocate(new_order, .before = 1) %>%
+#'     sheets_sheet_relocate(sheet_names) %>%
 #'     sheets_sheet_names()
 #'
-#'   # move multiple sheets to the back
+#'   # reorder and move multiple sheets to the back
 #'   ss %>%
 #'     sheets_sheet_relocate(c("bravo", "alfa", "echo"), .after = 10) %>%
 #'     sheets_sheet_names()
@@ -65,15 +65,12 @@
 #' }
 sheets_sheet_relocate <- function(ss,
                                   sheet,
-                                  .before = NULL,
+                                  .before = if (is.null(.after)) 1,
                                   .after = NULL) {
   ssid <- as_sheets_id(ss)
   walk(sheet, check_sheet)
-  if (is.null(.before) && is.null(.after)) {
-    stop_glue(
-      "Either {bt('.before')} or {bt('.after')} must be specified"
-    )
-  }
+  maybe_sheet(.before)
+  maybe_sheet(.after)
 
   x <- sheets_get(ssid)
   message_glue("Relocating sheets in {dq(x$name)}")

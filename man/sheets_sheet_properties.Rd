@@ -38,6 +38,7 @@ Other worksheet functions:
 \code{\link{sheets_sheet_add}()},
 \code{\link{sheets_sheet_copy}()},
 \code{\link{sheets_sheet_delete}()},
+\code{\link{sheets_sheet_relocate}()},
 \code{\link{sheets_sheet_rename}()},
 \code{\link{sheets_sheet_resize}()}
 }

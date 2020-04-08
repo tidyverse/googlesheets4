@@ -66,7 +66,8 @@ these <- c(
   "AppendCellsRequest",
   "AutoResizeDimensionsRequest",
   "DeleteRangeRequest",
-  "DuplicateSheetRequest"
+  "DuplicateSheetRequest",
+  "AddSheetRequest"
 )
 
 .tidy_schemas <- these %>%

@@ -58,11 +58,12 @@ if (sheets_has_token()) {
   sheets_sheet_properties(ss)
 
   # cleanup
-  sheets_find("add-sheets-to-me") \%>\% googledrive::drive_rm()
+  sheets_find("add-sheets-to-me") \%>\%
+    googledrive::drive_trash()
 }
 }
 \seealso{
-Makes an \code{AddSheetRequest}:
+Makes a batch of \code{AddSheetRequest}s (one per sheet):
 \itemize{
 \item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#addsheetrequest}
 }

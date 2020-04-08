@@ -17,7 +17,8 @@
 #'
 #' @export
 #' @family worksheet functions
-#' @seealso Makes an `AddSheetRequest`:
+#' @seealso
+#' Makes a batch of `AddSheetRequest`s (one per sheet):
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#addsheetrequest>
 #'
 #' @examples
@@ -48,7 +49,8 @@
 #'   sheets_sheet_properties(ss)
 #'
 #'   # cleanup
-#'   sheets_find("add-sheets-to-me") %>% googledrive::drive_rm()
+#'   sheets_find("add-sheets-to-me") %>%
+#'     googledrive::drive_trash()
 #' }
 sheets_sheet_add <- function(ss,
                              sheet = NULL,
@@ -116,6 +118,8 @@ make_addSheet <- function(title = NULL, index = NULL, dots = list()) {
     return(list(addSheet = NULL))
   }
 
-  sp <- new("SheetProperties", title = title, index = index, !!!dots)
-  list(addSheet = list(properties = sp))
+  list(addSheet = new(
+    "AddSheetRequest",
+    properties = new("SheetProperties", title = title, index = index, !!!dots)
+  ))
 }

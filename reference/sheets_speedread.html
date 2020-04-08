@@ -111,7 +111,7 @@ sheets_deauth() has put googlesheets4 into a de-authorized state." />
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
         </div>
       </div>
     </div>
@@ -216,7 +216,7 @@ sends an auth token with the request, unless a previous call to
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='sheets_get.html'>sheets_get()</a></code>, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+(returned by <code><a href='sheets_get.html'>sheets_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
 <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
@@ -279,7 +279,7 @@ is a lower bound. Ignored if <code>range</code> is given.</p></td>
 
 <span class='co'># clean up</span>
 <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>(<span class='no'>ss</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: readr</span></div><div class='output co'>#&gt; <span class='message'>Reading from "deaths", "other" sheet, range "A5:F15"</span></div><div class='output co'>#&gt; <span class='message'>Export URL: https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/export?format=csv&amp;range=A5%3AF15&amp;gid=28655153</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "despotic-carp"</span></div><div class='output co'>#&gt; <span class='message'>Reading from "despotic-carp"</span></div><div class='output co'>#&gt; <span class='message'>Export URL: https://docs.google.com/spreadsheets/d/1b9H37iB7hTOIlDxOnL7iINMp4NtbOBUpz41lEquVywI/export?format=csv</span></div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: readr</span></div><div class='output co'>#&gt; <span class='message'>Reading from "deaths", "other" sheet, range "A5:F15"</span></div><div class='output co'>#&gt; <span class='message'>Export URL: https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/export?format=csv&amp;range=A5%3AF15&amp;gid=28655153</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "despotic-carp"</span></div><div class='output co'>#&gt; <span class='message'>Reading from "despotic-carp"</span></div><div class='output co'>#&gt; <span class='message'>Export URL: https://docs.google.com/spreadsheets/d/1vkV5gshilVehMfgZkEhngjTetp4-m4sN-1xTsOJeL54/export?format=csv</span></div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
 #&gt; <span class='message'>cols(</span>
 #&gt; <span class='message'>  Sepal.Length = <span style='color: #00BB00;'>col_double()</span><span>,</span>
 #&gt; <span class='message'>  Sepal.Width = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
@@ -287,7 +287,7 @@ is a lower bound. Ignored if <code>range</code> is given.</p></td>
 #&gt; <span class='message'>  Petal.Width = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
 #&gt; <span class='message'>  Species = </span><span style='color: #BB0000;'>col_character()</span><span></span>
 #&gt; <span class='message'>)</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * despotic-carp: 1b9H37iB7hTOIlDxOnL7iINMp4NtbOBUpz41lEquVywI</span></div></span></pre>
+#&gt; <span class='message'>  * despotic-carp: 1vkV5gshilVehMfgZkEhngjTetp4-m4sN-1xTsOJeL54</span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

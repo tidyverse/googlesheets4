@@ -101,7 +101,7 @@ sheets_sheet_relocate()." />
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
         </div>
       </div>
     </div>
@@ -201,7 +201,7 @@ result, break it into a sequence of simpler calls to
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='sheets_get.html'>sheets_get()</a></code>, or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+(returned by <code><a href='sheets_get.html'>sheets_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
 <code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
@@ -267,14 +267,9 @@ specified. Refer to an existing sheet by name (via a string) or by position
   <span class='co'># clean up</span>
   <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='st'>"sheets-sheet-relocate-demo"</span>) <span class='kw'>%&gt;%</span>
     <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheets-sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-#&gt; <span class='error'>  * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-#&gt; <span class='error'>  * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-#&gt; <span class='error'></span>
-#&gt; <span class='error'>Error details:</span>
-#&gt; <span class='error'>  * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-#&gt; <span class='error'>  * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-#&gt; <span class='error'>  * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheets-sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheets-sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheets-sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheets-sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheets-sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheets-sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * sheets-sheet-relocate-demo: 1L_P9eKFbvYNTDodXiRpsbcJiPIaPO1fA96Zp1wt9tH4</span>
+#&gt; <span class='message'>  * sheets-sheet-relocate-demo: 13l6klt0NYY2VQm6tJIediSh60O1fxI2Hg3-TpCv--WM</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

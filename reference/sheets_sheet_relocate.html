@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Append rows to a sheet — sheets_append • googlesheets4</title>
+<title>Relocate one or more (work)sheets — sheets_sheet_relocate • googlesheets4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -41,9 +41,18 @@
 
 
 
-<meta property="og:title" content="Append rows to a sheet — sheets_append" />
-<meta property="og:description" content="Adds one or more new rows after the last row with data in a (work)sheet,
-increasing the row dimension of the sheet if necessary." />
+<meta property="og:title" content="Relocate one or more (work)sheets — sheets_sheet_relocate" />
+<meta property="og:description" content="Move (work)sheets around within a (spread)Sheet. The outcome is most
+predictable for these common and simple use cases:
+Reorder and move one or more sheets to the front.
+Move a single sheet to a specific (but arbitrary) location.
+Move multiple sheets to the back with .after = 100 (.after can be
+any number greater than or equal to the number of sheets).
+
+
+If your relocation task is more complicated and you are puzzled by the
+result, break it into a sequence of simpler calls to
+sheets_sheet_relocate()." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -155,25 +164,35 @@ increasing the row dimension of the sheet if necessary." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Append rows to a sheet</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_append.R'><code>R/sheets_append.R</code></a></small>
-    <div class="hidden name"><code>sheets_append.Rd</code></div>
+    <h1>Relocate one or more (work)sheets</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_sheet_relocate.R'><code>R/sheets_sheet_relocate.R</code></a></small>
+    <div class="hidden name"><code>sheets_sheet_relocate.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Adds one or more new rows after the last row with data in a (work)sheet,
-increasing the row dimension of the sheet if necessary.</p>
+    <p>Move (work)sheets around within a (spread)Sheet. The outcome is most
+predictable for these common and simple use cases:</p><ul>
+<li><p>Reorder and move one or more sheets to the front.</p></li>
+<li><p>Move a single sheet to a specific (but arbitrary) location.</p></li>
+<li><p>Move multiple sheets to the back with <code>.after = 100</code> (<code>.after</code> can be
+any number greater than or equal to the number of sheets).</p></li>
+</ul>
+
+<p>If your relocation task is more complicated and you are puzzled by the
+result, break it into a sequence of simpler calls to
+<code>sheets_sheet_relocate()</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_append</span>(<span class='no'>data</span>, <span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_sheet_relocate</span>(
+  <span class='no'>ss</span>,
+  <span class='no'>sheet</span>,
+  <span class='kw'>.before</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span>(<span class='no'>.after</span>)) <span class='fl'>1</span>,
+  <span class='kw'>.after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>data</th>
-      <td><p>A data frame.</p></td>
-    </tr>
     <tr>
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
@@ -184,7 +203,14 @@ is how googledrive represents Drive files. Processed through
     </tr>
     <tr>
       <th>sheet</th>
-      <td><p>Sheet to append to, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number.</p></td>
+      <td><p>Sheet to relocate, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. You can pass a vector to move multiple sheets at once or even a list, if you need to mix names and positions.</p></td>
+    </tr>
+    <tr>
+      <th>.before, .after</th>
+      <td><p>Specification of where to locate the sheets(s)
+identified by <code>sheet</code>. Exactly one of <code>.before</code> and <code>.after</code> must be
+specified. Refer to an existing sheet by name (via a string) or by position
+(via a number).</p></td>
     </tr>
     </table>
 
@@ -193,46 +219,52 @@ is how googledrive represents Drive files. Processed through
     <p>The input <code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Makes an <code>AppendCellsRequest</code>:</p><ul>
-<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AppendCellsRequest'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AppendCellsRequest</a></p></li>
+    <div class='dont-index'><p>Constructs a batch of <code>UpdateSheetPropertiesRequest</code>s (one per sheet):</p><ul>
+<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest</a></p></li>
 </ul>
 
-<p>Other write functions: 
-<code><a href='sheets_create.html'>sheets_create</a>()</code>,
-<code><a href='sheets_delete.html'>sheets_delete</a>()</code>,
-<code><a href='sheets_edit.html'>sheets_edit</a>()</code>,
-<code><a href='sheets_flood.html'>sheets_flood</a>()</code>,
-<code><a href='sheets_formula.html'>sheets_formula</a>()</code>,
-<code><a href='write_sheet.html'>write_sheet</a>()</code></p></div>
+<p>Other worksheet functions: 
+<code><a href='sheets_sheet_add.html'>sheets_sheet_add</a>()</code>,
+<code><a href='sheets_sheet_copy.html'>sheets_sheet_copy</a>()</code>,
+<code><a href='sheets_sheet_delete.html'>sheets_sheet_delete</a>()</code>,
+<code><a href='sheets_sheet_properties.html'>sheets_sheet_properties</a>()</code>,
+<code><a href='sheets_sheet_rename.html'>sheets_sheet_rename</a>()</code>,
+<code><a href='sheets_sheet_resize.html'>sheets_sheet_resize</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='sheets_has_token.html'>sheets_has_token</a></span>()) {
-  <span class='co'># we will recreate the table of "other" deaths from this example Sheet</span>
-  (<span class='no'>deaths</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_example.html'>sheets_example</a></span>(<span class='st'>"deaths"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='read_sheet.html'>sheets_read</a></span>(<span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"other_data"</span>, <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='st'>"????DD"</span>))
+  <span class='no'>sheet_names</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alfa"</span>, <span class='st'>"bravo"</span>, <span class='st'>"charlie"</span>, <span class='st'>"delta"</span>, <span class='st'>"echo"</span>, <span class='st'>"foxtrot"</span>)
+  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(<span class='st'>"sheets-sheet-relocate-demo"</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='no'>sheet_names</span>)
+  <span class='fu'><a href='sheets_sheet_properties.html'>sheets_sheet_names</a></span>(<span class='no'>ss</span>)
 
-  <span class='co'># split the data into 3 pieces, which we will send separately</span>
-  <span class='no'>deaths_one</span> <span class='kw'>&lt;-</span> <span class='no'>deaths</span>[<span class='fl'>1</span>:<span class='fl'>5</span>, ]
-  <span class='no'>deaths_two</span> <span class='kw'>&lt;-</span> <span class='no'>deaths</span>[<span class='fl'>6</span>, ]
-  <span class='no'>deaths_three</span> <span class='kw'>&lt;-</span> <span class='no'>deaths</span>[<span class='fl'>7</span>:<span class='fl'>10</span>, ]
+  <span class='co'># move one sheet, forwards then backwards</span>
+  <span class='no'>ss</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheets_sheet_relocate</span>(<span class='st'>"echo"</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='st'>"bravo"</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='sheets_sheet_properties.html'>sheets_sheet_names</a></span>()
+  <span class='no'>ss</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheets_sheet_relocate</span>(<span class='st'>"echo"</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='st'>"delta"</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='sheets_sheet_properties.html'>sheets_sheet_names</a></span>()
 
-  <span class='co'># create a Sheet and send the first chunk of data</span>
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='sheets_create.html'>sheets_create</a></span>(<span class='st'>"sheets-append-demo"</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>deaths</span> <span class='kw'>=</span> <span class='no'>deaths_one</span>))
+  <span class='co'># reorder and move multiple sheets to the front</span>
+  <span class='no'>ss</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheets_sheet_relocate</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"foxtrot"</span>, <span class='fl'>4</span>)) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='sheets_sheet_properties.html'>sheets_sheet_names</a></span>()
 
-  <span class='co'># append a single row</span>
-  <span class='fu'>sheets_append</span>(<span class='no'>deaths_two</span>, <span class='no'>ss</span>)
+  <span class='co'># put the sheets back in the original order</span>
+  <span class='no'>ss</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheets_sheet_relocate</span>(<span class='no'>sheet_names</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='sheets_sheet_properties.html'>sheets_sheet_names</a></span>()
 
-  <span class='co'># append remaining rows</span>
-  <span class='fu'>sheets_append</span>(<span class='no'>deaths_three</span>, <span class='no'>ss</span>)
+  <span class='co'># reorder and move multiple sheets to the back</span>
+  <span class='no'>ss</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheets_sheet_relocate</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bravo"</span>, <span class='st'>"alfa"</span>, <span class='st'>"echo"</span>), <span class='kw'>.after</span> <span class='kw'>=</span> <span class='fl'>10</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'><a href='sheets_sheet_properties.html'>sheets_sheet_names</a></span>()
 
-  <span class='co'># read and check against the original</span>
-  <span class='no'>deaths_replica</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='read_sheet.html'>sheets_read</a></span>(<span class='no'>ss</span>, <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='st'>"????DD"</span>)
-  <span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='no'>deaths</span>, <span class='no'>deaths_replica</span>)
-
-  <span class='co'># cleanup</span>
-  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>(<span class='no'>ss</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Reading from "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Range "other_data"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheets-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to "sheets-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Appending 1 row(s) to "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Writing to "sheets-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Appending 4 row(s) to "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Reading from "sheets-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Range "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * sheets-append-demo: 1fZw3DNEUM9-DyNfkSrgr0UThQ4fwpxnPpyERBwYkOGw</span></div></pre>
+  <span class='co'># clean up</span>
+  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='st'>"sheets-sheet-relocate-demo"</span>) <span class='kw'>%&gt;%</span>
+    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheets-sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheets-sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheets-sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheets-sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheets-sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheets-sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * sheets-sheet-relocate-demo: 1svykvPGucqrAfXX6uKO1pzHG2MJyn1IOFe9xcv5gxvE</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

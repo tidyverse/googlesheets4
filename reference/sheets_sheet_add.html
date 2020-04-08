@@ -201,7 +201,7 @@ in <code>name = value</code> form.</p></td>
     <p>The input <code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p>Makes an <code>AddSheetRequest</code>:</p><ul>
+    <div class='dont-index'><p>Makes a batch of <code>AddSheetRequest</code>s (one per sheet):</p><ul>
 <li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#addsheetrequest'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#addsheetrequest</a></p></li>
 </ul>
 
@@ -209,6 +209,7 @@ in <code>name = value</code> form.</p></td>
 <code><a href='sheets_sheet_copy.html'>sheets_sheet_copy</a>()</code>,
 <code><a href='sheets_sheet_delete.html'>sheets_sheet_delete</a>()</code>,
 <code><a href='sheets_sheet_properties.html'>sheets_sheet_properties</a>()</code>,
+<code><a href='sheets_sheet_relocate.html'>sheets_sheet_relocate</a>()</code>,
 <code><a href='sheets_sheet_rename.html'>sheets_sheet_rename</a>()</code>,
 <code><a href='sheets_sheet_resize.html'>sheets_sheet_resize</a>()</code></p></div>
 
@@ -240,9 +241,10 @@ in <code>name = value</code> form.</p></td>
   <span class='fu'><a href='sheets_sheet_properties.html'>sheets_sheet_properties</a></span>(<span class='no'>ss</span>)
 
   <span class='co'># cleanup</span>
-  <span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"add-sheets-to-me"</span>) <span class='kw'>%&gt;%</span> <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_rm.html'>drive_rm</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "Sheet2"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "apple"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "banana"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "coconut", "dragonfruit"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "eggplant"</span></div><div class='output co'>#&gt; <span class='message'>Files deleted:</span>
-#&gt; <span class='message'>  * add-sheets-to-me: 1TTN8focwFw5NomKRFr0j_GIcgNUW4_dDarsmbYriQMY</span></div></pre>
+  <span class='fu'><a href='sheets_find.html'>sheets_find</a></span>(<span class='st'>"add-sheets-to-me"</span>) <span class='kw'>%&gt;%</span>
+    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "Sheet2"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "apple"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "banana"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "coconut", "dragonfruit"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "eggplant"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * add-sheets-to-me: 1Vs44HI2PQqTaoja0D-f0sgwpyDmilYXGThOG4rp7oAc</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

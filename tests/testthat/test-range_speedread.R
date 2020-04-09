@@ -8,7 +8,7 @@ test_that("sheets_spreadread() works", {
     test_sheet("googlesheets4-cell-tests"),
     range = "'range-experimentation'!B:D"
   )
-  speedread <- sheets_speedread(
+  speedread <- range_speedread(
     test_sheet("googlesheets4-cell-tests"),
     range = "'range-experimentation'!B:D"
   )
@@ -21,7 +21,7 @@ test_that("sheets_spreadread() works", {
     range = "A5:F15",
     col_types = "??i?DD"
   )
-  speedread <- sheets_speedread(
+  speedread <- range_speedread(
     sheets_example("deaths"),
     sheet = "other",
     range = "A5:F15",

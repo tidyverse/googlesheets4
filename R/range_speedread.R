@@ -18,7 +18,7 @@
 #'   googlesheets4.
 #'
 #' Note that the Sheets API is still used to retrieve metadata on the target
-#' Sheet, in order to support range specification. `sheets_speedread()` also
+#' Sheet, in order to support range specification. `range_speedread()` also
 #' sends an auth token with the request, unless a previous call to
 #' [sheets_deauth()] has put googlesheets4 into a de-authorized state.
 #'
@@ -31,38 +31,36 @@
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#'
 #'   if (require("readr")) {
-#'   # since cell type is not available, use readr's col type specification
-#'   sheets_speedread(
-#'     sheets_example("deaths"),
-#'     sheet = "other",
-#'     range = "A5:F15",
-#'     col_types = cols(
-#'       Age = col_integer(),
-#'       `Date of birth` = col_date("%m/%d/%Y"),
-#'       `Date of death` = col_date("%m/%d/%Y")
+#'     # since cell type is not available, use readr's col type specification
+#'     range_speedread(
+#'       sheets_example("deaths"),
+#'       sheet = "other",
+#'       range = "A5:F15",
+#'       col_types = cols(
+#'         Age = col_integer(),
+#'         `Date of birth` = col_date("%m/%d/%Y"),
+#'         `Date of death` = col_date("%m/%d/%Y")
+#'       )
 #'     )
-#'   )
+#'   }
+#'
+#'   # write a Sheet that, by default, is NOT world-readable
+#'   (ss <- sheets_write(iris))
+#'
+#'   # demo that range_speedread() sends a token, which is why we can read this
+#'   range_speedread(ss)
+#'
+#'   # clean up
+#'   googledrive::drive_trash(ss)
 #' }
-#'
-#' # write a Sheet that, by default, is NOT world-readable
-#' (ss <- sheets_write(iris))
-#'
-#' # demo that sheets_speedread() sends a token, which is why we can read this
-#' sheets_speedread(ss)
-#'
-#' # clean up
-#' googledrive::drive_trash(ss)
-#' }
-sheets_speedread <- function(ss,
-                             sheet = NULL,
-                             range = NULL,
-                             skip = 0,
-                             ...) {
-
+range_speedread <- function(ss,
+                            sheet = NULL,
+                            range = NULL,
+                            skip = 0,
+                            ...) {
   if (!requireNamespace("readr", quietly = TRUE)) {
-    stop_glue("The readr package must be installed to use {bt('sheets_speedread()'}")
+    stop_glue("The readr package must be installed to use {bt('range_speedread()'}")
   }
 
   ssid <- as_sheets_id(ss)
@@ -80,11 +78,12 @@ sheets_speedread <- function(ss,
   sheet_msg <- ""
   range_msg <- ""
   range_spec <- as_range_spec(
-    range, sheet = sheet, skip = skip,
+    range,
+    sheet = sheet, skip = skip,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   if (!is.null(range_spec$named_range)) {
-    stop_glue("{bt('sheets_speedread()'} cannot work with a named range")
+    stop_glue("{bt('range_speedread()'} cannot work with a named range")
   }
   if (!is.null(range_spec$cell_limits)) {
     range_spec$cell_range <- as_sheets_range(range_spec$cell_limits)
@@ -112,5 +111,5 @@ sheets_speedread <- function(ss,
   response <- httr::GET(req$url, config = token)
   stopifnot(identical(httr::http_type(response), "text/csv"))
   readr::read_csv(httr::content(response, type = "raw"), ...)
-  #vroom::vroom(httr::content(response, type = "raw"), ...)
+  # vroom::vroom(httr::content(response, type = "raw"), ...)
 }

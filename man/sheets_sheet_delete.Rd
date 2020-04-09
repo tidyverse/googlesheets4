@@ -24,7 +24,7 @@ Deletes one or more (work)sheets from a (spread)Sheet.
 \examples{
 if (sheets_has_token()) {
   ss <- sheets_create("delete-sheets-from-me")
-  sheets_sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
+  sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 
   # get an overview of the sheets
   sheets_sheet_properties(ss)
@@ -48,6 +48,7 @@ Makes an \code{DeleteSheetsRequest}:
 }
 
 Other worksheet functions: 
+\code{\link{sheet_add}()},
 \code{\link{sheet_append}()},
 \code{\link{sheets_sheet_add}()},
 \code{\link{sheets_sheet_copy}()},

@@ -35,6 +35,7 @@ if (sheets_has_token()) {
 }
 \seealso{
 Other worksheet functions: 
+\code{\link{sheet_add}()},
 \code{\link{sheet_append}()},
 \code{\link{sheets_sheet_add}()},
 \code{\link{sheets_sheet_copy}()},

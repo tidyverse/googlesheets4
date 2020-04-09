@@ -15,7 +15,7 @@ test_that("sheets_sheet_delete() works", {
 
   ss <- scoped_temporary_ss(me_())
 
-  sheets_sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
+  sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 
   expect_error_free(
     sheets_sheet_delete(ss, 1)

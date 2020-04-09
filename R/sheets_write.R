@@ -116,7 +116,7 @@ write_sheet <- function(data,
     )
   }
   if (is.null(s)) {
-    x <- sheets_sheet_add_impl_(ssid, sheet_name = sheet)
+    x <- sheet_add_impl_(ssid, sheet_name = sheet)
     s <- lookup_sheet(nrow(x$sheets), sheets_df = x$sheets)
   } else {
     # create request to clear the data and formatting in pre-existing sheet

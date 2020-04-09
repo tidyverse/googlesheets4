@@ -67,6 +67,7 @@ Other write functions:
 \code{\link{write_sheet}()}
 
 Other worksheet functions: 
+\code{\link{sheet_add}()},
 \code{\link{sheets_sheet_add}()},
 \code{\link{sheets_sheet_copy}()},
 \code{\link{sheets_sheet_delete}()},

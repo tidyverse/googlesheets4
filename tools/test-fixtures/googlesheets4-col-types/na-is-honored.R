@@ -14,5 +14,5 @@ df <- tibble(
   C = c(1, NA, 3),
   D = 1:3
 )
-sheets_sheet_add(ss, sheet = "NAs")
+sheet_add(ss, sheet = "NAs")
 sheets_write(df, ss, sheet = "NAs")

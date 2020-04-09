@@ -39,7 +39,7 @@ There is a new family of `sheets_sheet_*()` functions that operate on the (work)
   * `sheets_sheet_properties()` returns a tibble of metadata with one row per
      sheet.
   * `sheets_sheet_names()` returns sheet names.
-  * `sheets_sheet_add()` adds one or more sheets.
+  * `sheet_add()` adds one or more sheets.
   * `sheets_sheet_copy()` copies a sheet.
   * `sheets_sheet_delete()` deletes one or more sheets.
   * `sheets_sheet_relocate()` moves sheets around.  

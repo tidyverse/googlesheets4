@@ -24,16 +24,16 @@
 #'   sheets_sheet_names(ss)
 #'
 #'   ss %>%
-#'     sheets_sheet_rename(1, new_name = "flowers") %>%
-#'     sheets_sheet_rename("chickwts", new_name = "poultry")
+#'     sheet_rename(1, new_name = "flowers") %>%
+#'     sheet_rename("chickwts", new_name = "poultry")
 #'
 #'   # clean up
 #'   googledrive::drive_find("sheets-sheet-rename-demo") %>%
 #'     googledrive::drive_trash()
 #' }
-sheets_sheet_rename <- function(ss,
-                                sheet = NULL,
-                                new_name) {
+sheet_rename <- function(ss,
+                         sheet = NULL,
+                         new_name) {
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   check_string(new_name)

@@ -1,5 +1,5 @@
 # ---- nm_fun ----
-me_ <- nm_fun("TEST-sheets_sheet_rename")
+me_ <- nm_fun("TEST-sheet_rename")
 
 # ---- tests ----
 test_that("internal copy works", {
@@ -11,8 +11,8 @@ test_that("internal copy works", {
     sheets = list(iris = head(iris), chickwts = head(chickwts))
   )
   ss %>%
-    sheets_sheet_rename(2, new_name = "poultry") %>%
-    sheets_sheet_rename(1, new_name = "flowers")
+    sheet_rename(2, new_name = "poultry") %>%
+    sheet_rename(1, new_name = "flowers")
   out <- sheets_sheet_names(ss)
   expect_equal(out, c("flowers", "poultry"))
 })

@@ -43,7 +43,7 @@ There is a new family of `sheets_sheet_*()` functions that operate on the (work)
   * `sheet_copy()` copies a sheet.
   * `sheet_delete()` deletes one or more sheets.
   * `sheet_relocate()` moves sheets around.  
-  * `sheets_sheet_rename()` renames one sheet.
+  * `sheet_rename()` renames one sheet.
   * `sheets_sheet_resize()` changes the number of rows or columns in a sheet.
   
 `sheets_speedread()` provides a quick-and-dirty method for reading a Sheet using its "export=csv" URL.

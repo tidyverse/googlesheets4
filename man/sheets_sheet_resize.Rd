@@ -70,8 +70,8 @@ Other worksheet functions:
 \code{\link{sheet_copy}()},
 \code{\link{sheet_delete}()},
 \code{\link{sheet_relocate}()},
+\code{\link{sheet_rename}()},
 \code{\link{sheets_sheet_add}()},
-\code{\link{sheets_sheet_properties}()},
-\code{\link{sheets_sheet_rename}()}
+\code{\link{sheets_sheet_properties}()}
 }
 \concept{worksheet functions}

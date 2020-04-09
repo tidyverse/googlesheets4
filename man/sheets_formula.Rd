@@ -22,7 +22,7 @@ formula. \code{googlesheets4_formula} is an S3 class implemented using the \href
 if (sheets_has_token()) {
 dat <- data.frame(X = c(1, 5, 3, 2, 4, 6))
 
-ss <- sheets_write(dat)
+ss <- sheet_write(dat)
 ss
 
 summaries <- tibble::tribble(
@@ -47,7 +47,7 @@ miscellany <- tibble::tribble(
 miscellany$example <- sheets_formula(miscellany$example)
 miscellany
 
-sheets_write(miscellany, ss = ss)
+sheet_write(miscellany, ss = ss)
 
 # clean up
 googledrive::drive_trash(ss)
@@ -59,7 +59,7 @@ Other write functions:
 \code{\link{range_flood}()},
 \code{\link{range_write}()},
 \code{\link{sheet_append}()},
-\code{\link{sheets_create}()},
-\code{\link{write_sheet}()}
+\code{\link{sheet_write}()},
+\code{\link{sheets_create}()}
 }
 \concept{write functions}

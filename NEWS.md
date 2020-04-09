@@ -22,7 +22,7 @@ These functions are ready for use but are still considered experimental and may 
 
   * `sheets_create()` is a new function to create a new Sheet and, optionally,
     write one or more data frames into it (#61).
-  * `sheets_write()` (also available as `write_sheet()`) is a new function to
+  * `sheet_write()` (also available as `write_sheet()`) is a new function to
     write a data frame into a new or existing (work)sheet, inside a new or
     existing (spread)Sheet.
   * `sheet_append()` adds rows to the data in an existing sheet.
@@ -34,7 +34,7 @@ These functions are ready for use but are still considered experimental and may 
   
 ### Other new functions and arguments
 
-There is a new family of `sheets_sheet_*()` functions that operate on the (work)sheets inside an existing (spread)Sheet:
+There is a new family of `sheet_*()` functions that operate on the (work)sheets inside an existing (spread)Sheet:
   
   * `sheet_properties()` returns a tibble of metadata with one row per
      sheet.

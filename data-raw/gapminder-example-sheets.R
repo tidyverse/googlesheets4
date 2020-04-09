@@ -19,11 +19,11 @@ ss <- sheets_find("gapminder") %>% as_sheets_id()
 # sheets_browse(ss)
 
 gapminder_split <- split(gapminder, gapminder$continent)
-sheets_write(gapminder_split$Africa,   ss = ss, sheet = "Africa")
-sheets_write(gapminder_split$Americas, ss = ss, sheet = "Americas")
-sheets_write(gapminder_split$Asia,     ss = ss, sheet = "Asia")
-sheets_write(gapminder_split$Europe,   ss = ss, sheet = "Europe")
-sheets_write(gapminder_split$Oceania,  ss = ss, sheet = "Oceania")
+sheet_write(gapminder_split$Africa,   ss = ss, sheet = "Africa")
+sheet_write(gapminder_split$Americas, ss = ss, sheet = "Americas")
+sheet_write(gapminder_split$Asia,     ss = ss, sheet = "Asia")
+sheet_write(gapminder_split$Europe,   ss = ss, sheet = "Europe")
+sheet_write(gapminder_split$Oceania,  ss = ss, sheet = "Oceania")
 
 ## Update mini-gap example Sheet ----
 mini_gap <- gapminder %>%
@@ -35,8 +35,8 @@ mini_gap <- gapminder %>%
 (ss <- sheets_find("mini-gap") %>% as_sheets_id())
 # sheets_browse(ss)
 
-sheets_write(mini_gap$Africa,   ss = ss, sheet = "Africa")
-sheets_write(mini_gap$Americas, ss = ss, sheet = "Americas")
-sheets_write(mini_gap$Asia,     ss = ss, sheet = "Asia")
-sheets_write(mini_gap$Europe,   ss = ss, sheet = "Europe")
-sheets_write(mini_gap$Oceania,  ss = ss, sheet = "Oceania")
+sheet_write(mini_gap$Africa,   ss = ss, sheet = "Africa")
+sheet_write(mini_gap$Americas, ss = ss, sheet = "Americas")
+sheet_write(mini_gap$Asia,     ss = ss, sheet = "Asia")
+sheet_write(mini_gap$Europe,   ss = ss, sheet = "Europe")
+sheet_write(mini_gap$Oceania,  ss = ss, sheet = "Oceania")

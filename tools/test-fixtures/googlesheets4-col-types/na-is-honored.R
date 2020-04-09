@@ -15,4 +15,4 @@ df <- tibble(
   D = 1:3
 )
 sheet_add(ss, sheet = "NAs")
-sheets_write(df, ss, sheet = "NAs")
+sheet_write(df, ss, sheet = "NAs")

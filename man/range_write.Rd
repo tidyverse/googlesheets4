@@ -50,10 +50,13 @@ The input \code{ss}, as an instance of \code{\link{sheets_id}}
 \description{
 \lifecycle{experimental}
 
-Writes a data frame into a range. Main differences from \code{\link[=sheets_write]{sheets_write()}}:
+Writes a data frame into a range of cells. Main differences from
+\code{\link[=sheet_write]{sheet_write()}} (a.k.a. \code{\link[=write_sheet]{write_sheet()}}):
 \itemize{
-\item The edited rectangle is not explicitly styled as a table.
-Nothing special is done re: formatting a header row or freezing rows.
+\item Narrower scope. \code{range_write()} literally targets some cells, not a whole
+(work)sheet.
+\item The edited rectangle is not explicitly styled as a table. Nothing special
+is done re: formatting a header row or freezing rows.
 \item Column names can be suppressed. This means that, although \code{data} must
 be a data frame (at least for now), \code{range_write()} can actually be used
 to write arbitrary data.
@@ -72,27 +75,27 @@ want is \code{\link[=sheet_append]{sheet_append()}}.
 The \code{range} argument of \code{range_write()} is special, because the Sheets API
 can implement it in 2 different ways:
 \itemize{
-\item If \code{range} represents exactly 1 cell, like "B3", it is taken as the
-\emph{start} (or upper left corner) of the targeted cell rectangle. The edited
-cells are determined implicitly by the extent of the \code{data} we are
-writing. This frees you from doing fiddly range computations based on the
-dimensions of the \code{data} you are sending.
+\item If \code{range} represents exactly 1 cell, like "B3", it is taken as the \emph{start}
+(or upper left corner) of the targeted cell rectangle. The edited cells are
+determined implicitly by the extent of the \code{data} we are writing. This
+frees you from doing fiddly range computations based on the dimensions of
+the \code{data}.
 \item If \code{range} describes a rectangle with multiple cells, it is interpreted
 as the \emph{actual} rectangle to edit. It is possible to describe a rectangle
-that is unbounded on the right (e.g. "B2:4"), on the bottom (e.g.
-"A4:C"), or on both the right and the bottom
-(e.g. \code{cell_limits(c(2, 3), c(NA, NA))}. Note that \strong{all cells} inside
-the rectangle receive updated data and format. Important implication: if
-the \code{data} object isn't big enough to fill the target rectangle, the cells
-that don't receive new data are effectively cleared, i.e. the
-existing value and format are deleted.
+that is unbounded on the right (e.g. "B2:4"), on the bottom (e.g. "A4:C"),
+or on both the right and the bottom (e.g.
+\code{cell_limits(c(2, 3), c(NA, NA))}. Note that \strong{all cells} inside the
+rectangle receive updated data and format. Important implication: if the
+\code{data} object isn't big enough to fill the target rectangle, the cells that
+don't receive new data are effectively cleared, i.e. the existing value
+and format are deleted.
 }
 }
 
 \examples{
 if (sheets_has_token()) {
   # create a Sheet with some initial, empty (work)sheets
-  (ss <- sheets_create("sheets-edit-demo", sheets = c("alpha", "beta")))
+  (ss <- sheets_create("range-write-demo", sheets = c("alpha", "beta")))
 
   df <- data.frame(
     x = 1:3,
@@ -120,7 +123,7 @@ if (sheets_has_token()) {
   range_write(ss, data = dat, range = "beta!C5", col_names = FALSE)
 
   # clean up
-  googledrive::drive_rm(ss)
+  googledrive::drive_trash(ss)
 }
 }
 \seealso{
@@ -138,8 +141,8 @@ Other write functions:
 \code{\link{range_delete}()},
 \code{\link{range_flood}()},
 \code{\link{sheet_append}()},
+\code{\link{sheet_write}()},
 \code{\link{sheets_create}()},
-\code{\link{sheets_formula}()},
-\code{\link{write_sheet}()}
+\code{\link{sheets_formula}()}
 }
 \concept{write functions}

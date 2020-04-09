@@ -3,17 +3,20 @@
 #' @description
 #' \lifecycle{experimental}
 #'
-#' Writes a data frame into a range. Main differences from [sheets_write()]:
-#'   * The edited rectangle is not explicitly styled as a table.
-#'     Nothing special is done re: formatting a header row or freezing rows.
-#'   * Column names can be suppressed. This means that, although `data` must
-#'     be a data frame (at least for now), `range_write()` can actually be used
-#'     to write arbitrary data.
-#'   * The target (spread)Sheet and (work)sheet must already exist. There is no
-#'     ability to create a Sheet or add a worksheet.
-#'   * The target sheet dimensions are not "trimmed" to shrink-wrap the `data`.
-#'     However, the sheet might gain rows and/or columns, in order to write
-#'     `data` to the user-specified `range`.
+#' Writes a data frame into a range of cells. Main differences from
+#' [sheet_write()] (a.k.a. [write_sheet()]):
+#' * Narrower scope. `range_write()` literally targets some cells, not a whole
+#'   (work)sheet.
+#' * The edited rectangle is not explicitly styled as a table. Nothing special
+#'   is done re: formatting a header row or freezing rows.
+#' * Column names can be suppressed. This means that, although `data` must
+#'   be a data frame (at least for now), `range_write()` can actually be used
+#'   to write arbitrary data.
+#' * The target (spread)Sheet and (work)sheet must already exist. There is no
+#'   ability to create a Sheet or add a worksheet.
+#' * The target sheet dimensions are not "trimmed" to shrink-wrap the `data`.
+#'   However, the sheet might gain rows and/or columns, in order to write
+#'   `data` to the user-specified `range`.
 #'
 #' If you just want to add rows to an existing table, the function you probably
 #' want is [sheet_append()].
@@ -21,20 +24,20 @@
 #' @section Range specification:
 #' The `range` argument of `range_write()` is special, because the Sheets API
 #' can implement it in 2 different ways:
-#'   * If `range` represents exactly 1 cell, like "B3", it is taken as the
-#'     *start* (or upper left corner) of the targeted cell rectangle. The edited
-#'     cells are determined implicitly by the extent of the `data` we are
-#'     writing. This frees you from doing fiddly range computations based on the
-#'     dimensions of the `data` you are sending.
-#'  * If `range` describes a rectangle with multiple cells, it is interpreted
-#'    as the *actual* rectangle to edit. It is possible to describe a rectangle
-#'    that is unbounded on the right (e.g. "B2:4"), on the bottom (e.g.
-#'    "A4:C"), or on both the right and the bottom
-#'    (e.g. `cell_limits(c(2, 3), c(NA, NA))`. Note that **all cells** inside
-#'    the rectangle receive updated data and format. Important implication: if
-#'    the `data` object isn't big enough to fill the target rectangle, the cells
-#'    that don't receive new data are effectively cleared, i.e. the
-#'    existing value and format are deleted.
+#' * If `range` represents exactly 1 cell, like "B3", it is taken as the *start*
+#'   (or upper left corner) of the targeted cell rectangle. The edited cells are
+#'   determined implicitly by the extent of the `data` we are writing. This
+#'   frees you from doing fiddly range computations based on the dimensions of
+#'   the `data`.
+#' * If `range` describes a rectangle with multiple cells, it is interpreted
+#'   as the *actual* rectangle to edit. It is possible to describe a rectangle
+#'   that is unbounded on the right (e.g. "B2:4"), on the bottom (e.g. "A4:C"),
+#'   or on both the right and the bottom (e.g.
+#'   `cell_limits(c(2, 3), c(NA, NA))`. Note that **all cells** inside the
+#'   rectangle receive updated data and format. Important implication: if the
+#'   `data` object isn't big enough to fill the target rectangle, the cells that
+#'    don't receive new data are effectively cleared, i.e. the existing value
+#'    and format are deleted.
 #'
 #' @eval param_ss()
 #' @param data A data frame.
@@ -70,7 +73,7 @@
 #' @examples
 #' if (sheets_has_token()) {
 #'   # create a Sheet with some initial, empty (work)sheets
-#'   (ss <- sheets_create("sheets-edit-demo", sheets = c("alpha", "beta")))
+#'   (ss <- sheets_create("range-write-demo", sheets = c("alpha", "beta")))
 #'
 #'   df <- data.frame(
 #'     x = 1:3,
@@ -98,7 +101,7 @@
 #'   range_write(ss, data = dat, range = "beta!C5", col_names = FALSE)
 #'
 #'   # clean up
-#'   googledrive::drive_rm(ss)
+#'   googledrive::drive_trash(ss)
 #' }
 range_write <- function(ss,
                         data,

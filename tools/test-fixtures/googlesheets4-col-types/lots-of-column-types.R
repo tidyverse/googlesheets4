@@ -18,4 +18,4 @@ df <- tibble(
                           "2003-12-21 09:20:29", "1975-04-14 13:31:03"))
 )
 
-sheets_write(df, ss, sheet = "lots-of-types")
+sheet_write(df, ss, sheet = "lots-of-types")

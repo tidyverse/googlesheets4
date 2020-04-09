@@ -21,7 +21,7 @@ new_formula <- function(x = character()) {
 #' if (sheets_has_token()) {
 #' dat <- data.frame(X = c(1, 5, 3, 2, 4, 6))
 #'
-#' ss <- sheets_write(dat)
+#' ss <- sheet_write(dat)
 #' ss
 #'
 #' summaries <- tibble::tribble(
@@ -46,7 +46,7 @@ new_formula <- function(x = character()) {
 #' miscellany$example <- sheets_formula(miscellany$example)
 #' miscellany
 #'
-#' sheets_write(miscellany, ss = ss)
+#' sheet_write(miscellany, ss = ss)
 #'
 #' # clean up
 #' googledrive::drive_trash(ss)

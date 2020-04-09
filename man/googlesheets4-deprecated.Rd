@@ -5,6 +5,7 @@
 \alias{sheets_sheets}
 \alias{sheets_cells}
 \alias{sheets_read}
+\alias{sheets_write}
 \title{Deprecated functions}
 \usage{
 sheets_sheets(...)
@@ -12,6 +13,8 @@ sheets_sheets(...)
 sheets_cells(...)
 
 sheets_read(...)
+
+sheets_write(...)
 }
 \arguments{
 \item{...}{Passed on to the function that succeeds the deprecated function.}
@@ -28,5 +31,8 @@ googlesheets4.
 
 \code{sheets_read()} is replaced by \code{\link[=range_read]{range_read()}} (which is a synonym for
 \code{\link[=read_sheet]{read_sheet()}}).
+
+\code{sheets_write()} is replaced by \code{\link[=sheet_write]{sheet_write()}} (which is a synonym for
+\code{\link[=write_sheet]{write_sheet()}}).
 }
 \keyword{internal}

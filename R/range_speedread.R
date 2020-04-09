@@ -46,7 +46,7 @@
 #'   }
 #'
 #'   # write a Sheet that, by default, is NOT world-readable
-#'   (ss <- sheets_write(iris))
+#'   (ss <- sheet_write(iris))
 #'
 #'   # demo that range_speedread() sends a token, which is why we can read this
 #'   range_speedread(ss)

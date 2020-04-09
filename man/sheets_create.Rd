@@ -26,7 +26,7 @@ The input \code{ss}, as an instance of \code{\link{sheets_id}}
 Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook).
 Optionally, you can also provide names and/or data for the initial set of
 (work)sheets. Any initial data provided via \code{sheets} is styled as a table,
-as described in \code{\link[=sheets_write]{sheets_write()}}.
+as described in \code{\link[=sheet_write]{sheet_write()}}.
 }
 \examples{
 if (sheets_has_token()) {
@@ -76,7 +76,7 @@ Other write functions:
 \code{\link{range_flood}()},
 \code{\link{range_write}()},
 \code{\link{sheet_append}()},
-\code{\link{sheets_formula}()},
-\code{\link{write_sheet}()}
+\code{\link{sheet_write}()},
+\code{\link{sheets_formula}()}
 }
 \concept{write functions}

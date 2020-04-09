@@ -1,8 +1,8 @@
 # ---- nm_fun ----
-me_ <- nm_fun("TEST-sheets_write")
+me_ <- nm_fun("TEST-sheet_write")
 
 # ---- tests ----
-test_that("sheets_write() writes what it should", {
+test_that("sheet_write() writes what it should", {
   skip_if_offline()
   skip_if_no_token()
 
@@ -14,7 +14,7 @@ test_that("sheets_write() writes what it should", {
   dat$factor <- factor(dat$factor)
 
   ss <- scoped_temporary_ss(me_("datetimes"))
-  sheets_write(dat, ss)
+  sheet_write(dat, ss)
   x <- range_read(ss, sheet = "dat", col_types = "C")
 
   # the main interesting bit to test is whether we successfully sent
@@ -44,7 +44,7 @@ test_that("sheets_write() writes what it should", {
   )
 })
 
-test_that("sheets_write() can figure out (work)sheet name", {
+test_that("sheet_write() can figure out (work)sheet name", {
   skip_if_offline()
   skip_if_no_token()
 
@@ -53,18 +53,18 @@ test_that("sheets_write() can figure out (work)sheet name", {
   ss <- scoped_temporary_ss(me_("sheetnames"))
 
   # get (work)sheet name from data frame's name
-  sheets_write(foofy, ss)
+  sheet_write(foofy, ss)
   expect_equal(tail(sheet_names(ss), 1), "foofy")
 
   # we don't clobber existing (work)sheet if name was inferred
-  sheets_write(foofy, ss)
+  sheet_write(foofy, ss)
   expect_equal(tail(sheet_names(ss), 1), "Sheet2")
 
   # we do write into existing (work)sheet if name is explicitly given
-  sheets_write(foofy, ss, sheet = "foofy")
+  sheet_write(foofy, ss, sheet = "foofy")
   expect_setequal(sheet_names(ss), c("Sheet1", "Sheet2", "foofy"))
 
   # we do write into existing (work)sheet if position is explicitly given
-  sheets_write(foofy, ss, sheet = 2)
+  sheet_write(foofy, ss, sheet = 2)
   expect_setequal(sheet_names(ss), c("Sheet1", "Sheet2", "foofy"))
 })

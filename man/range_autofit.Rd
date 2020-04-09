@@ -39,7 +39,7 @@ if (sheets_has_token()) {
     fruit = c("date", "lime", "pear", "plum")
   )
 
-  ss <- sheets_write(dat)
+  ss <- write_sheet(dat)
   ss
 
   # open in the browser

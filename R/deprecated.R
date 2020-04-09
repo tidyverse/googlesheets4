@@ -43,4 +43,14 @@ sheets_read <- function(...) {
   range_read(...)
 }
 
+#' @description
+#' `sheets_write()` is replaced by [sheet_write()] (which is a synonym for
+#' [write_sheet()]).
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_write <- function(...) {
+  deprecate_warn("0.2.0", "sheets_write()", "sheet_write()")
+  sheet_write(...)
+}
+
 # nocov end

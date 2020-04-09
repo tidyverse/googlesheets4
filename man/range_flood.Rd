@@ -94,8 +94,8 @@ Other write functions:
 \code{\link{range_delete}()},
 \code{\link{range_write}()},
 \code{\link{sheet_append}()},
+\code{\link{sheet_write}()},
 \code{\link{sheets_create}()},
-\code{\link{sheets_formula}()},
-\code{\link{write_sheet}()}
+\code{\link{sheets_formula}()}
 }
 \concept{write functions}

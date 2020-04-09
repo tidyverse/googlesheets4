@@ -76,6 +76,7 @@ Other worksheet functions:
 \code{\link{sheet_properties}()},
 \code{\link{sheet_relocate}()},
 \code{\link{sheet_rename}()},
-\code{\link{sheet_resize}()}
+\code{\link{sheet_resize}()},
+\code{\link{sheet_write}()}
 }
 \concept{worksheet functions}

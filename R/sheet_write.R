@@ -1,35 +1,54 @@
-#' (Over)write new data into a worksheet
+#' (Over)write new data into a Sheet
 #'
 #' @description
 #' \lifecycle{experimental}
 #'
-#' Writes a data frame into a (work)sheet inside a (spread)Sheet. The target
+
+#' @description
+
+#' This is one of the main ways to write data with googlesheets4. This function
+#' writes a data frame into a (work)sheet inside a (spread)Sheet. The target
 #' sheet is styled as a table:
 #'   * Special formatting is applied to the header row, which holds column
 #'     names.
 #'   * The first row (header row) is frozen.
-#'   * Sheet dimensions are set to "shrink wrap" the `data`.
+#'   * The sheet's dimensions are set to "shrink wrap" the `data`.
 #'
 #' If no existing Sheet is specified via `ss`, this function delegates to
 #' [`sheets_create()`] and the new Sheet's name is randomly generated. If that's
 #' undesirable, call [`sheets_create()`] directly to get more control.
 #'
-#' If no `sheet` is specified or if `sheet` doesn't identify an existing sheet, a
-#' new sheet is added to receive the `data`. If `sheet` specifies an existing
+#' If no `sheet` is specified or if `sheet` doesn't identify an existing sheet,
+#' a new sheet is added to receive the `data`. If `sheet` specifies an existing
 #' sheet, it is effectively overwritten! All pre-existing values, formats, and
 #' dimensions are cleared and the targeted sheet gets new values and dimensions
 #' from `data`.
+#'
+#' This function goes by two names, because we want it to make sense in two
+#' contexts:
+#' * `write_sheet()` evokes other table-writing functions, like
+#'   `readr::write_csv()`. The `sheet` here technically refers to an individual
+#'   (work)sheet (but also sort of refers to the associated Google
+#'   (spread)Sheet).
+#' * `sheet_write()` is the right name according to the naming convention used
+#'   throughout the googlesheets4 package.
+#'
+#' `write_sheet()` and `sheet_write()` are synonyms and you can use either one.
+#' The first release of googlesheets used a `sheets_` prefix everywhere, so we
+#' had `sheets_write()`. It still works, but it's deprecated and will go away
+#' rather swiftly.
 #'
 #' @param data A data frame. If it has zero rows, we send one empty pseudo-row
 #'   of data, so that we can apply the usual table styling. This empty row goes
 #'   away (gets filled, actually) the first time you send more data with
 #'   [sheet_append()].
-
 #' @eval param_ss()
 #' @eval param_sheet(action = "write into")
+#'
 #' @template ss-return
 #' @export
 #' @family write functions
+#' @family worksheet functions
 #'
 #' @examples
 #' if (sheets_has_token()) {
@@ -39,23 +58,23 @@
 #'   )
 #'
 #'   # specify only a data frame, get a new Sheet, with a random name
-#'   ss <- sheets_write(df)
-#'   range_read(ss)
+#'   ss <- write_sheet(df)
+#'   read_sheet(ss)
 #'
 #'   # clean up
-#'   googledrive::drive_rm(ss)
+#'   googledrive::drive_trash(ss)
 #'
 #'   # create a Sheet with some initial, placeholder data
 #'   ss <- sheets_create(
-#'     "sheets-write-demo",
+#'     "sheet-write-demo",
 #'     sheets = list(alpha = data.frame(x = 1), omega = data.frame(x = 1))
 #'   )
 #'
 #'   # write df into its own, new sheet
-#'   sheets_write(df, ss = ss)
+#'   sheet_write(df, ss = ss)
 #'
 #'   # write mtcars into the sheet named "omega"
-#'   sheets_write(mtcars, ss = ss, sheet = "omega")
+#'   sheet_write(mtcars, ss = ss, sheet = "omega")
 #'
 #'   # get an overview of the sheets
 #'   sheet_properties(ss)
@@ -64,9 +83,9 @@
 #'   # sheets_browse(ss)
 #'
 #'   # clean up
-#'   googledrive::drive_rm(ss)
+#'   googledrive::drive_trash(ss)
 #' }
-write_sheet <- function(data,
+sheet_write <- function(data,
                         ss = NULL,
                         sheet = NULL) {
   data_quo <- enquo(data)
@@ -148,6 +167,6 @@ write_sheet <- function(data,
   invisible(ssid)
 }
 
-#' @rdname write_sheet
+#' @rdname sheet_write
 #' @export
-sheets_write <- write_sheet
+write_sheet <- sheet_write

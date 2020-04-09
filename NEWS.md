@@ -14,7 +14,7 @@ These functions are ready for use but are still considered experimental and may 
   * `range_flood()` "floods" all cells in a range with the same content.
     `range_clear()` is a wrapper around `range_flood()` for the special case
      of clearing cell values.
-  * `sheets_delete()` deletes a range of cells.
+  * `range_delete()` deletes a range of cells.
   
 ### Other new functions and arguments
 

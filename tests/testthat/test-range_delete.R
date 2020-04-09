@@ -1,17 +1,17 @@
 # ---- nm_fun ----
-me_ <- nm_fun("TEST-sheets_delete")
+me_ <- nm_fun("TEST-range_delete")
 
 # ---- tests ----
-test_that("sheets_delete() works", {
+test_that("range_delete() works", {
   skip_if_offline()
   skip_if_no_token()
 
   df <- sheets_fodder(4)
   ss <- scoped_temporary_ss(me_(), sheets = list(df))
 
-  sheets_delete(ss, range = "2:3")
-  sheets_delete(ss, range = "B")
-  sheets_delete(ss, range = "B2", shift = "left")
+  range_delete(ss, range = "2:3")
+  range_delete(ss, range = "B")
+  range_delete(ss, range = "B2", shift = "left")
 
   out <- sheets_read(ss)
 

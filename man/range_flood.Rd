@@ -91,9 +91,9 @@ Makes a \code{RepeatCellRequest}:
 }
 
 Other write functions: 
+\code{\link{range_delete}()},
 \code{\link{sheets_append}()},
 \code{\link{sheets_create}()},
-\code{\link{sheets_delete}()},
 \code{\link{sheets_edit}()},
 \code{\link{sheets_formula}()},
 \code{\link{write_sheet}()}

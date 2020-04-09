@@ -1,7 +1,7 @@
 #' Delete cells
 #'
 #' Deletes a range of cells and shifts other cells into the deleted area. There
-#' are several related tasks that are done by other functions:
+#' are several related tasks that are implemented by other functions:
 #'   * To clear cells of their value and/or format, use [range_clear()].
 #'   * To delete an entire (work)sheet, use [sheets_sheet_delete()].
 #'   * To change the dimensions of a (work)sheet, use [sheets_sheet_resize()].
@@ -16,7 +16,7 @@
 #'   here and how it works in other functions (e.g. [sheets_read()]):
 #'   * `range` must be specified.
 #'   * `range` must not be a named range.
-#'   * `range` must not be the name of a (work) sheet. Use
+#'   * `range` must not be the name of a (work) sheet. Instead, use
 #'     [sheets_sheet_delete()] to delete an entire sheet.
 #'  Row-only and column-only ranges are especially relevant, such as "2:6" or
 #'  "D". Remember you can also use the helpers in [`cell-specification`],
@@ -41,21 +41,21 @@
 #'   ss <- sheets_create("sheets-delete-example", sheets = list(df))
 #'
 #'   # delete some rows
-#'   sheets_delete(ss, range = "2:4")
+#'   range_delete(ss, range = "2:4")
 #'
 #'   # delete a column
-#'   sheets_delete(ss, range = "C")
+#'   range_delete(ss, range = "C")
 #'
 #'   # delete a rectangle and specify how to shift remaining cells
-#'   sheets_delete(ss, range = "B3:F4", shift = "left")
+#'   range_delete(ss, range = "B3:F4", shift = "left")
 #'
 #'   # clean up
 #'   googledrive::drive_trash(ss)
 #' }
-sheets_delete <- function(ss,
-                          sheet = NULL,
-                          range,
-                          shift = NULL) {
+range_delete <- function(ss,
+                         sheet = NULL,
+                         range,
+                         shift = NULL) {
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   check_range(range)
@@ -72,11 +72,12 @@ sheets_delete <- function(ss,
 
   # determine (work)sheet and range --------------------------------------------
   range_spec <- as_range_spec(
-    range, sheet = sheet,
+    range,
+    sheet = sheet,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   if (is.null(range_spec$cell_range) && is.null(range_spec$cell_limits)) {
-    stop_glue("{bt('sheets_delete()')} requires a cell range")
+    stop_glue("{bt('range_delete()')} requires a cell range")
   }
   range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
   # as_GridRange() throws an error for a named range

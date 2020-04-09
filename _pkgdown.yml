@@ -54,7 +54,7 @@ reference:
       Make changes to a (spread)Sheet or to the (work)sheets it contains
     contents:
       - sheets_create
-      - sheets_delete
+      - range_delete
       - starts_with("sheets_sheet")
   - title: "Formatting and aesthetics"
     desc: >

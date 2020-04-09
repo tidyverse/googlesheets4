@@ -19,7 +19,7 @@ sheets_cells(...)
 These functions are deprecated and will be removed in a future release of
 googlesheets4.
 
-\code{sheets_sheets()} is replaced by \code{sheets_sheet_names()}.
+\code{sheets_sheets()} is replaced by \code{sheet_names()}.
 
 \code{sheets_cells()} is replaced by \code{range_read_cells()}.
 }

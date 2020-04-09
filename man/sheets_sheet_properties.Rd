@@ -2,12 +2,12 @@
 % Please edit documentation in R/sheets_sheet_properties.R
 \name{sheets_sheet_properties}
 \alias{sheets_sheet_properties}
-\alias{sheets_sheet_names}
+\alias{sheet_names}
 \title{Get data about (work)sheets}
 \usage{
 sheets_sheet_properties(ss)
 
-sheets_sheet_names(ss)
+sheet_names(ss)
 }
 \arguments{
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
@@ -19,7 +19,7 @@ is how googledrive represents Drive files. Processed through
 \value{
 \itemize{
 \item \code{sheets_sheet_properties()}: A tibble with one row per (work)sheet.
-\item \code{sheets_sheet_names()}: A character vector of (work)sheet names.
+\item \code{sheet_names()}: A character vector of (work)sheet names.
 }
 }
 \description{
@@ -30,7 +30,7 @@ Reveals full metadata or just the names for the (work)sheets inside a
 if (sheets_has_token()) {
   ss <- sheets_example("gapminder")
   sheets_sheet_properties(ss)
-  sheets_sheet_names(ss)
+  sheet_names(ss)
 }
 }
 \seealso{

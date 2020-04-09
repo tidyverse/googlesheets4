@@ -13,7 +13,7 @@ test_that("relocation works", {
   sheet_relocate(ss, list("foxtrot", 4))
   sheet_relocate(ss, c("bravo", "alfa", "echo"), .after = 10)
   expect_equal(
-    sheets_sheet_names(ss),
+    sheet_names(ss),
     c("foxtrot", "charlie", "delta", "bravo", "alfa", "echo")
   )
 })

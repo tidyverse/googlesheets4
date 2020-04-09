@@ -38,7 +38,7 @@ There is a new family of `sheets_sheet_*()` functions that operate on the (work)
   
   * `sheets_sheet_properties()` returns a tibble of metadata with one row per
      sheet.
-  * `sheets_sheet_names()` returns sheet names.
+  * `sheet_names()` returns sheet names.
   * `sheet_add()` adds one or more sheets.
   * `sheet_copy()` copies a sheet.
   * `sheet_delete()` deletes one or more sheets.
@@ -53,8 +53,6 @@ There is a new family of `sheets_sheet_*()` functions that operate on the (work)
 `sheets_fodder()` is a convenience function that creates a filler data frame you can use to make toy sheets you're using to practice on or for a reprex.
 
 ### Renamed functions and classes
-
-* `sheets_sheets()` is now `sheets_sheet_names()`, in order to fit into a coherent family of `sheets_sheet_*()` functions that deal with (work)sheets. `sheets_sheets()` still exists but will be removed rather quickly since googlesheets4 is so new.
 
 * The S3 class `sheets_Spreadsheet` is renamed to `googlesheets4_spreadsheet`, a consequence of rationalizing all internal and external classes. `googlesheets4_spreadsheet` is the class that holds metadata for a Sheet and it is connected to the API's [`Spreadsheet`](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet) schema. The return value of `sheets_get()` has this class.
 

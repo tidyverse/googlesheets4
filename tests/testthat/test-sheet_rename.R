@@ -13,6 +13,6 @@ test_that("internal copy works", {
   ss %>%
     sheet_rename(2, new_name = "poultry") %>%
     sheet_rename(1, new_name = "flowers")
-  out <- sheets_sheet_names(ss)
+  out <- sheet_names(ss)
   expect_equal(out, c("flowers", "poultry"))
 })

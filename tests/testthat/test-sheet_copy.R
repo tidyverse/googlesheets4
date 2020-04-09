@@ -11,7 +11,7 @@ test_that("internal copy works", {
     sheets = list(iris = head(iris), chickwts = head(chickwts))
   )
   sheet_copy(ss, to_sheet = "xyz", .after = 1)
-  out <- sheets_sheet_names(ss)
+  out <- sheet_names(ss)
   expect_equal(out, c("iris", "xyz", "chickwts"))
 })
 
@@ -29,6 +29,6 @@ test_that("external copy works", {
     ss_source, from_sheet = "chickwts",
     to_ss = ss_dest, to_sheet = "chicks-two", .before = 1
   )
-  out <- sheets_sheet_names(ss_dest)
+  out <- sheet_names(ss_dest)
   expect_equal(out, c("chicks-two", "Sheet1"))
 })

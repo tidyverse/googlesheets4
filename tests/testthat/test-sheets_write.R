@@ -54,17 +54,17 @@ test_that("sheets_write() can figure out (work)sheet name", {
 
   # get (work)sheet name from data frame's name
   sheets_write(foofy, ss)
-  expect_equal(tail(sheets_sheet_names(ss), 1), "foofy")
+  expect_equal(tail(sheet_names(ss), 1), "foofy")
 
   # we don't clobber existing (work)sheet if name was inferred
   sheets_write(foofy, ss)
-  expect_equal(tail(sheets_sheet_names(ss), 1), "Sheet2")
+  expect_equal(tail(sheet_names(ss), 1), "Sheet2")
 
   # we do write into existing (work)sheet if name is explicitly given
   sheets_write(foofy, ss, sheet = "foofy")
-  expect_setequal(sheets_sheet_names(ss), c("Sheet1", "Sheet2", "foofy"))
+  expect_setequal(sheet_names(ss), c("Sheet1", "Sheet2", "foofy"))
 
   # we do write into existing (work)sheet if position is explicitly given
   sheets_write(foofy, ss, sheet = 2)
-  expect_setequal(sheets_sheet_names(ss), c("Sheet1", "Sheet2", "foofy"))
+  expect_setequal(sheet_names(ss), c("Sheet1", "Sheet2", "foofy"))
 })

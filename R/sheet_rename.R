@@ -21,7 +21,7 @@
 #'     "sheets-sheet-rename-demo",
 #'     sheets = list(iris = head(iris), chickwts = head(chickwts))
 #'   )
-#'   sheets_sheet_names(ss)
+#'   sheet_names(ss)
 #'
 #'   ss %>%
 #'     sheet_rename(1, new_name = "flowers") %>%

@@ -7,14 +7,14 @@
 #'
 #' @return
 #'   * `sheets_sheet_properties()`: A tibble with one row per (work)sheet.
-#'   * `sheets_sheet_names()`: A character vector of (work)sheet names.
+#'   * `sheet_names()`: A character vector of (work)sheet names.
 #' @export
 #' @family worksheet functions
 #' @examples
 #' if (sheets_has_token()) {
 #'   ss <- sheets_example("gapminder")
 #'   sheets_sheet_properties(ss)
-#'   sheets_sheet_names(ss)
+#'   sheet_names(ss)
 #' }
 sheets_sheet_properties <- function(ss) {
   x <- sheets_get(ss)
@@ -23,6 +23,6 @@ sheets_sheet_properties <- function(ss) {
 
 #' @export
 #' @rdname sheets_sheet_properties
-sheets_sheet_names <- function(ss) {
+sheet_names <- function(ss) {
   sheets_sheet_properties(ss)$name
 }

@@ -16,12 +16,12 @@ NULL
 # nocov start
 
 #' @description
-#' `sheets_sheets()` is replaced by `sheets_sheet_names()`.
+#' `sheets_sheets()` is replaced by `sheet_names()`.
 #' @rdname googlesheets4-deprecated
 #' @export
 sheets_sheets <- function(...) {
-  deprecate_warn("0.2.0", "sheets_sheets()", "sheets_sheet_names()")
-  sheets_sheet_names(...)
+  deprecate_warn("0.2.0", "sheets_sheets()", "sheet_names()")
+  sheet_names(...)
 }
 
 #' @description

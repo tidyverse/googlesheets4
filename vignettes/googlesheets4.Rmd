@@ -92,10 +92,10 @@ sheets_get(ss)
 
 sheets_sheet_properties(ss)
 
-sheets_sheet_names(ss)
+sheet_names(ss)
 ```
 
-`sheets_sheet_properties()` and `sheets_sheet_names()` are two members of a larger family of functions for dealing with the (work)sheets within a (spread)Sheet.
+`sheets_sheet_properties()` and `sheet_names()` are two members of a larger family of functions for dealing with the (work)sheets within a (spread)Sheet.
 
 The metadata exposed by `sheets_get()` is also revealed whenever you print an object that is known to be a `sheets_id` (an S3 class we use to make Sheet IDs).
 

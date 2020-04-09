@@ -34,30 +34,30 @@
 #' if (sheets_has_token()) {
 #'   sheet_names <- c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot")
 #'   ss <- sheets_create("sheets-sheet-relocate-demo", sheets = sheet_names)
-#'   sheets_sheet_names(ss)
+#'   sheet_names(ss)
 #'
 #'   # move one sheet, forwards then backwards
 #'   ss %>%
 #'     sheet_relocate("echo", .before = "bravo") %>%
-#'     sheets_sheet_names()
+#'     sheet_names()
 #'   ss %>%
 #'     sheet_relocate("echo", .after = "delta") %>%
-#'     sheets_sheet_names()
+#'     sheet_names()
 #'
 #'   # reorder and move multiple sheets to the front
 #'   ss %>%
 #'     sheet_relocate(list("foxtrot", 4)) %>%
-#'     sheets_sheet_names()
+#'     sheet_names()
 #'
 #'   # put the sheets back in the original order
 #'   ss %>%
 #'     sheet_relocate(sheet_names) %>%
-#'     sheets_sheet_names()
+#'     sheet_names()
 #'
 #'   # reorder and move multiple sheets to the back
 #'   ss %>%
 #'     sheet_relocate(c("bravo", "alfa", "echo"), .after = 10) %>%
-#'     sheets_sheet_names()
+#'     sheet_names()
 #'
 #'   # clean up
 #'   googledrive::drive_find("sheets-sheet-relocate-demo") %>%

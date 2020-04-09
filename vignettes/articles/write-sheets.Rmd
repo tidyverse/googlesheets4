@@ -27,8 +27,8 @@ Basic Sheet writing is shown in the [Get started](https://googlesheets4.tidyvers
     - But it can create (work)sheets and write data.
   * `sheets_write()` emphasizes writing a data frame into a (work)sheet.
     - But it can create a new (spread)Sheet or a new (work)sheet.
-  * `sheets_append()` is about adding rows to an existing data table.
-  * `sheets_create()`, `sheets_write()`, and `sheets_append()` implement
+  * `sheet_append()` is about adding rows to an existing data table.
+  * `sheets_create()`, `sheets_write()`, and `sheet_append()` implement
     holistic operations for representing a single R data frame as a table in
     a (work)sheet within a Google Sheet.
     - `sheets_create()` and `sheets_write()` both impose this mentality via
@@ -194,9 +194,9 @@ sheets_find("write-sheets-demo") %>%
   googledrive::drive_trash()
 ```
 
-## `sheets_append()`
+## `sheet_append()`
 
-`sheets_append()` can add one or more rows of data to an existing (work)sheet.
+`sheet_append()` can add one or more rows of data to an existing (work)sheet.
 
 Let's recreate the table of "other" deaths from an example Sheet, but without the annoying text above and below the data. First we bring that data into a local data frame and chop it into pieces.
 
@@ -229,15 +229,15 @@ Send the data, one or more rows at a time. Keep inspecting in the browser if you
 ss
 
 # send several rows
-ss %>% sheets_append(deaths_one)
+ss %>% sheet_append(deaths_one)
 ss
 
 # send a single row
-ss %>% sheets_append(deaths_two)
+ss %>% sheet_append(deaths_two)
 ss
 
 # send remaining rows
-ss %>% sheets_append(deaths_three)
+ss %>% sheet_append(deaths_three)
 ss
 ```
 

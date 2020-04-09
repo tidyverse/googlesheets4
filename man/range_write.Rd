@@ -65,7 +65,7 @@ However, the sheet might gain rows and/or columns, in order to write
 }
 
 If you just want to add rows to an existing table, the function you probably
-want is \code{\link[=sheets_append]{sheets_append()}}.
+want is \code{\link[=sheet_append]{sheet_append()}}.
 }
 \section{Range specification}{
 
@@ -137,7 +137,7 @@ The main data write is done via an \code{UpdateCellsRequest}:
 Other write functions: 
 \code{\link{range_delete}()},
 \code{\link{range_flood}()},
-\code{\link{sheets_append}()},
+\code{\link{sheet_append}()},
 \code{\link{sheets_create}()},
 \code{\link{sheets_formula}()},
 \code{\link{write_sheet}()}

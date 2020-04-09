@@ -74,7 +74,7 @@ Makes a \code{DeleteRangeRequest}:
 Other write functions: 
 \code{\link{range_flood}()},
 \code{\link{range_write}()},
-\code{\link{sheets_append}()},
+\code{\link{sheet_append}()},
 \code{\link{sheets_create}()},
 \code{\link{sheets_formula}()},
 \code{\link{write_sheet}()}

@@ -13,7 +13,7 @@ sheets_write(data, ss = NULL, sheet = NULL)
 \item{data}{A data frame. If it has zero rows, we send one empty pseudo-row
 of data, so that we can apply the usual table styling. This empty row goes
 away (gets filled, actually) the first time you send more data with
-\code{\link[=sheets_append]{sheets_append()}}.}
+\code{\link[=sheet_append]{sheet_append()}}.}
 
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of \code{googlesheets4_spreadsheet}
@@ -89,7 +89,7 @@ Other write functions:
 \code{\link{range_delete}()},
 \code{\link{range_flood}()},
 \code{\link{range_write}()},
-\code{\link{sheets_append}()},
+\code{\link{sheet_append}()},
 \code{\link{sheets_create}()},
 \code{\link{sheets_formula}()}
 }

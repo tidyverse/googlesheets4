@@ -83,7 +83,7 @@ Constructs a batch of \code{UpdateSheetPropertiesRequest}s (one per sheet):
 }
 
 Other worksheet functions: 
-\code{\link{sheets_append}()},
+\code{\link{sheet_append}()},
 \code{\link{sheets_sheet_add}()},
 \code{\link{sheets_sheet_copy}()},
 \code{\link{sheets_sheet_delete}()},

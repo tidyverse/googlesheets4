@@ -25,7 +25,7 @@ These functions are ready for use but are still considered experimental and may 
   * `sheets_write()` (also available as `write_sheet()`) is a new function to
     write a data frame into a new or existing (work)sheet, inside a new or
     existing (spread)Sheet.
-  * `sheets_append()` adds rows to the data in an existing sheet.
+  * `sheet_append()` adds rows to the data in an existing sheet.
   * `range_write()` writes to a range.
   * `range_flood()` "floods" all cells in a range with the same content.
     `range_clear()` is a wrapper around `range_flood()` for the special case

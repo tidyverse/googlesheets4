@@ -29,10 +29,10 @@
 #'   ss <- sheets_create("sheets-append-demo", sheets = list(deaths = deaths_one))
 #'
 #'   # append a single row
-#'   ss %>% sheets_append(deaths_two)
+#'   ss %>% sheet_append(deaths_two)
 #'
 #'   # append remaining rows
-#'   ss %>% sheets_append(deaths_three)
+#'   ss %>% sheet_append(deaths_three)
 #'
 #'   # read and check against the original
 #'   deaths_replica <- sheets_read(ss, col_types = "????DD")
@@ -41,7 +41,7 @@
 #'   # cleanup
 #'   googledrive::drive_trash(ss)
 #' }
-sheets_append <- function(ss, data, sheet = 1) {
+sheet_append <- function(ss, data, sheet = 1) {
   check_data_frame(data)
   ssid <- as_sheets_id(ss)
   check_sheet(sheet)

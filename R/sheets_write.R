@@ -23,7 +23,7 @@
 #' @param data A data frame. If it has zero rows, we send one empty pseudo-row
 #'   of data, so that we can apply the usual table styling. This empty row goes
 #'   away (gets filled, actually) the first time you send more data with
-#'   [sheets_append()].
+#'   [sheet_append()].
 
 #' @eval param_ss()
 #' @eval param_sheet(action = "write into")

@@ -111,7 +111,7 @@ head(mtcars) %>%
 ss
 ```
 
-`range_write()` and `sheets_append()` are additional writing functions that are useful in specific situations. See the article [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html) for more about writing to Sheets.
+`range_write()` and `sheet_append()` are additional writing functions that are useful in specific situations. See the article [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html) for more about writing to Sheets.
 
 ```{r include = FALSE}
 googledrive::drive_rm(ss)

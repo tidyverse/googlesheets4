@@ -30,7 +30,7 @@ reference:
     contents:
       - write_sheet
       - sheets_create
-      - sheets_append
+      - sheet_append
       - range_write
       - range_flood
   - title: "Data preparation"

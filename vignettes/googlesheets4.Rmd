@@ -139,14 +139,14 @@ sheets_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
 ss
 ```
 
-`sheets_append()` adds one or more rows to an existing sheet.
+`sheet_append()` adds one or more rows to an existing sheet.
 
 ```{r}
-ss %>% sheets_append(data.frame(x = 11, letters[11]), sheet = "df")
+ss %>% sheet_append(data.frame(x = 11, letters[11]), sheet = "df")
 ss
 ```
 
-`range_write()` makes it possible to write arbitrary data, into an arbitrary range. It has a very different "feel" from `sheets_create()`, `sheets_write()`, and `sheets_append()`, all of which assume we're writing or growing a table of data in a (work)sheet. `range_write()` make fewer assumptions about what it's writing and why.
+`range_write()` makes it possible to write arbitrary data, into an arbitrary range. It has a very different "feel" from `sheets_create()`, `sheets_write()`, and `sheet_append()`, all of which assume we're writing or growing a table of data in a (work)sheet. `range_write()` make fewer assumptions about what it's writing and why.
 
 There is also a family of `sheets_sheet_*()` functions that do pure (work)sheet operations, such as add and delete.
 

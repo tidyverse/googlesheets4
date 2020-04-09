@@ -16,7 +16,7 @@
 #'     `data` to the user-specified `range`.
 #'
 #' If you just want to add rows to an existing table, the function you probably
-#' want is [sheets_append()].
+#' want is [sheet_append()].
 #'
 #' @section Range specification:
 #' The `range` argument of `range_write()` is special, because the Sheets API

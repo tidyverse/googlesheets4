@@ -69,7 +69,7 @@ Makes a batch of \code{AddSheetRequest}s (one per sheet):
 }
 
 Other worksheet functions: 
-\code{\link{sheets_append}()},
+\code{\link{sheet_append}()},
 \code{\link{sheets_sheet_copy}()},
 \code{\link{sheets_sheet_delete}()},
 \code{\link{sheets_sheet_properties}()},

@@ -50,8 +50,8 @@ Makes an \code{DeleteSheetsRequest}:
 Other worksheet functions: 
 \code{\link{sheet_add}()},
 \code{\link{sheet_append}()},
+\code{\link{sheet_copy}()},
 \code{\link{sheets_sheet_add}()},
-\code{\link{sheets_sheet_copy}()},
 \code{\link{sheets_sheet_properties}()},
 \code{\link{sheets_sheet_relocate}()},
 \code{\link{sheets_sheet_rename}()},

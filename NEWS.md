@@ -40,7 +40,7 @@ There is a new family of `sheets_sheet_*()` functions that operate on the (work)
      sheet.
   * `sheets_sheet_names()` returns sheet names.
   * `sheet_add()` adds one or more sheets.
-  * `sheets_sheet_copy()` copies a sheet.
+  * `sheet_copy()` copies a sheet.
   * `sheets_sheet_delete()` deletes one or more sheets.
   * `sheets_sheet_relocate()` moves sheets around.  
   * `sheets_sheet_rename()` renames one sheet.

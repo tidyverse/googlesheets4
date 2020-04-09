@@ -1,5 +1,5 @@
 # ---- nm_fun ----
-me_ <- nm_fun("TEST-sheets_sheet_copy")
+me_ <- nm_fun("TEST-sheet_copy")
 
 # ---- tests ----
 test_that("internal copy works", {
@@ -10,7 +10,7 @@ test_that("internal copy works", {
     me_("internal"),
     sheets = list(iris = head(iris), chickwts = head(chickwts))
   )
-  sheets_sheet_copy(ss, to_sheet = "xyz", .after = 1)
+  sheet_copy(ss, to_sheet = "xyz", .after = 1)
   out <- sheets_sheet_names(ss)
   expect_equal(out, c("iris", "xyz", "chickwts"))
 })
@@ -25,7 +25,7 @@ test_that("external copy works", {
   )
   ss_dest <- scoped_temporary_ss(me_("dest"))
 
-  sheets_sheet_copy(
+  sheet_copy(
     ss_source, from_sheet = "chickwts",
     to_ss = ss_dest, to_sheet = "chicks-two", .before = 1
   )

@@ -14,11 +14,11 @@ sheets_append DONE
 sheets_auto_resize_dims
 sheets_sheet_add DONE
 sheets_sheet_copy DONE
-sheets_sheet_delete
+sheets_sheet_delete DONE
 sheets_sheet_names
 sheets_sheet_properties
-sheets_sheet_relocate
-sheets_sheet_rename
+sheets_sheet_relocate DONE
+sheets_sheet_rename DONE
 sheets_sheet_resize
 sheets_sheets DONE
 

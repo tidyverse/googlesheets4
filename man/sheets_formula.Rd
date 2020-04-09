@@ -37,7 +37,7 @@ summaries <- tibble::tribble(
 summaries$summaries <- sheets_formula(summaries$summaries)
 summaries
 
-sheets_edit(ss, data = summaries, range = "C1", reformat = FALSE)
+range_write(ss, data = summaries, range = "C1", reformat = FALSE)
 
 miscellany <- tibble::tribble(
        ~ desc, ~ example,
@@ -57,9 +57,9 @@ googledrive::drive_trash(ss)
 Other write functions: 
 \code{\link{range_delete}()},
 \code{\link{range_flood}()},
+\code{\link{range_write}()},
 \code{\link{sheets_append}()},
 \code{\link{sheets_create}()},
-\code{\link{sheets_edit}()},
 \code{\link{write_sheet}()}
 }
 \concept{write functions}

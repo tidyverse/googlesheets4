@@ -74,8 +74,8 @@ There is an article on writing Sheets:
 Other write functions: 
 \code{\link{range_delete}()},
 \code{\link{range_flood}()},
+\code{\link{range_write}()},
 \code{\link{sheets_append}()},
-\code{\link{sheets_edit}()},
 \code{\link{sheets_formula}()},
 \code{\link{write_sheet}()}
 }

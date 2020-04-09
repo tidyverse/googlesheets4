@@ -7,7 +7,7 @@
 #'   * The edited rectangle is not explicitly styled as a table.
 #'     Nothing special is done re: formatting a header row or freezing rows.
 #'   * Column names can be suppressed. This means that, although `data` must
-#'     be a data frame (at least for now), `sheets_edit()` can actually be used
+#'     be a data frame (at least for now), `range_write()` can actually be used
 #'     to write arbitrary data.
 #'   * The target (spread)Sheet and (work)sheet must already exist. There is no
 #'     ability to create a Sheet or add a worksheet.
@@ -19,7 +19,7 @@
 #' want is [sheets_append()].
 #'
 #' @section Range specification:
-#' The `range` argument of `sheets_edit()` is special, because the Sheets API
+#' The `range` argument of `range_write()` is special, because the Sheets API
 #' can implement it in 2 different ways:
 #'   * If `range` represents exactly 1 cell, like "B3", it is taken as the
 #'     *start* (or upper left corner) of the targeted cell rectangle. The edited
@@ -78,7 +78,7 @@
 #'   )
 #'
 #'   #  write df somewhere other than the "upper left corner"
-#'   sheets_edit(ss, data = df, range = "D6")
+#'   range_write(ss, data = df, range = "D6")
 #'
 #'   # view your magnificent creation in the browser
 #'   # sheets_browse(ss)
@@ -89,18 +89,18 @@
 #'     logical = TRUE,
 #'     datetime = Sys.time()
 #'   )
-#'   sheets_edit(ss, data = dat, sheet = "beta", col_names = FALSE)
+#'   range_write(ss, data = dat, sheet = "beta", col_names = FALSE)
 #'
 #'   # send data of disparate types to a 1-column rectangle
 #'   dat <- tibble::tibble(
 #'     x = list(Sys.time(), FALSE, "string")
 #'   )
-#'   sheets_edit(ss, data = dat, range = "beta!C5", col_names = FALSE)
+#'   range_write(ss, data = dat, range = "beta!C5", col_names = FALSE)
 #'
 #'   # clean up
 #'   googledrive::drive_rm(ss)
 #' }
-sheets_edit <- function(ss,
+range_write <- function(ss,
                         data,
                         sheet = NULL,
                         range = NULL,

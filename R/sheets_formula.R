@@ -36,7 +36,7 @@ new_formula <- function(x = character()) {
 #' summaries$summaries <- sheets_formula(summaries$summaries)
 #' summaries
 #'
-#' sheets_edit(ss, data = summaries, range = "C1", reformat = FALSE)
+#' range_write(ss, data = summaries, range = "C1", reformat = FALSE)
 #'
 #' miscellany <- tibble::tribble(
 #'        ~ desc, ~ example,

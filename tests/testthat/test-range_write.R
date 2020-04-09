@@ -1,8 +1,8 @@
 # ---- nm_fun ----
-me_ <- nm_fun("TEST-sheets_edit")
+me_ <- nm_fun("TEST-range_write")
 
 # ---- tests ----
-test_that("sheets_edit() works", {
+test_that("range_write() works", {
   skip_if_offline()
   skip_if_no_token()
 
@@ -16,7 +16,7 @@ test_that("sheets_edit() works", {
   # this is intentional below: refer to sheet in various ways
 
   # write into existing cells --> no size change
-  sheets_edit(ss, data[3:2, ])
+  range_write(ss, data[3:2, ])
   props <- sheets_sheet_properties(ss)
   expect_equal(props$grid_rows, n + 1)
   expect_equal(props$grid_columns, m)
@@ -24,7 +24,7 @@ test_that("sheets_edit() works", {
   expect_identical(df[1, ], df[3, ])
 
   # write into non-existing cells --> sheet must grow
-  sheets_edit(ss, data, range = "foo!F5")
+  range_write(ss, data, range = "foo!F5")
   props <- sheets_sheet_properties(ss)
   expect_equal(props$grid_rows, (5 - 1) + n + 1)
   expect_equal(props$grid_columns, (which(LETTERS == "F") - 1) + m)
@@ -32,7 +32,7 @@ test_that("sheets_edit() works", {
   expect_equal(df, data)
 
   # write into existing and non-existing cells --> need new columns
-  sheets_edit(ss, data[1:3], sheet = "foo", range = "I2:K5")
+  range_write(ss, data[1:3], sheet = "foo", range = "I2:K5")
   props <- sheets_sheet_properties(ss)
   expect_equal(props$grid_columns, (which(LETTERS == "K")))
   df <- read_sheet(ss, range = "I2:K5")

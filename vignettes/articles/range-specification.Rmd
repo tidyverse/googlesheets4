@@ -20,7 +20,7 @@ sheets_deauth()
 
 # User-specified range
 
-Several googlesheets4 functions allow the user to specify which cells to read or write. This range specification comes via the `sheet`, `range`, and (possibly) `skip` arguments. Examples of functions with this interface: `sheets_read()`, `sheets_cells()`, and `sheets_edit()`.
+Several googlesheets4 functions allow the user to specify which cells to read or write. This range specification comes via the `sheet`, `range`, and (possibly) `skip` arguments. Examples of functions with this interface: `sheets_read()`, `sheets_cells()`, and `range_write()`.
 
   * `range` is the primary and most powerful argument and takes precedence over
     all others. `range` can be:
@@ -49,7 +49,7 @@ Loose ends and hangnails:
     first visible worksheet), so we don't retrieve data that we will just throw away. This is all very special case-y right now.
   * `cell_limits` objects can hold sheet information and I have made no
     arrangements for that.
-  * Should `sheets_edit()` have a skip argument, just for internal consistency?
+  * Should `range_write()` have a skip argument, just for internal consistency?
 
 # Range spec
 
@@ -230,7 +230,7 @@ When editing a sheet, we send an [`UpdateCellsRequest`](https://developers.googl
     cells that don't receive new data are cleared, according to the accompanying
     field mask in `fields`.
 
-`sheets_edit()` is the only writing function in googlesheets4 that lets the user target a specific range. This function is why we need the ability to convert A1-notation to `cell_limits` and to decide whether user's range should be sent via `start` or `range`. `sheets_write()`, `sheets_create()`, and `sheets_append()` all offer a higher-level API, focused on the holistic management of (work)sheets that hold a single data table.
+`range_write()` is the only writing function in googlesheets4 that lets the user target a specific range. This function is why we need the ability to convert A1-notation to `cell_limits` and to decide whether user's range should be sent via `start` or `range`. `sheets_write()`, `sheets_create()`, and `sheets_append()` all offer a higher-level API, focused on the holistic management of (work)sheets that hold a single data table.
 
 Here's a table that translates the A1-style ranges created above into `cell_limits`. Some scenarios are covered more than once in this input, because above we were tackling a different (harder) problem. But that's harmless and these inputs are good, in terms of covering all relevant scenarios. Note I dropped the row corresponding to "no input".
 
@@ -248,7 +248,7 @@ df %>%
   knitr::kable()
 ```
 
-How to decide whether to send user's range via `start` or `range`? Possible scenarios for `(sheet, range)` (remember: so far, `sheets_edit()` doesn't offer `skip`):
+How to decide whether to send user's range via `start` or `range`? Possible scenarios for `(sheet, range)` (remember: so far, `range_write()` doesn't offer `skip`):
 
   * `sheet` not given: populate with first (visible) sheet.
   * No `range`: Send sheet ID as `GridCoordinate` via `start`. We will

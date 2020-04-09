@@ -31,7 +31,7 @@ reference:
       - write_sheet
       - sheets_create
       - sheets_append
-      - sheets_edit
+      - range_write
       - range_flood
   - title: "Data preparation"
     desc: >

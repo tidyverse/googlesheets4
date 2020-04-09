@@ -229,15 +229,15 @@ Send the data, one or more rows at a time. Keep inspecting in the browser if you
 ss
 
 # send several rows
-sheets_append(deaths_one, ss)
+ss %>% sheets_append(deaths_one)
 ss
 
 # send a single row
-sheets_append(deaths_two, ss)
+ss %>% sheets_append(deaths_two)
 ss
 
 # send remaining rows
-sheets_append(deaths_three, ss)
+ss %>% sheets_append(deaths_three)
 ss
 ```
 

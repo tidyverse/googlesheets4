@@ -3,14 +3,14 @@
 #' Adds one or more new rows after the last row with data in a (work)sheet,
 #' increasing the row dimension of the sheet if necessary.
 #'
-#' @param data A data frame.
 #' @eval param_ss()
+#' @param data A data frame.
 #' @eval param_sheet(action = "append to")
 #'
 #' @template ss-return
 #' @export
 #' @family write functions
-
+#' @family worksheet functions
 #' @seealso Makes an `AppendCellsRequest`:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AppendCellsRequest>
 #'
@@ -21,27 +21,27 @@
 #'     sheets_read(range = "other_data", col_types = "????DD"))
 #'
 #'   # split the data into 3 pieces, which we will send separately
-#'   deaths_one <- deaths[1:5, ]
-#'   deaths_two <- deaths[6, ]
+#'   deaths_one   <- deaths[ 1:5, ]
+#'   deaths_two   <- deaths[   6, ]
 #'   deaths_three <- deaths[7:10, ]
 #'
 #'   # create a Sheet and send the first chunk of data
 #'   ss <- sheets_create("sheets-append-demo", sheets = list(deaths = deaths_one))
 #'
 #'   # append a single row
-#'   sheets_append(deaths_two, ss)
+#'   ss %>% sheets_append(deaths_two)
 #'
 #'   # append remaining rows
-#'   sheets_append(deaths_three, ss)
+#'   ss %>% sheets_append(deaths_three)
 #'
 #'   # read and check against the original
 #'   deaths_replica <- sheets_read(ss, col_types = "????DD")
 #'   identical(deaths, deaths_replica)
 #'
 #'   # cleanup
-#'   googledrive::drive_rm(ss)
+#'   googledrive::drive_trash(ss)
 #' }
-sheets_append <- function(data, ss, sheet = 1) {
+sheets_append <- function(ss, data, sheet = 1) {
   check_data_frame(data)
   ssid <- as_sheets_id(ss)
   check_sheet(sheet)

@@ -4,16 +4,16 @@
 \alias{sheets_append}
 \title{Append rows to a sheet}
 \usage{
-sheets_append(data, ss, sheet = 1)
+sheets_append(ss, data, sheet = 1)
 }
 \arguments{
-\item{data}{A data frame.}
-
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of \code{googlesheets4_spreadsheet}
 (returned by \code{\link[=sheets_get]{sheets_get()}}), or a \code{\link[googledrive:dribble]{dribble}}, which
 is how googledrive represents Drive files. Processed through
 \code{\link[=as_sheets_id]{as_sheets_id()}}.}
+
+\item{data}{A data frame.}
 
 \item{sheet}{Sheet to append to, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number.}
 }
@@ -31,25 +31,25 @@ if (sheets_has_token()) {
     sheets_read(range = "other_data", col_types = "????DD"))
 
   # split the data into 3 pieces, which we will send separately
-  deaths_one <- deaths[1:5, ]
-  deaths_two <- deaths[6, ]
+  deaths_one   <- deaths[ 1:5, ]
+  deaths_two   <- deaths[   6, ]
   deaths_three <- deaths[7:10, ]
 
   # create a Sheet and send the first chunk of data
   ss <- sheets_create("sheets-append-demo", sheets = list(deaths = deaths_one))
 
   # append a single row
-  sheets_append(deaths_two, ss)
+  ss \%>\% sheets_append(deaths_two)
 
   # append remaining rows
-  sheets_append(deaths_three, ss)
+  ss \%>\% sheets_append(deaths_three)
 
   # read and check against the original
   deaths_replica <- sheets_read(ss, col_types = "????DD")
   identical(deaths, deaths_replica)
 
   # cleanup
-  googledrive::drive_rm(ss)
+  googledrive::drive_trash(ss)
 }
 }
 \seealso{
@@ -65,5 +65,15 @@ Other write functions:
 \code{\link{sheets_create}()},
 \code{\link{sheets_formula}()},
 \code{\link{write_sheet}()}
+
+Other worksheet functions: 
+\code{\link{sheets_sheet_add}()},
+\code{\link{sheets_sheet_copy}()},
+\code{\link{sheets_sheet_delete}()},
+\code{\link{sheets_sheet_properties}()},
+\code{\link{sheets_sheet_relocate}()},
+\code{\link{sheets_sheet_rename}()},
+\code{\link{sheets_sheet_resize}()}
 }
+\concept{worksheet functions}
 \concept{write functions}

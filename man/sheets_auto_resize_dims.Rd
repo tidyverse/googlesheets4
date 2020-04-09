@@ -57,7 +57,7 @@ sheets_auto_resize_dims(ss)
 dat2 <- tibble::tibble(
   fruit = c("cucumber", "honeydew")
 )
-sheets_append(dat2, ss)
+ss \%>\% sheets_append(dat2)
 # in the browser, see that column A is now too narrow to show the data
 
 sheets_auto_resize_dims(ss)

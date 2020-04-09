@@ -142,7 +142,7 @@ ss
 `sheets_append()` adds one or more rows to an existing sheet.
 
 ```{r}
-sheets_append(data.frame(x = 11, letters[11]), ss, sheet = "df")
+ss %>% sheets_append(data.frame(x = 11, letters[11]), sheet = "df")
 ss
 ```
 

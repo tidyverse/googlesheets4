@@ -20,7 +20,7 @@ test_that("sheets_auto_resize_dims() works", {
 
   dat2 <- purrr::modify(dat, ~ paste0(.x, "_", .x))
   dat4 <- purrr::modify(dat2, ~ paste0(.x, "_", .x))
-  sheets_append(dat4, ss)
+  sheets_append(ss, dat4)
   sheets_auto_resize_dims(ss)
 
   after <- sheets_get_impl_(

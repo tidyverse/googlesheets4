@@ -4,7 +4,7 @@
 #' are several related tasks that are implemented by other functions:
 #'   * To clear cells of their value and/or format, use [range_clear()].
 #'   * To delete an entire (work)sheet, use [sheet_delete()].
-#'   * To change the dimensions of a (work)sheet, use [sheets_sheet_resize()].
+#'   * To change the dimensions of a (work)sheet, use [sheet_resize()].
 #'
 #' @eval param_ss()
 #' @eval param_sheet(
@@ -133,7 +133,7 @@ determine_shift <- function(gr) {
 
   stop_glue(
     "`range` must be bounded on the bottom and/or on the right.
-     See `sheet_delete()` or `sheets_sheet_resize()` to delete or \\
+     See `sheet_delete()` or `sheet_resize()` to delete or \\
      resize a (work)sheet."
   )
 }

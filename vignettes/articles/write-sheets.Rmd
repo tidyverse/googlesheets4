@@ -292,7 +292,7 @@ read_this <- function(ss) {
 
 ss_edit <- sheets_create("sheets-edit-demo")
 #googlesheets4:::sheets_share(ss_edit) %>% sheets_browse()
-sheets_sheet_resize(ss_edit, nrow = n, ncol = n, exact = TRUE)
+sheet_resize(ss_edit, nrow = n, ncol = n, exact = TRUE)
 populate(ss_edit)
 ```
 
@@ -458,7 +458,7 @@ sheets_find("range-flood-demo") %>%
 ## `range_delete()`
 
 `range_delete()` deletes a range of cells and shifts other cells into the deleted area. If you're trying to delete an entire (work)sheet or change its actual dimensions or extent, you should, instead, use `sheet_delete()` or
-`sheets_sheet_resize()`. If you just want to clear values or formats, use `range_clear()`.
+`sheet_resize()`. If you just want to clear values or formats, use `range_clear()`.
 
 First, we create a data frame and initialize a new Sheet with that data.
 

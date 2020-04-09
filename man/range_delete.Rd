@@ -41,7 +41,7 @@ are several related tasks that are implemented by other functions:
 \itemize{
 \item To clear cells of their value and/or format, use \code{\link[=range_clear]{range_clear()}}.
 \item To delete an entire (work)sheet, use \code{\link[=sheet_delete]{sheet_delete()}}.
-\item To change the dimensions of a (work)sheet, use \code{\link[=sheets_sheet_resize]{sheets_sheet_resize()}}.
+\item To change the dimensions of a (work)sheet, use \code{\link[=sheet_resize]{sheet_resize()}}.
 }
 }
 \examples{

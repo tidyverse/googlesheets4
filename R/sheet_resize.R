@@ -8,7 +8,7 @@
 #'   of `NULL` means to leave unchanged.
 #' @param exact Logical, indicating whether to impose `nrow` and `ncol` exactly
 #'   or to treat them as lower bounds. If `exact = FALSE`,
-#'   `sheets_sheet_resize()` can only add cells. If `exact = TRUE`, cells can be
+#'   `sheet_resize()` can only add cells. If `exact = TRUE`, cells can be
 #'   deleted and their contents are lost.
 #'
 #' @template ss-return
@@ -26,29 +26,29 @@
 #'   sheet_properties(ss)
 #'
 #'   # no resize occurs
-#'   sheets_sheet_resize(ss, nrow = 2, ncol = 6)
+#'   sheet_resize(ss, nrow = 2, ncol = 6)
 #'
 #'   # reduce sheet size
-#'   sheets_sheet_resize(ss, nrow = 5, ncol = 7, exact = TRUE)
+#'   sheet_resize(ss, nrow = 5, ncol = 7, exact = TRUE)
 #'
 #'   # add rows
-#'   sheets_sheet_resize(ss, nrow = 7)
+#'   sheet_resize(ss, nrow = 7)
 #'
 #'   # add columns
-#'   sheets_sheet_resize(ss, ncol = 10)
+#'   sheet_resize(ss, ncol = 10)
 #'
 #'   # add rows and columns
-#'   sheets_sheet_resize(ss, nrow = 9, ncol = 12)
+#'   sheet_resize(ss, nrow = 9, ncol = 12)
 #'
 #'   # re-inspect (work)sheet dims
 #'   sheet_properties(ss)
 #'
 #'   googledrive::drive_rm(ss)
 #' }
-sheets_sheet_resize <- function(ss,
-                                sheet = NULL,
-                                nrow = NULL, ncol = NULL,
-                                exact = FALSE) {
+sheet_resize <- function(ss,
+                         sheet = NULL,
+                         nrow = NULL, ncol = NULL,
+                         exact = FALSE) {
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   maybe_non_negative_integer(nrow)

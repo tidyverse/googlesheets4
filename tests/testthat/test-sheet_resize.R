@@ -1,18 +1,18 @@
 # ---- nm_fun ----
-me_ <- nm_fun("TEST-sheets_sheet_resize")
+me_ <- nm_fun("TEST-sheet_resize")
 
 # ---- tests ----
-test_that("sheets_sheet_resize() works", {
+test_that("sheet_resize() works", {
   skip_if_offline()
   skip_if_no_token()
 
   ss <- scoped_temporary_ss(me_())
 
   # no resize occurs
-  expect_message(sheets_sheet_resize(ss, nrow = 2, ncol = 6), "No need")
+  expect_message(sheet_resize(ss, nrow = 2, ncol = 6), "No need")
 
   # reduce sheet size
-  sheets_sheet_resize(ss, nrow = 5, ncol = 7, exact = TRUE)
+  sheet_resize(ss, nrow = 5, ncol = 7, exact = TRUE)
   props <- sheet_properties(ss)
   expect_equal(props$grid_rows, 5)
   expect_equal(props$grid_columns, 7)

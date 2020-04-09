@@ -24,9 +24,9 @@
 #'   sheets_sheet_properties(ss)
 #'
 #'   # delete sheets
-#'   sheets_sheet_delete(ss, 1)
-#'   sheets_sheet_delete(ss, "gamma")
-#'   sheets_sheet_delete(ss, list("alpha", 2))
+#'   sheet_delete(ss, 1)
+#'   sheet_delete(ss, "gamma")
+#'   sheet_delete(ss, list("alpha", 2))
 #'
 #'   # get an overview of the sheets
 #'   sheets_sheet_properties(ss)
@@ -34,7 +34,7 @@
 #'   # cleanup
 #'   sheets_find("delete-sheets-from-me") %>% googledrive::drive_rm()
 #' }
-sheets_sheet_delete <- function(ss, sheet) {
+sheet_delete <- function(ss, sheet) {
   ssid <- as_sheets_id(ss)
   walk(sheet, ~ check_sheet(.x, nm = "sheet"))
 

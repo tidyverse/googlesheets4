@@ -457,7 +457,7 @@ sheets_find("range-flood-demo") %>%
 
 ## `range_delete()`
 
-`range_delete()` deletes a range of cells and shifts other cells into the deleted area. If you're trying to delete an entire (work)sheet or change its actual dimensions or extent, you should, instead, use `sheets_sheet_delete()` or
+`range_delete()` deletes a range of cells and shifts other cells into the deleted area. If you're trying to delete an entire (work)sheet or change its actual dimensions or extent, you should, instead, use `sheet_delete()` or
 `sheets_sheet_resize()`. If you just want to clear values or formats, use `range_clear()`.
 
 First, we create a data frame and initialize a new Sheet with that data.

@@ -21,7 +21,7 @@ here and how it works in other functions (e.g. \code{\link[=sheets_read]{sheets_
 \item \code{range} must be specified.
 \item \code{range} must not be a named range.
 \item \code{range} must not be the name of a (work) sheet. Instead, use
-\code{\link[=sheets_sheet_delete]{sheets_sheet_delete()}} to delete an entire sheet.
+\code{\link[=sheet_delete]{sheet_delete()}} to delete an entire sheet.
 Row-only and column-only ranges are especially relevant, such as "2:6" or
 "D". Remember you can also use the helpers in \code{\link{cell-specification}},
 such as \code{cell_cols(4:6)}, or \code{cell_rows(5)}.
@@ -40,7 +40,7 @@ Deletes a range of cells and shifts other cells into the deleted area. There
 are several related tasks that are implemented by other functions:
 \itemize{
 \item To clear cells of their value and/or format, use \code{\link[=range_clear]{range_clear()}}.
-\item To delete an entire (work)sheet, use \code{\link[=sheets_sheet_delete]{sheets_sheet_delete()}}.
+\item To delete an entire (work)sheet, use \code{\link[=sheet_delete]{sheet_delete()}}.
 \item To change the dimensions of a (work)sheet, use \code{\link[=sheets_sheet_resize]{sheets_sheet_resize()}}.
 }
 }

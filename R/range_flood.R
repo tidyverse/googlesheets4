@@ -1,7 +1,7 @@
 #' Flood or clear a range of cells
 #'
-#' `sheets_flood()` "floods" a range of cells with the same content.
-#' `sheets_clear()` is a wrapper that handles the common special case of
+#' `range_flood()` "floods" a range of cells with the same content.
+#' `range_clear()` is a wrapper that handles the common special case of
 #' clearing the cell value. Both functions, by default, also clear the format,
 #' but this can be specified via `reformat`.
 #'
@@ -27,13 +27,13 @@
 #'   ss <- sheets_create("sheets-flood-example", sheets = list(df))
 #'
 #'   # default behavior (`cell = NULL`): clear value and format
-#'   sheets_flood(ss, range = "A1:B3")
+#'   range_flood(ss, range = "A1:B3")
 #'
 #'   # clear value but preserve format
-#'   sheets_flood(ss, range = "C1:D3", reformat = FALSE)
+#'   range_flood(ss, range = "C1:D3", reformat = FALSE)
 #'
 #'   # send new value
-#'   sheets_flood(ss, range = "4:5", cell = ";-)")
+#'   range_flood(ss, range = "4:5", cell = ";-)")
 #'
 #'   # send formatting
 #'   # WARNING: use these unexported, internal functions at your own risk!
@@ -42,24 +42,25 @@
 #'     userEnteredFormat = googlesheets4:::new(
 #'       "CellFormat",
 #'       backgroundColor = googlesheets4:::new(
-#'         "Color", red = 159/255, green = 183/255, blue = 196/255
+#'         "Color",
+#'         red = 159 / 255, green = 183 / 255, blue = 196 / 255
 #'       )
 #'     )
 #'   )
-#'   sheets_flood(ss, range = "I:J", cell = blue_background)
+#'   range_flood(ss, range = "I:J", cell = blue_background)
 #'
-#'   # sheets_clear() is a shortcut where `cell = NULL` always
-#'   sheets_clear(ss, range = "9:9")
-#'   sheets_clear(ss, range = "10:10", reformat = FALSE)
+#'   # range_clear() is a shortcut where `cell = NULL` always
+#'   range_clear(ss, range = "9:9")
+#'   range_clear(ss, range = "10:10", reformat = FALSE)
 #'
 #'   # clean up
 #'   googledrive::drive_trash(ss)
 #' }
-sheets_flood <- function(ss,
-                         sheet = NULL,
-                         range = NULL,
-                         cell = NULL,
-                         reformat = TRUE) {
+range_flood <- function(ss,
+                        sheet = NULL,
+                        range = NULL,
+                        cell = NULL,
+                        reformat = TRUE) {
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   check_range(range)
@@ -70,11 +71,12 @@ sheets_flood <- function(ss,
 
   # determine (work)sheet ------------------------------------------------------
   range_spec <- as_range_spec(
-    range, sheet = sheet,
+    range,
+    sheet = sheet,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
-  s <- lookup_sheet(range_spec$sheet_name , sheets_df = x$sheets)
+  s <- lookup_sheet(range_spec$sheet_name, sheets_df = x$sheets)
   message_glue("Editing sheet {dq(range_spec$sheet_name)}")
 
   # prepare cell and field mask ------------------------------------------------
@@ -108,13 +110,13 @@ sheets_flood <- function(ss,
   invisible(ssid)
 }
 
-#' @rdname sheets_flood
+#' @rdname range_flood
 #' @export
-sheets_clear <- function(ss,
-                         sheet = NULL,
-                         range = NULL,
-                         reformat = TRUE) {
-  sheets_flood(
+range_clear <- function(ss,
+                        sheet = NULL,
+                        range = NULL,
+                        reformat = TRUE) {
+  range_flood(
     ss = ss,
     sheet = sheet,
     range = range,

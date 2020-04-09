@@ -32,7 +32,7 @@ reference:
       - sheets_create
       - sheets_append
       - sheets_edit
-      - sheets_flood
+      - range_flood
   - title: "Data preparation"
     desc: >
       Helpers for preparing data to write into Sheets
@@ -83,3 +83,8 @@ reference:
       - sheets_token
       - sheets_has_token
       - sheets_endpoints
+  - title: "Operate on a range of cells"
+    desc: >
+      Functions that can target a cell range
+    contents:
+      - starts_with("range_")

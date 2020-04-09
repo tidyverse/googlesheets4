@@ -39,7 +39,7 @@ The input \code{ss}, as an instance of \code{\link{sheets_id}}
 Deletes a range of cells and shifts other cells into the deleted area. There
 are several related tasks that are done by other functions:
 \itemize{
-\item To clear cells of their value and/or format, use \code{\link[=sheets_clear]{sheets_clear()}}.
+\item To clear cells of their value and/or format, use \code{\link[=range_clear]{range_clear()}}.
 \item To delete an entire (work)sheet, use \code{\link[=sheets_sheet_delete]{sheets_sheet_delete()}}.
 \item To change the dimensions of a (work)sheet, use \code{\link[=sheets_sheet_resize]{sheets_sheet_resize()}}.
 }
@@ -72,10 +72,10 @@ Makes a \code{DeleteRangeRequest}:
 }
 
 Other write functions: 
+\code{\link{range_flood}()},
 \code{\link{sheets_append}()},
 \code{\link{sheets_create}()},
 \code{\link{sheets_edit}()},
-\code{\link{sheets_flood}()},
 \code{\link{sheets_formula}()},
 \code{\link{write_sheet}()}
 }

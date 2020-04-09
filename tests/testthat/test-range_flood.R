@@ -1,8 +1,8 @@
 # ---- nm_fun ----
-me_ <- nm_fun("TEST-sheets_flood")
+me_ <- nm_fun("TEST-range_flood")
 
 # ---- tests ----
-test_that("sheets_flood() works", {
+test_that("range_flood() works", {
   skip_if_offline()
   skip_if_no_token()
 
@@ -10,13 +10,13 @@ test_that("sheets_flood() works", {
   ss <- scoped_temporary_ss(me_(), sheets = list(dat))
 
   # clear values and format
-  sheets_flood(ss, range = "A:A")
+  range_flood(ss, range = "A:A")
 
   # reset values and reformat
-  sheets_flood(ss, range = "B:B", cell = "hi")
+  range_flood(ss, range = "B:B", cell = "hi")
 
   # reset values, leave format unchanged
-  sheets_flood(ss, range = "C:C", cell = "bye", reformat = FALSE)
+  range_flood(ss, range = "C:C", cell = "bye", reformat = FALSE)
 
   out <- sheets_cells(ss, cell_data = "full", discard_empty = FALSE)
 

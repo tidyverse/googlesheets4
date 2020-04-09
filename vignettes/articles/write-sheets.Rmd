@@ -36,7 +36,7 @@ Basic Sheet writing is shown in the [Get started](https://googlesheets4.tidyvers
     - All 3 functions aim to shrink-wrap the data.
   * `sheets_edit()` is the one function that helps you write arbitrary data
     into an arbitrary range, although it is still oriented around a data frame.
-  * `sheets_flood()` writes common content into all of the cells in a range.
+  * `range_flood()` writes common content into all of the cells in a range.
     - An important special case is *clearing* a range of cells of their
       existing values and, optionally, formatting.
   * `sheets_delete()` deletes a range of cells and shifts other cells into the
@@ -415,14 +415,15 @@ sheets_find("sheets-formula-demo") %>%
   googledrive::drive_trash()
 ```
 
-## `sheets_flood()`
+## `range_flood()`
 
-`sheets_flood()` "floods" all cells in a range with common content. By default, it floods them with no content, i.e. it clears cells of their existing value and format. Note that `sheets_clear()` is a convenience wrapper for this special case. 
+`range_flood()` "floods" all cells in a range with common content. By default, it floods them with no content, i.e. it clears cells of their existing value and format. Note that `range_clear()` is a convenience wrapper for this special case.
+
 First, we create a data frame and initialize a new Sheet with that data.
 
 ```{r}
 df <- sheets_fodder(10)
-(ss <- sheets_create("sheets-flood-demo", sheets = list(df)))
+(ss <- sheets_create("range-flood-demo", sheets = list(df)))
 ```
 
 To begin, each cell holds its A1-coordinates as its value. If you viewed this in the browser, you'd see the header row has some special formatting, including a gray background.
@@ -431,10 +432,10 @@ To begin, each cell holds its A1-coordinates as its value. If you viewed this in
 sheets_read(ss)
 ```
 
-By default, `sheets_flood()` sends an empty cell (and clears existing formatting).
+By default, `range_flood()` sends an empty cell (and clears existing formatting).
 
 ```{r}
-sheets_flood(ss, range = "A1:B3")
+range_flood(ss, range = "A1:B3")
 sheets_read(ss)
 ```
 
@@ -443,21 +444,21 @@ We can't easily demonstrate this here, but if you are working with a sheet in th
 We can also send a new value into a range of cells.
 
 ```{r}
-sheets_flood(ss, range = "4:5", cell = ";-)")
+range_flood(ss, range = "4:5", cell = ";-)")
 sheets_read(ss)
 ```
 
 ### Clean up
 
 ```{r}
-sheets_find("sheets-flood-demo") %>%
+sheets_find("range-flood-demo") %>%
   googledrive::drive_trash()
 ```
 
 ## `sheets_delete()`
 
 `sheets_deletes()` deletes a range of cells and shifts other cells into the deleted area. If you're trying to delete an entire (work)sheet or change its actual dimensions or extent, you should, instead, use `sheets_sheet_delete()` or
-`sheets_sheet_resize()`. If you just want to clear values or formats, use `sheets_clear()`.
+`sheets_sheet_resize()`. If you just want to clear values or formats, use `range_clear()`.
 
 First, we create a data frame and initialize a new Sheet with that data.
 

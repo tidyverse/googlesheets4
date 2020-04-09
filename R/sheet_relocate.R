@@ -10,7 +10,7 @@
 #'
 #' If your relocation task is more complicated and you are puzzled by the
 #' result, break it into a sequence of simpler calls to
-#' `sheets_sheet_relocate()`.
+#' `sheet_relocate()`.
 #'
 #' @eval param_ss()
 #' @eval param_sheet(
@@ -38,35 +38,35 @@
 #'
 #'   # move one sheet, forwards then backwards
 #'   ss %>%
-#'     sheets_sheet_relocate("echo", .before = "bravo") %>%
+#'     sheet_relocate("echo", .before = "bravo") %>%
 #'     sheets_sheet_names()
 #'   ss %>%
-#'     sheets_sheet_relocate("echo", .after = "delta") %>%
+#'     sheet_relocate("echo", .after = "delta") %>%
 #'     sheets_sheet_names()
 #'
 #'   # reorder and move multiple sheets to the front
 #'   ss %>%
-#'     sheets_sheet_relocate(list("foxtrot", 4)) %>%
+#'     sheet_relocate(list("foxtrot", 4)) %>%
 #'     sheets_sheet_names()
 #'
 #'   # put the sheets back in the original order
 #'   ss %>%
-#'     sheets_sheet_relocate(sheet_names) %>%
+#'     sheet_relocate(sheet_names) %>%
 #'     sheets_sheet_names()
 #'
 #'   # reorder and move multiple sheets to the back
 #'   ss %>%
-#'     sheets_sheet_relocate(c("bravo", "alfa", "echo"), .after = 10) %>%
+#'     sheet_relocate(c("bravo", "alfa", "echo"), .after = 10) %>%
 #'     sheets_sheet_names()
 #'
 #'   # clean up
 #'   googledrive::drive_find("sheets-sheet-relocate-demo") %>%
 #'     googledrive::drive_trash()
 #' }
-sheets_sheet_relocate <- function(ss,
-                                  sheet,
-                                  .before = if (is.null(.after)) 1,
-                                  .after = NULL) {
+sheet_relocate <- function(ss,
+                           sheet,
+                           .before = if (is.null(.after)) 1,
+                           .after = NULL) {
   ssid <- as_sheets_id(ss)
   walk(sheet, check_sheet)
   maybe_sheet(.before)

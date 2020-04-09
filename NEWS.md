@@ -42,7 +42,7 @@ There is a new family of `sheets_sheet_*()` functions that operate on the (work)
   * `sheet_add()` adds one or more sheets.
   * `sheet_copy()` copies a sheet.
   * `sheet_delete()` deletes one or more sheets.
-  * `sheets_sheet_relocate()` moves sheets around.  
+  * `sheet_relocate()` moves sheets around.  
   * `sheets_sheet_rename()` renames one sheet.
   * `sheets_sheet_resize()` changes the number of rows or columns in a sheet.
   

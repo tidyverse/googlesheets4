@@ -1,5 +1,5 @@
 # ---- nm_fun ----
-me_ <- nm_fun("TEST-sheets_sheet_relocate")
+me_ <- nm_fun("TEST-sheet_relocate")
 
 # ---- tests ----
 test_that("relocation works", {
@@ -9,9 +9,9 @@ test_that("relocation works", {
   sheet_names <- c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot")
   ss <- scoped_temporary_ss(me_(), sheets = sheet_names)
 
-  sheets_sheet_relocate(ss, "echo", .before = "bravo")
-  sheets_sheet_relocate(ss, list("foxtrot", 4))
-  sheets_sheet_relocate(ss, c("bravo", "alfa", "echo"), .after = 10)
+  sheet_relocate(ss, "echo", .before = "bravo")
+  sheet_relocate(ss, list("foxtrot", 4))
+  sheet_relocate(ss, c("bravo", "alfa", "echo"), .after = 10)
   expect_equal(
     sheets_sheet_names(ss),
     c("foxtrot", "charlie", "delta", "bravo", "alfa", "echo")

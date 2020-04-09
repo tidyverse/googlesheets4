@@ -58,7 +58,7 @@
 #'   sheets_write(mtcars, ss = ss, sheet = "omega")
 #'
 #'   # get an overview of the sheets
-#'   sheets_sheet_properties(ss)
+#'   sheet_properties(ss)
 #'
 #'   # view your magnificent creation in the browser
 #'   # sheets_browse(ss)

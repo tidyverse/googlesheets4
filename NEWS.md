@@ -36,7 +36,7 @@ These functions are ready for use but are still considered experimental and may 
 
 There is a new family of `sheets_sheet_*()` functions that operate on the (work)sheets inside an existing (spread)Sheet:
   
-  * `sheets_sheet_properties()` returns a tibble of metadata with one row per
+  * `sheet_properties()` returns a tibble of metadata with one row per
      sheet.
   * `sheet_names()` returns sheet names.
   * `sheet_add()` adds one or more sheets.

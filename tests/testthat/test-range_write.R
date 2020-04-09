@@ -17,7 +17,7 @@ test_that("range_write() works", {
 
   # write into existing cells --> no size change
   range_write(ss, data[3:2, ])
-  props <- sheets_sheet_properties(ss)
+  props <- sheet_properties(ss)
   expect_equal(props$grid_rows, n + 1)
   expect_equal(props$grid_columns, m)
   df <- read_sheet(ss)
@@ -25,7 +25,7 @@ test_that("range_write() works", {
 
   # write into non-existing cells --> sheet must grow
   range_write(ss, data, range = "foo!F5")
-  props <- sheets_sheet_properties(ss)
+  props <- sheet_properties(ss)
   expect_equal(props$grid_rows, (5 - 1) + n + 1)
   expect_equal(props$grid_columns, (which(LETTERS == "F") - 1) + m)
   df <- read_sheet(ss, range = cell_cols(c("F", NA)))
@@ -33,7 +33,7 @@ test_that("range_write() works", {
 
   # write into existing and non-existing cells --> need new columns
   range_write(ss, data[1:3], sheet = "foo", range = "I2:K5")
-  props <- sheets_sheet_properties(ss)
+  props <- sheet_properties(ss)
   expect_equal(props$grid_columns, (which(LETTERS == "K")))
   df <- read_sheet(ss, range = "I2:K5")
   expect_equal(df, data[1:3])

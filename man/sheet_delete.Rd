@@ -27,7 +27,7 @@ if (sheets_has_token()) {
   sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 
   # get an overview of the sheets
-  sheets_sheet_properties(ss)
+  sheet_properties(ss)
 
   # delete sheets
   sheet_delete(ss, 1)
@@ -35,7 +35,7 @@ if (sheets_has_token()) {
   sheet_delete(ss, list("alpha", 2))
 
   # get an overview of the sheets
-  sheets_sheet_properties(ss)
+  sheet_properties(ss)
 
   # cleanup
   sheets_find("delete-sheets-from-me") \%>\% googledrive::drive_rm()
@@ -51,10 +51,10 @@ Other worksheet functions:
 \code{\link{sheet_add}()},
 \code{\link{sheet_append}()},
 \code{\link{sheet_copy}()},
+\code{\link{sheet_properties}()},
 \code{\link{sheet_relocate}()},
 \code{\link{sheet_rename}()},
 \code{\link{sheets_sheet_add}()},
-\code{\link{sheets_sheet_properties}()},
 \code{\link{sheets_sheet_resize}()}
 }
 \concept{worksheet functions}

@@ -46,7 +46,7 @@
 #'     )
 #'
 #'   # get an overview of the sheets
-#'   sheets_sheet_properties(ss)
+#'   sheet_properties(ss)
 #'
 #'   # cleanup
 #'   sheets_find("add-sheets-to-me") %>%

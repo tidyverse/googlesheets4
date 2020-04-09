@@ -55,7 +55,7 @@ if (sheets_has_token()) {
     )
 
   # get an overview of the sheets
-  sheets_sheet_properties(ss)
+  sheet_properties(ss)
 
   # cleanup
   sheets_find("add-sheets-to-me") \%>\%
@@ -72,10 +72,10 @@ Other worksheet functions:
 \code{\link{sheet_append}()},
 \code{\link{sheet_copy}()},
 \code{\link{sheet_delete}()},
+\code{\link{sheet_properties}()},
 \code{\link{sheet_relocate}()},
 \code{\link{sheet_rename}()},
 \code{\link{sheets_sheet_add}()},
-\code{\link{sheets_sheet_properties}()},
 \code{\link{sheets_sheet_resize}()}
 }
 \concept{worksheet functions}

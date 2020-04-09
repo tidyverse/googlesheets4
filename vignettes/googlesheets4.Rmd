@@ -90,12 +90,12 @@ ss <- sheets_example("deaths")
 
 sheets_get(ss)
 
-sheets_sheet_properties(ss)
+sheet_properties(ss)
 
 sheet_names(ss)
 ```
 
-`sheets_sheet_properties()` and `sheet_names()` are two members of a larger family of functions for dealing with the (work)sheets within a (spread)Sheet.
+`sheet_properties()` and `sheet_names()` are two members of a larger family of functions for dealing with the (work)sheets within a (spread)Sheet.
 
 The metadata exposed by `sheets_get()` is also revealed whenever you print an object that is known to be a `sheets_id` (an S3 class we use to make Sheet IDs).
 
@@ -153,7 +153,7 @@ There is also a family of `sheets_sheet_*()` functions that do pure (work)sheet 
 We take one last look at the sheets we created in `ss`, then clean up.
 
 ```{r}
-sheets_sheet_properties(ss)
+sheet_properties(ss)
 
 googledrive::drive_rm(ss)
 ```

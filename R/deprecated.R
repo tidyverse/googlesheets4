@@ -53,4 +53,13 @@ sheets_write <- function(...) {
   sheet_write(...)
 }
 
+#' @description
+#' `sheets_create()` is replaced by [gs4_create()].
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_create <- function(...) {
+  deprecate_warn("0.2.0", "sheets_create()", "gs4_create()")
+  gs4_create(...)
+}
+
 # nocov end

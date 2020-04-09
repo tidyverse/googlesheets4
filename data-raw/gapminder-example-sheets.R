@@ -6,7 +6,7 @@ library(gapminder)
 googlesheets4:::sheets_auth_docs()
 
 # if I were making the gapminder sheet from scratch, here's what I would do now:
-ss <- sheets_create(
+ss <- gs4_create(
   "gapminder-reboot",
   sheets = split(gapminder, gapminder$continent)
 )

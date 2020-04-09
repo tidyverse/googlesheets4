@@ -34,7 +34,7 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
   m <- match(name, existing$name)
   if (is.na(m)) {
     message_glue("Creating {dq(name)}")
-    ss <- sheets_create(name)
+    ss <- gs4_create(name)
   } else {
     message_glue("Testing sheet named {dq(name)} already exists ... using that")
     ss <- existing$id[[m]]

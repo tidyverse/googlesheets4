@@ -25,8 +25,8 @@ Changes the name of a (work)sheet.
 }
 \examples{
 if (sheets_has_token()) {
-  ss <- sheets_create(
-    "sheets-sheet-rename-demo",
+  ss <- gs4_create(
+    "sheet-rename-demo",
     sheets = list(iris = head(iris), chickwts = head(chickwts))
   )
   sheet_names(ss)
@@ -36,7 +36,7 @@ if (sheets_has_token()) {
     sheet_rename("chickwts", new_name = "poultry")
 
   # clean up
-  googledrive::drive_find("sheets-sheet-rename-demo") \%>\%
+  googledrive::drive_find("sheet-rename-demo") \%>\%
     googledrive::drive_trash()
 }
 }

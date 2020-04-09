@@ -36,7 +36,7 @@ if (sheets_has_token()) {
   deaths_three <- deaths[7:10, ]
 
   # create a Sheet and send the first chunk of data
-  ss <- sheets_create("sheets-append-demo", sheets = list(deaths = deaths_one))
+  ss <- gs4_create("sheet-append-demo", sheets = list(deaths = deaths_one))
 
   # append a single row
   ss \%>\% sheet_append(deaths_two)
@@ -59,11 +59,11 @@ Makes an \code{AppendCellsRequest}:
 }
 
 Other write functions: 
+\code{\link{gs4_create}()},
 \code{\link{range_delete}()},
 \code{\link{range_flood}()},
 \code{\link{range_write}()},
 \code{\link{sheet_write}()},
-\code{\link{sheets_create}()},
 \code{\link{sheets_formula}()}
 
 Other worksheet functions: 

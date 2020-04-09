@@ -73,7 +73,7 @@
 #' @examples
 #' if (sheets_has_token()) {
 #'   # create a Sheet with some initial, empty (work)sheets
-#'   (ss <- sheets_create("range-write-demo", sheets = c("alpha", "beta")))
+#'   (ss <- gs4_create("range-write-demo", sheets = c("alpha", "beta")))
 #'
 #'   df <- data.frame(
 #'     x = 1:3,

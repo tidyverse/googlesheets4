@@ -107,24 +107,24 @@ See the article [Find and Identify Sheets](https://googlesheets4.tidyverse.org/a
 
 ## Write
 
-`sheets_create()` creates a brand new (spread)Sheet and can optionally send some initial data.
+`gs4_create()` creates a brand new Google Sheet and can optionally send some initial data.
 
 ```{r}
-(ss <- sheets_create("fluffy-bunny", sheets = list(flowers = head(iris))))
+(ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 ```
 
-`sheets_write()` (over)writes a whole data frame into a (work)sheet within a (spread)Sheet.
+`sheet_write()` (over)writes a whole data frame into a (work)sheet within a (spread)Sheet.
 
 ```{r}
 head(mtcars) %>% 
-  sheets_write(ss, sheet = "autos")
+  sheet_write(ss, sheet = "autos")
 ss
 ```
 
 `range_write()` and `sheet_append()` are additional writing functions that are useful in specific situations. See the article [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html) for more about writing to Sheets.
 
 ```{r include = FALSE}
-googledrive::drive_rm(ss)
+googledrive::drive_trash(ss)
 ```
 
 ## Where to learn more

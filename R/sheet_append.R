@@ -26,7 +26,7 @@
 #'   deaths_three <- deaths[7:10, ]
 #'
 #'   # create a Sheet and send the first chunk of data
-#'   ss <- sheets_create("sheets-append-demo", sheets = list(deaths = deaths_one))
+#'   ss <- gs4_create("sheet-append-demo", sheets = list(deaths = deaths_one))
 #'
 #'   # append a single row
 #'   ss %>% sheet_append(deaths_two)

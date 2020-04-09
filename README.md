@@ -143,14 +143,14 @@ type, and getting low-level cell data.
 
 ## Write
 
-`sheets_create()` creates a brand new (spread)Sheet and can optionally
-send some initial data.
+`gs4_create()` creates a brand new Google Sheet and can optionally send
+some initial data.
 
 ``` r
-(ss <- sheets_create("fluffy-bunny", sheets = list(flowers = head(iris))))
+(ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> Creating new Sheet: "fluffy-bunny"
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1y9fiQXsYgz1qV4_n6ftzoJXPUpLf2KdohjSDzauicxg
+#>                 ID: 1Td3Dktr7Bq8go_r3SZjd3A3PRk2SDzDaDoYyn5Jjaeo
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -159,17 +159,17 @@ send some initial data.
 #>      flowers: 7 x 5
 ```
 
-`sheets_write()` (over)writes a whole data frame into a (work)sheet
+`sheet_write()` (over)writes a whole data frame into a (work)sheet
 within a (spread)Sheet.
 
 ``` r
 head(mtcars) %>% 
-  sheets_write(ss, sheet = "autos")
+  sheet_write(ss, sheet = "autos")
 #> Writing to "fluffy-bunny"
 #> Writing to sheet "autos"
 ss
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1y9fiQXsYgz1qV4_n6ftzoJXPUpLf2KdohjSDzauicxg
+#>                 ID: 1Td3Dktr7Bq8go_r3SZjd3A3PRk2SDzDaDoYyn5Jjaeo
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2

@@ -34,8 +34,8 @@
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#'   ss_aaa <- sheets_create(
-#'     "sheets-sheet-copy-demo-aaa",
+#'   ss_aaa <- gs4_create(
+#'     "sheet-copy-demo-aaa",
 #'     sheets = list(iris = head(iris), chickwts = head(chickwts))
 #'   )
 #'
@@ -49,7 +49,7 @@
 #'     sheet_copy(to_sheet = "iris-the-sequel", .after = 1)
 #'
 #'   # make a second Sheet
-#'   ss_bbb <- sheets_create("sheets-sheet-copy-demo-bbb")
+#'   ss_bbb <- gs4_create("sheet-copy-demo-bbb")
 #'
 #'   # copy 'chickwts' sheet from first Sheet to second
 #'   # accept auto-generated name and default location
@@ -65,7 +65,7 @@
 #'     )
 #'
 #'   # clean up
-#'   googledrive::drive_find("sheets-sheet-copy-demo") %>%
+#'   googledrive::drive_find("sheet-copy-demo") %>%
 #'     googledrive::drive_trash()
 #' }
 sheet_copy <- function(from_ss,

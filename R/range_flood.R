@@ -24,7 +24,7 @@
 #'   df <- sheets_fodder(10)
 #'
 #'   # create Sheet
-#'   ss <- sheets_create("sheets-flood-example", sheets = list(df))
+#'   ss <- gs4_create("range-flood-example", sheets = list(df))
 #'
 #'   # default behavior (`cell = NULL`): clear value and format
 #'   range_flood(ss, range = "A1:B3")

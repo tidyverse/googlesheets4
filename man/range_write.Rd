@@ -95,7 +95,7 @@ and format are deleted.
 \examples{
 if (sheets_has_token()) {
   # create a Sheet with some initial, empty (work)sheets
-  (ss <- sheets_create("range-write-demo", sheets = c("alpha", "beta")))
+  (ss <- gs4_create("range-write-demo", sheets = c("alpha", "beta")))
 
   df <- data.frame(
     x = 1:3,
@@ -138,11 +138,11 @@ The main data write is done via an \code{UpdateCellsRequest}:
 }
 
 Other write functions: 
+\code{\link{gs4_create}()},
 \code{\link{range_delete}()},
 \code{\link{range_flood}()},
 \code{\link{sheet_append}()},
 \code{\link{sheet_write}()},
-\code{\link{sheets_create}()},
 \code{\link{sheets_formula}()}
 }
 \concept{write functions}

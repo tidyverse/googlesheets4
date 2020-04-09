@@ -42,8 +42,8 @@ Copies a (work)sheet, within its current (spread)Sheet or to another Sheet.
 }
 \examples{
 if (sheets_has_token()) {
-  ss_aaa <- sheets_create(
-    "sheets-sheet-copy-demo-aaa",
+  ss_aaa <- gs4_create(
+    "sheet-copy-demo-aaa",
     sheets = list(iris = head(iris), chickwts = head(chickwts))
   )
 
@@ -57,7 +57,7 @@ if (sheets_has_token()) {
     sheet_copy(to_sheet = "iris-the-sequel", .after = 1)
 
   # make a second Sheet
-  ss_bbb <- sheets_create("sheets-sheet-copy-demo-bbb")
+  ss_bbb <- gs4_create("sheet-copy-demo-bbb")
 
   # copy 'chickwts' sheet from first Sheet to second
   # accept auto-generated name and default location
@@ -73,7 +73,7 @@ if (sheets_has_token()) {
     )
 
   # clean up
-  googledrive::drive_find("sheets-sheet-copy-demo") \%>\%
+  googledrive::drive_find("sheet-copy-demo") \%>\%
     googledrive::drive_trash()
 }
 }

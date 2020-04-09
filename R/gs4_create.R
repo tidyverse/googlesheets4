@@ -29,36 +29,37 @@
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#'   sheets_create("sheets-create-demo-1")
+#'   gs4_create("gs4-create-demo-1")
 #'
-#'   sheets_create("sheets-create-demo-2", locale = "en_CA")
+#'   gs4_create("gs4-create-demo-2", locale = "en_CA")
 #'
-#'   sheets_create(
-#'     "sheets-create-demo-3",
+#'   gs4_create(
+#'     "gs4-create-demo-3",
 #'     locale = "fr_FR",
 #'     timeZone = "Europe/Paris"
 #'   )
 #'
-#'   sheets_create(
-#'     "sheets-create-demo-4",
+#'   gs4_create(
+#'     "gs4-create-demo-4",
 #'     sheets = c("alpha", "beta")
 #'   )
 #'
 #'   my_data <- data.frame(x = 1)
-#'   sheets_create(
-#'     "sheets-create-demo-5",
+#'   gs4_create(
+#'     "gs4-create-demo-5",
 #'     sheets = my_data
 #'   )
 #'
-#'   sheets_create(
-#'     "sheets-create-demo-6",
+#'   gs4_create(
+#'     "gs4-create-demo-6",
 #'     sheets = list(iris = head(iris), mtcars = head(mtcars))
 #'   )
 #'
 #'   # clean up
-#'   sheets_find("sheets-create-demo") %>% googledrive::drive_trash()
+#'   sheets_find("gs4-create-demo") %>%
+#'     googledrive::drive_trash()
 #' }
-sheets_create <- function(name = sheets_random(), ..., sheets = NULL) {
+gs4_create <- function(name = sheets_random(), ..., sheets = NULL) {
   sheets       <- enlist_sheets(enquo(sheets))
   sheets_given <- !is.null(sheets)
   data_given   <- sheets_given && !is.null(unlist(sheets$value))

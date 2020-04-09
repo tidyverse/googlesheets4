@@ -38,7 +38,7 @@
 #'   df <- sheets_fodder(10)
 #'
 #'   # create Sheet
-#'   ss <- sheets_create("sheets-delete-example", sheets = list(df))
+#'   ss <- gs4_create("range-delete-example", sheets = list(df))
 #'
 #'   # delete some rows
 #'   range_delete(ss, range = "2:4")

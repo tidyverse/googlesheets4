@@ -20,7 +20,7 @@
 #' @examples
 #' if (sheets_has_token()) {
 #'   # create a Sheet with the default initial worksheet
-#'   (ss <- sheets_create("sheets-resize-demo"))
+#'   (ss <- gs4_create("sheet-resize-demo"))
 #'
 #'   # see (work)sheet dims
 #'   sheet_properties(ss)
@@ -43,7 +43,7 @@
 #'   # re-inspect (work)sheet dims
 #'   sheet_properties(ss)
 #'
-#'   googledrive::drive_rm(ss)
+#'   googledrive::drive_trash(ss)
 #' }
 sheet_resize <- function(ss,
                          sheet = NULL,

@@ -51,7 +51,7 @@ if (sheets_has_token()) {
   df <- sheets_fodder(10)
 
   # create Sheet
-  ss <- sheets_create("sheets-flood-example", sheets = list(df))
+  ss <- gs4_create("range-flood-example", sheets = list(df))
 
   # default behavior (`cell = NULL`): clear value and format
   range_flood(ss, range = "A1:B3")
@@ -91,11 +91,11 @@ Makes a \code{RepeatCellRequest}:
 }
 
 Other write functions: 
+\code{\link{gs4_create}()},
 \code{\link{range_delete}()},
 \code{\link{range_write}()},
 \code{\link{sheet_append}()},
 \code{\link{sheet_write}()},
-\code{\link{sheets_create}()},
 \code{\link{sheets_formula}()}
 }
 \concept{write functions}

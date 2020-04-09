@@ -230,7 +230,7 @@ When editing a sheet, we send an [`UpdateCellsRequest`](https://developers.googl
     cells that don't receive new data are cleared, according to the accompanying
     field mask in `fields`.
 
-`range_write()` is the only writing function in googlesheets4 that lets the user target a specific range. This function is why we need the ability to convert A1-notation to `cell_limits` and to decide whether user's range should be sent via `start` or `range`. `sheets_write()`, `sheets_create()`, and `sheet_append()` all offer a higher-level API, focused on the holistic management of (work)sheets that hold a single data table.
+`range_write()` is the only writing function in googlesheets4 that lets the user target a specific range. This function is why we need the ability to convert A1-notation to `cell_limits` and to decide whether user's range should be sent via `start` or `range`. `gs4_create()`, `sheet_write()`, and `sheet_append()` all offer a higher-level API, focused on the holistic management of (work)sheets that hold a single data table.
 
 Here's a table that translates the A1-style ranges created above into `cell_limits`. Some scenarios are covered more than once in this input, because above we were tackling a different (harder) problem. But that's harmless and these inputs are good, in terms of covering all relevant scenarios. Note I dropped the row corresponding to "no input".
 

@@ -40,7 +40,7 @@ result, break it into a sequence of simpler calls to
 \examples{
 if (sheets_has_token()) {
   sheet_names <- c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot")
-  ss <- sheets_create("sheets-sheet-relocate-demo", sheets = sheet_names)
+  ss <- gs4_create("sheet-relocate-demo", sheets = sheet_names)
   sheet_names(ss)
 
   # move one sheet, forwards then backwards
@@ -67,7 +67,7 @@ if (sheets_has_token()) {
     sheet_names()
 
   # clean up
-  googledrive::drive_find("sheets-sheet-relocate-demo") \%>\%
+  googledrive::drive_find("sheet-relocate-demo") \%>\%
     googledrive::drive_trash()
 }
 }

@@ -40,8 +40,8 @@ names.
 }
 
 If no existing Sheet is specified via \code{ss}, this function delegates to
-\code{\link[=sheets_create]{sheets_create()}} and the new Sheet's name is randomly generated. If that's
-undesirable, call \code{\link[=sheets_create]{sheets_create()}} directly to get more control.
+\code{\link[=gs4_create]{gs4_create()}} and the new Sheet's name is randomly generated. If that's
+undesirable, call \code{\link[=gs4_create]{gs4_create()}} directly to get more control.
 
 If no \code{sheet} is specified or if \code{sheet} doesn't identify an existing sheet,
 a new sheet is added to receive the \code{data}. If \code{sheet} specifies an existing
@@ -80,7 +80,7 @@ if (sheets_has_token()) {
   googledrive::drive_trash(ss)
 
   # create a Sheet with some initial, placeholder data
-  ss <- sheets_create(
+  ss <- gs4_create(
     "sheet-write-demo",
     sheets = list(alpha = data.frame(x = 1), omega = data.frame(x = 1))
   )
@@ -103,11 +103,11 @@ if (sheets_has_token()) {
 }
 \seealso{
 Other write functions: 
+\code{\link{gs4_create}()},
 \code{\link{range_delete}()},
 \code{\link{range_flood}()},
 \code{\link{range_write}()},
 \code{\link{sheet_append}()},
-\code{\link{sheets_create}()},
 \code{\link{sheets_formula}()}
 
 Other worksheet functions: 

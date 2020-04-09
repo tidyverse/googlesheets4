@@ -29,7 +29,7 @@ reference:
       Write data from a local data frame into a Sheet
     contents:
       - write_sheet
-      - sheets_create
+      - gs4_create
       - sheet_append
       - range_write
       - range_flood
@@ -53,7 +53,7 @@ reference:
     desc: >
       Make changes to a (spread)Sheet or to the (work)sheets it contains
     contents:
-      - sheets_create
+      - gs4_create
       - range_delete
       - starts_with("sheets_sheet")
   - title: "Formatting and aesthetics"
@@ -83,6 +83,16 @@ reference:
       - sheets_token
       - sheets_has_token
       - sheets_endpoints
+  - title: "Operate on (spread)Sheets or the Sheets API"
+    desc: >
+      Functions that operate at the level of a (spread)sheet or the whole API/package
+    contents:
+      - starts_with("gs4_")
+  - title: "Operate on (work)sheets"
+    desc: >
+      Functions that operate on whole (work)sheets
+    contents:
+      - starts_with("sheet_")
   - title: "Operate on a range of cells"
     desc: >
       Functions that can target a cell range

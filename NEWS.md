@@ -20,8 +20,8 @@ Any function present in the previous CRAN release, v0.1.1, still works, but trig
 
 These functions are ready for use but are still considered experimental and may see more refinements to their interface and capabilities:
 
-  * `sheets_create()` is a new function to create a new Sheet and, optionally,
-    write one or more data frames into it (#61).
+  * `gs4_create()` is a new function to create a new Google Sheet and,
+    optionally, write one or more data frames into it (#61).
   * `sheet_write()` (also available as `write_sheet()`) is a new function to
     write a data frame into a new or existing (work)sheet, inside a new or
     existing (spread)Sheet.

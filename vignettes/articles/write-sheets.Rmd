@@ -23,15 +23,15 @@ library(googlesheets4)
 
 Basic Sheet writing is shown in the [Get started](https://googlesheets4.tidyverse.org/articles/googlesheets4.html) article. Here we explore the different uses for the writing functions:
 
-  * `sheets_create()` emphasizes the creation of a new (spread)Sheet.
+  * `gs4_create()` emphasizes the creation of a new (spread)Sheet.
     - But it can create (work)sheets and write data.
-  * `sheets_write()` emphasizes writing a data frame into a (work)sheet.
+  * `sheet_write()` emphasizes writing a data frame into a (work)sheet.
     - But it can create a new (spread)Sheet or a new (work)sheet.
   * `sheet_append()` is about adding rows to an existing data table.
-  * `sheets_create()`, `sheets_write()`, and `sheet_append()` implement
+  * `gs4_create()`, `sheet_write()`, and `sheet_append()` implement
     holistic operations for representing a single R data frame as a table in
     a (work)sheet within a Google Sheet.
-    - `sheets_create()` and `sheets_write()` both impose this mentality via
+    - `gs4_create()` and `sheet_write()` both impose this mentality via
       specific formatting, such as special treatment of the column header row.
     - All 3 functions aim to shrink-wrap the data.
   * `range_write()` is the one function that helps you write arbitrary data
@@ -56,12 +56,12 @@ googlesheets4:::sheets_auth_docs(drive = TRUE)
 if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(20)
 ```
 
-## `sheets_create()`
+## `gs4_create()`
 
-Create a brand new Sheet with `sheets_create()`. You can specify the new Sheet's `name` (or accept a randomly generated name).
+Create a brand new Sheet with `gs4_create()`. You can specify the new Sheet's `name` (or accept a randomly generated name).
 
 ```{r}
-ss1 <- sheets_create("sheets-create-demo-1")
+ss1 <- gs4_create("sheets-create-demo-1")
 ss1
 ```
 
@@ -74,7 +74,7 @@ You can control the names and content of the initial (work)sheets with the `shee
 Use a character vector to specify the names of one or more empty sheets.
 
 ```{r}
-ss2 <- sheets_create(
+ss2 <- gs4_create(
   "sheets-create-demo-2",
   sheets = c("alpha", "beta")
 )
@@ -90,7 +90,7 @@ If you provide a data frame, it is used to populate the cells of a sheet and to 
 ```{r}
 my_data <- data.frame(x = 1:3, y = letters[1:3])
 
-ss3 <- sheets_create(
+ss3 <- gs4_create(
   "sheets-create-demo-3",
   sheets = my_data
 )
@@ -104,7 +104,7 @@ If you provide a list of data frames, each is used to populate the cells of one 
 ```{r}
 my_data_frames <- list(iris = head(iris), chickwts = head(chickwts))
 
-ss4 <- sheets_create(
+ss4 <- gs4_create(
   "sheets-create-demo-4",
   sheets = my_data_frames
 )
@@ -113,12 +113,12 @@ ss4
 
 ### Write metadata
 
-Most users won't need to do this, but `sheets_create()` can set additional Sheet-level metadata, such as locale or time zone. To really make use of this feature, you need to read up on the [`spreadsheets.create` endpoint](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create).
+Most users won't need to do this, but `gs4_create()` can set additional Sheet-level metadata, such as locale or time zone. To really make use of this feature, you need to read up on the [`spreadsheets.create` endpoint](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create).
 
 Notice how the default empty Sheet here is named "Feuille 1", since we request a French locale.
 
 ```{r}
-ss5 <- sheets_create(
+ss5 <- gs4_create(
   "sheets-create-demo-5",
   locale = "fr_FR",
   timeZone = "Europe/Paris"
@@ -137,53 +137,53 @@ sheets_find("sheets-create-demo") %>%
   googledrive::drive_trash()
 ```
 
-## `write_sheet()`, a.k.a. `sheets_write()`
+## `write_sheet()`, a.k.a. `sheet_write()`
 
-`write_sheet()` is aliased to `sheets_write()` and is meant to evoke `readr::write_csv()` or `writexl::write_xlsx()`. Whereas `sheets_create()` emphasizes the *target Sheet*, `sheets_write()` emphasizes the *data you want to write*.
+`write_sheet()` is aliased to `sheet_write()` and is meant to evoke `readr::write_csv()` or `writexl::write_xlsx()`. Whereas `gs4_create()` emphasizes the *target Sheet*, `sheet_write()` emphasizes the *data you want to write*.
 
-The only required argument for `sheets_write()` is the data.
+The only required argument for `sheet_write()` is the data.
 
 ```{r}
 df <- data.frame(x = 1:3, y = letters[1:3])
 
-random_ss <- sheets_write(df)
+random_ss <- sheet_write(df)
 random_ss
 ```
 
-This creates a new (work)sheet inside a new (spread)Sheet and returns its ID. You'll notice the new Sheet has a randomly generated name. If that is a problem, use `sheets_create()` instead, which affords more control over various aspects of the new Sheet.
+This creates a new (work)sheet inside a new (spread)Sheet and returns its ID. You'll notice the new Sheet has a randomly generated name. If that is a problem, use `gs4_create()` instead, which affords more control over various aspects of the new Sheet.
 
-Let's start over: we delete that Sheet and call `sheets_create()`, so we can specify the new Sheet's name. Then we'll modify it with `sheets_write()`. We send one sheet name, "chickwts", to prevent the creation of "Sheet1", but we send no data.
+Let's start over: we delete that Sheet and call `gs4_create()`, so we can specify the new Sheet's name. Then we'll modify it with `sheet_write()`. We send one sheet name, "chickwts", to prevent the creation of "Sheet1", but we send no data.
 
 ```{r}
 googledrive::drive_rm(random_ss)
 
-ss1 <- sheets_create(
+ss1 <- gs4_create(
   "write-sheets-demo-1",
   sheets = "chickwts"
 )
 ss1
 ```
 
-`sheets_write()` allows us to write the actual `chickwts` data into the sheet by that name. 
+`sheet_write()` allows us to write the actual `chickwts` data into the sheet by that name. 
 ```{r}
-sheets_write(chickwts, ss = ss1, sheet = "chickwts")
+sheet_write(chickwts, ss = ss1, sheet = "chickwts")
 ss1
 ```
 
-`sheets_write()` can also write data into a new sheet, if `sheet` implicitly or explicitly targets a non-existent sheet.
+`sheet_write()` can also write data into a new sheet, if `sheet` implicitly or explicitly targets a non-existent sheet.
 
 ```{r}
 # explicitly make a new sheet named "iris"
-sheets_write(iris, ss = ss1, sheet = "iris")
+sheet_write(iris, ss = ss1, sheet = "iris")
 
 # implicitly make a new sheet named "mtcars"
-sheets_write(mtcars, ss = ss1)
+sheet_write(mtcars, ss = ss1)
 ```
 
 If no sheet name is given and it can't be determined from `data`, a name of the form "SheetN" is automatically generated by Sheets.
 
 ```{r}
-sheets_write(data.frame(x = 1:2, y = 3:4), ss = ss1)
+sheet_write(data.frame(x = 1:2, y = 3:4), ss = ss1)
 ss1
 ```
 
@@ -210,10 +210,10 @@ deaths_two   <- deaths[6, ]
 deaths_three <- deaths[7:10, ]
 ```
 
-We use `sheets_create()` to create a new (spread)Sheet and initialize a new (work)sheet with the "deaths" column headers, but no data. A second empty row is created (it must be, in order for us to freeze the top row), but it will soon be filled when we append.
+We use `gs4_create()` to create a new (spread)Sheet and initialize a new (work)sheet with the "deaths" column headers, but no data. A second empty row is created (it must be, in order for us to freeze the top row), but it will soon be filled when we append.
 
 ```{r}
-ss <- sheets_create("sheets-append-demo", sheets = list(deaths = deaths_zero))
+ss <- gs4_create("sheets-append-demo", sheets = list(deaths = deaths_zero))
 ss
 ```
 
@@ -290,7 +290,7 @@ read_this <- function(ss) {
   )
 }
 
-ss_edit <- sheets_create("sheets-edit-demo")
+ss_edit <- gs4_create("sheets-edit-demo")
 #googlesheets4:::sheets_share(ss_edit) %>% sheets_browse()
 sheet_resize(ss_edit, nrow = n, ncol = n, exact = TRUE)
 populate(ss_edit)
@@ -399,7 +399,7 @@ lang_dat$translated <- sheets_formula(
   '=GoogleTranslate(INDIRECT("R[0]C[-2]", FALSE), "en", INDIRECT("R[0]C[-1]", FALSE))'
 )
 
-(ss <- sheets_create("sheets-formula-demo", sheets = lang_dat))
+(ss <- gs4_create("sheets-formula-demo", sheets = lang_dat))
 ```
 
 Now we can read the data back out, complete with translations!
@@ -423,7 +423,7 @@ First, we create a data frame and initialize a new Sheet with that data.
 
 ```{r}
 df <- sheets_fodder(10)
-(ss <- sheets_create("range-flood-demo", sheets = list(df)))
+(ss <- gs4_create("range-flood-demo", sheets = list(df)))
 ```
 
 To begin, each cell holds its A1-coordinates as its value. If you viewed this in the browser, you'd see the header row has some special formatting, including a gray background.
@@ -464,7 +464,7 @@ First, we create a data frame and initialize a new Sheet with that data.
 
 ```{r}
 df <- sheets_fodder(4)
-(ss <- sheets_create("sheets-delete-demo", sheets = list(df)))
+(ss <- gs4_create("sheets-delete-demo", sheets = list(df)))
 ```
 
 To begin, each cell holds its A1-coordinates as its value. If you viewed this in the browser, you'd see the header row has some special formatting, including a gray background.

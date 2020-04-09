@@ -55,5 +55,5 @@ scoped_temporary_ss <- function(name, ..., env = parent.frame()) {
       }
     }, envir = env)
   }
-  sheets_create(name, ...)
+  gs4_create(name, ...)
 }

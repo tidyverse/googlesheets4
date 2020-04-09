@@ -23,7 +23,7 @@
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#'   ss <- sheets_create("add-sheets-to-me")
+#'   ss <- gs4_create("add-sheets-to-me")
 #'
 #'   # the only required argument is the target spreadsheet
 #'   ss %>% sheet_add()

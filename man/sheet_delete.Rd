@@ -23,7 +23,7 @@ Deletes one or more (work)sheets from a (spread)Sheet.
 }
 \examples{
 if (sheets_has_token()) {
-  ss <- sheets_create("delete-sheets-from-me")
+  ss <- gs4_create("delete-sheets-from-me")
   sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 
   # get an overview of the sheets

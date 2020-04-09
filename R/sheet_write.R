@@ -15,8 +15,8 @@
 #'   * The sheet's dimensions are set to "shrink wrap" the `data`.
 #'
 #' If no existing Sheet is specified via `ss`, this function delegates to
-#' [`sheets_create()`] and the new Sheet's name is randomly generated. If that's
-#' undesirable, call [`sheets_create()`] directly to get more control.
+#' [`gs4_create()`] and the new Sheet's name is randomly generated. If that's
+#' undesirable, call [`gs4_create()`] directly to get more control.
 #'
 #' If no `sheet` is specified or if `sheet` doesn't identify an existing sheet,
 #' a new sheet is added to receive the `data`. If `sheet` specifies an existing
@@ -65,7 +65,7 @@
 #'   googledrive::drive_trash(ss)
 #'
 #'   # create a Sheet with some initial, placeholder data
-#'   ss <- sheets_create(
+#'   ss <- gs4_create(
 #'     "sheet-write-demo",
 #'     sheets = list(alpha = data.frame(x = 1), omega = data.frame(x = 1))
 #'   )
@@ -92,16 +92,16 @@ sheet_write <- function(data,
   data <- eval_tidy(data_quo)
   check_data_frame(data)
 
-  # no Sheet provided --> call sheets_create() ---------------------------------
+  # no Sheet provided --> call gs4_create() ---------------------------------
   if (is.null(ss)) {
     if (quo_is_symbol(data_quo)) {
       sheet <- sheet %||% as_name(data_quo)
     }
     if (is.null(sheet)) {
-      return(sheets_create(sheets = data))
+      return(gs4_create(sheets = data))
     } else {
       check_string(sheet)
-      return(sheets_create(sheets = list2(!!sheet := data)))
+      return(gs4_create(sheets = list2(!!sheet := data)))
     }
   }
 

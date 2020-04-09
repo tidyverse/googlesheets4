@@ -60,7 +60,7 @@ reference:
     desc: >
       Change how a Sheet appears in the browser UI
     contents:
-      - sheets_auto_resize_dims
+      - range_autofit
   - title: "Example Sheets"
     desc: >
       World-readable Sheets to use in examples and reprexes

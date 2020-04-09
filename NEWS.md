@@ -50,6 +50,8 @@ There is a new family of `sheets_sheet_*()` functions that operate on the (work)
 
 `range_read_cells()` (formerly known as `sheets_cells()`) gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But `range_read_cells(cell_data = "full", discard_empty = FALSE)` is now available if you want full cell data, including formatting, even for cells that have no value (#4).
 
+`range_autofit()` causes column width or row height to fit the data. It only affects the display of a sheet and does not change values or dimensions.
+
 `sheets_fodder()` is a convenience function that creates a filler data frame you can use to make toy sheets you're using to practice on or for a reprex.
 
 ### Renamed functions and classes

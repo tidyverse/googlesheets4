@@ -1,9 +1,9 @@
-#' Auto-resize columns or rows
+#' Auto-fit columns or rows to the data
 #'
 #' Applies automatic resizing to either columns or rows of a (work)sheet. The
 #' width or height of targeted columns or rows, respectively, is determined
-#' from the current cell contents. This only affects the appearance of a Sheet
-#' in the browser and doesn't affect its values in any way.
+#' from the current cell contents. This only affects the appearance of a sheet
+#' in the browser and doesn't affect its values or dimensions in any way.
 #'
 #' @eval param_ss()
 #' @eval param_sheet(
@@ -27,35 +27,35 @@
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#' dat <- tibble::tibble(
-#'   fruit = c("date", "lime", "pear", "plum")
-#' )
+#'   dat <- tibble::tibble(
+#'     fruit = c("date", "lime", "pear", "plum")
+#'   )
 #'
-#' ss <- sheets_write(dat)
-#' ss
+#'   ss <- sheets_write(dat)
+#'   ss
 #'
-#' # open in the browser
-#' sheets_browse(ss)
+#'   # open in the browser
+#'   sheets_browse(ss)
 #'
-#' # shrink column A to fit the short fruit names
-#' sheets_auto_resize_dims(ss)
+#'   # shrink column A to fit the short fruit names
+#'   range_autofit(ss)
 #'
-#' # send some longer fruit names
-#' dat2 <- tibble::tibble(
-#'   fruit = c("cucumber", "honeydew")
-#' )
-#' ss %>% sheet_append(dat2)
-#' # in the browser, see that column A is now too narrow to show the data
+#'   # send some longer fruit names
+#'   dat2 <- tibble::tibble(
+#'     fruit = c("cucumber", "honeydew")
+#'   )
+#'   ss %>% sheet_append(dat2)
+#'   # in the browser, see that column A is now too narrow to show the data
 #'
-#' sheets_auto_resize_dims(ss)
-#' # in the browser, see the column A reveals all the data now
+#'   range_autofit(ss)
+#'   # in the browser, see the column A reveals all the data now
 #'
-#' googledrive::drive_trash(ss)
+#'   googledrive::drive_trash(ss)
 #' }
-sheets_auto_resize_dims <- function(ss,
-                                    sheet = NULL,
-                                    range = NULL,
-                                    dimension = c("columns", "rows")) {
+range_autofit <- function(ss,
+                          sheet = NULL,
+                          range = NULL,
+                          dimension = c("columns", "rows")) {
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   check_range(range)
@@ -64,11 +64,12 @@ sheets_auto_resize_dims <- function(ss,
 
   # determine targeted sheet ---------------------------------------------------
   range_spec <- as_range_spec(
-    range, sheet = sheet,
+    range,
+    sheet = sheet,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
-  s <- lookup_sheet(range_spec$sheet_name , sheets_df = x$sheets)
+  s <- lookup_sheet(range_spec$sheet_name, sheets_df = x$sheets)
 
   # form request ---------------------------------------------------------------
   if (is.null(range)) {
@@ -101,7 +102,6 @@ sheets_auto_resize_dims <- function(ss,
   gargle::response_process(resp_raw)
 
   invisible(ssid)
-
 }
 
 force_cell_limits <- function(x) {

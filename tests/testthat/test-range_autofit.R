@@ -1,8 +1,8 @@
 # ---- nm_fun ----
-me_ <- nm_fun("TEST-sheets_auto_resize_dims")
+me_ <- nm_fun("TEST-range_autofit")
 
 # ---- tests ----
-test_that("sheets_auto_resize_dims() works", {
+test_that("range_autofit() works", {
   skip_if_offline()
   skip_if_no_token()
 
@@ -13,7 +13,7 @@ test_that("sheets_auto_resize_dims() works", {
   ss <- scoped_temporary_ss(me_(), sheets = list(dat = dat))
   ssid <- as_sheets_id(ss)
 
-  sheets_auto_resize_dims(ss)
+  range_autofit(ss)
   before <- sheets_get_impl_(
     ssid, fields = "sheets.data.columnMetadata.pixelSize"
   )
@@ -21,7 +21,7 @@ test_that("sheets_auto_resize_dims() works", {
   dat2 <- purrr::modify(dat, ~ paste0(.x, "_", .x))
   dat4 <- purrr::modify(dat2, ~ paste0(.x, "_", .x))
   sheet_append(ss, dat4)
-  sheets_auto_resize_dims(ss)
+  range_autofit(ss)
 
   after <- sheets_get_impl_(
     ssid, fields = "sheets.data.columnMetadata.pixelSize"

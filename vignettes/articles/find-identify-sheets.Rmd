@@ -61,7 +61,7 @@ googlesheets4 accepts such a URL as the `ss` argument (think "spreadsheet") of m
 
 ```{r}
 ugly_url <- "https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"
-sheets_read(ugly_url)
+read_sheet(ugly_url)
 ```
 
 At this time, although the URL may contain both a (spread)Sheet and a (work)sheet, we only extract the (spread)Sheet ID. If the function targets a specific (work)sheet, that is typically specified via arguments like `range` or `sheet` or a default of "first (visible) sheet".
@@ -91,14 +91,14 @@ This is the same metadata you'll see when you call `sheets_get()` (but you must 
 googlesheets4 also accepts a Sheet ID as the `ss` argument of many functions:
 
 ```{r}
-sheets_read(ssid)
+read_sheet(ssid)
 ```
 
 I think in a script or app that will endure for a while it is better to refer to a Sheet by its ID than by its URL. The Sheet ID is nicer to look at, it is complete, it is minimal.
 
 ```{r}
 ssid <- "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"
-sheets_read(ssid)
+read_sheet(ssid)
 ```
 
 Note this demonstration that a Sheet ID also works when provided as a plain, old string, i.e. it does not **have** to have the `sheets_id` class. In some contexts, you might even prefer to store it as a string, in order to bypass the special printing behaviour for `sheets_id`.
@@ -107,7 +107,7 @@ When the Sheet is specified via a character string, googlesheets4 assumes it is 
 
 ```{r}
 ssid <- as_sheets_id("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
-sheets_read(ssid)
+read_sheet(ssid)
 ```
 
 If your script or app targets a specific Sheet, the most efficient and robust way to address it is by its ID.

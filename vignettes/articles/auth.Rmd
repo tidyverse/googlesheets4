@@ -33,7 +33,7 @@ sheets_deauth()
 
 # imagine this is the URL or ID of a Sheet readable by anyone (with a link)
 ss <- "?????"
-dat <- sheets_read(ss)
+dat <- read_sheet(ss)
 ```
 
 ## Default auth behaviour and beyond

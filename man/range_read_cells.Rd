@@ -60,11 +60,11 @@ A tibble with one row per cell in the \code{range}.
 This low-level function returns cell data in a tibble with one row per cell.
 This tibble has integer variables \code{row} and \code{column} (referring to location
 with the Google Sheet), an A1-style reference \code{loc}, and a \code{cell}
-list-column. The flagship function \code{\link[=read_sheet]{read_sheet()}}, a.k.a. \code{\link[=sheets_read]{sheets_read()}}, is
-what most users are looking for, rather than \code{range_read_cells()}. \code{\link[=read_sheet]{read_sheet()}}
-is basically \code{range_read_cells()} (this function), followed by \code{\link[=spread_sheet]{spread_sheet()}},
-which looks after reshaping and column typing. But if you really want raw cell
-data from the API, \code{range_read_cells()} is for you!
+list-column. The flagship function \code{\link[=read_sheet]{read_sheet()}}, a.k.a. \code{\link[=range_read]{range_read()}}, is
+what most users are looking for, rather than \code{range_read_cells()}.
+\code{\link[=read_sheet]{read_sheet()}} is basically \code{range_read_cells()} (this function), followed by
+\code{\link[=spread_sheet]{spread_sheet()}}, which looks after reshaping and column typing. But if you
+really want raw cell data from the API, \code{range_read_cells()} is for you!
 }
 \examples{
 if (sheets_has_token()) {

@@ -13,7 +13,7 @@
 #'   "specifies the sheet, defaults to the first visible sheet."
 #' )
 #' @param range Cells to delete. There are a couple differences between `range`
-#'   here and how it works in other functions (e.g. [sheets_read()]):
+#'   here and how it works in other functions (e.g. [range_read()]):
 #'   * `range` must be specified.
 #'   * `range` must not be a named range.
 #'   * `range` must not be the name of a (work) sheet. Instead, use

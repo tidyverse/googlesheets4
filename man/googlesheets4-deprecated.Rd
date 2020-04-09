@@ -4,11 +4,14 @@
 \alias{googlesheets4-deprecated}
 \alias{sheets_sheets}
 \alias{sheets_cells}
+\alias{sheets_read}
 \title{Deprecated functions}
 \usage{
 sheets_sheets(...)
 
 sheets_cells(...)
+
+sheets_read(...)
 }
 \arguments{
 \item{...}{Passed on to the function that succeeds the deprecated function.}
@@ -19,8 +22,11 @@ sheets_cells(...)
 These functions are deprecated and will be removed in a future release of
 googlesheets4.
 
-\code{sheets_sheets()} is replaced by \code{sheet_names()}.
+\code{sheets_sheets()} is replaced by \code{\link[=sheet_names]{sheet_names()}}.
 
-\code{sheets_cells()} is replaced by \code{range_read_cells()}.
+\code{sheets_cells()} is replaced by \code{\link[=range_read_cells]{range_read_cells()}}.
+
+\code{sheets_read()} is replaced by \code{\link[=range_read]{range_read()}} (which is a synonym for
+\code{\link[=read_sheet]{read_sheet()}}).
 }
 \keyword{internal}

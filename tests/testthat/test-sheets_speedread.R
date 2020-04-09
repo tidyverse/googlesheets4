@@ -4,7 +4,7 @@ test_that("sheets_spreadread() works", {
   skip_if_not_installed("readr")
 
   # specify a sheet-qualified cell range
-  read <- sheets_read(
+  read <- range_read(
     test_sheet("googlesheets4-cell-tests"),
     range = "'range-experimentation'!B:D"
   )
@@ -15,7 +15,7 @@ test_that("sheets_spreadread() works", {
   expect_equivalent(read, speedread)
 
   # specify col_types
-  read <- sheets_read(
+  read <- range_read(
     sheets_example("deaths"),
     sheet = "other",
     range = "A5:F15",

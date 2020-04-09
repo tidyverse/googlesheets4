@@ -2,7 +2,7 @@ test_that("read_sheet() works and discovers reasonable types", {
   skip_if_offline()
   skip_if_no_token()
 
-  dat <- sheets_read(
+  dat <- range_read(
     test_sheet("googlesheets4-col-types"),
     sheet = "lots-of-types"
   )
@@ -19,7 +19,7 @@ test_that("read_sheet() enacts user-specified coltypes", {
   skip_if_offline()
   skip_if_no_token()
 
-  dat <- sheets_read(
+  dat <- range_read(
     test_sheet("googlesheets4-col-types"),
     sheet = "lots-of-types",
     col_types = "lccinDT"
@@ -37,7 +37,7 @@ test_that("read_sheet() can skip columns", {
   skip_if_offline()
   skip_if_no_token()
 
-  dat <- sheets_read(
+  dat <- range_read(
     test_sheet("googlesheets4-col-types"),
     sheet = "lots-of-types",
     col_types = "?-_-_-?"

@@ -37,18 +37,32 @@ googlesheets4:::sheets_auth_docs(drive = TRUE)
 if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(20)
 ```
 
+## `read_sheet()` and `range_read()` are synonyms
+
+The main "read" function of the googlesheets4 package goes by two names, because we want it to make sense in two contexts:
+* `read_sheet()` evokes other table-reading functions, like
+ `readr::read_csv()` and `readxl::read_excel()`. The `sheet` in this case
+  refers to a Google (spread)Sheet.
+* `range_read()` is the right name according to the naming convention used
+  throughout the googlesheets4 package.
+  
+`read_sheet()` and `range_read()` are synonyms and you can use either one. Throughout this article, we're going to use `range_read()`.
+
+Note: The first release of googlesheets used a `sheets_` prefix everywhere, so we had `sheets_read()`. It still works, but it's deprecated and will go away
+rather swiftly.
+
 ## Specify the range and column types
 
 Here we read from the "mini-gap" and "deaths" example Sheets to show some of the different ways to specify (work)sheet and cell ranges. Note also that `col_types` gives control of column types, similar to how `col_types` works in readr and readxl.
 
 ```{r}
-read_sheet(sheets_example("mini-gap"), sheet = 2)
+range_read(sheets_example("mini-gap"), sheet = 2)
 
-read_sheet(sheets_example("mini-gap"), sheet = "Oceania", n_max = 3)
+range_read(sheets_example("mini-gap"), sheet = "Oceania", n_max = 3)
 
-read_sheet(sheets_example("deaths"), skip = 4, n_max = 10)
+range_read(sheets_example("deaths"), skip = 4, n_max = 10)
 
-read_sheet(
+range_read(
   sheets_example("deaths"), range = "other!A5:F15", col_types = "?ci??D"
 )
 ```
@@ -59,7 +73,7 @@ We've designated the data rectangles as [named ranges](https://support.google.co
 
 ```{r}
 sheets_example("deaths") %>% 
-  read_sheet(range = "arts_data")
+  range_read(range = "arts_data")
 ```
 
 The named ranges, if any exist, are part of the information returned by `sheets_get()`.
@@ -75,19 +89,19 @@ df$cell[[3]]
 
 Specify `cell_data = "full", discard_empty = FALSE` to get even more data if you, for example, need access to cell formulas or formatting.
 
-`spread_sheet()` `r emo::ji("wink")` converts data in the "one row per cell" form into the data frame you get from `read_sheet()`, which involves reshaping and column typing.
+`spread_sheet()` `r emo::ji("wink")` converts data in the "one row per cell" form into the data frame you get from `range_read()`, which involves reshaping and column typing.
 
 ```{r}
 df %>% spread_sheet(col_types = "D")
 ## is same as ...
-read_sheet(sheets_example("deaths"), range = "E5:E7", col_types ="D")
+range_read(sheets_example("deaths"), range = "E5:E7", col_types ="D")
 ```
 
 ## When speed matters
 
-If your Sheet is so large that the speed of `sheets_read()` is causing problems, consider `sheets_speedread()`. It uses a special URL that allows a Sheet to be read as comma-separated values (CSV). Access via this URL doesn't use the Sheets API (although `sheets_speedread()` still makes an API call to retrieve Sheet metadata). As an example, on a Sheet with around 57,000 rows and 25 columns (over 1.4 million cells), `sheets_speadread()` takes ~5 seconds, whereas `sheets_read()` takes closer to 3 minutes. Why wouldn't we always take the faster option?!? Because the speed difference is imperceptible for many Sheets and there are some downsides (described later).
+If your Sheet is so large that the speed of `range_read()` is causing problems, consider `sheets_speedread()`. It uses a special URL that allows a Sheet to be read as comma-separated values (CSV). Access via this URL doesn't use the Sheets API (although `sheets_speedread()` still makes an API call to retrieve Sheet metadata). As an example, on a Sheet with around 57,000 rows and 25 columns (over 1.4 million cells), `sheets_speadread()` takes ~5 seconds, whereas `range_read()` takes closer to 3 minutes. Why wouldn't we always take the faster option?!? Because the speed difference is imperceptible for many Sheets and there are some downsides (described later).
 
-`sheets_speedread()` has much the same interface as `sheets_read()`.
+`sheets_speedread()` has much the same interface as `range_read()`.
 
 ```{r}
 sheets_example("gapminder") %>% 
@@ -108,20 +122,20 @@ sheets_example("deaths") %>%
   )
 ```
 
-Compare that to how we would read the same data with `sheets_read()`:
+Compare that to how we would read the same data with `range_read()`:
 
 ```{r}
 sheets_example("deaths") %>% 
-  sheets_read(range = "other_data", col_types = "??i?DD")
+  range_read(range = "other_data", col_types = "??i?DD")
 ```
 
 This example highlights two important differences:
 
   * `range = "other!A5:F15"` versus `range = "other_data"`: `sheets_speedread()`
-    can't access a named range, whereas `sheets_read()` can.
+    can't access a named range, whereas `range_read()` can.
   * `readr::col_date("%m/%d/%Y")` vs `D`: `sheets_speedread()` must parse a
     character representation of all cell data, including datetimes, whereas 
-    `sheets_read()` has access to the actual cell data and its type.
+    `range_read()` has access to the actual cell data and its type.
 
 What's the speed difference for something like the Africa sheet in the
 "gapminder" example Sheet? (around 625 rows x 6 columns, or 3700 cells)
@@ -131,22 +145,22 @@ system.time(
   sheets_example("gapminder") %>% sheets_speedread(sheet = "Africa")
 )
 system.time(
-  sheets_example("gapminder") %>% sheets_read(sheet = "Africa")
+  sheets_example("gapminder") %>% range_read(sheet = "Africa")
 )
 ```
 
 The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.
 
-Summary of how to think about `sheets_speedread()` vs `sheets_read()`:
+Summary of how to think about `sheets_speedread()` vs `range_read()`:
 
   * Both use auth (literally, send a token), unless there was a prior to call to
     `sheets_deauth()`.
   * `sheets_speedread()` is faster, but it's not noticeable for typical Sheets.
   * `sheets_speedread()` uses readr-style column type specification, which is
-    actually more flexible than what `sheets_read()` currently does. In future
+    actually more flexible than what `range_read()` currently does. In future
     googlesheets4 releases, we will adopt readr-style column type specification.
   * `sheets_speedread()` requires more detailed column type specification,
     because it cannot access unformatted cell data and the actual cell type, as
-    `sheets_read()` can.
+    `range_read()` can.
   * `sheets_speedread()` can't access full cell data, e.g., formatting.
   * `sheets_speedrad()` can't work with named ranges.

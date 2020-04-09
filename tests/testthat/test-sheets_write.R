@@ -6,7 +6,7 @@ test_that("sheets_write() writes what it should", {
   skip_if_offline()
   skip_if_no_token()
 
-  dat <- sheets_read(
+  dat <- range_read(
     test_sheet("googlesheets4-col-types"),
     sheet = "lots-of-types",
     col_types = "lccinDT" # TODO: revisit when 'f' means factor
@@ -15,7 +15,7 @@ test_that("sheets_write() writes what it should", {
 
   ss <- scoped_temporary_ss(me_("datetimes"))
   sheets_write(dat, ss)
-  x <- sheets_read(ss, sheet = "dat", col_types = "C")
+  x <- range_read(ss, sheet = "dat", col_types = "C")
 
   # the main interesting bit to test is whether we successfully sent
   # correct value for the date and datetime, with a sane (= ISO 8601) format

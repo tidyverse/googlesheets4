@@ -10,10 +10,10 @@ test_that("sheet_append() works", {
   ss <- scoped_temporary_ss(me_(), sheets = list(test = dat[0, ]))
 
   sheet_append(ss, dat[1, ], sheet = "test")
-  out <- sheets_read(ss, sheet = "test")
+  out <- range_read(ss, sheet = "test")
   expect_equal(out, dat[1, ])
 
   sheet_append(ss, dat[2:10, ], sheet = "test")
-  out <- sheets_read(ss, sheet = "test")
+  out <- range_read(ss, sheet = "test")
   expect_equal(out, dat)
 })

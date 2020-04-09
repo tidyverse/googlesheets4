@@ -202,7 +202,7 @@ Let's recreate the table of "other" deaths from an example Sheet, but without th
 
 ```{r}
 (deaths <- sheets_example("deaths") %>%
-   sheets_read(range = "other_data", col_types = "????DD"))
+   range_read(range = "other_data", col_types = "????DD"))
 
 deaths_zero  <- deaths[integer(), ] # "scaffolding" data frame with 0 rows
 deaths_one   <- deaths[1:5, ] 
@@ -244,7 +244,7 @@ ss
 Now the big reveal: have we successfully rebuilt that data through incremental updates?
 
 ```{r}
-deaths_replica <- sheets_read(ss, col_types = "????DD")
+deaths_replica <- range_read(ss, col_types = "????DD")
 identical(deaths, deaths_replica)
 ```
 
@@ -263,7 +263,7 @@ sheets_find("sheets-append-demo") %>%
 
 We focus here on the geometry of `range_write()`, i.e. which cells are edited.
 
-In a hidden chunk, we've created a demo Sheet `ss_edit` and we've filled the cells with "-". We've also created `read_this()`, a wrapper around `sheets_read()` that names columns by letter, like spreadsheets do.
+In a hidden chunk, we've created a demo Sheet `ss_edit` and we've filled the cells with "-". We've also created `read_this()`, a wrapper around `range_read()` that names columns by letter, like spreadsheets do.
 
 ```{r include = FALSE}
 library(tidyverse)
@@ -283,7 +283,7 @@ populate <- function(ss, sheet = NULL, range = NULL, col_names = FALSE) {
 }
 
 read_this <- function(ss) {
-  sheets_read(
+  range_read(
     ss = ss,
     col_names = FALSE,
     .name_repair = ~ LETTERS[seq_along(.x)]
@@ -405,7 +405,7 @@ lang_dat$translated <- sheets_formula(
 Now we can read the data back out, complete with translations!
 
 ```{r}
-sheets_read(ss)
+range_read(ss)
 ```
 
 ### Clean up
@@ -429,14 +429,14 @@ df <- sheets_fodder(10)
 To begin, each cell holds its A1-coordinates as its value. If you viewed this in the browser, you'd see the header row has some special formatting, including a gray background.
 
 ```{r}
-sheets_read(ss)
+range_read(ss)
 ```
 
 By default, `range_flood()` sends an empty cell (and clears existing formatting).
 
 ```{r}
 range_flood(ss, range = "A1:B3")
-sheets_read(ss)
+range_read(ss)
 ```
 
 We can't easily demonstrate this here, but if you are working with a sheet in the browser, you can experiment with `reformat = TRUE/FALSE` to clear the existing format (or not).
@@ -445,7 +445,7 @@ We can also send a new value into a range of cells.
 
 ```{r}
 range_flood(ss, range = "4:5", cell = ";-)")
-sheets_read(ss)
+range_read(ss)
 ```
 
 ### Clean up
@@ -470,28 +470,28 @@ df <- sheets_fodder(4)
 To begin, each cell holds its A1-coordinates as its value. If you viewed this in the browser, you'd see the header row has some special formatting, including a gray background.
 
 ```{r}
-sheets_read(ss)
+range_read(ss)
 ```
 
 Let's delete some rows.
 
 ```{r}
 range_delete(ss, range = "2:3")
-sheets_read(ss)
+range_read(ss)
 ```
 
 Let's delete a column.
 
 ```{r}
 range_delete(ss, range = "C")
-sheets_read(ss)
+range_read(ss)
 ```
 
 Let's delete a bounded cell range. Since it's unclear how to fill this space, we must specify `shift`. We'll fill the space by shifting remaining cells to the left. Remember that `range` continues to refer to actual rows and columns and, due to our deletions, no longer match with the values which reflect the original locations.
 
 ```{r}
 range_delete(ss, range = "B2:B3", shift = "left")
-sheets_read(ss)
+range_read(ss)
 ```
 
 ### Clean up

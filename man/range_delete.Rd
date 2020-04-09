@@ -16,7 +16,7 @@ is how googledrive represents Drive files. Processed through
 \item{sheet}{Sheet to delete, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Ignored if the sheet is specified via \code{range}. If neither argument specifies the sheet, defaults to the first visible sheet.}
 
 \item{range}{Cells to delete. There are a couple differences between \code{range}
-here and how it works in other functions (e.g. \code{\link[=sheets_read]{sheets_read()}}):
+here and how it works in other functions (e.g. \code{\link[=range_read]{range_read()}}):
 \itemize{
 \item \code{range} must be specified.
 \item \code{range} must not be a named range.

@@ -18,7 +18,7 @@
 #' if (sheets_has_token()) {
 #'   # we will recreate the table of "other" deaths from this example Sheet
 #'   (deaths <- sheets_example("deaths") %>%
-#'     sheets_read(range = "other_data", col_types = "????DD"))
+#'     range_read(range = "other_data", col_types = "????DD"))
 #'
 #'   # split the data into 3 pieces, which we will send separately
 #'   deaths_one   <- deaths[ 1:5, ]
@@ -35,7 +35,7 @@
 #'   ss %>% sheet_append(deaths_three)
 #'
 #'   # read and check against the original
-#'   deaths_replica <- sheets_read(ss, col_types = "????DD")
+#'   deaths_replica <- range_read(ss, col_types = "????DD")
 #'   identical(deaths, deaths_replica)
 #'
 #'   # cleanup

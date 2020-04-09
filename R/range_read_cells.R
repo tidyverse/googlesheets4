@@ -3,11 +3,11 @@
 #' This low-level function returns cell data in a tibble with one row per cell.
 #' This tibble has integer variables `row` and `column` (referring to location
 #' with the Google Sheet), an A1-style reference `loc`, and a `cell`
-#' list-column. The flagship function [read_sheet()], a.k.a. [sheets_read()], is
-#' what most users are looking for, rather than `range_read_cells()`. [read_sheet()]
-#' is basically `range_read_cells()` (this function), followed by [spread_sheet()],
-#' which looks after reshaping and column typing. But if you really want raw cell
-#' data from the API, `range_read_cells()` is for you!
+#' list-column. The flagship function [read_sheet()], a.k.a. [range_read()], is
+#' what most users are looking for, rather than `range_read_cells()`.
+#' [read_sheet()] is basically `range_read_cells()` (this function), followed by
+#' [spread_sheet()], which looks after reshaping and column typing. But if you
+#' really want raw cell data from the API, `range_read_cells()` is for you!
 #'
 #' @eval param_ss()
 #' @eval param_sheet(

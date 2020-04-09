@@ -40,7 +40,7 @@
 #'
 #'   # specify only a data frame, get a new Sheet, with a random name
 #'   ss <- sheets_write(df)
-#'   sheets_read(ss)
+#'   range_read(ss)
 #'
 #'   # clean up
 #'   googledrive::drive_rm(ss)

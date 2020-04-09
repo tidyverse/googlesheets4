@@ -44,7 +44,7 @@
 #'   "specifies the sheet, defaults to the first visible sheet."
 #' )
 #' @param range Where to write. This `range` argument has important similarities
-#'   and differences to `range` elsewhere (e.g. [sheets_read()]):
+#'   and differences to `range` elsewhere (e.g. [range_read()]):
 #'   * Similarities: Can be a cell range, using A1 notation ("A1:D3") or using
 #'     the helpers in [`cell-specification`]. Can combine sheet name and cell
 #'     range ("Sheet1!A5:A") or refer to a sheet by name (`range = "Sheet1"`,

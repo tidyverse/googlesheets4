@@ -25,7 +25,7 @@ is how googledrive represents Drive files. Processed through
 \item{sheet}{Sheet to write into, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Ignored if the sheet is specified via \code{range}. If neither argument specifies the sheet, defaults to the first visible sheet.}
 
 \item{range}{Where to write. This \code{range} argument has important similarities
-and differences to \code{range} elsewhere (e.g. \code{\link[=sheets_read]{sheets_read()}}):
+and differences to \code{range} elsewhere (e.g. \code{\link[=range_read]{range_read()}}):
 \itemize{
 \item Similarities: Can be a cell range, using A1 notation ("A1:D3") or using
 the helpers in \code{\link{cell-specification}}. Can combine sheet name and cell

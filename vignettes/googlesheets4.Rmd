@@ -29,20 +29,20 @@ library(googlesheets4)
 This article takes a quick tour of the main features of googlesheets4. 
 Remember to see [the articles](https://googlesheets4.tidyverse.org/articles/index.html) for more detailed treatment of all these topics and more.
 
-## `read_sheet()`, a.k.a. `sheets_read()`
+## `read_sheet()`, a.k.a. `range_read()`
 
-`read_sheet()` is the main "read" function and should evoke `readr::read_csv()` and `readxl::read_excel()`. It's an alias for `sheets_read()`, because most functions in googlesheets4 actually start with `sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`), but works just fine without the pipe.
+`read_sheet()` is the main "read" function and should evoke `readr::read_csv()` and `readxl::read_excel()`. It's an alias for `range_read()`, which is the correct name for this function according to the scheme for naming googlesheets4 functions. You can use them interchangeably. googlesheets4 is pipe-friendly (and reexports `%>%`), but works just fine without the pipe.
 
 `read_sheet()` is designed to "just work", for most purposes, most of the time. It can read straight from a Sheets browser URL:
 
 ```{r}
-sheets_read("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077")
+read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077")
 ```
 
 However, these URLs are not pleasant to work with. More often, you will want to identify a Sheet by its ID:
 
 ```{r}
-sheets_read("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
+read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 ```
 
 or by its name, which requires an assist from the googledrive package ([googledrive.tidyverse.org](https://googledrive.tidyverse.org)):
@@ -53,7 +53,7 @@ or by its name, which requires an assist from the googledrive package ([googledr
 library(googledrive)
 
 drive_get("gapminder") %>% 
-  sheets_read()
+  read_sheet()
 ```
 
 Note that the name-based approach above will only work if **you** have access to a Sheet named "gapminder". Sheet names cannot be used as absolute identifiers; only a Sheet ID can play that role.
@@ -71,7 +71,7 @@ We've made a few Sheets available to "anyone with a link", for use in examples a
     
 ```{r}
 sheets_example("chicken-sheet") %>% 
-  sheets_read()
+  read_sheet()
 ```
 
 If you'd like to see a Sheet in the browser, including our example Sheets, use `sheets_browse()`:
@@ -148,7 +148,7 @@ ss
 
 `range_write()` makes it possible to write arbitrary data, into an arbitrary range. It has a very different "feel" from `sheets_create()`, `sheets_write()`, and `sheet_append()`, all of which assume we're writing or growing a table of data in a (work)sheet. `range_write()` make fewer assumptions about what it's writing and why.
 
-There is also a family of `sheets_sheet_*()` functions that do pure (work)sheet operations, such as add and delete.
+There is also a family of `sheet_*()` functions that do pure (work)sheet operations, such as add and delete.
 
 We take one last look at the sheets we created in `ss`, then clean up.
 

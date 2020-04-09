@@ -13,7 +13,7 @@ test_that("range_delete() works", {
   range_delete(ss, range = "B")
   range_delete(ss, range = "B2", shift = "left")
 
-  out <- sheets_read(ss)
+  out <- range_read(ss)
 
   expect_match(sub("[A-Z](\\d)", "\\1", out[2, ]), "5")
   expect_equal(names(out), c("A", "C", "D"))

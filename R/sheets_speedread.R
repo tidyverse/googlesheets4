@@ -3,7 +3,7 @@
 #' @description
 #' This function uses a quick-and-dirty method to read a Sheet that bypasses the
 #' Sheets API and, instead, parses a CSV representation of the data. This can be
-#' much faster than [sheets_read()] -- noticeably so for "large" spreadsheets.
+#' much faster than [range_read()] -- noticeably so for "large" spreadsheets.
 #' There are real downsides, though, so we recommend this approach only when the
 #' speed difference justifies it. Here are the limitations we must accept to get
 #' faster reading:

@@ -63,11 +63,20 @@ library(googlesheets4)
 
 ## Read
 
-`read_sheet()` is the main “read” function and should evoke
-`readr::read_csv()` and `readxl::read_excel()`. It’s an alias for
-`sheets_read()`, because most functions in googlesheets4 actually start
-with `sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`),
-but works just fine without the pipe.
+The main “read” function of the googlesheets4 package goes by two names,
+because we want it to make sense in two contexts:
+
+  - `read_sheet()` evokes other table-reading functions, like
+    `readr::read_csv()` and `readxl::read_excel()`. The `sheet` in this
+    case refers to a Google (spread)Sheet.
+  - `range_read()` is the right name according to the naming convention
+    used throughout the googlesheets4 package.
+
+`read_sheet()` and `range_read()` are synonyms and you can use either
+one. Here we’ll use `read_sheet()`.
+
+googlesheets4 is pipe-friendly (and reexports `%>%`), but works just
+fine without the pipe.
 
 Read from
 
@@ -110,7 +119,7 @@ read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 
 # a googledrive "dribble"
 googledrive::drive_get("gapminder") %>% 
-  sheets_read()
+  read_sheet()
 #> Reading from "gapminder"
 #> Range "Africa"
 #> # A tibble: 624 x 6
@@ -141,7 +150,7 @@ send some initial data.
 (ss <- sheets_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> Creating new Sheet: "fluffy-bunny"
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1PZhWuDisiOsj2CKnUDgJyRVGRxvYhyb9NVJRoYhtZ78
+#>                 ID: 1y9fiQXsYgz1qV4_n6ftzoJXPUpLf2KdohjSDzauicxg
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -160,7 +169,7 @@ head(mtcars) %>%
 #> Writing to sheet "autos"
 ss
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1PZhWuDisiOsj2CKnUDgJyRVGRxvYhyb9NVJRoYhtZ78
+#>                 ID: 1y9fiQXsYgz1qV4_n6ftzoJXPUpLf2KdohjSDzauicxg
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2

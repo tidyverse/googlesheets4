@@ -1,8 +1,18 @@
 #' Read a Sheet into a data frame
 #'
-#' This is the main "read" function of the googlesheets4 package. The goal is
-#' that `read_sheet()` is to a Google Sheet as `readr::read_csv()` is to a csv
-#' file or `readxl::read_excel()` is to an Excel spreadsheet.
+#' @description
+#' This is the main "read" function of the googlesheets4 package. It goes by two
+#' names, because we want it to make sense in two contexts:
+#' * `read_sheet()` evokes other table-reading functions, like
+#'   `readr::read_csv()` and `readxl::read_excel()`. The `sheet` in this case
+#'    refers to a Google (spread)Sheet.
+#' * `range_read()` is the right name according to the naming convention used
+#'   throughout the googlesheets4 package.
+#'
+#' `read_sheet()` and `range_read()` are synonyms and you can use either one.
+#' The first release of googlesheets used a `sheets_` prefix everywhere, so we
+#' had `sheets_read()`. It still works, but it's deprecated and will go away
+#' rather swiftly.
 #'
 #' @section Column specification:
 #'
@@ -80,7 +90,7 @@
 #'     col_types = "ccid"
 #'   )
 #' }
-read_sheet <- function(ss,
+range_read <- function(ss,
                        sheet = NULL,
                        range = NULL,
                        col_names = TRUE, col_types = NULL,
@@ -110,19 +120,20 @@ read_sheet <- function(ss,
   )
 }
 
-#' @rdname read_sheet
+#' @rdname range_read
 #' @export
-sheets_read <- read_sheet
+read_sheet <- range_read
 
 #' Spread a data frame of cells into spreadsheet shape
 #'
 #' Reshapes a data frame of cells (presumably the output of
 #' [range_read_cells()]) into another data frame, i.e., puts it back into the
 #' shape of the source spreadsheet. This function exists primarily for internal
-#' use and for testing. The flagship function [read_sheet()] is what most users
-#' are looking for. It is basically [range_read_cells()] + [spread_sheet()].
+#' use and for testing. The flagship function [range_read()], a.k.a.
+#' [read_sheet()] is what most users are looking for. It is basically
+#' [range_read_cells()] + [spread_sheet()].
 #'
-#' @inheritParams read_sheet
+#' @inheritParams range_read
 #' @param df A data frame with one row per (nonempty) cell, integer variables
 #'   `row` and `column` (probably referring to location within the spreadsheet),
 #'   and a list-column `cell` of `SHEET_CELL` objects.
@@ -165,7 +176,9 @@ spread_sheet_impl_ <- function(df,
                                na = "", trim_ws = TRUE,
                                guess_max = min(1000, max(df$row)),
                                .name_repair = "unique") {
-  if (nrow(df) == 0) return(tibble::tibble())
+  if (nrow(df) == 0) {
+    return(tibble::tibble())
+  }
   col_names <- col_spec$col_names
   ctypes <- col_spec$ctypes
   col_names_in_sheet <- isTRUE(col_names)

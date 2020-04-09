@@ -39,7 +39,7 @@ A \link[tibble:tibble-package]{tibble}
 \description{
 This function uses a quick-and-dirty method to read a Sheet that bypasses the
 Sheets API and, instead, parses a CSV representation of the data. This can be
-much faster than \code{\link[=sheets_read]{sheets_read()}} -- noticeably so for "large" spreadsheets.
+much faster than \code{\link[=range_read]{range_read()}} -- noticeably so for "large" spreadsheets.
 There are real downsides, though, so we recommend this approach only when the
 speed difference justifies it. Here are the limitations we must accept to get
 faster reading:

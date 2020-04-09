@@ -18,7 +18,7 @@ test_that("range_flood() works", {
   # reset values, leave format unchanged
   range_flood(ss, range = "C:C", cell = "bye", reformat = FALSE)
 
-  out <- sheets_cells(ss, cell_data = "full", discard_empty = FALSE)
+  out <- range_read_cells(ss, cell_data = "full", discard_empty = FALSE)
 
   expect_equal(
     purrr::map_chr(out$cell, "formattedValue", .default = ""),

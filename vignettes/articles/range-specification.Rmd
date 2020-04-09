@@ -20,7 +20,7 @@ sheets_deauth()
 
 # User-specified range
 
-Several googlesheets4 functions allow the user to specify which cells to read or write. This range specification comes via the `sheet`, `range`, and (possibly) `skip` arguments. Examples of functions with this interface: `sheets_read()`, `sheets_cells()`, and `range_write()`.
+Several googlesheets4 functions allow the user to specify which cells to read or write. This range specification comes via the `sheet`, `range`, and (possibly) `skip` arguments. Examples of functions with this interface: `sheets_read()`, `range_read_cells()`, and `range_write()`.
 
   * `range` is the primary and most powerful argument and takes precedence over
     all others. `range` can be:
@@ -32,7 +32,7 @@ Several googlesheets4 functions allow the user to specify which cells to read or
   * `sheet` can be used to specify a (work)sheet by name, such as "arts", or
     by position, such as 3
   * `skip` is an optional argument that appears in `sheets_read()` and 
-    `sheets_cells()`, to be compatible with functions like `read.table()`,
+    `range_read_cells()`, to be compatible with functions like `read.table()`,
     `readr::read_delim()`, and `readxl::read_excel()`.
     
 (You might think `n_max` should also be mentioned here, but for technical reasons, in general, `n_max` can only be enforced after we've read data. So it's not part of the range ingest problem.)
@@ -158,7 +158,7 @@ In any case, between user expectations and API idiosyncrasies, we have to be abl
 
 ### A1 range from `cell_limits`
 
-The reading functions `sheets_read()` and `sheets_cells()` hit the `sheets.spreadsheets.get` endpoint. Bizarrely, this endpoint requires the range to be specified in A1-notation. If the user specifies the cell rectangle in A1-notation, things are easy and we essentially just pass that along. But users can describe certain partially open cell rectangles via `cell_limits` that can't be literally expressed in A1-notation. The table below shows how all possible combinations of row and cell limits are translated into an A1-style range, using technical limits on the number of rows and columns in a Google Sheet.
+The reading functions `sheets_read()` and `range_read_cells()` hit the `sheets.spreadsheets.get` endpoint. Bizarrely, this endpoint requires the range to be specified in A1-notation. If the user specifies the cell rectangle in A1-notation, things are easy and we essentially just pass that along. But users can describe certain partially open cell rectangles via `cell_limits` that can't be literally expressed in A1-notation. The table below shows how all possible combinations of row and cell limits are translated into an A1-style range, using technical limits on the number of rows and columns in a Google Sheet.
 
 ```{r echo = FALSE}
 f <- function(start_col, start_row, end_col, end_row) {

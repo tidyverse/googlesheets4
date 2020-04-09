@@ -48,15 +48,16 @@ user's wishes regarding column names, column types, \code{NA} strings, and
 whitespace trimming.
 }
 \description{
-Reshapes a data frame of cells (presumably the output of \code{\link[=sheets_cells]{sheets_cells()}})
-into another data frame, i.e., puts it back into the shape of the source
-spreadsheet. This function exists primarily for internal use and for testing.
-The flagship function \code{\link[=read_sheet]{read_sheet()}} is what most users are looking for. It
-is basically \code{\link[=sheets_cells]{sheets_cells()}} + \code{\link[=spread_sheet]{spread_sheet()}}.
+Reshapes a data frame of cells (presumably the output of
+\code{\link[=range_read_cells]{range_read_cells()}}) into another data frame, i.e., puts it back into the
+shape of the source spreadsheet. This function exists primarily for internal
+use and for testing. The flagship function \code{\link[=read_sheet]{read_sheet()}} is what most users
+are looking for. It is basically \code{\link[=range_read_cells]{range_read_cells()}} + \code{\link[=spread_sheet]{spread_sheet()}}.
 }
 \examples{
 if (sheets_has_token()) {
-  df <- sheets_cells(sheets_example("mini-gap"))
+  df <- sheets_example("mini-gap") \%>\%
+    range_read_cells()
   spread_sheet(df)
 
   # ^^ gets same result as ...

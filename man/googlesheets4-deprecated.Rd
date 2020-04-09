@@ -3,16 +3,15 @@
 \name{googlesheets4-deprecated}
 \alias{googlesheets4-deprecated}
 \alias{sheets_sheets}
+\alias{sheets_cells}
 \title{Deprecated functions}
 \usage{
-sheets_sheets(ss)
+sheets_sheets(...)
+
+sheets_cells(...)
 }
 \arguments{
-\item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, an instance of \code{googlesheets4_spreadsheet}
-(returned by \code{\link[=sheets_get]{sheets_get()}}), or a \code{\link[googledrive:dribble]{dribble}}, which
-is how googledrive represents Drive files. Processed through
-\code{\link[=as_sheets_id]{as_sheets_id()}}.}
+\item{...}{Passed on to the function that succeeds the deprecated function.}
 }
 \description{
 \lifecycle{deprecated}
@@ -21,5 +20,7 @@ These functions are deprecated and will be removed in a future release of
 googlesheets4.
 
 \code{sheets_sheets()} is replaced by \code{sheets_sheet_names()}.
+
+\code{sheets_cells()} is replaced by \code{range_read_cells()}.
 }
 \keyword{internal}

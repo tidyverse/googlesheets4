@@ -22,7 +22,7 @@
 #' sends an auth token with the request, unless a previous call to
 #' [sheets_deauth()] has put googlesheets4 into a de-authorized state.
 #'
-#' @inheritParams sheets_cells
+#' @inheritParams range_read_cells
 #' @param ... Passed along to the CSV parsing function (currently
 #'   `readr::read_csv()`).
 #'

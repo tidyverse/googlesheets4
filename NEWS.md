@@ -1,5 +1,21 @@
 # googlesheets4 (development version)
 
+### Function naming scheme
+
+The universal `sheets_` prefix has been replaced by a scheme that conveys more information about the scope of the function, e.g., a whole spreadsheet vs. a whole worksheet vs. a cell range. We've added many functions since the initial CRAN release and it became clear the original scheme wasn't serving us well.
+
+This table summarizes what the new prefixes (`gs4_`, `sheet_`, `range_`) mean conceptually and what they tell you about the function signature.
+
+| prefix | ss  | sheet | range | scope            |
+|--------|-----|-------|-------|------------------|
+| gs4_   | yes | no    | no    | a (spread)Sheet  |
+| sheet_ | yes | yes   | no    | a (work)sheet    |
+| range_ | yes | yes   | yes   | a range of cell  |
+
+Note: `gs4_` is also used for general, package-level functions.
+
+Any function present in the previous CRAN release, v0.1.1, still works, but triggers a warning with strong encouragement to call it via its current name.
+
 ### Write Sheets
 
 These functions are ready for use but are still considered experimental and may see more refinements to their interface and capabilities:
@@ -32,7 +48,7 @@ There is a new family of `sheets_sheet_*()` functions that operate on the (work)
   
 `sheets_speedread()` provides a quick-and-dirty method for reading a Sheet using its "export=csv" URL.
 
-`sheets_cells()` gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But `sheets_cells(cell_data = "full", discard_empty = FALSE)` is now available if you want full cell data, including formatting, even for cells that have no value (#4).
+`range_read_cells()` (formerly known as `sheets_cells()`) gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But `range_read_cells(cell_data = "full", discard_empty = FALSE)` is now available if you want full cell data, including formatting, even for cells that have no value (#4).
 
 `sheets_fodder()` is a convenience function that creates a filler data frame you can use to make toy sheets you're using to practice on or for a reprex.
 

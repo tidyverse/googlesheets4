@@ -9,7 +9,7 @@
 #' but googlesheets4 accepts and converts a few alternative specifications
 #' provided by the functions in the [cellranger][cellranger] package. Of course,
 #' you can always provide A1-style ranges directly to functions like
-#' [read_sheet()] or [sheets_cells()]. Why would you use the
+#' [read_sheet()] or [range_read_cells()]. Why would you use the
 #' [cellranger][cellranger] helpers? Some ranges are practically impossible to
 #' express in A1 notation, specifically when you want to describe rectangles
 #' with some bounds that are specified and others determined by the data.

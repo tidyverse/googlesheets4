@@ -43,7 +43,7 @@
 #'   * *Still to come*: duration (code will be `:`) and factor (code will be
 #'   `f`).
 #'
-#' @inheritParams sheets_cells
+#' @inheritParams range_read_cells
 #' @param col_names `TRUE` to use the first row as column names, `FALSE` to get
 #'   default names, or a character vector to provide column names directly. If
 #'   user provides `col_types`, `col_names` can have one entry per column or one
@@ -116,11 +116,11 @@ sheets_read <- read_sheet
 
 #' Spread a data frame of cells into spreadsheet shape
 #'
-#' Reshapes a data frame of cells (presumably the output of [sheets_cells()])
-#' into another data frame, i.e., puts it back into the shape of the source
-#' spreadsheet. This function exists primarily for internal use and for testing.
-#' The flagship function [read_sheet()] is what most users are looking for. It
-#' is basically [sheets_cells()] + [spread_sheet()].
+#' Reshapes a data frame of cells (presumably the output of
+#' [range_read_cells()]) into another data frame, i.e., puts it back into the
+#' shape of the source spreadsheet. This function exists primarily for internal
+#' use and for testing. The flagship function [read_sheet()] is what most users
+#' are looking for. It is basically [range_read_cells()] + [spread_sheet()].
 #'
 #' @inheritParams read_sheet
 #' @param df A data frame with one row per (nonempty) cell, integer variables
@@ -134,7 +134,8 @@ sheets_read <- read_sheet
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#'   df <- sheets_cells(sheets_example("mini-gap"))
+#'   df <- sheets_example("mini-gap") %>%
+#'     range_read_cells()
 #'   spread_sheet(df)
 #'
 #'   # ^^ gets same result as ...

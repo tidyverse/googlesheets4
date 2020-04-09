@@ -4,10 +4,10 @@
 #' This tibble has integer variables `row` and `column` (referring to location
 #' with the Google Sheet), an A1-style reference `loc`, and a `cell`
 #' list-column. The flagship function [read_sheet()], a.k.a. [sheets_read()], is
-#' what most users are looking for, rather than `sheets_cells()`. [read_sheet()]
-#' is basically `sheets_cells()` (this function), followed by [spread_sheet()],
+#' what most users are looking for, rather than `range_read_cells()`. [read_sheet()]
+#' is basically `range_read_cells()` (this function), followed by [spread_sheet()],
 #' which looks after reshaping and column typing. But if you really want raw cell
-#' data from the API, `sheets_cells()` is for you!
+#' data from the API, `range_read_cells()` is for you!
 #'
 #' @eval param_ss()
 #' @eval param_sheet(
@@ -36,16 +36,16 @@
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#'   sheets_cells(sheets_example("deaths"), range = "arts_data")
+#'   range_read_cells(sheets_example("deaths"), range = "arts_data")
 #'
 #'   # if you want detailed and exhaustive cell data, do this
-#'   sheets_cells(
+#'   range_read_cells(
 #'     sheets_example("formulas-and-formats"),
 #'     cell_data = "full",
 #'     discard_empty = FALSE
 #'   )
 #' }
-sheets_cells <- function(ss,
+range_read_cells <- function(ss,
                          sheet = NULL,
                          range = NULL,
                          skip = 0, n_max = Inf,

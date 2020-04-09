@@ -15,8 +15,11 @@ is how googledrive represents Drive files. Processed through
 \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 }
 \description{
-Deprecated functions
+\lifecycle{deprecated}
 
-Use \code{sheets_sheet_names()} instead of \code{sheets_sheets()}.
+These functions are deprecated and will be removed in a future release of
+googlesheets4.
+
+\code{sheets_sheets()} is replaced by \code{sheets_sheet_names()}.
 }
 \keyword{internal}

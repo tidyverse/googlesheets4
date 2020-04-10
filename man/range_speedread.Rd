@@ -65,7 +65,7 @@ if (sheets_has_token()) {
   if (require("readr")) {
     # since cell type is not available, use readr's col type specification
     range_speedread(
-      sheets_example("deaths"),
+      gs4_example("deaths"),
       sheet = "other",
       range = "A5:F15",
       col_types = cols(

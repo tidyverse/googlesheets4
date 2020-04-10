@@ -21,7 +21,7 @@ browser.
 }
 \examples{
 if (sheets_has_token()) {
-  sheets_example("mini-gap")
+  gs4_example("mini-gap")
 }
 }
 \seealso{

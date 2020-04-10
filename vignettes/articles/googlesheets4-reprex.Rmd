@@ -21,7 +21,7 @@ Here we show various ways this can work, if rough order of preference.
 
 ## Use a public example Sheet
 
-If you can make your point with one of the example Sheets, exposed via `sheets_examples()` and `sheets_example()`, do so! You can call `sheets_deauth()` explicitly in your reprex to shut down any attempt to get a token.
+If you can make your point with one of the example Sheets, exposed via `gs4_examples()` and `gs4_example()`, do so! You can call `sheets_deauth()` explicitly in your reprex to shut down any attempt to get a token.
 
 ```{r eval = FALSE}
 library(googlesheets4)
@@ -30,7 +30,7 @@ sheets_deauth()
 
 # put the googlesheets4 code you want to reproduce below here
 # the following is just an example, replace it with your own code
-sheets_example("mini-gap") %>% 
+gs4_example("mini-gap") %>% 
   gs4_get()
 ```
 

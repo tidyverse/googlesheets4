@@ -28,7 +28,7 @@ Reveals full metadata or just the names for the (work)sheets inside a
 }
 \examples{
 if (sheets_has_token()) {
-  ss <- sheets_example("gapminder")
+  ss <- gs4_example("gapminder")
   sheet_properties(ss)
   sheet_names(ss)
 }

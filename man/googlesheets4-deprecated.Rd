@@ -8,6 +8,8 @@
 \alias{sheets_write}
 \alias{sheets_create}
 \alias{sheets_get}
+\alias{sheets_example}
+\alias{sheets_examples}
 \alias{sheets_browse}
 \title{Deprecated functions}
 \usage{
@@ -22,6 +24,10 @@ sheets_write(...)
 sheets_create(...)
 
 sheets_get(...)
+
+sheets_example(...)
+
+sheets_examples(...)
 
 sheets_browse(...)
 }
@@ -47,6 +53,10 @@ googlesheets4.
 \code{sheets_create()} is replaced by \code{\link[=gs4_create]{gs4_create()}}.
 
 \code{sheets_get()} is replaced by \code{\link[=gs4_get]{gs4_get()}}.
+
+\code{sheets_example()} is replaced by \code{\link[=gs4_example]{gs4_example()}}.
+
+\code{sheets_examples()} is replaced by \code{\link[=gs4_examples]{gs4_examples()}}.
 
 \code{sheets_browse()} is replaced by \code{\link[=gs4_browse]{gs4_browse()}}.
 }

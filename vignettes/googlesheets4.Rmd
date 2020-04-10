@@ -64,20 +64,20 @@ For more Sheet identification concepts and strategies, see the article [Find and
 
 We've made a few Sheets available to "anyone with a link", for use in examples and docs. Two helper functions make it easy to get your hands on these file IDs.
 
-  * `sheets_examples()` lists all the example Sheets and it can also filter by
+  * `gs4_examples()` lists all the example Sheets and it can also filter by
     matching names to a regular expression.
-  * `sheets_example()` requires a regular expression and returns exactly 1 Sheet
+  * `gs4_example()` requires a regular expression and returns exactly 1 Sheet
     ID (or throws an error).
     
 ```{r}
-sheets_example("chicken-sheet") %>% 
+gs4_example("chicken-sheet") %>% 
   read_sheet()
 ```
 
 If you'd like to see a Sheet in the browser, including our example Sheets, use `gs4_browse()`:
 
 ```{r eval = FALSE}
-sheets_example("deaths") %>%
+gs4_example("deaths") %>%
   gs4_browse()
 ```
 
@@ -86,7 +86,7 @@ sheets_example("deaths") %>%
 `gs4_get()` exposes Sheet metadata, such as details on worksheets and named ranges.
 
 ```{r}
-ss <- sheets_example("deaths")
+ss <- gs4_example("deaths")
 
 gs4_get(ss)
 

@@ -22,7 +22,7 @@ you forget that exists and hope that \code{as_id()} will "just work".
 }
 \examples{
 if (sheets_has_token()) {
-  ss <- gs4_get(sheets_example("mini-gap"))
+  ss <- gs4_get(gs4_example("mini-gap"))
   class(ss)
   googledrive::as_id(ss)
 }

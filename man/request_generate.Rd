@@ -53,7 +53,7 @@ remaining parameters into those destined for the body versus the query.
 \examples{
 req <- request_generate(
   "sheets.spreadsheets.get",
-  list(spreadsheetId = sheets_example("deaths")),
+  list(spreadsheetId = gs4_example("deaths")),
   token = NULL
 )
 req

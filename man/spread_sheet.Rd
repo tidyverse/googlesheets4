@@ -57,11 +57,11 @@ use and for testing. The flagship function \code{\link[=range_read]{range_read()
 }
 \examples{
 if (sheets_has_token()) {
-  df <- sheets_example("mini-gap") \%>\%
+  df <- gs4_example("mini-gap") \%>\%
     range_read_cells()
   spread_sheet(df)
 
   # ^^ gets same result as ...
-  read_sheet(sheets_example("mini-gap"))
+  read_sheet(gs4_example("mini-gap"))
 }
 }

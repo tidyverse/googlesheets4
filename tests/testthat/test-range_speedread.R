@@ -16,13 +16,13 @@ test_that("sheets_spreadread() works", {
 
   # specify col_types
   read <- range_read(
-    sheets_example("deaths"),
+    gs4_example("deaths"),
     sheet = "other",
     range = "A5:F15",
     col_types = "??i?DD"
   )
   speedread <- range_speedread(
-    sheets_example("deaths"),
+    gs4_example("deaths"),
     sheet = "other",
     range = "A5:F15",
     col_types = readr::cols(

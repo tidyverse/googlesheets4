@@ -23,7 +23,7 @@ if (interactive()) {
   sheets_user()
 
   # get metadata on the public 'deaths' spreadsheet
-  gs4_get(sheets_example("deaths"))
+  gs4_get(gs4_example("deaths"))
 }
 }
 \seealso{

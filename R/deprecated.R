@@ -72,6 +72,24 @@ sheets_get <- function(...) {
 }
 
 #' @description
+#' `sheets_example()` is replaced by [gs4_example()].
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_example <- function(...) {
+  deprecate_warn("0.2.0", "sheets_example()", "gs4_example()")
+  gs4_example(...)
+}
+
+#' @description
+#' `sheets_examples()` is replaced by [gs4_examples()].
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_examples <- function(...) {
+  deprecate_warn("0.2.0", "sheets_examples()", "gs4_examples()")
+  gs4_examples(...)
+}
+
+#' @description
 #' `sheets_browse()` is replaced by [gs4_browse()].
 #' @rdname googlesheets4-deprecated
 #' @export
@@ -79,5 +97,4 @@ sheets_browse <- function(...) {
   deprecate_warn("0.2.0", "sheets_browse()", "gs4_browse()")
   gs4_browse(...)
 }
-
 # nocov end

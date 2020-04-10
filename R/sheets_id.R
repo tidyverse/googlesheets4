@@ -20,7 +20,7 @@
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#'   sheets_example("mini-gap")
+#'   gs4_example("mini-gap")
 #' }
 NULL
 
@@ -179,7 +179,7 @@ one_id <- function(x) {
 #' @export
 #' @examples
 #' if (sheets_has_token()) {
-#'   ss <- gs4_get(sheets_example("mini-gap"))
+#'   ss <- gs4_get(gs4_example("mini-gap"))
 #'   class(ss)
 #'   googledrive::as_id(ss)
 #' }

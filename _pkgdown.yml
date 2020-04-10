@@ -65,7 +65,7 @@ reference:
     desc: >
       World-readable Sheets to use in examples and reprexes
     contents:
-      - starts_with("sheets_example")
+      - starts_with("gs4_example")
   - title: "Auth"
     desc: >
       Take explicit control of the googlesheets4 auth status or examine current state

@@ -20,5 +20,5 @@ The Sheet's browser URL, invisibly.
 Visits a Google Sheet in your default browser, if session is interactive.
 }
 \examples{
-sheets_example("mini-gap") \%>\% gs4_browse()
+gs4_example("mini-gap") \%>\% gs4_browse()
 }

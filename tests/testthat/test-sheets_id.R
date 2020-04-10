@@ -81,7 +81,7 @@ test_that("sheets_id print method reveals metadata", {
 
   verify_output(
     test_path("ref", "sheets-id-print-with-token.txt"),
-    print(sheets_example("gapminder"))
+    print(gs4_example("gapminder"))
   )
 })
 
@@ -112,7 +112,7 @@ test_that("can print public sheets_id if deauth'd", {
 
   verify_output(
     test_path("ref", "sheets-id-print-deauthed.txt"),
-    print(sheets_example("mini-gap"))
+    print(gs4_example("mini-gap"))
   )
 })
 
@@ -132,10 +132,10 @@ test_that("sheets_id print does not error for lack of cred", {
   .auth$clear_cred()
   .auth$set_auth_active(TRUE)
 
-  expect_error_free(format(sheets_example("mini-gap")))
+  expect_error_free(format(gs4_example("mini-gap")))
 
   verify_output(
     test_path("ref", "sheets-id-print-no-cred.txt"),
-    print(sheets_example("mini-gap"))
+    print(gs4_example("mini-gap"))
   )
 })

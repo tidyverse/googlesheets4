@@ -1,5 +1,5 @@
 ## TODO: consult remote key-value store for these? in case they change?
-.sheets_examples <- googledrive::as_id(c(
+.gs4_examples <- googledrive::as_id(c(
                    "mini-gap" = "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU",
                   "gapminder" = "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY",
                      "deaths" = "1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg",
@@ -83,34 +83,34 @@ one_sheet <- function(needle, haystack, adjective) {
 #' access by their nicknames.
 #'
 #' @param matches A regular expression that matches the nickname of the desired
-#'   example Sheet(s). This argument is optional for `sheets_examples()` and, if
-#'   provided, multiple matches are allowed. `sheets_example()` requires
+#'   example Sheet(s). This argument is optional for `gs4_examples()` and, if
+#'   provided, multiple matches are allowed. `gs4_example()` requires
 #'   this argument and requires that there is exactly one match.
 #'
 #' @return
-#' * `sheets_example()`: a single [sheets_id] object
-#' * `sheets_examples()`: a named vector of all built-in examples, with class
+#' * `gs4_example()`: a single [sheets_id] object
+#' * `gs4_examples()`: a named vector of all built-in examples, with class
 #'   [`drive_id`][googledrive::as_id]
 #'
 #' @export
 #' @examples
-#' sheets_examples()
-#' sheets_examples("gap")
-#' sheets_example("gapminder")
-sheets_example <- function(matches) {
+#' gs4_examples()
+#' gs4_examples("gap")
+#' gs4_example("gapminder")
+gs4_example <- function(matches) {
   one_sheet(
     needle    = matches,
-    haystack  = .sheets_examples,
+    haystack  = .gs4_examples,
     adjective = "example"
   )
 }
 
-#' @rdname sheets_example
+#' @rdname gs4_example
 #' @export
-sheets_examples <- function(matches) {
+gs4_examples <- function(matches) {
   many_sheets(
     needle    = matches,
-    haystack  = .sheets_examples,
+    haystack  = .gs4_examples,
     adjective = "example"
   )
 }

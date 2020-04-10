@@ -17,7 +17,7 @@
 #' @examples
 #' if (sheets_has_token()) {
 #'   # we will recreate the table of "other" deaths from this example Sheet
-#'   (deaths <- sheets_example("deaths") %>%
+#'   (deaths <- gs4_example("deaths") %>%
 #'     range_read(range = "other_data", col_types = "????DD"))
 #'
 #'   # split the data into 3 pieces, which we will send separately

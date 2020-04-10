@@ -149,14 +149,14 @@ its discovered type.
 
 \examples{
 if (sheets_has_token()) {
-  ss <- sheets_example("deaths")
+  ss <- gs4_example("deaths")
   read_sheet(ss, range = "A5:F15")
   read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
   read_sheet(ss, range = "arts_data", col_types = "ccilDD")
 
-  read_sheet(sheets_example("mini-gap"))
+  read_sheet(gs4_example("mini-gap"))
   read_sheet(
-    sheets_example("mini-gap"),
+    gs4_example("mini-gap"),
     sheet = "Europe",
     range = "A:D",
     col_types = "ccid"

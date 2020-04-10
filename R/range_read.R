@@ -77,14 +77,14 @@
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#'   ss <- sheets_example("deaths")
+#'   ss <- gs4_example("deaths")
 #'   read_sheet(ss, range = "A5:F15")
 #'   read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
 #'   read_sheet(ss, range = "arts_data", col_types = "ccilDD")
 #'
-#'   read_sheet(sheets_example("mini-gap"))
+#'   read_sheet(gs4_example("mini-gap"))
 #'   read_sheet(
-#'     sheets_example("mini-gap"),
+#'     gs4_example("mini-gap"),
 #'     sheet = "Europe",
 #'     range = "A:D",
 #'     col_types = "ccid"
@@ -145,12 +145,12 @@ read_sheet <- range_read
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#'   df <- sheets_example("mini-gap") %>%
+#'   df <- gs4_example("mini-gap") %>%
 #'     range_read_cells()
 #'   spread_sheet(df)
 #'
 #'   # ^^ gets same result as ...
-#'   read_sheet(sheets_example("mini-gap"))
+#'   read_sheet(gs4_example("mini-gap"))
 #' }
 spread_sheet <- function(df,
                          col_names = TRUE, col_types = NULL,

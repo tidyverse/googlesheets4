@@ -201,7 +201,7 @@ sheets_find("write-sheets-demo") %>%
 Let's recreate the table of "other" deaths from an example Sheet, but without the annoying text above and below the data. First we bring that data into a local data frame and chop it into pieces.
 
 ```{r}
-(deaths <- sheets_example("deaths") %>%
+(deaths <- gs4_example("deaths") %>%
    range_read(range = "other_data", col_types = "????DD"))
 
 deaths_zero  <- deaths[integer(), ] # "scaffolding" data frame with 0 rows

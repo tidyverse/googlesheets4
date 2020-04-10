@@ -40,7 +40,7 @@
 #' @examples
 #' req <- request_generate(
 #'   "sheets.spreadsheets.get",
-#'   list(spreadsheetId = sheets_example("deaths")),
+#'   list(spreadsheetId = gs4_example("deaths")),
 #'   token = NULL
 #' )
 #' req

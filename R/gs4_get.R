@@ -15,7 +15,7 @@
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#'   gs4_get(sheets_example("mini-gap"))
+#'   gs4_get(gs4_example("mini-gap"))
 #' }
 gs4_get <- function(ss) {
   resp <- gs4_get_impl_(as_sheets_id(ss))

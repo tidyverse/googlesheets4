@@ -1,4 +1,4 @@
-> print(sheets_example("mini-gap"))
+> print(gs4_example("mini-gap"))
   Spreadsheet name: <unknown>
                 ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
             Locale: <unknown>

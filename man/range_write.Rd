@@ -106,7 +106,7 @@ if (sheets_has_token()) {
   range_write(ss, data = df, range = "D6")
 
   # view your magnificent creation in the browser
-  # sheets_browse(ss)
+  gs4_browse(ss)
 
   # send data of disparate types to a 1-row rectangle
   dat <- tibble::tibble(

@@ -35,7 +35,7 @@
 #'   ss
 #'
 #'   # open in the browser
-#'   sheets_browse(ss)
+#'   gs4_browse(ss)
 #'
 #'   # shrink column A to fit the short fruit names
 #'   range_autofit(ss)

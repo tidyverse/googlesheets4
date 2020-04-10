@@ -70,4 +70,14 @@ sheets_get <- function(...) {
   deprecate_warn("0.2.0", "sheets_get()", "gs4_get()")
   gs4_get(...)
 }
+
+#' @description
+#' `sheets_browse()` is replaced by [gs4_browse()].
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_browse <- function(...) {
+  deprecate_warn("0.2.0", "sheets_browse()", "gs4_browse()")
+  gs4_browse(...)
+}
+
 # nocov end

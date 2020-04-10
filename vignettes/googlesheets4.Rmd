@@ -60,7 +60,7 @@ Note that the name-based approach above will only work if **you** have access to
 
 For more Sheet identification concepts and strategies, see the article [Find and Identify Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html). See the article [Read Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html) for more about reading from a specific (work)sheet or ranges, setting column type, and getting low-level cell data.
 
-## Example Sheets and `sheets_browse()`
+## Example Sheets and `gs4_browse()`
 
 We've made a few Sheets available to "anyone with a link", for use in examples and docs. Two helper functions make it easy to get your hands on these file IDs.
 
@@ -74,11 +74,11 @@ sheets_example("chicken-sheet") %>%
   read_sheet()
 ```
 
-If you'd like to see a Sheet in the browser, including our example Sheets, use `sheets_browse()`:
+If you'd like to see a Sheet in the browser, including our example Sheets, use `gs4_browse()`:
 
 ```{r eval = FALSE}
 sheets_example("deaths") %>%
-  sheets_browse()
+  gs4_browse()
 ```
 
 ## Sheet metadata

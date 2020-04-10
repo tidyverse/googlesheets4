@@ -16,7 +16,7 @@ drive_trash(ss)
 
 ## Update gapminder example Sheet ----
 ss <- sheets_find("gapminder") %>% as_sheets_id()
-# sheets_browse(ss)
+# gs4_browse(ss)
 
 gapminder_split <- split(gapminder, gapminder$continent)
 sheet_write(gapminder_split$Africa,   ss = ss, sheet = "Africa")
@@ -33,7 +33,7 @@ mini_gap <- gapminder %>%
   split(.$continent)
 
 (ss <- sheets_find("mini-gap") %>% as_sheets_id())
-# sheets_browse(ss)
+# gs4_browse(ss)
 
 sheet_write(mini_gap$Africa,   ss = ss, sheet = "Africa")
 sheet_write(mini_gap$Americas, ss = ss, sheet = "Americas")

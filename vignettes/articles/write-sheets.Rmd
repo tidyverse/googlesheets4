@@ -217,10 +217,10 @@ ss <- gs4_create("sheets-append-demo", sheets = list(deaths = deaths_zero))
 ss
 ```
 
-If you're following along, I recommend you open this Sheet in a web browser with `sheets_browse()` and revisit as we go along, to see how the initial empty row gets consumed and how additional rows are added to the targetted sheet automatically.
+If you're following along, I recommend you open this Sheet in a web browser with `gs4_browse()` and revisit as we go along, to see how the initial empty row gets consumed and how additional rows are added to the targetted sheet automatically.
 
 ```{r}
-sheets_browse(ss)
+gs4_browse(ss)
 ```
 
 Send the data, one or more rows at a time. Keep inspecting in the browser if you're doing this yourself.
@@ -291,7 +291,7 @@ read_this <- function(ss) {
 }
 
 ss_edit <- gs4_create("sheets-edit-demo")
-#googlesheets4:::sheets_share(ss_edit) %>% sheets_browse()
+#googlesheets4:::sheets_share(ss_edit) %>% gs4_browse()
 sheet_resize(ss_edit, nrow = n, ncol = n, exact = TRUE)
 populate(ss_edit)
 ```

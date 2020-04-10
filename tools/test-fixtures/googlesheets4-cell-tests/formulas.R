@@ -5,7 +5,7 @@ library(googledrive)
 sheets_auth_testing()
 
 ss <- test_sheet_create()
-sheets_browse(ss)
+gs4_browse(ss)
 
 # TODO: I created this worksheet in the browser, by copying from
 # sheets_example("formulas-and-formats")

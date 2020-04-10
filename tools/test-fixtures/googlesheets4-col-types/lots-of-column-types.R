@@ -5,7 +5,7 @@ library(tidyverse)
 # googlesheets4:::sheets_auth_testing()
 
 ss <- test_sheet_create("googlesheets4-col-types")
-sheets_browse(ss)
+gs4_browse(ss)
 
 df <- tibble(
   logical = c(TRUE, FALSE, NA, TRUE),

@@ -8,6 +8,7 @@
 \alias{sheets_write}
 \alias{sheets_create}
 \alias{sheets_get}
+\alias{sheets_browse}
 \title{Deprecated functions}
 \usage{
 sheets_sheets(...)
@@ -21,6 +22,8 @@ sheets_write(...)
 sheets_create(...)
 
 sheets_get(...)
+
+sheets_browse(...)
 }
 \arguments{
 \item{...}{Passed on to the function that succeeds the deprecated function.}
@@ -44,5 +47,7 @@ googlesheets4.
 \code{sheets_create()} is replaced by \code{\link[=gs4_create]{gs4_create()}}.
 
 \code{sheets_get()} is replaced by \code{\link[=gs4_get]{gs4_get()}}.
+
+\code{sheets_browse()} is replaced by \code{\link[=gs4_browse]{gs4_browse()}}.
 }
 \keyword{internal}

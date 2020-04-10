@@ -45,7 +45,7 @@ reference:
     contents:
       - gs4_get
       - sheets_find
-      - sheets_browse
+      - gs4_browse
       - ends_with("_id")
       - as_id.googlesheets4_spreadsheet
       - sheets_random

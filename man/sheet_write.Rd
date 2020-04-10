@@ -95,7 +95,7 @@ if (sheets_has_token()) {
   sheet_properties(ss)
 
   # view your magnificent creation in the browser
-  # sheets_browse(ss)
+  gs4_browse(ss)
 
   # clean up
   googledrive::drive_trash(ss)

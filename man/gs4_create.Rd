@@ -57,7 +57,7 @@ if (sheets_has_token()) {
   )
 
   # clean up
-  sheets_find("gs4-create-demo") \%>\%
+  gs4_find("gs4-create-demo") \%>\%
     googledrive::drive_trash()
 }
 }

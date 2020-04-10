@@ -30,7 +30,7 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
     stop_glue("Must be auth'd as {sq('googlesheets4-testing')}, not {sq(user)}")
   }
 
-  existing <- sheets_find()
+  existing <- gs4_find()
   m <- match(name, existing$name)
   if (is.na(m)) {
     message_glue("Creating {dq(name)}")

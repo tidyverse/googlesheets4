@@ -35,7 +35,7 @@ nm_fun <- function(context, user = Sys.info()["user"]) {
 }
 
 scoped_temporary_ss <- function(name, ..., env = parent.frame()) {
-  existing <- sheets_find(name)
+  existing <- gs4_find(name)
   if (nrow(existing) > 0) {
     stop_glue("A spreadsheet named {sq(name)} already exists.")
   }
@@ -47,7 +47,7 @@ scoped_temporary_ss <- function(name, ..., env = parent.frame()) {
     )
   } else {
     withr::defer({
-      trash_me <- sheets_find(name)
+      trash_me <- gs4_find(name)
       if (nrow(trash_me) < 1) {
         warning_glue("The spreadsheet named {sq(name)} already seems to be deleted.")
       } else {

@@ -38,7 +38,8 @@ if (sheets_has_token()) {
   sheet_properties(ss)
 
   # cleanup
-  sheets_find("delete-sheets-from-me") \%>\% googledrive::drive_rm()
+  gs4_find("delete-sheets-from-me") \%>\%
+    googledrive::drive_trash()
 }
 }
 \seealso{

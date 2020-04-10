@@ -56,7 +56,7 @@
 #'   )
 #'
 #'   # clean up
-#'   sheets_find("gs4-create-demo") %>%
+#'   gs4_find("gs4-create-demo") %>%
 #'     googledrive::drive_trash()
 #' }
 gs4_create <- function(name = sheets_random(), ..., sheets = NULL) {

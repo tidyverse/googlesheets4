@@ -32,7 +32,8 @@
 #'   sheet_properties(ss)
 #'
 #'   # cleanup
-#'   sheets_find("delete-sheets-from-me") %>% googledrive::drive_rm()
+#'   gs4_find("delete-sheets-from-me") %>%
+#'     googledrive::drive_trash()
 #' }
 sheet_delete <- function(ss, sheet) {
   ssid <- as_sheets_id(ss)

@@ -29,7 +29,7 @@ spreadsheets, we are only prepared to accept a one-row \code{dribble}.
 \itemize{
 \item \code{\link[googledrive:drive_get]{googledrive::drive_get("YOUR_SHEET_NAME")}}
 is a great way to look up a Sheet via its name.
-\item \code{\link[=sheets_find]{sheets_find("YOUR_SHEET_NAME")}} is another good way
+\item \code{\link[=gs4_find]{gs4_find("YOUR_SHEET_NAME")}} is another good way
 to get your hands on a Sheet.
 }
 \item Spreadsheet meta data, as returned by, e.g., \code{\link[=gs4_get]{gs4_get()}}. Literally,

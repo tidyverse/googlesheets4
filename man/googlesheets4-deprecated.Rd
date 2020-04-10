@@ -11,6 +11,7 @@
 \alias{sheets_example}
 \alias{sheets_examples}
 \alias{sheets_browse}
+\alias{sheets_find}
 \title{Deprecated functions}
 \usage{
 sheets_sheets(...)
@@ -30,6 +31,8 @@ sheets_example(...)
 sheets_examples(...)
 
 sheets_browse(...)
+
+sheets_find(...)
 }
 \arguments{
 \item{...}{Passed on to the function that succeeds the deprecated function.}
@@ -59,5 +62,7 @@ googlesheets4.
 \code{sheets_examples()} is replaced by \code{\link[=gs4_examples]{gs4_examples()}}.
 
 \code{sheets_browse()} is replaced by \code{\link[=gs4_browse]{gs4_browse()}}.
+
+\code{sheets_find()} is replaced by \code{\link[=gs4_find]{gs4_find()}}.
 }
 \keyword{internal}

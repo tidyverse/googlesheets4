@@ -58,7 +58,7 @@ if (sheets_has_token()) {
   sheet_properties(ss)
 
   # cleanup
-  sheets_find("add-sheets-to-me") \%>\%
+  gs4_find("add-sheets-to-me") \%>\%
     googledrive::drive_trash()
 }
 }

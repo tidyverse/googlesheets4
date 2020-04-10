@@ -44,7 +44,7 @@ reference:
       Helpers for accessing Sheets and their metadata
     contents:
       - gs4_get
-      - sheets_find
+      - gs4_find
       - gs4_browse
       - ends_with("_id")
       - as_id.googlesheets4_spreadsheet

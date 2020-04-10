@@ -70,7 +70,7 @@ sheets_id <- function(x) {
 #'     spreadsheets, we are only prepared to accept a one-row `dribble`.
 #'     - [`googledrive::drive_get("YOUR_SHEET_NAME")`][googledrive::drive_get()]
 #'     is a great way to look up a Sheet via its name.
-#'     - [`sheets_find("YOUR_SHEET_NAME")`][sheets_find()] is another good way
+#'     - [`gs4_find("YOUR_SHEET_NAME")`][gs4_find()] is another good way
 #'     to get your hands on a Sheet.
 #'   * Spreadsheet meta data, as returned by, e.g., [gs4_get()]. Literally,
 #'     this is an object of class `googlesheets4_spreadsheet`.

@@ -15,7 +15,7 @@ drive_trash(ss)
 # instead I will edit it (and mini-gap) in situ
 
 ## Update gapminder example Sheet ----
-ss <- sheets_find("gapminder") %>% as_sheets_id()
+ss <- gs4_find("gapminder") %>% as_sheets_id()
 # gs4_browse(ss)
 
 gapminder_split <- split(gapminder, gapminder$continent)
@@ -32,7 +32,7 @@ mini_gap <- gapminder %>%
   slice(1:5) %>%
   split(.$continent)
 
-(ss <- sheets_find("mini-gap") %>% as_sheets_id())
+(ss <- gs4_find("mini-gap") %>% as_sheets_id())
 # gs4_browse(ss)
 
 sheet_write(mini_gap$Africa,   ss = ss, sheet = "Africa")

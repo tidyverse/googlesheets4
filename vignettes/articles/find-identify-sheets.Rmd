@@ -171,10 +171,10 @@ What if you want to see all of your Sheets? Or all the Sheets with "gap" in thei
 drive_find(type = "spreadsheet")
 ```
 
-This is so handy that we've made `sheets_find()` in googlesheets4, which is a shortcut for `drive_find(type = "spreadsheet")`:
+This is so handy that we've made `gs4_find()` in googlesheets4, which is a shortcut for `drive_find(type = "spreadsheet")`:
 
 ```{r}
-sheets_find()
+gs4_find()
 ```
 
-See the examples for `drive_find()` and `sheets_find()` for more ideas about how to search Drive effectively for your Sheets.
+See the examples for `drive_find()` and `gs4_find()` for more ideas about how to search Drive effectively for your Sheets.

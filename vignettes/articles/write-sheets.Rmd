@@ -133,7 +133,7 @@ I would only do this if you have specific evidence that the default behaviour wi
 Trash all the Sheets created above. This actually requires googledrive, since it is not possible to trash or delete Sheets through the Sheets API. In our hidden auth process, described earlier, we put a shared token into force for both Sheets and Drive. You can read how to do that in your own work in the article [Using googlesheets4 with googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html).
 
 ```{r}
-sheets_find("sheets-create-demo") %>%
+gs4_find("sheets-create-demo") %>%
   googledrive::drive_trash()
 ```
 
@@ -190,7 +190,7 @@ ss1
 ### Clean up
 
 ```{r}
-sheets_find("write-sheets-demo") %>%
+gs4_find("write-sheets-demo") %>%
   googledrive::drive_trash()
 ```
 
@@ -253,7 +253,7 @@ Gosh I hope that's still `TRUE` as it was the last time I checked this article!
 ### Clean up
 
 ```{r}
-sheets_find("sheets-append-demo") %>%
+gs4_find("sheets-append-demo") %>%
   googledrive::drive_trash()
 ```
 
@@ -378,7 +378,7 @@ The examples for `range_write()` show writing data of disparate type to a 1-row 
 ### Clean up
 
 ```{r}
-sheets_find("sheets-edit-demo") %>%
+gs4_find("sheets-edit-demo") %>%
   googledrive::drive_trash()
 ```
 
@@ -411,7 +411,7 @@ range_read(ss)
 ### Clean up
 
 ```{r}
-sheets_find("sheets-formula-demo") %>%
+gs4_find("sheets-formula-demo") %>%
   googledrive::drive_trash()
 ```
 
@@ -451,7 +451,7 @@ range_read(ss)
 ### Clean up
 
 ```{r}
-sheets_find("range-flood-demo") %>%
+gs4_find("range-flood-demo") %>%
   googledrive::drive_trash()
 ```
 
@@ -497,6 +497,6 @@ range_read(ss)
 ### Clean up
 
 ```{r}
-sheets_find("sheets-delete-demo") %>%
+gs4_find("sheets-delete-demo") %>%
   googledrive::drive_trash()
 ```

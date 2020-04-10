@@ -16,10 +16,10 @@
 #' @examples
 #' if (sheets_has_token()) {
 #'   # see all your Sheets
-#'   sheets_find()
+#'   gs4_find()
 #'
 #'   # see 5 Sheets, prioritized by creation time
-#'   x <- sheets_find(order_by = "createdTime desc", n_max = 5)
+#'   x <- gs4_find(order_by = "createdTime desc", n_max = 5)
 #'   x
 #'
 #'   # hoist the creation date, using other packages in the tidyverse
@@ -27,6 +27,6 @@
 #'   #   tidyr::hoist(drive_resource, created_on = "createdTime") %>%
 #'   #   dplyr::mutate(created_on = as.Date(created_on))
 #' }
-sheets_find <- function(...) {
+gs4_find <- function(...) {
   googledrive::drive_find(..., type = "spreadsheet")
 }

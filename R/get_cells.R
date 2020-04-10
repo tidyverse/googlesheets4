@@ -17,7 +17,7 @@ get_cells <- function(ss,
   check_bool(discard_empty)
 
   ## retrieve spreadsheet metadata --------------------------------------------
-  x <- sheets_get(ssid)
+  x <- gs4_get(ssid)
   message_glue("Reading from {dq(x$name)}")
 
   ## prepare range specification for API --------------------------------------

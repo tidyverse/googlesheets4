@@ -67,7 +67,7 @@ range_delete <- function(ss,
     shift_dimension <- switch(shift, up = "ROWS", left = "COLUMNS")
   }
 
-  x <- sheets_get(ssid)
+  x <- gs4_get(ssid)
   message_glue("Editing {dq(x$name)}")
 
   # determine (work)sheet and range --------------------------------------------

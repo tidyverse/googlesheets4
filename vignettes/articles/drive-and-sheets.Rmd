@@ -69,7 +69,7 @@ drive_find("chicken")
 
 ss <- drive_get("chicken-sheet")
 
-sheets_get(ss)
+gs4_get(ss)
 
 read_sheet(ss)
 ```
@@ -122,7 +122,7 @@ drive_find("chicken")
 
 ss <- drive_get("chicken-sheet")
 
-sheets_get(ss)
+gs4_get(ss)
 
 read_sheet(ss)
 ```

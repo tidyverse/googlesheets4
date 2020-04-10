@@ -110,7 +110,7 @@ sheet_write <- function(data,
   maybe_sheet(sheet)
 
   # retrieve spreadsheet metadata ----------------------------------------------
-  x <- sheets_get(ssid)
+  x <- gs4_get(ssid)
   message_glue("Writing to {dq(x$name)}")
 
   # no `sheet` ... but maybe we can name the sheet after the data --------------

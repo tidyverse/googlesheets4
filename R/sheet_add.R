@@ -59,7 +59,7 @@ sheet_add <- function(ss,
                       .after = NULL) {
   ssid <- as_sheets_id(ss)
   maybe_character(sheet)
-  x <- sheets_get(ssid)
+  x <- gs4_get(ssid)
   index <- resolve_index(x$sheets, .before, .after)
   message_glue("Adding sheet(s) in {dq(x$name)}")
 

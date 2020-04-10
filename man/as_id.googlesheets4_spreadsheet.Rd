@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{x}{An instance of \code{googlesheets4_spreadsheet}, which is returned by,
-e.g., \code{\link[=sheets_get]{sheets_get()}}.}
+e.g., \code{\link[=gs4_get]{gs4_get()}}.}
 
 \item{...}{Other arguments passed down to methods. (Not used.)}
 }
@@ -22,7 +22,7 @@ you forget that exists and hope that \code{as_id()} will "just work".
 }
 \examples{
 if (sheets_has_token()) {
-  ss <- sheets_get(sheets_example("mini-gap"))
+  ss <- gs4_get(sheets_example("mini-gap"))
   class(ss)
   googledrive::as_id(ss)
 }

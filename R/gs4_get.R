@@ -2,7 +2,7 @@
 #'
 #' Retrieve spreadsheet-specific metadata, such as details on the individual
 #' (work)sheets or named ranges.
-#'   * `sheets_get()` complements [googledrive::drive_get()], which
+#'   * `gs4_get()` complements [googledrive::drive_get()], which
 #'     returns metadata that exists for any file on Drive.
 #'
 #' @eval param_ss()
@@ -15,17 +15,17 @@
 #'
 #' @examples
 #' if (sheets_has_token()) {
-#'   sheets_get(sheets_example("mini-gap"))
+#'   gs4_get(sheets_example("mini-gap"))
 #' }
-sheets_get <- function(ss) {
-  resp <- sheets_get_impl_(as_sheets_id(ss))
+gs4_get <- function(ss) {
+  resp <- gs4_get_impl_(as_sheets_id(ss))
   new_googlesheets4_spreadsheet(resp)
 }
 
 ## I want a separate worker so there is a version of this available that
 ## accepts `fields`, yet I don't want a user-facing function with `fields` arg
-sheets_get_impl_ <- function(ssid,
-                             fields = NULL) {
+gs4_get_impl_ <- function(ssid,
+                          fields = NULL) {
   fields <- fields %||% "spreadsheetId,properties,spreadsheetUrl,sheets.properties,namedRanges"
   req <- request_generate(
     "sheets.spreadsheets.get",

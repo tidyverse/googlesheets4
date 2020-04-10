@@ -55,7 +55,7 @@ sheet_resize <- function(ss,
   maybe_non_negative_integer(ncol)
   check_bool(exact)
 
-  x <- sheets_get(ssid)
+  x <- gs4_get(ssid)
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
   message_glue("Resizing sheet {dq(s$name)} in {dq(x$name)}")
 

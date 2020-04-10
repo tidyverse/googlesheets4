@@ -76,7 +76,7 @@ sheets_example("deaths") %>%
   range_read(range = "arts_data")
 ```
 
-The named ranges, if any exist, are part of the information returned by `sheets_get()`.
+The named ranges, if any exist, are part of the information returned by `gs4_get()`.
 
 ## Detailed cell data
 

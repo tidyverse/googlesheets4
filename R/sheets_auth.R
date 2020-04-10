@@ -92,7 +92,7 @@ sheets_auth <- function(email = gargle::gargle_oauth_email(),
 #'   sheets_user()
 #'
 #'   # get metadata on the public 'deaths' spreadsheet
-#'   sheets_get(sheets_example("deaths"))
+#'   gs4_get(sheets_example("deaths"))
 #' }
 sheets_deauth <- function() {
   .auth$set_auth_active(FALSE)

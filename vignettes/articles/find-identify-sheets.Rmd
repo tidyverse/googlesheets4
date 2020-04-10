@@ -86,7 +86,7 @@ Why did we call `unclass(ssid)` above to see the naked Sheet ID? Because, by def
 ssid
 ```
 
-This is the same metadata you'll see when you call `sheets_get()` (but you must call `sheets_get()` explicitly if you want to *store* the returned metadata).
+This is the same metadata you'll see when you call `gs4_get()` (but you must call `gs4_get()` explicitly if you want to *store* the returned metadata).
 
 googlesheets4 also accepts a Sheet ID as the `ss` argument of many functions:
 

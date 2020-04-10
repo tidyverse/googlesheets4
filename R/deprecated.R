@@ -62,4 +62,12 @@ sheets_create <- function(...) {
   gs4_create(...)
 }
 
+#' @description
+#' `sheets_get()` is replaced by [gs4_get()].
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_get <- function(...) {
+  deprecate_warn("0.2.0", "sheets_get()", "gs4_get()")
+  gs4_get(...)
+}
 # nocov end

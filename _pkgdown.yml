@@ -43,7 +43,7 @@ reference:
     desc: >
       Helpers for accessing Sheets and their metadata
     contents:
-      - sheets_get
+      - gs4_get
       - sheets_find
       - sheets_browse
       - ends_with("_id")

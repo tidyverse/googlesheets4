@@ -104,7 +104,7 @@ sheet_copy_internal <- function(ssid,
                                 .before = NULL,
                                 .after = NULL) {
   maybe_string(to_sheet)
-  x <- sheets_get(ssid)
+  x <- gs4_get(ssid)
   s <- lookup_sheet(from_sheet, sheets_df = x$sheets)
   message_glue("Duplicating sheet {dq(s$name)} in {dq(x$name)}")
 
@@ -137,8 +137,8 @@ sheet_copy_external <- function(from_ssid,
                                 to_sheet = NULL,
                                 .before = NULL,
                                 .after = NULL) {
-  from_x <- sheets_get(from_ssid)
-  to_x <- sheets_get(to_ssid)
+  from_x <- gs4_get(from_ssid)
+  to_x <- gs4_get(to_ssid)
   maybe_string(to_sheet, "sheet_copy")
 
   from_s <- lookup_sheet(from_sheet, sheets_df = from_x$sheets)

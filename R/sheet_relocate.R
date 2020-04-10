@@ -72,7 +72,7 @@ sheet_relocate <- function(ss,
   maybe_sheet(.before)
   maybe_sheet(.after)
 
-  x <- sheets_get(ssid)
+  x <- gs4_get(ssid)
   message_glue("Relocating sheets in {dq(x$name)}")
 
   if (!is.null(.before)) {

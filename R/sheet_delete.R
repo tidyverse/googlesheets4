@@ -39,7 +39,7 @@ sheet_delete <- function(ss, sheet) {
   walk(sheet, ~ check_sheet(.x, nm = "sheet"))
 
   # retrieve spreadsheet metadata ----------------------------------------------
-  x <- sheets_get(ssid)
+  x <- gs4_get(ssid)
 
   # capture sheet ids ----------------------------------------------------------
   s <- map(sheet, ~ lookup_sheet(.x, sheets_df = x$sheets))

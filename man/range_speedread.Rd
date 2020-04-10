@@ -9,7 +9,7 @@ range_speedread(ss, sheet = NULL, range = NULL, skip = 0, ...)
 \arguments{
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of \code{googlesheets4_spreadsheet}
-(returned by \code{\link[=sheets_get]{sheets_get()}}), or a \code{\link[googledrive:dribble]{dribble}}, which
+(returned by \code{\link[=gs4_get]{gs4_get()}}), or a \code{\link[googledrive:dribble]{dribble}}, which
 is how googledrive represents Drive files. Processed through
 \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 

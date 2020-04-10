@@ -68,7 +68,7 @@ range_speedread <- function(ss,
   check_range(range)
   check_non_negative_integer(skip)
 
-  x <- sheets_get(ssid)
+  x <- gs4_get(ssid)
 
   params <- list(
     spreadsheet_id = unclass(ssid),

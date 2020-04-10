@@ -3,7 +3,7 @@
 #' @description A `sheets_id` is a spreadsheet identifier, i.e. a string. This
 #'   is what the Sheets and Drive APIs refer to as `spreadsheetId` and `fileId`,
 #'   respectively. When you print a `sheets_id`, we attempt to reveal its
-#'   current metadata (via `sheets_get()`). This can fail for a variety of
+#'   current metadata (via `gs4_get()`). This can fail for a variety of
 #'   reasons (e.g. if you're offline), but the `sheets_id` is always revealed
 #'   and is returned, invisibly.
 #'
@@ -72,7 +72,7 @@ sheets_id <- function(x) {
 #'     is a great way to look up a Sheet via its name.
 #'     - [`sheets_find("YOUR_SHEET_NAME")`][sheets_find()] is another good way
 #'     to get your hands on a Sheet.
-#'   * Spreadsheet meta data, as returned by, e.g., [sheets_get()]. Literally,
+#'   * Spreadsheet meta data, as returned by, e.g., [gs4_get()]. Literally,
 #'     this is an object of class `googlesheets4_spreadsheet`.
 #'
 #' @description This is a generic function.
@@ -173,13 +173,13 @@ one_id <- function(x) {
 #'
 #' @inheritParams googledrive::as_id
 #' @param x An instance of `googlesheets4_spreadsheet`, which is returned by,
-#'   e.g., [sheets_get()].
+#'   e.g., [gs4_get()].
 #' @inherit googledrive::as_id return
 #' @importFrom googledrive as_id
 #' @export
 #' @examples
 #' if (sheets_has_token()) {
-#'   ss <- sheets_get(sheets_example("mini-gap"))
+#'   ss <- gs4_get(sheets_example("mini-gap"))
 #'   class(ss)
 #'   googledrive::as_id(ss)
 #' }
@@ -188,7 +188,7 @@ as_id.googlesheets4_spreadsheet <- function(x, ...) as_sheets_id(x)
 #' @export
 format.sheets_id <- function(x, ...) {
   meta <- tryCatch(
-    with_abort(sheets_get(x)),
+    with_abort(gs4_get(x)),
     rlang_error = function(e) e
   )
 
@@ -196,7 +196,7 @@ format.sheets_id <- function(x, ...) {
     return(format(meta))
   }
 
-  # meta is an error, i.e. sheets_get() failed
+  # meta is an error, i.e. gs4_get() failed
   out <- new_googlesheets4_spreadsheet(list(spreadsheetId = x))
   c(
     format(out),

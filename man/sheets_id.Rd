@@ -7,7 +7,7 @@
 A \code{sheets_id} is a spreadsheet identifier, i.e. a string. This
 is what the Sheets and Drive APIs refer to as \code{spreadsheetId} and \code{fileId},
 respectively. When you print a \code{sheets_id}, we attempt to reveal its
-current metadata (via \code{sheets_get()}). This can fail for a variety of
+current metadata (via \code{gs4_get()}). This can fail for a variety of
 reasons (e.g. if you're offline), but the \code{sheets_id} is always revealed
 and is returned, invisibly.
 

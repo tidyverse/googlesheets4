@@ -60,7 +60,7 @@ range_autofit <- function(ss,
   maybe_sheet(sheet)
   check_range(range)
 
-  x <- sheets_get(ssid)
+  x <- gs4_get(ssid)
 
   # determine targeted sheet ---------------------------------------------------
   range_spec <- as_range_spec(

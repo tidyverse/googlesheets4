@@ -17,7 +17,7 @@
 #'   sheet_names(ss)
 #' }
 sheet_properties <- function(ss) {
-  x <- sheets_get(ss)
+  x <- gs4_get(ss)
   pluck(x, "sheets")
 }
 

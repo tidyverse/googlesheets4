@@ -14,7 +14,7 @@ test_that("range_autofit() works", {
   ssid <- as_sheets_id(ss)
 
   range_autofit(ss)
-  before <- sheets_get_impl_(
+  before <- gs4_get_impl_(
     ssid, fields = "sheets.data.columnMetadata.pixelSize"
   )
 
@@ -23,7 +23,7 @@ test_that("range_autofit() works", {
   sheet_append(ss, dat4)
   range_autofit(ss)
 
-  after <- sheets_get_impl_(
+  after <- gs4_get_impl_(
     ssid, fields = "sheets.data.columnMetadata.pixelSize"
   )
 

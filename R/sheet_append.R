@@ -46,7 +46,7 @@ sheet_append <- function(ss, data, sheet = 1) {
   ssid <- as_sheets_id(ss)
   check_sheet(sheet)
 
-  x <- sheets_get(ssid)
+  x <- gs4_get(ssid)
   message_glue("Writing to {dq(x$name)}")
 
   s <- lookup_sheet(sheet, sheets_df = x$sheets)

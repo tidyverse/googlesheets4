@@ -106,7 +106,7 @@ formatize <- function(x) paste(escape_brackets(format(x)), collapse = "<br>")
 
 ```{r include = FALSE}
 ss <- sheets_example("gapminder")
-ss_meta <- sheets_get(ss)
+ss_meta <- gs4_get(ss)
 
 df <- df %>% 
   mutate(

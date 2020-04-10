@@ -83,12 +83,12 @@ sheets_example("deaths") %>%
 
 ## Sheet metadata
 
-`sheets_get()` exposes Sheet metadata, such as details on worksheets and named ranges.
+`gs4_get()` exposes Sheet metadata, such as details on worksheets and named ranges.
 
 ```{r}
 ss <- sheets_example("deaths")
 
-sheets_get(ss)
+gs4_get(ss)
 
 sheet_properties(ss)
 
@@ -97,9 +97,9 @@ sheet_names(ss)
 
 `sheet_properties()` and `sheet_names()` are two members of a larger family of functions for dealing with the (work)sheets within a (spread)Sheet.
 
-The metadata exposed by `sheets_get()` is also revealed whenever you print an object that is known to be a `sheets_id` (an S3 class we use to make Sheet IDs).
+The metadata exposed by `gs4_get()` is also revealed whenever you print an object that is known to be a `sheets_id` (an S3 class we use to make Sheet IDs).
 
-`sheets_get()` is related to `googledrive::drive_get()`. Both functions return metadata about a file on Google Drive, such as its ID and name. However, `sheets_get()` reveals additional metadata that is specific to Drive files that happen to be Sheets, such as info about worksheets and named ranges.
+`gs4_get()` is related to `googledrive::drive_get()`. Both functions return metadata about a file on Google Drive, such as its ID and name. However, `gs4_get()` reveals additional metadata that is specific to Drive files that happen to be Sheets, such as info about worksheets and named ranges.
 
 ## Writing Sheets
 

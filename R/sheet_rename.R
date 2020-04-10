@@ -38,7 +38,7 @@ sheet_rename <- function(ss,
   maybe_sheet(sheet)
   check_string(new_name)
 
-  x <- sheets_get(ssid)
+  x <- gs4_get(ssid)
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
   message_glue("Renaming sheet {dq(s$name)} to {dq(new_name)}")
 

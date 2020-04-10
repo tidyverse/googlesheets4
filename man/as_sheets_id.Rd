@@ -32,7 +32,7 @@ is a great way to look up a Sheet via its name.
 \item \code{\link[=sheets_find]{sheets_find("YOUR_SHEET_NAME")}} is another good way
 to get your hands on a Sheet.
 }
-\item Spreadsheet meta data, as returned by, e.g., \code{\link[=sheets_get]{sheets_get()}}. Literally,
+\item Spreadsheet meta data, as returned by, e.g., \code{\link[=gs4_get]{gs4_get()}}. Literally,
 this is an object of class \code{googlesheets4_spreadsheet}.
 }
 

@@ -52,8 +52,8 @@ Reshapes a data frame of cells (presumably the output of
 \code{\link[=range_read_cells]{range_read_cells()}}) into another data frame, i.e., puts it back into the
 shape of the source spreadsheet. This function exists primarily for internal
 use and for testing. The flagship function \code{\link[=range_read]{range_read()}}, a.k.a.
-\code{\link[=read_sheet]{read_sheet()}} is what most users are looking for. It is basically
-\code{\link[=range_read_cells]{range_read_cells()}} + \code{\link[=spread_sheet]{spread_sheet()}}.
+\code{\link[=read_sheet]{read_sheet()}}, is what most users are looking for. It is basically
+\code{\link[=range_read_cells]{range_read_cells()}} + \code{spread_sheet()}.
 }
 \examples{
 if (sheets_has_token()) {

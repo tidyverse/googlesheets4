@@ -130,8 +130,8 @@ read_sheet <- range_read
 #' [range_read_cells()]) into another data frame, i.e., puts it back into the
 #' shape of the source spreadsheet. This function exists primarily for internal
 #' use and for testing. The flagship function [range_read()], a.k.a.
-#' [read_sheet()] is what most users are looking for. It is basically
-#' [range_read_cells()] + [spread_sheet()].
+#' [read_sheet()], is what most users are looking for. It is basically
+#' [range_read_cells()] + `spread_sheet()`.
 #'
 #' @inheritParams range_read
 #' @param df A data frame with one row per (nonempty) cell, integer variables

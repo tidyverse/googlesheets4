@@ -65,11 +65,14 @@ jobs:
           sudo -s eval "$sysreqs"
 
       - name: Install dependencies
+        # undo the xml2 thing here once it builds on macOS again
+        # xml2 is keeping spelling from being installed
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("tidyverse")
           remotes::install_github("hadley/emo")
+          remotes::install_github("r-lib/xml2")
         shell: Rscript {0}
 
       - name: Check

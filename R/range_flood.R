@@ -21,7 +21,7 @@
 #' @examples
 #' if (sheets_has_token()) {
 #'   # create a data frame to use as initial data
-#'   df <- sheets_fodder(10)
+#'   df <- gs4_fodder(10)
 #'
 #'   # create Sheet
 #'   ss <- gs4_create("range-flood-example", sheets = list(df))

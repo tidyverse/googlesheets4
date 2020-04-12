@@ -37,7 +37,7 @@ reference:
     desc: >
       Helpers for preparing data to write into Sheets
     contents:
-      - sheets_fodder
+      - gs4_fodder
       - sheets_formula
   - title: "Metadata on Sheets"
     desc: >

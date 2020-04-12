@@ -422,7 +422,7 @@ gs4_find("sheets-formula-demo") %>%
 First, we create a data frame and initialize a new Sheet with that data.
 
 ```{r}
-df <- sheets_fodder(10)
+df <- gs4_fodder(10)
 (ss <- gs4_create("range-flood-demo", sheets = list(df)))
 ```
 
@@ -463,7 +463,7 @@ gs4_find("range-flood-demo") %>%
 First, we create a data frame and initialize a new Sheet with that data.
 
 ```{r}
-df <- sheets_fodder(4)
+df <- gs4_fodder(4)
 (ss <- gs4_create("sheets-delete-demo", sheets = list(df)))
 ```
 

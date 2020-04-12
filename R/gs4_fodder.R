@@ -16,9 +16,9 @@
 #' @export
 #'
 #' @examples
-#' sheets_fodder()
-#' sheets_fodder(5, 3)
-sheets_fodder <- function(n = 10, m = n) {
+#' gs4_fodder()
+#' gs4_fodder(5, 3)
+gs4_fodder <- function(n = 10, m = n) {
   columns <- LETTERS[seq_len(m)]
   names(columns) <- columns
   f <- function(number, letter) paste0(letter, number)

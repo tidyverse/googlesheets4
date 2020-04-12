@@ -52,7 +52,7 @@ There is a new family of `sheet_*()` functions that operate on the (work)sheets 
 
 `range_autofit()` causes column width or row height to fit the data. It only affects the display of a sheet and does not change values or dimensions.
 
-`sheets_fodder()` is a convenience function that creates a filler data frame you can use to make toy sheets you're using to practice on or for a reprex.
+`gs4_fodder()` is a convenience function that creates a filler data frame you can use to make toy sheets you're using to practice on or for a reprex.
 
 ### Renamed functions and classes
 

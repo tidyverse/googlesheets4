@@ -4,7 +4,7 @@
 \alias{gs4_create}
 \title{Create a new Sheet}
 \usage{
-gs4_create(name = sheets_random(), ..., sheets = NULL)
+gs4_create(name = gs4_random(), ..., sheets = NULL)
 }
 \arguments{
 \item{name}{The name of the new spreadsheet.}

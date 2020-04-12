@@ -59,7 +59,7 @@
 #'   gs4_find("gs4-create-demo") %>%
 #'     googledrive::drive_trash()
 #' }
-gs4_create <- function(name = sheets_random(), ..., sheets = NULL) {
+gs4_create <- function(name = gs4_random(), ..., sheets = NULL) {
   sheets       <- enlist_sheets(enquo(sheets))
   sheets_given <- !is.null(sheets)
   data_given   <- sheets_given && !is.null(unlist(sheets$value))
@@ -148,7 +148,7 @@ prepare_df <- function(sheet_id, df, skip = 0) {
 #' @export
 #'
 #' @examples
-#' sheets_random()
-sheets_random <- function(n = 1) {
+#' gs4_random()
+gs4_random <- function(n = 1) {
   ids::adjective_animal(n = n, max_len = 10, style = "kebab")
 }

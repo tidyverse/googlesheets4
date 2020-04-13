@@ -64,15 +64,21 @@ jobs:
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
 
+     - name: Install macOS dependencies
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
+        # the xml2 thing is a hack due to
+        # https://github.com/r-lib/xml2/pull/297
+        # this entire step can go away once that's released on CRAN
+        # xml2 is necessary to install spelling
+        run: |
+          Rscript -e "remotes::install_github('r-lib/xml2')"
+
       - name: Install dependencies
-        # undo the xml2 thing here once it builds on macOS again
-        # xml2 is keeping spelling from being installed
         run: |
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("tidyverse")
           remotes::install_github("hadley/emo")
-          remotes::install_github("r-lib/xml2")
         shell: Rscript {0}
 
       - name: Check

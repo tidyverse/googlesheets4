@@ -104,11 +104,11 @@ if (sheets_has_token()) {
 \seealso{
 Other write functions: 
 \code{\link{gs4_create}()},
+\code{\link{gs4_formula}()},
 \code{\link{range_delete}()},
 \code{\link{range_flood}()},
 \code{\link{range_write}()},
-\code{\link{sheet_append}()},
-\code{\link{sheets_formula}()}
+\code{\link{sheet_append}()}
 
 Other worksheet functions: 
 \code{\link{sheet_add}()},

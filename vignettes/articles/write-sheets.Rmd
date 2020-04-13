@@ -384,7 +384,7 @@ gs4_find("sheets-edit-demo") %>%
 
 ## Write formulas
 
-All the writing functions can write *formulas* into cells, if you indicate this in the R object you are writing, i.e. in the data frame. The `sheets_formula()` function marks a character vector as containing Sheets formulas, as opposed to regular character strings.
+All the writing functions can write *formulas* into cells, if you indicate this in the R object you are writing, i.e. in the data frame. The `gs4_formula()` function marks a character vector as containing Sheets formulas, as opposed to regular character strings.
 
 Here's a demo that also shows off using the Google Translate API inside a Sheet.
 
@@ -395,7 +395,7 @@ lang_dat <- tibble::tribble(
    "hello world", "ko",
   "baby turtles", "th" 
 )
-lang_dat$translated <- sheets_formula(
+lang_dat$translated <- gs4_formula(
   '=GoogleTranslate(INDIRECT("R[0]C[-2]", FALSE), "en", INDIRECT("R[0]C[-1]", FALSE))'
 )
 

@@ -92,10 +92,10 @@ Makes a \code{RepeatCellRequest}:
 
 Other write functions: 
 \code{\link{gs4_create}()},
+\code{\link{gs4_formula}()},
 \code{\link{range_delete}()},
 \code{\link{range_write}()},
 \code{\link{sheet_append}()},
-\code{\link{sheet_write}()},
-\code{\link{sheets_formula}()}
+\code{\link{sheet_write}()}
 }
 \concept{write functions}

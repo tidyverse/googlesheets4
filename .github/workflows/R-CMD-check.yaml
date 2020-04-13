@@ -64,7 +64,7 @@ jobs:
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
 
-     - name: Install macOS dependencies
+      - name: Install macOS dependencies
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
         # the xml2 thing is a hack due to
         # https://github.com/r-lib/xml2/pull/297

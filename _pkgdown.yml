@@ -82,7 +82,7 @@ reference:
       - request_make
       - sheets_token
       - sheets_has_token
-      - sheets_endpoints
+      - gs4_endpoints
   - title: "Operate on (spread)Sheets or the Sheets API"
     desc: >
       Functions that operate at the level of a (spread)sheet or the whole API/package

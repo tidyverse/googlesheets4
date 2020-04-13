@@ -17,7 +17,7 @@
 #'   * Adds an API key to the query if and only if `token = NULL`.
 #'
 #' @param endpoint Character. Nickname for one of the selected Sheets API v4
-#'   endpoints built into googlesheets4. Learn more in [sheets_endpoints()].
+#'   endpoints built into googlesheets4. Learn more in [gs4_endpoints()].
 #' @param params Named list. Parameters destined for endpoint URL substitution,
 #'   the query, or the body.
 #' @param key API key. Needed for requests that don't contain a token. The need

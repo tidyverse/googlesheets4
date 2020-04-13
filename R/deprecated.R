@@ -106,4 +106,13 @@ sheets_find <- function(...) {
   deprecate_warn("0.2.0", "sheets_find()", "gs4_find()")
   gs4_find(...)
 }
+
+#' @description
+#' `sheets_endpoints()` is replaced by [gs4_endpoints()].
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_endpoints <- function(...) {
+  deprecate_warn("0.2.0", "sheets_endpoints()", "gs4_endpoints()")
+  gs4_endpoints(...)
+}
 # nocov end

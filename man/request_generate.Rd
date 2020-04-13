@@ -13,7 +13,7 @@ request_generate(
 }
 \arguments{
 \item{endpoint}{Character. Nickname for one of the selected Sheets API v4
-endpoints built into googlesheets4. Learn more in \code{\link[=sheets_endpoints]{sheets_endpoints()}}.}
+endpoints built into googlesheets4. Learn more in \code{\link[=gs4_endpoints]{gs4_endpoints()}}.}
 
 \item{params}{Named list. Parameters destined for endpoint URL substitution,
 the query, or the body.}

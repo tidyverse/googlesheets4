@@ -16,10 +16,10 @@
 #' @export
 #'
 #' @examples
-#' str(sheets_endpoints(), max.level = 2)
-#' sheets_endpoints("sheets.spreadsheets.values.get")
-#' sheets_endpoints(4)
-sheets_endpoints <- function(i = NULL) {
+#' str(gs4_endpoints(), max.level = 2)
+#' gs4_endpoints("sheets.spreadsheets.values.get")
+#' gs4_endpoints(4)
+gs4_endpoints <- function(i = NULL) {
   if (is.null(i)) {
     i <- seq_along(.endpoints)
   }

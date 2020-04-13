@@ -29,11 +29,11 @@ request_make <- function(x,
   # https://github.com/r-lib/gargle/issues/124
   encode <- match.arg(encode)
   gargle::request_make(
-    x, ..., encode = encode, user_agent = sheets_user_agent()
+    x, ..., encode = encode, user_agent = gs4_user_agent()
   )
 }
 
-sheets_user_agent <- function() {
+gs4_user_agent <- function() {
   httr::user_agent(paste0(
     "googlesheets4/", utils::packageVersion("googlesheets4"), " ",
     "(GPN:RStudio; )", " ",

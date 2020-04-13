@@ -11,7 +11,7 @@
 #' @export
 #' @family worksheet functions
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   ss <- gs4_example("gapminder")
 #'   sheet_properties(ss)
 #'   sheet_names(ss)

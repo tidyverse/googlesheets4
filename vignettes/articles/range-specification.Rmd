@@ -15,7 +15,7 @@ This is article serves mostly as internal documentation of how various represent
 library(tidyverse)
 library(googlesheets4)
 
-sheets_deauth()
+gs4_deauth()
 ```
 
 # User-specified range

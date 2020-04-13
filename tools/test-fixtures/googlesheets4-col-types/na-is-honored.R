@@ -3,7 +3,7 @@ devtools::load_all() # I assume we're in googlesheets4 source
 library(googledrive)
 library(tidyverse)
 
-googlesheets4:::sheets_auth_testing()
+googlesheets4:::gs4_auth_testing()
 
 ss <- test_sheet_create("googlesheets4-col-types")
 gs4_browse(ss)

@@ -20,7 +20,7 @@
 #' Note that the Sheets API is still used to retrieve metadata on the target
 #' Sheet, in order to support range specification. `range_speedread()` also
 #' sends an auth token with the request, unless a previous call to
-#' [sheets_deauth()] has put googlesheets4 into a de-authorized state.
+#' [gs4_deauth()] has put googlesheets4 into a de-authorized state.
 #'
 #' @inheritParams range_read_cells
 #' @param ... Passed along to the CSV parsing function (currently
@@ -30,7 +30,7 @@
 #' @export
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   if (require("readr")) {
 #'     # since cell type is not available, use readr's col type specification
 #'     range_speedread(
@@ -99,7 +99,7 @@ range_speedread <- function(ss,
   }
   message_glue("Reading from {dq(x$name)}{sheet_msg}{range_msg}")
 
-  token <- sheets_token() %||% list()
+  token <- gs4_token() %||% list()
 
   req <- gargle::request_build(
     path = "spreadsheets/d/{spreadsheet_id}/{path}",

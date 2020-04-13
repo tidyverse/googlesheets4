@@ -3,7 +3,7 @@ library(googledrive)
 library(googlesheets4)
 library(gapminder)
 
-googlesheets4:::sheets_auth_docs()
+googlesheets4:::gs4_auth_docs()
 
 # if I were making the gapminder sheet from scratch, here's what I would do now:
 ss <- gs4_create(

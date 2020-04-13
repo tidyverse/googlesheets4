@@ -16,7 +16,7 @@
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteSheetRequest>
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   ss <- gs4_create("delete-sheets-from-me")
 #'   sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 #'

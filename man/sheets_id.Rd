@@ -20,7 +20,7 @@ change file name, path, or permissions, copy the file, or visit it in a web
 browser.
 }
 \examples{
-if (sheets_has_token()) {
+if (gs4_has_token()) {
   gs4_example("mini-gap")
 }
 }

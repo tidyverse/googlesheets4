@@ -21,12 +21,12 @@ Here we show various ways this can work, if rough order of preference.
 
 ## Use a public example Sheet
 
-If you can make your point with one of the example Sheets, exposed via `gs4_examples()` and `gs4_example()`, do so! You can call `sheets_deauth()` explicitly in your reprex to shut down any attempt to get a token.
+If you can make your point with one of the example Sheets, exposed via `gs4_examples()` and `gs4_example()`, do so! You can call `gs4_deauth()` explicitly in your reprex to shut down any attempt to get a token.
 
 ```{r eval = FALSE}
 library(googlesheets4)
 
-sheets_deauth()
+gs4_deauth()
 
 # put the googlesheets4 code you want to reproduce below here
 # the following is just an example, replace it with your own code
@@ -36,7 +36,7 @@ gs4_example("mini-gap") %>%
 
 ## Create a Sheet and make it world-readable
 
-If you can create an example Sheet that makes your point and make it readable by "anyone with a link", do so! You can call `sheets_deauth()` explicitly in your reprex to shut down any attempt to get a token.
+If you can create an example Sheet that makes your point and make it readable by "anyone with a link", do so! You can call `gs4_deauth()` explicitly in your reprex to shut down any attempt to get a token.
 
 How do you make a Sheet world-readable? Do this setup once! It should not be part of your reprex. Two options:
 
@@ -56,7 +56,7 @@ Now make a reprex just like we do with the official example Sheets:
 ```{r eval = FALSE}
 library(googlesheets4)
 
-sheets_deauth()
+gs4_deauth()
 
 # put the googlesheets4 code you want to reproduce below here
 # the following is just an example, replace it with your own code
@@ -92,9 +92,9 @@ This general situation is documented in the gargle vignette [Non-interactive aut
 
   * Develop a code snippet that works interactively for you, in a clean R
     session.
-  * Note who you are logged in as. `sheets_user()` reveals this if you're not
+  * Note who you are logged in as. `gs4_user()` reveals this if you're not
     sure.
-  * Insert an explicit call to `sheets_auth(email = "SOMEONE@example.org)`
+  * Insert an explicit call to `gs4_auth(email = "SOMEONE@example.org)`
     into your code (see below).
   * Use `reprex::reprex()`.
   
@@ -103,7 +103,7 @@ Here's an example of a snippet suitable for `reprex::reprex()`, assuming the use
 ```{r eval = FALSE}
 library(googlesheets4)
 
-sheets_auth(email = "jane_doe@example.com")
+gs4_auth(email = "jane_doe@example.com")
 
 # put the googlesheets4 code you want to reproduce below here
 # the following is just an example, replace it with your own code
@@ -118,7 +118,7 @@ library(googlesheets4)
 
 #+ include = FALSE
 # code here is executed but the results won't appear in rendered reprex
-sheets_auth(email = "jane_doe@example.com")
+gs4_auth(email = "jane_doe@example.com")
 ssid <- "some_very_long_string_of_letters_and_digits"
 
 #+ include = TRUE

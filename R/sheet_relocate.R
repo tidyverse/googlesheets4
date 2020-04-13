@@ -31,7 +31,7 @@
 #' * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest>
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   sheet_names <- c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot")
 #'   ss <- gs4_create("sheet-relocate-demo", sheets = sheet_names)
 #'   sheet_names(ss)

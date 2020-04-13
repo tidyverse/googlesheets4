@@ -50,7 +50,7 @@ Since this article is compiled noninteractively on a server, we have arranged fo
 
 ```{r include = FALSE}
 # happens in .onLoad() when IN_PKGDOWN, but need this for local dev/preview
-googlesheets4:::sheets_auth_docs(drive = TRUE)
+googlesheets4:::gs4_auth_docs(drive = TRUE)
 
 # attempt to reduce quota exhaustion problems
 if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(20)
@@ -291,7 +291,7 @@ read_this <- function(ss) {
 }
 
 ss_edit <- gs4_create("sheets-edit-demo")
-#googlesheets4:::sheets_share(ss_edit) %>% gs4_browse()
+#googlesheets4:::gs4_share(ss_edit) %>% gs4_browse()
 sheet_resize(ss_edit, nrow = n, ncol = n, exact = TRUE)
 populate(ss_edit)
 ```

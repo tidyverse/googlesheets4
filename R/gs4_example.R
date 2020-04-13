@@ -24,7 +24,7 @@ test_sheet <- function(matches = "googlesheets4-cell-tests") {
 test_sheet_create <- function(name = "googlesheets4-cell-tests") {
   stopifnot(is_string(name))
 
-  user <- sheets_user()
+  user <- gs4_user()
   if (!grepl("^googlesheets4-testing", user)) {
     user <- sub("@.+$", "", user)
     stop_glue("Must be auth'd as {sq('googlesheets4-testing')}, not {sq(user)}")
@@ -43,7 +43,7 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
 
   # it's fiddly to check current sharing status, so just re-share
   message_glue("Making sure anyone with a link can read {dq(name)}")
-  sheets_share(ssid)
+  gs4_share(ssid)
   ssid
 }
 

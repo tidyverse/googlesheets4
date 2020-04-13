@@ -14,7 +14,7 @@
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get>
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   gs4_get(gs4_example("mini-gap"))
 #' }
 gs4_get <- function(ss) {

@@ -26,7 +26,7 @@ returns metadata that exists for any file on Drive.
 }
 }
 \examples{
-if (sheets_has_token()) {
+if (gs4_has_token()) {
   gs4_get(gs4_example("mini-gap"))
 }
 }

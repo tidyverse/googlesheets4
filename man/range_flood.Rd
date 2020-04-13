@@ -46,7 +46,7 @@ clearing the cell value. Both functions, by default, also clear the format,
 but this can be specified via \code{reformat}.
 }
 \examples{
-if (sheets_has_token()) {
+if (gs4_has_token()) {
   # create a data frame to use as initial data
   df <- gs4_fodder(10)
 

@@ -108,7 +108,7 @@ test_that("can print public sheets_id if deauth'd", {
     .auth$set_auth_active(original_auth_active)
   })
 
-  sheets_deauth()
+  gs4_deauth()
 
   verify_output(
     test_path("ref", "sheets-id-print-deauthed.txt"),

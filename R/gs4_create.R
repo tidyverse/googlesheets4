@@ -28,7 +28,7 @@
 #' @family write functions
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   gs4_create("gs4-create-demo-1")
 #'
 #'   gs4_create("gs4-create-demo-2", locale = "en_CA")

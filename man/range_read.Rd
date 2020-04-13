@@ -148,7 +148,7 @@ its discovered type.
 }
 
 \examples{
-if (sheets_has_token()) {
+if (gs4_has_token()) {
   ss <- gs4_example("deaths")
   read_sheet(ss, range = "A5:F15")
   read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")

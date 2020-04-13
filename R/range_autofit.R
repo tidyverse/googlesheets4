@@ -26,7 +26,7 @@
 #' * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#autoresizedimensionsrequest>
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   dat <- tibble::tibble(
 #'     fruit = c("date", "lime", "pear", "plum")
 #'   )

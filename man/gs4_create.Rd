@@ -29,7 +29,7 @@ Optionally, you can also provide names and/or data for the initial set of
 as described in \code{\link[=sheet_write]{sheet_write()}}.
 }
 \examples{
-if (sheets_has_token()) {
+if (gs4_has_token()) {
   gs4_create("gs4-create-demo-1")
 
   gs4_create("gs4-create-demo-2", locale = "en_CA")

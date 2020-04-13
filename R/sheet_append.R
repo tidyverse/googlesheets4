@@ -15,7 +15,7 @@
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AppendCellsRequest>
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   # we will recreate the table of "other" deaths from this example Sheet
 #'   (deaths <- gs4_example("deaths") %>%
 #'     range_read(range = "other_data", col_types = "????DD"))

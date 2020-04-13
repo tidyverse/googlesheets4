@@ -66,7 +66,7 @@ had \code{sheets_write()}. It still works, but it's deprecated and will go away
 rather swiftly.
 }
 \examples{
-if (sheets_has_token()) {
+if (gs4_has_token()) {
   df <- data.frame(
     x = 1:3,
     y = letters[1:3]

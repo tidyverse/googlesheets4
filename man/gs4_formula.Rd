@@ -19,7 +19,7 @@ object of class \code{googlesheets4_formula}. This is how we distinguish a
 formula. \code{googlesheets4_formula} is an S3 class implemented using the \href{https://vctrs.r-lib.org/articles/s3-vector.html}{vctrs package}.
 }
 \examples{
-if (sheets_has_token()) {
+if (gs4_has_token()) {
   dat <- data.frame(X = c(1, 5, 3, 2, 4, 6))
 
   ss <- sheet_write(dat)

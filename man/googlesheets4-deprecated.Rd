@@ -13,6 +13,14 @@
 \alias{sheets_browse}
 \alias{sheets_find}
 \alias{sheets_endpoints}
+\alias{sheets_auth}
+\alias{sheets_deauth}
+\alias{sheets_auth_configure}
+\alias{sheets_api_key}
+\alias{sheets_oauth_app}
+\alias{sheets_token}
+\alias{sheets_has_token}
+\alias{sheets_user}
 \title{Deprecated functions}
 \usage{
 sheets_sheets(...)
@@ -36,6 +44,22 @@ sheets_browse(...)
 sheets_find(...)
 
 sheets_endpoints(...)
+
+sheets_auth(...)
+
+sheets_deauth(...)
+
+sheets_auth_configure(...)
+
+sheets_api_key(...)
+
+sheets_oauth_app(...)
+
+sheets_token(...)
+
+sheets_has_token(...)
+
+sheets_user(...)
 }
 \arguments{
 \item{...}{Passed on to the function that succeeds the deprecated function.}
@@ -70,4 +94,32 @@ googlesheets4.
 
 \code{sheets_endpoints()} is replaced by \code{\link[=gs4_endpoints]{gs4_endpoints()}}.
 }
+\section{Auth and API endpoints}{
+\tabular{ll}{
+   \strong{< v0.2.0} \tab \strong{>= v0.2.0} \cr
+   sheets_auth() \tab gs4_auth() \cr
+   sheets_auth_configure() \tab gs4_auth_configure() \cr
+   sheets_api_key() \tab gs4_api_key() \cr
+   sheets_deauth() \tab gs4_deauth() \cr
+   sheets_has_token() \tab gs4_has_token() \cr
+   sheets_oauth_app() \tab gs4_oauth_app() \cr
+   sheets_token() \tab gs4_token() \cr
+   sheet_user() \tab gs4_user() \cr
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
 \keyword{internal}

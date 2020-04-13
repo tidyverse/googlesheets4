@@ -1,15 +1,15 @@
 if (gargle:::secret_can_decrypt("googlesheets4") &&
     !is.null(curl::nslookup("sheets.googleapis.com", error = FALSE))) {
   capture.output(
-    sheets_auth_testing(drive = TRUE)
+    gs4_auth_testing(drive = TRUE)
   )
 } else {
-  sheets_deauth()
+  gs4_deauth()
 }
 
 skip_if_no_token <- function() {
   Sys.sleep(1)
-  testthat::skip_if_not(sheets_has_token())
+  testthat::skip_if_not(gs4_has_token())
 }
 
 expect_error_free <- function(...) {

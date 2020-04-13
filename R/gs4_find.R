@@ -14,7 +14,7 @@
 #' @export
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   # see all your Sheets
 #'   gs4_find()
 #'

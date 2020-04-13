@@ -16,7 +16,7 @@
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest>
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   ss <- gs4_create(
 #'     "sheet-rename-demo",
 #'     sheets = list(iris = head(iris), chickwts = head(chickwts))

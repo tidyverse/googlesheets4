@@ -13,7 +13,7 @@ gargle_lookup_table <- list(
   YOUR_STUFF  = "your Google Sheets",
   PRODUCT     = "Google Sheets",
   API         = "Sheets API",
-  PREFIX      = "sheets"
+  PREFIX      = "gs4"
 )
 
 #' Authorize googlesheets4
@@ -29,33 +29,33 @@ gargle_lookup_table <- list(
 #' if (interactive()) {
 #'   # load/refresh existing credentials, if available
 #'   # otherwise, go to browser for authentication and authorization
-#'   sheets_auth()
+#'   gs4_auth()
 #'
 #'   # force use of a token associated with a specific email
-#'   sheets_auth(email = "jenny@example.com")
+#'   gs4_auth(email = "jenny@example.com")
 #'
 #'   # use a 'read only' scope, so it's impossible to edit or delete Sheets
-#'   sheets_auth(
+#'   gs4_auth(
 #'     scopes = "https://www.googleapis.com/auth/spreadsheets.readonly"
 #'   )
 #'
 #'   # use a service account token
-#'   sheets_auth(path = "foofy-83ee9e7c9c48.json")
+#'   gs4_auth(path = "foofy-83ee9e7c9c48.json")
 #' }
-sheets_auth <- function(email = gargle::gargle_oauth_email(),
-                        path = NULL,
-                        scopes = "https://www.googleapis.com/auth/spreadsheets",
-                        cache = gargle::gargle_oauth_cache(),
-                        use_oob = gargle::gargle_oob_default(),
-                        token = NULL) {
-  # I have called `sheets_auth(token = drive_token())` multiple times now,
+gs4_auth <- function(email = gargle::gargle_oauth_email(),
+                     path = NULL,
+                     scopes = "https://www.googleapis.com/auth/spreadsheets",
+                     cache = gargle::gargle_oauth_cache(),
+                     use_oob = gargle::gargle_oob_default(),
+                     token = NULL) {
+  # I have called `gs4_auth(token = drive_token())` multiple times now,
   # without attaching googledrive. Expose this error noisily, before it gets
   # muffled by the `tryCatch()` treatment of `token_fetch()`.
   force(token)
 
   cred <- gargle::token_fetch(
     scopes = scopes,
-    app = sheets_oauth_app() %||% gargle::tidyverse_app(),
+    app = gs4_oauth_app() %||% gargle::tidyverse_app(),
     email = email,
     path = path,
     package = "googlesheets4",
@@ -67,8 +67,8 @@ sheets_auth <- function(email = gargle::gargle_oauth_email(),
     stop(
       "Can't get Google credentials.\n",
       "Are you running googlesheets4 in a non-interactive session? Consider:\n",
-      "  * `sheets_deauth()` to prevent the attempt to get credentials.\n",
-      "  * Call `sheets_auth()` directly with all necessary specifics.\n",
+      "  * `gs4_deauth()` to prevent the attempt to get credentials.\n",
+      "  * Call `gs4_auth()` directly with all necessary specifics.\n",
       "See gargle's \"Non-interactive auth\" vignette for more details:\n",
       "https://gargle.r-lib.org/articles/non-interactive-auth.html",
       call. = FALSE
@@ -88,13 +88,14 @@ sheets_auth <- function(email = gargle::gargle_oauth_email(),
 #' @export
 #' @examples
 #' if (interactive()) {
-#'   sheets_deauth()
-#'   sheets_user()
+#'   gs4_deauth()
+#'   gs4_user()
 #'
 #'   # get metadata on the public 'deaths' spreadsheet
-#'   gs4_get(gs4_example("deaths"))
+#'   gs4_example("deaths") %>%
+#'     gs4_get()
 #' }
-sheets_deauth <- function() {
+gs4_deauth <- function() {
   .auth$set_auth_active(FALSE)
   .auth$clear_cred()
   invisible()
@@ -108,20 +109,20 @@ sheets_deauth <- function() {
 #' @family low-level API functions
 #' @export
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   req <- request_generate(
 #'     "sheets.spreadsheets.get",
 #'     list(spreadsheetId = "abc"),
-#'     token = sheets_token()
+#'     token = gs4_token()
 #'   )
 #'   req
 #' }
-sheets_token <- function() {
+gs4_token <- function() {
   if (isFALSE(.auth$auth_active)) {
     return(NULL)
   }
-  if (!sheets_has_token()) {
-    sheets_auth()
+  if (!gs4_has_token()) {
+    gs4_auth()
   }
   httr::config(token = .auth$cred)
 }
@@ -135,8 +136,8 @@ sheets_token <- function() {
 #' @export
 #'
 #' @examples
-#' sheets_has_token()
-sheets_has_token <- function() {
+#' gs4_has_token()
+gs4_has_token <- function() {
   inherits(.auth$cred, "Token2.0")
 }
 
@@ -150,10 +151,10 @@ sheets_has_token <- function() {
 #' @export
 #' @examples
 #' # see and store the current user-configured OAuth app (probaby `NULL`)
-#' (original_app <- sheets_oauth_app())
+#' (original_app <- gs4_oauth_app())
 #'
 #' # see and store the current user-configured API key (probaby `NULL`)
-#' (original_api_key <- sheets_api_key())
+#' (original_api_key <- gs4_api_key())
 #'
 #' if (require(httr)) {
 #'   # bring your own app via client id (aka key) and secret
@@ -163,11 +164,11 @@ sheets_has_token <- function() {
 #'     secret = "YOUR_SECRET_GOES_HERE"
 #'   )
 #'   google_key <- "YOUR_API_KEY"
-#'   sheets_auth_configure(app = google_app, api_key = google_key)
+#'   gs4_auth_configure(app = google_app, api_key = google_key)
 #'
 #'   # confirm the changes
-#'   sheets_oauth_app()
-#'   sheets_api_key()
+#'   gs4_oauth_app()
+#'   gs4_api_key()
 #'
 #'   # bring your own app via JSON downloaded from Google Developers Console
 #'   # this file has the same structure as the JSON from Google
@@ -175,15 +176,15 @@ sheets_has_token <- function() {
 #'     "extdata", "fake-oauth-client-id-and-secret.json",
 #'     package = "googlesheets4"
 #'   )
-#'   sheets_auth_configure(path =app_path)
+#'   gs4_auth_configure(path = app_path)
 #'
 #'   # confirm the changes
-#'   sheets_oauth_app()
+#'   gs4_oauth_app()
 #' }
 #'
 #' # restore original auth config
-#' sheets_auth_configure(app = original_app, api_key = original_api_key)
-sheets_auth_configure <- function(app, path, api_key) {
+#' gs4_auth_configure(app = original_app, api_key = original_api_key)
+gs4_auth_configure <- function(app, path, api_key) {
   if (!missing(app) && !missing(path)) {
     stop("Must supply exactly one of `app` and `path`", call. = FALSE)
   }
@@ -207,12 +208,12 @@ sheets_auth_configure <- function(app, path, api_key) {
 }
 
 #' @export
-#' @rdname sheets_auth_configure
-sheets_api_key <- function() .auth$api_key
+#' @rdname gs4_auth_configure
+gs4_api_key <- function() .auth$api_key
 
 #' @export
-#' @rdname sheets_auth_configure
-sheets_oauth_app <- function() .auth$app
+#' @rdname gs4_auth_configure
+gs4_oauth_app <- function() .auth$app
 
 #' Get info on current user
 #'
@@ -222,10 +223,10 @@ sheets_oauth_app <- function() .auth$app
 #'
 #' @export
 #' @examples
-#' sheets_user()
-sheets_user <- function() {
-  if (sheets_has_token()) {
-    gargle::token_email(sheets_token())
+#' gs4_user()
+gs4_user <- function() {
+  if (gs4_has_token()) {
+    gargle::token_email(gs4_token())
   } else {
     message("Not logged in as any specific Google user.")
     invisible()
@@ -233,9 +234,9 @@ sheets_user <- function() {
 }
 
 # unexported helpers that are nice for internal use ----
-sheets_auth_internal <- function(account = c("docs", "testing"),
-                                 scopes = NULL,
-                                 drive = TRUE) {
+gs4_auth_internal <- function(account = c("docs", "testing"),
+                              scopes = NULL,
+                              drive = TRUE) {
   stopifnot(gargle:::secret_can_decrypt("googlesheets4"))
   account <- match.arg(account)
   filename <- glue("googlesheets4-{account}.json")
@@ -243,19 +244,19 @@ sheets_auth_internal <- function(account = c("docs", "testing"),
   # https://github.com/r-lib/gargle/issues/103
   scopes <- scopes %||% "https://www.googleapis.com/auth/drive"
   json <- gargle:::secret_read("googlesheets4", filename)
-  sheets_auth(scopes = scopes, path = rawToChar(json))
-  print(sheets_user())
+  gs4_auth(scopes = scopes, path = rawToChar(json))
+  print(gs4_user())
   if (drive) {
-    googledrive::drive_auth(token = sheets_token())
+    googledrive::drive_auth(token = gs4_token())
     print(googledrive::drive_user())
   }
   invisible(TRUE)
 }
 
-sheets_auth_docs <- function(scopes = NULL, drive = TRUE) {
-  sheets_auth_internal("docs", scopes = scopes, drive = drive)
+gs4_auth_docs <- function(scopes = NULL, drive = TRUE) {
+  gs4_auth_internal("docs", scopes = scopes, drive = drive)
 }
 
-sheets_auth_testing <- function(scopes = NULL, drive = TRUE) {
-  sheets_auth_internal("testing", scopes = scopes, drive = drive)
+gs4_auth_testing <- function(scopes = NULL, drive = TRUE) {
+  gs4_auth_internal("testing", scopes = scopes, drive = drive)
 }

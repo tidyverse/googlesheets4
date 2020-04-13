@@ -23,7 +23,7 @@ message("No token available. Code chunks will not be evaluated.")
 ```
 
 ```{r readme-auth, include = FALSE}
-googlesheets4:::sheets_auth_docs()
+googlesheets4:::gs4_auth_docs()
 ```
 
 # googlesheets4 <a href='https:/googlesheets4.tidyverse.org'><img src='man/figures/logo.png' align="right" height="138.5" /></a>
@@ -58,7 +58,7 @@ devtools::install_github("tidyverse/googlesheets4")
 
 ## Auth
 
-googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. If you don't need to access private Sheets, use `sheets_deauth()` to indicate there is no need for a token. See the article [googlesheets4 auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html) for more.
+googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. If you don't need to access private Sheets, use `gs4_deauth()` to indicate there is no need for a token. See the article [googlesheets4 auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html) for more.
 
 For this overview, we've logged into Google as a specific user in a hidden chunk.
 

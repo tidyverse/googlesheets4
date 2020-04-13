@@ -35,7 +35,7 @@
 #' @export
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   range_read_cells(gs4_example("deaths"), range = "arts_data")
 #'
 #'   # if you want detailed and exhaustive cell data, do this

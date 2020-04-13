@@ -34,7 +34,7 @@ from the current cell contents. This only affects the appearance of a sheet
 in the browser and doesn't affect its values or dimensions in any way.
 }
 \examples{
-if (sheets_has_token()) {
+if (gs4_has_token()) {
   dat <- tibble::tibble(
     fruit = c("date", "lime", "pear", "plum")
   )

@@ -2,7 +2,7 @@ library(tidyverse)
 devtools::load_all() # I assume we're in googlesheets4 source
 library(googledrive)
 
-sheets_auth_testing()
+gs4_auth_testing()
 
 ss <- test_sheet_create()
 gs4_browse(ss)

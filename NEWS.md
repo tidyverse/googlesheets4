@@ -60,7 +60,7 @@ There is a new family of `sheet_*()` functions that operate on the (work)sheets 
 
 ### Printing a Sheet ID
 
-The print method for `sheets_id` objects now attempts to reveal the current Sheet metadata available via `gs4_get()`. The means that printing can lead to an attempt to initiate auth, unless `sheets_deauth()` has been called. However, `sheets_id` printing should never lead to an actual error condition, although it may reveal information from caught errors.
+The print method for `sheets_id` objects now attempts to reveal the current Sheet metadata available via `gs4_get()`. The means that printing can lead to an attempt to initiate auth, unless `gs4_deauth()` has been called. However, `sheets_id` printing should never lead to an actual error condition, although it may reveal information from caught errors.
 
 ### Bug fixes
 

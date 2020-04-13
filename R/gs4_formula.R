@@ -18,7 +18,7 @@ new_formula <- function(x = character()) {
 #' @family write functions
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   dat <- data.frame(X = c(1, 5, 3, 2, 4, 6))
 #'
 #'   ss <- sheet_write(dat)

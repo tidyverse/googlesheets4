@@ -70,18 +70,18 @@ reference:
     desc: >
       Take explicit control of the googlesheets4 auth status or examine current state
     contents:
-      - sheets_auth
-      - sheets_deauth
-      - sheets_user
-      - sheets_auth_configure
+      - gs4_auth
+      - gs4_deauth
+      - gs4_user
+      - gs4_auth_configure
   - title: "Programming around the Sheets API"
     desc: >
       Low-level functions used internally and made available for programming
     contents:
       - request_generate
       - request_make
-      - sheets_token
-      - sheets_has_token
+      - gs4_token
+      - gs4_has_token
       - gs4_endpoints
   - title: "Operate on (spread)Sheets or the Sheets API"
     desc: >

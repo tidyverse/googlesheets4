@@ -93,7 +93,7 @@ and format are deleted.
 }
 
 \examples{
-if (sheets_has_token()) {
+if (gs4_has_token()) {
   # create a Sheet with some initial, empty (work)sheets
   (ss <- gs4_create("range-write-demo", sheets = c("alpha", "beta")))
 

@@ -31,7 +31,7 @@ Adds one or more (work)sheets to an existing (spread)Sheet. Note that sheet
 names must be unique.
 }
 \examples{
-if (sheets_has_token()) {
+if (gs4_has_token()) {
   ss <- gs4_create("add-sheets-to-me")
 
   # the only required argument is the target spreadsheet

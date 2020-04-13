@@ -19,7 +19,7 @@ message("No token available. Code chunks will not be evaluated.")
 ```
 
 ```{r index-auth, include = FALSE}
-googlesheets4:::sheets_auth_docs()
+googlesheets4:::gs4_auth_docs()
 ```
 
 ```{r}

@@ -11,10 +11,10 @@
 # --> "anyone with the link" can view
 #
 # examples:
-# sheets_share()
-# sheets_share(type = "user", emailAddress = "jane@example.com")
-# sheets_share(type = "user", emailAddress = "jane@example.com", role = "writer")
-sheets_share <- function(ss,
+# gs4_share()
+# gs4_share(type = "user", emailAddress = "jane@example.com")
+# gs4_share(type = "user", emailAddress = "jane@example.com", role = "writer")
+gs4_share <- function(ss,
                          ...,
                          role = c(
                            "reader", "commenter", "writer",

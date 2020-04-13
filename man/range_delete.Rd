@@ -45,7 +45,7 @@ are several related tasks that are implemented by other functions:
 }
 }
 \examples{
-if (sheets_has_token()) {
+if (gs4_has_token()) {
   # create a data frame to use as initial data
   df <- gs4_fodder(10)
 

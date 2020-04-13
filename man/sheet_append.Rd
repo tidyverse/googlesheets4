@@ -25,7 +25,7 @@ Adds one or more new rows after the last row with data in a (work)sheet,
 increasing the row dimension of the sheet if necessary.
 }
 \examples{
-if (sheets_has_token()) {
+if (gs4_has_token()) {
   # we will recreate the table of "other" deaths from this example Sheet
   (deaths <- gs4_example("deaths") \%>\%
     range_read(range = "other_data", col_types = "????DD"))

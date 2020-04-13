@@ -33,7 +33,7 @@
 #' * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#DeleteRangeRequest>
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   # create a data frame to use as initial data
 #'   df <- gs4_fodder(10)
 #'

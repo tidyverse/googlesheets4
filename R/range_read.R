@@ -76,7 +76,7 @@
 #' @export
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   ss <- gs4_example("deaths")
 #'   read_sheet(ss, range = "A5:F15")
 #'   read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
@@ -144,7 +144,7 @@ read_sheet <- range_read
 #' @export
 #'
 #' @examples
-#' if (sheets_has_token()) {
+#' if (gs4_has_token()) {
 #'   df <- gs4_example("mini-gap") %>%
 #'     range_read_cells()
 #'   spread_sheet(df)

@@ -8,7 +8,7 @@ request_generate(
   endpoint = character(),
   params = list(),
   key = NULL,
-  token = sheets_token()
+  token = gs4_token()
 )
 }
 \arguments{
@@ -23,11 +23,11 @@ for an API key in the absence of a token is explained in Google's document
 \href{https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279}{Credentials, access, security, and identity}.
 In order of precedence, these sources are consulted: the formal \code{key}
 argument, a \code{key} parameter in \code{params}, a user-configured API key set up
-with \code{\link[=sheets_auth_configure]{sheets_auth_configure()}} and retrieved with \code{\link[=sheets_api_key]{sheets_api_key()}}.}
+with \code{\link[=gs4_auth_configure]{gs4_auth_configure()}} and retrieved with \code{\link[=gs4_api_key]{gs4_api_key()}}.}
 
 \item{token}{Set this to \code{NULL} to suppress the inclusion of a token. Note
-that, if auth has been de-activated via \code{\link[=sheets_deauth]{sheets_deauth()}},
-\code{sheets_token()} will actually return \code{NULL}.}
+that, if auth has been de-activated via \code{\link[=gs4_deauth]{gs4_deauth()}},
+\code{gs4_token()} will actually return \code{NULL}.}
 }
 \value{
 \code{list()}\cr Components are \code{method}, \code{url}, \code{body}, and \code{token},
@@ -63,8 +63,8 @@ req
 \code{\link[gargle:request_make]{gargle::request_make()}}
 
 Other low-level API functions: 
-\code{\link{request_make}()},
-\code{\link{sheets_has_token}()},
-\code{\link{sheets_token}()}
+\code{\link{gs4_has_token}()},
+\code{\link{gs4_token}()},
+\code{\link{request_make}()}
 }
 \concept{low-level API functions}

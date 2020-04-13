@@ -115,4 +115,85 @@ sheets_endpoints <- function(...) {
   deprecate_warn("0.2.0", "sheets_endpoints()", "gs4_endpoints()")
   gs4_endpoints(...)
 }
+
+#' @section Auth and API endpoints:
+#'
+#' ```{r echo = FALSE}
+#' dat <- tibble::tribble(
+#'                ~ "< v0.2.0", ~ ">= v0.2.0",
+#'             "sheets_auth()",   "gs4_auth()",
+#'   "sheets_auth_configure()",   "gs4_auth_configure()",
+#'          "sheets_api_key()",   "gs4_api_key()",
+#'           "sheets_deauth()",   "gs4_deauth()",
+#'        "sheets_has_token()",   "gs4_has_token()",
+#'        "sheets_oauth_app()",   "gs4_oauth_app()",
+#'            "sheets_token()",   "gs4_token()",
+#'              "sheet_user()",   "gs4_user()"
+#' )
+#' knitr::kable(dat, col.names = paste0("**", colnames(dat), "**"))
+#' ```
+#'
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_auth <- function(...) {
+  deprecate_warn("0.2.0", "sheets_auth()", "gs4_auth()")
+  gs4_auth(...)
+}
+
+#' @section Auth and API endpoints:
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_deauth <- function(...) {
+  deprecate_warn("0.2.0", "sheets_deauth()", "gs4_deauth()")
+  gs4_deauth(...)
+}
+
+#' @section Auth and API endpoints:
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_auth_configure <- function(...) {
+  deprecate_warn("0.2.0", "sheets_auth_configure()", "gs4_auth_configure()")
+  gs4_auth_configure(...)
+}
+
+#' @section Auth and API endpoints:
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_api_key <- function(...) {
+  deprecate_warn("0.2.0", "sheets_api_key()", "gs4_api_key()")
+  gs4_api_key(...)
+}
+
+#' @section Auth and API endpoints:
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_oauth_app <- function(...) {
+  deprecate_warn("0.2.0", "sheets_oauth_app()", "gs4_oauth_app()")
+  gs4_oauth_app(...)
+}
+
+#' @section Auth and API endpoints:
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_token <- function(...) {
+  deprecate_warn("0.2.0", "sheets_token()", "gs4_token()")
+  gs4_token(...)
+}
+
+#' @section Auth and API endpoints:
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_has_token <- function(...) {
+  deprecate_warn("0.2.0", "sheets_has_token()", "gs4_has_token()")
+  gs4_has_token(...)
+}
+
+#' @section Auth and API endpoints:
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_user <- function(...) {
+  deprecate_warn("0.2.0", "sheets_user()", "gs4_user()")
+  gs4_user(...)
+}
+
 # nocov end

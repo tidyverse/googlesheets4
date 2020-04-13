@@ -47,7 +47,7 @@ devtools::install_github("tidyverse/googlesheets4")
 
 googlesheets4 will, by default, help you interact with Sheets as an
 authenticated Google user. If you don’t need to access private Sheets,
-use `sheets_deauth()` to indicate there is no need for a token. See the
+use `gs4_deauth()` to indicate there is no need for a token. See the
 article [googlesheets4
 auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html)
 for more.

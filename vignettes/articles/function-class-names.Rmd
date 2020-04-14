@@ -1,0 +1,137 @@
+---
+title: "Function and class names"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This article explains conventions in googlesheets4 around:
+
+  * Function names
+  * Classes
+
+# Prefixes: gs4, sheet, range
+
+Almost all functions in googlesheets4 have one of these prefixes:
+
+  * `gs4_`, referring variously to the googlesheets4 package, v4 of the Google 
+    Sheets API, or to operations on one or more (spread)Sheets
+  * `sheet_`, referring to an operation on one or more (work)sheets
+  * `range_`, referring to an operation on a range of cells
+
+This table summarizes what the `gs4_`, `sheet_`, `range_` mean conceptually and what they tell you about the function signature.
+
+| prefix | ss  | sheet | range | scope            |
+|--------|-----|-------|-------|------------------|
+| gs4_   | yes | no    | no    | a (spread)Sheet  |
+| sheet_ | yes | yes   | no    | a (work)sheet    |
+| range_ | yes | yes   | yes   | a range of cells |
+
+Take this table with a grain of salt. There are a few violations of it in function signatures, when justified, but it's true in broad strokes. And remember that `gs4_` is also used for general, package-level functions.
+
+# Previous use of `sheets_` prefix
+
+In the first CRAN release, googlesheets4 v0.1.0 (and patch release v0.1.1) had a nearly universal `sheets_` prefix. The subsequent version 0.2.0 gains a tremendous amount of writing and editing functionality. During its development, it became clear that the `sheets_` scheme was an impediment to generating descriptive, predictable function names. For example, you might want to delete a (spread)Sheet, a (work)sheet, or a cell range. Which one of these functions will be named `sheets_delete()` and what do we call the rest? There is no good answer to this, which is why we adopted the 3 prefix strategy.
+
+This decision was made shortly before the release of v0.2.0, so those using the dev version of googlesheets4 may need to adapt their code. Any function that appeared in v0.1.1 has been formally deprecated and is addressed by formal documentation mapping old names to new. Below are larger tables, that also cover functions that only existed in dev versions, but that may have seen use in the community.
+
+The dev version of googlesheets4 was bumped from 0.1.1.9000 to 0.1.1.9100 at the time of this change and the last commit under the "old" naming scheme was also tagged as "v0.1.1.9000". Therefore, one can install from that specific state via `devtools::install_github("tidyverse/googlesheets4@v0.1.1.9000")`.
+
+## Auth and the Sheet API v4 surface 
+
+```{r echo = FALSE}
+dat <- tibble::tribble(
+   ~ "<= v0.1.1.9000",             ~ ">= v0.1.1.9100",
+  "`sheets_api_key()` (*)",        "`gs4_api_key()`",
+  "`sheets_auth()` (*)",           "`gs4_auth()`",
+  "`sheets_auth_configure()` (*)", "`gs4_auth_configure()`",
+  "`sheets_deauth()` (*)",         "`gs4_deauth()`",
+  "`sheets_endpoints()` (*)",      "`gs4_endpoints()`",
+  "`sheets_has_token()` (*)",      "`gs4_has_token()`",
+  "`sheets_oauth_app()` (*)",      "`gs4_oauth_app()`",
+  "`sheets_token()` (*)",          "`gs4_token()`",
+  "`sheets_user()` (*)",           "`gs4_user()`"
+)
+knitr::kable(dat)
+```
+
+(*) indicates functions in the CRAN versions <= v0.1.1.
+
+## (Spread)sheet scope
+
+```{r echo = FALSE}
+dat <- tibble::tribble(
+  ~ "<= v0.1.1.9000",       ~ ">= v0.1.1.9100",
+  "`sheets_browse()` (*)",   "`gs4_browse()`",
+  "`sheets_create()`",       "`gs4_create()`",
+  "`sheets_find()` (*)",     "`gs4_find()`",
+  "`sheets_fodder()`",       "`gs4_fodder()`",
+  "`sheets_formula()`",      "`gs4_formula()`",
+  "`sheets_example()` (*)",  "`gs4_example()`",
+  "`sheets_examples()` (*)", "`gs4_examples()`",
+  "`sheets_get()` (*)",      "`gs4_get()`",
+  "`sheets_random()`",       "`gs4_random()`"
+)
+knitr::kable(dat)
+```
+
+(*) indicates functions in the CRAN versions <= v0.1.1.
+
+## (Work)sheet scope
+
+```{r echo = FALSE}
+dat <- tibble::tribble(
+  ~ "<= v0.1.1.9000",            ~ ">= v0.1.1.9100",
+  "`sheets_append ()`",          "`sheet_append ()`",          
+  "`sheets_sheet_add()`",        "`sheet_add()`",
+  "`sheets_sheet_copy()`",       "`sheet_copy()`",
+  "`sheets_sheet_delete()`",     "`sheet_delete()`",
+  "`sheets_sheet_names()`",      "`sheet_names()`",
+  "`sheets_sheet_properties()`", "`sheet_properties()`",
+  "`sheets_sheet_relocate()`",   "`sheet_relocate()`",
+  "`sheets_sheet_rename()`",     "`sheet_rename()`",
+  "`sheets_sheet_resize()`",     "`sheet_resize()`",
+  "`sheets_sheets()` (*)",       "`sheet_names()`",
+  "`sheets_write()`",            "`sheet_write()`"
+)
+knitr::kable(dat)
+```
+
+(*) indicates functions in the CRAN versions <= v0.1.1.
+
+## Range scope
+
+```{r echo = FALSE}
+dat <- tibble::tribble(
+  ~ "<= v0.1.1.9000",            ~ ">= v0.1.1.9100",
+  "`sheets_auto_resize_dims()`", "`range_autofit()`",          
+  "`sheets_cells()` (*)",        "`range_read_cells()`",
+  "`sheets_clear()`",            "`range_clear()`",
+  "`sheets_edit()`",             "`range_write()`",
+  "`sheets_flood()`",            "`range_flood()`",
+  "`sheets_read()` (*)",         "`range_read()`",
+  "`sheets_speedread()`",        "`range_speedread()`"
+)
+knitr::kable(dat)
+```
+
+(*) indicates functions in the CRAN versions <= v0.1.1.
+
+Note: "range" can mean two things in the Sheets API:
+
+  * An A1-style range, given as a string. Examples: `A1:B3` (a cell range), `Africa` (a worksheet name), `Africa!A1:B3` (a sheet-qualified cell range), `arts_data` (a named range). Some API endpoints require this, believe it or not.
+  * A cell rectangle described by start/end row/column, packaged as an instance of a schema, such as `GridRange`. Most API endpoints use this.
+
+Fun fact: The "cell rectangle" type of range is almost a sub-case of the A1-style range, except there are rectangles open on one or more sides that can be described via `GridRange` that cannot be expressed as an A1-range string. The mostly-developer-facing article [Range specification](https://googlesheets4.tidyverse.org/articles/articles/range-specification.html) documents all this and how I approach it internally.
+
+The `range_` prefix encompasses both types of ranges and each function has to indicate what sorts of `range` it supports, which is determined by the behaviour of the associated API endpoint.
+
+# Classes
+
+Any user facing class that is related to a schema should be named like `googlesheets4_schema_name`, where the schema name is in lower_snake_case.
+
+The internal schema-derived classes should be like `googlesheets4_schema_SchemaName` / `googlesheets4_schema` / `list`. Use the `googlesheets4_schema` prefix and retain the API's UpperCamelCase.

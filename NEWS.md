@@ -2,17 +2,7 @@
 
 ### Function naming scheme
 
-The universal `sheets_` prefix has been replaced by a scheme that conveys more information about the scope of the function, e.g., a whole spreadsheet vs. a whole worksheet vs. a cell range. We've added many functions since the initial CRAN release and it became clear the original scheme wasn't serving us well.
-
-This table summarizes what the new prefixes (`gs4_`, `sheet_`, `range_`) mean conceptually and what they tell you about the function signature.
-
-| prefix | ss  | sheet | range | scope            |
-|--------|-----|-------|-------|------------------|
-| gs4_   | yes | no    | no    | a (spread)Sheet  |
-| sheet_ | yes | yes   | no    | a (work)sheet    |
-| range_ | yes | yes   | yes   | a range of cell  |
-
-Note: `gs4_` is also used for general, package-level functions.
+The universal `sheets_` prefix has been replaced by a scheme that conveys more information about the scope of the function, e.g., a whole spreadsheet vs. a whole worksheet vs. a cell range. We've added many functions since the initial CRAN release and it became clear the original scheme wasn't serving us well. There is a new article about conventions for function names and classes, [Function and class names](https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html).
 
 Any function present in the previous CRAN release, v0.1.1, still works, but triggers a warning with strong encouragement to call it via its current name.
 
@@ -34,7 +24,7 @@ These functions are ready for use but are still considered experimental and may 
   
 ### Other new functions and arguments
 
-There is a new family of `sheet_*()` functions that operate on the (work)sheets inside an existing (spread)Sheet:
+The `sheet_*()` family of functions operate on the (work)sheets inside an existing (spread)Sheet:
   
   * `sheet_properties()` returns a tibble of metadata with one row per
      sheet.

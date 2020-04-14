@@ -8,8 +8,12 @@ if (gargle:::secret_can_decrypt("googlesheets4") &&
 }
 
 skip_if_no_token <- function() {
-  Sys.sleep(2)
-  testthat::skip_if_not(gs4_has_token())
+  if (gs4_has_token()) {
+    # hack to slow things down in CI
+    Sys.sleep(2)
+  } else {
+    skip("No token")
+  }
 }
 
 expect_error_free <- function(...) {

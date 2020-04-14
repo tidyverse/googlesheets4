@@ -76,7 +76,7 @@ gs4_example("chicken-sheet") %>%
 
 If you'd like to see a Sheet in the browser, including our example Sheets, use `gs4_browse()`:
 
-```{r eval = FALSE}
+```{r}
 gs4_example("deaths") %>%
   gs4_browse()
 ```
@@ -119,7 +119,7 @@ You'll notice the new (spread)Sheet has a randomly generated name. If that is a 
 Let's start over: we delete that Sheet and call `gs4_create()`, so we can specify the new Sheet's name.
 
 ```{r}
-googledrive::drive_rm(ss)
+googledrive::drive_trash(ss)
 
 ss <- gs4_create("fluffy-bunny", sheets = df)
 ss
@@ -155,7 +155,7 @@ We take one last look at the sheets we created in `ss`, then clean up.
 ```{r}
 sheet_properties(ss)
 
-googledrive::drive_rm(ss)
+googledrive::drive_trash(ss)
 ```
 
 The article [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html) has even more detail.

@@ -87,5 +87,5 @@ if (requireNamespace("readxl", quietly = TRUE)) {
 
 ```{r}
 file.remove(iris_tempfile, iris_xlsxfile)
-drive_rm(iris_ss)
+drive_trash(iris_ss)
 ```

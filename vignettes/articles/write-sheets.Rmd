@@ -155,7 +155,7 @@ This creates a new (work)sheet inside a new (spread)Sheet and returns its ID. Yo
 Let's start over: we delete that Sheet and call `gs4_create()`, so we can specify the new Sheet's name. Then we'll modify it with `sheet_write()`. We send one sheet name, "chickwts", to prevent the creation of "Sheet1", but we send no data.
 
 ```{r}
-googledrive::drive_rm(random_ss)
+googledrive::drive_trash(random_ss)
 
 ss1 <- gs4_create(
   "write-sheets-demo-1",

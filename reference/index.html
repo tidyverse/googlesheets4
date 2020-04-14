@@ -90,7 +90,7 @@
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9100</span>
         </div>
       </div>
     </div>
@@ -120,6 +120,9 @@
     </li>
     <li>
       <a href="../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="../articles/articles/function-class-names.html">Function and class names</a>
     </li>
     <li>
       <a href="../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
@@ -171,7 +174,7 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-read-cells" class="hasAnchor"><a href="#section-read-cells" class="anchor"></a>Read cells</h2>
+          <h2 id="section-reading" class="hasAnchor"><a href="#section-reading" class="anchor"></a>Reading</h2>
           <p class="section-desc"><p>Import data from a Sheet into a local data frame</p></p>
         </th>
       </tr>
@@ -183,19 +186,19 @@
       <tr>
         
         <td>
-          <p><code><a href="read_sheet.html">read_sheet()</a></code> <code><a href="read_sheet.html">sheets_read()</a></code> </p>
+          <p><code><a href="range_read.html">range_read()</a></code> <code><a href="range_read.html">read_sheet()</a></code> </p>
         </td>
         <td><p>Read a Sheet into a data frame</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_speedread.html">sheets_speedread()</a></code> </p>
+          <p><code><a href="range_speedread.html">range_speedread()</a></code> </p>
         </td>
         <td><p>Read Sheet as CSV</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_cells.html">sheets_cells()</a></code> </p>
+          <p><code><a href="range_read_cells.html">range_read_cells()</a></code> </p>
         </td>
         <td><p>Read cells from a Sheet</p></td>
       </tr><tr>
@@ -214,8 +217,8 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-write-cells" class="hasAnchor"><a href="#section-write-cells" class="anchor"></a>Write cells</h2>
-          <p class="section-desc"><p>Write data from a local data frame into a Sheet</p></p>
+          <h2 id="section-writing" class="hasAnchor"><a href="#section-writing" class="anchor"></a>Writing</h2>
+          <p class="section-desc"><p>Write data into a Sheet</p></p>
         </th>
       </tr>
       
@@ -226,31 +229,31 @@
       <tr>
         
         <td>
-          <p><code><a href="write_sheet.html">write_sheet()</a></code> <code><a href="write_sheet.html">sheets_write()</a></code> </p>
+          <p><code><a href="sheet_write.html">sheet_write()</a></code> <code><a href="sheet_write.html">write_sheet()</a></code> </p>
         </td>
-        <td><p>(Over)write new data into a worksheet</p></td>
+        <td><p>(Over)write new data into a Sheet</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_create.html">sheets_create()</a></code> </p>
+          <p><code><a href="gs4_create.html">gs4_create()</a></code> </p>
         </td>
         <td><p>Create a new Sheet</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_append.html">sheets_append()</a></code> </p>
+          <p><code><a href="sheet_append.html">sheet_append()</a></code> </p>
         </td>
         <td><p>Append rows to a sheet</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_edit.html">sheets_edit()</a></code> </p>
+          <p><code><a href="range_write.html">range_write()</a></code> </p>
         </td>
         <td><p>(Over)write new data into a range</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_flood.html">sheets_flood()</a></code> <code><a href="sheets_flood.html">sheets_clear()</a></code> </p>
+          <p><code><a href="range_flood.html">range_flood()</a></code> <code><a href="range_flood.html">range_clear()</a></code> </p>
         </td>
         <td><p>Flood or clear a range of cells</p></td>
       </tr>
@@ -269,13 +272,13 @@
       <tr>
         
         <td>
-          <p><code><a href="sheets_fodder.html">sheets_fodder()</a></code> </p>
+          <p><code><a href="gs4_fodder.html">gs4_fodder()</a></code> </p>
         </td>
         <td><p>Create useful spreadsheet filler</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_formula.html">sheets_formula()</a></code> </p>
+          <p><code><a href="gs4_formula.html">gs4_formula()</a></code> </p>
         </td>
         <td><p>Class for Google Sheets formulas</p></td>
       </tr>
@@ -294,21 +297,21 @@
       <tr>
         
         <td>
-          <p><code><a href="sheets_get.html">sheets_get()</a></code> </p>
+          <p><code><a href="gs4_get.html">gs4_get()</a></code> </p>
         </td>
         <td><p>Get Sheet metadata</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_find.html">sheets_find()</a></code> </p>
+          <p><code><a href="gs4_find.html">gs4_find()</a></code> </p>
         </td>
         <td><p>Find Google Sheets</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_browse.html">sheets_browse()</a></code> </p>
+          <p><code><a href="gs4_browse.html">gs4_browse()</a></code> </p>
         </td>
-        <td><p>Visit Sheet in browser</p></td>
+        <td><p>Visit a Sheet in a web browser</p></td>
       </tr><tr>
         
         <td>
@@ -330,7 +333,7 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_random.html">sheets_random()</a></code> </p>
+          <p><code><a href="gs4_random.html">gs4_random()</a></code> </p>
         </td>
         <td><p>Generate a random Sheet name</p></td>
       </tr>
@@ -349,57 +352,75 @@
       <tr>
         
         <td>
-          <p><code><a href="sheets_create.html">sheets_create()</a></code> </p>
+          <p><code><a href="gs4_create.html">gs4_create()</a></code> </p>
         </td>
         <td><p>Create a new Sheet</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_delete.html">sheets_delete()</a></code> </p>
+          <p><code><a href="range_delete.html">range_delete()</a></code> </p>
         </td>
         <td><p>Delete cells</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_sheet_add.html">sheets_sheet_add()</a></code> </p>
+          <p><code><a href="sheet_add.html">sheet_add()</a></code> </p>
         </td>
         <td><p>Add one or more (work)sheets</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_sheet_copy.html">sheets_sheet_copy()</a></code> </p>
+          <p><code><a href="sheet_append.html">sheet_append()</a></code> </p>
+        </td>
+        <td><p>Append rows to a sheet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheet_copy.html">sheet_copy()</a></code> </p>
         </td>
         <td><p>Copy a (work)sheet</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_sheet_delete.html">sheets_sheet_delete()</a></code> </p>
+          <p><code><a href="sheet_delete.html">sheet_delete()</a></code> </p>
         </td>
         <td><p>Delete one or more (work)sheets</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_sheet_properties.html">sheets_sheet_properties()</a></code> <code><a href="sheets_sheet_properties.html">sheets_sheet_names()</a></code> </p>
+          <p><code><a href="sheet_properties.html">sheet_properties()</a></code> <code><a href="sheet_properties.html">sheet_names()</a></code> </p>
         </td>
         <td><p>Get data about (work)sheets</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_sheet_relocate.html">sheets_sheet_relocate()</a></code> </p>
+          <p><code><a href="sheet_relocate.html">sheet_relocate()</a></code> </p>
         </td>
         <td><p>Relocate one or more (work)sheets</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_sheet_rename.html">sheets_sheet_rename()</a></code> </p>
+          <p><code><a href="sheet_rename.html">sheet_rename()</a></code> </p>
         </td>
         <td><p>Rename a (work)sheet</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_sheet_resize.html">sheets_sheet_resize()</a></code> </p>
+          <p><code><a href="sheet_resize.html">sheet_resize()</a></code> </p>
         </td>
         <td><p>Change the size of a (work)sheet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheet_write.html">sheet_write()</a></code> <code><a href="sheet_write.html">write_sheet()</a></code> </p>
+        </td>
+        <td><p>(Over)write new data into a Sheet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheets_id.html">sheets_id</a></code> </p>
+        </td>
+        <td><p><code>sheets_id</code> object</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -416,9 +437,9 @@
       <tr>
         
         <td>
-          <p><code><a href="sheets_auto_resize_dims.html">sheets_auto_resize_dims()</a></code> </p>
+          <p><code><a href="range_autofit.html">range_autofit()</a></code> </p>
         </td>
-        <td><p>Auto-resize columns or rows</p></td>
+        <td><p>Auto-fit columns or rows to the data</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -435,7 +456,7 @@
       <tr>
         
         <td>
-          <p><code><a href="sheets_example.html">sheets_example()</a></code> <code><a href="sheets_example.html">sheets_examples()</a></code> </p>
+          <p><code><a href="gs4_example.html">gs4_example()</a></code> <code><a href="gs4_example.html">gs4_examples()</a></code> </p>
         </td>
         <td><p>File IDs of example Sheets</p></td>
       </tr>
@@ -454,25 +475,25 @@
       <tr>
         
         <td>
-          <p><code><a href="sheets_auth.html">sheets_auth()</a></code> </p>
+          <p><code><a href="gs4_auth.html">gs4_auth()</a></code> </p>
         </td>
         <td><p>Authorize googlesheets4</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_deauth.html">sheets_deauth()</a></code> </p>
+          <p><code><a href="gs4_deauth.html">gs4_deauth()</a></code> </p>
         </td>
         <td><p>Suspend authorization</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_user.html">sheets_user()</a></code> </p>
+          <p><code><a href="gs4_user.html">gs4_user()</a></code> </p>
         </td>
         <td><p>Get info on current user</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_auth_configure.html">sheets_auth_configure()</a></code> <code><a href="sheets_auth_configure.html">sheets_api_key()</a></code> <code><a href="sheets_auth_configure.html">sheets_oauth_app()</a></code> </p>
+          <p><code><a href="gs4_auth_configure.html">gs4_auth_configure()</a></code> <code><a href="gs4_auth_configure.html">gs4_api_key()</a></code> <code><a href="gs4_auth_configure.html">gs4_oauth_app()</a></code> </p>
         </td>
         <td><p>Edit and view auth configuration</p></td>
       </tr>
@@ -503,21 +524,246 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_token.html">sheets_token()</a></code> </p>
+          <p><code><a href="gs4_token.html">gs4_token()</a></code> </p>
         </td>
         <td><p>Produce configured token</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_has_token.html">sheets_has_token()</a></code> </p>
+          <p><code><a href="gs4_has_token.html">gs4_has_token()</a></code> </p>
         </td>
         <td><p>Is there a token on hand?</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="sheets_endpoints.html">sheets_endpoints()</a></code> </p>
+          <p><code><a href="gs4_endpoints.html">gs4_endpoints()</a></code> </p>
         </td>
         <td><p>List Sheets endpoints</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-operate-on-spread-sheets-or-the-sheets-api" class="hasAnchor"><a href="#section-operate-on-spread-sheets-or-the-sheets-api" class="anchor"></a>Operate on (spread)Sheets or the Sheets API</h2>
+          <p class="section-desc"><p>Functions that operate at the level of a (spread)sheet or the whole API/package</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="gs4_auth.html">gs4_auth()</a></code> </p>
+        </td>
+        <td><p>Authorize googlesheets4</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_auth_configure.html">gs4_auth_configure()</a></code> <code><a href="gs4_auth_configure.html">gs4_api_key()</a></code> <code><a href="gs4_auth_configure.html">gs4_oauth_app()</a></code> </p>
+        </td>
+        <td><p>Edit and view auth configuration</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_browse.html">gs4_browse()</a></code> </p>
+        </td>
+        <td><p>Visit a Sheet in a web browser</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_create.html">gs4_create()</a></code> </p>
+        </td>
+        <td><p>Create a new Sheet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_deauth.html">gs4_deauth()</a></code> </p>
+        </td>
+        <td><p>Suspend authorization</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_endpoints.html">gs4_endpoints()</a></code> </p>
+        </td>
+        <td><p>List Sheets endpoints</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_example.html">gs4_example()</a></code> <code><a href="gs4_example.html">gs4_examples()</a></code> </p>
+        </td>
+        <td><p>File IDs of example Sheets</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_find.html">gs4_find()</a></code> </p>
+        </td>
+        <td><p>Find Google Sheets</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_fodder.html">gs4_fodder()</a></code> </p>
+        </td>
+        <td><p>Create useful spreadsheet filler</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_formula.html">gs4_formula()</a></code> </p>
+        </td>
+        <td><p>Class for Google Sheets formulas</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_get.html">gs4_get()</a></code> </p>
+        </td>
+        <td><p>Get Sheet metadata</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_has_token.html">gs4_has_token()</a></code> </p>
+        </td>
+        <td><p>Is there a token on hand?</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_random.html">gs4_random()</a></code> </p>
+        </td>
+        <td><p>Generate a random Sheet name</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_token.html">gs4_token()</a></code> </p>
+        </td>
+        <td><p>Produce configured token</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="gs4_user.html">gs4_user()</a></code> </p>
+        </td>
+        <td><p>Get info on current user</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-operate-on-work-sheets" class="hasAnchor"><a href="#section-operate-on-work-sheets" class="anchor"></a>Operate on (work)sheets</h2>
+          <p class="section-desc"><p>Functions that operate on whole (work)sheets</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="sheet_add.html">sheet_add()</a></code> </p>
+        </td>
+        <td><p>Add one or more (work)sheets</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheet_append.html">sheet_append()</a></code> </p>
+        </td>
+        <td><p>Append rows to a sheet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheet_copy.html">sheet_copy()</a></code> </p>
+        </td>
+        <td><p>Copy a (work)sheet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheet_delete.html">sheet_delete()</a></code> </p>
+        </td>
+        <td><p>Delete one or more (work)sheets</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheet_properties.html">sheet_properties()</a></code> <code><a href="sheet_properties.html">sheet_names()</a></code> </p>
+        </td>
+        <td><p>Get data about (work)sheets</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheet_relocate.html">sheet_relocate()</a></code> </p>
+        </td>
+        <td><p>Relocate one or more (work)sheets</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheet_rename.html">sheet_rename()</a></code> </p>
+        </td>
+        <td><p>Rename a (work)sheet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheet_resize.html">sheet_resize()</a></code> </p>
+        </td>
+        <td><p>Change the size of a (work)sheet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="sheet_write.html">sheet_write()</a></code> <code><a href="sheet_write.html">write_sheet()</a></code> </p>
+        </td>
+        <td><p>(Over)write new data into a Sheet</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-operate-on-a-range-of-cells" class="hasAnchor"><a href="#section-operate-on-a-range-of-cells" class="anchor"></a>Operate on a range of cells</h2>
+          <p class="section-desc"><p>Functions that can target a cell range</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="range_autofit.html">range_autofit()</a></code> </p>
+        </td>
+        <td><p>Auto-fit columns or rows to the data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="range_delete.html">range_delete()</a></code> </p>
+        </td>
+        <td><p>Delete cells</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="range_flood.html">range_flood()</a></code> <code><a href="range_flood.html">range_clear()</a></code> </p>
+        </td>
+        <td><p>Flood or clear a range of cells</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="range_read.html">range_read()</a></code> <code><a href="range_read.html">read_sheet()</a></code> </p>
+        </td>
+        <td><p>Read a Sheet into a data frame</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="range_read_cells.html">range_read_cells()</a></code> </p>
+        </td>
+        <td><p>Read cells from a Sheet</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="range_speedread.html">range_speedread()</a></code> </p>
+        </td>
+        <td><p>Read Sheet as CSV</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="range_write.html">range_write()</a></code> </p>
+        </td>
+        <td><p>(Over)write new data into a range</p></td>
       </tr>
     </tbody>
     </table>

@@ -49,7 +49,7 @@
         <a class="navbar-brand" href="../../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9100</span>
         </div>
       </div>
     </div>
@@ -79,6 +79,9 @@
     </li>
     <li>
       <a href="../../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/function-class-names.html">Function and class names</a>
     </li>
     <li>
       <a href="../../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
@@ -148,7 +151,7 @@
 <p>Notice that this URL contains a (spread)Sheet ID and a (work)sheet ID. This URL happens to link to <a href="https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077">the official example Sheet that holds Gapminder data</a>.</p>
 <p>googlesheets4 accepts such a URL as the <code>ss</code> argument (think “spreadsheet”) of many functions:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">ugly_url</span> <span class="kw">&lt;-</span> <span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span>
-<span class="fu"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="no">ugly_url</span>)
+<span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ugly_url</span>)
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
@@ -190,9 +193,9 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (Named range): (A1 range)        </span>
 <span class="co">#&gt;        canada: 'Americas'!A38:F49</span></pre></body></html></div>
-<p>This is the same metadata you’ll see when you call <code><a href="../../reference/sheets_get.html">sheets_get()</a></code> (but you must call <code><a href="../../reference/sheets_get.html">sheets_get()</a></code> explicitly if you want to <em>store</em> the returned metadata).</p>
+<p>This is the same metadata you’ll see when you call <code><a href="../../reference/gs4_get.html">gs4_get()</a></code> (but you must call <code><a href="../../reference/gs4_get.html">gs4_get()</a></code> explicitly if you want to <em>store</em> the returned metadata).</p>
 <p>googlesheets4 also accepts a Sheet ID as the <code>ss</code> argument of many functions:</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="no">ssid</span>)
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ssid</span>)
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
@@ -206,7 +209,7 @@
 <span class="co">#&gt; # … with 619 more rows</span></pre></body></html></div>
 <p>I think in a script or app that will endure for a while it is better to refer to a Sheet by its ID than by its URL. The Sheet ID is nicer to look at, it is complete, it is minimal.</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">ssid</span> <span class="kw">&lt;-</span> <span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span>
-<span class="fu"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="no">ssid</span>)
+<span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ssid</span>)
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
@@ -221,7 +224,7 @@
 <p>Note this demonstration that a Sheet ID also works when provided as a plain, old string, i.e. it does not <strong>have</strong> to have the <code>sheets_id</code> class. In some contexts, you might even prefer to store it as a string, in order to bypass the special printing behaviour for <code>sheets_id</code>.</p>
 <p>When the Sheet is specified via a character string, googlesheets4 assumes it is a Sheet ID (or an ID-containing URL). This is NOT the case for googledrive, which assumes a character string is a file name or path. Therefore, for maximum happiness, in a mixed googlesheets4 / googledrive workflow, it’s a good idea to be explicit and declare a string to be a Sheet ID, when that is the case.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">ssid</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/as_sheets_id.html">as_sheets_id</a></span>(<span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span>)
-<span class="fu"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="no">ssid</span>)
+<span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ssid</span>)
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
@@ -270,7 +273,7 @@
 <span class="co">#&gt; (Named range): (A1 range)        </span>
 <span class="co">#&gt;        canada: 'Americas'!A38:F49</span></pre></body></html></div>
 <p>Since we generally call <code><a href="../../reference/as_sheets_id.html">as_sheets_id()</a></code> on whatever the user provides as <code>ss</code>, you can even pass <code>gap_dribble</code> straight into googlesheets4 functions.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_sheet_properties.html">sheets_sheet_properties</a></span>(<span class="no">gap_dribble</span>)
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheet_properties.html">sheet_properties</a></span>(<span class="no">gap_dribble</span>)
 <span class="co">#&gt; # A tibble: 5 x 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
@@ -295,27 +298,27 @@
 <p>What if you want to see all of your Sheets? Or all the Sheets with “gap” in their name?</p>
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"spreadsheet"</span>)
-<span class="co">#&gt; # A tibble: 30 x 3</span>
+<span class="co">#&gt; # A tibble: 36 x 3</span>
 <span class="co">#&gt;   name               id                                         drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 write-sheets-demo… 1yT8PftebBzktKR5Q_Ofq_XsOd6ICNxBA2Byq6_fn… &lt;named list [34…</span>
-<span class="co">#&gt; 2 smooth-indianabat  1moe2AEeu1K_qHGj5JFgxddjTAq1A4PbvSCzd76uQ… &lt;named list [34…</span>
-<span class="co">#&gt; 3 sheets-resize-demo 18lNiX-f8l0pWPnoInEHcAY-r-ZkfUILb93sFqeUA… &lt;named list [33…</span>
-<span class="co">#&gt; 4 deaths             1nYDgl4geeodhKyrMuuqa0vvo6frBKpnYNqs1N_MS… &lt;named list [35…</span>
-<span class="co">#&gt; 5 sheets-write-demo  1NUXZs9meUsQeqwiHE5_d9nBb2YoFkzJW8xLxxZun… &lt;named list [34…</span>
-<span class="co">#&gt; # … with 25 more rows</span></pre></body></html></div>
-<p>This is so handy that we’ve made <code><a href="../../reference/sheets_find.html">sheets_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_find.html">sheets_find</a></span>()
-<span class="co">#&gt; # A tibble: 30 x 3</span>
+<span class="co">#&gt; 1 sheet-write-demo   1STlFA09SOGDvSmmn1qsqNisTvXwkKEENjP1-k-Xu… &lt;named list [33…</span>
+<span class="co">#&gt; 2 sheet-resize-demo  13krXL1V1gtaiNIOPLWcetsBza82aB-wceBao7w07… &lt;named list [33…</span>
+<span class="co">#&gt; 3 sheet-copy-demo-b… 1N3469OLIpdT-9dXrq4YfgA2HYHgpglemVHmR7wxw… &lt;named list [33…</span>
+<span class="co">#&gt; 4 sheet-copy-demo-a… 1Sx05voLCjTnSJKDJNSwO03HxBdcqwovSWdddbmBt… &lt;named list [33…</span>
+<span class="co">#&gt; 5 add-sheets-to-me   1Rwz4B-pp7U2h4b9djddqLDPsXYij_BHvuo44YAoc… &lt;named list [33…</span>
+<span class="co">#&gt; # … with 31 more rows</span></pre></body></html></div>
+<p>This is so handy that we’ve made <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
+<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span>()
+<span class="co">#&gt; # A tibble: 36 x 3</span>
 <span class="co">#&gt;   name               id                                         drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 write-sheets-demo… 1yT8PftebBzktKR5Q_Ofq_XsOd6ICNxBA2Byq6_fn… &lt;named list [34…</span>
-<span class="co">#&gt; 2 smooth-indianabat  1moe2AEeu1K_qHGj5JFgxddjTAq1A4PbvSCzd76uQ… &lt;named list [34…</span>
-<span class="co">#&gt; 3 sheets-resize-demo 18lNiX-f8l0pWPnoInEHcAY-r-ZkfUILb93sFqeUA… &lt;named list [33…</span>
-<span class="co">#&gt; 4 deaths             1nYDgl4geeodhKyrMuuqa0vvo6frBKpnYNqs1N_MS… &lt;named list [35…</span>
-<span class="co">#&gt; 5 sheets-write-demo  1NUXZs9meUsQeqwiHE5_d9nBb2YoFkzJW8xLxxZun… &lt;named list [34…</span>
-<span class="co">#&gt; # … with 25 more rows</span></pre></body></html></div>
-<p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/sheets_find.html">sheets_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
+<span class="co">#&gt; 1 sheet-write-demo   1STlFA09SOGDvSmmn1qsqNisTvXwkKEENjP1-k-Xu… &lt;named list [33…</span>
+<span class="co">#&gt; 2 sheet-resize-demo  13krXL1V1gtaiNIOPLWcetsBza82aB-wceBao7w07… &lt;named list [33…</span>
+<span class="co">#&gt; 3 sheet-copy-demo-b… 1N3469OLIpdT-9dXrq4YfgA2HYHgpglemVHmR7wxw… &lt;named list [33…</span>
+<span class="co">#&gt; 4 sheet-copy-demo-a… 1Sx05voLCjTnSJKDJNSwO03HxBdcqwovSWdddbmBt… &lt;named list [33…</span>
+<span class="co">#&gt; 5 add-sheets-to-me   1Rwz4B-pp7U2h4b9djddqLDPsXYij_BHvuo44YAoc… &lt;named list [33…</span>
+<span class="co">#&gt; # … with 31 more rows</span></pre></body></html></div>
+<p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </div>
 

@@ -49,7 +49,7 @@
         <a class="navbar-brand" href="../../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9100</span>
         </div>
       </div>
     </div>
@@ -79,6 +79,9 @@
     </li>
     <li>
       <a href="../../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/function-class-names.html">Function and class names</a>
     </li>
     <li>
       <a href="../../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
@@ -153,7 +156,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googlesheets4</span>)</pre></body></html></div>
 <p>Do auth first with googledrive. Remember <code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">googledrive::drive_auth()</a></code> accepts additional arguments, e.g. to specify a Google identity via <code>email =</code> or to use a service account via <code>path =</code>. Then direct googlesheets4 to use the same token as googledrive.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">drive_auth</a></span>()
-<span class="fu"><a href="../../reference/sheets_auth.html">sheets_auth</a></span>(<span class="kw">token</span> <span class="kw">=</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_token.html">drive_token</a></span>())</pre></body></html></div>
+<span class="fu"><a href="../../reference/gs4_auth.html">gs4_auth</a></span>(<span class="kw">token</span> <span class="kw">=</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_token.html">drive_token</a></span>())</pre></body></html></div>
 <p>Now you can use googledrive functions, like <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> or <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">googledrive::drive_get()</a></code>, to list files or find them by name, path, or other property. Then, once you’ve identified the target file, use googlesheets4 to do spreadsheet-specific tasks.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="st">"chicken"</span>)
 <span class="co">#&gt; # A tibble: 1 x 3</span>
@@ -163,7 +166,7 @@
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"chicken-sheet"</span>)
 
-<span class="fu"><a href="../../reference/sheets_get.html">sheets_get</a></span>(<span class="no">ss</span>)
+<span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt;   Spreadsheet name: chicken-sheet</span>
 <span class="co">#&gt;                 ID: 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU</span>
 <span class="co">#&gt;             Locale: en_US</span>
@@ -173,7 +176,7 @@
 <span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
 <span class="co">#&gt;  chicken.csv: 1000 x 26</span>
 
-<span class="fu"><a href="../../reference/read_sheet.html">read_sheet</a></span>(<span class="no">ss</span>)
+<span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Reading from "chicken-sheet"</span>
 <span class="co">#&gt; Range "chicken.csv"</span>
 <span class="co">#&gt; # A tibble: 5 x 4</span>
@@ -189,7 +192,7 @@
 <span class="co">#&gt; Logged in as:</span>
 <span class="co">#&gt;   *  displayName: googlesheets4-docs@gargle-169921.iam.gserviceaccount.com</span>
 <span class="co">#&gt;   * emailAddress: googlesheets4-docs@gargle-169921.iam.gserviceaccount.com</span>
-<span class="fu"><a href="../../reference/sheets_user.html">sheets_user</a></span>()
+<span class="fu"><a href="../../reference/gs4_user.html">gs4_user</a></span>()
 <span class="co">#&gt; [1] "googlesheets4-docs@gargle-169921.iam.gserviceaccount.com"</span></pre></body></html></div>
 <p>We are using a service account to render this article. But if you’ve used the default OAuth flow, this should correspond to the email of the Google account you logged in with.</p>
 </div>
@@ -204,9 +207,9 @@
 <p>First attach both packages.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googlesheets4</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googledrive</span>)</pre></body></html></div>
-<p>Do auth first with googlesheets4, specifying a Drive scope. Remember <code><a href="../../reference/sheets_auth.html">sheets_auth()</a></code> accepts additional arguments, e.g. to specify a Google identity via <code>email =</code> or to use a service account via <code>path =</code>. Then direct googledrive to use the same token as googlesheets4.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_auth.html">sheets_auth</a></span>(<span class="kw">scope</span> <span class="kw">=</span> <span class="st">"https://www.googleapis.com/auth/drive"</span>)
-<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">drive_auth</a></span>(<span class="kw">token</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/sheets_token.html">sheets_token</a></span>())</pre></body></html></div>
+<p>Do auth first with googlesheets4, specifying a Drive scope. Remember <code><a href="../../reference/gs4_auth.html">gs4_auth()</a></code> accepts additional arguments, e.g. to specify a Google identity via <code>email =</code> or to use a service account via <code>path =</code>. Then direct googledrive to use the same token as googlesheets4.</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../../reference/gs4_auth.html">gs4_auth</a></span>(<span class="kw">scope</span> <span class="kw">=</span> <span class="st">"https://www.googleapis.com/auth/drive"</span>)
+<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">drive_auth</a></span>(<span class="kw">token</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/gs4_token.html">gs4_token</a></span>())</pre></body></html></div>
 <p>Now you can use googledrive functions to list files or find them by name, path, or other property. Then, once you’ve identified the target file, use googlesheets4 to do spreadsheet-specific tasks.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="st">"chicken"</span>)
 <span class="co">#&gt; # A tibble: 1 x 3</span>
@@ -216,7 +219,7 @@
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"chicken-sheet"</span>)
 
-<span class="fu"><a href="../../reference/sheets_get.html">sheets_get</a></span>(<span class="no">ss</span>)
+<span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt;   Spreadsheet name: chicken-sheet</span>
 <span class="co">#&gt;                 ID: 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU</span>
 <span class="co">#&gt;             Locale: en_US</span>
@@ -226,7 +229,7 @@
 <span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
 <span class="co">#&gt;  chicken.csv: 1000 x 26</span>
 
-<span class="fu"><a href="../../reference/read_sheet.html">read_sheet</a></span>(<span class="no">ss</span>)
+<span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Reading from "chicken-sheet"</span>
 <span class="co">#&gt; Range "chicken.csv"</span>
 <span class="co">#&gt; # A tibble: 5 x 4</span>
@@ -265,7 +268,7 @@
   <span class="no">...</span>
 )</pre></body></html></div>
 <p>If you are not using Drive at all, i.e. you always identify Sheets by file ID, and you are only reading from those Sheets, you only need googlesheets4 and <code>spreadsheets.readonly</code> is sufficient.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheets_auth.html">sheets_auth</a></span>(
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../../reference/gs4_auth.html">gs4_auth</a></span>(
   <span class="no">...</span>,
   <span class="kw">scopes</span> <span class="kw">=</span> <span class="st">"https://www.googleapis.com/auth/spreadsheets.readonly"</span>,
   <span class="no">...</span>

@@ -90,7 +90,7 @@
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9100</span>
         </div>
       </div>
     </div>
@@ -120,6 +120,9 @@
     </li>
     <li>
       <a href="../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="../articles/articles/function-class-names.html">Function and class names</a>
     </li>
     <li>
       <a href="../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
@@ -165,71 +168,77 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#googlesheets4-development-version" class="anchor"></a>googlesheets4 (development version)<small> Unreleased </small>
 </h1>
+<div id="function-naming-scheme" class="section level3">
+<h3 class="hasAnchor">
+<a href="#function-naming-scheme" class="anchor"></a>Function naming scheme</h3>
+<p>The universal <code>sheets_</code> prefix has been replaced by a scheme that conveys more information about the scope of the function, e.g., a whole spreadsheet vs. a whole worksheet vs. a cell range. We’ve added many functions since the initial CRAN release and it became clear the original scheme wasn’t serving us well. There is a new article about conventions for function names and classes, <a href="https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html">Function and class names</a>.</p>
+<p>Any function present in the previous CRAN release, v0.1.1, still works, but triggers a warning with strong encouragement to call it via its current name.</p>
+</div>
 <div id="write-sheets" class="section level3">
 <h3 class="hasAnchor">
 <a href="#write-sheets" class="anchor"></a>Write Sheets</h3>
 <p>These functions are ready for use but are still considered experimental and may see more refinements to their interface and capabilities:</p>
 <ul>
 <li>
-<code><a href="../reference/sheets_create.html">sheets_create()</a></code> is a new function to create a new Sheet and, optionally, write one or more data frames into it (<a href='https://github.com/tidyverse/googlesheets4/issues/61'>#61</a>).</li>
+<code><a href="../reference/gs4_create.html">gs4_create()</a></code> is a new function to create a new Google Sheet and, optionally, write one or more data frames into it (<a href='https://github.com/tidyverse/googlesheets4/issues/61'>#61</a>).</li>
 <li>
-<code><a href="../reference/write_sheet.html">sheets_write()</a></code> (also available as <code><a href="../reference/write_sheet.html">write_sheet()</a></code>) is a new function to write a data frame into a new or existing (work)sheet, inside a new or existing (spread)Sheet.</li>
+<code><a href="../reference/sheet_write.html">sheet_write()</a></code> (also available as <code><a href="../reference/sheet_write.html">write_sheet()</a></code>) is a new function to write a data frame into a new or existing (work)sheet, inside a new or existing (spread)Sheet.</li>
 <li>
-<code><a href="../reference/sheets_append.html">sheets_append()</a></code> adds rows to the data in an existing sheet.</li>
+<code><a href="../reference/sheet_append.html">sheet_append()</a></code> adds rows to the data in an existing sheet.</li>
 <li>
-<code><a href="../reference/sheets_edit.html">sheets_edit()</a></code> writes to a range.</li>
+<code><a href="../reference/range_write.html">range_write()</a></code> writes to a range.</li>
 <li>
-<code><a href="../reference/sheets_flood.html">sheets_flood()</a></code> “floods” all cells in a range with the same content. <code><a href="../reference/sheets_flood.html">sheets_clear()</a></code> is a wrapper around <code><a href="../reference/sheets_flood.html">sheets_flood()</a></code> for the special case of clearing cell values.</li>
+<code><a href="../reference/range_flood.html">range_flood()</a></code> “floods” all cells in a range with the same content. <code><a href="../reference/range_flood.html">range_clear()</a></code> is a wrapper around <code><a href="../reference/range_flood.html">range_flood()</a></code> for the special case of clearing cell values.</li>
 <li>
-<code><a href="../reference/sheets_delete.html">sheets_delete()</a></code> deletes a range of cells.</li>
+<code><a href="../reference/range_delete.html">range_delete()</a></code> deletes a range of cells.</li>
 </ul>
 </div>
 <div id="other-new-functions-and-arguments" class="section level3">
 <h3 class="hasAnchor">
 <a href="#other-new-functions-and-arguments" class="anchor"></a>Other new functions and arguments</h3>
-<p>There is a new family of <code>sheets_sheet_*()</code> functions that operate on the (work)sheets inside an existing (spread)Sheet:</p>
+<p>The <code>sheet_*()</code> family of functions operate on the (work)sheets inside an existing (spread)Sheet:</p>
 <ul>
 <li>
-<code><a href="../reference/sheets_sheet_properties.html">sheets_sheet_properties()</a></code> returns a tibble of metadata with one row per sheet.</li>
+<code><a href="../reference/sheet_properties.html">sheet_properties()</a></code> returns a tibble of metadata with one row per sheet.</li>
 <li>
-<code><a href="../reference/sheets_sheet_properties.html">sheets_sheet_names()</a></code> returns sheet names.</li>
+<code><a href="../reference/sheet_properties.html">sheet_names()</a></code> returns sheet names.</li>
 <li>
-<code><a href="../reference/sheets_sheet_add.html">sheets_sheet_add()</a></code> adds one or more sheets.</li>
+<code><a href="../reference/sheet_add.html">sheet_add()</a></code> adds one or more sheets.</li>
 <li>
-<code><a href="../reference/sheets_sheet_copy.html">sheets_sheet_copy()</a></code> copies a sheet.</li>
+<code><a href="../reference/sheet_copy.html">sheet_copy()</a></code> copies a sheet.</li>
 <li>
-<code><a href="../reference/sheets_sheet_delete.html">sheets_sheet_delete()</a></code> deletes one or more sheets.</li>
+<code><a href="../reference/sheet_delete.html">sheet_delete()</a></code> deletes one or more sheets.</li>
 <li>
-<code><a href="../reference/sheets_sheet_relocate.html">sheets_sheet_relocate()</a></code> moves sheets around.<br>
+<code><a href="../reference/sheet_relocate.html">sheet_relocate()</a></code> moves sheets around.<br>
 </li>
 <li>
-<code><a href="../reference/sheets_sheet_rename.html">sheets_sheet_rename()</a></code> renames one sheet.</li>
+<code><a href="../reference/sheet_rename.html">sheet_rename()</a></code> renames one sheet.</li>
 <li>
-<code><a href="../reference/sheets_sheet_resize.html">sheets_sheet_resize()</a></code> changes the number of rows or columns in a sheet.</li>
+<code><a href="../reference/sheet_resize.html">sheet_resize()</a></code> changes the number of rows or columns in a sheet.</li>
 </ul>
-<p><code><a href="../reference/sheets_speedread.html">sheets_speedread()</a></code> provides a quick-and-dirty method for reading a Sheet using its “export=csv” URL.</p>
-<p><code><a href="../reference/sheets_cells.html">sheets_cells()</a></code> gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But <code><a href="../reference/sheets_cells.html">sheets_cells(cell_data = "full", discard_empty = FALSE)</a></code> is now available if you want full cell data, including formatting, even for cells that have no value (<a href='https://github.com/tidyverse/googlesheets4/issues/4'>#4</a>).</p>
-<p><code><a href="../reference/sheets_fodder.html">sheets_fodder()</a></code> is a convenience function that creates a filler data frame you can use to make toy sheets you’re using to practice on or for a reprex.</p>
+<p><code><a href="../reference/range_speedread.html">range_speedread()</a></code> provides a quick-and-dirty method for reading a Sheet using its “export=csv” URL.</p>
+<p><code><a href="../reference/range_read_cells.html">range_read_cells()</a></code> (formerly known as <code><a href="../reference/googlesheets4-deprecated.html">sheets_cells()</a></code>) gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But <code><a href="../reference/range_read_cells.html">range_read_cells(cell_data = "full", discard_empty = FALSE)</a></code> is now available if you want full cell data, including formatting, even for cells that have no value (<a href='https://github.com/tidyverse/googlesheets4/issues/4'>#4</a>).</p>
+<p><code><a href="../reference/range_autofit.html">range_autofit()</a></code> causes column width or row height to fit the data. It only affects the display of a sheet and does not change values or dimensions.</p>
+<p><code><a href="../reference/gs4_fodder.html">gs4_fodder()</a></code> is a convenience function that creates a filler data frame you can use to make toy sheets you’re using to practice on or for a reprex.</p>
 </div>
 <div id="renamed-functions-and-classes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#renamed-functions-and-classes" class="anchor"></a>Renamed functions and classes</h3>
 <ul>
-<li><p><code><a href="../reference/googlesheets4-deprecated.html">sheets_sheets()</a></code> is now <code><a href="../reference/sheets_sheet_properties.html">sheets_sheet_names()</a></code>, in order to fit into a coherent family of <code>sheets_sheet_*()</code> functions that deal with (work)sheets. <code><a href="../reference/googlesheets4-deprecated.html">sheets_sheets()</a></code> still exists but will be removed rather quickly since googlesheets4 is so new.</p></li>
-<li><p>The S3 class <code>sheets_Spreadsheet</code> is renamed to <code>googlesheets4_spreadsheet</code>, a consequence of rationalizing all internal and external classes. <code>googlesheets4_spreadsheet</code> is the class that holds metadata for a Sheet and it is connected to the API’s <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet"><code>Spreadsheet</code></a> schema. The return value of <code><a href="../reference/sheets_get.html">sheets_get()</a></code> has this class.</p></li>
+<li>The S3 class <code>sheets_Spreadsheet</code> is renamed to <code>googlesheets4_spreadsheet</code>, a consequence of rationalizing all internal and external classes. <code>googlesheets4_spreadsheet</code> is the class that holds metadata for a Sheet and it is connected to the API’s <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet"><code>Spreadsheet</code></a> schema. The return value of <code><a href="../reference/gs4_get.html">gs4_get()</a></code> has this class.</li>
 </ul>
 </div>
 <div id="printing-a-sheet-id" class="section level3">
 <h3 class="hasAnchor">
 <a href="#printing-a-sheet-id" class="anchor"></a>Printing a Sheet ID</h3>
-<p>The print method for <code>sheets_id</code> objects now attempts to reveal the current Sheet metadata available via <code><a href="../reference/sheets_get.html">sheets_get()</a></code>. The means that printing can lead to an attempt to initiate auth, unless <code><a href="../reference/sheets_deauth.html">sheets_deauth()</a></code> has been called. However, <code>sheets_id</code> printing should never lead to an actual error condition, although it may reveal information from caught errors.</p>
+<p>The print method for <code>sheets_id</code> objects now attempts to reveal the current Sheet metadata available via <code><a href="../reference/gs4_get.html">gs4_get()</a></code>. The means that printing can lead to an attempt to initiate auth, unless <code><a href="../reference/gs4_deauth.html">gs4_deauth()</a></code> has been called. However, <code>sheets_id</code> printing should never lead to an actual error condition, although it may reveal information from caught errors.</p>
 </div>
 <div id="bug-fixes" class="section level3">
 <h3 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug fixes</h3>
 <ul>
 <li>
-<code><a href="../reference/read_sheet.html">read_sheet()</a></code> passes its <code>na</code> argument down to the helpers that parse cells, so that <code>na</code> actually has the documented effect (<a href='https://github.com/tidyverse/googlesheets4/issues/73'>#73</a>).</li>
+<code><a href="../reference/range_read.html">read_sheet()</a></code> passes its <code>na</code> argument down to the helpers that parse cells, so that <code>na</code> actually has the documented effect (<a href='https://github.com/tidyverse/googlesheets4/issues/73'>#73</a>).</li>
 </ul>
 </div>
 </div>

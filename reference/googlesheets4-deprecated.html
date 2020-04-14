@@ -48,8 +48,8 @@
 <meta property="og:title" content="Deprecated functions — googlesheets4-deprecated" />
 <meta property="og:description" content="
 These functions are deprecated and will be removed in a future release of
-googlesheets4.
-sheets_sheets() is replaced by sheets_sheet_names()." />
+googlesheets4. Since googlesheets4 is a relatively young package, this
+removal will happen rapidly, possibly after just 1 release cycle." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -94,7 +94,7 @@ sheets_sheets() is replaced by sheets_sheet_names()." />
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9100</span>
         </div>
       </div>
     </div>
@@ -124,6 +124,9 @@ sheets_sheets() is replaced by sheets_sheet_names()." />
     </li>
     <li>
       <a href="../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="../articles/articles/function-class-names.html">Function and class names</a>
     </li>
     <li>
       <a href="../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
@@ -169,24 +172,117 @@ sheets_sheets() is replaced by sheets_sheet_names()." />
     <div class="ref-description">
     <p><img src='figures/lifecycle-deprecated.svg' alt='Deprecated lifecycle' /></p>
 <p>These functions are deprecated and will be removed in a future release of
-googlesheets4.</p>
-<p><code>sheets_sheets()</code> is replaced by <code><a href='sheets_sheet_properties.html'>sheets_sheet_names()</a></code>.</p>
+googlesheets4. Since googlesheets4 is a relatively young package, this
+removal will happen rapidly, possibly after just 1 release cycle.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheets_sheets</span>(<span class='no'>ss</span>)</pre>
+    <pre class="usage"><span class='fu'>sheets_sheets</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_cells</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_read</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_example</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_examples</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_browse</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_find</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_get</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_auth</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_deauth</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_auth_configure</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_api_key</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_oauth_app</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_token</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_has_token</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_user</span>(<span class='no'>...</span>)
+
+<span class='fu'>sheets_endpoints</span>(<span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ss</th>
-      <td><p>Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='sheets_get.html'>sheets_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
-is how googledrive represents Drive files. Processed through
-<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+      <th>...</th>
+      <td><p>Passed on to the function that succeeds the deprecated function.</p></td>
     </tr>
     </table>
+
+    <h2 class="hasAnchor" id="auth-and-api-endpoints"><a class="anchor" href="#auth-and-api-endpoints"></a>Auth and API endpoints</h2>
+
+    
+<table class='table'>
+<tr><td><strong>&lt; v0.2.0</strong></td><td><strong>&gt;= v0.2.0</strong></td></tr>
+<tr><td>sheets_api_key()</td><td>gs4_api_key()</td></tr>
+<tr><td>sheets_auth()</td><td>gs4_auth()</td></tr>
+<tr><td>sheets_auth_configure()</td><td>gs4_auth_configure()</td></tr>
+<tr><td>sheets_deauth()</td><td>gs4_deauth()</td></tr>
+<tr><td>sheets_endpoints()</td><td>gs4_endpoints()</td></tr>
+<tr><td>sheets_has_token()</td><td>gs4_has_token()</td></tr>
+<tr><td>sheets_oauth_app()</td><td>gs4_oauth_app()</td></tr>
+<tr><td>sheets_token()</td><td>gs4_token()</td></tr>
+<tr><td>sheets_user()</td><td>gs4_user()</td></tr>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <h2 class="hasAnchor" id="spreadsheet-operations"><a class="anchor" href="#spreadsheet-operations"></a>Spreadsheet operations</h2>
+
+    
+<table class='table'>
+<tr><td><strong>&lt; v0.2.0</strong></td><td><strong>&gt;= v0.2.0</strong></td></tr>
+<tr><td>sheets_browse()</td><td>gs4_browse()</td></tr>
+<tr><td>sheets_find()</td><td>gs4_find()</td></tr>
+<tr><td>sheets_example()</td><td>gs4_example()</td></tr>
+<tr><td>sheets_examples()</td><td>gs4_examples()</td></tr>
+<tr><td>sheets_get()</td><td>gs4_get()</td></tr>
+</table>
+
+
+    <h2 class="hasAnchor" id="-work-sheet-operations"><a class="anchor" href="#-work-sheet-operations"></a>(Work)sheet operations</h2>
+
+    
+<table class='table'>
+<tr><td><strong>&lt; v0.2.0</strong></td><td><strong>&gt;= v0.2.0</strong></td></tr>
+<tr><td>sheets_sheets()</td><td>sheet_names()</td></tr>
+</table>
+
+
+    <h2 class="hasAnchor" id="range-operations"><a class="anchor" href="#range-operations"></a>Range operations</h2>
+
+    
+<table class='table'>
+<tr><td><strong>&lt; v0.2.0</strong></td><td><strong>&gt;= v0.2.0</strong></td></tr>
+<tr><td>sheets_cells()</td><td>range_read_cells()</td></tr>
+<tr><td>sheets_read()</td><td>range_read()</td></tr>
+</table>
+
 
 
   </div>

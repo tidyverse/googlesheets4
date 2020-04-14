@@ -49,7 +49,7 @@
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9100</span>
         </div>
       </div>
     </div>
@@ -79,6 +79,9 @@
     </li>
     <li>
       <a href="../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="../articles/articles/function-class-names.html">Function and class names</a>
     </li>
     <li>
       <a href="../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
@@ -128,69 +131,63 @@
     
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googlesheets4</span>)</pre></body></html></div>
 <p>This article takes a quick tour of the main features of googlesheets4. Remember to see <a href="https://googlesheets4.tidyverse.org/articles/index.html">the articles</a> for more detailed treatment of all these topics and more.</p>
-<div id="read_sheet-a-k-a--sheets_read" class="section level2">
+<div id="read_sheet-a-k-a--range_read" class="section level2">
 <h2 class="hasAnchor">
-<a href="#read_sheet-a-k-a--sheets_read" class="anchor"></a><code>read_sheet()</code>, a.k.a. <code>sheets_read()</code>
+<a href="#read_sheet-a-k-a--range_read" class="anchor"></a><code>read_sheet()</code>, a.k.a. <code>range_read()</code>
 </h2>
-<p><code><a href="../reference/read_sheet.html">read_sheet()</a></code> is the main “read” function and should evoke <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> and <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">readxl::read_excel()</a></code>. It’s an alias for <code><a href="../reference/read_sheet.html">sheets_read()</a></code>, because most functions in googlesheets4 actually start with <code>sheets_</code>. googlesheets4 is pipe-friendly (and reexports <code><a href="../reference/pipe.html">%&gt;%</a></code>), but works just fine without the pipe.</p>
-<p><code><a href="../reference/read_sheet.html">read_sheet()</a></code> is designed to “just work”, for most purposes, most of the time. It can read straight from a Sheets browser URL:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/read_sheet.html">sheets_read</a></span>(<span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span>)
+<p><code><a href="../reference/range_read.html">read_sheet()</a></code> is the main “read” function and should evoke <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> and <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">readxl::read_excel()</a></code>. It’s an alias for <code><a href="../reference/range_read.html">range_read()</a></code>, which is the correct name for this function according to the scheme for naming googlesheets4 functions. You can use them interchangeably. googlesheets4 is pipe-friendly (and reexports <code><a href="../reference/pipe.html">%&gt;%</a></code>), but works just fine without the pipe.</p>
+<p><code><a href="../reference/range_read.html">read_sheet()</a></code> is designed to “just work”, for most purposes, most of the time. It can read straight from a Sheets browser URL:</p>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span>(<span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span>)
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
-<span class="co">#&gt; # A tibble: 624 x 6</span>
-<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
-<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
-<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
-<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
-<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span></pre></body></html></div>
+<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
+<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Error details:</span>
+<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
+<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
+<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
 <p>However, these URLs are not pleasant to work with. More often, you will want to identify a Sheet by its ID:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/read_sheet.html">sheets_read</a></span>(<span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span>)
-<span class="co">#&gt; Reading from "gapminder"</span>
-<span class="co">#&gt; Range "Africa"</span>
-<span class="co">#&gt; # A tibble: 624 x 6</span>
-<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
-<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
-<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
-<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
-<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span></pre></body></html></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span>(<span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span>)
+<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
+<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Error details:</span>
+<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
+<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
+<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
 <p>or by its name, which requires an assist from the googledrive package (<a href="https://googledrive.tidyverse.org">googledrive.tidyverse.org</a>):</p>
 <!-- remove the 'message = i' later -->
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googledrive</span>)
 
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"gapminder"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/read_sheet.html">sheets_read</a></span>()
-<span class="co">#&gt; Range "Africa"</span>
-<span class="co">#&gt; # A tibble: 624 x 6</span>
-<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
-<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
-<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
-<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
-<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span></pre></body></html></div>
+  <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span>()
+<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
+<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Error details:</span>
+<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
+<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
+<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
 <p>Note that the name-based approach above will only work if <strong>you</strong> have access to a Sheet named “gapminder”. Sheet names cannot be used as absolute identifiers; only a Sheet ID can play that role.</p>
 <p>For more Sheet identification concepts and strategies, see the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Find and Identify Sheets</a>. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Read Sheets</a> for more about reading from a specific (work)sheet or ranges, setting column type, and getting low-level cell data.</p>
 </div>
-<div id="example-sheets-and-sheets_browse" class="section level2">
+<div id="example-sheets-and-gs4_browse" class="section level2">
 <h2 class="hasAnchor">
-<a href="#example-sheets-and-sheets_browse" class="anchor"></a>Example Sheets and <code>sheets_browse()</code>
+<a href="#example-sheets-and-gs4_browse" class="anchor"></a>Example Sheets and <code>gs4_browse()</code>
 </h2>
 <p>We’ve made a few Sheets available to “anyone with a link”, for use in examples and docs. Two helper functions make it easy to get your hands on these file IDs.</p>
 <ul>
 <li>
-<code><a href="../reference/sheets_example.html">sheets_examples()</a></code> lists all the example Sheets and it can also filter by matching names to a regular expression.</li>
+<code><a href="../reference/gs4_example.html">gs4_examples()</a></code> lists all the example Sheets and it can also filter by matching names to a regular expression.</li>
 <li>
-<code><a href="../reference/sheets_example.html">sheets_example()</a></code> requires a regular expression and returns exactly 1 Sheet ID (or throws an error).</li>
+<code><a href="../reference/gs4_example.html">gs4_example()</a></code> requires a regular expression and returns exactly 1 Sheet ID (or throws an error).</li>
 </ul>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"chicken-sheet"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/read_sheet.html">sheets_read</a></span>()
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"chicken-sheet"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span>()
 <span class="co">#&gt; Reading from "chicken-sheet"</span>
 <span class="co">#&gt; Range "chicken.csv"</span>
 <span class="co">#&gt; # A tibble: 5 x 4</span>
@@ -201,141 +198,124 @@
 <span class="co">#&gt; 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…</span>
 <span class="co">#&gt; 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  </span>
 <span class="co">#&gt; 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.</span></pre></body></html></div>
-<p>If you’d like to see a Sheet in the browser, including our example Sheets, use <code><a href="../reference/sheets_browse.html">sheets_browse()</a></code>:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/sheets_browse.html">sheets_browse</a></span>()</pre></body></html></div>
+<p>If you’d like to see a Sheet in the browser, including our example Sheets, use <code><a href="../reference/gs4_browse.html">gs4_browse()</a></code>:</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"deaths"</span>) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/gs4_browse.html">gs4_browse</a></span>()</pre></body></html></div>
 </div>
 <div id="sheet-metadata" class="section level2">
 <h2 class="hasAnchor">
 <a href="#sheet-metadata" class="anchor"></a>Sheet metadata</h2>
-<p><code><a href="../reference/sheets_get.html">sheets_get()</a></code> exposes Sheet metadata, such as details on worksheets and named ranges.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/sheets_example.html">sheets_example</a></span>(<span class="st">"deaths"</span>)
+<p><code><a href="../reference/gs4_get.html">gs4_get()</a></code> exposes Sheet metadata, such as details on worksheets and named ranges.</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"deaths"</span>)
 
-<span class="fu"><a href="../reference/sheets_get.html">sheets_get</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt;   Spreadsheet name: deaths</span>
-<span class="co">#&gt;                 ID: 1nYDgl4geeodhKyrMuuqa0vvo6frBKpnYNqs1N_MS4m8</span>
-<span class="co">#&gt;             Locale: en_US</span>
-<span class="co">#&gt;          Time zone: America/Los_Angeles</span>
-<span class="co">#&gt;        # of sheets: 2</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;         arts: 1000 x 26</span>
-<span class="co">#&gt;        other: 1000 x 26</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; (Named range): (A1 range)    </span>
-<span class="co">#&gt;     arts_data: 'arts'!A5:F15 </span>
-<span class="co">#&gt;    other_data: 'other'!A5:F15</span>
+<span class="fu"><a href="../reference/gs4_get.html">gs4_get</a></span>(<span class="no">ss</span>)
+<span class="co">#&gt; Error: Client error: (404) NOT_FOUND</span>
+<span class="co">#&gt;   * A specified resource is not found, or the request is rejected by undisclosed reasons, such as whitelisting.</span>
+<span class="co">#&gt;   * Requested entity was not found.</span>
 
-<span class="fu"><a href="../reference/sheets_sheet_properties.html">sheets_sheet_properties</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt; # A tibble: 2 x 8</span>
-<span class="co">#&gt;   name  index        id type  visible grid_rows grid_columns data  </span>
-<span class="co">#&gt;   &lt;chr&gt; &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 arts      0 561340196 GRID  TRUE         1000           26 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 other     1 459484841 GRID  TRUE         1000           26 &lt;NULL&gt;</span>
+<span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span>(<span class="no">ss</span>)
+<span class="co">#&gt; Error: Client error: (404) NOT_FOUND</span>
+<span class="co">#&gt;   * A specified resource is not found, or the request is rejected by undisclosed reasons, such as whitelisting.</span>
+<span class="co">#&gt;   * Requested entity was not found.</span>
 
-<span class="fu"><a href="../reference/sheets_sheet_properties.html">sheets_sheet_names</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt; [1] "arts"  "other"</span></pre></body></html></div>
-<p><code><a href="../reference/sheets_sheet_properties.html">sheets_sheet_properties()</a></code> and <code><a href="../reference/sheets_sheet_properties.html">sheets_sheet_names()</a></code> are two members of a larger family of functions for dealing with the (work)sheets within a (spread)Sheet.</p>
-<p>The metadata exposed by <code><a href="../reference/sheets_get.html">sheets_get()</a></code> is also revealed whenever you print an object that is known to be a <code>sheets_id</code> (an S3 class we use to make Sheet IDs).</p>
-<p><code><a href="../reference/sheets_get.html">sheets_get()</a></code> is related to <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">googledrive::drive_get()</a></code>. Both functions return metadata about a file on Google Drive, such as its ID and name. However, <code><a href="../reference/sheets_get.html">sheets_get()</a></code> reveals additional metadata that is specific to Drive files that happen to be Sheets, such as info about worksheets and named ranges.</p>
+<span class="fu"><a href="../reference/sheet_properties.html">sheet_names</a></span>(<span class="no">ss</span>)
+<span class="co">#&gt; Error: Client error: (404) NOT_FOUND</span>
+<span class="co">#&gt;   * A specified resource is not found, or the request is rejected by undisclosed reasons, such as whitelisting.</span>
+<span class="co">#&gt;   * Requested entity was not found.</span></pre></body></html></div>
+<p><code><a href="../reference/sheet_properties.html">sheet_properties()</a></code> and <code><a href="../reference/sheet_properties.html">sheet_names()</a></code> are two members of a larger family of functions for dealing with the (work)sheets within a (spread)Sheet.</p>
+<p>The metadata exposed by <code><a href="../reference/gs4_get.html">gs4_get()</a></code> is also revealed whenever you print an object that is known to be a <code>sheets_id</code> (an S3 class we use to make Sheet IDs).</p>
+<p><code><a href="../reference/gs4_get.html">gs4_get()</a></code> is related to <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">googledrive::drive_get()</a></code>. Both functions return metadata about a file on Google Drive, such as its ID and name. However, <code><a href="../reference/gs4_get.html">gs4_get()</a></code> reveals additional metadata that is specific to Drive files that happen to be Sheets, such as info about worksheets and named ranges.</p>
 </div>
 <div id="writing-sheets" class="section level2">
 <h2 class="hasAnchor">
 <a href="#writing-sheets" class="anchor"></a>Writing Sheets</h2>
 <p><em>The writing functions are the most recent additions and are likely to see some refinements re: user interface and which function does what.</em></p>
-<p><code><a href="../reference/write_sheet.html">sheets_write()</a></code> writes a data frame into a Sheet. The only required argument is the data.</p>
+<p><code><a href="../reference/range_write.html">range_write()</a></code> writes a data frame into a Sheet. The only required argument is the data.</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">letters</span>[<span class="fl">1</span>:<span class="fl">3</span>])
 
-<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/write_sheet.html">sheets_write</a></span>(<span class="no">df</span>)
-<span class="co">#&gt; Creating new Sheet: "bewildered-turtle"</span>
+<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/range_write.html">range_write</a></span>(<span class="no">df</span>)
+<span class="co">#&gt; Error: Don't know how to coerce an object of class 'data.frame' into a 'sheets_id'</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: &lt;unknown&gt;</span>
-<span class="co">#&gt;                 ID: 17cDKSC-8JcbAdfc9uQLXageyk51xNcQA_d60-TLGqYE</span>
+<span class="co">#&gt;                 ID: 1nYDgl4geeodhKyrMuuqa0vvo6frBKpnYNqs1N_MS4m8</span>
 <span class="co">#&gt;             Locale: &lt;unknown&gt;</span>
 <span class="co">#&gt;          Time zone: &lt;unknown&gt;</span>
 <span class="co">#&gt;        # of sheets: &lt;unknown&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Unable to get metadata for this Sheet. Error details:</span>
-<span class="co">#&gt; Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
-<p>You’ll notice the new (spread)Sheet has a randomly generated name. If that is a problem, use <code><a href="../reference/sheets_create.html">sheets_create()</a></code> instead, which affords more control over various aspects of the new Sheet.</p>
-<p>Let’s start over: we delete that Sheet and call <code><a href="../reference/sheets_create.html">sheets_create()</a></code>, so we can specify the new Sheet’s name.</p>
+<span class="co">#&gt; Client error: (404) NOT_FOUND</span>
+<span class="co">#&gt;   * A specified resource is not found, or the request is rejected by undisclosed reasons, such as whitelisting.</span>
+<span class="co">#&gt;   * Requested entity was not found.</span></pre></body></html></div>
+<p>You’ll notice the new (spread)Sheet has a randomly generated name. If that is a problem, use <code><a href="../reference/gs4_create.html">gs4_create()</a></code> instead, which affords more control over various aspects of the new Sheet.</p>
+<p>Let’s start over: we delete that Sheet and call <code><a href="../reference/gs4_create.html">gs4_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * bewildered-turtle: 17cDKSC-8JcbAdfc9uQLXageyk51xNcQA_d60-TLGqYE</span>
+<span class="co">#&gt; Error: Client error: (404) Not Found</span>
+<span class="co">#&gt;   *       domain: global</span>
+<span class="co">#&gt;   *       reason: notFound</span>
+<span class="co">#&gt;   *      message: File not found: 1nYDgl4geeodhKyrMuuqa0vvo6frBKpnYNqs1N_MS4m8.</span>
+<span class="co">#&gt;   * locationType: parameter</span>
+<span class="co">#&gt;   *     location: fileId</span>
 
-<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/sheets_create.html">sheets_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="no">df</span>)
+<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="no">df</span>)
 <span class="co">#&gt; Creating new Sheet: "fluffy-bunny"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1wQkrIFT6nzy2m0lKCUaJoOLAf1DJwduHag4dPz3NDkw</span>
+<span class="co">#&gt;                 ID: 1G0F6XuwkXjrLNM-lSm4HOo3ZbsKbJHnKhI4tELqWDOw</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
 <span class="co">#&gt;           df: 4 x 2</span></pre></body></html></div>
-<p><code><a href="../reference/write_sheet.html">sheets_write()</a></code> can write to new or existing (work)sheets in this Sheet. Let’s write the <code>chickwts</code> data to a new sheet in <code>ss</code>.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="../reference/write_sheet.html">sheets_write</a></span>(<span class="no">chickwts</span>, <span class="no">ss</span>)
-<span class="co">#&gt; Writing to "fluffy-bunny"</span>
-<span class="co">#&gt; Writing to sheet "chickwts"</span>
+<p><code><a href="../reference/range_write.html">range_write()</a></code> can write to new or existing (work)sheets in this Sheet. Let’s write the <code>chickwts</code> data to a new sheet in <code>ss</code>.</p>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="../reference/range_write.html">range_write</a></span>(<span class="no">chickwts</span>, <span class="no">ss</span>)
+<span class="co">#&gt; Error: Don't know how to coerce an object of class 'data.frame' into a 'sheets_id'</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1wQkrIFT6nzy2m0lKCUaJoOLAf1DJwduHag4dPz3NDkw</span>
+<span class="co">#&gt;                 ID: 1G0F6XuwkXjrLNM-lSm4HOo3ZbsKbJHnKhI4tELqWDOw</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
-<span class="co">#&gt;        # of sheets: 2</span>
+<span class="co">#&gt;        # of sheets: 1</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;           df: 4 x 2</span>
-<span class="co">#&gt;     chickwts: 72 x 2</span></pre></body></html></div>
-<p>We can also use <code><a href="../reference/write_sheet.html">sheets_write()</a></code> to replace the data in an existing sheet.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../reference/write_sheet.html">sheets_write</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">4</span>:<span class="fl">10</span>, <span class="no">letters</span>[<span class="fl">4</span>:<span class="fl">10</span>]), <span class="no">ss</span>, <span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"df"</span>)
-<span class="co">#&gt; Writing to "fluffy-bunny"</span>
-<span class="co">#&gt; Writing to sheet "df"</span>
+<span class="co">#&gt;           df: 4 x 2</span></pre></body></html></div>
+<p>We can also use <code><a href="../reference/range_write.html">range_write()</a></code> to replace the data in an existing sheet.</p>
+<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../reference/range_write.html">range_write</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">4</span>:<span class="fl">10</span>, <span class="no">letters</span>[<span class="fl">4</span>:<span class="fl">10</span>]), <span class="no">ss</span>, <span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"df"</span>)
+<span class="co">#&gt; Error: Don't know how to coerce an object of class 'data.frame' into a 'sheets_id'</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1wQkrIFT6nzy2m0lKCUaJoOLAf1DJwduHag4dPz3NDkw</span>
+<span class="co">#&gt;                 ID: 1G0F6XuwkXjrLNM-lSm4HOo3ZbsKbJHnKhI4tELqWDOw</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
-<span class="co">#&gt;        # of sheets: 2</span>
+<span class="co">#&gt;        # of sheets: 1</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;           df: 8 x 2</span>
-<span class="co">#&gt;     chickwts: 72 x 2</span></pre></body></html></div>
-<p><code><a href="../reference/sheets_append.html">sheets_append()</a></code> adds one or more rows to an existing sheet.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="../reference/sheets_append.html">sheets_append</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">11</span>, <span class="no">letters</span>[<span class="fl">11</span>]), <span class="no">ss</span>, <span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"df"</span>)
+<span class="co">#&gt;           df: 4 x 2</span></pre></body></html></div>
+<p><code><a href="../reference/sheet_append.html">sheet_append()</a></code> adds one or more rows to an existing sheet.</p>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">ss</span> <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/sheet_append.html">sheet_append</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">11</span>, <span class="no">letters</span>[<span class="fl">11</span>]), <span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"df"</span>)
 <span class="co">#&gt; Writing to "fluffy-bunny"</span>
 <span class="co">#&gt; Appending 1 row(s) to "df"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1wQkrIFT6nzy2m0lKCUaJoOLAf1DJwduHag4dPz3NDkw</span>
+<span class="co">#&gt;                 ID: 1G0F6XuwkXjrLNM-lSm4HOo3ZbsKbJHnKhI4tELqWDOw</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
-<span class="co">#&gt;        # of sheets: 2</span>
+<span class="co">#&gt;        # of sheets: 1</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;           df: 9 x 2</span>
-<span class="co">#&gt;     chickwts: 72 x 2</span></pre></body></html></div>
-<p><code><a href="../reference/sheets_edit.html">sheets_edit()</a></code> makes it possible to write arbitrary data, into an arbitrary range. It has a very different “feel” from <code><a href="../reference/sheets_create.html">sheets_create()</a></code>, <code><a href="../reference/write_sheet.html">sheets_write()</a></code>, and <code><a href="../reference/sheets_append.html">sheets_append()</a></code>, all of which assume we’re writing or growing a table of data in a (work)sheet. <code><a href="../reference/sheets_edit.html">sheets_edit()</a></code> make fewer assumptions about what it’s writing and why.</p>
-<p>There is also a family of <code>sheets_sheet_*()</code> functions that do pure (work)sheet operations, such as add and delete.</p>
+<span class="co">#&gt;           df: 5 x 2</span></pre></body></html></div>
+<p><code><a href="../reference/range_write.html">range_write()</a></code> makes it possible to write arbitrary data, into an arbitrary range. It has a very different “feel” from <code><a href="../reference/gs4_create.html">gs4_create()</a></code>, <code><a href="../reference/sheet_write.html">sheet_write()</a></code>, and <code><a href="../reference/sheet_append.html">sheet_append()</a></code>, all of which assume we’re writing or growing a table of data in a (work)sheet. <code><a href="../reference/range_write.html">range_write()</a></code> makes fewer assumptions about what it’s writing and why.</p>
+<p>There is also a family of <code>sheet_*()</code> functions that do pure (work)sheet operations, such as add and delete.</p>
 <p>We take one last look at the sheets we created in <code>ss</code>, then clean up.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/sheets_sheet_properties.html">sheets_sheet_properties</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt; # A tibble: 2 x 8</span>
-<span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 1773775583 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 1181883122 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span>(<span class="no">ss</span>)
+<span class="co">#&gt; # A tibble: 1 x 8</span>
+<span class="co">#&gt;   name  index        id type  visible grid_rows grid_columns data  </span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
+<span class="co">#&gt; 1 df        0 109645810 GRID  TRUE            5            2 &lt;NULL&gt;</span>
 
 <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_rm.html">drive_rm</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files deleted:</span>
-<span class="co">#&gt;   * fluffy-bunny: 1wQkrIFT6nzy2m0lKCUaJoOLAf1DJwduHag4dPz3NDkw</span></pre></body></html></div>
+<span class="co">#&gt;   * fluffy-bunny: 1G0F6XuwkXjrLNM-lSm4HOo3ZbsKbJHnKhI4tELqWDOw</span></pre></body></html></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

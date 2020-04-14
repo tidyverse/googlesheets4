@@ -1,17 +1,18 @@
 pandoc: 2.7.3
 pkgdown: 1.5.1.9000
-pkgdown_sha: cb74ce08c4b25adda98256ea46196b1182f4e0ea
+pkgdown_sha: fcc120d996055519db89f37f0097af7ce25d6641
 articles:
   auth: articles/auth.html
   drive-and-sheets: articles/drive-and-sheets.html
   find-identify-sheets: articles/find-identify-sheets.html
   fun-with-googledrive-and-readxl: articles/fun-with-googledrive-and-readxl.html
+  function-class-names: articles/function-class-names.html
   googlesheets4-reprex: articles/googlesheets4-reprex.html
   range-specification: articles/range-specification.html
   read-sheets: articles/read-sheets.html
   write-sheets: articles/write-sheets.html
   googlesheets4: googlesheets4.html
-last_built: 2020-04-14T05:19Z
+last_built: 2020-04-14T20:08Z
 urls:
   reference: https://googlesheets4.tidyverse.org/reference
   article: https://googlesheets4.tidyverse.org/articles

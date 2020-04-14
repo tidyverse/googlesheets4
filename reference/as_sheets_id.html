@@ -59,10 +59,10 @@ files, one row per file. Since googlesheets4 is not vectorized over
 spreadsheets, we are only prepared to accept a one-row dribble.
 googledrive::drive_get(&quot;YOUR_SHEET_NAME&quot;)
 is a great way to look up a Sheet via its name.
-sheets_find(&quot;YOUR_SHEET_NAME&quot;) is another good way
+gs4_find(&quot;YOUR_SHEET_NAME&quot;) is another good way
 to get your hands on a Sheet.
 
-Spreadsheet meta data, as returned by, e.g., sheets_get(). Literally,
+Spreadsheet meta data, as returned by, e.g., gs4_get(). Literally,
 this is an object of class googlesheets4_spreadsheet.
 
 
@@ -111,7 +111,7 @@ This is a generic function." />
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9100</span>
         </div>
       </div>
     </div>
@@ -141,6 +141,9 @@ This is a generic function." />
     </li>
     <li>
       <a href="../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="../articles/articles/function-class-names.html">Function and class names</a>
     </li>
     <li>
       <a href="../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
@@ -197,10 +200,10 @@ files, one row per file. Since googlesheets4 is not vectorized over
 spreadsheets, we are only prepared to accept a one-row <code>dribble</code>.</p><ul>
 <li><p><code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>googledrive::drive_get("YOUR_SHEET_NAME")</a></code>
 is a great way to look up a Sheet via its name.</p></li>
-<li><p><code><a href='sheets_find.html'>sheets_find("YOUR_SHEET_NAME")</a></code> is another good way
+<li><p><code><a href='gs4_find.html'>gs4_find("YOUR_SHEET_NAME")</a></code> is another good way
 to get your hands on a Sheet.</p></li>
 </ul></li>
-<li><p>Spreadsheet meta data, as returned by, e.g., <code><a href='sheets_get.html'>sheets_get()</a></code>. Literally,
+<li><p>Spreadsheet meta data, as returned by, e.g., <code><a href='gs4_get.html'>gs4_get()</a></code>. Literally,
 this is an object of class <code>googlesheets4_spreadsheet</code>.</p></li>
 </ul>
 

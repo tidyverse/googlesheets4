@@ -49,7 +49,7 @@
         <a class="navbar-brand" href="../../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9100</span>
         </div>
       </div>
     </div>
@@ -79,6 +79,9 @@
     </li>
     <li>
       <a href="../../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/function-class-names.html">Function and class names</a>
     </li>
     <li>
       <a href="../../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
@@ -127,25 +130,25 @@
     
     
 <p>googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. The package facilitates this process upon first need.</p>
-<div id="sheets_deauth" class="section level2">
+<div id="gs4_deauth" class="section level2">
 <h2 class="hasAnchor">
-<a href="#sheets_deauth" class="anchor"></a><code>sheets_deauth()</code>
+<a href="#gs4_deauth" class="anchor"></a><code>gs4_deauth()</code>
 </h2>
-<p>If you don’t need to access private Sheets, use <code><a href="../../reference/sheets_deauth.html">sheets_deauth()</a></code> to indicate there is no need for a token. This puts googlesheets4 into a de-authorized mode.</p>
+<p>If you don’t need to access private Sheets, use <code><a href="../../reference/gs4_deauth.html">gs4_deauth()</a></code> to indicate there is no need for a token. This puts googlesheets4 into a de-authorized mode.</p>
 <p>Here’s how an R script might look if all you plan to do is read Sheets that are world-readable or readable by “anyone with a link”:</p>
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googlesheets4</span>)
 
-<span class="fu"><a href="../../reference/sheets_deauth.html">sheets_deauth</a></span>()
+<span class="fu"><a href="../../reference/gs4_deauth.html">gs4_deauth</a></span>()
 
 <span class="co"># imagine this is the URL or ID of a Sheet readable by anyone (with a link)</span>
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="st">"?????"</span>
-<span class="no">dat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/read_sheet.html">sheets_read</a></span>(<span class="no">ss</span>)</pre></body></html></div>
+<span class="no">dat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ss</span>)</pre></body></html></div>
 </div>
 <div id="default-auth-behaviour-and-beyond" class="section level2">
 <h2 class="hasAnchor">
 <a href="#default-auth-behaviour-and-beyond" class="anchor"></a>Default auth behaviour and beyond</h2>
 <p>As soon as googlesheets4 needs a token, it tries to discover one. If it fails, it engages with you interactively to help you get a token. Once successful, that token is remembered for subsequent use in that R session.</p>
-<p>Users can take control of auth proactively via the <a href="https://googlesheets4.tidyverse.org/reference/index.html#section-auth"><code>sheets_auth*()</code> family of functions</a>. Examples of what you can control or provide:</p>
+<p>Users can take control of auth proactively via the <a href="https://googlesheets4.tidyverse.org/reference/index.html#section-auth"><code>gs4_auth*()</code> family of functions</a>. Examples of what you can control or provide:</p>
 <ul>
 <li>The email address of the Google identity you want to use.</li>
 <li>Whether to cache tokens and where.</li>

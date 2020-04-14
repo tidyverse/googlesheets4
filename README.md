@@ -43,6 +43,10 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("tidyverse/googlesheets4")
 ```
 
+As of mid-April 2020, note that all of the writing/modifying features
+are only in the dev version, but a CRAN release will happen soon. This
+website documents the dev version.
+
 ## Auth
 
 googlesheets4 will, by default, help you interact with Sheets as an
@@ -69,14 +73,15 @@ because we want it to make sense in two contexts:
   - `read_sheet()` evokes other table-reading functions, like
     `readr::read_csv()` and `readxl::read_excel()`. The `sheet` in this
     case refers to a Google (spread)Sheet.
-  - `range_read()` is the right name according to the naming convention
+  - `range_read()` is the right name according to the [naming
+    convention](https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html)
     used throughout the googlesheets4 package.
 
 `read_sheet()` and `range_read()` are synonyms and you can use either
 one. Here we’ll use `read_sheet()`.
 
-googlesheets4 is pipe-friendly (and reexports `%>%`), but works just
-fine without the pipe.
+googlesheets4 is [pipe-friendly](https://r4ds.had.co.nz/pipes.html) (and
+reexports `%>%`), but works just fine without the pipe.
 
 Read from
 
@@ -150,7 +155,7 @@ some initial data.
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> Creating new Sheet: "fluffy-bunny"
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1Td3Dktr7Bq8go_r3SZjd3A3PRk2SDzDaDoYyn5Jjaeo
+#>                 ID: 1BoWvvqC7-sqwkBhZN7VgFNDKvWJuYFlQgoF-MLY323o
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -169,7 +174,7 @@ head(mtcars) %>%
 #> Writing to sheet "autos"
 ss
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1Td3Dktr7Bq8go_r3SZjd3A3PRk2SDzDaDoYyn5Jjaeo
+#>                 ID: 1BoWvvqC7-sqwkBhZN7VgFNDKvWJuYFlQgoF-MLY323o
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2
@@ -179,31 +184,24 @@ ss
 #>        autos: 7 x 11
 ```
 
-`range_write()` and `sheet_append()` are additional writing functions
-that are useful in specific situations. See the article [Write
+`sheet_append()`, `range_write()`, `range_flood()`, and `range_clear()`
+are more specialized writing functions. See the article [Write
 Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html)
 for more about writing to Sheets.
 
 ## Where to learn more
 
-  - [Get
-    started](https://googlesheets4.tidyverse.org/articles/googlesheets4.html)
-  - [googlesheets4
-    auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html)
-  - [Find and Identify
-    Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html)
-  - [Read
-    Sheets](https://googlesheets4.tidyverse.org/articles/articles/read-sheets.html)
-  - [Write
-    Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html)
-  - [Using googlesheets4 with
-    googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html)
-  - [Fun with googledrive and
-    readxl](https://googlesheets4.tidyverse.org/articles/articles/fun-with-googledrive-and-readxl.html)
-  - [How to create a googlesheets4
-    reprex](https://googlesheets4.tidyverse.org/articles/articles/googlesheets4-reprex.html)
-  - [All the
-    functions\!](https://googlesheets4.tidyverse.org/reference/index.html)
+[Get
+started](https://googlesheets4.tidyverse.org/articles/googlesheets4.html)
+is a more extensive general introduction to googlesheets4.
+
+Browse the [articles
+index](https://googlesheets4.tidyverse.org/articles/index.html) to find
+articles that cover various topics in more depth.
+
+See the [function
+index](https://googlesheets4.tidyverse.org/reference/index.html) for an
+organized, exhaustive listing.
 
 ## Contributing
 

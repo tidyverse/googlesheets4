@@ -17,6 +17,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Reveal env vars
+        run: |
+          echo GITHUB_WORKFLOW   = $GITHUB_WORKFLOW
+          echo HOME              = $HOME
+          echo GITHUB_ACTION     = $GITHUB_ACTION
+          echo GITHUB_ACTIONS    = $GITHUB_ACTIONS
+          echo GITHUB_ACTOR      = $GITHUB_ACTOR
+          echo GITHUB_REPOSITORY = $GITHUB_REPOSITORY
+          echo GITHUB_EVENT_NAME = $GITHUB_EVENT_NAME
+          echo GITHUB_EVENT_PATH = $GITHUB_EVENT_PATH
+          echo GITHUB_WORKSPACE  = $GITHUB_WORKSPACE
+          echo GITHUB_SHA        = $GITHUB_SHA
+          echo GITHUB_REF        = $GITHUB_REF
+
       - uses: r-lib/actions/setup-r@master
 
       - uses: r-lib/actions/setup-pandoc@master

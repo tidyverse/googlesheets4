@@ -8,7 +8,7 @@ if (gargle:::secret_can_decrypt("googlesheets4") &&
 }
 
 skip_if_no_token <- function() {
-  Sys.sleep(1)
+  Sys.sleep(2)
   testthat::skip_if_not(gs4_has_token())
 }
 

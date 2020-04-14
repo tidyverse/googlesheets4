@@ -68,7 +68,8 @@ these <- c(
   "DeleteRangeRequest",
   "DuplicateSheetRequest",
   "AddSheetRequest",
-  "UpdateNamedRangeRequest"
+  "UpdateNamedRangeRequest",
+  "AddNamedRangeRequest"
 )
 
 .tidy_schemas <- these %>%

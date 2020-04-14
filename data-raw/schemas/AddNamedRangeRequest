@@ -1,0 +1,5 @@
+# AddNamedRangeRequest  
+# A tibble: 1 x 6
+  property   type   instance_of array_of format enum            
+  <chr>      <chr>  <chr>       <chr>    <chr>  <list>          
+1 namedRange object NamedRange  <NA>     <NA>   <tibble [0 × 2]>

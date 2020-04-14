@@ -5,13 +5,11 @@
 \alias{sheets_sheets}
 \alias{sheets_cells}
 \alias{sheets_read}
-\alias{sheets_write}
-\alias{sheets_create}
-\alias{sheets_get}
 \alias{sheets_example}
 \alias{sheets_examples}
 \alias{sheets_browse}
 \alias{sheets_find}
+\alias{sheets_get}
 \alias{sheets_auth}
 \alias{sheets_deauth}
 \alias{sheets_auth_configure}
@@ -29,12 +27,6 @@ sheets_cells(...)
 
 sheets_read(...)
 
-sheets_write(...)
-
-sheets_create(...)
-
-sheets_get(...)
-
 sheets_example(...)
 
 sheets_examples(...)
@@ -42,6 +34,8 @@ sheets_examples(...)
 sheets_browse(...)
 
 sheets_find(...)
+
+sheets_get(...)
 
 sheets_auth(...)
 
@@ -68,23 +62,44 @@ sheets_endpoints(...)
 \lifecycle{deprecated}
 
 These functions are deprecated and will be removed in a future release of
-googlesheets4.
-
-\code{sheets_sheets()} is replaced by \code{\link[=sheet_names]{sheet_names()}}.
-
-\code{sheets_cells()} is replaced by \code{\link[=range_read_cells]{range_read_cells()}}.
-
-\code{sheets_read()} is replaced by \code{\link[=range_read]{range_read()}} (which is a synonym for
-\code{\link[=read_sheet]{read_sheet()}}).
-
-\code{sheets_write()} is replaced by \code{\link[=sheet_write]{sheet_write()}} (which is a synonym for
-\code{\link[=write_sheet]{write_sheet()}}).
+googlesheets4. Since googlesheets4 is a relatively young package, this
+removal will happen rapidly, possibly after just 1 release cycle.
 }
-\section{Spreadsheet level operations}{
+\section{Auth and API endpoints}{
+\tabular{ll}{
+   \strong{< v0.2.0} \tab \strong{>= v0.2.0} \cr
+   sheets_api_key() \tab gs4_api_key() \cr
+   sheets_auth() \tab gs4_auth() \cr
+   sheets_auth_configure() \tab gs4_auth_configure() \cr
+   sheets_deauth() \tab gs4_deauth() \cr
+   sheets_endpoints() \tab gs4_endpoints() \cr
+   sheets_has_token() \tab gs4_has_token() \cr
+   sheets_oauth_app() \tab gs4_oauth_app() \cr
+   sheets_token() \tab gs4_token() \cr
+   sheets_user() \tab gs4_user() \cr
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+\section{Spreadsheet operations}{
 \tabular{ll}{
    \strong{< v0.2.0} \tab \strong{>= v0.2.0} \cr
    sheets_browse() \tab gs4_browse() \cr
-   sheets_create() \tab gs4_create() \cr
    sheets_find() \tab gs4_find() \cr
    sheets_example() \tab gs4_example() \cr
    sheets_examples() \tab gs4_examples() \cr
@@ -92,35 +107,19 @@ googlesheets4.
 }
 }
 
-\section{Auth and API endpoints}{
+\section{(Work)sheet operations}{
 \tabular{ll}{
    \strong{< v0.2.0} \tab \strong{>= v0.2.0} \cr
-   sheets_auth() \tab gs4_auth() \cr
-   sheets_auth_configure() \tab gs4_auth_configure() \cr
-   sheets_api_key() \tab gs4_api_key() \cr
-   sheets_deauth() \tab gs4_deauth() \cr
-   sheets_endpoints() \tab gs4_endpoints() \cr
-   sheets_has_token() \tab gs4_has_token() \cr
-   sheets_oauth_app() \tab gs4_oauth_app() \cr
-   sheets_token() \tab gs4_token() \cr
-   sheet_user() \tab gs4_user() \cr
+   sheets_sheets() \tab sheet_names() \cr
+}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\section{Range operations}{
+\tabular{ll}{
+   \strong{< v0.2.0} \tab \strong{>= v0.2.0} \cr
+   sheets_cells() \tab range_read_cells() \cr
+   sheets_read() \tab range_read() \cr
+}
 }
 
 \keyword{internal}

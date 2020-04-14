@@ -43,8 +43,9 @@ The main "read" function of the googlesheets4 package goes by two names, because
 * `read_sheet()` evokes other table-reading functions, like
  `readr::read_csv()` and `readxl::read_excel()`. The `sheet` in this case
   refers to a Google (spread)Sheet.
-* `range_read()` is the right name according to the naming convention used
-  throughout the googlesheets4 package.
+* `range_read()` is technically the right name according to the naming
+  convention used throughout the googlesheets4 package, because we can read from
+  an arbitrary cell range.
   
 `read_sheet()` and `range_read()` are synonyms and you can use either one. Throughout this article, we're going to use `range_read()`.
 
@@ -99,7 +100,7 @@ range_read(gs4_example("deaths"), range = "E5:E7", col_types ="D")
 
 ## When speed matters
 
-If your Sheet is so large that the speed of `range_read()` is causing problems, consider `range_speedread()`. It uses a special URL that allows a Sheet to be read as comma-separated values (CSV). Access via this URL doesn't use the Sheets API (although `range_speedread()` still makes an API call to retrieve Sheet metadata). As an example, on a Sheet with around 57,000 rows and 25 columns (over 1.4 million cells), `sheets_speadread()` takes ~5 seconds, whereas `range_read()` takes closer to 3 minutes. Why wouldn't we always take the faster option?!? Because the speed difference is imperceptible for many Sheets and there are some downsides (described later).
+If your Sheet is so large that the speed of `range_read()` is causing problems, consider `range_speedread()`. It uses a special URL that allows a Sheet to be read as comma-separated values (CSV). Access via this URL doesn't use the Sheets API (although `range_speedread()` still makes an API call to retrieve Sheet metadata). As an example, on a Sheet with around 57,000 rows and 25 columns (over 1.4 million cells), `range_speedread()` takes ~5 seconds, whereas `range_read()` takes closer to 3 minutes. Why wouldn't we always take the faster option?!? Because the speed difference is imperceptible for many Sheets and there are some downsides (described later).
 
 `range_speedread()` has much the same interface as `range_read()`.
 
@@ -108,7 +109,7 @@ gs4_example("gapminder") %>%
   range_speedread(sheet = "Oceania", n_max = 3)
 ```
 
-The output above reveals that, under the hood, `sheets_speadread()` calls an external function for CSV parsing (currently `readr::read_csv()`, but it is likely to switch to `vroom::vroom()`). An important consequence is that all arguments around column type specification are passed along to the CSV-parsing function. Here is a demo using readr-style column specification:
+The output above reveals that, under the hood, `range_speedread()` calls an external function for CSV parsing (currently `readr::read_csv()`, but it is likely to switch to `vroom::vroom()`). An important consequence is that all arguments around column type specification are passed along to the CSV-parsing function. Here is a demo using readr-style column specification:
 
 ```{r}
 gs4_example("deaths") %>% 
@@ -163,4 +164,4 @@ Summary of how to think about `range_speedread()` vs `range_read()`:
     because it cannot access unformatted cell data and the actual cell type, as
     `range_read()` can.
   * `range_speedread()` can't access full cell data, e.g., formatting.
-  * `sheets_speedrad()` can't work with named ranges.
+  * `range_speedread()` can't work with named ranges.

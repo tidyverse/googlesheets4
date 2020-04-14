@@ -255,7 +255,7 @@ How to decide whether to send user's range via `start` or `range`? Possible scen
     overwrite data (and usually formats) in cells covered by the accompanying
     `data`. But we don't touch the rest of the sheet. Why not send as `range`?
     That feels too aggressive because it clears the data (and usually formats)
-    of any cells in the sheet that are not covered by the `data`. But if user wants that, there's always `sheets_write()`.
+    of any cells in the sheet that are not covered by the `data`. But if user wants that, there's always `range_write()`.
   * `range` as A1 notation: Re-express it as `cell_limits`.
   * `range` as `cell_limits` breaks down into a couple scenarios:
     - `cell_limits` contains at least 1 `NA`: send as `GridRange` via `range`.
@@ -263,9 +263,9 @@ How to decide whether to send user's range via `start` or `range`? Possible scen
       `GridRange`, so we will clear the targeted fields for the whole sheet.
       This seems OK here, because no one can do this by accident, i.e. you
       have to go out of your way to make an explicit `cell_limits` object
-      containing only `NA`s. Why would you do this instead of `sheets_write()`?
+      containing only `NA`s. Why would you do this instead of `range_write()`?
       Maybe you need to suppress the inclusion of `col_names` or you don't
-      like the table formatting applied by `sheets_write()`.
+      like the table formatting applied by `range_write()`.
     - `cell_limits` has no `NA`s: If rectangle includes more than 1 cell, send
       as `GridRange` via `range`. If rectangle is exactly 1 cell, send as
       `GridCoordinate` via `start`.

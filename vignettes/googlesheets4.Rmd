@@ -105,12 +105,12 @@ The metadata exposed by `gs4_get()` is also revealed whenever you print an objec
 
 *The writing functions are the most recent additions and are likely to see some refinements re: user interface and which function does what.*
 
-`sheets_write()` writes a data frame into a Sheet. The only required argument is the data.
+`range_write()` writes a data frame into a Sheet. The only required argument is the data.
 
 ```{r}
 df <- data.frame(x = 1:3, y = letters[1:3])
 
-ss <- sheets_write(df)
+ss <- range_write(df)
 ss
 ```
 
@@ -125,17 +125,17 @@ ss <- gs4_create("fluffy-bunny", sheets = df)
 ss
 ```
 
-`sheets_write()` can write to new or existing (work)sheets in this Sheet. Let's write the `chickwts` data to a new sheet in `ss`.
+`range_write()` can write to new or existing (work)sheets in this Sheet. Let's write the `chickwts` data to a new sheet in `ss`.
 
 ```{r}
-sheets_write(chickwts, ss)
+range_write(chickwts, ss)
 ss
 ```
 
-We can also use `sheets_write()` to replace the data in an existing sheet.
+We can also use `range_write()` to replace the data in an existing sheet.
 
 ```{r}
-sheets_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
+range_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
 ss
 ```
 

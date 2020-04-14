@@ -1,4 +1,4 @@
-test_that("sheets_spreadread() works", {
+test_that("range_spreadread() works", {
   skip_if_offline()
   skip_if_no_token()
   skip_if_not_installed("readr")

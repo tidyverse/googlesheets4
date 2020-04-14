@@ -30,7 +30,7 @@ if (gs4_has_token()) {
     "max", "=max(A:A)",
     "sum", "=sum(A:A)",
     "min", "=min(A:A)",
-    "sparkline", "=SPARKLINE(A:A, {\\\\"color\\", \\\\"blue\\"})"
+    "sparkline", "=SPARKLINE(A:A, {\"color\", \"blue\"})"
   )
 
   # explicitly declare a column as `googlesheets4_formula`
@@ -41,8 +41,8 @@ if (gs4_has_token()) {
 
   miscellany <- tibble::tribble(
     ~desc, ~example,
-    "hyperlink", "=HYPERLINK(\\\\"http://www.google.com/\\",\\\\"Google\\")",
-    "image", "=IMAGE(\\\\"https://www.google.com/images/srpr/logo3w.png\\")"
+    "hyperlink", "=HYPERLINK(\"http://www.google.com/\",\"Google\")",
+    "image", "=IMAGE(\"https://www.google.com/images/srpr/logo3w.png\")"
   )
   miscellany$example <- gs4_formula(miscellany$example)
   miscellany

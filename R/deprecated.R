@@ -53,8 +53,21 @@ sheets_write <- function(...) {
   sheet_write(...)
 }
 
-#' @description
-#' `sheets_create()` is replaced by [gs4_create()].
+#' @section Spreadsheet level operations:
+#'
+#' ```{r echo = FALSE}
+#' dat <- tibble::tribble(
+#'          ~ "< v0.2.0", ~ ">= v0.2.0",
+#'     "sheets_browse()",   "gs4_browse()",
+#'     "sheets_create()",   "gs4_create()",
+#'       "sheets_find()",   "gs4_find()",
+#'    "sheets_example()",   "gs4_example()",
+#'   "sheets_examples()",   "gs4_examples()",
+#'        "sheets_get()",   "gs4_get()",
+#' )
+#' knitr::kable(dat, col.names = paste0("**", colnames(dat), "**"))
+#' ```
+#'
 #' @rdname googlesheets4-deprecated
 #' @export
 sheets_create <- function(...) {
@@ -62,8 +75,6 @@ sheets_create <- function(...) {
   gs4_create(...)
 }
 
-#' @description
-#' `sheets_get()` is replaced by [gs4_get()].
 #' @rdname googlesheets4-deprecated
 #' @export
 sheets_get <- function(...) {
@@ -71,8 +82,6 @@ sheets_get <- function(...) {
   gs4_get(...)
 }
 
-#' @description
-#' `sheets_example()` is replaced by [gs4_example()].
 #' @rdname googlesheets4-deprecated
 #' @export
 sheets_example <- function(...) {
@@ -80,8 +89,6 @@ sheets_example <- function(...) {
   gs4_example(...)
 }
 
-#' @description
-#' `sheets_examples()` is replaced by [gs4_examples()].
 #' @rdname googlesheets4-deprecated
 #' @export
 sheets_examples <- function(...) {
@@ -89,8 +96,6 @@ sheets_examples <- function(...) {
   gs4_examples(...)
 }
 
-#' @description
-#' `sheets_browse()` is replaced by [gs4_browse()].
 #' @rdname googlesheets4-deprecated
 #' @export
 sheets_browse <- function(...) {
@@ -98,22 +103,11 @@ sheets_browse <- function(...) {
   gs4_browse(...)
 }
 
-#' @description
-#' `sheets_find()` is replaced by [gs4_find()].
 #' @rdname googlesheets4-deprecated
 #' @export
 sheets_find <- function(...) {
   deprecate_warn("0.2.0", "sheets_find()", "gs4_find()")
   gs4_find(...)
-}
-
-#' @description
-#' `sheets_endpoints()` is replaced by [gs4_endpoints()].
-#' @rdname googlesheets4-deprecated
-#' @export
-sheets_endpoints <- function(...) {
-  deprecate_warn("0.2.0", "sheets_endpoints()", "gs4_endpoints()")
-  gs4_endpoints(...)
 }
 
 #' @section Auth and API endpoints:
@@ -125,6 +119,7 @@ sheets_endpoints <- function(...) {
 #'   "sheets_auth_configure()",   "gs4_auth_configure()",
 #'          "sheets_api_key()",   "gs4_api_key()",
 #'           "sheets_deauth()",   "gs4_deauth()",
+#'        "sheets_endpoints()",   "gs4_endpoints()",
 #'        "sheets_has_token()",   "gs4_has_token()",
 #'        "sheets_oauth_app()",   "gs4_oauth_app()",
 #'            "sheets_token()",   "gs4_token()",
@@ -194,6 +189,14 @@ sheets_has_token <- function(...) {
 sheets_user <- function(...) {
   deprecate_warn("0.2.0", "sheets_user()", "gs4_user()")
   gs4_user(...)
+}
+
+#' @section Auth and API endpoints:
+#' @rdname googlesheets4-deprecated
+#' @export
+sheets_endpoints <- function(...) {
+  deprecate_warn("0.2.0", "sheets_endpoints()", "gs4_endpoints()")
+  gs4_endpoints(...)
 }
 
 # nocov end

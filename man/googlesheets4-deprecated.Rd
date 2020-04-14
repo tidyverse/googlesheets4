@@ -12,7 +12,6 @@
 \alias{sheets_examples}
 \alias{sheets_browse}
 \alias{sheets_find}
-\alias{sheets_endpoints}
 \alias{sheets_auth}
 \alias{sheets_deauth}
 \alias{sheets_auth_configure}
@@ -21,6 +20,7 @@
 \alias{sheets_token}
 \alias{sheets_has_token}
 \alias{sheets_user}
+\alias{sheets_endpoints}
 \title{Deprecated functions}
 \usage{
 sheets_sheets(...)
@@ -43,8 +43,6 @@ sheets_browse(...)
 
 sheets_find(...)
 
-sheets_endpoints(...)
-
 sheets_auth(...)
 
 sheets_deauth(...)
@@ -60,6 +58,8 @@ sheets_token(...)
 sheets_has_token(...)
 
 sheets_user(...)
+
+sheets_endpoints(...)
 }
 \arguments{
 \item{...}{Passed on to the function that succeeds the deprecated function.}
@@ -79,21 +79,19 @@ googlesheets4.
 
 \code{sheets_write()} is replaced by \code{\link[=sheet_write]{sheet_write()}} (which is a synonym for
 \code{\link[=write_sheet]{write_sheet()}}).
-
-\code{sheets_create()} is replaced by \code{\link[=gs4_create]{gs4_create()}}.
-
-\code{sheets_get()} is replaced by \code{\link[=gs4_get]{gs4_get()}}.
-
-\code{sheets_example()} is replaced by \code{\link[=gs4_example]{gs4_example()}}.
-
-\code{sheets_examples()} is replaced by \code{\link[=gs4_examples]{gs4_examples()}}.
-
-\code{sheets_browse()} is replaced by \code{\link[=gs4_browse]{gs4_browse()}}.
-
-\code{sheets_find()} is replaced by \code{\link[=gs4_find]{gs4_find()}}.
-
-\code{sheets_endpoints()} is replaced by \code{\link[=gs4_endpoints]{gs4_endpoints()}}.
 }
+\section{Spreadsheet level operations}{
+\tabular{ll}{
+   \strong{< v0.2.0} \tab \strong{>= v0.2.0} \cr
+   sheets_browse() \tab gs4_browse() \cr
+   sheets_create() \tab gs4_create() \cr
+   sheets_find() \tab gs4_find() \cr
+   sheets_example() \tab gs4_example() \cr
+   sheets_examples() \tab gs4_examples() \cr
+   sheets_get() \tab gs4_get() \cr
+}
+}
+
 \section{Auth and API endpoints}{
 \tabular{ll}{
    \strong{< v0.2.0} \tab \strong{>= v0.2.0} \cr
@@ -101,11 +99,14 @@ googlesheets4.
    sheets_auth_configure() \tab gs4_auth_configure() \cr
    sheets_api_key() \tab gs4_api_key() \cr
    sheets_deauth() \tab gs4_deauth() \cr
+   sheets_endpoints() \tab gs4_endpoints() \cr
    sheets_has_token() \tab gs4_has_token() \cr
    sheets_oauth_app() \tab gs4_oauth_app() \cr
    sheets_token() \tab gs4_token() \cr
    sheet_user() \tab gs4_user() \cr
 }
+
+
 
 
 

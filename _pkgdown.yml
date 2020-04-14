@@ -15,7 +15,7 @@ navbar:
     home: ~
 
 reference:
-  - title: "Read cells"
+  - title: "Reading"
     desc: >
       Import data from a Sheet into a local data frame
     contents:
@@ -24,15 +24,16 @@ reference:
       - range_read_cells
       - spread_sheet
       - cell-specification
-  - title: "Write cells"
+  - title: "Writing"
     desc: >
-      Write data from a local data frame into a Sheet
+      Write data into a Sheet
     contents:
       - write_sheet
       - gs4_create
       - sheet_append
       - range_write
       - range_flood
+      - range_clear
   - title: "Data preparation"
     desc: >
       Helpers for preparing data to write into Sheets
@@ -55,7 +56,7 @@ reference:
     contents:
       - gs4_create
       - range_delete
-      - starts_with("sheets_sheet")
+      - starts_with("sheet")
   - title: "Formatting and aesthetics"
     desc: >
       Change how a Sheet appears in the browser UI

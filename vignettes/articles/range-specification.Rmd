@@ -15,12 +15,12 @@ This is article serves mostly as internal documentation of how various represent
 library(tidyverse)
 library(googlesheets4)
 
-sheets_deauth()
+gs4_deauth()
 ```
 
 # User-specified range
 
-Several googlesheets4 functions allow the user to specify which cells to read or write. This range specification comes via the `sheet`, `range`, and (possibly) `skip` arguments. Examples of functions with this interface: `sheets_read()`, `sheets_cells()`, and `sheets_edit()`.
+Several googlesheets4 functions allow the user to specify which cells to read or write. This range specification comes via the `sheet`, `range`, and (possibly) `skip` arguments. Examples of functions with this interface: `range_read()`, `range_read_cells()`, and `range_write()`.
 
   * `range` is the primary and most powerful argument and takes precedence over
     all others. `range` can be:
@@ -31,8 +31,8 @@ Several googlesheets4 functions allow the user to specify which cells to read or
       - a `cell_limits` object made with helpers from the cellranger package
   * `sheet` can be used to specify a (work)sheet by name, such as "arts", or
     by position, such as 3
-  * `skip` is an optional argument that appears in `sheets_read()` and 
-    `sheets_cells()`, to be compatible with functions like `read.table()`,
+  * `skip` is an optional argument that appears in `range_read()` and 
+    `range_read_cells()`, to be compatible with functions like `read.table()`,
     `readr::read_delim()`, and `readxl::read_excel()`.
     
 (You might think `n_max` should also be mentioned here, but for technical reasons, in general, `n_max` can only be enforced after we've read data. So it's not part of the range ingest problem.)
@@ -49,7 +49,7 @@ Loose ends and hangnails:
     first visible worksheet), so we don't retrieve data that we will just throw away. This is all very special case-y right now.
   * `cell_limits` objects can hold sheet information and I have made no
     arrangements for that.
-  * Should `sheets_edit()` have a skip argument, just for internal consistency?
+  * Should `range_write()` have a skip argument, just for internal consistency?
 
 # Range spec
 
@@ -105,8 +105,8 @@ formatize <- function(x) paste(escape_brackets(format(x)), collapse = "<br>")
 ```
 
 ```{r include = FALSE}
-ss <- sheets_example("gapminder")
-ss_meta <- sheets_get(ss)
+ss <- gs4_example("gapminder")
+ss_meta <- gs4_get(ss)
 
 df <- df %>% 
   mutate(
@@ -158,7 +158,7 @@ In any case, between user expectations and API idiosyncrasies, we have to be abl
 
 ### A1 range from `cell_limits`
 
-The reading functions `sheets_read()` and `sheets_cells()` hit the `sheets.spreadsheets.get` endpoint. Bizarrely, this endpoint requires the range to be specified in A1-notation. If the user specifies the cell rectangle in A1-notation, things are easy and we essentially just pass that along. But users can describe certain partially open cell rectangles via `cell_limits` that can't be literally expressed in A1-notation. The table below shows how all possible combinations of row and cell limits are translated into an A1-style range, using technical limits on the number of rows and columns in a Google Sheet.
+The reading functions `range_read()` and `range_read_cells()` hit the `sheets.spreadsheets.get` endpoint. Bizarrely, this endpoint requires the range to be specified in A1-notation. If the user specifies the cell rectangle in A1-notation, things are easy and we essentially just pass that along. But users can describe certain partially open cell rectangles via `cell_limits` that can't be literally expressed in A1-notation. The table below shows how all possible combinations of row and cell limits are translated into an A1-style range, using technical limits on the number of rows and columns in a Google Sheet.
 
 ```{r echo = FALSE}
 f <- function(start_col, start_row, end_col, end_row) {
@@ -230,7 +230,7 @@ When editing a sheet, we send an [`UpdateCellsRequest`](https://developers.googl
     cells that don't receive new data are cleared, according to the accompanying
     field mask in `fields`.
 
-`sheets_edit()` is the only writing function in googlesheets4 that lets the user target a specific range. This function is why we need the ability to convert A1-notation to `cell_limits` and to decide whether user's range should be sent via `start` or `range`. `sheets_write()`, `sheets_create()`, and `sheets_append()` all offer a higher-level API, focused on the holistic management of (work)sheets that hold a single data table.
+`range_write()` is the only writing function in googlesheets4 that lets the user target a specific range. This function is why we need the ability to convert A1-notation to `cell_limits` and to decide whether user's range should be sent via `start` or `range`. `gs4_create()`, `sheet_write()`, and `sheet_append()` all offer a higher-level API, focused on the holistic management of (work)sheets that hold a single data table.
 
 Here's a table that translates the A1-style ranges created above into `cell_limits`. Some scenarios are covered more than once in this input, because above we were tackling a different (harder) problem. But that's harmless and these inputs are good, in terms of covering all relevant scenarios. Note I dropped the row corresponding to "no input".
 
@@ -248,14 +248,14 @@ df %>%
   knitr::kable()
 ```
 
-How to decide whether to send user's range via `start` or `range`? Possible scenarios for `(sheet, range)` (remember: so far, `sheets_edit()` doesn't offer `skip`):
+How to decide whether to send user's range via `start` or `range`? Possible scenarios for `(sheet, range)` (remember: so far, `range_write()` doesn't offer `skip`):
 
   * `sheet` not given: populate with first (visible) sheet.
   * No `range`: Send sheet ID as `GridCoordinate` via `start`. We will
     overwrite data (and usually formats) in cells covered by the accompanying
     `data`. But we don't touch the rest of the sheet. Why not send as `range`?
     That feels too aggressive because it clears the data (and usually formats)
-    of any cells in the sheet that are not covered by the `data`. But if user wants that, there's always `sheets_write()`.
+    of any cells in the sheet that are not covered by the `data`. But if user wants that, there's always `range_write()`.
   * `range` as A1 notation: Re-express it as `cell_limits`.
   * `range` as `cell_limits` breaks down into a couple scenarios:
     - `cell_limits` contains at least 1 `NA`: send as `GridRange` via `range`.
@@ -263,9 +263,9 @@ How to decide whether to send user's range via `start` or `range`? Possible scen
       `GridRange`, so we will clear the targeted fields for the whole sheet.
       This seems OK here, because no one can do this by accident, i.e. you
       have to go out of your way to make an explicit `cell_limits` object
-      containing only `NA`s. Why would you do this instead of `sheets_write()`?
+      containing only `NA`s. Why would you do this instead of `range_write()`?
       Maybe you need to suppress the inclusion of `col_names` or you don't
-      like the table formatting applied by `sheets_write()`.
+      like the table formatting applied by `range_write()`.
     - `cell_limits` has no `NA`s: If rectangle includes more than 1 cell, send
       as `GridRange` via `range`. If rectangle is exactly 1 cell, send as
       `GridCoordinate` via `start`.

@@ -2,10 +2,10 @@ devtools::load_all() # I assume we're in googlesheets4 source
 library(googledrive)
 library(tidyverse)
 
-# googlesheets4:::sheets_auth_testing()
+# googlesheets4:::gs4_auth_testing()
 
 ss <- test_sheet_create("googlesheets4-col-types")
-sheets_browse(ss)
+gs4_browse(ss)
 
 df <- tibble(
   logical = c(TRUE, FALSE, NA, TRUE),
@@ -18,4 +18,4 @@ df <- tibble(
                           "2003-12-21 09:20:29", "1975-04-14 13:31:03"))
 )
 
-sheets_write(df, ss, sheet = "lots-of-types")
+sheet_write(df, ss, sheet = "lots-of-types")

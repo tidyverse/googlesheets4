@@ -35,7 +35,7 @@ Since this article is compiled noninteractively on a server, we have arranged fo
 
 ```{r include = FALSE}
 # happens in .onLoad() when IN_PKGDOWN, but need this for local dev/preview
-googlesheets4:::sheets_auth_docs(drive = TRUE) 
+googlesheets4:::gs4_auth_docs(drive = TRUE) 
 
 # attempt to reduce quota exhaustion problems
 if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(20)
@@ -61,7 +61,7 @@ googlesheets4 accepts such a URL as the `ss` argument (think "spreadsheet") of m
 
 ```{r}
 ugly_url <- "https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"
-sheets_read(ugly_url)
+read_sheet(ugly_url)
 ```
 
 At this time, although the URL may contain both a (spread)Sheet and a (work)sheet, we only extract the (spread)Sheet ID. If the function targets a specific (work)sheet, that is typically specified via arguments like `range` or `sheet` or a default of "first (visible) sheet".
@@ -86,19 +86,19 @@ Why did we call `unclass(ssid)` above to see the naked Sheet ID? Because, by def
 ssid
 ```
 
-This is the same metadata you'll see when you call `sheets_get()` (but you must call `sheets_get()` explicitly if you want to *store* the returned metadata).
+This is the same metadata you'll see when you call `gs4_get()` (but you must call `gs4_get()` explicitly if you want to *store* the returned metadata).
 
 googlesheets4 also accepts a Sheet ID as the `ss` argument of many functions:
 
 ```{r}
-sheets_read(ssid)
+read_sheet(ssid)
 ```
 
 I think in a script or app that will endure for a while it is better to refer to a Sheet by its ID than by its URL. The Sheet ID is nicer to look at, it is complete, it is minimal.
 
 ```{r}
 ssid <- "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"
-sheets_read(ssid)
+read_sheet(ssid)
 ```
 
 Note this demonstration that a Sheet ID also works when provided as a plain, old string, i.e. it does not **have** to have the `sheets_id` class. In some contexts, you might even prefer to store it as a string, in order to bypass the special printing behaviour for `sheets_id`.
@@ -107,7 +107,7 @@ When the Sheet is specified via a character string, googlesheets4 assumes it is 
 
 ```{r}
 ssid <- as_sheets_id("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
-sheets_read(ssid)
+read_sheet(ssid)
 ```
 
 If your script or app targets a specific Sheet, the most efficient and robust way to address it is by its ID.
@@ -143,7 +143,7 @@ gap_id
 Since we generally call `as_sheets_id()` on whatever the user provides as `ss`, you can even pass `gap_dribble` straight into googlesheets4 functions.
 
 ```{r}
-sheets_sheet_properties(gap_dribble)
+sheet_properties(gap_dribble)
 ```
 
 
@@ -171,10 +171,10 @@ What if you want to see all of your Sheets? Or all the Sheets with "gap" in thei
 drive_find(type = "spreadsheet")
 ```
 
-This is so handy that we've made `sheets_find()` in googlesheets4, which is a shortcut for `drive_find(type = "spreadsheet")`:
+This is so handy that we've made `gs4_find()` in googlesheets4, which is a shortcut for `drive_find(type = "spreadsheet")`:
 
 ```{r}
-sheets_find()
+gs4_find()
 ```
 
-See the examples for `drive_find()` and `sheets_find()` for more ideas about how to search Drive effectively for your Sheets.
+See the examples for `drive_find()` and `gs4_find()` for more ideas about how to search Drive effectively for your Sheets.

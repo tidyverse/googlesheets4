@@ -15,6 +15,7 @@ datetime
 Datetime
 datetimes
 de
+deauth
 Feuille
 funder
 gamechanger
@@ -43,6 +44,7 @@ roundtrip
 SheetN
 shortcodes
 Shortcodes
+ss
 targetted
 tibble
 tibble's

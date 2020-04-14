@@ -51,12 +51,12 @@ Do auth first with googledrive. Remember `googledrive::drive_auth()` accepts add
 
 ```{r eval = FALSE}
 drive_auth()
-sheets_auth(token = drive_token())
+gs4_auth(token = drive_token())
 ```
 
 ```{r include = FALSE}
 # happens in .onLoad() when IN_PKGDOWN, but need this for local dev/preview
-googlesheets4:::sheets_auth_docs(drive = TRUE) 
+googlesheets4:::gs4_auth_docs(drive = TRUE) 
 
 # attempt to reduce quota exhaustion problems
 if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(20)
@@ -69,7 +69,7 @@ drive_find("chicken")
 
 ss <- drive_get("chicken-sheet")
 
-sheets_get(ss)
+gs4_get(ss)
 
 read_sheet(ss)
 ```
@@ -78,13 +78,13 @@ If you ever want to confirm the currently authenticated user, both packages prov
 
 ```{r}
 drive_user()
-sheets_user()
+gs4_user()
 ```
 
 We are using a service account to render this article. But if you've used the default OAuth flow, this should correspond to the email of the Google account you logged in with.
 
 ```{r include = FALSE}
-sheets_deauth()
+gs4_deauth()
 drive_deauth()
 detach("package:googledrive", character.only = TRUE)
 detach("package:googlesheets4", character.only = TRUE)
@@ -104,15 +104,15 @@ library(googlesheets4)
 library(googledrive)
 ```
 
-Do auth first with googlesheets4, specifying a Drive scope. Remember `sheets_auth()` accepts additional arguments, e.g. to specify a Google identity via `email =` or to use a service account via `path =`. Then direct googledrive to use the same token as googlesheets4.
+Do auth first with googlesheets4, specifying a Drive scope. Remember `gs4_auth()` accepts additional arguments, e.g. to specify a Google identity via `email =` or to use a service account via `path =`. Then direct googledrive to use the same token as googlesheets4.
 
 ```{r eval = FALSE}
-sheets_auth(scope = "https://www.googleapis.com/auth/drive")
-drive_auth(token = sheets_token())
+gs4_auth(scope = "https://www.googleapis.com/auth/drive")
+drive_auth(token = gs4_token())
 ```
 
 ```{r include = FALSE}
-googlesheets4:::sheets_auth_docs(drive = TRUE)
+googlesheets4:::gs4_auth_docs(drive = TRUE)
 ```
 
 Now you can use googledrive functions to list files or find them by name, path, or other property. Then, once you've identified the target file, use googlesheets4 to do spreadsheet-specific tasks.
@@ -122,13 +122,13 @@ drive_find("chicken")
 
 ss <- drive_get("chicken-sheet")
 
-sheets_get(ss)
+gs4_get(ss)
 
 read_sheet(ss)
 ```
 
 ```{r include = FALSE}
-sheets_deauth()
+gs4_deauth()
 drive_deauth()
 detach("package:googledrive", character.only = TRUE)
 detach("package:googlesheets4", character.only = TRUE)
@@ -176,7 +176,7 @@ PACKAGE_auth(
 If you are not using Drive at all, i.e. you always identify Sheets by file ID, and you are only reading from those Sheets, you only need googlesheets4 and `spreadsheets.readonly` is sufficient.
 
 ```{r eval = FALSE}
-sheets_auth(
+gs4_auth(
   ...,
   scopes = "https://www.googleapis.com/auth/spreadsheets.readonly",
   ...

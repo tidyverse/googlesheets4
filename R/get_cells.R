@@ -1,4 +1,4 @@
-## this is the "cell getter" for sheets_cells() and read_sheet()
+## this is the "cell getter" for range_read_cells() and read_sheet()
 get_cells <- function(ss,
                       sheet = NULL,
                       range = NULL,
@@ -17,14 +17,15 @@ get_cells <- function(ss,
   check_bool(discard_empty)
 
   ## retrieve spreadsheet metadata --------------------------------------------
-  x <- sheets_get(ssid)
+  x <- gs4_get(ssid)
   message_glue("Reading from {dq(x$name)}")
 
   ## prepare range specification for API --------------------------------------
 
   ## user's range, sheet, skip --> qualified A1 range, suitable for API
   range_spec <- as_range_spec(
-    range, sheet = sheet, skip = skip,
+    range,
+    sheet = sheet, skip = skip,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   # if we send no range, we get all cells from all sheets; not what we want
@@ -32,7 +33,7 @@ get_cells <- function(ss,
   message_glue("Range {dq(effective_range)}")
 
   ## main GET -----------------------------------------------------------------
-  resp <- sheets_cells_impl_(
+  resp <- read_cells_impl_(
     ssid,
     ranges = effective_range,
     detail_level = detail_level
@@ -67,10 +68,10 @@ get_cells <- function(ss,
 # I want a separate worker so there is a version of this available that
 # accepts `fields` (or `includeGridData`), yet I don't want a user-facing
 # function that exposes those details
-sheets_cells_impl_ <- function(ssid,
-                               ranges,
-                               fields = NULL,
-                               detail_level = c("default", "full")) {
+read_cells_impl_ <- function(ssid,
+                             ranges,
+                             fields = NULL,
+                             detail_level = c("default", "full")) {
   # there are 2 ways to control the level of detail re: cell data:
   #   1. Supply a field mask. What we currently do.
   #   2. Set `includeGridData` to true. This gets *everything* about the

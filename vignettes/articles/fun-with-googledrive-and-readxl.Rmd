@@ -31,7 +31,7 @@ library(readxl)
 
 ```{r include = FALSE}
 # happens in .onLoad() when IN_PKGDOWN, but need this for local dev/preview
-googlesheets4:::sheets_auth_docs(drive = TRUE) 
+googlesheets4:::gs4_auth_docs(drive = TRUE) 
 
 # attempt to reduce quota exhaustion problems
 if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(20)

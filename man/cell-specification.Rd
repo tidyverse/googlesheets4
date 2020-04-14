@@ -14,14 +14,14 @@ cells. The Sheets v4 API expects user-specified ranges to be expressed via
 but googlesheets4 accepts and converts a few alternative specifications
 provided by the functions in the \link{cellranger} package. Of course,
 you can always provide A1-style ranges directly to functions like
-\code{\link[=read_sheet]{read_sheet()}} or \code{\link[=sheets_cells]{sheets_cells()}}. Why would you use the
+\code{\link[=read_sheet]{read_sheet()}} or \code{\link[=range_read_cells]{range_read_cells()}}. Why would you use the
 \link{cellranger} helpers? Some ranges are practically impossible to
 express in A1 notation, specifically when you want to describe rectangles
 with some bounds that are specified and others determined by the data.
 }
 \examples{
-if (sheets_has_token() && interactive()) {
-  ss <- sheets_example("mini-gap")
+if (gs4_has_token() && interactive()) {
+  ss <- gs4_example("mini-gap")
 
   # Specify only the rows or only the columns
   read_sheet(ss, range = cell_rows(1:3))

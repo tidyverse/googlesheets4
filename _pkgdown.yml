@@ -15,71 +15,87 @@ navbar:
     home: ~
 
 reference:
-  - title: "Read cells"
+  - title: "Reading"
     desc: >
       Import data from a Sheet into a local data frame
     contents:
       - read_sheet
-      - sheets_speedread
-      - sheets_cells
+      - range_speedread
+      - range_read_cells
       - spread_sheet
       - cell-specification
-  - title: "Write cells"
+  - title: "Writing"
     desc: >
-      Write data from a local data frame into a Sheet
+      Write data into a Sheet
     contents:
       - write_sheet
-      - sheets_create
-      - sheets_append
-      - sheets_edit
-      - sheets_flood
+      - gs4_create
+      - sheet_append
+      - range_write
+      - range_flood
+      - range_clear
   - title: "Data preparation"
     desc: >
       Helpers for preparing data to write into Sheets
     contents:
-      - sheets_fodder
-      - sheets_formula
+      - gs4_fodder
+      - gs4_formula
   - title: "Metadata on Sheets"
     desc: >
       Helpers for accessing Sheets and their metadata
     contents:
-      - sheets_get
-      - sheets_find
-      - sheets_browse
+      - gs4_get
+      - gs4_find
+      - gs4_browse
       - ends_with("_id")
       - as_id.googlesheets4_spreadsheet
-      - sheets_random
+      - gs4_random
   - title: "Modify a Sheet"
     desc: >
       Make changes to a (spread)Sheet or to the (work)sheets it contains
     contents:
-      - sheets_create
-      - sheets_delete
-      - starts_with("sheets_sheet")
+      - gs4_create
+      - range_delete
+      - starts_with("sheet")
   - title: "Formatting and aesthetics"
     desc: >
       Change how a Sheet appears in the browser UI
     contents:
-      - sheets_auto_resize_dims
+      - range_autofit
   - title: "Example Sheets"
     desc: >
       World-readable Sheets to use in examples and reprexes
     contents:
-      - starts_with("sheets_example")
+      - starts_with("gs4_example")
   - title: "Auth"
     desc: >
       Take explicit control of the googlesheets4 auth status or examine current state
     contents:
-      - sheets_auth
-      - sheets_deauth
-      - sheets_user
-      - sheets_auth_configure
+      - gs4_auth
+      - gs4_deauth
+      - gs4_user
+      - gs4_auth_configure
   - title: "Programming around the Sheets API"
     desc: >
       Low-level functions used internally and made available for programming
     contents:
       - request_generate
       - request_make
-      - sheets_token
-      - sheets_has_token
-      - sheets_endpoints
+      - gs4_token
+      - gs4_has_token
+      - gs4_endpoints
+  - title: "Operate on (spread)Sheets or the Sheets API"
+    desc: >
+      Functions that operate at the level of a (spread)sheet or the whole API/package
+    contents:
+      - starts_with("gs4_")
+  - title: "Operate on (work)sheets"
+    desc: >
+      Functions that operate on whole (work)sheets
+    contents:
+      - starts_with("sheet_")
+  - title: "Operate on a range of cells"
+    desc: >
+      Functions that can target a cell range
+    contents:
+      - starts_with("range_")

@@ -3,10 +3,10 @@ devtools::load_all() # I assume we're in googlesheets4 source
 library(googledrive)
 library(tidyverse)
 
-googlesheets4:::sheets_auth_testing()
+googlesheets4:::gs4_auth_testing()
 
 ss <- test_sheet_create("googlesheets4-col-types")
-sheets_browse(ss)
+gs4_browse(ss)
 
 df <- tibble(
   A = list(1, "Missing", 3),
@@ -14,5 +14,5 @@ df <- tibble(
   C = c(1, NA, 3),
   D = 1:3
 )
-sheets_sheet_add(ss, sheet = "NAs")
-sheets_write(df, ss, sheet = "NAs")
+sheet_add(ss, sheet = "NAs")
+sheet_write(df, ss, sheet = "NAs")

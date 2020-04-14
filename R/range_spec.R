@@ -205,7 +205,7 @@ as_A1_range <- function(x) {
 #   check_non_negative_integer(skip)
 #
 #   # retrieve spreadsheet metadata ----------------------------------------------
-#   x <- sheets_get(ssid)
+#   x <- gs4_get(ssid)
 #   message_glue("Spreadsheet name: {dq(x$name)}")
 #
 #   # range specification --------------------------------------------------------

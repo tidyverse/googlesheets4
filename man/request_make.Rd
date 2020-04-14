@@ -34,8 +34,8 @@ output is processed with \code{process_response()}.
 }
 \seealso{
 Other low-level API functions: 
-\code{\link{request_generate}()},
-\code{\link{sheets_has_token}()},
-\code{\link{sheets_token}()}
+\code{\link{gs4_has_token}()},
+\code{\link{gs4_token}()},
+\code{\link{request_generate}()}
 }
 \concept{low-level API functions}

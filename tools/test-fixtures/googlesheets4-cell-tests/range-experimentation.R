@@ -1,10 +1,9 @@
 devtools::load_all() # I assume we're in googlesheets4 source
 
-googlesheets4:::sheets_auth_testing()
+googlesheets4:::gs4_auth_testing()
 
 ss <- test_sheet_create("googlesheets4-cell-tests")
-sheets_browse(ss)
+gs4_browse(ss)
 
-df <- sheets_fodder(5)
-sheets_write(df, ss, sheet = "range-experimentation")
-w
+df <- gs4_fodder(5)
+sheet_write(df, ss, sheet = "range-experimentation")

@@ -126,7 +126,7 @@ test_that("as_CellData() works for list", {
 test_that("as_CellData() works for formula", {
   hyperlink <- "=HYPERLINK(\"http://www.google.com/\",\"Google\")"
   image <- "=IMAGE(\"https://www.google.com/images/srpr/logo3w.png\")"
-  out <- as_CellData(sheets_formula(c(hyperlink, NA, image)))
+  out <- as_CellData(gs4_formula(c(hyperlink, NA, image)))
   expect_cell_value(out[[1]], "formulaValue", hyperlink)
   expect_empty_cell(out[[2]])
   expect_cell_value(out[[3]], "formulaValue", image)

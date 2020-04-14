@@ -3,23 +3,123 @@
 \name{googlesheets4-deprecated}
 \alias{googlesheets4-deprecated}
 \alias{sheets_sheets}
+\alias{sheets_cells}
+\alias{sheets_read}
+\alias{sheets_example}
+\alias{sheets_examples}
+\alias{sheets_browse}
+\alias{sheets_find}
+\alias{sheets_get}
+\alias{sheets_auth}
+\alias{sheets_deauth}
+\alias{sheets_auth_configure}
+\alias{sheets_api_key}
+\alias{sheets_oauth_app}
+\alias{sheets_token}
+\alias{sheets_has_token}
+\alias{sheets_user}
+\alias{sheets_endpoints}
 \title{Deprecated functions}
 \usage{
-sheets_sheets(ss)
+sheets_sheets(...)
+
+sheets_cells(...)
+
+sheets_read(...)
+
+sheets_example(...)
+
+sheets_examples(...)
+
+sheets_browse(...)
+
+sheets_find(...)
+
+sheets_get(...)
+
+sheets_auth(...)
+
+sheets_deauth(...)
+
+sheets_auth_configure(...)
+
+sheets_api_key(...)
+
+sheets_oauth_app(...)
+
+sheets_token(...)
+
+sheets_has_token(...)
+
+sheets_user(...)
+
+sheets_endpoints(...)
 }
 \arguments{
-\item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, an instance of \code{googlesheets4_spreadsheet}
-(returned by \code{\link[=sheets_get]{sheets_get()}}), or a \code{\link[googledrive:dribble]{dribble}}, which
-is how googledrive represents Drive files. Processed through
-\code{\link[=as_sheets_id]{as_sheets_id()}}.}
+\item{...}{Passed on to the function that succeeds the deprecated function.}
 }
 \description{
 \lifecycle{deprecated}
 
 These functions are deprecated and will be removed in a future release of
-googlesheets4.
-
-\code{sheets_sheets()} is replaced by \code{sheets_sheet_names()}.
+googlesheets4. Since googlesheets4 is a relatively young package, this
+removal will happen rapidly, possibly after just 1 release cycle.
 }
+\section{Auth and API endpoints}{
+\tabular{ll}{
+   \strong{< v0.2.0} \tab \strong{>= v0.2.0} \cr
+   sheets_api_key() \tab gs4_api_key() \cr
+   sheets_auth() \tab gs4_auth() \cr
+   sheets_auth_configure() \tab gs4_auth_configure() \cr
+   sheets_deauth() \tab gs4_deauth() \cr
+   sheets_endpoints() \tab gs4_endpoints() \cr
+   sheets_has_token() \tab gs4_has_token() \cr
+   sheets_oauth_app() \tab gs4_oauth_app() \cr
+   sheets_token() \tab gs4_token() \cr
+   sheets_user() \tab gs4_user() \cr
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+\section{Spreadsheet operations}{
+\tabular{ll}{
+   \strong{< v0.2.0} \tab \strong{>= v0.2.0} \cr
+   sheets_browse() \tab gs4_browse() \cr
+   sheets_find() \tab gs4_find() \cr
+   sheets_example() \tab gs4_example() \cr
+   sheets_examples() \tab gs4_examples() \cr
+   sheets_get() \tab gs4_get() \cr
+}
+}
+
+\section{(Work)sheet operations}{
+\tabular{ll}{
+   \strong{< v0.2.0} \tab \strong{>= v0.2.0} \cr
+   sheets_sheets() \tab sheet_names() \cr
+}
+}
+
+\section{Range operations}{
+\tabular{ll}{
+   \strong{< v0.2.0} \tab \strong{>= v0.2.0} \cr
+   sheets_cells() \tab range_read_cells() \cr
+   sheets_read() \tab range_read() \cr
+}
+}
+
 \keyword{internal}

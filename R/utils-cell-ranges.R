@@ -80,7 +80,7 @@ as_sheets_range <- function(x) {
 #   * `grid_rows` = max row extent
 #   * `grid_columns` = max col extent
 # probably obtained like so:
-# df <- sheets_get()$sheets
+# df <- gs4_get()$sheets
 # df[df$name == sheet, c("grid_rows", "grid_columns")]
 resolve_limits <- function(cell_limits, sheet_data = NULL) {
   # If no sheet_data, use theoretical maxima.

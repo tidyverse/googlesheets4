@@ -17,7 +17,7 @@
 #'   * Adds an API key to the query if and only if `token = NULL`.
 #'
 #' @param endpoint Character. Nickname for one of the selected Sheets API v4
-#'   endpoints built into googlesheets4. Learn more in [sheets_endpoints()].
+#'   endpoints built into googlesheets4. Learn more in [gs4_endpoints()].
 #' @param params Named list. Parameters destined for endpoint URL substitution,
 #'   the query, or the body.
 #' @param key API key. Needed for requests that don't contain a token. The need
@@ -26,10 +26,10 @@
 #'   identity](https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279).
 #'   In order of precedence, these sources are consulted: the formal `key`
 #'   argument, a `key` parameter in `params`, a user-configured API key set up
-#'   with [sheets_auth_configure()] and retrieved with [sheets_api_key()].
+#'   with [gs4_auth_configure()] and retrieved with [gs4_api_key()].
 #' @param token Set this to `NULL` to suppress the inclusion of a token. Note
-#'   that, if auth has been de-activated via [sheets_deauth()],
-#'   `sheets_token()` will actually return `NULL`.
+#'   that, if auth has been de-activated via [gs4_deauth()],
+#'   `gs4_token()` will actually return `NULL`.
 #'
 #' @return `list()`\cr Components are `method`, `url`, `body`, and `token`,
 #'   suitable as input for [request_make()].
@@ -40,14 +40,14 @@
 #' @examples
 #' req <- request_generate(
 #'   "sheets.spreadsheets.get",
-#'   list(spreadsheetId = sheets_example("deaths")),
+#'   list(spreadsheetId = gs4_example("deaths")),
 #'   token = NULL
 #' )
 #' req
 request_generate <- function(endpoint = character(),
                              params = list(),
                              key = NULL,
-                             token = sheets_token()) {
+                             token = gs4_token()) {
   ept <- .endpoints[[endpoint]]
   if (is.null(ept)) {
     stop_glue("\nEndpoint not recognized:\n  * {endpoint}")
@@ -59,7 +59,7 @@ request_generate <- function(endpoint = character(),
 
   ## modifications specific to googlesheets4 package
   params$key <- key %||% params$key %||%
-    sheets_api_key() %||% gargle::tidyverse_api_key()
+    gs4_api_key() %||% gargle::tidyverse_api_key()
 
   req <- gargle::request_develop(
     endpoint = ept,

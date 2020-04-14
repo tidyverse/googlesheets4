@@ -1,15 +1,19 @@
 if (gargle:::secret_can_decrypt("googlesheets4") &&
     !is.null(curl::nslookup("sheets.googleapis.com", error = FALSE))) {
   capture.output(
-    sheets_auth_testing(drive = TRUE)
+    gs4_auth_testing(drive = TRUE)
   )
 } else {
-  sheets_deauth()
+  gs4_deauth()
 }
 
 skip_if_no_token <- function() {
-  Sys.sleep(2)
-  testthat::skip_if_not(sheets_has_token())
+  if (gs4_has_token()) {
+    # hack to slow things down in CI
+    Sys.sleep(2)
+  } else {
+    skip("No token")
+  }
 }
 
 expect_error_free <- function(...) {
@@ -35,7 +39,7 @@ nm_fun <- function(context, user = Sys.info()["user"]) {
 }
 
 scoped_temporary_ss <- function(name, ..., env = parent.frame()) {
-  existing <- sheets_find(name)
+  existing <- gs4_find(name)
   if (nrow(existing) > 0) {
     stop_glue("A spreadsheet named {sq(name)} already exists.")
   }
@@ -47,7 +51,7 @@ scoped_temporary_ss <- function(name, ..., env = parent.frame()) {
     )
   } else {
     withr::defer({
-      trash_me <- sheets_find(name)
+      trash_me <- gs4_find(name)
       if (nrow(trash_me) < 1) {
         warning_glue("The spreadsheet named {sq(name)} already seems to be deleted.")
       } else {
@@ -55,5 +59,13 @@ scoped_temporary_ss <- function(name, ..., env = parent.frame()) {
       }
     }, envir = env)
   }
-  sheets_create(name, ...)
+  gs4_create(name, ...)
+}
+
+toggle_rlang_interactive <- function() {
+  before <- getOption("rlang_interactive")
+  after <- if (identical(before, FALSE)) TRUE else FALSE
+  options(rlang_interactive = after)
+  ui_line(glue::glue("rlang_interactive: {before %||% '<unset>'} --> {after}"))
+  invisible()
 }

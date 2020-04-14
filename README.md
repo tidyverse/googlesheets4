@@ -47,7 +47,7 @@ devtools::install_github("tidyverse/googlesheets4")
 
 googlesheets4 will, by default, help you interact with Sheets as an
 authenticated Google user. If you don’t need to access private Sheets,
-use `sheets_deauth()` to indicate there is no need for a token. See the
+use `gs4_deauth()` to indicate there is no need for a token. See the
 article [googlesheets4
 auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html)
 for more.
@@ -63,11 +63,20 @@ library(googlesheets4)
 
 ## Read
 
-`read_sheet()` is the main “read” function and should evoke
-`readr::read_csv()` and `readxl::read_excel()`. It’s an alias for
-`sheets_read()`, because most functions in googlesheets4 actually start
-with `sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`),
-but works just fine without the pipe.
+The main “read” function of the googlesheets4 package goes by two names,
+because we want it to make sense in two contexts:
+
+  - `read_sheet()` evokes other table-reading functions, like
+    `readr::read_csv()` and `readxl::read_excel()`. The `sheet` in this
+    case refers to a Google (spread)Sheet.
+  - `range_read()` is the right name according to the naming convention
+    used throughout the googlesheets4 package.
+
+`read_sheet()` and `range_read()` are synonyms and you can use either
+one. Here we’ll use `read_sheet()`.
+
+googlesheets4 is pipe-friendly (and reexports `%>%`), but works just
+fine without the pipe.
 
 Read from
 
@@ -110,7 +119,7 @@ read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 
 # a googledrive "dribble"
 googledrive::drive_get("gapminder") %>% 
-  sheets_read()
+  read_sheet()
 #> Reading from "gapminder"
 #> Range "Africa"
 #> # A tibble: 624 x 6
@@ -134,14 +143,14 @@ type, and getting low-level cell data.
 
 ## Write
 
-`sheets_create()` creates a brand new (spread)Sheet and can optionally
-send some initial data.
+`gs4_create()` creates a brand new Google Sheet and can optionally send
+some initial data.
 
 ``` r
-(ss <- sheets_create("fluffy-bunny", sheets = list(flowers = head(iris))))
+(ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> Creating new Sheet: "fluffy-bunny"
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1PZhWuDisiOsj2CKnUDgJyRVGRxvYhyb9NVJRoYhtZ78
+#>                 ID: 1Td3Dktr7Bq8go_r3SZjd3A3PRk2SDzDaDoYyn5Jjaeo
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -150,17 +159,17 @@ send some initial data.
 #>      flowers: 7 x 5
 ```
 
-`sheets_write()` (over)writes a whole data frame into a (work)sheet
+`sheet_write()` (over)writes a whole data frame into a (work)sheet
 within a (spread)Sheet.
 
 ``` r
 head(mtcars) %>% 
-  sheets_write(ss, sheet = "autos")
+  sheet_write(ss, sheet = "autos")
 #> Writing to "fluffy-bunny"
 #> Writing to sheet "autos"
 ss
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1PZhWuDisiOsj2CKnUDgJyRVGRxvYhyb9NVJRoYhtZ78
+#>                 ID: 1Td3Dktr7Bq8go_r3SZjd3A3PRk2SDzDaDoYyn5Jjaeo
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2
@@ -170,7 +179,7 @@ ss
 #>        autos: 7 x 11
 ```
 
-`sheets_edit()` and `sheets_append()` are additional writing functions
+`range_write()` and `sheet_append()` are additional writing functions
 that are useful in specific situations. See the article [Write
 Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html)
 for more about writing to Sheets.

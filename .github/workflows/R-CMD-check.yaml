@@ -18,19 +18,19 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: '3.6', sheets_auth: GOOGLESHEETS4_NOAUTH}
-          - {os: macOS-latest, r: '3.6', sheets_auth: GOOGLESHEETS4_PASSWORD}
-          - {os: macOS-latest, r: 'devel', sheets_auth: GOOGLESHEETS4_NOAUTH}
-          #- {os: ubuntu-16.04, r: '3.2', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-          - {os: ubuntu-16.04, r: '3.3', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-          - {os: ubuntu-16.04, r: '3.4', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-          - {os: ubuntu-16.04, r: '3.5', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
-          - {os: ubuntu-16.04, r: '3.6', sheets_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - {os: windows-latest, r: '3.6', gs4_auth: GOOGLESHEETS4_NOAUTH}
+          - {os: macOS-latest, r: '3.6', gs4_auth: GOOGLESHEETS4_PASSWORD}
+          - {os: macOS-latest, r: 'devel', gs4_auth: GOOGLESHEETS4_NOAUTH}
+          #- {os: ubuntu-16.04, r: '3.2', gs4_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - {os: ubuntu-16.04, r: '3.3', gs4_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - {os: ubuntu-16.04, r: '3.4', gs4_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - {os: ubuntu-16.04, r: '3.5', gs4_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
+          - {os: ubuntu-16.04, r: '3.6', gs4_auth: GOOGLESHEETS4_NOAUTH, rspm: "https://demo.rstudiopm.com/all/__linux__/xenial/latest"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
-      GOOGLESHEETS4_PASSWORD: ${{ secrets[matrix.config.sheets_auth] }}
+      GOOGLESHEETS4_PASSWORD: ${{ secrets[matrix.config.gs4_auth] }}
 
     steps:
       - uses: actions/checkout@v2
@@ -63,6 +63,15 @@ jobs:
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
+
+      - name: Install macOS dependencies
+        if: matrix.config.os == 'macOS-latest' && matrix.config.r == 'devel'
+        # the xml2 thing is a hack due to
+        # https://github.com/r-lib/xml2/pull/297
+        # this entire step can go away once that's released on CRAN
+        # xml2 is necessary to install spelling
+        run: |
+          Rscript -e "remotes::install_github('r-lib/xml2')"
 
       - name: Install dependencies
         run: |

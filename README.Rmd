@@ -23,7 +23,7 @@ message("No token available. Code chunks will not be evaluated.")
 ```
 
 ```{r readme-auth, include = FALSE}
-googlesheets4:::sheets_auth_docs()
+googlesheets4:::gs4_auth_docs()
 ```
 
 # googlesheets4 <a href='https:/googlesheets4.tidyverse.org'><img src='man/figures/logo.png' align="right" height="138.5" /></a>
@@ -58,7 +58,7 @@ devtools::install_github("tidyverse/googlesheets4")
 
 ## Auth
 
-googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. If you don't need to access private Sheets, use `sheets_deauth()` to indicate there is no need for a token. See the article [googlesheets4 auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html) for more.
+googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. If you don't need to access private Sheets, use `gs4_deauth()` to indicate there is no need for a token. See the article [googlesheets4 auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html) for more.
 
 For this overview, we've logged into Google as a specific user in a hidden chunk.
 
@@ -70,7 +70,17 @@ library(googlesheets4)
 
 ## Read
 
-`read_sheet()` is the main "read" function and should evoke `readr::read_csv()` and `readxl::read_excel()`. It's an alias for `sheets_read()`, because most functions in googlesheets4 actually start with `sheets_`. googlesheets4 is pipe-friendly (and reexports `%>%`), but works just fine without the pipe.
+The main "read" function of the googlesheets4 package goes by two names, because we want it to make sense in two contexts:
+
+* `read_sheet()` evokes other table-reading functions, like
+ `readr::read_csv()` and `readxl::read_excel()`. The `sheet` in this case
+  refers to a Google (spread)Sheet.
+* `range_read()` is the right name according to the naming convention used
+  throughout the googlesheets4 package.
+  
+`read_sheet()` and `range_read()` are synonyms and you can use either one. Here we'll use `read_sheet()`.
+
+googlesheets4 is pipe-friendly (and reexports `%>%`), but works just fine without the pipe.
 
 Read from
 
@@ -90,31 +100,31 @@ read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 
 # a googledrive "dribble"
 googledrive::drive_get("gapminder") %>% 
-  sheets_read()
+  read_sheet()
 ```
 
 See the article [Find and Identify Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html) for more about specifying the Sheet you want to address. See the article [Read Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html) for more about reading from specific sheets or ranges, setting column type, and getting low-level cell data.
 
 ## Write
 
-`sheets_create()` creates a brand new (spread)Sheet and can optionally send some initial data.
+`gs4_create()` creates a brand new Google Sheet and can optionally send some initial data.
 
 ```{r}
-(ss <- sheets_create("fluffy-bunny", sheets = list(flowers = head(iris))))
+(ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 ```
 
-`sheets_write()` (over)writes a whole data frame into a (work)sheet within a (spread)Sheet.
+`sheet_write()` (over)writes a whole data frame into a (work)sheet within a (spread)Sheet.
 
 ```{r}
 head(mtcars) %>% 
-  sheets_write(ss, sheet = "autos")
+  sheet_write(ss, sheet = "autos")
 ss
 ```
 
-`sheets_edit()` and `sheets_append()` are additional writing functions that are useful in specific situations. See the article [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html) for more about writing to Sheets.
+`range_write()` and `sheet_append()` are additional writing functions that are useful in specific situations. See the article [Write Sheets](https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html) for more about writing to Sheets.
 
 ```{r include = FALSE}
-googledrive::drive_rm(ss)
+googledrive::drive_trash(ss)
 ```
 
 ## Where to learn more

@@ -1,4 +1,4 @@
-> print(sheets_example("gapminder"))
+> print(gs4_example("gapminder"))
   Spreadsheet name: gapminder
                 ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY
             Locale: en_US

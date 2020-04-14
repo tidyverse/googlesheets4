@@ -24,4 +24,3 @@
 ^\.github/workflows/R-CMD-check\.yaml$
 ^\.github/workflows/pkgdown\.yaml$
 ^vignettes/googlesheets4\.Rmd$
-^renaming-notes\.txt$

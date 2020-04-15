@@ -16,6 +16,7 @@ Datetime
 datetimes
 de
 deauth
+dev
 Feuille
 funder
 gamechanger
@@ -54,6 +55,7 @@ unboundedness
 unformatted
 unskipped
 UpdateSheetPropertiesRequest
+UpperCamelCase
 vctrs
 vectorized
 xls

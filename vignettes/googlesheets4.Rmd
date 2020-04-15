@@ -97,20 +97,20 @@ sheet_names(ss)
 
 `sheet_properties()` and `sheet_names()` are two members of a larger family of functions for dealing with the (work)sheets within a (spread)Sheet.
 
-The metadata exposed by `gs4_get()` is also revealed whenever you print an object that is known to be a `sheets_id` (an S3 class we use to make Sheet IDs).
+The metadata exposed by `gs4_get()` is also revealed whenever you print an object that is (or can be converted to) a `sheets_id` (an S3 class we use to mark Sheet IDs).
 
 `gs4_get()` is related to `googledrive::drive_get()`. Both functions return metadata about a file on Google Drive, such as its ID and name. However, `gs4_get()` reveals additional metadata that is specific to Drive files that happen to be Sheets, such as info about worksheets and named ranges.
 
 ## Writing Sheets
 
-*The writing functions are the most recent additions and are likely to see some refinements re: user interface and which function does what.*
+*The writing functions are the most recent additions and may still see some refinements re: user interface and which function does what. We're very interested to hear how these functions feel in terms of ergonomics.*
 
-`range_write()` writes a data frame into a Sheet. The only required argument is the data.
+`sheet_write()` writes a data frame into a Sheet. The only required argument is the data.
 
 ```{r}
 df <- data.frame(x = 1:3, y = letters[1:3])
 
-ss <- range_write(df)
+ss <- sheet_write(df)
 ss
 ```
 
@@ -121,32 +121,32 @@ Let's start over: we delete that Sheet and call `gs4_create()`, so we can specif
 ```{r}
 googledrive::drive_trash(ss)
 
-ss <- gs4_create("fluffy-bunny", sheets = df)
+ss <- gs4_create("testy-hedgehog", sheets = df)
 ss
 ```
 
-`range_write()` can write to new or existing (work)sheets in this Sheet. Let's write the `chickwts` data to a new sheet in `ss`.
+`sheet_write()` can write to new or existing (work)sheets in this Sheet. Let's write the `chickwts` data to a new sheet in `ss`.
 
 ```{r}
-range_write(chickwts, ss)
+sheet_write(chickwts, ss)
 ss
 ```
 
-We can also use `range_write()` to replace the data in an existing sheet.
+We can also use `sheet_write()` to replace the data in an existing sheet.
 
 ```{r}
-range_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
-ss
+sheet_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
+read_sheet(ss, sheet = "df")
 ```
 
 `sheet_append()` adds one or more rows to an existing sheet.
 
 ```{r}
 ss %>% sheet_append(data.frame(x = 11, letters[11]), sheet = "df")
-ss
+read_sheet(ss, sheet = "df")
 ```
 
-`range_write()` makes it possible to write arbitrary data, into an arbitrary range. It has a very different "feel" from `gs4_create()`, `sheet_write()`, and `sheet_append()`, all of which assume we're writing or growing a table of data in a (work)sheet. `range_write()` makes fewer assumptions about what it's writing and why.
+A related function -- `range_write()` -- writes arbitrary data, into an arbitrary range. It has a very different "feel" from `gs4_create()`, `sheet_write()`, and `sheet_append()`, all of which assume we're writing or growing a table of data in a (work)sheet. `range_write()` is much more surgical and limited. `range_write()` makes fewer assumptions about what it's writing and why.
 
 There is also a family of `sheet_*()` functions that do pure (work)sheet operations, such as add and delete.
 

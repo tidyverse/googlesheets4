@@ -143,6 +143,7 @@
 <p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("devtools")</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"tidyverse/googlesheets4"</span>)</pre></div>
+<p>As of mid-April 2020, note that all of the writing/modifying features are only in the dev version, but a CRAN release will happen soon. This website documents the dev version.</p>
 </div>
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
@@ -163,10 +164,10 @@
 <li>
 <code><a href="reference/range_read.html">read_sheet()</a></code> evokes other table-reading functions, like <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code> and <code><a href="https://readxl.tidyverse.org/reference/read_excel.html">readxl::read_excel()</a></code>. The <code>sheet</code> in this case refers to a Google (spread)Sheet.</li>
 <li>
-<code><a href="reference/range_read.html">range_read()</a></code> is the right name according to the naming convention used throughout the googlesheets4 package.</li>
+<code><a href="reference/range_read.html">range_read()</a></code> is the right name according to the <a href="https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html">naming convention</a> used throughout the googlesheets4 package.</li>
 </ul>
 <p><code><a href="reference/range_read.html">read_sheet()</a></code> and <code><a href="reference/range_read.html">range_read()</a></code> are synonyms and you can use either one. Here we’ll use <code><a href="reference/range_read.html">read_sheet()</a></code>.</p>
-<p>googlesheets4 is pipe-friendly (and reexports <code><a href="reference/pipe.html">%&gt;%</a></code>), but works just fine without the pipe.</p>
+<p>googlesheets4 is <a href="https://r4ds.had.co.nz/pipes.html">pipe-friendly</a> (and reexports <code><a href="reference/pipe.html">%&gt;%</a></code>), but works just fine without the pipe.</p>
 <p>Read from</p>
 <ul>
 <li>a URL</li>
@@ -225,7 +226,7 @@
 <div class="sourceCode" id="cb5"><pre class="r">(<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/gs4_create.html">gs4_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">flowers</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">iris</span>))))
 <span class="co">#&gt; Creating new Sheet: "fluffy-bunny"</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1Td3Dktr7Bq8go_r3SZjd3A3PRk2SDzDaDoYyn5Jjaeo</span>
+<span class="co">#&gt;                 ID: 1BoWvvqC7-sqwkBhZN7VgFNDKvWJuYFlQgoF-MLY323o</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -239,7 +240,7 @@
 <span class="co">#&gt; Writing to sheet "autos"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1Td3Dktr7Bq8go_r3SZjd3A3PRk2SDzDaDoYyn5Jjaeo</span>
+<span class="co">#&gt;                 ID: 1BoWvvqC7-sqwkBhZN7VgFNDKvWJuYFlQgoF-MLY323o</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>
@@ -247,22 +248,14 @@
 <span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
 <span class="co">#&gt;      flowers: 7 x 5</span>
 <span class="co">#&gt;        autos: 7 x 11</span></pre></div>
-<p><code><a href="reference/range_write.html">range_write()</a></code> and <code><a href="reference/sheet_append.html">sheet_append()</a></code> are additional writing functions that are useful in specific situations. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> for more about writing to Sheets.</p>
+<p><code><a href="reference/sheet_append.html">sheet_append()</a></code>, <code><a href="reference/range_write.html">range_write()</a></code>, <code><a href="reference/range_flood.html">range_flood()</a></code>, and <code><a href="reference/range_flood.html">range_clear()</a></code> are more specialized writing functions. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> for more about writing to Sheets.</p>
 </div>
 <div id="where-to-learn-more" class="section level2">
 <h2 class="hasAnchor">
 <a href="#where-to-learn-more" class="anchor"></a>Where to learn more</h2>
-<ul>
-<li><a href="https://googlesheets4.tidyverse.org/articles/googlesheets4.html">Get started</a></li>
-<li><a href="https://googlesheets4.tidyverse.org/articles/articles/auth.html">googlesheets4 auth</a></li>
-<li><a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Find and Identify Sheets</a></li>
-<li><a href="https://googlesheets4.tidyverse.org/articles/articles/read-sheets.html">Read Sheets</a></li>
-<li><a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a></li>
-<li><a href="https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a></li>
-<li><a href="https://googlesheets4.tidyverse.org/articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a></li>
-<li><a href="https://googlesheets4.tidyverse.org/articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a></li>
-<li><a href="https://googlesheets4.tidyverse.org/reference/index.html">All the functions!</a></li>
-</ul>
+<p><a href="https://googlesheets4.tidyverse.org/articles/googlesheets4.html">Get started</a> is a more extensive general introduction to googlesheets4.</p>
+<p>Browse the <a href="https://googlesheets4.tidyverse.org/articles/index.html">articles index</a> to find articles that cover various topics in more depth.</p>
+<p>See the <a href="https://googlesheets4.tidyverse.org/reference/index.html">function index</a> for an organized, exhaustive listing.</p>
 </div>
 <div id="contributing" class="section level2">
 <h2 class="hasAnchor">

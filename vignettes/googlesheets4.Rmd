@@ -58,7 +58,7 @@ drive_get("gapminder") %>%
 
 Note that the name-based approach above will only work if **you** have access to a Sheet named "gapminder". Sheet names cannot be used as absolute identifiers; only a Sheet ID can play that role.
 
-For more Sheet identification concepts and strategies, see the article [Find and Identify Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html). See the article [Read Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html) for more about reading from a specific (work)sheet or ranges, setting column type, and getting low-level cell data.
+For more Sheet identification concepts and strategies, see the article [Find and Identify Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html). See the article [Read Sheets](https://googlesheets4.tidyverse.org/articles/articles/read-sheets.html) for more about reading from a specific (work)sheet or ranges, setting column type, and getting low-level cell data.
 
 ## Example Sheets and `gs4_browse()`
 

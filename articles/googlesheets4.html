@@ -179,7 +179,7 @@
 <span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
 <span class="co">#&gt; # … with 619 more rows</span></pre></body></html></div>
 <p>Note that the name-based approach above will only work if <strong>you</strong> have access to a Sheet named “gapminder”. Sheet names cannot be used as absolute identifiers; only a Sheet ID can play that role.</p>
-<p>For more Sheet identification concepts and strategies, see the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Find and Identify Sheets</a>. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Read Sheets</a> for more about reading from a specific (work)sheet or ranges, setting column type, and getting low-level cell data.</p>
+<p>For more Sheet identification concepts and strategies, see the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Find and Identify Sheets</a>. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/read-sheets.html">Read Sheets</a> for more about reading from a specific (work)sheet or ranges, setting column type, and getting low-level cell data.</p>
 </div>
 <div id="example-sheets-and-gs4_browse" class="section level2">
 <h2 class="hasAnchor">
@@ -250,10 +250,10 @@
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">letters</span>[<span class="fl">1</span>:<span class="fl">3</span>])
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span>(<span class="no">df</span>)
-<span class="co">#&gt; Creating new Sheet: "cretinoid-sandpiper"</span>
+<span class="co">#&gt; Creating new Sheet: "actinide-toadfish"</span>
 <span class="no">ss</span>
-<span class="co">#&gt;   Spreadsheet name: cretinoid-sandpiper</span>
-<span class="co">#&gt;                 ID: 1DZ88no_zSlyK2-Znb3CJE8baTmFfngO8Te7CsD8VUA0</span>
+<span class="co">#&gt;   Spreadsheet name: actinide-toadfish</span>
+<span class="co">#&gt;                 ID: 18I60cg2ShjiC5MigK3cQdQfV5CVr0XgVNVqsnH2pI2g</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -264,13 +264,13 @@
 <p>Let’s start over: we delete that Sheet and call <code><a href="../reference/gs4_create.html">gs4_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * cretinoid-sandpiper: 1DZ88no_zSlyK2-Znb3CJE8baTmFfngO8Te7CsD8VUA0</span>
+<span class="co">#&gt;   * actinide-toadfish: 18I60cg2ShjiC5MigK3cQdQfV5CVr0XgVNVqsnH2pI2g</span>
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span>(<span class="st">"testy-hedgehog"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="no">df</span>)
 <span class="co">#&gt; Creating new Sheet: "testy-hedgehog"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;                 ID: 1NG8gb-TQIa_bQZL_brZcUxmL-J29hAw6KY6S9eC9WL8</span>
+<span class="co">#&gt;                 ID: 1jbGBsVI_niWCOboqa04df0SvEyH0d1e6y018LSYOeww</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -283,7 +283,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;                 ID: 1NG8gb-TQIa_bQZL_brZcUxmL-J29hAw6KY6S9eC9WL8</span>
+<span class="co">#&gt;                 ID: 1jbGBsVI_niWCOboqa04df0SvEyH0d1e6y018LSYOeww</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>
@@ -330,12 +330,12 @@
 <span class="co">#&gt; # A tibble: 2 x 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0  855101596 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 2109632892 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 1 df           0  759815124 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 1847820139 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * testy-hedgehog: 1NG8gb-TQIa_bQZL_brZcUxmL-J29hAw6KY6S9eC9WL8</span></pre></body></html></div>
+<span class="co">#&gt;   * testy-hedgehog: 1jbGBsVI_niWCOboqa04df0SvEyH0d1e6y018LSYOeww</span></pre></body></html></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

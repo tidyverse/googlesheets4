@@ -1,0 +1,381 @@
+---
+title: "Dates and times"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Dates and times}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<!-- dates-and-times.Rmd is generated from dates-and-times.Rmd.orig.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+can_decrypt <- gargle:::secret_can_decrypt("googlesheets4")
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  error = TRUE,
+  purl = can_decrypt,
+  eval = can_decrypt
+)
+```
+
+```{r eval = !can_decrypt, echo = FALSE, comment = NA}
+message("No token available. Code chunks will not be evaluated.")
+```
+
+This article provides advice on reading and writing datetimes with Google Sheets, specifically around the matter of time zones.
+
+A related issue is how datetimes are formatted for presentation in the Sheet itself. You can read more about these formats in the [Date and time format patterns section of the Sheets API docs](https://developers.google.com/sheets/api/guides/formats#date_and_time_format_patterns). At the time of writing, googlesheets4 provides no user-friendly way to address these formats, although it may do so in the future.
+
+## Attach packages and do auth
+
+Attach googlesheets4.
+
+```{r}
+library(googlesheets4)
+```
+
+Since we eventually create and edit Sheets, we also auth here in a hidden chunk. If you run this code, you should expect auth to happen.
+ 
+```{r include = FALSE}
+# happens in .onLoad() when IN_PKGDOWN, but need this for local, intentional
+# precompilation
+googlesheets4:::gs4_auth_docs(drive = TRUE)
+```
+
+The lubridate package ([lubridate.tidyverse.org](https://lubridate.tidyverse.org)) is useful for this exploration, so we attach it now.
+
+```{r}
+library(lubridate, warn.conflicts = FALSE)
+```
+
+## How to work with time zones in a Google Sheet
+
+You don't.
+
+Literally, you can't.
+
+I know this sounds very harsh, but it is the truth. Google Sheets offer essentially no support for time zones and your life will be simpler if you just make peace with this and accept that you will be looking at UTC times in Sheets.
+
+A short demo: in R, capture the current time as `tt` and reveal the current time zone. Note that `tt` is displayed in R according to this time zone.
+
+```{r}
+(tt <- Sys.time())
+
+Sys.timezone()
+```
+
+Write the `tt` datetime to a Sheet, configured with the same time zone as the local R session, and create another cell that captures the exact text presented in the browser UI for `tt`. Read this back into R.
+
+```{r}
+dat <- tibble::tibble(
+  datetime = tt,
+  as_displayed = gs4_formula("=TO_TEXT(A2)")
+)
+
+(ss <- gs4_create(
+  "no-time-zone-effect",
+  sheets = dat,
+  timeZone = Sys.timezone()
+))
+
+read_sheet(ss)
+```
+
+Note that the `tt` datetime is displayed differently in Sheets than it is locally in R. Sheets presents datetimes in Coordinated Universal Time (time zone Etc/UTC), even if the Sheet's metadata specifies a different time zone, such as America/Vancouver.
+
+```{r}
+with_tz(tt, "Etc/UTC")
+```
+
+If you want to understand more about datetimes in R, in Sheets, and how you can sort of hack around this time zone problem, keep reading.
+
+```{r include = FALSE}
+gs4_find("no-time-zone-effect") %>% googledrive::drive_trash()
+```
+
+## Need-to-know basics of datetimes
+
+Datetimes are a complicated topic. Here we dramatically oversimplify things, in the name of making a reader who is new to all of this at least minimally functional.
+
+The main system used to represent times in the computing world is Unix epoch time:
+
+> A moment in time is represented by the number of seconds that have elapsed since 1 January 1970 00:00:00 UTC.
+
+The "UTC" part stands for "Coordinated Universal Time". Yes, the order of the letters is strangely different from the words! It's a great metaphor for this entire subject, because nothing is as simple as you'd like. Just accept it and move on. UTC is what you may already think of as "Greenwich Mean Time", if you've ever encountered that term.
+
+There are three wrinkles we must acknowledge, even when oversimplifying:
+
+1. Time zones. We don't all live in Greenwich, England, so local times are
+   described by an offset from UTC.
+   - I live in Vancouver, British Columbia, which is 8 hours behind UTC
+     (UTC−08:00). Or, at least, it is part of the year ...
+2. Daylight savings time. Lots of places change their clocks twice a year. UTC
+   does not! UTC "just is". This means that your UTC offset is one number part
+   of the year and another number part of the year.
+   - My offset is -08:00 during standard time, but is -07:00 during daylight
+     savings (roughly March - October).
+3. Spreadsheets are special. Spreadsheets use a different form of epoch time.
+   Their epoch or origin is usually around 1900 and they keep track of how many
+   *days* have elapsed since the epoch (not seconds, like Unix epoch time).
+   These are sometimes called "serial dates" or "serial numbers".
+   - Google Sheets use an epoch of 30 December 1899 00:00:00 UTC.   
+   - Horrors I will spare you: different epochs for different spreadsheet
+     applications (or versions thereof) and the Lotus 1-2-3 leap year bug.
+   
+You can read more in the [Sheets API docs about Date/Time serial numbers](https://developers.google.com/sheets/api/guides/concepts#datetime_serial_numbers).
+
+## Datetimes in R
+
+R uses Unix epoch time.
+
+R uses the [POSIXct](https://rdrr.io/r/base/DateTimeClasses.html) class to represent datetimes. (Yes, there's also `POSIXlt`, but I recommend and will focus on `POSIXct`.)
+
+If you ask for the current time, R prints it formatted for your time zone (or, at least, it tries). You can also ask R to reveal what it thinks your time zone is.
+
+```{r}
+Sys.time()
+
+Sys.timezone()
+```
+
+The time zone is **purely matter of display**, but it's a really nice touch! It is comforting to get a time printed by R that matches your experience of what time it is, based on looking the clock on your wall ("clock time").
+
+lubridate's `with_tz()` function let's you explicitly associate a datetime with a time zone, e.g. your own or any other time zone recognized by your system. And this, in turn, affects how the time is formatted for human eyeballs.
+
+```{r}
+tt <- Sys.time()
+
+with_tz(tt, tzone = "America/Vancouver")
+
+with_tz(tt, tzone = "America/Denver")
+
+with_tz(tt, tzone = "Etc/UTC")
+```
+
+**This ability to display a moment in time according to a specified time zone is not present in Sheets.** Yes, each Sheet has an associated time zone, but it does not have this effect, even though you might expect or hope for that.
+
+When we read datetimes out of a Google Sheet, we must:
+
+  * Convert from days to seconds.
+  * Adjust for Unix epoch versus spreadsheet epoch.
+  * Use the resulting number to construct an instance of `POSIXct`.
+  
+When we write a datetime to a Google Sheet, we must:
+
+  * Convert from seconds to days.
+  * Adjust for the spreadsheet epoch versus Unix epoch.
+  * Use the resulting number to create an instance of the
+  [`CellData`](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/cells#celldata)
+  schema.
+
+## Datetimes in Google Sheets
+
+Google Sheets use a spreadsheet-y version of epoch time. A datetime cell holds a so-called serial number, which is the elapsed days since the epoch of 30 December 1899 00:00:00 UTC. This number is then displayed in a more human-friendly way, according to a special token string. Currently googlesheets4 doesn't offer any explicit support for dealing with these [format strings](https://developers.google.com/sheets/api/guides/formats#date_and_time_format_patterns), although one day it probably will.
+
+Let's gain some intuition by looking at datetimes shortly after the epoch and inspecting the underlying serial numbers. In a hidden chunk, we create a Sheet and read it into R.
+
+```{r include = FALSE}
+# The constructed formulas are very special because of a very weird thing!
+# The =DATE() function can only be used with dates on or after 1 Jan 1900,
+# even though the Sheets epoch is 30 Dec 1899.
+# https://support.google.com/docs/answer/3092969?hl=en&ref_topic=3105385
+#   "Google Sheets uses the 1900 date system. The first date is 1/1/1900.
+#    Between 0 and 1899, Google Sheets adds that value to 1900 to calculate
+#    the year. For example, DATE(119,2,1) will create a date of 2/1/2019."
+# Therefore, to construct a moment in 1899, I choose to construct the date part
+# from parsing a string, then I can use =TIME() to apply a time to that.
+```
+
+```{r echo = FALSE}
+dat <- tibble::tibble(
+  datetime = gs4_formula(c(
+    '=(TO_DATE(DATEVALUE("1899-12-30"))+TIME(12,0,0))',
+    '=(TO_DATE(DATEVALUE("1899-12-31"))+TIME(18,0,0))'
+  )),
+  serial_number = gs4_formula(c("=ARRAYFORMULA(TO_PURE_NUMBER(A2:A))", NA))
+)
+ss <- gs4_create("near-the-epoch", sheets = dat)
+read_sheet(ss)
+```
+
+1899-12-30 12:00:00 is noon on the day that is the Google Sheets epoch. Its underlying serial number is 0.5, because one half-day has elapsed since the epoch. 1899-12-31 18:00:00 is 6pm in the evening on the day after the epoch. Its underlying serial number is 1.75, because it's one plus three-quarters of a day since the epoch.
+
+```{r include = FALSE}
+gs4_find("near-the-epoch") %>% googledrive::drive_trash()
+```
+
+Every Google Sheet has an associated time zone. It is included in the metadata returned by `gs4_get()`, like the locale, and is revealed by default when we print a Sheets ID.
+
+```{r}
+(meta <- gs4_example("gapminder") %>%
+   gs4_get())
+
+meta$time_zone
+```
+
+However, this time zone has a very different impact -- much *less* impact -- on the user experience than the time zone in R.
+
+The Sheets' time zone does **not** influence the display of datetimes. There is no way to request that a datetime be displayed according to a specific time zone -- not via the Sheet's time zone, not via the format string, and not via a Sheets function.
+
+Datetimes in Google Sheets are fundamentally UTC-based and always display as such.
+
+If you want to see "9:14 am" in your Sheet, you must make sure the serial number in that cell represents 9:14 in the morning, UTC time.
+
+As far as I can tell, here is the only effect of a Sheet's time zone: The formulas `=NOW()` and `=TODAY()` take the local clock time or date, according to the the Sheet's time zone, and construct the UTC moment or date that will display as that time or date. Therefore `=NOW()`, especially, is almost misleading! It does not capture the current moment, in UTC, but instead fabricates a UTC moment that matches current local clock time.
+
+This suggests various hacks if you truly, deeply want to see specific clock times in your Sheet, for non-UTC time zones.
+
+Starting with the UTC moments, you must determine and apply the offset yourself. At a very crude level, this can be done from first principles with datetime arithmetic in the Sheet ("Vancouver is −08:00, so subtract 8 hours"). But then there's daylight savings time and other complexities ("Except, during DST, subtract 7 hours."). In reality, no mere mortal will ever get this right, in general.
+
+You need to use external, authoritative offset information, either within R or in the Sheet. Below, we show how to do this in R. In Sheets, people tend to use Google Apps script and solutions based on [moment.js](https://momentjs.com).
+
+## Worked example
+
+Let's make all of this concrete. We construct a data frame in R with a datetime and various versions of it that explore time zone issues. We also include a couple of Google Sheet formulas, to trigger some datetime work once the data is written into a Sheet. We sketch the construction of this data frame here, with considerable abuse of notation (mixing R code and Sheets formulas):
+
+| what | datetime | serial_number |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|
+| moment | `Sys.time()` | `=ARRAYFORMULA(TO_PURE_NUMBER(B2:B))` |
+| moment_ny | `with_tz(moment, tzone = "America/New_York")` |  |
+| moment_utc | `with_tz(moment, tzone = "Etc/UTC")` |  |
+| moment_ny_force_utc | `force_tz(moment_ny, tzone = "Etc/UTC")` |  |
+| =NOW() | `=NOW()` |  |
+| =(DATE(moment_utc) + TIME(moment_utc)) | `=(DATE({year},{month},{day})+time({hour},{minute},{round(second, 1)}))` where `year`, `month`, etc. are computed from `moment_utc` |  |
+
+Capture the current `moment` in time, with `Sys.time()`, which has no explicit time zone. Store versions of `moment` with explicit time zones: America/New_York and Etc/UTC. Use `lubridate::force_tz()` to create a new moment in time: the moment in UTC that has the same clock time as the original `moment` in New York.
+
+The first Sheets formula we use is `=NOW()`, which you might expect to be the equivalent of R's `Sys.time()`. But it's more like `force_tz(Sys.time(), tzone = "Etc/UTC")`. The second formula we construct is more elaborate. It uses datetime functions in Sheets to explicitly construct `moment_utc` in the Sheet. The last column uses `=TO_PURE_NUMBER()` to reveal the underlying serial numbers for all of the datetimes.
+
+```{r define-populate-sheets, include = FALSE}
+populate_sheets <- function(moment, ss) {
+  force(moment)
+  moment_ny        <-  with_tz(moment,    tzone = "America/New_York")
+  moment_utc       <-  with_tz(moment,    tzone = "Etc/UTC")
+  moment_ny_utc_force <- force_tz(moment_ny, tzone = "Etc/UTC")
+
+  # https://github.com/tidyverse/lubridate/issues/882
+  # use moment_utc, so I know for sure that time zone is UTC
+  fixed_formula <- gs4_formula(glue::glue(
+    "=(DATE({year},{month},{day})+time({hour},{minute},{round(second, 1)}))",
+    year = year(moment_utc), month = month(moment_utc), day = day(moment_utc),
+    hour = hour(moment_utc), minute = minute(moment_utc),
+    second = second(moment_utc)
+  ))
+  now_formula <- gs4_formula("=NOW()")
+  serial_number <- "=ARRAYFORMULA(TO_PURE_NUMBER(B2:B))"
+  length(serial_number) <- 6
+
+  dat <- tibble::tibble(
+    what = c(
+      "moment", "moment_ny", "moment_utc", "moment_ny_utc_force",
+      "=NOW()", "=DATE(moment_utc)"
+    ),
+    datetime = list(
+      moment, moment_ny, moment_utc, moment_ny_utc_force,
+      now_formula, fixed_formula
+    ),
+    serial_number = gs4_formula(serial_number)
+  )
+  
+  range_iso <- function(ss, range) {
+    fmt <- googlesheets4:::CellData(
+      userEnteredFormat = googlesheets4:::new(
+        "CellFormat",
+        numberFormat = list(type = "DATE_TIME", pattern = "yyyy-mm-dd hh:mm:ss")
+      )
+    )
+    range_flood(ss, sheet = 1, range = range, cell = fmt)
+  }
+
+  for (i in seq_along(ss)) {
+    sheet_write(dat, ss = ss[i], sheet = 1)
+    range_autofit(ss[i], sheet = 1)
+    range_iso(ss[i], range = "B2:B")
+  }
+  dat
+}
+```
+
+Create 3 Sheets, with different approaches to the time zone:
+
+* No explicit specification of time zone. It's hard to say what you'll get here!
+* America/New_York
+* Etc/UTC
+
+```{r}
+ss_xx  <- gs4_create("tz-default")
+ss_ny  <- gs4_create("tz-america-new-york", timeZone = "America/New_York")
+ss_utc <- gs4_create("tz-etc-utc", timeZone = "Etc/UTC")
+
+show_timezone <- function(ss) gs4_get(ss)$time_zone
+
+show_timezone(ss_xx)
+show_timezone(ss_ny)
+show_timezone(ss_utc)
+```
+
+```{r eval = FALSE, include = FALSE}
+# useful when developing and the sheets already exist
+(ss_xx <- gs4_find("tz-default") %>% as_sheets_id())
+(ss_ny <- gs4_find("tz-america-new-york") %>% as_sheets_id())
+(ss_utc <- gs4_find("tz-etc-utc") %>% as_sheets_id())
+```
+
+```{r eval = FALSE, include = FALSE}
+# useful during development, in order to see these sheets in the browser
+gs4_share(ss_xx)
+gs4_share(ss_ny)
+gs4_share(ss_utc)
+```
+
+```{r eval = FALSE, include = FALSE}
+# useful during development, e.g. for capturing screenshots
+gs4_browse(ss_xx)
+gs4_browse(ss_ny)
+gs4_browse(ss_utc)
+```
+
+Capture the current `moment` with `Sys.time()`, construct the data frame described above, and write it into each of the prepared Google Sheets.
+
+```{r}
+dat <- populate_sheets(Sys.time(), c(ss_xx, ss_ny, ss_utc))
+```
+
+First, let's look at `dat`, the data frame we sent.
+
+```{r}
+dat
+```
+
+That's hard to parse since the `datetime` column is a list-column. Here's a different look, with the most natural character representation of that column.
+
+```{r echo = FALSE}
+dat2 <- dat
+dat2$datetime <- vapply(
+  dat$datetime, function(x) format(x, usetz = TRUE), character(1)
+)
+dat2
+```
+
+Read the Sheets back into R, the Sheet with no explicit time zone set.
+
+```{r}
+read_sheet(ss_xx) %>% as.data.frame()
+read_sheet(ss_ny) %>% as.data.frame()
+read_sheet(ss_utc) %>% as.data.frame()
+```
+
+Main conclusions:
+
+* All 3 versions of `moment` result in the same serial number in all 3 Sheets. Lesson: in R, time zone is merely a matter of display and, in Sheets, there is only UTC.
+* `moment_ny_utc_force` (forcing `moment`s NY clock time into UTC) results in the same serial number in all 3 Sheets. Lesson: If you want to see a specify clock time in the Sheet, force this on the R side, before writing to Sheets. But realize that you have fudged the datetime data in order to get the desired display.
+* `=NOW()` is one of the few things affected by a Sheet's time zone (along with `=TODAY()`. It allows you to force the Sheet's clock time into UTC.
+
+Clean up.
+
+```{r}
+gs4_find("tz-") %>% 
+  googledrive::drive_trash()
+```

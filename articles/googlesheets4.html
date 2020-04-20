@@ -196,14 +196,14 @@
   <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span>()
 <span class="co">#&gt; Reading from "chicken-sheet"</span>
 <span class="co">#&gt; Range "chicken.csv"</span>
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
+<span class="co">#&gt; # A tibble: 5 x 4</span>
+<span class="co">#&gt;   chicken            breed         sex    motto                                 </span>
+<span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                                 </span>
+<span class="co">#&gt; 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…</span>
+<span class="co">#&gt; 2 Chicken Little     unknown       hen    The sky is falling!                   </span>
+<span class="co">#&gt; 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…</span>
+<span class="co">#&gt; 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  </span>
+<span class="co">#&gt; 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.</span></pre></body></html></div>
 <p>If you’d like to see a Sheet in the browser, including our example Sheets, use <code><a href="../reference/gs4_browse.html">gs4_browse()</a></code>:</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"deaths"</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="../reference/gs4_browse.html">gs4_browse</a></span>()</pre></body></html></div>
@@ -230,24 +230,14 @@
 <span class="co">#&gt;     arts_data: 'arts'!A5:F15</span>
 
 <span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span>
+<span class="co">#&gt; # A tibble: 2 x 8</span>
+<span class="co">#&gt;   name  index         id type  visible grid_rows grid_columns data  </span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
+<span class="co">#&gt; 1 arts      0 1512440582 GRID  TRUE         1000           26 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 other     1  278837031 GRID  TRUE         1000           26 &lt;NULL&gt;</span>
 
 <span class="fu"><a href="../reference/sheet_properties.html">sheet_names</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
+<span class="co">#&gt; [1] "arts"  "other"</span></pre></body></html></div>
 <p><code><a href="../reference/sheet_properties.html">sheet_properties()</a></code> and <code><a href="../reference/sheet_properties.html">sheet_names()</a></code> are two members of a larger family of functions for dealing with the (work)sheets within a (spread)Sheet.</p>
 <p>The metadata exposed by <code><a href="../reference/gs4_get.html">gs4_get()</a></code> is also revealed whenever you print an object that is (or can be converted to) a <code>sheets_id</code> (an S3 class we use to mark Sheet IDs).</p>
 <p><code><a href="../reference/gs4_get.html">gs4_get()</a></code> is related to <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">googledrive::drive_get()</a></code>. Both functions return metadata about a file on Google Drive, such as its ID and name. However, <code><a href="../reference/gs4_get.html">gs4_get()</a></code> reveals additional metadata that is specific to Drive files that happen to be Sheets, such as info about worksheets and named ranges.</p>
@@ -260,10 +250,10 @@
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">letters</span>[<span class="fl">1</span>:<span class="fl">3</span>])
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span>(<span class="no">df</span>)
-<span class="co">#&gt; Creating new Sheet: "uppity-fieldmouse"</span>
+<span class="co">#&gt; Creating new Sheet: "orchestral-aoudad"</span>
 <span class="no">ss</span>
-<span class="co">#&gt;   Spreadsheet name: uppity-fieldmouse</span>
-<span class="co">#&gt;                 ID: 160CC4duf7feSm7SzGZ0cJKU4H6go6SAGfaTStKGdAVM</span>
+<span class="co">#&gt;   Spreadsheet name: orchestral-aoudad</span>
+<span class="co">#&gt;                 ID: 1_dOy6QyEHSLdK8AJRn10aYmLUoRNqLxNygkdY4_4nyw</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -274,13 +264,13 @@
 <p>Let’s start over: we delete that Sheet and call <code><a href="../reference/gs4_create.html">gs4_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * uppity-fieldmouse: 160CC4duf7feSm7SzGZ0cJKU4H6go6SAGfaTStKGdAVM</span>
+<span class="co">#&gt;   * orchestral-aoudad: 1_dOy6QyEHSLdK8AJRn10aYmLUoRNqLxNygkdY4_4nyw</span>
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span>(<span class="st">"testy-hedgehog"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="no">df</span>)
 <span class="co">#&gt; Creating new Sheet: "testy-hedgehog"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;                 ID: 1N2z40zun6OPp25p3760SLpSg2BdKIaHZFfAzFmSL_e0</span>
+<span class="co">#&gt;                 ID: 1_oZpAY_RLRE5-JAq33VJV8hX0AYm_AgRgc0C1MqsCUA</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -293,7 +283,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;                 ID: 1N2z40zun6OPp25p3760SLpSg2BdKIaHZFfAzFmSL_e0</span>
+<span class="co">#&gt;                 ID: 1_oZpAY_RLRE5-JAq33VJV8hX0AYm_AgRgc0C1MqsCUA</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>
@@ -340,12 +330,12 @@
 <span class="co">#&gt; # A tibble: 2 x 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0   62428834 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 1850039277 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 1 df           0 2144749426 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 1054548173 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * testy-hedgehog: 1N2z40zun6OPp25p3760SLpSg2BdKIaHZFfAzFmSL_e0</span></pre></body></html></div>
+<span class="co">#&gt;   * testy-hedgehog: 1_oZpAY_RLRE5-JAq33VJV8hX0AYm_AgRgc0C1MqsCUA</span></pre></body></html></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

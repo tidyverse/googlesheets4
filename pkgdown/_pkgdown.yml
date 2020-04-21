@@ -14,6 +14,34 @@ navbar:
   components:
     home: ~
 
+articles:
+- title: Basic reading and writing
+  navbar: Basic reading and writing
+  contents:
+  - googlesheets4
+  - articles/read-sheets
+  - articles/write-sheets
+
+- title: Special topics
+  navbar: Special topics
+  contents:
+  - articles/auth
+  - articles/dates-and-times
+  - articles/find-identify-sheets
+
+- title: Connections to googledrive, readxl, and reprex
+  navbar: Connections to other packages
+  contents:
+  - articles/drive-and-sheets
+  - articles/fun-with-googledrive-and-readxl
+  - articles/googlesheets4-reprex
+
+- title: Developer
+  desc: Articles about package internals
+  contents:
+  - articles/range-specification
+  - articles/function-class-names
+
 reference:
   - title: "Reading"
     desc: >

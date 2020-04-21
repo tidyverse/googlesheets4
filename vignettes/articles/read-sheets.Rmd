@@ -1,5 +1,7 @@
 ---
 title: "Read Sheets"
+description: >
+  Specifying the range and column types, getting detailed cell data
 ---
 
 ```{r setup, include = FALSE}

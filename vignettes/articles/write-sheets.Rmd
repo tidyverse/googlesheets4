@@ -1,5 +1,7 @@
 ---
 title: "Write Sheets"
+description: >
+  Targeting different parts of a Sheet, writing formulas, addressing cell format
 ---
 
 ```{r setup, include = FALSE}

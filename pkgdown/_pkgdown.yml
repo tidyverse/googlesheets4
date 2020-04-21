@@ -16,7 +16,7 @@ navbar:
 
 articles:
 - title: Basic reading and writing
-  navbar: Basic reading and writing
+  navbar: ~
   contents:
   - googlesheets4
   - articles/read-sheets

@@ -20,7 +20,7 @@ googlesheets4 provides an R interface to [Google
 Sheets](https://spreadsheets.google.com/) via the [Sheets API
 v4](https://developers.google.com/sheets/api/). It is a reboot of an
 earlier package called
-[googlesheets](https://cran.r-project.org/package=googlesheets).
+[googlesheets](https://github.com/jennybc/googlesheets#readme).
 
 *Why **4**? Why googlesheets**4**? Did I miss googlesheets1 through 3?
 No. The idea is to name the package after the corresponding version of
@@ -50,9 +50,9 @@ website documents the dev version.
 ## Auth
 
 googlesheets4 will, by default, help you interact with Sheets as an
-authenticated Google user. If you don’t need to access private Sheets,
-use `gs4_deauth()` to indicate there is no need for a token. See the
-article [googlesheets4
+authenticated Google user. If you don’t plan to write Sheets or to read
+private Sheets, use `gs4_deauth()` to indicate there is no need for a
+token. See the article [googlesheets4
 auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html)
 for more.
 
@@ -155,7 +155,7 @@ some initial data.
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> Creating new Sheet: "fluffy-bunny"
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1BoWvvqC7-sqwkBhZN7VgFNDKvWJuYFlQgoF-MLY323o
+#>                 ID: 1cXGbHLYkNbtzdxs62QKMeFhaDKdJFKLHsj2hxqqNsBs
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -174,7 +174,7 @@ head(mtcars) %>%
 #> Writing to sheet "autos"
 ss
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1BoWvvqC7-sqwkBhZN7VgFNDKvWJuYFlQgoF-MLY323o
+#>                 ID: 1cXGbHLYkNbtzdxs62QKMeFhaDKdJFKLHsj2hxqqNsBs
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2

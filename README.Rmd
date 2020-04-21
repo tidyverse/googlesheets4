@@ -37,7 +37,7 @@ googlesheets4:::gs4_auth_docs()
 
 ## Overview
 
-googlesheets4 provides an R interface to [Google Sheets](https://spreadsheets.google.com/) via the [Sheets API v4](https://developers.google.com/sheets/api/). It is a reboot of an earlier package called [googlesheets](https://cran.r-project.org/package=googlesheets).
+googlesheets4 provides an R interface to [Google Sheets](https://spreadsheets.google.com/) via the [Sheets API v4](https://developers.google.com/sheets/api/). It is a reboot of an earlier package called [googlesheets](https://github.com/jennybc/googlesheets#readme).
 
 *Why **4**? Why googlesheets**4**? Did I miss googlesheets1 through 3? No. The idea is to name the package after the corresponding version of the Sheets API. In hindsight, the original googlesheets should have been googlesheets**3**.*
 
@@ -60,7 +60,7 @@ As of mid-April 2020, note that all of the writing/modifying features are only i
 
 ## Auth
 
-googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. If you don't need to access private Sheets, use `gs4_deauth()` to indicate there is no need for a token. See the article [googlesheets4 auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html) for more.
+googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. If you don't plan to write Sheets or to read private Sheets, use `gs4_deauth()` to indicate there is no need for a token. See the article [googlesheets4 auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html) for more.
 
 For this overview, we've logged into Google as a specific user in a hidden chunk.
 

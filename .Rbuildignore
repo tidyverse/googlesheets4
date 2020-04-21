@@ -1,11 +1,8 @@
 ^internal$
 ^\.Rproj\.user$
 ^docs$
-^_pkgdown\.yml$
 ^codecov\.yml$
 ^data-raw$
-^man-roxygen$
-^\.httr-oauth.*
 ^scratch\.R$
 ^old$
 ^googlesheets4\.Rproj$
@@ -13,14 +10,9 @@
 ^vignettes$
 ^README\.Rmd$
 ^\.github$
-^\.github/ISSUE_TEMPLATE$
 ^pkgdown$
-^vignettes/articles$
 ^index\.Rmd$
 ^index\.md$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
 ^tools$
-^\.github/workflows/R-CMD-check\.yaml$
-^\.github/workflows/pkgdown\.yaml$
-^vignettes/googlesheets4\.Rmd$

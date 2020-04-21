@@ -128,32 +128,39 @@ want is sheet_append()." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/articles/auth.html">googlesheets4 auth</a>
-    </li>
-    <li>
-      <a href="../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
-    </li>
-    <li>
-      <a href="../articles/articles/find-identify-sheets.html">Find and Identify Sheets</a>
-    </li>
-    <li>
-      <a href="../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
-    </li>
-    <li>
-      <a href="../articles/articles/function-class-names.html">Function and class names</a>
-    </li>
-    <li>
-      <a href="../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
-    </li>
-    <li>
-      <a href="../articles/articles/range-specification.html">Range specification</a>
-    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Basic reading and writing</li>
     <li>
       <a href="../articles/articles/read-sheets.html">Read Sheets</a>
     </li>
     <li>
       <a href="../articles/articles/write-sheets.html">Write Sheets</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Special topics</li>
+    <li>
+      <a href="../articles/articles/auth.html">googlesheets4 auth</a>
+    </li>
+    <li>
+      <a href="../articles/articles/dates-and-times.html">Dates and times</a>
+    </li>
+    <li>
+      <a href="../articles/articles/find-identify-sheets.html">Find and identify Sheets</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Connections to other packages</li>
+    <li>
+      <a href="../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
+    </li>
+    <li>
+      <a href="../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -336,8 +343,14 @@ and format are deleted.</p></li>
 
   <span class='co'># clean up</span>
   <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>(<span class='no'>ss</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "alpha"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "beta"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "beta"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * range-write-demo: 11O-j_EULE7Ua5a58CaOYVmKyMp3nQtuvy3BAAXzz47o</span></div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "alpha"</span></div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+#&gt; <span class='error'>  * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
+#&gt; <span class='error'>  * Quota exceeded for quota group 'WriteGroup' and limit 'Write requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
+#&gt; <span class='error'></span>
+#&gt; <span class='error'>Error details:</span>
+#&gt; <span class='error'>  * Error details of type 'google.rpc.Help' are not implemented yet.</span>
+#&gt; <span class='error'>  * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
+#&gt; <span class='error'>  * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

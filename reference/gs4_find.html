@@ -114,32 +114,39 @@ if you want to coordinate auth between googlesheets4 and googledrive." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/articles/auth.html">googlesheets4 auth</a>
-    </li>
-    <li>
-      <a href="../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
-    </li>
-    <li>
-      <a href="../articles/articles/find-identify-sheets.html">Find and Identify Sheets</a>
-    </li>
-    <li>
-      <a href="../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
-    </li>
-    <li>
-      <a href="../articles/articles/function-class-names.html">Function and class names</a>
-    </li>
-    <li>
-      <a href="../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
-    </li>
-    <li>
-      <a href="../articles/articles/range-specification.html">Range specification</a>
-    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Basic reading and writing</li>
     <li>
       <a href="../articles/articles/read-sheets.html">Read Sheets</a>
     </li>
     <li>
       <a href="../articles/articles/write-sheets.html">Write Sheets</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Special topics</li>
+    <li>
+      <a href="../articles/articles/auth.html">googlesheets4 auth</a>
+    </li>
+    <li>
+      <a href="../articles/articles/dates-and-times.html">Dates and times</a>
+    </li>
+    <li>
+      <a href="../articles/articles/find-identify-sheets.html">Find and identify Sheets</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Connections to other packages</li>
+    <li>
+      <a href="../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
+    </li>
+    <li>
+      <a href="../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -207,13 +214,13 @@ if you want to coordinate auth between googlesheets4 and googledrive.</p>
   <span class='co'>#   tidyr::hoist(drive_resource, created_on = "createdTime") %&gt;%</span>
   <span class='co'>#   dplyr::mutate(created_on = as.Date(created_on))</span>
 }</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 3</span><span>
-#&gt;   name              id                                          drive_resource  
-#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                       </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>          
-#&gt; </span><span style='color: #555555;'>1</span><span> smooth-indianabat 1DP2YpmgflG0OsDsWWBS4h2PvbmREgDCiuWP-htYp2… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
-#&gt; </span><span style='color: #555555;'>2</span><span> sheet-resize-demo 1C_TLeVgvBn85RVbgLz7tzDOK7h2BtEtCtSOEtt7jZ… </span><span style='color: #555555;'>&lt;named list [33</span><span>…
-#&gt; </span><span style='color: #555555;'>3</span><span> mysterious-paca   1Zte0vSDdE2s5R9GlOo9r9-0PJKptIa5yyYvA3SW3b… </span><span style='color: #555555;'>&lt;named list [33</span><span>…
-#&gt; </span><span style='color: #555555;'>4</span><span> smooth-indianabat 1-GIiOiWm5Ya4eVY2Pigp9e221gCfefCszTsVb43bH… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
-#&gt; </span><span style='color: #555555;'>5</span><span> sheet-resize-demo 1crvtJVcRJQy5Jd2cgErT7l5oKd-tzHM0giUS3xEzk… </span><span style='color: #555555;'>&lt;named list [33</span><span>…</div></span></pre>
+#&gt;   name                 id                                       drive_resource  
+#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                    </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>          
+#&gt; </span><span style='color: #555555;'>1</span><span> sheets-edit-demo     18WuNLADtj3afPAsysX8bC6wSpM_igmPaOyb3h3… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
+#&gt; </span><span style='color: #555555;'>2</span><span> sheet-resize-demo    19F73zDAxEMBgktX1ki7gUTUcu5lFjCWyOemX2U… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
+#&gt; </span><span style='color: #555555;'>3</span><span> sheet-relocate-demo  1y94fyWFLe_fV2G2njWK1-RCvBcUAC6uv6vSX-T… </span><span style='color: #555555;'>&lt;named list [33</span><span>…
+#&gt; </span><span style='color: #555555;'>4</span><span> delete-sheets-from-… 1Ehhzb2e94ZTqmC6TdiavyG-IB2zvGnLC7VET_M… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
+#&gt; </span><span style='color: #555555;'>5</span><span> sheets-edit-demo     1beNcfU3F5-ZmIYqLHz175jt2a84gNrow5cZVjk… </span><span style='color: #555555;'>&lt;named list [34</span><span>…</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

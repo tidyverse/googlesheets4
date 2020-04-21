@@ -75,32 +75,39 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="articles/articles/auth.html">googlesheets4 auth</a>
-    </li>
-    <li>
-      <a href="articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
-    </li>
-    <li>
-      <a href="articles/articles/find-identify-sheets.html">Find and Identify Sheets</a>
-    </li>
-    <li>
-      <a href="articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
-    </li>
-    <li>
-      <a href="articles/articles/function-class-names.html">Function and class names</a>
-    </li>
-    <li>
-      <a href="articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
-    </li>
-    <li>
-      <a href="articles/articles/range-specification.html">Range specification</a>
-    </li>
+<li class="divider">
+    <li class="dropdown-header">Basic reading and writing</li>
     <li>
       <a href="articles/articles/read-sheets.html">Read Sheets</a>
     </li>
     <li>
       <a href="articles/articles/write-sheets.html">Write Sheets</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Special topics</li>
+    <li>
+      <a href="articles/articles/auth.html">googlesheets4 auth</a>
+    </li>
+    <li>
+      <a href="articles/articles/dates-and-times.html">Dates and times</a>
+    </li>
+    <li>
+      <a href="articles/articles/find-identify-sheets.html">Find and identify Sheets</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Connections to other packages</li>
+    <li>
+      <a href="articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
+    </li>
+    <li>
+      <a href="articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -132,7 +139,7 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>googlesheets4 provides an R interface to <a href="https://spreadsheets.google.com/">Google Sheets</a> via the <a href="https://developers.google.com/sheets/api/">Sheets API v4</a>. It is a reboot of an earlier package called <a href="https://cran.r-project.org/package=googlesheets">googlesheets</a>.</p>
+<p>googlesheets4 provides an R interface to <a href="https://spreadsheets.google.com/">Google Sheets</a> via the <a href="https://developers.google.com/sheets/api/">Sheets API v4</a>. It is a reboot of an earlier package called <a href="https://github.com/jennybc/googlesheets#readme">googlesheets</a>.</p>
 <p><em>Why <strong>4</strong>? Why googlesheets<strong>4</strong>? Did I miss googlesheets1 through 3? No. The idea is to name the package after the corresponding version of the Sheets API. In hindsight, the original googlesheets should have been googlesheets<strong>3</strong>.</em></p>
 </div>
 <div id="installation" class="section level2">
@@ -148,7 +155,7 @@
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
 <a href="#auth" class="anchor"></a>Auth</h2>
-<p>googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. If you don’t need to access private Sheets, use <code><a href="reference/gs4_deauth.html">gs4_deauth()</a></code> to indicate there is no need for a token. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/auth.html">googlesheets4 auth</a> for more.</p>
+<p>googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. If you don’t plan to write Sheets or to read private Sheets, use <code><a href="reference/gs4_deauth.html">gs4_deauth()</a></code> to indicate there is no need for a token. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/auth.html">googlesheets4 auth</a> for more.</p>
 <p>For this overview, we’ve logged into Google as a specific user in a hidden chunk.</p>
 </div>
 <div id="attach-googlesheets4" class="section level2">
@@ -226,7 +233,7 @@
 <div class="sourceCode" id="cb5"><pre class="r">(<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/gs4_create.html">gs4_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">flowers</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">iris</span>))))
 <span class="co">#&gt; Creating new Sheet: "fluffy-bunny"</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1BoWvvqC7-sqwkBhZN7VgFNDKvWJuYFlQgoF-MLY323o</span>
+<span class="co">#&gt;                 ID: 1cXGbHLYkNbtzdxs62QKMeFhaDKdJFKLHsj2hxqqNsBs</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -240,7 +247,7 @@
 <span class="co">#&gt; Writing to sheet "autos"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1BoWvvqC7-sqwkBhZN7VgFNDKvWJuYFlQgoF-MLY323o</span>
+<span class="co">#&gt;                 ID: 1cXGbHLYkNbtzdxs62QKMeFhaDKdJFKLHsj2hxqqNsBs</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>

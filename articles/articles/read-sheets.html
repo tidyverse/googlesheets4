@@ -19,7 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
 <script src="../../pkgdown.js"></script><link href="../../tidyverse-2.css" rel="stylesheet">
 <meta property="og:title" content="Read Sheets">
-<meta property="og:description" content="googlesheets4">
+<meta property="og:description" content="Specifying the range and column types, getting detailed cell data">
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -68,32 +68,39 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../../articles/articles/auth.html">googlesheets4 auth</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/find-identify-sheets.html">Find and Identify Sheets</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/function-class-names.html">Function and class names</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/range-specification.html">Range specification</a>
-    </li>
+<li class="divider">
+    <li class="dropdown-header">Basic reading and writing</li>
     <li>
       <a href="../../articles/articles/read-sheets.html">Read Sheets</a>
     </li>
     <li>
       <a href="../../articles/articles/write-sheets.html">Write Sheets</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Special topics</li>
+    <li>
+      <a href="../../articles/articles/auth.html">googlesheets4 auth</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/dates-and-times.html">Dates and times</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/find-identify-sheets.html">Find and identify Sheets</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Connections to other packages</li>
+    <li>
+      <a href="../../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="../../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -368,14 +375,14 @@
 <span class="co">#&gt;   gdpPercap = col_double()</span>
 <span class="co">#&gt; )</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.056   0.001   0.391</span>
+<span class="co">#&gt;   0.055   0.002   0.673</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(
   <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"gapminder"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/range_read.html">range_read</a></span>(<span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"Africa"</span>)
 )
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "'Africa'"</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.612   0.018   1.012</span></pre></body></html></div>
+<span class="co">#&gt;   0.631   0.023   1.239</span></pre></body></html></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> vs <code><a href="../../reference/range_read.html">range_read()</a></code>:</p>
 <ul>

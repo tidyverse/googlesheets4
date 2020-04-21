@@ -68,32 +68,39 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../../articles/articles/auth.html">googlesheets4 auth</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/find-identify-sheets.html">Find and Identify Sheets</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/function-class-names.html">Function and class names</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/range-specification.html">Range specification</a>
-    </li>
+<li class="divider">
+    <li class="dropdown-header">Basic reading and writing</li>
     <li>
       <a href="../../articles/articles/read-sheets.html">Read Sheets</a>
     </li>
     <li>
       <a href="../../articles/articles/write-sheets.html">Write Sheets</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Special topics</li>
+    <li>
+      <a href="../../articles/articles/auth.html">googlesheets4 auth</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/dates-and-times.html">Dates and times</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/find-identify-sheets.html">Find and identify Sheets</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Connections to other packages</li>
+    <li>
+      <a href="../../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="../../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -153,26 +160,26 @@
 <a href="#create-a-private-sheet-from-csv-with-the-drive-api" class="anchor"></a>Create a private Sheet from csv with the Drive API</h2>
 <p>Put the iris data into a csv file.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r">(<span class="no">iris_tempfile</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>(<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"iris-"</span>, <span class="kw">fileext</span> <span class="kw">=</span> <span class="st">".csv"</span>))
-<span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp1yEmCq/iris-b3754ee77cf.csv"</span>
+<span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmprLFNiX/iris-85847763b79.csv"</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(<span class="no">iris</span>, <span class="no">iris_tempfile</span>, <span class="kw">row.names</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <p>Use <code><a href="https://googledrive.tidyverse.org/reference/drive_upload.html">googledrive::drive_upload()</a></code> to upload the csv and simultaneously convert to a Sheet.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r">(<span class="no">iris_ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_upload.html">drive_upload</a></span>(<span class="no">iris_tempfile</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"spreadsheet"</span>))
 <span class="co">#&gt; Local file:</span>
-<span class="co">#&gt;   * /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp1yEmCq/iris-b3754ee77cf.csv</span>
+<span class="co">#&gt;   * /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmprLFNiX/iris-85847763b79.csv</span>
 <span class="co">#&gt; uploaded into Drive file:</span>
-<span class="co">#&gt;   * iris-b3754ee77cf: 13OAaN8OQV-gIQwfxBsuQTUvmCY6QzRbmsoWZjt5ta4M</span>
+<span class="co">#&gt;   * iris-85847763b79: 10fYdVvcCmpOygxed8herXCH_XZBdmuUDHrQE6ZnFO14</span>
 <span class="co">#&gt; with MIME type:</span>
 <span class="co">#&gt;   * application/vnd.google-apps.spreadsheet</span>
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;   name             id                                           drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;            &lt;chr&gt;                                        &lt;list&gt;          </span>
-<span class="co">#&gt; 1 iris-b3754ee77cf 13OAaN8OQV-gIQwfxBsuQTUvmCY6QzRbmsoWZjt5ta4M &lt;named list [34…</span>
+<span class="co">#&gt; 1 iris-85847763b79 10fYdVvcCmpOygxed8herXCH_XZBdmuUDHrQE6ZnFO14 &lt;named list [34…</span>
 
 <span class="co"># visit the new Sheet in the browser, in an interactive session!</span>
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_browse.html">drive_browse</a></span>(<span class="no">iris_ss</span>)</pre></body></html></div>
 <p>Read data from the private Sheet into R.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">iris_ss</span>, <span class="kw">range</span> <span class="kw">=</span> <span class="st">"B1:D6"</span>)
-<span class="co">#&gt; Reading from "iris-b3754ee77cf"</span>
+<span class="co">#&gt; Reading from "iris-85847763b79"</span>
 <span class="co">#&gt; Range "B1:D6"</span>
 <span class="co">#&gt; # A tibble: 5 x 3</span>
 <span class="co">#&gt;   Sepal.Width Petal.Length Petal.Width</span>
@@ -188,12 +195,12 @@
 <a href="#create-a-local-xlsx-from-a-sheet-with-the-drive-api" class="anchor"></a>Create a local xlsx from a Sheet with the Drive API</h2>
 <p>Download the Sheet as an Excel workbook.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r">(<span class="no">iris_xlsxfile</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="st">"[.]csv"</span>, <span class="st">".xlsx"</span>, <span class="no">iris_tempfile</span>))
-<span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp1yEmCq/iris-b3754ee77cf.xlsx"</span>
+<span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmprLFNiX/iris-85847763b79.xlsx"</span>
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_download.html">drive_download</a></span>(<span class="no">iris_ss</span>, <span class="kw">path</span> <span class="kw">=</span> <span class="no">iris_xlsxfile</span>, <span class="kw">overwrite</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="co">#&gt; File downloaded:</span>
-<span class="co">#&gt;   * iris-b3754ee77cf</span>
+<span class="co">#&gt;   * iris-85847763b79</span>
 <span class="co">#&gt; Saved locally as:</span>
-<span class="co">#&gt;   * /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp1yEmCq/iris-b3754ee77cf.xlsx</span></pre></body></html></div>
+<span class="co">#&gt;   * /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmprLFNiX/iris-85847763b79.xlsx</span></pre></body></html></div>
 </div>
 <div id="read-xlsx-with-readxl" class="section level2">
 <h2 class="hasAnchor">
@@ -224,7 +231,7 @@
 <span class="co">#&gt; [1] TRUE TRUE</span>
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>(<span class="no">iris_ss</span>)
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * iris-b3754ee77cf: 13OAaN8OQV-gIQwfxBsuQTUvmCY6QzRbmsoWZjt5ta4M</span></pre></body></html></div>
+<span class="co">#&gt;   * iris-85847763b79: 10fYdVvcCmpOygxed8herXCH_XZBdmuUDHrQE6ZnFO14</span></pre></body></html></div>
 </div>
   </div>
 

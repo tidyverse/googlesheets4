@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Find and Identify Sheets • googlesheets4</title>
+<title>Find and identify Sheets • googlesheets4</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../../apple-touch-icon.png">
@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../../pkgdown.css" rel="stylesheet">
 <script src="../../pkgdown.js"></script><link href="../../tidyverse-2.css" rel="stylesheet">
-<meta property="og:title" content="Find and Identify Sheets">
+<meta property="og:title" content="Find and identify Sheets">
 <meta property="og:description" content="googlesheets4">
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png">
 <meta name="twitter:card" content="summary">
@@ -68,32 +68,39 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../../articles/articles/auth.html">googlesheets4 auth</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/find-identify-sheets.html">Find and Identify Sheets</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/function-class-names.html">Function and class names</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
-    </li>
-    <li>
-      <a href="../../articles/articles/range-specification.html">Range specification</a>
-    </li>
+<li class="divider">
+    <li class="dropdown-header">Basic reading and writing</li>
     <li>
       <a href="../../articles/articles/read-sheets.html">Read Sheets</a>
     </li>
     <li>
       <a href="../../articles/articles/write-sheets.html">Write Sheets</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Special topics</li>
+    <li>
+      <a href="../../articles/articles/auth.html">googlesheets4 auth</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/dates-and-times.html">Dates and times</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/find-identify-sheets.html">Find and identify Sheets</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Connections to other packages</li>
+    <li>
+      <a href="../../articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
+    </li>
+    <li>
+      <a href="../../articles/articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="../../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -119,7 +126,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Find and Identify Sheets</h1>
+      <h1 data-toc-skip>Find and identify Sheets</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/tidyverse/googlesheets4/blob/master/vignettes/articles/find-identify-sheets.Rmd"><code>vignettes/articles/find-identify-sheets.Rmd</code></a></small>
@@ -152,14 +159,17 @@
 <p>googlesheets4 accepts such a URL as the <code>ss</code> argument (think “spreadsheet”) of many functions:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">ugly_url</span> <span class="kw">&lt;-</span> <span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span>
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ugly_url</span>)
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
+<span class="co">#&gt; Reading from "gapminder"</span>
+<span class="co">#&gt; Range "Africa"</span>
+<span class="co">#&gt; # A tibble: 624 x 6</span>
+<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
+<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
+<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
+<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
+<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
+<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
+<span class="co">#&gt; # … with 619 more rows</span></pre></body></html></div>
 <p>At this time, although the URL may contain both a (spread)Sheet and a (work)sheet, we only extract the (spread)Sheet ID. If the function targets a specific (work)sheet, that is typically specified via arguments like <code>range</code> or <code>sheet</code> or a default of “first (visible) sheet”.</p>
 <p>These URLs are not particularly nice to look at in your code, though.</p>
 </div>
@@ -295,26 +305,26 @@
 <p>What if you want to see all of your Sheets? Or all the Sheets with “gap” in their name?</p>
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"spreadsheet"</span>)
-<span class="co">#&gt; # A tibble: 20 x 3</span>
+<span class="co">#&gt; # A tibble: 43 x 3</span>
 <span class="co">#&gt;   name               id                                         drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 sheet-write-demo   153iFtmta0nkc-G86lt_xET-VfwcOxIGCFCeAcirK… &lt;named list [33…</span>
-<span class="co">#&gt; 2 sheet-resize-demo  1JtL3OM5kKAVVbQmCmHmDDU6uUh1uPC3erq9YsGFX… &lt;named list [33…</span>
-<span class="co">#&gt; 3 sheet-rename-demo  1hCjnz71OC5H1yh12ZR17WCN7y78s6OR3xA06g7w2… &lt;named list [33…</span>
-<span class="co">#&gt; 4 sheet-relocate-de… 1rTGuM0_1iTE6ESgHPo3rk-ppzYzbqQyJrcnOQ_g9… &lt;named list [33…</span>
-<span class="co">#&gt; 5 sheet-copy-demo-a… 19wZ4ywyBWyIAXNe-4yjQoR5M_S98i6sOTRVc4zZ-… &lt;named list [33…</span>
-<span class="co">#&gt; # … with 15 more rows</span></pre></body></html></div>
+<span class="co">#&gt; 1 smooth-indianabat  1LzGjPRlAXQmJD4zmcY5jgn9cCXU7WtA0wEfMf1cR… &lt;named list [33…</span>
+<span class="co">#&gt; 2 sheet-resize-demo  1MzLx37JQnkOb6bLeATnBZED4n4aJXRGFhLVdnjZv… &lt;named list [33…</span>
+<span class="co">#&gt; 3 sheet-rename-demo  1eQrH1OFp3WUBnzT6nO3_jAkuZQEw6aqYyWM9zesI… &lt;named list [33…</span>
+<span class="co">#&gt; 4 sheet-relocate-de… 1gw-7_We20A9n3n5kmJ4JeqB29kSrRUlqONXliCHa… &lt;named list [33…</span>
+<span class="co">#&gt; 5 sheet-copy-demo-a… 1O-z1EcDjpmyYSwn_LgIbQm8JvjrihZGFC6ooh_D3… &lt;named list [33…</span>
+<span class="co">#&gt; # … with 38 more rows</span></pre></body></html></div>
 <p>This is so handy that we’ve made <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span>()
-<span class="co">#&gt; # A tibble: 20 x 3</span>
+<span class="co">#&gt; # A tibble: 43 x 3</span>
 <span class="co">#&gt;   name               id                                         drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 sheet-write-demo   153iFtmta0nkc-G86lt_xET-VfwcOxIGCFCeAcirK… &lt;named list [33…</span>
-<span class="co">#&gt; 2 sheet-resize-demo  1JtL3OM5kKAVVbQmCmHmDDU6uUh1uPC3erq9YsGFX… &lt;named list [33…</span>
-<span class="co">#&gt; 3 sheet-rename-demo  1hCjnz71OC5H1yh12ZR17WCN7y78s6OR3xA06g7w2… &lt;named list [33…</span>
-<span class="co">#&gt; 4 sheet-relocate-de… 1rTGuM0_1iTE6ESgHPo3rk-ppzYzbqQyJrcnOQ_g9… &lt;named list [33…</span>
-<span class="co">#&gt; 5 sheet-copy-demo-a… 19wZ4ywyBWyIAXNe-4yjQoR5M_S98i6sOTRVc4zZ-… &lt;named list [33…</span>
-<span class="co">#&gt; # … with 15 more rows</span></pre></body></html></div>
+<span class="co">#&gt; 1 smooth-indianabat  1LzGjPRlAXQmJD4zmcY5jgn9cCXU7WtA0wEfMf1cR… &lt;named list [33…</span>
+<span class="co">#&gt; 2 sheet-resize-demo  1MzLx37JQnkOb6bLeATnBZED4n4aJXRGFhLVdnjZv… &lt;named list [33…</span>
+<span class="co">#&gt; 3 sheet-rename-demo  1eQrH1OFp3WUBnzT6nO3_jAkuZQEw6aqYyWM9zesI… &lt;named list [33…</span>
+<span class="co">#&gt; 4 sheet-relocate-de… 1gw-7_We20A9n3n5kmJ4JeqB29kSrRUlqONXliCHa… &lt;named list [33…</span>
+<span class="co">#&gt; 5 sheet-copy-demo-a… 1O-z1EcDjpmyYSwn_LgIbQm8JvjrihZGFC6ooh_D3… &lt;named list [33…</span>
+<span class="co">#&gt; # … with 38 more rows</span></pre></body></html></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </div>

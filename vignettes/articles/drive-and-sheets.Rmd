@@ -59,7 +59,7 @@ gs4_auth(token = drive_token())
 googlesheets4:::gs4_auth_docs(drive = TRUE) 
 
 # attempt to reduce quota exhaustion problems
-if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(20)
+if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(30)
 ```
 
 Now you can use googledrive functions, like `googledrive::drive_find()` or `googledrive::drive_get()`, to list files or find them by name, path, or other property. Then, once you've identified the target file, use googlesheets4 to do spreadsheet-specific tasks.

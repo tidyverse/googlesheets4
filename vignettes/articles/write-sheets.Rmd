@@ -198,6 +198,11 @@ gs4_find("write-sheets-demo") %>%
 
 ## `sheet_append()`
 
+```{r include = FALSE}
+# attempt to reduce quota exhaustion problems
+if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(100)
+```
+
 `sheet_append()` can add one or more rows of data to an existing (work)sheet.
 
 Let's recreate the table of "other" deaths from an example Sheet, but without the annoying text above and below the data. First we bring that data into a local data frame and chop it into pieces.

@@ -120,8 +120,6 @@ sheet_relocate()." />
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="divider"></li>
-    <li class="dropdown-header">Basic reading and writing</li>
     <li>
       <a href="../articles/articles/read-sheets.html">Read Sheets</a>
     </li>
@@ -274,14 +272,14 @@ specified. Refer to an existing sheet by name (via a string) or by position
   <span class='co'># clean up</span>
   <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='st'>"sheet-relocate-demo"</span>) <span class='kw'>%&gt;%</span>
     <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-#&gt; <span class='error'>  * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-#&gt; <span class='error'>  * Quota exceeded for quota group 'WriteGroup' and limit 'Write requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-#&gt; <span class='error'></span>
-#&gt; <span class='error'>Error details:</span>
-#&gt; <span class='error'>  * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-#&gt; <span class='error'>  * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-#&gt; <span class='error'>  * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * sheet-relocate-demo: 1iqRKSvNLRJhkXARV2w_PCJRDUdwf_4NwxxzWEXKCHQs</span>
+#&gt; <span class='message'>  * sheet-relocate-demo: 1ril4R2UZMJRZkmBrlYTO1iYo6GOjoHY7dcxlfn88WKc</span>
+#&gt; <span class='message'>  * sheet-relocate-demo: 1gw-7_We20A9n3n5kmJ4JeqB29kSrRUlqONXliCHaHp8</span>
+#&gt; <span class='message'>  * sheet-relocate-demo: 1y94fyWFLe_fV2G2njWK1-RCvBcUAC6uv6vSX-T-ImYc</span>
+#&gt; <span class='message'>  * sheet-relocate-demo: 1dXocfCb8Dvf5t7Il0-sujrk4fQAE8FC1lFCRdaKuPdc</span>
+#&gt; <span class='message'>  * sheet-relocate-demo: 14NZgBeHmWK3BL-XDpLH50C139ILIcuhW3h7tUSX-7Ps</span>
+#&gt; <span class='message'>  * sheet-relocate-demo: 1rTGuM0_1iTE6ESgHPo3rk-ppzYzbqQyJrcnOQ_g9xxc</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

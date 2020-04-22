@@ -303,26 +303,26 @@
 <p>What if you want to see all of your Sheets? Or all the Sheets with “gap” in their name?</p>
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"spreadsheet"</span>)
-<span class="co">#&gt; # A tibble: 43 x 3</span>
+<span class="co">#&gt; # A tibble: 47 x 3</span>
 <span class="co">#&gt;   name                 id                                       drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;                &lt;chr&gt;                                    &lt;list&gt;          </span>
-<span class="co">#&gt; 1 delete-sheets-from-… 1vUd9Oid4FM0_MHVLU-e8T_g4cIbWv-RdAEyEhk… &lt;named list [33…</span>
-<span class="co">#&gt; 2 sheet-copy-demo-bbb  1gqhTGrG6BrkzZxtSqdnyZIsZ1lUG4RwDpshaQT… &lt;named list [33…</span>
-<span class="co">#&gt; 3 sheet-copy-demo-aaa  1BR_X6GiyxMh6YMz182M_P93-vaeCdO6IBmWceW… &lt;named list [33…</span>
-<span class="co">#&gt; 4 sheet-append-demo    1tarfb3D7hTB_ws5vzjK7lmlXzd3NE9w3pUGUmI… &lt;named list [33…</span>
-<span class="co">#&gt; 5 add-sheets-to-me     1JW1w8B2fjWtUkmnpm5B6HGJq3jlJB4mZtQiCx4… &lt;named list [34…</span>
-<span class="co">#&gt; # … with 38 more rows</span></pre></body></html></div>
+<span class="co">#&gt; 1 sheet-write-demo     1LUfPSyz8Yo_D92UQAbT8OtxjNbVP5gVlTUhk37… &lt;named list [33…</span>
+<span class="co">#&gt; 2 delete-sheets-from-… 1x5l5ewDQYKeJyrJIzfYAoemdalsffglnoumJCT… &lt;named list [33…</span>
+<span class="co">#&gt; 3 add-sheets-to-me     1N--dGeUwHQncT6Pq4Gob_yEq_C-7R3c-By9Yg3… &lt;named list [33…</span>
+<span class="co">#&gt; 4 range-flood-example  1Aw9oxKHxTwYCf4vQpKjVu8kjmmV7z82CjjdDqY… &lt;named list [33…</span>
+<span class="co">#&gt; 5 delete-sheets-from-… 1vUd9Oid4FM0_MHVLU-e8T_g4cIbWv-RdAEyEhk… &lt;named list [34…</span>
+<span class="co">#&gt; # … with 42 more rows</span></pre></body></html></div>
 <p>This is so handy that we’ve made <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span>()
-<span class="co">#&gt; # A tibble: 43 x 3</span>
+<span class="co">#&gt; # A tibble: 47 x 3</span>
 <span class="co">#&gt;   name                 id                                       drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;                &lt;chr&gt;                                    &lt;list&gt;          </span>
-<span class="co">#&gt; 1 delete-sheets-from-… 1vUd9Oid4FM0_MHVLU-e8T_g4cIbWv-RdAEyEhk… &lt;named list [33…</span>
-<span class="co">#&gt; 2 sheet-copy-demo-bbb  1gqhTGrG6BrkzZxtSqdnyZIsZ1lUG4RwDpshaQT… &lt;named list [33…</span>
-<span class="co">#&gt; 3 sheet-copy-demo-aaa  1BR_X6GiyxMh6YMz182M_P93-vaeCdO6IBmWceW… &lt;named list [33…</span>
-<span class="co">#&gt; 4 sheet-append-demo    1tarfb3D7hTB_ws5vzjK7lmlXzd3NE9w3pUGUmI… &lt;named list [33…</span>
-<span class="co">#&gt; 5 add-sheets-to-me     1JW1w8B2fjWtUkmnpm5B6HGJq3jlJB4mZtQiCx4… &lt;named list [34…</span>
-<span class="co">#&gt; # … with 38 more rows</span></pre></body></html></div>
+<span class="co">#&gt; 1 sheet-write-demo     1LUfPSyz8Yo_D92UQAbT8OtxjNbVP5gVlTUhk37… &lt;named list [33…</span>
+<span class="co">#&gt; 2 delete-sheets-from-… 1x5l5ewDQYKeJyrJIzfYAoemdalsffglnoumJCT… &lt;named list [33…</span>
+<span class="co">#&gt; 3 add-sheets-to-me     1N--dGeUwHQncT6Pq4Gob_yEq_C-7R3c-By9Yg3… &lt;named list [33…</span>
+<span class="co">#&gt; 4 range-flood-example  1Aw9oxKHxTwYCf4vQpKjVu8kjmmV7z82CjjdDqY… &lt;named list [33…</span>
+<span class="co">#&gt; 5 delete-sheets-from-… 1vUd9Oid4FM0_MHVLU-e8T_g4cIbWv-RdAEyEhk… &lt;named list [34…</span>
+<span class="co">#&gt; # … with 42 more rows</span></pre></body></html></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </div>

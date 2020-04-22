@@ -41,6 +41,7 @@ articles:
   contents:
   - articles/range-specification
   - articles/function-class-names
+  - articles/example-sheets
 
 reference:
   - title: "Reading"

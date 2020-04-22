@@ -1,0 +1,78 @@
+---
+title: "Example Sheets"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>", 
+  error = TRUE
+)
+```
+
+An index of the official example and test Sheets. They are world-readable, so we do `gs4_deauth()`.
+
+```{r setup}
+library(googlesheets4)
+
+gs4_deauth()
+```
+
+## Example Sheets
+
+```{r include = FALSE}
+example_urls <- sapply(gs4_examples(), gs4_browse)
+links <- glue::glue("[{names(example_urls)}]({unname(example_urls)})")
+dat <- tibble::tibble(
+  `name (these are links)` = links,
+  id = unclass(gs4_examples())
+)
+```
+
+```{r echo = FALSE}
+knitr::kable(dat)
+```
+
+### How to get hold of the example Sheets yourself
+
+`gs4_examples()` returns a named vector of Sheet IDs. It is also an instance of `drive_id`, to make good things happen with googledrive.
+
+```{r}
+gs4_examples()
+
+gs4_examples("gap")
+
+gs4_examples("and")
+```
+
+`gs4_example()` returns exactly one Sheet ID (or errors). It is an instance of `drive_id`. It is also an instance of `sheets_id`, which means printing will (try to) reveal current metadata about the Sheet.
+
+```{r}
+gs4_example("chicken")
+
+gs4_example("gap")
+```
+
+Here's a handy snippet to open all the example Sheets in browser tabs.
+
+```{r eval = FALSE}
+lapply(gs4_examples(), gs4_browse)
+```
+
+## Test Sheets
+
+These are more developer-facing, but it's convenient to do them here too.
+
+```{r include = FALSE}
+test_urls <- googlesheets4:::.test_sheets %>% 
+  purrr::map(gs4_browse)
+links <- glue::glue("[{names(test_urls)}]({unname(test_urls)})")
+dat <- tibble::tibble(
+  `name (these are links)` = links,
+  id = unclass(googlesheets4:::.test_sheets)
+)
+```
+
+```{r echo = FALSE}
+knitr::kable(dat)
+```

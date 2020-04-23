@@ -255,14 +255,14 @@ whitespace trimming.</p>
 
   <span class='co'># ^^ gets same result as ...</span>
   <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='fu'><a href='gs4_example.html'>gs4_example</a></span>(<span class='st'>"mini-gap"</span>))
-}</div><div class='output co'>#&gt; <span class='message'>Reading from "mini-gap"</span></div><div class='output co'>#&gt; <span class='message'>Range "Africa"</span></div><div class='output co'>#&gt; <span class='message'>Reading from "mini-gap"</span></div><div class='output co'>#&gt; <span class='message'>Range "Africa"</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 6</span><span>
-#&gt;   country      continent  year lifeExp     pop gdpPercap
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>   </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> Algeria      Africa     </span><span style='text-decoration: underline;'>1</span><span>952    43.1 9</span><span style='text-decoration: underline;'>279</span><span>525     </span><span style='text-decoration: underline;'>2</span><span>449.
-#&gt; </span><span style='color: #555555;'>2</span><span> Angola       Africa     </span><span style='text-decoration: underline;'>1</span><span>952    30.0 4</span><span style='text-decoration: underline;'>232</span><span>095     </span><span style='text-decoration: underline;'>3</span><span>521.
-#&gt; </span><span style='color: #555555;'>3</span><span> Benin        Africa     </span><span style='text-decoration: underline;'>1</span><span>952    38.2 1</span><span style='text-decoration: underline;'>738</span><span>315     </span><span style='text-decoration: underline;'>1</span><span>063.
-#&gt; </span><span style='color: #555555;'>4</span><span> Botswana     Africa     </span><span style='text-decoration: underline;'>1</span><span>952    47.6  </span><span style='text-decoration: underline;'>442</span><span>308      851.
-#&gt; </span><span style='color: #555555;'>5</span><span> Burkina Faso Africa     </span><span style='text-decoration: underline;'>1</span><span>952    32.0 4</span><span style='text-decoration: underline;'>469</span><span>979      543.</div></span></pre>
+}</div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+#&gt; <span class='error'>  * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
+#&gt; <span class='error'>  * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
+#&gt; <span class='error'></span>
+#&gt; <span class='error'>Error details:</span>
+#&gt; <span class='error'>  * Error details of type 'google.rpc.Help' are not implemented yet.</span>
+#&gt; <span class='error'>  * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
+#&gt; <span class='error'>  * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

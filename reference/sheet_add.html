@@ -257,9 +257,9 @@ in <code>name = value</code> form.</p></td>
   <span class='co'># cleanup</span>
   <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"add-sheets-to-me"</span>) <span class='kw'>%&gt;%</span>
     <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "Sheet2"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "apple"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "banana"</span></div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
 #&gt; <span class='error'>  * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-#&gt; <span class='error'>  * Quota exceeded for quota group 'WriteGroup' and limit 'Write requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
+#&gt; <span class='error'>  * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
 #&gt; <span class='error'></span>
 #&gt; <span class='error'>Error details:</span>
 #&gt; <span class='error'>  * Error details of type 'google.rpc.Help' are not implemented yet.</span>

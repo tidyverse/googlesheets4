@@ -13,9 +13,8 @@ Interact with Google Sheets through the Sheets API
     "application programming interface"; the Sheets API allows users to
     interact with Google Sheets programmatically, instead of via a web
     browser. The "v4" refers to the fact that the Sheets API is currently
-    at version 4. This package helps the user to retrieve Sheet metadata
-    and to read data out of specific worksheets or ranges into an R
-    object, such as a data frame.
+    at version 4. This package can read and write both the metadata and the cell
+    data in a Sheet.
 }
 \seealso{
 Useful links:

@@ -1,31 +1,47 @@
 # googlesheets4 (development version)
 
-### Function naming scheme
+## Articles
 
-The universal `sheets_` prefix has been replaced by a scheme that conveys more information about the scope of the function, e.g., a whole spreadsheet vs. a whole worksheet vs. a cell range. We've added many functions since the initial CRAN release and it became clear the original scheme wasn't serving us well. There is a new article about conventions for function names and classes, [Function and class names](https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html).
+Several new articles are available at [googlesheets4.tidyverse.org](https://googlesheets4.tidyverse.org/articles/index.html).
 
-Any function present in the previous CRAN release, v0.1.1, still works, but triggers a warning with strong encouragement to call it via its current name.
+## Function naming scheme
 
-### Write Sheets
+The universal `sheets_` prefix has been replaced by a scheme that conveys more information about the scope of the function. There are three prefixes:
 
-These functions are ready for use but are still considered experimental and may see more refinements to their interface and capabilities:
+* `gs4_`: refers variously to the googlesheets4 package, v4 of the Google 
+  Sheets API, or to operations on one or more (spread)Sheets
+* `sheet_`: operations on one or more (work)sheets
+* `range_`: operations on a range of cells
 
-  * `gs4_create()` is a new function to create a new Google Sheet and,
-    optionally, write one or more data frames into it (#61).
-  * `sheet_write()` (also available as `write_sheet()`) is a new function to
-    write a data frame into a new or existing (work)sheet, inside a new or
-    existing (spread)Sheet.
-  * `sheet_append()` adds rows to the data in an existing sheet.
-  * `range_write()` writes to a range.
+The addition of write/edit functionality resulted in many new functions and the original naming scheme proved to be problematic. The article [Function and class names](https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html) contains more detail.
+
+Any function present in the previous CRAN release, v0.1.1, still works, but triggers a warning with strong encouragement to switch to the current name.
+
+## Printing a Sheet ID
+
+The print method for `sheets_id` objects now attempts to reveal the current Sheet metadata available via `gs4_get()`, i.e. it makes an API call (but it should never error).
+
+## Write Sheets
+
+googlesheets4 now has very broad capabilities around Sheet creation and modification. These functions are ready for general use but are still marked experimental, as they may see some refinement based on user feedback.
+
+  * `gs4_create()` creates a new Google Sheet and, optionally, writes one or
+    more data frames into it (#61).
+  * `sheet_write()` (also available as `write_sheet()`) writes a data frame
+    into a new or existing (work)sheet, inside an existing (or new)
+    (spread)Sheet.
+  * `sheet_append()` adds rows to an existing data table.
+  * `range_write()` writes to a cell range.
   * `range_flood()` "floods" all cells in a range with the same content.
     `range_clear()` is a wrapper around `range_flood()` for the special case
      of clearing cell values.
   * `range_delete()` deletes a range of cells.
   
-### Other new functions and arguments
+## (Work)sheet operations
 
 The `sheet_*()` family of functions operate on the (work)sheets inside an existing (spread)Sheet:
   
+  * (`sheet_write()` and `sheet_append()` are described above.)
   * `sheet_properties()` returns a tibble of metadata with one row per
      sheet.
   * `sheet_names()` returns sheet names.
@@ -36,23 +52,25 @@ The `sheet_*()` family of functions operate on the (work)sheets inside an existi
   * `sheet_rename()` renames one sheet.
   * `sheet_resize()` changes the number of rows or columns in a sheet.
   
-`range_speedread()` provides a quick-and-dirty method for reading a Sheet using its "export=csv" URL.
+## Range operations
+
+`range_speedread()` reads from a Sheet using its "export=csv" URL and, therefore, uses readr-style column type specification. It still supports fairly general range syntax and auth. For very large Sheets, this can be substantially faster than `read_sheet()`.
 
 `range_read_cells()` (formerly known as `sheets_cells()`) gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But `range_read_cells(cell_data = "full", discard_empty = FALSE)` is now available if you want full cell data, including formatting, even for cells that have no value (#4).
 
-`range_autofit()` causes column width or row height to fit the data. It only affects the display of a sheet and does not change values or dimensions.
+`range_autofit()` adjusts column width or row height to fit the data. This only affects the display of a sheet and does not change values or dimensions.
+
+## Other changes and additions
+
+`gs_formula()` implements a vctrs S3 class for storing Sheets formulas.
 
 `gs4_fodder()` is a convenience function that creates a filler data frame you can use to make toy sheets you're using to practice on or for a reprex.
 
-### Renamed functions and classes
+## Renamed classes
 
-* The S3 class `sheets_Spreadsheet` is renamed to `googlesheets4_spreadsheet`, a consequence of rationalizing all internal and external classes. `googlesheets4_spreadsheet` is the class that holds metadata for a Sheet and it is connected to the API's [`Spreadsheet`](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet) schema. The return value of `gs4_get()` has this class.
+The S3 class `sheets_Spreadsheet` is renamed to `googlesheets4_spreadsheet`, a consequence of rationalizing all internal and external classes (detailed in the article [Function and class names](https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html)). `googlesheets4_spreadsheet` is the class that holds metadata for a Sheet and it is connected to the API's [`Spreadsheet`](https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet) schema. The return value of `gs4_get()` has this class.
 
-### Printing a Sheet ID
-
-The print method for `sheets_id` objects now attempts to reveal the current Sheet metadata available via `gs4_get()`. The means that printing can lead to an attempt to initiate auth, unless `gs4_deauth()` has been called. However, `sheets_id` printing should never lead to an actual error condition, although it may reveal information from caught errors.
-
-### Bug fixes
+## Bug fixes
 
 * `read_sheet()` passes its `na` argument down to the helpers that parse cells, so that `na` actually has the documented effect (#73).
 

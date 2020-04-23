@@ -50,7 +50,7 @@ A short demo: in R, capture the current time as `tt` and reveal the current time
 
 ```r
 (tt <- Sys.time())
-#> [1] "2020-04-21 10:08:22 PDT"
+#> [1] "2020-04-23 12:48:57 PDT"
 
 Sys.timezone()
 #> [1] "America/Vancouver"
@@ -72,7 +72,7 @@ dat <- tibble::tibble(
 ))
 #> Creating new Sheet: "no-time-zone-effect"
 #>   Spreadsheet name: no-time-zone-effect
-#>                 ID: 116XKVlcL7PD2wqIOiPm7vJvZju7IGPVUD6JQjFdP83U
+#>                 ID: 1rH4nOOFBFvqCLEcYqaPjMIPj7EHfcT21tLTRL2FbHx0
 #>             Locale: en_US
 #>          Time zone: America/Vancouver
 #>        # of sheets: 1
@@ -86,7 +86,7 @@ read_sheet(ss)
 #> # A tibble: 1 x 2
 #>   datetime            as_displayed       
 #>   <dttm>              <chr>              
-#> 1 2020-04-21 17:08:22 2020-04-21 17:08:23
+#> 1 2020-04-23 19:48:57 2020-04-23 19:48:58
 ```
 
 Note that the `tt` datetime is displayed differently in Sheets than it is locally in R. Sheets presents datetimes in Coordinated Universal Time (time zone Etc/UTC), even if the Sheet's metadata specifies a different time zone, such as America/Vancouver.
@@ -94,7 +94,7 @@ Note that the `tt` datetime is displayed differently in Sheets than it is locall
 
 ```r
 with_tz(tt, "Etc/UTC")
-#> [1] "2020-04-21 17:08:22 UTC"
+#> [1] "2020-04-23 19:48:57 UTC"
 ```
 
 If you want to understand more about datetimes in R, in Sheets, and how you can sort of hack around this time zone problem, keep reading.
@@ -143,31 +143,31 @@ If you ask for the current time, R prints it formatted for your time zone (or, a
 
 ```r
 Sys.time()
-#> [1] "2020-04-21 10:08:28 PDT"
+#> [1] "2020-04-23 12:49:04 PDT"
 
 Sys.timezone()
 #> [1] "America/Vancouver"
 ```
 
-The time zone is **purely matter of display**, but it's a really nice touch! It is comforting to get a time printed by R that matches your experience of what time it is, based on looking the clock on your wall ("clock time").
+The time zone is **purely matter of display**, but it's a really nice touch! It is comforting to get a time printed by R that matches your experience of what time it is, based on looking at the clock on your wall ("clock time").
 
-lubridate's `with_tz()` function let's you explicitly associate a datetime with a time zone, e.g. your own or any other time zone recognized by your system. And this, in turn, affects how the time is formatted for human eyeballs.
+lubridate's `with_tz()` function lets you explicitly associate a datetime with a time zone, e.g. your own or any other time zone recognized by your system. And this, in turn, affects how the time is formatted for human eyeballs.
 
 
 ```r
 tt <- Sys.time()
 
 with_tz(tt, tzone = "America/Vancouver")
-#> [1] "2020-04-21 10:08:28 PDT"
+#> [1] "2020-04-23 12:49:04 PDT"
 
 with_tz(tt, tzone = "America/Denver")
-#> [1] "2020-04-21 11:08:28 MDT"
+#> [1] "2020-04-23 13:49:04 MDT"
 
 with_tz(tt, tzone = "Etc/UTC")
-#> [1] "2020-04-21 17:08:28 UTC"
+#> [1] "2020-04-23 19:49:04 UTC"
 ```
 
-**This ability to display a moment in time according to a specified time zone is not present in Sheets.** Yes, each Sheet has an associated time zone, but it does not have this effect, even though you might expect or hope for that.
+**Google Sheets have no ability to display a moment in time according to a specified time zone.** Yes, each Sheet has an associated time zone, but this is not what it influences, even though you might expect or hope for that.
 
 When we read datetimes out of a Google Sheet, we must:
 
@@ -245,7 +245,7 @@ As far as I can tell, here is the only effect of a Sheet's time zone: The formul
 
 This suggests various hacks if you truly, deeply want to see specific clock times in your Sheet, for non-UTC time zones.
 
-Starting with the UTC moments, you must determine and apply the offset yourself. At a very crude level, this can be done from first principles with datetime arithmetic in the Sheet ("Vancouver is −08:00, so subtract 8 hours"). But then there's daylight savings time and other complexities ("Except, during DST, subtract 7 hours."). In reality, no mere mortal will ever get this right, in general.
+Starting with the UTC moments, you must determine and apply the offset yourself. At a very crude level, this can be done from first principles with datetime arithmetic in the Sheet ("Vancouver is −08:00, so subtract 8 hours"). But then there's daylight savings time and other complexities ("Except, during DST, subtract 7 hours."). In reality, no mere mortal will *ever* get this right, in general. If you doubt me, please watch the YouTube video [Computerphile's "The Problem with Time & Timezones"](https://youtu.be/-5wpm-gesOY).
 
 You need to use external, authoritative offset information, either within R or in the Sheet. Below, we show how to do this in R. In Sheets, people tend to use Google Apps script and solutions based on [moment.js](https://momentjs.com).
 
@@ -347,12 +347,12 @@ That's hard to parse since the `datetime` column is a list-column. Here's a diff
 #> # A tibble: 6 x 3
 #>   what             datetime                     serial_number                      
 #>   <chr>            <chr>                        <fmla>                             
-#> 1 moment           2020-04-21 10:08:44 PDT      =ARRAYFORMULA(TO_PURE_NUMBER(B2:B))
-#> 2 moment_ny        2020-04-21 13:08:44 EDT      NA                                 
-#> 3 moment_utc       2020-04-21 17:08:44 UTC      NA                                 
-#> 4 moment_ny_utc_f… 2020-04-21 13:08:44 UTC      NA                                 
+#> 1 moment           2020-04-23 12:49:20 PDT      =ARRAYFORMULA(TO_PURE_NUMBER(B2:B))
+#> 2 moment_ny        2020-04-23 15:49:20 EDT      NA                                 
+#> 3 moment_utc       2020-04-23 19:49:20 UTC      NA                                 
+#> 4 moment_ny_utc_f… 2020-04-23 15:49:20 UTC      NA                                 
 #> 5 =NOW()           =NOW()                       NA                                 
-#> 6 =DATE(moment_ut… =(DATE(2020,4,21)+time(17,8… NA
+#> 6 =DATE(moment_ut… =(DATE(2020,4,23)+time(19,4… NA
 ```
 
 Read the Sheets back into R, the Sheet with no explicit time zone set.
@@ -363,32 +363,32 @@ read_sheet(ss_xx) %>% as.data.frame()
 #> Reading from "tz-default"
 #> Range "Sheet1"
 #>                  what            datetime serial_number
-#> 1              moment 2020-04-21 17:08:44      43942.71
-#> 2           moment_ny 2020-04-21 17:08:44      43942.71
-#> 3          moment_utc 2020-04-21 17:08:44      43942.71
-#> 4 moment_ny_utc_force 2020-04-21 13:08:44      43942.55
-#> 5              =NOW() 2020-04-21 17:08:46      43942.71
-#> 6   =DATE(moment_utc) 2020-04-21 17:08:44      43942.71
+#> 1              moment 2020-04-23 19:49:20      43944.83
+#> 2           moment_ny 2020-04-23 19:49:20      43944.83
+#> 3          moment_utc 2020-04-23 19:49:20      43944.83
+#> 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66
+#> 5              =NOW() 2020-04-23 19:49:22      43944.83
+#> 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83
 read_sheet(ss_ny) %>% as.data.frame()
 #> Reading from "tz-america-new-york"
 #> Range "Sheet1"
 #>                  what            datetime serial_number
-#> 1              moment 2020-04-21 17:08:44      43942.71
-#> 2           moment_ny 2020-04-21 17:08:44      43942.71
-#> 3          moment_utc 2020-04-21 17:08:44      43942.71
-#> 4 moment_ny_utc_force 2020-04-21 13:08:44      43942.55
-#> 5              =NOW() 2020-04-21 13:08:47      43942.55
-#> 6   =DATE(moment_utc) 2020-04-21 17:08:44      43942.71
+#> 1              moment 2020-04-23 19:49:20      43944.83
+#> 2           moment_ny 2020-04-23 19:49:20      43944.83
+#> 3          moment_utc 2020-04-23 19:49:20      43944.83
+#> 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66
+#> 5              =NOW() 2020-04-23 15:49:23      43944.66
+#> 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83
 read_sheet(ss_utc) %>% as.data.frame()
 #> Reading from "tz-etc-utc"
 #> Range "Sheet1"
 #>                  what            datetime serial_number
-#> 1              moment 2020-04-21 17:08:44      43942.71
-#> 2           moment_ny 2020-04-21 17:08:44      43942.71
-#> 3          moment_utc 2020-04-21 17:08:44      43942.71
-#> 4 moment_ny_utc_force 2020-04-21 13:08:44      43942.55
-#> 5              =NOW() 2020-04-21 17:08:48      43942.71
-#> 6   =DATE(moment_utc) 2020-04-21 17:08:44      43942.71
+#> 1              moment 2020-04-23 19:49:20      43944.83
+#> 2           moment_ny 2020-04-23 19:49:20      43944.83
+#> 3          moment_utc 2020-04-23 19:49:20      43944.83
+#> 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66
+#> 5              =NOW() 2020-04-23 19:49:25      43944.83
+#> 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83
 ```
 
 Main conclusions:
@@ -404,7 +404,7 @@ Clean up.
 gs4_find("tz-") %>% 
   googledrive::drive_trash()
 #> Files trashed:
-#>   * tz-etc-utc: 1Aj15-jJdhKuDqZcOBF4xfV7eer0m3kGc4RzZBffcOIM
-#>   * tz-america-new-york: 1pjuGN856G9qQd5vVJWCyhoICgulB_MSnTYV3n3BQGSA
-#>   * tz-default: 1Ian7U62JUDLeiKA5IATQcDSTUfSadyYXYQcp8SeDRSI
+#>   * tz-etc-utc: 1xUiNXYsk6nDMmgDq8E5FhBwJA6Zg1XCyhkuQISI91As
+#>   * tz-america-new-york: 1RYjk25FKJH2QRpfT1fHGmomeO2BQ5VqErWQADLGeFJI
+#>   * tz-default: 1X9Zqe--GLw6X4jajyHVb9XmKh-AiLMwZKk_g5GoJl3Y
 ```

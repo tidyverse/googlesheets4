@@ -140,9 +140,9 @@ Sys.time()
 Sys.timezone()
 ```
 
-The time zone is **purely matter of display**, but it's a really nice touch! It is comforting to get a time printed by R that matches your experience of what time it is, based on looking the clock on your wall ("clock time").
+The time zone is **purely matter of display**, but it's a really nice touch! It is comforting to get a time printed by R that matches your experience of what time it is, based on looking at the clock on your wall ("clock time").
 
-lubridate's `with_tz()` function let's you explicitly associate a datetime with a time zone, e.g. your own or any other time zone recognized by your system. And this, in turn, affects how the time is formatted for human eyeballs.
+lubridate's `with_tz()` function lets you explicitly associate a datetime with a time zone, e.g. your own or any other time zone recognized by your system. And this, in turn, affects how the time is formatted for human eyeballs.
 
 ```{r}
 tt <- Sys.time()
@@ -154,7 +154,7 @@ with_tz(tt, tzone = "America/Denver")
 with_tz(tt, tzone = "Etc/UTC")
 ```
 
-**This ability to display a moment in time according to a specified time zone is not present in Sheets.** Yes, each Sheet has an associated time zone, but it does not have this effect, even though you might expect or hope for that.
+**Google Sheets have no ability to display a moment in time according to a specified time zone.** Yes, each Sheet has an associated time zone, but this is not what it influences, even though you might expect or hope for that.
 
 When we read datetimes out of a Google Sheet, we must:
 
@@ -227,7 +227,7 @@ As far as I can tell, here is the only effect of a Sheet's time zone: The formul
 
 This suggests various hacks if you truly, deeply want to see specific clock times in your Sheet, for non-UTC time zones.
 
-Starting with the UTC moments, you must determine and apply the offset yourself. At a very crude level, this can be done from first principles with datetime arithmetic in the Sheet ("Vancouver is −08:00, so subtract 8 hours"). But then there's daylight savings time and other complexities ("Except, during DST, subtract 7 hours."). In reality, no mere mortal will ever get this right, in general.
+Starting with the UTC moments, you must determine and apply the offset yourself. At a very crude level, this can be done from first principles with datetime arithmetic in the Sheet ("Vancouver is −08:00, so subtract 8 hours"). But then there's daylight savings time and other complexities ("Except, during DST, subtract 7 hours."). In reality, no mere mortal will *ever* get this right, in general. If you doubt me, please watch the YouTube video [Computerphile's "The Problem with Time & Timezones"](https://youtu.be/-5wpm-gesOY).
 
 You need to use external, authoritative offset information, either within R or in the Sheet. Below, we show how to do this in R. In Sheets, people tend to use Google Apps script and solutions based on [moment.js](https://momentjs.com).
 

@@ -154,7 +154,7 @@
 <p>I know this sounds very harsh, but it is the truth. Google Sheets offer essentially no support for time zones and your life will be simpler if you just make peace with this and accept that you will be looking at UTC times in Sheets.</p>
 <p>A short demo: in R, capture the current time as <code>tt</code> and reveal the current time zone. Note that <code>tt</code> is displayed in R according to this time zone.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r">(<span class="no">tt</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>())
-<span class="co">#&gt; [1] "2020-04-21 10:08:22 PDT"</span>
+<span class="co">#&gt; [1] "2020-04-23 12:48:57 PDT"</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/timezones.html">Sys.timezone</a></span>()
 <span class="co">#&gt; [1] "America/Vancouver"</span></pre></body></html></div>
@@ -171,7 +171,7 @@
 ))
 <span class="co">#&gt; Creating new Sheet: "no-time-zone-effect"</span>
 <span class="co">#&gt;   Spreadsheet name: no-time-zone-effect</span>
-<span class="co">#&gt;                 ID: 116XKVlcL7PD2wqIOiPm7vJvZju7IGPVUD6JQjFdP83U</span>
+<span class="co">#&gt;                 ID: 1rH4nOOFBFvqCLEcYqaPjMIPj7EHfcT21tLTRL2FbHx0</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: America/Vancouver</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -185,10 +185,10 @@
 <span class="co">#&gt; # A tibble: 1 x 2</span>
 <span class="co">#&gt;   datetime            as_displayed       </span>
 <span class="co">#&gt;   &lt;dttm&gt;              &lt;chr&gt;              </span>
-<span class="co">#&gt; 1 2020-04-21 17:08:22 2020-04-21 17:08:23</span></pre></body></html></div>
+<span class="co">#&gt; 1 2020-04-23 19:48:57 2020-04-23 19:48:58</span></pre></body></html></div>
 <p>Note that the <code>tt</code> datetime is displayed differently in Sheets than it is locally in R. Sheets presents datetimes in Coordinated Universal Time (time zone Etc/UTC), even if the Sheet’s metadata specifies a different time zone, such as America/Vancouver.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="http://lubridate.tidyverse.org/reference/with_tz.html">with_tz</a></span>(<span class="no">tt</span>, <span class="st">"Etc/UTC"</span>)
-<span class="co">#&gt; [1] "2020-04-21 17:08:22 UTC"</span></pre></body></html></div>
+<span class="co">#&gt; [1] "2020-04-23 19:48:57 UTC"</span></pre></body></html></div>
 <p>If you want to understand more about datetimes in R, in Sheets, and how you can sort of hack around this time zone problem, keep reading.</p>
 </div>
 <div id="need-to-know-basics-of-datetimes" class="section level2">
@@ -229,23 +229,23 @@
 <p>R uses the <a href="https://rdrr.io/r/base/DateTimeClasses.html">POSIXct</a> class to represent datetimes. (Yes, there’s also <code>POSIXlt</code>, but I recommend and will focus on <code>POSIXct</code>.)</p>
 <p>If you ask for the current time, R prints it formatted for your time zone (or, at least, it tries). You can also ask R to reveal what it thinks your time zone is.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>()
-<span class="co">#&gt; [1] "2020-04-21 10:08:28 PDT"</span>
+<span class="co">#&gt; [1] "2020-04-23 12:49:04 PDT"</span>
 
 <span class="fu"><a href="https://rdrr.io/r/base/timezones.html">Sys.timezone</a></span>()
 <span class="co">#&gt; [1] "America/Vancouver"</span></pre></body></html></div>
-<p>The time zone is <strong>purely matter of display</strong>, but it’s a really nice touch! It is comforting to get a time printed by R that matches your experience of what time it is, based on looking the clock on your wall (“clock time”).</p>
-<p>lubridate’s <code><a href="http://lubridate.tidyverse.org/reference/with_tz.html">with_tz()</a></code> function let’s you explicitly associate a datetime with a time zone, e.g. your own or any other time zone recognized by your system. And this, in turn, affects how the time is formatted for human eyeballs.</p>
+<p>The time zone is <strong>purely matter of display</strong>, but it’s a really nice touch! It is comforting to get a time printed by R that matches your experience of what time it is, based on looking at the clock on your wall (“clock time”).</p>
+<p>lubridate’s <code><a href="http://lubridate.tidyverse.org/reference/with_tz.html">with_tz()</a></code> function lets you explicitly associate a datetime with a time zone, e.g. your own or any other time zone recognized by your system. And this, in turn, affects how the time is formatted for human eyeballs.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">tt</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span>()
 
 <span class="fu"><a href="http://lubridate.tidyverse.org/reference/with_tz.html">with_tz</a></span>(<span class="no">tt</span>, <span class="kw">tzone</span> <span class="kw">=</span> <span class="st">"America/Vancouver"</span>)
-<span class="co">#&gt; [1] "2020-04-21 10:08:28 PDT"</span>
+<span class="co">#&gt; [1] "2020-04-23 12:49:04 PDT"</span>
 
 <span class="fu"><a href="http://lubridate.tidyverse.org/reference/with_tz.html">with_tz</a></span>(<span class="no">tt</span>, <span class="kw">tzone</span> <span class="kw">=</span> <span class="st">"America/Denver"</span>)
-<span class="co">#&gt; [1] "2020-04-21 11:08:28 MDT"</span>
+<span class="co">#&gt; [1] "2020-04-23 13:49:04 MDT"</span>
 
 <span class="fu"><a href="http://lubridate.tidyverse.org/reference/with_tz.html">with_tz</a></span>(<span class="no">tt</span>, <span class="kw">tzone</span> <span class="kw">=</span> <span class="st">"Etc/UTC"</span>)
-<span class="co">#&gt; [1] "2020-04-21 17:08:28 UTC"</span></pre></body></html></div>
-<p><strong>This ability to display a moment in time according to a specified time zone is not present in Sheets.</strong> Yes, each Sheet has an associated time zone, but it does not have this effect, even though you might expect or hope for that.</p>
+<span class="co">#&gt; [1] "2020-04-23 19:49:04 UTC"</span></pre></body></html></div>
+<p><strong>Google Sheets have no ability to display a moment in time according to a specified time zone.</strong> Yes, each Sheet has an associated time zone, but this is not what it influences, even though you might expect or hope for that.</p>
 <p>When we read datetimes out of a Google Sheet, we must:</p>
 <ul>
 <li>Convert from days to seconds.</li>
@@ -300,7 +300,7 @@
 <p>If you want to see “9:14 am” in your Sheet, you must make sure the serial number in that cell represents 9:14 in the morning, UTC time.</p>
 <p>As far as I can tell, here is the only effect of a Sheet’s time zone: The formulas <code>=NOW()</code> and <code>=TODAY()</code> take the local clock time or date, according to the the Sheet’s time zone, and construct the UTC moment or date that will display as that time or date. Therefore <code>=NOW()</code>, especially, is almost misleading! It does not capture the current moment, in UTC, but instead fabricates a UTC moment that matches current local clock time.</p>
 <p>This suggests various hacks if you truly, deeply want to see specific clock times in your Sheet, for non-UTC time zones.</p>
-<p>Starting with the UTC moments, you must determine and apply the offset yourself. At a very crude level, this can be done from first principles with datetime arithmetic in the Sheet (“Vancouver is −08:00, so subtract 8 hours”). But then there’s daylight savings time and other complexities (“Except, during DST, subtract 7 hours.”). In reality, no mere mortal will ever get this right, in general.</p>
+<p>Starting with the UTC moments, you must determine and apply the offset yourself. At a very crude level, this can be done from first principles with datetime arithmetic in the Sheet (“Vancouver is −08:00, so subtract 8 hours”). But then there’s daylight savings time and other complexities (“Except, during DST, subtract 7 hours.”). In reality, no mere mortal will <em>ever</em> get this right, in general. If you doubt me, please watch the YouTube video <a href="https://youtu.be/-5wpm-gesOY">Computerphile’s “The Problem with Time &amp; Timezones”</a>.</p>
 <p>You need to use external, authoritative offset information, either within R or in the Sheet. Below, we show how to do this in R. In Sheets, people tend to use Google Apps script and solutions based on <a href="https://momentjs.com">moment.js</a>.</p>
 </div>
 <div id="worked-example" class="section level2">
@@ -411,43 +411,43 @@
 <pre><code>#&gt; # A tibble: 6 x 3
 #&gt;   what             datetime                     serial_number                      
 #&gt;   &lt;chr&gt;            &lt;chr&gt;                        &lt;fmla&gt;                             
-#&gt; 1 moment           2020-04-21 10:08:44 PDT      =ARRAYFORMULA(TO_PURE_NUMBER(B2:B))
-#&gt; 2 moment_ny        2020-04-21 13:08:44 EDT      NA                                 
-#&gt; 3 moment_utc       2020-04-21 17:08:44 UTC      NA                                 
-#&gt; 4 moment_ny_utc_f… 2020-04-21 13:08:44 UTC      NA                                 
+#&gt; 1 moment           2020-04-23 12:49:20 PDT      =ARRAYFORMULA(TO_PURE_NUMBER(B2:B))
+#&gt; 2 moment_ny        2020-04-23 15:49:20 EDT      NA                                 
+#&gt; 3 moment_utc       2020-04-23 19:49:20 UTC      NA                                 
+#&gt; 4 moment_ny_utc_f… 2020-04-23 15:49:20 UTC      NA                                 
 #&gt; 5 =NOW()           =NOW()                       NA                                 
-#&gt; 6 =DATE(moment_ut… =(DATE(2020,4,21)+time(17,8… NA</code></pre>
+#&gt; 6 =DATE(moment_ut… =(DATE(2020,4,23)+time(19,4… NA</code></pre>
 <p>Read the Sheets back into R, the Sheet with no explicit time zone set.</p>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ss_xx</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>()
 <span class="co">#&gt; Reading from "tz-default"</span>
 <span class="co">#&gt; Range "Sheet1"</span>
 <span class="co">#&gt;                  what            datetime serial_number</span>
-<span class="co">#&gt; 1              moment 2020-04-21 17:08:44      43942.71</span>
-<span class="co">#&gt; 2           moment_ny 2020-04-21 17:08:44      43942.71</span>
-<span class="co">#&gt; 3          moment_utc 2020-04-21 17:08:44      43942.71</span>
-<span class="co">#&gt; 4 moment_ny_utc_force 2020-04-21 13:08:44      43942.55</span>
-<span class="co">#&gt; 5              =NOW() 2020-04-21 17:08:46      43942.71</span>
-<span class="co">#&gt; 6   =DATE(moment_utc) 2020-04-21 17:08:44      43942.71</span>
+<span class="co">#&gt; 1              moment 2020-04-23 19:49:20      43944.83</span>
+<span class="co">#&gt; 2           moment_ny 2020-04-23 19:49:20      43944.83</span>
+<span class="co">#&gt; 3          moment_utc 2020-04-23 19:49:20      43944.83</span>
+<span class="co">#&gt; 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66</span>
+<span class="co">#&gt; 5              =NOW() 2020-04-23 19:49:22      43944.83</span>
+<span class="co">#&gt; 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83</span>
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ss_ny</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>()
 <span class="co">#&gt; Reading from "tz-america-new-york"</span>
 <span class="co">#&gt; Range "Sheet1"</span>
 <span class="co">#&gt;                  what            datetime serial_number</span>
-<span class="co">#&gt; 1              moment 2020-04-21 17:08:44      43942.71</span>
-<span class="co">#&gt; 2           moment_ny 2020-04-21 17:08:44      43942.71</span>
-<span class="co">#&gt; 3          moment_utc 2020-04-21 17:08:44      43942.71</span>
-<span class="co">#&gt; 4 moment_ny_utc_force 2020-04-21 13:08:44      43942.55</span>
-<span class="co">#&gt; 5              =NOW() 2020-04-21 13:08:47      43942.55</span>
-<span class="co">#&gt; 6   =DATE(moment_utc) 2020-04-21 17:08:44      43942.71</span>
+<span class="co">#&gt; 1              moment 2020-04-23 19:49:20      43944.83</span>
+<span class="co">#&gt; 2           moment_ny 2020-04-23 19:49:20      43944.83</span>
+<span class="co">#&gt; 3          moment_utc 2020-04-23 19:49:20      43944.83</span>
+<span class="co">#&gt; 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66</span>
+<span class="co">#&gt; 5              =NOW() 2020-04-23 15:49:23      43944.66</span>
+<span class="co">#&gt; 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83</span>
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ss_utc</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>()
 <span class="co">#&gt; Reading from "tz-etc-utc"</span>
 <span class="co">#&gt; Range "Sheet1"</span>
 <span class="co">#&gt;                  what            datetime serial_number</span>
-<span class="co">#&gt; 1              moment 2020-04-21 17:08:44      43942.71</span>
-<span class="co">#&gt; 2           moment_ny 2020-04-21 17:08:44      43942.71</span>
-<span class="co">#&gt; 3          moment_utc 2020-04-21 17:08:44      43942.71</span>
-<span class="co">#&gt; 4 moment_ny_utc_force 2020-04-21 13:08:44      43942.55</span>
-<span class="co">#&gt; 5              =NOW() 2020-04-21 17:08:48      43942.71</span>
-<span class="co">#&gt; 6   =DATE(moment_utc) 2020-04-21 17:08:44      43942.71</span></pre></body></html></div>
+<span class="co">#&gt; 1              moment 2020-04-23 19:49:20      43944.83</span>
+<span class="co">#&gt; 2           moment_ny 2020-04-23 19:49:20      43944.83</span>
+<span class="co">#&gt; 3          moment_utc 2020-04-23 19:49:20      43944.83</span>
+<span class="co">#&gt; 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66</span>
+<span class="co">#&gt; 5              =NOW() 2020-04-23 19:49:25      43944.83</span>
+<span class="co">#&gt; 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83</span></pre></body></html></div>
 <p>Main conclusions:</p>
 <ul>
 <li>All 3 versions of <code>moment</code> result in the same serial number in all 3 Sheets. Lesson: in R, time zone is merely a matter of display and, in Sheets, there is only UTC.</li>
@@ -460,9 +460,9 @@
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span>(<span class="st">"tz-"</span>) <span class="kw">%&gt;%</span>
   <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>()
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * tz-etc-utc: 1Aj15-jJdhKuDqZcOBF4xfV7eer0m3kGc4RzZBffcOIM</span>
-<span class="co">#&gt;   * tz-america-new-york: 1pjuGN856G9qQd5vVJWCyhoICgulB_MSnTYV3n3BQGSA</span>
-<span class="co">#&gt;   * tz-default: 1Ian7U62JUDLeiKA5IATQcDSTUfSadyYXYQcp8SeDRSI</span></pre></body></html></div>
+<span class="co">#&gt;   * tz-etc-utc: 1xUiNXYsk6nDMmgDq8E5FhBwJA6Zg1XCyhkuQISI91As</span>
+<span class="co">#&gt;   * tz-america-new-york: 1RYjk25FKJH2QRpfT1fHGmomeO2BQ5VqErWQADLGeFJI</span>
+<span class="co">#&gt;   * tz-default: 1X9Zqe--GLw6X4jajyHVb9XmKh-AiLMwZKk_g5GoJl3Y</span></pre></body></html></div>
 </div>
   </div>
 

@@ -158,7 +158,7 @@
 <a href="#create-a-private-sheet-from-csv-with-the-drive-api" class="anchor"></a>Create a private Sheet from csv with the Drive API</h2>
 <p>Put the iris data into a csv file.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r">(<span class="no">iris_tempfile</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>(<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"iris-"</span>, <span class="kw">fileext</span> <span class="kw">=</span> <span class="st">".csv"</span>))
-<span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpsCXxnz/iris-c1658f79697.csv"</span>
+<span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpPMHfOd/iris-cbd3fb595a6.csv"</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(<span class="no">iris</span>, <span class="no">iris_tempfile</span>, <span class="kw">row.names</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <p>Use <code><a href="https://googledrive.tidyverse.org/reference/drive_upload.html">googledrive::drive_upload()</a></code> to upload the csv and simultaneously convert to a Sheet.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r">(<span class="no">iris_ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_upload.html">drive_upload</a></span>(<span class="no">iris_tempfile</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"spreadsheet"</span>))
@@ -176,7 +176,7 @@
 <a href="#create-a-local-xlsx-from-a-sheet-with-the-drive-api" class="anchor"></a>Create a local xlsx from a Sheet with the Drive API</h2>
 <p>Download the Sheet as an Excel workbook.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r">(<span class="no">iris_xlsxfile</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="st">"[.]csv"</span>, <span class="st">".xlsx"</span>, <span class="no">iris_tempfile</span>))
-<span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpsCXxnz/iris-c1658f79697.xlsx"</span>
+<span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpPMHfOd/iris-cbd3fb595a6.xlsx"</span>
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_download.html">drive_download</a></span>(<span class="no">iris_ss</span>, <span class="kw">path</span> <span class="kw">=</span> <span class="no">iris_xlsxfile</span>, <span class="kw">overwrite</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
 <span class="co">#&gt; Error in as_dribble(file): object 'iris_ss' not found</span></pre></body></html></div>
 </div>
@@ -187,14 +187,14 @@
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"readxl"</span>, <span class="kw">quietly</span> <span class="kw">=</span> <span class="fl">TRUE</span>)) {
   <span class="kw pkg">readxl</span><span class="kw ns">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span>(<span class="no">iris_xlsxfile</span>)
 }
-<span class="co">#&gt; Error: `path` does not exist: '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpsCXxnz/iris-c1658f79697.xlsx'</span></pre></body></html></div>
+<span class="co">#&gt; Error: `path` does not exist: '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpPMHfOd/iris-cbd3fb595a6.xlsx'</span></pre></body></html></div>
 </div>
 <div id="clean-up" class="section level2">
 <h2 class="hasAnchor">
 <a href="#clean-up" class="anchor"></a>Clean up</h2>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.remove</a></span>(<span class="no">iris_tempfile</span>, <span class="no">iris_xlsxfile</span>)
 <span class="co">#&gt; Warning in file.remove(iris_tempfile, iris_xlsxfile): cannot remove file '/var/</span>
-<span class="co">#&gt; folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpsCXxnz/iris-c1658f79697.xlsx',</span>
+<span class="co">#&gt; folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpPMHfOd/iris-cbd3fb595a6.xlsx',</span>
 <span class="co">#&gt; reason 'No such file or directory'</span>
 <span class="co">#&gt; [1]  TRUE FALSE</span>
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>(<span class="no">iris_ss</span>)

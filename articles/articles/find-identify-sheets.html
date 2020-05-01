@@ -300,26 +300,26 @@
 <p>What if you want to see all of your Sheets? Or all the Sheets with “gap” in their name?</p>
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"spreadsheet"</span>)
-<span class="co">#&gt; # A tibble: 59 x 3</span>
+<span class="co">#&gt; # A tibble: 67 x 3</span>
 <span class="co">#&gt;   name               id                                         drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 sheet-resize-demo  155ygtSpfrjfPmGGPaMg5jlQdCJbjFyyyEsxuTcuJ… &lt;named list [33…</span>
-<span class="co">#&gt; 2 sheet-rename-demo  1IqPQz7Xdy5idxF7Fg3AxoPFrkJGZWXC71thqUCQ_… &lt;named list [33…</span>
-<span class="co">#&gt; 3 sheet-relocate-de… 1pnvI7O5gomzx680L4FeQilV6iS2vZtL-JGkyBcTm… &lt;named list [33…</span>
-<span class="co">#&gt; 4 sheet-copy-demo-b… 1-6sjy9sYu5Kj8C9x0Nof4WgV_82g5_LStVpcvMOB… &lt;named list [33…</span>
-<span class="co">#&gt; 5 sheet-copy-demo-a… 1sDq-RgUJC3XyTAO71LMEA4rX4ZeXkAbz03KK3WhI… &lt;named list [33…</span>
-<span class="co">#&gt; # … with 54 more rows</span></pre></body></html></div>
+<span class="co">#&gt; 1 smooth-indianabat  1aqCbvD5-mtqdHvs3vIoFsk_ELlhw_jYjqorXEXmJ… &lt;named list [33…</span>
+<span class="co">#&gt; 2 sheet-resize-demo  12CtJ5qDCNGiNz4bEARUOBkVUKypLCo0NJ06x-8f9… &lt;named list [33…</span>
+<span class="co">#&gt; 3 sheet-rename-demo  1oARhw2bue_0BuOC0pvccV0rSQ4g2tYxH6FETkhMP… &lt;named list [33…</span>
+<span class="co">#&gt; 4 sheet-relocate-de… 1kllEja7uHHsbi0MAp-L76ODB6Q8pca-NOXQmLivL… &lt;named list [33…</span>
+<span class="co">#&gt; 5 sheet-copy-demo-b… 1rZIOkWKd6DHwfjvB6B2NCnQmZigNcAjQmJgkb284… &lt;named list [33…</span>
+<span class="co">#&gt; # … with 62 more rows</span></pre></body></html></div>
 <p>This is so handy that we’ve made <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span>()
-<span class="co">#&gt; # A tibble: 59 x 3</span>
+<span class="co">#&gt; # A tibble: 67 x 3</span>
 <span class="co">#&gt;   name               id                                         drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 sheet-resize-demo  155ygtSpfrjfPmGGPaMg5jlQdCJbjFyyyEsxuTcuJ… &lt;named list [33…</span>
-<span class="co">#&gt; 2 sheet-rename-demo  1IqPQz7Xdy5idxF7Fg3AxoPFrkJGZWXC71thqUCQ_… &lt;named list [33…</span>
-<span class="co">#&gt; 3 sheet-relocate-de… 1pnvI7O5gomzx680L4FeQilV6iS2vZtL-JGkyBcTm… &lt;named list [33…</span>
-<span class="co">#&gt; 4 sheet-copy-demo-b… 1-6sjy9sYu5Kj8C9x0Nof4WgV_82g5_LStVpcvMOB… &lt;named list [33…</span>
-<span class="co">#&gt; 5 sheet-copy-demo-a… 1sDq-RgUJC3XyTAO71LMEA4rX4ZeXkAbz03KK3WhI… &lt;named list [33…</span>
-<span class="co">#&gt; # … with 54 more rows</span></pre></body></html></div>
+<span class="co">#&gt; 1 smooth-indianabat  1aqCbvD5-mtqdHvs3vIoFsk_ELlhw_jYjqorXEXmJ… &lt;named list [33…</span>
+<span class="co">#&gt; 2 sheet-resize-demo  12CtJ5qDCNGiNz4bEARUOBkVUKypLCo0NJ06x-8f9… &lt;named list [33…</span>
+<span class="co">#&gt; 3 sheet-rename-demo  1oARhw2bue_0BuOC0pvccV0rSQ4g2tYxH6FETkhMP… &lt;named list [33…</span>
+<span class="co">#&gt; 4 sheet-relocate-de… 1kllEja7uHHsbi0MAp-L76ODB6Q8pca-NOXQmLivL… &lt;named list [33…</span>
+<span class="co">#&gt; 5 sheet-copy-demo-b… 1rZIOkWKd6DHwfjvB6B2NCnQmZigNcAjQmJgkb284… &lt;named list [33…</span>
+<span class="co">#&gt; # … with 62 more rows</span></pre></body></html></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </div>

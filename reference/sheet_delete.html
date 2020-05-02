@@ -232,12 +232,14 @@ is how googledrive represents Drive files. Processed through
   <span class='co'># cleanup</span>
   <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"delete-sheets-from-me"</span>) <span class='kw'>%&gt;%</span>
     <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "delete-sheets-from-me"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "delete-sheets-from-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "alpha", "beta", "gamma", "delta"</span></div><div class='output co'>#&gt; <span class='message'>Deleting these sheet(s) from "delete-sheets-from-me":</span>
-#&gt; <span class='message'>* Sheet1</span></div><div class='output co'>#&gt; <span class='message'>Deleting these sheet(s) from "delete-sheets-from-me":</span>
-#&gt; <span class='message'>* gamma</span></div><div class='output co'>#&gt; <span class='message'>Deleting these sheet(s) from "delete-sheets-from-me":</span>
-#&gt; <span class='message'>* alpha</span>
-#&gt; <span class='message'>* beta</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * delete-sheets-from-me: 1ngqEh4IvTDiKtFCCIw3W9tKTsExcqXLbBjvmXHdeC7s</span></div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "delete-sheets-from-me"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "delete-sheets-from-me"</span></div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+#&gt; <span class='error'>  * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
+#&gt; <span class='error'>  * Quota exceeded for quota group 'WriteGroup' and limit 'Write requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
+#&gt; <span class='error'></span>
+#&gt; <span class='error'>Error details:</span>
+#&gt; <span class='error'>  * Error details of type 'google.rpc.Help' are not implemented yet.</span>
+#&gt; <span class='error'>  * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
+#&gt; <span class='error'>  * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

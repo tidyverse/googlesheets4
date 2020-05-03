@@ -157,17 +157,14 @@
 <p>googlesheets4 accepts such a URL as the <code>ss</code> argument (think “spreadsheet”) of many functions:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">ugly_url</span> <span class="kw">&lt;-</span> <span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span>
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ugly_url</span>)
-<span class="co">#&gt; Reading from "gapminder"</span>
-<span class="co">#&gt; Range "Africa"</span>
-<span class="co">#&gt; # A tibble: 624 x 6</span>
-<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
-<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
-<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
-<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
-<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span></pre></body></html></div>
+<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
+<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Error details:</span>
+<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
+<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
+<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></pre></body></html></div>
 <p>At this time, although the URL may contain both a (spread)Sheet and a (work)sheet, we only extract the (spread)Sheet ID. If the function targets a specific (work)sheet, that is typically specified via arguments like <code>range</code> or <code>sheet</code> or a default of “first (visible) sheet”.</p>
 <p>These URLs are not particularly nice to look at in your code, though.</p>
 </div>
@@ -303,26 +300,26 @@
 <p>What if you want to see all of your Sheets? Or all the Sheets with “gap” in their name?</p>
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"spreadsheet"</span>)
-<span class="co">#&gt; # A tibble: 68 x 3</span>
-<span class="co">#&gt;   name                 id                                       drive_resource  </span>
-<span class="co">#&gt; * &lt;chr&gt;                &lt;chr&gt;                                    &lt;list&gt;          </span>
-<span class="co">#&gt; 1 sheet-relocate-demo  1HDNmAnprkWA_TSpJSIFiNigriEuZTXQaAKuQzD… &lt;named list [33…</span>
-<span class="co">#&gt; 2 delete-sheets-from-… 1m1caXRM6CjQPXqXXbzd44dDtizZFNPUoJBU-xC… &lt;named list [33…</span>
-<span class="co">#&gt; 3 range-write-demo     1b527cvaP80Em3a3tHrJcfDf9lDCoVbvuaqu_R5… &lt;named list [33…</span>
-<span class="co">#&gt; 4 despotic-carp        1kwTiUIJcS2AfllvaMQ8mJm6aJxzFNbF8CsCJwV… &lt;named list [33…</span>
-<span class="co">#&gt; 5 range-flood-example  1dYTj7BWjBTJAoJkYRpo-dOP8-hisPXzV90hFiG… &lt;named list [33…</span>
-<span class="co">#&gt; # … with 63 more rows</span></pre></body></html></div>
+<span class="co">#&gt; # A tibble: 73 x 3</span>
+<span class="co">#&gt;   name               id                                         drive_resource  </span>
+<span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
+<span class="co">#&gt; 1 smooth-indianabat  1O91yed7sKeVMql5t3aDclP5T9_BMOEzaIWUnt1pD… &lt;named list [33…</span>
+<span class="co">#&gt; 2 sheet-relocate-de… 1RiIRCdOBZpVNeMhgI-BGHkVjQDiv77pEBjfXgqUA… &lt;named list [33…</span>
+<span class="co">#&gt; 3 sheet-copy-demo-b… 17q4A06KdfoJ88gVmOKMsseCe9GBIxpBzB-rX2LjX… &lt;named list [33…</span>
+<span class="co">#&gt; 4 sheet-copy-demo-a… 1kzh_sfGdMKJ16JZEQn-s56ypp3pYll4VR9cEJb5F… &lt;named list [33…</span>
+<span class="co">#&gt; 5 sheet-append-demo  19dMOLInQ5Ww3e9gstSI6mQlunlep76KBEHLC_o-s… &lt;named list [33…</span>
+<span class="co">#&gt; # … with 68 more rows</span></pre></body></html></div>
 <p>This is so handy that we’ve made <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span>()
-<span class="co">#&gt; # A tibble: 68 x 3</span>
-<span class="co">#&gt;   name                 id                                       drive_resource  </span>
-<span class="co">#&gt; * &lt;chr&gt;                &lt;chr&gt;                                    &lt;list&gt;          </span>
-<span class="co">#&gt; 1 sheet-relocate-demo  1HDNmAnprkWA_TSpJSIFiNigriEuZTXQaAKuQzD… &lt;named list [33…</span>
-<span class="co">#&gt; 2 delete-sheets-from-… 1m1caXRM6CjQPXqXXbzd44dDtizZFNPUoJBU-xC… &lt;named list [33…</span>
-<span class="co">#&gt; 3 range-write-demo     1b527cvaP80Em3a3tHrJcfDf9lDCoVbvuaqu_R5… &lt;named list [33…</span>
-<span class="co">#&gt; 4 despotic-carp        1kwTiUIJcS2AfllvaMQ8mJm6aJxzFNbF8CsCJwV… &lt;named list [33…</span>
-<span class="co">#&gt; 5 range-flood-example  1dYTj7BWjBTJAoJkYRpo-dOP8-hisPXzV90hFiG… &lt;named list [33…</span>
-<span class="co">#&gt; # … with 63 more rows</span></pre></body></html></div>
+<span class="co">#&gt; # A tibble: 73 x 3</span>
+<span class="co">#&gt;   name               id                                         drive_resource  </span>
+<span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
+<span class="co">#&gt; 1 smooth-indianabat  1O91yed7sKeVMql5t3aDclP5T9_BMOEzaIWUnt1pD… &lt;named list [33…</span>
+<span class="co">#&gt; 2 sheet-relocate-de… 1RiIRCdOBZpVNeMhgI-BGHkVjQDiv77pEBjfXgqUA… &lt;named list [33…</span>
+<span class="co">#&gt; 3 sheet-copy-demo-b… 17q4A06KdfoJ88gVmOKMsseCe9GBIxpBzB-rX2LjX… &lt;named list [33…</span>
+<span class="co">#&gt; 4 sheet-copy-demo-a… 1kzh_sfGdMKJ16JZEQn-s56ypp3pYll4VR9cEJb5F… &lt;named list [33…</span>
+<span class="co">#&gt; 5 sheet-append-demo  19dMOLInQ5Ww3e9gstSI6mQlunlep76KBEHLC_o-s… &lt;named list [33…</span>
+<span class="co">#&gt; # … with 68 more rows</span></pre></body></html></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </div>

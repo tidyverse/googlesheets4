@@ -55,7 +55,9 @@ if (gs4_has_token()) {
   # re-inspect (work)sheet dims
   sheet_properties(ss)
 
-  googledrive::drive_trash(ss)
+  # clean up
+  googledrive::drive_find("sheet-resize-demo") \%>\%
+    googledrive::drive_trash()
 }
 }
 \seealso{

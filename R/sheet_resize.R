@@ -43,7 +43,9 @@
 #'   # re-inspect (work)sheet dims
 #'   sheet_properties(ss)
 #'
-#'   googledrive::drive_trash(ss)
+#'   # clean up
+#'   googledrive::drive_find("sheet-resize-demo") %>%
+#'     googledrive::drive_trash()
 #' }
 sheet_resize <- function(ss,
                          sheet = NULL,

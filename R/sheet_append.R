@@ -38,8 +38,9 @@
 #'   deaths_replica <- range_read(ss, col_types = "????DD")
 #'   identical(deaths, deaths_replica)
 #'
-#'   # cleanup
-#'   googledrive::drive_trash(ss)
+#'   # clean up
+#'   gs4_find("sheet-append-demo") %>%
+#'     googledrive::drive_trash()
 #' }
 sheet_append <- function(ss, data, sheet = 1) {
   check_data_frame(data)

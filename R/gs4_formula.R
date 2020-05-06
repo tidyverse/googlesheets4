@@ -19,9 +19,9 @@ new_formula <- function(x = character()) {
 #'
 #' @examples
 #' if (gs4_has_token()) {
-#'   dat <- data.frame(X = c(1, 5, 3, 2, 4, 6))
+#'   dat <- data.frame(x = c(1, 5, 3, 2, 4, 6))
 #'
-#'   ss <- sheet_write(dat)
+#'   ss <- gs4_create("gs4-formula-demo", sheets = dat)
 #'   ss
 #'
 #'   summaries <- tibble::tribble(
@@ -49,7 +49,8 @@ new_formula <- function(x = character()) {
 #'   sheet_write(miscellany, ss = ss)
 #'
 #'   # clean up
-#'   googledrive::drive_trash(ss)
+#'   gs4_find("gs4-formula-demo") %>%
+#'     googledrive::drive_trash()
 #' }
 gs4_formula <- function(x = character()) {
   x <- vec_cast(x, character())

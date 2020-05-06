@@ -48,8 +48,9 @@ if (gs4_has_token()) {
   deaths_replica <- range_read(ss, col_types = "????DD")
   identical(deaths, deaths_replica)
 
-  # cleanup
-  googledrive::drive_trash(ss)
+  # clean up
+  gs4_find("sheet-append-demo") \%>\%
+    googledrive::drive_trash()
 }
 }
 \seealso{

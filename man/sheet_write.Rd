@@ -98,7 +98,8 @@ if (gs4_has_token()) {
   gs4_browse(ss)
 
   # clean up
-  googledrive::drive_trash(ss)
+  gs4_find("sheet-write-demo") \%>\%
+    googledrive::drive_trash()
 }
 }
 \seealso{

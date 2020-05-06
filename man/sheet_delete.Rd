@@ -37,7 +37,7 @@ if (gs4_has_token()) {
   # get an overview of the sheets
   sheet_properties(ss)
 
-  # cleanup
+  # clean up
   gs4_find("delete-sheets-from-me") \%>\%
     googledrive::drive_trash()
 }

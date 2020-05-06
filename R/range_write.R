@@ -101,7 +101,8 @@
 #'   range_write(ss, data = dat, range = "beta!C5", col_names = FALSE)
 #'
 #'   # clean up
-#'   googledrive::drive_trash(ss)
+#'   googledrive::drive_find("range-write-demo") %>%
+#'     googledrive::drive_trash()
 #' }
 range_write <- function(ss,
                         data,

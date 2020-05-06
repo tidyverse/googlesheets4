@@ -62,7 +62,8 @@ if (gs4_has_token()) {
   range_delete(ss, range = "B3:F4", shift = "left")
 
   # clean up
-  googledrive::drive_trash(ss)
+  gs4_find("range-delete-example") \%>\%
+    googledrive::drive_trash()
 }
 }
 \seealso{

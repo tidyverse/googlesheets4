@@ -20,9 +20,9 @@ formula. \code{googlesheets4_formula} is an S3 class implemented using the \href
 }
 \examples{
 if (gs4_has_token()) {
-  dat <- data.frame(X = c(1, 5, 3, 2, 4, 6))
+  dat <- data.frame(x = c(1, 5, 3, 2, 4, 6))
 
-  ss <- sheet_write(dat)
+  ss <- gs4_create("gs4-formula-demo", sheets = dat)
   ss
 
   summaries <- tibble::tribble(
@@ -50,7 +50,8 @@ if (gs4_has_token()) {
   sheet_write(miscellany, ss = ss)
 
   # clean up
-  googledrive::drive_trash(ss)
+  gs4_find("gs4-formula-demo") \%>\%
+    googledrive::drive_trash()
 }
 }
 \seealso{

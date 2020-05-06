@@ -31,7 +31,7 @@
 #'     fruit = c("date", "lime", "pear", "plum")
 #'   )
 #'
-#'   ss <- write_sheet(dat)
+#'   ss <- gs4_create("range-autofit-demo", sheets = dat)
 #'   ss
 #'
 #'   # open in the browser
@@ -39,6 +39,7 @@
 #'
 #'   # shrink column A to fit the short fruit names
 #'   range_autofit(ss)
+#'   # in the browser, notice how the column width shrank
 #'
 #'   # send some longer fruit names
 #'   dat2 <- tibble::tibble(
@@ -50,7 +51,9 @@
 #'   range_autofit(ss)
 #'   # in the browser, see the column A reveals all the data now
 #'
-#'   googledrive::drive_trash(ss)
+#'   # clean up
+#'   gs4_find("range-autofit-demo") %>%
+#'     googledrive::drive_trash()
 #' }
 range_autofit <- function(ss,
                           sheet = NULL,

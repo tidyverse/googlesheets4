@@ -51,7 +51,7 @@ if (gs4_has_token()) {
   df <- gs4_fodder(10)
 
   # create Sheet
-  ss <- gs4_create("range-flood-example", sheets = list(df))
+  ss <- gs4_create("range-flood-demo", sheets = list(df))
 
   # default behavior (`cell = NULL`): clear value and format
   range_flood(ss, range = "A1:B3")
@@ -81,7 +81,8 @@ if (gs4_has_token()) {
   range_clear(ss, range = "10:10", reformat = FALSE)
 
   # clean up
-  googledrive::drive_trash(ss)
+  gs4_find("range-flood-demo") \%>\%
+    googledrive::drive_trash()
 }
 }
 \seealso{

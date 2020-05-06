@@ -24,7 +24,7 @@ Depends:
 Imports: 
     cellranger,
     curl,
-    gargle (>= 0.4.0.9004),
+    gargle (>= 0.5.0),
     glue (>= 1.3.0),
     googledrive (>= 1.0.0),
     httr,
@@ -48,8 +48,6 @@ Suggests:
     withr
 RdMacros: 
     lifecycle
-Remotes: 
-    r-lib/gargle
 ByteCompile: true
 Encoding: UTF-8
 Language: en-US

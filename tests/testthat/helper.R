@@ -10,7 +10,7 @@ if (gargle:::secret_can_decrypt("googlesheets4") &&
 skip_if_no_token <- function() {
   if (gs4_has_token()) {
     # hack to slow things down in CI
-    Sys.sleep(2)
+    Sys.sleep(3)
   } else {
     skip("No token")
   }

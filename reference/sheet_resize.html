@@ -251,15 +251,27 @@ deleted and their contents are lost.</p></td>
   <span class='co'># re-inspect (work)sheet dims</span>
   <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='no'>ss</span>)
 
-  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>(<span class='no'>ss</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-resize-demo"</span></div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-#&gt; <span class='error'>  * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-#&gt; <span class='error'>  * Quota exceeded for quota group 'WriteGroup' and limit 'Write requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-#&gt; <span class='error'></span>
-#&gt; <span class='error'>Error details:</span>
-#&gt; <span class='error'>  * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-#&gt; <span class='error'>  * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-#&gt; <span class='error'>  * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></div></pre>
+  <span class='co'># clean up</span>
+  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='st'>"sheet-resize-demo"</span>) <span class='kw'>%&gt;%</span>
+    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheet-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>No need to change existing dims (1000 x 26)</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheet-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Changing dims: (1000 x 26) --&gt; (5 x 7)</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheet-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Changing dims: (5 x 7) --&gt; (7 x 7)</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheet-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Changing dims: (7 x 7) --&gt; (7 x 10)</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheet-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Changing dims: (7 x 10) --&gt; (9 x 12)</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 165dhNz7j6DU_gT4vpKslWMwWkRnlCHlc3fa5MiHEF_Y</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 12CtJ5qDCNGiNz4bEARUOBkVUKypLCo0NJ06x-8f9Uu8</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 155ygtSpfrjfPmGGPaMg5jlQdCJbjFyyyEsxuTcuJibk</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 10hqVfX2nTYrJdubvl1DKTZ9FKuBRqG68I7jP04t5WL8</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 1vJmHzkBFhLQ7zlHe2PN4ESn7oVk42KjoQFUIoE0ssJs</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 152Y_V_K5yWEa3DHdzzVKaMRcA-apVPQNUHJm_pZtpcQ</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 1-7EfUdrzT0jgZqYmIBVMbEg-jnTTEZJ8Fb5QCcW8i4U</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 1E5USlyanlCFUeyqoCa1qeDSlqMsbizEa60K9sUpw4W0</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 1MzLx37JQnkOb6bLeATnBZED4n4aJXRGFhLVdnjZvI_4</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 19F73zDAxEMBgktX1ki7gUTUcu5lFjCWyOemX2UfZx9E</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 1SlSkviqwSBvitMMUCyza6wlcB6whm5OCZN-0fgHwLPU</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 1b3I6wVjS97Ag-cNHHL8DyZjcDqUwy_pijOMn6JiePXs</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 1JtL3OM5kKAVVbQmCmHmDDU6uUh1uPC3erq9YsGFXECE</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 1C_TLeVgvBn85RVbgLz7tzDOK7h2BtEtCtSOEtt7jZe4</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 1crvtJVcRJQy5Jd2cgErT7l5oKd-tzHM0giUS3xEzkYE</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 1l26gcnJiWVwBcex3I25JI2B2gdVfOjZ4PqYeEa0aRjQ</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 1TJjWxqv9QccuyJiO36JEza-oHWQiChwBjrsM-MndBoE</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

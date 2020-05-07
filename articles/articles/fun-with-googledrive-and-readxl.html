@@ -158,27 +158,47 @@
 <a href="#create-a-private-sheet-from-csv-with-the-drive-api" class="anchor"></a>Create a private Sheet from csv with the Drive API</h2>
 <p>Put the iris data into a csv file.</p>
 <div class="sourceCode" id="cb2"><html><body><pre class="r">(<span class="no">iris_tempfile</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempfile</a></span>(<span class="kw">pattern</span> <span class="kw">=</span> <span class="st">"iris-"</span>, <span class="kw">fileext</span> <span class="kw">=</span> <span class="st">".csv"</span>))
-<span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpqDiZNY/iris-b5f45baa12a.csv"</span>
+<span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpdr3qee/iris-bae6e9a22bd.csv"</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/write.table.html">write.csv</a></span>(<span class="no">iris</span>, <span class="no">iris_tempfile</span>, <span class="kw">row.names</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 <p>Use <code><a href="https://googledrive.tidyverse.org/reference/drive_upload.html">googledrive::drive_upload()</a></code> to upload the csv and simultaneously convert to a Sheet.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r">(<span class="no">iris_ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_upload.html">drive_upload</a></span>(<span class="no">iris_tempfile</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">"spreadsheet"</span>))
-<span class="co">#&gt; Error: No method asJSON S3 class: form_file</span>
+<span class="co">#&gt; Local file:</span>
+<span class="co">#&gt;   * /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpdr3qee/iris-bae6e9a22bd.csv</span>
+<span class="co">#&gt; uploaded into Drive file:</span>
+<span class="co">#&gt;   * iris-bae6e9a22bd: 1sT93Ptjn0W8BmjMwIXphfua_AgZcRjXEgAJCE78pgbc</span>
+<span class="co">#&gt; with MIME type:</span>
+<span class="co">#&gt;   * application/vnd.google-apps.spreadsheet</span>
+<span class="co">#&gt; # A tibble: 1 x 3</span>
+<span class="co">#&gt;   name             id                                           drive_resource  </span>
+<span class="co">#&gt; * &lt;chr&gt;            &lt;chr&gt;                                        &lt;list&gt;          </span>
+<span class="co">#&gt; 1 iris-bae6e9a22bd 1sT93Ptjn0W8BmjMwIXphfua_AgZcRjXEgAJCE78pgbc &lt;named list [35…</span>
 
 <span class="co"># visit the new Sheet in the browser, in an interactive session!</span>
-<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_browse.html">drive_browse</a></span>(<span class="no">iris_ss</span>)
-<span class="co">#&gt; Error in as_dribble(file): object 'iris_ss' not found</span></pre></body></html></div>
+<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_browse.html">drive_browse</a></span>(<span class="no">iris_ss</span>)</pre></body></html></div>
 <p>Read data from the private Sheet into R.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">iris_ss</span>, <span class="kw">range</span> <span class="kw">=</span> <span class="st">"B1:D6"</span>)
-<span class="co">#&gt; Error in as_sheets_id(ss): object 'iris_ss' not found</span></pre></body></html></div>
+<span class="co">#&gt; Reading from "iris-bae6e9a22bd"</span>
+<span class="co">#&gt; Range "B1:D6"</span>
+<span class="co">#&gt; # A tibble: 5 x 3</span>
+<span class="co">#&gt;   Sepal.Width Petal.Length Petal.Width</span>
+<span class="co">#&gt;         &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;</span>
+<span class="co">#&gt; 1         3.5          1.4         0.2</span>
+<span class="co">#&gt; 2         3            1.4         0.2</span>
+<span class="co">#&gt; 3         3.2          1.3         0.2</span>
+<span class="co">#&gt; 4         3.1          1.5         0.2</span>
+<span class="co">#&gt; 5         3.6          1.4         0.2</span></pre></body></html></div>
 </div>
 <div id="create-a-local-xlsx-from-a-sheet-with-the-drive-api" class="section level2">
 <h2 class="hasAnchor">
 <a href="#create-a-local-xlsx-from-a-sheet-with-the-drive-api" class="anchor"></a>Create a local xlsx from a Sheet with the Drive API</h2>
 <p>Download the Sheet as an Excel workbook.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r">(<span class="no">iris_xlsxfile</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">sub</a></span>(<span class="st">"[.]csv"</span>, <span class="st">".xlsx"</span>, <span class="no">iris_tempfile</span>))
-<span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpqDiZNY/iris-b5f45baa12a.xlsx"</span>
+<span class="co">#&gt; [1] "/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpdr3qee/iris-bae6e9a22bd.xlsx"</span>
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_download.html">drive_download</a></span>(<span class="no">iris_ss</span>, <span class="kw">path</span> <span class="kw">=</span> <span class="no">iris_xlsxfile</span>, <span class="kw">overwrite</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="co">#&gt; Error in as_dribble(file): object 'iris_ss' not found</span></pre></body></html></div>
+<span class="co">#&gt; File downloaded:</span>
+<span class="co">#&gt;   * iris-bae6e9a22bd</span>
+<span class="co">#&gt; Saved locally as:</span>
+<span class="co">#&gt;   * /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmpdr3qee/iris-bae6e9a22bd.xlsx</span></pre></body></html></div>
 </div>
 <div id="read-xlsx-with-readxl" class="section level2">
 <h2 class="hasAnchor">
@@ -187,18 +207,29 @@
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"readxl"</span>, <span class="kw">quietly</span> <span class="kw">=</span> <span class="fl">TRUE</span>)) {
   <span class="kw pkg">readxl</span><span class="kw ns">::</span><span class="fu"><a href="https://readxl.tidyverse.org/reference/read_excel.html">read_excel</a></span>(<span class="no">iris_xlsxfile</span>)
 }
-<span class="co">#&gt; Error: `path` does not exist: '/var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpqDiZNY/iris-b5f45baa12a.xlsx'</span></pre></body></html></div>
+<span class="co">#&gt; # A tibble: 150 x 5</span>
+<span class="co">#&gt;    Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
+<span class="co">#&gt;           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  </span>
+<span class="co">#&gt;  1          5.1         3.5          1.4         0.2 setosa </span>
+<span class="co">#&gt;  2          4.9         3            1.4         0.2 setosa </span>
+<span class="co">#&gt;  3          4.7         3.2          1.3         0.2 setosa </span>
+<span class="co">#&gt;  4          4.6         3.1          1.5         0.2 setosa </span>
+<span class="co">#&gt;  5          5           3.6          1.4         0.2 setosa </span>
+<span class="co">#&gt;  6          5.4         3.9          1.7         0.4 setosa </span>
+<span class="co">#&gt;  7          4.6         3.4          1.4         0.3 setosa </span>
+<span class="co">#&gt;  8          5           3.4          1.5         0.2 setosa </span>
+<span class="co">#&gt;  9          4.4         2.9          1.4         0.2 setosa </span>
+<span class="co">#&gt; 10          4.9         3.1          1.5         0.1 setosa </span>
+<span class="co">#&gt; # … with 140 more rows</span></pre></body></html></div>
 </div>
 <div id="clean-up" class="section level2">
 <h2 class="hasAnchor">
 <a href="#clean-up" class="anchor"></a>Clean up</h2>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.remove</a></span>(<span class="no">iris_tempfile</span>, <span class="no">iris_xlsxfile</span>)
-<span class="co">#&gt; Warning in file.remove(iris_tempfile, iris_xlsxfile): cannot remove file '/var/</span>
-<span class="co">#&gt; folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpqDiZNY/iris-b5f45baa12a.xlsx',</span>
-<span class="co">#&gt; reason 'No such file or directory'</span>
-<span class="co">#&gt; [1]  TRUE FALSE</span>
+<span class="co">#&gt; [1] TRUE TRUE</span>
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>(<span class="no">iris_ss</span>)
-<span class="co">#&gt; Error in as_dribble(file): object 'iris_ss' not found</span></pre></body></html></div>
+<span class="co">#&gt; Files trashed:</span>
+<span class="co">#&gt;   * iris-bae6e9a22bd: 1sT93Ptjn0W8BmjMwIXphfua_AgZcRjXEgAJCE78pgbc</span></pre></body></html></div>
 </div>
   </div>
 

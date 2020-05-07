@@ -1,6 +1,6 @@
 # googlesheets4 0.2.0
 
-## Articles
+googlesheets4 can now write and modify Sheets.
 
 Several new articles are available at [googlesheets4.tidyverse.org](https://googlesheets4.tidyverse.org/articles/index.html).
 
@@ -16,10 +16,6 @@ The universal `sheets_` prefix has been replaced by a scheme that conveys more i
 The addition of write/edit functionality resulted in many new functions and the original naming scheme proved to be problematic. The article [Function and class names](https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html) contains more detail.
 
 Any function present in the previous CRAN release, v0.1.1, still works, but triggers a warning with strong encouragement to switch to the current name.
-
-## Printing a Sheet ID
-
-The print method for `sheets_id` objects now attempts to reveal the current Sheet metadata available via `gs4_get()`, i.e. it makes an API call (but it should never error).
 
 ## Write Sheets
 
@@ -59,6 +55,10 @@ The `sheet_*()` family of functions operate on the (work)sheets inside an existi
 `range_read_cells()` (formerly known as `sheets_cells()`) gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But `range_read_cells(cell_data = "full", discard_empty = FALSE)` is now available if you want full cell data, including formatting, even for cells that have no value (#4).
 
 `range_autofit()` adjusts column width or row height to fit the data. This only affects the display of a sheet and does not change values or dimensions.
+
+## Printing a Sheet ID
+
+The print method for `sheets_id` objects now attempts to reveal the current Sheet metadata available via `gs4_get()`, i.e. it makes an API call (but it should never error).
 
 ## Other changes and additions
 

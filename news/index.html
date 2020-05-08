@@ -90,7 +90,7 @@
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9100</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
         </div>
       </div>
     </div>
@@ -173,11 +173,13 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#googlesheets4-development-version" class="anchor"></a>googlesheets4 (development version)<small> Unreleased </small>
 </h1>
-<div id="articles" class="section level2">
-<h2 class="hasAnchor">
-<a href="#articles" class="anchor"></a>Articles</h2>
-<p>Several new articles are available at <a href="https://googlesheets4.tidyverse.org/articles/index.html">googlesheets4.tidyverse.org</a>.</p>
 </div>
+    <div id="googlesheets4-020" class="section level1">
+<h1 class="page-header" data-toc-text="0.2.0">
+<a href="#googlesheets4-020" class="anchor"></a>googlesheets4 0.2.0<small> 2020-05-08 </small>
+</h1>
+<p>googlesheets4 can now write and modify Sheets.</p>
+<p>Several new articles are available at <a href="https://googlesheets4.tidyverse.org/articles/index.html">googlesheets4.tidyverse.org</a>.</p>
 <div id="function-naming-scheme" class="section level2">
 <h2 class="hasAnchor">
 <a href="#function-naming-scheme" class="anchor"></a>Function naming scheme</h2>
@@ -192,11 +194,6 @@
 </ul>
 <p>The addition of write/edit functionality resulted in many new functions and the original naming scheme proved to be problematic. The article <a href="https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html">Function and class names</a> contains more detail.</p>
 <p>Any function present in the previous CRAN release, v0.1.1, still works, but triggers a warning with strong encouragement to switch to the current name.</p>
-</div>
-<div id="printing-a-sheet-id" class="section level2">
-<h2 class="hasAnchor">
-<a href="#printing-a-sheet-id" class="anchor"></a>Printing a Sheet ID</h2>
-<p>The print method for <code>sheets_id</code> objects now attempts to reveal the current Sheet metadata available via <code><a href="../reference/gs4_get.html">gs4_get()</a></code>, i.e. it makes an API call (but it should never error).</p>
 </div>
 <div id="write-sheets" class="section level2">
 <h2 class="hasAnchor">
@@ -248,6 +245,11 @@
 <p><code><a href="../reference/range_speedread.html">range_speedread()</a></code> reads from a Sheet using its “export=csv” URL and, therefore, uses readr-style column type specification. It still supports fairly general range syntax and auth. For very large Sheets, this can be substantially faster than <code><a href="../reference/range_read.html">read_sheet()</a></code>.</p>
 <p><code><a href="../reference/range_read_cells.html">range_read_cells()</a></code> (formerly known as <code><a href="../reference/googlesheets4-deprecated.html">sheets_cells()</a></code>) gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But <code><a href="../reference/range_read_cells.html">range_read_cells(cell_data = "full", discard_empty = FALSE)</a></code> is now available if you want full cell data, including formatting, even for cells that have no value (<a href='https://github.com/tidyverse/googlesheets4/issues/4'>#4</a>).</p>
 <p><code><a href="../reference/range_autofit.html">range_autofit()</a></code> adjusts column width or row height to fit the data. This only affects the display of a sheet and does not change values or dimensions.</p>
+</div>
+<div id="printing-a-sheet-id" class="section level2">
+<h2 class="hasAnchor">
+<a href="#printing-a-sheet-id" class="anchor"></a>Printing a Sheet ID</h2>
+<p>The print method for <code>sheets_id</code> objects now attempts to reveal the current Sheet metadata available via <code><a href="../reference/gs4_get.html">gs4_get()</a></code>, i.e. it makes an API call (but it should never error).</p>
 </div>
 <div id="other-changes-and-additions" class="section level2">
 <h2 class="hasAnchor">

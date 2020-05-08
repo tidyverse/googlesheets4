@@ -49,7 +49,7 @@
         <a class="navbar-brand" href="../../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9100</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
         </div>
       </div>
     </div>
@@ -176,14 +176,21 @@
 <span class="co">#&gt; 3 Australia   Oceania    1957    70.3 9712569    10950.</span>
 
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span>(<span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"deaths"</span>), <span class="kw">skip</span> <span class="kw">=</span> <span class="fl">4</span>, <span class="kw">n_max</span> <span class="kw">=</span> <span class="fl">10</span>)
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota group 'ReadGroup' and limit 'Read requests per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span>
+<span class="co">#&gt; Reading from "deaths"</span>
+<span class="co">#&gt; Range "5:5000000"</span>
+<span class="co">#&gt; # A tibble: 10 x 6</span>
+<span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span>
+<span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span>
+<span class="co">#&gt;  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span>
+<span class="co">#&gt;  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span>
+<span class="co">#&gt;  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span>
+<span class="co">#&gt;  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00</span>
+<span class="co">#&gt;  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00</span>
+<span class="co">#&gt;  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00</span>
+<span class="co">#&gt;  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00</span>
+<span class="co">#&gt;  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00</span>
+<span class="co">#&gt;  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00</span>
+<span class="co">#&gt; 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00</span>
 
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span>(
   <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"deaths"</span>), <span class="kw">range</span> <span class="kw">=</span> <span class="st">"other!A5:F15"</span>, <span class="kw">col_types</span> <span class="kw">=</span> <span class="st">"?ci??D"</span>
@@ -366,14 +373,14 @@
 <span class="co">#&gt;   gdpPercap = col_double()</span>
 <span class="co">#&gt; )</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.064   0.001   0.465</span>
+<span class="co">#&gt;   0.072   0.001   0.600</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(
   <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"gapminder"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../../reference/range_read.html">range_read</a></span>(<span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"Africa"</span>)
 )
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "'Africa'"</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.687   0.021   1.399</span></pre></body></html></div>
+<span class="co">#&gt;   0.738   0.042   1.422</span></pre></body></html></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> vs <code><a href="../../reference/range_read.html">range_read()</a></code>:</p>
 <ul>

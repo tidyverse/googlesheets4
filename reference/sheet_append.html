@@ -92,7 +92,7 @@ increasing the row dimension of the sheet if necessary." />
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9100</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
         </div>
       </div>
     </div>
@@ -253,14 +253,17 @@ is how googledrive represents Drive files. Processed through
   <span class='co'># clean up</span>
   <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"sheet-append-demo"</span>) <span class='kw'>%&gt;%</span>
     <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Reading from "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Range "other_data"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-#&gt; <span class='error'>  * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-#&gt; <span class='error'>  * Quota exceeded for quota group 'WriteGroup' and limit 'Write requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-#&gt; <span class='error'></span>
-#&gt; <span class='error'>Error details:</span>
-#&gt; <span class='error'>  * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-#&gt; <span class='error'>  * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-#&gt; <span class='error'>  * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Reading from "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Range "other_data"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Appending 1 row(s) to "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Writing to "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Appending 4 row(s) to "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Reading from "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Range "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * sheet-append-demo: 1hLzwgJZZWk01wtep4JvbsPnVAsWSvGcWb7fHFqKT4W0</span>
+#&gt; <span class='message'>  * sheet-append-demo: 1LZakqIdXw0p4HVijn4pXYZ20TCDVSWJGCSCjG6FY-3Q</span>
+#&gt; <span class='message'>  * sheet-append-demo: 19dMOLInQ5Ww3e9gstSI6mQlunlep76KBEHLC_o-sXTE</span>
+#&gt; <span class='message'>  * sheet-append-demo: 1IYk07sd2RMV4b7XhEH2_afmel3naV1AsE4XjNhkzXck</span>
+#&gt; <span class='message'>  * sheet-append-demo: 1X7Y7JuFGggneYX37fJOiJS1h6bJtLus8NFnd2SFanZQ</span>
+#&gt; <span class='message'>  * sheet-append-demo: 1mSQaXhL96ZDJDn2okk6EtqoKtOa-YM_GToWqTiHfQvE</span>
+#&gt; <span class='message'>  * sheet-append-demo: 1tarfb3D7hTB_ws5vzjK7lmlXzd3NE9w3pUGUmIXjTZY</span>
+#&gt; <span class='message'>  * sheet-append-demo: 18AX6W0RIcvglEZRZObovnnDhCGPzoWThRF4s80Z1c0s</span>
+#&gt; <span class='message'>  * sheet-append-demo: 1XRBqLFF1v-PjsPgbba1tWdQjNRv5fRwQQNvcb7M8-_w</span>
+#&gt; <span class='message'>  * sheet-append-demo: 1rC38mNaQS6oWDn_Dn6V6jY7IS2FapTTvd1ICPq9lwto</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

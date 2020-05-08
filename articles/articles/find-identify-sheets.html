@@ -49,7 +49,7 @@
         <a class="navbar-brand" href="../../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9100</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
         </div>
       </div>
     </div>
@@ -303,26 +303,26 @@
 <p>What if you want to see all of your Sheets? Or all the Sheets with “gap” in their name?</p>
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"spreadsheet"</span>)
-<span class="co">#&gt; # A tibble: 55 x 3</span>
+<span class="co">#&gt; # A tibble: 37 x 3</span>
 <span class="co">#&gt;   name                 id                                       drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;                &lt;chr&gt;                                    &lt;list&gt;          </span>
-<span class="co">#&gt; 1 delete-sheets-from-… 12mDnf5se8eWyP0_wty2m1O7pEB6PR_DtguoOdz… &lt;named list [33…</span>
-<span class="co">#&gt; 2 sheet-copy-demo-bbb  1c9g2Q7JqP4cxZqNVnYqpobwiB8uGQWqw6LVT-t… &lt;named list [33…</span>
-<span class="co">#&gt; 3 sheet-copy-demo-aaa  1izNq4aC1wHBYVahv1JErowSJLInoaJ4Wyjlgl7… &lt;named list [33…</span>
-<span class="co">#&gt; 4 sheet-append-demo    1LZakqIdXw0p4HVijn4pXYZ20TCDVSWJGCSCjG6… &lt;named list [33…</span>
-<span class="co">#&gt; 5 add-sheets-to-me     1TNnEUSuLjA-HMxYCcsAqoFDp6DaPImg4uzBf30… &lt;named list [33…</span>
-<span class="co">#&gt; # … with 50 more rows</span></pre></body></html></div>
+<span class="co">#&gt; 1 delete-sheets-from-… 1G4wO-LSdHEfDH7_y7pcre_4Dgmox4YlqkdgqU8… &lt;named list [33…</span>
+<span class="co">#&gt; 2 add-sheets-to-me     1QfrmGV5sFxth_1BxsMFNeshq8qKTx6hVOHjfc3… &lt;named list [34…</span>
+<span class="co">#&gt; 3 delete-sheets-from-… 12mDnf5se8eWyP0_wty2m1O7pEB6PR_DtguoOdz… &lt;named list [34…</span>
+<span class="co">#&gt; 4 add-sheets-to-me     1TNnEUSuLjA-HMxYCcsAqoFDp6DaPImg4uzBf30… &lt;named list [33…</span>
+<span class="co">#&gt; 5 add-sheets-to-me     1cJGkhQEfaVgwZWbWRzfkRJkmbQL9MW2g3K5Pvh… &lt;named list [33…</span>
+<span class="co">#&gt; # … with 32 more rows</span></pre></body></html></div>
 <p>This is so handy that we’ve made <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span>()
-<span class="co">#&gt; # A tibble: 55 x 3</span>
+<span class="co">#&gt; # A tibble: 37 x 3</span>
 <span class="co">#&gt;   name                 id                                       drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;                &lt;chr&gt;                                    &lt;list&gt;          </span>
-<span class="co">#&gt; 1 delete-sheets-from-… 12mDnf5se8eWyP0_wty2m1O7pEB6PR_DtguoOdz… &lt;named list [33…</span>
-<span class="co">#&gt; 2 sheet-copy-demo-bbb  1c9g2Q7JqP4cxZqNVnYqpobwiB8uGQWqw6LVT-t… &lt;named list [33…</span>
-<span class="co">#&gt; 3 sheet-copy-demo-aaa  1izNq4aC1wHBYVahv1JErowSJLInoaJ4Wyjlgl7… &lt;named list [33…</span>
-<span class="co">#&gt; 4 sheet-append-demo    1LZakqIdXw0p4HVijn4pXYZ20TCDVSWJGCSCjG6… &lt;named list [33…</span>
-<span class="co">#&gt; 5 add-sheets-to-me     1TNnEUSuLjA-HMxYCcsAqoFDp6DaPImg4uzBf30… &lt;named list [33…</span>
-<span class="co">#&gt; # … with 50 more rows</span></pre></body></html></div>
+<span class="co">#&gt; 1 delete-sheets-from-… 1G4wO-LSdHEfDH7_y7pcre_4Dgmox4YlqkdgqU8… &lt;named list [33…</span>
+<span class="co">#&gt; 2 add-sheets-to-me     1QfrmGV5sFxth_1BxsMFNeshq8qKTx6hVOHjfc3… &lt;named list [34…</span>
+<span class="co">#&gt; 3 delete-sheets-from-… 12mDnf5se8eWyP0_wty2m1O7pEB6PR_DtguoOdz… &lt;named list [34…</span>
+<span class="co">#&gt; 4 add-sheets-to-me     1TNnEUSuLjA-HMxYCcsAqoFDp6DaPImg4uzBf30… &lt;named list [33…</span>
+<span class="co">#&gt; 5 add-sheets-to-me     1cJGkhQEfaVgwZWbWRzfkRJkmbQL9MW2g3K5Pvh… &lt;named list [33…</span>
+<span class="co">#&gt; # … with 32 more rows</span></pre></body></html></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </div>

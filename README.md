@@ -43,10 +43,6 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("tidyverse/googlesheets4")
 ```
 
-As of mid-April 2020, note that all of the writing/modifying features
-are only in the dev version, but a CRAN release will happen soon. This
-website documents the dev version.
-
 ## Auth
 
 googlesheets4 will, by default, help you interact with Sheets as an
@@ -155,7 +151,7 @@ some initial data.
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> Creating new Sheet: "fluffy-bunny"
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1cXGbHLYkNbtzdxs62QKMeFhaDKdJFKLHsj2hxqqNsBs
+#>                 ID: 1smR7snslX75NE1KCO4MrqioEGgh-PCXLDsilu_bgOd4
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -174,7 +170,7 @@ head(mtcars) %>%
 #> Writing to sheet "autos"
 ss
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1cXGbHLYkNbtzdxs62QKMeFhaDKdJFKLHsj2hxqqNsBs
+#>                 ID: 1smR7snslX75NE1KCO4MrqioEGgh-PCXLDsilu_bgOd4
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2

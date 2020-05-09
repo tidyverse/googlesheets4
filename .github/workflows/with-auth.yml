@@ -9,7 +9,7 @@ on:
 name: with-auth
 
 jobs:
-  live-api:
+  with-auth:
     runs-on: macOS-latest
 
     steps:

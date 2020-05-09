@@ -35,6 +35,8 @@ jobs:
 
       - name: Install dependencies
         run: |
+          install.packages("remotes")
+          remotes::install_github("r-lib/remotes")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}

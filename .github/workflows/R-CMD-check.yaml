@@ -67,7 +67,7 @@ jobs:
       - name: Install dependencies
         run: |
           # temporary hack until there's a macOS binary for ps
-          install.packages("ps", type = "binary")
+          install.packages("ps", type = "source")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("tidyverse")

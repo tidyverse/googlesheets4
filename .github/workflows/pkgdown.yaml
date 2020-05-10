@@ -40,7 +40,8 @@ jobs:
 
       - name: Query dependencies
         run: |
-          install.packages('remotes')
+          # getting dev remotes for better behaviour re: installation order
+          install.packages("https://github.com/r-lib/remotes/archive/master.tar.gz", repos = NULL)
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
         shell: Rscript {0}
 
@@ -53,7 +54,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          install.packages("remotes")
+          # temporary hack until there's a macOS binary for ps
+          install.packages("ps", type = "source")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("tidyverse")
           remotes::install_github("tidyverse/tidytemplate")

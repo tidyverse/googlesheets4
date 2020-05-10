@@ -282,20 +282,14 @@ about sheet names, specify <code>to_sheet</code>.</p></td>
   <span class='co'># clean up</span>
   <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='st'>"sheet-copy-demo"</span>) <span class='kw'>%&gt;%</span>
     <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-copy-demo-aaa"</span></div><div class='output co'>#&gt; <span class='message'>Duplicating sheet "iris" in "sheet-copy-demo-aaa"</span></div><div class='output co'>#&gt; <span class='message'>Copied as "Copy of iris"</span></div><div class='output co'>#&gt; <span class='message'>Duplicating sheet "Copy of iris" in "sheet-copy-demo-aaa"</span></div><div class='output co'>#&gt; <span class='message'>Copied as "iris-the-sequel"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-copy-demo-bbb"</span></div><div class='output co'>#&gt; <span class='message'>Copying sheet "chickwts" from "sheet-copy-demo-aaa" to "sheet-copy-demo-bbb"</span></div><div class='output co'>#&gt; <span class='message'>Copied as "Copy of chickwts"</span></div><div class='output co'>#&gt; <span class='message'>Copying sheet "chickwts" from "sheet-copy-demo-aaa" to "sheet-copy-demo-bbb"</span></div><div class='output co'>#&gt; <span class='message'>Copied as "chicks-two"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * sheet-copy-demo-bbb: 1RgjiEm8yHwroQSQYOiLcI0e9vpqJxF2diBdmppfq_WY</span>
-#&gt; <span class='message'>  * sheet-copy-demo-aaa: 1pGI6OxrJa66pcihnX4wezQdlv1lPmzssFZsYu_MkkD4</span>
-#&gt; <span class='message'>  * sheet-copy-demo-bbb: 1c9g2Q7JqP4cxZqNVnYqpobwiB8uGQWqw6LVT-tUVnWE</span>
-#&gt; <span class='message'>  * sheet-copy-demo-aaa: 1izNq4aC1wHBYVahv1JErowSJLInoaJ4Wyjlgl73a92c</span>
-#&gt; <span class='message'>  * sheet-copy-demo-bbb: 1Q_xMV7SO_XCcWuJpWGteK2_hE1EwV43PFxLZNh9X0tM</span>
-#&gt; <span class='message'>  * sheet-copy-demo-aaa: 1h1a6X2-YaR_MoAAxkZ92dDURrN-38bFP_CFa0LJsU0E</span>
-#&gt; <span class='message'>  * sheet-copy-demo-aaa: 1la-a3i8XRLlpOD4zzKE6EsMEB2vg9cI84D2f96wN4wg</span>
-#&gt; <span class='message'>  * sheet-copy-demo-bbb: 17q4A06KdfoJ88gVmOKMsseCe9GBIxpBzB-rX2LjXoS0</span>
-#&gt; <span class='message'>  * sheet-copy-demo-aaa: 1kzh_sfGdMKJ16JZEQn-s56ypp3pYll4VR9cEJb5F9ZE</span>
-#&gt; <span class='message'>  * sheet-copy-demo-bbb: 1rZIOkWKd6DHwfjvB6B2NCnQmZigNcAjQmJgkb284_So</span>
-#&gt; <span class='message'>  * sheet-copy-demo-aaa: 1cMmeGPl96qgmYdVnggn0CKglG1MDcaGdieBbI1FrUYg</span>
-#&gt; <span class='message'>  * sheet-copy-demo-bbb: 1-6sjy9sYu5Kj8C9x0Nof4WgV_82g5_LStVpcvMOBHgM</span>
-#&gt; <span class='message'>  * sheet-copy-demo-aaa: 1sDq-RgUJC3XyTAO71LMEA4rX4ZeXkAbz03KK3WhIcVQ</span></div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-copy-demo-aaa"</span></div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+#&gt; <span class='error'>  * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
+#&gt; <span class='error'>  * Quota exceeded for quota group 'WriteGroup' and limit 'Write requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
+#&gt; <span class='error'></span>
+#&gt; <span class='error'>Error details:</span>
+#&gt; <span class='error'>  * Error details of type 'google.rpc.Help' are not implemented yet.</span>
+#&gt; <span class='error'>  * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
+#&gt; <span class='error'>  * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

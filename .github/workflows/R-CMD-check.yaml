@@ -70,8 +70,6 @@ jobs:
           install.packages("ps", type = "source")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
-          remotes::install_cran("tidyverse")
-          remotes::install_github("hadley/emo")
         shell: Rscript {0}
 
       - name: Session info

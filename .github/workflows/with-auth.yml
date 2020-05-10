@@ -21,6 +21,7 @@ jobs:
 
       - name: Query dependencies
         run: |
+          # getting dev remotes for better behaviour re: installation order
           install.packages("https://github.com/r-lib/remotes/archive/master.tar.gz", repos = NULL)
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
         shell: Rscript {0}
@@ -30,12 +31,13 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-r-${{ matrix.config.r }}-3-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-3-
+          key: ${{ runner.os }}-r-${{ matrix.config.r }}-4-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-r-${{ matrix.config.r }}-4-
 
       - name: Install dependencies
         run: |
-          install.packages("https://github.com/r-lib/remotes/archive/master.tar.gz", repos = NULL)
+          # temporary hack until there's a macOS binary for ps
+          install.packages("ps", type = "binary")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}

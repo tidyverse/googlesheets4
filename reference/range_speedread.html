@@ -164,8 +164,22 @@ gs4_deauth() has put googlesheets4 into a de-authorized state." />
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Blog posts</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2020/05/googlesheets4-0-2-0/">googlesheets4 0.2.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Change log</a>
+    </li>
+  </ul>
 </li>
         <li>
   <a href="https://github.com/tidyverse/googlesheets4/">
@@ -286,15 +300,14 @@ is a lower bound. Ignored if <code>range</code> is given.</p></td>
 
   <span class='co'># clean up</span>
   <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>(<span class='no'>ss</span>)
-}</div><div class='output co'>#&gt; <span class='message'>Loading required package: readr</span></div><div class='output co'>#&gt; <span class='message'>Reading from "deaths", "other" sheet, range "A5:F15"</span></div><div class='output co'>#&gt; <span class='message'>Export URL: https://docs.google.com/spreadsheets/d/1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y/export?format=csv&amp;range=A5%3AF15&amp;gid=278837031</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "fiery-hart"</span></div><div class='output co'>#&gt; <span class='message'>Reading from "fiery-hart"</span></div><div class='output co'>#&gt; <span class='message'>Export URL: https://docs.google.com/spreadsheets/d/1JMvSBVfo7OdQ8C4w6MhWa7shr1FjpUv55GZ4Yr3Ggew/export?format=csv</span></div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
-#&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  Sepal.Length = <span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  Sepal.Width = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  Petal.Length = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  Petal.Width = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  Species = </span><span style='color: #BB0000;'>col_character()</span><span></span>
-#&gt; <span class='message'>)</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * fiery-hart: 1JMvSBVfo7OdQ8C4w6MhWa7shr1FjpUv55GZ4Yr3Ggew</span></div></span></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Loading required package: readr</span></div><div class='output co'>#&gt; <span class='message'>Reading from "deaths", "other" sheet, range "A5:F15"</span></div><div class='output co'>#&gt; <span class='message'>Export URL: https://docs.google.com/spreadsheets/d/1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y/export?format=csv&amp;range=A5%3AF15&amp;gid=278837031</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "fiery-hart"</span></div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+#&gt; <span class='error'>  * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
+#&gt; <span class='error'>  * Quota exceeded for quota group 'WriteGroup' and limit 'Write requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
+#&gt; <span class='error'></span>
+#&gt; <span class='error'>Error details:</span>
+#&gt; <span class='error'>  * Error details of type 'google.rpc.Help' are not implemented yet.</span>
+#&gt; <span class='error'>  * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
+#&gt; <span class='error'>  * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

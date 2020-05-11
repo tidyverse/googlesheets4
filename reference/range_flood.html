@@ -147,8 +147,22 @@ but this can be specified via reformat." />
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Blog posts</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2020/05/googlesheets4-0-2-0/">googlesheets4 0.2.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Change log</a>
+    </li>
+  </ul>
 </li>
         <li>
   <a href="https://github.com/tidyverse/googlesheets4/">
@@ -281,8 +295,14 @@ Currently googlesheets4 provides no real support for formatting, so
   <span class='co'># clean up</span>
   <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"range-flood-demo"</span>) <span class='kw'>%&gt;%</span>
     <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * range-flood-demo: 1IT0IJQbNBAmV87R0WzrcySnWkirT8K7_5DKPsqd_jSc</span></div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+#&gt; <span class='error'>  * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
+#&gt; <span class='error'>  * Quota exceeded for quota group 'WriteGroup' and limit 'Write requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
+#&gt; <span class='error'></span>
+#&gt; <span class='error'>Error details:</span>
+#&gt; <span class='error'>  * Error details of type 'google.rpc.Help' are not implemented yet.</span>
+#&gt; <span class='error'>  * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
+#&gt; <span class='error'>  * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

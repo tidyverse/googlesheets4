@@ -148,8 +148,22 @@ if you want to coordinate auth between googlesheets4 and googledrive." />
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Blog posts</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2020/05/googlesheets4-0-2-0/">googlesheets4 0.2.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Change log</a>
+    </li>
+  </ul>
 </li>
         <li>
   <a href="https://github.com/tidyverse/googlesheets4/">
@@ -212,13 +226,13 @@ if you want to coordinate auth between googlesheets4 and googledrive.</p>
   <span class='co'>#   tidyr::hoist(drive_resource, created_on = "createdTime") %&gt;%</span>
   <span class='co'>#   dplyr::mutate(created_on = as.Date(created_on))</span>
 }</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 3</span><span>
-#&gt;   name                 id                                       drive_resource  
-#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                    </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>          
-#&gt; </span><span style='color: #555555;'>1</span><span> able-aardvark        1-PtSgE3ytUcn-Grvswi7Czc-S7KKfI-8I3nYtk… </span><span style='color: #555555;'>&lt;named list [33</span><span>…
-#&gt; </span><span style='color: #555555;'>2</span><span> cranky-gerbil        1hQLfxlRTTRU_8lBCgvdpfWCPyH3dbZaQDkyV9v… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
-#&gt; </span><span style='color: #555555;'>3</span><span> delete-sheets-from-… 1G4wO-LSdHEfDH7_y7pcre_4Dgmox4YlqkdgqU8… </span><span style='color: #555555;'>&lt;named list [33</span><span>…
-#&gt; </span><span style='color: #555555;'>4</span><span> add-sheets-to-me     1QfrmGV5sFxth_1BxsMFNeshq8qKTx6hVOHjfc3… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
-#&gt; </span><span style='color: #555555;'>5</span><span> delete-sheets-from-… 12mDnf5se8eWyP0_wty2m1O7pEB6PR_DtguoOdz… </span><span style='color: #555555;'>&lt;named list [34</span><span>…</div></span></pre>
+#&gt;   name              id                                          drive_resource  
+#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                       </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>          
+#&gt; </span><span style='color: #555555;'>1</span><span> able-aardvark     19cvScA8Z9UHLlNP8iWnpP6lNcexZsrXqcon39dAYv… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
+#&gt; </span><span style='color: #555555;'>2</span><span> able-aardvark     1c09Gahdu-Kny8QsW9eNS-V7N8MJSmcFe85rDLK6-S… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
+#&gt; </span><span style='color: #555555;'>3</span><span> able-aardvark     1uNTE9qFFJVXuerWtgD93aDHDukswurPNPO2OY1cpe… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
+#&gt; </span><span style='color: #555555;'>4</span><span> able-aardvark     1FC3sNHv9cc9u67ANb4G_4-YB8FqeV_G7lSKKBv-DJ… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
+#&gt; </span><span style='color: #555555;'>5</span><span> heartsick-sealion 1vK1bVxqcxLAL4FnMGRDV4-2eETXBIr2X2oDHHO1FT… </span><span style='color: #555555;'>&lt;named list [34</span><span>…</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

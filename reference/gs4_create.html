@@ -148,8 +148,22 @@ as described in sheet_write()." />
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Blog posts</li>
+    <li>
+      <a href="https://www.tidyverse.org/blog/2020/05/googlesheets4-0-2-0/">googlesheets4 0.2.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Change log</a>
+    </li>
+  </ul>
 </li>
         <li>
   <a href="https://github.com/tidyverse/googlesheets4/">
@@ -259,12 +273,12 @@ frames. See the examples.</p></td>
   <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"gs4-create-demo"</span>) <span class='kw'>%&gt;%</span>
     <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
 }</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-1"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-2"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-3"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-4"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-5"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-6"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * gs4-create-demo-6: 1uT9fNI4Tr8hCdQDJH2TQuPx0usyEYzJW5BuzQGL8Z4c</span>
-#&gt; <span class='message'>  * gs4-create-demo-5: 1KPs_9-3_ypI2nFIytHuNAL_RPZE3HLOGAjdwcKdWI0Q</span>
-#&gt; <span class='message'>  * gs4-create-demo-4: 1sTCFumVwgwBedPcqo_mpqmARPne6VNqrvQ7NIjyPQlg</span>
-#&gt; <span class='message'>  * gs4-create-demo-3: 1nnI_ZzuiVHq4qRk-UbqtzzYszLjdS8tl_4dJb2EEDTg</span>
-#&gt; <span class='message'>  * gs4-create-demo-2: 1or_doJRFjtGXWZjAISAclXVcQDpTm9nAV2OjJgw72WU</span>
-#&gt; <span class='message'>  * gs4-create-demo-1: 1CkzRg9CB3hoEtpXwsPFn4bOr8SBVZCuGDN4ISA-nK2k</span></div></pre>
+#&gt; <span class='message'>  * gs4-create-demo-6: 1EnDFPSEVI_SogVux-i6pJBuha1ca-eNCD01LQu5Ynmc</span>
+#&gt; <span class='message'>  * gs4-create-demo-5: 1FH1S7VwXn-ggG1nE4hNB83JEhI400pssgN8qrMxqaMQ</span>
+#&gt; <span class='message'>  * gs4-create-demo-4: 12YmQeNOB6zhpbORz3tKasIYiQx2kofYMH_P19BUm2nA</span>
+#&gt; <span class='message'>  * gs4-create-demo-3: 1PfVJRMLGgQKehhg1IObG1ItiJbJ5r4twsIu5Z2gwFRo</span>
+#&gt; <span class='message'>  * gs4-create-demo-2: 1SCRxTHRmGxVzCy-ervOXlYfAJ2NKdY7LsHwo2O9UXKs</span>
+#&gt; <span class='message'>  * gs4-create-demo-1: 1B1ZRomUsyqb4B-ah6Z-aHvRns1Iq6zvIthiNipWjDJI</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

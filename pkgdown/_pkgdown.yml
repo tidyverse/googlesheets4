@@ -13,6 +13,15 @@ authors:
 navbar:
   components:
     home: ~
+    news:
+      text: News
+      menu:
+      - text: "Blog posts"
+      - text: "googlesheets4 0.2.0"
+        href: https://www.tidyverse.org/blog/2020/05/googlesheets4-0-2-0/
+      - text: "------------------"
+      - text: "Change log"
+        href: news/index.html
 
 articles:
 - title: Basic reading and writing

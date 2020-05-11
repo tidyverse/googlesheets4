@@ -15,6 +15,7 @@ jobs:
     if: "github.event_name == 'schedule' || contains(github.event.head_commit.message, '[covr]')"
 
     env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       GOOGLESHEETS4_PASSWORD: ${{ secrets.GOOGLESHEETS4_PASSWORD }}
 
     steps:

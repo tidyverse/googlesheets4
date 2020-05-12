@@ -317,26 +317,26 @@
 <p>What if you want to see all of your Sheets? Or all the Sheets with “gap” in their name?</p>
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="kw">type</span> <span class="kw">=</span> <span class="st">"spreadsheet"</span>)
-<span class="co">#&gt; # A tibble: 51 x 3</span>
+<span class="co">#&gt; # A tibble: 42 x 3</span>
 <span class="co">#&gt;   name               id                                         drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 sheet-resize-demo  1kumKWfb6jyyeC1UL7xojbpShx9QC7A_575E8QE3z… &lt;named list [33…</span>
+<span class="co">#&gt; 1 sheet-copy-demo-a… 1D23nQcoLqNbMifQnZ83hwLz6nDtpyIBRf12xxbHU… &lt;named list [33…</span>
 <span class="co">#&gt; 2 sheet-copy-demo-a… 1zd1PDHdCK3gRKXEGIj-OZNizOAXqJV6wyLH4PkUa… &lt;named list [33…</span>
-<span class="co">#&gt; 3 add-sheets-to-me   1Y1Pk5BrrIicTp4eW4hjG9n5IY3QaqxMgrn7ybnVx… &lt;named list [33…</span>
-<span class="co">#&gt; 4 fiery-hart         1QtkU4WlWBOGBhjpyKicU-8gcUYyFTTJ9drKtYdAt… &lt;named list [33…</span>
-<span class="co">#&gt; 5 range-flood-demo   1puWU3LJOSaUQR1PhZscJN0FWGu41rRdxlafiSy0h… &lt;named list [33…</span>
-<span class="co">#&gt; # … with 46 more rows</span></pre></body></html></div>
+<span class="co">#&gt; 3 fiery-hart         1QtkU4WlWBOGBhjpyKicU-8gcUYyFTTJ9drKtYdAt… &lt;named list [33…</span>
+<span class="co">#&gt; 4 able-aardvark      19cvScA8Z9UHLlNP8iWnpP6lNcexZsrXqcon39dAY… &lt;named list [34…</span>
+<span class="co">#&gt; 5 able-aardvark      1c09Gahdu-Kny8QsW9eNS-V7N8MJSmcFe85rDLK6-… &lt;named list [34…</span>
+<span class="co">#&gt; # … with 37 more rows</span></pre></body></html></div>
 <p>This is so handy that we’ve made <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span>()
-<span class="co">#&gt; # A tibble: 51 x 3</span>
+<span class="co">#&gt; # A tibble: 42 x 3</span>
 <span class="co">#&gt;   name               id                                         drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 sheet-resize-demo  1kumKWfb6jyyeC1UL7xojbpShx9QC7A_575E8QE3z… &lt;named list [33…</span>
+<span class="co">#&gt; 1 sheet-copy-demo-a… 1D23nQcoLqNbMifQnZ83hwLz6nDtpyIBRf12xxbHU… &lt;named list [33…</span>
 <span class="co">#&gt; 2 sheet-copy-demo-a… 1zd1PDHdCK3gRKXEGIj-OZNizOAXqJV6wyLH4PkUa… &lt;named list [33…</span>
-<span class="co">#&gt; 3 add-sheets-to-me   1Y1Pk5BrrIicTp4eW4hjG9n5IY3QaqxMgrn7ybnVx… &lt;named list [33…</span>
-<span class="co">#&gt; 4 fiery-hart         1QtkU4WlWBOGBhjpyKicU-8gcUYyFTTJ9drKtYdAt… &lt;named list [33…</span>
-<span class="co">#&gt; 5 range-flood-demo   1puWU3LJOSaUQR1PhZscJN0FWGu41rRdxlafiSy0h… &lt;named list [33…</span>
-<span class="co">#&gt; # … with 46 more rows</span></pre></body></html></div>
+<span class="co">#&gt; 3 fiery-hart         1QtkU4WlWBOGBhjpyKicU-8gcUYyFTTJ9drKtYdAt… &lt;named list [33…</span>
+<span class="co">#&gt; 4 able-aardvark      19cvScA8Z9UHLlNP8iWnpP6lNcexZsrXqcon39dAY… &lt;named list [34…</span>
+<span class="co">#&gt; 5 able-aardvark      1c09Gahdu-Kny8QsW9eNS-V7N8MJSmcFe85rDLK6-… &lt;named list [34…</span>
+<span class="co">#&gt; # … with 37 more rows</span></pre></body></html></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </div>

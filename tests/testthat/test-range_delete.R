@@ -7,7 +7,7 @@ test_that("range_delete() works", {
   skip_if_no_token()
 
   df <- gs4_fodder(4)
-  ss <- scoped_temporary_ss(me_(), sheets = list(df))
+  ss <- local_ss(me_(), sheets = list(df))
 
   range_delete(ss, range = "2:3")
   range_delete(ss, range = "B")

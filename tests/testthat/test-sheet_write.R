@@ -13,7 +13,7 @@ test_that("sheet_write() writes what it should", {
   )
   dat$factor <- factor(dat$factor)
 
-  ss <- scoped_temporary_ss(me_("datetimes"))
+  ss <- local_ss(me_("datetimes"))
   sheet_write(dat, ss)
   x <- range_read(ss, sheet = "dat", col_types = "C")
 
@@ -50,7 +50,7 @@ test_that("sheet_write() can figure out (work)sheet name", {
 
   foofy <- data.frame(x = 1:3, y = letters[1:3])
 
-  ss <- scoped_temporary_ss(me_("sheetnames"))
+  ss <- local_ss(me_("sheetnames"))
 
   # get (work)sheet name from data frame's name
   sheet_write(foofy, ss)

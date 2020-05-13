@@ -12,7 +12,7 @@ test_that("range_write() works", {
     matrix(head(letters, n * m), nrow = n , ncol = m), .name_repair = "unique"
   )
 
-  ss <- scoped_temporary_ss(me_(), sheets = list(foo = data))
+  ss <- local_ss(me_(), sheets = list(foo = data))
   # this is intentional below: refer to sheet in various ways
 
   # write into existing cells --> no size change

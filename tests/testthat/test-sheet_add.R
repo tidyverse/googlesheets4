@@ -13,7 +13,7 @@ test_that("sheet_add() works", {
   skip_if_offline()
   skip_if_no_token()
 
-  ss <- scoped_temporary_ss(me_())
+  ss <- local_ss(me_())
 
   expect_error_free(
     sheet_add(ss)

@@ -7,7 +7,7 @@ test_that("sheet_append() works", {
   skip_if_no_token()
 
   dat <- tibble::tibble(x = as.numeric(1:10), y = LETTERS[1:10])
-  ss <- scoped_temporary_ss(me_(), sheets = list(test = dat[0, ]))
+  ss <- local_ss(me_(), sheets = list(test = dat[0, ]))
 
   sheet_append(ss, dat[1, ], sheet = "test")
   out <- range_read(ss, sheet = "test")

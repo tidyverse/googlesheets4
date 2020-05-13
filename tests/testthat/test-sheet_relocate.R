@@ -7,7 +7,7 @@ test_that("relocation works", {
   skip_if_no_token()
 
   sheet_names <- c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot")
-  ss <- scoped_temporary_ss(me_(), sheets = sheet_names)
+  ss <- local_ss(me_(), sheets = sheet_names)
 
   sheet_relocate(ss, "echo", .before = "bravo")
   sheet_relocate(ss, list("foxtrot", 4))

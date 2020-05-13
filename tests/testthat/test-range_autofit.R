@@ -10,7 +10,7 @@ test_that("range_autofit() works", {
         ~x,     ~y,     ~z,     ~a,     ~b,     ~c,
     "abcd", "efgh", "ijkl", "mnop", "qrst", "uvwx"
   )
-  ss <- scoped_temporary_ss(me_(), sheets = list(dat = dat))
+  ss <- local_ss(me_(), sheets = list(dat = dat))
   ssid <- as_sheets_id(ss)
 
   range_autofit(ss)

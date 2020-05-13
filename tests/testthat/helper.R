@@ -38,7 +38,7 @@ nm_fun <- function(context, user = Sys.info()["user"]) {
   function(x = NULL) as.character(glue::glue_collapse(c(x, y), sep = "-"))
 }
 
-scoped_temporary_ss <- function(name, ..., env = parent.frame()) {
+local_ss <- function(name, ..., env = parent.frame()) {
   existing <- gs4_find(name)
   if (nrow(existing) > 0) {
     stop_glue("A spreadsheet named {sq(name)} already exists.")

@@ -7,7 +7,7 @@ test_that("range_flood() works", {
   skip_if_no_token()
 
   dat <- tibble::tibble(x = rep(1, 3), y = rep(2, 3), z = rep(3, 3))
-  ss <- scoped_temporary_ss(me_(), sheets = list(dat))
+  ss <- local_ss(me_(), sheets = list(dat))
 
   # clear values and format
   range_flood(ss, range = "A:A")

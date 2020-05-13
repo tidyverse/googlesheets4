@@ -6,7 +6,7 @@ test_that("sheet_resize() works", {
   skip_if_offline()
   skip_if_no_token()
 
-  ss <- scoped_temporary_ss(me_())
+  ss <- local_ss(me_())
 
   # no resize occurs
   expect_message(sheet_resize(ss, nrow = 2, ncol = 6), "No need")

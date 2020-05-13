@@ -6,7 +6,7 @@ test_that("internal copy works", {
   skip_if_offline()
   skip_if_no_token()
 
-  ss <- scoped_temporary_ss(
+  ss <- local_ss(
     me_("internal"),
     sheets = list(iris = head(iris), chickwts = head(chickwts))
   )
@@ -19,11 +19,11 @@ test_that("external copy works", {
   skip_if_offline()
   skip_if_no_token()
 
-  ss_source <- scoped_temporary_ss(
+  ss_source <- local_ss(
     me_("source"),
     sheets = list(iris = head(iris), chickwts = head(chickwts))
   )
-  ss_dest <- scoped_temporary_ss(me_("dest"))
+  ss_dest <- local_ss(me_("dest"))
 
   sheet_copy(
     ss_source, from_sheet = "chickwts",

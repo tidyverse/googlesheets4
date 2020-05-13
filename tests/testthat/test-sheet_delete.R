@@ -13,7 +13,7 @@ test_that("sheet_delete() works", {
   skip_if_offline()
   skip_if_no_token()
 
-  ss <- scoped_temporary_ss(me_())
+  ss <- local_ss(me_())
 
   sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 

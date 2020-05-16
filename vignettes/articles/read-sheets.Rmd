@@ -42,9 +42,11 @@ if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(30)
 ## `read_sheet()` and `range_read()` are synonyms
 
 The main "read" function of the googlesheets4 package goes by two names, because we want it to make sense in two contexts:
+
 * `read_sheet()` evokes other table-reading functions, like
  `readr::read_csv()` and `readxl::read_excel()`. The `sheet` in this case
   refers to a Google (spread)Sheet.
+  
 * `range_read()` is technically the right name according to the naming
   convention used throughout the googlesheets4 package, because we can read from
   an arbitrary cell range.
@@ -57,6 +59,8 @@ rather swiftly.
 ## Specify the range and column types
 
 Here we read from the "mini-gap" and "deaths" example Sheets to show some of the different ways to specify (work)sheet and cell ranges. Note also that `col_types` gives control of column types, similar to how `col_types` works in readr and readxl.
+
+For the full list of column types and how to specify them, see [Column specification](https://googlesheets4.tidyverse.org/reference/range_read.html#column-specification) in the ["Read a Sheet into a data frame" reference](https://googlesheets4.tidyverse.org/reference/range_read.html).  
 
 ```{r}
 range_read(gs4_example("mini-gap"), sheet = 2)

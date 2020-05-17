@@ -58,9 +58,7 @@ rather swiftly.
 
 ## Specify the range and column types
 
-Here we read from the "mini-gap" and "deaths" example Sheets to show some of the different ways to specify (work)sheet and cell ranges. Note also that `col_types` gives control of column types, similar to how `col_types` works in readr and readxl.
-
-For the full list of column types and how to specify them, see [Column specification](https://googlesheets4.tidyverse.org/reference/range_read.html#column-specification) in the ["Read a Sheet into a data frame" reference](https://googlesheets4.tidyverse.org/reference/range_read.html).  
+Here we read from the "mini-gap" and "deaths" example Sheets to show some of the different ways to specify (work)sheet and cell ranges. 
 
 ```{r}
 range_read(gs4_example("mini-gap"), sheet = 2)
@@ -69,9 +67,21 @@ range_read(gs4_example("mini-gap"), sheet = "Oceania", n_max = 3)
 
 range_read(gs4_example("deaths"), skip = 4, n_max = 10)
 
+```
+
+
+The example below shows the `range` method to specify a sheet ("other") and a cell reference range within that sheet. 
+
+It also demonstrates how `col_types` gives control of column types, similar to how `col_types` works in readr and readxl.
+
+* For the full list of column types and how to specify them, see [Column specification](https://googlesheets4.tidyverse.org/reference/range_read.html#column-specification) in the "Read a Sheet into a data frame" reference.  
+
+```{r}
+
 range_read(
   gs4_example("deaths"), range = "other!A5:F15", col_types = "?ci??D"
 )
+
 ```
 
 If you looked at the "deaths" spreadsheet in the browser (it's [here](https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/edit#gid=1210215306)), you know that it has some of the typical features of real world spreadsheets: the main data rectangle has prose intended for human-consumption before and after it. That's why we have to specify the range when we read from it.

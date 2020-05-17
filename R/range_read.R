@@ -14,7 +14,7 @@
 #' had `sheets_read()`. It still works, but it's deprecated and will go away
 #' rather swiftly.
 #'
-#' @section Column specification:
+#' @section Column Specification:
 #'
 #'   Column types must be specified in a single string of readr-style short
 #'   codes, e.g. "cci?l" means "character, character, integer, guess, logical".
@@ -61,7 +61,7 @@
 #' @param col_types Column types. Either `NULL` to guess all from the
 #'   spreadsheet or a string of readr-style shortcodes, with one character or
 #'   code per column. If exactly one `col_type` is specified, it is recycled.
-#'   See Details for more.
+#'   See Column Specification for more.
 #' @param na Character vector of strings to interpret as missing values. By
 #'   default, blank cells are treated as missing data.
 #' @param trim_ws Logical. Should leading and trailing whitespace be trimmed

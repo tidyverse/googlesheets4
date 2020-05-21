@@ -28,7 +28,7 @@ request_make <- function(x,
   # TODO: remove this if I implement it in gargle instead
   # https://github.com/r-lib/gargle/issues/124
   encode <- match.arg(encode)
-  gargle::request_make(
+  gargle::request_retry(
     x, ..., encode = encode, user_agent = gs4_user_agent()
   )
 }

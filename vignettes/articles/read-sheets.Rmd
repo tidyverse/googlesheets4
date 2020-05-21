@@ -69,12 +69,11 @@ range_read(gs4_example("deaths"), skip = 4, n_max = 10)
 
 ```
 
+The example below shows the use of `range` to specify both the (work)sheet and an A1-style cell range.
 
-The example below shows the `range` method to specify a sheet ("other") and a cell reference range within that sheet. 
+It also demonstrates how `col_types` gives control of column types, similar to how `col_types` works in readr and readxl. Note that currently there is only support for the "shortcode" style of column specification and we plan to align better with readr's capabilities in a future release.
 
-It also demonstrates how `col_types` gives control of column types, similar to how `col_types` works in readr and readxl.
-
-* For the full list of column types and how to specify them, see [Column specification](https://googlesheets4.tidyverse.org/reference/range_read.html#column-specification) in the "Read a Sheet into a data frame" reference.  
+* For the full list of column types and how to specify them, see the [Column specification](https://googlesheets4.tidyverse.org/reference/range_read.html#column-specification) section of the help for `range_read()`.
 
 ```{r}
 

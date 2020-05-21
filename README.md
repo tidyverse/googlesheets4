@@ -134,6 +134,10 @@ googledrive::drive_get("gapminder") %>%
 #> # … with 619 more rows
 ```
 
+*Note: the only reason we can read a sheet named “gapminder” (the last
+example) is because the account we’re logged in as has a Sheet named
+“gapminder”.*
+
 See the article [Find and Identify
 Sheets](https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html)
 for more about specifying the Sheet you want to address. See the article
@@ -151,7 +155,7 @@ some initial data.
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> Creating new Sheet: "fluffy-bunny"
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1smR7snslX75NE1KCO4MrqioEGgh-PCXLDsilu_bgOd4
+#>                 ID: 1K4a9H9_7WyYm2bOV6VHi9aCtIHIjoGI4auNf92hzCVY
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 1
@@ -170,7 +174,7 @@ head(mtcars) %>%
 #> Writing to sheet "autos"
 ss
 #>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1smR7snslX75NE1KCO4MrqioEGgh-PCXLDsilu_bgOd4
+#>                 ID: 1K4a9H9_7WyYm2bOV6VHi9aCtIHIjoGI4auNf92hzCVY
 #>             Locale: en_US
 #>          Time zone: Etc/GMT
 #>        # of sheets: 2

@@ -178,41 +178,25 @@
 <span class="fu"><a href="../../reference/gs4_auth.html">gs4_auth</a></span>(<span class="kw">token</span> <span class="kw">=</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_token.html">drive_token</a></span>())</pre></body></html></div>
 <p>Now you can use googledrive functions, like <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> or <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">googledrive::drive_get()</a></code>, to list files or find them by name, path, or other property. Then, once you’ve identified the target file, use googlesheets4 to do spreadsheet-specific tasks.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="st">"chicken"</span>)
-<span class="co">#&gt; # A tibble: 1 x 3</span>
-<span class="co">#&gt;   name          id                                           drive_resource   </span>
-<span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt;                                        &lt;list&gt;           </span>
-<span class="co">#&gt; 1 chicken-sheet 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU &lt;named list [35]&gt;</span>
+<span class="co">#&gt; # A tibble: 0 x 3</span>
+<span class="co">#&gt; # … with 3 variables: name &lt;chr&gt;, id &lt;chr&gt;, drive_resource &lt;list&gt;</span>
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"chicken-sheet"</span>)
 
 <span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt;   Spreadsheet name: chicken-sheet</span>
-<span class="co">#&gt;                 ID: 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU</span>
-<span class="co">#&gt;             Locale: en_US</span>
-<span class="co">#&gt;          Time zone: America/Los_Angeles</span>
-<span class="co">#&gt;        # of sheets: 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;  chicken.csv: 1000 x 26</span>
+<span class="co">#&gt; Error: Dribble input must have exactly 1 row.</span>
+<span class="co">#&gt; * Actual input has 0 rows.</span>
 
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt; Reading from "chicken-sheet"</span>
-<span class="co">#&gt; Range "chicken.csv"</span>
-<span class="co">#&gt; # A tibble: 5 x 4</span>
-<span class="co">#&gt;   chicken            breed         sex    motto                                 </span>
-<span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                                 </span>
-<span class="co">#&gt; 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…</span>
-<span class="co">#&gt; 2 Chicken Little     unknown       hen    The sky is falling!                   </span>
-<span class="co">#&gt; 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…</span>
-<span class="co">#&gt; 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  </span>
-<span class="co">#&gt; 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.</span></pre></body></html></div>
+<span class="co">#&gt; Error: Dribble input must have exactly 1 row.</span>
+<span class="co">#&gt; * Actual input has 0 rows.</span></pre></body></html></div>
 <p>If you ever want to confirm the currently authenticated user, both packages provide a <code>*_user()</code> function that reveals some info:</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_user.html">drive_user</a></span>()
 <span class="co">#&gt; Logged in as:</span>
-<span class="co">#&gt;   *  displayName: googlesheets4-docs@gargle-169921.iam.gserviceaccount.com</span>
-<span class="co">#&gt;   * emailAddress: googlesheets4-docs@gargle-169921.iam.gserviceaccount.com</span>
+<span class="co">#&gt;   *  displayName: googlesheets4-dev-docs@robust-fin-276504.iam.gserviceaccount.com</span>
+<span class="co">#&gt;   * emailAddress: googlesheets4-dev-docs@robust-fin-276504.iam.gserviceaccount.com</span>
 <span class="fu"><a href="../../reference/gs4_user.html">gs4_user</a></span>()
-<span class="co">#&gt; [1] "googlesheets4-docs@gargle-169921.iam.gserviceaccount.com"</span></pre></body></html></div>
+<span class="co">#&gt; [1] "googlesheets4-dev-docs@robust-fin-276504.iam.gserviceaccount.com"</span></pre></body></html></div>
 <p>We are using a service account to render this article. But if you’ve used the default OAuth flow, this should correspond to the email of the Google account you logged in with.</p>
 </div>
 <div id="auth-with-googlesheets4-first-then-googledrive" class="section level2">
@@ -231,34 +215,18 @@
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">drive_auth</a></span>(<span class="kw">token</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/gs4_token.html">gs4_token</a></span>())</pre></body></html></div>
 <p>Now you can use googledrive functions to list files or find them by name, path, or other property. Then, once you’ve identified the target file, use googlesheets4 to do spreadsheet-specific tasks.</p>
 <div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="st">"chicken"</span>)
-<span class="co">#&gt; # A tibble: 1 x 3</span>
-<span class="co">#&gt;   name          id                                           drive_resource   </span>
-<span class="co">#&gt; * &lt;chr&gt;         &lt;chr&gt;                                        &lt;list&gt;           </span>
-<span class="co">#&gt; 1 chicken-sheet 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU &lt;named list [35]&gt;</span>
+<span class="co">#&gt; # A tibble: 0 x 3</span>
+<span class="co">#&gt; # … with 3 variables: name &lt;chr&gt;, id &lt;chr&gt;, drive_resource &lt;list&gt;</span>
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"chicken-sheet"</span>)
 
 <span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt;   Spreadsheet name: chicken-sheet</span>
-<span class="co">#&gt;                 ID: 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU</span>
-<span class="co">#&gt;             Locale: en_US</span>
-<span class="co">#&gt;          Time zone: America/Los_Angeles</span>
-<span class="co">#&gt;        # of sheets: 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;  chicken.csv: 1000 x 26</span>
+<span class="co">#&gt; Error: Dribble input must have exactly 1 row.</span>
+<span class="co">#&gt; * Actual input has 0 rows.</span>
 
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ss</span>)
-<span class="co">#&gt; Reading from "chicken-sheet"</span>
-<span class="co">#&gt; Range "chicken.csv"</span>
-<span class="co">#&gt; # A tibble: 5 x 4</span>
-<span class="co">#&gt;   chicken            breed         sex    motto                                 </span>
-<span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                                 </span>
-<span class="co">#&gt; 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…</span>
-<span class="co">#&gt; 2 Chicken Little     unknown       hen    The sky is falling!                   </span>
-<span class="co">#&gt; 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…</span>
-<span class="co">#&gt; 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  </span>
-<span class="co">#&gt; 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.</span></pre></body></html></div>
+<span class="co">#&gt; Error: Dribble input must have exactly 1 row.</span>
+<span class="co">#&gt; * Actual input has 0 rows.</span></pre></body></html></div>
 </div>
 <div id="scope-savvy" class="section level2">
 <h2 class="hasAnchor">

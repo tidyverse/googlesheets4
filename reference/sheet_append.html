@@ -267,14 +267,8 @@ is how googledrive represents Drive files. Processed through
   <span class='co'># clean up</span>
   <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"sheet-append-demo"</span>) <span class='kw'>%&gt;%</span>
     <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Reading from "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Range "other_data"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-#&gt; <span class='error'>  * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-#&gt; <span class='error'>  * Quota exceeded for quota group 'WriteGroup' and limit 'Write requests per user per 100 seconds' of service 'sheets.googleapis.com' for consumer 'project_number:603366585132'.</span>
-#&gt; <span class='error'></span>
-#&gt; <span class='error'>Error details:</span>
-#&gt; <span class='error'>  * Error details of type 'google.rpc.Help' are not implemented yet.</span>
-#&gt; <span class='error'>  * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-#&gt; <span class='error'>  * Please open an issue at https://github.com/r-lib/gargle/issues, so we can fix.</span></div></pre>
+}</div><div class='output co'>#&gt; <span class='message'>Reading from "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Range "other_data"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Appending 1 row(s) to "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Writing to "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Appending 4 row(s) to "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Reading from "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Range "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * sheet-append-demo: 19Dhj-3Wmk15T6tdwPYwCvAb3RkOqMjsUozK6KFjge3U</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

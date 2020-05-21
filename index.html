@@ -234,6 +234,7 @@
 <span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
 <span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
 <span class="co">#&gt; # … with 619 more rows</span></pre></div>
+<p><em>Note: the only reason we can read a sheet named “gapminder” (the last example) is because the account we’re logged in as has a Sheet named “gapminder”.</em></p>
 <p>See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Find and Identify Sheets</a> for more about specifying the Sheet you want to address. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Read Sheets</a> for more about reading from specific sheets or ranges, setting column type, and getting low-level cell data.</p>
 </div>
 <div id="write" class="section level2">
@@ -243,7 +244,7 @@
 <div class="sourceCode" id="cb5"><pre class="r">(<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/gs4_create.html">gs4_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">flowers</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">iris</span>))))
 <span class="co">#&gt; Creating new Sheet: "fluffy-bunny"</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1smR7snslX75NE1KCO4MrqioEGgh-PCXLDsilu_bgOd4</span>
+<span class="co">#&gt;                 ID: 1K4a9H9_7WyYm2bOV6VHi9aCtIHIjoGI4auNf92hzCVY</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -257,7 +258,7 @@
 <span class="co">#&gt; Writing to sheet "autos"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;                 ID: 1smR7snslX75NE1KCO4MrqioEGgh-PCXLDsilu_bgOd4</span>
+<span class="co">#&gt;                 ID: 1K4a9H9_7WyYm2bOV6VHi9aCtIHIjoGI4auNf92hzCVY</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>

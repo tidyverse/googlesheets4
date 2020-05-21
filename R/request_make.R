@@ -14,20 +14,16 @@
 #'   with [request_generate()] or [gargle::request_build()]. Must contain a
 #'   `method` and `url`. If present, `body` and `token` are used.
 #' @param ... Optional arguments passed through to the HTTP method.
-#' @param encode If the body is a named list, how should it be encoded? This is
-#'   essentially the same as `encode` in all the [`httr::VERB()`]s, except we
-#'   choose a different default: a default of `encode = "json"` is much more
-#'   useful when calling Google APIs.
+#' @param encode If the body is a named list, how should it be encoded? This has
+#'   the same meaning as `encode` in all the [httr::VERB()]s, such as
+#'   [httr::POST()]. Note, however, that we default to `encode = "json"`, which
+#'   is what you want most of the time when calling the Sheets API. The httr
+#'   default is `"multipart"`. Other acceptable values are `"form"` and `"raw"`.
 #'
 #' @return Object of class `response` from [httr].
 #' @export
 #' @family low-level API functions
-request_make <- function(x,
-                         ...,
-                         encode = c("json", "multipart", "form", "raw")) {
-  # TODO: remove this if I implement it in gargle instead
-  # https://github.com/r-lib/gargle/issues/124
-  encode <- match.arg(encode)
+request_make <- function(x, ..., encode = "json") {
   gargle::request_retry(
     x, ..., encode = encode, user_agent = gs4_user_agent()
   )

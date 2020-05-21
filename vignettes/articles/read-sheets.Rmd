@@ -42,9 +42,11 @@ if (identical(Sys.getenv("IN_PKGDOWN"), "true")) Sys.sleep(30)
 ## `read_sheet()` and `range_read()` are synonyms
 
 The main "read" function of the googlesheets4 package goes by two names, because we want it to make sense in two contexts:
+
 * `read_sheet()` evokes other table-reading functions, like
  `readr::read_csv()` and `readxl::read_excel()`. The `sheet` in this case
   refers to a Google (spread)Sheet.
+  
 * `range_read()` is technically the right name according to the naming
   convention used throughout the googlesheets4 package, because we can read from
   an arbitrary cell range.
@@ -56,7 +58,7 @@ rather swiftly.
 
 ## Specify the range and column types
 
-Here we read from the "mini-gap" and "deaths" example Sheets to show some of the different ways to specify (work)sheet and cell ranges. Note also that `col_types` gives control of column types, similar to how `col_types` works in readr and readxl.
+Here we read from the "mini-gap" and "deaths" example Sheets to show some of the different ways to specify (work)sheet and cell ranges. 
 
 ```{r}
 range_read(gs4_example("mini-gap"), sheet = 2)
@@ -65,9 +67,20 @@ range_read(gs4_example("mini-gap"), sheet = "Oceania", n_max = 3)
 
 range_read(gs4_example("deaths"), skip = 4, n_max = 10)
 
+```
+
+The example below shows the use of `range` to specify both the (work)sheet and an A1-style cell range.
+
+It also demonstrates how `col_types` gives control of column types, similar to how `col_types` works in readr and readxl. Note that currently there is only support for the "shortcode" style of column specification and we plan to align better with readr's capabilities in a future release.
+
+* For the full list of column types and how to specify them, see the [Column specification](https://googlesheets4.tidyverse.org/reference/range_read.html#column-specification) section of the help for `range_read()`.
+
+```{r}
+
 range_read(
   gs4_example("deaths"), range = "other!A5:F15", col_types = "?ci??D"
 )
+
 ```
 
 If you looked at the "deaths" spreadsheet in the browser (it's [here](https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/edit#gid=1210215306)), you know that it has some of the typical features of real world spreadsheets: the main data rectangle has prose intended for human-consumption before and after it. That's why we have to specify the range when we read from it.

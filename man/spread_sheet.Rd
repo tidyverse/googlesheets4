@@ -27,7 +27,7 @@ entry per unskipped column.}
 \item{col_types}{Column types. Either \code{NULL} to guess all from the
 spreadsheet or a string of readr-style shortcodes, with one character or
 code per column. If exactly one \code{col_type} is specified, it is recycled.
-See Details for more.}
+See Column Specification for more.}
 
 \item{na}{Character vector of strings to interpret as missing values. By
 default, blank cells are treated as missing data.}

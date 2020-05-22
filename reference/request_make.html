@@ -203,7 +203,7 @@ been created with <code><a href='request_generate.html'>request_generate()</a></
 output is processed with <code>process_response()</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>request_make</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>encode</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"json"</span>, <span class='st'>"multipart"</span>, <span class='st'>"form"</span>, <span class='st'>"raw"</span>))</pre>
+    <pre class="usage"><span class='fu'>request_make</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>encode</span> <span class='kw'>=</span> <span class='st'>"json"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -220,10 +220,11 @@ with <code><a href='request_generate.html'>request_generate()</a></code> or <cod
     </tr>
     <tr>
       <th>encode</th>
-      <td><p>If the body is a named list, how should it be encoded? This is
-essentially the same as <code>encode</code> in all the <code><a href='https://httr.r-lib.org/reference/VERB.html'>httr::VERB()</a></code>s, except we
-choose a different default: a default of <code>encode = "json"</code> is much more
-useful when calling Google APIs.</p></td>
+      <td><p>If the body is a named list, how should it be encoded? This has
+the same meaning as <code>encode</code> in all the <code><a href='https://httr.r-lib.org/reference/VERB.html'>httr::VERB()</a></code>s, such as
+<code><a href='https://httr.r-lib.org/reference/POST.html'>httr::POST()</a></code>. Note, however, that we default to <code>encode = "json"</code>, which
+is what you want most of the time when calling the Sheets API. The httr
+default is <code>"multipart"</code>. Other acceptable values are <code>"form"</code> and <code>"raw"</code>.</p></td>
     </tr>
     </table>
 

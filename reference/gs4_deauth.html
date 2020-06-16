@@ -204,28 +204,28 @@ resources for which no Google sign-in is required. This is handy for using
 googlesheets4 in a non-interactive setting to make requests that do not
 require a token. It will prevent the attempt to obtain a token
 interactively in the browser. The user can configure their own API key
-via <code><a href='gs4_auth_configure.html'>gs4_auth_configure()</a></code> and retrieve that key via
-<code><a href='gs4_auth_configure.html'>gs4_api_key()</a></code>.
+via <code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_auth_configure.html'>gs4_auth_configure()</a></code> and retrieve that key via
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_auth_configure.html'>gs4_api_key()</a></code>.
 In the absence of a user-configured key, a built-in default key is used.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gs4_deauth</span>()</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_deauth.html'>gs4_deauth</a></span>()</pre>
 
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other auth functions: 
-<code><a href='gs4_auth_configure.html'>gs4_auth_configure</a>()</code>,
-<code><a href='gs4_auth.html'>gs4_auth</a>()</code></p></div>
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_auth_configure.html'>gs4_auth_configure</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_auth.html'>gs4_auth</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
-  <span class='fu'>gs4_deauth</span>()
-  <span class='fu'><a href='gs4_user.html'>gs4_user</a></span>()
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_deauth.html'>gs4_deauth</a></span>()
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_user.html'>gs4_user</a></span>()
 
   <span class='co'># get metadata on the public 'deaths' spreadsheet</span>
-  <span class='fu'><a href='gs4_example.html'>gs4_example</a></span>(<span class='st'>"deaths"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'><a href='gs4_get.html'>gs4_get</a></span>()
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_example.html'>gs4_example</a></span>(<span class='st'>"deaths"</span>) <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_get.html'>gs4_get</a></span>()
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

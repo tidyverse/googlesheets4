@@ -195,9 +195,9 @@
 (spread)Sheet.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheet_properties</span>(<span class='no'>ss</span>)
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_properties.html'>sheet_properties</a></span>(<span class='kw'>ss</span>)
 
-<span class='fu'>sheet_names</span>(<span class='no'>ss</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_properties.html'>sheet_names</a></span>(<span class='kw'>ss</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -206,9 +206,9 @@
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+(returned by <code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
-<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     </table>
 
@@ -216,28 +216,28 @@ is how googledrive represents Drive files. Processed through
 
     
 <ul>
-<li><p><code>sheet_properties()</code>: A tibble with one row per (work)sheet.</p></li>
-<li><p><code>sheet_names()</code>: A character vector of (work)sheet names.</p></li>
+<li><p><code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_properties.html'>sheet_properties()</a></code>: A tibble with one row per (work)sheet.</p></li>
+<li><p><code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_properties.html'>sheet_names()</a></code>: A character vector of (work)sheet names.</p></li>
 </ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other worksheet functions: 
-<code><a href='sheet_add.html'>sheet_add</a>()</code>,
-<code><a href='sheet_append.html'>sheet_append</a>()</code>,
-<code><a href='sheet_copy.html'>sheet_copy</a>()</code>,
-<code><a href='sheet_delete.html'>sheet_delete</a>()</code>,
-<code><a href='sheet_relocate.html'>sheet_relocate</a>()</code>,
-<code><a href='sheet_rename.html'>sheet_rename</a>()</code>,
-<code><a href='sheet_resize.html'>sheet_resize</a>()</code>,
-<code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_add.html'>sheet_add</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_append.html'>sheet_append</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_copy.html'>sheet_copy</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_delete.html'>sheet_delete</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_relocate.html'>sheet_relocate</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_rename.html'>sheet_rename</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_resize.html'>sheet_resize</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_example.html'>gs4_example</a></span>(<span class='st'>"gapminder"</span>)
-  <span class='fu'>sheet_properties</span>(<span class='no'>ss</span>)
-  <span class='fu'>sheet_names</span>(<span class='no'>ss</span>)
-}</div><div class='output co'>#&gt; [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania" </div></pre>
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_has_token.html'>gs4_has_token</a></span>()) {
+  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_example.html'>gs4_example</a></span>(<span class='st'>"gapminder"</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_properties.html'>sheet_properties</a></span>(<span class='kw'>ss</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_properties.html'>sheet_names</a></span>(<span class='kw'>ss</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

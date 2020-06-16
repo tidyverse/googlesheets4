@@ -198,10 +198,10 @@ as described in sheet_write()." />
 <p>Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook).
 Optionally, you can also provide names and/or data for the initial set of
 (work)sheets. Any initial data provided via <code>sheets</code> is styled as a table,
-as described in <code><a href='sheet_write.html'>sheet_write()</a></code>.</p>
+as described in <code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_write.html'>sheet_write()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gs4_create</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='fu'><a href='gs4_random.html'>gs4_random</a></span>(), <span class='no'>...</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(name = <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_random.html'>gs4_random</a></span>(), <span class='kw'>...</span>, sheets = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -226,7 +226,7 @@ frames. See the examples.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The input <code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
+    <p>The input <code>ss</code>, as an instance of <code><a href='https://rdrr.io/pkg/googlesheets4/man/sheets_id.html'>sheets_id</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Wraps the <code>spreadsheets.create</code> endpoint:</p><ul>
@@ -238,51 +238,45 @@ frames. See the examples.</p></td>
 </ul>
 
 <p>Other write functions: 
-<code><a href='gs4_formula.html'>gs4_formula</a>()</code>,
-<code><a href='range_delete.html'>range_delete</a>()</code>,
-<code><a href='range_flood.html'>range_flood</a>()</code>,
-<code><a href='range_write.html'>range_write</a>()</code>,
-<code><a href='sheet_append.html'>sheet_append</a>()</code>,
-<code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_formula.html'>gs4_formula</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_delete.html'>range_delete</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_flood</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_write.html'>range_write</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_append.html'>sheet_append</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
-  <span class='fu'>gs4_create</span>(<span class='st'>"gs4-create-demo-1"</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_has_token.html'>gs4_has_token</a></span>()) {
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(<span class='st'>"gs4-create-demo-1"</span>)
 
-  <span class='fu'>gs4_create</span>(<span class='st'>"gs4-create-demo-2"</span>, <span class='kw'>locale</span> <span class='kw'>=</span> <span class='st'>"en_CA"</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(<span class='st'>"gs4-create-demo-2"</span>, locale = <span class='st'>"en_CA"</span>)
 
-  <span class='fu'>gs4_create</span>(
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(
     <span class='st'>"gs4-create-demo-3"</span>,
-    <span class='kw'>locale</span> <span class='kw'>=</span> <span class='st'>"fr_FR"</span>,
-    <span class='kw'>timeZone</span> <span class='kw'>=</span> <span class='st'>"Europe/Paris"</span>
+    locale = <span class='st'>"fr_FR"</span>,
+    timeZone = <span class='st'>"Europe/Paris"</span>
   )
 
-  <span class='fu'>gs4_create</span>(
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(
     <span class='st'>"gs4-create-demo-4"</span>,
-    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha"</span>, <span class='st'>"beta"</span>)
+    sheets = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha"</span>, <span class='st'>"beta"</span>)
   )
 
-  <span class='no'>my_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>)
-  <span class='fu'>gs4_create</span>(
+  <span class='kw'>my_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(x = <span class='fl'>1</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(
     <span class='st'>"gs4-create-demo-5"</span>,
-    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='no'>my_data</span>
+    sheets = <span class='kw'>my_data</span>
   )
 
-  <span class='fu'>gs4_create</span>(
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(
     <span class='st'>"gs4-create-demo-6"</span>,
-    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>iris</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>iris</span>), <span class='kw'>mtcars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>mtcars</span>))
+    sheets = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(iris = <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>iris</span>), mtcars = <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>mtcars</span>))
   )
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"gs4-create-demo"</span>) <span class='kw'>%&gt;%</span>
-    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-1"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-2"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-3"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-4"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-5"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-6"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * gs4-create-demo-6: 1Oc-LhXTv3JM5EDQ9Q-FnnnSbt6wgY5a4D20PBypzVU8</span>
-#&gt; <span class='message'>  * gs4-create-demo-5: 1_Y7GkKHLNkdtqutay1b7fT9WfwyY65fmWVhkcSuEKQ0</span>
-#&gt; <span class='message'>  * gs4-create-demo-4: 1jc_tDf5YkiTY8geAuXtnWvPL3v0rFXDEXCdvTxNg_Ro</span>
-#&gt; <span class='message'>  * gs4-create-demo-3: 17bpcUT4Oz3gF_BIr_NYQXr4EfImaXebeG6gqmjegKzk</span>
-#&gt; <span class='message'>  * gs4-create-demo-2: 1P9Y7BnsSD9csR6lmheceLgj_KFkKKURqmNxXzK0j0LU</span>
-#&gt; <span class='message'>  * gs4-create-demo-1: 1ecduxKyLvJ7T_mfJZ6tN3mPepH0yc8v_eT1QiT-7BEQ</span></div></pre>
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_find.html'>gs4_find</a></span>(<span class='st'>"gs4-create-demo"</span>) <span class='op'>%&gt;%</span>
+    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

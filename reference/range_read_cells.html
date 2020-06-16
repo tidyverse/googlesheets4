@@ -200,21 +200,21 @@ really want raw cell data from the API, range_read_cells() is for you!" />
     <p>This low-level function returns cell data in a tibble with one row per cell.
 This tibble has integer variables <code>row</code> and <code>column</code> (referring to location
 with the Google Sheet), an A1-style reference <code>loc</code>, and a <code>cell</code>
-list-column. The flagship function <code><a href='range_read.html'>read_sheet()</a></code>, a.k.a. <code><a href='range_read.html'>range_read()</a></code>, is
-what most users are looking for, rather than <code>range_read_cells()</code>.
-<code><a href='range_read.html'>read_sheet()</a></code> is basically <code>range_read_cells()</code> (this function), followed by
-<code><a href='spread_sheet.html'>spread_sheet()</a></code>, which looks after reshaping and column typing. But if you
-really want raw cell data from the API, <code>range_read_cells()</code> is for you!</p>
+list-column. The flagship function <code><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>read_sheet()</a></code>, a.k.a. <code><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>range_read()</a></code>, is
+what most users are looking for, rather than <code><a href='https://rdrr.io/pkg/googlesheets4/man/range_read_cells.html'>range_read_cells()</a></code>.
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>read_sheet()</a></code> is basically <code><a href='https://rdrr.io/pkg/googlesheets4/man/range_read_cells.html'>range_read_cells()</a></code> (this function), followed by
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/spread_sheet.html'>spread_sheet()</a></code>, which looks after reshaping and column typing. But if you
+really want raw cell data from the API, <code><a href='https://rdrr.io/pkg/googlesheets4/man/range_read_cells.html'>range_read_cells()</a></code> is for you!</p>
     </div>
 
-    <pre class="usage"><span class='fu'>range_read_cells</span>(
-  <span class='no'>ss</span>,
-  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
-  <span class='kw'>cell_data</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"full"</span>),
-  <span class='kw'>discard_empty</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_read_cells.html'>range_read_cells</a></span>(
+  <span class='kw'>ss</span>,
+  sheet = <span class='kw'>NULL</span>,
+  range = <span class='kw'>NULL</span>,
+  skip = <span class='fl'>0</span>,
+  n_max = <span class='fl'>Inf</span>,
+  cell_data = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"full"</span>),
+  discard_empty = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -224,9 +224,9 @@ really want raw cell data from the API, <code>range_read_cells()</code> is for y
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+(returned by <code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
-<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
       <th>sheet</th>
@@ -236,7 +236,7 @@ is how googledrive represents Drive files. Processed through
       <th>range</th>
       <td><p>A cell range to read from. If <code>NULL</code>, all non-empty cells are
 read. Otherwise specify <code>range</code> as described in <a href='https://developers.google.com/sheets/api/guides/concepts#a1_notation'>Sheets A1 notation</a>
-or using the helpers documented in <a href='cell-specification.html'>cell-specification</a>. Sheets uses
+or using the helpers documented in <a href='https://rdrr.io/pkg/googlesheets4/man/cell-specification.html'>cell-specification</a>. Sheets uses
 fairly standard spreadsheet range notation, although a bit different from
 Excel. Examples of valid ranges: <code>"Sheet1!A1:B2"</code>, <code>"Sheet1!A:A"</code>,
 <code>"Sheet1!1:2"</code>, <code>"Sheet1!A5:A"</code>, <code>"A1:B2"</code>, <code>"Sheet1"</code>. Interpreted
@@ -285,29 +285,16 @@ we check for an <code>effectiveValue</code>, which is one of the fields in the
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
-  <span class='fu'>range_read_cells</span>(<span class='fu'><a href='gs4_example.html'>gs4_example</a></span>(<span class='st'>"deaths"</span>), <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"arts_data"</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_has_token.html'>gs4_has_token</a></span>()) {
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_read_cells.html'>range_read_cells</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_example.html'>gs4_example</a></span>(<span class='st'>"deaths"</span>), range = <span class='st'>"arts_data"</span>)
 
   <span class='co'># if you want detailed and exhaustive cell data, do this</span>
-  <span class='fu'>range_read_cells</span>(
-    <span class='fu'><a href='gs4_example.html'>gs4_example</a></span>(<span class='st'>"formulas-and-formats"</span>),
-    <span class='kw'>cell_data</span> <span class='kw'>=</span> <span class='st'>"full"</span>,
-    <span class='kw'>discard_empty</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_read_cells.html'>range_read_cells</a></span>(
+    <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_example.html'>gs4_example</a></span>(<span class='st'>"formulas-and-formats"</span>),
+    cell_data = <span class='st'>"full"</span>,
+    discard_empty = <span class='fl'>FALSE</span>
   )
-}</div><div class='output co'>#&gt; <span class='message'>Reading from "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Range "arts_data"</span></div><div class='output co'>#&gt; <span class='message'>Reading from "formulas-and-formats"</span></div><div class='output co'>#&gt; <span class='message'>Range "Sheet1"</span></div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 678 x 4</span><span>
-#&gt;      row   col loc   cell      
-#&gt;    </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>    
-#&gt; </span><span style='color: #555555;'> 1</span><span>     1     1 A1    </span><span style='color: #555555;'>&lt;CELL_TEX&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 2</span><span>     1     2 B1    </span><span style='color: #555555;'>&lt;CELL_TEX&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 3</span><span>     1     3 C1    </span><span style='color: #555555;'>&lt;CELL_TEX&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 4</span><span>     1     4 D1    </span><span style='color: #555555;'>&lt;CELL_TEX&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 5</span><span>     1     5 E1    </span><span style='color: #555555;'>&lt;CELL_TEX&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 6</span><span>     1     6 F1    </span><span style='color: #555555;'>&lt;CELL_TEX&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 7</span><span>     2     1 A2    </span><span style='color: #555555;'>&lt;CELL_NUM&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 8</span><span>     2     2 B2    </span><span style='color: #555555;'>&lt;CELL_NUM&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 9</span><span>     2     3 C2    </span><span style='color: #555555;'>&lt;CELL_NUM&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>10</span><span>     2     4 D2    </span><span style='color: #555555;'>&lt;CELL_TEX&gt;</span><span>
-#&gt; </span><span style='color: #555555;'># … with 668 more rows</span><span></div></span></pre>
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -210,13 +210,13 @@ want is sheet_append()." />
     <div class="ref-description">
     <p><a href='https://www.tidyverse.org/lifecycle/#experimental'><img src='figures/lifecycle-experimental.svg' alt='Experimental lifecycle'></a></p>
 <p>Writes a data frame into a range of cells. Main differences from
-<code><a href='sheet_write.html'>sheet_write()</a></code> (a.k.a. <code><a href='sheet_write.html'>write_sheet()</a></code>):</p><ul>
-<li><p>Narrower scope. <code>range_write()</code> literally targets some cells, not a whole
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_write.html'>sheet_write()</a></code> (a.k.a. <code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_write.html'>write_sheet()</a></code>):</p><ul>
+<li><p>Narrower scope. <code><a href='https://rdrr.io/pkg/googlesheets4/man/range_write.html'>range_write()</a></code> literally targets some cells, not a whole
 (work)sheet.</p></li>
 <li><p>The edited rectangle is not explicitly styled as a table. Nothing special
 is done re: formatting a header row or freezing rows.</p></li>
 <li><p>Column names can be suppressed. This means that, although <code>data</code> must
-be a data frame (at least for now), <code>range_write()</code> can actually be used
+be a data frame (at least for now), <code><a href='https://rdrr.io/pkg/googlesheets4/man/range_write.html'>range_write()</a></code> can actually be used
 to write arbitrary data.</p></li>
 <li><p>The target (spread)Sheet and (work)sheet must already exist. There is no
 ability to create a Sheet or add a worksheet.</p></li>
@@ -226,16 +226,16 @@ However, the sheet might gain rows and/or columns, in order to write
 </ul>
 
 <p>If you just want to add rows to an existing table, the function you probably
-want is <code><a href='sheet_append.html'>sheet_append()</a></code>.</p>
+want is <code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_append.html'>sheet_append()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>range_write</span>(
-  <span class='no'>ss</span>,
-  <span class='no'>data</span>,
-  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_write.html'>range_write</a></span>(
+  <span class='kw'>ss</span>,
+  <span class='kw'>data</span>,
+  sheet = <span class='kw'>NULL</span>,
+  range = <span class='kw'>NULL</span>,
+  col_names = <span class='fl'>TRUE</span>,
+  reformat = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -245,9 +245,9 @@ want is <code><a href='sheet_append.html'>sheet_append()</a></code>.</p>
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+(returned by <code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
-<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
       <th>data</th>
@@ -260,9 +260,9 @@ is how googledrive represents Drive files. Processed through
     <tr>
       <th>range</th>
       <td><p>Where to write. This <code>range</code> argument has important similarities
-and differences to <code>range</code> elsewhere (e.g. <code><a href='range_read.html'>range_read()</a></code>):</p><ul>
+and differences to <code>range</code> elsewhere (e.g. <code><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>range_read()</a></code>):</p><ul>
 <li><p>Similarities: Can be a cell range, using A1 notation ("A1:D3") or using
-the helpers in <code><a href='cell-specification.html'>cell-specification</a></code>. Can combine sheet name and cell
+the helpers in <code><a href='https://rdrr.io/pkg/googlesheets4/man/cell-specification.html'>cell-specification</a></code>. Can combine sheet name and cell
 range ("Sheet1!A5:A") or refer to a sheet by name (<code>range = "Sheet1"</code>,
 although <code>sheet = "Sheet1"</code> is preferred for clarity).</p></li>
 <li><p>Difference: Can NOT be a named range.</p></li>
@@ -286,12 +286,12 @@ Currently googlesheets4 provides no real support for formatting, so
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The input <code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
+    <p>The input <code>ss</code>, as an instance of <code><a href='https://rdrr.io/pkg/googlesheets4/man/sheets_id.html'>sheets_id</a></code></p>
     <h2 class="hasAnchor" id="range-specification"><a class="anchor" href="#range-specification"></a>Range specification</h2>
 
     
 
-<p>The <code>range</code> argument of <code>range_write()</code> is special, because the Sheets API
+<p>The <code>range</code> argument of <code><a href='https://rdrr.io/pkg/googlesheets4/man/range_write.html'>range_write()</a></code> is special, because the Sheets API
 can implement it in 2 different ways:</p><ul>
 <li><p>If <code>range</code> represents exactly 1 cell, like "B3", it is taken as the <em>start</em>
 (or upper left corner) of the targeted cell rectangle. The edited cells are
@@ -302,7 +302,7 @@ the <code>data</code>.</p></li>
 as the <em>actual</em> rectangle to edit. It is possible to describe a rectangle
 that is unbounded on the right (e.g. "B2:4"), on the bottom (e.g. "A4:C"),
 or on both the right and the bottom (e.g.
-<code><a href='cell-specification.html'>cell_limits(c(2, 3), c(NA, NA))</a></code>. Note that <strong>all cells</strong> inside the
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/cell-specification.html'>cell_limits(c(2, 3), c(NA, NA))</a></code>. Note that <strong>all cells</strong> inside the
 rectangle receive updated data and format. Important implication: if the
 <code>data</code> object isn't big enough to fill the target rectangle, the cells that
 don't receive new data are effectively cleared, i.e. the existing value
@@ -320,48 +320,47 @@ and format are deleted.</p></li>
 </ul>
 
 <p>Other write functions: 
-<code><a href='gs4_create.html'>gs4_create</a>()</code>,
-<code><a href='gs4_formula.html'>gs4_formula</a>()</code>,
-<code><a href='range_delete.html'>range_delete</a>()</code>,
-<code><a href='range_flood.html'>range_flood</a>()</code>,
-<code><a href='sheet_append.html'>sheet_append</a>()</code>,
-<code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_formula.html'>gs4_formula</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_delete.html'>range_delete</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_flood</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_append.html'>sheet_append</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_has_token.html'>gs4_has_token</a></span>()) {
   <span class='co'># create a Sheet with some initial, empty (work)sheets</span>
-  (<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"range-write-demo"</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha"</span>, <span class='st'>"beta"</span>)))
+  (<span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(<span class='st'>"range-write-demo"</span>, sheets = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha"</span>, <span class='st'>"beta"</span>)))
 
-  <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
-    <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
+  <span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+    x = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
+    y = <span class='kw'>letters</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>]
   )
 
   <span class='co'>#  write df somewhere other than the "upper left corner"</span>
-  <span class='fu'>range_write</span>(<span class='no'>ss</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>df</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"D6"</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_write.html'>range_write</a></span>(<span class='kw'>ss</span>, data = <span class='kw'>df</span>, range = <span class='st'>"D6"</span>)
 
   <span class='co'># view your magnificent creation in the browser</span>
-  <span class='fu'><a href='gs4_browse.html'>gs4_browse</a></span>(<span class='no'>ss</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_browse.html'>gs4_browse</a></span>(<span class='kw'>ss</span>)
 
   <span class='co'># send data of disparate types to a 1-row rectangle</span>
-  <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
-    <span class='kw'>string</span> <span class='kw'>=</span> <span class='st'>"string"</span>,
-    <span class='kw'>logical</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-    <span class='kw'>datetime</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()
+  <span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='kw'>tibble</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+    string = <span class='st'>"string"</span>,
+    logical = <span class='fl'>TRUE</span>,
+    datetime = <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()
   )
-  <span class='fu'>range_write</span>(<span class='no'>ss</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"beta"</span>, <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_write.html'>range_write</a></span>(<span class='kw'>ss</span>, data = <span class='kw'>dat</span>, sheet = <span class='st'>"beta"</span>, col_names = <span class='fl'>FALSE</span>)
 
   <span class='co'># send data of disparate types to a 1-column rectangle</span>
-  <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(), <span class='fl'>FALSE</span>, <span class='st'>"string"</span>)
+  <span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='kw'>tibble</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+    x = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(), <span class='fl'>FALSE</span>, <span class='st'>"string"</span>)
   )
-  <span class='fu'>range_write</span>(<span class='no'>ss</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"beta!C5"</span>, <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_write.html'>range_write</a></span>(<span class='kw'>ss</span>, data = <span class='kw'>dat</span>, range = <span class='st'>"beta!C5"</span>, col_names = <span class='fl'>FALSE</span>)
 
   <span class='co'># clean up</span>
-  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='st'>"range-write-demo"</span>) <span class='kw'>%&gt;%</span>
-    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "alpha"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "beta"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "beta"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * range-write-demo: 1re9yh9-qxyQBtQdCCmhAG42MmUBVmmCiq2556h2lb_w</span></div></pre>
+  <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='st'>"range-write-demo"</span>) <span class='op'>%&gt;%</span>
+    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

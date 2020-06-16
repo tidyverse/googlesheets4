@@ -158,10 +158,14 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install the released version of googlesheets4 from <a href="https://CRAN.R-project.org">CRAN</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"googlesheets4"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"googlesheets4"</span>)
+</pre></div>
 <p>And the development version from <a href="https://github.com/">GitHub</a> with:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu">install_github</span>(<span class="st">"tidyverse/googlesheets4"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># install.packages("devtools")</span>
+<span class="kw">devtools</span>::<span class="fu">install_github</span>(<span class="st">"tidyverse/googlesheets4"</span>)
+</pre></div>
 </div>
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
@@ -172,7 +176,9 @@
 <div id="attach-googlesheets4" class="section level2">
 <h2 class="hasAnchor">
 <a href="#attach-googlesheets4" class="anchor"></a>Attach googlesheets4</h2>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googlesheets4</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span>)
+</pre></div>
 </div>
 <div id="read" class="section level2">
 <h2 class="hasAnchor">
@@ -185,7 +191,7 @@
 <code><a href="reference/range_read.html">range_read()</a></code> is the right name according to the <a href="https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html">naming convention</a> used throughout the googlesheets4 package.</li>
 </ul>
 <p><code><a href="reference/range_read.html">read_sheet()</a></code> and <code><a href="reference/range_read.html">range_read()</a></code> are synonyms and you can use either one. Here we’ll use <code><a href="reference/range_read.html">read_sheet()</a></code>.</p>
-<p>googlesheets4 is <a href="https://r4ds.had.co.nz/pipes.html">pipe-friendly</a> (and reexports <code><a href="reference/pipe.html">%&gt;%</a></code>), but works just fine without the pipe.</p>
+<p>googlesheets4 is <a href="https://r4ds.had.co.nz/pipes.html">pipe-friendly</a> (and reexports <code><a href="reference/%&gt;%.html">%&gt;%</a></code>), but works just fine without the pipe.</p>
 <p>Read from</p>
 <ul>
 <li>a URL</li>
@@ -193,7 +199,8 @@
 <li>a <a href="https://googledrive.tidyverse.org/reference/dribble.html"><code>dribble</code></a> produced by the googledrive package, which can lookup by file name</li>
 </ul>
 <p>These all achieve the same thing:</p>
-<div class="sourceCode" id="cb4"><pre class="r"><span class="co"># URL</span>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="co"># URL</span>
 <span class="fu"><a href="reference/range_read.html">read_sheet</a></span>(<span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span>)
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
@@ -222,7 +229,7 @@
 <span class="co">#&gt; # … with 619 more rows</span>
 
 <span class="co"># a googledrive "dribble"</span>
-<span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"gapminder"</span>) <span class="kw">%&gt;%</span>
+<span class="kw">googledrive</span>::<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"gapminder"</span>) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/range_read.html">read_sheet</a></span>()
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
@@ -234,7 +241,8 @@
 <span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
 <span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
 <span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span></pre></div>
+<span class="co">#&gt; # … with 619 more rows</span>
+</pre></div>
 <p><em>Note: the only reason we can read a sheet named “gapminder” (the last example) is because the account we’re logged in as has a Sheet named “gapminder”.</em></p>
 <p>See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Find and Identify Sheets</a> for more about specifying the Sheet you want to address. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Read Sheets</a> for more about reading from specific sheets or ranges, setting column type, and getting low-level cell data.</p>
 </div>
@@ -242,7 +250,8 @@
 <h2 class="hasAnchor">
 <a href="#write" class="anchor"></a>Write</h2>
 <p><code><a href="reference/gs4_create.html">gs4_create()</a></code> creates a brand new Google Sheet and can optionally send some initial data.</p>
-<div class="sourceCode" id="cb5"><pre class="r">(<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="reference/gs4_create.html">gs4_create</a></span>(<span class="st">"fluffy-bunny"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">flowers</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">iris</span>))))
+<div class="sourceCode" id="cb5"><pre class="downlit">
+(<span class="kw">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gs4_create.html">gs4_create</a></span>(<span class="st">"fluffy-bunny"</span>, sheets = <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(flowers = <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">iris</span>))))
 <span class="co">#&gt; Creating new Sheet: "fluffy-bunny"</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
 <span class="co">#&gt;                 ID: 1K4a9H9_7WyYm2bOV6VHi9aCtIHIjoGI4auNf92hzCVY</span>
@@ -251,13 +260,15 @@
 <span class="co">#&gt;        # of sheets: 1</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;      flowers: 7 x 5</span></pre></div>
+<span class="co">#&gt;      flowers: 7 x 5</span>
+</pre></div>
 <p><code><a href="reference/sheet_write.html">sheet_write()</a></code> (over)writes a whole data frame into a (work)sheet within a (spread)Sheet.</p>
-<div class="sourceCode" id="cb6"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">mtcars</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="reference/sheet_write.html">sheet_write</a></span>(<span class="no">ss</span>, <span class="kw">sheet</span> <span class="kw">=</span> <span class="st">"autos"</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw">mtcars</span>) <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/sheet_write.html">sheet_write</a></span>(<span class="kw">ss</span>, sheet = <span class="st">"autos"</span>)
 <span class="co">#&gt; Writing to "fluffy-bunny"</span>
 <span class="co">#&gt; Writing to sheet "autos"</span>
-<span class="no">ss</span>
+<span class="kw">ss</span>
 <span class="co">#&gt;   Spreadsheet name: fluffy-bunny</span>
 <span class="co">#&gt;                 ID: 1K4a9H9_7WyYm2bOV6VHi9aCtIHIjoGI4auNf92hzCVY</span>
 <span class="co">#&gt;             Locale: en_US</span>
@@ -266,7 +277,8 @@
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
 <span class="co">#&gt;      flowers: 7 x 5</span>
-<span class="co">#&gt;        autos: 7 x 11</span></pre></div>
+<span class="co">#&gt;        autos: 7 x 11</span>
+</pre></div>
 <p><code><a href="reference/sheet_append.html">sheet_append()</a></code>, <code><a href="reference/range_write.html">range_write()</a></code>, <code><a href="reference/range_flood.html">range_flood()</a></code>, and <code><a href="reference/range_flood.html">range_clear()</a></code> are more specialized writing functions. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> for more about writing to Sheets.</p>
 </div>
 <div id="where-to-learn-more" class="section level2">

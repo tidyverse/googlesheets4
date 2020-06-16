@@ -219,17 +219,17 @@
 <p>googlesheets4 now has very broad capabilities around Sheet creation and modification. These functions are ready for general use but are still marked experimental, as they may see some refinement based on user feedback.</p>
 <ul>
 <li>
-<code><a href="../reference/gs4_create.html">gs4_create()</a></code> creates a new Google Sheet and, optionally, writes one or more data frames into it (<a href='https://github.com/tidyverse/googlesheets4/issues/61'>#61</a>).</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/gs4_create.html">gs4_create()</a></code> creates a new Google Sheet and, optionally, writes one or more data frames into it (<a href='https://github.com/tidyverse/googlesheets4/issues/61'>#61</a>).</li>
 <li>
-<code><a href="../reference/sheet_write.html">sheet_write()</a></code> (also available as <code><a href="../reference/sheet_write.html">write_sheet()</a></code>) writes a data frame into a new or existing (work)sheet, inside an existing (or new) (spread)Sheet.</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/sheet_write.html">sheet_write()</a></code> (also available as <code><a href="https://rdrr.io/pkg/googlesheets4/man/sheet_write.html">write_sheet()</a></code>) writes a data frame into a new or existing (work)sheet, inside an existing (or new) (spread)Sheet.</li>
 <li>
-<code><a href="../reference/sheet_append.html">sheet_append()</a></code> adds rows to an existing data table.</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/sheet_append.html">sheet_append()</a></code> adds rows to an existing data table.</li>
 <li>
-<code><a href="../reference/range_write.html">range_write()</a></code> writes to a cell range.</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/range_write.html">range_write()</a></code> writes to a cell range.</li>
 <li>
-<code><a href="../reference/range_flood.html">range_flood()</a></code> “floods” all cells in a range with the same content. <code><a href="../reference/range_flood.html">range_clear()</a></code> is a wrapper around <code><a href="../reference/range_flood.html">range_flood()</a></code> for the special case of clearing cell values.</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/range_flood.html">range_flood()</a></code> “floods” all cells in a range with the same content. <code><a href="https://rdrr.io/pkg/googlesheets4/man/range_flood.html">range_clear()</a></code> is a wrapper around <code><a href="https://rdrr.io/pkg/googlesheets4/man/range_flood.html">range_flood()</a></code> for the special case of clearing cell values.</li>
 <li>
-<code><a href="../reference/range_delete.html">range_delete()</a></code> deletes a range of cells.</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/range_delete.html">range_delete()</a></code> deletes a range of cells.</li>
 </ul>
 </div>
 <div id="worksheet-operations" class="section level2">
@@ -237,55 +237,55 @@
 <a href="#worksheet-operations" class="anchor"></a>(Work)sheet operations</h2>
 <p>The <code>sheet_*()</code> family of functions operate on the (work)sheets inside an existing (spread)Sheet:</p>
 <ul>
-<li>(<code><a href="../reference/sheet_write.html">sheet_write()</a></code> and <code><a href="../reference/sheet_append.html">sheet_append()</a></code> are described above.)</li>
+<li>(<code><a href="https://rdrr.io/pkg/googlesheets4/man/sheet_write.html">sheet_write()</a></code> and <code><a href="https://rdrr.io/pkg/googlesheets4/man/sheet_append.html">sheet_append()</a></code> are described above.)</li>
 <li>
-<code><a href="../reference/sheet_properties.html">sheet_properties()</a></code> returns a tibble of metadata with one row per sheet.</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/sheet_properties.html">sheet_properties()</a></code> returns a tibble of metadata with one row per sheet.</li>
 <li>
-<code><a href="../reference/sheet_properties.html">sheet_names()</a></code> returns sheet names.</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/sheet_properties.html">sheet_names()</a></code> returns sheet names.</li>
 <li>
-<code><a href="../reference/sheet_add.html">sheet_add()</a></code> adds one or more sheets.</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/sheet_add.html">sheet_add()</a></code> adds one or more sheets.</li>
 <li>
-<code><a href="../reference/sheet_copy.html">sheet_copy()</a></code> copies a sheet.</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/sheet_copy.html">sheet_copy()</a></code> copies a sheet.</li>
 <li>
-<code><a href="../reference/sheet_delete.html">sheet_delete()</a></code> deletes one or more sheets.</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/sheet_delete.html">sheet_delete()</a></code> deletes one or more sheets.</li>
 <li>
-<code><a href="../reference/sheet_relocate.html">sheet_relocate()</a></code> moves sheets around.<br>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/sheet_relocate.html">sheet_relocate()</a></code> moves sheets around.<br>
 </li>
 <li>
-<code><a href="../reference/sheet_rename.html">sheet_rename()</a></code> renames one sheet.</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/sheet_rename.html">sheet_rename()</a></code> renames one sheet.</li>
 <li>
-<code><a href="../reference/sheet_resize.html">sheet_resize()</a></code> changes the number of rows or columns in a sheet.</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/sheet_resize.html">sheet_resize()</a></code> changes the number of rows or columns in a sheet.</li>
 </ul>
 </div>
 <div id="range-operations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#range-operations" class="anchor"></a>Range operations</h2>
-<p><code><a href="../reference/range_speedread.html">range_speedread()</a></code> reads from a Sheet using its “export=csv” URL and, therefore, uses readr-style column type specification. It still supports fairly general range syntax and auth. For very large Sheets, this can be substantially faster than <code><a href="../reference/range_read.html">read_sheet()</a></code>.</p>
-<p><code><a href="../reference/range_read_cells.html">range_read_cells()</a></code> (formerly known as <code><a href="../reference/googlesheets4-deprecated.html">sheets_cells()</a></code>) gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But <code><a href="../reference/range_read_cells.html">range_read_cells(cell_data = "full", discard_empty = FALSE)</a></code> is now available if you want full cell data, including formatting, even for cells that have no value (<a href='https://github.com/tidyverse/googlesheets4/issues/4'>#4</a>).</p>
-<p><code><a href="../reference/range_autofit.html">range_autofit()</a></code> adjusts column width or row height to fit the data. This only affects the display of a sheet and does not change values or dimensions.</p>
+<p><code><a href="https://rdrr.io/pkg/googlesheets4/man/range_speedread.html">range_speedread()</a></code> reads from a Sheet using its “export=csv” URL and, therefore, uses readr-style column type specification. It still supports fairly general range syntax and auth. For very large Sheets, this can be substantially faster than <code><a href="https://rdrr.io/pkg/googlesheets4/man/range_read.html">read_sheet()</a></code>.</p>
+<p><code><a href="https://rdrr.io/pkg/googlesheets4/man/range_read_cells.html">range_read_cells()</a></code> (formerly known as <code><a href="https://rdrr.io/pkg/googlesheets4/man/googlesheets4-deprecated.html">sheets_cells()</a></code>) gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But <code><a href="https://rdrr.io/pkg/googlesheets4/man/range_read_cells.html">range_read_cells(cell_data = "full", discard_empty = FALSE)</a></code> is now available if you want full cell data, including formatting, even for cells that have no value (<a href='https://github.com/tidyverse/googlesheets4/issues/4'>#4</a>).</p>
+<p><code><a href="https://rdrr.io/pkg/googlesheets4/man/range_autofit.html">range_autofit()</a></code> adjusts column width or row height to fit the data. This only affects the display of a sheet and does not change values or dimensions.</p>
 </div>
 <div id="printing-a-sheet-id" class="section level2">
 <h2 class="hasAnchor">
 <a href="#printing-a-sheet-id" class="anchor"></a>Printing a Sheet ID</h2>
-<p>The print method for <code>sheets_id</code> objects now attempts to reveal the current Sheet metadata available via <code><a href="../reference/gs4_get.html">gs4_get()</a></code>, i.e. it makes an API call (but it should never error).</p>
+<p>The print method for <code>sheets_id</code> objects now attempts to reveal the current Sheet metadata available via <code><a href="https://rdrr.io/pkg/googlesheets4/man/gs4_get.html">gs4_get()</a></code>, i.e. it makes an API call (but it should never error).</p>
 </div>
 <div id="other-changes-and-additions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#other-changes-and-additions" class="anchor"></a>Other changes and additions</h2>
 <p><code>gs_formula()</code> implements a vctrs S3 class for storing Sheets formulas.</p>
-<p><code><a href="../reference/gs4_fodder.html">gs4_fodder()</a></code> is a convenience function that creates a filler data frame you can use to make toy sheets you’re using to practice on or for a reprex.</p>
+<p><code><a href="https://rdrr.io/pkg/googlesheets4/man/gs4_fodder.html">gs4_fodder()</a></code> is a convenience function that creates a filler data frame you can use to make toy sheets you’re using to practice on or for a reprex.</p>
 </div>
 <div id="renamed-classes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#renamed-classes" class="anchor"></a>Renamed classes</h2>
-<p>The S3 class <code>sheets_Spreadsheet</code> is renamed to <code>googlesheets4_spreadsheet</code>, a consequence of rationalizing all internal and external classes (detailed in the article <a href="https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html">Function and class names</a>). <code>googlesheets4_spreadsheet</code> is the class that holds metadata for a Sheet and it is connected to the API’s <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet"><code>Spreadsheet</code></a> schema. The return value of <code><a href="../reference/gs4_get.html">gs4_get()</a></code> has this class.</p>
+<p>The S3 class <code>sheets_Spreadsheet</code> is renamed to <code>googlesheets4_spreadsheet</code>, a consequence of rationalizing all internal and external classes (detailed in the article <a href="https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html">Function and class names</a>). <code>googlesheets4_spreadsheet</code> is the class that holds metadata for a Sheet and it is connected to the API’s <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#resource:-spreadsheet"><code>Spreadsheet</code></a> schema. The return value of <code><a href="https://rdrr.io/pkg/googlesheets4/man/gs4_get.html">gs4_get()</a></code> has this class.</p>
 </div>
 <div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>
-<code><a href="../reference/range_read.html">read_sheet()</a></code> passes its <code>na</code> argument down to the helpers that parse cells, so that <code>na</code> actually has the documented effect (<a href='https://github.com/tidyverse/googlesheets4/issues/73'>#73</a>).</li>
+<code><a href="https://rdrr.io/pkg/googlesheets4/man/range_read.html">read_sheet()</a></code> passes its <code>na</code> argument down to the helpers that parse cells, so that <code>na</code> actually has the documented effect (<a href='https://github.com/tidyverse/googlesheets4/issues/73'>#73</a>).</li>
 </ul>
 </div>
 </div>

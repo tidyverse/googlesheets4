@@ -193,15 +193,15 @@ but this can be specified via reformat." />
     </div>
 
     <div class="ref-description">
-    <p><code>range_flood()</code> "floods" a range of cells with the same content.
-<code>range_clear()</code> is a wrapper that handles the common special case of
+    <p><code><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_flood()</a></code> "floods" a range of cells with the same content.
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_clear()</a></code> is a wrapper that handles the common special case of
 clearing the cell value. Both functions, by default, also clear the format,
 but this can be specified via <code>reformat</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>range_flood</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cell</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_flood</a></span>(<span class='kw'>ss</span>, sheet = <span class='kw'>NULL</span>, range = <span class='kw'>NULL</span>, cell = <span class='kw'>NULL</span>, reformat = <span class='fl'>TRUE</span>)
 
-<span class='fu'>range_clear</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_clear</a></span>(<span class='kw'>ss</span>, sheet = <span class='kw'>NULL</span>, range = <span class='kw'>NULL</span>, reformat = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,9 +210,9 @@ but this can be specified via <code>reformat</code>.</p>
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+(returned by <code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
-<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
       <th>sheet</th>
@@ -222,7 +222,7 @@ is how googledrive represents Drive files. Processed through
       <th>range</th>
       <td><p>A cell range to read from. If <code>NULL</code>, all non-empty cells are
 read. Otherwise specify <code>range</code> as described in <a href='https://developers.google.com/sheets/api/guides/concepts#a1_notation'>Sheets A1 notation</a>
-or using the helpers documented in <a href='cell-specification.html'>cell-specification</a>. Sheets uses
+or using the helpers documented in <a href='https://rdrr.io/pkg/googlesheets4/man/cell-specification.html'>cell-specification</a>. Sheets uses
 fairly standard spreadsheet range notation, although a bit different from
 Excel. Examples of valid ranges: <code>"Sheet1!A1:B2"</code>, <code>"Sheet1!A:A"</code>,
 <code>"Sheet1!1:2"</code>, <code>"Sheet1!A5:A"</code>, <code>"A1:B2"</code>, <code>"Sheet1"</code>. Interpreted
@@ -246,7 +246,7 @@ Currently googlesheets4 provides no real support for formatting, so
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The input <code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
+    <p>The input <code>ss</code>, as an instance of <code><a href='https://rdrr.io/pkg/googlesheets4/man/sheets_id.html'>sheets_id</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Makes a <code>RepeatCellRequest</code>:</p><ul>
@@ -254,53 +254,52 @@ Currently googlesheets4 provides no real support for formatting, so
 </ul>
 
 <p>Other write functions: 
-<code><a href='gs4_create.html'>gs4_create</a>()</code>,
-<code><a href='gs4_formula.html'>gs4_formula</a>()</code>,
-<code><a href='range_delete.html'>range_delete</a>()</code>,
-<code><a href='range_write.html'>range_write</a>()</code>,
-<code><a href='sheet_append.html'>sheet_append</a>()</code>,
-<code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_formula.html'>gs4_formula</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_delete.html'>range_delete</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_write.html'>range_write</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_append.html'>sheet_append</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_has_token.html'>gs4_has_token</a></span>()) {
   <span class='co'># create a data frame to use as initial data</span>
-  <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_fodder.html'>gs4_fodder</a></span>(<span class='fl'>10</span>)
+  <span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_fodder.html'>gs4_fodder</a></span>(<span class='fl'>10</span>)
 
   <span class='co'># create Sheet</span>
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"range-flood-demo"</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>df</span>))
+  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(<span class='st'>"range-flood-demo"</span>, sheets = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>df</span>))
 
   <span class='co'># default behavior (`cell = NULL`): clear value and format</span>
-  <span class='fu'>range_flood</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"A1:B3"</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_flood</a></span>(<span class='kw'>ss</span>, range = <span class='st'>"A1:B3"</span>)
 
   <span class='co'># clear value but preserve format</span>
-  <span class='fu'>range_flood</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"C1:D3"</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_flood</a></span>(<span class='kw'>ss</span>, range = <span class='st'>"C1:D3"</span>, reformat = <span class='fl'>FALSE</span>)
 
   <span class='co'># send new value</span>
-  <span class='fu'>range_flood</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"4:5"</span>, <span class='kw'>cell</span> <span class='kw'>=</span> <span class='st'>";-)"</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_flood</a></span>(<span class='kw'>ss</span>, range = <span class='st'>"4:5"</span>, cell = <span class='st'>";-)"</span>)
 
   <span class='co'># send formatting</span>
   <span class='co'># WARNING: use these unexported, internal functions at your own risk!</span>
   <span class='co'># This not (yet) officially supported, but it's possible.</span>
-  <span class='no'>blue_background</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>googlesheets4</span><span class='kw ns'>:::</span><span class='fu'>CellData</span>(
-    <span class='kw'>userEnteredFormat</span> <span class='kw'>=</span> <span class='kw pkg'>googlesheets4</span><span class='kw ns'>:::</span><span class='fu'>new</span>(
+  <span class='kw'>blue_background</span> <span class='op'>&lt;-</span> <span class='kw'>googlesheets4</span>:::<span class='fu'>CellData</span>(
+    userEnteredFormat = <span class='kw'>googlesheets4</span>:::<span class='fu'>new</span>(
       <span class='st'>"CellFormat"</span>,
-      <span class='kw'>backgroundColor</span> <span class='kw'>=</span> <span class='kw pkg'>googlesheets4</span><span class='kw ns'>:::</span><span class='fu'>new</span>(
+      backgroundColor = <span class='kw'>googlesheets4</span>:::<span class='fu'>new</span>(
         <span class='st'>"Color"</span>,
-        <span class='kw'>red</span> <span class='kw'>=</span> <span class='fl'>159</span> / <span class='fl'>255</span>, <span class='kw'>green</span> <span class='kw'>=</span> <span class='fl'>183</span> / <span class='fl'>255</span>, <span class='kw'>blue</span> <span class='kw'>=</span> <span class='fl'>196</span> / <span class='fl'>255</span>
+        red = <span class='fl'>159</span> <span class='op'>/</span> <span class='fl'>255</span>, green = <span class='fl'>183</span> <span class='op'>/</span> <span class='fl'>255</span>, blue = <span class='fl'>196</span> <span class='op'>/</span> <span class='fl'>255</span>
       )
     )
   )
-  <span class='fu'>range_flood</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"I:J"</span>, <span class='kw'>cell</span> <span class='kw'>=</span> <span class='no'>blue_background</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_flood</a></span>(<span class='kw'>ss</span>, range = <span class='st'>"I:J"</span>, cell = <span class='kw'>blue_background</span>)
 
   <span class='co'># range_clear() is a shortcut where `cell = NULL` always</span>
-  <span class='fu'>range_clear</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"9:9"</span>)
-  <span class='fu'>range_clear</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"10:10"</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_clear</a></span>(<span class='kw'>ss</span>, range = <span class='st'>"9:9"</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_clear</a></span>(<span class='kw'>ss</span>, range = <span class='st'>"10:10"</span>, reformat = <span class='fl'>FALSE</span>)
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"range-flood-demo"</span>) <span class='kw'>%&gt;%</span>
-    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * range-flood-demo: 1ZfCsXlIqCcfQl-5zuftClKedR6EBCeeo91jfjVeIJag</span></div></pre>
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_find.html'>gs4_find</a></span>(<span class='st'>"range-flood-demo"</span>) <span class='op'>%&gt;%</span>
+    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

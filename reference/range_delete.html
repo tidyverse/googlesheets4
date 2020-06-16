@@ -198,14 +198,14 @@ To change the dimensions of a (work)sheet, use sheet_resize().
     <div class="ref-description">
     <p>Deletes a range of cells and shifts other cells into the deleted area. There
 are several related tasks that are implemented by other functions:</p><ul>
-<li><p>To clear cells of their value and/or format, use <code><a href='range_flood.html'>range_clear()</a></code>.</p></li>
-<li><p>To delete an entire (work)sheet, use <code><a href='sheet_delete.html'>sheet_delete()</a></code>.</p></li>
-<li><p>To change the dimensions of a (work)sheet, use <code><a href='sheet_resize.html'>sheet_resize()</a></code>.</p></li>
+<li><p>To clear cells of their value and/or format, use <code><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_clear()</a></code>.</p></li>
+<li><p>To delete an entire (work)sheet, use <code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_delete.html'>sheet_delete()</a></code>.</p></li>
+<li><p>To change the dimensions of a (work)sheet, use <code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_resize.html'>sheet_resize()</a></code>.</p></li>
 </ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>range_delete</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>range</span>, <span class='kw'>shift</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_delete.html'>range_delete</a></span>(<span class='kw'>ss</span>, sheet = <span class='kw'>NULL</span>, <span class='kw'>range</span>, shift = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -214,9 +214,9 @@ are several related tasks that are implemented by other functions:</p><ul>
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+(returned by <code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
-<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
       <th>sheet</th>
@@ -225,14 +225,14 @@ is how googledrive represents Drive files. Processed through
     <tr>
       <th>range</th>
       <td><p>Cells to delete. There are a couple differences between <code>range</code>
-here and how it works in other functions (e.g. <code><a href='range_read.html'>range_read()</a></code>):</p><ul>
+here and how it works in other functions (e.g. <code><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>range_read()</a></code>):</p><ul>
 <li><p><code>range</code> must be specified.</p></li>
 <li><p><code>range</code> must not be a named range.</p></li>
 <li><p><code>range</code> must not be the name of a (work) sheet. Instead, use
-<code><a href='sheet_delete.html'>sheet_delete()</a></code> to delete an entire sheet.
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_delete.html'>sheet_delete()</a></code> to delete an entire sheet.
 Row-only and column-only ranges are especially relevant, such as "2:6" or
-"D". Remember you can also use the helpers in <code><a href='cell-specification.html'>cell-specification</a></code>,
-such as <code><a href='cell-specification.html'>cell_cols(4:6)</a></code>, or <code><a href='cell-specification.html'>cell_rows(5)</a></code>.</p></li>
+"D". Remember you can also use the helpers in <code><a href='https://rdrr.io/pkg/googlesheets4/man/cell-specification.html'>cell-specification</a></code>,
+such as <code><a href='https://rdrr.io/pkg/googlesheets4/man/cell-specification.html'>cell_cols(4:6)</a></code>, or <code><a href='https://rdrr.io/pkg/googlesheets4/man/cell-specification.html'>cell_rows(5)</a></code>.</p></li>
 </ul></td>
     </tr>
     <tr>
@@ -246,7 +246,7 @@ surrounding cells up or to the left.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The input <code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
+    <p>The input <code>ss</code>, as an instance of <code><a href='https://rdrr.io/pkg/googlesheets4/man/sheets_id.html'>sheets_id</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Makes a <code>DeleteRangeRequest</code>:</p><ul>
@@ -254,35 +254,34 @@ surrounding cells up or to the left.</p></td>
 </ul>
 
 <p>Other write functions: 
-<code><a href='gs4_create.html'>gs4_create</a>()</code>,
-<code><a href='gs4_formula.html'>gs4_formula</a>()</code>,
-<code><a href='range_flood.html'>range_flood</a>()</code>,
-<code><a href='range_write.html'>range_write</a>()</code>,
-<code><a href='sheet_append.html'>sheet_append</a>()</code>,
-<code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_formula.html'>gs4_formula</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_flood</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_write.html'>range_write</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_append.html'>sheet_append</a>()</code>,
+<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_has_token.html'>gs4_has_token</a></span>()) {
   <span class='co'># create a data frame to use as initial data</span>
-  <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_fodder.html'>gs4_fodder</a></span>(<span class='fl'>10</span>)
+  <span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_fodder.html'>gs4_fodder</a></span>(<span class='fl'>10</span>)
 
   <span class='co'># create Sheet</span>
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"range-delete-example"</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>df</span>))
+  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(<span class='st'>"range-delete-example"</span>, sheets = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>df</span>))
 
   <span class='co'># delete some rows</span>
-  <span class='fu'>range_delete</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"2:4"</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_delete.html'>range_delete</a></span>(<span class='kw'>ss</span>, range = <span class='st'>"2:4"</span>)
 
   <span class='co'># delete a column</span>
-  <span class='fu'>range_delete</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"C"</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_delete.html'>range_delete</a></span>(<span class='kw'>ss</span>, range = <span class='st'>"C"</span>)
 
   <span class='co'># delete a rectangle and specify how to shift remaining cells</span>
-  <span class='fu'>range_delete</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"B3:F4"</span>, <span class='kw'>shift</span> <span class='kw'>=</span> <span class='st'>"left"</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_delete.html'>range_delete</a></span>(<span class='kw'>ss</span>, range = <span class='st'>"B3:F4"</span>, shift = <span class='st'>"left"</span>)
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"range-delete-example"</span>) <span class='kw'>%&gt;%</span>
-    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "range-delete-example"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-delete-example"</span></div><div class='output co'>#&gt; <span class='message'>Deleting cells in sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-delete-example"</span></div><div class='output co'>#&gt; <span class='message'>Deleting cells in sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-delete-example"</span></div><div class='output co'>#&gt; <span class='message'>Deleting cells in sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * range-delete-example: 1B_6vMgRFohbvOgcB0iiW6DpEBvpu7I-x4u7-Wrf3DBU</span></div></pre>
+  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_find.html'>gs4_find</a></span>(<span class='st'>"range-delete-example"</span>) <span class='op'>%&gt;%</span>
+    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

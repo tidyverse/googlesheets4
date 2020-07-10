@@ -178,6 +178,13 @@
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span>(<span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"mini-gap"</span>), sheet = <span class="fl">2</span>)
 <span class="co">#&gt; Reading from "mini-gap"</span>
 <span class="co">#&gt; Range "'Americas'"</span>
+<span class="co">#&gt; Warning: `...` is not empty.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; We detected these problematic arguments:</span>
+<span class="co">#&gt; * `needs_dots`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
+<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 5 x 6</span>
 <span class="co">#&gt;   country   continent  year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
@@ -190,6 +197,13 @@
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span>(<span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"mini-gap"</span>), sheet = <span class="st">"Oceania"</span>, n_max = <span class="fl">3</span>)
 <span class="co">#&gt; Reading from "mini-gap"</span>
 <span class="co">#&gt; Range "'Oceania'"</span>
+<span class="co">#&gt; Warning: `...` is not empty.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; We detected these problematic arguments:</span>
+<span class="co">#&gt; * `needs_dots`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
+<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 3 x 6</span>
 <span class="co">#&gt;   country     continent  year lifeExp     pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;       &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;</span>
@@ -200,6 +214,13 @@
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span>(<span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"deaths"</span>), skip = <span class="fl">4</span>, n_max = <span class="fl">10</span>)
 <span class="co">#&gt; Reading from "deaths"</span>
 <span class="co">#&gt; Range "5:5000000"</span>
+<span class="co">#&gt; Warning: `...` is not empty.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; We detected these problematic arguments:</span>
+<span class="co">#&gt; * `needs_dots`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
+<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 10 x 6</span>
 <span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span>
 <span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span>
@@ -226,6 +247,13 @@
 )
 <span class="co">#&gt; Reading from "deaths"</span>
 <span class="co">#&gt; Range "'other'!A5:F15"</span>
+<span class="co">#&gt; Warning: `...` is not empty.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; We detected these problematic arguments:</span>
+<span class="co">#&gt; * `needs_dots`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
+<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 10 x 6</span>
 <span class="co">#&gt;    Name          Profession   Age `Has kids` `Date of birth`     `Date of death`</span>
 <span class="co">#&gt;    &lt;chr&gt;         &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;date&gt;         </span>
@@ -247,6 +275,13 @@
   <span class="fu"><a href="../../reference/range_read.html">range_read</a></span>(range = <span class="st">"arts_data"</span>)
 <span class="co">#&gt; Reading from "deaths"</span>
 <span class="co">#&gt; Range "arts_data"</span>
+<span class="co">#&gt; Warning: `...` is not empty.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; We detected these problematic arguments:</span>
+<span class="co">#&gt; * `needs_dots`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
+<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 10 x 6</span>
 <span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span>
 <span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span>
@@ -271,6 +306,13 @@
 (<span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/range_read_cells.html">range_read_cells</a></span>(<span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"deaths"</span>), range = <span class="st">"E5:E7"</span>))
 <span class="co">#&gt; Reading from "deaths"</span>
 <span class="co">#&gt; Range "E5:E7"</span>
+<span class="co">#&gt; Warning: `...` is not empty.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; We detected these problematic arguments:</span>
+<span class="co">#&gt; * `needs_dots`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
+<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 3 x 4</span>
 <span class="co">#&gt;     row   col loc   cell      </span>
 <span class="co">#&gt;   &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;list&gt;    </span>
@@ -303,6 +345,13 @@
 <p><code><a href="../../reference/spread_sheet.html">spread_sheet()</a></code> 😉 converts data in the “one row per cell” form into the data frame you get from <code><a href="../../reference/range_read.html">range_read()</a></code>, which involves reshaping and column typing.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
 <span class="kw">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/spread_sheet.html">spread_sheet</a></span>(col_types = <span class="st">"D"</span>)
+<span class="co">#&gt; Warning: `...` is not empty.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; We detected these problematic arguments:</span>
+<span class="co">#&gt; * `needs_dots`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
+<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 2 x 1</span>
 <span class="co">#&gt;   `Date of birth`</span>
 <span class="co">#&gt;   &lt;date&gt;         </span>
@@ -312,6 +361,13 @@
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span>(<span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"deaths"</span>), range = <span class="st">"E5:E7"</span>, col_types =<span class="st">"D"</span>)
 <span class="co">#&gt; Reading from "deaths"</span>
 <span class="co">#&gt; Range "E5:E7"</span>
+<span class="co">#&gt; Warning: `...` is not empty.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; We detected these problematic arguments:</span>
+<span class="co">#&gt; * `needs_dots`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
+<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 2 x 1</span>
 <span class="co">#&gt;   `Date of birth`</span>
 <span class="co">#&gt;   &lt;date&gt;         </span>
@@ -338,6 +394,13 @@
 <span class="co">#&gt;   pop = col_double(),</span>
 <span class="co">#&gt;   gdpPercap = col_double()</span>
 <span class="co">#&gt; )</span>
+<span class="co">#&gt; Warning: `...` is not empty.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; We detected these problematic arguments:</span>
+<span class="co">#&gt; * `needs_dots`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
+<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 3 x 6</span>
 <span class="co">#&gt;   country   continent  year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
@@ -358,6 +421,13 @@
   )
 <span class="co">#&gt; Reading from "deaths", "other" sheet, range "A5:F15"</span>
 <span class="co">#&gt; Export URL: https://docs.google.com/spreadsheets/d/1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y/export?format=csv&amp;range=A5%3AF15&amp;gid=278837031</span>
+<span class="co">#&gt; Warning: `...` is not empty.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; We detected these problematic arguments:</span>
+<span class="co">#&gt; * `needs_dots`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
+<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 10 x 6</span>
 <span class="co">#&gt;    Name           Profession   Age `Has kids` `Date of birth` `Date of death`</span>
 <span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;date&gt;          &lt;date&gt;         </span>
@@ -378,6 +448,13 @@
   <span class="fu"><a href="../../reference/range_read.html">range_read</a></span>(range = <span class="st">"other_data"</span>, col_types = <span class="st">"??i?DD"</span>)
 <span class="co">#&gt; Reading from "deaths"</span>
 <span class="co">#&gt; Range "other_data"</span>
+<span class="co">#&gt; Warning: `...` is not empty.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; We detected these problematic arguments:</span>
+<span class="co">#&gt; * `needs_dots`</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
+<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 10 x 6</span>
 <span class="co">#&gt;    Name           Profession   Age `Has kids` `Date of birth` `Date of death`</span>
 <span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;date&gt;          &lt;date&gt;         </span>
@@ -416,14 +493,14 @@
 <span class="co">#&gt;   gdpPercap = col_double()</span>
 <span class="co">#&gt; )</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.119   0.001   0.925</span>
+<span class="co">#&gt;   0.053   0.002   0.964</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(
   <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span>(<span class="st">"gapminder"</span>) <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/range_read.html">range_read</a></span>(sheet = <span class="st">"Africa"</span>)
 )
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "'Africa'"</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.922   0.037   1.299</span>
+<span class="co">#&gt;   0.639   0.007   1.296</span>
 </pre></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> vs <code><a href="../../reference/range_read.html">range_read()</a></code>:</p>

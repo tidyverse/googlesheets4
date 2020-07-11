@@ -177,13 +177,6 @@
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="kw">ugly_url</span>)
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
 <span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
@@ -234,13 +227,6 @@
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="kw">ssid</span>)
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
 <span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
@@ -257,13 +243,6 @@
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="kw">ssid</span>)
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
 <span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
@@ -281,13 +260,6 @@
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="kw">ssid</span>)
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
 <span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
@@ -313,13 +285,6 @@
 <p>The Sheet we’ve been working with is named “gapminder” and is owned by the account we’ve logged in as here. We can use <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">googledrive::drive_get()</a></code> to identify a file by name:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit">
 (<span class="kw">gap_dribble</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"gapminder"</span>))
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 1 x 4</span>
 <span class="co">#&gt;   name      path        id                                      drive_resource  </span>
 <span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;                                   &lt;list&gt;          </span>
@@ -350,13 +315,6 @@
 <p>Since we generally call <code><a href="../../reference/as_sheets_id.html">as_sheets_id()</a></code> on whatever the user provides as <code>ss</code>, you can even pass <code>gap_dribble</code> straight into googlesheets4 functions.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit">
 <span class="fu"><a href="../../reference/sheet_properties.html">sheet_properties</a></span>(<span class="kw">gap_dribble</span>)
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 5 x 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
@@ -383,13 +341,6 @@
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit">
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(type = <span class="st">"spreadsheet"</span>)
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;   name      id                                           drive_resource   </span>
 <span class="co">#&gt; * &lt;chr&gt;     &lt;chr&gt;                                        &lt;list&gt;           </span>
@@ -398,13 +349,6 @@
 <p>This is so handy that we’ve made <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span>()
-<span class="co">#&gt; Warning: `...` is not empty.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; We detected these problematic arguments:</span>
-<span class="co">#&gt; * `needs_dots`</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; These dots only exist to allow future extensions and should be empty.</span>
-<span class="co">#&gt; Did you misspecify an argument?</span>
 <span class="co">#&gt; # A tibble: 1 x 3</span>
 <span class="co">#&gt;   name      id                                           drive_resource   </span>
 <span class="co">#&gt; * &lt;chr&gt;     &lt;chr&gt;                                        &lt;list&gt;           </span>

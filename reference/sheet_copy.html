@@ -193,13 +193,13 @@
     <p>Copies a (work)sheet, within its current (spread)Sheet or to another Sheet.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_copy.html'>sheet_copy</a></span>(
-  <span class='kw'>from_ss</span>,
-  from_sheet = <span class='kw'>NULL</span>,
-  to_ss = <span class='kw'>from_ss</span>,
-  to_sheet = <span class='kw'>NULL</span>,
-  .before = <span class='kw'>NULL</span>,
-  .after = <span class='kw'>NULL</span>
+    <pre class="usage"><span class='fu'>sheet_copy</span>(
+  <span class='no'>from_ss</span>,
+  <span class='kw'>from_sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>to_ss</span> <span class='kw'>=</span> <span class='no'>from_ss</span>,
+  <span class='kw'>to_sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.before</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>.after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -209,9 +209,9 @@
       <th>from_ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+(returned by <code><a href='gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
       <th>from_sheet</th>
@@ -239,7 +239,7 @@ about sheet names, specify <code>to_sheet</code>.</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The receiving Sheet, <code>to_ ss</code>, as an instance of <code><a href='https://rdrr.io/pkg/googlesheets4/man/sheets_id.html'>sheets_id</a></code>.</p>
+    <p>The receiving Sheet, <code>to_ ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>If the copy happens within one Sheet, makes a <code>DuplicateSheetRequest</code>:</p><ul>
@@ -256,50 +256,50 @@ about sheet names, specify <code>to_sheet</code>.</p></td>
 </ul>
 
 <p>Other worksheet functions: 
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_add.html'>sheet_add</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_append.html'>sheet_append</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_delete.html'>sheet_delete</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_properties.html'>sheet_properties</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_relocate.html'>sheet_relocate</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_rename.html'>sheet_rename</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_resize.html'>sheet_resize</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_write.html'>sheet_write</a>()</code></p></div>
+<code><a href='sheet_add.html'>sheet_add</a>()</code>,
+<code><a href='sheet_append.html'>sheet_append</a>()</code>,
+<code><a href='sheet_delete.html'>sheet_delete</a>()</code>,
+<code><a href='sheet_properties.html'>sheet_properties</a>()</code>,
+<code><a href='sheet_relocate.html'>sheet_relocate</a>()</code>,
+<code><a href='sheet_rename.html'>sheet_rename</a>()</code>,
+<code><a href='sheet_resize.html'>sheet_resize</a>()</code>,
+<code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_has_token.html'>gs4_has_token</a></span>()) {
-  <span class='kw'>ss_aaa</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+  <span class='no'>ss_aaa</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(
     <span class='st'>"sheet-copy-demo-aaa"</span>,
-    sheets = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(iris = <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>iris</span>), chickwts = <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>chickwts</span>))
+    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>iris</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>iris</span>), <span class='kw'>chickwts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>chickwts</span>))
   )
 
   <span class='co'># copy 'iris' sheet within existing Sheet, accept autogenerated name</span>
-  <span class='kw'>ss_aaa</span> <span class='op'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_copy.html'>sheet_copy</a></span>()
+  <span class='no'>ss_aaa</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheet_copy</span>()
 
   <span class='co'># copy 'iris' sheet within existing Sheet</span>
   <span class='co'># specify new sheet's name and location</span>
-  <span class='kw'>ss_aaa</span> <span class='op'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_copy.html'>sheet_copy</a></span>(to_sheet = <span class='st'>"iris-the-sequel"</span>, .after = <span class='fl'>1</span>)
+  <span class='no'>ss_aaa</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheet_copy</span>(<span class='kw'>to_sheet</span> <span class='kw'>=</span> <span class='st'>"iris-the-sequel"</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 
   <span class='co'># make a second Sheet</span>
-  <span class='kw'>ss_bbb</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(<span class='st'>"sheet-copy-demo-bbb"</span>)
+  <span class='no'>ss_bbb</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"sheet-copy-demo-bbb"</span>)
 
   <span class='co'># copy 'chickwts' sheet from first Sheet to second</span>
   <span class='co'># accept auto-generated name and default location</span>
-  <span class='kw'>ss_aaa</span> <span class='op'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_copy.html'>sheet_copy</a></span>(<span class='st'>"chickwts"</span>, to_ss = <span class='kw'>ss_bbb</span>)
+  <span class='no'>ss_aaa</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheet_copy</span>(<span class='st'>"chickwts"</span>, <span class='kw'>to_ss</span> <span class='kw'>=</span> <span class='no'>ss_bbb</span>)
 
   <span class='co'># copy 'chickwts' sheet from first Sheet to second,</span>
   <span class='co'># WITH a specific name and into a specific location</span>
-  <span class='kw'>ss_aaa</span> <span class='op'>%&gt;%</span>
-    <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_copy.html'>sheet_copy</a></span>(
+  <span class='no'>ss_aaa</span> <span class='kw'>%&gt;%</span>
+    <span class='fu'>sheet_copy</span>(
       <span class='st'>"chickwts"</span>,
-      to_ss = <span class='kw'>ss_bbb</span>, to_sheet = <span class='st'>"chicks-two"</span>, .before = <span class='fl'>1</span>
+      <span class='kw'>to_ss</span> <span class='kw'>=</span> <span class='no'>ss_bbb</span>, <span class='kw'>to_sheet</span> <span class='kw'>=</span> <span class='st'>"chicks-two"</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='fl'>1</span>
     )
 
   <span class='co'># clean up</span>
-  <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='st'>"sheet-copy-demo"</span>) <span class='op'>%&gt;%</span>
-    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='st'>"sheet-copy-demo"</span>) <span class='kw'>%&gt;%</span>
+    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

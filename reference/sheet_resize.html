@@ -193,7 +193,7 @@
     <p>Changes the number of rows and/or columns in a (work)sheet.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_resize.html'>sheet_resize</a></span>(<span class='kw'>ss</span>, sheet = <span class='kw'>NULL</span>, nrow = <span class='kw'>NULL</span>, ncol = <span class='kw'>NULL</span>, exact = <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,9 +202,9 @@
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+(returned by <code><a href='gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
       <th>sheet</th>
@@ -219,14 +219,14 @@ of <code>NULL</code> means to leave unchanged.</p></td>
       <th>exact</th>
       <td><p>Logical, indicating whether to impose <code>nrow</code> and <code>ncol</code> exactly
 or to treat them as lower bounds. If <code>exact = FALSE</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_resize.html'>sheet_resize()</a></code> can only add cells. If <code>exact = TRUE</code>, cells can be
+<code>sheet_resize()</code> can only add cells. If <code>exact = TRUE</code>, cells can be
 deleted and their contents are lost.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>The input <code>ss</code>, as an instance of <code><a href='https://rdrr.io/pkg/googlesheets4/man/sheets_id.html'>sheets_id</a></code></p>
+    <p>The input <code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Makes an <code>UpdateSheetPropertiesRequest</code>:</p><ul>
@@ -234,44 +234,44 @@ deleted and their contents are lost.</p></td>
 </ul>
 
 <p>Other worksheet functions: 
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_add.html'>sheet_add</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_append.html'>sheet_append</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_copy.html'>sheet_copy</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_delete.html'>sheet_delete</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_properties.html'>sheet_properties</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_relocate.html'>sheet_relocate</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_rename.html'>sheet_rename</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_write.html'>sheet_write</a>()</code></p></div>
+<code><a href='sheet_add.html'>sheet_add</a>()</code>,
+<code><a href='sheet_append.html'>sheet_append</a>()</code>,
+<code><a href='sheet_copy.html'>sheet_copy</a>()</code>,
+<code><a href='sheet_delete.html'>sheet_delete</a>()</code>,
+<code><a href='sheet_properties.html'>sheet_properties</a>()</code>,
+<code><a href='sheet_relocate.html'>sheet_relocate</a>()</code>,
+<code><a href='sheet_rename.html'>sheet_rename</a>()</code>,
+<code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_has_token.html'>gs4_has_token</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
   <span class='co'># create a Sheet with the default initial worksheet</span>
-  (<span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(<span class='st'>"sheet-resize-demo"</span>))
+  (<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"sheet-resize-demo"</span>))
 
   <span class='co'># see (work)sheet dims</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_properties.html'>sheet_properties</a></span>(<span class='kw'>ss</span>)
+  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='no'>ss</span>)
 
   <span class='co'># no resize occurs</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_resize.html'>sheet_resize</a></span>(<span class='kw'>ss</span>, nrow = <span class='fl'>2</span>, ncol = <span class='fl'>6</span>)
+  <span class='fu'>sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>6</span>)
 
   <span class='co'># reduce sheet size</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_resize.html'>sheet_resize</a></span>(<span class='kw'>ss</span>, nrow = <span class='fl'>5</span>, ncol = <span class='fl'>7</span>, exact = <span class='fl'>TRUE</span>)
+  <span class='fu'>sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
   <span class='co'># add rows</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_resize.html'>sheet_resize</a></span>(<span class='kw'>ss</span>, nrow = <span class='fl'>7</span>)
+  <span class='fu'>sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>7</span>)
 
   <span class='co'># add columns</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_resize.html'>sheet_resize</a></span>(<span class='kw'>ss</span>, ncol = <span class='fl'>10</span>)
+  <span class='fu'>sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>10</span>)
 
   <span class='co'># add rows and columns</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_resize.html'>sheet_resize</a></span>(<span class='kw'>ss</span>, nrow = <span class='fl'>9</span>, ncol = <span class='fl'>12</span>)
+  <span class='fu'>sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>9</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>12</span>)
 
   <span class='co'># re-inspect (work)sheet dims</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_properties.html'>sheet_properties</a></span>(<span class='kw'>ss</span>)
+  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='no'>ss</span>)
 
   <span class='co'># clean up</span>
-  <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='st'>"sheet-resize-demo"</span>) <span class='op'>%&gt;%</span>
-    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_find.html'>drive_find</a></span>(<span class='st'>"sheet-resize-demo"</span>) <span class='kw'>%&gt;%</span>
+    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

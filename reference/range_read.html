@@ -204,45 +204,45 @@ rather swiftly." />
     <div class="ref-description">
     <p>This is the main "read" function of the googlesheets4 package. It goes by two
 names, because we want it to make sense in two contexts:</p><ul>
-<li><p><code><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>read_sheet()</a></code> evokes other table-reading functions, like
+<li><p><code>read_sheet()</code> evokes other table-reading functions, like
 <code><a href='https://readr.tidyverse.org/reference/read_delim.html'>readr::read_csv()</a></code> and <code><a href='https://readxl.tidyverse.org/reference/read_excel.html'>readxl::read_excel()</a></code>. The <code>sheet</code> in this case
 refers to a Google (spread)Sheet.</p></li>
-<li><p><code><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>range_read()</a></code> is the right name according to the naming convention used
+<li><p><code>range_read()</code> is the right name according to the naming convention used
 throughout the googlesheets4 package.</p></li>
 </ul>
 
-<p><code><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>read_sheet()</a></code> and <code><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>range_read()</a></code> are synonyms and you can use either one.
+<p><code>read_sheet()</code> and <code>range_read()</code> are synonyms and you can use either one.
 The first release of googlesheets used a <code>sheets_</code> prefix everywhere, so we
-had <code><a href='https://rdrr.io/pkg/googlesheets4/man/googlesheets4-deprecated.html'>sheets_read()</a></code>. It still works, but it's deprecated and will go away
+had <code><a href='googlesheets4-deprecated.html'>sheets_read()</a></code>. It still works, but it's deprecated and will go away
 rather swiftly.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>range_read</a></span>(
-  <span class='kw'>ss</span>,
-  sheet = <span class='kw'>NULL</span>,
-  range = <span class='kw'>NULL</span>,
-  col_names = <span class='fl'>TRUE</span>,
-  col_types = <span class='kw'>NULL</span>,
-  na = <span class='st'>""</span>,
-  trim_ws = <span class='fl'>TRUE</span>,
-  skip = <span class='fl'>0</span>,
-  n_max = <span class='fl'>Inf</span>,
-  guess_max = <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='fl'>1000</span>, <span class='kw'>n_max</span>),
-  .name_repair = <span class='st'>"unique"</span>
+    <pre class="usage"><span class='fu'>range_read</span>(
+  <span class='no'>ss</span>,
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>na</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>trim_ws</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
+  <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='fl'>1000</span>, <span class='no'>n_max</span>),
+  <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>
 )
 
-<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>read_sheet</a></span>(
-  <span class='kw'>ss</span>,
-  sheet = <span class='kw'>NULL</span>,
-  range = <span class='kw'>NULL</span>,
-  col_names = <span class='fl'>TRUE</span>,
-  col_types = <span class='kw'>NULL</span>,
-  na = <span class='st'>""</span>,
-  trim_ws = <span class='fl'>TRUE</span>,
-  skip = <span class='fl'>0</span>,
-  n_max = <span class='fl'>Inf</span>,
-  guess_max = <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='fl'>1000</span>, <span class='kw'>n_max</span>),
-  .name_repair = <span class='st'>"unique"</span>
+<span class='fu'>read_sheet</span>(
+  <span class='no'>ss</span>,
+  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>na</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>trim_ws</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>n_max</span> <span class='kw'>=</span> <span class='fl'>Inf</span>,
+  <span class='kw'>guess_max</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span>(<span class='fl'>1000</span>, <span class='no'>n_max</span>),
+  <span class='kw'>.name_repair</span> <span class='kw'>=</span> <span class='st'>"unique"</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -252,9 +252,9 @@ rather swiftly.</p>
       <th>ss</th>
       <td><p>Something that identifies a Google Sheet: its file ID, a URL from
 which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
+(returned by <code><a href='gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
 is how googledrive represents Drive files. Processed through
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
       <th>sheet</th>
@@ -264,7 +264,7 @@ is how googledrive represents Drive files. Processed through
       <th>range</th>
       <td><p>A cell range to read from. If <code>NULL</code>, all non-empty cells are
 read. Otherwise specify <code>range</code> as described in <a href='https://developers.google.com/sheets/api/guides/concepts#a1_notation'>Sheets A1 notation</a>
-or using the helpers documented in <a href='https://rdrr.io/pkg/googlesheets4/man/cell-specification.html'>cell-specification</a>. Sheets uses
+or using the helpers documented in <a href='cell-specification.html'>cell-specification</a>. Sheets uses
 fairly standard spreadsheet range notation, although a bit different from
 Excel. Examples of valid ranges: <code>"Sheet1!A1:B2"</code>, <code>"Sheet1!A:A"</code>,
 <code>"Sheet1!1:2"</code>, <code>"Sheet1!A5:A"</code>, <code>"A1:B2"</code>, <code>"Sheet1"</code>. Interpreted
@@ -338,7 +338,7 @@ This is not where googlesheets4's col spec will end up, but it gets the
 ball rolling in a way that is consistent with readr and doesn't reinvent
 any wheels.</p>
 <p>Shortcodes for column types:</p><ul>
-<li><p><code>_</code> or <code><a href='https://rdrr.io/r/base/Arithmetic.html'>-</a></code>: Skip. Data in a skipped column is still requested from the
+<li><p><code>_</code> or <code>-</code>: Skip. Data in a skipped column is still requested from the
 API (the high-level functions in this package are rectangle-oriented), but
 is not parsed into the data frame output.</p></li>
 <li><p><code>?</code>: Guess. A type is guessed for each cell and then a consensus type is
@@ -364,24 +364,24 @@ useful internally, but exposed for those who want direct access to, e.g.,
 formulas and formats.</p></li>
 <li><p><code>L</code>: List, as in "list-column". Each cell is a length-1 atomic vector of
 its discovered type.</p></li>
-<li><p><em>Still to come</em>: duration (code will be <code><a href='https://rdrr.io/r/base/Colon.html'>:</a></code>) and factor (code will be
+<li><p><em>Still to come</em>: duration (code will be <code>:</code>) and factor (code will be
 <code>f</code>).</p></li>
 </ul>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_has_token.html'>gs4_has_token</a></span>()) {
-  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_example.html'>gs4_example</a></span>(<span class='st'>"deaths"</span>)
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>, range = <span class='st'>"A5:F15"</span>)
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>, range = <span class='st'>"other!A5:F15"</span>, col_types = <span class='st'>"ccilDD"</span>)
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>, range = <span class='st'>"arts_data"</span>, col_types = <span class='st'>"ccilDD"</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_example.html'>gs4_example</a></span>(<span class='st'>"deaths"</span>)
+  <span class='fu'>read_sheet</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"A5:F15"</span>)
+  <span class='fu'>read_sheet</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"other!A5:F15"</span>, <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='st'>"ccilDD"</span>)
+  <span class='fu'>read_sheet</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"arts_data"</span>, <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='st'>"ccilDD"</span>)
 
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>read_sheet</a></span>(<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_example.html'>gs4_example</a></span>(<span class='st'>"mini-gap"</span>))
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_read.html'>read_sheet</a></span>(
-    <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_example.html'>gs4_example</a></span>(<span class='st'>"mini-gap"</span>),
-    sheet = <span class='st'>"Europe"</span>,
-    range = <span class='st'>"A:D"</span>,
-    col_types = <span class='st'>"ccid"</span>
+  <span class='fu'>read_sheet</span>(<span class='fu'><a href='gs4_example.html'>gs4_example</a></span>(<span class='st'>"mini-gap"</span>))
+  <span class='fu'>read_sheet</span>(
+    <span class='fu'><a href='gs4_example.html'>gs4_example</a></span>(<span class='st'>"mini-gap"</span>),
+    <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"Europe"</span>,
+    <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"A:D"</span>,
+    <span class='kw'>col_types</span> <span class='kw'>=</span> <span class='st'>"ccid"</span>
   )
 }</div></pre>
   </div>

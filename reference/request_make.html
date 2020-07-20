@@ -203,11 +203,11 @@ such as reading or writing worksheets or cell ranges. The functions here
 are intended for internal use and for programming around the Sheets API.</p>
 <p><code>make_request()</code> does very, very little: it calls an HTTP
 method, only adding the googlesheets4 user agent. Typically the input has
-been created with <code><a href='https://rdrr.io/pkg/googlesheets4/man/request_generate.html'>request_generate()</a></code> or <code><a href='https://gargle.r-lib.org/reference/request_develop.html'>gargle::request_build()</a></code> and the
+been created with <code><a href='request_generate.html'>request_generate()</a></code> or <code><a href='https://gargle.r-lib.org/reference/request_develop.html'>gargle::request_build()</a></code> and the
 output is processed with <code>process_response()</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/request_make.html'>request_make</a></span>(<span class='kw'>x</span>, <span class='kw'>...</span>, encode = <span class='st'>"json"</span>)</pre>
+    <pre class="usage"><span class='fu'>request_make</span>(<span class='no'>x</span>, <span class='no'>...</span>, <span class='kw'>encode</span> <span class='kw'>=</span> <span class='st'>"json"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -215,7 +215,7 @@ output is processed with <code>process_response()</code>.</p>
     <tr>
       <th>x</th>
       <td><p>List. Holds the components for an HTTP request, presumably created
-with <code><a href='https://rdrr.io/pkg/googlesheets4/man/request_generate.html'>request_generate()</a></code> or <code><a href='https://gargle.r-lib.org/reference/request_develop.html'>gargle::request_build()</a></code>. Must contain a
+with <code><a href='request_generate.html'>request_generate()</a></code> or <code><a href='https://gargle.r-lib.org/reference/request_develop.html'>gargle::request_build()</a></code>. Must contain a
 <code>method</code> and <code>url</code>. If present, <code>body</code> and <code>token</code> are used.</p></td>
     </tr>
     <tr>
@@ -234,13 +234,13 @@ default is <code>"multipart"</code>. Other acceptable values are <code>"form"</c
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Object of class <code>response</code> from <a href='https://httr.r-lib.org/reference/httr-package.html'>httr</a>.</p>
+    <p>Object of class <code>response</code> from httr.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other low-level API functions: 
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_has_token.html'>gs4_has_token</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_token.html'>gs4_token</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/request_generate.html'>request_generate</a>()</code></p></div>
+<code><a href='gs4_has_token.html'>gs4_has_token</a>()</code>,
+<code><a href='gs4_token.html'>gs4_token</a>()</code>,
+<code><a href='request_generate.html'>request_generate</a>()</code></p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

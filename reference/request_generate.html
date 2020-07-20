@@ -204,11 +204,11 @@ Adds an API key to the query if and only if token = NULL.
 
     <div class="ref-description">
     <p>Generate a request, using knowledge of the <a href='https://developers.google.com/sheets/api/'>Sheets API</a> from its <a href='https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest'>Discovery Document</a>. Use
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/request_make.html'>request_make()</a></code> to execute the request. Most users should, instead, use
+<code><a href='request_make.html'>request_make()</a></code> to execute the request. Most users should, instead, use
 higher-level wrappers that facilitate common tasks, such as reading or
 writing worksheets or cell ranges. The functions here are intended for
 internal use and for programming around the Sheets API.</p>
-<p><code><a href='https://rdrr.io/pkg/googlesheets4/man/request_generate.html'>request_generate()</a></code> lets you provide the bare minimum of input.
+<p><code>request_generate()</code> lets you provide the bare minimum of input.
 It takes a nickname for an endpoint and:</p><ul>
 <li><p>Uses the API spec to look up the <code>method</code>, <code>path</code>, and <code>base_url</code>.</p></li>
 <li><p>Checks <code>params</code> for validity and completeness with respect to the
@@ -219,11 +219,11 @@ remaining parameters into those destined for the body versus the query.</p></li>
 
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/request_generate.html'>request_generate</a></span>(
-  endpoint = <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(),
-  params = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
-  key = <span class='kw'>NULL</span>,
-  token = <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_token.html'>gs4_token</a></span>()
+    <pre class="usage"><span class='fu'>request_generate</span>(
+  <span class='kw'>endpoint</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>(),
+  <span class='kw'>params</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(),
+  <span class='kw'>key</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'><a href='gs4_token.html'>gs4_token</a></span>()
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -232,7 +232,7 @@ remaining parameters into those destined for the body versus the query.</p></li>
     <tr>
       <th>endpoint</th>
       <td><p>Character. Nickname for one of the selected Sheets API v4
-endpoints built into googlesheets4. Learn more in <code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_endpoints.html'>gs4_endpoints()</a></code>.</p></td>
+endpoints built into googlesheets4. Learn more in <code><a href='gs4_endpoints.html'>gs4_endpoints()</a></code>.</p></td>
     </tr>
     <tr>
       <th>params</th>
@@ -246,40 +246,41 @@ for an API key in the absence of a token is explained in Google's document
 <a href='https://support.google.com/googleapi/answer/6158857?hl=en&amp;ref_topic=7013279'>Credentials, access, security, and identity</a>.
 In order of precedence, these sources are consulted: the formal <code>key</code>
 argument, a <code>key</code> parameter in <code>params</code>, a user-configured API key set up
-with <code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_auth_configure.html'>gs4_auth_configure()</a></code> and retrieved with <code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_auth_configure.html'>gs4_api_key()</a></code>.</p></td>
+with <code><a href='gs4_auth_configure.html'>gs4_auth_configure()</a></code> and retrieved with <code><a href='gs4_auth_configure.html'>gs4_api_key()</a></code>.</p></td>
     </tr>
     <tr>
       <th>token</th>
       <td><p>Set this to <code>NULL</code> to suppress the inclusion of a token. Note
-that, if auth has been de-activated via <code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_deauth.html'>gs4_deauth()</a></code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_token.html'>gs4_token()</a></code> will actually return <code>NULL</code>.</p></td>
+that, if auth has been de-activated via <code><a href='gs4_deauth.html'>gs4_deauth()</a></code>,
+<code><a href='gs4_token.html'>gs4_token()</a></code> will actually return <code>NULL</code>.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p><code><a href='https://rdrr.io/r/base/list.html'>list()</a></code><br /> Components are <code>method</code>, <code>url</code>, <code>body</code>, and <code>token</code>,
-suitable as input for <code><a href='https://rdrr.io/pkg/googlesheets4/man/request_make.html'>request_make()</a></code>.</p>
+suitable as input for <code><a href='request_make.html'>request_make()</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='https://gargle.r-lib.org/reference/request_develop.html'>gargle::request_develop()</a></code>, <code><a href='https://gargle.r-lib.org/reference/request_develop.html'>gargle::request_build()</a></code>,
 <code><a href='https://gargle.r-lib.org/reference/request_make.html'>gargle::request_make()</a></code></p>
 <p>Other low-level API functions: 
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_has_token.html'>gs4_has_token</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_token.html'>gs4_token</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/request_make.html'>request_make</a>()</code></p></div>
+<code><a href='gs4_has_token.html'>gs4_has_token</a>()</code>,
+<code><a href='gs4_token.html'>gs4_token</a>()</code>,
+<code><a href='request_make.html'>request_make</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>req</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/request_generate.html'>request_generate</a></span>(
+    <pre class="examples"><div class='input'><span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'>request_generate</span>(
   <span class='st'>"sheets.spreadsheets.get"</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(spreadsheetId = <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_example.html'>gs4_example</a></span>(<span class='st'>"deaths"</span>)),
-  token = <span class='kw'>NULL</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>spreadsheetId</span> <span class='kw'>=</span> <span class='fu'><a href='gs4_example.html'>gs4_example</a></span>(<span class='st'>"deaths"</span>)),
+  <span class='kw'>key</span> <span class='kw'>=</span> <span class='st'>"PRETEND_I_AM_AN_API_KEY"</span>,
+  <span class='kw'>token</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )
-<span class='kw'>req</span></div><div class='output co'>#&gt; $method
+<span class='no'>req</span></div><div class='output co'>#&gt; $method
 #&gt; [1] "GET"
 #&gt; 
 #&gt; $url
-#&gt; [1] "https://sheets.googleapis.com/v4/spreadsheets/1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y?key=AIzaSyDKRsnYs5G4c8y4BMlXLKTKMTheNXrsNEM"
+#&gt; [1] "https://sheets.googleapis.com/v4/spreadsheets/1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y?key=PRETEND_I_AM_AN_API_KEY"
 #&gt; 
 #&gt; $body
 #&gt; named list()

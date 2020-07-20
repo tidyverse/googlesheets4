@@ -199,7 +199,7 @@ object of class <code>googlesheets4_formula</code>. This is how we distinguish a
 formula. <code>googlesheets4_formula</code> is an S3 class implemented using the <a href='https://vctrs.r-lib.org/articles/s3-vector.html'>vctrs package</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_formula.html'>gs4_formula</a></span>(x = <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>())</pre>
+    <pre class="usage"><span class='fu'>gs4_formula</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>character</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -216,22 +216,22 @@ formula. <code>googlesheets4_formula</code> is an S3 class implemented using the
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other write functions: 
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_delete.html'>range_delete</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_flood.html'>range_flood</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/range_write.html'>range_write</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_append.html'>sheet_append</a>()</code>,
-<code><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_write.html'>sheet_write</a>()</code></p></div>
+<code><a href='gs4_create.html'>gs4_create</a>()</code>,
+<code><a href='range_delete.html'>range_delete</a>()</code>,
+<code><a href='range_flood.html'>range_flood</a>()</code>,
+<code><a href='range_write.html'>range_write</a>()</code>,
+<code><a href='sheet_append.html'>sheet_append</a>()</code>,
+<code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_has_token.html'>gs4_has_token</a></span>()) {
-  <span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(x = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>4</span>, <span class='fl'>6</span>))
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+  <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>5</span>, <span class='fl'>3</span>, <span class='fl'>2</span>, <span class='fl'>4</span>, <span class='fl'>6</span>))
 
-  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_create.html'>gs4_create</a></span>(<span class='st'>"gs4-formula-demo"</span>, sheets = <span class='kw'>dat</span>)
-  <span class='kw'>ss</span>
+  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"gs4-formula-demo"</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='no'>dat</span>)
+  <span class='no'>ss</span>
 
-  <span class='kw'>summaries</span> <span class='op'>&lt;-</span> <span class='kw'>tibble</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span>(
-    <span class='op'>~</span><span class='kw'>desc</span>, <span class='op'>~</span><span class='kw'>summaries</span>,
+  <span class='no'>summaries</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span>(
+    ~<span class='no'>desc</span>, ~<span class='no'>summaries</span>,
     <span class='st'>"max"</span>, <span class='st'>"=max(A:A)"</span>,
     <span class='st'>"sum"</span>, <span class='st'>"=sum(A:A)"</span>,
     <span class='st'>"min"</span>, <span class='st'>"=min(A:A)"</span>,
@@ -239,24 +239,24 @@ formula. <code>googlesheets4_formula</code> is an S3 class implemented using the
   )
 
   <span class='co'># explicitly declare a column as `googlesheets4_formula`</span>
-  <span class='kw'>summaries</span><span class='op'>$</span><span class='kw'>summaries</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_formula.html'>gs4_formula</a></span>(<span class='kw'>summaries</span><span class='op'>$</span><span class='kw'>summaries</span>)
-  <span class='kw'>summaries</span>
+  <span class='no'>summaries</span>$<span class='no'>summaries</span> <span class='kw'>&lt;-</span> <span class='fu'>gs4_formula</span>(<span class='no'>summaries</span>$<span class='no'>summaries</span>)
+  <span class='no'>summaries</span>
 
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/range_write.html'>range_write</a></span>(<span class='kw'>ss</span>, data = <span class='kw'>summaries</span>, range = <span class='st'>"C1"</span>, reformat = <span class='fl'>FALSE</span>)
+  <span class='fu'><a href='range_write.html'>range_write</a></span>(<span class='no'>ss</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>summaries</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"C1"</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
 
-  <span class='kw'>miscellany</span> <span class='op'>&lt;-</span> <span class='kw'>tibble</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span>(
-    <span class='op'>~</span><span class='kw'>desc</span>, <span class='op'>~</span><span class='kw'>example</span>,
+  <span class='no'>miscellany</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tribble.html'>tribble</a></span>(
+    ~<span class='no'>desc</span>, ~<span class='no'>example</span>,
     <span class='st'>"hyperlink"</span>, <span class='st'>"=HYPERLINK(\"http://www.google.com/\",\"Google\")"</span>,
     <span class='st'>"image"</span>, <span class='st'>"=IMAGE(\"https://www.google.com/images/srpr/logo3w.png\")"</span>
   )
-  <span class='kw'>miscellany</span><span class='op'>$</span><span class='kw'>example</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_formula.html'>gs4_formula</a></span>(<span class='kw'>miscellany</span><span class='op'>$</span><span class='kw'>example</span>)
-  <span class='kw'>miscellany</span>
+  <span class='no'>miscellany</span>$<span class='no'>example</span> <span class='kw'>&lt;-</span> <span class='fu'>gs4_formula</span>(<span class='no'>miscellany</span>$<span class='no'>example</span>)
+  <span class='no'>miscellany</span>
 
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/sheet_write.html'>sheet_write</a></span>(<span class='kw'>miscellany</span>, ss = <span class='kw'>ss</span>)
+  <span class='fu'><a href='sheet_write.html'>sheet_write</a></span>(<span class='no'>miscellany</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>)
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='https://rdrr.io/pkg/googlesheets4/man/gs4_find.html'>gs4_find</a></span>(<span class='st'>"gs4-formula-demo"</span>) <span class='op'>%&gt;%</span>
-    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"gs4-formula-demo"</span>) <span class='kw'>%&gt;%</span>
+    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

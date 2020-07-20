@@ -53,6 +53,6 @@ Encoding: UTF-8
 Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.0
-Remotes:  
+RoxygenNote: 7.1.1
+Remotes: 
     r-lib/gargle@retry

@@ -54,12 +54,13 @@ remaining parameters into those destined for the body versus the query.
 req <- request_generate(
   "sheets.spreadsheets.get",
   list(spreadsheetId = gs4_example("deaths")),
+  key = "PRETEND_I_AM_AN_API_KEY",
   token = NULL
 )
 req
 }
 \seealso{
-\code{\link[gargle:request_develop]{gargle::request_develop()}}, \code{\link[gargle:request_build]{gargle::request_build()}},
+\code{\link[gargle:request_develop]{gargle::request_develop()}}, \code{\link[gargle:request_develop]{gargle::request_build()}},
 \code{\link[gargle:request_make]{gargle::request_make()}}
 
 Other low-level API functions: 

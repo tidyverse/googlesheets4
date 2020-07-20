@@ -8,7 +8,7 @@ request_make(x, ..., encode = "json")
 }
 \arguments{
 \item{x}{List. Holds the components for an HTTP request, presumably created
-with \code{\link[=request_generate]{request_generate()}} or \code{\link[gargle:request_build]{gargle::request_build()}}. Must contain a
+with \code{\link[=request_generate]{request_generate()}} or \code{\link[gargle:request_develop]{gargle::request_build()}}. Must contain a
 \code{method} and \code{url}. If present, \code{body} and \code{token} are used.}
 
 \item{...}{Optional arguments passed through to the HTTP method.}
@@ -30,7 +30,7 @@ are intended for internal use and for programming around the Sheets API.
 
 \code{make_request()} does very, very little: it calls an HTTP
 method, only adding the googlesheets4 user agent. Typically the input has
-been created with \code{\link[=request_generate]{request_generate()}} or \code{\link[gargle:request_build]{gargle::request_build()}} and the
+been created with \code{\link[=request_generate]{request_generate()}} or \code{\link[gargle:request_develop]{gargle::request_build()}} and the
 output is processed with \code{process_response()}.
 }
 \seealso{

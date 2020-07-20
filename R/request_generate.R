@@ -41,6 +41,7 @@
 #' req <- request_generate(
 #'   "sheets.spreadsheets.get",
 #'   list(spreadsheetId = gs4_example("deaths")),
+#'   key = "PRETEND_I_AM_AN_API_KEY",
 #'   token = NULL
 #' )
 #' req

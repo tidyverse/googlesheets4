@@ -171,8 +171,6 @@
 <span class="co">#&gt; # … with 619 more rows</span></pre></body></html></div>
 <p>However, these URLs are not pleasant to work with. More often, you will want to identify a Sheet by its ID:</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span>(<span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span>)
-<span class="co">#&gt; Request failed [429]. Retry 1 happens in 100.5 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 2 happens in 10.2 seconds ...</span>
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
@@ -272,10 +270,10 @@
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">letters</span>[<span class="fl">1</span>:<span class="fl">3</span>])
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span>(<span class="no">df</span>)
-<span class="co">#&gt; Creating new Sheet: "masculine-incatern"</span>
+<span class="co">#&gt; Creating new Sheet: "unwhited-myotis"</span>
 <span class="no">ss</span>
-<span class="co">#&gt;   Spreadsheet name: masculine-incatern</span>
-<span class="co">#&gt;                 ID: 1he43KbRpF8FSWTXdn1n-BWMLqpFowrssiC-d99vwQhc</span>
+<span class="co">#&gt;   Spreadsheet name: unwhited-myotis</span>
+<span class="co">#&gt;                 ID: 1XTwQAgUhQLzHdR2DIFpZaEmrnMLQefYX6fHXpvaCe2U</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -286,13 +284,13 @@
 <p>Let’s start over: we delete that Sheet and call <code><a href="../reference/gs4_create.html">gs4_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * masculine-incatern: 1he43KbRpF8FSWTXdn1n-BWMLqpFowrssiC-d99vwQhc</span>
+<span class="co">#&gt;   * unwhited-myotis: 1XTwQAgUhQLzHdR2DIFpZaEmrnMLQefYX6fHXpvaCe2U</span>
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span>(<span class="st">"testy-hedgehog"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="no">df</span>)
 <span class="co">#&gt; Creating new Sheet: "testy-hedgehog"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;                 ID: 1uLRRC6xX5Co4olqXv_eeRHL0GuurYnYvCT8EdcoMH38</span>
+<span class="co">#&gt;                 ID: 1G5B-DNSb13K6xJnPgYQHpwsbbjl4YK2-N0BdOhpZAjA</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -305,7 +303,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;                 ID: 1uLRRC6xX5Co4olqXv_eeRHL0GuurYnYvCT8EdcoMH38</span>
+<span class="co">#&gt;                 ID: 1G5B-DNSb13K6xJnPgYQHpwsbbjl4YK2-N0BdOhpZAjA</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>
@@ -352,12 +350,12 @@
 <span class="co">#&gt; # A tibble: 2 x 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 1796498987 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 2118678842 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 1 df           0 1232577095 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1  894311690 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * testy-hedgehog: 1uLRRC6xX5Co4olqXv_eeRHL0GuurYnYvCT8EdcoMH38</span></pre></body></html></div>
+<span class="co">#&gt;   * testy-hedgehog: 1G5B-DNSb13K6xJnPgYQHpwsbbjl4YK2-N0BdOhpZAjA</span></pre></body></html></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

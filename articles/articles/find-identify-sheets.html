@@ -277,16 +277,21 @@
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">unclass</a></span>(<span class="no">gap_id</span>)
 <span class="co">#&gt; [1] "1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew"</span>
 <span class="no">gap_id</span>
-<span class="co">#&gt;   Spreadsheet name: &lt;unknown&gt;</span>
+<span class="co">#&gt;   Spreadsheet name: gapminder</span>
 <span class="co">#&gt;                 ID: 1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew</span>
-<span class="co">#&gt;             Locale: &lt;unknown&gt;</span>
-<span class="co">#&gt;          Time zone: &lt;unknown&gt;</span>
-<span class="co">#&gt;        # of sheets: &lt;unknown&gt;</span>
+<span class="co">#&gt;             Locale: en_US</span>
+<span class="co">#&gt;          Time zone: America/Los_Angeles</span>
+<span class="co">#&gt;        # of sheets: 5</span>
 <span class="co">#&gt; </span>
-<span class="co">#&gt; Unable to get metadata for this Sheet. Error details:</span>
-<span class="co">#&gt; Server error: (503) UNAVAILABLE</span>
-<span class="co">#&gt;   * Service unavailable. Typically the server is down.</span>
-<span class="co">#&gt;   * The service is currently unavailable.</span></pre></body></html></div>
+<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
+<span class="co">#&gt;       Africa: 625 x 6</span>
+<span class="co">#&gt;     Americas: 301 x 6</span>
+<span class="co">#&gt;         Asia: 397 x 6</span>
+<span class="co">#&gt;       Europe: 361 x 6</span>
+<span class="co">#&gt;      Oceania: 25 x 6</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; (Named range): (A1 range)        </span>
+<span class="co">#&gt;        canada: 'Americas'!A38:F49</span></pre></body></html></div>
 <p>Since we generally call <code><a href="../../reference/as_sheets_id.html">as_sheets_id()</a></code> on whatever the user provides as <code>ss</code>, you can even pass <code>gap_dribble</code> straight into googlesheets4 functions.</p>
 <div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../../reference/sheet_properties.html">sheet_properties</a></span>(<span class="no">gap_dribble</span>)
 <span class="co">#&gt; # A tibble: 5 x 8</span>

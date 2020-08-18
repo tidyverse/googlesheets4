@@ -12,7 +12,7 @@ name: pkgdown
 jobs:
   pkgdown:
     runs-on: macOS-latest
-    if: "github.event_name == 'schedule' || contains(github.event.head_commit.message, '[pkgdown]')"
+    if: github.event_name == 'schedule' || contains(github.event.head_commit.message, '[pkgdown]')
 
     env:
       GOOGLESHEETS4_PASSWORD: ${{ secrets.GOOGLESHEETS4_PASSWORD }}

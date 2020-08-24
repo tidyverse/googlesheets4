@@ -1,0 +1,6 @@
+# BooleanCondition  
+# A tibble: 2 x 6
+  property type  instance_of array_of       format enum             
+  <chr>    <chr> <chr>       <chr>          <chr>  <list>           
+1 type     enum  <NA>        <NA>           <NA>   <tibble [30 × 2]>
+2 values   array <NA>        ConditionValue <NA>   <tibble [0 × 2]> 

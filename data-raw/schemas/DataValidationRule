@@ -1,0 +1,8 @@
+# DataValidationRule  
+# A tibble: 4 x 6
+  property     type    instance_of      array_of format enum            
+  <chr>        <chr>   <chr>            <chr>    <chr>  <list>          
+1 condition    object  BooleanCondition <NA>     <NA>   <tibble [0 × 2]>
+2 inputMessage string  <NA>             <NA>     <NA>   <tibble [0 × 2]>
+3 showCustomUi boolean <NA>             <NA>     <NA>   <tibble [0 × 2]>
+4 strict       boolean <NA>             <NA>     <NA>   <tibble [0 × 2]>

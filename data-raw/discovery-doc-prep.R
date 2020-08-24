@@ -69,7 +69,11 @@ these <- c(
   "DuplicateSheetRequest",
   "AddSheetRequest",
   "UpdateNamedRangeRequest",
-  "AddNamedRangeRequest"
+  "AddNamedRangeRequest",
+  "SetDataValidationRequest",
+  "DataValidationRule",
+  "BooleanCondition",
+  "ConditionValue"
 )
 
 .tidy_schemas <- these %>%

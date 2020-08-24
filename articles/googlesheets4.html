@@ -270,10 +270,10 @@
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">df</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="fl">1</span>:<span class="fl">3</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">letters</span>[<span class="fl">1</span>:<span class="fl">3</span>])
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span>(<span class="no">df</span>)
-<span class="co">#&gt; Creating new Sheet: "onerous-squid"</span>
+<span class="co">#&gt; Creating new Sheet: "lemon-hawk"</span>
 <span class="no">ss</span>
-<span class="co">#&gt;   Spreadsheet name: onerous-squid</span>
-<span class="co">#&gt;                 ID: 1uhyvQJ5P1ccl54KeDdfTb5HjichmT6WR7Pl6koAqAe8</span>
+<span class="co">#&gt;   Spreadsheet name: lemon-hawk</span>
+<span class="co">#&gt;                 ID: 1s0ixg7g0DYd3r0scN0leB8ZHPCQA3gBprMmrQntUjGo</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -284,13 +284,13 @@
 <p>Let’s start over: we delete that Sheet and call <code><a href="../reference/gs4_create.html">gs4_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * onerous-squid: 1uhyvQJ5P1ccl54KeDdfTb5HjichmT6WR7Pl6koAqAe8</span>
+<span class="co">#&gt;   * lemon-hawk: 1s0ixg7g0DYd3r0scN0leB8ZHPCQA3gBprMmrQntUjGo</span>
 
 <span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span>(<span class="st">"testy-hedgehog"</span>, <span class="kw">sheets</span> <span class="kw">=</span> <span class="no">df</span>)
 <span class="co">#&gt; Creating new Sheet: "testy-hedgehog"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;                 ID: 14vbCjy3hJRCtxTMjZ4n7dMzsNxRJmk7Gh-fmalvI2uE</span>
+<span class="co">#&gt;                 ID: 1m1Ul3RFkDYKMQqu3whRiC8pGA6-0W0051WZIfX5UWFk</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 1</span>
@@ -303,7 +303,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="no">ss</span>
 <span class="co">#&gt;   Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;                 ID: 14vbCjy3hJRCtxTMjZ4n7dMzsNxRJmk7Gh-fmalvI2uE</span>
+<span class="co">#&gt;                 ID: 1m1Ul3RFkDYKMQqu3whRiC8pGA6-0W0051WZIfX5UWFk</span>
 <span class="co">#&gt;             Locale: en_US</span>
 <span class="co">#&gt;          Time zone: Etc/GMT</span>
 <span class="co">#&gt;        # of sheets: 2</span>
@@ -348,14 +348,14 @@
 <p>We take one last look at the sheets we created in <code>ss</code>, then clean up.</p>
 <div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; # A tibble: 2 x 8</span>
-<span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0  991397138 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 1492816087 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt;   name     index        id type  visible grid_rows grid_columns data  </span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
+<span class="co">#&gt; 1 df           0 813905608 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 299223867 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="kw pkg">googledrive</span><span class="kw ns">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>(<span class="no">ss</span>)
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * testy-hedgehog: 14vbCjy3hJRCtxTMjZ4n7dMzsNxRJmk7Gh-fmalvI2uE</span></pre></body></html></div>
+<span class="co">#&gt;   * testy-hedgehog: 1m1Ul3RFkDYKMQqu3whRiC8pGA6-0W0051WZIfX5UWFk</span></pre></body></html></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

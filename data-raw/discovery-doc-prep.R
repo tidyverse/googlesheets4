@@ -73,7 +73,12 @@ these <- c(
   "SetDataValidationRequest",
   "DataValidationRule",
   "BooleanCondition",
-  "ConditionValue"
+  "ConditionValue",
+  "AddProtectedRangeRequest",
+  "UpdateProtectedRangeRequest",
+  "DeleteProtectedRangeRequest",
+  "ProtectedRange",
+  "Editors"
 )
 
 .tidy_schemas <- these %>%

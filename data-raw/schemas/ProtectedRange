@@ -1,0 +1,12 @@
+# ProtectedRange  
+# A tibble: 8 x 6
+  property              type    instance_of array_of  format enum            
+  <chr>                 <chr>   <chr>       <chr>     <chr>  <list>          
+1 description           string  <NA>        <NA>      <NA>   <tibble [0 × 2]>
+2 editors               object  Editors     <NA>      <NA>   <tibble [0 × 2]>
+3 namedRangeId          string  <NA>        <NA>      <NA>   <tibble [0 × 2]>
+4 protectedRangeId      integer <NA>        <NA>      int32  <tibble [0 × 2]>
+5 range                 object  GridRange   <NA>      <NA>   <tibble [0 × 2]>
+6 requestingUserCanEdit boolean <NA>        <NA>      <NA>   <tibble [0 × 2]>
+7 unprotectedRanges     array   <NA>        GridRange <NA>   <tibble [0 × 2]>
+8 warningOnly           boolean <NA>        <NA>      <NA>   <tibble [0 × 2]>

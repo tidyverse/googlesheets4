@@ -11,9 +11,9 @@
 # --> "anyone with the link" can view
 #
 # examples:
-# gs4_share()
-# gs4_share(type = "user", emailAddress = "jane@example.com")
-# gs4_share(type = "user", emailAddress = "jane@example.com", role = "writer")
+# gs4_share(ss)
+# gs4_share(ss, type = "user", emailAddress = "jane@example.com")
+# gs4_share(ss, type = "user", emailAddress = "jane@example.com", role = "writer")
 gs4_share <- function(ss,
                          ...,
                          role = c(

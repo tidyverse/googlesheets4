@@ -12,8 +12,14 @@ new_googlesheets4_spreadsheet <- function(x = list()) {
 
   if (!is.null(x$sheets)) {
     sheets <- map(x$sheets, ~ new("Sheet", !!!.x))
-    sheets <- map(sheets, as_tibble)
-    out$sheets <- do.call(rbind, sheets)
+    sheet_properties <- map(sheets, as_tibble)
+    out$sheets <- do.call(rbind, sheet_properties)
+
+    protected_ranges <- map(sheets, "protectedRanges")
+    protected_ranges <- purrr::flatten(protected_ranges)
+    protected_ranges <- map(protected_ranges, ~ new("ProtectedRange", !!!.x))
+    protected_ranges <- map(protected_ranges, as_tibble)
+    out$protected_ranges <- do.call(rbind, protected_ranges)
   }
 
   if (!is.null(x$namedRanges)) {
@@ -47,19 +53,27 @@ new_googlesheets4_spreadsheet <- function(x = list()) {
 
 #' @export
 format.googlesheets4_spreadsheet <- function(x, ...) {
-
-  meta <- glue_data(
-    x,
-    "
-      Spreadsheet name: {name}
-                    ID: {spreadsheet_id}
-                Locale: {locale}
-             Time zone: {time_zone}
-           # of sheets: {nrow(x$sheets) %||% '<unknown>'}
-    ",
-    .sep = "\n"
+  meta <- tibble::tribble(
+    ~col1, ~col2,
+    "Spreadsheet name", x$name,
+    "ID", x$spreadsheet_id,
+    "Locale", x$locale,
+    "Time zone", x$time_zone,
+    "# of sheets", as.character(nrow(x$sheets)) %||% "<unknown>"
   )
-  meta <- strsplit(meta, split = "\n")[[1]]
+  if (!is.null(x$named_ranges)) {
+    meta <- tibble::add_row(
+      meta,
+      col1 = "# of named ranges", col2 = as.character(nrow(x$named_ranges))
+    )
+  }
+  if (!is.null(x$protected_ranges)) {
+    meta <- tibble::add_row(
+      meta,
+      col1 = "# of protected ranges", col2 = as.character(nrow(x$protected_ranges))
+    )
+  }
+  meta <- glue_data(meta, "{fr(col1)}: {col2}")
 
   if (!is.null(x$sheets)) {
     col1 <- fr(c("(Sheet name)", x$sheets$name))

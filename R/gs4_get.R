@@ -26,7 +26,7 @@ gs4_get <- function(ss) {
 ## accepts `fields`, yet I don't want a user-facing function with `fields` arg
 gs4_get_impl_ <- function(ssid,
                           fields = NULL) {
-  fields <- fields %||% "spreadsheetId,properties,spreadsheetUrl,sheets.properties,namedRanges"
+  fields <- fields %||% "spreadsheetId,properties,spreadsheetUrl,sheets.properties,sheets.protectedRanges,namedRanges"
   req <- request_generate(
     "sheets.spreadsheets.get",
     params = list(

@@ -1,5 +1,7 @@
 # googlesheets4 (development version)
 
+* `gs4_get()` retrieves information about protected ranges.
+
 # googlesheets4 0.2.0
 
 googlesheets4 can now write and modify Sheets.

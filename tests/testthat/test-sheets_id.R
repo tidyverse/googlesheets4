@@ -126,7 +126,10 @@ test_that("sheets_id print does not error for lack of cred", {
     .auth$set_cred(original_cred)
     .auth$set_auth_active(original_auth_active)
   })
-  withr::local_options(list(gargle_oauth_cache = FALSE))
+  withr::local_options(list(
+    gargle_oauth_cache = FALSE,
+    rlang_interactive = FALSE
+  ))
 
   # typical initial state: auth_active, but no token yet
   .auth$clear_cred()

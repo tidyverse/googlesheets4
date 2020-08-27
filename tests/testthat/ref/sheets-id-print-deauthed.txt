@@ -1,9 +1,9 @@
 > print(gs4_example("mini-gap"))
-  Spreadsheet name: mini-gap
-                ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
-            Locale: en_US
-         Time zone: America/Los_Angeles
-       # of sheets: 5
+Spreadsheet name: mini-gap
+              ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
+          Locale: en_US
+       Time zone: America/Los_Angeles
+     # of sheets: 5
 
 (Sheet name): (Nominal extent in rows x columns)
       Africa: 6 x 6

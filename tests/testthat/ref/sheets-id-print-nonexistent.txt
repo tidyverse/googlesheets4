@@ -1,9 +1,9 @@
 > print(as_sheets_id("12345"))
-  Spreadsheet name: <unknown>
-                ID: 12345
-            Locale: <unknown>
-         Time zone: <unknown>
-       # of sheets: <unknown>
+Spreadsheet name: <unknown>
+              ID: 12345
+          Locale: <unknown>
+       Time zone: <unknown>
+     # of sheets: <unknown>
 
 Unable to get metadata for this Sheet. Error details:
 Client error: (404) NOT_FOUND

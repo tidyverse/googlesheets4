@@ -1,9 +1,9 @@
 > print(gs4_example("mini-gap"))
-  Spreadsheet name: <unknown>
-                ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
-            Locale: <unknown>
-         Time zone: <unknown>
-       # of sheets: <unknown>
+Spreadsheet name: <unknown>
+              ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
+          Locale: <unknown>
+       Time zone: <unknown>
+     # of sheets: <unknown>
 
 Unable to get metadata for this Sheet. Error details:
 Can't get Google credentials.

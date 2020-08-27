@@ -1,9 +1,10 @@
 > print(gs4_example("gapminder"))
-  Spreadsheet name: gapminder
-                ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY
-            Locale: en_US
-         Time zone: America/Los_Angeles
-       # of sheets: 5
+ Spreadsheet name: gapminder
+               ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY
+           Locale: en_US
+        Time zone: America/Los_Angeles
+      # of sheets: 5
+# of named ranges: 1
 
 (Sheet name): (Nominal extent in rows x columns)
       Africa: 625 x 6

@@ -198,11 +198,12 @@
 <p><code><a href="../../reference/as_sheets_id.html">as_sheets_id()</a></code> is a generic function, which means it knows what to do with a few different types of input. For character string input, <code><a href="../../reference/as_sheets_id.html">as_sheets_id()</a></code> passes a string through, unless it looks like a URL. If it looks like a URL, we use a regular expression to extract the Sheet ID. The returned string bears the classes <code>sheets_id</code> and <code>drive_id</code> (for playing nicely with googledrive).</p>
 <p>Why did we call <code><a href="https://rdrr.io/r/base/class.html">unclass(ssid)</a></code> above to see the naked Sheet ID? Because, by default, when you print an instance of <code>sheets_id</code>, we attempt to show you some current metadata about the Sheet.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">ssid</span>
-<span class="co">#&gt;   Spreadsheet name: gapminder</span>
-<span class="co">#&gt;                 ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY</span>
-<span class="co">#&gt;             Locale: en_US</span>
-<span class="co">#&gt;          Time zone: America/Los_Angeles</span>
-<span class="co">#&gt;        # of sheets: 5</span>
+<span class="co">#&gt;  Spreadsheet name: gapminder</span>
+<span class="co">#&gt;                ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY</span>
+<span class="co">#&gt;            Locale: en_US</span>
+<span class="co">#&gt;         Time zone: America/Los_Angeles</span>
+<span class="co">#&gt;       # of sheets: 5</span>
+<span class="co">#&gt; # of named ranges: 1</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
 <span class="co">#&gt;       Africa: 625 x 6</span>
@@ -277,11 +278,12 @@
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">unclass</a></span>(<span class="no">gap_id</span>)
 <span class="co">#&gt; [1] "1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew"</span>
 <span class="no">gap_id</span>
-<span class="co">#&gt;   Spreadsheet name: gapminder</span>
-<span class="co">#&gt;                 ID: 1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew</span>
-<span class="co">#&gt;             Locale: en_US</span>
-<span class="co">#&gt;          Time zone: America/Los_Angeles</span>
-<span class="co">#&gt;        # of sheets: 5</span>
+<span class="co">#&gt;  Spreadsheet name: gapminder</span>
+<span class="co">#&gt;                ID: 1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew</span>
+<span class="co">#&gt;            Locale: en_US</span>
+<span class="co">#&gt;         Time zone: America/Los_Angeles</span>
+<span class="co">#&gt;       # of sheets: 5</span>
+<span class="co">#&gt; # of named ranges: 1</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
 <span class="co">#&gt;       Africa: 625 x 6</span>

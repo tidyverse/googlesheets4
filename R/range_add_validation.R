@@ -7,7 +7,7 @@
 #' `range_add_validation()` adds a data validation rule to a range of cells.
 #'
 #' @eval param_ss()
-#' @eval param_sheet(action = "act on")
+#' @eval param_sheet()
 #' @param range Cells to apply data validation to. This `range` argument has
 #'   important similarities and differences to `range` elsewhere (e.g.
 #'   [range_read()]):

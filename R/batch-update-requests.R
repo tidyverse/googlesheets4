@@ -57,10 +57,14 @@ bureq_clear_sheet <- function(sheetId) {
 # https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest
 bureq_set_grid_properties <- function(sheetId,
                                       nrow = NULL, ncol = NULL,
-                                      frozenRowCount = 1) {
+                                      frozenRowCount = 1,
+                                      frozenColumnCount = NULL) {
   gp <- new("GridProperties", rowCount = nrow, columnCount = ncol)
   if (!is.null(frozenRowCount) && frozenRowCount > 0) {
     gp <- patch(gp, frozenRowCount = frozenRowCount)
+  }
+  if (!is.null(frozenColumnCount) && frozenColumnCount > 0) {
+    gp <- patch(gp, frozenColumnCount = frozenColumnCount)
   }
   if (length(gp) == 0) {
     return(NULL)

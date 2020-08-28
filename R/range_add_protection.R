@@ -7,7 +7,7 @@
 #' `range_add_protection()` protects a range of cells against editing.
 #'
 #' @eval param_ss()
-#' @eval param_sheet(action = "act on")
+#' @eval param_sheet()
 #' @param range Cells to protect. This `range` argument works very much like
 #'   `range` in, for example, [range_read()]). Specific things to note:
 #'   You can omit `range` to protect a whole sheet and `range` can be a named

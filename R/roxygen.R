@@ -18,7 +18,7 @@ param_ss <- function(..., pname = "ss") {
 }
 
 ### sheet ----
-param_sheet <- function(..., action, pname = "sheet") {
+param_sheet <- function(..., action = "act on", pname = "sheet") {
   template <- glue("
     @param {pname} \\
     Sheet to {action}, in the sense of \"worksheet\" or \"tab\". \\

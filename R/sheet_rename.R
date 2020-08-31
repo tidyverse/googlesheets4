@@ -28,7 +28,7 @@
 #'     sheet_rename("chickwts", new_name = "poultry")
 #'
 #'   # clean up
-#'   googledrive::drive_find("sheet-rename-demo") %>%
+#'   gs4_find("sheet-rename-demo") %>%
 #'     googledrive::drive_trash()
 #' }
 sheet_rename <- function(ss,

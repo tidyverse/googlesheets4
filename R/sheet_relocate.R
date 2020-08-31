@@ -60,7 +60,7 @@
 #'     sheet_names()
 #'
 #'   # clean up
-#'   googledrive::drive_find("sheet-relocate-demo") %>%
+#'   gs4_find("sheet-relocate-demo") %>%
 #'     googledrive::drive_trash()
 #' }
 sheet_relocate <- function(ss,

@@ -67,7 +67,7 @@ if (gs4_has_token()) {
     sheet_names()
 
   # clean up
-  googledrive::drive_find("sheet-relocate-demo") \%>\%
+  gs4_find("sheet-relocate-demo") \%>\%
     googledrive::drive_trash()
 }
 }

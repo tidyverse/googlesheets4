@@ -44,7 +44,7 @@
 #'   sheet_properties(ss)
 #'
 #'   # clean up
-#'   googledrive::drive_find("sheet-resize-demo") %>%
+#'   gs4_find("sheet-resize-demo") %>%
 #'     googledrive::drive_trash()
 #' }
 sheet_resize <- function(ss,

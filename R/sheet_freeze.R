@@ -33,7 +33,7 @@
 #'   sheet_freeze(ss, ncol = 2)
 #'
 #'   # clean up
-#'   googledrive::drive_find("sheet-freeze-example") %>%
+#'   gs4_find("sheet-freeze-example") %>%
 #'     googledrive::drive_trash()
 #' }
 sheet_freeze <- function(ss,

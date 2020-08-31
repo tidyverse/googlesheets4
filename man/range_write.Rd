@@ -123,7 +123,7 @@ if (gs4_has_token()) {
   range_write(ss, data = dat, range = "beta!C5", col_names = FALSE)
 
   # clean up
-  googledrive::drive_find("range-write-demo") \%>\%
+  gs4_find("range-write-demo") \%>\%
     googledrive::drive_trash()
 }
 }

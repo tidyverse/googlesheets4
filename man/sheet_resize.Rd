@@ -56,7 +56,7 @@ if (gs4_has_token()) {
   sheet_properties(ss)
 
   # clean up
-  googledrive::drive_find("sheet-resize-demo") \%>\%
+  gs4_find("sheet-resize-demo") \%>\%
     googledrive::drive_trash()
 }
 }

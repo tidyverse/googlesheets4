@@ -73,7 +73,7 @@ if (gs4_has_token()) {
     )
 
   # clean up
-  googledrive::drive_find("sheet-copy-demo") \%>\%
+  gs4_find("sheet-copy-demo") \%>\%
     googledrive::drive_trash()
 }
 }

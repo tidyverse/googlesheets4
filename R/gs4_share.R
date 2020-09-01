@@ -24,7 +24,7 @@ gs4_share <- function(ss,
   role <- match.arg(role)
   type <- match.arg(type)
   googledrive::drive_share(
-    file = googledrive::as_id(as_sheets_id(ss)),
+    file = as_sheets_id(ss),
     role = role,
     type = type,
     ...

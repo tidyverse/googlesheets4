@@ -21,6 +21,7 @@ gs4_share <- function(ss,
                            "owner", "organizer"
                          ),
                          type = c("anyone", "user", "group", "domain")) {
+  check_gs4_email_is_drive_email()
   role <- match.arg(role)
   type <- match.arg(type)
   googledrive::drive_share(

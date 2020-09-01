@@ -17,7 +17,9 @@ Finds your Google Sheets. This is a very thin wrapper around
 \code{\link[googledrive:drive_find]{googledrive::drive_find()}}, that specifies you want to list Drive files
 where \code{type = "spreadsheet"}. Therefore, note that this will require auth for
 googledrive! See the article \href{https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html}{Using googlesheets4 with googledrive}
-if you want to coordinate auth between googlesheets4 and googledrive.
+if you want to coordinate auth between googlesheets4 and googledrive. This
+function will emit an informational message if you are currently logged in
+with both googlesheets4 and googledrive, but as different users.
 }
 \examples{
 if (gs4_has_token()) {

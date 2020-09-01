@@ -105,6 +105,8 @@ as_sheets_id.dribble <- function(x, ...) {
       "  * Actual input has {nrow(x)} rows."
     )
   }
+  # not worrying about whether we are authed as same user with Sheets and Drive
+  # revealing the MIME type is local to the dribble, so this makes no API calls
   mime_type <- googledrive::drive_reveal(x, "mime_type")[["mime_type"]]
   target <- "application/vnd.google-apps.spreadsheet"
   if (!identical(mime_type, target)) {

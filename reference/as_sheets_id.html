@@ -56,7 +56,7 @@ Spreadsheet id, &quot;a string containing letters, numbers, and some special
 characters&quot;, typically 44 characters long, in our experience. Example:
 1qpyC0XzvTcKT6EISywvqESX3A0MwQoFDE8p-Bll4hps.
 A URL, from which we can excavate a spreadsheet or file id. Example:
-https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545.
+&quot;https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545&quot;.
 A one-row dribble, a &quot;Drive tibble&quot; used by the
 googledrive package. In general, a dribble can represent several
 files, one row per file. Since googlesheets4 is not vectorized over
@@ -216,7 +216,7 @@ This is a generic function." />
 characters", typically 44 characters long, in our experience. Example:
 <code>1qpyC0XzvTcKT6EISywvqESX3A0MwQoFDE8p-Bll4hps</code>.</p></li>
 <li><p>A URL, from which we can excavate a spreadsheet or file id. Example:
-<a href='https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545'>https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545</a>.</p></li>
+"https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545".</p></li>
 <li><p>A one-row <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, a "Drive tibble" used by the
 googledrive package. In general, a <code>dribble</code> can represent several
 files, one row per file. Since googlesheets4 is not vectorized over
@@ -241,8 +241,8 @@ this is an object of class <code>googlesheets4_spreadsheet</code>.</p></li>
     <tr>
       <th>x</th>
       <td><p>Something that uniquely identifies a Google Sheet: a <code><a href='sheets_id.html'>sheets_id</a></code>,
-a URL, one-row <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, or a
-<code>googlesheets4_spreadsheet</code>.</p></td>
+a <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>drive_id</a></code>, a URL, a one-row
+<code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, or a <code>googlesheets4_spreadsheet</code>.</p></td>
     </tr>
     <tr>
       <th>...</th>

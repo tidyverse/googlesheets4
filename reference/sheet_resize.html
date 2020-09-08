@@ -193,7 +193,7 @@
     <p>Changes the number of rows and/or columns in a (work)sheet.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>sheet_resize</span>(<span class='kw'>ss</span>, sheet = <span class='kw'>NULL</span>, nrow = <span class='kw'>NULL</span>, ncol = <span class='kw'>NULL</span>, exact = <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -244,35 +244,37 @@ deleted and their contents are lost.</p></td>
 <code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
   <span class='co'># create a Sheet with the default initial worksheet</span>
-  (<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"sheet-resize-demo"</span>))
+  (<span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"sheet-resize-demo"</span>))
 
   <span class='co'># see (work)sheet dims</span>
-  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='no'>ss</span>)
+  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='kw'>ss</span>)
 
   <span class='co'># no resize occurs</span>
-  <span class='fu'>sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>6</span>)
+  <span class='fu'>sheet_resize</span>(<span class='kw'>ss</span>, nrow = <span class='fl'>2</span>, ncol = <span class='fl'>6</span>)
 
   <span class='co'># reduce sheet size</span>
-  <span class='fu'>sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>7</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+  <span class='fu'>sheet_resize</span>(<span class='kw'>ss</span>, nrow = <span class='fl'>5</span>, ncol = <span class='fl'>7</span>, exact = <span class='fl'>TRUE</span>)
 
   <span class='co'># add rows</span>
-  <span class='fu'>sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>7</span>)
+  <span class='fu'>sheet_resize</span>(<span class='kw'>ss</span>, nrow = <span class='fl'>7</span>)
 
   <span class='co'># add columns</span>
-  <span class='fu'>sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+  <span class='fu'>sheet_resize</span>(<span class='kw'>ss</span>, ncol = <span class='fl'>10</span>)
 
   <span class='co'># add rows and columns</span>
-  <span class='fu'>sheet_resize</span>(<span class='no'>ss</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>9</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>12</span>)
+  <span class='fu'>sheet_resize</span>(<span class='kw'>ss</span>, nrow = <span class='fl'>9</span>, ncol = <span class='fl'>12</span>)
 
   <span class='co'># re-inspect (work)sheet dims</span>
-  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='no'>ss</span>)
+  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='kw'>ss</span>)
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"sheet-resize-demo"</span>) <span class='kw'>%&gt;%</span>
-    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div></pre>
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"sheet-resize-demo"</span>) <span class='op'>%&gt;%</span>
+    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}
+</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheet-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>No need to change existing dims (1000 x 26)</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheet-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Changing dims: (1000 x 26) --&gt; (5 x 7)</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheet-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Changing dims: (5 x 7) --&gt; (7 x 7)</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheet-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Changing dims: (7 x 7) --&gt; (7 x 10)</span></div><div class='output co'>#&gt; <span class='message'>Resizing sheet "Sheet1" in "sheet-resize-demo"</span></div><div class='output co'>#&gt; <span class='message'>Changing dims: (7 x 10) --&gt; (9 x 12)</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * sheet-resize-demo: 1xG9_ZCDVmv6rfXj_JMm9CK2sFQND65MSma5ot-uLgPk</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

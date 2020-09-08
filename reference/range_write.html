@@ -230,12 +230,12 @@ want is <code><a href='sheet_append.html'>sheet_append()</a></code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>range_write</span>(
-  <span class='no'>ss</span>,
-  <span class='no'>data</span>,
-  <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>ss</span>,
+  <span class='kw'>data</span>,
+  sheet = <span class='kw'>NULL</span>,
+  range = <span class='kw'>NULL</span>,
+  col_names = <span class='fl'>TRUE</span>,
+  reformat = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -328,39 +328,41 @@ and format are deleted.</p></li>
 <code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
   <span class='co'># create a Sheet with some initial, empty (work)sheets</span>
-  (<span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"range-write-demo"</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha"</span>, <span class='st'>"beta"</span>)))
+  (<span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"range-write-demo"</span>, sheets = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha"</span>, <span class='st'>"beta"</span>)))
 
-  <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
-    <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
+  <span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+    x = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
+    y = <span class='kw'>letters</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>]
   )
 
   <span class='co'>#  write df somewhere other than the "upper left corner"</span>
-  <span class='fu'>range_write</span>(<span class='no'>ss</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>df</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"D6"</span>)
+  <span class='fu'>range_write</span>(<span class='kw'>ss</span>, data = <span class='kw'>df</span>, range = <span class='st'>"D6"</span>)
 
   <span class='co'># view your magnificent creation in the browser</span>
-  <span class='fu'><a href='gs4_browse.html'>gs4_browse</a></span>(<span class='no'>ss</span>)
+  <span class='fu'><a href='gs4_browse.html'>gs4_browse</a></span>(<span class='kw'>ss</span>)
 
   <span class='co'># send data of disparate types to a 1-row rectangle</span>
-  <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
-    <span class='kw'>string</span> <span class='kw'>=</span> <span class='st'>"string"</span>,
-    <span class='kw'>logical</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-    <span class='kw'>datetime</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()
+  <span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='kw'>tibble</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+    string = <span class='st'>"string"</span>,
+    logical = <span class='fl'>TRUE</span>,
+    datetime = <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()
   )
-  <span class='fu'>range_write</span>(<span class='no'>ss</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"beta"</span>, <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'>range_write</span>(<span class='kw'>ss</span>, data = <span class='kw'>dat</span>, sheet = <span class='st'>"beta"</span>, col_names = <span class='fl'>FALSE</span>)
 
   <span class='co'># send data of disparate types to a 1-column rectangle</span>
-  <span class='no'>dat</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>tibble</span><span class='kw ns'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(), <span class='fl'>FALSE</span>, <span class='st'>"string"</span>)
+  <span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='kw'>tibble</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
+    x = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(), <span class='fl'>FALSE</span>, <span class='st'>"string"</span>)
   )
-  <span class='fu'>range_write</span>(<span class='no'>ss</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>dat</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"beta!C5"</span>, <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'>range_write</span>(<span class='kw'>ss</span>, data = <span class='kw'>dat</span>, range = <span class='st'>"beta!C5"</span>, col_names = <span class='fl'>FALSE</span>)
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"range-write-demo"</span>) <span class='kw'>%&gt;%</span>
-    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div></pre>
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"range-write-demo"</span>) <span class='op'>%&gt;%</span>
+    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}
+</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "alpha"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "beta"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "beta"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * range-write-demo: 1yCHbgKIXADuQnw6ktRiNb0q5llXjLqXmN0DjjQDpUnQ</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

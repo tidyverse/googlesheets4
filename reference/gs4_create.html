@@ -201,7 +201,7 @@ Optionally, you can also provide names and/or data for the initial set of
 as described in <code><a href='sheet_write.html'>sheet_write()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gs4_create</span>(<span class='kw'>name</span> <span class='kw'>=</span> <span class='fu'><a href='gs4_random.html'>gs4_random</a></span>(), <span class='no'>...</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>gs4_create</span>(name = <span class='fu'><a href='gs4_random.html'>gs4_random</a></span>(), <span class='kw'>...</span>, sheets = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -246,37 +246,44 @@ frames. See the examples.</p></td>
 <code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
   <span class='fu'>gs4_create</span>(<span class='st'>"gs4-create-demo-1"</span>)
 
-  <span class='fu'>gs4_create</span>(<span class='st'>"gs4-create-demo-2"</span>, <span class='kw'>locale</span> <span class='kw'>=</span> <span class='st'>"en_CA"</span>)
+  <span class='fu'>gs4_create</span>(<span class='st'>"gs4-create-demo-2"</span>, locale = <span class='st'>"en_CA"</span>)
 
   <span class='fu'>gs4_create</span>(
     <span class='st'>"gs4-create-demo-3"</span>,
-    <span class='kw'>locale</span> <span class='kw'>=</span> <span class='st'>"fr_FR"</span>,
-    <span class='kw'>timeZone</span> <span class='kw'>=</span> <span class='st'>"Europe/Paris"</span>
+    locale = <span class='st'>"fr_FR"</span>,
+    timeZone = <span class='st'>"Europe/Paris"</span>
   )
 
   <span class='fu'>gs4_create</span>(
     <span class='st'>"gs4-create-demo-4"</span>,
-    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha"</span>, <span class='st'>"beta"</span>)
+    sheets = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha"</span>, <span class='st'>"beta"</span>)
   )
 
-  <span class='no'>my_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+  <span class='kw'>my_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(x = <span class='fl'>1</span>)
   <span class='fu'>gs4_create</span>(
     <span class='st'>"gs4-create-demo-5"</span>,
-    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='no'>my_data</span>
+    sheets = <span class='kw'>my_data</span>
   )
 
   <span class='fu'>gs4_create</span>(
     <span class='st'>"gs4-create-demo-6"</span>,
-    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>iris</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>iris</span>), <span class='kw'>mtcars</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>mtcars</span>))
+    sheets = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(iris = <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>iris</span>), mtcars = <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>mtcars</span>))
   )
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"gs4-create-demo"</span>) <span class='kw'>%&gt;%</span>
-    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div></pre>
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"gs4-create-demo"</span>) <span class='op'>%&gt;%</span>
+    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}
+</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-1"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-2"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-3"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-4"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-5"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "gs4-create-demo-6"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * gs4-create-demo-6: 1eXHjfHaVypgzNzSgJeh9E2NRSrkN-LSfCG-CYv1svmo</span>
+#&gt; <span class='message'>  * gs4-create-demo-5: 1oY5axWu7o3S414kLvvT_4cNdnLF5Ho18bCKCYgYgVOo</span>
+#&gt; <span class='message'>  * gs4-create-demo-4: 1uKsQZZMzDwshnXD7spvGEXpxfyJemgtCZLgml1jAbEI</span>
+#&gt; <span class='message'>  * gs4-create-demo-3: 1aH351PHou40ukOn3LO97ZMNRyH8urg_60PwCUwqHNbk</span>
+#&gt; <span class='message'>  * gs4-create-demo-2: 18t5YWFLsMgxtOc-RduyLqiiBoonhe6VChM8bxY55oUU</span>
+#&gt; <span class='message'>  * gs4-create-demo-1: 1RDi5QaeKi5hkc6xVqmE814p_SgUBLILzafFEmN6dqlQ</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

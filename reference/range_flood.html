@@ -199,9 +199,9 @@ clearing the cell value. Both functions, by default, also clear the format,
 but this can be specified via <code>reformat</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>range_flood</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>cell</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+    <pre class="usage"><span class='fu'>range_flood</span>(<span class='kw'>ss</span>, sheet = <span class='kw'>NULL</span>, range = <span class='kw'>NULL</span>, cell = <span class='kw'>NULL</span>, reformat = <span class='fl'>TRUE</span>)
 
-<span class='fu'>range_clear</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+<span class='fu'>range_clear</span>(<span class='kw'>ss</span>, sheet = <span class='kw'>NULL</span>, range = <span class='kw'>NULL</span>, reformat = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -262,44 +262,46 @@ Currently googlesheets4 provides no real support for formatting, so
 <code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
   <span class='co'># create a data frame to use as initial data</span>
-  <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_fodder.html'>gs4_fodder</a></span>(<span class='fl'>10</span>)
+  <span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_fodder.html'>gs4_fodder</a></span>(<span class='fl'>10</span>)
 
   <span class='co'># create Sheet</span>
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"range-flood-demo"</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>df</span>))
+  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"range-flood-demo"</span>, sheets = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>df</span>))
 
   <span class='co'># default behavior (`cell = NULL`): clear value and format</span>
-  <span class='fu'>range_flood</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"A1:B3"</span>)
+  <span class='fu'>range_flood</span>(<span class='kw'>ss</span>, range = <span class='st'>"A1:B3"</span>)
 
   <span class='co'># clear value but preserve format</span>
-  <span class='fu'>range_flood</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"C1:D3"</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'>range_flood</span>(<span class='kw'>ss</span>, range = <span class='st'>"C1:D3"</span>, reformat = <span class='fl'>FALSE</span>)
 
   <span class='co'># send new value</span>
-  <span class='fu'>range_flood</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"4:5"</span>, <span class='kw'>cell</span> <span class='kw'>=</span> <span class='st'>";-)"</span>)
+  <span class='fu'>range_flood</span>(<span class='kw'>ss</span>, range = <span class='st'>"4:5"</span>, cell = <span class='st'>";-)"</span>)
 
   <span class='co'># send formatting</span>
   <span class='co'># WARNING: use these unexported, internal functions at your own risk!</span>
   <span class='co'># This not (yet) officially supported, but it's possible.</span>
-  <span class='no'>blue_background</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>googlesheets4</span><span class='kw ns'>:::</span><span class='fu'>CellData</span>(
-    <span class='kw'>userEnteredFormat</span> <span class='kw'>=</span> <span class='kw pkg'>googlesheets4</span><span class='kw ns'>:::</span><span class='fu'>new</span>(
+  <span class='kw'>blue_background</span> <span class='op'>&lt;-</span> <span class='kw'>googlesheets4</span>:::<span class='fu'>CellData</span>(
+    userEnteredFormat = <span class='kw'>googlesheets4</span>:::<span class='fu'>new</span>(
       <span class='st'>"CellFormat"</span>,
-      <span class='kw'>backgroundColor</span> <span class='kw'>=</span> <span class='kw pkg'>googlesheets4</span><span class='kw ns'>:::</span><span class='fu'>new</span>(
+      backgroundColor = <span class='kw'>googlesheets4</span>:::<span class='fu'>new</span>(
         <span class='st'>"Color"</span>,
-        <span class='kw'>red</span> <span class='kw'>=</span> <span class='fl'>159</span> / <span class='fl'>255</span>, <span class='kw'>green</span> <span class='kw'>=</span> <span class='fl'>183</span> / <span class='fl'>255</span>, <span class='kw'>blue</span> <span class='kw'>=</span> <span class='fl'>196</span> / <span class='fl'>255</span>
+        red = <span class='fl'>159</span> <span class='op'>/</span> <span class='fl'>255</span>, green = <span class='fl'>183</span> <span class='op'>/</span> <span class='fl'>255</span>, blue = <span class='fl'>196</span> <span class='op'>/</span> <span class='fl'>255</span>
       )
     )
   )
-  <span class='fu'>range_flood</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"I:J"</span>, <span class='kw'>cell</span> <span class='kw'>=</span> <span class='no'>blue_background</span>)
+  <span class='fu'>range_flood</span>(<span class='kw'>ss</span>, range = <span class='st'>"I:J"</span>, cell = <span class='kw'>blue_background</span>)
 
   <span class='co'># range_clear() is a shortcut where `cell = NULL` always</span>
-  <span class='fu'>range_clear</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"9:9"</span>)
-  <span class='fu'>range_clear</span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='st'>"10:10"</span>, <span class='kw'>reformat</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
+  <span class='fu'>range_clear</span>(<span class='kw'>ss</span>, range = <span class='st'>"9:9"</span>)
+  <span class='fu'>range_clear</span>(<span class='kw'>ss</span>, range = <span class='st'>"10:10"</span>, reformat = <span class='fl'>FALSE</span>)
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"range-flood-demo"</span>) <span class='kw'>%&gt;%</span>
-    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div></pre>
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"range-flood-demo"</span>) <span class='op'>%&gt;%</span>
+    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}
+</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Request failed [429]. Retry 1 happens in 100 seconds ...</span></div><div class='output co'>#&gt; <span class='message'>Request failed [429]. Retry 2 happens in 6.2 seconds ...</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-flood-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * range-flood-demo: 1I5bkIFw6mfXxO7c-4V7j7VRO48rzvU9zhXRn3P_nEW0</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

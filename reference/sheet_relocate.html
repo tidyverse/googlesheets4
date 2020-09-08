@@ -213,7 +213,7 @@ result, break it into a sequence of simpler calls to
 <code>sheet_relocate()</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheet_relocate</span>(<span class='no'>ss</span>, <span class='no'>sheet</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span>(<span class='no'>.after</span>)) <span class='fl'>1</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>sheet_relocate</span>(<span class='kw'>ss</span>, <span class='kw'>sheet</span>, .before = <span class='co'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/NULL.html'>is.null</a></span>(<span class='kw'>.after</span>)) <span class='fl'>1</span>, .after = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -259,38 +259,40 @@ specified. Refer to an existing sheet by name (via a string) or by position
 <code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
-  <span class='no'>sheet_names</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alfa"</span>, <span class='st'>"bravo"</span>, <span class='st'>"charlie"</span>, <span class='st'>"delta"</span>, <span class='st'>"echo"</span>, <span class='st'>"foxtrot"</span>)
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"sheet-relocate-demo"</span>, <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='no'>sheet_names</span>)
-  <span class='fu'><a href='sheet_properties.html'>sheet_names</a></span>(<span class='no'>ss</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+  <span class='kw'>sheet_names</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alfa"</span>, <span class='st'>"bravo"</span>, <span class='st'>"charlie"</span>, <span class='st'>"delta"</span>, <span class='st'>"echo"</span>, <span class='st'>"foxtrot"</span>)
+  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"sheet-relocate-demo"</span>, sheets = <span class='kw'>sheet_names</span>)
+  <span class='fu'><a href='sheet_properties.html'>sheet_names</a></span>(<span class='kw'>ss</span>)
 
   <span class='co'># move one sheet, forwards then backwards</span>
-  <span class='no'>ss</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>sheet_relocate</span>(<span class='st'>"echo"</span>, <span class='kw'>.before</span> <span class='kw'>=</span> <span class='st'>"bravo"</span>) <span class='kw'>%&gt;%</span>
+  <span class='kw'>ss</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>sheet_relocate</span>(<span class='st'>"echo"</span>, .before = <span class='st'>"bravo"</span>) <span class='op'>%&gt;%</span>
     <span class='fu'><a href='sheet_properties.html'>sheet_names</a></span>()
-  <span class='no'>ss</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>sheet_relocate</span>(<span class='st'>"echo"</span>, <span class='kw'>.after</span> <span class='kw'>=</span> <span class='st'>"delta"</span>) <span class='kw'>%&gt;%</span>
+  <span class='kw'>ss</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>sheet_relocate</span>(<span class='st'>"echo"</span>, .after = <span class='st'>"delta"</span>) <span class='op'>%&gt;%</span>
     <span class='fu'><a href='sheet_properties.html'>sheet_names</a></span>()
 
   <span class='co'># reorder and move multiple sheets to the front</span>
-  <span class='no'>ss</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>sheet_relocate</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"foxtrot"</span>, <span class='fl'>4</span>)) <span class='kw'>%&gt;%</span>
+  <span class='kw'>ss</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>sheet_relocate</span>(<span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"foxtrot"</span>, <span class='fl'>4</span>)) <span class='op'>%&gt;%</span>
     <span class='fu'><a href='sheet_properties.html'>sheet_names</a></span>()
 
   <span class='co'># put the sheets back in the original order</span>
-  <span class='no'>ss</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>sheet_relocate</span>(<span class='no'>sheet_names</span>) <span class='kw'>%&gt;%</span>
+  <span class='kw'>ss</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>sheet_relocate</span>(<span class='kw'>sheet_names</span>) <span class='op'>%&gt;%</span>
     <span class='fu'><a href='sheet_properties.html'>sheet_names</a></span>()
 
   <span class='co'># reorder and move multiple sheets to the back</span>
-  <span class='no'>ss</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>sheet_relocate</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bravo"</span>, <span class='st'>"alfa"</span>, <span class='st'>"echo"</span>), <span class='kw'>.after</span> <span class='kw'>=</span> <span class='fl'>10</span>) <span class='kw'>%&gt;%</span>
+  <span class='kw'>ss</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>sheet_relocate</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"bravo"</span>, <span class='st'>"alfa"</span>, <span class='st'>"echo"</span>), .after = <span class='fl'>10</span>) <span class='op'>%&gt;%</span>
     <span class='fu'><a href='sheet_properties.html'>sheet_names</a></span>()
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"sheet-relocate-demo"</span>) <span class='kw'>%&gt;%</span>
-    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div></pre>
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"sheet-relocate-demo"</span>) <span class='op'>%&gt;%</span>
+    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}
+</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Relocating sheets in "sheet-relocate-demo"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * sheet-relocate-demo: 1EZ9P9-qE27cTc6kV7W0CqFTiIzIadQZKoFjGjNg3hWs</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

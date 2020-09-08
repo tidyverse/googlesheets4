@@ -193,7 +193,7 @@
     <p>Deletes one or more (work)sheets from a (spread)Sheet.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheet_delete</span>(<span class='no'>ss</span>, <span class='no'>sheet</span>)</pre>
+    <pre class="usage"><span class='fu'>sheet_delete</span>(<span class='kw'>ss</span>, <span class='kw'>sheet</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -232,25 +232,31 @@ is how googledrive represents Drive files. Processed through
 <code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"delete-sheets-from-me"</span>)
-  <span class='fu'><a href='sheet_add.html'>sheet_add</a></span>(<span class='no'>ss</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha"</span>, <span class='st'>"beta"</span>, <span class='st'>"gamma"</span>, <span class='st'>"delta"</span>))
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"delete-sheets-from-me"</span>)
+  <span class='fu'><a href='sheet_add.html'>sheet_add</a></span>(<span class='kw'>ss</span>, <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha"</span>, <span class='st'>"beta"</span>, <span class='st'>"gamma"</span>, <span class='st'>"delta"</span>))
 
   <span class='co'># get an overview of the sheets</span>
-  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='no'>ss</span>)
+  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='kw'>ss</span>)
 
   <span class='co'># delete sheets</span>
-  <span class='fu'>sheet_delete</span>(<span class='no'>ss</span>, <span class='fl'>1</span>)
-  <span class='fu'>sheet_delete</span>(<span class='no'>ss</span>, <span class='st'>"gamma"</span>)
-  <span class='fu'>sheet_delete</span>(<span class='no'>ss</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"alpha"</span>, <span class='fl'>2</span>))
+  <span class='fu'>sheet_delete</span>(<span class='kw'>ss</span>, <span class='fl'>1</span>)
+  <span class='fu'>sheet_delete</span>(<span class='kw'>ss</span>, <span class='st'>"gamma"</span>)
+  <span class='fu'>sheet_delete</span>(<span class='kw'>ss</span>, <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='st'>"alpha"</span>, <span class='fl'>2</span>))
 
   <span class='co'># get an overview of the sheets</span>
-  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='no'>ss</span>)
+  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='kw'>ss</span>)
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"delete-sheets-from-me"</span>) <span class='kw'>%&gt;%</span>
-    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div></pre>
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"delete-sheets-from-me"</span>) <span class='op'>%&gt;%</span>
+    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}
+</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "delete-sheets-from-me"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "delete-sheets-from-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "alpha", "beta", "gamma", "delta"</span></div><div class='output co'>#&gt; <span class='message'>Deleting these sheet(s) from "delete-sheets-from-me":</span>
+#&gt; <span class='message'>* Sheet1</span></div><div class='output co'>#&gt; <span class='message'>Deleting these sheet(s) from "delete-sheets-from-me":</span>
+#&gt; <span class='message'>* gamma</span></div><div class='output co'>#&gt; <span class='message'>Request failed [429]. Retry 1 happens in 100.9 seconds ...</span></div><div class='output co'>#&gt; <span class='message'>Request failed [429]. Retry 2 happens in 2.3 seconds ...</span></div><div class='output co'>#&gt; <span class='message'>Deleting these sheet(s) from "delete-sheets-from-me":</span>
+#&gt; <span class='message'>* alpha</span>
+#&gt; <span class='message'>* beta</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * delete-sheets-from-me: 19Xk9qSrQNVY5wItFs2BokwtZhjRwS32KZzPSdD9D6hQ</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

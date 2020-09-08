@@ -193,7 +193,7 @@
     <p>Changes the name of a (work)sheet.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheet_rename</span>(<span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>new_name</span>)</pre>
+    <pre class="usage"><span class='fu'>sheet_rename</span>(<span class='kw'>ss</span>, sheet = <span class='kw'>NULL</span>, <span class='kw'>new_name</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -236,21 +236,23 @@ is how googledrive represents Drive files. Processed through
 <code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(
     <span class='st'>"sheet-rename-demo"</span>,
-    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>iris</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>iris</span>), <span class='kw'>chickwts</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='no'>chickwts</span>))
+    sheets = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(iris = <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>iris</span>), chickwts = <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span>(<span class='kw'>chickwts</span>))
   )
-  <span class='fu'><a href='sheet_properties.html'>sheet_names</a></span>(<span class='no'>ss</span>)
+  <span class='fu'><a href='sheet_properties.html'>sheet_names</a></span>(<span class='kw'>ss</span>)
 
-  <span class='no'>ss</span> <span class='kw'>%&gt;%</span>
-    <span class='fu'>sheet_rename</span>(<span class='fl'>1</span>, <span class='kw'>new_name</span> <span class='kw'>=</span> <span class='st'>"flowers"</span>) <span class='kw'>%&gt;%</span>
-    <span class='fu'>sheet_rename</span>(<span class='st'>"chickwts"</span>, <span class='kw'>new_name</span> <span class='kw'>=</span> <span class='st'>"poultry"</span>)
+  <span class='kw'>ss</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>sheet_rename</span>(<span class='fl'>1</span>, new_name = <span class='st'>"flowers"</span>) <span class='op'>%&gt;%</span>
+    <span class='fu'>sheet_rename</span>(<span class='st'>"chickwts"</span>, new_name = <span class='st'>"poultry"</span>)
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"sheet-rename-demo"</span>) <span class='kw'>%&gt;%</span>
-    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div></pre>
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"sheet-rename-demo"</span>) <span class='op'>%&gt;%</span>
+    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}
+</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-rename-demo"</span></div><div class='output co'>#&gt; <span class='message'>Renaming sheet "iris" to "flowers"</span></div><div class='output co'>#&gt; <span class='message'>Renaming sheet "chickwts" to "poultry"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * sheet-rename-demo: 1yngk9he9niNtQXO75S_aKNzYq-Zh1OZsvKDsCphG5pU</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

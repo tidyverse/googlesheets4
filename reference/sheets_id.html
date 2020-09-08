@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><code>sheets_id</code> object — sheets_id • googlesheets4</title>
+<title>sheets_id object — sheets_id • googlesheets4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,7 +49,7 @@
 
 
 
-<meta property="og:title" content="<code>sheets_id</code> object — sheets_id" />
+<meta property="og:title" content="sheets_id object — sheets_id" />
 <meta property="og:description" content="A sheets_id is a spreadsheet identifier, i.e. a string. This
 is what the Sheets and Drive APIs refer to as spreadsheetId and fileId,
 respectively. When you print a sheets_id, we attempt to reveal its
@@ -224,9 +224,21 @@ browser.</p>
     <div class='dont-index'><p><code><a href='as_sheets_id.html'>as_sheets_id()</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
   <span class='fu'><a href='gs4_example.html'>gs4_example</a></span>(<span class='st'>"mini-gap"</span>)
-}</div></pre>
+}
+</div><div class='output co'>#&gt; Spreadsheet name: mini-gap
+#&gt;               ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
+#&gt;           Locale: en_US
+#&gt;        Time zone: America/Los_Angeles
+#&gt;      # of sheets: 5
+#&gt; 
+#&gt; (Sheet name): (Nominal extent in rows x columns)
+#&gt;       Africa: 6 x 6
+#&gt;     Americas: 6 x 6
+#&gt;         Asia: 6 x 6
+#&gt;       Europe: 6 x 6
+#&gt;      Oceania: 6 x 6</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

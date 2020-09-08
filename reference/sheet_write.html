@@ -255,9 +255,9 @@ had <code>sheets_write()</code>. It still works, but it's deprecated and will go
 rather swiftly.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheet_write</span>(<span class='no'>data</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>sheet_write</span>(<span class='kw'>data</span>, ss = <span class='kw'>NULL</span>, sheet = <span class='kw'>NULL</span>)
 
-<span class='fu'>write_sheet</span>(<span class='no'>data</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>write_sheet</span>(<span class='kw'>data</span>, ss = <span class='kw'>NULL</span>, sheet = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -306,41 +306,44 @@ is how googledrive represents Drive files. Processed through
 <code><a href='sheet_resize.html'>sheet_resize</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
-  <span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-    <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>,
-    <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>3</span>]
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+  <span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+    x = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
+    y = <span class='kw'>letters</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>]
   )
 
   <span class='co'># specify only a data frame, get a new Sheet, with a random name</span>
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'>write_sheet</span>(<span class='no'>df</span>)
-  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='no'>ss</span>)
+  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'>write_sheet</span>(<span class='kw'>df</span>)
+  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>)
 
   <span class='co'># clean up</span>
-  <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>(<span class='no'>ss</span>)
+  <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>(<span class='kw'>ss</span>)
 
   <span class='co'># create a Sheet with some initial, placeholder data</span>
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(
+  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(
     <span class='st'>"sheet-write-demo"</span>,
-    <span class='kw'>sheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>), <span class='kw'>omega</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>))
+    sheets = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(alpha = <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(x = <span class='fl'>1</span>), omega = <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(x = <span class='fl'>1</span>))
   )
 
   <span class='co'># write df into its own, new sheet</span>
-  <span class='fu'>sheet_write</span>(<span class='no'>df</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>)
+  <span class='fu'>sheet_write</span>(<span class='kw'>df</span>, ss = <span class='kw'>ss</span>)
 
   <span class='co'># write mtcars into the sheet named "omega"</span>
-  <span class='fu'>sheet_write</span>(<span class='no'>mtcars</span>, <span class='kw'>ss</span> <span class='kw'>=</span> <span class='no'>ss</span>, <span class='kw'>sheet</span> <span class='kw'>=</span> <span class='st'>"omega"</span>)
+  <span class='fu'>sheet_write</span>(<span class='kw'>mtcars</span>, ss = <span class='kw'>ss</span>, sheet = <span class='st'>"omega"</span>)
 
   <span class='co'># get an overview of the sheets</span>
-  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='no'>ss</span>)
+  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='kw'>ss</span>)
 
   <span class='co'># view your magnificent creation in the browser</span>
-  <span class='fu'><a href='gs4_browse.html'>gs4_browse</a></span>(<span class='no'>ss</span>)
+  <span class='fu'><a href='gs4_browse.html'>gs4_browse</a></span>(<span class='kw'>ss</span>)
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"sheet-write-demo"</span>) <span class='kw'>%&gt;%</span>
-    <span class='kw pkg'>googledrive</span><span class='kw ns'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}</div></pre>
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"sheet-write-demo"</span>) <span class='op'>%&gt;%</span>
+    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
+}
+</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "fragrant-huia"</span></div><div class='output co'>#&gt; <span class='message'>Reading from "fragrant-huia"</span></div><div class='output co'>#&gt; <span class='message'>Range "df"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * fragrant-huia: 1BzS-xU_RrhRyyUfBLAlc8wCh5iJpt1Uz29Wn3EUkMyU</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to "sheet-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "df"</span></div><div class='output co'>#&gt; <span class='message'>Writing to "sheet-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "omega"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * sheet-write-demo: 1O3G0k6Gl9UaCltRPhJbbRNpRnbVqYDfSPfv_fLaPNGA</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

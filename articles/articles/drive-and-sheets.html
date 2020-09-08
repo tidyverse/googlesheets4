@@ -172,32 +172,40 @@
 <li>Tell googlesheets4 to use the same token as googledrive.</li>
 </ul>
 <p>First attach both packages.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googledrive</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googlesheets4</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://googledrive.tidyverse.org">googledrive</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span>)
+</pre></div>
 <p>Do auth first with googledrive. Remember <code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">googledrive::drive_auth()</a></code> accepts additional arguments, e.g. to specify a Google identity via <code>email =</code> or to use a service account via <code>path =</code>. Then direct googlesheets4 to use the same token as googledrive.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">drive_auth</a></span>()
-<span class="fu"><a href="../../reference/gs4_auth.html">gs4_auth</a></span>(<span class="kw">token</span> <span class="kw">=</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_token.html">drive_token</a></span>())</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">drive_auth</a></span>()
+<span class="fu"><a href="../../reference/gs4_auth.html">gs4_auth</a></span>(token = <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_token.html">drive_token</a></span>())
+</pre></div>
 <p>Now you can use googledrive functions, like <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> or <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">googledrive::drive_get()</a></code>, to list files or find them by name, path, or other property. Then, once you’ve identified the target file, use googlesheets4 to do spreadsheet-specific tasks.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="st">"chicken"</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="st">"chicken"</span>)
 <span class="co">#&gt; # A tibble: 0 x 3</span>
 <span class="co">#&gt; # … with 3 variables: name &lt;chr&gt;, id &lt;chr&gt;, drive_resource &lt;list&gt;</span>
 
-<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"chicken-sheet"</span>)
+<span class="kw">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"chicken-sheet"</span>)
 
-<span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span>(<span class="no">ss</span>)
+<span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span>(<span class="kw">ss</span>)
 <span class="co">#&gt; Error: Dribble input must have exactly 1 row.</span>
 <span class="co">#&gt; * Actual input has 0 rows.</span>
 
-<span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ss</span>)
+<span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="kw">ss</span>)
 <span class="co">#&gt; Error: Dribble input must have exactly 1 row.</span>
-<span class="co">#&gt; * Actual input has 0 rows.</span></pre></body></html></div>
+<span class="co">#&gt; * Actual input has 0 rows.</span>
+</pre></div>
 <p>If you ever want to confirm the currently authenticated user, both packages provide a <code>*_user()</code> function that reveals some info:</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_user.html">drive_user</a></span>()
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_user.html">drive_user</a></span>()
 <span class="co">#&gt; Logged in as:</span>
 <span class="co">#&gt;   *  displayName: googlesheets4-dev-docs@robust-fin-276504.iam.gserviceaccount.com</span>
 <span class="co">#&gt;   * emailAddress: googlesheets4-dev-docs@robust-fin-276504.iam.gserviceaccount.com</span>
 <span class="fu"><a href="../../reference/gs4_user.html">gs4_user</a></span>()
-<span class="co">#&gt; [1] "googlesheets4-dev-docs@robust-fin-276504.iam.gserviceaccount.com"</span></pre></body></html></div>
+<span class="co">#&gt; [1] "googlesheets4-dev-docs@robust-fin-276504.iam.gserviceaccount.com"</span>
+</pre></div>
 <p>We are using a service account to render this article. But if you’ve used the default OAuth flow, this should correspond to the email of the Google account you logged in with.</p>
 </div>
 <div id="auth-with-googlesheets4-first-then-googledrive" class="section level2">
@@ -209,25 +217,31 @@
 <li>Tell googledrive to use the same token as googlesheets4.</li>
 </ul>
 <p>First attach both packages.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googlesheets4</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">googledrive</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://googledrive.tidyverse.org">googledrive</a></span>)
+</pre></div>
 <p>Do auth first with googlesheets4, specifying a Drive scope. Remember <code><a href="../../reference/gs4_auth.html">gs4_auth()</a></code> accepts additional arguments, e.g. to specify a Google identity via <code>email =</code> or to use a service account via <code>path =</code>. Then direct googledrive to use the same token as googlesheets4.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../../reference/gs4_auth.html">gs4_auth</a></span>(<span class="kw">scope</span> <span class="kw">=</span> <span class="st">"https://www.googleapis.com/auth/drive"</span>)
-<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">drive_auth</a></span>(<span class="kw">token</span> <span class="kw">=</span> <span class="fu"><a href="../../reference/gs4_token.html">gs4_token</a></span>())</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="../../reference/gs4_auth.html">gs4_auth</a></span>(scope = <span class="st">"https://www.googleapis.com/auth/drive"</span>)
+<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">drive_auth</a></span>(token = <span class="fu"><a href="../../reference/gs4_token.html">gs4_token</a></span>())
+</pre></div>
 <p>Now you can use googledrive functions to list files or find them by name, path, or other property. Then, once you’ve identified the target file, use googlesheets4 to do spreadsheet-specific tasks.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="st">"chicken"</span>)
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span>(<span class="st">"chicken"</span>)
 <span class="co">#&gt; # A tibble: 0 x 3</span>
 <span class="co">#&gt; # … with 3 variables: name &lt;chr&gt;, id &lt;chr&gt;, drive_resource &lt;list&gt;</span>
 
-<span class="no">ss</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"chicken-sheet"</span>)
+<span class="kw">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span>(<span class="st">"chicken-sheet"</span>)
 
-<span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span>(<span class="no">ss</span>)
+<span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span>(<span class="kw">ss</span>)
 <span class="co">#&gt; Error: Dribble input must have exactly 1 row.</span>
 <span class="co">#&gt; * Actual input has 0 rows.</span>
 
-<span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="no">ss</span>)
+<span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span>(<span class="kw">ss</span>)
 <span class="co">#&gt; Error: Dribble input must have exactly 1 row.</span>
-<span class="co">#&gt; * Actual input has 0 rows.</span></pre></body></html></div>
+<span class="co">#&gt; * Actual input has 0 rows.</span>
+</pre></div>
 </div>
 <div id="scope-savvy" class="section level2">
 <h2 class="hasAnchor">
@@ -235,32 +249,40 @@
 <p>If you only need “read” access to Drive or Sheets, the conservative thing to do is to specify a read-only scope. This is a great way to limit the damage anyone can do with the token – you or someone else – through carelessness or malice. If you are storing a token on a remote or shared location, it is wise to use the most conservative scope that still gets the job done.</p>
 <p>Here are various scopes relevant to googledrive and googlesheets4 and what they would allow.</p>
 <p><code>drive</code> scope allows reading and writing with Drive and Sheets APIs. This scope is the most powerful and, therefore, the most dangerous.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu">PACKAGE_auth</span>(
-  <span class="no">...</span>,
-  <span class="kw">scopes</span> <span class="kw">=</span> <span class="st">"https://www.googleapis.com/auth/drive"</span>,
-  <span class="no">...</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="fu">PACKAGE_auth</span>(
+  <span class="kw">...</span>,
+  scopes = <span class="st">"https://www.googleapis.com/auth/drive"</span>,
+  <span class="kw">...</span>
+)
+</pre></div>
 <p><code>drive.readonly</code> still allows file identification via Drive and can be combined with <code>spreadsheets</code> if you plan to edit, create, or delete Sheets.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu">PACKAGE_auth</span>(
-  <span class="no">...</span>,
-  <span class="kw">scopes</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="fu">PACKAGE_auth</span>(
+  <span class="kw">...</span>,
+  scopes = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(
     <span class="st">"https://www.googleapis.com/auth/drive.readonly"</span>,
     <span class="st">"https://www.googleapis.com/auth/spreadsheets"</span>
   ),
-  <span class="no">...</span>
-)</pre></body></html></div>
+  <span class="kw">...</span>
+)
+</pre></div>
 <p>If you are just using Drive to identify Sheets and are only reading from those Sheets, the <code>drive.readonly</code> scope is sufficient and means you can’t modify anything by accident.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu">PACKAGE_auth</span>(
-  <span class="no">...</span>,
-  <span class="kw">scopes</span> <span class="kw">=</span> <span class="st">"https://www.googleapis.com/auth/drive.readonly"</span>,
-  <span class="no">...</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu">PACKAGE_auth</span>(
+  <span class="kw">...</span>,
+  scopes = <span class="st">"https://www.googleapis.com/auth/drive.readonly"</span>,
+  <span class="kw">...</span>
+)
+</pre></div>
 <p>If you are not using Drive at all, i.e. you always identify Sheets by file ID, and you are only reading from those Sheets, you only need googlesheets4 and <code>spreadsheets.readonly</code> is sufficient.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../../reference/gs4_auth.html">gs4_auth</a></span>(
-  <span class="no">...</span>,
-  <span class="kw">scopes</span> <span class="kw">=</span> <span class="st">"https://www.googleapis.com/auth/spreadsheets.readonly"</span>,
-  <span class="no">...</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="fu"><a href="../../reference/gs4_auth.html">gs4_auth</a></span>(
+  <span class="kw">...</span>,
+  scopes = <span class="st">"https://www.googleapis.com/auth/spreadsheets.readonly"</span>,
+  <span class="kw">...</span>
+)
+</pre></div>
 </div>
   </div>
 

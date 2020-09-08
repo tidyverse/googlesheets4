@@ -233,7 +233,7 @@ this is an object of class <code>googlesheets4_spreadsheet</code>.</p></li>
 <p>This is a generic function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_sheets_id</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>as_sheets_id</span>(<span class='kw'>x</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -252,19 +252,17 @@ a <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>drive_i
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>as_sheets_id</span>(<span class='st'>"abc"</span>)</div><div class='output co'>#&gt; Spreadsheet name: &lt;unknown&gt;
+    <pre class="examples"><div class='input'><span class='fu'>as_sheets_id</span>(<span class='st'>"abc"</span>)
+</div><div class='output co'>#&gt; Spreadsheet name: &lt;unknown&gt;
 #&gt;               ID: abc
 #&gt;           Locale: &lt;unknown&gt;
 #&gt;        Time zone: &lt;unknown&gt;
 #&gt;      # of sheets: &lt;unknown&gt;
 #&gt; 
 #&gt; Unable to get metadata for this Sheet. Error details:
-#&gt; Can't get Google credentials.
-#&gt; Are you running googlesheets4 in a non-interactive session? Consider:
-#&gt;   * `gs4_deauth()` to prevent the attempt to get credentials.
-#&gt;   * Call `gs4_auth()` directly with all necessary specifics.
-#&gt; See gargle's "Non-interactive auth" vignette for more details:
-#&gt; https://gargle.r-lib.org/articles/non-interactive-auth.html</div></pre>
+#&gt; Client error: (404) NOT_FOUND
+#&gt;   * A specified resource is not found, or the request is rejected by undisclosed reasons, such as whitelisting.
+#&gt;   * Requested entity was not found.</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

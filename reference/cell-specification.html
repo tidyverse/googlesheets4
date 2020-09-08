@@ -215,25 +215,26 @@ with some bounds that are specified and others determined by the data.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>() <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
-  <span class='no'>ss</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='gs4_example.html'>gs4_example</a></span>(<span class='st'>"mini-gap"</span>)
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>() <span class='op'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_example.html'>gs4_example</a></span>(<span class='st'>"mini-gap"</span>)
 
   <span class='co'># Specify only the rows or only the columns</span>
-  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fl'>1</span>:<span class='fl'>3</span>))
-  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='st'>"C:D"</span>))
-  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fl'>1</span>))
+  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>, range = <span class='fu'>cell_rows</span>(<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>))
+  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>, range = <span class='fu'>cell_cols</span>(<span class='st'>"C:D"</span>))
+  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>, range = <span class='fu'>cell_cols</span>(<span class='fl'>1</span>))
 
   <span class='co'># Specify upper or lower bound on row or column</span>
-  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
-  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"D"</span>)))
-  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_rows</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>NA</span>)))
-  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>NA</span>)))
-  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"C"</span>, <span class='fl'>NA</span>)))
+  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>, range = <span class='fu'>cell_rows</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
+  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>, range = <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='st'>"D"</span>)))
+  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>, range = <span class='fu'>cell_rows</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>NA</span>)))
+  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>, range = <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>NA</span>)))
+  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>, range = <span class='fu'>cell_cols</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"C"</span>, <span class='fl'>NA</span>)))
 
   <span class='co'># Specify a partially open rectangle</span>
-  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_limits</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>NA</span>)), <span class='kw'>col_names</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='no'>ss</span>, <span class='kw'>range</span> <span class='kw'>=</span> <span class='fu'>cell_limits</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
-}</div></pre>
+  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>, range = <span class='fu'>cell_limits</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>3</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>NA</span>)), col_names = <span class='fl'>FALSE</span>)
+  <span class='fu'><a href='range_read.html'>read_sheet</a></span>(<span class='kw'>ss</span>, range = <span class='fu'>cell_limits</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>), <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>NA</span>, <span class='fl'>4</span>)))
+}
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

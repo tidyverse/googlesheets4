@@ -221,14 +221,27 @@ returns <code>NULL</code>.</p>
 <code><a href='request_make.html'>request_make</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
-  <span class='no'>req</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='request_generate.html'>request_generate</a></span>(
+    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+  <span class='kw'>req</span> <span class='op'>&lt;-</span> <span class='fu'><a href='request_generate.html'>request_generate</a></span>(
     <span class='st'>"sheets.spreadsheets.get"</span>,
-    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>spreadsheetId</span> <span class='kw'>=</span> <span class='st'>"abc"</span>),
-    <span class='kw'>token</span> <span class='kw'>=</span> <span class='fu'>gs4_token</span>()
+    <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(spreadsheetId = <span class='st'>"abc"</span>),
+    token = <span class='fu'>gs4_token</span>()
   )
-  <span class='no'>req</span>
-}</div></pre>
+  <span class='kw'>req</span>
+}
+</div><div class='output co'>#&gt; $method
+#&gt; [1] "GET"
+#&gt; 
+#&gt; $url
+#&gt; [1] "https://sheets.googleapis.com/v4/spreadsheets/abc"
+#&gt; 
+#&gt; $body
+#&gt; named list()
+#&gt; 
+#&gt; $token
+#&gt; &lt;request&gt;
+#&gt; Auth token: TokenServiceAccount
+#&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

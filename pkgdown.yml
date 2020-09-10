@@ -2,7 +2,7 @@ pandoc: 2.7.3
 pkgdown: 1.6.0
 pkgdown_sha: ~
 articles: []
-last_built: 2020-09-09T12:14Z
+last_built: 2020-09-10T12:14Z
 urls:
   reference: https://googlesheets4.tidyverse.org/reference
   article: https://googlesheets4.tidyverse.org/articles

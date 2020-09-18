@@ -286,10 +286,10 @@
 <span class="kw">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(x = <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y = <span class="kw">letters</span>[<span class="fl">1</span><span class="op">:</span><span class="fl">3</span>])
 
 <span class="kw">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span>(<span class="kw">df</span>)
-<span class="co">#&gt; Creating new Sheet: "fadable-cowrie"</span>
+<span class="co">#&gt; Creating new Sheet: "albino-booby"</span>
 <span class="kw">ss</span>
-<span class="co">#&gt; Spreadsheet name: fadable-cowrie</span>
-<span class="co">#&gt;               ID: 1JLYWA-2oMGWNzGMpFEWfrX3Dl-mVYCKwAWutRDUOddM</span>
+<span class="co">#&gt; Spreadsheet name: albino-booby</span>
+<span class="co">#&gt;               ID: 1QB3VcZg9MbbO2MIBJ9XRgmeRBmILN42_XX8ud6xblws</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -302,13 +302,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="kw">googledrive</span>::<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>(<span class="kw">ss</span>)
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * fadable-cowrie: 1JLYWA-2oMGWNzGMpFEWfrX3Dl-mVYCKwAWutRDUOddM</span>
+<span class="co">#&gt;   * albino-booby: 1QB3VcZg9MbbO2MIBJ9XRgmeRBmILN42_XX8ud6xblws</span>
 
 <span class="kw">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span>(<span class="st">"testy-hedgehog"</span>, sheets = <span class="kw">df</span>)
 <span class="co">#&gt; Creating new Sheet: "testy-hedgehog"</span>
 <span class="kw">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1mTWQUFpN8SMH7WLFd8JIDb-Zq0zduPKef20Lbcu_Iqc</span>
+<span class="co">#&gt;               ID: 1upEKYkNT2LPhvN66puG5d4DxikEy_RrALpp4Tnm5I-8</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -323,7 +323,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="kw">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1mTWQUFpN8SMH7WLFd8JIDb-Zq0zduPKef20Lbcu_Iqc</span>
+<span class="co">#&gt;               ID: 1upEKYkNT2LPhvN66puG5d4DxikEy_RrALpp4Tnm5I-8</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -376,12 +376,12 @@
 <span class="co">#&gt; # A tibble: 2 x 8</span>
 <span class="co">#&gt;   name     index        id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 767029881 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 915586742 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 1 df           0  38170975 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 912555960 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="kw">googledrive</span>::<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span>(<span class="kw">ss</span>)
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * testy-hedgehog: 1mTWQUFpN8SMH7WLFd8JIDb-Zq0zduPKef20Lbcu_Iqc</span>
+<span class="co">#&gt;   * testy-hedgehog: 1upEKYkNT2LPhvN66puG5d4DxikEy_RrALpp4Tnm5I-8</span>
 </pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>

@@ -203,7 +203,7 @@ associated HTTP <code>method</code>, the <code>path</code>, and details about th
 list is derived programmatically from the <a href='https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest'>Sheets API v4 Discovery Document</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gs4_endpoints</span>(i = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>gs4_endpoints</span><span class='op'>(</span>i <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -221,7 +221,7 @@ Optional. By default, the entire list is returned.</p></td>
 endpoints that are used internally by googlesheets4.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'>gs4_endpoints</span>(), max.level = <span class='fl'>2</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='fu'>gs4_endpoints</span><span class='op'>(</span><span class='op'>)</span>, max.level <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; List of 17
 #&gt;  $ sheets.spreadsheets.getByDataFilter               :List of 9
 #&gt;   ..$ id            : chr "sheets.spreadsheets.getByDataFilter"
@@ -388,7 +388,7 @@ endpoints that are used internally by googlesheets4.</p>
 #&gt;   ..$ description   : chr "Clears values from a spreadsheet. The caller must specify the spreadsheet ID and range. Only values are cleared"| __truncated__
 #&gt;   ..$ request       : chr "ClearValuesRequest"
 #&gt;   ..$ response      : chr "ClearValuesResponse"
-#&gt;   ..$ parameterOrder: chr [1:2] "spreadsheetId" "range"</div><div class='input'><span class='fu'>gs4_endpoints</span>(<span class='st'>"sheets.spreadsheets.values.get"</span>)
+#&gt;   ..$ parameterOrder: chr [1:2] "spreadsheetId" "range"</div><div class='input'><span class='fu'>gs4_endpoints</span><span class='op'>(</span><span class='st'>"sheets.spreadsheets.values.get"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $sheets.spreadsheets.values.get
 #&gt; $sheets.spreadsheets.values.get$id
 #&gt; [1] "sheets.spreadsheets.values.get"
@@ -637,7 +637,7 @@ endpoints that are used internally by googlesheets4.</p>
 #&gt; $sheets.spreadsheets.values.get$parameterOrder
 #&gt; [1] "spreadsheetId" "range"        
 #&gt; 
-#&gt; </div><div class='input'><span class='fu'>gs4_endpoints</span>(<span class='fl'>4</span>)
+#&gt; </div><div class='input'><span class='fu'>gs4_endpoints</span><span class='op'>(</span><span class='fl'>4</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $sheets.spreadsheets.batchUpdate
 #&gt; $sheets.spreadsheets.batchUpdate$id
 #&gt; [1] "sheets.spreadsheets.batchUpdate"

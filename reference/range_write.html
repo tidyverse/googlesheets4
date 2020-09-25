@@ -229,14 +229,14 @@ However, the sheet might gain rows and/or columns, in order to write
 want is <code><a href='sheet_append.html'>sheet_append()</a></code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>range_write</span>(
-  <span class='kw'>ss</span>,
-  <span class='kw'>data</span>,
-  sheet = <span class='kw'>NULL</span>,
-  range = <span class='kw'>NULL</span>,
-  col_names = <span class='fl'>TRUE</span>,
-  reformat = <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>range_write</span><span class='op'>(</span>
+  <span class='va'>ss</span>,
+  <span class='va'>data</span>,
+  sheet <span class='op'>=</span> <span class='cn'>NULL</span>,
+  range <span class='op'>=</span> <span class='cn'>NULL</span>,
+  col_names <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  reformat <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -328,41 +328,41 @@ and format are deleted.</p></li>
 <code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='co'># create a Sheet with some initial, empty (work)sheets</span>
-  (<span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"range-write-demo"</span>, sheets = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"alpha"</span>, <span class='st'>"beta"</span>)))
+  <span class='op'>(</span><span class='va'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span><span class='op'>(</span><span class='st'>"range-write-demo"</span>, sheets <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"alpha"</span>, <span class='st'>"beta"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
 
-  <span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-    x = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
-    y = <span class='kw'>letters</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>]
-  )
+  <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>
+    x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>,
+    y <span class='op'>=</span> <span class='va'>letters</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span><span class='op'>]</span>
+  <span class='op'>)</span>
 
   <span class='co'>#  write df somewhere other than the "upper left corner"</span>
-  <span class='fu'>range_write</span>(<span class='kw'>ss</span>, data = <span class='kw'>df</span>, range = <span class='st'>"D6"</span>)
+  <span class='fu'>range_write</span><span class='op'>(</span><span class='va'>ss</span>, data <span class='op'>=</span> <span class='va'>df</span>, range <span class='op'>=</span> <span class='st'>"D6"</span><span class='op'>)</span>
 
   <span class='co'># view your magnificent creation in the browser</span>
-  <span class='fu'><a href='gs4_browse.html'>gs4_browse</a></span>(<span class='kw'>ss</span>)
+  <span class='fu'><a href='gs4_browse.html'>gs4_browse</a></span><span class='op'>(</span><span class='va'>ss</span><span class='op'>)</span>
 
   <span class='co'># send data of disparate types to a 1-row rectangle</span>
-  <span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='kw'>tibble</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
-    string = <span class='st'>"string"</span>,
-    logical = <span class='fl'>TRUE</span>,
-    datetime = <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>()
-  )
-  <span class='fu'>range_write</span>(<span class='kw'>ss</span>, data = <span class='kw'>dat</span>, sheet = <span class='st'>"beta"</span>, col_names = <span class='fl'>FALSE</span>)
+  <span class='va'>dat</span> <span class='op'>&lt;-</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>
+    string <span class='op'>=</span> <span class='st'>"string"</span>,
+    logical <span class='op'>=</span> <span class='cn'>TRUE</span>,
+    datetime <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>
+  <span class='op'>)</span>
+  <span class='fu'>range_write</span><span class='op'>(</span><span class='va'>ss</span>, data <span class='op'>=</span> <span class='va'>dat</span>, sheet <span class='op'>=</span> <span class='st'>"beta"</span>, col_names <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
   <span class='co'># send data of disparate types to a 1-column rectangle</span>
-  <span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='kw'>tibble</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
-    x = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span>(), <span class='fl'>FALSE</span>, <span class='st'>"string"</span>)
-  )
-  <span class='fu'>range_write</span>(<span class='kw'>ss</span>, data = <span class='kw'>dat</span>, range = <span class='st'>"beta!C5"</span>, col_names = <span class='fl'>FALSE</span>)
+  <span class='va'>dat</span> <span class='op'>&lt;-</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>
+    x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.time</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='cn'>FALSE</span>, <span class='st'>"string"</span><span class='op'>)</span>
+  <span class='op'>)</span>
+  <span class='fu'>range_write</span><span class='op'>(</span><span class='va'>ss</span>, data <span class='op'>=</span> <span class='va'>dat</span>, range <span class='op'>=</span> <span class='st'>"beta!C5"</span>, col_names <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"range-write-demo"</span>) <span class='op'>%&gt;%</span>
-    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}
-</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "alpha"</span></div><div class='output co'>#&gt; <span class='message'>Request failed [429]. Retry 1 happens in 100.5 seconds ...</span></div><div class='output co'>#&gt; <span class='message'>Request failed [429]. Retry 2 happens in 3.9 seconds ...</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "beta"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "beta"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * range-write-demo: 1WVIll4EaqLq5EccZFkxqx_JHPAYxtp3U6oEmLLy03XA</span></div></pre>
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span><span class='op'>(</span><span class='st'>"range-write-demo"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>googledrive</span><span class='fu'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "alpha"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "beta"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-write-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to sheet "beta"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * range-write-demo: 1XM3RdZcK1k0MBoVjhkPpMeWADXSMsX0zvhuCGzP6gSc</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

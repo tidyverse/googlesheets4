@@ -205,7 +205,7 @@ are several related tasks that are implemented by other functions:</p><ul>
 
     </div>
 
-    <pre class="usage"><span class='fu'>range_delete</span>(<span class='kw'>ss</span>, sheet = <span class='kw'>NULL</span>, <span class='kw'>range</span>, shift = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>range_delete</span><span class='op'>(</span><span class='va'>ss</span>, sheet <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>range</span>, shift <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -262,28 +262,28 @@ surrounding cells up or to the left.</p></td>
 <code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='co'># create a data frame to use as initial data</span>
-  <span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_fodder.html'>gs4_fodder</a></span>(<span class='fl'>10</span>)
+  <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_fodder.html'>gs4_fodder</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
 
   <span class='co'># create Sheet</span>
-  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"range-delete-example"</span>, sheets = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>df</span>))
+  <span class='va'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span><span class='op'>(</span><span class='st'>"range-delete-example"</span>, sheets <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span><span class='op'>)</span>
 
   <span class='co'># delete some rows</span>
-  <span class='fu'>range_delete</span>(<span class='kw'>ss</span>, range = <span class='st'>"2:4"</span>)
+  <span class='fu'>range_delete</span><span class='op'>(</span><span class='va'>ss</span>, range <span class='op'>=</span> <span class='st'>"2:4"</span><span class='op'>)</span>
 
   <span class='co'># delete a column</span>
-  <span class='fu'>range_delete</span>(<span class='kw'>ss</span>, range = <span class='st'>"C"</span>)
+  <span class='fu'>range_delete</span><span class='op'>(</span><span class='va'>ss</span>, range <span class='op'>=</span> <span class='st'>"C"</span><span class='op'>)</span>
 
   <span class='co'># delete a rectangle and specify how to shift remaining cells</span>
-  <span class='fu'>range_delete</span>(<span class='kw'>ss</span>, range = <span class='st'>"B3:F4"</span>, shift = <span class='st'>"left"</span>)
+  <span class='fu'>range_delete</span><span class='op'>(</span><span class='va'>ss</span>, range <span class='op'>=</span> <span class='st'>"B3:F4"</span>, shift <span class='op'>=</span> <span class='st'>"left"</span><span class='op'>)</span>
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"range-delete-example"</span>) <span class='op'>%&gt;%</span>
-    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span><span class='op'>(</span><span class='st'>"range-delete-example"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>googledrive</span><span class='fu'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "range-delete-example"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-delete-example"</span></div><div class='output co'>#&gt; <span class='message'>Deleting cells in sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-delete-example"</span></div><div class='output co'>#&gt; <span class='message'>Deleting cells in sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-delete-example"</span></div><div class='output co'>#&gt; <span class='message'>Deleting cells in sheet "Sheet1"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * range-delete-example: 1YyAND5Zddy1gUIDgxgw96h936gwm-97BoPPx6hLzg8k</span></div></pre>
+#&gt; <span class='message'>  * range-delete-example: 1VvldZyon272fONnbXbQKlCR-GpLGKoD6lj_94vyok1A</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

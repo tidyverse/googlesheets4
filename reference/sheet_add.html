@@ -195,7 +195,7 @@ names must be unique." />
 names must be unique.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheet_add</span>(<span class='kw'>ss</span>, sheet = <span class='kw'>NULL</span>, <span class='kw'>...</span>, .before = <span class='kw'>NULL</span>, .after = <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>sheet_add</span><span class='op'>(</span><span class='va'>ss</span>, sheet <span class='op'>=</span> <span class='cn'>NULL</span>, <span class='va'>...</span>, .before <span class='op'>=</span> <span class='cn'>NULL</span>, .after <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -246,38 +246,38 @@ in <code>name = value</code> form.</p></td>
 <code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
-  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"add-sheets-to-me"</span>)
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span><span class='op'>(</span><span class='st'>"add-sheets-to-me"</span><span class='op'>)</span>
 
   <span class='co'># the only required argument is the target spreadsheet</span>
-  <span class='kw'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'>sheet_add</span>()
+  <span class='va'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'>sheet_add</span><span class='op'>(</span><span class='op'>)</span>
 
   <span class='co'># but you CAN specify sheet name and/or position</span>
-  <span class='kw'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'>sheet_add</span>(<span class='st'>"apple"</span>, .after = <span class='fl'>1</span>)
-  <span class='kw'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'>sheet_add</span>(<span class='st'>"banana"</span>, .after = <span class='st'>"apple"</span>)
+  <span class='va'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'>sheet_add</span><span class='op'>(</span><span class='st'>"apple"</span>, .after <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
+  <span class='va'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'>sheet_add</span><span class='op'>(</span><span class='st'>"banana"</span>, .after <span class='op'>=</span> <span class='st'>"apple"</span><span class='op'>)</span>
 
   <span class='co'># add multiple sheets at once</span>
-  <span class='kw'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'>sheet_add</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"coconut"</span>, <span class='st'>"dragonfruit"</span>))
+  <span class='va'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'>sheet_add</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"coconut"</span>, <span class='st'>"dragonfruit"</span><span class='op'>)</span><span class='op'>)</span>
 
   <span class='co'># keeners can even specify additional sheet properties</span>
-  <span class='kw'>ss</span> <span class='op'>%&gt;%</span>
-    <span class='fu'>sheet_add</span>(
-      sheet = <span class='st'>"eggplant"</span>,
-      .before = <span class='fl'>1</span>,
-      gridProperties = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(
-        rowCount = <span class='fl'>3</span>, columnCount = <span class='fl'>6</span>, frozenRowCount = <span class='fl'>1</span>
-      )
-    )
+  <span class='va'>ss</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>sheet_add</span><span class='op'>(</span>
+      sheet <span class='op'>=</span> <span class='st'>"eggplant"</span>,
+      .before <span class='op'>=</span> <span class='fl'>1</span>,
+      gridProperties <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>
+        rowCount <span class='op'>=</span> <span class='fl'>3</span>, columnCount <span class='op'>=</span> <span class='fl'>6</span>, frozenRowCount <span class='op'>=</span> <span class='fl'>1</span>
+      <span class='op'>)</span>
+    <span class='op'>)</span>
 
   <span class='co'># get an overview of the sheets</span>
-  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span>(<span class='kw'>ss</span>)
+  <span class='fu'><a href='sheet_properties.html'>sheet_properties</a></span><span class='op'>(</span><span class='va'>ss</span><span class='op'>)</span>
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"add-sheets-to-me"</span>) <span class='op'>%&gt;%</span>
-    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}
-</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "Sheet2"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "apple"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "banana"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "coconut", "dragonfruit"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "eggplant"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * add-sheets-to-me: 1HKDqESStHNTcKYkPiGPjrviV6noLZTncAO9RJuLpmVo</span></div></pre>
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span><span class='op'>(</span><span class='st'>"add-sheets-to-me"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>googledrive</span><span class='fu'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>Request failed [429]. Retry 1 happens in 100.5 seconds ...</span></div><div class='output co'>#&gt; <span class='message'>Request failed [429]. Retry 2 happens in 3.9 seconds ...</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "Sheet2"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "apple"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "banana"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "coconut", "dragonfruit"</span></div><div class='output co'>#&gt; <span class='message'>Adding sheet(s) in "add-sheets-to-me"</span></div><div class='output co'>#&gt; <span class='message'>New sheet(s): "eggplant"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * add-sheets-to-me: 16KjkJI4mvgDALvGezzIuHxMVXWfF1MjnsrXt6lrdxQk</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

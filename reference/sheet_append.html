@@ -195,7 +195,7 @@ increasing the row dimension of the sheet if necessary." />
 increasing the row dimension of the sheet if necessary.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sheet_append</span>(<span class='kw'>ss</span>, <span class='kw'>data</span>, sheet = <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>sheet_append</span><span class='op'>(</span><span class='va'>ss</span>, <span class='va'>data</span>, sheet <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -245,35 +245,35 @@ is how googledrive represents Drive files. Processed through
 <code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
   <span class='co'># we will recreate the table of "other" deaths from this example Sheet</span>
-  (<span class='kw'>deaths</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_example.html'>gs4_example</a></span>(<span class='st'>"deaths"</span>) <span class='op'>%&gt;%</span>
-    <span class='fu'><a href='range_read.html'>range_read</a></span>(range = <span class='st'>"other_data"</span>, col_types = <span class='st'>"????DD"</span>))
+  <span class='op'>(</span><span class='va'>deaths</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_example.html'>gs4_example</a></span><span class='op'>(</span><span class='st'>"deaths"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'><a href='range_read.html'>range_read</a></span><span class='op'>(</span>range <span class='op'>=</span> <span class='st'>"other_data"</span>, col_types <span class='op'>=</span> <span class='st'>"????DD"</span><span class='op'>)</span><span class='op'>)</span>
 
   <span class='co'># split the data into 3 pieces, which we will send separately</span>
-  <span class='kw'>deaths_one</span>   <span class='op'>&lt;-</span> <span class='kw'>deaths</span>[ <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, ]
-  <span class='kw'>deaths_two</span>   <span class='op'>&lt;-</span> <span class='kw'>deaths</span>[   <span class='fl'>6</span>, ]
-  <span class='kw'>deaths_three</span> <span class='op'>&lt;-</span> <span class='kw'>deaths</span>[<span class='fl'>7</span><span class='op'>:</span><span class='fl'>10</span>, ]
+  <span class='va'>deaths_one</span>   <span class='op'>&lt;-</span> <span class='va'>deaths</span><span class='op'>[</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>, <span class='op'>]</span>
+  <span class='va'>deaths_two</span>   <span class='op'>&lt;-</span> <span class='va'>deaths</span><span class='op'>[</span>   <span class='fl'>6</span>, <span class='op'>]</span>
+  <span class='va'>deaths_three</span> <span class='op'>&lt;-</span> <span class='va'>deaths</span><span class='op'>[</span><span class='fl'>7</span><span class='op'>:</span><span class='fl'>10</span>, <span class='op'>]</span>
 
   <span class='co'># create a Sheet and send the first chunk of data</span>
-  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"sheet-append-demo"</span>, sheets = <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(deaths = <span class='kw'>deaths_one</span>))
+  <span class='va'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span><span class='op'>(</span><span class='st'>"sheet-append-demo"</span>, sheets <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>deaths <span class='op'>=</span> <span class='va'>deaths_one</span><span class='op'>)</span><span class='op'>)</span>
 
   <span class='co'># append a single row</span>
-  <span class='kw'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'>sheet_append</span>(<span class='kw'>deaths_two</span>)
+  <span class='va'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'>sheet_append</span><span class='op'>(</span><span class='va'>deaths_two</span><span class='op'>)</span>
 
   <span class='co'># append remaining rows</span>
-  <span class='kw'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'>sheet_append</span>(<span class='kw'>deaths_three</span>)
+  <span class='va'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'>sheet_append</span><span class='op'>(</span><span class='va'>deaths_three</span><span class='op'>)</span>
 
   <span class='co'># read and check against the original</span>
-  <span class='kw'>deaths_replica</span> <span class='op'>&lt;-</span> <span class='fu'><a href='range_read.html'>range_read</a></span>(<span class='kw'>ss</span>, col_types = <span class='st'>"????DD"</span>)
-  <span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span>(<span class='kw'>deaths</span>, <span class='kw'>deaths_replica</span>)
+  <span class='va'>deaths_replica</span> <span class='op'>&lt;-</span> <span class='fu'><a href='range_read.html'>range_read</a></span><span class='op'>(</span><span class='va'>ss</span>, col_types <span class='op'>=</span> <span class='st'>"????DD"</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/identical.html'>identical</a></span><span class='op'>(</span><span class='va'>deaths</span>, <span class='va'>deaths_replica</span><span class='op'>)</span>
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"sheet-append-demo"</span>) <span class='op'>%&gt;%</span>
-    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span><span class='op'>(</span><span class='st'>"sheet-append-demo"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>googledrive</span><span class='fu'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='message'>Reading from "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Range "other_data"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Writing to "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Appending 1 row(s) to "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Writing to "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Appending 4 row(s) to "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Reading from "sheet-append-demo"</span></div><div class='output co'>#&gt; <span class='message'>Range "deaths"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * sheet-append-demo: 1_0glKYRUnK2P3QUKqrGv4mDWb0VV_h61U9wlkaipwiM</span></div></pre>
+#&gt; <span class='message'>  * sheet-append-demo: 1tD2nzRgZQevSs3QWIYNq2neYXj9ZKO096yKl8IDXfvc</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

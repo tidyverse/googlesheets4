@@ -199,7 +199,7 @@ from the current cell contents. This only affects the appearance of a sheet
 in the browser and doesn't affect its values or dimensions in any way.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>range_autofit</span>(<span class='kw'>ss</span>, sheet = <span class='kw'>NULL</span>, range = <span class='kw'>NULL</span>, dimension = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"columns"</span>, <span class='st'>"rows"</span>))</pre>
+    <pre class="usage"><span class='fu'>range_autofit</span><span class='op'>(</span><span class='va'>ss</span>, sheet <span class='op'>=</span> <span class='cn'>NULL</span>, range <span class='op'>=</span> <span class='cn'>NULL</span>, dimension <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"columns"</span>, <span class='st'>"rows"</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -242,37 +242,37 @@ to request auto-resize for all columns or all rows.</p></td>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>if</span> (<span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span>()) {
-  <span class='kw'>dat</span> <span class='op'>&lt;-</span> <span class='kw'>tibble</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
-    fruit = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"date"</span>, <span class='st'>"lime"</span>, <span class='st'>"pear"</span>, <span class='st'>"plum"</span>)
-  )
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='va'>dat</span> <span class='op'>&lt;-</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>
+    fruit <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"date"</span>, <span class='st'>"lime"</span>, <span class='st'>"pear"</span>, <span class='st'>"plum"</span><span class='op'>)</span>
+  <span class='op'>)</span>
 
-  <span class='kw'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span>(<span class='st'>"range-autofit-demo"</span>, sheets = <span class='kw'>dat</span>)
-  <span class='kw'>ss</span>
+  <span class='va'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span><span class='op'>(</span><span class='st'>"range-autofit-demo"</span>, sheets <span class='op'>=</span> <span class='va'>dat</span><span class='op'>)</span>
+  <span class='va'>ss</span>
 
   <span class='co'># open in the browser</span>
-  <span class='fu'><a href='gs4_browse.html'>gs4_browse</a></span>(<span class='kw'>ss</span>)
+  <span class='fu'><a href='gs4_browse.html'>gs4_browse</a></span><span class='op'>(</span><span class='va'>ss</span><span class='op'>)</span>
 
   <span class='co'># shrink column A to fit the short fruit names</span>
-  <span class='fu'>range_autofit</span>(<span class='kw'>ss</span>)
+  <span class='fu'>range_autofit</span><span class='op'>(</span><span class='va'>ss</span><span class='op'>)</span>
   <span class='co'># in the browser, notice how the column width shrank</span>
 
   <span class='co'># send some longer fruit names</span>
-  <span class='kw'>dat2</span> <span class='op'>&lt;-</span> <span class='kw'>tibble</span>::<span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span>(
-    fruit = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"cucumber"</span>, <span class='st'>"honeydew"</span>)
-  )
-  <span class='kw'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='sheet_append.html'>sheet_append</a></span>(<span class='kw'>dat2</span>)
+  <span class='va'>dat2</span> <span class='op'>&lt;-</span> <span class='fu'>tibble</span><span class='fu'>::</span><span class='fu'><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble</a></span><span class='op'>(</span>
+    fruit <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"cucumber"</span>, <span class='st'>"honeydew"</span><span class='op'>)</span>
+  <span class='op'>)</span>
+  <span class='va'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='sheet_append.html'>sheet_append</a></span><span class='op'>(</span><span class='va'>dat2</span><span class='op'>)</span>
   <span class='co'># in the browser, see that column A is now too narrow to show the data</span>
 
-  <span class='fu'>range_autofit</span>(<span class='kw'>ss</span>)
+  <span class='fu'>range_autofit</span><span class='op'>(</span><span class='va'>ss</span><span class='op'>)</span>
   <span class='co'># in the browser, see the column A reveals all the data now</span>
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span>(<span class='st'>"range-autofit-demo"</span>) <span class='op'>%&gt;%</span>
-    <span class='kw'>googledrive</span>::<span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span>()
-}
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span><span class='op'>(</span><span class='st'>"range-autofit-demo"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+    <span class='fu'>googledrive</span><span class='fu'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span><span class='op'>(</span><span class='op'>)</span>
+<span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "range-autofit-demo"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-autofit-demo"</span></div><div class='output co'>#&gt; <span class='message'>Resizing one or more columns in "dat"</span></div><div class='output co'>#&gt; <span class='message'>Writing to "range-autofit-demo"</span></div><div class='output co'>#&gt; <span class='message'>Appending 2 row(s) to "dat"</span></div><div class='output co'>#&gt; <span class='message'>Editing "range-autofit-demo"</span></div><div class='output co'>#&gt; <span class='message'>Resizing one or more columns in "dat"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * range-autofit-demo: 1KAioNztn8A3V-1noIkTUrydUWyRrvxcZzKu-MdVTlqY</span></div></pre>
+#&gt; <span class='message'>  * range-autofit-demo: 1A-yF1McwpQchwFcGHvjvcHZlnOFGku5K224qCi9ZUTQ</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -282,7 +282,7 @@ is a lower bound. Ignored if <code>range</code> is given.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='http://readr.tidyverse.org'>"readr"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='kw'>if</span> <span class='op'>(</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='st'><a href='https://readr.tidyverse.org'>"readr"</a></span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
     <span class='co'># since cell type is not available, use readr's col type specification</span>
     <span class='fu'>range_speedread</span><span class='op'>(</span>
       <span class='fu'><a href='gs4_example.html'>gs4_example</a></span><span class='op'>(</span><span class='st'>"deaths"</span><span class='op'>)</span>,
@@ -305,15 +305,16 @@ is a lower bound. Ignored if <code>range</code> is given.</p></td>
   <span class='co'># clean up</span>
   <span class='fu'>googledrive</span><span class='fu'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span><span class='op'>(</span><span class='va'>ss</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Loading required package: readr</span></div><div class='output co'>#&gt; <span class='message'>Reading from "deaths", "other" sheet, range "A5:F15"</span></div><div class='output co'>#&gt; <span class='message'>Export URL: https://docs.google.com/spreadsheets/d/1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y/export?format=csv&amp;range=A5%3AF15&amp;gid=278837031</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "heartsick-sealion"</span></div><div class='output co'>#&gt; <span class='message'>Reading from "heartsick-sealion"</span></div><div class='output co'>#&gt; <span class='message'>Export URL: https://docs.google.com/spreadsheets/d/1GKNgkHyRoRqkBGdoLwQEXAnV4zWZi57UTh51nBU0yvc/export?format=csv</span></div><div class='output co'>#&gt; <span class='message'>Parsed with column specification:</span>
+</div><div class='output co'>#&gt; <span class='message'>Loading required package: readr</span></div><div class='output co'>#&gt; <span class='message'>Reading from "deaths", "other" sheet, range "A5:F15"</span></div><div class='output co'>#&gt; <span class='message'>Export URL: https://docs.google.com/spreadsheets/d/1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y/export?format=csv&amp;range=A5%3AF15&amp;gid=278837031</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "heartsick-sealion"</span></div><div class='output co'>#&gt; <span class='message'>Reading from "heartsick-sealion"</span></div><div class='output co'>#&gt; <span class='message'>Export URL: https://docs.google.com/spreadsheets/d/14SP6SJGlBlfwy0mqBsMZX-prlK8rAw9hxh8tZsnN1LA/export?format=csv</span></div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Column specification</span><span> </span><span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span><span></span>
 #&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  Sepal.Length = <span style='color: #00BB00;'>col_double()</span><span>,</span>
+#&gt; <span class='message'>  Sepal.Length = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
 #&gt; <span class='message'>  Sepal.Width = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
 #&gt; <span class='message'>  Petal.Length = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
 #&gt; <span class='message'>  Petal.Width = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
 #&gt; <span class='message'>  Species = </span><span style='color: #BB0000;'>col_character()</span><span></span>
 #&gt; <span class='message'>)</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * heartsick-sealion: 1GKNgkHyRoRqkBGdoLwQEXAnV4zWZi57UTh51nBU0yvc</span></div></span></pre>
+#&gt; <span class='message'>  * heartsick-sealion: 14SP6SJGlBlfwy0mqBsMZX-prlK8rAw9hxh8tZsnN1LA</span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

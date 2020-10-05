@@ -323,7 +323,8 @@
   <span class="fu"><a href="../../reference/range_speedread.html">range_speedread</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Oceania"</span>, n_max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; Reading from "gapminder", "Oceania" sheet</span>
 <span class="co">#&gt; Export URL: https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=1796776040</span>
-<span class="co">#&gt; Parsed with column specification:</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
 <span class="co">#&gt;   country = col_character(),</span>
 <span class="co">#&gt;   continent = col_character(),</span>
@@ -397,7 +398,8 @@
 <span class="op">)</span>
 <span class="co">#&gt; Reading from "gapminder", "Africa" sheet</span>
 <span class="co">#&gt; Export URL: https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=780868077</span>
-<span class="co">#&gt; Parsed with column specification:</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
 <span class="co">#&gt;   country = col_character(),</span>
 <span class="co">#&gt;   continent = col_character(),</span>
@@ -407,14 +409,14 @@
 <span class="co">#&gt;   gdpPercap = col_double()</span>
 <span class="co">#&gt; )</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.054   0.001   1.019</span>
+<span class="co">#&gt;   0.084   0.010   0.690</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span>
   <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "'Africa'"</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.662   0.012   1.398</span></pre></div>
+<span class="co">#&gt;   0.680   0.008   1.249</span></pre></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> vs <code><a href="../../reference/range_read.html">range_read()</a></code>:</p>
 <ul>

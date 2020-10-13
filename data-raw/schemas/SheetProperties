@@ -1,13 +1,14 @@
 # SheetProperties  
-# A tibble: 9 x 6
-  property       type    instance_of    array_of format enum            
-  <chr>          <chr>   <chr>          <chr>    <chr>  <list>          
-1 gridProperties object  GridProperties <NA>     <NA>   <tibble [0 × 2]>
-2 hidden         boolean <NA>           <NA>     <NA>   <tibble [0 × 2]>
-3 index          integer <NA>           <NA>     int32  <tibble [0 × 2]>
-4 rightToLeft    boolean <NA>           <NA>     <NA>   <tibble [0 × 2]>
-5 sheetId        integer <NA>           <NA>     int32  <tibble [0 × 2]>
-6 sheetType      enum    <NA>           <NA>     <NA>   <tibble [3 × 2]>
-7 tabColor       object  Color          <NA>     <NA>   <tibble [0 × 2]>
-8 tabColorStyle  object  ColorStyle     <NA>     <NA>   <tibble [0 × 2]>
-9 title          string  <NA>           <NA>     <NA>   <tibble [0 × 2]>
+# A tibble: 10 x 7
+   property                  type    instance_of               array_of format readOnly enum            
+   <chr>                     <chr>   <chr>                     <chr>    <chr>  <lgl>    <list>          
+ 1 dataSourceSheetProperties object  DataSourceSheetProperties <NA>     <NA>   TRUE     <tibble [0 × 2]>
+ 2 gridProperties            object  GridProperties            <NA>     <NA>   NA       <tibble [0 × 2]>
+ 3 hidden                    boolean <NA>                      <NA>     <NA>   NA       <tibble [0 × 2]>
+ 4 index                     integer <NA>                      <NA>     int32  NA       <tibble [0 × 2]>
+ 5 rightToLeft               boolean <NA>                      <NA>     <NA>   NA       <tibble [0 × 2]>
+ 6 sheetId                   integer <NA>                      <NA>     int32  NA       <tibble [0 × 2]>
+ 7 sheetType                 enum    <NA>                      <NA>     <NA>   NA       <tibble [4 × 2]>
+ 8 tabColor                  object  Color                     <NA>     <NA>   NA       <tibble [0 × 2]>
+ 9 tabColorStyle             object  ColorStyle                <NA>     <NA>   NA       <tibble [0 × 2]>
+10 title                     string  <NA>                      <NA>     <NA>   NA       <tibble [0 × 2]>

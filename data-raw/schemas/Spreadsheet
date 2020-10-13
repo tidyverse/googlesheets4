@@ -1,10 +1,12 @@
 # Spreadsheet  
-# A tibble: 6 x 6
-  property          type   instance_of           array_of          format enum            
-  <chr>             <chr>  <chr>                 <chr>             <chr>  <list>          
-1 developerMetadata array  <NA>                  DeveloperMetadata <NA>   <tibble [0 × 2]>
-2 namedRanges       array  <NA>                  NamedRange        <NA>   <tibble [0 × 2]>
-3 properties        object SpreadsheetProperties <NA>              <NA>   <tibble [0 × 2]>
-4 sheets            array  <NA>                  Sheet             <NA>   <tibble [0 × 2]>
-5 spreadsheetId     string <NA>                  <NA>              <NA>   <tibble [0 × 2]>
-6 spreadsheetUrl    string <NA>                  <NA>              <NA>   <tibble [0 × 2]>
+# A tibble: 8 x 7
+  property            type   instance_of           array_of                  format readOnly enum            
+  <chr>               <chr>  <chr>                 <chr>                     <chr>  <lgl>    <list>          
+1 dataSources         array  <NA>                  DataSource                <NA>   NA       <tibble [0 × 2]>
+2 dataSourceSchedules array  <NA>                  DataSourceRefreshSchedule <NA>   TRUE     <tibble [0 × 2]>
+3 developerMetadata   array  <NA>                  DeveloperMetadata         <NA>   NA       <tibble [0 × 2]>
+4 namedRanges         array  <NA>                  NamedRange                <NA>   NA       <tibble [0 × 2]>
+5 properties          object SpreadsheetProperties <NA>                      <NA>   NA       <tibble [0 × 2]>
+6 sheets              array  <NA>                  Sheet                     <NA>   NA       <tibble [0 × 2]>
+7 spreadsheetId       string <NA>                  <NA>                      <NA>   NA       <tibble [0 × 2]>
+8 spreadsheetUrl      string <NA>                  <NA>                      <NA>   NA       <tibble [0 × 2]>

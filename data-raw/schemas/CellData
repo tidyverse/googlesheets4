@@ -1,14 +1,16 @@
 # CellData  
-# A tibble: 10 x 6
-   property          type   instance_of        array_of      format enum            
-   <chr>             <chr>  <chr>              <chr>         <chr>  <list>          
- 1 dataValidation    object DataValidationRule <NA>          <NA>   <tibble [0 × 2]>
- 2 effectiveFormat   object CellFormat         <NA>          <NA>   <tibble [0 × 2]>
- 3 effectiveValue    object ExtendedValue      <NA>          <NA>   <tibble [0 × 2]>
- 4 formattedValue    string <NA>               <NA>          <NA>   <tibble [0 × 2]>
- 5 hyperlink         string <NA>               <NA>          <NA>   <tibble [0 × 2]>
- 6 note              string <NA>               <NA>          <NA>   <tibble [0 × 2]>
- 7 pivotTable        object PivotTable         <NA>          <NA>   <tibble [0 × 2]>
- 8 textFormatRuns    array  <NA>               TextFormatRun <NA>   <tibble [0 × 2]>
- 9 userEnteredFormat object CellFormat         <NA>          <NA>   <tibble [0 × 2]>
-10 userEnteredValue  object ExtendedValue      <NA>          <NA>   <tibble [0 × 2]>
+# A tibble: 12 x 7
+   property          type   instance_of        array_of      format readOnly enum            
+   <chr>             <chr>  <chr>              <chr>         <chr>  <lgl>    <list>          
+ 1 dataSourceFormula object DataSourceFormula  <NA>          <NA>   TRUE     <tibble [0 × 2]>
+ 2 dataSourceTable   object DataSourceTable    <NA>          <NA>   NA       <tibble [0 × 2]>
+ 3 dataValidation    object DataValidationRule <NA>          <NA>   NA       <tibble [0 × 2]>
+ 4 effectiveFormat   object CellFormat         <NA>          <NA>   NA       <tibble [0 × 2]>
+ 5 effectiveValue    object ExtendedValue      <NA>          <NA>   NA       <tibble [0 × 2]>
+ 6 formattedValue    string <NA>               <NA>          <NA>   NA       <tibble [0 × 2]>
+ 7 hyperlink         string <NA>               <NA>          <NA>   NA       <tibble [0 × 2]>
+ 8 note              string <NA>               <NA>          <NA>   NA       <tibble [0 × 2]>
+ 9 pivotTable        object PivotTable         <NA>          <NA>   NA       <tibble [0 × 2]>
+10 textFormatRuns    array  <NA>               TextFormatRun <NA>   NA       <tibble [0 × 2]>
+11 userEnteredFormat object CellFormat         <NA>          <NA>   NA       <tibble [0 × 2]>
+12 userEnteredValue  object ExtendedValue      <NA>          <NA>   NA       <tibble [0 × 2]>

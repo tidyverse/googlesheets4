@@ -1,0 +1,110 @@
+id,httpMethod,path,scopes,description,response,request,parameterOrder
+spreadsheets.create,POST,v4/spreadsheets,"drive, drive.file, spreadsheets","Creates a spreadsheet, returning the newly created spreadsheet.",Spreadsheet,Spreadsheet,NA
+spreadsheets.batchUpdate,POST,v4/spreadsheets/{spreadsheetId}:batchUpdate,"drive, drive.file, spreadsheets","Applies one or more updates to the spreadsheet.
+
+Each request is validated before
+being applied. If any request is not valid then the entire request will
+fail and nothing will be applied.
+
+Some requests have replies to
+give you some information about how
+they are applied. The replies will mirror the requests.  For example,
+if you applied 4 updates and the 3rd one had a reply, then the
+response will have 2 empty replies, the actual reply, and another empty
+reply, in that order.
+
+Due to the collaborative nature of spreadsheets, it is not guaranteed that
+the spreadsheet will reflect exactly your changes after this completes,
+however it is guaranteed that the updates in the request will be
+applied together atomically. Your changes may be altered with respect to
+collaborator changes. If there are no collaborators, the spreadsheet
+should reflect your changes.",BatchUpdateSpreadsheetResponse,BatchUpdateSpreadsheetRequest,spreadsheetId
+spreadsheets.get,GET,v4/spreadsheets/{spreadsheetId},"drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly","Returns the spreadsheet at the given ID.
+The caller must specify the spreadsheet ID.
+
+By default, data within grids will not be returned.
+You can include grid data one of two ways:
+
+* Specify a field mask listing your desired fields using the `fields` URL
+parameter in HTTP
+
+* Set the includeGridData
+URL parameter to true.  If a field mask is set, the `includeGridData`
+parameter is ignored
+
+For large spreadsheets, it is recommended to retrieve only the specific
+fields of the spreadsheet that you want.
+
+To retrieve only subsets of the spreadsheet, use the
+ranges URL parameter.
+Multiple ranges can be specified.  Limiting the range will
+return only the portions of the spreadsheet that intersect the requested
+ranges. Ranges are specified using A1 notation.",Spreadsheet,NA,spreadsheetId
+spreadsheets.getByDataFilter,POST,v4/spreadsheets/{spreadsheetId}:getByDataFilter,"drive, drive.file, spreadsheets","Returns the spreadsheet at the given ID.
+The caller must specify the spreadsheet ID.
+
+This method differs from GetSpreadsheet in that it allows selecting
+which subsets of spreadsheet data to return by specifying a
+dataFilters parameter.
+Multiple DataFilters can be specified.  Specifying one or
+more data filters will return the portions of the spreadsheet that
+intersect ranges matched by any of the filters.
+
+By default, data within grids will not be returned.
+You can include grid data one of two ways:
+
+* Specify a field mask listing your desired fields using the `fields` URL
+parameter in HTTP
+
+* Set the includeGridData
+parameter to true.  If a field mask is set, the `includeGridData`
+parameter is ignored
+
+For large spreadsheets, it is recommended to retrieve only the specific
+fields of the spreadsheet that you want.",Spreadsheet,GetSpreadsheetByDataFilterRequest,spreadsheetId
+spreadsheets.values.batchGet,GET,v4/spreadsheets/{spreadsheetId}/values:batchGet,"drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly","Returns one or more ranges of values from a spreadsheet.
+The caller must specify the spreadsheet ID and one or more ranges.",BatchGetValuesResponse,NA,spreadsheetId
+spreadsheets.values.clear,POST,v4/spreadsheets/{spreadsheetId}/values/{range}:clear,"drive, drive.file, spreadsheets","Clears values from a spreadsheet.
+The caller must specify the spreadsheet ID and range.
+Only values are cleared -- all other properties of the cell (such as
+formatting, data validation, etc..) are kept.",ClearValuesResponse,ClearValuesRequest,"spreadsheetId, range"
+spreadsheets.values.batchClearByDataFilter,POST,v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter,"drive, drive.file, spreadsheets","Clears one or more ranges of values from a spreadsheet.
+The caller must specify the spreadsheet ID and one or more
+DataFilters. Ranges matching any of the specified data
+filters will be cleared.  Only values are cleared -- all other properties
+of the cell (such as formatting, data validation, etc..) are kept.",BatchClearValuesByDataFilterResponse,BatchClearValuesByDataFilterRequest,spreadsheetId
+spreadsheets.values.append,POST,v4/spreadsheets/{spreadsheetId}/values/{range}:append,"drive, drive.file, spreadsheets","Appends values to a spreadsheet. The input range is used to search for
+existing data and find a ""table"" within that range. Values will be
+appended to the next row of the table, starting with the first column of
+the table. See the
+[guide](/sheets/api/guides/values#appending_values)
+and
+[sample code](/sheets/api/samples/writing#append_values)
+for specific details of how tables are detected and data is appended.
+
+The caller must specify the spreadsheet ID, range, and
+a valueInputOption.  The `valueInputOption` only
+controls how the input data will be added to the sheet (column-wise or
+row-wise), it does not influence what cell the data starts being written
+to.",AppendValuesResponse,ValueRange,"spreadsheetId, range"
+spreadsheets.values.batchGetByDataFilter,POST,v4/spreadsheets/{spreadsheetId}/values:batchGetByDataFilter,"drive, drive.file, spreadsheets","Returns one or more ranges of values that match the specified data filters.
+The caller must specify the spreadsheet ID and one or more
+DataFilters.  Ranges that match any of the data filters in
+the request will be returned.",BatchGetValuesByDataFilterResponse,BatchGetValuesByDataFilterRequest,spreadsheetId
+spreadsheets.values.batchClear,POST,v4/spreadsheets/{spreadsheetId}/values:batchClear,"drive, drive.file, spreadsheets","Clears one or more ranges of values from a spreadsheet.
+The caller must specify the spreadsheet ID and one or more ranges.
+Only values are cleared -- all other properties of the cell (such as
+formatting, data validation, etc..) are kept.",BatchClearValuesResponse,BatchClearValuesRequest,spreadsheetId
+spreadsheets.values.get,GET,v4/spreadsheets/{spreadsheetId}/values/{range},"drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly","Returns a range of values from a spreadsheet.
+The caller must specify the spreadsheet ID and a range.",ValueRange,NA,"spreadsheetId, range"
+spreadsheets.values.batchUpdateByDataFilter,POST,v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter,"drive, drive.file, spreadsheets","Sets values in one or more ranges of a spreadsheet.
+The caller must specify the spreadsheet ID,
+a valueInputOption, and one or more
+DataFilterValueRanges.",BatchUpdateValuesByDataFilterResponse,BatchUpdateValuesByDataFilterRequest,spreadsheetId
+spreadsheets.values.update,PUT,v4/spreadsheets/{spreadsheetId}/values/{range},"drive, drive.file, spreadsheets","Sets values in a range of a spreadsheet.
+The caller must specify the spreadsheet ID, range, and
+a valueInputOption.",UpdateValuesResponse,ValueRange,"spreadsheetId, range"
+spreadsheets.values.batchUpdate,POST,v4/spreadsheets/{spreadsheetId}/values:batchUpdate,"drive, drive.file, spreadsheets","Sets values in one or more ranges of a spreadsheet.
+The caller must specify the spreadsheet ID,
+a valueInputOption, and one or more
+ValueRanges.",BatchUpdateValuesResponse,BatchUpdateValuesRequest,spreadsheetId

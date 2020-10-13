@@ -6,6 +6,5 @@ internal
 inst/doc
 scratch.R
 *cache*
-old
 docs/
 *.xlsx

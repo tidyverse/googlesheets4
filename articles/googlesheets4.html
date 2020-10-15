@@ -160,7 +160,6 @@
 <p><code><a href="../reference/range_read.html">read_sheet()</a></code> is designed to “just work”, for most purposes, most of the time. It can read straight from a Sheets browser URL:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
 <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span><span class="op">)</span>
-<span class="co">#&gt; Request failed [429]. Retry 1 happens in 100 seconds ...</span>
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
@@ -280,10 +279,10 @@
 <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "upbeat-grackle"</span>
+<span class="co">#&gt; Creating new Sheet: "expecting-crab"</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: upbeat-grackle</span>
-<span class="co">#&gt;               ID: 1FZeq-Lcp4jNs98Y_Cd4_rm3zT7QsoCB97MLvihvx148</span>
+<span class="co">#&gt; Spreadsheet name: expecting-crab</span>
+<span class="co">#&gt;               ID: 18TnL7qRppcp3xZqfAxHy7zLRxxG6ItHbQ4SQNZtOyFA</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -295,13 +294,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit">
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * upbeat-grackle: 1FZeq-Lcp4jNs98Y_Cd4_rm3zT7QsoCB97MLvihvx148</span>
+<span class="co">#&gt;   * expecting-crab: 18TnL7qRppcp3xZqfAxHy7zLRxxG6ItHbQ4SQNZtOyFA</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; Creating new Sheet: "testy-hedgehog"</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1HbdfkTEztXnj4cA2Km0kyzf9Ul-7WN-LMq5838W18LY</span>
+<span class="co">#&gt;               ID: 1qWcXg2wdkDBNfXzhZ9vV8NSRlew73pAUVLDh_4ZwpGg</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -315,7 +314,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1HbdfkTEztXnj4cA2Km0kyzf9Ul-7WN-LMq5838W18LY</span>
+<span class="co">#&gt;               ID: 1qWcXg2wdkDBNfXzhZ9vV8NSRlew73pAUVLDh_4ZwpGg</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -363,14 +362,14 @@
 <div class="sourceCode" id="cb13"><pre class="downlit">
 <span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 x 8</span>
-<span class="co">#&gt;   name     index        id type  visible grid_rows grid_columns data  </span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 744023042 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 156670609 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
+<span class="co">#&gt; 1 df           0  777669510 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 1204655828 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * testy-hedgehog: 1HbdfkTEztXnj4cA2Km0kyzf9Ul-7WN-LMq5838W18LY</span></pre></div>
+<span class="co">#&gt;   * testy-hedgehog: 1qWcXg2wdkDBNfXzhZ9vV8NSRlew73pAUVLDh_4ZwpGg</span></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

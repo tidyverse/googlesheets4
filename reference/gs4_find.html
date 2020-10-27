@@ -234,10 +234,14 @@ with both googlesheets4 and googledrive, but as different users.</p>
   <span class='co'>#   tidyr::hoist(drive_resource, created_on = "createdTime") %&gt;%</span>
   <span class='co'>#   dplyr::mutate(created_on = as.Date(created_on))</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 1 x 3</span><span>
-#&gt;   name      id                                           drive_resource   
-#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                        </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>           
-#&gt; </span><span style='color: #555555;'>1</span><span> gapminder 1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew </span><span style='color: #555555;'>&lt;named list [33]&gt;</span><span></div></span></pre>
+</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 5 x 3</span><span>
+#&gt;   name              id                                          drive_resource  
+#&gt; </span><span style='color: #555555;'>*</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>             </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                                       </span><span style='color: #555555;font-style: italic;'>&lt;list&gt;</span><span>          
+#&gt; </span><span style='color: #555555;'>1</span><span> gs4-create-demo-5 1_M-IhhqocqxcFGBkJhCzRvvgQFwtqzwhlqMSJURhx… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
+#&gt; </span><span style='color: #555555;'>2</span><span> gs4-create-demo-4 1o00QAZxHf-csHm9A9rauL9AzM2JsUGLwQne2uRJa0… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
+#&gt; </span><span style='color: #555555;'>3</span><span> gs4-create-demo-3 1sxmoI31n7oTaRSwlyQpLXmOqV7liI_QSWifhFFDss… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
+#&gt; </span><span style='color: #555555;'>4</span><span> gs4-create-demo-2 19Nm-TGbVDkCkz8I69vVwTqTxbdm4WJJP5EFMxJ6QO… </span><span style='color: #555555;'>&lt;named list [34</span><span>…
+#&gt; </span><span style='color: #555555;'>5</span><span> gs4-create-demo-1 1uW4sEeGTmriNjGcG35exNGS1a_9lh45IxFcSgJLqo… </span><span style='color: #555555;'>&lt;named list [34</span><span>…</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

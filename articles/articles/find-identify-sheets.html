@@ -333,17 +333,27 @@
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit">
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 1 x 3</span>
-<span class="co">#&gt;   name      id                                           drive_resource   </span>
-<span class="co">#&gt; * &lt;chr&gt;     &lt;chr&gt;                                        &lt;list&gt;           </span>
-<span class="co">#&gt; 1 gapminder 1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew &lt;named list [33]&gt;</span></pre></div>
+<span class="co">#&gt; # A tibble: 6 x 3</span>
+<span class="co">#&gt;   name              id                                          drive_resource  </span>
+<span class="co">#&gt; * &lt;chr&gt;             &lt;chr&gt;                                       &lt;list&gt;          </span>
+<span class="co">#&gt; 1 gs4-create-demo-5 1_M-IhhqocqxcFGBkJhCzRvvgQFwtqzwhlqMSJURhx… &lt;named list [34…</span>
+<span class="co">#&gt; 2 gs4-create-demo-4 1o00QAZxHf-csHm9A9rauL9AzM2JsUGLwQne2uRJa0… &lt;named list [34…</span>
+<span class="co">#&gt; 3 gs4-create-demo-3 1sxmoI31n7oTaRSwlyQpLXmOqV7liI_QSWifhFFDss… &lt;named list [34…</span>
+<span class="co">#&gt; 4 gs4-create-demo-2 19Nm-TGbVDkCkz8I69vVwTqTxbdm4WJJP5EFMxJ6QO… &lt;named list [34…</span>
+<span class="co">#&gt; 5 gs4-create-demo-1 1uW4sEeGTmriNjGcG35exNGS1a_9lh45IxFcSgJLqo… &lt;named list [34…</span>
+<span class="co">#&gt; # … with 1 more row</span></pre></div>
 <p>This is so handy that we’ve made <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit">
 <span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 1 x 3</span>
-<span class="co">#&gt;   name      id                                           drive_resource   </span>
-<span class="co">#&gt; * &lt;chr&gt;     &lt;chr&gt;                                        &lt;list&gt;           </span>
-<span class="co">#&gt; 1 gapminder 1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew &lt;named list [33]&gt;</span></pre></div>
+<span class="co">#&gt; # A tibble: 6 x 3</span>
+<span class="co">#&gt;   name              id                                          drive_resource  </span>
+<span class="co">#&gt; * &lt;chr&gt;             &lt;chr&gt;                                       &lt;list&gt;          </span>
+<span class="co">#&gt; 1 gs4-create-demo-5 1_M-IhhqocqxcFGBkJhCzRvvgQFwtqzwhlqMSJURhx… &lt;named list [34…</span>
+<span class="co">#&gt; 2 gs4-create-demo-4 1o00QAZxHf-csHm9A9rauL9AzM2JsUGLwQne2uRJa0… &lt;named list [34…</span>
+<span class="co">#&gt; 3 gs4-create-demo-3 1sxmoI31n7oTaRSwlyQpLXmOqV7liI_QSWifhFFDss… &lt;named list [34…</span>
+<span class="co">#&gt; 4 gs4-create-demo-2 19Nm-TGbVDkCkz8I69vVwTqTxbdm4WJJP5EFMxJ6QO… &lt;named list [34…</span>
+<span class="co">#&gt; 5 gs4-create-demo-1 1uW4sEeGTmriNjGcG35exNGS1a_9lh45IxFcSgJLqo… &lt;named list [34…</span>
+<span class="co">#&gt; # … with 1 more row</span></pre></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </div>

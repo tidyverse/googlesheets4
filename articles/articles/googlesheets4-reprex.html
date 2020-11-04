@@ -161,15 +161,15 @@
 <h2 class="hasAnchor">
 <a href="#use-a-public-example-sheet" class="anchor"></a>Use a public example Sheet</h2>
 <p>If you can make your point with one of the example Sheets, exposed via <code><a href="../../reference/gs4_example.html">gs4_examples()</a></code> and <code><a href="../../reference/gs4_example.html">gs4_example()</a></code>, do so! You can call <code><a href="../../reference/gs4_deauth.html">gs4_deauth()</a></code> explicitly in your reprex to shut down any attempt to get a token.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span><span class="op">)</span>
 
 <span class="fu"><a href="../../reference/gs4_deauth.html">gs4_deauth</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># put the googlesheets4 code you want to reproduce below here</span>
 <span class="co"># the following is just an example, replace it with your own code</span>
 <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+  <span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="create-a-sheet-and-make-it-world-readable" class="section level2">
 <h2 class="hasAnchor">
@@ -180,23 +180,23 @@
 <li><p>In the browser: <em>Share</em> (big green button) &gt; <em>Advanced</em> &gt; <em>Who has access … Change</em> &gt; <em>Link sharing: On - Anyone with the link</em></p></li>
 <li>
 <p>Using googledrive:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org">googledrive</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org">googledrive</a></span><span class="op">)</span>
 
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="st">"YOUR_SHEET_NAME"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_share.html">drive_share</a></span><span class="op">(</span><span class="va">x</span>, role <span class="op">=</span> <span class="st">"reader"</span>, type <span class="op">=</span> <span class="st">"anyone"</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_share.html">drive_share</a></span><span class="op">(</span><span class="va">x</span>, role <span class="op">=</span> <span class="st">"reader"</span>, type <span class="op">=</span> <span class="st">"anyone"</span><span class="op">)</span></code></pre></div>
 </li>
 </ul>
 <p>Now make a reprex just like we do with the official example Sheets:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span><span class="op">)</span>
 
 <span class="fu"><a href="../../reference/gs4_deauth.html">gs4_deauth</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># put the googlesheets4 code you want to reproduce below here</span>
 <span class="co"># the following is just an example, replace it with your own code</span>
-<span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="st">"YOUR_SHEET_ID_OR_URL_GOES_HERE"</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="st">"YOUR_SHEET_ID_OR_URL_GOES_HERE"</span><span class="op">)</span></code></pre></div>
 <div id="grant-access-to-specific-users" class="section level3">
 <h3 class="hasAnchor">
 <a href="#grant-access-to-specific-users" class="anchor"></a>Grant access to specific user(s)</h3>
@@ -205,8 +205,8 @@
 <li><p>In the browser: <em>Share</em> (big green button) &gt; <em>People</em> &gt; <em>Enter names or email addresses</em>.</p></li>
 <li>
 <p>Using googledrive:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org">googledrive</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org">googledrive</a></span><span class="op">)</span>
 
 <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="st">"YOUR_SHEET_NAME"</span><span class="op">)</span>
 
@@ -214,7 +214,7 @@
   <span class="va">x</span>, 
   role <span class="op">=</span> <span class="st">"reader"</span>, type <span class="op">=</span> <span class="st">"user"</span>,
   email_address <span class="op">=</span> <span class="st">"jane_package_maintainer@example.org"</span>
-<span class="op">)</span></pre></div>
+<span class="op">)</span></code></pre></div>
 </li>
 </ul>
 <p>See the next section for advice on your reprex code.</p>
@@ -232,18 +232,18 @@
 <li>Use <code><a href="https://reprex.tidyverse.org/reference/reprex.html">reprex::reprex()</a></code>.</li>
 </ul>
 <p>Here’s an example of a snippet suitable for <code><a href="https://reprex.tidyverse.org/reference/reprex.html">reprex::reprex()</a></code>, assuming the user has successfully run it once interactively, so there’s a cached token for “<a href="mailto:jane_doe@example.com" class="email">jane_doe@example.com</a>”.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span><span class="op">)</span>
 
 <span class="fu"><a href="../../reference/gs4_auth.html">gs4_auth</a></span><span class="op">(</span>email <span class="op">=</span> <span class="st">"jane_doe@example.com"</span><span class="op">)</span>
 
 <span class="co"># put the googlesheets4 code you want to reproduce below here</span>
 <span class="co"># the following is just an example, replace it with your own code</span>
 <span class="va">ssid</span> <span class="op">&lt;-</span> <span class="st">"some_very_long_string_of_letters_and_digits"</span>
-<span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></code></pre></div>
 <p>If you’re reluctant to reveal your email address and/or the spreadsheet id, you can use special comments to create a hidden chunk and a visible body chunk. If the Sheet is private and no one else will be able to access it anyway, this is still a good option to show exactly what you’re seeing locally.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span><span class="op">)</span>
 
 <span class="co">#+ include = FALSE</span>
 <span class="co"># code here is executed but the results won't appear in rendered reprex</span>
@@ -253,7 +253,7 @@
 <span class="co">#+ include = TRUE</span>
 <span class="co"># put the googlesheets4 code you want to reproduce below here</span>
 <span class="co"># the following is just an example, replace it with your own code</span>
-<span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></code></pre></div>
 </div>
   </div>
 

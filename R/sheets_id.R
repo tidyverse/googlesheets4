@@ -63,7 +63,7 @@ sheets_id <- function(x) {
 #'   characters", typically 44 characters long, in our experience. Example:
 #'   `1qpyC0XzvTcKT6EISywvqESX3A0MwQoFDE8p-Bll4hps`.
 #'   * A URL, from which we can excavate a spreadsheet or file id. Example:
-#'     "https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545".
+#'     `"https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545"`.
 #'   * A one-row [`dribble`][googledrive::dribble], a "Drive tibble" used by the
 #'     [googledrive] package. In general, a `dribble` can represent several
 #'     files, one row per file. Since googlesheets4 is not vectorized over

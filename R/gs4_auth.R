@@ -1,10 +1,8 @@
 ## This file is the interface between googlesheets4 and the
 ## auth functionality in gargle.
 
-.auth <- gargle::AuthState$new(
-  package     = "googlesheets4",
-  auth_active = TRUE
-)
+# Initialization happens in .onLoad
+.auth <- NULL
 
 ## The roxygen comments for these functions are mostly generated from data
 ## in this list and template text maintained in gargle.

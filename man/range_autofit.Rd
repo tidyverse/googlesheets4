@@ -69,5 +69,8 @@ Makes an \code{AutoResizeDimensionsRequest}:
 \itemize{
 \item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#autoresizedimensionsrequest}
 }
+
+Other formatting functions: 
+\code{\link{range_format_pattern}()}
 }
 \concept{formatting functions}

@@ -2,6 +2,8 @@
 
 * `gs4_get()` retrieves information about protected ranges.
 
+* New `range_format_pattern()` adds formatting for dates and numbers
+
 # googlesheets4 0.2.0
 
 googlesheets4 can now write and modify Sheets.

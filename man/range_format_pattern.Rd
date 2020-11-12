@@ -4,7 +4,13 @@
 \alias{range_format_pattern}
 \title{Range format following pattern}
 \usage{
-range_format_pattern(ss, pattern, sheet = NULL, range = NULL)
+range_format_pattern(
+  ss,
+  pattern,
+  type = c("NUMBER", "DATE"),
+  sheet = NULL,
+  range = NULL
+)
 }
 \arguments{
 \item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
@@ -15,6 +21,8 @@ is how googledrive represents Drive files. Processed through
 
 \item{pattern}{Character. Google Sheets format pattern. For options see the
 \href{https://developers.google.com/sheets/api/guides/formats}{Google Documentation}.}
+
+\item{type}{Character. Type of data. Either "NUMBER" or "DATE".}
 
 \item{sheet}{Sheet to modify, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Ignored if the sheet is specified via \code{range}. If neither argument specifies the sheet, defaults to the first visible sheet.}
 

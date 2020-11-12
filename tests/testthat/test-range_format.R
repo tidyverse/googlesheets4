@@ -20,7 +20,7 @@ test_that("range_format_pattern() works", {
   range_format_pattern(ss, "0.0%", range = "A")
   sheet_t1 <- range_speedread(ss)
 
-  range_format_pattern(ss, "dd\"-\"mmmm")
+  range_format_pattern(ss, "dd\"-\"mmmm", range = "B")
   sheet_t2 <- range_speedread(ss)
 
   expect_equal(sheet_t0$small_number, example_num)

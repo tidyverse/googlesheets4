@@ -27,8 +27,6 @@ is how googledrive represents Drive files. Processed through
 The input \code{ss}, as an instance of \code{\link{sheets_id}}
 }
 \description{
-\lifecycle{experimental}
-
 This is one of the main ways to write data with googlesheets4. This function
 writes a data frame into a (work)sheet inside a (spread)Sheet. The target
 sheet is styled as a table:
@@ -61,9 +59,6 @@ throughout the googlesheets4 package.
 }
 
 \code{write_sheet()} and \code{sheet_write()} are synonyms and you can use either one.
-The first release of googlesheets used a \code{sheets_} prefix everywhere, so we
-had \code{sheets_write()}. It still works, but it's deprecated and will go away
-rather swiftly.
 }
 \examples{
 if (gs4_has_token()) {

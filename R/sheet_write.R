@@ -30,8 +30,6 @@
 #'   throughout the googlesheets4 package.
 #'
 #' `write_sheet()` and `sheet_write()` are synonyms and you can use either one.
-#' The first release of googlesheets used a `sheets_` prefix everywhere, so we
-#' had `sheets_write()`.
 #'
 #' @param data A data frame. If it has zero rows, we send one empty pseudo-row
 #'   of data, so that we can apply the usual table styling. This empty row goes

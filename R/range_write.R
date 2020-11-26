@@ -1,7 +1,6 @@
 #' (Over)write new data into a range
 #'
 #' @description
-#' \lifecycle{experimental}
 #'
 #' Writes a data frame into a range of cells. Main differences from
 #' [sheet_write()] (a.k.a. [write_sheet()]):

@@ -1,11 +1,7 @@
 #' (Over)write new data into a Sheet
 #'
 #' @description
-#' \lifecycle{experimental}
 #'
-
-#' @description
-
 #' This is one of the main ways to write data with googlesheets4. This function
 #' writes a data frame into a (work)sheet inside a (spread)Sheet. The target
 #' sheet is styled as a table:
@@ -35,7 +31,7 @@
 #'
 #' `write_sheet()` and `sheet_write()` are synonyms and you can use either one.
 #' The first release of googlesheets used a `sheets_` prefix everywhere, so we
-#' had `sheets_write()`. 
+#' had `sheets_write()`.
 #'
 #' @param data A data frame. If it has zero rows, we send one empty pseudo-row
 #'   of data, so that we can apply the usual table styling. This empty row goes

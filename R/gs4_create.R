@@ -1,7 +1,6 @@
 #' Create a new Sheet
 #'
 #' @description
-#' \lifecycle{experimental}
 #'
 #' Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook).
 #' Optionally, you can also provide names and/or data for the initial set of

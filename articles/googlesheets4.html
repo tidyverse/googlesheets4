@@ -122,7 +122,7 @@
 </li>
         <li>
   <a href="https://github.com/tidyverse/googlesheets4/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -136,8 +136,7 @@
 
       
 
-      </header><script src="googlesheets4_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="googlesheets4_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="googlesheets4_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="googlesheets4_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Get started with googlesheets4</h1>
@@ -280,10 +279,12 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "raw-xenopus"</span>
+<span class="co">#&gt; Creating new Sheet: "sure-merlin"</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: raw-xenopus</span>
-<span class="co">#&gt;               ID: 1JDfUsZeZ3vquYJx-DKlBOeCPX6GqHl_V1tNO4PHmbuY</span>
+<span class="co">#&gt; Request failed [429]. Retry 1 happens in 2.6 seconds ...</span>
+<span class="co">#&gt; Request failed [429]. Retry 2 happens in 8.8 seconds ...</span>
+<span class="co">#&gt; Spreadsheet name: sure-merlin</span>
+<span class="co">#&gt;               ID: 1ZmS0hUvR8QHOVwkvBNyB0DEvvElf08i4M1VVMJP06Z0</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -295,13 +296,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * raw-xenopus: 1JDfUsZeZ3vquYJx-DKlBOeCPX6GqHl_V1tNO4PHmbuY</span>
+<span class="co">#&gt;   * sure-merlin: 1ZmS0hUvR8QHOVwkvBNyB0DEvvElf08i4M1VVMJP06Z0</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; Creating new Sheet: "testy-hedgehog"</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 17znjLS83QzwjRV6FNctaSl7smUta3ERelarm0GKz8uI</span>
+<span class="co">#&gt;               ID: 1yiAq2jdxic5SvP2LtLN-7kmLsNjCqOjOswZAmdzaKd8</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -315,7 +316,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 17znjLS83QzwjRV6FNctaSl7smUta3ERelarm0GKz8uI</span>
+<span class="co">#&gt;               ID: 1yiAq2jdxic5SvP2LtLN-7kmLsNjCqOjOswZAmdzaKd8</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -365,12 +366,12 @@
 <span class="co">#&gt; # A tibble: 2 x 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 1416458834 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 2028188303 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 1 df           0 1094426824 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1  586717927 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * testy-hedgehog: 17znjLS83QzwjRV6FNctaSl7smUta3ERelarm0GKz8uI</span></code></pre></div>
+<span class="co">#&gt;   * testy-hedgehog: 1yiAq2jdxic5SvP2LtLN-7kmLsNjCqOjOswZAmdzaKd8</span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

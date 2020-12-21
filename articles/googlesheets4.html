@@ -258,22 +258,13 @@
 <span class="co">#&gt;    other_data: 'other'!A5:F15</span>
 
 <span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Request failed [429]. Retry 1 happens in 1.7 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 2 happens in 1 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 3 happens in 1.8 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 4 happens in 1.5 seconds ...</span>
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:250395471985'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.ErrorInfo' may not be fully revealed.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Consider opening an issue at https://github.com/r-lib/gargle/issues.</span>
+<span class="co">#&gt; # A tibble: 2 x 8</span>
+<span class="co">#&gt;   name  index         id type  visible grid_rows grid_columns data  </span>
+<span class="co">#&gt;   &lt;chr&gt; &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
+<span class="co">#&gt; 1 arts      0 1512440582 GRID  TRUE         1000           26 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 other     1  278837031 GRID  TRUE         1000           26 &lt;NULL&gt;</span>
 
 <span class="fu"><a href="../reference/sheet_properties.html">sheet_names</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Request failed [429]. Retry 1 happens in 3.7 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 2 happens in 2.9 seconds ...</span>
 <span class="co">#&gt; [1] "arts"  "other"</span></code></pre></div>
 <p><code><a href="../reference/sheet_properties.html">sheet_properties()</a></code> and <code><a href="../reference/sheet_properties.html">sheet_names()</a></code> are two members of a larger family of functions for dealing with the (work)sheets within a (spread)Sheet.</p>
 <p>The metadata exposed by <code><a href="../reference/gs4_get.html">gs4_get()</a></code> is also revealed whenever you print an object that is (or can be converted to) a <code>sheets_id</code> (an S3 class we use to mark Sheet IDs).</p>
@@ -288,10 +279,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "refreshing-flyingfox"</span>
+<span class="co">#&gt; Creating new Sheet: "resident-needletail"</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: refreshing-flyingfox</span>
-<span class="co">#&gt;               ID: 1-ENeaExQgl7GVvBLIXa0vsP2nIqX-KUVxmowyvrpP4I</span>
+<span class="co">#&gt; Spreadsheet name: resident-needletail</span>
+<span class="co">#&gt;               ID: 1Gjf-iLcmkBHWbrcn-xA9zZBAOdRVC72fJQGS-7TlVy0</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -303,13 +294,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * refreshing-flyingfox: 1-ENeaExQgl7GVvBLIXa0vsP2nIqX-KUVxmowyvrpP4I</span>
+<span class="co">#&gt;   * resident-needletail: 1Gjf-iLcmkBHWbrcn-xA9zZBAOdRVC72fJQGS-7TlVy0</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; Creating new Sheet: "testy-hedgehog"</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1sRh2sz_k_pWzAnRZHbna9kzBB6F0jpSEG3S7i3wk1OI</span>
+<span class="co">#&gt;               ID: 1QIbq_DpQpPOxlRdEVInjxVnW6a5ZfM0eWQHuq_VDVcE</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -323,7 +314,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1sRh2sz_k_pWzAnRZHbna9kzBB6F0jpSEG3S7i3wk1OI</span>
+<span class="co">#&gt;               ID: 1QIbq_DpQpPOxlRdEVInjxVnW6a5ZfM0eWQHuq_VDVcE</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -373,12 +364,12 @@
 <span class="co">#&gt; # A tibble: 2 x 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 1127206388 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1  635052781 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 1 df           0  855383857 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 2104453728 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * testy-hedgehog: 1sRh2sz_k_pWzAnRZHbna9kzBB6F0jpSEG3S7i3wk1OI</span></code></pre></div>
+<span class="co">#&gt;   * testy-hedgehog: 1QIbq_DpQpPOxlRdEVInjxVnW6a5ZfM0eWQHuq_VDVcE</span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

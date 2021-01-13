@@ -279,10 +279,14 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "embracive-naga"</span>
+<span class="co">#&gt; Creating new Sheet: "foilable-canary"</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: embracive-naga</span>
-<span class="co">#&gt;               ID: 1dXASW7vXy2WRX40tUpR7xZIca3_dwnqU5dkPo4TSqx8</span>
+<span class="co">#&gt; Request failed [429]. Retry 1 happens in 5.9 seconds ...</span>
+<span class="co">#&gt; Request failed [429]. Retry 2 happens in 10.4 seconds ...</span>
+<span class="co">#&gt; Request failed [429]. Retry 3 happens in 12.8 seconds ...</span>
+<span class="co">#&gt; Request failed [429]. Retry 4 happens in 7.6 seconds ...</span>
+<span class="co">#&gt; Spreadsheet name: foilable-canary</span>
+<span class="co">#&gt;               ID: 1adkXgjKMhVQF-rHK2dly6E3tY23Xw3U-QaU4Fjfq4f8</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -294,13 +298,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * embracive-naga: 1dXASW7vXy2WRX40tUpR7xZIca3_dwnqU5dkPo4TSqx8</span>
+<span class="co">#&gt;   * foilable-canary: 1adkXgjKMhVQF-rHK2dly6E3tY23Xw3U-QaU4Fjfq4f8</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; Creating new Sheet: "testy-hedgehog"</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 14UZnznYLV0qw85Fhl3F16uXLEr09YeX08UqqUg50spg</span>
+<span class="co">#&gt;               ID: 1fjmk8a9WO7aOZ30dtgGk12nvGqvgoWLe5nGW-fbbLS8</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -314,7 +318,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 14UZnznYLV0qw85Fhl3F16uXLEr09YeX08UqqUg50spg</span>
+<span class="co">#&gt;               ID: 1fjmk8a9WO7aOZ30dtgGk12nvGqvgoWLe5nGW-fbbLS8</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -330,10 +334,6 @@
 <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss</span>, sheet <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span>
 <span class="co">#&gt; Reading from "testy-hedgehog"</span>
 <span class="co">#&gt; Range "'df'"</span>
-<span class="co">#&gt; Request failed [429]. Retry 1 happens in 3.8 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 2 happens in 1.2 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 3 happens in 24.5 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 4 happens in 45.1 seconds ...</span>
 <span class="co">#&gt; # A tibble: 7 x 2</span>
 <span class="co">#&gt;       x letters.4.10.</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;        </span>
@@ -368,12 +368,12 @@
 <span class="co">#&gt; # A tibble: 2 x 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 1680975929 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 1314851978 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 1 df           0 1530717679 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 1207497013 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * testy-hedgehog: 14UZnznYLV0qw85Fhl3F16uXLEr09YeX08UqqUg50spg</span></code></pre></div>
+<span class="co">#&gt;   * testy-hedgehog: 1fjmk8a9WO7aOZ30dtgGk12nvGqvgoWLe5nGW-fbbLS8</span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

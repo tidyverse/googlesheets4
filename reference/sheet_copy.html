@@ -301,14 +301,10 @@ about sheet names, specify <code>to_sheet</code>.</p></td>
   <span class='fu'><a href='gs4_find.html'>gs4_find</a></span><span class='op'>(</span><span class='st'>"sheet-copy-demo"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>googledrive</span><span class='fu'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-copy-demo-aaa"</span></div><div class='output co'>#&gt; <span class='message'>Request failed [429]. Retry 1 happens in 4.5 seconds ...</span></div><div class='output co'>#&gt; <span class='message'>Request failed [429]. Retry 2 happens in 9.8 seconds ...</span></div><div class='output co'>#&gt; <span class='message'>Request failed [429]. Retry 3 happens in 5.2 seconds ...</span></div><div class='output co'>#&gt; <span class='message'>Request failed [429]. Retry 4 happens in 45.7 seconds ...</span></div><div class='output co'>#&gt; <span class='error'>Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-#&gt; <span class='error'>  * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-#&gt; <span class='error'>  * Quota exceeded for quota metric 'Write requests' and limit 'Write requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:250395471985'.</span>
-#&gt; <span class='error'></span>
-#&gt; <span class='error'>Error details:</span>
-#&gt; <span class='error'>  * Error details of type 'google.rpc.ErrorInfo' may not be fully revealed.</span>
-#&gt; <span class='error'>  * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-#&gt; <span class='error'>  * Consider opening an issue at https://github.com/r-lib/gargle/issues.</span></div></pre>
+</div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-copy-demo-aaa"</span></div><div class='output co'>#&gt; <span class='message'>Duplicating sheet "iris" in "sheet-copy-demo-aaa"</span></div><div class='output co'>#&gt; <span class='message'>Copied as "Copy of iris"</span></div><div class='output co'>#&gt; <span class='message'>Duplicating sheet "Copy of iris" in "sheet-copy-demo-aaa"</span></div><div class='output co'>#&gt; <span class='message'>Copied as "iris-the-sequel"</span></div><div class='output co'>#&gt; <span class='message'>Creating new Sheet: "sheet-copy-demo-bbb"</span></div><div class='output co'>#&gt; <span class='message'>Copying sheet "chickwts" from "sheet-copy-demo-aaa" to "sheet-copy-demo-bbb"</span></div><div class='output co'>#&gt; <span class='message'>Copied as "Copy of chickwts"</span></div><div class='output co'>#&gt; <span class='message'>Copying sheet "chickwts" from "sheet-copy-demo-aaa" to "sheet-copy-demo-bbb"</span></div><div class='output co'>#&gt; <span class='message'>Copied as "chicks-two"</span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * sheet-copy-demo-bbb: 15nqyh1GEWNSxrf8He3SBKOoqFmDpw4k5h2WPgg7CCr4</span>
+#&gt; <span class='message'>  * sheet-copy-demo-aaa: 1l-PwwuyV4tcE6yiO8-2ke-1aYJ4d5WGEX5bHzgS9CUE</span>
+#&gt; <span class='message'>  * sheet-copy-demo-aaa: 1bWoohhooAY8fnjZWa3yQ3qOU2A2WdXta4EpOxc2ypto</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

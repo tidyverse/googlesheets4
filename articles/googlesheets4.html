@@ -162,9 +162,6 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span><span class="op">)</span>
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
-<span class="co">#&gt; Request failed [429]. Retry 1 happens in 4.1 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 2 happens in 5 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 3 happens in 19.9 seconds ...</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
 <span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
@@ -282,10 +279,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "tremendous-gadwall"</span>
+<span class="co">#&gt; Creating new Sheet: "monochrome-verdin"</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: tremendous-gadwall</span>
-<span class="co">#&gt;               ID: 1jQ4f1U5_sBh9uL48L4wOz-r91CQDvhibwjweQ_G-Wwg</span>
+<span class="co">#&gt; Spreadsheet name: monochrome-verdin</span>
+<span class="co">#&gt;               ID: 1fIpo4U_wemH95XBox7_KR-DCNLaEe_EyB1crKzlFWiQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -297,13 +294,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * tremendous-gadwall: 1jQ4f1U5_sBh9uL48L4wOz-r91CQDvhibwjweQ_G-Wwg</span>
+<span class="co">#&gt;   * monochrome-verdin: 1fIpo4U_wemH95XBox7_KR-DCNLaEe_EyB1crKzlFWiQ</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; Creating new Sheet: "testy-hedgehog"</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1fYFEdm05vtPZvPqYVZ-soQGQ2-3RCGzBk5ljN0qozDA</span>
+<span class="co">#&gt;               ID: 103SdxHEJiEmZuhF_--j0PXnFX7Tk0tXuLxGVL-oi5cQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -317,7 +314,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1fYFEdm05vtPZvPqYVZ-soQGQ2-3RCGzBk5ljN0qozDA</span>
+<span class="co">#&gt;               ID: 103SdxHEJiEmZuhF_--j0PXnFX7Tk0tXuLxGVL-oi5cQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -345,12 +342,22 @@
 <p><code><a href="../reference/sheet_append.html">sheet_append()</a></code> adds one or more rows to an existing sheet.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ss</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/sheet_append.html">sheet_append</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">11</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">11</span><span class="op">]</span><span class="op">)</span>, sheet <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span>
-<span class="co">#&gt; Writing to "testy-hedgehog"</span>
-<span class="co">#&gt; Appending 1 row(s) to "df"</span>
+<span class="co">#&gt; Request failed [429]. Retry 1 happens in 1.9 seconds ...</span>
+<span class="co">#&gt; Request failed [429]. Retry 2 happens in 6.7 seconds ...</span>
+<span class="co">#&gt; Request failed [429]. Retry 3 happens in 5.8 seconds ...</span>
+<span class="co">#&gt; Request failed [429]. Retry 4 happens in 38 seconds ...</span>
+<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
+<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
+<span class="co">#&gt;   * Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:250395471985'.</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Error details:</span>
+<span class="co">#&gt;   * Error details of type 'google.rpc.ErrorInfo' may not be fully revealed.</span>
+<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
+<span class="co">#&gt;   * Consider opening an issue at https://github.com/r-lib/gargle/issues.</span>
 <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss</span>, sheet <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span>
 <span class="co">#&gt; Reading from "testy-hedgehog"</span>
 <span class="co">#&gt; Range "'df'"</span>
-<span class="co">#&gt; # A tibble: 8 x 2</span>
+<span class="co">#&gt; # A tibble: 7 x 2</span>
 <span class="co">#&gt;       x letters.4.10.</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;        </span>
 <span class="co">#&gt; 1     4 d            </span>
@@ -358,21 +365,21 @@
 <span class="co">#&gt; 3     6 f            </span>
 <span class="co">#&gt; 4     7 g            </span>
 <span class="co">#&gt; 5     8 h            </span>
-<span class="co">#&gt; # … with 3 more rows</span></code></pre></div>
+<span class="co">#&gt; # … with 2 more rows</span></code></pre></div>
 <p>A related function – <code><a href="../reference/range_write.html">range_write()</a></code> – writes arbitrary data, into an arbitrary range. It has a very different “feel” from <code><a href="../reference/gs4_create.html">gs4_create()</a></code>, <code><a href="../reference/sheet_write.html">sheet_write()</a></code>, and <code><a href="../reference/sheet_append.html">sheet_append()</a></code>, all of which assume we’re writing or growing a table of data in a (work)sheet. <code><a href="../reference/range_write.html">range_write()</a></code> is much more surgical and limited. <code><a href="../reference/range_write.html">range_write()</a></code> makes fewer assumptions about what it’s writing and why.</p>
 <p>There is also a family of <code>sheet_*()</code> functions that do pure (work)sheet operations, such as add and delete.</p>
 <p>We take one last look at the sheets we created in <code>ss</code>, then clean up.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 x 8</span>
-<span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 2057514879 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1  781109694 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt;   name     index        id type  visible grid_rows grid_columns data  </span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
+<span class="co">#&gt; 1 df           0 627198258 GRID  TRUE            8            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 244214817 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * testy-hedgehog: 1fYFEdm05vtPZvPqYVZ-soQGQ2-3RCGzBk5ljN0qozDA</span></code></pre></div>
+<span class="co">#&gt;   * testy-hedgehog: 103SdxHEJiEmZuhF_--j0PXnFX7Tk0tXuLxGVL-oi5cQ</span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

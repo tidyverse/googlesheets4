@@ -17,6 +17,16 @@ knitr::opts_chunk$set(
 message("No token available. Code chunks will not be evaluated.")
 ```
 
+```{r eval = FALSE, include = FALSE}
+# article assume current user has access to a Sheet named "chicken-sheet"
+# execute this if it seems to have gone missing
+x <- drive_find("chicken")
+if (nrow(x) != 1) {
+  x <- gs4_example("chicken-sheet")
+  y <- drive_cp(x, name = "chicken-sheet")
+}
+```
+
 ## Why use googlesheets4 and googledrive together?
 
 googlesheets4 wraps the Sheets API v4, which lets you read, write, and format data in Sheets. The Sheets API is very focused on spreadsheet-oriented data and metadata, i.e. (work)sheets and cells.

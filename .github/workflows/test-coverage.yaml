@@ -28,6 +28,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Reveal env vars
+        run: |
+          echo GITHUB_ACTIONS    = $GITHUB_ACTIONS
+          echo GITHUB_WORKFLOW   = $GITHUB_WORKFLOW
+          echo GITHUB_RUN_ID     = $GITHUB_RUN_ID
+
       - uses: r-lib/actions/setup-r@v1
         id: install-r
 

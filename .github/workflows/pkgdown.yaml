@@ -1,73 +1,68 @@
 on:
   push:
-    branches: master
+    branches:
+      - main
+      - master
   schedule:
     # * is a special character in YAML so we have to quote this string
     # 3am Pacific = 11am UTC
     # https://crontab.guru is your friend
-    - cron:  '0 12 * * *'
+    - cron:  '0 11 * * *'
 
 name: pkgdown
 
 jobs:
   pkgdown:
-    runs-on: macOS-latest
+    runs-on: ubuntu-18.04
     if: github.event_name == 'schedule' || contains(github.event.head_commit.message, '[pkgdown]')
 
     env:
+      RSPM: https://packagemanager.rstudio.com/cran/__linux__/bionic/latest
       GOOGLESHEETS4_PASSWORD: ${{ secrets.GOOGLESHEETS4_PASSWORD }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
 
-      - name: Reveal env vars
+      - uses: r-lib/actions/setup-r@v1
+        id: install-r
+
+      - uses: r-lib/actions/setup-pandoc@v1
+
+      - name: Install pak and query dependencies
         run: |
-          echo GITHUB_WORKFLOW   = $GITHUB_WORKFLOW
-          echo HOME              = $HOME
-          echo GITHUB_ACTION     = $GITHUB_ACTION
-          echo GITHUB_ACTIONS    = $GITHUB_ACTIONS
-          echo GITHUB_ACTOR      = $GITHUB_ACTOR
-          echo GITHUB_REPOSITORY = $GITHUB_REPOSITORY
-          echo GITHUB_EVENT_NAME = $GITHUB_EVENT_NAME
-          echo GITHUB_EVENT_PATH = $GITHUB_EVENT_PATH
-          echo GITHUB_WORKSPACE  = $GITHUB_WORKSPACE
-          echo GITHUB_SHA        = $GITHUB_SHA
-          echo GITHUB_REF        = $GITHUB_REF
-
-      - uses: r-lib/actions/setup-r@master
-
-      - uses: r-lib/actions/setup-pandoc@master
-
-      - name: Query dependencies
-        run: |
-          # getting dev remotes for better behaviour re: installation order
-          install.packages("https://github.com/r-lib/remotes/archive/master.tar.gz", repos = NULL)
-          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
-          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+          install.packages("pak", repos = "https://r-lib.github.io/p/pak/dev/")
+          saveRDS(pak::pkg_deps("local::.", dependencies = TRUE), ".github/r-depends.rds")
         shell: Rscript {0}
 
       - name: Cache R packages
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ${{ env.R_LIBS_USER }}
-          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
-          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+          key: ubuntu-18.04-${{ steps.install-r.outputs.installed-r-version }}-1-${{ hashFiles('.github/r-depends.rds') }}
+          restore-keys: ubuntu-18.04-${{ steps.install-r.outputs.installed-r-version }}-1-
+
+      - name: Install system dependencies
+        if: runner.os == 'Linux'
+        run: |
+          pak::local_system_requirements(execute = TRUE)
+          pak::pkg_system_requirements("pkgdown", execute = TRUE)
+        shell: Rscript {0}
 
       - name: Install dependencies
         run: |
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_cran("tidyverse")
-          remotes::install_github("tidyverse/tidytemplate")
-          remotes::install_github("hadley/emo")
-          install.packages("pkgdown")
+          pak::local_install_dev_deps(upgrade = TRUE)
+          pak::pkg_install("tidyverse")
+          pak::pkg_install("tidyverse/tidytemplate")
+          pak::pkg_install("hadley/emo")
+          pak::pkg_install("pkgdown")
         shell: Rscript {0}
 
       - name: Install package
         run: R CMD INSTALL .
 
-      - name: Deploy package
+      - name: Build and deploy pkgdown site
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
           Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'

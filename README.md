@@ -8,10 +8,9 @@
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/googlesheets4)](https://CRAN.R-project.org/package=googlesheets4)
-[![R build
-status](https://github.com/tidyverse/googlesheets4/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googlesheets4/actions)
 [![Codecov test
 coverage](https://codecov.io/gh/tidyverse/googlesheets4/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/googlesheets4?branch=master)
+[![R-CMD-check](https://github.com/tidyverse/googlesheets4/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googlesheets4/actions)
 <!-- badges: end -->
 
 ## Overview
@@ -66,10 +65,10 @@ library(googlesheets4)
 The main “read” function of the googlesheets4 package goes by two names,
 because we want it to make sense in two contexts:
 
-  - `read_sheet()` evokes other table-reading functions, like
+-   `read_sheet()` evokes other table-reading functions, like
     `readr::read_csv()` and `readxl::read_excel()`. The `sheet` in this
     case refers to a Google (spread)Sheet.
-  - `range_read()` is the right name according to the [naming
+-   `range_read()` is the right name according to the [naming
     convention](https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html)
     used throughout the googlesheets4 package.
 
@@ -81,9 +80,9 @@ reexports `%>%`), but works just fine without the pipe.
 
 Read from
 
-  - a URL
-  - a Sheet ID
-  - a
+-   a URL
+-   a Sheet ID
+-   a
     [`dribble`](https://googledrive.tidyverse.org/reference/dribble.html)
     produced by the googledrive package, which can lookup by file name
 
@@ -154,11 +153,11 @@ some initial data.
 ``` r
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> Creating new Sheet: "fluffy-bunny"
-#>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1K4a9H9_7WyYm2bOV6VHi9aCtIHIjoGI4auNf92hzCVY
-#>             Locale: en_US
-#>          Time zone: Etc/GMT
-#>        # of sheets: 1
+#> Spreadsheet name: fluffy-bunny
+#>               ID: 1NcpGzsBrroxjoQCbJA5GRMTw9uuT44nxFRlnUEn_hXE
+#>           Locale: en_US
+#>        Time zone: Etc/GMT
+#>      # of sheets: 1
 #> 
 #> (Sheet name): (Nominal extent in rows x columns)
 #>      flowers: 7 x 5
@@ -173,11 +172,11 @@ head(mtcars) %>%
 #> Writing to "fluffy-bunny"
 #> Writing to sheet "autos"
 ss
-#>   Spreadsheet name: fluffy-bunny
-#>                 ID: 1K4a9H9_7WyYm2bOV6VHi9aCtIHIjoGI4auNf92hzCVY
-#>             Locale: en_US
-#>          Time zone: Etc/GMT
-#>        # of sheets: 2
+#> Spreadsheet name: fluffy-bunny
+#>               ID: 1NcpGzsBrroxjoQCbJA5GRMTw9uuT44nxFRlnUEn_hXE
+#>           Locale: en_US
+#>        Time zone: Etc/GMT
+#>      # of sheets: 2
 #> 
 #> (Sheet name): (Nominal extent in rows x columns)
 #>      flowers: 7 x 5
@@ -223,26 +222,27 @@ contributing to this project, you agree to abide by its terms.
 googlesheets4 draws on and complements / emulates other packages in the
 tidyverse:
 
-  - [googlesheets](https://cran.r-project.org/package=googlesheets) is
+-   [googlesheets](https://cran.r-project.org/package=googlesheets) is
     the package that googlesheets4 replaces. Main improvements in
     googlesheets4: (1) wraps the current, most modern Sheets API; (2)
     leaves all “whole file” operations to googledrive; and (3) uses
     shared infrastructure for auth and more, from the gargle package.
     The v3 API wrapped by googlesheets is deprecated. [Starting in
-    April/May 2020](https://cloud.google.com/blog/products/g-suite/migrate-your-apps-use-latest-sheets-api),
+    April/May
+    2020](https://cloud.google.com/blog/products/g-suite/migrate-your-apps-use-latest-sheets-api),
     features will gradually be disabled and it’s anticipated the API
     will fully shutdown in September 2020. At that point, the original
     googlesheets package must be retired.
-  - [googledrive](https://googledrive.tidyverse.org) provides a
+-   [googledrive](https://googledrive.tidyverse.org) provides a
     fully-featured interface to the Google Drive API. Any “whole file”
     operations can be accomplished with googledrive: upload or download
     or update a spreadsheet, copy, rename, move, change permission,
     delete, etc. googledrive supports Team Drives.
-  - [readxl](https://readxl.tidyverse.org) is the tidyverse package for
+-   [readxl](https://readxl.tidyverse.org) is the tidyverse package for
     reading Excel files (xls or xlsx) into an R data frame.
     googlesheets4 takes cues from parts of the readxl interface,
     especially around specifying which cells to read.
-  - [readr](https://readr.tidyverse.org) is the tidyverse package for
+-   [readr](https://readr.tidyverse.org) is the tidyverse package for
     reading delimited files (e.g., csv or tsv) into an R data frame.
     googlesheets4 takes cues from readr with respect to column type
     specification.

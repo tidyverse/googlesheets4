@@ -104,6 +104,6 @@ jobs:
           name: ${{ matrix.config.os }}-r${{ matrix.config.r }}-results
           path: check
 
-       - name: Fix path for Windows caching
-         if: runner.os == 'Windows'
-         run: echo "C:/Program Files/Git/usr/bin" >> $GITHUB_PATH
+      - name: Fix path for Windows caching
+        if: runner.os == 'Windows'
+        run: echo "C:/Program Files/Git/usr/bin" >> $GITHUB_PATH

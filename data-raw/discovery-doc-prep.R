@@ -88,8 +88,9 @@ these <- c(
 
 fs::dir_create(here::here("data-raw", "schemas"))
 write_one <- function(data, id) {
+  withr::local_options(list(width = 150, crayon.enabled = FALSE))
+  pillar:::num_colors(forget = TRUE)
   sink(here::here("data-raw", "schemas", id))
-  withr::local_options(list(width = 150))
   cat("#", id, " \n")
   print(data, n = Inf, width = Inf)
   sink()

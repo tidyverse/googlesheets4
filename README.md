@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/googlesheets4)](https://CRAN.R-project.org/package=googlesheets4)
 [![Codecov test
@@ -16,7 +16,7 @@ coverage](https://codecov.io/gh/tidyverse/googlesheets4/branch/master/graph/badg
 ## Overview
 
 googlesheets4 provides an R interface to [Google
-Sheets](https://spreadsheets.google.com/) via the [Sheets API
+Sheets](https://docs.google.com/spreadsheets/) via the [Sheets API
 v4](https://developers.google.com/sheets/api/). It is a reboot of an
 earlier package called
 [googlesheets](https://github.com/jennybc/googlesheets#readme).
@@ -154,7 +154,7 @@ some initial data.
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> Creating new Sheet: "fluffy-bunny"
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 1NcpGzsBrroxjoQCbJA5GRMTw9uuT44nxFRlnUEn_hXE
+#>               ID: 1D3a3lurpANPviWofNqA0GXKzIh4LRzrXKcRKl3sMTeg
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 1
@@ -173,7 +173,7 @@ head(mtcars) %>%
 #> Writing to sheet "autos"
 ss
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 1NcpGzsBrroxjoQCbJA5GRMTw9uuT44nxFRlnUEn_hXE
+#>               ID: 1D3a3lurpANPviWofNqA0GXKzIh4LRzrXKcRKl3sMTeg
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 2

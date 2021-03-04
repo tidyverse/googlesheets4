@@ -29,7 +29,7 @@ googlesheets4:::gs4_auth_docs()
 # googlesheets4 <a href='https:/googlesheets4.tidyverse.org'><img src='man/figures/logo.png' align="right" height="138.5" /></a>
 
 <!-- badges: start -->
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![CRAN status](https://www.r-pkg.org/badges/version/googlesheets4)](https://CRAN.R-project.org/package=googlesheets4)
 [![Codecov test coverage](https://codecov.io/gh/tidyverse/googlesheets4/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/googlesheets4?branch=master)
 [![R-CMD-check](https://github.com/tidyverse/googlesheets4/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googlesheets4/actions)
@@ -37,7 +37,7 @@ googlesheets4:::gs4_auth_docs()
 
 ## Overview
 
-googlesheets4 provides an R interface to [Google Sheets](https://spreadsheets.google.com/) via the [Sheets API v4](https://developers.google.com/sheets/api/). It is a reboot of an earlier package called [googlesheets](https://github.com/jennybc/googlesheets#readme).
+googlesheets4 provides an R interface to [Google Sheets](https://docs.google.com/spreadsheets/) via the [Sheets API v4](https://developers.google.com/sheets/api/). It is a reboot of an earlier package called [googlesheets](https://github.com/jennybc/googlesheets#readme).
 
 *Why **4**? Why googlesheets**4**? Did I miss googlesheets1 through 3? No. The idea is to name the package after the corresponding version of the Sheets API. In hindsight, the original googlesheets should have been googlesheets**3**.*
 

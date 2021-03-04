@@ -1,14 +1,35 @@
 #' Make a Google Sheets API request
 #'
-#' @description Low-level function to execute a Sheets API request. Most users
-#'   should, instead, use higher-level wrappers that facilitate common tasks,
-#'   such as reading or writing worksheets or cell ranges. The functions here
-#'   are intended for internal use and for programming around the Sheets API.
+#' Low-level function to execute a Sheets API request. Most users should,
+#' instead, use higher-level wrappers that facilitate common tasks, such as
+#' reading or writing worksheets or cell ranges. The functions here are intended
+#' for internal use and for programming around the Sheets API.
 #'
-#' @description `make_request()` does very, very little: it calls an HTTP
-#'   method, only adding the googlesheets4 user agent. Typically the input has
-#'   been created with [request_generate()] or [gargle::request_build()] and the
-#'   output is processed with `process_response()`.
+#' `make_request()` is a very thin wrapper around [gargle::request_retry()],
+#' only adding the googlesheets4 user agent. Typically the input has been
+#' created with [request_generate()] or [gargle::request_build()] and the output
+#' is processed with `process_response()`.
+#'
+#' [gargle::request_retry()] retries requests that error with `429
+#' RESOURCE_EXHAUSTED`. Its basic scheme is exponential backoff, with one tweak
+#' that is very specific to the Sheets API, which has documented [usage
+#' limits](https://developers.google.com/sheets/api/limits):
+#'
+#' "a limit of 500 requests per 100 seconds per project and 100 requests per 100
+#' seconds per user"
+#'
+#' Note that the "project" here means everyone using googlesheets4 who hasn't
+#' configured their own OAuth app. This is potentially a lot of users, all
+#' acting independently.
+#'
+#' If you hit the "100 requests per 100 seconds per **user**" limit (which
+#' really does mean YOU), the first wait time is a bit more than 100 seconds,
+#' then we revert to exponential backoff.
+#'
+#' If you experience lots of retries, especially with 100 second delays, it
+#' means your use of googlesheets4 is more than casual and **it's time for you
+#' to get your own OAuth app or use a service account token**. This is explained
+#' in the gargle vignette `vignette("get-api-credentials", package = "gargle")`.
 #'
 #' @param x List. Holds the components for an HTTP request, presumably created
 #'   with [request_generate()] or [gargle::request_build()]. Must contain a

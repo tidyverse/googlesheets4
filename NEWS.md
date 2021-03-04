@@ -1,6 +1,8 @@
 # googlesheets4 (development version)
 
-* `gs4_get()` retrieves information about protected ranges.
+All requests are now made with retry capability. Specifically, when a request fails due to a `429 RESOURCE_EXHAUSTED` error, it is retried a few times, with suitable delays. Note that if it appears that you *personally* have exhausted your quota (more than 100 requests in 100 seconds), the initial waiting time is 100 seconds and this indicates you need to get your own OAuth app or service account.
+
+`gs4_get()` retrieves information about protected ranges.
 
 # googlesheets4 0.2.0
 

@@ -242,7 +242,7 @@ always determined from the token itself, never from this argument. Use <code>NA<
 or <code>FALSE</code> to match nothing and force the OAuth dance in the browser. Use
 <code>TRUE</code> to allow email auto-discovery, if exactly one matching token is
 found in the cache. Defaults to the option named "gargle_oauth_email",
-retrieved by <code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle::gargle_oauth_email()</a></code>.</p></td>
+retrieved by <code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oauth_email()</a></code>.</p></td>
     </tr>
     <tr>
       <th>path</th>
@@ -253,7 +253,7 @@ file path or JSON string).</p></td>
     <tr>
       <th>scopes</th>
       <td><p>A character vector of scopes to request. Pick from those listed
-at <a href='https://developers.google.com/identity/protocols/googlescopes'>https://developers.google.com/identity/protocols/googlescopes</a>.</p>
+at <a href='https://developers.google.com/identity/protocols/oauth2/scopes'>https://developers.google.com/identity/protocols/oauth2/scopes</a>.</p>
 <p>For certain token flows, the
 <code>"https://www.googleapis.com/auth/userinfo.email"</code> scope is unconditionally
 included. This grants permission to retrieve the email address associated
@@ -264,13 +264,13 @@ does not appear on the consent screen.</p></td>
     <tr>
       <th>cache</th>
       <td><p>Specifies the OAuth token cache. Defaults to the option named
-"gargle_oauth_cache", retrieved via <code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle::gargle_oauth_cache()</a></code>.</p></td>
+"gargle_oauth_cache", retrieved via <code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oauth_cache()</a></code>.</p></td>
     </tr>
     <tr>
       <th>use_oob</th>
       <td><p>Whether to prefer "out of band" authentication. Defaults to
 the option named "gargle_oob_default", retrieved via
-<code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle::gargle_oob_default()</a></code>.</p></td>
+<code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle_oob_default()</a></code>.</p></td>
     </tr>
     <tr>
       <th>token</th>

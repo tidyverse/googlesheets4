@@ -151,7 +151,7 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>googlesheets4 provides an R interface to <a href="https://spreadsheets.google.com/">Google Sheets</a> via the <a href="https://developers.google.com/sheets/api/">Sheets API v4</a>. It is a reboot of an earlier package called <a href="https://github.com/jennybc/googlesheets#readme">googlesheets</a>.</p>
+<p>googlesheets4 provides an R interface to <a href="https://docs.google.com/spreadsheets/">Google Sheets</a> via the <a href="https://developers.google.com/sheets/api/">Sheets API v4</a>. It is a reboot of an earlier package called <a href="https://github.com/jennybc/googlesheets#readme">googlesheets</a>.</p>
 <p><em>Why <strong>4</strong>? Why googlesheets<strong>4</strong>? Did I miss googlesheets1 through 3? No. The idea is to name the package after the corresponding version of the Sheets API. In hindsight, the original googlesheets should have been googlesheets<strong>3</strong>.</em></p>
 </div>
 <div id="installation" class="section level2">
@@ -250,7 +250,7 @@
 <code class="sourceCode R"><span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"fluffy-bunny"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>flowers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Creating new Sheet: "fluffy-bunny"</span>
 <span class="co">#&gt; Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;               ID: 1NcpGzsBrroxjoQCbJA5GRMTw9uuT44nxFRlnUEn_hXE</span>
+<span class="co">#&gt;               ID: 1D3a3lurpANPviWofNqA0GXKzIh4LRzrXKcRKl3sMTeg</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -265,7 +265,7 @@
 <span class="co">#&gt; Writing to sheet "autos"</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;               ID: 1NcpGzsBrroxjoQCbJA5GRMTw9uuT44nxFRlnUEn_hXE</span>
+<span class="co">#&gt;               ID: 1D3a3lurpANPviWofNqA0GXKzIh4LRzrXKcRKl3sMTeg</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -350,7 +350,7 @@
   <div class="dev-status">
 <h2>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="lifecycle"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="lifecycle"></a></li>
 <li><a href="https://CRAN.R-project.org/package=googlesheets4"><img src="https://www.r-pkg.org/badges/version/googlesheets4" alt="CRAN status"></a></li>
 <li><a href="https://codecov.io/gh/tidyverse/googlesheets4?branch=master"><img src="https://codecov.io/gh/tidyverse/googlesheets4/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://github.com/tidyverse/googlesheets4/actions"><img src="https://github.com/tidyverse/googlesheets4/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>

@@ -50,14 +50,10 @@
 
 
 <meta property="og:title" content="Make a Google Sheets API request — request_make" />
-<meta property="og:description" content="Low-level function to execute a Sheets API request. Most users
-should, instead, use higher-level wrappers that facilitate common tasks,
-such as reading or writing worksheets or cell ranges. The functions here
-are intended for internal use and for programming around the Sheets API.
-make_request() does very, very little: it calls an HTTP
-method, only adding the googlesheets4 user agent. Typically the input has
-been created with request_generate() or gargle::request_build() and the
-output is processed with process_response()." />
+<meta property="og:description" content="Low-level function to execute a Sheets API request. Most users should,
+instead, use higher-level wrappers that facilitate common tasks, such as
+reading or writing worksheets or cell ranges. The functions here are intended
+for internal use and for programming around the Sheets API." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -197,14 +193,10 @@ output is processed with process_response()." />
     </div>
 
     <div class="ref-description">
-    <p>Low-level function to execute a Sheets API request. Most users
-should, instead, use higher-level wrappers that facilitate common tasks,
-such as reading or writing worksheets or cell ranges. The functions here
-are intended for internal use and for programming around the Sheets API.</p>
-<p><code>make_request()</code> does very, very little: it calls an HTTP
-method, only adding the googlesheets4 user agent. Typically the input has
-been created with <code><a href='request_generate.html'>request_generate()</a></code> or <code><a href='https://gargle.r-lib.org/reference/request_develop.html'>gargle::request_build()</a></code> and the
-output is processed with <code>process_response()</code>.</p>
+    <p>Low-level function to execute a Sheets API request. Most users should,
+instead, use higher-level wrappers that facilitate common tasks, such as
+reading or writing worksheets or cell ranges. The functions here are intended
+for internal use and for programming around the Sheets API.</p>
     </div>
 
     <pre class="usage"><span class='fu'>request_make</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span>, encode <span class='op'>=</span> <span class='st'>"json"</span><span class='op'>)</span></pre>
@@ -235,6 +227,26 @@ default is <code>"multipart"</code>. Other acceptable values are <code>"form"</c
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Object of class <code>response</code> from <a href='https://httr.r-lib.org/reference/httr-package.html'>httr</a>.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>make_request()</code> is a very thin wrapper around <code><a href='https://gargle.r-lib.org/reference/request_retry.html'>gargle::request_retry()</a></code>,
+only adding the googlesheets4 user agent. Typically the input has been
+created with <code><a href='request_generate.html'>request_generate()</a></code> or <code><a href='https://gargle.r-lib.org/reference/request_develop.html'>gargle::request_build()</a></code> and the output
+is processed with <code>process_response()</code>.</p>
+<p><code><a href='https://gargle.r-lib.org/reference/request_retry.html'>gargle::request_retry()</a></code> retries requests that error with <code>429 RESOURCE_EXHAUSTED</code>. Its basic scheme is exponential backoff, with one tweak
+that is very specific to the Sheets API, which has documented <a href='https://developers.google.com/sheets/api/limits'>usage limits</a>:</p>
+<p>"a limit of 500 requests per 100 seconds per project and 100 requests per 100
+seconds per user"</p>
+<p>Note that the "project" here means everyone using googlesheets4 who hasn't
+configured their own OAuth app. This is potentially a lot of users, all
+acting independently.</p>
+<p>If you hit the "100 requests per 100 seconds per <strong>user</strong>" limit (which
+really does mean YOU), the first wait time is a bit more than 100 seconds,
+then we revert to exponential backoff.</p>
+<p>If you experience lots of retries, especially with 100 second delays, it
+means your use of googlesheets4 is more than casual and <strong>it's time for you
+to get your own OAuth app or use a service account token</strong>. This is explained
+in the gargle vignette <code><a href='https://gargle.r-lib.org/articles/get-api-credentials.html'>vignette("get-api-credentials", package = "gargle")</a></code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p>Other low-level API functions: 

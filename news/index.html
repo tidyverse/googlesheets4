@@ -191,10 +191,9 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#googlesheets4-development-version" class="anchor"></a>googlesheets4 (development version)<small> Unreleased </small>
 </h1>
-<ul>
-<li>
-<code><a href="../reference/gs4_get.html">gs4_get()</a></code> retrieves information about protected ranges.</li>
-</ul>
+<p>All requests are now made with retry capability. Specifically, when a request fails due to a <code>429 RESOURCE_EXHAUSTED</code> error, it is retried a few times, with suitable delays. Note that if it appears that you <em>personally</em> have exhausted your quota (more than 100 requests in 100 seconds), the initial waiting time is 100 seconds and this indicates you need to get your own OAuth app or service account.</p>
+<p>When googlesheets4 and googledrive are used together in the same session, we alert you if you’re logged in to these package with different Google identities.</p>
+<p><code><a href="../reference/gs4_get.html">gs4_get()</a></code> retrieves information about protected ranges.</p>
 </div>
     <div id="googlesheets4-020" class="section level1">
 <h1 class="page-header" data-toc-text="0.2.0">

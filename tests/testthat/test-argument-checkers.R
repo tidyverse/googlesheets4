@@ -12,7 +12,7 @@ test_that("logical col_names must be TRUE or FALSE", {
 })
 
 test_that("standardise_ctypes() turns NULL col_types into 'COL_GUESS'", {
-  expect_equivalent(standardise_ctypes(NULL), "COL_GUESS")
+  expect_equal(standardise_ctypes(NULL), c("?" = "COL_GUESS"))
 })
 
 test_that("standardise_ctypes() errors for only 'COL_SKIP'", {
@@ -23,7 +23,7 @@ test_that("standardise_ctypes() errors for only 'COL_SKIP'", {
 
 test_that("standardise_ctypes() understands and requires readr shortcodes", {
   good <- "_-lidnDtTcCL?"
-  expect_equivalent(
+  expect_equal(
     standardise_ctypes(good),
     c(`_` = "COL_SKIP", `-` = "COL_SKIP", l = "CELL_LOGICAL",
       i = "CELL_INTEGER", d = "CELL_NUMERIC", n = "CELL_NUMERIC",

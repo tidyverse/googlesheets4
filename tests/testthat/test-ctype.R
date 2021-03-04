@@ -15,8 +15,8 @@ test_that("ctype() works on a SHEET_CELL, when it should", {
 })
 
 test_that("ctype() works on shortcodes, when it should", {
-  expect_equivalent(
-    ctype(c("?", "-", "n", "z", "D")),
+  expect_equal(
+    unname(ctype(c("?", "-", "n", "z", "D"))),
     c("COL_GUESS", "COL_SKIP", "CELL_NUMERIC", NA, "CELL_DATE")
   )
 })
@@ -29,7 +29,7 @@ test_that("ctype() works on lists, when it should", {
     structure(1, class = c("wut", "SHEETS_CELL")),
     structure(1, class = c("CELL_TEXT", "SHEETS_CELL"))
   )
-  expect_equivalent(
+  expect_equal(
     ctype(list_of_cells),
     c("CELL_NUMERIC", NA, NA, NA, "CELL_TEXT")
   )
@@ -37,10 +37,10 @@ test_that("ctype() works on lists, when it should", {
 
 test_that("effective_cell_type() doesn't just pass ctype through", {
   ## neither the API nor JSON has a proper way to convey integer-ness
-  expect_equivalent(effective_cell_type("CELL_INTEGER"), "CELL_NUMERIC")
+  expect_equal(unname(effective_cell_type("CELL_INTEGER")), "CELL_NUMERIC")
   ## conversion to date or time is lossy, so never guess that
-  expect_equivalent(effective_cell_type("CELL_DATE"), "CELL_DATETIME")
-  expect_equivalent(effective_cell_type("CELL_TIME"), "CELL_DATETIME")
+  expect_equal(unname(effective_cell_type("CELL_DATE")), "CELL_DATETIME")
+  expect_equal(unname(effective_cell_type("CELL_TIME")), "CELL_DATETIME")
 })
 
 test_that("consensus_col_type() implements our type coercion DAG", {

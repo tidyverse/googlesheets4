@@ -53,7 +53,7 @@ test_that("we can make a GridRange from a range_spec", {
   spec2 <- new_range_spec(
     sheet_name = "abc", cell_range = "C3", sheets_df = sheets_df
   )
-  expect_equivalent(as_GridRange(spec1), as_GridRange(spec2))
+  expect_equal(as_GridRange(spec1), as_GridRange(spec2))
 })
 
 test_that("we refuse to make a GridRange from a named_range", {

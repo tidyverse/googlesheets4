@@ -25,7 +25,7 @@ test_that("we can (or won't) make a GridCoordinate from a mutli-cell range", {
   spec2 <- new_range_spec(
     sheet_name = "abc", cell_range = "A3", sheets_df = sheets_df
   )
-  expect_equivalent(
+  expect_equal(
     as_GridCoordinate(spec, strict = FALSE),
     as_GridCoordinate(spec2)
   )

@@ -3,5 +3,5 @@ test_that("gs4_find() works", {
   skip_if_no_token()
 
   df <- gs4_find(n_max = 5)
-  expect_is(df, "dribble")
+  expect_s3_class(df, "dribble")
 })

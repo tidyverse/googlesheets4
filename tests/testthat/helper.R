@@ -60,11 +60,3 @@ local_ss <- function(name, ..., env = parent.frame()) {
   }, envir = env)
   gs4_create(name, ...)
 }
-
-toggle_rlang_interactive <- function() {
-  before <- getOption("rlang_interactive")
-  after <- if (identical(before, FALSE)) TRUE else FALSE
-  options(rlang_interactive = after)
-  ui_line(glue::glue("rlang_interactive: {before %||% '<unset>'} --> {after}"))
-  invisible()
-}

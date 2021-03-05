@@ -40,5 +40,3 @@ warning_glue_data <- function(..., .sep = "", .envir = parent.frame(),
 }
 
 warning_collapse <- function(x) warning(glue_collapse(x, sep = "\n"))
-
-message_collapse <- function(x) message(glue_collapse(x, sep = "\n"))

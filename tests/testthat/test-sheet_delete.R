@@ -17,18 +17,15 @@ test_that("sheet_delete() works", {
 
   sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 
-  # the suppressMessages() calls are targetting googledrive
-  # when it gets a UI overhaul and knows to be silent during testing
-  # they can be removed
-  suppressMessages(expect_error_free(
+  expect_error_free(
     sheet_delete(ss, 1)
-  ))
-  suppressMessages(expect_error_free(
+  )
+  expect_error_free(
     sheet_delete(ss, "gamma")
-  ))
-  suppressMessages(expect_error_free(
+  )
+  expect_error_free(
     sheet_delete(ss, list("alpha", 2))
-  ))
+  )
 
   sheets_df <- sheet_properties(ss)
 

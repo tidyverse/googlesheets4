@@ -162,7 +162,7 @@ infer_ctype <- function(cell, na = "", trim_ws = TRUE) {
       string  = "CELL_TEXT",
       boolean = "CELL_LOGICAL",
       formula = {
-        warning_glue("Cell has formula as effectiveValue. I thought impossible!")
+        warn("Internal warning: Cell has formula as effectiveValue. I thought impossible!")
         "CELL_TEXT"
       },
       stop_glue("Unhandled effective_type: {sq(effective_type)}")

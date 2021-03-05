@@ -22,21 +22,3 @@ stop_glue_data <- function(..., .sep = "", .envir = parent.frame(),
 }
 
 stop_collapse <- function(x) stop(glue_collapse(x, sep = "\n"), call. = FALSE)
-
-warning_glue <- function(..., .sep = "", .envir = parent.frame(),
-                         call. = FALSE, .domain = NULL) {
-  warning(
-    glue(..., .sep = .sep, .envir = .envir),
-    call. = call., domain = .domain
-  )
-}
-
-warning_glue_data <- function(..., .sep = "", .envir = parent.frame(),
-                              call. = FALSE, .domain = NULL) {
-  warning(
-    glue_data(..., .sep = .sep, .envir = .envir),
-    call. = call., domain = .domain
-  )
-}
-
-warning_collapse <- function(x) warning(glue_collapse(x, sep = "\n"))

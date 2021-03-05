@@ -88,7 +88,7 @@ as_sheets_id <- function(x, ...) UseMethod("as_sheets_id")
 
 #' @export
 as_sheets_id.NULL <- function(x, ...) {
-  stop_glue("Cannot turn `NULL` into a `sheets_id` object.")
+  abort_unsupported_conversion(x, "sheets_id")
 }
 
 #' @export
@@ -123,10 +123,7 @@ as_sheets_id.dribble <- function(x, ...) {
 
 #' @export
 as_sheets_id.default <- function(x, ...) {
-  stop_glue(
-    "Don't know how to coerce an object of class {class_collapse(x)} ",
-    "into a 'sheets_id'"
-  )
+  abort_unsupported_conversion(x, to = 'sheets_id')
 }
 
 #' @export

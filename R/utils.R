@@ -127,7 +127,3 @@ groom_text <- function(x, na = "", trim_ws = TRUE) {
   }
   enforce_na(x, na)
 }
-
-class_collapse <- function(x) {
-  sq(glue_collapse(class(x), sep = '/'))
-}

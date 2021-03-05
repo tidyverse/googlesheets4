@@ -23,10 +23,7 @@ as_CellData <- function(x, .na = NULL) {
 
 #' @export
 as_CellData.default <- function(x, .na = NULL) {
-  stop_glue(
-    "Don't know how to make an instance of {bt('CellData')} from something of ",
-    "class {class_collapse(x)}."
-  )
+  abort_unsupported_conversion(x, to = 'CellData')
 }
 
 # I want to centralize what we send for NA, even though -- for now, at

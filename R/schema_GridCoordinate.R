@@ -4,10 +4,7 @@ as_GridCoordinate <- function(x, ...) {
 
 #' @export
 as_GridCoordinate.default <- function(x, ...) {
-  stop_glue(
-    "Don't know how to make an instance of {bt('GridCoordinate')} from something of ",
-    "class {class_collapse(x)}."
-  )
+  abort_unsupported_conversion(x, to = 'GridCoordinate')
 }
 
 #' @export

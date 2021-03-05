@@ -33,7 +33,9 @@ ctype <- function(x,  ...) {
 }
 
 #' @export
-ctype.NULL <- function(x, ...) stop_glue("Cannot turn `NULL` into `ctype`.")
+ctype.NULL <- function(x, ...) {
+  abort_unsupported_conversion(x, "ctype")
+}
 
 #' @export
 ctype.SHEETS_CELL <- function(x, ...) {
@@ -58,9 +60,7 @@ ctype.list <- function(x, ...) {
 
 #' @export
 ctype.default <- function(x, ...) {
-  stop_glue(
-    "Don't know how to coerce an object of class {class_collapse(x)} to 'ctype'"
-  )
+  abort_unsupported_conversion(x, to = 'ctype')
 }
 
 .discovered_to_effective_type <- c(

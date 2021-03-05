@@ -9,3 +9,10 @@ test_that("gs4_abort() glues data in", {
   x <- "this"
   expect_gs4_error(gs4_abort("`x` is {sq(x)}"), "`x` is 'this'", fixed = TRUE)
 })
+
+test_that("abort_unsupported_conversion() works", {
+  x <- structure(1, class = c("a", "b", "c"))
+  expect_snapshot_error(
+    abort_unsupported_conversion(x, "d")
+  )
+})

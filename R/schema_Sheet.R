@@ -11,10 +11,7 @@ as_Sheet <- function(x, ...) {
 
 #' @export
 as_Sheet.default <- function(x, ...) {
-  stop_glue(
-    "Don't know how to make an instance of {bt('Sheet')} from something of ",
-    "class {class_collapse(x)}."
-  )
+  abort_unsupported_conversion(x, to = 'Sheet')
 }
 
 #' @export

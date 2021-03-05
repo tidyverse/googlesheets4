@@ -20,8 +20,8 @@ expect_error_free <- function(...) {
   expect_error(..., regexp = NA)
 }
 
-expect_gs4_error <- function(...) {
-  expect_error(..., class = "gs4_error")
+expect_gs4_error <- function(..., class = "gs4_error") {
+  expect_error(..., class = class)
 }
 
 ref <- function(pattern, ...) {

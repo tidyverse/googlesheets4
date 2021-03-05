@@ -37,7 +37,7 @@ range_add_named <- function(ss,
   check_range(range)
 
   x <- gs4_get(ssid)
-  message_glue("Working in {dq(x$name)}")
+  gs4_success("Working in {.file {x$name}}")
 
   # determine (work)sheet ------------------------------------------------------
   range_spec <- as_range_spec(
@@ -71,8 +71,9 @@ range_add_named <- function(ss,
     reply$sheet_id, data = x$sheets, key = "id", value = "name"
   )
   A1_range <- qualified_A1(reply$sheet_name, do.call(make_cell_range, reply))
-  message_glue(
-    "Created new range named {dq(reply$name)} representing {dq(A1_range)}"
+ gs4_success(
+    "Created new range named {.field {reply$name}}
+    representing {.field {A1_range}}"
   )
 
   invisible(ssid)

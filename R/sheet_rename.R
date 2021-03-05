@@ -40,7 +40,7 @@ sheet_rename <- function(ss,
 
   x <- gs4_get(ssid)
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
-  message_glue("Renaming sheet {dq(s$name)} to {dq(new_name)}")
+  gs4_success("Renaming sheet {.field {s$name}} to {.field {new_name}}")
 
   sp <- new("SheetProperties", sheetId = s$id, title = new_name)
   update_req <- new(

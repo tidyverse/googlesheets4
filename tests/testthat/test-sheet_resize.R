@@ -7,12 +7,14 @@ test_that("sheet_resize() works", {
   skip_if_no_token()
 
   ss <- local_ss(me_())
+  local_gs4_loud()
 
   # no resize occurs
-  expect_message(sheet_resize(ss, nrow = 2, ncol = 6), "No need")
+  expect_message(sheet_resize(ss, nrow = 2, ncol = 6), "No need") %>%
+    suppressMessages()
 
   # reduce sheet size
-  sheet_resize(ss, nrow = 5, ncol = 7, exact = TRUE)
+  suppressMessages(sheet_resize(ss, nrow = 5, ncol = 7, exact = TRUE))
   props <- sheet_properties(ss)
   expect_equal(props$grid_rows, 5)
   expect_equal(props$grid_columns, 7)

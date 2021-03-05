@@ -1,5 +1,5 @@
 gs4_quiet <- function() {
-  as.logical(Sys.getenv("GOOGLESHEETS4_QUIET", unset = "NA"))
+  as.logical(Sys.getenv("GOOGLESHEETS4_QUIET", unset = NA))
 }
 
 local_gs4_quiet <- function(gs4_quiet = "TRUE", env = parent.frame()) {

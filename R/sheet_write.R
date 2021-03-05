@@ -105,7 +105,7 @@ sheet_write <- function(data,
 
   # retrieve spreadsheet metadata ----------------------------------------------
   x <- gs4_get(ssid)
-  message_glue("Writing to {dq(x$name)}")
+  gs4_success("Writing to {.file {x$name}}")
 
   # no `sheet` ... but maybe we can name the sheet after the data --------------
   if (is.null(sheet) && quo_is_symbol(data_quo)) {
@@ -138,7 +138,7 @@ sheet_write <- function(data,
       list(bureq_clear_sheet(s$id))
     )
   }
-  message_glue("Writing to sheet {dq(s$name)}")
+  gs4_success("Writing to sheet {.file {s$name}}")
 
   # create request to write data frame into sheet ------------------------------
   requests <- c(

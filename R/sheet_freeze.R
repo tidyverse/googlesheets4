@@ -21,10 +21,10 @@
 #' if (gs4_has_token()) {
 #'   # create a data frame to use as initial data
 #'   # intentionally has lots of rows and columns
-#'   df <- gs4_fodder(25)
+#'   dat <- gs4_fodder(25)
 #'
 #'   # create Sheet
-#'   ss <- gs4_create("sheet-freeze-example", sheets = list(df))
+#'   ss <- gs4_create("sheet-freeze-example", sheets = list(dat))
 #'
 #'   # look at it in the browser
 #'   gs4_browse(ss)
@@ -45,19 +45,20 @@ sheet_freeze <- function(ss,
   maybe_non_negative_integer(ncol)
 
   if (is.null(nrow) && is.null(ncol)) {
-    message_glue("Nothing to be done")
+    gs4_info("Nothing to be done")
     return(invisible(ssid))
   }
 
   dims <- c(
-    if (!is.null(nrow)) "row(s)",
-    if (!is.null(ncol)) "col(s)"
+    if (!is.null(nrow)) cli::pluralize("{nrow} row{?s}"),
+    if (!is.null(ncol)) cli::pluralize("{ncol} column{?s}")
   )
   dims <- glue_collapse(dims, sep = " and ")
 
   x <- gs4_get(ssid)
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
-  message_glue("Freezing {dims} on sheet {dq(s$name)} in {dq(x$name)}")
+  gs4_success("
+    Freezing {dims} on sheet {.field {s$name}} in {.file {x$name}}")
 
   freeze_req <- bureq_set_grid_properties(
     sheetId = s$id,

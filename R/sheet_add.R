@@ -61,13 +61,13 @@ sheet_add <- function(ss,
   maybe_character(sheet)
   x <- gs4_get(ssid)
   index <- resolve_index(x$sheets, .before, .after)
-  message_glue("Adding sheet(s) in {dq(x$name)}")
+  n_new <- if (is.null(sheet)) 1 else length(sheet)
+  gs4_success("Adding {n_new} sheet{?s} to {.file {x$name}}")
 
   ss <- sheet_add_impl_(ssid, sheet_name = sheet, index = index, ...)
 
   new_sheet_names <- setdiff(ss$sheets$name, x$sheets$name)
-  new_sheet_names <- paste0(dq(new_sheet_names), collapse = ", ")
-  message_glue("New sheet(s): {new_sheet_names}")
+  gs4_success("New sheet{?s}: {.field {new_sheet_names}}")
 
   invisible(ssid)
 }

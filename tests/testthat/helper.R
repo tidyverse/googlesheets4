@@ -55,7 +55,8 @@ local_ss <- function(name, ..., env = parent.frame()) {
     if (nrow(trash_me) < 1) {
       warning_glue("The spreadsheet named {sq(name)} already seems to be deleted.")
     } else {
-      googledrive::drive_trash(trash_me)
+      quiet <- gs4_quiet() %|% is_testing()
+      googledrive::drive_trash(trash_me, verbose = !quiet)
     }
   }, envir = env)
   gs4_create(name, ...)

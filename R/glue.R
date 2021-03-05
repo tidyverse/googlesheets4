@@ -1,6 +1,3 @@
-#' @importFrom glue glue glue_data glue_collapse
-NULL
-
 sq <- function(x) glue::single_quote(x)
 bt <- function(x) glue::backtick(x)
 dq <- function(x) encodeString(x, quote = '"')

@@ -1,3 +1,7 @@
+message <- function(...) {
+  abort("Internal error: use googlesheets4's UI functions, not `message()`")
+}
+
 gs4_quiet <- function() {
   as.logical(Sys.getenv("GOOGLESHEETS4_QUIET", unset = NA))
 }
@@ -43,18 +47,3 @@ gs4_warning <- function(text, .envir = parent.frame()) {
 gs4_danger <- function(text, .envir = parent.frame()) {
   gs4_alert(text, type = "danger", .envir = .envir)
 }
-
-# reprex_path <- function(header, path, type = "success", .envir = parent.frame()) {
-#   quiet <- reprex_quiet() %|% is_testing()
-#   if (quiet) {
-#     return(invisible())
-#   }
-#   reprex_alert(header, type = type, .envir = .envir)
-#   cli::cli_ul()
-#   cli::cli_li()
-#   cli::cli_text("{.file {path}}")
-# }
-
-# message <- function(...) {
-#   abort("Internal error: use reprex's UI functions, not `message()`")
-# }

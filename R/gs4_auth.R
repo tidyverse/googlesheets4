@@ -226,7 +226,7 @@ gs4_user <- function() {
   if (gs4_has_token()) {
     gargle::token_email(gs4_token())
   } else {
-    message("Not logged in as any specific Google user.")
+    gs4_info("Not logged in as any specific Google user")
     invisible()
   }
 }

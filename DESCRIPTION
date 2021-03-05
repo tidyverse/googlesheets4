@@ -23,7 +23,7 @@ Depends:
     R (>= 3.2)
 Imports: 
     cellranger,
-    cli,
+    cli (>= 2.0.0),
     curl,
     gargle (>= 1.0.0),
     glue (>= 1.3.0),

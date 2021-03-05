@@ -94,7 +94,7 @@
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9001</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9000</span>
         </div>
       </div>
     </div>
@@ -190,6 +190,11 @@
     <div id="googlesheets4-development-version" class="section level1">
 <h1 class="page-header" data-toc-text="development version">
 <a href="#googlesheets4-development-version" class="anchor"></a>googlesheets4 (development version)<small> Unreleased </small>
+</h1>
+</div>
+    <div id="googlesheets4-030" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#googlesheets4-030" class="anchor"></a>googlesheets4 0.3.0<small> 2021-03-04 </small>
 </h1>
 <p>All requests are now made with retry capability. Specifically, when a request fails due to a <code>429 RESOURCE_EXHAUSTED</code> error, it is retried a few times, with suitable delays. Note that if it appears that you <em>personally</em> have exhausted your quota (more than 100 requests in 100 seconds), the initial waiting time is 100 seconds and this indicates you need to get your own OAuth app or service account.</p>
 <p>When googlesheets4 and googledrive are used together in the same session, we alert you if you’re logged in to these package with different Google identities.</p>

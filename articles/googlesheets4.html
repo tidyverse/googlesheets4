@@ -50,7 +50,7 @@
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9001</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9000</span>
         </div>
       </div>
     </div>
@@ -162,18 +162,15 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span><span class="op">)</span>
 <span class="co">#&gt; Reading from "gapminder"</span>
 <span class="co">#&gt; Range "Africa"</span>
-<span class="co">#&gt; Request failed [429]. Retry 1 happens in 3.2 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 2 happens in 7.3 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 3 happens in 1.7 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 4 happens in 38.2 seconds ...</span>
-<span class="co">#&gt; Error: Client error: (429) RESOURCE_EXHAUSTED</span>
-<span class="co">#&gt;   * Either out of resource quota or reaching rate limiting. The client should look for google.rpc.QuotaFailure error detail for more information.</span>
-<span class="co">#&gt;   * Quota exceeded for quota metric 'Read requests' and limit 'Read requests per minute per user' of service 'sheets.googleapis.com' for consumer 'project_number:250395471985'.</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Error details:</span>
-<span class="co">#&gt;   * Error details of type 'google.rpc.ErrorInfo' may not be fully revealed.</span>
-<span class="co">#&gt;   * Workaround: use `tryCatch()` and inspect error payload yourself.</span>
-<span class="co">#&gt;   * Consider opening an issue at https://github.com/r-lib/gargle/issues.</span></code></pre></div>
+<span class="co">#&gt; # A tibble: 624 x 6</span>
+<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
+<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
+<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
+<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
+<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
+<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
+<span class="co">#&gt; # … with 619 more rows</span></code></pre></div>
 <p>However, these URLs are not pleasant to work with. More often, you will want to identify a Sheet by its ID:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span><span class="op">)</span>
@@ -282,10 +279,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "lumpish-arcticduck"</span>
+<span class="co">#&gt; Creating new Sheet: "swimming-peacock"</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: lumpish-arcticduck</span>
-<span class="co">#&gt;               ID: 1dvoRrgkN1Ut4zVEVYCPX-w6LBIx4KwqVj4S0VQFIqj0</span>
+<span class="co">#&gt; Spreadsheet name: swimming-peacock</span>
+<span class="co">#&gt;               ID: 1B8-3EWqLvX82c-CP0wphVryJ1JIHymiUB2usR46PquQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -297,13 +294,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * lumpish-arcticduck: 1dvoRrgkN1Ut4zVEVYCPX-w6LBIx4KwqVj4S0VQFIqj0</span>
+<span class="co">#&gt;   * swimming-peacock: 1B8-3EWqLvX82c-CP0wphVryJ1JIHymiUB2usR46PquQ</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; Creating new Sheet: "testy-hedgehog"</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1uwqgF7h1dpTBSeDhpK4wYp99DCMkqhGqac0AgTzr5zs</span>
+<span class="co">#&gt;               ID: 1WtRUQi2bksa511RVvQksGKpYQgBqALEYfRJJddKOcYE</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -317,7 +314,7 @@
 <span class="co">#&gt; Writing to sheet "chickwts"</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1uwqgF7h1dpTBSeDhpK4wYp99DCMkqhGqac0AgTzr5zs</span>
+<span class="co">#&gt;               ID: 1WtRUQi2bksa511RVvQksGKpYQgBqALEYfRJJddKOcYE</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -365,14 +362,14 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 x 8</span>
-<span class="co">#&gt;   name     index        id type  visible grid_rows grid_columns data  </span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 621532149 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 413352570 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
+<span class="co">#&gt; 1 df           0  541159300 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 1454718060 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * testy-hedgehog: 1uwqgF7h1dpTBSeDhpK4wYp99DCMkqhGqac0AgTzr5zs</span></code></pre></div>
+<span class="co">#&gt;   * testy-hedgehog: 1WtRUQi2bksa511RVvQksGKpYQgBqALEYfRJJddKOcYE</span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

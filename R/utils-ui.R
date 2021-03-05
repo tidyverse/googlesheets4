@@ -2,6 +2,9 @@ message <- function(...) {
   abort("Internal error: use googlesheets4's UI functions, not `message()`")
 }
 
+fr <- function(x) format(x, justify = 'right')
+fl <- function(x) format(x, justify = 'left')
+
 gs4_quiet <- function() {
   as.logical(Sys.getenv("GOOGLESHEETS4_QUIET", unset = NA))
 }

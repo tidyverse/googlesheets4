@@ -20,6 +20,10 @@ expect_error_free <- function(...) {
   expect_error(..., regexp = NA)
 }
 
+expect_gs4_error <- function(...) {
+  expect_error(..., class = "gs4_error")
+}
+
 ref <- function(pattern, ...) {
   x <- list.files(testthat::test_path("ref"), pattern = pattern, ...)
   if (length(x) < 1) {

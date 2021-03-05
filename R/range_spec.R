@@ -206,7 +206,7 @@ as_A1_range <- function(x) {
 #
 #   # retrieve spreadsheet metadata ----------------------------------------------
 #   x <- gs4_get(ssid)
-#   message_glue("Spreadsheet name: {dq(x$name)}")
+#   gs4_success("Spreadsheet name: {.file {x$name}}")
 #
 #   # range specification --------------------------------------------------------
 #   range_spec <- as_range_spec(
@@ -214,7 +214,7 @@ as_A1_range <- function(x) {
 #     sheets_df = x$sheets, nr_df = x$named_ranges
 #   )
 #   A1_range <- as_A1_range(range_spec)
-#   message_glue("A1 range {dq(A1_range)}")
+#   gs4_success("A1 range {.field {A1_range}}")
 #
 #   range_spec
 # }

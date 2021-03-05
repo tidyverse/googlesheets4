@@ -10,7 +10,8 @@ test_that("range_spreadread() works", {
   )
   speedread <- range_speedread(
     test_sheet("googlesheets4-cell-tests"),
-    range = "'range-experimentation'!B:D"
+    range = "'range-experimentation'!B:D",
+    col_types = readr::cols() # suppress col spec printing
   )
   expect_equal(read, speedread, ignore_attr = TRUE)
 

@@ -88,9 +88,10 @@ range_autofit <- function(ss,
     1, "autoResizeDimensions", "dimensions", "dimension"
   )
 
-  message_glue("Editing {dq(x$name)}")
-  message_glue(
-    "Resizing one or more {tolower(resize_dim)} in {dq(range_spec$sheet_name)}"
+  gs4_success("Editing {.file {x$name}}")
+  gs4_success(
+    "Resizing one or more {tolower(resize_dim)} in
+    {.field {range_spec$sheet_name}}"
   )
 
   # do it ----------------------------------------------------------------------

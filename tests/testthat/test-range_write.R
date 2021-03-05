@@ -8,8 +8,10 @@ test_that("range_write() works", {
 
   n <- 3
   m <- 5
-  data <- tibble::as_tibble(
-    matrix(head(letters, n * m), nrow = n , ncol = m), .name_repair = "unique"
+  data <- suppressMessages( # silence messages about name repair
+    tibble::as_tibble(
+      matrix(head(letters, n * m), nrow = n , ncol = m), .name_repair = "unique"
+    )
   )
 
   ss <- local_ss(me_(), sheets = list(foo = data))
@@ -64,8 +66,10 @@ test_that("prepare_loc() makes the right call re: `start` vs. `range`", {
 test_that("prepare_dims() works when write_loc is a `start` (a GridCoordinate)", {
   n <- 3
   m <- 5
-  data <- tibble::as_tibble(
-    matrix(head(letters, n * m), nrow = n , ncol = m), .name_repair = "unique"
+  data <- suppressMessages( # silence messages about name repair
+    tibble::as_tibble(
+      matrix(head(letters, n * m), nrow = n , ncol = m), .name_repair = "unique"
+    )
   )
 
   expect_dims <- function(loc, col_names, dims) {
@@ -98,8 +102,10 @@ test_that("prepare_dims() works when write_loc is a `start` (a GridCoordinate)",
 test_that("prepare_dims() works when write_loc is a `range` (a GridRange)", {
   n <- 3
   m <- 5
-  data <- tibble::as_tibble(
-    matrix(head(letters, n * m), nrow = n , ncol = m), .name_repair = "unique"
+  data <- suppressMessages( # silence messages about name repair
+    tibble::as_tibble(
+      matrix(head(letters, n * m), nrow = n , ncol = m), .name_repair = "unique"
+    )
   )
 
   expect_dims <- function(x, col_names, dims) {

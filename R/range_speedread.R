@@ -90,14 +90,17 @@ range_speedread <- function(ss,
   }
   if (!is.null(range_spec$cell_range)) {
     params[["range"]] <- range_spec$cell_range
-    range_msg <- glue(", range {dq(range_spec$cell_range)}")
+    range_msg <- ", range {.field {range_spec$cell_range}}"
   }
   if (!is.null(range_spec$sheet_name)) {
     s <- lookup_sheet(range_spec$sheet_name, sheets_df = x$sheets)
     params[["gid"]] <- s$id
-    sheet_msg <- glue(", {dq(range_spec$sheet_name)} sheet")
+    sheet_msg <- ", sheet {.field {range_spec$sheet_name}}"
   }
-  message_glue("Reading from {dq(x$name)}{sheet_msg}{range_msg}")
+  msg <- glue("
+    Reading from {.file {x$name}}<<sheet_msg>><<range_msg>>",
+    .open = "<<", .close = ">>")
+  gs4_success(msg)
 
   token <- gs4_token() %||% list()
 
@@ -106,7 +109,7 @@ range_speedread <- function(ss,
     params = params,
     base_url = "https://docs.google.com"
   )
-  message_glue("Export URL: {req$url}")
+  gs4_success("Export URL: {.url {req$url}}")
 
   response <- httr::GET(req$url, config = token)
   stopifnot(identical(httr::http_type(response), "text/csv"))

@@ -240,16 +240,24 @@ check_gs4_email_is_drive_email <- function() {
     drive_email <- googledrive::drive_user()[["emailAddress"]]
     gs4_email <- gs4_user()
     if (drive_email != gs4_email) {
-      message_glue("
-        Authenticated as 2 different users with googledrive and googlesheets4:
-          * googledrive: {drive_email}
-          * googlesheets4: {gs4_email}
-        If you get a puzzling result, this is probably why.
-        See the article \"Using googlesheets4 with googledrive\" for tips:
-        https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html
-      ")
+      # TODO: rework this when cli has line breaks
+      # https://github.com/r-lib/cli/issues/211
+      fussy_message(drive_email, gs4_email)
     }
   }
+}
+
+fussy_message <- function(drive_email, gs4_email) {
+  gs4_warning("Authenticated as 2 different users with googledrive and googlesheets4:")
+  id_1 <- cli::cli_ul()
+  cli::cli_li()
+  id_2 <- cli::cli_ul(); id_3 <- cli::cli_ul()
+  cli::cli_li("googledrive: {.email {drive_email}}")
+  cli::cli_li("googlesheets4: {.email {gs4_email}}")
+  cli::cli_end(id_3); cli::cli_end(id_2)
+  cli::cli_text("If you get a puzzling result, this is probably why.")
+  cli::cli_text("See the article \"Using googlesheets4 with googledrive\" for tips:")
+  cli::cli_text("{.url https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html}")
 }
 
 # unexported helpers that are nice for internal use ----
@@ -278,4 +286,16 @@ gs4_auth_docs <- function(scopes = NULL, drive = TRUE) {
 
 gs4_auth_testing <- function(scopes = NULL, drive = TRUE) {
   gs4_auth_internal("testing", scopes = scopes, drive = drive)
+}
+
+local_deauth <- function(env = parent.frame()) {
+  original_cred <- .auth$get_cred()
+  original_auth_active <- .auth$auth_active
+  gs4_info("Going into deauthorized state")
+  withr::defer(gs4_info("Restoring auth state"), envir = env)
+  withr::defer({
+    .auth$set_cred(original_cred)
+    .auth$set_auth_active(original_auth_active)
+  }, envir = env)
+  gs4_deauth()
 }

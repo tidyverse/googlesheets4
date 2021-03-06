@@ -39,14 +39,14 @@ maybe_string <- function(x, nm = deparse(substitute(x))) {
 
 check_length_one <- function(x, nm = deparse(substitute(x))) {
   if (length(x) != 1) {
-    stop_glue("{bt(nm)} must have length 1, not length {length(x)}")
+    gs4_abort("{bt(nm)} must have length 1, not length {length(x)}")
   }
   x
 }
 
 check_has_length <- function(x, nm = deparse(substitute(x))) {
   if (length(x) < 1) {
-    stop_glue("{bt(nm)} must have length greater than zero")
+    gs4_abort("{bt(nm)} must have length greater than zero")
   }
   x
 }

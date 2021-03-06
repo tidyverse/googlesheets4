@@ -33,10 +33,10 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
 
   m <- as.integer(sheet)
   if (!(m %in% seq_len(nrow(sheets_df)))) {
-    stop_glue(
-      "There are {nrow(sheets_df)} sheets:\n",
-      "  * Requested sheet number is out-of-bounds: {m}"
-    )
+    gs4_abort(c(
+      cli::pluralize("There {?is/are} {nrow(sheets_df)} sheet{?s}:"),
+      x = "Requested sheet number is out-of-bounds: {m}"
+    ))
   }
   as.list(sheets_df[m, ])
 }

@@ -100,10 +100,10 @@ as_sheets_id.drive_id <- function(x, ...) new_sheets_id(x)
 #' @export
 as_sheets_id.dribble <- function(x, ...) {
   if (nrow(x) != 1) {
-    stop_glue(
-      "Dribble input must have exactly 1 row.\n",
-      "  * Actual input has {nrow(x)} rows."
-    )
+    gs4_abort(c(
+      "Dribble input must have exactly 1 row",
+      x = "Actual input has {nrow(x)} rows"
+    ))
   }
   # not worrying about whether we are authed as same user with Sheets and Drive
   # revealing the MIME type is local to the dribble, so this makes no API calls
@@ -129,10 +129,7 @@ as_sheets_id.default <- function(x, ...) {
 #' @export
 as_sheets_id.character <- function(x, ...) {
   if (length(x) != 1) {
-    stop_glue(
-      "Character input must have length == 1.\n",
-      "  * Actual input has length {length(x)}."
-    )
+    gs4_abort("Character input must have length == 1, not length {length(x)}")
   }
   out <- one_id(x)
   if (is.na(out)) {

@@ -89,8 +89,8 @@ maybe_non_negative_integer <- function(i, nm = deparse(substitute(i))) {
 }
 
 check_bool <- function(bool, nm = deparse(substitute(bool))) {
-  if (!isTRUE(bool) && !identical(bool, FALSE)) {
-    stop_glue("{bt(nm)} must be either TRUE or FALSE")
+  if (!is_bool(bool)) {
+    gs4_abort("{bt(nm)} must be either TRUE or FALSE")
   }
   bool
 }

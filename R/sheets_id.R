@@ -110,13 +110,13 @@ as_sheets_id.dribble <- function(x, ...) {
   mime_type <- googledrive::drive_reveal(x, "mime_type")[["mime_type"]]
   target <- "application/vnd.google-apps.spreadsheet"
   if (!identical(mime_type, target)) {
-    stop_glue(
-      "Dribble input must refer to a Google Sheet, i.e. a file with MIME ",
-      "type {sq(target)}.\n",
-      "  * File id: {sq(x$id)}\n",
-      "  * File name: {sq(x$name)}\n",
-      "  * MIME TYPE: {sq(mime_type)}"
-    )
+    gs4_abort(c(
+      "Dribble input must refer to a Google Sheet, i.e. a file with MIME \\
+       type {sq(target)}",
+      i = "File id: {sq(x$id)}",
+      i = "File name: {sq(x$name)}",
+      x = "MIME TYPE: {sq(mime_type)}"
+    ))
   }
   new_sheets_id(x$id)
 }
@@ -133,11 +133,11 @@ as_sheets_id.character <- function(x, ...) {
   }
   out <- one_id(x)
   if (is.na(out)) {
-    stop_glue(
-      "Input does not match our regular expression for extracting ",
-      "spreadsheet id.\n",
-      "  * Input: {sq(x)}"
-    )
+    gs4_abort(c(
+      "Input does not match our regular expression for extracting \\
+       spreadsheet id",
+      x = "Input: {sq(x)}"
+    ))
   }
   sheets_id(out)
 }

@@ -269,10 +269,9 @@ standardise_ctypes <- function(col_types) {
   check_string(col_types)
 
   if (identical(col_types, "")) {
-    stop_glue(
-      "{bt('col_types')}, if provided, must be a string that contains at ",
-      "least one readr-style shortcode."
-    )
+    gs4_abort("
+      {bt('col_types')}, if provided, must be a string that contains at \\
+      least one readr-style shortcode")
   }
 
   accepted_codes <- keep(names(.ctypes), nzchar)
@@ -281,14 +280,14 @@ standardise_ctypes <- function(col_types) {
   ok <- col_types_split %in% accepted_codes
   if (!all(ok)) {
     bad_codes <- glue_collapse(sq(col_types_split[!ok]), sep = ",")
-    stop_glue(
-      "{bt('col_types')} must be a string of readr-style shortcodes:\n",
-      "  * Unrecognized codes: {bad_codes}"
-    )
+    gs4_abort(c(
+      "{bt('col_types')} must be a string of readr-style shortcodes:",
+      x = "Unrecognized codes: {bad_codes}"
+    ))
   }
   ctypes <- ctype(col_types_split)
   if (all(ctypes == "COL_SKIP")) {
-    stop_glue("{bt('col_types')} can't request that all columns be skipped")
+    gs4_abort("{bt('col_types')} can't request that all columns be skipped")
   }
   ctypes
 }

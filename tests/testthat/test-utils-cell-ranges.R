@@ -55,7 +55,7 @@ test_that("lookup_sheet_name() consults sheet names, if given", {
   expect_identical(lookup_sheet_name("foo", sheets_df), "foo")
   expect_error(
     lookup_sheet_name("nope", sheets_df),
-    class = "googlesheets4_error_sheet_not_found"
+    class = "gs4_error_sheet_not_found"
   )
 })
 

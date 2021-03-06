@@ -33,16 +33,16 @@ new_sheets_id <- function(x) {
   structure(x, class = c("sheets_id", "drive_id"))
 }
 
-## validator: performs more expensive checks that the object has correct values
-## from Sheet API docs:
-## The spreadsheet ID is a string containing letters, numbers, and some special
-## characters. The following regular expression can be used to extract the
-## spreadsheet ID from a Google Sheets URL:
-## /spreadsheets/d/([a-zA-Z0-9-_]+)
+# validator: performs more expensive checks that the object has correct values
+# from Sheet API docs:
+# The spreadsheet ID is a string containing letters, numbers, and some special
+# characters. The following regular expression can be used to extract the
+# spreadsheet ID from a Google Sheets URL:
+# /spreadsheets/d/([a-zA-Z0-9-_]+)
 validate_sheets_id <- function(x) {
   stopifnot(inherits(x, "sheets_id"))
   if (!grepl("^[a-zA-Z0-9-_]+$", x, perl = TRUE)) {
-    stop("Spreadsheet ID contains invalid characters:\n", x, call. = FALSE)
+    gs4_abort(c("Spreadsheet ID contains invalid characters:", x = "{sq(x)}"))
   }
   ## I am quite sure id should have exactly 44 characters but am reluctant
   ## to require this because it makes small examples and tests burdensome

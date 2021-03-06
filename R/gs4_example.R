@@ -27,7 +27,7 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
   user <- gs4_user()
   if (!grepl("^googlesheets4-testing", user)) {
     user <- sub("@.+$", "", user)
-    stop_glue("Must be auth'd as {sq('googlesheets4-testing')}, not {sq(user)}")
+    gs4_abort("Must be auth'd as {sq('googlesheets4-testing')}, not {sq(user)}")
   }
 
   existing <- gs4_find()

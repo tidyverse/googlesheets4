@@ -15,17 +15,17 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
   # sheet is a string or an integer
 
   if (is.character(sheet)) {
-    stop_sheet_not_found <- function(sheet) {
-      abort(
-        glue("No sheet found with this name: {dq(sheet)}"),
-        class = "googlesheets4_error_sheet_not_found",
-        sheet = sheet
-      )
-    }
     sheet <- sq_unescape(sheet)
     m <- match(sheet, sheets_df$name)
     if (is.na(m)) {
-      stop_sheet_not_found(sheet)
+      gs4_abort(
+        c("Can't find a sheet with this name:", x = "{sq(sheet)}"),
+        sheet = sheet,
+        # there is some usage where we throw this error, but it is OK
+        # and we use tryCatch()
+        # that's why we apply the sub-class
+        class = "gs4_error_sheet_not_found"
+      )
     }
     return(as.list(sheets_df[m, ]))
   }
@@ -116,5 +116,5 @@ enlist_sheets <- function(sheets_quo) {
   }
 
   # we should never get here, so not a user-facing message
-  stop_glue("Invalid input for (work)sheet(s)")
+  gs4_abort("Invalid input for (work)sheet(s)")
 }

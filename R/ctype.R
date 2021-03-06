@@ -165,7 +165,7 @@ infer_ctype <- function(cell, na = "", trim_ws = TRUE) {
         warn("Internal warning: Cell has formula as effectiveValue. I thought impossible!")
         "CELL_TEXT"
       },
-      stop_glue("Unhandled effective_type: {sq(effective_type)}")
+      gs4_abort("Unhandled effective_type: {sq(effective_type)}")
     ))
   }
   # only numeric cells remain

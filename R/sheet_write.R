@@ -125,7 +125,7 @@ sheet_write <- function(data,
   if (!is.null(sheet)) {
     s <- tryCatch(
       lookup_sheet(sheet, sheets_df = x$sheets),
-      googlesheets4_error_sheet_not_found = function(cnd) NULL
+      gs4_error_sheet_not_found = function(cnd) NULL
     )
   }
   if (is.null(s)) {

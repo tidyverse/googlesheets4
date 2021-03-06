@@ -12,8 +12,8 @@ test_that("string with invalid character is rejected", {
 })
 
 test_that("invalid inputs are caught", {
-  expect_gs4_error(as_sheets_id(NULL), class = "gs4_error_unsupported_conversion")
-  expect_gs4_error(as_sheets_id(1), class = "gs4_error_unsupported_conversion")
+  expect_error(as_sheets_id(NULL))
+  expect_error(as_sheets_id(1))
   expect_error(as_sheets_id(character()), "must have length == 1")
   expect_error(as_sheets_id(letters[1:2]), "must have length == 1")
 

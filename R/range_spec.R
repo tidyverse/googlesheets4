@@ -23,7 +23,7 @@ as_range_spec <- function(x, ...) {
 
 #' @export
 as_range_spec.default <- function(x, ...) {
-  abort_bad_range(c(
+  gs4_abort(c(
     "Can't make a range suitable for the Sheets API from the supplied \\
      {bt('range')}",
     x = "{bt('range')} has class {class_collapse(x)}",
@@ -90,7 +90,7 @@ as_range_spec.character <- function(x,
   # range must be in A1 notation
   m <- grepl(A1_rx, strsplit(x, split = ":")[[1]])
   if (!all(m)) {
-    abort_bad_range(c(
+    gs4_abort(c(
       "{bt('range')} doesn't appear to be a range in A1 notation, a named \\
        range, or a sheet name:",
       x = "{sq(x)}"

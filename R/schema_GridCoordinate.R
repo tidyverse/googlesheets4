@@ -19,7 +19,7 @@ as_GridCoordinate.range_spec <- function(x, ..., strict = TRUE) {
     row_index_diff <- grid_range$endRowIndex - grid_range$startRowIndex
     col_index_diff <- grid_range$endColumnIndex - grid_range$startColumnIndex
     if (row_index_diff != 1 || col_index_diff != 1) {
-      abort_bad_range(c(
+      gs4_abort(c(
         "Range must identify exactly 1 cell:",
         x = "Invalid cell range: {sq(x$cell_range)}"
       ))

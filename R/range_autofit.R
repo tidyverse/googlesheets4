@@ -131,7 +131,7 @@ check_only_one_dimension <- function(x) {
     return(invisible(x))
   }
 
-  abort_bad_range("
+  gs4_abort("
     The {bt('range')} must target only columns or only rows, but not both")
 }
 

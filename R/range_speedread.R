@@ -81,7 +81,7 @@ range_speedread <- function(ss,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   if (!is.null(range_spec$named_range)) {
-    abort_bad_range("{bt('range_speedread()')} cannot work with a named range")
+    gs4_abort("{bt('range_speedread()')} cannot work with a named range")
   }
   if (!is.null(range_spec$cell_limits)) {
     range_spec$cell_range <- as_sheets_range(range_spec$cell_limits)

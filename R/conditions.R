@@ -29,18 +29,5 @@ abort_unsupported_conversion <- function(from, to) {
   } else {
     msg_from <- glue("something of class {class_collapse(from)}")
   }
-  gs4_abort("
-    Don't know how to make an instance of {bt(to)} from {msg_from}",
-    class = "gs4_error_unsupported_conversion"
-  )
-}
-
-# exists mostly for self-documenting name
-abort_bad_range <- function(message, ..., .envir = parent.frame()) {
-  gs4_abort(
-    message = message,
-    ...,
-    class = "gs4_error_bad_range",
-    .envir = .envir
-  )
+  gs4_abort("Don't know how to make an instance of {bt(to)} from {msg_from}")
 }

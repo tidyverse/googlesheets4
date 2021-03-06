@@ -60,7 +60,7 @@ as_sheets_range <- function(x) {
   }
 
   # if resolve_limits() is doing its job, we should never get here
-  abort_bad_range(c(
+  gs4_abort(c(
     "Can't express these {bt('cell_limits')} as an A1 range:",
     # cell_limits doesn't have a format method :(
     x = utils::capture.output(print(x))
@@ -160,10 +160,10 @@ as_cell_limits <- function(x) {
 
 limits_from_range <- function(x) {
   x_split <- strsplit(x, ":")[[1]]
-  if (!length(x_split) %in% 1:2)   {abort_bad_range("Invalid range: {sq(x)}")}
-  if (!all(grepl(A1_rx, x_split))) {abort_bad_range("Invalid range: {sq(x)}")}
+  if (!length(x_split) %in% 1:2)   {gs4_abort("Invalid range: {sq(x)}")}
+  if (!all(grepl(A1_rx, x_split))) {gs4_abort("Invalid range: {sq(x)}")}
   corners <- rematch2::re_match(x_split, A1_decomp)
-  if (anyNA(corners$.match))  {abort_bad_range("Invalid range: {sq(x)}")}
+  if (anyNA(corners$.match))  {gs4_abort("Invalid range: {sq(x)}")}
   corners$column <- ifelse(nzchar(corners$column), corners$column, NA_character_)
   corners$row <- ifelse(nzchar(corners$row), corners$row, NA_character_)
   corners$row <- as.integer(corners$row)
@@ -186,7 +186,7 @@ check_range <- function(range = NULL) {
   if (is.null(range) || inherits(range, "cell_limits") || is_string(range)) {
     return(range)
   }
-  abort_bad_range("
+  gs4_abort("
     {bt('range')} must be {bt('NULL')}, a string, or \\
     a {bt('cell_limits')} object")
 }

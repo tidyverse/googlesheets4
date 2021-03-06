@@ -1,12 +1,6 @@
 test_that("ctype() errors for unanticipated inputs", {
-  expect_gs4_error(
-    ctype(NULL),
-    class = "gs4_error_unsupported_conversion"
-  )
-  expect_gs4_error(
-    ctype(data.frame(cell = "cell")),
-    class = "gs4_error_unsupported_conversion"
-  )
+  expect_error(ctype(NULL))
+  expect_error(ctype(data.frame(cell = "cell")))
 })
 
 test_that("ctype() works on a SHEET_CELL, when it should", {

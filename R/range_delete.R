@@ -131,7 +131,7 @@ determine_shift <- function(gr) {
     return("COLUMNS")
   }
 
-  abort_bad_range(c(
+  gs4_abort(c(
     "{bt('range')} must be bounded on the bottom and/or on the right",
     i = "Use {bt('sheet_delete()')} or {bt('sheet_resize()')} to delete or \\
          resize a (work)sheet"

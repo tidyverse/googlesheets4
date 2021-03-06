@@ -1,7 +1,7 @@
 test_that("gs4_abort() throws classed condition", {
   expect_error(gs4_abort("oops"), class = "gs4_error")
   expect_gs4_error(gs4_abort("oops"))
-  expect_error(gs4_abort("oops", class = "gs4_foo"), class = "gs4_error")
+  expect_gs4_error(gs4_abort("oops", class = "gs4_foo"))
   expect_error(gs4_abort("oops", class = "gs4_foo"), class = "gs4_foo")
 })
 
@@ -20,14 +20,4 @@ test_that("abort_unsupported_conversion() works", {
   expect_snapshot_error(
     abort_unsupported_conversion(x, "d")
   )
-})
-
-test_that("abort_bad_range() works", {
-  msg <- "hello"
-  err <- expect_error(
-    abort_bad_range("MESSAGE {msg}", x = 1),
-    class = "gs4_error_bad_range"
-  )
-  expect_equal(err$message, "MESSAGE hello")
-  expect_equal(err$x, 1)
 })

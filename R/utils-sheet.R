@@ -63,13 +63,13 @@ lookup_sheet_name <- function(sheet, sheets_df) {
 check_sheet <- function(sheet, nm = deparse(substitute(sheet))) {
   check_length_one(sheet, nm = nm)
   if (!is.character(sheet) && !is.numeric(sheet)) {
-    stop_glue(
-      "{bt(nm)} must be either character (sheet name) or ",
-      "numeric (sheet number):\n",
-      "  * {bt(nm)} has class {class_collapse(sheet)}"
-    )
+    gs4_abort(c(
+      "{bt(nm)} must be either character (sheet name) or \\
+       numeric (sheet number):",
+      x = "{bt(nm)} has class {class_collapse(sheet)}"
+    ))
   }
-  return(sheet)
+  sheet
 }
 
 maybe_sheet <- function(sheet = NULL, nm = deparse(substitute(sheet))) {

@@ -59,9 +59,8 @@ patch <- function(x, ...) {
 
 #' @export
 patch.default <- function(x, ...) {
-  stop_glue("
-  Don't know how to {bt('patch()')} an object of class {class_collapse(x)}
-  ")
+  gs4_abort("
+    Don't know how to {bt('patch()')} an object of class {class_collapse(x)}")
 }
 
 #' @export

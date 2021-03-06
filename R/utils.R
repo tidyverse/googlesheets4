@@ -15,10 +15,10 @@ is_integerish <- function(x) {
 
 check_data_frame <- function(x, nm = deparse(substitute(x))) {
   if (!is.data.frame(x)) {
-    stop_glue(
-      "{bt(nm)} must be a data frame:\n",
-      "  * {bt(nm)} has class {class_collapse(x)}"
-    )
+    gs4_abort(c(
+      "{bt(nm)} must be a data frame:",
+      x = "{bt(nm)} has class {class_collapse(x)}"
+    ))
   }
   x
 }
@@ -53,10 +53,10 @@ check_has_length <- function(x, nm = deparse(substitute(x))) {
 
 check_character <- function(x, nm = deparse(substitute(x))) {
   if (!is.character(x)) {
-    stop_glue(
-      "{bt(nm)} must be character:\n",
-      "  * {bt(nm)} has class {class_collapse(x)}"
-    )
+    gs4_abort(c(
+      "{bt(nm)} must be character:",
+      x = "{bt(nm)} has class {class_collapse(x)}"
+    ))
   }
   x
 }
@@ -72,10 +72,10 @@ maybe_character <- function(x, nm = deparse(substitute(x))) {
 check_non_negative_integer <- function(i, nm = deparse(substitute(i))) {
   if (length(i) != 1 || !is.numeric(i) ||
       !is_integerish(i) || is.na(i) || i < 0) {
-    stop_glue(
-      "{bt(nm)} must be a positive integer:\n",
-      "  * {bt(nm)} has class {class_collapse(i)}"
-    )
+    gs4_abort(c(
+      "{bt(nm)} must be a positive integer:",
+      x = "{bt(nm)} has class {class_collapse(x)}"
+    ))
   }
   i
 }

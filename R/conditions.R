@@ -7,8 +7,9 @@
 #' @noRd
 NULL
 
-gs4_abort <- function(message, ..., class = NULL, env = parent.frame()) {
-  msg <- glue(message, .envir = env)
+gs4_abort <- function(message, ..., class = NULL, .envir = parent.frame()) {
+  g <- function(line) glue(line, .envir = .envir)
+  msg <- map_chr(message, g)
   abort(msg, class = c(class, "gs4_error"), ...)
 }
 

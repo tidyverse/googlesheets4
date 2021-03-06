@@ -17,6 +17,10 @@ local_gs4_loud <- function(env = parent.frame()) {
   local_gs4_quiet("FALSE", env = env)
 }
 
+is_testing <- function() {
+  identical(Sys.getenv("TESTTHAT"), "true")
+}
+
 gs4_alert <- function(text,
                       type = c("success", "info", "warning", "danger"),
                       .envir = parent.frame()) {

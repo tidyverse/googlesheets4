@@ -1,4 +1,4 @@
-#' Errors conditions for the googlesheets4 package
+#' Error conditions for the googlesheets4 package
 #'
 #' @param class Use only if you want to subclass beyond `gs4_error`
 #'
@@ -21,7 +21,8 @@ class_collapse <- function(x) {
   bt(glue_collapse(class(x), sep = ' / '))
 }
 
-# helpful in the default method for the as_{to} generic
+# helpful in the default method of an as_{to} generic
+# exists mostly to template the message
 abort_unsupported_conversion <- function(from, to) {
   if (is.null(from)) {
     msg_from <- bt("NULL")

@@ -19,10 +19,10 @@ as_GridCoordinate.range_spec <- function(x, ..., strict = TRUE) {
     row_index_diff <- grid_range$endRowIndex - grid_range$startRowIndex
     col_index_diff <- grid_range$endColumnIndex - grid_range$startColumnIndex
     if (row_index_diff != 1 || col_index_diff != 1) {
-      stop_glue(
-        "Range must identify exactly 1 cell:\n",
-        "  * Invalid cell range: {x$cell_range}"
-      )
+      abort_bad_range(c(
+        "Range must identify exactly 1 cell:",
+        x = "Invalid cell range: {sq(x$cell_range)}"
+      ))
     }
   }
 

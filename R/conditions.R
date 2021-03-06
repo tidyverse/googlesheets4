@@ -34,3 +34,13 @@ abort_unsupported_conversion <- function(from, to) {
     class = "gs4_error_unsupported_conversion"
   )
 }
+
+# exists mostly for self-documenting name
+abort_bad_range <- function(message, ..., .envir = parent.frame()) {
+  gs4_abort(
+    message = message,
+    ...,
+    class = "gs4_error_bad_range",
+    .envir = .envir
+  )
+}

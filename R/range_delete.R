@@ -132,9 +132,9 @@ determine_shift <- function(gr) {
     return("COLUMNS")
   }
 
-  stop_glue(
-    "`range` must be bounded on the bottom and/or on the right.
-     See `sheet_delete()` or `sheet_resize()` to delete or \\
-     resize a (work)sheet."
-  )
+  abort_bad_range(c(
+    "{bt('range')} must be bounded on the bottom and/or on the right",
+    i = "Use {bt('sheet_delete()')} or {bt('sheet_resize()')} to delete or \\
+         resize a (work)sheet"
+  ))
 }

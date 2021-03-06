@@ -131,7 +131,8 @@ check_only_one_dimension <- function(x) {
     return(invisible(x))
   }
 
-  stop_glue("The {bt('range')} must target only columns or only rows")
+  abort_bad_range("
+    The {bt('range')} must target only columns or only rows, but not both")
 }
 
 determine_dimension <- function(x) {

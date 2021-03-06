@@ -54,7 +54,7 @@ many_sheets <- function(needle, haystack, adjective) {
     check_string(needle)
     sel <- grepl(needle, names(out), ignore.case = TRUE)
     if (!any(sel)) {
-      stop_glue("Can't find {adjective} Sheet that matches {dq(needle)}")
+      gs4_abort("Can't find {adjective} Sheet that matches {dq(needle)}")
     }
     out <- googledrive::as_id(out[sel])
   }
@@ -67,11 +67,11 @@ one_sheet <- function(needle, haystack, adjective) {
   out <- many_sheets(needle = needle, haystack = haystack, adjective = adjective)
   if (length(out) > 1) {
     bullets <- glue_collapse(glue("  * {names(out)}"), last = "\n")
-    stop_glue("
-      Found multiple matching {adjective} Sheets:
-      {bullets}
-      Make the {bt('matches')} regular expression more specific.
-      ")
+    gs4_abort(c(
+      "Found multiple matching {adjective} Sheets:",
+      sq(names(out)),
+      i = "Make the {bt('matches')} regular expression more specific"
+    ))
   }
   new_sheets_id(out)
 }

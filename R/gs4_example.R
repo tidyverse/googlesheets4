@@ -66,7 +66,6 @@ one_sheet <- function(needle, haystack, adjective) {
   check_string(needle)
   out <- many_sheets(needle = needle, haystack = haystack, adjective = adjective)
   if (length(out) > 1) {
-    bullets <- glue_collapse(glue("  * {names(out)}"), last = "\n")
     gs4_abort(c(
       "Found multiple matching {adjective} Sheets:",
       dq(names(out)),

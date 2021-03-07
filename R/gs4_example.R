@@ -69,7 +69,7 @@ one_sheet <- function(needle, haystack, adjective) {
     bullets <- glue_collapse(glue("  * {names(out)}"), last = "\n")
     gs4_abort(c(
       "Found multiple matching {adjective} Sheets:",
-      sq(names(out)),
+      dq(names(out)),
       i = "Make the {bt('matches')} regular expression more specific"
     ))
   }

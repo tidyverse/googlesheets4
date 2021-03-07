@@ -51,6 +51,7 @@ articles:
   - articles/range-specification
   - articles/function-class-names
   - articles/example-sheets
+  - articles/messages-and-errors
 
 reference:
   - title: "Reading"

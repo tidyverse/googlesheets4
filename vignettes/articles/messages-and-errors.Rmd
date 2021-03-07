@@ -1,0 +1,282 @@
+---
+title: "Messages and errors in googlesheets4"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  error = TRUE
+)
+```
+
+```{r setup}
+library(googlesheets4)
+```
+
+*In a hidden chunk here, I "export" the internal helpers covered below.*
+
+```{r include = FALSE}
+gs4_success <- googlesheets4:::gs4_success
+gs4_info <- googlesheets4:::gs4_info
+gs4_warning <- googlesheets4:::gs4_warning
+gs4_danger <- googlesheets4:::gs4_danger
+
+gs4_abort <- googlesheets4:::gs4_abort
+abort_unsupported_conversion <- googlesheets4:::abort_unsupported_conversion
+
+dq <- googlesheets4:::dq
+sq <- googlesheets4:::sq
+bt <- googlesheets4:::bt
+```
+
+## User-facing messages
+
+Everything should be emitted by helpers in `utils-ui.R`, such as `gs4_success()` or `gs4_info()`.
+This encourages consistent styling and makes it possible to selectively silence messages coming from googlesheets4.
+The googlesheets4 message helpers:
+
+-   Use the [cli package](https://cli.r-lib.org/index.html) to get interpolation, inline markup, and pluralization
+-   Eventually route through `rlang::inform()`, which is important because `inform()` prints to standard output in interactive sessions. This means that informational messages won't have the same "look" as errors, at least in RStudio.
+-   Are under the control of the `GOOGLESHEETS4_QUIET` environment variable. If it's unset, the default is to show messages (unless we're testing, i.e. the environment variable `TESTTHAT` is `"true"`). `GOOGLESHEETS4_QUIET=true` will suppress messages.
+
+*Come back here once I export and document more re: GOOGLESHEETS4_QUIET.*
+
+```{r}
+gs4_success("Doing good stuff")
+gs4_info("The more you know!")
+gs4_warning("You might want to know about this")
+gs4_danger("Something quite bad")
+```
+
+### Inline styling
+
+How we use the inline classes:
+
+-   `.file` for the name of Google Sheet
+-   `.field` for the name of a worksheet
+-   `.field` for an A1-style range or named range
+-   `.url` and `.email` for a URL or email address
+
+*These may not demo well via pkgdown, but the interactive experience is nice.*
+
+```{r}
+nm <- "name-of-a-Google-Sheet"
+gs4_success("Creating new Sheet: {.file {nm}}")
+
+nm <- "name-of-a-worksheet"
+gs4_success("Protecting cells on sheet: {.field {nm}}")
+
+rg <- "A3:B20"
+gs4_success("Writing to the range {.field {rg}}")
+```
+
+Most relevant cli docs:
+
+-   [CLI inline markup](https://cli.r-lib.org/reference/inline-markup.html)
+-   [Building a Semantic CLI](https://cli.r-lib.org/articles/semantic-cli.html)
+
+### Line breaks and whitespace
+
+Because cli wants to deal with whitespace and wrapping, for better or for worse, lines breaks and leading whitespace in the source have no effect.
+This is different from `glue::glue()`, which we use in error messages (see below), and it's easy to get confused.
+
+```{r}
+things <- "rows"
+rg <- "A3:B20"
+gs4_success(
+  "Resizing one
+or more {things} in
+    {.field {rg}}")
+```
+
+### Pluralization
+
+[cli's pluralization](https://cli.r-lib.org/articles/pluralization.html) is awesome!
+
+```{r}
+nm <- "name-of-a-Google-Sheet"
+n_new <- 1
+gs4_success("Adding {n_new} sheet{?s} to {.file {nm}}")
+
+n_new <- 3
+gs4_success("Adding {n_new} sheet{?s} to {.file {nm}}")
+```
+
+### Collapsing
+
+[Collapsing lists of things](https://cli.r-lib.org/articles/semantic-cli.html#inline-lists-of-items) is great!
+Also more pluralization.
+
+```{r}
+new_sheet_names <- c("apple", "banana", "cherry")
+gs4_success("New sheet{?s}: {.field {new_sheet_names}}")
+
+new_sheet_names <- "kumquat"
+gs4_success("New sheet{?s}: {.field {new_sheet_names}}")
+```
+
+### Tricky stuff
+
+If you want to see some tricky examples of building up a message from parts, look here:
+
+-   `range_speedread()`
+-   `sheet_freeze()`
+
+## Errors
+
+Use `gs4_abort()` instead of `rlang::abort()` or `stop()`.
+So far, I'm not really using `...` to put data in the condition, but I could start when/if there's a reason to.
+Be prepared to get confused about how to style and line break error messages vs. regular messages, which use `glue()` and cli, respectively.
+
+`abort_unsupported_conversion()` is a wrapper around `gs4_abort()`.
+
+```{r}
+x <- structure(1, class = c("a", "b", "c"))
+abort_unsupported_conversion(x, to = "foofy")
+```
+
+`abort_unsupported_conversion()` exists to standardize a recurring type of error message, usually encountered during development, not by end-users.
+I use it a lot in the default method of an `as_{to}()` generic.
+
+### Inline styling
+
+We process the `message` of `gs4_abort()` with `glue::glue()`.
+
+Use helpers `dq()`, `sq()`, and `bt()` for inline style (yes, it's clunky compared to cli):
+
+-   `dq()` for double quotes (Sheet names)
+-   `sq()` for single quotes (worksheet names, ranges, and most strings, generally)
+-   `bt()` for backticks (argument names, functions)
+
+```{r}
+nm <- "name-of-a-Google-Sheet"
+gs4_abort("Use double quotes around a Google Sheet name: {dq(nm)}")
+
+nm <- "name-of-a-worksheet"
+gs4_abort("Use single quotes around a worksheet name: {sq(nm)}")
+
+gs4_abort("In fact, when in doubt, just use single quotes around {sq('stuff')}")
+
+gs4_abort("
+  But use backticks when referring to an {bt('argument')} \\
+  or {bt('function()')}")
+```
+
+### Multiple lines and bullets
+
+Get multiple lines by sending a character vector as `message`.
+Think about what `rlang::format_error_bullets()` does and be intentional with naming: the choices are `i`, `x`, and no name.
+
+```{r}
+bad_stuff <- c("eew", "yuck", "uh-oh")
+gs4_abort(c(
+  "This first line is a header, explaining the general situation",
+  x = "Sometimes you have to deliver Very Bad News",
+  bad_stuff,
+  i = "Maybe a call to {bt('magic_function()')} would help?"
+))
+
+endpoint <- "sheets.spreadsheets.WTF"
+gs4_abort(c("Endpoint not recognized:", x = "{sq(endpoint)}"))
+```
+
+### Line breaks and whitespace
+
+Remember each element of `message` is processed with `glue::glue()`, so let's review the line break situation, which is different to the messages made with cli, which is confusing.
+
+This produces two lines:
+
+```{r}
+shift <- "SHIFT"
+gs4_abort("
+  The {bt('shift')} direction must be specified for this {bt('range')}
+  It can't be automatically determined")
+```
+
+Use `\\` if you want continuation, i.e. you want one line:
+
+```{r}
+shift <- "SHIFT"
+gs4_abort("
+  The {bt('shift')} direction must be specified for this {bt('range')}. \\
+  It can't be automatically determined.")
+
+very_very_very_very_very_very_very_very_long_variable_name <- "HA HA"
+gs4_abort(c(
+  "Imagine {very_very_very_very_very_very_very_very_long_variable_name} \\
+   a line that's long in source but short after interpolation", 
+  x = "Short bad thing",
+  i = "Helpful tip"
+))
+```
+
+### Pluralization
+
+Use `cli::pluralize()` directly if you need pluralization in error messages.
+Search for `cli::qty()` for a few places where the pluralization was a bit trickier.
+
+```{r}
+col_names <- c("apple", "banana")
+nc <- 1
+gs4_abort(c(
+  "Length of {bt('col_names')} is not compatible with the data:",
+  x = cli::pluralize("Expected {length(col_names)} un-skipped column{?s}"),
+  x = cli::pluralize("But data has {nc} column{?s}")
+))
+
+m <- 8
+sheets_df <- head(iris)
+gs4_abort(c(
+  cli::pluralize("There {?is/are} {nrow(sheets_df)} sheet{?s}:"),
+  x = "Requested sheet number is out-of-bounds: {m}"
+))
+
+sheets_df <- head(iris, 1)
+gs4_abort(c(
+  cli::pluralize("There {?is/are} {nrow(sheets_df)} sheet{?s}:"),
+  x = "Requested sheet number is out-of-bounds: {m}"
+))
+```
+
+### Collapsing
+
+Use `glue_collapse()` ahead of time, if you need to style and collapse.
+
+```{r}
+bad_codes <- letters[1:3]
+bad_codes <- glue::glue_collapse(sq(bad_codes), sep = ",")
+gs4_abort(c(
+  "{bt('col_types')} must be a string of readr-style shortcodes:",
+  x = "Unrecognized codes: {bad_codes}"
+))
+```
+
+### Tricky stuff
+
+If you want to see some tricky examples of building up a message from parts, look here:
+
+-   `rep_ctypes()` (conditional pluralization)
+
+## Future thoughts
+
+Would I ever want to use cli in the errors?
+There are good things and bad things about that.
+Messing around.
+This may very well not show up in pkgdown, which is related to what's problematic.
+
+```{r}
+rlang::abort(cli::col_blue("Hello ", "world!"))
+
+rlang::abort(paste("... to highlight the", cli::col_red("search term"),
+                   "in a block of text\n"))
+
+error <- cli::combine_ansi_styles("red", "bold")
+warn <- cli::combine_ansi_styles("magenta", "underline")
+note <- cli::style_italic
+
+rlang::abort(error("Error: subscript out of bounds!\n"))
+rlang::abort(warn("Warning: shorter argument was recycled.\n"))
+rlang::abort(note("Note: no such directory.\n"))
+```
+

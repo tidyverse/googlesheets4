@@ -42,6 +42,8 @@ The googlesheets4 message helpers:
 
 *Come back here once I export and document more re: GOOGLESHEETS4_QUIET.*
 
+These are all wrappers around `cli::cli_alert()` and friends.
+
 ```{r}
 gs4_success("Doing good stuff")
 gs4_info("The more you know!")
@@ -127,7 +129,7 @@ If you want to see some tricky examples of building up a message from parts, loo
 
 Use `gs4_abort()` instead of `rlang::abort()` or `stop()`.
 So far, I'm not really using `...` to put data in the condition, but I could start when/if there's a reason to.
-Be prepared to get confused about how to style and line break error messages vs. regular messages, which use `glue()` and cli, respectively.
+Be prepared to get confused about how to style and line break error messages vs. regular messages, which use `glue::glue()` and `cli::cli_alert()`, respectively.
 
 `abort_unsupported_conversion()` is a wrapper around `gs4_abort()`.
 
@@ -241,7 +243,7 @@ gs4_abort(c(
 
 ### Collapsing
 
-Use `glue_collapse()` ahead of time, if you need to style and collapse.
+Use `glue::glue_collapse()` ahead of time, if you need to style and collapse.
 
 ```{r}
 bad_codes <- letters[1:3]
@@ -279,4 +281,3 @@ rlang::abort(error("Error: subscript out of bounds!\n"))
 rlang::abort(warn("Warning: shorter argument was recycled.\n"))
 rlang::abort(note("Note: no such directory.\n"))
 ```
-

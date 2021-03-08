@@ -42,12 +42,12 @@ gs4_warning("You might want to know about this")
 gs4_danger("Something quite bad")
 ```
 
-The helpers encourage consistent styling and makes it possible to selectively silence messages coming from googlesheets4.
+The helpers encourage consistent styling and make it possible to selectively silence messages coming from googlesheets4.
 The googlesheets4 message helpers:
 
 -   Use the [cli package](https://cli.r-lib.org/index.html) to get interpolation, inline markup, and pluralization
 -   Eventually route through `rlang::inform()`, which is important because `inform()` prints to standard output in interactive sessions. This means that informational messages won't have the same "look" as errors and can generally be more stylish, at least in IDEs like RStudio.
--   Are under the control of the `GOOGLESHEETS4_QUIET` environment variable. If it's unset, the default is to show messages (unless we're testing, i.e. the environment variable `TESTTHAT` is `"true"`). `GOOGLESHEETS4_QUIET=true` will suppress messages. The are convenience helpers `local_gs4_quiet()` and `with_gs4_quiet()`.
+-   Are under the control of the `GOOGLESHEETS4_QUIET` environment variable. If it's unset, the default is to show messages (unless we're testing, i.e. the environment variable `TESTTHAT` is `"true"`). `GOOGLESHEETS4_QUIET=true` will suppress messages. There are withr-style convenience helpers: `local_gs4_quiet()` and `with_gs4_quiet()`.
 
 ### Inline styling
 

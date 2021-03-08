@@ -114,6 +114,7 @@ reference:
       - gs4_deauth
       - gs4_user
       - gs4_auth_configure
+      - googlesheets4-configuration
   - title: "Programming around the Sheets API"
     desc: >
       Low-level functions used internally and made available for programming
@@ -123,6 +124,7 @@ reference:
       - gs4_token
       - gs4_has_token
       - gs4_endpoints
+      - matches("quiet")
   - title: "Operate on (spread)Sheets or the Sheets API"
     desc: >
       Functions that operate at the level of a (spread)sheet or the whole API/package

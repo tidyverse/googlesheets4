@@ -199,10 +199,10 @@
 <p>Create a brand new Sheet with <code><a href="../../reference/gs4_create.html">gs4_create()</a></code>. You can specify the new Sheet’s <code>name</code> (or accept a randomly generated name).</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ss1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"sheets-create-demo-1"</span><span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "sheets-create-demo-1"</span>
+<span class="co">#&gt; ✔ Creating new Sheet: sheets-create-demo-1</span>
 <span class="va">ss1</span>
 <span class="co">#&gt; Spreadsheet name: sheets-create-demo-1</span>
-<span class="co">#&gt;               ID: 1-ACQ9shF7v8M5P0f0fgN2ZcyGJOKHUUFnZGGXOd-ci0</span>
+<span class="co">#&gt;               ID: 125qMA2WFco9tfEglt0PeRHVkPTrklBOBmWzh7Gm-Ekw</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -220,10 +220,10 @@
   <span class="st">"sheets-create-demo-2"</span>,
   sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"alpha"</span>, <span class="st">"beta"</span><span class="op">)</span>
 <span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "sheets-create-demo-2"</span>
+<span class="co">#&gt; ✔ Creating new Sheet: sheets-create-demo-2</span>
 <span class="va">ss2</span>
 <span class="co">#&gt; Spreadsheet name: sheets-create-demo-2</span>
-<span class="co">#&gt;               ID: 10nC4HxSMsiLj2vLHQelK2sSDX2dwlhZ86lX9IxN_vMA</span>
+<span class="co">#&gt;               ID: 1NYqSTHFRH9NDDVMfjKRn93OtDeziW_QDO-MHlnoX7BU</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -244,10 +244,10 @@
   <span class="st">"sheets-create-demo-3"</span>,
   sheets <span class="op">=</span> <span class="va">my_data</span>
 <span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "sheets-create-demo-3"</span>
+<span class="co">#&gt; ✔ Creating new Sheet: sheets-create-demo-3</span>
 <span class="va">ss3</span>
 <span class="co">#&gt; Spreadsheet name: sheets-create-demo-3</span>
-<span class="co">#&gt;               ID: 1X05AXayfgROmG0giWJjpJf7NDiasmoDASVBoQpG1PWs</span>
+<span class="co">#&gt;               ID: 1GjoE9nqihXWjjKMS3_2CBeuGutnsWdktvPtgrAB18r4</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -266,10 +266,10 @@
   <span class="st">"sheets-create-demo-4"</span>,
   sheets <span class="op">=</span> <span class="va">my_data_frames</span>
 <span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "sheets-create-demo-4"</span>
+<span class="co">#&gt; ✔ Creating new Sheet: sheets-create-demo-4</span>
 <span class="va">ss4</span>
 <span class="co">#&gt; Spreadsheet name: sheets-create-demo-4</span>
-<span class="co">#&gt;               ID: 1jX5d_ZUSt1Kf4f9v-4fsnmSTmyeLFOBqKwt4FRUjzKQ</span>
+<span class="co">#&gt;               ID: 1QxBipnz2U1Eav4tLdw-chlAY_2vNAfsUBiIHfpN7Mno</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -289,10 +289,10 @@
   locale <span class="op">=</span> <span class="st">"fr_FR"</span>,
   timeZone <span class="op">=</span> <span class="st">"Europe/Paris"</span>
 <span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "sheets-create-demo-5"</span>
+<span class="co">#&gt; ✔ Creating new Sheet: sheets-create-demo-5</span>
 <span class="va">ss5</span>
 <span class="co">#&gt; Spreadsheet name: sheets-create-demo-5</span>
-<span class="co">#&gt;               ID: 1n-o0rTyankZTrp-Xb4QNNJvoS8dDUZ_HHRzL6qwEP7g</span>
+<span class="co">#&gt;               ID: 1_VbZ20nWZQbbLI3-dW7jQ6bmK7xc_aKZxK5DEJtsggA</span>
 <span class="co">#&gt;           Locale: fr_FR</span>
 <span class="co">#&gt;        Time zone: Europe/Paris</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -309,11 +309,11 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-create-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-create-demo-5: 1n-o0rTyankZTrp-Xb4QNNJvoS8dDUZ_HHRzL6qwEP7g</span>
-<span class="co">#&gt;   * sheets-create-demo-4: 1jX5d_ZUSt1Kf4f9v-4fsnmSTmyeLFOBqKwt4FRUjzKQ</span>
-<span class="co">#&gt;   * sheets-create-demo-3: 1X05AXayfgROmG0giWJjpJf7NDiasmoDASVBoQpG1PWs</span>
-<span class="co">#&gt;   * sheets-create-demo-2: 10nC4HxSMsiLj2vLHQelK2sSDX2dwlhZ86lX9IxN_vMA</span>
-<span class="co">#&gt;   * sheets-create-demo-1: 1-ACQ9shF7v8M5P0f0fgN2ZcyGJOKHUUFnZGGXOd-ci0</span></code></pre></div>
+<span class="co">#&gt;   * sheets-create-demo-5: 1_VbZ20nWZQbbLI3-dW7jQ6bmK7xc_aKZxK5DEJtsggA</span>
+<span class="co">#&gt;   * sheets-create-demo-4: 1QxBipnz2U1Eav4tLdw-chlAY_2vNAfsUBiIHfpN7Mno</span>
+<span class="co">#&gt;   * sheets-create-demo-3: 1GjoE9nqihXWjjKMS3_2CBeuGutnsWdktvPtgrAB18r4</span>
+<span class="co">#&gt;   * sheets-create-demo-2: 1NYqSTHFRH9NDDVMfjKRn93OtDeziW_QDO-MHlnoX7BU</span>
+<span class="co">#&gt;   * sheets-create-demo-1: 125qMA2WFco9tfEglt0PeRHVkPTrklBOBmWzh7Gm-Ekw</span></code></pre></div>
 </div>
 </div>
 <div id="write_sheet-a-k-a--sheet_write" class="section level2">
@@ -326,10 +326,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">random_ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "annoying-bunting"</span>
+<span class="co">#&gt; ✔ Creating new Sheet: androgenic-human</span>
 <span class="va">random_ss</span>
-<span class="co">#&gt; Spreadsheet name: annoying-bunting</span>
-<span class="co">#&gt;               ID: 13gDw_f_ka4RpBqi9TAKPzxL4slv8spaZTgmiO_JPm30</span>
+<span class="co">#&gt; Spreadsheet name: androgenic-human</span>
+<span class="co">#&gt;               ID: 11lW0JrQYwhoMaHFXC23_ROMtaleY9_gUe51CHl-jm1I</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -341,16 +341,16 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">random_ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * annoying-bunting: 13gDw_f_ka4RpBqi9TAKPzxL4slv8spaZTgmiO_JPm30</span>
+<span class="co">#&gt;   * androgenic-human: 11lW0JrQYwhoMaHFXC23_ROMtaleY9_gUe51CHl-jm1I</span>
 
 <span class="va">ss1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span>
   <span class="st">"write-sheets-demo-1"</span>,
   sheets <span class="op">=</span> <span class="st">"chickwts"</span>
 <span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "write-sheets-demo-1"</span>
+<span class="co">#&gt; ✔ Creating new Sheet: write-sheets-demo-1</span>
 <span class="va">ss1</span>
 <span class="co">#&gt; Spreadsheet name: write-sheets-demo-1</span>
-<span class="co">#&gt;               ID: 1gm0f13fdW-H299MscncP-Be_iLuuYhcUVXH_kkbTcHg</span>
+<span class="co">#&gt;               ID: 1FjbsyQb21ElKqN0r0QedTwgyphu3UvwPNPwTesnl8vw</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -360,11 +360,11 @@
 <p><code><a href="../../reference/sheet_write.html">sheet_write()</a></code> allows us to write the actual <code>chickwts</code> data into the sheet by that name.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">chickwts</span>, ss <span class="op">=</span> <span class="va">ss1</span>, sheet <span class="op">=</span> <span class="st">"chickwts"</span><span class="op">)</span>
-<span class="co">#&gt; Writing to "write-sheets-demo-1"</span>
-<span class="co">#&gt; Writing to sheet "chickwts"</span>
+<span class="co">#&gt; ✔ Writing to write-sheets-demo-1</span>
+<span class="co">#&gt; ✔ Writing to sheet chickwts</span>
 <span class="va">ss1</span>
 <span class="co">#&gt; Spreadsheet name: write-sheets-demo-1</span>
-<span class="co">#&gt;               ID: 1gm0f13fdW-H299MscncP-Be_iLuuYhcUVXH_kkbTcHg</span>
+<span class="co">#&gt;               ID: 1FjbsyQb21ElKqN0r0QedTwgyphu3UvwPNPwTesnl8vw</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -375,21 +375,21 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># explicitly make a new sheet named "iris"</span>
 <span class="fu"><a href="../../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">iris</span>, ss <span class="op">=</span> <span class="va">ss1</span>, sheet <span class="op">=</span> <span class="st">"iris"</span><span class="op">)</span>
-<span class="co">#&gt; Writing to "write-sheets-demo-1"</span>
-<span class="co">#&gt; Writing to sheet "iris"</span>
+<span class="co">#&gt; ✔ Writing to write-sheets-demo-1</span>
+<span class="co">#&gt; ✔ Writing to sheet iris</span>
 
 <span class="co"># implicitly make a new sheet named "mtcars"</span>
 <span class="fu"><a href="../../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">mtcars</span>, ss <span class="op">=</span> <span class="va">ss1</span><span class="op">)</span>
-<span class="co">#&gt; Writing to "write-sheets-demo-1"</span>
-<span class="co">#&gt; Writing to sheet "mtcars"</span></code></pre></div>
+<span class="co">#&gt; ✔ Writing to write-sheets-demo-1</span>
+<span class="co">#&gt; ✔ Writing to sheet mtcars</span></code></pre></div>
 <p>If no sheet name is given and it can’t be determined from <code>data</code>, a name of the form “SheetN” is automatically generated by Sheets.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, y <span class="op">=</span> <span class="fl">3</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>, ss <span class="op">=</span> <span class="va">ss1</span><span class="op">)</span>
-<span class="co">#&gt; Writing to "write-sheets-demo-1"</span>
-<span class="co">#&gt; Writing to sheet "Sheet1"</span>
+<span class="co">#&gt; ✔ Writing to write-sheets-demo-1</span>
+<span class="co">#&gt; ✔ Writing to sheet Sheet1</span>
 <span class="va">ss1</span>
 <span class="co">#&gt; Spreadsheet name: write-sheets-demo-1</span>
-<span class="co">#&gt;               ID: 1gm0f13fdW-H299MscncP-Be_iLuuYhcUVXH_kkbTcHg</span>
+<span class="co">#&gt;               ID: 1FjbsyQb21ElKqN0r0QedTwgyphu3UvwPNPwTesnl8vw</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 4</span>
@@ -406,7 +406,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"write-sheets-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * write-sheets-demo-1: 1gm0f13fdW-H299MscncP-Be_iLuuYhcUVXH_kkbTcHg</span></code></pre></div>
+<span class="co">#&gt;   * write-sheets-demo-1: 1FjbsyQb21ElKqN0r0QedTwgyphu3UvwPNPwTesnl8vw</span></code></pre></div>
 </div>
 </div>
 <div id="sheet_append" class="section level2">
@@ -418,8 +418,8 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="va">deaths</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op">%&gt;%</span>
    <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>range <span class="op">=</span> <span class="st">"other_data"</span>, col_types <span class="op">=</span> <span class="st">"????DD"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Reading from "deaths"</span>
-<span class="co">#&gt; Range "other_data"</span>
+<span class="co">#&gt; ✔ Reading from deaths</span>
+<span class="co">#&gt; ✔ Range other_data</span>
 <span class="co">#&gt; # A tibble: 10 x 6</span>
 <span class="co">#&gt;    Name           Profession   Age `Has kids` `Date of birth` `Date of death`</span>
 <span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;date&gt;          &lt;date&gt;         </span>
@@ -441,10 +441,10 @@
 <p>We use <code><a href="../../reference/gs4_create.html">gs4_create()</a></code> to create a new (spread)Sheet and initialize a new (work)sheet with the “deaths” column headers, but no data. A second empty row is created (it must be, in order for us to freeze the top row), but it will soon be filled when we append.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"sheets-append-demo"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>deaths <span class="op">=</span> <span class="va">deaths_zero</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "sheets-append-demo"</span>
+<span class="co">#&gt; ✔ Creating new Sheet: sheets-append-demo</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;               ID: 1LsOCZ3dz6FlF8HNEfMfwOpfrO5hQOXXojEeVLieABLI</span>
+<span class="co">#&gt;               ID: 19wvKvd7aiZ0UWcZ5jMByvID_4fTWbbww4CXJjX7vx_o</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -458,7 +458,7 @@
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;               ID: 1LsOCZ3dz6FlF8HNEfMfwOpfrO5hQOXXojEeVLieABLI</span>
+<span class="co">#&gt;               ID: 19wvKvd7aiZ0UWcZ5jMByvID_4fTWbbww4CXJjX7vx_o</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -468,11 +468,11 @@
 
 <span class="co"># send several rows</span>
 <span class="va">ss</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/sheet_append.html">sheet_append</a></span><span class="op">(</span><span class="va">deaths_one</span><span class="op">)</span>
-<span class="co">#&gt; Writing to "sheets-append-demo"</span>
-<span class="co">#&gt; Appending 5 row(s) to "deaths"</span>
+<span class="co">#&gt; ✔ Writing to sheets-append-demo</span>
+<span class="co">#&gt; ✔ Appending 5 rows to deaths</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;               ID: 1LsOCZ3dz6FlF8HNEfMfwOpfrO5hQOXXojEeVLieABLI</span>
+<span class="co">#&gt;               ID: 19wvKvd7aiZ0UWcZ5jMByvID_4fTWbbww4CXJjX7vx_o</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -482,11 +482,11 @@
 
 <span class="co"># send a single row</span>
 <span class="va">ss</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/sheet_append.html">sheet_append</a></span><span class="op">(</span><span class="va">deaths_two</span><span class="op">)</span>
-<span class="co">#&gt; Writing to "sheets-append-demo"</span>
-<span class="co">#&gt; Appending 1 row(s) to "deaths"</span>
+<span class="co">#&gt; ✔ Writing to sheets-append-demo</span>
+<span class="co">#&gt; ✔ Appending 1 row to deaths</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;               ID: 1LsOCZ3dz6FlF8HNEfMfwOpfrO5hQOXXojEeVLieABLI</span>
+<span class="co">#&gt;               ID: 19wvKvd7aiZ0UWcZ5jMByvID_4fTWbbww4CXJjX7vx_o</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -496,11 +496,11 @@
 
 <span class="co"># send remaining rows</span>
 <span class="va">ss</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/sheet_append.html">sheet_append</a></span><span class="op">(</span><span class="va">deaths_three</span><span class="op">)</span>
-<span class="co">#&gt; Writing to "sheets-append-demo"</span>
-<span class="co">#&gt; Appending 4 row(s) to "deaths"</span>
+<span class="co">#&gt; ✔ Writing to sheets-append-demo</span>
+<span class="co">#&gt; ✔ Appending 4 rows to deaths</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;               ID: 1LsOCZ3dz6FlF8HNEfMfwOpfrO5hQOXXojEeVLieABLI</span>
+<span class="co">#&gt;               ID: 19wvKvd7aiZ0UWcZ5jMByvID_4fTWbbww4CXJjX7vx_o</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -510,8 +510,8 @@
 <p>Now the big reveal: have we successfully rebuilt that data through incremental updates?</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">deaths_replica</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="va">ss</span>, col_types <span class="op">=</span> <span class="st">"????DD"</span><span class="op">)</span>
-<span class="co">#&gt; Reading from "sheets-append-demo"</span>
-<span class="co">#&gt; Range "deaths"</span>
+<span class="co">#&gt; ✔ Reading from sheets-append-demo</span>
+<span class="co">#&gt; ✔ Range deaths</span>
 <span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span><span class="op">(</span><span class="va">deaths</span>, <span class="va">deaths_replica</span><span class="op">)</span>
 <span class="co">#&gt; [1] TRUE</span></code></pre></div>
 <p>Gosh I hope that’s still <code>TRUE</code> as it was the last time I checked this article!</p>
@@ -522,7 +522,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-append-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-append-demo: 1LsOCZ3dz6FlF8HNEfMfwOpfrO5hQOXXojEeVLieABLI</span></code></pre></div>
+<span class="co">#&gt;   * sheets-append-demo: 19wvKvd7aiZ0UWcZ5jMByvID_4fTWbbww4CXJjX7vx_o</span></code></pre></div>
 </div>
 </div>
 <div id="range_write" class="section level2">
@@ -535,8 +535,8 @@
 <p>Here’s the initial state of <code>ss_edit</code>:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">read_this</span><span class="op">(</span><span class="va">ss_edit</span><span class="op">)</span>
-<span class="co">#&gt; Reading from "sheets-edit-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
+<span class="co">#&gt; ✔ Reading from sheets-edit-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; # A tibble: 7 x 7</span>
 <span class="co">#&gt;   A     B     C     D     E     F     G    </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span>
@@ -559,10 +559,10 @@
 <p>If we do not specify the range, <code>df</code> is written into the upper left corner and only affects cells spanned by <code>df</code>. To see where we’ve written, focus on the cells are NOT “x”.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_write.html">range_write</a></span><span class="op">(</span><span class="va">ss_edit</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">read_this</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Editing "sheets-edit-demo"</span>
-<span class="co">#&gt; Writing to sheet "Sheet1"</span>
-<span class="co">#&gt; Reading from "sheets-edit-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
+<span class="co">#&gt; ✔ Editing sheets-edit-demo</span>
+<span class="co">#&gt; ✔ Writing to sheet Sheet1</span>
+<span class="co">#&gt; ✔ Reading from sheets-edit-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; # A tibble: 7 x 7</span>
 <span class="co">#&gt;   A     B     C     D     E     F     G    </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span>
@@ -577,10 +577,10 @@
 <p>If we target a <strong>single cell</strong> with <code>range</code>, it specifies the upper left corner of the target area. The cells written are determined by the extent of the data.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_write.html">range_write</a></span><span class="op">(</span><span class="va">ss_edit</span>, data <span class="op">=</span> <span class="va">df</span>, range <span class="op">=</span> <span class="st">"C2"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">read_this</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Editing "sheets-edit-demo"</span>
-<span class="co">#&gt; Writing to sheet "Sheet1"</span>
-<span class="co">#&gt; Reading from "sheets-edit-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
+<span class="co">#&gt; ✔ Editing sheets-edit-demo</span>
+<span class="co">#&gt; ✔ Writing to sheet Sheet1</span>
+<span class="co">#&gt; ✔ Reading from sheets-edit-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; # A tibble: 7 x 7</span>
 <span class="co">#&gt;   A     B     C     D     E     F     G    </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span>
@@ -594,10 +594,10 @@
 <p>If <code>range</code> specifies multiple cells (it can even be unbounded on some sides), it is taken literally and all covered cells are written. If <code>range</code> is larger than the data, this results in some cells being <em>cleared</em> of their values. In this example, the <code>range</code> is “too big” for the data, so the remaining cells are cleared of their existing “-” value.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_write.html">range_write</a></span><span class="op">(</span><span class="va">ss_edit</span>, data <span class="op">=</span> <span class="va">df</span>, range <span class="op">=</span> <span class="st">"D4:G7"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">read_this</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Editing "sheets-edit-demo"</span>
-<span class="co">#&gt; Writing to sheet "Sheet1"</span>
-<span class="co">#&gt; Reading from "sheets-edit-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
+<span class="co">#&gt; ✔ Editing sheets-edit-demo</span>
+<span class="co">#&gt; ✔ Writing to sheet Sheet1</span>
+<span class="co">#&gt; ✔ Reading from sheets-edit-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; # A tibble: 7 x 7</span>
 <span class="co">#&gt;   A     B     C     D     E     F     G    </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span>
@@ -611,10 +611,10 @@
 <p>Here’s another case where the <code>range</code> is bigger than it needs to be and it’s unbounded on the bottom and top:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_write.html">range_write</a></span><span class="op">(</span><span class="va">ss_edit</span>, data <span class="op">=</span> <span class="va">df</span>, range <span class="op">=</span> <span class="st">"B:E"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">read_this</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Editing "sheets-edit-demo"</span>
-<span class="co">#&gt; Writing to sheet "Sheet1"</span>
-<span class="co">#&gt; Reading from "sheets-edit-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
+<span class="co">#&gt; ✔ Editing sheets-edit-demo</span>
+<span class="co">#&gt; ✔ Writing to sheet Sheet1</span>
+<span class="co">#&gt; ✔ Reading from sheets-edit-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; # A tibble: 7 x 7</span>
 <span class="co">#&gt;   A     B     C     D     E     F     G    </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;chr&gt; &lt;chr&gt;</span>
@@ -628,10 +628,10 @@
 <p>Here’s another <code>range</code> that’s unbounded on the left and “too big”:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_write.html">range_write</a></span><span class="op">(</span><span class="va">ss_edit</span>, data <span class="op">=</span> <span class="va">df</span>, range <span class="op">=</span> <span class="st">"B2:6"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">read_this</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Editing "sheets-edit-demo"</span>
-<span class="co">#&gt; Writing to sheet "Sheet1"</span>
-<span class="co">#&gt; Reading from "sheets-edit-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
+<span class="co">#&gt; ✔ Editing sheets-edit-demo</span>
+<span class="co">#&gt; ✔ Writing to sheet Sheet1</span>
+<span class="co">#&gt; ✔ Reading from sheets-edit-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; # A tibble: 7 x 7</span>
 <span class="co">#&gt;   A     B     C     D     E     F     G    </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span>
@@ -645,11 +645,11 @@
 <p>The target sheet will be expanded, if necessary, if and only if <code>range</code> is a single cell (i.e. it gives the upper left corner).</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_write.html">range_write</a></span><span class="op">(</span><span class="va">ss_edit</span>, data <span class="op">=</span> <span class="va">df</span>, range <span class="op">=</span> <span class="st">"G6"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">read_this</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Editing "sheets-edit-demo"</span>
-<span class="co">#&gt; Writing to sheet "Sheet1"</span>
-<span class="co">#&gt; Changing dims: (7 x 7) --&gt; (9 x 8)</span>
-<span class="co">#&gt; Reading from "sheets-edit-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
+<span class="co">#&gt; ✔ Editing sheets-edit-demo</span>
+<span class="co">#&gt; ✔ Writing to sheet Sheet1</span>
+<span class="co">#&gt; ✔ Changing dims: (7 x 7) --&gt; (9 x 8)</span>
+<span class="co">#&gt; ✔ Reading from sheets-edit-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; # A tibble: 9 x 8</span>
 <span class="co">#&gt;   A     B     C     D     E     F     G     H    </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span>
@@ -676,7 +676,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-edit-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-edit-demo: 1PKoakSguign7dY-MyEeKrymMNY3jx_KscWYx2KEggIw</span></code></pre></div>
+<span class="co">#&gt;   * sheets-edit-demo: 1FdtgBh9X-_xT5NnFYQh5bthM-QuPYn4dBS4UJ9k6WD0</span></code></pre></div>
 </div>
 </div>
 <div id="write-formulas" class="section level2">
@@ -696,9 +696,9 @@
 <span class="op">)</span>
 
 <span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"sheets-formula-demo"</span>, sheets <span class="op">=</span> <span class="va">lang_dat</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "sheets-formula-demo"</span>
+<span class="co">#&gt; ✔ Creating new Sheet: sheets-formula-demo</span>
 <span class="co">#&gt; Spreadsheet name: sheets-formula-demo</span>
-<span class="co">#&gt;               ID: 1P6Qe3VcV5TrXRVFjgrwKy1KMK9KllzUEy-1vX-SxXqg</span>
+<span class="co">#&gt;               ID: 12D-purSTPcFDxN6KUe9dNhmoG8T_mXSGjbLwejfBYaw</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -708,8 +708,8 @@
 <p>Now we can read the data back out, complete with translations!</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Reading from "sheets-formula-demo"</span>
-<span class="co">#&gt; Range "lang_dat"</span>
+<span class="co">#&gt; ✔ Reading from sheets-formula-demo</span>
+<span class="co">#&gt; ✔ Range lang_dat</span>
 <span class="co">#&gt; # A tibble: 3 x 3</span>
 <span class="co">#&gt;   english      to    translated     </span>
 <span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;          </span>
@@ -723,7 +723,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-formula-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-formula-demo: 1P6Qe3VcV5TrXRVFjgrwKy1KMK9KllzUEy-1vX-SxXqg</span></code></pre></div>
+<span class="co">#&gt;   * sheets-formula-demo: 12D-purSTPcFDxN6KUe9dNhmoG8T_mXSGjbLwejfBYaw</span></code></pre></div>
 </div>
 </div>
 <div id="range_flood" class="section level2">
@@ -735,9 +735,9 @@
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_fodder.html">gs4_fodder</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
 <span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"range-flood-demo"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "range-flood-demo"</span>
+<span class="co">#&gt; ✔ Creating new Sheet: range-flood-demo</span>
 <span class="co">#&gt; Spreadsheet name: range-flood-demo</span>
-<span class="co">#&gt;               ID: 1i7jmXr_uVwQrBnXQ1V4AF6al4883YK_FX-VgkdLtYcI</span>
+<span class="co">#&gt;               ID: 1elNfGqLHObW9mLsEMJEYOgT3kfWZR91KQqFoXMm-iWk</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -747,8 +747,8 @@
 <p>To begin, each cell holds its A1-coordinates as its value. If you viewed this in the browser, you’d see the header row has some special formatting, including a gray background.</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Reading from "range-flood-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
+<span class="co">#&gt; ✔ Reading from range-flood-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; # A tibble: 10 x 10</span>
 <span class="co">#&gt;    A     B     C     D     E     F     G     H     I     J    </span>
 <span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span>
@@ -765,11 +765,11 @@
 <p>By default, <code><a href="../../reference/range_flood.html">range_flood()</a></code> sends an empty cell (and clears existing formatting).</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_flood.html">range_flood</a></span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"A1:B3"</span><span class="op">)</span>
-<span class="co">#&gt; Editing "range-flood-demo"</span>
-<span class="co">#&gt; Editing sheet "Sheet1"</span>
+<span class="co">#&gt; ✔ Editing range-flood-demo</span>
+<span class="co">#&gt; ✔ Editing sheet Sheet1</span>
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Reading from "range-flood-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
+<span class="co">#&gt; ✔ Reading from range-flood-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; New names:</span>
 <span class="co">#&gt; * `` -&gt; ...1</span>
 <span class="co">#&gt; * `` -&gt; ...2</span>
@@ -790,15 +790,11 @@
 <p>We can also send a new value into a range of cells.</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_flood.html">range_flood</a></span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"4:5"</span>, cell <span class="op">=</span> <span class="st">";-)"</span><span class="op">)</span>
-<span class="co">#&gt; Editing "range-flood-demo"</span>
-<span class="co">#&gt; Editing sheet "Sheet1"</span>
+<span class="co">#&gt; ✔ Editing range-flood-demo</span>
+<span class="co">#&gt; ✔ Editing sheet Sheet1</span>
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Reading from "range-flood-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
-<span class="co">#&gt; Request failed [429]. Retry 1 happens in 4.8 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 2 happens in 3.3 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 3 happens in 22.3 seconds ...</span>
-<span class="co">#&gt; Request failed [429]. Retry 4 happens in 45.4 seconds ...</span>
+<span class="co">#&gt; ✔ Reading from range-flood-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; New names:</span>
 <span class="co">#&gt; * `` -&gt; ...1</span>
 <span class="co">#&gt; * `` -&gt; ...2</span>
@@ -822,7 +818,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"range-flood-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * range-flood-demo: 1i7jmXr_uVwQrBnXQ1V4AF6al4883YK_FX-VgkdLtYcI</span></code></pre></div>
+<span class="co">#&gt;   * range-flood-demo: 1elNfGqLHObW9mLsEMJEYOgT3kfWZR91KQqFoXMm-iWk</span></code></pre></div>
 </div>
 </div>
 <div id="range_delete" class="section level2">
@@ -834,9 +830,9 @@
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_fodder.html">gs4_fodder</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span>
 <span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"sheets-delete-demo"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Creating new Sheet: "sheets-delete-demo"</span>
+<span class="co">#&gt; ✔ Creating new Sheet: sheets-delete-demo</span>
 <span class="co">#&gt; Spreadsheet name: sheets-delete-demo</span>
-<span class="co">#&gt;               ID: 1UDrN4lBZUAU8YW9L47-kZZ3DzGDiJk1reCs__c-YdEA</span>
+<span class="co">#&gt;               ID: 1V_aEXBevyDlQjRUYjEAUOW3oCoA1AeplzgrYGo7pmf4</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -846,8 +842,8 @@
 <p>To begin, each cell holds its A1-coordinates as its value. If you viewed this in the browser, you’d see the header row has some special formatting, including a gray background.</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Reading from "sheets-delete-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
+<span class="co">#&gt; ✔ Reading from sheets-delete-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; # A tibble: 4 x 4</span>
 <span class="co">#&gt;   A     B     C     D    </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span>
@@ -858,11 +854,11 @@
 <p>Let’s delete some rows.</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_delete.html">range_delete</a></span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"2:3"</span><span class="op">)</span>
-<span class="co">#&gt; Editing "sheets-delete-demo"</span>
-<span class="co">#&gt; Deleting cells in sheet "Sheet1"</span>
+<span class="co">#&gt; ✔ Editing sheets-delete-demo</span>
+<span class="co">#&gt; ✔ Deleting cells in sheet Sheet1</span>
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Reading from "sheets-delete-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
+<span class="co">#&gt; ✔ Reading from sheets-delete-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; # A tibble: 2 x 4</span>
 <span class="co">#&gt;   A     B     C     D    </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span>
@@ -871,11 +867,11 @@
 <p>Let’s delete a column.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_delete.html">range_delete</a></span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"C"</span><span class="op">)</span>
-<span class="co">#&gt; Editing "sheets-delete-demo"</span>
-<span class="co">#&gt; Deleting cells in sheet "Sheet1"</span>
+<span class="co">#&gt; ✔ Editing sheets-delete-demo</span>
+<span class="co">#&gt; ✔ Deleting cells in sheet Sheet1</span>
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Reading from "sheets-delete-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
+<span class="co">#&gt; ✔ Reading from sheets-delete-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; # A tibble: 2 x 3</span>
 <span class="co">#&gt;   A     B     D    </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;</span>
@@ -884,11 +880,11 @@
 <p>Let’s delete a bounded cell range. Since it’s unclear how to fill this space, we must specify <code>shift</code>. We’ll fill the space by shifting remaining cells to the left. Remember that <code>range</code> continues to refer to actual rows and columns and, due to our deletions, no longer match with the values which reflect the original locations.</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_delete.html">range_delete</a></span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"B2:B3"</span>, shift <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span>
-<span class="co">#&gt; Editing "sheets-delete-demo"</span>
-<span class="co">#&gt; Deleting cells in sheet "Sheet1"</span>
+<span class="co">#&gt; ✔ Editing sheets-delete-demo</span>
+<span class="co">#&gt; ✔ Deleting cells in sheet Sheet1</span>
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Reading from "sheets-delete-demo"</span>
-<span class="co">#&gt; Range "Sheet1"</span>
+<span class="co">#&gt; ✔ Reading from sheets-delete-demo</span>
+<span class="co">#&gt; ✔ Range Sheet1</span>
 <span class="co">#&gt; # A tibble: 2 x 3</span>
 <span class="co">#&gt;   A     B     D    </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt; &lt;lgl&gt;</span>
@@ -901,7 +897,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-delete-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-delete-demo: 1UDrN4lBZUAU8YW9L47-kZZ3DzGDiJk1reCs__c-YdEA</span></code></pre></div>
+<span class="co">#&gt;   * sheets-delete-demo: 1V_aEXBevyDlQjRUYjEAUOW3oCoA1AeplzgrYGo7pmf4</span></code></pre></div>
 </div>
 </div>
   </div>

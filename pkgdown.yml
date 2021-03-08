@@ -10,11 +10,12 @@ articles:
   articles/fun-with-googledrive-and-readxl: fun-with-googledrive-and-readxl.html
   articles/function-class-names: function-class-names.html
   articles/googlesheets4-reprex: googlesheets4-reprex.html
+  articles/messages-and-errors: messages-and-errors.html
   articles/range-specification: range-specification.html
   articles/read-sheets: read-sheets.html
   articles/write-sheets: write-sheets.html
   googlesheets4: googlesheets4.html
-last_built: 2021-03-07T11:16Z
+last_built: 2021-03-08T11:16Z
 urls:
   reference: https://googlesheets4.tidyverse.org/reference
   article: https://googlesheets4.tidyverse.org/articles

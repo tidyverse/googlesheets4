@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create a new Sheet — gs4_create • googlesheets4</title>
+<title>googlesheets4 configuration — googlesheets4-configuration • googlesheets4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,11 +49,9 @@
 
 
 
-<meta property="og:title" content="Create a new Sheet — gs4_create" />
-<meta property="og:description" content="Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook).
-Optionally, you can also provide names and/or data for the initial set of
-(work)sheets. Any initial data provided via sheets is styled as a table,
-as described in sheet_write()." />
+<meta property="og:title" content="googlesheets4 configuration — googlesheets4-configuration" />
+<meta property="og:description" content="Some aspects of googlesheets4 behaviour can be controlled via an option or
+an environment variable." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -187,101 +185,97 @@ as described in sheet_write()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create a new Sheet</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/gs4_create.R'><code>R/gs4_create.R</code></a></small>
-    <div class="hidden name"><code>gs4_create.Rd</code></div>
+    <h1>googlesheets4 configuration</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/googlesheets4-package.R'><code>R/googlesheets4-package.R</code></a>, <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/utils-ui.R'><code>R/utils-ui.R</code></a></small>
+    <div class="hidden name"><code>googlesheets4-configuration.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Creates an entirely new (spread)Sheet (or, in Excel-speak, workbook).
-Optionally, you can also provide names and/or data for the initial set of
-(work)sheets. Any initial data provided via <code>sheets</code> is styled as a table,
-as described in <code><a href='sheet_write.html'>sheet_write()</a></code>.</p>
+    <p>Some aspects of googlesheets4 behaviour can be controlled via an option or
+an environment variable.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>gs4_create</span><span class='op'>(</span>name <span class='op'>=</span> <span class='fu'><a href='gs4_random.html'>gs4_random</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>...</span>, sheets <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>local_gs4_quiet</span><span class='op'>(</span>env <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='fu'>with_gs4_quiet</span><span class='op'>(</span><span class='va'>code</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>name</th>
-      <td><p>The name of the new spreadsheet.</p></td>
+      <th>env</th>
+      <td><p>The environment to use for scoping</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>Optional spreadsheet properties that can be set through this API
-endpoint, such as locale and time zone.</p></td>
-    </tr>
-    <tr>
-      <th>sheets</th>
-      <td><p>Optional input for initializing (work)sheets. If unspecified,
-the Sheets API automatically creates an empty "Sheet1". You can provide a
-vector of sheet names, a data frame, or a (possibly named) list of data
-frames. See the examples.</p></td>
+      <th>code</th>
+      <td><p>Code to execute quietly</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="messages"><a class="anchor" href="#messages"></a>Messages</h2>
 
-    <p>The input <code>ss</code>, as an instance of <code><a href='sheets_id.html'>sheets_id</a></code></p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    
 
-    <div class='dont-index'><p>Wraps the <code>spreadsheets.create</code> endpoint:</p><ul>
-<li><p><a href='https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create'>https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/create</a></p></li>
+
+<p>The <code>GOOGLESHEETS4_QUIET</code> environment variable can be used to suppress
+messages from googlesheets4. By default, googlesheets4 always messages, i.e.
+it is <em>not</em> quiet.</p>
+<p>Set <code>GOOGLESHEETS4_QUIET</code> to <code>"true"</code> to suppress messages, by one of these
+means, in order of decreasing scope:</p><ul>
+<li><p>Put <code>GOOGLESHEETS4_QUIET=true</code> in a start-up file, such as <code>.Renviron</code></p></li>
+<li><p>Call <code><a href='https://rdrr.io/r/base/Sys.setenv.html'>Sys.setenv(GOOGLESHEETS4_QUIET = "true")</a></code> in, e.g., your R script</p></li>
+<li><p>Use <code>local_gs4_quiet()</code> to silence googlesheets4 in a specific scope</p></li>
+<li><p>Use <code>with_gs4_quiet()</code> to run a small bit of code silently</p></li>
 </ul>
 
-<p>There is an article on writing Sheets:</p><ul>
-<li><p><a href='https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html'>https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html</a></p></li>
+<p><code>local_gs4_quiet()</code> and <code>with_gs4_quiet()</code> follow the conventions of the
+the withr package (<a href='https://withr.r-lib.org'>https://withr.r-lib.org</a>).</p>
+    <h2 class="hasAnchor" id="auth"><a class="anchor" href="#auth"></a>Auth</h2>
+
+    
+
+
+<p>Read about googlesheets4's main auth function, <code><a href='gs4_auth.html'>gs4_auth()</a></code>. It is powered
+by the gargle package, which consults several options:</p><ul>
+<li><p>Default Google user or, more precisely, <code>email</code>: see
+<code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle::gargle_oauth_email()</a></code></p></li>
+<li><p>Whether or where to cache OAuth tokens: see
+<code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle::gargle_oauth_cache()</a></code></p></li>
+<li><p>Whether to prefer "out-of-band" auth: see
+<code><a href='https://gargle.r-lib.org/reference/gargle_options.html'>gargle::gargle_oob_default()</a></code></p></li>
+<li><p>Application Default Credentials: see <code><a href='https://gargle.r-lib.org/reference/credentials_app_default.html'>gargle::credentials_app_default()</a></code></p></li>
 </ul>
 
-<p>Other write functions: 
-<code><a href='gs4_formula.html'>gs4_formula</a>()</code>,
-<code><a href='range_delete.html'>range_delete</a>()</code>,
-<code><a href='range_flood.html'>range_flood</a>()</code>,
-<code><a href='range_write.html'>range_write</a>()</code>,
-<code><a href='sheet_append.html'>sheet_append</a>()</code>,
-<code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'>gs4_create</span><span class='op'>(</span><span class='st'>"gs4-create-demo-1"</span><span class='op'>)</span>
+  <span class='co'># message: "Creating new Sheet ..."</span>
+  <span class='op'>(</span><span class='va'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span><span class='op'>(</span><span class='st'>"gs4-quiet-demo"</span>, sheets <span class='op'>=</span> <span class='st'>"alpha"</span><span class='op'>)</span><span class='op'>)</span>
 
-  <span class='fu'>gs4_create</span><span class='op'>(</span><span class='st'>"gs4-create-demo-2"</span>, locale <span class='op'>=</span> <span class='st'>"en_CA"</span><span class='op'>)</span>
+  <span class='co'># message: "Editing ..., Writing ..."</span>
+  <span class='fu'><a href='range_write.html'>range_write</a></span><span class='op'>(</span><span class='va'>ss</span>, data <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span>, y <span class='op'>=</span> <span class='st'>"a"</span><span class='op'>)</span><span class='op'>)</span>
 
-  <span class='fu'>gs4_create</span><span class='op'>(</span>
-    <span class='st'>"gs4-create-demo-3"</span>,
-    locale <span class='op'>=</span> <span class='st'>"fr_FR"</span>,
-    timeZone <span class='op'>=</span> <span class='st'>"Europe/Paris"</span>
+  <span class='co'># suppress messages for a small amount of code</span>
+  <span class='fu'>with_gs4_quiet</span><span class='op'>(</span>
+    <span class='va'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='sheet_append.html'>sheet_append</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>2</span>, y <span class='op'>=</span> <span class='st'>"b"</span><span class='op'>)</span><span class='op'>)</span>
   <span class='op'>)</span>
 
-  <span class='fu'>gs4_create</span><span class='op'>(</span>
-    <span class='st'>"gs4-create-demo-4"</span>,
-    sheets <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"alpha"</span>, <span class='st'>"beta"</span><span class='op'>)</span>
-  <span class='op'>)</span>
+  <span class='co'># message: "Writing ..., Appending ..."</span>
+  <span class='va'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='sheet_append.html'>sheet_append</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>3</span>, y <span class='op'>=</span> <span class='st'>"c"</span><span class='op'>)</span><span class='op'>)</span>
 
-  <span class='va'>my_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span>
-  <span class='fu'>gs4_create</span><span class='op'>(</span>
-    <span class='st'>"gs4-create-demo-5"</span>,
-    sheets <span class='op'>=</span> <span class='va'>my_data</span>
-  <span class='op'>)</span>
+  <span class='co'># suppress messages until end of current scope</span>
+  <span class='fu'>local_gs4_quiet</span><span class='op'>(</span><span class='op'>)</span>
+  <span class='va'>ss</span> <span class='op'>%&gt;%</span> <span class='fu'><a href='sheet_append.html'>sheet_append</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>4</span>, y <span class='op'>=</span> <span class='st'>"d"</span><span class='op'>)</span><span class='op'>)</span>
 
-  <span class='fu'>gs4_create</span><span class='op'>(</span>
-    <span class='st'>"gs4-create-demo-6"</span>,
-    sheets <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>iris <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>, mtcars <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>mtcars</span><span class='op'>)</span><span class='op'>)</span>
-  <span class='op'>)</span>
+  <span class='co'># see that all the data was, in fact, written</span>
+  <span class='fu'><a href='range_read.html'>read_sheet</a></span><span class='op'>(</span><span class='va'>ss</span><span class='op'>)</span>
 
   <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span><span class='op'>(</span><span class='st'>"gs4-create-demo"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span><span class='op'>(</span><span class='st'>"gs4-quiet-demo"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
     <span class='fu'>googledrive</span><span class='fu'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✔</span><span> Creating new Sheet: </span><span style='color: #0000BB;'>gs4-create-demo-1</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Creating new Sheet: </span><span style='color: #0000BB;'>gs4-create-demo-2</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Creating new Sheet: </span><span style='color: #0000BB;'>gs4-create-demo-3</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Creating new Sheet: </span><span style='color: #0000BB;'>gs4-create-demo-4</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Creating new Sheet: </span><span style='color: #0000BB;'>gs4-create-demo-5</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Creating new Sheet: </span><span style='color: #0000BB;'>gs4-create-demo-6</span><span></span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
-#&gt; <span class='message'>  * gs4-create-demo-6: 1PRdHotaB1T_jiBYUf-30MTpDfwVA8Fd_SDSiqhSPEe4</span>
-#&gt; <span class='message'>  * gs4-create-demo-5: 1VbE1LsuXSL2rq9qQVLSDQct_uOf-v6EKq-I7mBcGQpc</span>
-#&gt; <span class='message'>  * gs4-create-demo-4: 1X3meyeHhByXqYz4-7mwz6IYUTBFQ58gaHhA_nH2tubU</span>
-#&gt; <span class='message'>  * gs4-create-demo-3: 15O2D8E5yjtyzY1O6YCYYrBvs4v6ueSmIcrOhgQh0Tv8</span>
-#&gt; <span class='message'>  * gs4-create-demo-2: 1gcnaHJ1VeQx-sJzZ53AjEtkH96aBKMYSK_8Z8DDKnQQ</span>
-#&gt; <span class='message'>  * gs4-create-demo-1: 1WPh3bR1dPzFG7WAxVYs3jBrDoZgo-4zr_cYWXd_pISo</span></div></span></pre>
+</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✔</span><span> Creating new Sheet: </span><span style='color: #0000BB;'>gs4-quiet-demo</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Editing </span><span style='color: #0000BB;'>gs4-quiet-demo</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Writing to sheet </span><span style='color: #00BB00;'>alpha</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Writing to </span><span style='color: #0000BB;'>gs4-quiet-demo</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>✔</span><span> Appending 1 row to </span><span style='color: #00BB00;'>alpha</span><span></span></div><div class='output co'>#&gt; <span class='message'>Files trashed:</span>
+#&gt; <span class='message'>  * gs4-quiet-demo: 15Q1kpgGJ8EyIQ6G86HRpgW_K-hGqTAdToMHorioGcnc</span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

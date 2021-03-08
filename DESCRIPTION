@@ -17,7 +17,8 @@ Description: Interact with Google Sheets through the Sheets API
     at version 4. This package can read and write both the metadata and
     the cell data in a Sheet.
 License: MIT + file LICENSE
-URL: https://github.com/tidyverse/googlesheets4
+URL: https://googlesheets4.tidyverse.org,
+    https://github.com/tidyverse/googlesheets4
 BugReports: https://github.com/tidyverse/googlesheets4/issues
 Depends: 
     R (>= 3.2)

@@ -19,6 +19,7 @@ Interact with Google Sheets through the Sheets API
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://googlesheets4.tidyverse.org}
   \item \url{https://github.com/tidyverse/googlesheets4}
   \item Report bugs at \url{https://github.com/tidyverse/googlesheets4/issues}
 }

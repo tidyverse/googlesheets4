@@ -4,11 +4,11 @@
 
 The user interface has gotten more stylish, thanks to the cli package (<https://cli.r-lib.org>).
 
-The `GOOGLESHEETS4_QUIET` environment variable can be used to suppress messages from googlesheets4, specifically.
+The `GOOGLESHEETS4_QUIET` environment variable can be used to suppress messages from googlesheets4, specifically (#163).
 By default, googlesheets4 always messages, i.e. it is *not* quiet.
 `local_gs4_quiet()` and `with_gs4_quiet()` are [withr-style](https://withr.r-lib.org) convenience helpers for setting `GOOGLESHEETS4_QUIET=true`.
 
-googlesheets4 now throws errors with class `"googlesheets4_error"`.
+googlesheets4 now throws errors with class `"googlesheets4_error"` (#12).
 
 ## Dependency changes
 

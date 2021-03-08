@@ -1,5 +1,21 @@
 # googlesheets4 (development version)
 
+## User interface
+
+The user interface has gotten more stylish, thanks to the cli package (<https://cli.r-lib.org>).
+
+The `GOOGLESHEETS4_QUIET` environment variable can be used to suppress messages from googlesheets4, specifically.
+By default, googlesheets4 always messages, i.e. it is *not* quiet.
+`local_gs4_quiet()` and `with_gs4_quiet()` are [withr-style](https://withr.r-lib.org) convenience helpers for setting `GOOGLESHEETS4_QUIET=true`.
+
+googlesheets4 now throws errors with class `"googlesheets4_error"`.
+
+## Dependency changes
+
+* cli is new in Imports.
+
+* googlesheets4 Suggests testthat >= 3.0.0 and, specifically, uses third edition features.
+
 # googlesheets4 0.3.0
 
 All requests are now made with retry capability. Specifically, when a request fails due to a `429 RESOURCE_EXHAUSTED` error, it is retried a few times, with suitable delays. Note that if it appears that you *personally* have exhausted your quota (more than 100 requests in 100 seconds), the initial waiting time is 100 seconds and this indicates you need to get your own OAuth app or service account.

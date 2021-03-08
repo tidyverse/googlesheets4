@@ -20,6 +20,10 @@ expect_error_free <- function(...) {
   expect_error(..., regexp = NA)
 }
 
+expect_gs4_error <- function(...) {
+  expect_error(..., class = "googlesheets4_error")
+}
+
 ref <- function(pattern, ...) {
   x <- list.files(testthat::test_path("ref"), pattern = pattern, ...)
   if (length(x) < 1) {
@@ -27,10 +31,10 @@ ref <- function(pattern, ...) {
   } else if (length(x) == 1) {
     return(testthat::test_path("ref", x))
   }
-  stop_glue(
-    "`pattern` identifies more than one test reference file:\n",
-    paste0("* ", x, collapse = "\n")
-  )
+  gs4_abort(c(
+    "{bt('pattern')} identifies more than one test reference file:",
+    set_names(sq(x), rep_along(x, "x"))
+  ))
 }
 
 nm_fun <- function(context, user = NULL) {
@@ -47,15 +51,16 @@ nm_fun <- function(context, user = NULL) {
 local_ss <- function(name, ..., env = parent.frame()) {
   existing <- gs4_find(name)
   if (nrow(existing) > 0) {
-    stop_glue("A spreadsheet named {sq(name)} already exists.")
+    gs4_abort("A spreadsheet named {sq(name)} already exists")
   }
 
   withr::defer({
     trash_me <- gs4_find(name)
     if (nrow(trash_me) < 1) {
-      warning_glue("The spreadsheet named {sq(name)} already seems to be deleted.")
+      warn("The spreadsheet named {dq(name)} already seems to be deleted")
     } else {
-      googledrive::drive_trash(trash_me)
+      quiet <- gs4_quiet() %|% is_testing()
+      googledrive::drive_trash(trash_me, verbose = !quiet)
     }
   }, envir = env)
   gs4_create(name, ...)

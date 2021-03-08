@@ -1,7 +1,7 @@
 new <- function(id, ...) {
   schema <- .tidy_schemas[[id]]
   if (is.null(schema)) {
-    abort(glue("Can't find a tidy schema with id {sq(id)}"))
+    gs4_abort("Can't find a tidy schema with id {sq(id)}")
   }
   dots <- list2(...)
   dots <- discard(dots, is.null)
@@ -23,20 +23,17 @@ check_against_schema <- function(x, schema = NULL, id = NA_character_) {
     .tidy_schemas[[id %|% id_from_class(x)]] %||%
     attr(x, "schema")
   if (is.null(schema)) {
-    msg <- glue("
-    Trying to check an object of class {class_collapse(x)}, \\
-    but can't get a schema.
-    ")
-    abort(msg)
+    gs4_abort("
+      Trying to check an object of class {class_collapse(x)}, \\
+      but can't get a schema")
   }
   stopifnot(is_dictionaryish(x))
   unexpected <- setdiff(names(x), schema$property)
   if (length(unexpected) > 0) {
-    msg <- glue("
-    Properties not recognized for the {sq(attr(schema, 'id'))} schema:
-      * {glue_collapse(unexpected, sep = ', ')}
-    ")
-    abort(msg)
+    gs4_abort(c(
+      "Properties not recognized for the {sq(attr(schema, 'id'))} schema:",
+      "{glue_collapse(sq(unexpected), sep = ', ')}"
+    ))
   }
   x
 }
@@ -59,9 +56,8 @@ patch <- function(x, ...) {
 
 #' @export
 patch.default <- function(x, ...) {
-  stop_glue("
-  Don't know how to {bt('patch()')} an object of class {class_collapse(x)}
-  ")
+  gs4_abort("
+    Don't know how to {bt('patch()')} an object of class {class_collapse(x)}")
 }
 
 #' @export

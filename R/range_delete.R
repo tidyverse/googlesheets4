@@ -69,7 +69,7 @@ range_delete <- function(ss,
   }
 
   x <- gs4_get(ssid)
-  message_glue("Editing {dq(x$name)}")
+  gs4_success("Editing {.file {x$name}}")
 
   # determine (work)sheet and range --------------------------------------------
   range_spec <- as_range_spec(
@@ -78,20 +78,19 @@ range_delete <- function(ss,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   if (is.null(range_spec$cell_range) && is.null(range_spec$cell_limits)) {
-    stop_glue("{bt('range_delete()')} requires a cell range")
+    gs4_abort("{bt('range_delete()')} requires a cell range")
   }
   range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
   # as_GridRange() throws an error for a named range
   grid_range <- as_GridRange(range_spec)
-  message_glue("Deleting cells in sheet {dq(range_spec$sheet_name)}")
+  gs4_success("Deleting cells in sheet {.field {range_spec$sheet_name}}")
 
   # form batch update request --------------------------------------------------
   shift_dimension <- shift_dimension %||% determine_shift(grid_range)
   if (is.null(shift_dimension)) {
-    stop_glue(
-      "The `shift` direction must be specified for this `range`. It can't be
-      automatically determined."
-    )
+    gs4_abort("
+      The {bt('shift')} direction must be specified for this {bt('range')}
+      It can't be automatically determined")
   }
 
   # form batch update request --------------------------------------------------
@@ -132,9 +131,9 @@ determine_shift <- function(gr) {
     return("COLUMNS")
   }
 
-  stop_glue(
-    "`range` must be bounded on the bottom and/or on the right.
-     See `sheet_delete()` or `sheet_resize()` to delete or \\
-     resize a (work)sheet."
-  )
+  gs4_abort(c(
+    "{bt('range')} must be bounded on the bottom and/or on the right",
+    i = "Use {bt('sheet_delete()')} or {bt('sheet_resize()')} to delete or \\
+         resize a (work)sheet"
+  ))
 }

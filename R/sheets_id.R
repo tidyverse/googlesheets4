@@ -33,16 +33,16 @@ new_sheets_id <- function(x) {
   structure(x, class = c("sheets_id", "drive_id"))
 }
 
-## validator: performs more expensive checks that the object has correct values
-## from Sheet API docs:
-## The spreadsheet ID is a string containing letters, numbers, and some special
-## characters. The following regular expression can be used to extract the
-## spreadsheet ID from a Google Sheets URL:
-## /spreadsheets/d/([a-zA-Z0-9-_]+)
+# validator: performs more expensive checks that the object has correct values
+# from Sheet API docs:
+# The spreadsheet ID is a string containing letters, numbers, and some special
+# characters. The following regular expression can be used to extract the
+# spreadsheet ID from a Google Sheets URL:
+# /spreadsheets/d/([a-zA-Z0-9-_]+)
 validate_sheets_id <- function(x) {
   stopifnot(inherits(x, "sheets_id"))
   if (!grepl("^[a-zA-Z0-9-_]+$", x, perl = TRUE)) {
-    stop("Spreadsheet ID contains invalid characters:\n", x, call. = FALSE)
+    gs4_abort(c("Spreadsheet ID contains invalid characters:", x = "{sq(x)}"))
   }
   ## I am quite sure id should have exactly 44 characters but am reluctant
   ## to require this because it makes small examples and tests burdensome
@@ -88,7 +88,7 @@ as_sheets_id <- function(x, ...) UseMethod("as_sheets_id")
 
 #' @export
 as_sheets_id.NULL <- function(x, ...) {
-  stop_glue("Cannot turn `NULL` into a `sheets_id` object.")
+  abort_unsupported_conversion(x, "sheets_id")
 }
 
 #' @export
@@ -100,50 +100,44 @@ as_sheets_id.drive_id <- function(x, ...) new_sheets_id(x)
 #' @export
 as_sheets_id.dribble <- function(x, ...) {
   if (nrow(x) != 1) {
-    stop_glue(
-      "Dribble input must have exactly 1 row.\n",
-      "  * Actual input has {nrow(x)} rows."
-    )
+    gs4_abort(c(
+      "Dribble input must have exactly 1 row",
+      x = "Actual input has {nrow(x)} rows"
+    ))
   }
   # not worrying about whether we are authed as same user with Sheets and Drive
   # revealing the MIME type is local to the dribble, so this makes no API calls
   mime_type <- googledrive::drive_reveal(x, "mime_type")[["mime_type"]]
   target <- "application/vnd.google-apps.spreadsheet"
   if (!identical(mime_type, target)) {
-    stop_glue(
-      "Dribble input must refer to a Google Sheet, i.e. a file with MIME ",
-      "type {sq(target)}.\n",
-      "  * File id: {sq(x$id)}\n",
-      "  * File name: {sq(x$name)}\n",
-      "  * MIME TYPE: {sq(mime_type)}"
-    )
+    gs4_abort(c(
+      "Dribble input must refer to a Google Sheet, i.e. a file with MIME \\
+       type {sq(target)}",
+      i = "File id: {sq(x$id)}",
+      i = "File name: {sq(x$name)}",
+      x = "MIME TYPE: {sq(mime_type)}"
+    ))
   }
   new_sheets_id(x$id)
 }
 
 #' @export
 as_sheets_id.default <- function(x, ...) {
-  stop_glue(
-    "Don't know how to coerce an object of class {class_collapse(x)} ",
-    "into a 'sheets_id'"
-  )
+  abort_unsupported_conversion(x, to = 'sheets_id')
 }
 
 #' @export
 as_sheets_id.character <- function(x, ...) {
   if (length(x) != 1) {
-    stop_glue(
-      "Character input must have length == 1.\n",
-      "  * Actual input has length {length(x)}."
-    )
+    gs4_abort("Character input must have length == 1, not length {length(x)}")
   }
   out <- one_id(x)
   if (is.na(out)) {
-    stop_glue(
-      "Input does not match our regular expression for extracting ",
-      "spreadsheet id.\n",
-      "  * Input: {sq(x)}"
-    )
+    gs4_abort(c(
+      "Input does not match our regular expression for extracting \\
+       spreadsheet id",
+      x = "Input: {sq(x)}"
+    ))
   }
   sheets_id(out)
 }

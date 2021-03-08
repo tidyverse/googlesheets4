@@ -51,7 +51,7 @@ request_generate <- function(endpoint = character(),
                              token = gs4_token()) {
   ept <- .endpoints[[endpoint]]
   if (is.null(ept)) {
-    stop_glue("\nEndpoint not recognized:\n  * {endpoint}")
+    gs4_abort(c("Endpoint not recognized:", x = "{sq(endpoint)}"))
   }
 
   # if there are problems in `params`, such as a nonexistent item,

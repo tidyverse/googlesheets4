@@ -12,10 +12,11 @@ test_that("string with invalid character is rejected", {
 })
 
 test_that("invalid inputs are caught", {
-  expect_error(as_sheets_id(NULL), "Cannot turn `NULL`")
+  expect_error(as_sheets_id(NULL))
+  expect_error(as_sheets_id(1))
   expect_error(as_sheets_id(character()), "must have length == 1")
   expect_error(as_sheets_id(letters[1:2]), "must have length == 1")
-  expect_error(as_sheets_id(1), "Don't know how to coerce")
+
 })
 
 test_that("id can be dug out of a URL", {
@@ -79,10 +80,7 @@ test_that("sheets_id print method reveals metadata", {
   skip_if_offline()
   skip_if_no_token()
 
-  verify_output(
-    test_path("ref", "sheets-id-print-with-token.txt"),
-    print(gs4_example("gapminder"))
-  )
+  expect_snapshot(print(gs4_example("gapminder")))
 })
 
 test_that("sheets_id print method doesn't error for nonexistent ID", {
@@ -90,55 +88,29 @@ test_that("sheets_id print method doesn't error for nonexistent ID", {
   skip_if_no_token()
 
   expect_error_free(format(as_sheets_id("12345")))
-
-  verify_output(
-    test_path("ref", "sheets-id-print-nonexistent.txt"),
-    print(as_sheets_id("12345"))
-  )
+  expect_snapshot(as_sheets_id("12345"))
 })
 
 test_that("can print public sheets_id if deauth'd", {
   skip_if_offline()
   skip_on_cran()
 
-  original_cred <- .auth$get_cred()
-  original_auth_active <- .auth$auth_active
-  withr::defer({
-    .auth$set_cred(original_cred)
-    .auth$set_auth_active(original_auth_active)
-  })
-
-  gs4_deauth()
-
-  verify_output(
-    test_path("ref", "sheets-id-print-deauthed.txt"),
-    print(gs4_example("mini-gap"))
-  )
+  local_deauth()
+  expect_snapshot(print(gs4_example("mini-gap")))
 })
 
 test_that("sheets_id print does not error for lack of cred", {
   skip_if_offline()
   skip_on_cran()
 
-  original_cred <- .auth$get_cred()
-  original_auth_active <- .auth$auth_active
-  withr::defer({
-    .auth$set_cred(original_cred)
-    .auth$set_auth_active(original_auth_active)
-  })
-  withr::local_options(list(
-    gargle_oauth_cache = FALSE,
-    rlang_interactive = FALSE
-  ))
+  local_deauth()
+  local_interactive(FALSE)
+  withr::local_options(list(gargle_oauth_cache = FALSE))
 
   # typical initial state: auth_active, but no token yet
   .auth$clear_cred()
   .auth$set_auth_active(TRUE)
 
   expect_error_free(format(gs4_example("mini-gap")))
-
-  verify_output(
-    test_path("ref", "sheets-id-print-no-cred.txt"),
-    print(gs4_example("mini-gap"))
-  )
+  expect_snapshot(print(gs4_example("mini-gap")))
 })

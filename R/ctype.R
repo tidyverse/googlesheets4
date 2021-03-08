@@ -33,7 +33,9 @@ ctype <- function(x,  ...) {
 }
 
 #' @export
-ctype.NULL <- function(x, ...) stop_glue("Cannot turn `NULL` into `ctype`.")
+ctype.NULL <- function(x, ...) {
+  abort_unsupported_conversion(x, "ctype")
+}
 
 #' @export
 ctype.SHEETS_CELL <- function(x, ...) {
@@ -58,9 +60,7 @@ ctype.list <- function(x, ...) {
 
 #' @export
 ctype.default <- function(x, ...) {
-  stop_glue(
-    "Don't know how to coerce an object of class {class_collapse(x)} to 'ctype'"
-  )
+  abort_unsupported_conversion(x, to = 'ctype')
 }
 
 .discovered_to_effective_type <- c(
@@ -162,10 +162,10 @@ infer_ctype <- function(cell, na = "", trim_ws = TRUE) {
       string  = "CELL_TEXT",
       boolean = "CELL_LOGICAL",
       formula = {
-        warning_glue("Cell has formula as effectiveValue. I thought impossible!")
+        warn("Internal warning: Cell has formula as effectiveValue. I thought impossible!")
         "CELL_TEXT"
       },
-      stop_glue("Unhandled effective_type: {sq(effective_type)}")
+      gs4_abort("Unhandled effective_type: {sq(effective_type)}")
     ))
   }
   # only numeric cells remain

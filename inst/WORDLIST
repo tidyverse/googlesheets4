@@ -1,6 +1,7 @@
 API's
 Auth
 AuthState
+CLI
 CMD
 Codecov
 Computerphile's
@@ -8,6 +9,7 @@ Datetime
 Datetimes
 Feuille
 Gapminder
+IDEs
 JSON
 OAuth
 ORCID
@@ -27,6 +29,8 @@ bigrquery
 cci
 cellranger
 chickwts
+cli
+cli's
 csv
 datetime
 datetimes
@@ -50,6 +54,7 @@ noninteractively
 ny
 oauth
 oob
+pkgdown
 pre
 programmatically
 readr
@@ -61,6 +66,7 @@ shortcode
 shortcodes
 ss
 targetted
+testthat
 tibble
 tibble's
 tidyverse
@@ -71,5 +77,6 @@ unskipped
 utc
 vctrs
 vectorized
+withr
 xls
 xlsx

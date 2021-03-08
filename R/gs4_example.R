@@ -27,22 +27,22 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
   user <- gs4_user()
   if (!grepl("^googlesheets4-testing", user)) {
     user <- sub("@.+$", "", user)
-    stop_glue("Must be auth'd as {sq('googlesheets4-testing')}, not {sq(user)}")
+    gs4_abort("Must be auth'd as {sq('googlesheets4-testing')}, not {sq(user)}")
   }
 
   existing <- gs4_find()
   m <- match(name, existing$name)
   if (is.na(m)) {
-    message_glue("Creating {dq(name)}")
+    gs4_success("Creating {.file {name}}")
     ss <- gs4_create(name)
   } else {
-    message_glue("Testing sheet named {dq(name)} already exists ... using that")
+    gs4_success("Testing sheet named {.file {name}} already exists ... using that")
     ss <- existing$id[[m]]
   }
   ssid <- as_sheets_id(ss)
 
   # it's fiddly to check current sharing status, so just re-share
-  message_glue("Making sure anyone with a link can read {dq(name)}")
+  gs4_success('Making sure "anyone with a link" can read {.file {name}}')
   gs4_share(ssid)
   ssid
 }
@@ -54,7 +54,7 @@ many_sheets <- function(needle, haystack, adjective) {
     check_string(needle)
     sel <- grepl(needle, names(out), ignore.case = TRUE)
     if (!any(sel)) {
-      stop_glue("Can't find {adjective} Sheet that matches {dq(needle)}")
+      gs4_abort("Can't find {adjective} Sheet that matches {dq(needle)}")
     }
     out <- googledrive::as_id(out[sel])
   }
@@ -66,12 +66,11 @@ one_sheet <- function(needle, haystack, adjective) {
   check_string(needle)
   out <- many_sheets(needle = needle, haystack = haystack, adjective = adjective)
   if (length(out) > 1) {
-    bullets <- glue_collapse(glue("  * {names(out)}"), last = "\n")
-    stop_glue("
-      Found multiple matching {adjective} Sheets:
-      {bullets}
-      Make the {bt('matches')} regular expression more specific.
-      ")
+    gs4_abort(c(
+      "Found multiple matching {adjective} Sheets:",
+      dq(names(out)),
+      i = "Make the {bt('matches')} regular expression more specific"
+    ))
   }
   new_sheets_id(out)
 }

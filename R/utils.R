@@ -15,10 +15,10 @@ is_integerish <- function(x) {
 
 check_data_frame <- function(x, nm = deparse(substitute(x))) {
   if (!is.data.frame(x)) {
-    stop_glue(
-      "{bt(nm)} must be a data frame:\n",
-      "  * {bt(nm)} has class {class_collapse(x)}"
-    )
+    gs4_abort(c(
+      "{bt(nm)} must be a data frame:",
+      x = "{bt(nm)} has class {class_collapse(x)}"
+    ))
   }
   x
 }
@@ -39,24 +39,24 @@ maybe_string <- function(x, nm = deparse(substitute(x))) {
 
 check_length_one <- function(x, nm = deparse(substitute(x))) {
   if (length(x) != 1) {
-    stop_glue("{bt(nm)} must have length 1, not length {length(x)}")
+    gs4_abort("{bt(nm)} must have length 1, not length {length(x)}")
   }
   x
 }
 
 check_has_length <- function(x, nm = deparse(substitute(x))) {
   if (length(x) < 1) {
-    stop_glue("{bt(nm)} must have length greater than zero")
+    gs4_abort("{bt(nm)} must have length greater than zero")
   }
   x
 }
 
 check_character <- function(x, nm = deparse(substitute(x))) {
   if (!is.character(x)) {
-    stop_glue(
-      "{bt(nm)} must be character:\n",
-      "  * {bt(nm)} has class {class_collapse(x)}"
-    )
+    gs4_abort(c(
+      "{bt(nm)} must be character:",
+      x = "{bt(nm)} has class {class_collapse(x)}"
+    ))
   }
   x
 }
@@ -72,10 +72,10 @@ maybe_character <- function(x, nm = deparse(substitute(x))) {
 check_non_negative_integer <- function(i, nm = deparse(substitute(i))) {
   if (length(i) != 1 || !is.numeric(i) ||
       !is_integerish(i) || is.na(i) || i < 0) {
-    stop_glue(
-      "{bt(nm)} must be a positive integer:\n",
-      "  * {bt(nm)} has class {class_collapse(i)}"
-    )
+    gs4_abort(c(
+      "{bt(nm)} must be a positive integer:",
+      x = "{bt(nm)} has class {class_collapse(x)}"
+    ))
   }
   i
 }
@@ -89,8 +89,8 @@ maybe_non_negative_integer <- function(i, nm = deparse(substitute(i))) {
 }
 
 check_bool <- function(bool, nm = deparse(substitute(bool))) {
-  if (!isTRUE(bool) && !identical(bool, FALSE)) {
-    stop_glue("{bt(nm)} must be either TRUE or FALSE")
+  if (!is_bool(bool)) {
+    gs4_abort("{bt(nm)} must be either TRUE or FALSE")
   }
   bool
 }
@@ -126,8 +126,4 @@ groom_text <- function(x, na = "", trim_ws = TRUE) {
     x <- ws_trim(x)
   }
   enforce_na(x, na)
-}
-
-class_collapse <- function(x) {
-  sq(glue_collapse(class(x), sep = '/'))
 }

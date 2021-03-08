@@ -59,12 +59,14 @@ sheet_resize <- function(ss,
 
   x <- gs4_get(ssid)
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
-  message_glue("Resizing sheet {dq(s$name)} in {dq(x$name)}")
+  gs4_success("Resizing sheet {.field {s$name}} in {.file {x$name}}")
 
   bureq <- prepare_resize_request(s, nrow_needed = nrow, ncol_needed = ncol, exact = exact)
 
   if (is.null(bureq)) {
-    message_glue("No need to change existing dims ({s$grid_rows} x {s$grid_columns})")
+    gs4_success(
+      "No need to change existing dims ({s$grid_rows} x {s$grid_columns})"
+    )
     return(invisible(ssid))
   }
 
@@ -72,7 +74,7 @@ sheet_resize <- function(ss,
   new_nrow <- pluck(new_grid_properties, "rowCount") %||% s$grid_rows
   new_ncol <- pluck(new_grid_properties, "columnCount") %||% s$grid_columns
 
-  message_glue(
+  gs4_success(
     "Changing dims: ({s$grid_rows} x {s$grid_columns}) --> ({new_nrow} x {new_ncol})"
   )
 

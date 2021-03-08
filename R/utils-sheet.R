@@ -1,7 +1,7 @@
 lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
   maybe_sheet(sheet)
   if (is.null(sheets_df)) {
-    stop_glue("Can't look up, e.g., sheet name or id without sheet metadata")
+    gs4_abort("Can't look up, e.g., sheet name or id without sheet metadata")
   }
 
   if (isTRUE(visible)) {
@@ -15,17 +15,17 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
   # sheet is a string or an integer
 
   if (is.character(sheet)) {
-    stop_sheet_not_found <- function(sheet) {
-      abort(
-        glue("No sheet found with this name: {dq(sheet)}"),
-        class = "googlesheets4_error_sheet_not_found",
-        sheet = sheet
-      )
-    }
     sheet <- sq_unescape(sheet)
     m <- match(sheet, sheets_df$name)
     if (is.na(m)) {
-      stop_sheet_not_found(sheet)
+      gs4_abort(
+        c("Can't find a sheet with this name:", x = "{sq(sheet)}"),
+        sheet = sheet,
+        # there is some usage where we throw this error, but it is OK
+        # and we use tryCatch()
+        # that's why we apply the sub-class
+        class = "googlesheets4_error_sheet_not_found"
+      )
     }
     return(as.list(sheets_df[m, ]))
   }
@@ -33,10 +33,10 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
 
   m <- as.integer(sheet)
   if (!(m %in% seq_len(nrow(sheets_df)))) {
-    stop_glue(
-      "There are {nrow(sheets_df)} sheets:\n",
-      "  * Requested sheet number is out-of-bounds: {m}"
-    )
+    gs4_abort(c(
+      cli::pluralize("There {?is/are} {nrow(sheets_df)} sheet{?s}:"),
+      x = "Requested sheet number is out-of-bounds: {m}"
+    ))
   }
   as.list(sheets_df[m, ])
 }
@@ -63,13 +63,13 @@ lookup_sheet_name <- function(sheet, sheets_df) {
 check_sheet <- function(sheet, nm = deparse(substitute(sheet))) {
   check_length_one(sheet, nm = nm)
   if (!is.character(sheet) && !is.numeric(sheet)) {
-    stop_glue(
-      "{bt(nm)} must be either character (sheet name) or ",
-      "numeric (sheet number):\n",
-      "  * {bt(nm)} has class {class_collapse(sheet)}"
-    )
+    gs4_abort(c(
+      "{bt(nm)} must be either character (sheet name) or \\
+       numeric (sheet number):",
+      x = "{bt(nm)} has class {class_collapse(sheet)}"
+    ))
   }
-  return(sheet)
+  sheet
 }
 
 maybe_sheet <- function(sheet = NULL, nm = deparse(substitute(sheet))) {
@@ -116,5 +116,5 @@ enlist_sheets <- function(sheets_quo) {
   }
 
   # we should never get here, so not a user-facing message
-  stop_glue("Invalid input for (work)sheet(s)")
+  gs4_abort("Invalid input for (work)sheet(s)")
 }

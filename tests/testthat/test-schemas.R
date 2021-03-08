@@ -16,13 +16,13 @@ test_that("new() accepts data expected for schema", {
 })
 
 test_that("new() rejects data not expected for schema", {
-  expect_error(
+  expect_gs4_error(
     new("Spreadsheet", foofy = "blah"),
     "not recognized"
   )
-  expect_error(
+  expect_gs4_error(
     new("Spreadsheet", foofy = "blah", foo = "bar"),
-    "foofy, foo"
+    "'foofy', 'foo'"
   )
 })
 

@@ -16,10 +16,7 @@ as_NamedRange <- function(x, ...) {
 
 #' @export
 as_NamedRange.default <- function(x, ...) {
-  stop_glue(
-    "Don't know how to make an instance of {bt('NamedRange')} from something of ",
-    "class {class_collapse(x)}."
-  )
+  abort_unsupported_conversion(x, to = 'NamedRange')
 }
 
 #' @export

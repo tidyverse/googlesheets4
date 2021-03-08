@@ -117,7 +117,7 @@ range_write <- function(ss,
   check_bool(reformat)
 
   x <- gs4_get(ssid)
-  message_glue("Editing {dq(x$name)}")
+  gs4_success("Editing {.file {x$name}}")
 
   # determine (work)sheet ------------------------------------------------------
   range_spec <- as_range_spec(
@@ -125,7 +125,7 @@ range_write <- function(ss,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
-  message_glue("Writing to sheet {dq(range_spec$sheet_name)}")
+  gs4_success("Writing to sheet {.field {range_spec$sheet_name}}")
 
   # initialize the batch update requests; store details on target sheet s ------
   requests <- list()
@@ -148,9 +148,9 @@ range_write <- function(ss,
       resize_req,
       "updateSheetProperties", "properties", "gridProperties"
     )
-    message_glue(
-      "Changing dims: ({s$grid_rows} x {s$grid_columns}) --> \\
-       ({new_dims$rowCount %||% s$grid_rows} x \\
+    gs4_success(
+      "Changing dims: ({s$grid_rows} x {s$grid_columns}) -->
+       ({new_dims$rowCount %||% s$grid_rows} x
        {new_dims$columnCount %||% s$grid_columns})"
     )
     requests <- c(requests, list(resize_req))

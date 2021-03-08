@@ -100,8 +100,8 @@ test_that("invalid range is rejected", {
 })
 
 test_that("unresolvable sheet raises error", {
-  expect_error(as_range_spec("A5:A", sheet = 3), "Can't look up")
-  expect_error(as_range_spec(x = NULL, sheet = 3), "Can't look up")
+  expect_gs4_error(as_range_spec("A5:A", sheet = 3), "Can't look up")
+  expect_gs4_error(as_range_spec(x = NULL, sheet = 3), "Can't look up")
   sheets_df <- tibble::tibble(name = LETTERS[1:3])
   expect_error(
     as_range_spec(x = NULL, sheet = "nope", sheets_df = sheets_df),

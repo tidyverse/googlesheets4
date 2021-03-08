@@ -60,11 +60,11 @@ as_sheets_range <- function(x) {
   }
 
   # if resolve_limits() is doing its job, we should never get here
-  stop_glue(
-    "Can't express these cell_limits as an A1 range:\n",
+  gs4_abort(c(
+    "Can't express these {bt('cell_limits')} as an A1 range:",
     # cell_limits doesn't have a format method :(
-    utils::capture.output(print(x))
-  )
+    x = utils::capture.output(print(x))
+  ))
 }
 
 # think of cell_limits like so:
@@ -160,10 +160,10 @@ as_cell_limits <- function(x) {
 
 limits_from_range <- function(x) {
   x_split <- strsplit(x, ":")[[1]]
-  if (!length(x_split) %in% 1:2)   {stop_glue("Invalid range: {sq(x)}")}
-  if (!all(grepl(A1_rx, x_split))) {stop_glue("Invalid range: {sq(x)}")}
+  if (!length(x_split) %in% 1:2)   {gs4_abort("Invalid range: {sq(x)}")}
+  if (!all(grepl(A1_rx, x_split))) {gs4_abort("Invalid range: {sq(x)}")}
   corners <- rematch2::re_match(x_split, A1_decomp)
-  if (anyNA(corners$.match))  {stop_glue("Invalid range: {sq(x)}")}
+  if (anyNA(corners$.match))  {gs4_abort("Invalid range: {sq(x)}")}
   corners$column <- ifelse(nzchar(corners$column), corners$column, NA_character_)
   corners$row <- ifelse(nzchar(corners$row), corners$row, NA_character_)
   corners$row <- as.integer(corners$row)
@@ -183,12 +183,12 @@ limits_from_range <- function(x) {
 }
 
 check_range <- function(range = NULL) {
-  if (is.null(range) ||
-      inherits(range, what = "cell_limits") ||
-      is_string(range)) return(range)
-  stop_glue(
-    "{bt('range')} must be NULL, a string, or a {bt('cell_limits')} object."
-  )
+  if (is.null(range) || inherits(range, "cell_limits") || is_string(range)) {
+    return(range)
+  }
+  gs4_abort("
+    {bt('range')} must be {bt('NULL')}, a string, or \\
+    a {bt('cell_limits')} object")
 }
 
 ## the `...` are used to absorb extra variables when this is used inside pmap()

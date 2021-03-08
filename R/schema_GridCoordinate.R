@@ -4,10 +4,7 @@ as_GridCoordinate <- function(x, ...) {
 
 #' @export
 as_GridCoordinate.default <- function(x, ...) {
-  stop_glue(
-    "Don't know how to make an instance of {bt('GridCoordinate')} from something of ",
-    "class {class_collapse(x)}."
-  )
+  abort_unsupported_conversion(x, to = 'GridCoordinate')
 }
 
 #' @export
@@ -22,10 +19,10 @@ as_GridCoordinate.range_spec <- function(x, ..., strict = TRUE) {
     row_index_diff <- grid_range$endRowIndex - grid_range$startRowIndex
     col_index_diff <- grid_range$endColumnIndex - grid_range$startColumnIndex
     if (row_index_diff != 1 || col_index_diff != 1) {
-      stop_glue(
-        "Range must identify exactly 1 cell:\n",
-        "  * Invalid cell range: {x$cell_range}"
-      )
+      gs4_abort(c(
+        "Range must identify exactly 1 cell:",
+        x = "Invalid cell range: {sq(x$cell_range)}"
+      ))
     }
   }
 

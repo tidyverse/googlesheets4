@@ -1,5 +1,6 @@
 message <- function(...) {
-  abort("Internal error: use googlesheets4's UI functions, not `message()`")
+  gs4_abort("
+    Internal error: use googlesheets4's UI functions, not {bt('message()')}")
 }
 
 fr <- function(x) format(x, justify = 'right')

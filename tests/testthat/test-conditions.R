@@ -1,8 +1,11 @@
 test_that("gs4_abort() throws classed condition", {
-  expect_error(gs4_abort("oops"), class = "gs4_error")
+  expect_error(gs4_abort("oops"), class = "googlesheets4_error")
   expect_gs4_error(gs4_abort("oops"))
-  expect_gs4_error(gs4_abort("oops", class = "gs4_foo"))
-  expect_error(gs4_abort("oops", class = "gs4_foo"), class = "gs4_foo")
+  expect_gs4_error(gs4_abort("oops", class = "googlesheets4_foo"))
+  expect_error(
+    gs4_abort("oops", class = "googlesheets4_foo"),
+    class = "googlesheets4_foo"
+  )
 })
 
 test_that("gs4_abort() glues data in", {

@@ -24,7 +24,7 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
         # there is some usage where we throw this error, but it is OK
         # and we use tryCatch()
         # that's why we apply the sub-class
-        class = "gs4_error_sheet_not_found"
+        class = "googlesheets4_error_sheet_not_found"
       )
     }
     return(as.list(sheets_df[m, ]))

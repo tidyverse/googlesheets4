@@ -1,6 +1,6 @@
 #' Error conditions for the googlesheets4 package
 #'
-#' @param class Use only if you want to subclass beyond `gs4_error`
+#' @param class Use only if you want to subclass beyond `googlesheets4_error`
 #'
 #' @keywords internal
 #' @name gs4-errors
@@ -10,7 +10,7 @@ NULL
 gs4_abort <- function(message, ..., class = NULL, .envir = parent.frame()) {
   g <- function(line) glue(line, .envir = .envir)
   msg <- map_chr(message, g)
-  abort(msg, class = c(class, "gs4_error"), ...)
+  abort(msg, class = c(class, "googlesheets4_error"), ...)
 }
 
 sq <- function(x) glue::single_quote(x)

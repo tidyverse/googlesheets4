@@ -21,7 +21,7 @@ expect_error_free <- function(...) {
 }
 
 expect_gs4_error <- function(...) {
-  expect_error(..., class = "gs4_error")
+  expect_error(..., class = "googlesheets4_error")
 }
 
 ref <- function(pattern, ...) {

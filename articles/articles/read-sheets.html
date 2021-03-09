@@ -150,7 +150,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></code></pre></div>
 <p>Basic Sheet reading is shown in the <a href="https://googlesheets4.tidyverse.org/articles/googlesheets4.html">Get started</a> article. Here we show how to target a specific (work)sheet or cell range, how to deal with column types, and how to get detailed cell data.</p>
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
@@ -175,7 +175,6 @@
 <p>Here we read from the “mini-gap” and “deaths” example Sheets to show some of the different ways to specify (work)sheet and cell ranges.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span>, sheet <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; Request failed [429]. Retry 1 happens in 2 seconds ...</span>
 <span class="co">#&gt; ✔ Reading from mini-gap</span>
 <span class="co">#&gt; ✔ Range 'Americas'</span>
 <span class="co">#&gt; # A tibble: 5 x 6</span>
@@ -413,14 +412,14 @@
 <span class="co">#&gt;   gdpPercap = col_double()</span>
 <span class="co">#&gt; )</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.104   0.000   0.755</span>
+<span class="co">#&gt;   0.099   0.000   1.170</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span>
   <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from gapminder</span>
 <span class="co">#&gt; ✔ Range 'Africa'</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.467   0.044   0.943</span></code></pre></div>
+<span class="co">#&gt;   0.426   0.032   1.030</span></code></pre></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> vs <code><a href="../../reference/range_read.html">range_read()</a></code>:</p>
 <ul>

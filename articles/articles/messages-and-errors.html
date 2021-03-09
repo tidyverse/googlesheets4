@@ -150,7 +150,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></code></pre></div>
 <p><em>In a hidden chunk here, I “export” the internal helpers covered below.</em></p>
 <div id="user-facing-messages" class="section level2">
 <h2 class="hasAnchor">
@@ -165,11 +165,11 @@
 <span class="co">#&gt; ! You might want to know about this</span>
 <span class="fu">gs4_danger</span><span class="op">(</span><span class="st">"Something quite bad"</span><span class="op">)</span>
 <span class="co">#&gt; ✖ Something quite bad</span></code></pre></div>
-<p>The helpers encourage consistent styling and makes it possible to selectively silence messages coming from googlesheets4. The googlesheets4 message helpers:</p>
+<p>The helpers encourage consistent styling and make it possible to selectively silence messages coming from googlesheets4. The googlesheets4 message helpers:</p>
 <ul>
 <li>Use the <a href="https://cli.r-lib.org/index.html">cli package</a> to get interpolation, inline markup, and pluralization</li>
 <li>Eventually route through <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::inform()</a></code>, which is important because <code>inform()</code> prints to standard output in interactive sessions. This means that informational messages won’t have the same “look” as errors and can generally be more stylish, at least in IDEs like RStudio.</li>
-<li>Are under the control of the <code>GOOGLESHEETS4_QUIET</code> environment variable. If it’s unset, the default is to show messages (unless we’re testing, i.e. the environment variable <code>TESTTHAT</code> is <code>"true"</code>). <code>GOOGLESHEETS4_QUIET=true</code> will suppress messages. The are convenience helpers <code><a href="../../reference/googlesheets4-configuration.html">local_gs4_quiet()</a></code> and <code><a href="../../reference/googlesheets4-configuration.html">with_gs4_quiet()</a></code>.</li>
+<li>Are under the control of the <code>GOOGLESHEETS4_QUIET</code> environment variable. If it’s unset, the default is to show messages (unless we’re testing, i.e. the environment variable <code>TESTTHAT</code> is <code>"true"</code>). <code>GOOGLESHEETS4_QUIET=true</code> will suppress messages. There are withr-style convenience helpers: <code><a href="../../reference/googlesheets4-configuration.html">local_gs4_quiet()</a></code> and <code><a href="../../reference/googlesheets4-configuration.html">with_gs4_quiet()</a></code>.</li>
 </ul>
 <div id="inline-styling" class="section level3">
 <h3 class="hasAnchor">

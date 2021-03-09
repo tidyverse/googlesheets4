@@ -174,7 +174,7 @@
 <p>First attach both packages.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org">googledrive</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span><span class="op">)</span></code></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></code></pre></div>
 <p>Do auth first with googledrive. Remember <code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">googledrive::drive_auth()</a></code> accepts additional arguments, e.g. to specify a Google identity via <code>email =</code> or to use a service account via <code>path =</code>. Then direct googlesheets4 to use the same token as googledrive.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html">drive_auth</a></span><span class="op">(</span><span class="op">)</span>
@@ -230,7 +230,7 @@
 </ul>
 <p>First attach both packages.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tidyverse/googlesheets4">googlesheets4</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org">googledrive</a></span><span class="op">)</span></code></pre></div>
 <p>Do auth first with googlesheets4, specifying a Drive scope. Remember <code><a href="../../reference/gs4_auth.html">gs4_auth()</a></code> accepts additional arguments, e.g. to specify a Google identity via <code>email =</code> or to use a service account via <code>path =</code>. Then direct googledrive to use the same token as googlesheets4.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">

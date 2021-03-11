@@ -7,7 +7,7 @@ fr <- function(x) format(x, justify = 'right')
 fl <- function(x) format(x, justify = 'left')
 
 gs4_quiet <- function() {
-  as.logical(Sys.getenv("GOOGLESHEETS4_QUIET", unset = NA))
+  getOption("googlesheets4_quiet", default = NA)
 }
 
 #' @export
@@ -41,18 +41,18 @@ gs4_quiet <- function() {
 #'     googledrive::drive_trash()
 #' }
 local_gs4_quiet <- function(env = parent.frame()) {
-  withr::local_envvar(c(GOOGLESHEETS4_QUIET = "true"), .local_envir = env)
+  withr::local_options(list(googlesheets4_quiet = TRUE), .local_envir = env)
 }
 
 local_gs4_loud <- function(env = parent.frame()) {
-  withr::local_envvar(c(GOOGLESHEETS4_QUIET = "false"), .local_envir = env)
+  withr::local_options(list(googlesheets4_quiet = FALSE), .local_envir = env)
 }
 
 #' @export
 #' @rdname googlesheets4-configuration
 #' @param code Code to execute quietly
 with_gs4_quiet <- function(code) {
-  withr::with_envvar(c(GOOGLESHEETS4_QUIET = "true"), code = code)
+  withr::local_options(list(googlesheets4_quiet = TRUE), code = code)
 }
 
 is_testing <- function() {

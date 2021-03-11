@@ -16,21 +16,20 @@ with_gs4_quiet(code)
 \item{code}{Code to execute quietly}
 }
 \description{
-Some aspects of googlesheets4 behaviour can be controlled via an option or
-an environment variable.
+Some aspects of googlesheets4 behaviour can be controlled via an option.
 }
 \section{Messages}{
 
 
-The \code{GOOGLESHEETS4_QUIET} environment variable can be used to suppress
-messages from googlesheets4. By default, googlesheets4 always messages, i.e.
-it is \emph{not} quiet.
+The \code{googlesheets4_quiet} option can be used to suppress messages from
+googlesheets4. By default, googlesheets4 always messages, i.e. it is \emph{not}
+quiet.
 
-Set \code{GOOGLESHEETS4_QUIET} to \code{"true"} to suppress messages, by one of these
+Set \code{googlesheets4_quiet} to \code{TRUE} to suppress messages, by one of these
 means, in order of decreasing scope:
 \itemize{
-\item Put \code{GOOGLESHEETS4_QUIET=true} in a start-up file, such as \code{.Renviron}
-\item Call \code{Sys.setenv(GOOGLESHEETS4_QUIET = "true")} in, e.g., your R script
+\item Put \code{options(googlesheets4_quiet = TRUE)} in a start-up file, such as
+\code{.Rprofile}, or in your R script
 \item Use \code{local_gs4_quiet()} to silence googlesheets4 in a specific scope
 \item Use \code{with_gs4_quiet()} to run a small bit of code silently
 }

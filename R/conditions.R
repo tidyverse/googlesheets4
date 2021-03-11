@@ -18,7 +18,7 @@ dq <- function(x) glue::double_quote(x)
 bt <- function(x) glue::backtick(x)
 
 class_collapse <- function(x) {
-  bt(glue_collapse(class(x), sep = ' / '))
+  glue("<{glue_collapse(class(x), sep = '/')}>")
 }
 
 # helpful in the default method of an as_{to} generic
@@ -29,5 +29,6 @@ abort_unsupported_conversion <- function(from, to) {
   } else {
     msg_from <- glue("something of class {class_collapse(from)}")
   }
-  gs4_abort("Don't know how to make an instance of {bt(to)} from {msg_from}")
+  gs4_abort("
+    Don't know how to make an instance of {class_collapse(to)} from {msg_from}")
 }

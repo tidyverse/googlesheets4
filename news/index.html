@@ -195,7 +195,7 @@
 <h2 class="hasAnchor">
 <a href="#user-interface" class="anchor"></a>User interface</h2>
 <p>The user interface has gotten more stylish, thanks to the cli package (<a href="https://cli.r-lib.org" class="uri">https://cli.r-lib.org</a>).</p>
-<p>The <code>GOOGLESHEETS4_QUIET</code> environment variable can be used to suppress messages from googlesheets4, specifically (<a href='https://github.com/tidyverse/googlesheets4/issues/163'>#163</a>). By default, googlesheets4 always messages, i.e. it is <em>not</em> quiet. <code><a href="../reference/googlesheets4-configuration.html">local_gs4_quiet()</a></code> and <code><a href="../reference/googlesheets4-configuration.html">with_gs4_quiet()</a></code> are <a href="https://withr.r-lib.org">withr-style</a> convenience helpers for setting <code>GOOGLESHEETS4_QUIET=true</code>.</p>
+<p>The <code>googlesheets4_quiet</code> option can be used to suppress messages from googlesheets4, specifically (<a href='https://github.com/tidyverse/googlesheets4/issues/163'>#163</a>). By default, googlesheets4 always messages, i.e. it is <em>not</em> quiet. <code><a href="../reference/googlesheets4-configuration.html">local_gs4_quiet()</a></code> and <code><a href="../reference/googlesheets4-configuration.html">with_gs4_quiet()</a></code> are <a href="https://withr.r-lib.org">withr-style</a> convenience helpers for setting <code>googlesheets4_quiet = TRUE</code>.</p>
 <p>googlesheets4 now throws errors with class <code>"googlesheets4_error"</code> (<a href='https://github.com/tidyverse/googlesheets4/issues/12'>#12</a>).</p>
 </div>
 <div id="dependency-changes" class="section level2">

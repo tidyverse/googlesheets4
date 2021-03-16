@@ -52,7 +52,7 @@ local_gs4_loud <- function(env = parent.frame()) {
 #' @rdname googlesheets4-configuration
 #' @param code Code to execute quietly
 with_gs4_quiet <- function(code) {
-  withr::local_options(list(googlesheets4_quiet = TRUE), code = code)
+  withr::with_options(list(googlesheets4_quiet = TRUE), code = code)
 }
 
 is_testing <- function() {

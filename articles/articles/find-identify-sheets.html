@@ -332,27 +332,27 @@
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 7 x 3</span>
+<span class="co">#&gt; # A tibble: 6 x 3</span>
 <span class="co">#&gt;   name               id                                         drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 range-autofit-demo 1TDSNwktpljcvTjhKsmpnCwJvEw8ieJdiqVUeV_Ad… &lt;named list [34…</span>
-<span class="co">#&gt; 2 childsafe-squid    1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc9BS… &lt;named list [34…</span>
-<span class="co">#&gt; 3 fiery-hart         18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEnWY6… &lt;named list [34…</span>
-<span class="co">#&gt; 4 chicken-sheet      1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM… &lt;named list [34…</span>
-<span class="co">#&gt; 5 releasable-rooster 1cMnXxJE-B55ZSyPzvv3yyXv2hZ0vu45Tp8LJV24e… &lt;named list [34…</span>
-<span class="co">#&gt; # … with 2 more rows</span></code></pre></div>
+<span class="co">#&gt; 1 childsafe-squid    1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc9BS… &lt;named list [34…</span>
+<span class="co">#&gt; 2 fiery-hart         18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEnWY6… &lt;named list [34…</span>
+<span class="co">#&gt; 3 chicken-sheet      1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM… &lt;named list [34…</span>
+<span class="co">#&gt; 4 releasable-rooster 1cMnXxJE-B55ZSyPzvv3yyXv2hZ0vu45Tp8LJV24e… &lt;named list [34…</span>
+<span class="co">#&gt; 5 eonian-atlasmoth   1BMEsbT_kSfV4zBl6si7HZXuda6kThG27vHuYc4Bv… &lt;named list [34…</span>
+<span class="co">#&gt; # … with 1 more row</span></code></pre></div>
 <p>This is so handy that we’ve made <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 7 x 3</span>
+<span class="co">#&gt; # A tibble: 6 x 3</span>
 <span class="co">#&gt;   name               id                                         drive_resource  </span>
 <span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 range-autofit-demo 1TDSNwktpljcvTjhKsmpnCwJvEw8ieJdiqVUeV_Ad… &lt;named list [34…</span>
-<span class="co">#&gt; 2 childsafe-squid    1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc9BS… &lt;named list [34…</span>
-<span class="co">#&gt; 3 fiery-hart         18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEnWY6… &lt;named list [34…</span>
-<span class="co">#&gt; 4 chicken-sheet      1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM… &lt;named list [34…</span>
-<span class="co">#&gt; 5 releasable-rooster 1cMnXxJE-B55ZSyPzvv3yyXv2hZ0vu45Tp8LJV24e… &lt;named list [34…</span>
-<span class="co">#&gt; # … with 2 more rows</span></code></pre></div>
+<span class="co">#&gt; 1 childsafe-squid    1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc9BS… &lt;named list [34…</span>
+<span class="co">#&gt; 2 fiery-hart         18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEnWY6… &lt;named list [34…</span>
+<span class="co">#&gt; 3 chicken-sheet      1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM… &lt;named list [34…</span>
+<span class="co">#&gt; 4 releasable-rooster 1cMnXxJE-B55ZSyPzvv3yyXv2hZ0vu45Tp8LJV24e… &lt;named list [34…</span>
+<span class="co">#&gt; 5 eonian-atlasmoth   1BMEsbT_kSfV4zBl6si7HZXuda6kThG27vHuYc4Bv… &lt;named list [34…</span>
+<span class="co">#&gt; # … with 1 more row</span></code></pre></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </div>

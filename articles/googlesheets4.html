@@ -279,10 +279,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Creating new Sheet: bubonic-tuatara</span>
+<span class="co">#&gt; ✔ Creating new Sheet: vocational-tarantula</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: bubonic-tuatara</span>
-<span class="co">#&gt;               ID: 1vlJUPImlIyUwlGy8zwaJzH9tTjd-RR52tXI86o1uNVA</span>
+<span class="co">#&gt; Spreadsheet name: vocational-tarantula</span>
+<span class="co">#&gt;               ID: 15Icj96nKTEWjd2w2BsQreCssclvpMynppYDiyqkrcTM</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -294,13 +294,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * bubonic-tuatara: 1vlJUPImlIyUwlGy8zwaJzH9tTjd-RR52tXI86o1uNVA</span>
+<span class="co">#&gt;   * vocational-tarantula: 15Icj96nKTEWjd2w2BsQreCssclvpMynppYDiyqkrcTM</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Creating new Sheet: testy-hedgehog</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1FPPIn-qo_Af2wJZKExQKS5_BSWbcj06-nLwIF9JYNaQ</span>
+<span class="co">#&gt;               ID: 10E4Co06j7ZzGwBhJ7x8ihemB4S90TvSRjyAqEW2nSYA</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -314,7 +314,7 @@
 <span class="co">#&gt; ✔ Writing to sheet chickwts</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1FPPIn-qo_Af2wJZKExQKS5_BSWbcj06-nLwIF9JYNaQ</span>
+<span class="co">#&gt;               ID: 10E4Co06j7ZzGwBhJ7x8ihemB4S90TvSRjyAqEW2nSYA</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -362,14 +362,14 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 x 8</span>
-<span class="co">#&gt;   name     index        id type  visible grid_rows grid_columns data  </span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 956414050 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 111728065 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
+<span class="co">#&gt; 1 df           0  915232130 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 1483005242 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * testy-hedgehog: 1FPPIn-qo_Af2wJZKExQKS5_BSWbcj06-nLwIF9JYNaQ</span></code></pre></div>
+<span class="co">#&gt;   * testy-hedgehog: 10E4Co06j7ZzGwBhJ7x8ihemB4S90TvSRjyAqEW2nSYA</span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

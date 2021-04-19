@@ -200,15 +200,11 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ss1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"sheets-create-demo-1"</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Creating new Sheet: sheets-create-demo-1</span>
+<span class="co">#&gt; Error: Server error: (503) UNAVAILABLE</span>
+<span class="co">#&gt; * Service unavailable. Typically the server is down.</span>
+<span class="co">#&gt; * The service is currently unavailable.</span>
 <span class="va">ss1</span>
-<span class="co">#&gt; Spreadsheet name: sheets-create-demo-1</span>
-<span class="co">#&gt;               ID: 1N9FR0QdHpPrbbao8Vl6qHA1RCrLKEqLU6K42VD2Ayzs</span>
-<span class="co">#&gt;           Locale: en_US</span>
-<span class="co">#&gt;        Time zone: Etc/GMT</span>
-<span class="co">#&gt;      # of sheets: 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;       Sheet1: 1000 x 26</span></code></pre></div>
+<span class="co">#&gt; Error in eval(expr, envir, enclos): object 'ss1' not found</span></code></pre></div>
 <p>Every Sheet <em>must</em> have at least one (work)sheet, so Google Sheets automatically creates an empty “Sheet1”.</p>
 <p>You can control the names and content of the initial (work)sheets with the <code>sheets</code> argument.</p>
 <div id="send-sheet-names" class="section level3">
@@ -223,7 +219,7 @@
 <span class="co">#&gt; ✔ Creating new Sheet: sheets-create-demo-2</span>
 <span class="va">ss2</span>
 <span class="co">#&gt; Spreadsheet name: sheets-create-demo-2</span>
-<span class="co">#&gt;               ID: 1A2EbeCLFrgZS93BbW8CD2SYEudK0XtfseDj1bnWfjQI</span>
+<span class="co">#&gt;               ID: 1XfFDnd-siuAzccckHuhOMZVUS4Ttp1ngN1Vay1qNjrw</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -247,7 +243,7 @@
 <span class="co">#&gt; ✔ Creating new Sheet: sheets-create-demo-3</span>
 <span class="va">ss3</span>
 <span class="co">#&gt; Spreadsheet name: sheets-create-demo-3</span>
-<span class="co">#&gt;               ID: 1urpEs0YVhk7NZD3jmQ5AdJ9peOyWt9vR_r831XVy78E</span>
+<span class="co">#&gt;               ID: 1LxoXetNJPCjxzhkK5bdXoHo-cOUy9hpKlPqI30wB3sE</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -269,7 +265,7 @@
 <span class="co">#&gt; ✔ Creating new Sheet: sheets-create-demo-4</span>
 <span class="va">ss4</span>
 <span class="co">#&gt; Spreadsheet name: sheets-create-demo-4</span>
-<span class="co">#&gt;               ID: 1RyIgdbtnCTwnW3yZZbJzLq3pa4odfwDe3npoanSF2eo</span>
+<span class="co">#&gt;               ID: 1gQUiSxdKX-w10yVTRdzjAe8bYlxMRFC4z3Jnitnheo4</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -292,7 +288,7 @@
 <span class="co">#&gt; ✔ Creating new Sheet: sheets-create-demo-5</span>
 <span class="va">ss5</span>
 <span class="co">#&gt; Spreadsheet name: sheets-create-demo-5</span>
-<span class="co">#&gt;               ID: 1w81f5LK5-hHrOWiSzGm1gfwwITuQWTrCrC1yLzndam0</span>
+<span class="co">#&gt;               ID: 1frke6oPcYBupC1rx10um8j65K4SBCMjytrI2uqzO03k</span>
 <span class="co">#&gt;           Locale: fr_FR</span>
 <span class="co">#&gt;        Time zone: Europe/Paris</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -309,11 +305,10 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-create-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-create-demo-5: 1w81f5LK5-hHrOWiSzGm1gfwwITuQWTrCrC1yLzndam0</span>
-<span class="co">#&gt;   * sheets-create-demo-4: 1RyIgdbtnCTwnW3yZZbJzLq3pa4odfwDe3npoanSF2eo</span>
-<span class="co">#&gt;   * sheets-create-demo-3: 1urpEs0YVhk7NZD3jmQ5AdJ9peOyWt9vR_r831XVy78E</span>
-<span class="co">#&gt;   * sheets-create-demo-2: 1A2EbeCLFrgZS93BbW8CD2SYEudK0XtfseDj1bnWfjQI</span>
-<span class="co">#&gt;   * sheets-create-demo-1: 1N9FR0QdHpPrbbao8Vl6qHA1RCrLKEqLU6K42VD2Ayzs</span></code></pre></div>
+<span class="co">#&gt;   * sheets-create-demo-5: 1frke6oPcYBupC1rx10um8j65K4SBCMjytrI2uqzO03k</span>
+<span class="co">#&gt;   * sheets-create-demo-4: 1gQUiSxdKX-w10yVTRdzjAe8bYlxMRFC4z3Jnitnheo4</span>
+<span class="co">#&gt;   * sheets-create-demo-3: 1LxoXetNJPCjxzhkK5bdXoHo-cOUy9hpKlPqI30wB3sE</span>
+<span class="co">#&gt;   * sheets-create-demo-2: 1XfFDnd-siuAzccckHuhOMZVUS4Ttp1ngN1Vay1qNjrw</span></code></pre></div>
 </div>
 </div>
 <div id="write_sheet-a-k-a--sheet_write" class="section level2">
@@ -326,10 +321,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">random_ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Creating new Sheet: wonderful-samoyeddog</span>
+<span class="co">#&gt; ✔ Creating new Sheet: diseased-frog</span>
 <span class="va">random_ss</span>
-<span class="co">#&gt; Spreadsheet name: wonderful-samoyeddog</span>
-<span class="co">#&gt;               ID: 1EHcp3-NpQ85WkU_j6vY7143j9z5cnqHHCtaxVhgd87s</span>
+<span class="co">#&gt; Spreadsheet name: diseased-frog</span>
+<span class="co">#&gt;               ID: 1LN_-ug1-1WSzJMnWOO3UH29395wxl0kUvFNY-pcbJJk</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -341,7 +336,7 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">random_ss</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * wonderful-samoyeddog: 1EHcp3-NpQ85WkU_j6vY7143j9z5cnqHHCtaxVhgd87s</span>
+<span class="co">#&gt;   * diseased-frog: 1LN_-ug1-1WSzJMnWOO3UH29395wxl0kUvFNY-pcbJJk</span>
 
 <span class="va">ss1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span>
   <span class="st">"write-sheets-demo-1"</span>,
@@ -350,7 +345,7 @@
 <span class="co">#&gt; ✔ Creating new Sheet: write-sheets-demo-1</span>
 <span class="va">ss1</span>
 <span class="co">#&gt; Spreadsheet name: write-sheets-demo-1</span>
-<span class="co">#&gt;               ID: 1mfPaWtKuBNZtlUfMeOo_V5LgiBuFtgPAV_xhziiFZbo</span>
+<span class="co">#&gt;               ID: 12LnyF8ZTsXk5bL8l21LnIm3d4lEDzOBqUVgrZHJxehw</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -364,7 +359,7 @@
 <span class="co">#&gt; ✔ Writing to sheet chickwts</span>
 <span class="va">ss1</span>
 <span class="co">#&gt; Spreadsheet name: write-sheets-demo-1</span>
-<span class="co">#&gt;               ID: 1mfPaWtKuBNZtlUfMeOo_V5LgiBuFtgPAV_xhziiFZbo</span>
+<span class="co">#&gt;               ID: 12LnyF8ZTsXk5bL8l21LnIm3d4lEDzOBqUVgrZHJxehw</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -389,7 +384,7 @@
 <span class="co">#&gt; ✔ Writing to sheet Sheet1</span>
 <span class="va">ss1</span>
 <span class="co">#&gt; Spreadsheet name: write-sheets-demo-1</span>
-<span class="co">#&gt;               ID: 1mfPaWtKuBNZtlUfMeOo_V5LgiBuFtgPAV_xhziiFZbo</span>
+<span class="co">#&gt;               ID: 12LnyF8ZTsXk5bL8l21LnIm3d4lEDzOBqUVgrZHJxehw</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 4</span>
@@ -406,7 +401,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"write-sheets-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * write-sheets-demo-1: 1mfPaWtKuBNZtlUfMeOo_V5LgiBuFtgPAV_xhziiFZbo</span></code></pre></div>
+<span class="co">#&gt;   * write-sheets-demo-1: 12LnyF8ZTsXk5bL8l21LnIm3d4lEDzOBqUVgrZHJxehw</span></code></pre></div>
 </div>
 </div>
 <div id="sheet_append" class="section level2">
@@ -444,7 +439,7 @@
 <span class="co">#&gt; ✔ Creating new Sheet: sheets-append-demo</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;               ID: 13_z10FoA3x13dpG52iEY0upHFKj1sp4DYs7qOsy1CeY</span>
+<span class="co">#&gt;               ID: 1aa5nZOFpr-GWY4Y8Od7iUnma_Z7i8BHfAidBRXn_XgQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -458,7 +453,7 @@
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;               ID: 13_z10FoA3x13dpG52iEY0upHFKj1sp4DYs7qOsy1CeY</span>
+<span class="co">#&gt;               ID: 1aa5nZOFpr-GWY4Y8Od7iUnma_Z7i8BHfAidBRXn_XgQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -472,7 +467,7 @@
 <span class="co">#&gt; ✔ Appending 5 rows to deaths</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;               ID: 13_z10FoA3x13dpG52iEY0upHFKj1sp4DYs7qOsy1CeY</span>
+<span class="co">#&gt;               ID: 1aa5nZOFpr-GWY4Y8Od7iUnma_Z7i8BHfAidBRXn_XgQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -486,7 +481,7 @@
 <span class="co">#&gt; ✔ Appending 1 row to deaths</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;               ID: 13_z10FoA3x13dpG52iEY0upHFKj1sp4DYs7qOsy1CeY</span>
+<span class="co">#&gt;               ID: 1aa5nZOFpr-GWY4Y8Od7iUnma_Z7i8BHfAidBRXn_XgQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -500,7 +495,7 @@
 <span class="co">#&gt; ✔ Appending 4 rows to deaths</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: sheets-append-demo</span>
-<span class="co">#&gt;               ID: 13_z10FoA3x13dpG52iEY0upHFKj1sp4DYs7qOsy1CeY</span>
+<span class="co">#&gt;               ID: 1aa5nZOFpr-GWY4Y8Od7iUnma_Z7i8BHfAidBRXn_XgQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -522,7 +517,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-append-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-append-demo: 13_z10FoA3x13dpG52iEY0upHFKj1sp4DYs7qOsy1CeY</span></code></pre></div>
+<span class="co">#&gt;   * sheets-append-demo: 1aa5nZOFpr-GWY4Y8Od7iUnma_Z7i8BHfAidBRXn_XgQ</span></code></pre></div>
 </div>
 </div>
 <div id="range_write" class="section level2">
@@ -676,7 +671,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-edit-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-edit-demo: 1fBqq-RtOdViCMpObzkuTB8xirzUz7aXz9N-YPp9j8ns</span></code></pre></div>
+<span class="co">#&gt;   * sheets-edit-demo: 1Bj1oLW20Zp1SwwdSd_1f0qUm62CxmYxdAji0B_OEvUQ</span></code></pre></div>
 </div>
 </div>
 <div id="write-formulas" class="section level2">
@@ -698,7 +693,7 @@
 <span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"sheets-formula-demo"</span>, sheets <span class="op">=</span> <span class="va">lang_dat</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Creating new Sheet: sheets-formula-demo</span>
 <span class="co">#&gt; Spreadsheet name: sheets-formula-demo</span>
-<span class="co">#&gt;               ID: 125gjRJPsgSAjSUmMKG-0mjYI6r7oXezjrCexa4iqTEk</span>
+<span class="co">#&gt;               ID: 1qmhWzjLeBp8GqHKRgAHXXDQOqompE60O4acIilqmJx4</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -723,7 +718,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-formula-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-formula-demo: 125gjRJPsgSAjSUmMKG-0mjYI6r7oXezjrCexa4iqTEk</span></code></pre></div>
+<span class="co">#&gt;   * sheets-formula-demo: 1qmhWzjLeBp8GqHKRgAHXXDQOqompE60O4acIilqmJx4</span></code></pre></div>
 </div>
 </div>
 <div id="range_flood" class="section level2">
@@ -737,7 +732,7 @@
 <span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"range-flood-demo"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Creating new Sheet: range-flood-demo</span>
 <span class="co">#&gt; Spreadsheet name: range-flood-demo</span>
-<span class="co">#&gt;               ID: 1DO1LxPCenwEHavduVS1PfS4MeQq6oVl3FJqn-us8E2Y</span>
+<span class="co">#&gt;               ID: 1ZkL4ipe4-Gcr4dD0hNBrknKHoMIlrT04RGug-Jz8Kyc</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -818,7 +813,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"range-flood-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * range-flood-demo: 1DO1LxPCenwEHavduVS1PfS4MeQq6oVl3FJqn-us8E2Y</span></code></pre></div>
+<span class="co">#&gt;   * range-flood-demo: 1ZkL4ipe4-Gcr4dD0hNBrknKHoMIlrT04RGug-Jz8Kyc</span></code></pre></div>
 </div>
 </div>
 <div id="range_delete" class="section level2">
@@ -832,7 +827,7 @@
 <span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"sheets-delete-demo"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Creating new Sheet: sheets-delete-demo</span>
 <span class="co">#&gt; Spreadsheet name: sheets-delete-demo</span>
-<span class="co">#&gt;               ID: 1B15EbSWEkcFtr9IJvJ8-TRH_FmUkRa5Pz91NWorrwLg</span>
+<span class="co">#&gt;               ID: 1ZdsqXO58ZDtUJf5YoJUNJ0ASnIjzlBXHdC6UvyqduAQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -897,7 +892,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-delete-demo"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * sheets-delete-demo: 1B15EbSWEkcFtr9IJvJ8-TRH_FmUkRa5Pz91NWorrwLg</span></code></pre></div>
+<span class="co">#&gt;   * sheets-delete-demo: 1ZdsqXO58ZDtUJf5YoJUNJ0ASnIjzlBXHdC6UvyqduAQ</span></code></pre></div>
 </div>
 </div>
   </div>

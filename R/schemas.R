@@ -32,7 +32,7 @@ check_against_schema <- function(x, schema = NULL, id = NA_character_) {
   if (length(unexpected) > 0) {
     gs4_abort(c(
       "Properties not recognized for the {sq(attr(schema, 'id'))} schema:",
-      "{glue_collapse(sq(unexpected), sep = ', ')}"
+      "*" = "{glue_collapse(sq(unexpected), sep = ', ')}"
     ))
   }
   x

@@ -68,7 +68,7 @@ one_sheet <- function(needle, haystack, adjective) {
   if (length(out) > 1) {
     gs4_abort(c(
       "Found multiple matching {adjective} Sheets:",
-      dq(names(out)),
+      set_names(dq(names(out)), rep_along(out, "*")),
       i = "Make the {bt('matches')} regular expression more specific"
     ))
   }

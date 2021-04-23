@@ -24,11 +24,11 @@ Depends:
     R (>= 3.2)
 Imports: 
     cellranger,
-    cli (>= 2.0.0),
+    cli (>= 2.4.0.9000),
     curl,
     gargle (>= 1.1.0),
     glue (>= 1.3.0),
-    googledrive (>= 1.0.0),
+    googledrive (>= 1.9.0.9000),
     httr,
     ids,
     lifecycle,
@@ -36,7 +36,7 @@ Imports:
     methods,
     purrr,
     rematch2,
-    rlang (>= 0.4.9),
+    rlang (>= 0.4.10.9000),
     tibble (>= 2.1.1),
     utils,
     vctrs (>= 0.2.3)
@@ -57,3 +57,7 @@ Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
+Remotes:  
+    r-lib/cli,
+    tidyverse/googledrive,
+    r-lib/rlang

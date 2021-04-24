@@ -160,7 +160,7 @@
 <p><code><a href="../reference/range_read.html">read_sheet()</a></code> is designed to “just work”, for most purposes, most of the time. It can read straight from a Sheets browser URL:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from gapminder</span>
+<span class="co">#&gt; ✔ Reading from 'gapminder'</span>
 <span class="co">#&gt; ✔ Range Africa</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
 <span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
@@ -174,7 +174,7 @@
 <p>However, these URLs are not pleasant to work with. More often, you will want to identify a Sheet by its ID:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from gapminder</span>
+<span class="co">#&gt; ✔ Reading from 'gapminder'</span>
 <span class="co">#&gt; ✔ Range Africa</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
 <span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
@@ -219,7 +219,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"chicken-sheet"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from chicken-sheet</span>
+<span class="co">#&gt; ✔ Reading from 'chicken-sheet'</span>
 <span class="co">#&gt; ✔ Range chicken.csv</span>
 <span class="co">#&gt; # A tibble: 5 x 4</span>
 <span class="co">#&gt;   chicken            breed         sex    motto                                 </span>
@@ -258,8 +258,6 @@
 <span class="co">#&gt;    other_data: 'other'!A5:F15</span>
 
 <span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; → Request failed [429]. Retry 1 happens in 100 seconds ...</span>
-<span class="co">#&gt; → Request failed [429]. Retry 2 happens in 1.6 seconds ...</span>
 <span class="co">#&gt; # A tibble: 2 x 8</span>
 <span class="co">#&gt;   name  index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt; &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
@@ -281,10 +279,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Creating new Sheet: lace-otter</span>
+<span class="co">#&gt; ✔ Creating new Sheet: 'dragonlike-nymph'</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: lace-otter</span>
-<span class="co">#&gt;               ID: 1BI04hGFlNvSqm66oGX9jcEXCxCaY_DGE-4Q5mckBGP0</span>
+<span class="co">#&gt; Spreadsheet name: dragonlike-nymph</span>
+<span class="co">#&gt;               ID: 1FR5ewfJ9f51h6sPzvGG8lU4UX09TOYAcRHRrPcpAuBQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -295,14 +293,14 @@
 <p>Let’s start over: we delete that Sheet and call <code><a href="../reference/gs4_create.html">gs4_create()</a></code>, so we can specify the new Sheet’s name.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * lace-otter: 1BI04hGFlNvSqm66oGX9jcEXCxCaY_DGE-4Q5mckBGP0</span>
+<span class="co">#&gt; File trashed:</span>
+<span class="co">#&gt; • dragonlike-nymph &lt;id: 1FR5ewfJ9f51h6sPzvGG8lU4UX09TOYAcRHRrPcpAuBQ&gt;</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Creating new Sheet: testy-hedgehog</span>
+<span class="co">#&gt; ✔ Creating new Sheet: 'testy-hedgehog'</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1q0DTkSWXCPNQMgd_TWtl3558kVX4mrMEtEHIrrtfVz8</span>
+<span class="co">#&gt;               ID: 15Cb1RBiCWxkWyz0kyri-shQ12tWjVJxgGri6v5nNH9U</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -312,11 +310,11 @@
 <p><code><a href="../reference/sheet_write.html">sheet_write()</a></code> can write to new or existing (work)sheets in this Sheet. Let’s write the <code>chickwts</code> data to a new sheet in <code>ss</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">chickwts</span>, <span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Writing to testy-hedgehog</span>
-<span class="co">#&gt; ✔ Writing to sheet chickwts</span>
+<span class="co">#&gt; ✔ Writing to 'testy-hedgehog'</span>
+<span class="co">#&gt; ✔ Writing to sheet 'chickwts'</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1q0DTkSWXCPNQMgd_TWtl3558kVX4mrMEtEHIrrtfVz8</span>
+<span class="co">#&gt;               ID: 15Cb1RBiCWxkWyz0kyri-shQ12tWjVJxgGri6v5nNH9U</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -327,10 +325,10 @@
 <p>We can also use <code><a href="../reference/sheet_write.html">sheet_write()</a></code> to replace the data in an existing sheet.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">10</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span><span class="op">)</span>, <span class="va">ss</span>, sheet <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Writing to testy-hedgehog</span>
-<span class="co">#&gt; ✔ Writing to sheet df</span>
+<span class="co">#&gt; ✔ Writing to 'testy-hedgehog'</span>
+<span class="co">#&gt; ✔ Writing to sheet 'df'</span>
 <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss</span>, sheet <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from testy-hedgehog</span>
+<span class="co">#&gt; ✔ Reading from 'testy-hedgehog'</span>
 <span class="co">#&gt; ✔ Range 'df'</span>
 <span class="co">#&gt; # A tibble: 7 x 2</span>
 <span class="co">#&gt;       x letters.4.10.</span>
@@ -344,10 +342,10 @@
 <p><code><a href="../reference/sheet_append.html">sheet_append()</a></code> adds one or more rows to an existing sheet.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ss</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/sheet_append.html">sheet_append</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">11</span>, <span class="va">letters</span><span class="op">[</span><span class="fl">11</span><span class="op">]</span><span class="op">)</span>, sheet <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Writing to testy-hedgehog</span>
+<span class="co">#&gt; ✔ Writing to 'testy-hedgehog'</span>
 <span class="co">#&gt; ✔ Appending 1 row to df</span>
 <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss</span>, sheet <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from testy-hedgehog</span>
+<span class="co">#&gt; ✔ Reading from 'testy-hedgehog'</span>
 <span class="co">#&gt; ✔ Range 'df'</span>
 <span class="co">#&gt; # A tibble: 8 x 2</span>
 <span class="co">#&gt;       x letters.4.10.</span>
@@ -364,14 +362,14 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 x 8</span>
-<span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0  378500185 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 1793158279 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt;   name     index        id type  visible grid_rows grid_columns data  </span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
+<span class="co">#&gt; 1 df           0 751617420 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 247218980 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Files trashed:</span>
-<span class="co">#&gt;   * testy-hedgehog: 1q0DTkSWXCPNQMgd_TWtl3558kVX4mrMEtEHIrrtfVz8</span></code></pre></div>
+<span class="co">#&gt; File trashed:</span>
+<span class="co">#&gt; • testy-hedgehog &lt;id: 15Cb1RBiCWxkWyz0kyri-shQ12tWjVJxgGri6v5nNH9U&gt;</span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

@@ -189,7 +189,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-Google-Sheet"</span>
 <span class="fu">gs4_success</span><span class="op">(</span><span class="st">"Creating new Sheet: {.file {nm}}"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Creating new Sheet: name-of-a-Google-Sheet</span>
+<span class="co">#&gt; ✔ Creating new Sheet: 'name-of-a-Google-Sheet'</span>
 
 <span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-worksheet"</span>
 <span class="fu">gs4_success</span><span class="op">(</span><span class="st">"Protecting cells on sheet: {.field {nm}}"</span><span class="op">)</span>
@@ -225,11 +225,11 @@ or more {things} in
 <code class="sourceCode R"><span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-Google-Sheet"</span>
 <span class="va">n_new</span> <span class="op">&lt;-</span> <span class="fl">1</span>
 <span class="fu">gs4_success</span><span class="op">(</span><span class="st">"Adding {n_new} sheet{?s} to {.file {nm}}"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Adding 1 sheet to name-of-a-Google-Sheet</span>
+<span class="co">#&gt; ✔ Adding 1 sheet to 'name-of-a-Google-Sheet'</span>
 
 <span class="va">n_new</span> <span class="op">&lt;-</span> <span class="fl">3</span>
 <span class="fu">gs4_success</span><span class="op">(</span><span class="st">"Adding {n_new} sheet{?s} to {.file {nm}}"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Adding 3 sheets to name-of-a-Google-Sheet</span></code></pre></div>
+<span class="co">#&gt; ✔ Adding 3 sheets to 'name-of-a-Google-Sheet'</span></code></pre></div>
 </div>
 <div id="collapsing" class="section level3">
 <h3 class="hasAnchor">
@@ -308,9 +308,9 @@ or more {things} in
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Error: This first line is a header, explaining the general situation</span>
 <span class="co">#&gt; ✖ Sometimes you have to deliver Very Bad News</span>
-<span class="co">#&gt; * eew</span>
-<span class="co">#&gt; * yuck</span>
-<span class="co">#&gt; * uh-oh</span>
+<span class="co">#&gt; eew</span>
+<span class="co">#&gt; yuck</span>
+<span class="co">#&gt; uh-oh</span>
 <span class="co">#&gt; ℹ Maybe a call to `magic_function()` would help?</span>
 
 <span class="va">endpoint</span> <span class="op">&lt;-</span> <span class="st">"sheets.spreadsheets.WTF"</span>

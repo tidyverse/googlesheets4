@@ -175,7 +175,7 @@
 <p>Here we read from the “mini-gap” and “deaths” example Sheets to show some of the different ways to specify (work)sheet and cell ranges.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span>, sheet <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from mini-gap</span>
+<span class="co">#&gt; ✔ Reading from 'mini-gap'</span>
 <span class="co">#&gt; ✔ Range 'Americas'</span>
 <span class="co">#&gt; # A tibble: 5 x 6</span>
 <span class="co">#&gt;   country   continent  year lifeExp      pop gdpPercap</span>
@@ -187,7 +187,7 @@
 <span class="co">#&gt; 5 Chile     Americas   1952    54.7  6377619     3940.</span>
 
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span>, sheet <span class="op">=</span> <span class="st">"Oceania"</span>, n_max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from mini-gap</span>
+<span class="co">#&gt; ✔ Reading from 'mini-gap'</span>
 <span class="co">#&gt; ✔ Range 'Oceania'</span>
 <span class="co">#&gt; # A tibble: 3 x 6</span>
 <span class="co">#&gt;   country     continent  year lifeExp     pop gdpPercap</span>
@@ -197,7 +197,7 @@
 <span class="co">#&gt; 3 Australia   Oceania    1957    70.3 9712569    10950.</span>
 
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>, skip <span class="op">=</span> <span class="fl">4</span>, n_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from deaths</span>
+<span class="co">#&gt; ✔ Reading from 'deaths'</span>
 <span class="co">#&gt; ✔ Range 5:5000000</span>
 <span class="co">#&gt; # A tibble: 10 x 6</span>
 <span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span>
@@ -222,7 +222,7 @@
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>
   <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>, range <span class="op">=</span> <span class="st">"other!A5:F15"</span>, col_types <span class="op">=</span> <span class="st">"?ci??D"</span>
 <span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from deaths</span>
+<span class="co">#&gt; ✔ Reading from 'deaths'</span>
 <span class="co">#&gt; ✔ Range 'other'!A5:F15</span>
 <span class="co">#&gt; # A tibble: 10 x 6</span>
 <span class="co">#&gt;    Name          Profession   Age `Has kids` `Date of birth`     `Date of death`</span>
@@ -242,7 +242,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>range <span class="op">=</span> <span class="st">"arts_data"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from deaths</span>
+<span class="co">#&gt; ✔ Reading from 'deaths'</span>
 <span class="co">#&gt; ✔ Range arts_data</span>
 <span class="co">#&gt; # A tibble: 10 x 6</span>
 <span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span>
@@ -265,7 +265,7 @@
 <p><code><a href="../../reference/range_read_cells.html">range_read_cells()</a></code> returns a data frame with one row per cell and it gives access to raw cell data sent by the Sheets API.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="op">(</span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/range_read_cells.html">range_read_cells</a></span><span class="op">(</span><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>, range <span class="op">=</span> <span class="st">"E5:E7"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from deaths</span>
+<span class="co">#&gt; ✔ Reading from 'deaths'</span>
 <span class="co">#&gt; ✔ Range E5:E7</span>
 <span class="co">#&gt; # A tibble: 3 x 4</span>
 <span class="co">#&gt;     row   col loc   cell      </span>
@@ -305,7 +305,7 @@
 <span class="co">#&gt; 2 1956-10-21</span>
 <span class="co">## is same as ...</span>
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>, range <span class="op">=</span> <span class="st">"E5:E7"</span>, col_types <span class="op">=</span><span class="st">"D"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from deaths</span>
+<span class="co">#&gt; ✔ Reading from 'deaths'</span>
 <span class="co">#&gt; ✔ Range E5:E7</span>
 <span class="co">#&gt; # A tibble: 2 x 1</span>
 <span class="co">#&gt;   `Date of birth`</span>
@@ -321,9 +321,9 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../../reference/range_speedread.html">range_speedread</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Oceania"</span>, n_max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from gapminder, sheet Oceania</span>
+<span class="co">#&gt; ✔ Reading from 'gapminder', sheet Oceania</span>
 <span class="co">#&gt; ✔ Export URL:</span>
-<span class="co">#&gt;   &lt;https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=1796776040&gt;</span>
+<span class="co">#&gt; &lt;https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=1796776040&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -351,9 +351,9 @@
       `Date of death` <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/parse_datetime.html">col_date</a></span><span class="op">(</span><span class="st">"%m/%d/%Y"</span><span class="op">)</span>
     <span class="op">)</span>
   <span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from deaths, sheet other, range A5:F15</span>
+<span class="co">#&gt; ✔ Reading from 'deaths', sheet other, range A5:F15</span>
 <span class="co">#&gt; ✔ Export URL:</span>
-<span class="co">#&gt;   &lt;https://docs.google.com/spreadsheets/d/1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y/export?format=csv&amp;range=A5%3AF15&amp;gid=278837031&gt;</span>
+<span class="co">#&gt; &lt;https://docs.google.com/spreadsheets/d/1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y/export?format=csv&amp;range=A5%3AF15&amp;gid=278837031&gt;</span>
 <span class="co">#&gt; # A tibble: 10 x 6</span>
 <span class="co">#&gt;    Name           Profession   Age `Has kids` `Date of birth` `Date of death`</span>
 <span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;date&gt;          &lt;date&gt;         </span>
@@ -371,7 +371,7 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>range <span class="op">=</span> <span class="st">"other_data"</span>, col_types <span class="op">=</span> <span class="st">"??i?DD"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from deaths</span>
+<span class="co">#&gt; ✔ Reading from 'deaths'</span>
 <span class="co">#&gt; ✔ Range other_data</span>
 <span class="co">#&gt; # A tibble: 10 x 6</span>
 <span class="co">#&gt;    Name           Profession   Age `Has kids` `Date of birth` `Date of death`</span>
@@ -398,9 +398,9 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span>
   <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/range_speedread.html">range_speedread</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span>
 <span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from gapminder, sheet Africa</span>
+<span class="co">#&gt; ✔ Reading from 'gapminder', sheet Africa</span>
 <span class="co">#&gt; ✔ Export URL:</span>
-<span class="co">#&gt;   &lt;https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=780868077&gt;</span>
+<span class="co">#&gt; &lt;https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=780868077&gt;</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
 <span class="co">#&gt; cols(</span>
@@ -412,14 +412,14 @@
 <span class="co">#&gt;   gdpPercap = col_double()</span>
 <span class="co">#&gt; )</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.081   0.000   0.913</span>
+<span class="co">#&gt;   0.078   0.008   0.923</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span>
   <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span>
 <span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from gapminder</span>
+<span class="co">#&gt; ✔ Reading from 'gapminder'</span>
 <span class="co">#&gt; ✔ Range 'Africa'</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.344   0.023   0.685</span></code></pre></div>
+<span class="co">#&gt;   0.332   0.000   0.802</span></code></pre></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> vs <code><a href="../../reference/range_read.html">range_read()</a></code>:</p>
 <ul>

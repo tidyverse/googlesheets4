@@ -150,19 +150,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span>
-<span class="co">#&gt; Warning: replacing previous import 'ellipsis::check_dots_unnamed' by</span>
-<span class="co">#&gt; 'rlang::check_dots_unnamed' when loading 'tibble'</span>
-<span class="co">#&gt; Warning: replacing previous import 'ellipsis::check_dots_used' by</span>
-<span class="co">#&gt; 'rlang::check_dots_used' when loading 'tibble'</span>
-<span class="co">#&gt; Warning: replacing previous import 'ellipsis::check_dots_empty' by</span>
-<span class="co">#&gt; 'rlang::check_dots_empty' when loading 'tibble'</span>
-<span class="co">#&gt; Warning: replacing previous import 'ellipsis::check_dots_unnamed' by</span>
-<span class="co">#&gt; 'rlang::check_dots_unnamed' when loading 'pillar'</span>
-<span class="co">#&gt; Warning: replacing previous import 'ellipsis::check_dots_used' by</span>
-<span class="co">#&gt; 'rlang::check_dots_used' when loading 'pillar'</span>
-<span class="co">#&gt; Warning: replacing previous import 'ellipsis::check_dots_empty' by</span>
-<span class="co">#&gt; 'rlang::check_dots_empty' when loading 'pillar'</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></code></pre></div>
 <p>Basic Sheet reading is shown in the <a href="https://googlesheets4.tidyverse.org/articles/googlesheets4.html">Get started</a> article. Here we show how to target a specific (work)sheet or cell range, how to deal with column types, and how to get detailed cell data.</p>
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
@@ -187,7 +175,6 @@
 <p>Here we read from the “mini-gap” and “deaths” example Sheets to show some of the different ways to specify (work)sheet and cell ranges.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span>, sheet <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; → Request failed [429]. Retry 1 happens in 100.5 seconds ...</span>
 <span class="co">#&gt; ✔ Reading from 'mini-gap'</span>
 <span class="co">#&gt; ✔ Range 'Americas'</span>
 <span class="co">#&gt; # A tibble: 5 x 6</span>
@@ -334,12 +321,6 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../../reference/range_speedread.html">range_speedread</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Oceania"</span>, n_max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt; Warning: replacing previous import 'ellipsis::check_dots_unnamed' by</span>
-<span class="co">#&gt; 'rlang::check_dots_unnamed' when loading 'hms'</span>
-<span class="co">#&gt; Warning: replacing previous import 'ellipsis::check_dots_used' by</span>
-<span class="co">#&gt; 'rlang::check_dots_used' when loading 'hms'</span>
-<span class="co">#&gt; Warning: replacing previous import 'ellipsis::check_dots_empty' by</span>
-<span class="co">#&gt; 'rlang::check_dots_empty' when loading 'hms'</span>
 <span class="co">#&gt; ✔ Reading from 'gapminder', sheet Oceania</span>
 <span class="co">#&gt; ✔ Export URL:</span>
 <span class="co">#&gt; &lt;https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=1796776040&gt;</span>
@@ -431,14 +412,14 @@
 <span class="co">#&gt;   gdpPercap = col_double()</span>
 <span class="co">#&gt; )</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.085   0.000   0.989</span>
+<span class="co">#&gt;   0.078   0.003   0.606</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span>
   <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from 'gapminder'</span>
 <span class="co">#&gt; ✔ Range 'Africa'</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.324   0.000   0.982</span></code></pre></div>
+<span class="co">#&gt;   0.319   0.000   0.704</span></code></pre></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> vs <code><a href="../../reference/range_read.html">range_read()</a></code>:</p>
 <ul>

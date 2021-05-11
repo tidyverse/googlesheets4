@@ -285,36 +285,21 @@
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get()</a></code> returns a <a href="https://googledrive.tidyverse.org/reference/dribble.html"><code>dribble</code></a>, a “Drive tibble”, where each row holds info on a Drive file. <code><a href="../../reference/as_sheets_id.html">as_sheets_id()</a></code> also accepts a one-row <code>dribble</code>, so we can get right into our normal googlesheets4 workflows:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gap_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/as_sheets_id.html">as_sheets_id</a></span><span class="op">(</span><span class="va">gap_dribble</span><span class="op">)</span>
+<span class="co">#&gt; Error: Dribble input must refer to a Google Sheet, i.e. a file with MIME type 'application/vnd.google-apps.spreadsheet'</span>
+<span class="co">#&gt; ℹ File id: '1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew'</span>
+<span class="co">#&gt; ℹ File name: 'gapminder'</span>
+<span class="co">#&gt; ✖ MIME TYPE: 'application/vnd.google-apps.spreadsheet'</span>
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">unclass</a></span><span class="op">(</span><span class="va">gap_id</span><span class="op">)</span>
-<span class="co">#&gt; [1] "1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew"</span>
+<span class="co">#&gt; Error in eval(expr, envir, enclos): object 'gap_id' not found</span>
 <span class="va">gap_id</span>
-<span class="co">#&gt;  Spreadsheet name: gapminder</span>
-<span class="co">#&gt;                ID: 1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew</span>
-<span class="co">#&gt;            Locale: en_US</span>
-<span class="co">#&gt;         Time zone: America/Los_Angeles</span>
-<span class="co">#&gt;       # of sheets: 5</span>
-<span class="co">#&gt; # of named ranges: 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;       Africa: 625 x 6</span>
-<span class="co">#&gt;     Americas: 301 x 6</span>
-<span class="co">#&gt;         Asia: 397 x 6</span>
-<span class="co">#&gt;       Europe: 361 x 6</span>
-<span class="co">#&gt;      Oceania: 25 x 6</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; (Named range): (A1 range)        </span>
-<span class="co">#&gt;        canada: 'Americas'!A38:F49</span></code></pre></div>
+<span class="co">#&gt; Error in eval(expr, envir, enclos): object 'gap_id' not found</span></code></pre></div>
 <p>Since we generally call <code><a href="../../reference/as_sheets_id.html">as_sheets_id()</a></code> on whatever the user provides as <code>ss</code>, you can even pass <code>gap_dribble</code> straight into googlesheets4 functions.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">gap_dribble</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 5 x 8</span>
-<span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 Africa       0  780868077 GRID  TRUE          625            6 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 Americas     1   45759261 GRID  TRUE          301            6 &lt;NULL&gt;</span>
-<span class="co">#&gt; 3 Asia         2 1984823455 GRID  TRUE          397            6 &lt;NULL&gt;</span>
-<span class="co">#&gt; 4 Europe       3 1503562052 GRID  TRUE          361            6 &lt;NULL&gt;</span>
-<span class="co">#&gt; 5 Oceania      4 1796776040 GRID  TRUE           25            6 &lt;NULL&gt;</span></code></pre></div>
+<span class="co">#&gt; Error: Dribble input must refer to a Google Sheet, i.e. a file with MIME type 'application/vnd.google-apps.spreadsheet'</span>
+<span class="co">#&gt; ℹ File id: '1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew'</span>
+<span class="co">#&gt; ℹ File name: 'gapminder'</span>
+<span class="co">#&gt; ✖ MIME TYPE: 'application/vnd.google-apps.spreadsheet'</span></code></pre></div>
 <p>Two important things to note:</p>
 <ul>
 <li>googledrive requires auth for functions like <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get()</a></code> and <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> (see below). At first, you can just react to the interactive auth prompts and <strong>make sure you auth as the same user</strong> with googledrive and googlesheets4. Once you get tired of doing auth for both packages, read the article <a href="https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>. Coordinated auth should get even easier in the future.

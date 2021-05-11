@@ -190,26 +190,16 @@
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="st">"chicken-sheet"</span><span class="op">)</span>
 
 <span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Spreadsheet name: chicken-sheet</span>
-<span class="co">#&gt;               ID: 1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM7u0</span>
-<span class="co">#&gt;           Locale: en_US</span>
-<span class="co">#&gt;        Time zone: America/Los_Angeles</span>
-<span class="co">#&gt;      # of sheets: 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;  chicken.csv: 1000 x 26</span>
+<span class="co">#&gt; Error: Dribble input must refer to a Google Sheet, i.e. a file with MIME type 'application/vnd.google-apps.spreadsheet'</span>
+<span class="co">#&gt; ℹ File id: '1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM7u0'</span>
+<span class="co">#&gt; ℹ File name: 'chicken-sheet'</span>
+<span class="co">#&gt; ✖ MIME TYPE: 'application/vnd.google-apps.spreadsheet'</span>
 
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from 'chicken-sheet'</span>
-<span class="co">#&gt; ✔ Range chicken.csv</span>
-<span class="co">#&gt; # A tibble: 5 x 4</span>
-<span class="co">#&gt;   chicken            breed         sex    motto                                 </span>
-<span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                                 </span>
-<span class="co">#&gt; 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…</span>
-<span class="co">#&gt; 2 Chicken Little     unknown       hen    The sky is falling!                   </span>
-<span class="co">#&gt; 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…</span>
-<span class="co">#&gt; 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  </span>
-<span class="co">#&gt; 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.</span></code></pre></div>
+<span class="co">#&gt; Error: Dribble input must refer to a Google Sheet, i.e. a file with MIME type 'application/vnd.google-apps.spreadsheet'</span>
+<span class="co">#&gt; ℹ File id: '1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM7u0'</span>
+<span class="co">#&gt; ℹ File name: 'chicken-sheet'</span>
+<span class="co">#&gt; ✖ MIME TYPE: 'application/vnd.google-apps.spreadsheet'</span></code></pre></div>
 <p>If you ever want to confirm the currently authenticated user, both packages provide a <code>*_user()</code> function that reveals some info:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_user.html">drive_user</a></span><span class="op">(</span><span class="op">)</span>
@@ -248,26 +238,16 @@
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="st">"chicken-sheet"</span><span class="op">)</span>
 
 <span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; Spreadsheet name: chicken-sheet</span>
-<span class="co">#&gt;               ID: 1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM7u0</span>
-<span class="co">#&gt;           Locale: en_US</span>
-<span class="co">#&gt;        Time zone: America/Los_Angeles</span>
-<span class="co">#&gt;      # of sheets: 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;  chicken.csv: 1000 x 26</span>
+<span class="co">#&gt; Error: Dribble input must refer to a Google Sheet, i.e. a file with MIME type 'application/vnd.google-apps.spreadsheet'</span>
+<span class="co">#&gt; ℹ File id: '1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM7u0'</span>
+<span class="co">#&gt; ℹ File name: 'chicken-sheet'</span>
+<span class="co">#&gt; ✖ MIME TYPE: 'application/vnd.google-apps.spreadsheet'</span>
 
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from 'chicken-sheet'</span>
-<span class="co">#&gt; ✔ Range chicken.csv</span>
-<span class="co">#&gt; # A tibble: 5 x 4</span>
-<span class="co">#&gt;   chicken            breed         sex    motto                                 </span>
-<span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                                 </span>
-<span class="co">#&gt; 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…</span>
-<span class="co">#&gt; 2 Chicken Little     unknown       hen    The sky is falling!                   </span>
-<span class="co">#&gt; 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…</span>
-<span class="co">#&gt; 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  </span>
-<span class="co">#&gt; 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.</span></code></pre></div>
+<span class="co">#&gt; Error: Dribble input must refer to a Google Sheet, i.e. a file with MIME type 'application/vnd.google-apps.spreadsheet'</span>
+<span class="co">#&gt; ℹ File id: '1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM7u0'</span>
+<span class="co">#&gt; ℹ File name: 'chicken-sheet'</span>
+<span class="co">#&gt; ✖ MIME TYPE: 'application/vnd.google-apps.spreadsheet'</span></code></pre></div>
 </div>
 <div id="scope-savvy" class="section level2">
 <h2 class="hasAnchor">

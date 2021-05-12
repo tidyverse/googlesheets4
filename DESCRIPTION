@@ -36,7 +36,7 @@ Imports:
     methods,
     purrr,
     rematch2,
-    rlang (>= 0.4.10.9000),
+    rlang (>= 0.4.11.9000),
     tibble (>= 2.1.1),
     utils,
     vctrs (>= 0.2.3)

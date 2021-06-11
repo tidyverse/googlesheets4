@@ -10,7 +10,7 @@ gs4_find(...)
 \item{...}{Arguments (other than \code{type}, which is hard-wired as \code{type = "spreadsheet"}) that are passed along to \code{\link[googledrive:drive_find]{googledrive::drive_find()}}.}
 }
 \value{
-An object of class \code{\link[googledrive]{dribble}}, a tibble with one row per item.
+An object of class \code{\link[googledrive]{dribble}}, a tibble with one row per file.
 }
 \description{
 Finds your Google Sheets. This is a very thin wrapper around

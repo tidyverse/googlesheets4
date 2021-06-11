@@ -155,7 +155,7 @@
 <div id="user-facing-messages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#user-facing-messages" class="anchor"></a>User-facing messages</h2>
-<p>Everything should be emitted by helpers in <code>utils-ui.R</code>, such as <code>gs4_success()</code> or <code>gs4_info()</code>. These are all wrappers around <code><a href="https://rdrr.io/pkg/cli/man/cli_alert.html">cli::cli_alert()</a></code> and friends.</p>
+<p>Everything should be emitted by helpers in <code>utils-ui.R</code>, such as <code>gs4_success()</code> or <code>gs4_info()</code>. These are all wrappers around <code><a href="https://cli.r-lib.org/reference/cli_alert.html">cli::cli_alert()</a></code> and friends.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gs4_success</span><span class="op">(</span><span class="st">"Doing good stuff"</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Doing good stuff</span>
@@ -257,7 +257,7 @@ or more {things} in
 <div id="errors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#errors" class="anchor"></a>Errors</h2>
-<p>Use <code>gs4_abort()</code> instead of <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::abort()</a></code> or <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code>. So far, I’m not really using <code>...</code> to put data in the condition, but I could start when/if there’s a reason to. Be prepared to get confused about how to style and line break error messages vs. regular messages, which use <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code> and <code><a href="https://rdrr.io/pkg/cli/man/cli_alert.html">cli::cli_alert()</a></code>, respectively.</p>
+<p>Use <code>gs4_abort()</code> instead of <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::abort()</a></code> or <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code>. So far, I’m not really using <code>...</code> to put data in the condition, but I could start when/if there’s a reason to. Be prepared to get confused about how to style and line break error messages vs. regular messages, which use <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code> and <code><a href="https://cli.r-lib.org/reference/cli_alert.html">cli::cli_alert()</a></code>, respectively.</p>
 <p><code>abort_unsupported_conversion()</code> is a wrapper around <code>gs4_abort()</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span><span class="op">(</span><span class="fl">1</span>, class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span>
@@ -352,14 +352,14 @@ or more {things} in
 <div id="pluralization-1" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pluralization-1" class="anchor"></a>Pluralization</h3>
-<p>Use <code><a href="https://rdrr.io/pkg/cli/man/pluralize.html">cli::pluralize()</a></code> directly if you need pluralization in error messages. Search for <code><a href="https://rdrr.io/pkg/cli/man/pluralization-helpers.html">cli::qty()</a></code> for a few places where the pluralization was a bit trickier.</p>
+<p>Use <code><a href="https://cli.r-lib.org/reference/pluralize.html">cli::pluralize()</a></code> directly if you need pluralization in error messages. Search for <code><a href="https://cli.r-lib.org/reference/pluralization-helpers.html">cli::qty()</a></code> for a few places where the pluralization was a bit trickier.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">col_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"apple"</span>, <span class="st">"banana"</span><span class="op">)</span>
 <span class="va">nc</span> <span class="op">&lt;-</span> <span class="fl">1</span>
 <span class="fu">gs4_abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"Length of {bt('col_names')} is not compatible with the data:"</span>,
-  x <span class="op">=</span> <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cli/man/pluralize.html">pluralize</a></span><span class="op">(</span><span class="st">"Expected {length(col_names)} un-skipped column{?s}"</span><span class="op">)</span>,
-  x <span class="op">=</span> <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cli/man/pluralize.html">pluralize</a></span><span class="op">(</span><span class="st">"But data has {nc} column{?s}"</span><span class="op">)</span>
+  x <span class="op">=</span> <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/pluralize.html">pluralize</a></span><span class="op">(</span><span class="st">"Expected {length(col_names)} un-skipped column{?s}"</span><span class="op">)</span>,
+  x <span class="op">=</span> <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/pluralize.html">pluralize</a></span><span class="op">(</span><span class="st">"But data has {nc} column{?s}"</span><span class="op">)</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Error: Length of `col_names` is not compatible with the data:</span>
 <span class="co">#&gt; ✖ Expected 2 un-skipped columns</span>
@@ -368,7 +368,7 @@ or more {things} in
 <span class="va">m</span> <span class="op">&lt;-</span> <span class="fl">8</span>
 <span class="va">sheets_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
 <span class="fu">gs4_abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
-  <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cli/man/pluralize.html">pluralize</a></span><span class="op">(</span><span class="st">"There {?is/are} {nrow(sheets_df)} sheet{?s}:"</span><span class="op">)</span>,
+  <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/pluralize.html">pluralize</a></span><span class="op">(</span><span class="st">"There {?is/are} {nrow(sheets_df)} sheet{?s}:"</span><span class="op">)</span>,
   x <span class="op">=</span> <span class="st">"Requested sheet number is out-of-bounds: {m}"</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Error: There are 6 sheets:</span>
@@ -376,7 +376,7 @@ or more {things} in
 
 <span class="va">sheets_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="fu">gs4_abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
-  <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cli/man/pluralize.html">pluralize</a></span><span class="op">(</span><span class="st">"There {?is/are} {nrow(sheets_df)} sheet{?s}:"</span><span class="op">)</span>,
+  <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/pluralize.html">pluralize</a></span><span class="op">(</span><span class="st">"There {?is/are} {nrow(sheets_df)} sheet{?s}:"</span><span class="op">)</span>,
   x <span class="op">=</span> <span class="st">"Requested sheet number is out-of-bounds: {m}"</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Error: There is 1 sheet:</span>
@@ -411,16 +411,16 @@ or more {things} in
 <a href="#future-thoughts" class="anchor"></a>Future thoughts</h2>
 <p>Would I ever want to use cli in the errors? There are good things and bad things about that. Messing around. This may very well not show up in pkgdown, which is related to what’s problematic.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html">abort</a></span><span class="op">(</span><span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cli/man/ansi-styles.html">col_blue</a></span><span class="op">(</span><span class="st">"Hello "</span>, <span class="st">"world!"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html">abort</a></span><span class="op">(</span><span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/ansi-styles.html">col_blue</a></span><span class="op">(</span><span class="st">"Hello "</span>, <span class="st">"world!"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Error: Hello world!</span>
 
-<span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html">abort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"... to highlight the"</span>, <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cli/man/ansi-styles.html">col_red</a></span><span class="op">(</span><span class="st">"search term"</span><span class="op">)</span>,
+<span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html">abort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"... to highlight the"</span>, <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/ansi-styles.html">col_red</a></span><span class="op">(</span><span class="st">"search term"</span><span class="op">)</span>,
                    <span class="st">"in a block of text\n"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Error: ... to highlight the search term in a block of text</span>
 
-<span class="va">error</span> <span class="op">&lt;-</span> <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cli/man/combine_ansi_styles.html">combine_ansi_styles</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"bold"</span><span class="op">)</span>
-<span class="va">warn</span> <span class="op">&lt;-</span> <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/cli/man/combine_ansi_styles.html">combine_ansi_styles</a></span><span class="op">(</span><span class="st">"magenta"</span>, <span class="st">"underline"</span><span class="op">)</span>
-<span class="va">note</span> <span class="op">&lt;-</span> <span class="fu">cli</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/cli/man/ansi-styles.html">style_italic</a></span>
+<span class="va">error</span> <span class="op">&lt;-</span> <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/combine_ansi_styles.html">combine_ansi_styles</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"bold"</span><span class="op">)</span>
+<span class="va">warn</span> <span class="op">&lt;-</span> <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/combine_ansi_styles.html">combine_ansi_styles</a></span><span class="op">(</span><span class="st">"magenta"</span>, <span class="st">"underline"</span><span class="op">)</span>
+<span class="va">note</span> <span class="op">&lt;-</span> <span class="fu">cli</span><span class="fu">::</span><span class="va"><a href="https://cli.r-lib.org/reference/ansi-styles.html">style_italic</a></span>
 
 <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html">abort</a></span><span class="op">(</span><span class="fu">error</span><span class="op">(</span><span class="st">"Error: subscript out of bounds!\n"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Error: Error: subscript out of bounds!</span>

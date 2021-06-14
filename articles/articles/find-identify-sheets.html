@@ -174,17 +174,9 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ugly_url</span> <span class="op">&lt;-</span> <span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span>
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ugly_url</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from 'gapminder'</span>
-<span class="co">#&gt; ✔ Range Africa</span>
-<span class="co">#&gt; # A tibble: 624 x 6</span>
-<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
-<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
-<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
-<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
-<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span></code></pre></div>
+<span class="co">#&gt; Error: Server error: (500) INTERNAL</span>
+<span class="co">#&gt; • Internal server error. Typically a server bug.</span>
+<span class="co">#&gt; • Internal error encountered.</span></code></pre></div>
 <p>At this time, although the URL may contain both a (spread)Sheet and a (work)sheet, we only extract the (spread)Sheet ID. If the function targets a specific (work)sheet, that is typically specified via arguments like <code>range</code> or <code>sheet</code> or a default of “first (visible) sheet”.</p>
 <p>These URLs are not particularly nice to look at in your code, though.</p>
 </div>
@@ -222,32 +214,16 @@
 <p>googlesheets4 also accepts a Sheet ID as the <code>ss</code> argument of many functions:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from 'gapminder'</span>
-<span class="co">#&gt; ✔ Range Africa</span>
-<span class="co">#&gt; # A tibble: 624 x 6</span>
-<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
-<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
-<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
-<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
-<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span></code></pre></div>
+<span class="co">#&gt; Error: Server error: (503) UNAVAILABLE</span>
+<span class="co">#&gt; • Service unavailable. Typically the server is down.</span>
+<span class="co">#&gt; • The service is currently unavailable.</span></code></pre></div>
 <p>I think in a script or app that will endure for a while it is better to refer to a Sheet by its ID than by its URL. The Sheet ID is nicer to look at, it is complete, it is minimal.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ssid</span> <span class="op">&lt;-</span> <span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span>
 <span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Reading from 'gapminder'</span>
-<span class="co">#&gt; ✔ Range Africa</span>
-<span class="co">#&gt; # A tibble: 624 x 6</span>
-<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
-<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
-<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
-<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
-<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span></code></pre></div>
+<span class="co">#&gt; Error: Server error: (503) UNAVAILABLE</span>
+<span class="co">#&gt; • Service unavailable. Typically the server is down.</span>
+<span class="co">#&gt; • The service is currently unavailable.</span></code></pre></div>
 <p>Note this demonstration that a Sheet ID also works when provided as a plain, old string, i.e. it does not <strong>have</strong> to have the <code>sheets_id</code> class. In some contexts, you might even prefer to store it as a string, in order to bypass the special printing behaviour for <code>sheets_id</code>.</p>
 <p>When the Sheet is specified via a character string, googlesheets4 assumes it is a Sheet ID (or an ID-containing URL). This is NOT the case for googledrive, which assumes a character string is a file name or path. Therefore, for maximum happiness, in a mixed googlesheets4 / googledrive workflow, it’s a good idea to be explicit and declare a string to be a Sheet ID, when that is the case.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -333,27 +309,27 @@
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">googledrive::drive_find()</a></code> is the workhorse function for these tasks for general Drive files. It has lots of bells and whistles and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span>
-<span class="co">#&gt; # A dribble: 9 x 3</span>
-<span class="co">#&gt;   name               id                                         drive_resource  </span>
-<span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 sheet-relocate-de… 1zjcd_flP8_5XzvP-tClTAftAMTsqX5H7XiHXnUb5… &lt;named list [34…</span>
-<span class="co">#&gt; 2 blubbery-lobo      1foTYXQEknymPpyug1xWOq7ituJ-ywLCaTEHaF2y4… &lt;named list [34…</span>
-<span class="co">#&gt; 3 bacciform-booby    15WqCxHBCjY4P_i6-uTL9rUBgpcHRKQFrqheRSSOg… &lt;named list [33…</span>
-<span class="co">#&gt; 4 childsafe-squid    1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc9BS… &lt;named list [34…</span>
-<span class="co">#&gt; 5 fiery-hart         18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEnWY6… &lt;named list [34…</span>
-<span class="co">#&gt; # … with 4 more rows</span></code></pre></div>
+<span class="co">#&gt; # A dribble: 8 x 3</span>
+<span class="co">#&gt;   name            id                                           drive_resource   </span>
+<span class="co">#&gt; * &lt;chr&gt;           &lt;chr&gt;                                        &lt;list&gt;           </span>
+<span class="co">#&gt; 1 blubbery-lobo   1foTYXQEknymPpyug1xWOq7ituJ-ywLCaTEHaF2y4uC4 &lt;named list [34]&gt;</span>
+<span class="co">#&gt; 2 bacciform-booby 15WqCxHBCjY4P_i6-uTL9rUBgpcHRKQFrqheRSSOgHhE &lt;named list [33]&gt;</span>
+<span class="co">#&gt; 3 childsafe-squid 1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc9BSSOo &lt;named list [34]&gt;</span>
+<span class="co">#&gt; 4 fiery-hart      18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEnWY6HSo &lt;named list [34]&gt;</span>
+<span class="co">#&gt; 5 chicken-sheet   1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM7u0 &lt;named list [34]&gt;</span>
+<span class="co">#&gt; # … with 3 more rows</span></code></pre></div>
 <p>This is so handy that we’ve made <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; # A dribble: 9 x 3</span>
-<span class="co">#&gt;   name               id                                         drive_resource  </span>
-<span class="co">#&gt; * &lt;chr&gt;              &lt;chr&gt;                                      &lt;list&gt;          </span>
-<span class="co">#&gt; 1 sheet-relocate-de… 1zjcd_flP8_5XzvP-tClTAftAMTsqX5H7XiHXnUb5… &lt;named list [34…</span>
-<span class="co">#&gt; 2 blubbery-lobo      1foTYXQEknymPpyug1xWOq7ituJ-ywLCaTEHaF2y4… &lt;named list [34…</span>
-<span class="co">#&gt; 3 bacciform-booby    15WqCxHBCjY4P_i6-uTL9rUBgpcHRKQFrqheRSSOg… &lt;named list [33…</span>
-<span class="co">#&gt; 4 childsafe-squid    1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc9BS… &lt;named list [34…</span>
-<span class="co">#&gt; 5 fiery-hart         18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEnWY6… &lt;named list [34…</span>
-<span class="co">#&gt; # … with 4 more rows</span></code></pre></div>
+<span class="co">#&gt; # A dribble: 8 x 3</span>
+<span class="co">#&gt;   name            id                                           drive_resource   </span>
+<span class="co">#&gt; * &lt;chr&gt;           &lt;chr&gt;                                        &lt;list&gt;           </span>
+<span class="co">#&gt; 1 blubbery-lobo   1foTYXQEknymPpyug1xWOq7ituJ-ywLCaTEHaF2y4uC4 &lt;named list [34]&gt;</span>
+<span class="co">#&gt; 2 bacciform-booby 15WqCxHBCjY4P_i6-uTL9rUBgpcHRKQFrqheRSSOgHhE &lt;named list [33]&gt;</span>
+<span class="co">#&gt; 3 childsafe-squid 1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc9BSSOo &lt;named list [34]&gt;</span>
+<span class="co">#&gt; 4 fiery-hart      18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEnWY6HSo &lt;named list [34]&gt;</span>
+<span class="co">#&gt; 5 chicken-sheet   1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM7u0 &lt;named list [34]&gt;</span>
+<span class="co">#&gt; # … with 3 more rows</span></code></pre></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find()</a></code> and <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </div>

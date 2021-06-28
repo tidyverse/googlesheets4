@@ -162,6 +162,8 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from 'gapminder'</span>
 <span class="co">#&gt; ✔ Range Africa</span>
+<span class="co">#&gt; ✖ Request failed [429]. Retry 1 happens in 100.5 seconds ...</span>
+<span class="co">#&gt; ✖ Request failed [429]. Retry 2 happens in 12.9 seconds ...</span>
 <span class="co">#&gt; # A tibble: 624 x 6</span>
 <span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
@@ -279,10 +281,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Creating new Sheet: 'collielike-quoll'</span>
+<span class="co">#&gt; ✔ Creating new Sheet: 'lambskin-nutria'</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: collielike-quoll</span>
-<span class="co">#&gt;               ID: 1AFr0pfMNQd2At0JOPQkyzr153buhDlEx34noVLrHq98</span>
+<span class="co">#&gt; Spreadsheet name: lambskin-nutria</span>
+<span class="co">#&gt;               ID: 1t72eZCGyvggE4B8_qGtFN1b2uaT7Tc3yLXeOm2Yl3fg</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -294,13 +296,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; • 'collielike-quoll' &lt;id: 1AFr0pfMNQd2At0JOPQkyzr153buhDlEx34noVLrHq98&gt;</span>
+<span class="co">#&gt; • 'lambskin-nutria' &lt;id: 1t72eZCGyvggE4B8_qGtFN1b2uaT7Tc3yLXeOm2Yl3fg&gt;</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Creating new Sheet: 'testy-hedgehog'</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1kkXSK1kaoSt9Q1TDm1Kv4im0uidOu8fyj7HFYh6z898</span>
+<span class="co">#&gt;               ID: 1T4AIHKAmX-1RCvINzgnKGfkXnsEgO96_zUqG-771_oo</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -314,7 +316,7 @@
 <span class="co">#&gt; ✔ Writing to sheet 'chickwts'</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1kkXSK1kaoSt9Q1TDm1Kv4im0uidOu8fyj7HFYh6z898</span>
+<span class="co">#&gt;               ID: 1T4AIHKAmX-1RCvINzgnKGfkXnsEgO96_zUqG-771_oo</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -364,12 +366,12 @@
 <span class="co">#&gt; # A tibble: 2 x 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 1223383311 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 1312968079 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 1 df           0 2084891689 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1  675225211 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; • 'testy-hedgehog' &lt;id: 1kkXSK1kaoSt9Q1TDm1Kv4im0uidOu8fyj7HFYh6z898&gt;</span></code></pre></div>
+<span class="co">#&gt; • 'testy-hedgehog' &lt;id: 1T4AIHKAmX-1RCvINzgnKGfkXnsEgO96_zUqG-771_oo&gt;</span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

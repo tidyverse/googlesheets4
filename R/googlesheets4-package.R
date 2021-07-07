@@ -21,7 +21,6 @@
 #' @importFrom purrr pluck
 #' @importFrom purrr pmap
 #' @importFrom purrr pmap_chr
-#' @importFrom purrr set_names
 #' @importFrom purrr transpose
 #' @importFrom purrr walk
 #' @importFrom tibble as_tibble

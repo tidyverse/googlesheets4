@@ -64,7 +64,7 @@ gs4_create <- function(name = gs4_random(), ..., sheets = NULL) {
   data_given   <- sheets_given && !is.null(unlist(sheets$value))
 
   # create the (spread)Sheet ---------------------------------------------------
-  gs4_success("Creating new Sheet: {.file {name}}")
+  gs4_bullets(c(v = "Creating new Sheet: {.file {name}}"))
   ss_body <- new(
     "Spreadsheet",
     properties = new("SpreadsheetProperties", title = name, ...)

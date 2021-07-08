@@ -106,7 +106,7 @@ sheet_copy_internal <- function(ssid,
   maybe_string(to_sheet)
   x <- gs4_get(ssid)
   s <- lookup_sheet(from_sheet, sheets_df = x$sheets)
-  gs4_success("Duplicating sheet {.field {s$name}} in {.file {x$name}}")
+  gs4_bullets(c(v = "Duplicating sheet {.field {s$name}} in {.file {x$name}}"))
 
   index <- resolve_index(x$sheets, .before = .before, .after = .after)
   dup_request <- new(
@@ -126,7 +126,7 @@ sheet_copy_internal <- function(ssid,
   resp_raw <- request_make(req)
   resp <- gargle::response_process(resp_raw)
   to_name <- pluck(resp, "replies", 1, "duplicateSheet", "properties", "title")
-  gs4_success("Copied as {.field {to_name}}")
+  gs4_bullets(c(v = "Copied as {.field {to_name}}"))
 
   invisible(ssid)
 }
@@ -142,10 +142,9 @@ sheet_copy_external <- function(from_ssid,
   maybe_string(to_sheet, "sheet_copy")
 
   from_s <- lookup_sheet(from_sheet, sheets_df = from_x$sheets)
-  gs4_success(
-    "Copying sheet {.field {from_s$name}} from
-    {.file {from_x$name}} to {.file {to_x$name}}"
-  )
+  gs4_bullets(c(
+    v = "Copying sheet {.field {from_s$name}} from \\
+         {.file {from_x$name}} to {.file {to_x$name}}"))
 
   req <- request_generate(
     "sheets.spreadsheets.sheets.copyTo",
@@ -161,7 +160,7 @@ sheet_copy_external <- function(from_ssid,
   # early exit if no need to relocate and/or rename copied sheet
   index <- resolve_index(to_x$sheets, .before, .after)
   if (is.null(index) && is.null(to_sheet)) {
-    gs4_success("Copied as {.field {to_s$title}}")
+    gs4_bullets(c(v = "Copied as {.field {to_s$title}}"))
     return(invisible(to_ssid))
   }
 
@@ -187,7 +186,7 @@ sheet_copy_external <- function(from_ssid,
   )
   resp_raw <- request_make(req)
   gargle::response_process(resp_raw)
-  gs4_success("Copied as {.field {to_sheet}}")
+  gs4_bullets(c(v = "Copied as {.field {to_sheet}}"))
 
   invisible(to_ssid)
 }

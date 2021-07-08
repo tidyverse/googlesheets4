@@ -46,8 +46,8 @@ sheet_delete <- function(ss, sheet) {
   s <- map(sheet, ~ lookup_sheet(.x, sheets_df = x$sheets))
   sheet_names <- map_chr(s, "name")
   n <- length(sheet_names)
-  gs4_success("
-    Deleting {n} sheet{?s} from {.file {x$name}}: {.field {sheet_names}}")
+  gs4_bullets(c(
+    v = "Deleting {n} sheet{?s} from {.file {x$name}}: {.field {sheet_names}}"))
 
   sid <- map(s, "id")
   requests <- map(sid, ~ list(deleteSheet = list(sheetId = .x)))

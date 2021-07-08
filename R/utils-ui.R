@@ -59,6 +59,16 @@ is_testing <- function() {
   identical(Sys.getenv("TESTTHAT"), "true")
 }
 
+gs4_bullets <- function(text, .envir = parent.frame()) {
+  quiet <- gs4_quiet() %|% is_testing()
+  if (quiet) {
+    return(invisible())
+  }
+  # TODO: I assume I'll eventually go here
+  # cli::cli_div(theme = gs4_theme())
+  cli::cli_bullets(text = text, .envir = .envir)
+}
+
 gs4_alert <- function(text,
                       type = c("success", "info", "warning", "danger"),
                       .envir = parent.frame()) {
@@ -75,10 +85,6 @@ gs4_alert <- function(text,
     cli::cli_alert
   )
   cli_fun(text = text, wrap = TRUE, .envir = .envir)
-}
-
-gs4_success <- function(text, .envir = parent.frame()) {
-  gs4_alert(text, type = "success", .envir = .envir)
 }
 
 gs4_info <- function(text, .envir = parent.frame()) {

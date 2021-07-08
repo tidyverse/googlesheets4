@@ -98,7 +98,7 @@ range_speedread <- function(ss,
   msg <- glue("
     Reading from {.file {x$name}}<<sheet_msg>><<range_msg>>",
     .open = "<<", .close = ">>")
-  gs4_success(msg)
+  gs4_bullets(c(v = msg))
 
   token <- gs4_token() %||% list()
 
@@ -107,7 +107,7 @@ range_speedread <- function(ss,
     params = params,
     base_url = "https://docs.google.com"
   )
-  gs4_success("Export URL: {.url {req$url}}")
+  gs4_bullets(c(i = "Export URL: {.url {req$url}}"))
 
   response <- httr::GET(req$url, config = token)
   stopifnot(identical(httr::http_type(response), "text/csv"))

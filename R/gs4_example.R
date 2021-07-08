@@ -33,16 +33,18 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
   existing <- gs4_find()
   m <- match(name, existing$name)
   if (is.na(m)) {
-    gs4_success("Creating {.file {name}}")
+    gs4_bullets(c(v = "Creating {.file {name}}"))
     ss <- gs4_create(name)
   } else {
-    gs4_success("Testing sheet named {.file {name}} already exists ... using that")
+    gs4_bullets(c(
+      v = "Testing sheet named {.file {name}} already exists ... using that"
+    ))
     ss <- existing$id[[m]]
   }
   ssid <- as_sheets_id(ss)
 
   # it's fiddly to check current sharing status, so just re-share
-  gs4_success('Making sure "anyone with a link" can read {.file {name}}')
+  gs4_bullets(c(v = 'Making sure "anyone with a link" can read {.file {name}}'))
   gs4_share(ssid)
   ssid
 }

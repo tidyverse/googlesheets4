@@ -88,11 +88,11 @@ range_autofit <- function(ss,
     1, "autoResizeDimensions", "dimensions", "dimension"
   )
 
-  gs4_success("Editing {.file {x$name}}")
-  gs4_success(
-    "Resizing one or more {tolower(resize_dim)} in
-    {.field {range_spec$sheet_name}}"
-  )
+  gs4_bullets(c(
+    v = "Editing {.file {x$name}}",
+    v = "Resizing one or more {tolower(resize_dim)} in \\
+         {.field {range_spec$sheet_name}}"
+  ))
 
   # do it ----------------------------------------------------------------------
   req <- request_generate(

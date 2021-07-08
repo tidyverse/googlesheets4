@@ -73,7 +73,7 @@ sheet_relocate <- function(ss,
   maybe_sheet(.after)
 
   x <- gs4_get(ssid)
-  gs4_success("Relocating sheets in {.file {x$name}}")
+  gs4_bullets(c(v = "Relocating sheets in {.file {x$name}}"))
 
   if (!is.null(.before)) {
     sheet <- rev(sheet)

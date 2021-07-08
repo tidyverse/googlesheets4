@@ -85,7 +85,7 @@ range_add_validation <- function(ss,
   }
 
   x <- gs4_get(ssid)
-  gs4_success("Editing {.file {x$name}}")
+  gs4_bullets(c(v = "Editing {.file {x$name}}"))
 
   # determine (work)sheet ------------------------------------------------------
   range_spec <- as_range_spec(
@@ -95,7 +95,7 @@ range_add_validation <- function(ss,
   )
   range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
   s <- lookup_sheet(range_spec$sheet_name, sheets_df = x$sheets)
-  gs4_success("Editing sheet {.field {range_spec$sheet_name}}")
+  gs4_bullets(c(v = "Editing sheet {.field {range_spec$sheet_name}}"))
 
   # form batch update request --------------------------------------------------
   sdv_req <- list(setDataValidation = new(

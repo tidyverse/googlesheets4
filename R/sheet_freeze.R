@@ -57,8 +57,8 @@ sheet_freeze <- function(ss,
 
   x <- gs4_get(ssid)
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
-  gs4_success("
-    Freezing {dims} on sheet {.field {s$name}} in {.file {x$name}}")
+  gs4_bullets(c(
+    v = "Freezing {dims} on sheet {.field {s$name}} in {.file {x$name}}"))
 
   freeze_req <- bureq_set_grid_properties(
     sheetId = s$id,

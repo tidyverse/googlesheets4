@@ -18,7 +18,7 @@ get_cells <- function(ss,
 
   ## retrieve spreadsheet metadata --------------------------------------------
   x <- gs4_get(ssid)
-  gs4_success("Reading from {.file {x$name}}")
+  gs4_bullets(c(v = "Reading from {.file {x$name}}"))
 
   ## prepare range specification for API --------------------------------------
 
@@ -30,7 +30,7 @@ get_cells <- function(ss,
   )
   # if we send no range, we get all cells from all sheets; not what we want
   effective_range <- as_A1_range(range_spec) %||% first_visible_name(x$sheets)
-  gs4_success("Range {.field {effective_range}}")
+  gs4_bullets(c(v = "Range {.field {effective_range}}"))
 
   ## main GET -----------------------------------------------------------------
   resp <- read_cells_impl_(

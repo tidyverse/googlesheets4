@@ -17,10 +17,7 @@ library(googlesheets4)
 *In a hidden chunk here, I "export" the internal helpers covered below.*
 
 ```{r include = FALSE}
-gs4_success <- googlesheets4:::gs4_success
-gs4_info <- googlesheets4:::gs4_info
-gs4_warning <- googlesheets4:::gs4_warning
-gs4_danger <- googlesheets4:::gs4_danger
+gs4_bullets <- googlesheets4:::gs4_bullets
 
 gs4_abort <- googlesheets4:::gs4_abort
 abort_unsupported_conversion <- googlesheets4:::abort_unsupported_conversion
@@ -32,14 +29,20 @@ bt <- googlesheets4:::bt
 
 ## User-facing messages
 
-Everything should be emitted by helpers in `utils-ui.R`, such as `gs4_success()` or `gs4_info()`.
-These are all wrappers around `cli::cli_alert()` and friends.
+Everything should be emitted by helpers in `utils-ui.R`: specifically, `gs4_bullets()` (and, for errors, `gs4_abort()`).
+These helpers are all wrappers around cli functions, such as `cli::cli_bullets()`.
 
 ```{r}
-gs4_success("Doing good stuff")
-gs4_info("The more you know!")
-gs4_warning("You might want to know about this")
-gs4_danger("Something quite bad")
+gs4_bullets(c(
+        "noindent",
+  " " = "indent",
+  "*" = "bullet",
+  ">" = "arrow",
+  "v" = "Doing good stuff for YOU the user",
+  "x" = "Nope nope nope",
+  "!" = "You might want to know about this",
+  "i" = "The more you know!"
+))
 ```
 
 The helpers encourage consistent styling and make it possible to selectively silence messages coming from googlesheets4.
@@ -62,33 +65,19 @@ How we use the inline classes:
 
 ```{r}
 nm <- "name-of-a-Google-Sheet"
-gs4_success("Creating new Sheet: {.file {nm}}")
+gs4_bullets(c(v = "Creating new Sheet: {.file {nm}}"))
 
 nm <- "name-of-a-worksheet"
-gs4_success("Protecting cells on sheet: {.field {nm}}")
+gs4_bullets(c(v = "Protecting cells on sheet: {.field {nm}}"))
 
 rg <- "A3:B20"
-gs4_success("Writing to the range {.field {rg}}")
+gs4_bullets(c(v = "Writing to the range {.field {rg}}"))
 ```
 
 Most relevant cli docs:
 
 -   [CLI inline markup](https://cli.r-lib.org/reference/inline-markup.html)
 -   [Building a Semantic CLI](https://cli.r-lib.org/articles/semantic-cli.html)
-
-### Line breaks and whitespace
-
-Because cli wants to deal with whitespace and wrapping, for better or for worse, lines breaks and leading whitespace in the source have no effect.
-This is different from `glue::glue()`, which we use in error messages (see below), and it's easy to get confused.
-
-```{r}
-things <- "rows"
-rg <- "A3:B20"
-gs4_success(
-  "Resizing one
-or more {things} in
-    {.field {rg}}")
-```
 
 ### Pluralization
 
@@ -97,10 +86,10 @@ or more {things} in
 ```{r}
 nm <- "name-of-a-Google-Sheet"
 n_new <- 1
-gs4_success("Adding {n_new} sheet{?s} to {.file {nm}}")
+gs4_bullets(c(v = "Adding {n_new} sheet{?s} to {.file {nm}}"))
 
 n_new <- 3
-gs4_success("Adding {n_new} sheet{?s} to {.file {nm}}")
+gs4_bullets(c(v = "Adding {n_new} sheet{?s} to {.file {nm}}"))
 ```
 
 ### Collapsing
@@ -110,10 +99,10 @@ Also more pluralization.
 
 ```{r}
 new_sheet_names <- c("apple", "banana", "cherry")
-gs4_success("New sheet{?s}: {.field {new_sheet_names}}")
+gs4_bullets(c("New sheet{?s}: {.field {new_sheet_names}}"))
 
 new_sheet_names <- "kumquat"
-gs4_success("New sheet{?s}: {.field {new_sheet_names}}")
+gs4_bullets(c("New sheet{?s}: {.field {new_sheet_names}}"))
 ```
 
 ### Tricky stuff
@@ -121,7 +110,6 @@ gs4_success("New sheet{?s}: {.field {new_sheet_names}}")
 If you want to see some tricky examples of building up a message from parts, look here:
 
 -   `range_speedread()`
--   `sheet_freeze()`
 
 ## Errors
 

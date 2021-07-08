@@ -69,36 +69,6 @@ gs4_bullets <- function(text, .envir = parent.frame()) {
   cli::cli_bullets(text = text, .envir = .envir)
 }
 
-gs4_alert <- function(text,
-                      type = c("success", "info", "warning", "danger"),
-                      .envir = parent.frame()) {
-  quiet <- gs4_quiet() %|% is_testing()
-  if (quiet) {
-    return(invisible())
-  }
-  cli_fun <- switch(
-    type,
-    success = cli::cli_alert_success,
-    info    = cli::cli_alert_info,
-    warning = cli::cli_alert_warning,
-    danger  = cli::cli_alert_danger,
-    cli::cli_alert
-  )
-  cli_fun(text = text, wrap = TRUE, .envir = .envir)
-}
-
-gs4_info <- function(text, .envir = parent.frame()) {
-  gs4_alert(text, type = "info", .envir = .envir)
-}
-
-gs4_warning <- function(text, .envir = parent.frame()) {
-  gs4_alert(text, type = "warning", .envir = .envir)
-}
-
-gs4_danger <- function(text, .envir = parent.frame()) {
-  gs4_alert(text, type = "danger", .envir = .envir)
-}
-
 #' Error conditions for the googlesheets4 package
 #'
 #' @param class Use only if you want to subclass beyond `googlesheets4_error`

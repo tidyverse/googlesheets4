@@ -45,7 +45,7 @@ sheet_freeze <- function(ss,
   maybe_non_negative_integer(ncol)
 
   if (is.null(nrow) && is.null(ncol)) {
-    gs4_info("Nothing to be done")
+    gs4_bullets(c(i = "Nothing to be done"))
     return(invisible(ssid))
   }
 

@@ -102,3 +102,21 @@ to_delete <- dat_explore %>%
   select(drive_id, permission_id)
 
 out <- map2(to_delete$drive_id, to_delete$permission_id, delete_one_permission)
+
+
+# 2021-06-05 I decided to publish some sheets, so they could be embedded in a
+# distill website
+drive_user()
+deaths <- drive_get("deaths")
+deaths %>%
+  drive_reveal("published")
+deaths <- deaths %>%
+  drive_publish()
+View(deaths$revision_resource)
+
+
+ff <- drive_get("formulas-and-formats")
+ff %>%
+  drive_reveal("published")
+ff <- ff %>%
+  drive_publish()

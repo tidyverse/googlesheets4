@@ -4,7 +4,7 @@ as_GridCoordinate <- function(x, ...) {
 
 #' @export
 as_GridCoordinate.default <- function(x, ...) {
-  abort_unsupported_conversion(x, to = 'GridCoordinate')
+  abort_unsupported_conversion(x, to = "GridCoordinate")
 }
 
 #' @export

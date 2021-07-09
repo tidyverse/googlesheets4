@@ -23,7 +23,7 @@ as_CellData <- function(x, .na = NULL) {
 
 #' @export
 as_CellData.default <- function(x, .na = NULL) {
-  abort_unsupported_conversion(x, to = 'CellData')
+  abort_unsupported_conversion(x, to = "CellData")
 }
 
 # I want to centralize what we send for NA, even though -- for now, at

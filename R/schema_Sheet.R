@@ -11,7 +11,7 @@ as_Sheet <- function(x, ...) {
 
 #' @export
 as_Sheet.default <- function(x, ...) {
-  abort_unsupported_conversion(x, to = 'Sheet')
+  abort_unsupported_conversion(x, to = "Sheet")
 }
 
 #' @export

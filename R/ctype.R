@@ -34,7 +34,7 @@ ctype <- function(x,  ...) {
 
 #' @export
 ctype.NULL <- function(x, ...) {
-  abort_unsupported_conversion(x, "ctype")
+  abort_unsupported_conversion(x, to = "ctype")
 }
 
 #' @export
@@ -60,7 +60,7 @@ ctype.list <- function(x, ...) {
 
 #' @export
 ctype.default <- function(x, ...) {
-  abort_unsupported_conversion(x, to = 'ctype')
+  abort_unsupported_conversion(x, to = "ctype")
 }
 
 .discovered_to_effective_type <- c(

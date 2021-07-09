@@ -91,7 +91,7 @@ as_sheets_id <- function(x, ...) UseMethod("as_sheets_id")
 
 #' @export
 as_sheets_id.NULL <- function(x, ...) {
-  abort_unsupported_conversion(x, "sheets_id")
+  abort_unsupported_conversion(x, to = "sheets_id")
 }
 
 #' @export
@@ -126,7 +126,7 @@ as_sheets_id.dribble <- function(x, ...) {
 
 #' @export
 as_sheets_id.default <- function(x, ...) {
-  abort_unsupported_conversion(x, to = 'sheets_id')
+  abort_unsupported_conversion(x, to = "sheets_id")
 }
 
 #' @export

@@ -16,7 +16,7 @@ as_NamedRange <- function(x, ...) {
 
 #' @export
 as_NamedRange.default <- function(x, ...) {
-  abort_unsupported_conversion(x, to = 'NamedRange')
+  abort_unsupported_conversion(x, to = "NamedRange")
 }
 
 #' @export

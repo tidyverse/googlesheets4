@@ -28,6 +28,6 @@ test_that("gs4_abort() glues data in", {
 test_that("abort_unsupported_conversion() works", {
   x <- structure(1, class = c("a", "b", "c"))
   expect_snapshot_error(
-    abort_unsupported_conversion(x, "d")
+    abort_unsupported_conversion(x, "target_class")
   )
 })

@@ -30,7 +30,7 @@ as_GridRange <- function(x, ...) {
 
 #' @export
 as_GridRange.default <- function(x, ...) {
-  abort_unsupported_conversion(x, to = 'GridRange')
+  abort_unsupported_conversion(x, to = "GridRange")
 }
 
 #' @export

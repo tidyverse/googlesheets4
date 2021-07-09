@@ -107,7 +107,7 @@ abort_unsupported_conversion <- function(from, to) {
     msg_from <- "something of class {.cls {class(from)}}"
   }
   msg <- glue("
-    Don't know how to make an instance of {.cls {class(to)}} from <<msg_from>>",
+    Don't know how to make an instance of {.cls {to}} from <<msg_from>>",
     .open = "<<", .close = ">>"
   )
   gs4_abort(msg)

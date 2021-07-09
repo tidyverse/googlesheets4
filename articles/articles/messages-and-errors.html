@@ -155,16 +155,26 @@
 <div id="user-facing-messages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#user-facing-messages" class="anchor"></a>User-facing messages</h2>
-<p>Everything should be emitted by helpers in <code>utils-ui.R</code>, such as <code>gs4_success()</code> or <code>gs4_info()</code>. These are all wrappers around <code><a href="https://cli.r-lib.org/reference/cli_alert.html">cli::cli_alert()</a></code> and friends.</p>
+<p>Everything should be emitted by helpers in <code>utils-ui.R</code>: specifically, <code>gs4_bullets()</code> (and, for errors, <code>gs4_abort()</code>). These helpers are all wrappers around cli functions, such as <code><a href="https://cli.r-lib.org/reference/cli_bullets.html">cli::cli_bullets()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">gs4_success</span><span class="op">(</span><span class="st">"Doing good stuff"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Doing good stuff</span>
-<span class="fu">gs4_info</span><span class="op">(</span><span class="st">"The more you know!"</span><span class="op">)</span>
-<span class="co">#&gt; ℹ The more you know!</span>
-<span class="fu">gs4_warning</span><span class="op">(</span><span class="st">"You might want to know about this"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+        <span class="st">"noindent"</span>,
+  <span class="st">" "</span> <span class="op">=</span> <span class="st">"indent"</span>,
+  <span class="st">"*"</span> <span class="op">=</span> <span class="st">"bullet"</span>,
+  <span class="st">"&gt;"</span> <span class="op">=</span> <span class="st">"arrow"</span>,
+  <span class="st">"v"</span> <span class="op">=</span> <span class="st">"Doing good stuff for YOU the user"</span>,
+  <span class="st">"x"</span> <span class="op">=</span> <span class="st">"Nope nope nope"</span>,
+  <span class="st">"!"</span> <span class="op">=</span> <span class="st">"You might want to know about this"</span>,
+  <span class="st">"i"</span> <span class="op">=</span> <span class="st">"The more you know!"</span>
+<span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; noindent</span>
+<span class="co">#&gt;   indent</span>
+<span class="co">#&gt; • bullet</span>
+<span class="co">#&gt; → arrow</span>
+<span class="co">#&gt; ✔ Doing good stuff for YOU the user</span>
+<span class="co">#&gt; ✖ Nope nope nope</span>
 <span class="co">#&gt; ! You might want to know about this</span>
-<span class="fu">gs4_danger</span><span class="op">(</span><span class="st">"Something quite bad"</span><span class="op">)</span>
-<span class="co">#&gt; ✖ Something quite bad</span></code></pre></div>
+<span class="co">#&gt; ℹ The more you know!</span></code></pre></div>
 <p>The helpers encourage consistent styling and make it possible to selectively silence messages coming from googlesheets4. The googlesheets4 message helpers:</p>
 <ul>
 <li>Use the <a href="https://cli.r-lib.org/index.html">cli package</a> to get interpolation, inline markup, and pluralization</li>
@@ -188,15 +198,15 @@
 <p><em>These may not demo well via pkgdown, but the interactive experience is nice.</em></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-Google-Sheet"</span>
-<span class="fu">gs4_success</span><span class="op">(</span><span class="st">"Creating new Sheet: {.file {nm}}"</span><span class="op">)</span>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Creating new Sheet: {.file {nm}}"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Creating new Sheet: 'name-of-a-Google-Sheet'</span>
 
 <span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-worksheet"</span>
-<span class="fu">gs4_success</span><span class="op">(</span><span class="st">"Protecting cells on sheet: {.field {nm}}"</span><span class="op">)</span>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Protecting cells on sheet: {.field {nm}}"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Protecting cells on sheet: name-of-a-worksheet</span>
 
 <span class="va">rg</span> <span class="op">&lt;-</span> <span class="st">"A3:B20"</span>
-<span class="fu">gs4_success</span><span class="op">(</span><span class="st">"Writing to the range {.field {rg}}"</span><span class="op">)</span>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Writing to the range {.field {rg}}"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Writing to the range A3:B20</span></code></pre></div>
 <p>Most relevant cli docs:</p>
 <ul>
@@ -204,45 +214,32 @@
 <li><a href="https://cli.r-lib.org/articles/semantic-cli.html">Building a Semantic CLI</a></li>
 </ul>
 </div>
-<div id="line-breaks-and-whitespace" class="section level3">
-<h3 class="hasAnchor">
-<a href="#line-breaks-and-whitespace" class="anchor"></a>Line breaks and whitespace</h3>
-<p>Because cli wants to deal with whitespace and wrapping, for better or for worse, lines breaks and leading whitespace in the source have no effect. This is different from <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code>, which we use in error messages (see below), and it’s easy to get confused.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">things</span> <span class="op">&lt;-</span> <span class="st">"rows"</span>
-<span class="va">rg</span> <span class="op">&lt;-</span> <span class="st">"A3:B20"</span>
-<span class="fu">gs4_success</span><span class="op">(</span>
-  <span class="st">"Resizing one
-or more {things} in
-    {.field {rg}}"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Resizing one or more rows in A3:B20</span></code></pre></div>
-</div>
 <div id="pluralization" class="section level3">
 <h3 class="hasAnchor">
 <a href="#pluralization" class="anchor"></a>Pluralization</h3>
 <p><a href="https://cli.r-lib.org/articles/pluralization.html">cli’s pluralization</a> is awesome!</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-Google-Sheet"</span>
 <span class="va">n_new</span> <span class="op">&lt;-</span> <span class="fl">1</span>
-<span class="fu">gs4_success</span><span class="op">(</span><span class="st">"Adding {n_new} sheet{?s} to {.file {nm}}"</span><span class="op">)</span>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Adding {n_new} sheet{?s} to {.file {nm}}"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Adding 1 sheet to 'name-of-a-Google-Sheet'</span>
 
 <span class="va">n_new</span> <span class="op">&lt;-</span> <span class="fl">3</span>
-<span class="fu">gs4_success</span><span class="op">(</span><span class="st">"Adding {n_new} sheet{?s} to {.file {nm}}"</span><span class="op">)</span>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Adding {n_new} sheet{?s} to {.file {nm}}"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Adding 3 sheets to 'name-of-a-Google-Sheet'</span></code></pre></div>
 </div>
 <div id="collapsing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#collapsing" class="anchor"></a>Collapsing</h3>
 <p><a href="https://cli.r-lib.org/articles/semantic-cli.html#inline-lists-of-items">Collapsing lists of things</a> is great! Also more pluralization.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">new_sheet_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span><span class="op">)</span>
-<span class="fu">gs4_success</span><span class="op">(</span><span class="st">"New sheet{?s}: {.field {new_sheet_names}}"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ New sheets: apple, banana, and cherry</span>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"New sheet{?s}: {.field {new_sheet_names}}"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; New sheets: apple, banana, and cherry</span>
 
 <span class="va">new_sheet_names</span> <span class="op">&lt;-</span> <span class="st">"kumquat"</span>
-<span class="fu">gs4_success</span><span class="op">(</span><span class="st">"New sheet{?s}: {.field {new_sheet_names}}"</span><span class="op">)</span>
-<span class="co">#&gt; ✔ New sheet: kumquat</span></code></pre></div>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"New sheet{?s}: {.field {new_sheet_names}}"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; New sheet: kumquat</span></code></pre></div>
 </div>
 <div id="tricky-stuff" class="section level3">
 <h3 class="hasAnchor">
@@ -250,7 +247,6 @@ or more {things} in
 <p>If you want to see some tricky examples of building up a message from parts, look here:</p>
 <ul>
 <li><code><a href="../../reference/range_speedread.html">range_speedread()</a></code></li>
-<li><code>sheet_freeze()</code></li>
 </ul>
 </div>
 </div>
@@ -259,7 +255,7 @@ or more {things} in
 <a href="#errors" class="anchor"></a>Errors</h2>
 <p>Use <code>gs4_abort()</code> instead of <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::abort()</a></code> or <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code>. So far, I’m not really using <code>...</code> to put data in the condition, but I could start when/if there’s a reason to. Be prepared to get confused about how to style and line break error messages vs. regular messages, which use <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code> and <code><a href="https://cli.r-lib.org/reference/cli_alert.html">cli::cli_alert()</a></code>, respectively.</p>
 <p><code>abort_unsupported_conversion()</code> is a wrapper around <code>gs4_abort()</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span><span class="op">(</span><span class="fl">1</span>, class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">abort_unsupported_conversion</span><span class="op">(</span><span class="va">x</span>, to <span class="op">=</span> <span class="st">"foofy"</span><span class="op">)</span>
 <span class="co">#&gt; Error: Don't know how to make an instance of &lt;character&gt; from something of class &lt;a/b/c&gt;</span></code></pre></div>
@@ -277,7 +273,7 @@ or more {things} in
 <li>
 <code>bt()</code> for backticks (argument names, functions)</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-Google-Sheet"</span>
 <span class="fu">gs4_abort</span><span class="op">(</span><span class="st">"Use double quotes around a Google Sheet name: {dq(nm)}"</span><span class="op">)</span>
 <span class="co">#&gt; Error: Use double quotes around a Google Sheet name: "name-of-a-Google-Sheet"</span>
@@ -298,7 +294,7 @@ or more {things} in
 <h3 class="hasAnchor">
 <a href="#multiple-lines-and-bullets" class="anchor"></a>Multiple lines and bullets</h3>
 <p>Get multiple lines by sending a character vector as <code>message</code>. Think about what <code><a href="https://rlang.r-lib.org/reference/format_error_bullets.html">rlang::format_error_bullets()</a></code> does and be intentional with naming: the choices are <code>i</code>, <code>x</code>, and no name.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bad_stuff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"eew"</span>, <span class="st">"yuck"</span>, <span class="st">"uh-oh"</span><span class="op">)</span>
 <span class="fu">gs4_abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"This first line is a header, explaining the general situation"</span>,
@@ -318,12 +314,12 @@ or more {things} in
 <span class="co">#&gt; Error: Endpoint not recognized:</span>
 <span class="co">#&gt; ✖ 'sheets.spreadsheets.WTF'</span></code></pre></div>
 </div>
-<div id="line-breaks-and-whitespace-1" class="section level3">
+<div id="line-breaks-and-whitespace" class="section level3">
 <h3 class="hasAnchor">
-<a href="#line-breaks-and-whitespace-1" class="anchor"></a>Line breaks and whitespace</h3>
+<a href="#line-breaks-and-whitespace" class="anchor"></a>Line breaks and whitespace</h3>
 <p>Remember each element of <code>message</code> is processed with <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code>, so let’s review the line break situation, which is different to the messages made with cli, which is confusing.</p>
 <p>This produces two lines:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">shift</span> <span class="op">&lt;-</span> <span class="st">"SHIFT"</span>
 <span class="fu">gs4_abort</span><span class="op">(</span><span class="st">"
   The {bt('shift')} direction must be specified for this {bt('range')}
@@ -331,7 +327,7 @@ or more {things} in
 <span class="co">#&gt; Error: The `shift` direction must be specified for this `range`</span>
 <span class="co">#&gt; It can't be automatically determined</span></code></pre></div>
 <p>Use <code>\\</code> if you want continuation, i.e. you want one line:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">shift</span> <span class="op">&lt;-</span> <span class="st">"SHIFT"</span>
 <span class="fu">gs4_abort</span><span class="op">(</span><span class="st">"
   The {bt('shift')} direction must be specified for this {bt('range')}. \\
@@ -353,7 +349,7 @@ or more {things} in
 <h3 class="hasAnchor">
 <a href="#pluralization-1" class="anchor"></a>Pluralization</h3>
 <p>Use <code><a href="https://cli.r-lib.org/reference/pluralize.html">cli::pluralize()</a></code> directly if you need pluralization in error messages. Search for <code><a href="https://cli.r-lib.org/reference/pluralization-helpers.html">cli::qty()</a></code> for a few places where the pluralization was a bit trickier.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">col_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"apple"</span>, <span class="st">"banana"</span><span class="op">)</span>
 <span class="va">nc</span> <span class="op">&lt;-</span> <span class="fl">1</span>
 <span class="fu">gs4_abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
@@ -386,7 +382,7 @@ or more {things} in
 <h3 class="hasAnchor">
 <a href="#collapsing-1" class="anchor"></a>Collapsing</h3>
 <p>Use <code><a href="https://glue.tidyverse.org/reference/glue_collapse.html">glue::glue_collapse()</a></code> ahead of time, if you need to style and collapse.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bad_codes</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
 <span class="va">bad_codes</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue_collapse.html">glue_collapse</a></span><span class="op">(</span><span class="fu">sq</span><span class="op">(</span><span class="va">bad_codes</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">","</span><span class="op">)</span>
 <span class="fu">gs4_abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
@@ -410,7 +406,7 @@ or more {things} in
 <h2 class="hasAnchor">
 <a href="#future-thoughts" class="anchor"></a>Future thoughts</h2>
 <p>Would I ever want to use cli in the errors? There are good things and bad things about that. Messing around. This may very well not show up in pkgdown, which is related to what’s problematic.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html">abort</a></span><span class="op">(</span><span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/ansi-styles.html">col_blue</a></span><span class="op">(</span><span class="st">"Hello "</span>, <span class="st">"world!"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Error: Hello world!</span>
 

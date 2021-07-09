@@ -42,7 +42,10 @@ new_sheets_id <- function(x) {
 validate_sheets_id <- function(x) {
   stopifnot(inherits(x, "sheets_id"))
   if (!grepl("^[a-zA-Z0-9-_]+$", x, perl = TRUE)) {
-    gs4_abort(c("Spreadsheet ID contains invalid characters:", x = "{sq(x)}"))
+    gs4_abort(c(
+      "Spreadsheet ID contains invalid characters:",
+      x = "{.field {x}}"
+    ))
   }
   ## I am quite sure id should have exactly 44 characters but am reluctant
   ## to require this because it makes small examples and tests burdensome
@@ -101,8 +104,8 @@ as_sheets_id.drive_id <- function(x, ...) new_sheets_id(x)
 as_sheets_id.dribble <- function(x, ...) {
   if (nrow(x) != 1) {
     gs4_abort(c(
-      "Dribble input must have exactly 1 row",
-      x = "Actual input has {nrow(x)} rows"
+      "Dribble input must have exactly 1 row.",
+      x = "Actual input has {nrow(x)} rows."
     ))
   }
   # not worrying about whether we are authed as same user with Sheets and Drive
@@ -112,10 +115,10 @@ as_sheets_id.dribble <- function(x, ...) {
   if (!identical(mime_type, target)) {
     gs4_abort(c(
       "Dribble input must refer to a Google Sheet, i.e. a file with MIME \\
-       type {sq(target)}",
-      i = "File id: {sq(x$id)}",
-      i = "File name: {sq(x$name)}",
-      x = "MIME TYPE: {sq(mime_type)}"
+       type {.field {target}}.",
+      i = "File id: {.field {x$id}}",
+      i = "File name: {.file {x$name}}",
+      x = "MIME TYPE: {.field {mime_type}}"
     ))
   }
   new_sheets_id(x$id)
@@ -129,14 +132,14 @@ as_sheets_id.default <- function(x, ...) {
 #' @export
 as_sheets_id.character <- function(x, ...) {
   if (length(x) != 1) {
-    gs4_abort("Character input must have length == 1, not length {length(x)}")
+    gs4_abort("Character input must have length == 1, not length {length(x)}.")
   }
   out <- one_id(x)
   if (is.na(out)) {
     gs4_abort(c(
       "Input does not match our regular expression for extracting \\
-       spreadsheet id",
-      x = "Input: {sq(x)}"
+       spreadsheet id.",
+      x = "Input: {.q {x}}."
     ))
   }
   sheets_id(out)

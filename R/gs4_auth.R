@@ -63,13 +63,13 @@ gs4_auth <- function(email = gargle::gargle_oauth_email(),
   )
   if (!inherits(cred, "Token2.0")) {
     gs4_abort(c(
-      "Can't get Google credentials",
-      "i" = "Are you running googlesheets4 in a non-interactive session? \\
-             Consider:",
-      "*" = "{bt('gs4_deauth()')} to prevent the attempt to get credentials",
-      "*" = "Call {bt('gs4_auth()')} directly with all necessary specifics",
+      "Can't get Google credentials.",
+      "i" = "Are you running {.pkg googlesheets4} in a non-interactive \\
+             session? Consider:",
+      "*" = "Call {.fun gs4_deauth} to prevent the attempt to get credentials.",
+      "*" = "Call {.fun gs4_auth} directly with all necessary specifics.",
       "i" = "See gargle's \"Non-interactive auth\" vignette for more details:",
-      "i" = "https://gargle.r-lib.org/articles/non-interactive-auth.html"
+      "i" = "{.url https://gargle.r-lib.org/articles/non-interactive-auth.html}"
     ))
   }
   .auth$set_cred(cred)
@@ -184,7 +184,7 @@ gs4_has_token <- function() {
 #' gs4_auth_configure(app = original_app, api_key = original_api_key)
 gs4_auth_configure <- function(app, path, api_key) {
   if (!missing(app) && !missing(path)) {
-    gs4_abort("Must supply exactly one of {bt('app')} and {bt('path')}")
+    gs4_abort("Must supply exactly one of {.arg app} and {.arg path}, not both.")
   }
   stopifnot(missing(api_key) || is.null(api_key) || is_string(api_key))
 

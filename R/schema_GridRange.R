@@ -36,8 +36,7 @@ as_GridRange.default <- function(x, ...) {
 #' @export
 as_GridRange.range_spec <- function(x, ...) {
   if (!is.null(x$named_range)) {
-    gs4_abort("
-      This function does not accept a named range as {bt('range')}")
+    gs4_abort("This function does not accept a named range as {.arg range}.")
   }
   s <- lookup_sheet(x$sheet_name, sheets_df = x$sheets_df)
   out <- new("GridRange", sheetId = s$id)

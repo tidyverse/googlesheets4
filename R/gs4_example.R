@@ -27,7 +27,8 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
   user <- gs4_user()
   if (!grepl("^googlesheets4-testing", user)) {
     user <- sub("@.+$", "", user)
-    gs4_abort("Must be auth'd as {sq('googlesheets4-testing')}, not {sq(user)}")
+    gs4_abort("
+      Must be auth'd as {.email googlesheets4-testing}, not {.email {user}}.")
   }
 
   existing <- gs4_find()
@@ -56,7 +57,7 @@ many_sheets <- function(needle, haystack, adjective) {
     check_string(needle)
     sel <- grepl(needle, names(out), ignore.case = TRUE)
     if (!any(sel)) {
-      gs4_abort("Can't find {adjective} Sheet that matches {dq(needle)}")
+      gs4_abort("Can't find {adjective} Sheet that matches {.q {needle}}.")
     }
     out <- googledrive::as_id(out[sel])
   }
@@ -70,8 +71,9 @@ one_sheet <- function(needle, haystack, adjective) {
   if (length(out) > 1) {
     gs4_abort(c(
       "Found multiple matching {adjective} Sheets:",
-      set_names(dq(names(out)), rep_along(out, "*")),
-      i = "Make the {bt('matches')} regular expression more specific"
+      # TODO: revisit when I have a style for Sheets
+      bulletize(gargle_map_cli(names(out))),
+      i = "Make the {.arg matches} regular expression more specific."
     ))
   }
   new_sheets_id(out)

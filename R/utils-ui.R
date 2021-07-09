@@ -1,6 +1,7 @@
 message <- function(...) {
   gs4_abort("
-    Internal error: use googlesheets4's UI functions, not {bt('message()')}")
+    Internal error: use the UI functions in {.pkg googlesheets4} \\
+    instead of {.fun message}")
 }
 
 fr <- function(x) format(x, justify = 'right')
@@ -79,9 +80,14 @@ gs4_bullets <- function(text, .envir = parent.frame()) {
 NULL
 
 gs4_abort <- function(message, ..., class = NULL, .envir = parent.frame()) {
-  g <- function(line) glue(line, .envir = .envir)
-  msg <- map_chr(message, g)
-  abort(msg, class = c(class, "googlesheets4_error"), ...)
+  # TODO: I assume I'll go here soon
+  # cli::cli_div(theme = gs4_theme())
+  cli::cli_abort(
+    message = message,
+    ...,
+    class = c(class, "googlesheets4_error"),
+    .envir = .envir
+  )
 }
 
 sq <- function(x) glue::single_quote(x)
@@ -96,10 +102,13 @@ class_collapse <- function(x) {
 # exists mostly to template the message
 abort_unsupported_conversion <- function(from, to) {
   if (is.null(from)) {
-    msg_from <- bt("NULL")
+    msg_from <- "{.code NULL}"
   } else {
-    msg_from <- glue("something of class {class_collapse(from)}")
+    msg_from <- "something of class {.cls {class(from)}}"
   }
-  gs4_abort("
-    Don't know how to make an instance of {class_collapse(to)} from {msg_from}")
+  msg <- glue("
+    Don't know how to make an instance of {.cls {class(to)}} from <<msg_from>>",
+    .open = "<<", .close = ">>"
+  )
+  gs4_abort(msg)
 }

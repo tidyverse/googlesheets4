@@ -67,10 +67,10 @@
            # of sheets: <unknown>
       
       Unable to get metadata for this Sheet. Error details:
-      Can't get Google credentials
+      Can't get Google credentials.
       i Are you running googlesheets4 in a non-interactive session? Consider:
-      * `gs4_deauth()` to prevent the attempt to get credentials
-      * Call `gs4_auth()` directly with all necessary specifics
+      * Call `gs4_deauth()` to prevent the attempt to get credentials.
+      * Call `gs4_auth()` directly with all necessary specifics.
       i See gargle's "Non-interactive auth" vignette for more details:
-      i https://gargle.r-lib.org/articles/non-interactive-auth.html
+      i <https://gargle.r-lib.org/articles/non-interactive-auth.html>
 

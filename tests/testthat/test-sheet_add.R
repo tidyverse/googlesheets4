@@ -3,9 +3,9 @@ me_ <- nm_fun("TEST-sheet_add")
 
 # ---- tests ----
 test_that("sheet_add() rejects non-character `sheet`", {
-  expect_error(
+  expect_snapshot(
     sheet_add(test_sheet("googlesheets4-cell-tests"), sheet = 3),
-    "must be character"
+    error = TRUE
   )
 })
 

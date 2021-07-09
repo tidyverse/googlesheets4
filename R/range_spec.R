@@ -25,10 +25,10 @@ as_range_spec <- function(x, ...) {
 as_range_spec.default <- function(x, ...) {
   gs4_abort(c(
     "Can't make a range suitable for the Sheets API from the supplied \\
-     {bt('range')}",
-    x = "{bt('range')} has class {class_collapse(x)}",
-    i = "{bt('range')} must be {bt('NULL')}, a string, or \\
-         a {bt('cell_limits')} object"
+     {.arg range}.",
+    x = "{.arg range} has class {.cls {class(x)}}.",
+    i = "{.arg range} must be {.code NULL}, a string, or \\
+         a {.cls cell_limits} object."
   ))
 }
 
@@ -91,9 +91,9 @@ as_range_spec.character <- function(x,
   m <- grepl(A1_rx, strsplit(x, split = ":")[[1]])
   if (!all(m)) {
     gs4_abort(c(
-      "{bt('range')} doesn't appear to be a range in A1 notation, a named \\
+      "{.arg range} doesn't appear to be a range in A1 notation, a named \\
        range, or a sheet name:",
-      x = "{sq(x)}"
+      x = "{.field {x}}"
     ))
   }
   out$cell_range <- x

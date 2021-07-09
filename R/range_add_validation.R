@@ -136,7 +136,7 @@ new_BooleanCondition <- function(type = "NOT_BLANK", values = NULL) {
   )
   if (type %in% needs_relative_date) {
     gs4_abort("
-      {bt('relativeDate')} not yet supported as a {bt('conditionValue')}")
+      {.field relativeDate} not yet supported as a {.code conditionValue}")
   }
   patch(out, values = map(values, ~ list(userEnteredValue = as.character(.x))))
 }

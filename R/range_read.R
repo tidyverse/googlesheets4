@@ -209,9 +209,9 @@ spread_sheet_impl_ <- function(df,
   # of col_names (and, therefore, ctypes) == nc
   if (is.character(col_names) && length(col_names) != nc) {
     gs4_abort(c(
-      "Length of {bt('col_names')} is not compatible with the data:",
-      x = cli::pluralize("Expected {length(col_names)} un-skipped column{?s}"),
-      x = cli::pluralize("But data has {nc} column{?s}")
+      "Length of {.arg col_names} is not compatible with the data:",
+      "*" = "{.arg col_names} has length {length(col_names)}.",
+      x = "But data has {nc} un-skipped column{?s}."
     ))
   }
 
@@ -270,8 +270,8 @@ standardise_ctypes <- function(col_types) {
 
   if (identical(col_types, "")) {
     gs4_abort("
-      {bt('col_types')}, if provided, must be a string that contains at \\
-      least one readr-style shortcode")
+      {.arg col_types}, if provided, must be a string that contains at \\
+      least one readr-style shortcode.")
   }
 
   accepted_codes <- keep(names(.ctypes), nzchar)
@@ -279,15 +279,14 @@ standardise_ctypes <- function(col_types) {
   col_types_split <- strsplit(col_types, split = "")[[1]]
   ok <- col_types_split %in% accepted_codes
   if (!all(ok)) {
-    bad_codes <- glue_collapse(sq(col_types_split[!ok]), sep = ",")
     gs4_abort(c(
-      "{bt('col_types')} must be a string of readr-style shortcodes:",
-      x = "Unrecognized codes: {bad_codes}"
+      "{.arg col_types} must be a string of readr-style shortcodes:",
+      x = "Unrecognized code{?s}: {col_types_split[!ok]}."
     ))
   }
   ctypes <- ctype(col_types_split)
   if (all(ctypes == "COL_SKIP")) {
-    gs4_abort("{bt('col_types')} can't request that all columns be skipped")
+    gs4_abort("{.arg col_types} can't request that all columns be skipped.")
   }
   ctypes
 }
@@ -307,12 +306,12 @@ rep_ctypes <- function(n, ctypes, comparator = "n") {
   # must pre-pluralize the comparator, e.g.
   # column{?s} found in sheet
   # column name{?s}
-  comparator <- cli::pluralize(sprintf("{cli::qty(n)}%s", comparator))
+  comparator <- cli::pluralize(sprintf("{cli::qty(n)}%s{?s}", comparator))
   gs4_abort(c(
-    "Length of {bt('col_types')} is not compatible with {comparator}:",
-    x = cli::pluralize("{length(ctypes)} column type{?s} specified"),
-    x = cli::pluralize("{n_col_types} un-skipped column type{?s} specified"),
-    x = cli::pluralize("But there {cli::qty(n)}{?is/are} {n} {comparator}")
+    "Length of {.arg col_types} is not compatible with {comparator}:",
+    x = "{length(ctypes)} column type{?s} specified.",
+    x = "{n_col_types} un-skipped column type{?s} specified.",
+    x = "But there {cli::qty(n)}{?is/are} {n} {comparator}."
   ))
 }
 

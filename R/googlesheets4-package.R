@@ -3,6 +3,8 @@
 "_PACKAGE"
 
 ## usethis namespace: start
+#' @importFrom gargle bulletize
+#' @importFrom gargle gargle_map_cli
 #' @importFrom glue glue
 #' @importFrom glue glue_collapse
 #' @importFrom glue glue_data

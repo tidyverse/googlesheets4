@@ -132,7 +132,7 @@ check_only_one_dimension <- function(x) {
   }
 
   gs4_abort("
-    The {bt('range')} must target only columns or only rows, but not both")
+    The {.arg range} must target only columns or only rows, but not both.")
 }
 
 determine_dimension <- function(x) {

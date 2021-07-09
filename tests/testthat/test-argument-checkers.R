@@ -1,12 +1,12 @@
 test_that("col_names must be logical or character and have length", {
-  expect_error(check_col_names(1:3), "must be character")
-  expect_error(check_col_names(factor("a")), "must be character")
-  expect_error(check_col_names(character()), "must have length")
+  expect_snapshot(check_col_names(1:3), error = TRUE)
+  expect_snapshot(check_col_names(factor("a")), error = TRUE)
+  expect_snapshot(check_col_names(character()), error = TRUE)
 })
 
 test_that("logical col_names must be TRUE or FALSE", {
-  expect_error(check_col_names(NA), "must be either TRUE or FALSE")
-  expect_error(check_col_names(c(TRUE, FALSE)), "must be either TRUE or FALSE")
+  expect_snapshot(check_col_names(NA), error = TRUE)
+  expect_snapshot(check_col_names(c(TRUE, FALSE)), error = TRUE)
   expect_identical(check_col_names(TRUE), TRUE)
   expect_identical(check_col_names(FALSE), FALSE)
 })

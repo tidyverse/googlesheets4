@@ -21,7 +21,7 @@ as_GridCoordinate.range_spec <- function(x, ..., strict = TRUE) {
     if (row_index_diff != 1 || col_index_diff != 1) {
       gs4_abort(c(
         "Range must identify exactly 1 cell:",
-        x = "Invalid cell range: {sq(x$cell_range)}"
+        x = "Invalid cell range: {.field {x$cell_range}}."
       ))
     }
   }

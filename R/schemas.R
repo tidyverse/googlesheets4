@@ -1,7 +1,7 @@
 new <- function(id, ...) {
   schema <- .tidy_schemas[[id]]
   if (is.null(schema)) {
-    gs4_abort("Can't find a tidy schema with id {sq(id)}")
+    gs4_abort("Can't find a tidy schema with id {.field {id}}.")
   }
   dots <- list2(...)
   dots <- discard(dots, is.null)
@@ -24,15 +24,15 @@ check_against_schema <- function(x, schema = NULL, id = NA_character_) {
     attr(x, "schema")
   if (is.null(schema)) {
     gs4_abort("
-      Trying to check an object of class {class_collapse(x)}, \\
-      but can't get a schema")
+      Trying to check an object of class {.cls {class(x)}}, \\
+      but can't get a schema.")
   }
   stopifnot(is_dictionaryish(x))
   unexpected <- setdiff(names(x), schema$property)
   if (length(unexpected) > 0) {
     gs4_abort(c(
-      "Properties not recognized for the {sq(attr(schema, 'id'))} schema:",
-      "*" = "{glue_collapse(sq(unexpected), sep = ', ')}"
+      "Properties not recognized for the {.field {attr(schema, 'id')}} schema:",
+      bulletize(gargle_map_cli(unexpected))
     ))
   }
   x
@@ -57,7 +57,7 @@ patch <- function(x, ...) {
 #' @export
 patch.default <- function(x, ...) {
   gs4_abort("
-    Don't know how to {bt('patch()')} an object of class {class_collapse(x)}")
+    Don't know how to {.fun patch} an object of class {.cls {class(x)}}.")
 }
 
 #' @export

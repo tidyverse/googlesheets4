@@ -16,13 +16,13 @@ test_that("new() accepts data expected for schema", {
 })
 
 test_that("new() rejects data not expected for schema", {
-  expect_gs4_error(
+  expect_snapshot(
     new("Spreadsheet", foofy = "blah"),
-    "not recognized"
+    error = TRUE
   )
-  expect_gs4_error(
+  expect_snapshot(
     new("Spreadsheet", foofy = "blah", foo = "bar"),
-    "'foofy', 'foo'"
+    error = TRUE
   )
 })
 
@@ -78,9 +78,9 @@ test_that("check_against_schema() errors when no schema can be found", {
     list(google_thing = "a"),
     class = c("googlesheets4_schema_SomeThing", "googlesheets4_schema", "list")
   )
-  expect_error(
+  expect_snapshot(
     check_against_schema(x),
-    "can't get a schema"
+    error = TRUE
   )
 })
 

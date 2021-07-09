@@ -1,7 +1,7 @@
 lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
   maybe_sheet(sheet)
   if (is.null(sheets_df)) {
-    gs4_abort("Can't look up, e.g., sheet name or id without sheet metadata")
+    gs4_abort("Can't look up, e.g., sheet name or id without sheet metadata.")
   }
 
   if (isTRUE(visible)) {
@@ -19,7 +19,7 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
     m <- match(sheet, sheets_df$name)
     if (is.na(m)) {
       gs4_abort(
-        c("Can't find a sheet with this name:", x = "{sq(sheet)}"),
+        c("Can't find a sheet with this name:", x = "{.field {sheet}}"),
         sheet = sheet,
         # there is some usage where we throw this error, but it is OK
         # and we use tryCatch()
@@ -34,8 +34,8 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
   m <- as.integer(sheet)
   if (!(m %in% seq_len(nrow(sheets_df)))) {
     gs4_abort(c(
-      cli::pluralize("There {?is/are} {nrow(sheets_df)} sheet{?s}:"),
-      x = "Requested sheet number is out-of-bounds: {m}"
+      "There {?is/are} {nrow(sheets_df)} sheet{?s}:",
+      x = "Requested sheet number is out-of-bounds: {m}."
     ))
   }
   as.list(sheets_df[m, ])
@@ -64,9 +64,9 @@ check_sheet <- function(sheet, nm = deparse(substitute(sheet))) {
   check_length_one(sheet, nm = nm)
   if (!is.character(sheet) && !is.numeric(sheet)) {
     gs4_abort(c(
-      "{bt(nm)} must be either character (sheet name) or \\
-       numeric (sheet number):",
-      x = "{bt(nm)} has class {class_collapse(sheet)}"
+      "{.arg {nm}} must be either {.cls character} (sheet name) or \\
+       {.cls numeric} (sheet number):",
+      x = "{.arg {nm}} has class {.cls {class(sheet)}}."
     ))
   }
   sheet
@@ -116,5 +116,5 @@ enlist_sheets <- function(sheets_quo) {
   }
 
   # we should never get here, so not a user-facing message
-  gs4_abort("Invalid input for (work)sheet(s)")
+  gs4_abort("Invalid input for (work)sheet(s).")
 }

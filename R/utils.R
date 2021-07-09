@@ -16,8 +16,8 @@ is_integerish <- function(x) {
 check_data_frame <- function(x, nm = deparse(substitute(x))) {
   if (!is.data.frame(x)) {
     gs4_abort(c(
-      "{bt(nm)} must be a data frame:",
-      x = "{bt(nm)} has class {class_collapse(x)}"
+      "{.arg {nm}} must be a {.cls data.frame}:",
+      x = "{.arg {nm}} has class {.cls {class(x)}}."
     ))
   }
   x
@@ -39,14 +39,14 @@ maybe_string <- function(x, nm = deparse(substitute(x))) {
 
 check_length_one <- function(x, nm = deparse(substitute(x))) {
   if (length(x) != 1) {
-    gs4_abort("{bt(nm)} must have length 1, not length {length(x)}")
+    gs4_abort("{.arg {nm}} must have length 1, not length {length(x)}.")
   }
   x
 }
 
 check_has_length <- function(x, nm = deparse(substitute(x))) {
   if (length(x) < 1) {
-    gs4_abort("{bt(nm)} must have length greater than zero")
+    gs4_abort("{.arg {nm}} must have length greater than zero.")
   }
   x
 }
@@ -54,8 +54,8 @@ check_has_length <- function(x, nm = deparse(substitute(x))) {
 check_character <- function(x, nm = deparse(substitute(x))) {
   if (!is.character(x)) {
     gs4_abort(c(
-      "{bt(nm)} must be character:",
-      x = "{bt(nm)} has class {class_collapse(x)}"
+      "{.arg {nm}} must be {.cls character}:",
+      x = "{.arg {nm}} has class {.cls {class(x)}}."
     ))
   }
   x
@@ -73,8 +73,8 @@ check_non_negative_integer <- function(i, nm = deparse(substitute(i))) {
   if (length(i) != 1 || !is.numeric(i) ||
       !is_integerish(i) || is.na(i) || i < 0) {
     gs4_abort(c(
-      "{bt(nm)} must be a positive integer:",
-      x = "{bt(nm)} has class {class_collapse(x)}"
+      "{.arg {nm}} must be a positive integer:",
+      x = "{.arg {nm}} has class {.cls {class(i)}}."
     ))
   }
   i
@@ -90,7 +90,7 @@ maybe_non_negative_integer <- function(i, nm = deparse(substitute(i))) {
 
 check_bool <- function(bool, nm = deparse(substitute(bool))) {
   if (!is_bool(bool)) {
-    gs4_abort("{bt(nm)} must be either TRUE or FALSE")
+    gs4_abort("{.arg {nm}} must be either {.code TRUE} or {.code FALSE}.")
   }
   bool
 }

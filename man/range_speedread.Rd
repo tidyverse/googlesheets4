@@ -77,7 +77,7 @@ if (gs4_has_token()) {
   }
 
   # write a Sheet that, by default, is NOT world-readable
-  (ss <- sheet_write(iris))
+  (ss <- sheet_write(chickwts))
 
   # demo that range_speedread() sends a token, which is why we can read this
   range_speedread(ss)

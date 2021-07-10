@@ -27,12 +27,12 @@ Changes the name of a (work)sheet.
 if (gs4_has_token()) {
   ss <- gs4_create(
     "sheet-rename-demo",
-    sheets = list(iris = head(iris), chickwts = head(chickwts))
+    sheets = list(cars = head(cars), chickwts = head(chickwts))
   )
   sheet_names(ss)
 
   ss \%>\%
-    sheet_rename(1, new_name = "flowers") \%>\%
+    sheet_rename(1, new_name = "automobiles") \%>\%
     sheet_rename("chickwts", new_name = "poultry")
 
   # clean up

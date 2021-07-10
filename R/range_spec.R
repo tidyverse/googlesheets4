@@ -93,7 +93,7 @@ as_range_spec.character <- function(x,
     gs4_abort(c(
       "{.arg range} doesn't appear to be a range in A1 notation, a named \\
        range, or a sheet name:",
-      x = "{.field {x}}"
+      x = "{.range {x}}"
     ))
   }
   out$cell_range <- x
@@ -207,7 +207,7 @@ as_A1_range <- function(x) {
 #
 #   # retrieve spreadsheet metadata ----------------------------------------------
 #   x <- gs4_get(ssid)
-#   gs4_bullets(c(i = "Spreadsheet name: {.file {x$name}}"))
+#   gs4_bullets(c(i = "Spreadsheet name: {.s_sheet {x$name}}"))
 #
 #   # range specification --------------------------------------------------------
 #   range_spec <- as_range_spec(
@@ -215,7 +215,7 @@ as_A1_range <- function(x) {
 #     sheets_df = x$sheets, nr_df = x$named_ranges
 #   )
 #   A1_range <- as_A1_range(range_spec)
-#   gs4_bullets(c(i = "A1 range {.field {A1_range}}"))
+#   gs4_bullets(c(i = "A1 range {.range {A1_range}}"))
 #
 #   range_spec
 # }

@@ -29,8 +29,8 @@ bt <- googlesheets4:::bt
 
 ## User-facing messages
 
-Everything should be emitted by helpers in `utils-ui.R`: specifically, `gs4_bullets()` (and, for errors, `gs4_abort()`).
-These helpers are all wrappers around cli functions, such as `cli::cli_bullets()`.
+Everything should be emitted by helpers in `utils-ui.R`: specifically, `gs4_bullets()` and, for errors, `gs4_abort()`.
+These helpers are wrappers around `cli::cli_bullets()` and `cli::cli_alert()`, respectively.
 
 ```{r}
 gs4_bullets(c(
@@ -48,7 +48,8 @@ gs4_bullets(c(
 The helpers encourage consistent styling and make it possible to selectively silence messages coming from googlesheets4.
 The googlesheets4 message helpers:
 
--   Use the [cli package](https://cli.r-lib.org/index.html) to get interpolation, inline markup, and pluralization
+-   Use the [cli package](https://cli.r-lib.org/index.html) to get interpolation, inline markup, and pluralization.
+-   Use googlesheets4's custom theme, which has styles for Sheet name, worksheet name, and range.
 -   Eventually route through `rlang::inform()`, which is important because `inform()` prints to standard output in interactive sessions. This means that informational messages won't have the same "look" as errors and can generally be more stylish, at least in IDEs like RStudio.
 -   Are under the control of the `GOOGLESHEETS4_QUIET` environment variable. If it's unset, the default is to show messages (unless we're testing, i.e. the environment variable `TESTTHAT` is `"true"`). `GOOGLESHEETS4_QUIET=true` will suppress messages. There are withr-style convenience helpers: `local_gs4_quiet()` and `with_gs4_quiet()`.
 
@@ -56,9 +57,9 @@ The googlesheets4 message helpers:
 
 How we use the inline classes:
 
--   `.file` for the name of Google Sheet
--   `.field` for the name of a worksheet
--   `.field` for an A1-style range or named range
+-   `.s_sheet` for the name of Google Sheet (custom)
+-   `.w_sheet` for the name of a worksheet (custom)
+-   `.range` for an A1-style range or named range (custom)
 -   `.code` for a column in a data frame and for reserved words, such as `NULL`, `TRUE`, and `NA`
 -   `.arg`, `.fun`, `.path`, `.cls`, `.url`. `.email` for their usual purpose
 
@@ -66,13 +67,35 @@ How we use the inline classes:
 
 ```{r}
 nm <- "name-of-a-Google-Sheet"
-gs4_bullets(c(v = "Creating new Sheet: {.file {nm}}"))
+gs4_bullets(c(v = "Creating new Sheet: {.s_sheet {nm}}"))
 
 nm <- "name-of-a-worksheet"
-gs4_bullets(c(v = "Protecting cells on sheet: {.field {nm}}"))
+gs4_bullets(c(v = "Protecting cells on sheet: {.w_sheet {nm}}"))
 
 rg <- "A3:B20"
-gs4_bullets(c(v = "Writing to the range {.field {rg}}"))
+gs4_bullets(c(v = "Writing to the range: {.range {rg}}"))
+```
+
+Above, I don't include a period (`.`) at the end of a message with the form: `Description of thing: THING`.
+I view it as a special case of a bullet list of simple items, which also don't get periods.
+
+```{r}
+gs4_bullets(c(
+  "We're going to list some things:",
+  bulletize(gargle_map_cli(month.abb[1:4]))
+))
+```
+
+Other messages that are complete sentence, or at least aspire to be, **do** get a period.
+
+```{r}
+gs4_bullets("Doing the stuff you asked me to do.")
+
+gs4_bullets(c(
+  "You probably need to do one of these things:",
+  "*" = "Call {.fun some_function}.",
+  "*" = "Provide more specific input via {.arg some_argument}."
+))
 ```
 
 Most relevant cli docs:
@@ -87,10 +110,10 @@ Most relevant cli docs:
 ```{r}
 nm <- "name-of-a-Google-Sheet"
 n_new <- 1
-gs4_bullets(c(v = "Adding {n_new} sheet{?s} to {.file {nm}}"))
+gs4_bullets(c(v = "Adding {n_new} sheet{?s} to {.s_sheet {nm}}"))
 
 n_new <- 3
-gs4_bullets(c(v = "Adding {n_new} sheet{?s} to {.file {nm}}"))
+gs4_bullets(c(v = "Adding {n_new} sheet{?s} to {.s_sheet {nm}}"))
 ```
 
 ### Collapsing
@@ -100,10 +123,10 @@ Also more pluralization.
 
 ```{r}
 new_sheet_names <- c("apple", "banana", "cherry")
-gs4_bullets(c("New sheet{?s}: {.field {new_sheet_names}}"))
+gs4_bullets(c("New sheet{?s}: {.w_sheet {new_sheet_names}}"))
 
 new_sheet_names <- "kumquat"
-gs4_bullets(c("New sheet{?s}: {.field {new_sheet_names}}"))
+gs4_bullets(c("New sheet{?s}: {.w_sheet {new_sheet_names}}"))
 ```
 
 ### Tricky stuff

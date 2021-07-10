@@ -59,13 +59,13 @@ sheet_resize <- function(ss,
 
   x <- gs4_get(ssid)
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
-  gs4_bullets(c(v = "Resizing sheet {.field {s$name}} in {.file {x$name}}"))
+  gs4_bullets(c(v = "Resizing sheet {.w_sheet {s$name}} in {.s_sheet {x$name}}."))
 
   bureq <- prepare_resize_request(s, nrow_needed = nrow, ncol_needed = ncol, exact = exact)
 
   if (is.null(bureq)) {
     gs4_bullets(c(
-      i = "No need to change existing dims ({s$grid_rows} x {s$grid_columns})"
+      i = "No need to change existing dims ({s$grid_rows} x {s$grid_columns})."
     ))
     return(invisible(ssid))
   }
@@ -76,7 +76,7 @@ sheet_resize <- function(ss,
 
   gs4_bullets(c(
     v = "Changing dims: ({s$grid_rows} x {s$grid_columns}) --> \\
-         ({new_nrow} x {new_ncol})"))
+         ({new_nrow} x {new_ncol})."))
 
   req <- request_generate(
     "sheets.spreadsheets.batchUpdate",

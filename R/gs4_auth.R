@@ -226,7 +226,7 @@ gs4_user <- function() {
   if (gs4_has_token()) {
     gargle::token_email(gs4_token())
   } else {
-    gs4_bullets(c(i = "Not logged in as any specific Google user"))
+    gs4_bullets(c(i = "Not logged in as any specific Google user."))
     invisible()
   }
 }
@@ -285,8 +285,8 @@ gs4_auth_testing <- function(scopes = NULL, drive = TRUE) {
 local_deauth <- function(env = parent.frame()) {
   original_cred <- .auth$get_cred()
   original_auth_active <- .auth$auth_active
-  gs4_bullets(c(i = "Going into deauthorized state"))
-  withr::defer(gs4_bullets(c(i = "Restoring auth state")), envir = env)
+  gs4_bullets(c(i = "Going into deauthorized state."))
+  withr::defer(gs4_bullets(c(i = "Restoring auth state.")), envir = env)
   withr::defer({
     .auth$set_cred(original_cred)
     .auth$set_auth_active(original_auth_active)

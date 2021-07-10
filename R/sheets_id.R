@@ -104,7 +104,7 @@ as_sheets_id.drive_id <- function(x, ...) new_sheets_id(x)
 as_sheets_id.dribble <- function(x, ...) {
   if (nrow(x) != 1) {
     gs4_abort(c(
-      "Dribble input must have exactly 1 row.",
+      "{.cls dribble} input must have exactly 1 row.",
       x = "Actual input has {nrow(x)} rows."
     ))
   }
@@ -114,10 +114,10 @@ as_sheets_id.dribble <- function(x, ...) {
   target <- "application/vnd.google-apps.spreadsheet"
   if (!identical(mime_type, target)) {
     gs4_abort(c(
-      "Dribble input must refer to a Google Sheet, i.e. a file with MIME \\
-       type {.field {target}}.",
+      "{.cls dribble} input must refer to a Google Sheet, i.e. a file with \\
+       MIME type {.field {target}}.",
       i = "File id: {.field {x$id}}",
-      i = "File name: {.file {x$name}}",
+      i = "File name: {.s_sheet {x$name}}",
       x = "MIME TYPE: {.field {mime_type}}"
     ))
   }
@@ -132,14 +132,15 @@ as_sheets_id.default <- function(x, ...) {
 #' @export
 as_sheets_id.character <- function(x, ...) {
   if (length(x) != 1) {
-    gs4_abort("Character input must have length == 1, not length {length(x)}.")
+    gs4_abort("
+      {.cls character>} input must have length == 1, not length {length(x)}.")
   }
   out <- one_id(x)
   if (is.na(out)) {
     gs4_abort(c(
       "Input does not match our regular expression for extracting \\
        spreadsheet id.",
-      x = "Input: {.q {x}}."
+      x = "Input: {.q {x}}"
     ))
   }
   sheets_id(out)

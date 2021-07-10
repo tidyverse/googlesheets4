@@ -34,18 +34,18 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
   existing <- gs4_find()
   m <- match(name, existing$name)
   if (is.na(m)) {
-    gs4_bullets(c(v = "Creating {.file {name}}"))
+    gs4_bullets(c(v = "Creating {.s_sheet {name}}."))
     ss <- gs4_create(name)
   } else {
     gs4_bullets(c(
-      v = "Testing sheet named {.file {name}} already exists ... using that"
+      v = "Testing sheet named {.s_sheet {name}} already exists ... using that."
     ))
     ss <- existing$id[[m]]
   }
   ssid <- as_sheets_id(ss)
 
   # it's fiddly to check current sharing status, so just re-share
-  gs4_bullets(c(v = 'Making sure "anyone with a link" can read {.file {name}}'))
+  gs4_bullets(c(v = 'Making sure "anyone with a link" can read {.s_sheet {name}}.'))
   gs4_share(ssid)
   ssid
 }
@@ -71,8 +71,7 @@ one_sheet <- function(needle, haystack, adjective) {
   if (length(out) > 1) {
     gs4_abort(c(
       "Found multiple matching {adjective} Sheets:",
-      # TODO: revisit when I have a style for Sheets
-      bulletize(gargle_map_cli(names(out))),
+      bulletize(gargle_map_cli(names(out), template = "{.s_sheet <<x>>}")),
       i = "Make the {.arg matches} regular expression more specific."
     ))
   }

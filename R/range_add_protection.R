@@ -33,7 +33,7 @@
 #'
 #'   # create Sheet, add a couple more sheets
 #'   ss <- gs4_create("range-add-protection-example", sheets = dat)
-#'   sheet_write(head(iris), ss, sheet = "iris")
+#'   sheet_write(head(chickwts), ss, sheet = "chickwts")
 #'   sheet_write(head(mtcars), ss, sheet = "mtcars")
 #'   sheet_write(ToothGrowth, ss, sheet = "ToothGrowth")
 #'
@@ -47,8 +47,8 @@
 #'
 #'   # create a named range, then protect it
 #'   ss %>%
-#'     range_add_named("species", sheet = "iris", range = "E:E") %>%
-#'     range_add_protection(range = "species", description = "named range")
+#'     range_add_named("feed", sheet = "chickwts", range = "B:B") %>%
+#'     range_add_protection(range = "feed", description = "named range")
 #'
 #'   # protect an arbitrary rectangle and add an editor
 #'   ss %>%
@@ -67,7 +67,7 @@
 #'     "C:C",
 #'     sheet = "ToothGrowth",
 #'     sheets_df = ss_info$sheets, nr_df = ss_info$named_ranges
-#'     )
+#'   )
 #'   unprotect_range <- as_GridRange(unprotect_this)
 #'   ss %>%
 #'     range_add_protection(
@@ -113,7 +113,7 @@ range_add_protection <- function(ss,
   check_range(range)
 
   x <- gs4_get(ssid)
-  gs4_bullets(c(v = "Editing {.file {x$name}}"))
+  gs4_bullets(c(v = "Editing {.s_sheet {x$name}}."))
 
   # determine range ------------------------------------------------------------
   range_spec <- as_range_spec(
@@ -124,10 +124,10 @@ range_add_protection <- function(ss,
   if (is.null(range_spec$named_range)) {
     range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
     gs4_bullets(c(
-      v = "Protecting cells on sheet: {.field {range_spec$sheet_name}}"))
+      v = "Protecting cells on sheet: {.w_sheet {range_spec$sheet_name}}."))
   } else {
     gs4_bullets(c(
-      v = "Protecting named range: {.field {range_spec$named_range}}"))
+      v = "Protecting named range: {.range {range_spec$named_range}}."))
   }
 
   # form batch update request --------------------------------------------------
@@ -169,7 +169,7 @@ range_update_protection <- function(ss, ...) {
   ssid <- as_sheets_id(ss)
 
   x <- gs4_get(ssid)
-  gs4_bullets(c(v = "Editing {.file {x$name}}"))
+  gs4_bullets(c(v = "Editing {.s_sheet {x$name}}."))
 
   # form batch update request --------------------------------------------------
   protected_range <- new("ProtectedRange", ...)
@@ -201,7 +201,7 @@ range_delete_protection <- function(ss, id) {
   ssid <- as_sheets_id(ss)
 
   x <- gs4_get(ssid)
-  gs4_bullets(c(v = "Editing {.file {x$name}}"))
+  gs4_bullets(c(v = "Editing {.s_sheet {x$name}}."))
 
   # form batch update request --------------------------------------------------
   prot_req <- list(deleteProtectedRange = new(

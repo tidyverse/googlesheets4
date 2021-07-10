@@ -47,7 +47,9 @@ sheet_delete <- function(ss, sheet) {
   sheet_names <- map_chr(s, "name")
   n <- length(sheet_names)
   gs4_bullets(c(
-    v = "Deleting {n} sheet{?s} from {.file {x$name}}: {.field {sheet_names}}"))
+    v = "Deleting {n} sheet{?s} from {.s_sheet {x$name}}:",
+    bulletize(gargle_map_cli(sheet_names, template = "{.field <<x>>}"))
+  ))
 
   sid <- map(s, "id")
   requests <- map(sid, ~ list(deleteSheet = list(sheetId = .x)))

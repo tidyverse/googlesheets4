@@ -46,7 +46,7 @@
 #'   }
 #'
 #'   # write a Sheet that, by default, is NOT world-readable
-#'   (ss <- sheet_write(iris))
+#'   (ss <- sheet_write(chickwts))
 #'
 #'   # demo that range_speedread() sends a token, which is why we can read this
 #'   range_speedread(ss)
@@ -88,15 +88,15 @@ range_speedread <- function(ss,
   }
   if (!is.null(range_spec$cell_range)) {
     params[["range"]] <- range_spec$cell_range
-    range_msg <- ", range {.field {range_spec$cell_range}}"
+    range_msg <- ", range {.range {range_spec$cell_range}}"
   }
   if (!is.null(range_spec$sheet_name)) {
     s <- lookup_sheet(range_spec$sheet_name, sheets_df = x$sheets)
     params[["gid"]] <- s$id
-    sheet_msg <- ", sheet {.field {range_spec$sheet_name}}"
+    sheet_msg <- ", sheet {.w_sheet {range_spec$sheet_name}}"
   }
   msg <- glue("
-    Reading from {.file {x$name}}<<sheet_msg>><<range_msg>>",
+    Reading from {.s_sheet {x$name}}<<sheet_msg>><<range_msg>>.",
     .open = "<<", .close = ">>")
   gs4_bullets(c(v = msg))
 

@@ -48,10 +48,10 @@ sheet_append <- function(ss, data, sheet = 1) {
   check_sheet(sheet)
 
   x <- gs4_get(ssid)
-  gs4_bullets(c(v = "Writing to {.file {x$name}}"))
+  gs4_bullets(c(v = "Writing to {.s_sheet {x$name}}."))
 
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
-  gs4_bullets(c(v = "Appending {nrow(data)} row{?s} to {.field {s$name}}"))
+  gs4_bullets(c(v = "Appending {nrow(data)} row{?s} to {.w_sheet {s$name}}."))
 
   req <- request_generate(
     "sheets.spreadsheets.batchUpdate",

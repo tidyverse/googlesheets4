@@ -19,7 +19,7 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
     m <- match(sheet, sheets_df$name)
     if (is.na(m)) {
       gs4_abort(
-        c("Can't find a sheet with this name:", x = "{.field {sheet}}"),
+        c("Can't find a sheet with this name:", x = "{.w_sheet {sheet}}"),
         sheet = sheet,
         # there is some usage where we throw this error, but it is OK
         # and we use tryCatch()
@@ -35,7 +35,7 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
   if (!(m %in% seq_len(nrow(sheets_df)))) {
     gs4_abort(c(
       "There {?is/are} {nrow(sheets_df)} sheet{?s}:",
-      x = "Requested sheet number is out-of-bounds: {m}."
+      x = "Requested sheet number is out-of-bounds: {m}"
     ))
   }
   as.list(sheets_df[m, ])

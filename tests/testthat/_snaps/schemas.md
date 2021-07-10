@@ -3,17 +3,17 @@
     Code
       new("Spreadsheet", foofy = "blah")
     Error <googlesheets4_error>
-      Properties not recognized for the Spreadsheet schema:
-      * foofy
+      Properties not recognized for the 'Spreadsheet' schema:
+      x 'foofy'
 
 ---
 
     Code
       new("Spreadsheet", foofy = "blah", foo = "bar")
     Error <googlesheets4_error>
-      Properties not recognized for the Spreadsheet schema:
-      * foofy
-      * foo
+      Properties not recognized for the 'Spreadsheet' schema:
+      x 'foofy'
+      x 'foo'
 
 # check_against_schema() errors when no schema can be found
 

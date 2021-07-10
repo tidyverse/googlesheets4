@@ -51,7 +51,7 @@
 #'
 #'   gs4_create(
 #'     "gs4-create-demo-6",
-#'     sheets = list(iris = head(iris), mtcars = head(mtcars))
+#'     sheets = list(chickwts = head(chickwts), mtcars = head(mtcars))
 #'   )
 #'
 #'   # clean up
@@ -64,7 +64,7 @@ gs4_create <- function(name = gs4_random(), ..., sheets = NULL) {
   data_given   <- sheets_given && !is.null(unlist(sheets$value))
 
   # create the (spread)Sheet ---------------------------------------------------
-  gs4_bullets(c(v = "Creating new Sheet: {.file {name}}"))
+  gs4_bullets(c(v = "Creating new Sheet: {.s_sheet {name}}."))
   ss_body <- new(
     "Spreadsheet",
     properties = new("SpreadsheetProperties", title = name, ...)

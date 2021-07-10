@@ -19,12 +19,12 @@
 #' if (gs4_has_token()) {
 #'   ss <- gs4_create(
 #'     "sheet-rename-demo",
-#'     sheets = list(iris = head(iris), chickwts = head(chickwts))
+#'     sheets = list(cars = head(cars), chickwts = head(chickwts))
 #'   )
 #'   sheet_names(ss)
 #'
 #'   ss %>%
-#'     sheet_rename(1, new_name = "flowers") %>%
+#'     sheet_rename(1, new_name = "automobiles") %>%
 #'     sheet_rename("chickwts", new_name = "poultry")
 #'
 #'   # clean up
@@ -40,7 +40,9 @@ sheet_rename <- function(ss,
 
   x <- gs4_get(ssid)
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
-  gs4_bullets(c(v = "Renaming sheet {.field {s$name}} to {.field {new_name}}"))
+  gs4_bullets(c(
+    v = "Renaming sheet {.w_sheet {s$name}} to {.w_sheet {new_name}}."
+  ))
 
   sp <- new("SheetProperties", sheetId = s$id, title = new_name)
   update_req <- new(

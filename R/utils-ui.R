@@ -1,3 +1,57 @@
+gs4_theme <- function() {
+  list(
+    span.field = list(transform = single_quote_if_no_color),
+    # This is same as custom `.drivepath` style in googledrive
+    span.s_sheet = list(color = "cyan", fmt = double_quote_weird_name),
+    span.w_sheet = list(color = "green", fmt = single_quote_weird_name),
+    span.range = list(color = "yellow", fmt = single_quote_weird_name),
+    # since we're using color so much elsewhere, I think the standard bullet
+    # should be "normal" color; matches what I do in googledrive
+    ".memo .memo-item-*" = list(
+      "text-exdent" = 2,
+      before = function(x) paste0(cli::symbol$bullet, " ")
+    )
+  )
+}
+
+single_quote_weird_name <- function(x) {
+  utils::getFromNamespace("quote_weird_name", "cli")(x)
+}
+
+# this is just the body of cli's quote_weird_name() but with a double quote
+double_quote_weird_name <- function(x) {
+  x2 <- utils::getFromNamespace("quote_weird_name0", "cli")(x)
+  if (x2[[2]] || cli::num_ansi_colors() == 1) {
+    x2[[1]] <- paste0('"', x2[[1]], '"')
+  }
+  x2[[1]]
+}
+
+single_quote_if_no_color <- function(x) quote_if_no_color(x, "'")
+double_quote_if_no_color <- function(x) quote_if_no_color(x, '"')
+
+quote_if_no_color <- function(x, quote = "'") {
+  # TODO: if a better way appears in cli, use it
+  # @gabor says: "if you want to have before and after for the no-color case
+  # only, we can have a selector for that, such as:
+  # span.field::no-color
+  # (but, at the time I write this, cli does not support this yet)
+  if (cli::num_ansi_colors() > 1) {
+    x
+  } else {
+    paste0(quote, x, quote)
+  }
+}
+
+# useful to me during development, so I can see how my messages look w/o color
+local_no_color <- function(.envir = parent.frame()) {
+  withr::local_envvar(c("NO_COLOR" = 1), .local_envir = .envir)
+}
+
+with_no_color <- function(code) {
+  withr::with_envvar(c("NO_COLOR" = 1), code)
+}
+
 message <- function(...) {
   gs4_abort("
     Internal error: use the UI functions in {.pkg googlesheets4} \\
@@ -65,8 +119,7 @@ gs4_bullets <- function(text, .envir = parent.frame()) {
   if (quiet) {
     return(invisible())
   }
-  # TODO: I assume I'll eventually go here
-  # cli::cli_div(theme = gs4_theme())
+  cli::cli_div(theme = gs4_theme())
   cli::cli_bullets(text = text, .envir = .envir)
 }
 
@@ -80,8 +133,7 @@ gs4_bullets <- function(text, .envir = parent.frame()) {
 NULL
 
 gs4_abort <- function(message, ..., class = NULL, .envir = parent.frame()) {
-  # TODO: I assume I'll go here soon
-  # cli::cli_div(theme = gs4_theme())
+  cli::cli_div(theme = gs4_theme())
   cli::cli_abort(
     message = message,
     ...,
@@ -107,7 +159,7 @@ abort_unsupported_conversion <- function(from, to) {
     msg_from <- "something of class {.cls {class(from)}}"
   }
   msg <- glue("
-    Don't know how to make an instance of {.cls {to}} from <<msg_from>>",
+    Don't know how to make an instance of {.cls {to}} from <<msg_from>>.",
     .open = "<<", .close = ">>"
   )
   gs4_abort(msg)

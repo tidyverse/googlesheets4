@@ -32,7 +32,7 @@ check_against_schema <- function(x, schema = NULL, id = NA_character_) {
   if (length(unexpected) > 0) {
     gs4_abort(c(
       "Properties not recognized for the {.field {attr(schema, 'id')}} schema:",
-      bulletize(gargle_map_cli(unexpected))
+      bulletize(gargle_map_cli(unexpected), bullet = "x")
     ))
   }
   x

@@ -51,7 +51,7 @@ if (gs4_has_token()) {
 
   gs4_create(
     "gs4-create-demo-6",
-    sheets = list(iris = head(iris), mtcars = head(mtcars))
+    sheets = list(chickwts = head(chickwts), mtcars = head(mtcars))
   )
 
   # clean up

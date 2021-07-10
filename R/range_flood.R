@@ -68,7 +68,7 @@ range_flood <- function(ss,
   check_bool(reformat)
 
   x <- gs4_get(ssid)
-  gs4_bullets(c(v = "Editing {.file {x$name}}"))
+  gs4_bullets(c(v = "Editing {.s_sheet {x$name}}."))
 
   # determine (work)sheet ------------------------------------------------------
   range_spec <- as_range_spec(
@@ -78,7 +78,7 @@ range_flood <- function(ss,
   )
   range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
   s <- lookup_sheet(range_spec$sheet_name, sheets_df = x$sheets)
-  gs4_bullets(c(v = "Editing sheet {.field {range_spec$sheet_name}}"))
+  gs4_bullets(c(v = "Editing sheet {.w_sheet {range_spec$sheet_name}}."))
 
   # prepare cell and field mask ------------------------------------------------
   # TODO: adapt here when CellData becomes a vctrs class

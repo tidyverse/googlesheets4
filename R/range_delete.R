@@ -69,7 +69,7 @@ range_delete <- function(ss,
   }
 
   x <- gs4_get(ssid)
-  gs4_bullets(c(v = "Editing {.file {x$name}}"))
+  gs4_bullets(c(v = "Editing {.s_sheet {x$name}}."))
 
   # determine (work)sheet and range --------------------------------------------
   range_spec <- as_range_spec(
@@ -83,7 +83,7 @@ range_delete <- function(ss,
   range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
   # as_GridRange() throws an error for a named range
   grid_range <- as_GridRange(range_spec)
-  gs4_bullets(c(v = "Deleting cells in sheet {.field {range_spec$sheet_name}}"))
+  gs4_bullets(c(v = "Deleting cells in sheet {.w_sheet {range_spec$sheet_name}}."))
 
   # form batch update request --------------------------------------------------
   shift_dimension <- shift_dimension %||% determine_shift(grid_range)

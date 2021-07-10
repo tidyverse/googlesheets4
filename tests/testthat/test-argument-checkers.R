@@ -30,8 +30,8 @@ test_that("standardise_ctypes() understands and requires readr shortcodes", {
       D = "CELL_DATE", t = "CELL_TIME", T = "CELL_DATETIME", c = "CELL_TEXT",
       C = "COL_CELL", L = "COL_LIST", `?` = "COL_GUESS")
   )
-  expect_error(standardise_ctypes("abe"), "Unrecognized codes")
-  expect_error(standardise_ctypes("f:"), "Unrecognized codes")
+  expect_error(standardise_ctypes("abe"), "Unrecognized")
+  expect_error(standardise_ctypes("f:"), "Unrecognized")
   expect_error(standardise_ctypes(""), "at least one")
 })
 

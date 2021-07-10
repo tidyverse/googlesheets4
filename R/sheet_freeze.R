@@ -45,7 +45,7 @@ sheet_freeze <- function(ss,
   maybe_non_negative_integer(ncol)
 
   if (is.null(nrow) && is.null(ncol)) {
-    gs4_bullets(c(i = "Nothing to be done"))
+    gs4_bullets(c(i = "Nothing to be done."))
     return(invisible(ssid))
   }
 
@@ -58,7 +58,7 @@ sheet_freeze <- function(ss,
   x <- gs4_get(ssid)
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
   gs4_bullets(c(
-    v = "Freezing {dims} on sheet {.field {s$name}} in {.file {x$name}}"))
+    v = "Freezing {dims} on sheet {.w_sheet {s$name}} in {.s_sheet {x$name}}."))
 
   freeze_req <- bureq_set_grid_properties(
     sheetId = s$id,

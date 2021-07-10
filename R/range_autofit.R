@@ -89,9 +89,9 @@ range_autofit <- function(ss,
   )
 
   gs4_bullets(c(
-    v = "Editing {.file {x$name}}",
+    v = "Editing {.s_sheet {x$name}}.",
     v = "Resizing one or more {tolower(resize_dim)} in \\
-         {.field {range_spec$sheet_name}}"
+         {.w_sheet {range_spec$sheet_name}}."
   ))
 
   # do it ----------------------------------------------------------------------

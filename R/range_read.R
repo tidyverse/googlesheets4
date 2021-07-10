@@ -270,7 +270,7 @@ standardise_ctypes <- function(col_types) {
 
   if (identical(col_types, "")) {
     gs4_abort("
-      {.arg col_types}, if provided, must be a string that contains at \\
+      {.arg col_types}, when provided, must be a string that contains at \\
       least one readr-style shortcode.")
   }
 
@@ -280,8 +280,9 @@ standardise_ctypes <- function(col_types) {
   ok <- col_types_split %in% accepted_codes
   if (!all(ok)) {
     gs4_abort(c(
-      "{.arg col_types} must be a string of readr-style shortcodes:",
-      x = "Unrecognized code{?s}: {col_types_split[!ok]}."
+      "{.arg col_types} must be a string of readr-style shortcodes. \\
+       Unrecognized code{?s}{cli::qty(sum(!ok))}:",
+      bulletize(gargle_map_cli(col_types_split[!ok]), bullet = "x")
     ))
   }
   ctypes <- ctype(col_types_split)

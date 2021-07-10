@@ -193,7 +193,10 @@
 <li>
 <code>.field</code> for an A1-style range or named range</li>
 <li>
-<code>.url</code> and <code>.email</code> for a URL or email address</li>
+<code>.code</code> for a column in a data frame and for reserved words, such as <code>NULL</code>, <code>TRUE</code>, and <code>NA</code>
+</li>
+<li>
+<code>.arg</code>, <code>.fun</code>, <code>.path</code>, <code>.cls</code>, <code>.url</code>. <code>.email</code> for their usual purpose</li>
 </ul>
 <p><em>These may not demo well via pkgdown, but the interactive experience is nice.</em></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -253,177 +256,15 @@
 <div id="errors" class="section level2">
 <h2 class="hasAnchor">
 <a href="#errors" class="anchor"></a>Errors</h2>
-<p>Use <code>gs4_abort()</code> instead of <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::abort()</a></code> or <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code>. So far, I’m not really using <code>...</code> to put data in the condition, but I could start when/if there’s a reason to. Be prepared to get confused about how to style and line break error messages vs. regular messages, which use <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code> and <code><a href="https://cli.r-lib.org/reference/cli_alert.html">cli::cli_alert()</a></code>, respectively.</p>
+<p>Use <code>gs4_abort()</code> instead of <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::abort()</a></code> or <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code>. So far, I’m not really using <code>...</code> to put data in the condition, but I could start when/if there’s a reason to.</p>
 <p><code>abort_unsupported_conversion()</code> is a wrapper around <code>gs4_abort()</code>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span><span class="op">(</span><span class="fl">1</span>, class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span>
-<span class="fu">abort_unsupported_conversion</span><span class="op">(</span><span class="va">x</span>, to <span class="op">=</span> <span class="st">"foofy"</span><span class="op">)</span>
-<span class="co">#&gt; Error: Don't know how to make an instance of &lt;character&gt; from something of class &lt;a/b/c&gt;</span></code></pre></div>
+<span class="fu">abort_unsupported_conversion</span><span class="op">(</span><span class="va">x</span>, to <span class="op">=</span> <span class="st">"SheetThing"</span><span class="op">)</span>
+<span class="co">#&gt; Error: Don't know how to make an instance of &lt;SheetThing&gt; from something of</span>
+<span class="co">#&gt; class &lt;a/b/c&gt;</span></code></pre></div>
 <p><code>abort_unsupported_conversion()</code> exists to standardize a recurring type of error message, usually encountered during development, not by end-users. I use it a lot in the default method of an <code>as_{to}()</code> generic.</p>
-<div id="inline-styling-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#inline-styling-1" class="anchor"></a>Inline styling</h3>
-<p>We process the <code>message</code> of <code>gs4_abort()</code> with <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code>.</p>
-<p>Use helpers <code>dq()</code>, <code>sq()</code>, and <code>bt()</code> for inline style (yes, it’s clunky compared to cli):</p>
-<ul>
-<li>
-<code>dq()</code> for double quotes (Sheet names)</li>
-<li>
-<code>sq()</code> for single quotes (worksheet names, ranges, and most strings, generally)</li>
-<li>
-<code>bt()</code> for backticks (argument names, functions)</li>
-</ul>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-Google-Sheet"</span>
-<span class="fu">gs4_abort</span><span class="op">(</span><span class="st">"Use double quotes around a Google Sheet name: {dq(nm)}"</span><span class="op">)</span>
-<span class="co">#&gt; Error: Use double quotes around a Google Sheet name: "name-of-a-Google-Sheet"</span>
-
-<span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-worksheet"</span>
-<span class="fu">gs4_abort</span><span class="op">(</span><span class="st">"Use single quotes around a worksheet name: {sq(nm)}"</span><span class="op">)</span>
-<span class="co">#&gt; Error: Use single quotes around a worksheet name: 'name-of-a-worksheet'</span>
-
-<span class="fu">gs4_abort</span><span class="op">(</span><span class="st">"In fact, when in doubt, just use single quotes around {sq('stuff')}"</span><span class="op">)</span>
-<span class="co">#&gt; Error: In fact, when in doubt, just use single quotes around 'stuff'</span>
-
-<span class="fu">gs4_abort</span><span class="op">(</span><span class="st">"
-  But use backticks when referring to an {bt('argument')} \\
-  or {bt('function()')}"</span><span class="op">)</span>
-<span class="co">#&gt; Error: But use backticks when referring to an `argument` or `function()`</span></code></pre></div>
-</div>
-<div id="multiple-lines-and-bullets" class="section level3">
-<h3 class="hasAnchor">
-<a href="#multiple-lines-and-bullets" class="anchor"></a>Multiple lines and bullets</h3>
-<p>Get multiple lines by sending a character vector as <code>message</code>. Think about what <code><a href="https://rlang.r-lib.org/reference/format_error_bullets.html">rlang::format_error_bullets()</a></code> does and be intentional with naming: the choices are <code>i</code>, <code>x</code>, and no name.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bad_stuff</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"eew"</span>, <span class="st">"yuck"</span>, <span class="st">"uh-oh"</span><span class="op">)</span>
-<span class="fu">gs4_abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
-  <span class="st">"This first line is a header, explaining the general situation"</span>,
-  x <span class="op">=</span> <span class="st">"Sometimes you have to deliver Very Bad News"</span>,
-  <span class="va">bad_stuff</span>,
-  i <span class="op">=</span> <span class="st">"Maybe a call to {bt('magic_function()')} would help?"</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error: This first line is a header, explaining the general situation</span>
-<span class="co">#&gt; ✖ Sometimes you have to deliver Very Bad News</span>
-<span class="co">#&gt; eew</span>
-<span class="co">#&gt; yuck</span>
-<span class="co">#&gt; uh-oh</span>
-<span class="co">#&gt; ℹ Maybe a call to `magic_function()` would help?</span>
-
-<span class="va">endpoint</span> <span class="op">&lt;-</span> <span class="st">"sheets.spreadsheets.WTF"</span>
-<span class="fu">gs4_abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Endpoint not recognized:"</span>, x <span class="op">=</span> <span class="st">"{sq(endpoint)}"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error: Endpoint not recognized:</span>
-<span class="co">#&gt; ✖ 'sheets.spreadsheets.WTF'</span></code></pre></div>
-</div>
-<div id="line-breaks-and-whitespace" class="section level3">
-<h3 class="hasAnchor">
-<a href="#line-breaks-and-whitespace" class="anchor"></a>Line breaks and whitespace</h3>
-<p>Remember each element of <code>message</code> is processed with <code><a href="https://glue.tidyverse.org/reference/glue.html">glue::glue()</a></code>, so let’s review the line break situation, which is different to the messages made with cli, which is confusing.</p>
-<p>This produces two lines:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">shift</span> <span class="op">&lt;-</span> <span class="st">"SHIFT"</span>
-<span class="fu">gs4_abort</span><span class="op">(</span><span class="st">"
-  The {bt('shift')} direction must be specified for this {bt('range')}
-  It can't be automatically determined"</span><span class="op">)</span>
-<span class="co">#&gt; Error: The `shift` direction must be specified for this `range`</span>
-<span class="co">#&gt; It can't be automatically determined</span></code></pre></div>
-<p>Use <code>\\</code> if you want continuation, i.e. you want one line:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">shift</span> <span class="op">&lt;-</span> <span class="st">"SHIFT"</span>
-<span class="fu">gs4_abort</span><span class="op">(</span><span class="st">"
-  The {bt('shift')} direction must be specified for this {bt('range')}. \\
-  It can't be automatically determined."</span><span class="op">)</span>
-<span class="co">#&gt; Error: The `shift` direction must be specified for this `range`. It can't be automatically determined.</span>
-
-<span class="va">very_very_very_very_very_very_very_very_long_variable_name</span> <span class="op">&lt;-</span> <span class="st">"HA HA"</span>
-<span class="fu">gs4_abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
-  <span class="st">"Imagine {very_very_very_very_very_very_very_very_long_variable_name} \\
-   a line that's long in source but short after interpolation"</span>, 
-  x <span class="op">=</span> <span class="st">"Short bad thing"</span>,
-  i <span class="op">=</span> <span class="st">"Helpful tip"</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error: Imagine HA HA a line that's long in source but short after interpolation</span>
-<span class="co">#&gt; ✖ Short bad thing</span>
-<span class="co">#&gt; ℹ Helpful tip</span></code></pre></div>
-</div>
-<div id="pluralization-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pluralization-1" class="anchor"></a>Pluralization</h3>
-<p>Use <code><a href="https://cli.r-lib.org/reference/pluralize.html">cli::pluralize()</a></code> directly if you need pluralization in error messages. Search for <code><a href="https://cli.r-lib.org/reference/pluralization-helpers.html">cli::qty()</a></code> for a few places where the pluralization was a bit trickier.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">col_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"apple"</span>, <span class="st">"banana"</span><span class="op">)</span>
-<span class="va">nc</span> <span class="op">&lt;-</span> <span class="fl">1</span>
-<span class="fu">gs4_abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
-  <span class="st">"Length of {bt('col_names')} is not compatible with the data:"</span>,
-  x <span class="op">=</span> <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/pluralize.html">pluralize</a></span><span class="op">(</span><span class="st">"Expected {length(col_names)} un-skipped column{?s}"</span><span class="op">)</span>,
-  x <span class="op">=</span> <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/pluralize.html">pluralize</a></span><span class="op">(</span><span class="st">"But data has {nc} column{?s}"</span><span class="op">)</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error: Length of `col_names` is not compatible with the data:</span>
-<span class="co">#&gt; ✖ Expected 2 un-skipped columns</span>
-<span class="co">#&gt; ✖ But data has 1 column</span>
-
-<span class="va">m</span> <span class="op">&lt;-</span> <span class="fl">8</span>
-<span class="va">sheets_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>
-<span class="fu">gs4_abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
-  <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/pluralize.html">pluralize</a></span><span class="op">(</span><span class="st">"There {?is/are} {nrow(sheets_df)} sheet{?s}:"</span><span class="op">)</span>,
-  x <span class="op">=</span> <span class="st">"Requested sheet number is out-of-bounds: {m}"</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error: There are 6 sheets:</span>
-<span class="co">#&gt; ✖ Requested sheet number is out-of-bounds: 8</span>
-
-<span class="va">sheets_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span>, <span class="fl">1</span><span class="op">)</span>
-<span class="fu">gs4_abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
-  <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/pluralize.html">pluralize</a></span><span class="op">(</span><span class="st">"There {?is/are} {nrow(sheets_df)} sheet{?s}:"</span><span class="op">)</span>,
-  x <span class="op">=</span> <span class="st">"Requested sheet number is out-of-bounds: {m}"</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error: There is 1 sheet:</span>
-<span class="co">#&gt; ✖ Requested sheet number is out-of-bounds: 8</span></code></pre></div>
-</div>
-<div id="collapsing-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#collapsing-1" class="anchor"></a>Collapsing</h3>
-<p>Use <code><a href="https://glue.tidyverse.org/reference/glue_collapse.html">glue::glue_collapse()</a></code> ahead of time, if you need to style and collapse.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">bad_codes</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
-<span class="va">bad_codes</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue_collapse.html">glue_collapse</a></span><span class="op">(</span><span class="fu">sq</span><span class="op">(</span><span class="va">bad_codes</span><span class="op">)</span>, sep <span class="op">=</span> <span class="st">","</span><span class="op">)</span>
-<span class="fu">gs4_abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
-  <span class="st">"{bt('col_types')} must be a string of readr-style shortcodes:"</span>,
-  x <span class="op">=</span> <span class="st">"Unrecognized codes: {bad_codes}"</span>
-<span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error: `col_types` must be a string of readr-style shortcodes:</span>
-<span class="co">#&gt; ✖ Unrecognized codes: 'a','b','c'</span></code></pre></div>
-</div>
-<div id="tricky-stuff-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#tricky-stuff-1" class="anchor"></a>Tricky stuff</h3>
-<p>If you want to see some tricky examples of building up a message from parts, look here:</p>
-<ul>
-<li>
-<code>rep_ctypes()</code> (conditional pluralization)</li>
-</ul>
-</div>
-</div>
-<div id="future-thoughts" class="section level2">
-<h2 class="hasAnchor">
-<a href="#future-thoughts" class="anchor"></a>Future thoughts</h2>
-<p>Would I ever want to use cli in the errors? There are good things and bad things about that. Messing around. This may very well not show up in pkgdown, which is related to what’s problematic.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html">abort</a></span><span class="op">(</span><span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/ansi-styles.html">col_blue</a></span><span class="op">(</span><span class="st">"Hello "</span>, <span class="st">"world!"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error: Hello world!</span>
-
-<span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html">abort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"... to highlight the"</span>, <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/ansi-styles.html">col_red</a></span><span class="op">(</span><span class="st">"search term"</span><span class="op">)</span>,
-                   <span class="st">"in a block of text\n"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error: ... to highlight the search term in a block of text</span>
-
-<span class="va">error</span> <span class="op">&lt;-</span> <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/combine_ansi_styles.html">combine_ansi_styles</a></span><span class="op">(</span><span class="st">"red"</span>, <span class="st">"bold"</span><span class="op">)</span>
-<span class="va">warn</span> <span class="op">&lt;-</span> <span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/combine_ansi_styles.html">combine_ansi_styles</a></span><span class="op">(</span><span class="st">"magenta"</span>, <span class="st">"underline"</span><span class="op">)</span>
-<span class="va">note</span> <span class="op">&lt;-</span> <span class="fu">cli</span><span class="fu">::</span><span class="va"><a href="https://cli.r-lib.org/reference/ansi-styles.html">style_italic</a></span>
-
-<span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html">abort</a></span><span class="op">(</span><span class="fu">error</span><span class="op">(</span><span class="st">"Error: subscript out of bounds!\n"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error: Error: subscript out of bounds!</span>
-<span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html">abort</a></span><span class="op">(</span><span class="fu">warn</span><span class="op">(</span><span class="st">"Warning: shorter argument was recycled.\n"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error: Warning: shorter argument was recycled.</span>
-<span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html">abort</a></span><span class="op">(</span><span class="fu">note</span><span class="op">(</span><span class="st">"Note: no such directory.\n"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; Error: Note: no such directory.</span></code></pre></div>
+<p>There’s not much to add here re: errors, now thet <code><a href="https://cli.r-lib.org/reference/cli_abort.html">cli::cli_abort()</a></code> exists. Error messages are formed just like informational messages now.</p>
 </div>
   </div>
 

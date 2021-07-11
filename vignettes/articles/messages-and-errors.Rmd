@@ -21,10 +21,6 @@ gs4_bullets <- googlesheets4:::gs4_bullets
 
 gs4_abort <- googlesheets4:::gs4_abort
 abort_unsupported_conversion <- googlesheets4:::abort_unsupported_conversion
-
-dq <- googlesheets4:::dq
-sq <- googlesheets4:::sq
-bt <- googlesheets4:::bt
 ```
 
 ## User-facing messages
@@ -51,7 +47,7 @@ The googlesheets4 message helpers:
 -   Use the [cli package](https://cli.r-lib.org/index.html) to get interpolation, inline markup, and pluralization.
 -   Use googlesheets4's custom theme, which has styles for Sheet name, worksheet name, and range.
 -   Eventually route through `rlang::inform()`, which is important because `inform()` prints to standard output in interactive sessions. This means that informational messages won't have the same "look" as errors and can generally be more stylish, at least in IDEs like RStudio.
--   Are under the control of the `GOOGLESHEETS4_QUIET` environment variable. If it's unset, the default is to show messages (unless we're testing, i.e. the environment variable `TESTTHAT` is `"true"`). `GOOGLESHEETS4_QUIET=true` will suppress messages. There are withr-style convenience helpers: `local_gs4_quiet()` and `with_gs4_quiet()`.
+-   Are under the control of the `"googlesheets4_quiet"` option. If it's unset, the default is to show messages (unless we're testing, i.e. the environment variable `TESTTHAT` is `"true"`). `googlesheets4_quiet = TRUE` will suppress messages. There are withr-style convenience helpers: `local_gs4_quiet()` and `with_gs4_quiet()`.
 
 ### Inline styling
 

@@ -155,7 +155,7 @@
 <div id="user-facing-messages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#user-facing-messages" class="anchor"></a>User-facing messages</h2>
-<p>Everything should be emitted by helpers in <code>utils-ui.R</code>: specifically, <code>gs4_bullets()</code> (and, for errors, <code>gs4_abort()</code>). These helpers are all wrappers around cli functions, such as <code><a href="https://cli.r-lib.org/reference/cli_bullets.html">cli::cli_bullets()</a></code>.</p>
+<p>Everything should be emitted by helpers in <code>utils-ui.R</code>: specifically, <code>gs4_bullets()</code> and, for errors, <code>gs4_abort()</code>. These helpers are wrappers around <code><a href="https://cli.r-lib.org/reference/cli_bullets.html">cli::cli_bullets()</a></code> and <code><a href="https://cli.r-lib.org/reference/cli_alert.html">cli::cli_alert()</a></code>, respectively.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
         <span class="st">"noindent"</span>,
@@ -177,7 +177,8 @@
 <span class="co">#&gt; ℹ The more you know!</span></code></pre></div>
 <p>The helpers encourage consistent styling and make it possible to selectively silence messages coming from googlesheets4. The googlesheets4 message helpers:</p>
 <ul>
-<li>Use the <a href="https://cli.r-lib.org/index.html">cli package</a> to get interpolation, inline markup, and pluralization</li>
+<li>Use the <a href="https://cli.r-lib.org/index.html">cli package</a> to get interpolation, inline markup, and pluralization.</li>
+<li>Use googlesheets4’s custom theme, which has styles for Sheet name, worksheet name, and range.</li>
 <li>Eventually route through <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::inform()</a></code>, which is important because <code>inform()</code> prints to standard output in interactive sessions. This means that informational messages won’t have the same “look” as errors and can generally be more stylish, at least in IDEs like RStudio.</li>
 <li>Are under the control of the <code>GOOGLESHEETS4_QUIET</code> environment variable. If it’s unset, the default is to show messages (unless we’re testing, i.e. the environment variable <code>TESTTHAT</code> is <code>"true"</code>). <code>GOOGLESHEETS4_QUIET=true</code> will suppress messages. There are withr-style convenience helpers: <code><a href="../../reference/googlesheets4-configuration.html">local_gs4_quiet()</a></code> and <code><a href="../../reference/googlesheets4-configuration.html">with_gs4_quiet()</a></code>.</li>
 </ul>
@@ -187,11 +188,11 @@
 <p>How we use the inline classes:</p>
 <ul>
 <li>
-<code>.file</code> for the name of Google Sheet</li>
+<code>.s_sheet</code> for the name of Google Sheet (custom)</li>
 <li>
-<code>.field</code> for the name of a worksheet</li>
+<code>.w_sheet</code> for the name of a worksheet (custom)</li>
 <li>
-<code>.field</code> for an A1-style range or named range</li>
+<code>.range</code> for an A1-style range or named range (custom)</li>
 <li>
 <code>.code</code> for a column in a data frame and for reserved words, such as <code>NULL</code>, <code>TRUE</code>, and <code>NA</code>
 </li>
@@ -201,16 +202,36 @@
 <p><em>These may not demo well via pkgdown, but the interactive experience is nice.</em></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-Google-Sheet"</span>
-<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Creating new Sheet: {.file {nm}}"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Creating new Sheet: 'name-of-a-Google-Sheet'</span>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Creating new Sheet: {.s_sheet {nm}}"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; ✔ Creating new Sheet: "name-of-a-Google-Sheet"</span>
 
 <span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-worksheet"</span>
-<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Protecting cells on sheet: {.field {nm}}"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Protecting cells on sheet: name-of-a-worksheet</span>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Protecting cells on sheet: {.w_sheet {nm}}"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; ✔ Protecting cells on sheet: 'name-of-a-worksheet'</span>
 
 <span class="va">rg</span> <span class="op">&lt;-</span> <span class="st">"A3:B20"</span>
-<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Writing to the range {.field {rg}}"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Writing to the range A3:B20</span></code></pre></div>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Writing to the range: {.range {rg}}"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; ✔ Writing to the range: 'A3:B20'</span></code></pre></div>
+<p>Above, I don’t include a period (<code>.</code>) at the end of a message with the form: <code>Description of thing: THING</code>. I view it as a special case of a bullet list of simple items, which also don’t get periods.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="st">"We're going to list some things:"</span>,
+  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">month.abb</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
+<span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; Error in bulletize(gargle_map_cli(month.abb[1:4])): could not find function "bulletize"</span></code></pre></div>
+<p>Other messages that are complete sentence, or at least aspire to be, <strong>do</strong> get a period.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">gs4_bullets</span><span class="op">(</span><span class="st">"Doing the stuff you asked me to do."</span><span class="op">)</span>
+<span class="co">#&gt; Doing the stuff you asked me to do.</span>
+
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
+  <span class="st">"You probably need to do one of these things:"</span>,
+  <span class="st">"*"</span> <span class="op">=</span> <span class="st">"Call {.fun some_function}."</span>,
+  <span class="st">"*"</span> <span class="op">=</span> <span class="st">"Provide more specific input via {.arg some_argument}."</span>
+<span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; You probably need to do one of these things:</span>
+<span class="co">#&gt; • Call `some_function()`.</span>
+<span class="co">#&gt; • Provide more specific input via `some_argument`.</span></code></pre></div>
 <p>Most relevant cli docs:</p>
 <ul>
 <li><a href="https://cli.r-lib.org/reference/inline-markup.html">CLI inline markup</a></li>
@@ -221,28 +242,28 @@
 <h3 class="hasAnchor">
 <a href="#pluralization" class="anchor"></a>Pluralization</h3>
 <p><a href="https://cli.r-lib.org/articles/pluralization.html">cli’s pluralization</a> is awesome!</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-Google-Sheet"</span>
 <span class="va">n_new</span> <span class="op">&lt;-</span> <span class="fl">1</span>
-<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Adding {n_new} sheet{?s} to {.file {nm}}"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Adding 1 sheet to 'name-of-a-Google-Sheet'</span>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Adding {n_new} sheet{?s} to {.s_sheet {nm}}"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; ✔ Adding 1 sheet to "name-of-a-Google-Sheet"</span>
 
 <span class="va">n_new</span> <span class="op">&lt;-</span> <span class="fl">3</span>
-<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Adding {n_new} sheet{?s} to {.file {nm}}"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Adding 3 sheets to 'name-of-a-Google-Sheet'</span></code></pre></div>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Adding {n_new} sheet{?s} to {.s_sheet {nm}}"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; ✔ Adding 3 sheets to "name-of-a-Google-Sheet"</span></code></pre></div>
 </div>
 <div id="collapsing" class="section level3">
 <h3 class="hasAnchor">
 <a href="#collapsing" class="anchor"></a>Collapsing</h3>
 <p><a href="https://cli.r-lib.org/articles/semantic-cli.html#inline-lists-of-items">Collapsing lists of things</a> is great! Also more pluralization.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">new_sheet_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span><span class="op">)</span>
-<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"New sheet{?s}: {.field {new_sheet_names}}"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; New sheets: apple, banana, and cherry</span>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"New sheet{?s}: {.w_sheet {new_sheet_names}}"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; New sheets: 'apple', 'banana', and 'cherry'</span>
 
 <span class="va">new_sheet_names</span> <span class="op">&lt;-</span> <span class="st">"kumquat"</span>
-<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"New sheet{?s}: {.field {new_sheet_names}}"</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; New sheet: kumquat</span></code></pre></div>
+<span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"New sheet{?s}: {.w_sheet {new_sheet_names}}"</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; New sheet: 'kumquat'</span></code></pre></div>
 </div>
 <div id="tricky-stuff" class="section level3">
 <h3 class="hasAnchor">
@@ -258,11 +279,11 @@
 <a href="#errors" class="anchor"></a>Errors</h2>
 <p>Use <code>gs4_abort()</code> instead of <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::abort()</a></code> or <code><a href="https://rdrr.io/r/base/stop.html">stop()</a></code>. So far, I’m not really using <code>...</code> to put data in the condition, but I could start when/if there’s a reason to.</p>
 <p><code>abort_unsupported_conversion()</code> is a wrapper around <code>gs4_abort()</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html">structure</a></span><span class="op">(</span><span class="fl">1</span>, class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">abort_unsupported_conversion</span><span class="op">(</span><span class="va">x</span>, to <span class="op">=</span> <span class="st">"SheetThing"</span><span class="op">)</span>
 <span class="co">#&gt; Error: Don't know how to make an instance of &lt;SheetThing&gt; from something of</span>
-<span class="co">#&gt; class &lt;a/b/c&gt;</span></code></pre></div>
+<span class="co">#&gt; class &lt;a/b/c&gt;.</span></code></pre></div>
 <p><code>abort_unsupported_conversion()</code> exists to standardize a recurring type of error message, usually encountered during development, not by end-users. I use it a lot in the default method of an <code>as_{to}()</code> generic.</p>
 <p>There’s not much to add here re: errors, now thet <code><a href="https://cli.r-lib.org/reference/cli_abort.html">cli::cli_abort()</a></code> exists. Error messages are formed just like informational messages now.</p>
 </div>

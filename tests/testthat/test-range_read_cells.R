@@ -1,3 +1,15 @@
+test_that("cells() returns `row` and `col` as integer", {
+  skip_if_offline()
+  skip_if_no_token()
+
+  out <- range_read_cells(
+    test_sheet("googlesheets4-cell-tests"),
+    range = "'range-experimentation'!A1:B2"
+  )
+  expect_true(is.integer(out$row))
+  expect_true(is.integer(out$col))
+})
+
 test_that("slightly tricky `range`s work", {
   skip_if_offline()
   skip_if_no_token()

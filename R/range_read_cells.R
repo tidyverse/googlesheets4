@@ -1,7 +1,7 @@
 #' Read cells from a Sheet
 #'
 #' This low-level function returns cell data in a tibble with one row per cell.
-#' This tibble has integer variables `row` and `column` (referring to location
+#' This tibble has integer variables `row` and `col` (referring to location
 #' with the Google Sheet), an A1-style reference `loc`, and a `cell`
 #' list-column. The flagship function [read_sheet()], a.k.a. [range_read()], is
 #' what most users are looking for, rather than `range_read_cells()`.

@@ -58,7 +58,7 @@ A tibble with one row per cell in the \code{range}.
 }
 \description{
 This low-level function returns cell data in a tibble with one row per cell.
-This tibble has integer variables \code{row} and \code{column} (referring to location
+This tibble has integer variables \code{row} and \code{col} (referring to location
 with the Google Sheet), an A1-style reference \code{loc}, and a \code{cell}
 list-column. The flagship function \code{\link[=read_sheet]{read_sheet()}}, a.k.a. \code{\link[=range_read]{range_read()}}, is
 what most users are looking for, rather than \code{range_read_cells()}.

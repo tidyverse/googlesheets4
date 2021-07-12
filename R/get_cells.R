@@ -130,7 +130,7 @@ cells <- function(x = list()) {
       seq.int(from = start_row, length.out = n_rows),
       times = row_lengths
     ),
-    col = start_column + sequence(row_lengths) - 1,
+    col = as.integer(start_column + sequence(row_lengths) - 1),
     cell = purrr::flatten(row_data)
   )
 }

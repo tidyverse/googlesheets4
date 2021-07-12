@@ -180,7 +180,7 @@
 <li>Use the <a href="https://cli.r-lib.org/index.html">cli package</a> to get interpolation, inline markup, and pluralization.</li>
 <li>Use googlesheets4’s custom theme, which has styles for Sheet name, worksheet name, and range.</li>
 <li>Eventually route through <code><a href="https://rlang.r-lib.org/reference/abort.html">rlang::inform()</a></code>, which is important because <code>inform()</code> prints to standard output in interactive sessions. This means that informational messages won’t have the same “look” as errors and can generally be more stylish, at least in IDEs like RStudio.</li>
-<li>Are under the control of the <code>GOOGLESHEETS4_QUIET</code> environment variable. If it’s unset, the default is to show messages (unless we’re testing, i.e. the environment variable <code>TESTTHAT</code> is <code>"true"</code>). <code>GOOGLESHEETS4_QUIET=true</code> will suppress messages. There are withr-style convenience helpers: <code><a href="../../reference/googlesheets4-configuration.html">local_gs4_quiet()</a></code> and <code><a href="../../reference/googlesheets4-configuration.html">with_gs4_quiet()</a></code>.</li>
+<li>Are under the control of the <code>"googlesheets4_quiet"</code> option. If it’s unset, the default is to show messages (unless we’re testing, i.e. the environment variable <code>TESTTHAT</code> is <code>"true"</code>). <code>googlesheets4_quiet = TRUE</code> will suppress messages. There are withr-style convenience helpers: <code><a href="../../reference/googlesheets4-configuration.html">local_gs4_quiet()</a></code> and <code><a href="../../reference/googlesheets4-configuration.html">with_gs4_quiet()</a></code>.</li>
 </ul>
 <div id="inline-styling" class="section level3">
 <h3 class="hasAnchor">

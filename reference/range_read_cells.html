@@ -51,7 +51,7 @@
 
 <meta property="og:title" content="Read cells from a Sheet — range_read_cells" />
 <meta property="og:description" content="This low-level function returns cell data in a tibble with one row per cell.
-This tibble has integer variables row and column (referring to location
+This tibble has integer variables row and col (referring to location
 with the Google Sheet), an A1-style reference loc, and a cell
 list-column. The flagship function read_sheet(), a.k.a. range_read(), is
 what most users are looking for, rather than range_read_cells().
@@ -198,7 +198,7 @@ really want raw cell data from the API, range_read_cells() is for you!" />
 
     <div class="ref-description">
     <p>This low-level function returns cell data in a tibble with one row per cell.
-This tibble has integer variables <code>row</code> and <code>column</code> (referring to location
+This tibble has integer variables <code>row</code> and <code>col</code> (referring to location
 with the Google Sheet), an A1-style reference <code>loc</code>, and a <code>cell</code>
 list-column. The flagship function <code><a href='range_read.html'>read_sheet()</a></code>, a.k.a. <code><a href='range_read.html'>range_read()</a></code>, is
 what most users are looking for, rather than <code>range_read_cells()</code>.
@@ -297,7 +297,7 @@ we check for an <code>effectiveValue</code>, which is one of the fields in the
 <span class='op'>}</span>
 </div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> Reading from <span style='color: #00BBBB;'>deaths</span>.</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> Range <span style='color: #BBBB00;'>arts_data</span>.</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> Reading from <span style='color: #00BBBB;'>formulas-and-formats</span>.</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> Range <span style='color: #BBBB00;'>Sheet1</span>.</span></div><div class='output co'>#&gt; <span style='color: #949494;'># A tibble: 678 x 4</span>
 #&gt;      row   col loc   cell      
-#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>    
+#&gt;    <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span> <span style='color: #949494; font-style: italic;'>&lt;list&gt;</span>    
 #&gt; <span style='color: #BCBCBC;'> 1</span>     1     1 A1    <span style='color: #949494;'>&lt;CELL_TEX&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 2</span>     1     2 B1    <span style='color: #949494;'>&lt;CELL_TEX&gt;</span>
 #&gt; <span style='color: #BCBCBC;'> 3</span>     1     3 C1    <span style='color: #949494;'>&lt;CELL_TEX&gt;</span>

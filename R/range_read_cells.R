@@ -46,15 +46,15 @@
 #'   )
 #' }
 range_read_cells <- function(ss,
-                         sheet = NULL,
-                         range = NULL,
-                         skip = 0, n_max = Inf,
-                         cell_data = c("default", "full"),
-                         discard_empty = TRUE) {
+                             sheet = NULL,
+                             range = NULL,
+                             skip = 0, n_max = Inf,
+                             cell_data = c("default", "full"),
+                             discard_empty = TRUE) {
   cell_data <- match.arg(cell_data)
 
-  ## range spec params are checked inside get_cells():
-  ## ss, sheet, range, skip, n_max
+  # range spec params are checked inside get_cells():
+  # ss, sheet, range, skip, n_max
   out <- get_cells(
     ss = ss,
     sheet = sheet, range = range,
@@ -67,7 +67,7 @@ range_read_cells <- function(ss,
   add_loc(out)
 }
 
-## I use this elsewhere during development, so handy to have in a function
+# I use this elsewhere during development, so handy to have in a function
 add_loc <- function(df) {
   tibble::add_column(
     df,

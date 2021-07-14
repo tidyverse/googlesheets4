@@ -98,14 +98,14 @@ range_read <- function(ss,
                        skip = 0, n_max = Inf,
                        guess_max = min(1000, n_max),
                        .name_repair = "unique") {
-  ## check these first, so we don't download cells in vain
+  # check these first, so we don't download cells in vain
   col_spec <- standardise_col_spec(col_names, col_types)
   check_character(na)
   check_bool(trim_ws)
   check_non_negative_integer(guess_max)
 
-  ## range spec params are checked inside get_cells():
-  ## ss, sheet, range, skip, n_max
+  # range spec params are checked inside get_cells():
+  # ss, sheet, range, skip, n_max
   df <- get_cells(
     ss = ss,
     sheet = sheet, range = range,
@@ -183,20 +183,20 @@ spread_sheet_impl_ <- function(df,
   ctypes <- col_spec$ctypes
   col_names_in_sheet <- isTRUE(col_names)
 
-  ## absolute spreadsheet coordinates no longer relevant
-  ## update row, col to refer to location in output data frame
-  ## row 0 holds cells designated as column names
+  # absolute spreadsheet coordinates no longer relevant
+  # update row, col to refer to location in output data frame
+  # row 0 holds cells designated as column names
   df$row <- df$row - min(df$row) + !col_names_in_sheet
   nr <- max(df$row)
   df$col <- df$col - min(df$col) + 1
 
   if (is.logical(col_names)) {
-    ## if col_names is logical, this is first chance to check/set length of
-    ## ctypes, using the cell data
+    # if col_names is logical, this is first chance to check/set length of
+    # ctypes, using the cell data
     ctypes <- rep_ctypes(max(df$col), ctypes, "column{?s} found in sheet")
   }
 
-  ## drop cells in skipped cols, update df$col and ctypes
+  # drop cells in skipped cols, update df$col and ctypes
   skipped_col <- ctypes == "COL_SKIP"
   if (any(skipped_col)) {
     df <- df[!df$col %in% which(skipped_col), ]
@@ -248,8 +248,8 @@ standardise_col_spec <- function(col_names, col_types) {
   if (is.character(col_names)) {
     ctypes <- rep_ctypes(length(col_names), ctypes, "column name{?s}")
     col_names <- filter_col_names(col_names, ctypes)
-    ## if column names were provided explicitly, this is now true
-    ## length(col_names) == length(ctypes[ctypes != "COL_SKIP"])
+    # if column names were provided explicitly, this is now true
+    # length(col_names) == length(ctypes[ctypes != "COL_SKIP"])
   }
   list(col_names = col_names, ctypes = ctypes)
 }
@@ -262,8 +262,8 @@ check_col_names <- function(col_names) {
   check_has_length(col_names)
 }
 
-## input:  a string of readr-style shortcodes or NULL
-## output: a vector of col types of length >= 1
+# input:  a string of readr-style shortcodes or NULL
+# output: a vector of col types of length >= 1
 standardise_ctypes <- function(col_types) {
   col_types <- col_types %||% "?"
   check_string(col_types)
@@ -292,7 +292,7 @@ standardise_ctypes <- function(col_types) {
   ctypes
 }
 
-## makes sure there are n ctypes or n ctypes that are not COL_SKIP
+# makes sure there are n ctypes or n ctypes that are not COL_SKIP
 rep_ctypes <- function(n, ctypes, comparator = "n") {
   if (length(ctypes) == n) {
     return(ctypes)
@@ -316,9 +316,9 @@ rep_ctypes <- function(n, ctypes, comparator = "n") {
   ))
 }
 
-## removes col_names for skipped columns
-## rep_ctypes() is called before and ensures that col_names and ctypes are
-## conformable (hence the non-user facing stopifnot())
+# removes col_names for skipped columns
+# rep_ctypes() is called before and ensures that col_names and ctypes are
+# conformable (hence the non-user facing stopifnot())
 filter_col_names <- function(col_names, ctypes) {
   stopifnot(length(col_names) <= length(ctypes))
   col_names[ctypes != "COL_SKIP"]

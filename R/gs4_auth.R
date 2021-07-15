@@ -223,12 +223,14 @@ gs4_oauth_app <- function() .auth$app
 #' @examples
 #' gs4_user()
 gs4_user <- function() {
-  if (gs4_has_token()) {
-    gargle::token_email(gs4_token())
-  } else {
+  if (!gs4_has_token()) {
     gs4_bullets(c(i = "Not logged in as any specific Google user."))
-    invisible()
+    return(invisible())
   }
+
+  email <- gargle::token_email(gs4_token())
+  gs4_bullets(c(i = "Logged in to {.pkg googlesheets4} as {.email {email}}."))
+  invisible(email)
 }
 
 # use this as a guard whenever a googlesheets4 function calls a
@@ -266,10 +268,10 @@ gs4_auth_internal <- function(account = c("docs", "testing"),
       message = c(
         "Auth unsuccessful:",
         if (!can_decrypt) {
-          c("x" = "Can't decrypt the {.field {account}} service account token")
+          c("x" = "Can't decrypt the {.field {account}} service account token.")
         },
         if (!online) {
-          c("x" = "We don't appear to be online (or maybe the Sheets API is down?)")
+          c("x" = "We don't appear to be online. Or maybe the Sheets API is down?")
         }
       ),
       class = "googlesheets4_auth_internal_error",
@@ -284,10 +286,10 @@ gs4_auth_internal <- function(account = c("docs", "testing"),
   scopes <- scopes %||% "https://www.googleapis.com/auth/drive"
   json <- gargle:::secret_read("googlesheets4", filename)
   gs4_auth(scopes = scopes, path = rawToChar(json))
-  print(gs4_user())
+  gs4_user()
   if (drive) {
     googledrive::drive_auth(token = gs4_token())
-    print(googledrive::drive_user())
+    gs4_bullets(c(i = "Authed also with {.pkg googledrive}."))
   }
   invisible(TRUE)
 }
@@ -305,7 +307,7 @@ local_deauth <- function(env = parent.frame()) {
   original_auth_active <- .auth$auth_active
   gs4_bullets(c(i = "Going into deauthorized state."))
   withr::defer(
-    drive_bullets(c("i" = "Restoring previous auth state")),
+    gs4_bullets(c("i" = "Restoring previous auth state.")),
     envir = env
   )
   withr::defer({

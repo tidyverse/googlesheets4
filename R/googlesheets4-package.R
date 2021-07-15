@@ -71,3 +71,19 @@ NULL
 #'
 #' @name googlesheets4-configuration
 NULL
+
+# used for building functions that construct Sheet names in tests ----
+nm_fun <- function(context, user_run = TRUE) {
+  user_run <- if (isTRUE(user_run)) nm_user_run() else NULL
+  y <- purrr::compact(list(context, user_run))
+  function(x = character()) as.character(glue_collapse(c(x, y), sep = "-"))
+}
+
+nm_user_run <- function() {
+  if(as.logical(Sys.getenv("GITHUB_ACTIONS", unset = "false"))) {
+    glue("gha-{Sys.getenv('GITHUB_WORKFLOW')}-{Sys.getenv('GITHUB_RUN_ID')}")
+  } else {
+    random_id <- ids::proquint(n = 1, n_words = 2)
+    glue("{Sys.info()['user']}-{random_id}")
+  }
+}

@@ -101,9 +101,6 @@ throughout the googlesheets4 package.
 }
 
 \code{read_sheet()} and \code{range_read()} are synonyms and you can use either one.
-The first release of googlesheets used a \code{sheets_} prefix everywhere, so we
-had \code{sheets_read()}. It still works, but it's deprecated and will go away
-rather swiftly.
 }
 \section{Column Specification}{
 

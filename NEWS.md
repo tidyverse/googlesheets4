@@ -10,6 +10,9 @@ By default, googlesheets4 always messages, i.e. it is *not* quiet.
 
 googlesheets4 now throws errors with class `"googlesheets4_error"` (#12).
 
+The `na` argument of `read_sheet()` has become more capable and more consistent with readr.
+Specifically, `na = character()` (or the general lack of `""` among the `na` strings) results in cells with no data appearing as the empty string `""` in R, as opposed to `NA` (#174).
+
 ## Dependency changes
 
 * cli is new in Imports.

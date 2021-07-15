@@ -216,6 +216,9 @@ infer_ctype <- function(cell, na = "", trim_ws = TRUE) {
 )
 
 is_na_string <- function(x, na = "", trim_ws = TRUE) {
+  if (length(na) == 0) {
+    return(FALSE)
+  }
   fv <- if (trim_ws) ws_trim(x) else x
   any(fv == na)
 }

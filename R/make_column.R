@@ -17,6 +17,10 @@ make_column <- function(df, ctype, ..., nr, guess_max = min(1000, nr)) {
     COL_LIST = vector(mode = "list", length = nr),
     as.vector(fodder, mode = typeof(parsed))
   )
+  if (ctype == "CELL_TEXT") {
+    dots <- list2(...)
+    column <- enforce_na(column, na = dots$na)
+  }
   column[df$row] <- parsed
   column
 }
@@ -141,12 +145,8 @@ as_date <- function(cell, na = "", trim_ws = TRUE) {
 
 ## prepare to coerce to character
 cell_content_chr <- function(cell, na = "", trim_ws = TRUE) {
-  switch(
-    ctype(cell),
-    CELL_BLANK = NA_character_,
-    pluck(cell, "formattedValue")
-  ) %>%
-    groom_text(na = na, trim_ws = trim_ws)
+  fv <- pluck(cell, "formattedValue", .default = NA_character_)
+  groom_text(fv, na = na, trim_ws = trim_ws)
 }
 
 as_character <- function(cell, na = "", trim_ws = TRUE) {

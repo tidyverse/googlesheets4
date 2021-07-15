@@ -117,8 +117,14 @@ ws_trim <- function(x) {
 
 enforce_na <- function(x, na = "") {
   stopifnot(is.character(x), is.character(na))
-  x[x %in% na] <- NA_character_
-  x
+  out <- x
+  if (length(na) > 0) {
+    out[x %in% na] <- NA_character_
+  }
+  if (!("" %in% na)) {
+    out[is.na(x)] <- ""
+  }
+  out
 }
 
 groom_text <- function(x, na = "", trim_ws = TRUE) {

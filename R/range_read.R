@@ -10,9 +10,6 @@
 #'   throughout the googlesheets4 package.
 #'
 #' `read_sheet()` and `range_read()` are synonyms and you can use either one.
-#' The first release of googlesheets used a `sheets_` prefix everywhere, so we
-#' had `sheets_read()`. It still works, but it's deprecated and will go away
-#' rather swiftly.
 #'
 #' @section Column Specification:
 #'
@@ -222,7 +219,8 @@ spread_sheet_impl_ <- function(df,
   }
   if (col_names_in_sheet) {
     this <- df$row == 0
-    col_names[df$col[this]] <- as_character(df$cell[this])
+    col_names[df$col[this]] <-
+      as_character(df$cell[this], na = na, trim_ws = trim_ws)
     df <- df[!this, ]
   }
 

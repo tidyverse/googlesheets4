@@ -48,17 +48,79 @@ test_that("read_sheet() can skip columns", {
 })
 
 # https://github.com/tidyverse/googlesheets4/issues/73
+# https://github.com/tidyverse/googlesheets4/issues/174
 test_that("read_sheet() honors `na`", {
   skip_if_offline()
   skip_if_no_token()
 
-  df <- read_sheet(
+  # default behaviour
+  dat <- read_sheet(
+    test_sheet("googlesheets4-col-types"),
+    sheet = "NAs"
+  )
+  expect_true(all(map_lgl(dat, is.character)))
+  expect_false(is.na(dat$...NA[2]))
+  expect_true(is.na(dat$space[2]))
+  expect_true(is.na(dat$empty_string[2]))
+  expect_true(is.na(dat$truly_empty[2]))
+
+  # can explicit whitespace survive?
+  dat <- read_sheet(
+    test_sheet("googlesheets4-col-types"),
+    sheet = "NAs",
+    trim_ws = FALSE
+  )
+  expect_equal(dat$space[2], " ")
+
+  # can we request empty string instead of NA?
+  dat <- read_sheet(
+    test_sheet("googlesheets4-col-types"),
+    sheet = "NAs",
+    na = character()
+  )
+  expect_equal(dat$space[2], "")
+  expect_equal(dat$empty_string[2], "")
+  expect_equal(dat$truly_empty[2], "")
+
+  # explicit whitespace and empty-string-for-NA
+  dat <- read_sheet(
+    test_sheet("googlesheets4-col-types"),
+    sheet = "NAs",
+    na = character(), trim_ws = FALSE
+  )
+  expect_equal(dat$space[2], " ")
+
+  # more NA strings
+  dat <- read_sheet(
     test_sheet("googlesheets4-col-types"),
     sheet = "NAs",
     na = c("", "NA", "Missing")
   )
-  expect_true(all(vapply(df, is.double, logical(1))))
-  expect_true(is.na(df$A[2]))
-  expect_true(is.na(df$B[2]))
-  expect_true(is.na(df$C[2]))
+  expect_true(is.na(dat$...Missing[2]))
+  expect_true(is.na(dat$...NA[2]))
+  expect_true(is.na(dat$space[2]))
+  expect_true(is.na(dat$empty_string[2]))
+  expect_true(is.na(dat$truly_empty[2]))
+
+  # column name that is NA string
+  dat <- read_sheet(
+    test_sheet("googlesheets4-col-types"),
+    sheet = "NAs",
+    na = "complete",
+    .name_repair = ~ vec_as_names(.x, repair = "unique", quiet = TRUE)
+  )
+  expect_match(rev(names(dat))[1], "^...")
+
+  # how NA strings interact with column typing
+  dat <- read_sheet(
+    test_sheet("googlesheets4-col-types"),
+    sheet = "NAs",
+    na = c("one", "three")
+  )
+  expect_true(is.character(dat$...Missing))
+  expect_true(is.character(dat$...NA))
+  expect_true(is.character(dat$space))
+  expect_true(is.character(dat$complete))
+  expect_true(is.logical(dat$empty_string))
+  expect_true(is.logical(dat$truly_empty))
 })

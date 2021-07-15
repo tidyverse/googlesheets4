@@ -15,6 +15,8 @@ Specifically, `na = character()` (or the general lack of `""` among the `na` str
 
 Explicit `NULL`s are now written properly, i.e. as an empty cell (#203).
 
+`sheet_append()` no longer touches any aspect of cell formatting other than `numberFormat` (#204).
+
 ## Dependency changes
 
 * cli is new in Imports.

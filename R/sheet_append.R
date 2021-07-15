@@ -72,6 +72,6 @@ prepare_rows <- function(sheet_id, df) {
     "AppendCellsRequest",
     sheetId = sheet_id,
     rows = as_RowData(df, col_names = FALSE), # an array of instances of RowData
-    fields = "userEnteredValue,userEnteredFormat"
+    fields = "userEnteredValue,userEnteredFormat.numberFormat"
   ))
 }

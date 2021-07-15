@@ -59,7 +59,7 @@ range_speedread <- function(ss,
                             range = NULL,
                             skip = 0,
                             ...) {
-  check_installed("readr", glue("to use {bt('range_speedread()')}"))
+  check_installed("readr", "to use `range_speedread()`.")
 
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)

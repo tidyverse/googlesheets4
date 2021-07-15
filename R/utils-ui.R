@@ -142,14 +142,6 @@ gs4_abort <- function(message, ..., class = NULL, .envir = parent.frame()) {
   )
 }
 
-sq <- function(x) glue::single_quote(x)
-dq <- function(x) glue::double_quote(x)
-bt <- function(x) glue::backtick(x)
-
-class_collapse <- function(x) {
-  glue("<{glue_collapse(class(x), sep = '/')}>")
-}
-
 # helpful in the default method of an as_{to} generic
 # exists mostly to template the message
 abort_unsupported_conversion <- function(from, to) {

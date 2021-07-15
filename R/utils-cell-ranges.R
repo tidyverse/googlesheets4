@@ -196,7 +196,7 @@ make_cell_range <- function(start_row, end_row, start_column, end_column,
   cl <- cellranger::cell_limits(
     ul = c(start_row, start_column),
     lr = c(end_row, end_column),
-    sheet = sq(sheet_name)
+    sheet = glue::single_quote(sheet_name)
   )
   as_sheets_range(cl)
 }

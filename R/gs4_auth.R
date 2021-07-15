@@ -240,7 +240,7 @@ gs4_user <- function() {
 check_gs4_email_is_drive_email <- function() {
   if (googledrive::drive_has_token() && gs4_has_token()) {
     drive_email <- googledrive::drive_user()[["emailAddress"]]
-    gs4_email <- gs4_user()
+    gs4_email <- with_gs4_quiet(gs4_user())
     if (drive_email != gs4_email) {
       gs4_bullets(c(
         "!" = "Authenticated as 2 different users with googledrive and \\

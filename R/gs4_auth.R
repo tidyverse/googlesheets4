@@ -258,8 +258,26 @@ check_gs4_email_is_drive_email <- function() {
 gs4_auth_internal <- function(account = c("docs", "testing"),
                               scopes = NULL,
                               drive = TRUE) {
-  stopifnot(gargle:::secret_can_decrypt("googlesheets4"))
   account <- match.arg(account)
+  can_decrypt <- gargle:::secret_can_decrypt("googlesheets4")
+  online <- !is.null(curl::nslookup("sheets.googleapis.com", error = FALSE))
+  if (!can_decrypt || !online) {
+    gs4_abort(
+      message = c(
+        "Auth unsuccessful:",
+        if (!can_decrypt) {
+          c("x" = "Can't decrypt the {.field {account}} service account token")
+        },
+        if (!online) {
+          c("x" = "We don't appear to be online (or maybe the Sheets API is down?)")
+        }
+      ),
+      class = "googlesheets4_auth_internal_error",
+      can_decrypt = can_decrypt, online = online
+    )
+  }
+
+  if (!is_interactive()) local_gs4_quiet()
   filename <- glue("googlesheets4-{account}.json")
   # TODO: revisit when I do PKG_scopes()
   # https://github.com/r-lib/gargle/issues/103
@@ -286,7 +304,10 @@ local_deauth <- function(env = parent.frame()) {
   original_cred <- .auth$get_cred()
   original_auth_active <- .auth$auth_active
   gs4_bullets(c(i = "Going into deauthorized state."))
-  withr::defer(gs4_bullets(c(i = "Restoring auth state.")), envir = env)
+  withr::defer(
+    drive_bullets(c("i" = "Restoring previous auth state")),
+    envir = env
+  )
   withr::defer({
     .auth$set_cred(original_cred)
     .auth$set_auth_active(original_auth_active)

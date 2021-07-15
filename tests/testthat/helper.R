@@ -1,9 +1,11 @@
-if (gargle:::secret_can_decrypt("googlesheets4") &&
-    !is.null(curl::nslookup("sheets.googleapis.com", error = FALSE))) {
-  capture.output(
-    gs4_auth_testing(drive = TRUE)
-  )
-} else {
+auth_success <- tryCatch(
+  gs4_auth_testing(),
+  googlesheets4_auth_internal_error = function(e) NULL
+)
+if (!isTRUE(auth_success)) {
+  gs4_bullets(c(
+    "!" = "Internal auth failed; calling {.fun gs4_deauth}."
+  ))
   gs4_deauth()
 }
 

@@ -56,7 +56,7 @@ cell_data <- function(x, val_type, .na = NULL) {
 
 #' @export
 as_CellData.NULL <- function(x, .na = NULL) {
-  empty_cell(.na)
+  list(empty_cell(.na))
 }
 
 #' @export

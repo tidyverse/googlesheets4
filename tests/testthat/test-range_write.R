@@ -41,6 +41,25 @@ test_that("range_write() works", {
   expect_equal(df, data[1:3])
 })
 
+# https://github.com/tidyverse/googlesheets4/issues/203
+test_that("we can write a hole-y tibble containing NULLs", {
+  skip_if_offline()
+  skip_if_no_token()
+
+  dat_write <- tibble::tibble(A = list(NULL, "HI"), B = month.abb[1:2])
+
+  ss <- local_ss(me_("write-NULL"), sheets = dat_write)
+  write_sheet(dat_write, ss, sheet = 1)
+
+  dat_read <- read_sheet(ss)
+  expect_equal(dat_read$A, c(NA, "HI"))
+  expect_equal(dat_read$B, dat_write$B)
+
+  dat_read <- read_sheet(ss, col_types = "Lc")
+  expect_equal(dat_read$A, dat_write$A)
+  expect_equal(dat_read$B, dat_write$B)
+})
+
 # ---- helpers ----
 test_that("prepare_loc() makes the right call re: `start` vs. `range`", {
   expect_loc <- function(x, loc) {

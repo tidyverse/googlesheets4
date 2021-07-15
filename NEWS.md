@@ -13,6 +13,8 @@ googlesheets4 now throws errors with class `"googlesheets4_error"` (#12).
 The `na` argument of `read_sheet()` has become more capable and more consistent with readr.
 Specifically, `na = character()` (or the general lack of `""` among the `na` strings) results in cells with no data appearing as the empty string `""` within a character vector, as opposed to `NA` (#174).
 
+Explicit `NULL`s are now written properly, i.e. as an empty cell (#203).
+
 ## Dependency changes
 
 * cli is new in Imports.

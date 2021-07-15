@@ -20,7 +20,7 @@ test_that("expect_empty_cell() is synced with empty_cell()", {
 })
 
 test_that("as_CellData() treats NULL as empty cell", {
-  expect_empty_cell(as_CellData(NULL))
+  expect_empty_cell(as_CellData(NULL)[[1]])
 })
 
 test_that("as_CellData() works for logical", {

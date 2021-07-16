@@ -3,6 +3,8 @@ on:
     branches:
       - main
       - master
+  tags:
+    -'*'
   schedule:
     # * is a special character in YAML so we have to quote this string
     # 3am Pacific = 11am UTC
@@ -35,10 +37,12 @@ jobs:
           saveRDS(pak::pkg_deps("local::.", dependencies = TRUE), ".github/r-depends.rds")
         shell: Rscript {0}
 
-      - name: Cache R packages
+      - name: Restore R package cache
         uses: actions/cache@v2
         with:
-          path: ${{ env.R_LIBS_USER }}
+          path: |
+            ${{ env.R_LIBS_USER }}/*
+            !${{ env.R_LIBS_USER }}/pak
           key: ubuntu-18.04-${{ steps.install-r.outputs.installed-r-version }}-1-${{ hashFiles('.github/r-depends.rds') }}
           restore-keys: ubuntu-18.04-${{ steps.install-r.outputs.installed-r-version }}-1-
 
@@ -51,10 +55,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pak::local_install_dev_deps(upgrade = TRUE)
-          pak::pkg_install("tidyverse")
-          pak::pkg_install("tidyverse/tidytemplate")
-          pak::pkg_install("hadley/emo")
+          pak::local_install_dev_deps(upgrade = TRUE, dependencies = c("all", "Config/Needs/website"))
           pak::pkg_install("pkgdown")
         shell: Rscript {0}
 

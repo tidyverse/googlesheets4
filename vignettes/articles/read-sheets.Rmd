@@ -105,7 +105,7 @@ df$cell[[3]]
 
 Specify `cell_data = "full", discard_empty = FALSE` to get even more data if you, for example, need access to cell formulas or formatting.
 
-`spread_sheet()` `r emo::ji("wink")` converts data in the "one row per cell" form into the data frame you get from `range_read()`, which involves reshaping and column typing.
+`spread_sheet()` converts data in the "one row per cell" form into the data frame you get from `range_read()`, which involves reshaping and column typing.
 
 ```{r}
 df %>% spread_sheet(col_types = "D")

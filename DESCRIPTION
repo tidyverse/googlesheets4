@@ -9,8 +9,8 @@ Authors@R:
              comment = c(ORCID = "0000-0002-6983-2759")),
       person(given = "RStudio",
              role = c("cph", "fnd")))
-Description: Interact with Google Sheets through the Sheets API
-    v4 <https://developers.google.com/sheets/api>. "API" is an acronym for
+Description: Interact with Google Sheets through the Sheets API v4
+    <https://developers.google.com/sheets/api>. "API" is an acronym for
     "application programming interface"; the Sheets API allows users to
     interact with Google Sheets programmatically, instead of via a web
     browser. The "v4" refers to the fact that the Sheets API is currently
@@ -50,11 +50,13 @@ Suggests:
     withr
 RdMacros: 
     lifecycle
+Remotes: 
+    r-lib/rlang
 ByteCompile: true
+Config/Needs/website:pkgdown, tidyverse, r-lib/downlit,
+    tidyverse/tidytemplate
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9001
-Remotes: 
-    r-lib/rlang

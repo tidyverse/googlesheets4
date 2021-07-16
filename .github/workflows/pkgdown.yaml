@@ -3,8 +3,8 @@ on:
     branches:
       - main
       - master
-  tags:
-    -'*'
+    tags:
+      -'*'
   schedule:
     # * is a special character in YAML so we have to quote this string
     # 3am Pacific = 11am UTC

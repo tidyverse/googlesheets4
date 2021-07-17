@@ -233,12 +233,13 @@ is how googledrive represents Drive files. Processed through
 <code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='va'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_example.html'>gs4_example</a></span><span class='op'>(</span><span class='st'>"gapminder"</span><span class='op'>)</span>
-  <span class='fu'>sheet_properties</span><span class='op'>(</span><span class='va'>ss</span><span class='op'>)</span>
-  <span class='fu'>sheet_names</span><span class='op'>(</span><span class='va'>ss</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania" </div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='va'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_example.html'>gs4_example</a></span><span class='op'>(</span><span class='st'>"gapminder"</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'>sheet_properties</span><span class='op'>(</span><span class='va'>ss</span><span class='op'>)</span></span>
+<span class='r-in'>  <span class='fu'>sheet_names</span><span class='op'>(</span><span class='va'>ss</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "Africa"   "Americas" "Asia"     "Europe"   "Oceania" </span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

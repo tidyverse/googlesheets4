@@ -224,41 +224,44 @@ this argument and requires that there is exactly one match.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>gs4_examples</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; &lt;drive_id[6]&gt;
-#&gt;                                     mini-gap 
-#&gt; 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU 
-#&gt;                                    gapminder 
-#&gt; 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY 
-#&gt;                                       deaths 
-#&gt; 1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y 
-#&gt;                                chicken-sheet 
-#&gt; 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU 
-#&gt;                         formulas-and-formats 
-#&gt; 1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms 
-#&gt;                    cell-contents-and-formats 
-#&gt; 1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E </div><div class='input'><span class='fu'>gs4_examples</span><span class='op'>(</span><span class='st'>"gap"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; &lt;drive_id[2]&gt;
-#&gt;                                     mini-gap 
-#&gt; 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU 
-#&gt;                                    gapminder 
-#&gt; 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY </div><div class='input'><span class='fu'>gs4_example</span><span class='op'>(</span><span class='st'>"gapminder"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  Spreadsheet name: gapminder
-#&gt;                ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY
-#&gt;            Locale: en_US
-#&gt;         Time zone: America/Los_Angeles
-#&gt;       # of sheets: 5
-#&gt; # of named ranges: 1
-#&gt; 
-#&gt; (Sheet name): (Nominal extent in rows x columns)
-#&gt;       Africa: 625 x 6
-#&gt;     Americas: 301 x 6
-#&gt;         Asia: 397 x 6
-#&gt;       Europe: 361 x 6
-#&gt;      Oceania: 25 x 6
-#&gt; 
-#&gt; (Named range): (A1 range)        
-#&gt;        canada: 'Americas'!A38:F49</div></pre>
+    <pre class="examples"><span class='r-in'><span class='fu'>gs4_examples</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;drive_id[6]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                     mini-gap </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                    gapminder </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                       deaths </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                chicken-sheet </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                         formulas-and-formats </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                    cell-contents-and-formats </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E </span>
+<span class='r-in'><span class='fu'>gs4_examples</span><span class='op'>(</span><span class='st'>"gap"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;drive_id[2]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                     mini-gap </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                    gapminder </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY </span>
+<span class='r-in'><span class='fu'>gs4_example</span><span class='op'>(</span><span class='st'>"gapminder"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Spreadsheet name: gapminder</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            Locale: en_US</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         Time zone: America/Los_Angeles</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       # of sheets: 5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> # of named ranges: 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Sheet name): (Nominal extent in rows x columns)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Africa: 625 x 6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     Americas: 301 x 6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         Asia: 397 x 6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Europe: 361 x 6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      Oceania: 25 x 6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Named range): (A1 range)        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        canada: 'Americas'!A38:F49</span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

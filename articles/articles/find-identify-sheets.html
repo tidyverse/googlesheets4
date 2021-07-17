@@ -199,7 +199,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/class.html">unclass</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span>
 <span class="co">#&gt; [1] "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span></code></pre></div>
 <p><code><a href="../../reference/as_sheets_id.html">as_sheets_id()</a></code> is a generic function, which means it knows what to do with a few different types of input. For character string input, <code><a href="../../reference/as_sheets_id.html">as_sheets_id()</a></code> passes a string through, unless it looks like a URL. If it looks like a URL, we use a regular expression to extract the Sheet ID. The returned string bears the classes <code>sheets_id</code> and <code>drive_id</code> (for playing nicely with googledrive).</p>
-<p>Why did we call <code><a href="https://rdrr.io/r/base/class.html">unclass(ssid)</a></code> above to see the naked Sheet ID? Because, by default, when you print an instance of <code>sheets_id</code>, we attempt to show you some current metadata about the Sheet.</p>
+<p>Why did we call <code>unclass(ssid)</code> above to see the naked Sheet ID? Because, by default, when you print an instance of <code>sheets_id</code>, we attempt to show you some current metadata about the Sheet.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ssid</span>
 <span class="co">#&gt;  Spreadsheet name: gapminder</span>
@@ -342,7 +342,7 @@
 <span class="co">#&gt; 4 fiery-hart      18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEnWY6HSo &lt;named list [35]&gt;</span>
 <span class="co">#&gt; 5 chicken-sheet   1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM7u0 &lt;named list [35]&gt;</span>
 <span class="co">#&gt; # … with 3 more rows</span></code></pre></div>
-<p>This is so handy that we’ve made <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html">drive_find(type = "spreadsheet")</a></code>:</p>
+<p>This is so handy that we’ve made <code><a href="../../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code>drive_find(type = "spreadsheet")</code>:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; # A dribble: 8 x 3</span>

@@ -297,7 +297,7 @@
 <p>1899-12-30 12:00:00 is noon on the day that is the Google Sheets epoch. Its underlying serial number is 0.5, because one half-day has elapsed since the epoch. 1899-12-31 18:00:00 is 6pm in the evening on the day after the epoch. Its underlying serial number is 1.75, because it’s one plus three-quarters of a day since the epoch.</p>
 <p>Every Google Sheet has an associated time zone. It is included in the metadata returned by <code><a href="../../reference/gs4_get.html">gs4_get()</a></code>, like the locale, and is revealed by default when we print a Sheets ID.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="op">(</span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
    <span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   Spreadsheet name: gapminder</span>
 <span class="co">#&gt;                 ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY</span>
@@ -349,17 +349,17 @@
 </tr>
 <tr class="even">
 <td>moment_ny</td>
-<td><code><a href="http://lubridate.tidyverse.org/reference/with_tz.html">with_tz(moment, tzone = "America/New_York")</a></code></td>
+<td><code>with_tz(moment, tzone = "America/New_York")</code></td>
 <td></td>
 </tr>
 <tr class="odd">
 <td>moment_utc</td>
-<td><code><a href="http://lubridate.tidyverse.org/reference/with_tz.html">with_tz(moment, tzone = "Etc/UTC")</a></code></td>
+<td><code>with_tz(moment, tzone = "Etc/UTC")</code></td>
 <td></td>
 </tr>
 <tr class="even">
 <td>moment_ny_force_utc</td>
-<td><code><a href="http://lubridate.tidyverse.org/reference/force_tz.html">force_tz(moment_ny, tzone = "Etc/UTC")</a></code></td>
+<td><code>force_tz(moment_ny, tzone = "Etc/UTC")</code></td>
 <td></td>
 </tr>
 <tr class="odd">
@@ -377,7 +377,7 @@
 </tbody>
 </table>
 <p>Capture the current <code>moment</code> in time, with <code><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time()</a></code>, which has no explicit time zone. Store versions of <code>moment</code> with explicit time zones: America/New_York and Etc/UTC. Use <code><a href="http://lubridate.tidyverse.org/reference/force_tz.html">lubridate::force_tz()</a></code> to create a new moment in time: the moment in UTC that has the same clock time as the original <code>moment</code> in New York.</p>
-<p>The first Sheets formula we use is <code>=NOW()</code>, which you might expect to be the equivalent of R’s <code><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time()</a></code>. But it’s more like <code><a href="http://lubridate.tidyverse.org/reference/force_tz.html">force_tz(Sys.time(), tzone = "Etc/UTC")</a></code>. The second formula we construct is more elaborate. It uses datetime functions in Sheets to explicitly construct <code>moment_utc</code> in the Sheet. The last column uses <code>=TO_PURE_NUMBER()</code> to reveal the underlying serial numbers for all of the datetimes.</p>
+<p>The first Sheets formula we use is <code>=NOW()</code>, which you might expect to be the equivalent of R’s <code><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time()</a></code>. But it’s more like <code>force_tz(Sys.time(), tzone = "Etc/UTC")</code>. The second formula we construct is more elaborate. It uses datetime functions in Sheets to explicitly construct <code>moment_utc</code> in the Sheet. The last column uses <code>=TO_PURE_NUMBER()</code> to reveal the underlying serial numbers for all of the datetimes.</p>
 <p>Create 3 Sheets, with different approaches to the time zone:</p>
 <ul>
 <li>No explicit specification of time zone. It’s hard to say what you’ll get here!</li>
@@ -445,7 +445,7 @@
 #&gt; 6 =DATE(moment_ut… =(DATE(2020,4,23)+time(19,4… NA</code></pre>
 <p>Read the Sheets back into R, the Sheet with no explicit time zone set.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss_xx</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss_xx</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Reading from "tz-default"</span>
 <span class="co">#&gt; Range "Sheet1"</span>
 <span class="co">#&gt;                  what            datetime serial_number</span>
@@ -455,7 +455,7 @@
 <span class="co">#&gt; 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66</span>
 <span class="co">#&gt; 5              =NOW() 2020-04-23 19:49:22      43944.83</span>
 <span class="co">#&gt; 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83</span>
-<span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss_ny</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss_ny</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Reading from "tz-america-new-york"</span>
 <span class="co">#&gt; Range "Sheet1"</span>
 <span class="co">#&gt;                  what            datetime serial_number</span>
@@ -465,7 +465,7 @@
 <span class="co">#&gt; 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66</span>
 <span class="co">#&gt; 5              =NOW() 2020-04-23 15:49:23      43944.66</span>
 <span class="co">#&gt; 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83</span>
-<span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss_utc</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu"><a href="../../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss_utc</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Reading from "tz-etc-utc"</span>
 <span class="co">#&gt; Range "Sheet1"</span>
 <span class="co">#&gt;                  what            datetime serial_number</span>
@@ -485,7 +485,7 @@
 </ul>
 <p>Clean up.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"tz-"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"tz-"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Files trashed:</span>
 <span class="co">#&gt;   * tz-etc-utc: 1xUiNXYsk6nDMmgDq8E5FhBwJA6Zg1XCyhkuQISI91As</span>

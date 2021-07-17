@@ -175,6 +175,7 @@
 <p>Here we read from the “mini-gap” and “deaths” example Sheets to show some of the different ways to specify (work)sheet and cell ranges.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span>, sheet <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
+<span class="co">#&gt; ✖ Request failed [429]. Retry 1 happens in 100.4 seconds ...</span>
 <span class="co">#&gt; ✔ Reading from "mini-gap".</span>
 <span class="co">#&gt; ✔ Range ''Americas''.</span>
 <span class="co">#&gt; # A tibble: 5 x 6</span>
@@ -240,7 +241,7 @@
 <p>If you looked at the “deaths” spreadsheet in the browser (it’s <a href="https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/edit#gid=1210215306">here</a>), you know that it has some of the typical features of real world spreadsheets: the main data rectangle has prose intended for human-consumption before and after it. That’s why we have to specify the range when we read from it.</p>
 <p>We’ve designated the data rectangles as <a href="https://support.google.com/docs/answer/63175?co=GENIE.Platform%3DDesktop&amp;hl=en">named ranges</a>, which provides a very slick way to read them – definitely less brittle and mysterious than approaches like <code>range = "other!A5:F15"</code> or <code>skip = 4, n_max = 10</code>. A named range can be passed via the <code>range =</code> argument:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>range <span class="op">=</span> <span class="st">"arts_data"</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from "deaths".</span>
 <span class="co">#&gt; ✔ Range 'arts_data'.</span>
@@ -295,9 +296,9 @@
 <span class="co">#&gt; attr(,"class")</span>
 <span class="co">#&gt; [1] "CELL_DATE"   "SHEETS_CELL"</span></code></pre></div>
 <p>Specify <code>cell_data = "full", discard_empty = FALSE</code> to get even more data if you, for example, need access to cell formulas or formatting.</p>
-<p><code><a href="../../reference/spread_sheet.html">spread_sheet()</a></code> 😉 converts data in the “one row per cell” form into the data frame you get from <code><a href="../../reference/range_read.html">range_read()</a></code>, which involves reshaping and column typing.</p>
+<p><code><a href="../../reference/spread_sheet.html">spread_sheet()</a></code> converts data in the “one row per cell” form into the data frame you get from <code><a href="../../reference/range_read.html">range_read()</a></code>, which involves reshaping and column typing.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/spread_sheet.html">spread_sheet</a></span><span class="op">(</span>col_types <span class="op">=</span> <span class="st">"D"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/spread_sheet.html">spread_sheet</a></span><span class="op">(</span>col_types <span class="op">=</span> <span class="st">"D"</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 x 1</span>
 <span class="co">#&gt;   `Date of birth`</span>
 <span class="co">#&gt;   &lt;date&gt;         </span>
@@ -319,7 +320,7 @@
 <p>If your Sheet is so large that the speed of <code><a href="../../reference/range_read.html">range_read()</a></code> is causing problems, consider <code><a href="../../reference/range_speedread.html">range_speedread()</a></code>. It uses a special URL that allows a Sheet to be read as comma-separated values (CSV). Access via this URL doesn’t use the Sheets API (although <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> still makes an API call to retrieve Sheet metadata). As an example, on a Sheet with around 57,000 rows and 25 columns (over 1.4 million cells), <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> takes ~5 seconds, whereas <code><a href="../../reference/range_read.html">range_read()</a></code> takes closer to 3 minutes. Why wouldn’t we always take the faster option?!? Because the speed difference is imperceptible for many Sheets and there are some downsides (described later).</p>
 <p><code><a href="../../reference/range_speedread.html">range_speedread()</a></code> has much the same interface as <code><a href="../../reference/range_read.html">range_read()</a></code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../../reference/range_speedread.html">range_speedread</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Oceania"</span>, n_max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from "gapminder", sheet 'Oceania'.</span>
 <span class="co">#&gt; ℹ Export URL:</span>
@@ -342,7 +343,7 @@
 <span class="co">#&gt; 3 Australia Oceania    1962    70.9 10794968    12217.</span></code></pre></div>
 <p>The output above reveals that, under the hood, <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> calls an external function for CSV parsing (currently <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code>, but it is likely to switch to <code>vroom::vroom()</code>). An important consequence is that all arguments around column type specification are passed along to the CSV-parsing function. Here is a demo using readr-style column specification:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../../reference/range_speedread.html">range_speedread</a></span><span class="op">(</span>
     range <span class="op">=</span> <span class="st">"other!A5:F15"</span>,
     col_types <span class="op">=</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/cols.html">cols</a></span><span class="op">(</span>
@@ -369,7 +370,7 @@
 <span class="co">#&gt; 10 Pat Summit     coach         64 TRUE       1952-06-14      2016-06-28</span></code></pre></div>
 <p>Compare that to how we would read the same data with <code><a href="../../reference/range_read.html">range_read()</a></code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>range <span class="op">=</span> <span class="st">"other_data"</span>, col_types <span class="op">=</span> <span class="st">"??i?DD"</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from "deaths".</span>
 <span class="co">#&gt; ✔ Range 'other_data'.</span>
@@ -391,12 +392,12 @@
 <li>
 <code>range = "other!A5:F15"</code> versus <code>range = "other_data"</code>: <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> can’t access a named range, whereas <code><a href="../../reference/range_read.html">range_read()</a></code> can.</li>
 <li>
-<code><a href="https://readr.tidyverse.org/reference/parse_datetime.html">readr::col_date("%m/%d/%Y")</a></code> vs <code>D</code>: <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> must parse a character representation of all cell data, including datetimes, whereas <code><a href="../../reference/range_read.html">range_read()</a></code> has access to the actual cell data and its type.</li>
+<code>readr::col_date("%m/%d/%Y")</code> vs <code>D</code>: <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> must parse a character representation of all cell data, including datetimes, whereas <code><a href="../../reference/range_read.html">range_read()</a></code> has access to the actual cell data and its type.</li>
 </ul>
 <p>What’s the speed difference for something like the Africa sheet in the “gapminder” example Sheet? (around 625 rows x 6 columns, or 3700 cells)</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span>
-  <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/range_speedread.html">range_speedread</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span>
+  <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/range_speedread.html">range_speedread</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from "gapminder", sheet 'Africa'.</span>
 <span class="co">#&gt; ℹ Export URL:</span>
@@ -412,14 +413,14 @@
 <span class="co">#&gt;   gdpPercap = col_double()</span>
 <span class="co">#&gt; )</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.105   0.000   0.533</span>
+<span class="co">#&gt;   0.100   0.001   0.713</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span>
-  <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span>
+  <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from "gapminder".</span>
 <span class="co">#&gt; ✔ Range ''Africa''.</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.371   0.000   0.655</span></code></pre></div>
+<span class="co">#&gt;   0.356   0.031   0.938</span></code></pre></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> vs <code><a href="../../reference/range_read.html">range_read()</a></code>:</p>
 <ul>

@@ -232,7 +232,7 @@ here and how it works in other functions (e.g. <code><a href='range_read.html'>r
 <code><a href='sheet_delete.html'>sheet_delete()</a></code> to delete an entire sheet.
 Row-only and column-only ranges are especially relevant, such as "2:6" or
 "D". Remember you can also use the helpers in <code><a href='cell-specification.html'>cell-specification</a></code>,
-such as <code><a href='cell-specification.html'>cell_cols(4:6)</a></code>, or <code><a href='cell-specification.html'>cell_rows(5)</a></code>.</p></li>
+such as <code>cell_cols(4:6)</code>, or <code>cell_rows(5)</code>.</p></li>
 </ul></td>
     </tr>
     <tr>
@@ -262,27 +262,36 @@ surrounding cells up or to the left.</p></td>
 <code><a href='sheet_write.html'>sheet_write</a>()</code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='co'># create a data frame to use as initial data</span>
-  <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_fodder.html'>gs4_fodder</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span>
-
-  <span class='co'># create Sheet</span>
-  <span class='va'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span><span class='op'>(</span><span class='st'>"range-delete-example"</span>, sheets <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span><span class='op'>)</span>
-
-  <span class='co'># delete some rows</span>
-  <span class='fu'>range_delete</span><span class='op'>(</span><span class='va'>ss</span>, range <span class='op'>=</span> <span class='st'>"2:4"</span><span class='op'>)</span>
-
-  <span class='co'># delete a column</span>
-  <span class='fu'>range_delete</span><span class='op'>(</span><span class='va'>ss</span>, range <span class='op'>=</span> <span class='st'>"C"</span><span class='op'>)</span>
-
-  <span class='co'># delete a rectangle and specify how to shift remaining cells</span>
-  <span class='fu'>range_delete</span><span class='op'>(</span><span class='va'>ss</span>, range <span class='op'>=</span> <span class='st'>"B3:F4"</span>, shift <span class='op'>=</span> <span class='st'>"left"</span><span class='op'>)</span>
-
-  <span class='co'># clean up</span>
-  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span><span class='op'>(</span><span class='st'>"range-delete-example"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
-    <span class='fu'>googledrive</span><span class='fu'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> Creating new Sheet: <span style='color: #00BBBB;'>range-delete-example</span>.</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> Editing <span style='color: #00BBBB;'>range-delete-example</span>.</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> Deleting cells in sheet <span style='color: #00BB00;'>Sheet1</span>.</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> Editing <span style='color: #00BBBB;'>range-delete-example</span>.</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> Deleting cells in sheet <span style='color: #00BB00;'>Sheet1</span>.</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> Editing <span style='color: #00BBBB;'>range-delete-example</span>.</span></div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>✔</span> Deleting cells in sheet <span style='color: #00BB00;'>Sheet1</span>.</span></div><div class='output co'>#&gt; <span class='message'>File trashed:</span></div><div class='output co'>#&gt; <span class='message'>• <span style='color: #00BBBB;'>range-delete-example</span> <span style='color: #555555;'>&lt;id: 176VZUFjI5Hh8ju4EYcfRxNhen5bLsg183Ur4z1mrpeA&gt;</span></span></div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='co'># create a data frame to use as initial data</span></span>
+<span class='r-in'>  <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_fodder.html'>gs4_fodder</a></span><span class='op'>(</span><span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'># create Sheet</span></span>
+<span class='r-in'>  <span class='va'>ss</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_create.html'>gs4_create</a></span><span class='op'>(</span><span class='st'>"range-delete-example"</span>, sheets <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'># delete some rows</span></span>
+<span class='r-in'>  <span class='fu'>range_delete</span><span class='op'>(</span><span class='va'>ss</span>, range <span class='op'>=</span> <span class='st'>"2:4"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'># delete a column</span></span>
+<span class='r-in'>  <span class='fu'>range_delete</span><span class='op'>(</span><span class='va'>ss</span>, range <span class='op'>=</span> <span class='st'>"C"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'># delete a rectangle and specify how to shift remaining cells</span></span>
+<span class='r-in'>  <span class='fu'>range_delete</span><span class='op'>(</span><span class='va'>ss</span>, range <span class='op'>=</span> <span class='st'>"B3:F4"</span>, shift <span class='op'>=</span> <span class='st'>"left"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'>  <span class='co'># clean up</span></span>
+<span class='r-in'>  <span class='fu'><a href='gs4_find.html'>gs4_find</a></span><span class='op'>(</span><span class='st'>"range-delete-example"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
+<span class='r-in'>    <span class='fu'>googledrive</span><span class='fu'>::</span><span class='fu'><a href='https://googledrive.tidyverse.org/reference/drive_trash.html'>drive_trash</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Creating new Sheet: <span style='color: #00BBBB;'>range-delete-example</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Editing <span style='color: #00BBBB;'>range-delete-example</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Deleting cells in sheet <span style='color: #00BB00;'>Sheet1</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Editing <span style='color: #00BBBB;'>range-delete-example</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Deleting cells in sheet <span style='color: #00BB00;'>Sheet1</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Editing <span style='color: #00BBBB;'>range-delete-example</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Deleting cells in sheet <span style='color: #00BB00;'>Sheet1</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> File trashed:</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>range-delete-example</span> <span style='color: #555555;'>&lt;id: 1usNWD2Q5P7VacGiY3zWMVDVS_VfCfv2qWc4gMt21Adc&gt;</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

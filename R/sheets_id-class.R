@@ -1,67 +1,32 @@
-#' `sheets_id` object
+#' `sheets_id` class
 #'
-#' @description A `sheets_id` is a spreadsheet identifier, i.e. a string. This
-#'   is what the Sheets and Drive APIs refer to as `spreadsheetId` and `fileId`,
-#'   respectively. When you print a `sheets_id`, we attempt to reveal its
-#'   current metadata (via `gs4_get()`). This can fail for a variety of
-#'   reasons (e.g. if you're offline), but the `sheets_id` is always revealed
-#'   and is returned, invisibly.
+#' @description
+
+#' `sheets_id` is an S3 class that marks a string as a Google Sheet's id, which
+#' the Sheets API docs refer to as `spreadsheetId`.
 #'
-#'   Any object of class `sheets_id` will also have the
-#'   [`drive_id`][googledrive::as_id] class, which is used by [googledrive] for
-#'   the same purpose. This means you can pipe a `sheets_id` object straight
-#'   into [googledrive] functions for all your Google Drive needs that have
-#'   nothing to do with the file being a spreadsheet. Examples: examine or
-#'   change file name, path, or permissions, copy the file, or visit it in a web
-#'   browser.
+#' Any object of class `sheets_id` also has the [`drive_id`][googledrive::as_id]
+#' class, which is used by [googledrive] for the same purpose. This means you
+#' can provide a `sheets_id` to [googledrive] functions, in order to do anything
+#' with your Sheet that has nothing to do with it being a spreadsheet. Examples:
+#' change the Sheet's name, parent folder, or permissions. Read more about using
+#' [googlesheets4] and [googledrive] together in `vignette("drive-and-sheets")`.
+#' Note that a `sheets_id` object is intended to hold **just one** id, while the
+#' parent class `drive_id` can be used for multiple ids.
 #'
-#' @name sheets_id
-#' @seealso [as_sheets_id()]
+
+#' `as_sheets_id()` is a generic function that converts various inputs into an
+#' instance of `sheets_id`. See more below.
 #'
-#' @examples
-#' if (gs4_has_token()) {
-#'   gs4_example("mini-gap")
-#' }
-NULL
 
-## implementing sheets_id as advised here:
-## https://github.com/hadley/adv-r/blob/master/S3.Rmd
+#' When you print a `sheets_id`, we attempt to reveal the Sheet's current
+#' metadata, via [gs4_get()]. This can fail for a variety of reasons (e.g. if
+#' you're offline), but the input `sheets_id` is always revealed and returned,
+#' invisibly.
 
-## constructor: efficiently creates new objects with the correct structure
-new_sheets_id <- function(x) {
-  stopifnot(is_string(x))
-  structure(x, class = c("sheets_id", "drive_id"))
-}
-
-# validator: performs more expensive checks that the object has correct values
-# from Sheet API docs:
-# The spreadsheet ID is a string containing letters, numbers, and some special
-# characters. The following regular expression can be used to extract the
-# spreadsheet ID from a Google Sheets URL:
-# /spreadsheets/d/([a-zA-Z0-9-_]+)
-validate_sheets_id <- function(x) {
-  stopifnot(inherits(x, "sheets_id"))
-  if (!grepl("^[a-zA-Z0-9-_]+$", x, perl = TRUE)) {
-    gs4_abort(c(
-      "Spreadsheet ID contains invalid characters:",
-      x = "{.field {x}}"
-    ))
-  }
-  ## I am quite sure id should have exactly 44 characters but am reluctant
-  ## to require this because it makes small examples and tests burdensome
-  x
-}
-
-## helper: provides convenient, neatly parameterised way for others to construct
-## and validate (create) objects of this class
-sheets_id <- function(x) {
-  validate_sheets_id(new_sheets_id(x))
-}
-
-#' Coerce to a sheets_id object
+#' @section `as_sheets_id()`:
 #'
-#' @description Converts various representations of a Google Sheet into a
-#'   [`sheets_id`] object. Anticipated inputs:
+#' These inputs can be converted to a `sheets_id`:
 #'   * Spreadsheet id, "a string containing letters, numbers, and some special
 #'   characters", typically 44 characters long, in our experience. Example:
 #'   `1qpyC0XzvTcKT6EISywvqESX3A0MwQoFDE8p-Bll4hps`.
@@ -78,15 +43,122 @@ sheets_id <- function(x) {
 #'   * Spreadsheet meta data, as returned by, e.g., [gs4_get()]. Literally,
 #'     this is an object of class `googlesheets4_spreadsheet`.
 #'
-#' @description This is a generic function.
-#'
-#' @param x Something that uniquely identifies a Google Sheet: a [`sheets_id`],
-#'   a [`drive_id`][googledrive::as_id], a URL, a one-row
+
+#' @name sheets_id
+#' @seealso [googledrive::as_id]
+
+#' @param x Something that contains a Google Sheet id: an id string, a
+#'   [`drive_id`][googledrive::as_id], a URL, a one-row
 #'   [`dribble`][googledrive::dribble], or a `googlesheets4_spreadsheet`.
 #' @param ... Other arguments passed down to methods. (Not used.)
-#' @export
-#' @examples
+
+#' @examplesIf gs4_has_token()
+#' mini_gap_id <- gs4_example("mini-gap")
+#' class(mini_gap_id)
+#' mini_gap_id
+#'
 #' as_sheets_id("abc")
+NULL
+
+# constructor and validator ----
+new_sheets_id <- function(x = character()) {
+  vec_assert(x, character())
+  new_vctr(x, class = c("sheets_id", "drive_id"), inherit_base_type = TRUE)
+}
+
+validate_sheets_id <- function(x) {
+  if (length(x) > 1) {
+    gs4_abort(c(
+      "A {.cls sheets_id} object can't have length greater than 1.",
+      x = "Actual input has length {length(x)}."
+    ))
+  }
+  validate_drive_id(x)
+}
+
+new_drive_id <- function(x = character()) {
+  utils::getFromNamespace("new_drive_id", "googledrive")(x)
+}
+validate_drive_id <- function(x) {
+  utils::getFromNamespace("validate_drive_id", "googledrive")(x)
+}
+
+# vctrs methods ----
+
+# sheets_id is intended to hold ONE id, so I want:
+# c(sheets_id, sheets_id) = drive_id
+# I'm willing to accept that this is not quite right / necessary if one or both
+# inputs has length 1
+#' @export
+vec_ptype2.sheets_id.sheets_id <- function(x, y, ...) new_drive_id()
+
+#' @export
+vec_ptype2.sheets_id.character <- function(x, y, ...) character()
+#' @export
+vec_ptype2.character.sheets_id <- function(x, y, ...) character()
+
+#' @export
+vec_ptype2.sheets_id.drive_id <- function(x, y, ...) new_drive_id()
+#' @export
+vec_ptype2.drive_id.sheets_id <- function(x, y, ...) new_drive_id()
+
+#' @export
+vec_cast.sheets_id.sheets_id <- function(x, to, ...) x
+
+#' @export
+vec_cast.sheets_id.character <- function(x, to, ...) {
+  validate_sheets_id(new_sheets_id(x))
+}
+#' @export
+vec_cast.character.sheets_id <- function(x, to, ...) vec_data(x)
+
+#' @export
+vec_cast.sheets_id.drive_id <- function(x, to, ...) {
+  validate_sheets_id(new_sheets_id(vec_data(x)))
+}
+#' @export
+vec_cast.drive_id.sheets_id <- function(x, to, ...) as_id(vec_data(x))
+
+#' @export
+vec_ptype_abbr.sheets_id <- function(x) "sht_id"
+
+# The main reason I implement str() (or rather just this specific inner bit) is
+# because the RStudio environment pane calls the str() method. And the default
+# behaviour from vctrs will eventually call the format() method, which I want to
+# prevent. I'm happy for the str() method to be super basic.
+
+#' @export
+obj_str_data.sheets_id <- function(x, ...,
+                                   indent.str = "",
+                                   width = getOption("width")) {
+  # inlining what vctrs does, but WITHOUT calling the format method
+  width <- width - nchar(indent.str) - 2
+  inline_list <- function(title, x, width = getOption("width"), quote = "") {
+    label_width <- width - nchar(title)
+    x <- glue::glue_collapse(
+      encodeString(x, quote = quote),
+      sep = ", ",
+      width = label_width
+    )
+    paste0(title, x)
+  }
+  title <- glue::glue(" {vec_ptype_abbr(x)} [1:{length(x)}] ")
+  cli::cat_line(inline_list(title, vec_data(x), width = width))
+
+  invisible(x)
+}
+
+# googledrive ----
+
+#' @export
+as_id.sheets_id <- function(x, ...) as_id(vec_data(x))
+#' @export
+as_id.googlesheets4_spreadsheet <- function(x, ...) as_id(x$spreadsheet_id)
+
+# user-facing  ----
+
+#' @export
+#' @rdname sheets_id
 as_sheets_id <- function(x, ...) UseMethod("as_sheets_id")
 
 #' @export
@@ -95,10 +167,17 @@ as_sheets_id.NULL <- function(x, ...) {
 }
 
 #' @export
+as_sheets_id.default <- function(x, ...) {
+  abort_unsupported_conversion(x, to = "sheets_id")
+}
+
+#' @export
 as_sheets_id.sheets_id <- function(x, ...) x
 
 #' @export
-as_sheets_id.drive_id <- function(x, ...) new_sheets_id(x)
+as_sheets_id.drive_id <- function(x, ...) {
+  validate_sheets_id(new_sheets_id(vec_data(x)))
+}
 
 #' @export
 as_sheets_id.dribble <- function(x, ...) {
@@ -116,80 +195,40 @@ as_sheets_id.dribble <- function(x, ...) {
     gs4_abort(c(
       "{.cls dribble} input must refer to a Google Sheet, i.e. a file with \\
        MIME type {.field {target}}.",
-      i = "File id: {.field {x$id}}",
       i = "File name: {.s_sheet {x$name}}",
+      i = "File id: {.field {x$id}}",
       x = "MIME TYPE: {.field {mime_type}}"
     ))
   }
-  new_sheets_id(x$id)
-}
-
-#' @export
-as_sheets_id.default <- function(x, ...) {
-  abort_unsupported_conversion(x, to = "sheets_id")
+  as_sheets_id(x$id)
 }
 
 #' @export
 as_sheets_id.character <- function(x, ...) {
-  if (length(x) != 1) {
-    gs4_abort("
-      {.cls character>} input must have length == 1, not length {length(x)}.")
-  }
-  out <- one_id(x)
-  if (is.na(out)) {
-    gs4_abort(c(
-      "Input does not match our regular expression for extracting \\
-       spreadsheet id.",
-      x = "Input: {.q {x}}"
-    ))
-  }
-  sheets_id(out)
+  # we're leaning on as_id() for URL detection and processing
+  id <- as_id(x)
+  validate_sheets_id(new_sheets_id(vec_data(id)))
 }
 
 #' @export
 as_sheets_id.googlesheets4_spreadsheet <- function(x, ...) {
-  new_sheets_id(x$spreadsheet_id)
+  validate_sheets_id(new_sheets_id(x$spreadsheet_id))
 }
 
-## copied from googledrive
-one_id <- function(x) {
-  if (!grepl("^http|/", x)) return(x)
-
-  ## We expect the links to have /d/ before the file id, have /folders/
-  ## before a folder id, or have id= before an uploaded blob
-  id_loc <- regexpr("/d/([^/])+|/folders/([^/])+|id=([^/])+", x)
-  if (id_loc == -1) {
-    NA_character_
-  } else {
-    gsub("/d/|/folders/|id=", "", regmatches(x, id_loc))
-  }
-}
-
-#' Extract the file id from Sheet metadata
-#'
-#' This method implements [googledrive::as_id()] for the class used here to hold
-#' metadata for a Sheet. It just calls [as_sheets_id()], but it's handy in case
-#' you forget that exists and hope that `as_id()` will "just work".
-#'
-#' @inheritParams googledrive::as_id
-#' @param x An instance of `googlesheets4_spreadsheet`, which is returned by,
-#'   e.g., [gs4_get()].
-#' @inherit googledrive::as_id return
-#' @importFrom googledrive as_id
-#' @export
-#' @examples
-#' if (gs4_has_token()) {
-#'   ss <- gs4_get(gs4_example("mini-gap"))
-#'   class(ss)
-#'   googledrive::as_id(ss)
-#' }
-as_id.googlesheets4_spreadsheet <- function(x, ...) as_sheets_id(x)
+# TODO: I now wonder if the fetching and presenting of metadata should actually
+# go in the print method. Is this an occasion to violate our usual preference
+# for keeping all logic in the format() method? At least in the vctrs world, the
+# format() method seems much more likely to be called in contexts where the live
+# API work is inappropriate.
 
 #' @export
 format.sheets_id <- function(x, ...) {
   meta <- tryCatch(
-    with_abort(gs4_get(x)),
-    rlang_error = function(e) e
+    gs4_get(x),
+    # seen with a failed request
+    gargle_error_request_failed = function(e) e,
+    # seen when we can't get a token but auth is active
+    googlesheets4_error = function(e) e
   )
 
   if (inherits(meta, "googlesheets4_spreadsheet")) {

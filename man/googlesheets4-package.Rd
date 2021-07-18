@@ -8,8 +8,8 @@
 \description{
 \if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
-Interact with Google Sheets through the Sheets API
-    v4 <https://developers.google.com/sheets/api>. "API" is an acronym for
+Interact with Google Sheets through the Sheets API v4
+    <https://developers.google.com/sheets/api>. "API" is an acronym for
     "application programming interface"; the Sheets API allows users to
     interact with Google Sheets programmatically, instead of via a web
     browser. The "v4" refers to the fact that the Sheets API is currently

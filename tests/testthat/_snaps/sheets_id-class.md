@@ -1,3 +1,39 @@
+# string with invalid character is rejected
+
+    Code
+      as_sheets_id("abc&123")
+    Error <rlang_error>
+      A <drive_id> must match this regular expression: `^[a-zA-Z0-9_-]+$`
+      Invalid input:
+      x 'abc&123'
+
+# invalid inputs are caught
+
+    Code
+      as_sheets_id(letters[1:2])
+    Error <googlesheets4_error>
+      A <sheets_id> object can't have length greater than 1.
+      x Actual input has length 2.
+
+# multi-row dribble is rejected
+
+    Code
+      as_sheets_id(d)
+    Error <googlesheets4_error>
+      <dribble> input must have exactly 1 row.
+      x Actual input has 2 rows.
+
+# dribble with non-Sheet file is rejected
+
+    Code
+      as_sheets_id(d)
+    Error <googlesheets4_error>
+      <dribble> input must refer to a Google Sheet, i.e. a file with MIME type
+      'application/vnd.google-apps.spreadsheet'.
+      i File name: "chicken.txt"
+      i File id: '1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y'
+      x MIME TYPE: 'text/plain'
+
 # sheets_id print method reveals metadata
 
     Code

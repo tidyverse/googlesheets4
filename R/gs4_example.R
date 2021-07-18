@@ -1,5 +1,5 @@
 ## TODO: consult remote key-value store for these? in case they change?
-.gs4_examples <- googledrive::as_id(c(
+.gs4_examples <- as_id(c(
                    "mini-gap" = "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU",
                   "gapminder" = "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY",
                      "deaths" = "1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y",
@@ -8,7 +8,7 @@
   "cell-contents-and-formats" = "1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E"
 ))
 
-.test_sheets <- googledrive::as_id(c(
+.test_sheets <- as_id(c(
   "googlesheets4-cell-tests" = "1WRFIb11PJsNwx2tYBRn3uq8uHwWSI5ziSgbGjkOukmE",
    "googlesheets4-col-types" = "1q-iRi1L3JugqHTtcjQ3DQOmOTuDnUsWi2AiG2eNyQkU"
 ))
@@ -59,7 +59,7 @@ many_sheets <- function(needle, haystack, adjective) {
     if (!any(sel)) {
       gs4_abort("Can't find {adjective} Sheet that matches {.q {needle}}.")
     }
-    out <- googledrive::as_id(out[sel])
+    out <- as_id(out[sel])
   }
 
   out
@@ -75,7 +75,7 @@ one_sheet <- function(needle, haystack, adjective) {
       i = "Make the {.arg matches} regular expression more specific."
     ))
   }
-  new_sheets_id(out)
+  as_sheets_id(out)
 }
 
 #' File IDs of example Sheets

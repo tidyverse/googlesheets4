@@ -7,11 +7,17 @@
 range_autofit(ss, sheet = NULL, range = NULL, dimension = c("columns", "rows"))
 }
 \arguments{
-\item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, an instance of \code{googlesheets4_spreadsheet}
-(returned by \code{\link[=gs4_get]{gs4_get()}}), or a \code{\link[googledrive:dribble]{dribble}}, which
-is how googledrive represents Drive files. Processed through
-\code{\link[=as_sheets_id]{as_sheets_id()}}.}
+\item{ss}{Something that identifies a Google Sheet:
+\itemize{
+\item its file id as a string or \code{\link[googledrive:as_id]{drive_id}}
+\item a URL from which we can recover the id
+\item a one-row \code{\link[googledrive:dribble]{dribble}}, which is how googledrive
+represents Drive files
+\item an instance of \code{googlesheets4_spreadsheet}, which is what \code{\link[=gs4_get]{gs4_get()}}
+returns
+}
+
+Processed through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
 \item{sheet}{Sheet to modify, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Ignored if the sheet is specified via \code{range}. If neither argument specifies the sheet, defaults to the first visible sheet.}
 

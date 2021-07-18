@@ -7,11 +7,17 @@
 sheet_add(ss, sheet = NULL, ..., .before = NULL, .after = NULL)
 }
 \arguments{
-\item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, an instance of \code{googlesheets4_spreadsheet}
-(returned by \code{\link[=gs4_get]{gs4_get()}}), or a \code{\link[googledrive:dribble]{dribble}}, which
-is how googledrive represents Drive files. Processed through
-\code{\link[=as_sheets_id]{as_sheets_id()}}.}
+\item{ss}{Something that identifies a Google Sheet:
+\itemize{
+\item its file id as a string or \code{\link[googledrive:as_id]{drive_id}}
+\item a URL from which we can recover the id
+\item a one-row \code{\link[googledrive:dribble]{dribble}}, which is how googledrive
+represents Drive files
+\item an instance of \code{googlesheets4_spreadsheet}, which is what \code{\link[=gs4_get]{gs4_get()}}
+returns
+}
+
+Processed through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
 \item{sheet}{One or more new sheet names. If unspecified, one new sheet is
 added and Sheets autogenerates a name of the form "SheetN".}

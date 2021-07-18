@@ -4,12 +4,15 @@
 param_ss <- function(..., pname = "ss") {
   template <- glue("
     @param {pname} \\
-    Something that identifies a Google Sheet: its file ID, a URL from
-    which we can recover the ID, an instance of `googlesheets4_spreadsheet`
-    (returned by [gs4_get()]), or a [`dribble`][googledrive::dribble], which
-    is how googledrive represents Drive files. Processed through
-    [as_sheets_id()].
-    ")
+    Something that identifies a Google Sheet:
+    * its file id as a string or [`drive_id`][googledrive::as_id]
+    * a URL from which we can recover the id
+    * a one-row [`dribble`][googledrive::dribble], which is how googledrive
+      represents Drive files
+    * an instance of `googlesheets4_spreadsheet`, which is what [gs4_get()]
+      returns
+
+    Processed through [as_sheets_id()].")
   dots <- list2(...)
   if (length(dots) > 0) {
     template <- c(template, dots)

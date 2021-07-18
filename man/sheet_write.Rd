@@ -15,11 +15,17 @@ of data, so that we can apply the usual table styling. This empty row goes
 away (gets filled, actually) the first time you send more data with
 \code{\link[=sheet_append]{sheet_append()}}.}
 
-\item{ss}{Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, an instance of \code{googlesheets4_spreadsheet}
-(returned by \code{\link[=gs4_get]{gs4_get()}}), or a \code{\link[googledrive:dribble]{dribble}}, which
-is how googledrive represents Drive files. Processed through
-\code{\link[=as_sheets_id]{as_sheets_id()}}.}
+\item{ss}{Something that identifies a Google Sheet:
+\itemize{
+\item its file id as a string or \code{\link[googledrive:as_id]{drive_id}}
+\item a URL from which we can recover the id
+\item a one-row \code{\link[googledrive:dribble]{dribble}}, which is how googledrive
+represents Drive files
+\item an instance of \code{googlesheets4_spreadsheet}, which is what \code{\link[=gs4_get]{gs4_get()}}
+returns
+}
+
+Processed through \code{\link[=as_sheets_id]{as_sheets_id()}}.}
 
 \item{sheet}{Sheet to write into, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number.}
 }

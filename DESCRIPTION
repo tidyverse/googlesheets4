@@ -36,7 +36,7 @@ Imports:
     methods,
     purrr,
     rematch2,
-    rlang (>= 0.4.11.9000),
+    rlang (>= 0.4.11),
     tibble (>= 2.1.1),
     utils,
     vctrs (>= 0.2.3)
@@ -50,8 +50,6 @@ Suggests:
     withr
 RdMacros: 
     lifecycle
-Remotes:  
-    r-lib/rlang
 ByteCompile: true
 Config/Needs/website: pkgdown, tidyverse, r-lib/downlit,
     tidyverse/tidytemplate

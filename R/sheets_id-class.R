@@ -122,32 +122,6 @@ vec_cast.drive_id.sheets_id <- function(x, to, ...) as_id(vec_data(x))
 #' @export
 vec_ptype_abbr.sheets_id <- function(x) "sht_id"
 
-# The main reason I implement str() (or rather just this specific inner bit) is
-# because the RStudio environment pane calls the str() method. And the default
-# behaviour from vctrs will eventually call the format() method, which I want to
-# prevent. I'm happy for the str() method to be super basic.
-
-#' @export
-obj_str_data.sheets_id <- function(x, ...,
-                                   indent.str = "",
-                                   width = getOption("width")) {
-  # inlining what vctrs does, but WITHOUT calling the format method
-  width <- width - nchar(indent.str) - 2
-  inline_list <- function(title, x, width = getOption("width"), quote = "") {
-    label_width <- width - nchar(title)
-    x <- glue::glue_collapse(
-      encodeString(x, quote = quote),
-      sep = ", ",
-      width = label_width
-    )
-    paste0(title, x)
-  }
-  title <- glue::glue(" {vec_ptype_abbr(x)} [1:{length(x)}] ")
-  cli::cat_line(inline_list(title, vec_data(x), width = width))
-
-  invisible(x)
-}
-
 # googledrive ----
 
 #' @export
@@ -215,14 +189,13 @@ as_sheets_id.googlesheets4_spreadsheet <- function(x, ...) {
   validate_sheets_id(new_sheets_id(x$spreadsheet_id))
 }
 
-# TODO: I now wonder if the fetching and presenting of metadata should actually
-# go in the print method. Is this an occasion to violate our usual preference
-# for keeping all logic in the format() method? At least in the vctrs world, the
-# format() method seems much more likely to be called in contexts where the live
-# API work is inappropriate.
-
 #' @export
-format.sheets_id <- function(x, ...) {
+print.sheets_id <- function(x, ...) {
+  cli::cat_line(sheets_id_print(x))
+  invisible(x)
+}
+
+sheets_id_print <- function(x) {
   meta <- tryCatch(
     gs4_get(x),
     # seen with a failed request
@@ -243,10 +216,4 @@ format.sheets_id <- function(x, ...) {
     "Unable to get metadata for this Sheet. Error details:",
     meta$message
   )
-}
-
-#' @export
-print.sheets_id <- function(x, ...) {
-  cat(format(x), sep = "\n")
-  invisible(x)
 }

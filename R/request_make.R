@@ -13,7 +13,7 @@
 #' [gargle::request_retry()] retries requests that error with `429
 #' RESOURCE_EXHAUSTED`. Its basic scheme is exponential backoff, with one tweak
 #' that is very specific to the Sheets API, which has documented [usage
-#' limits](https://developers.google.com/sheets/api/limits):
+#' limits](https://developers.google.com/sheets/api/reference/limits):
 #'
 #' "a limit of 500 requests per 100 seconds per project and 100 requests per 100
 #' seconds per user"

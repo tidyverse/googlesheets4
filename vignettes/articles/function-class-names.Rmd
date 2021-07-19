@@ -37,16 +37,16 @@ And remember that `gs4_` is also used for general, package-level functions.
 
 # Previous use of `sheets_` prefix
 
-When googlesheets4 first appeared on CRAN and up to v0.1.1, it had a nearly universal `sheets_` prefix.
-In version 0.2.0, googlesheets4 gained a tremendous amount of writing and editing functionality.
+When googlesheets4 first appeared on CRAN and up to v0.1.1 (released 2020-03-21), it had a nearly universal `sheets_` prefix.
+In version 0.2.0 (released 2020-05-08), googlesheets4 gained a tremendous amount of writing and editing functionality.
 At that time, it became clear that the `sheets_` scheme was an impediment to generating descriptive, predictable function names.
 For example, you can delete a (spread)Sheet, a (work)sheet, or a cell range.
 Which one of these functions will be named `sheets_delete()`?
 How do we name the others?
 There is no good answer to this, which is why we adopted the 3 prefix strategy.
 
-Any function that existed in v0.1.1 has been formally deprecated and is addressed by formal documentation mapping old names to new.
-Below are larger tables, that also cover functions that only existed in dev versions, but that may have seen use in the community.
+Any function that existed in v0.1.1 was formally deprecated in v0.2.0 and was removed in v1.0.0.
+Below are tables documenting the name changes, that also cover functions that only existed in dev versions, but that may have seen use in the community.
 As time goes on, this article becomes more of historical note.
 
 The dev version of googlesheets4 was bumped from 0.1.1.9000 to 0.1.1.9100 when the `sheets_` naming scheme was abandoned.

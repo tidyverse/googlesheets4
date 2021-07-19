@@ -1,53 +1,49 @@
-## TODO: consult remote key-value store for these? in case they change?
-.gs4_examples <- as_id(c(
-                   "mini-gap" = "1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU",
-                  "gapminder" = "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY",
-                     "deaths" = "1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y",
-              "chicken-sheet" = "1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU",
-       "formulas-and-formats" = "1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms",
-  "cell-contents-and-formats" = "1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E"
-))
+#' Example Sheets
+#'
+#' googlesheets4 makes a variety of world-readable example Sheets available for
+#' use in documentation and reprexes. These functions help you access the
+#' example Sheets. See `vignette("example-sheets", package = "googlesheets4")`
+#' for more.
+#'
+#' @param matches A regular expression that matches the name of the desired
+#'   example Sheet(s). `matches` is optional for the plural `gs4_examples()`
+#'   and, if provided, it can match multiple Sheets. The singular
+#'   `gs4_example()` requires `matches` and it must match exactly one Sheet.
+#'
+#' @return
 
-.test_sheets <- as_id(c(
-  "googlesheets4-cell-tests" = "1WRFIb11PJsNwx2tYBRn3uq8uHwWSI5ziSgbGjkOukmE",
-   "googlesheets4-col-types" = "1q-iRi1L3JugqHTtcjQ3DQOmOTuDnUsWi2AiG2eNyQkU"
-))
+#' * `gs4_example()`: a [sheets_id]
+#' * `gs4_examples()`: a named vector of all built-in examples, with class
+#'   [`drive_id`][googledrive::as_id]
 
-test_sheet <- function(matches = "googlesheets4-cell-tests") {
-  one_sheet(
+#'
+#' @name gs4_examples
+#' @examplesIf gs4_has_token()
+#' gs4_examples()
+#' gs4_examples("gap")
+#'
+#' gs4_example("gapminder")
+#' gs4_example("deaths")
+NULL
+
+#' @rdname gs4_examples
+#' @export
+gs4_examples <- function(matches) {
+  many_sheets(
     needle    = matches,
-    haystack  = .test_sheets,
-    adjective = "test"
+    haystack  = example_and_test_sheets("example"),
+    adjective = "example"
   )
 }
 
-test_sheet_create <- function(name = "googlesheets4-cell-tests") {
-  stopifnot(is_string(name))
-
-  user <- gs4_user()
-  if (!grepl("^googlesheets4-testing", user)) {
-    user <- sub("@.+$", "", user)
-    gs4_abort("
-      Must be auth'd as {.email googlesheets4-testing}, not {.email {user}}.")
-  }
-
-  existing <- gs4_find()
-  m <- match(name, existing$name)
-  if (is.na(m)) {
-    gs4_bullets(c(v = "Creating {.s_sheet {name}}."))
-    ss <- gs4_create(name)
-  } else {
-    gs4_bullets(c(
-      v = "Testing sheet named {.s_sheet {name}} already exists ... using that."
-    ))
-    ss <- existing$id[[m]]
-  }
-  ssid <- as_sheets_id(ss)
-
-  # it's fiddly to check current sharing status, so just re-share
-  gs4_bullets(c(v = 'Making sure "anyone with a link" can read {.s_sheet {name}}.'))
-  gs4_share(ssid)
-  ssid
+#' @rdname gs4_examples
+#' @export
+gs4_example <- function(matches) {
+  one_sheet(
+    needle    = matches,
+    haystack  = example_and_test_sheets("example"),
+    adjective = "example"
+  )
 }
 
 many_sheets <- function(needle, haystack, adjective) {
@@ -78,41 +74,69 @@ one_sheet <- function(needle, haystack, adjective) {
   as_sheets_id(out)
 }
 
-#' File IDs of example Sheets
-#'
-#' googlesheets4 ships with static IDs for some world-readable example Sheets
-#' for use in examples and documentation. These functions make them easy to
-#' access by their nicknames.
-#'
-#' @param matches A regular expression that matches the nickname of the desired
-#'   example Sheet(s). This argument is optional for `gs4_examples()` and, if
-#'   provided, multiple matches are allowed. `gs4_example()` requires
-#'   this argument and requires that there is exactly one match.
-#'
-#' @return
-#' * `gs4_example()`: a single [sheets_id] object
-#' * `gs4_examples()`: a named vector of all built-in examples, with class
-#'   [`drive_id`][googledrive::as_id]
-#'
-#' @export
-#' @examples
-#' gs4_examples()
-#' gs4_examples("gap")
-#' gs4_example("gapminder")
-gs4_example <- function(matches) {
-  one_sheet(
+example_and_test_sheets <- function(purpose = NULL) {
+  # inlining env_cache() logic, so I don't need bleeding edge rlang
+  if (!env_has(.googlesheets4, "example_and_test_sheets")) {
+    inventory_id <- "1dSIZ2NkEPDWiEbsg9G80Hr9Xe7HZglEAPwGhVa-OSyA"
+    local_gs4_quiet()
+    if (!gs4_has_token()) { # don't trigger auth just for this
+      local_deauth()
+    }
+    dat <- read_sheet(as_sheets_id(inventory_id))
+    env_poke(.googlesheets4, "example_and_test_sheets", dat)
+  }
+  dat <- env_get(.googlesheets4, "example_and_test_sheets")
+  if (!is.null(purpose)) {
+    dat <- dat[dat$purpose == purpose, ]
+  }
+  out <- dat$id
+  names(out) <- dat$name
+  as_id(out)
+}
+
+# test sheet management ----
+test_sheets <- function(matches) {
+  many_sheets(
     needle    = matches,
-    haystack  = .gs4_examples,
-    adjective = "example"
+    haystack  = example_and_test_sheets("test"),
+    adjective = "test"
   )
 }
 
-#' @rdname gs4_example
-#' @export
-gs4_examples <- function(matches) {
-  many_sheets(
+test_sheet <- function(matches = "googlesheets4-cell-tests") {
+  one_sheet(
     needle    = matches,
-    haystack  = .gs4_examples,
-    adjective = "example"
+    haystack  = example_and_test_sheets("test"),
+    adjective = "test"
   )
+}
+
+test_sheet_create <- function(name = "googlesheets4-cell-tests") {
+  stopifnot(is_string(name))
+
+  user <- gs4_user()
+  if (!grepl("^googlesheets4-sheet-keeper", user)) {
+    user <- sub("@.+$", "", user)
+    gs4_abort("
+      Must be auth'd as {.email googlesheets4-sheet-keeper}, \\
+      not {.email {user}}.")
+  }
+
+  existing <- gs4_find()
+  m <- match(name, existing$name)
+  if (is.na(m)) {
+    gs4_bullets(c(v = "Creating {.s_sheet {name}}."))
+    ss <- gs4_create(name)
+  } else {
+    gs4_bullets(c(
+      v = "Testing sheet named {.s_sheet {name}} already exists ... using that."
+    ))
+    ss <- existing$id[[m]]
+  }
+  ssid <- as_sheets_id(ss)
+
+  # it's fiddly to check current sharing status, so just re-share
+  gs4_bullets(c(v = 'Making sure "anyone with a link" can read {.s_sheet {name}}.'))
+  gs4_share(ssid)
+  ssid
 }

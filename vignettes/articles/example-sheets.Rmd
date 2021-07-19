@@ -21,13 +21,17 @@ gs4_deauth()
 ## Example Sheets
 
 ```{r include = FALSE}
-examples <- gs4_examples()
-example_urls <- sapply(examples, gs4_browse)
-names(example_urls) <- names(examples)
+# the non-interactive wrapper prevents tons of browser tabs opening when I
+# have to tinker with this code interactively
+sheets <- gs4_examples()
+rlang::with_interactive(
+  value = FALSE,
+  example_urls <- purrr::map_chr(sheets, gs4_browse)
+)
 links <- glue::glue("[{names(example_urls)}]({unname(example_urls)})")
 dat <- tibble::tibble(
   `name (these are links)` = links,
-  id = unclass(gs4_examples())
+  id = unclass(sheets)
 )
 ```
 
@@ -59,6 +63,10 @@ Here's a handy snippet to open all the example Sheets in browser tabs.
 
 ```{r eval = FALSE}
 lapply(gs4_examples(), gs4_browse)
+
+# for tidyversers
+gs4_examples() %>% 
+  purrr::walk(gs4_browse)
 ```
 
 ## Test Sheets
@@ -66,12 +74,15 @@ lapply(gs4_examples(), gs4_browse)
 These are more developer-facing, but it's convenient to do them here too.
 
 ```{r include = FALSE}
-test_urls <- googlesheets4:::.test_sheets %>% 
-  purrr::map(gs4_browse)
+sheets <- googlesheets4:::test_sheets()
+rlang::with_interactive(
+  value = FALSE,
+  test_urls <- purrr::map_chr(sheets, gs4_browse)
+)
 links <- glue::glue("[{names(test_urls)}]({unname(test_urls)})")
 dat <- tibble::tibble(
   `name (these are links)` = links,
-  id = unclass(googlesheets4:::.test_sheets)
+  id = unclass(sheets)
 )
 ```
 

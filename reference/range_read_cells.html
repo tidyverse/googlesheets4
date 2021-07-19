@@ -222,11 +222,16 @@ really want raw cell data from the API, <code>range_read_cells()</code> is for y
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ss</th>
-      <td><p>Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
-is how googledrive represents Drive files. Processed through
-<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+      <td><p>Something that identifies a Google Sheet:</p><ul>
+<li><p>its file id as a string or <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>drive_id</a></code></p></li>
+<li><p>a URL from which we can recover the id</p></li>
+<li><p>a one-row <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which is how googledrive
+represents Drive files</p></li>
+<li><p>an instance of <code>googlesheets4_spreadsheet</code>, which is what <code><a href='gs4_get.html'>gs4_get()</a></code>
+returns</p></li>
+</ul>
+
+<p>Processed through <code><a href='sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
       <th>sheet</th>

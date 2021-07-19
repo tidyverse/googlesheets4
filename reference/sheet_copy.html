@@ -207,11 +207,16 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>from_ss</th>
-      <td><p>Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
-is how googledrive represents Drive files. Processed through
-<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+      <td><p>Something that identifies a Google Sheet:</p><ul>
+<li><p>its file id as a string or <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>drive_id</a></code></p></li>
+<li><p>a URL from which we can recover the id</p></li>
+<li><p>a one-row <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which is how googledrive
+represents Drive files</p></li>
+<li><p>an instance of <code>googlesheets4_spreadsheet</code>, which is what <code><a href='gs4_get.html'>gs4_get()</a></code>
+returns</p></li>
+</ul>
+
+<p>Processed through <code><a href='sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
       <th>from_sheet</th>
@@ -312,8 +317,8 @@ about sheet names, specify <code>to_sheet</code>.</p></td>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Copying sheet <span style='color: #00BB00;'>chickwts</span> from <span style='color: #00BBBB;'>sheet-copy-demo-aaa</span> to <span style='color: #00BBBB;'>sheet-copy-demo-bbb</span>.</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Copied as <span style='color: #00BB00;'>chicks-two</span>.</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> Files trashed:</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>sheet-copy-demo-bbb</span> <span style='color: #555555;'>&lt;id: 15Wbg8QLlo5eu2nz0DvUIQSxptWCBADHucB9b5zgtGvk&gt;</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>sheet-copy-demo-aaa</span> <span style='color: #555555;'>&lt;id: 1BlCJ5mfP3Xb5J56QkLD3r5OrgJ088WeVCTLlt1-Esp0&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>sheet-copy-demo-bbb</span> <span style='color: #555555;'>&lt;id: 15EpS2BM3gkuZJmGeUYoC4HG84heUf_gpCnSziudpQ0U&gt;</span></span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> • <span style='color: #00BBBB;'>sheet-copy-demo-aaa</span> <span style='color: #555555;'>&lt;id: 1ZFykImvsSN5CejGMzjZix8a9R-xKLqkGu074UqLfCkk&gt;</span></span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

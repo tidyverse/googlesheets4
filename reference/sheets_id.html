@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>sheets_id object — sheets_id • googlesheets4</title>
+<title>sheets_id class — sheets_id • googlesheets4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,20 +49,23 @@
 
 
 
-<meta property="og:title" content="sheets_id object — sheets_id" />
-<meta property="og:description" content="A sheets_id is a spreadsheet identifier, i.e. a string. This
-is what the Sheets and Drive APIs refer to as spreadsheetId and fileId,
-respectively. When you print a sheets_id, we attempt to reveal its
-current metadata (via gs4_get()). This can fail for a variety of
-reasons (e.g. if you're offline), but the sheets_id is always revealed
-and is returned, invisibly.
-Any object of class sheets_id will also have the
-drive_id class, which is used by googledrive for
-the same purpose. This means you can pipe a sheets_id object straight
-into googledrive functions for all your Google Drive needs that have
-nothing to do with the file being a spreadsheet. Examples: examine or
-change file name, path, or permissions, copy the file, or visit it in a web
-browser." />
+<meta property="og:title" content="sheets_id class — sheets_id" />
+<meta property="og:description" content="sheets_id is an S3 class that marks a string as a Google Sheet's id, which
+the Sheets API docs refer to as spreadsheetId.
+Any object of class sheets_id also has the drive_id
+class, which is used by googledrive for the same purpose. This means you
+can provide a sheets_id to googledrive functions, in order to do anything
+with your Sheet that has nothing to do with it being a spreadsheet. Examples:
+change the Sheet's name, parent folder, or permissions. Read more about using
+googlesheets4 and googledrive together in vignette(&quot;drive-and-sheets&quot;).
+Note that a sheets_id object is intended to hold just one id, while the
+parent class drive_id can be used for multiple ids.
+as_sheets_id() is a generic function that converts various inputs into an
+instance of sheets_id. See more below.
+When you print a sheets_id, we attempt to reveal the Sheet's current
+metadata, via gs4_get(). This can fail for a variety of reasons (e.g. if
+you're offline), but the input sheets_id is always revealed and returned,
+invisibly." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -196,37 +199,80 @@ browser." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1><code>sheets_id</code> object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_id.R'><code>R/sheets_id.R</code></a></small>
+    <h1><code>sheets_id</code> class</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/sheets_id-class.R'><code>R/sheets_id-class.R</code></a></small>
     <div class="hidden name"><code>sheets_id.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A <code>sheets_id</code> is a spreadsheet identifier, i.e. a string. This
-is what the Sheets and Drive APIs refer to as <code>spreadsheetId</code> and <code>fileId</code>,
-respectively. When you print a <code>sheets_id</code>, we attempt to reveal its
-current metadata (via <code><a href='gs4_get.html'>gs4_get()</a></code>). This can fail for a variety of
-reasons (e.g. if you're offline), but the <code>sheets_id</code> is always revealed
-and is returned, invisibly.</p>
-<p>Any object of class <code>sheets_id</code> will also have the
-<code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>drive_id</a></code> class, which is used by googledrive for
-the same purpose. This means you can pipe a <code>sheets_id</code> object straight
-into googledrive functions for all your Google Drive needs that have
-nothing to do with the file being a spreadsheet. Examples: examine or
-change file name, path, or permissions, copy the file, or visit it in a web
-browser.</p>
+    <p><code>sheets_id</code> is an S3 class that marks a string as a Google Sheet's id, which
+the Sheets API docs refer to as <code>spreadsheetId</code>.</p>
+<p>Any object of class <code>sheets_id</code> also has the <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>drive_id</a></code>
+class, which is used by googledrive for the same purpose. This means you
+can provide a <code>sheets_id</code> to googledrive functions, in order to do anything
+with your Sheet that has nothing to do with it being a spreadsheet. Examples:
+change the Sheet's name, parent folder, or permissions. Read more about using
+<a href='googlesheets4-package.html'>googlesheets4</a> and googledrive together in <code>vignette("drive-and-sheets")</code>.
+Note that a <code>sheets_id</code> object is intended to hold <strong>just one</strong> id, while the
+parent class <code>drive_id</code> can be used for multiple ids.</p>
+<p><code>as_sheets_id()</code> is a generic function that converts various inputs into an
+instance of <code>sheets_id</code>. See more below.</p>
+<p>When you print a <code>sheets_id</code>, we attempt to reveal the Sheet's current
+metadata, via <code><a href='gs4_get.html'>gs4_get()</a></code>. This can fail for a variety of reasons (e.g. if
+you're offline), but the input <code>sheets_id</code> is always revealed and returned,
+invisibly.</p>
     </div>
 
+    <pre class="usage"><span class='fu'>as_sheets_id</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>Something that contains a Google Sheet id: an id string, a
+<code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>drive_id</a></code>, a URL, a one-row
+<code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, or a <code>googlesheets4_spreadsheet</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Other arguments passed down to methods. (Not used.)</p></td>
+    </tr>
+    </table>
+
+    <h2 class="hasAnchor" id="as-sheets-id-"><a class="anchor" href="#as-sheets-id-"></a><code>as_sheets_id()</code></h2>
+
+    
+
+
+<p>These inputs can be converted to a <code>sheets_id</code>:</p><ul>
+<li><p>Spreadsheet id, "a string containing letters, numbers, and some special
+characters", typically 44 characters long, in our experience. Example:
+<code>1qpyC0XzvTcKT6EISywvqESX3A0MwQoFDE8p-Bll4hps</code>.</p></li>
+<li><p>A URL, from which we can excavate a spreadsheet or file id. Example:
+<code>"https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545"</code>.</p></li>
+<li><p>A one-row <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, a "Drive tibble" used by the
+googledrive package. In general, a <code>dribble</code> can represent several
+files, one row per file. Since googlesheets4 is not vectorized over
+spreadsheets, we are only prepared to accept a one-row <code>dribble</code>.</p><ul>
+<li><p><code><a href='https://googledrive.tidyverse.org/reference/drive_get.html'>googledrive::drive_get("YOUR_SHEET_NAME")</a></code>
+is a great way to look up a Sheet via its name.</p></li>
+<li><p><code><a href='gs4_find.html'>gs4_find("YOUR_SHEET_NAME")</a></code> is another good way
+to get your hands on a Sheet.</p></li>
+</ul></li>
+<li><p>Spreadsheet meta data, as returned by, e.g., <code><a href='gs4_get.html'>gs4_get()</a></code>. Literally,
+this is an object of class <code>googlesheets4_spreadsheet</code>.</p></li>
+</ul>
 
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='as_sheets_id.html'>as_sheets_id()</a></code></p></div>
+    <div class='dont-index'><p><a href='https://googledrive.tidyverse.org/reference/as_id.html'>googledrive::as_id</a></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'>  <span class='fu'><a href='gs4_example.html'>gs4_example</a></span><span class='op'>(</span><span class='st'>"mini-gap"</span><span class='op'>)</span></span>
-<span class='r-in'><span class='op'>}</span></span>
+    <pre class="examples"><span class='r-in'><span class='va'>mini_gap_id</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_example.html'>gs4_example</a></span><span class='op'>(</span><span class='st'>"mini-gap"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/class.html'>class</a></span><span class='op'>(</span><span class='va'>mini_gap_id</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "sheets_id"  "drive_id"   "vctrs_vctr" "character" </span>
+<span class='r-in'><span class='va'>mini_gap_id</span></span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span> Spreadsheet name: mini-gap</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>               ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>           Locale: en_US</span>
@@ -239,6 +285,19 @@ browser.</p>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>         Asia: 6 x 6</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>       Europe: 6 x 6</span>
 <span class='r-out co'><span class='r-pr'>#&gt;</span>      Oceania: 6 x 6</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='fu'>as_sheets_id</span><span class='op'>(</span><span class='st'>"abc"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Spreadsheet name: &lt;unknown&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>               ID: abc</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>           Locale: &lt;unknown&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        Time zone: &lt;unknown&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      # of sheets: &lt;unknown&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> Unable to get metadata for this Sheet. Error details:</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='font-weight: bold;'>Client error: (404) NOT_FOUND</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> • A specified resource is not found, or the request is rejected by undisclosed</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   reasons, such as whitelisting.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> • Requested entity was not found.</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

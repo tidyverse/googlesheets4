@@ -244,11 +244,16 @@ throughout the googlesheets4 package.</p></li>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>ss</th>
-      <td><p>Something that identifies a Google Sheet: its file ID, a URL from
-which we can recover the ID, an instance of <code>googlesheets4_spreadsheet</code>
-(returned by <code><a href='gs4_get.html'>gs4_get()</a></code>), or a <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which
-is how googledrive represents Drive files. Processed through
-<code><a href='as_sheets_id.html'>as_sheets_id()</a></code>.</p></td>
+      <td><p>Something that identifies a Google Sheet:</p><ul>
+<li><p>its file id as a string or <code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>drive_id</a></code></p></li>
+<li><p>a URL from which we can recover the id</p></li>
+<li><p>a one-row <code><a href='https://googledrive.tidyverse.org/reference/dribble.html'>dribble</a></code>, which is how googledrive
+represents Drive files</p></li>
+<li><p>an instance of <code>googlesheets4_spreadsheet</code>, which is what <code><a href='gs4_get.html'>gs4_get()</a></code>
+returns</p></li>
+</ul>
+
+<p>Processed through <code><a href='sheets_id.html'>as_sheets_id()</a></code>.</p></td>
     </tr>
     <tr>
       <th>sheet</th>
@@ -378,9 +383,24 @@ its discovered type.</p></li>
 <span class='r-in'>    col_types <span class='op'>=</span> <span class='st'>"ccid"</span></span>
 <span class='r-in'>  <span class='op'>)</span></span>
 <span class='r-in'><span class='op'>}</span></span>
-<span class='r-err co'><span class='r-pr'>#&gt;</span> <span class='error'>Error:</span> <span style='font-weight: bold;'>Server error: (503) UNAVAILABLE</span></span>
-<span class='r-err co'><span class='r-pr'>#&gt;</span> • Service unavailable. Typically the server is down.</span>
-<span class='r-err co'><span class='r-pr'>#&gt;</span> • The service is currently unavailable.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Reading from <span style='color: #00BBBB;'>deaths</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Range <span style='color: #BBBB00;'>A5:F15</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Reading from <span style='color: #00BBBB;'>deaths</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Range '<span style='color: #BBBB00;'>'other'!A5:F15</span>'.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Reading from <span style='color: #00BBBB;'>deaths</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Range <span style='color: #BBBB00;'>arts_data</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Reading from <span style='color: #00BBBB;'>mini-gap</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Range <span style='color: #BBBB00;'>Africa</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Reading from <span style='color: #00BBBB;'>mini-gap</span>.</span>
+<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Range '<span style='color: #BBBB00;'>'Europe'!A:D</span>'.</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 5 x 4</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   country                continent  year lifeExp</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>                  <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;int&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Albania                Europe     <span style='text-decoration: underline;'>1</span>952    55.2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Austria                Europe     <span style='text-decoration: underline;'>1</span>952    66.8</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Belgium                Europe     <span style='text-decoration: underline;'>1</span>952    68  </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> Bosnia and Herzegovina Europe     <span style='text-decoration: underline;'>1</span>952    53.8</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> Bulgaria               Europe     <span style='text-decoration: underline;'>1</span>952    59.6</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

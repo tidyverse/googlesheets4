@@ -297,7 +297,7 @@
 <p>1899-12-30 12:00:00 is noon on the day that is the Google Sheets epoch. Its underlying serial number is 0.5, because one half-day has elapsed since the epoch. 1899-12-31 18:00:00 is 6pm in the evening on the day after the epoch. Its underlying serial number is 1.75, because it’s one plus three-quarters of a day since the epoch.</p>
 <p>Every Google Sheet has an associated time zone. It is included in the metadata returned by <code><a href="../../reference/gs4_get.html">gs4_get()</a></code>, like the locale, and is revealed by default when we print a Sheets ID.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
+<code class="sourceCode R"><span class="op">(</span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span>
    <span class="fu"><a href="../../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   Spreadsheet name: gapminder</span>
 <span class="co">#&gt;                 ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY</span>

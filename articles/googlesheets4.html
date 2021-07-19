@@ -212,12 +212,12 @@
 <p>We’ve made a few Sheets available to “anyone with a link”, for use in examples and docs. Two helper functions make it easy to get your hands on these file IDs.</p>
 <ul>
 <li>
-<code><a href="../reference/gs4_example.html">gs4_examples()</a></code> lists all the example Sheets and it can also filter by matching names to a regular expression.</li>
+<code><a href="../reference/gs4_examples.html">gs4_examples()</a></code> lists all the example Sheets and it can also filter by matching names to a regular expression.</li>
 <li>
-<code><a href="../reference/gs4_example.html">gs4_example()</a></code> requires a regular expression and returns exactly 1 Sheet ID (or throws an error).</li>
+<code><a href="../reference/gs4_examples.html">gs4_example()</a></code> requires a regular expression and returns exactly 1 Sheet ID (or throws an error).</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"chicken-sheet"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"chicken-sheet"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from "chicken-sheet".</span>
 <span class="co">#&gt; ✔ Range 'chicken.csv'.</span>
@@ -231,7 +231,7 @@
 <span class="co">#&gt; 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.</span></code></pre></div>
 <p>If you’d like to see a Sheet in the browser, including our example Sheets, use <code><a href="../reference/gs4_browse.html">gs4_browse()</a></code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
   <span class="fu"><a href="../reference/gs4_browse.html">gs4_browse</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="sheet-metadata" class="section level2">
@@ -239,7 +239,7 @@
 <a href="#sheet-metadata" class="anchor"></a>Sheet metadata</h2>
 <p><code><a href="../reference/gs4_get.html">gs4_get()</a></code> exposes Sheet metadata, such as details on worksheets and named ranges.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_example.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt;  Spreadsheet name: deaths</span>
@@ -279,10 +279,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Creating new Sheet: "webby-sunfish".</span>
+<span class="co">#&gt; ✔ Creating new Sheet: "corny-schipperke".</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: webby-sunfish</span>
-<span class="co">#&gt;               ID: 1aNrxWHfAPwqjkUB8jeaITFqxr5uK8Cj93b4mo1dbwQc</span>
+<span class="co">#&gt; Spreadsheet name: corny-schipperke</span>
+<span class="co">#&gt;               ID: 1kjG35iMfawAMQV_iANb1_RlUoloATp-CsyR63Ramgj8</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -294,13 +294,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; • 'webby-sunfish' &lt;id: 1aNrxWHfAPwqjkUB8jeaITFqxr5uK8Cj93b4mo1dbwQc&gt;</span>
+<span class="co">#&gt; • 'corny-schipperke' &lt;id: 1kjG35iMfawAMQV_iANb1_RlUoloATp-CsyR63Ramgj8&gt;</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Creating new Sheet: "testy-hedgehog".</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1hLpwYwk9QwyiLt5ohRDreDhYCQ-VeTv2uKuZCFzTWDY</span>
+<span class="co">#&gt;               ID: 1CL0qhm0exNhpVOrjlS-GAxEFzxMs6EGDnySI9y4aLUw</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -314,7 +314,7 @@
 <span class="co">#&gt; ✔ Writing to sheet 'chickwts'.</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1hLpwYwk9QwyiLt5ohRDreDhYCQ-VeTv2uKuZCFzTWDY</span>
+<span class="co">#&gt;               ID: 1CL0qhm0exNhpVOrjlS-GAxEFzxMs6EGDnySI9y4aLUw</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -364,12 +364,12 @@
 <span class="co">#&gt; # A tibble: 2 x 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0  303150139 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 1288820104 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 1 df           0 1328127710 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 1150680208 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; • 'testy-hedgehog' &lt;id: 1hLpwYwk9QwyiLt5ohRDreDhYCQ-VeTv2uKuZCFzTWDY&gt;</span></code></pre></div>
+<span class="co">#&gt; • 'testy-hedgehog' &lt;id: 1CL0qhm0exNhpVOrjlS-GAxEFzxMs6EGDnySI9y4aLUw&gt;</span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

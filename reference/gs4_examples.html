@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Spread a data frame of cells into spreadsheet shape — spread_sheet • googlesheets4</title>
+<title>Example Sheets — gs4_examples • googlesheets4</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -49,13 +49,11 @@
 
 
 
-<meta property="og:title" content="Spread a data frame of cells into spreadsheet shape — spread_sheet" />
-<meta property="og:description" content="Reshapes a data frame of cells (presumably the output of
-range_read_cells()) into another data frame, i.e., puts it back into the
-shape of the source spreadsheet. This function exists primarily for internal
-use and for testing. The flagship function range_read(), a.k.a.
-read_sheet(), is what most users are looking for. It is basically
-range_read_cells() + spread_sheet()." />
+<meta property="og:title" content="Example Sheets — gs4_examples" />
+<meta property="og:description" content="googlesheets4 makes a variety of world-readable example Sheets available for
+use in documentation and reprexes. These functions help you access the
+example Sheets. See vignette(&quot;example-sheets&quot;, package = &quot;googlesheets4&quot;)
+for more." />
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -189,103 +187,98 @@ range_read_cells() + spread_sheet()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Spread a data frame of cells into spreadsheet shape</h1>
-    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/range_read.R'><code>R/range_read.R</code></a></small>
-    <div class="hidden name"><code>spread_sheet.Rd</code></div>
+    <h1>Example Sheets</h1>
+    <small class="dont-index">Source: <a href='https://github.com/tidyverse/googlesheets4/blob/master/R/gs4_example.R'><code>R/gs4_example.R</code></a></small>
+    <div class="hidden name"><code>gs4_examples.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Reshapes a data frame of cells (presumably the output of
-<code><a href='range_read_cells.html'>range_read_cells()</a></code>) into another data frame, i.e., puts it back into the
-shape of the source spreadsheet. This function exists primarily for internal
-use and for testing. The flagship function <code><a href='range_read.html'>range_read()</a></code>, a.k.a.
-<code><a href='range_read.html'>read_sheet()</a></code>, is what most users are looking for. It is basically
-<code><a href='range_read_cells.html'>range_read_cells()</a></code> + <code>spread_sheet()</code>.</p>
+    <p>googlesheets4 makes a variety of world-readable example Sheets available for
+use in documentation and reprexes. These functions help you access the
+example Sheets. See <code>vignette("example-sheets", package = "googlesheets4")</code>
+for more.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>spread_sheet</span><span class='op'>(</span>
-  <span class='va'>df</span>,
-  col_names <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  col_types <span class='op'>=</span> <span class='cn'>NULL</span>,
-  na <span class='op'>=</span> <span class='st'>""</span>,
-  trim_ws <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  guess_max <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>min</a></span><span class='op'>(</span><span class='fl'>1000</span>, <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='va'>df</span><span class='op'>$</span><span class='va'>row</span><span class='op'>)</span><span class='op'>)</span>,
-  .name_repair <span class='op'>=</span> <span class='st'>"unique"</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>gs4_examples</span><span class='op'>(</span><span class='va'>matches</span><span class='op'>)</span>
+
+<span class='fu'>gs4_example</span><span class='op'>(</span><span class='va'>matches</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>df</th>
-      <td><p>A data frame with one row per (nonempty) cell, integer variables
-<code>row</code> and <code>column</code> (probably referring to location within the spreadsheet),
-and a list-column <code>cell</code> of <code>SHEET_CELL</code> objects.</p></td>
-    </tr>
-    <tr>
-      <th>col_names</th>
-      <td><p><code>TRUE</code> to use the first row as column names, <code>FALSE</code> to get
-default names, or a character vector to provide column names directly. If
-user provides <code>col_types</code>, <code>col_names</code> can have one entry per column or one
-entry per unskipped column.</p></td>
-    </tr>
-    <tr>
-      <th>col_types</th>
-      <td><p>Column types. Either <code>NULL</code> to guess all from the
-spreadsheet or a string of readr-style shortcodes, with one character or
-code per column. If exactly one <code>col_type</code> is specified, it is recycled.
-See Column Specification for more.</p></td>
-    </tr>
-    <tr>
-      <th>na</th>
-      <td><p>Character vector of strings to interpret as missing values. By
-default, blank cells are treated as missing data.</p></td>
-    </tr>
-    <tr>
-      <th>trim_ws</th>
-      <td><p>Logical. Should leading and trailing whitespace be trimmed
-from cell contents?</p></td>
-    </tr>
-    <tr>
-      <th>guess_max</th>
-      <td><p>Maximum number of data rows to use for guessing column
-types.</p></td>
-    </tr>
-    <tr>
-      <th>.name_repair</th>
-      <td><p>Handling of column names. By default, googlesheets4
-ensures column names are not empty and are unique. There is full support
-for <code>.name_repair</code> as documented in <code><a href='https://tibble.tidyverse.org/reference/tibble.html'>tibble::tibble()</a></code>.</p></td>
+      <th>matches</th>
+      <td><p>A regular expression that matches the name of the desired
+example Sheet(s). <code>matches</code> is optional for the plural <code>gs4_examples()</code>
+and, if provided, it can match multiple Sheets. The singular
+<code>gs4_example()</code> requires <code>matches</code> and it must match exactly one Sheet.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A tibble in the shape of the original spreadsheet, but enforcing
-user's wishes regarding column names, column types, <code>NA</code> strings, and
-whitespace trimming.</p>
+    
+<ul>
+<li><p><code>gs4_example()</code>: a <a href='sheets_id.html'>sheets_id</a></p></li>
+<li><p><code>gs4_examples()</code>: a named vector of all built-in examples, with class
+<code><a href='https://googledrive.tidyverse.org/reference/as_id.html'>drive_id</a></code></p></li>
+</ul>
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='gs4_has_token.html'>gs4_has_token</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
-<span class='r-in'>  <span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='gs4_examples.html'>gs4_example</a></span><span class='op'>(</span><span class='st'>"mini-gap"</span><span class='op'>)</span> <span class='op'><a href='%>%.html'>%&gt;%</a></span></span>
-<span class='r-in'>    <span class='fu'><a href='range_read_cells.html'>range_read_cells</a></span><span class='op'>(</span><span class='op'>)</span></span>
-<span class='r-in'>  <span class='fu'>spread_sheet</span><span class='op'>(</span><span class='va'>df</span><span class='op'>)</span></span>
+    <pre class="examples"><span class='r-in'><span class='fu'>gs4_examples</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;drive_id[6]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                    cell-contents-and-formats </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                chicken-sheet </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                       deaths </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                         formulas-and-formats </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                    gapminder </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                     mini-gap </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU </span>
+<span class='r-in'><span class='fu'>gs4_examples</span><span class='op'>(</span><span class='st'>"gap"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> &lt;drive_id[2]&gt;</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                    gapminder </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                                     mini-gap </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU </span>
 <span class='r-in'></span>
-<span class='r-in'>  <span class='co'># ^^ gets same result as ...</span></span>
-<span class='r-in'>  <span class='fu'><a href='range_read.html'>read_sheet</a></span><span class='op'>(</span><span class='fu'><a href='gs4_examples.html'>gs4_example</a></span><span class='op'>(</span><span class='st'>"mini-gap"</span><span class='op'>)</span><span class='op'>)</span></span>
-<span class='r-in'><span class='op'>}</span></span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Reading from <span style='color: #00BBBB;'>mini-gap</span>.</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Range <span style='color: #BBBB00;'>Africa</span>.</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Reading from <span style='color: #00BBBB;'>mini-gap</span>.</span>
-<span class='r-msg co'><span class='r-pr'>#&gt;</span> <span style='color: #00BB00;'>✔</span> Range <span style='color: #BBBB00;'>Africa</span>.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #949494;'># A tibble: 5 x 6</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   country      continent  year lifeExp     pop gdpPercap</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>        <span style='color: #949494; font-style: italic;'>&lt;chr&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>   <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span>     <span style='color: #949494; font-style: italic;'>&lt;dbl&gt;</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>1</span> Algeria      Africa     <span style='text-decoration: underline;'>1</span>952    43.1 9<span style='text-decoration: underline;'>279</span>525     <span style='text-decoration: underline;'>2</span>449.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>2</span> Angola       Africa     <span style='text-decoration: underline;'>1</span>952    30.0 4<span style='text-decoration: underline;'>232</span>095     <span style='text-decoration: underline;'>3</span>521.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>3</span> Benin        Africa     <span style='text-decoration: underline;'>1</span>952    38.2 1<span style='text-decoration: underline;'>738</span>315     <span style='text-decoration: underline;'>1</span>063.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>4</span> Botswana     Africa     <span style='text-decoration: underline;'>1</span>952    47.6  <span style='text-decoration: underline;'>442</span>308      851.</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> <span style='color: #BCBCBC;'>5</span> Burkina Faso Africa     <span style='text-decoration: underline;'>1</span>952    32.0 4<span style='text-decoration: underline;'>469</span>979      543.</span>
+<span class='r-in'><span class='fu'>gs4_example</span><span class='op'>(</span><span class='st'>"gapminder"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Spreadsheet name: gapminder</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            Locale: en_US</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         Time zone: America/Los_Angeles</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       # of sheets: 5</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> # of named ranges: 1</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Sheet name): (Nominal extent in rows x columns)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Africa: 625 x 6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     Americas: 301 x 6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         Asia: 397 x 6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       Europe: 361 x 6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>      Oceania: 25 x 6</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Named range): (A1 range)        </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        canada: 'Americas'!A38:F49</span>
+<span class='r-in'><span class='fu'>gs4_example</span><span class='op'>(</span><span class='st'>"deaths"</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  Spreadsheet name: deaths</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>                ID: 1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>            Locale: en_US</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         Time zone: America/Los_Angeles</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>       # of sheets: 2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> # of named ranges: 2</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Sheet name): (Nominal extent in rows x columns)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>         arts: 1000 x 26</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>        other: 1000 x 26</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> (Named range): (A1 range)    </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>     arts_data: 'arts'!A5:F15 </span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>    other_data: 'other'!A5:F15</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

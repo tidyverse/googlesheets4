@@ -91,8 +91,8 @@ These all achieve the same thing:
 ``` r
 # URL
 read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077")
-#> Reading from "gapminder"
-#> Range "Africa"
+#> ✓ Reading from "gapminder".
+#> ✓ Range 'Africa'.
 #> # A tibble: 624 x 6
 #>   country continent  year lifeExp      pop gdpPercap
 #>   <chr>   <chr>     <dbl>   <dbl>    <dbl>     <dbl>
@@ -105,8 +105,8 @@ read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2d
 
 # Sheet ID
 read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
-#> Reading from "gapminder"
-#> Range "Africa"
+#> ✓ Reading from "gapminder".
+#> ✓ Range 'Africa'.
 #> # A tibble: 624 x 6
 #>   country continent  year lifeExp      pop gdpPercap
 #>   <chr>   <chr>     <dbl>   <dbl>    <dbl>     <dbl>
@@ -120,8 +120,9 @@ read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 # a googledrive "dribble"
 googledrive::drive_get("gapminder") %>% 
   read_sheet()
-#> Reading from "gapminder"
-#> Range "Africa"
+#> ✓ The input `path` resolved to exactly 1 file.
+#> ✓ Reading from "gapminder".
+#> ✓ Range 'Africa'.
 #> # A tibble: 624 x 6
 #>   country continent  year lifeExp      pop gdpPercap
 #>   <chr>   <chr>     <dbl>   <dbl>    <dbl>     <dbl>
@@ -152,9 +153,9 @@ some initial data.
 
 ``` r
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
-#> Creating new Sheet: "fluffy-bunny"
+#> ✓ Creating new Sheet: "fluffy-bunny".
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 1D3a3lurpANPviWofNqA0GXKzIh4LRzrXKcRKl3sMTeg
+#>               ID: 1t1Js_mC0oD7hezTVAam4PgCnJEs8ixigH9cLJcHgqaA
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 1
@@ -169,11 +170,11 @@ within a (spread)Sheet.
 ``` r
 head(mtcars) %>% 
   sheet_write(ss, sheet = "autos")
-#> Writing to "fluffy-bunny"
-#> Writing to sheet "autos"
+#> ✓ Writing to "fluffy-bunny".
+#> ✓ Writing to sheet 'autos'.
 ss
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 1D3a3lurpANPviWofNqA0GXKzIh4LRzrXKcRKl3sMTeg
+#>               ID: 1t1Js_mC0oD7hezTVAam4PgCnJEs8ixigH9cLJcHgqaA
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 2

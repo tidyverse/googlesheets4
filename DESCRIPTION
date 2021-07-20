@@ -31,7 +31,6 @@ Imports:
     googledrive (>= 2.0.0),
     httr,
     ids,
-    lifecycle,
     magrittr,
     methods,
     purrr,
@@ -48,8 +47,6 @@ Suggests:
     spelling,
     testthat (>= 3.0.0),
     withr
-RdMacros: 
-    lifecycle
 ByteCompile: true
 Config/Needs/website: pkgdown, tidyverse, r-lib/downlit,
     tidyverse/tidytemplate

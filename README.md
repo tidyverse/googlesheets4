@@ -5,7 +5,6 @@
 
 <!-- badges: start -->
 
-[![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/googlesheets4)](https://CRAN.R-project.org/package=googlesheets4)
 [![Codecov test
@@ -155,7 +154,7 @@ some initial data.
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> ✓ Creating new Sheet: "fluffy-bunny".
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 1t1Js_mC0oD7hezTVAam4PgCnJEs8ixigH9cLJcHgqaA
+#>               ID: 1GtTKAaC0R2WI6gaGitsj1v_IGuDC6n6uVBwk8-aFExg
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 1
@@ -174,7 +173,7 @@ head(mtcars) %>%
 #> ✓ Writing to sheet 'autos'.
 ss
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 1t1Js_mC0oD7hezTVAam4PgCnJEs8ixigH9cLJcHgqaA
+#>               ID: 1GtTKAaC0R2WI6gaGitsj1v_IGuDC6n6uVBwk8-aFExg
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 2

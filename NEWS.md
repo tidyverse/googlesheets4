@@ -10,6 +10,12 @@ By default, googlesheets4 always messages, i.e. it is *not* quiet.
 
 googlesheets4 now throws errors with class `"googlesheets4_error"` (#12).
 
+## Other changes
+
+The deprecated `sheets_*()` functions have now been removed, as promised in the warning they have been throwing for over a year.
+No functionality has been removed, this is just the result of the function naming scheme adopted in googlesheets4 >= 0.2.0.
+More details are in [this developer documentation](https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html#previous-use-of-sheets-prefix).
+
 The `na` argument of `read_sheet()` has become more capable and more consistent with readr.
 Specifically, `na = character()` (or the general lack of `""` among the `na` strings) results in cells with no data appearing as the empty string `""` within a character vector, as opposed to `NA` (#174).
 

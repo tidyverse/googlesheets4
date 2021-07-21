@@ -78,7 +78,8 @@ The internal generic `as_range_spec()` dispatches on primary argument `x`, which
 Here's how various user-specified ranges are stored as a `range_spec`.
 
 ```{r include = FALSE}
-df <- read_csv('
+# switched from read_csv because https://github.com/tidyverse/readr/issues/1237
+df <- read.csv(text = '
     "sheet",                          "range", "skip"
      "NULL",                           "NULL",    "0"
    "Africa",                           "NULL",    "0"
@@ -94,7 +95,7 @@ df <- read_csv('
         "2",                          "A1:B2",    "0"
      "NULL", "cell_limits(c(2, 3), c(NA, 5))",   "0"
  "Americas", "cell_limits(c(2, 3), c(NA, 5))",   "0"
-')
+', strip.white = TRUE)
 
 escape_brackets <- function(x) {
   #str_replace_all(x, c("<" = "\\\\<", ">" = "\\\\>"))

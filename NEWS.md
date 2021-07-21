@@ -4,16 +4,18 @@
 
 The user interface has gotten more stylish, thanks to the cli package (<https://cli.r-lib.org>).
 
-The `googlesheets4_quiet` option can be used to suppress messages from googlesheets4, specifically (#163).
-By default, googlesheets4 always messages, i.e. it is *not* quiet.
-`local_gs4_quiet()` and `with_gs4_quiet()` are [withr-style](https://withr.r-lib.org) convenience helpers for setting `googlesheets4_quiet = TRUE`.
-
+All informational messages, warnings, and errors are now emitted via cli, which uses rlang's condition functions under-the-hood.
 googlesheets4 now throws errors with class `"googlesheets4_error"` (#12).
+
+`googlesheets4_quiet` is a new option to suppress informational messages from googlesheets4 (#163).
+Unless it's explicitly set to `TRUE`, the default is to message.
+
+`local_gs4_quiet()` and `with_gs4_quiet()` are [withr-style](https://withr.r-lib.org) convenience helpers for setting `googlesheets4_quiet = TRUE`.
 
 ## Other changes
 
 The deprecated `sheets_*()` functions have now been removed, as promised in the warning they have been throwing for over a year.
-No functionality has been removed, this is just the result of the function naming scheme adopted in googlesheets4 >= 0.2.0.
+No functionality has been removed, this is just the result of the function (re-)naming scheme adopted in googlesheets4 >= 0.2.0.
 More details are in [this developer documentation](https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html#previous-use-of-sheets-prefix).
 
 The `na` argument of `read_sheet()` has become more capable and more consistent with readr.
@@ -23,11 +25,16 @@ Explicit `NULL`s are now written properly, i.e. as an empty cell (#203).
 
 `sheet_append()` no longer touches any aspect of cell formatting other than `numberFormat` (#204).
 
+`gs4_example()` and `gs4_examples()` now learn the example Sheet ids from a Google Sheet.
+This should not change anything for users, but it means there is an API call the first time either of these functions is called.
+
 ## Dependency changes
 
 * cli is new in Imports.
 
 * googlesheets4 Suggests testthat >= 3.0.0 and, specifically, uses third edition features.
+
+R 3.4 is now the oldest version that is explicitly supported and tested, as per the [tidyverse policy](https://www.tidyverse.org/blog/2019/04/r-version-support/).
 
 # googlesheets4 0.3.0
 

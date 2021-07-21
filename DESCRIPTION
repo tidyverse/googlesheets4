@@ -1,6 +1,6 @@
 Package: googlesheets4
 Title: Access Google Sheets using the Sheets API V4
-Version: 1.0.0
+Version: 1.0.0.9000
 Authors@R: 
     c(person(given = "Jennifer",
              family = "Bryan",

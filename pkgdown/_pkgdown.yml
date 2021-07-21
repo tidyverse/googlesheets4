@@ -86,8 +86,7 @@ reference:
       - gs4_get
       - gs4_find
       - gs4_browse
-      - ends_with("_id")
-      - as_id.googlesheets4_spreadsheet
+      - as_sheets_id
       - gs4_random
   - title: "Modify a Sheet"
     desc: >

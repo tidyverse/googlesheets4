@@ -50,7 +50,7 @@
         <a class="navbar-brand" href="../../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
         </div>
       </div>
     </div>
@@ -204,8 +204,8 @@
 <div id="previous-use-of-sheets_-prefix" class="section level1">
 <h1 class="hasAnchor">
 <a href="#previous-use-of-sheets_-prefix" class="anchor"></a>Previous use of <code>sheets_</code> prefix</h1>
-<p>When googlesheets4 first appeared on CRAN and up to v0.1.1, it had a nearly universal <code>sheets_</code> prefix. In version 0.2.0, googlesheets4 gained a tremendous amount of writing and editing functionality. At that time, it became clear that the <code>sheets_</code> scheme was an impediment to generating descriptive, predictable function names. For example, you can delete a (spread)Sheet, a (work)sheet, or a cell range. Which one of these functions will be named <code>sheets_delete()</code>? How do we name the others? There is no good answer to this, which is why we adopted the 3 prefix strategy.</p>
-<p>Any function that existed in v0.1.1 has been formally deprecated and is addressed by formal documentation mapping old names to new. Below are larger tables, that also cover functions that only existed in dev versions, but that may have seen use in the community. As time goes on, this article becomes more of historical note.</p>
+<p>When googlesheets4 first appeared on CRAN and up to v0.1.1 (released 2020-03-21), it had a nearly universal <code>sheets_</code> prefix. In version 0.2.0 (released 2020-05-08), googlesheets4 gained a tremendous amount of writing and editing functionality. At that time, it became clear that the <code>sheets_</code> scheme was an impediment to generating descriptive, predictable function names. For example, you can delete a (spread)Sheet, a (work)sheet, or a cell range. Which one of these functions will be named <code>sheets_delete()</code>? How do we name the others? There is no good answer to this, which is why we adopted the 3 prefix strategy.</p>
+<p>Any function that existed in v0.1.1 was formally deprecated in v0.2.0 and was removed in v1.0.0. Below are tables documenting the name changes, that also cover functions that only existed in dev versions, but that may have seen use in the community. As time goes on, this article becomes more of historical note.</p>
 <p>The dev version of googlesheets4 was bumped from 0.1.1.9000 to 0.1.1.9100 when the <code>sheets_</code> naming scheme was abandoned. The last commit under the old scheme was also tagged as “v0.1.1.9000”, which means one can install from that specific state via <code>devtools::install_github("tidyverse/googlesheets4@v0.1.1.9000")</code>.</p>
 <div id="auth-and-the-sheet-api-v4-surface" class="section level2">
 <h2 class="hasAnchor">
@@ -218,47 +218,47 @@
 <tbody>
 <tr class="odd">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_api_key()</a></code> (*)</td>
+<code>sheets_api_key()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_auth_configure.html">gs4_api_key()</a></code></td>
 </tr>
 <tr class="even">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_auth()</a></code> (*)</td>
+<code>sheets_auth()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_auth.html">gs4_auth()</a></code></td>
 </tr>
 <tr class="odd">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_auth_configure()</a></code> (*)</td>
+<code>sheets_auth_configure()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_auth_configure.html">gs4_auth_configure()</a></code></td>
 </tr>
 <tr class="even">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_deauth()</a></code> (*)</td>
+<code>sheets_deauth()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_deauth.html">gs4_deauth()</a></code></td>
 </tr>
 <tr class="odd">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_endpoints()</a></code> (*)</td>
+<code>sheets_endpoints()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_endpoints.html">gs4_endpoints()</a></code></td>
 </tr>
 <tr class="even">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_has_token()</a></code> (*)</td>
+<code>sheets_has_token()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_has_token.html">gs4_has_token()</a></code></td>
 </tr>
 <tr class="odd">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_oauth_app()</a></code> (*)</td>
+<code>sheets_oauth_app()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_auth_configure.html">gs4_oauth_app()</a></code></td>
 </tr>
 <tr class="even">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_token()</a></code> (*)</td>
+<code>sheets_token()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_token.html">gs4_token()</a></code></td>
 </tr>
 <tr class="odd">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_user()</a></code> (*)</td>
+<code>sheets_user()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_user.html">gs4_user()</a></code></td>
 </tr>
 </tbody>
@@ -276,7 +276,7 @@
 <tbody>
 <tr class="odd">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_browse()</a></code> (*)</td>
+<code>sheets_browse()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_browse.html">gs4_browse()</a></code></td>
 </tr>
 <tr class="even">
@@ -285,7 +285,7 @@
 </tr>
 <tr class="odd">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_find()</a></code> (*)</td>
+<code>sheets_find()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_find.html">gs4_find()</a></code></td>
 </tr>
 <tr class="even">
@@ -298,17 +298,17 @@
 </tr>
 <tr class="even">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_example()</a></code> (*)</td>
+<code>sheets_example()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_examples.html">gs4_example()</a></code></td>
 </tr>
 <tr class="odd">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_examples()</a></code> (*)</td>
+<code>sheets_examples()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_examples.html">gs4_examples()</a></code></td>
 </tr>
 <tr class="even">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_get()</a></code> (*)</td>
+<code>sheets_get()</code> (*)</td>
 <td align="left"><code><a href="../../reference/gs4_get.html">gs4_get()</a></code></td>
 </tr>
 <tr class="odd">
@@ -366,7 +366,7 @@
 </tr>
 <tr class="even">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_sheets()</a></code> (*)</td>
+<code>sheets_sheets()</code> (*)</td>
 <td align="left"><code><a href="../../reference/sheet_properties.html">sheet_names()</a></code></td>
 </tr>
 <tr class="odd">
@@ -392,7 +392,7 @@
 </tr>
 <tr class="even">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_cells()</a></code> (*)</td>
+<code>sheets_cells()</code> (*)</td>
 <td align="left"><code><a href="../../reference/range_read_cells.html">range_read_cells()</a></code></td>
 </tr>
 <tr class="odd">
@@ -409,7 +409,7 @@
 </tr>
 <tr class="even">
 <td align="left">
-<code><a href="../../reference/googlesheets4-deprecated.html">sheets_read()</a></code> (*)</td>
+<code>sheets_read()</code> (*)</td>
 <td align="left"><code><a href="../../reference/range_read.html">range_read()</a></code></td>
 </tr>
 <tr class="odd">

@@ -50,7 +50,7 @@
         <a class="navbar-brand" href="../../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
         </div>
       </div>
     </div>
@@ -167,7 +167,7 @@
 <li><p><code><a href="../../reference/range_read.html">range_read()</a></code> is technically the right name according to the naming convention used throughout the googlesheets4 package, because we can read from an arbitrary cell range.</p></li>
 </ul>
 <p><code><a href="../../reference/range_read.html">read_sheet()</a></code> and <code><a href="../../reference/range_read.html">range_read()</a></code> are synonyms and you can use either one. Throughout this article, we’re going to use <code><a href="../../reference/range_read.html">range_read()</a></code>.</p>
-<p>Note: The first release of googlesheets used a <code>sheets_</code> prefix everywhere, so we had <code><a href="../../reference/googlesheets4-deprecated.html">sheets_read()</a></code>. It still works, but it’s deprecated and will go away rather swiftly.</p>
+<p>Note: The first release of googlesheets used a <code>sheets_</code> prefix everywhere, so we had <code>sheets_read()</code>. It still works, but it’s deprecated and will go away rather swiftly.</p>
 </div>
 <div id="specify-the-range-and-column-types" class="section level2">
 <h2 class="hasAnchor">
@@ -175,7 +175,6 @@
 <p>Here we read from the “mini-gap” and “deaths” example Sheets to show some of the different ways to specify (work)sheet and cell ranges.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="fu"><a href="../../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span>, sheet <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>
-<span class="co">#&gt; ✖ Request failed [429]. Retry 1 happens in 100.1 seconds ...</span>
 <span class="co">#&gt; ✔ Reading from "mini-gap".</span>
 <span class="co">#&gt; ✔ Range ''Americas''.</span>
 <span class="co">#&gt; # A tibble: 5 x 6</span>
@@ -325,23 +324,21 @@
 <span class="co">#&gt; ✔ Reading from "gapminder", sheet 'Oceania'.</span>
 <span class="co">#&gt; ℹ Export URL:</span>
 <span class="co">#&gt;   &lt;https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=1796776040&gt;</span>
-<span class="co">#&gt; </span>
+<span class="co">#&gt; Rows: 3 Columns: 6</span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
-<span class="co">#&gt; cols(</span>
-<span class="co">#&gt;   country = col_character(),</span>
-<span class="co">#&gt;   continent = col_character(),</span>
-<span class="co">#&gt;   year = col_double(),</span>
-<span class="co">#&gt;   lifeExp = col_double(),</span>
-<span class="co">#&gt;   pop = col_double(),</span>
-<span class="co">#&gt;   gdpPercap = col_double()</span>
-<span class="co">#&gt; )</span>
+<span class="co">#&gt; Delimiter: ","</span>
+<span class="co">#&gt; chr (2): country, continent</span>
+<span class="co">#&gt; dbl (4): year, lifeExp, pop, gdpPercap</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt; # A tibble: 3 x 6</span>
 <span class="co">#&gt;   country   continent  year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;     &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 Australia Oceania    1952    69.1  8691212    10040.</span>
 <span class="co">#&gt; 2 Australia Oceania    1957    70.3  9712569    10950.</span>
 <span class="co">#&gt; 3 Australia Oceania    1962    70.9 10794968    12217.</span></code></pre></div>
-<p>The output above reveals that, under the hood, <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> calls an external function for CSV parsing (currently <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code>, but it is likely to switch to <code>vroom::vroom()</code>). An important consequence is that all arguments around column type specification are passed along to the CSV-parsing function. Here is a demo using readr-style column specification:</p>
+<p>The output above reveals that, under the hood, <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> calls an external function for CSV parsing (currently <code><a href="https://readr.tidyverse.org/reference/read_delim.html">readr::read_csv()</a></code>, but it is likely to switch to <code><a href="https://vroom.r-lib.org/reference/vroom.html">vroom::vroom()</a></code>). An important consequence is that all arguments around column type specification are passed along to the CSV-parsing function. Here is a demo using readr-style column specification:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../../reference/range_speedread.html">range_speedread</a></span><span class="op">(</span>
@@ -402,25 +399,23 @@
 <span class="co">#&gt; ✔ Reading from "gapminder", sheet 'Africa'.</span>
 <span class="co">#&gt; ℹ Export URL:</span>
 <span class="co">#&gt;   &lt;https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&amp;gid=780868077&gt;</span>
-<span class="co">#&gt; </span>
+<span class="co">#&gt; Rows: 624 Columns: 6</span>
 <span class="co">#&gt; ── Column specification ────────────────────────────────────────────────────────</span>
-<span class="co">#&gt; cols(</span>
-<span class="co">#&gt;   country = col_character(),</span>
-<span class="co">#&gt;   continent = col_character(),</span>
-<span class="co">#&gt;   year = col_double(),</span>
-<span class="co">#&gt;   lifeExp = col_double(),</span>
-<span class="co">#&gt;   pop = col_double(),</span>
-<span class="co">#&gt;   gdpPercap = col_double()</span>
-<span class="co">#&gt; )</span>
+<span class="co">#&gt; Delimiter: ","</span>
+<span class="co">#&gt; chr (2): country, continent</span>
+<span class="co">#&gt; dbl (4): year, lifeExp, pop, gdpPercap</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
+<span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.091   0.000   0.639</span>
+<span class="co">#&gt;   0.174   0.000   0.616</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span>
   <span class="fu"><a href="../../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from "gapminder".</span>
 <span class="co">#&gt; ✔ Range ''Africa''.</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.332   0.012   0.756</span></code></pre></div>
+<span class="co">#&gt;   0.307   0.004   0.650</span></code></pre></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> vs <code><a href="../../reference/range_read.html">range_read()</a></code>:</p>
 <ul>

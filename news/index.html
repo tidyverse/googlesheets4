@@ -94,7 +94,7 @@
         <a class="navbar-brand" href="../index.html">googlesheets4</a>
         <div class="info hidden-xs hidden-sm">
           <span class="partof">part of the <a href="https://tidyverse.org">tidyverse</a></span>
-          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0.9000</span>
+          <span class="version version-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
         </div>
       </div>
     </div>
@@ -191,15 +191,27 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#googlesheets4-development-version" class="anchor"></a>googlesheets4 (development version)<small> Unreleased </small>
 </h1>
+</div>
+    <div id="googlesheets4-100" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.0">
+<a href="#googlesheets4-100" class="anchor"></a>googlesheets4 1.0.0<small> 2021-07-21 </small>
+</h1>
 <div id="user-interface" class="section level2">
 <h2 class="hasAnchor">
 <a href="#user-interface" class="anchor"></a>User interface</h2>
 <p>The user interface has gotten more stylish, thanks to the cli package (<a href="https://cli.r-lib.org" class="uri">https://cli.r-lib.org</a>).</p>
-<p>The <code>googlesheets4_quiet</code> option can be used to suppress messages from googlesheets4, specifically (<a href='https://github.com/tidyverse/googlesheets4/issues/163'>#163</a>). By default, googlesheets4 always messages, i.e. it is <em>not</em> quiet. <code><a href="../reference/googlesheets4-configuration.html">local_gs4_quiet()</a></code> and <code><a href="../reference/googlesheets4-configuration.html">with_gs4_quiet()</a></code> are <a href="https://withr.r-lib.org">withr-style</a> convenience helpers for setting <code>googlesheets4_quiet = TRUE</code>.</p>
-<p>googlesheets4 now throws errors with class <code>"googlesheets4_error"</code> (<a href='https://github.com/tidyverse/googlesheets4/issues/12'>#12</a>).</p>
+<p>All informational messages, warnings, and errors are now emitted via cli, which uses rlang’s condition functions under-the-hood. googlesheets4 now throws errors with class <code>"googlesheets4_error"</code> (<a href='https://github.com/tidyverse/googlesheets4/issues/12'>#12</a>).</p>
+<p><code>googlesheets4_quiet</code> is a new option to suppress informational messages from googlesheets4 (<a href='https://github.com/tidyverse/googlesheets4/issues/163'>#163</a>). Unless it’s explicitly set to <code>TRUE</code>, the default is to message.</p>
+<p><code><a href="../reference/googlesheets4-configuration.html">local_gs4_quiet()</a></code> and <code><a href="../reference/googlesheets4-configuration.html">with_gs4_quiet()</a></code> are <a href="https://withr.r-lib.org">withr-style</a> convenience helpers for setting <code>googlesheets4_quiet = TRUE</code>.</p>
+</div>
+<div id="other-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-changes" class="anchor"></a>Other changes</h2>
+<p>The deprecated <code>sheets_*()</code> functions have now been removed, as promised in the warning they have been throwing for over a year. No functionality has been removed, this is just the result of the function (re-)naming scheme adopted in googlesheets4 &gt;= 0.2.0. More details are in <a href="https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html#previous-use-of-sheets-prefix">this developer documentation</a>.</p>
 <p>The <code>na</code> argument of <code><a href="../reference/range_read.html">read_sheet()</a></code> has become more capable and more consistent with readr. Specifically, <code>na = character()</code> (or the general lack of <code>""</code> among the <code>na</code> strings) results in cells with no data appearing as the empty string <code>""</code> within a character vector, as opposed to <code>NA</code> (<a href='https://github.com/tidyverse/googlesheets4/issues/174'>#174</a>).</p>
 <p>Explicit <code>NULL</code>s are now written properly, i.e. as an empty cell (<a href='https://github.com/tidyverse/googlesheets4/issues/203'>#203</a>).</p>
 <p><code><a href="../reference/sheet_append.html">sheet_append()</a></code> no longer touches any aspect of cell formatting other than <code>numberFormat</code> (<a href='https://github.com/tidyverse/googlesheets4/issues/204'>#204</a>).</p>
+<p><code><a href="../reference/gs4_examples.html">gs4_example()</a></code> and <code><a href="../reference/gs4_examples.html">gs4_examples()</a></code> now learn the example Sheet ids from a Google Sheet. This should not change anything for users, but it means there is an API call the first time either of these functions is called.</p>
 </div>
 <div id="dependency-changes" class="section level2">
 <h2 class="hasAnchor">
@@ -208,6 +220,7 @@
 <li><p>cli is new in Imports.</p></li>
 <li><p>googlesheets4 Suggests testthat &gt;= 3.0.0 and, specifically, uses third edition features.</p></li>
 </ul>
+<p>R 3.4 is now the oldest version that is explicitly supported and tested, as per the <a href="https://www.tidyverse.org/blog/2019/04/r-version-support/">tidyverse policy</a>.</p>
 </div>
 </div>
     <div id="googlesheets4-030" class="section level1">
@@ -287,7 +300,7 @@
 <h2 class="hasAnchor">
 <a href="#range-operations" class="anchor"></a>Range operations</h2>
 <p><code><a href="../reference/range_speedread.html">range_speedread()</a></code> reads from a Sheet using its “export=csv” URL and, therefore, uses readr-style column type specification. It still supports fairly general range syntax and auth. For very large Sheets, this can be substantially faster than <code><a href="../reference/range_read.html">read_sheet()</a></code>.</p>
-<p><code><a href="../reference/range_read_cells.html">range_read_cells()</a></code> (formerly known as <code><a href="../reference/googlesheets4-deprecated.html">sheets_cells()</a></code>) gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But <code>range_read_cells(cell_data = "full", discard_empty = FALSE)</code> is now available if you want full cell data, including formatting, even for cells that have no value (<a href='https://github.com/tidyverse/googlesheets4/issues/4'>#4</a>).</p>
+<p><code><a href="../reference/range_read_cells.html">range_read_cells()</a></code> (formerly known as <code>sheets_cells()</code>) gains two new arguments that make it possible to get more data on more cells. By default, we get only the fields needed to parse cells that contain values. But <code>range_read_cells(cell_data = "full", discard_empty = FALSE)</code> is now available if you want full cell data, including formatting, even for cells that have no value (<a href='https://github.com/tidyverse/googlesheets4/issues/4'>#4</a>).</p>
 <p><code><a href="../reference/range_autofit.html">range_autofit()</a></code> adjusts column width or row height to fit the data. This only affects the display of a sheet and does not change values or dimensions.</p>
 </div>
 <div id="printing-a-sheet-id" class="section level2">

@@ -35,7 +35,6 @@ csv
 datetime
 datetimes
 de
-deauth
 dev
 funder
 gamechanger
@@ -47,7 +46,6 @@ https
 httr
 httr's
 js
-lifecycle
 lubridate
 lubridate's
 noninteractively
@@ -61,10 +59,11 @@ readr
 readr's
 readxl
 reprex
+reprexes
+rlang's
 roundtrip
 shortcode
 shortcodes
-ss
 targetted
 testthat
 tibble

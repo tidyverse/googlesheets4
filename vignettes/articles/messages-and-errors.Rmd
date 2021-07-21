@@ -146,5 +146,5 @@ abort_unsupported_conversion(x, to = "SheetThing")
 `abort_unsupported_conversion()` exists to standardize a recurring type of error message, usually encountered during development, not by end-users.
 I use it a lot in the default method of an `as_{to}()` generic.
 
-There's not much to add here re: errors, now thet `cli::cli_abort()` exists.
+There's not much to add here re: errors, now that `cli::cli_abort()` exists.
 Error messages are formed just like informational messages now.

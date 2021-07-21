@@ -20,7 +20,8 @@ googlesheets4 package. The names of this list (or the \code{id} sub-elements) ar
 the nicknames that can be used to specify an endpoint in
 \code{\link[=request_generate]{request_generate()}}. For each endpoint, we store its nickname or \code{id}, the
 associated HTTP \code{method}, the \code{path}, and details about the parameters. This
-list is derived programmatically from the \href{https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest}{Sheets API v4 Discovery Document}.
+list is derived programmatically from the Sheets API v4 Discovery
+Document (\verb{https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest}).
 }
 \examples{
 str(gs4_endpoints(), max.level = 2)

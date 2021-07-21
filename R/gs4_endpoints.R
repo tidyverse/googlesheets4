@@ -5,8 +5,8 @@
 #' the nicknames that can be used to specify an endpoint in
 #' [request_generate()]. For each endpoint, we store its nickname or `id`, the
 #' associated HTTP `method`, the `path`, and details about the parameters. This
-#' list is derived programmatically from the [Sheets API v4 Discovery
-#' Document](https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest).
+#' list is derived programmatically from the Sheets API v4 Discovery
+#' Document (`https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest`).
 #'
 #' @param i The name(s) or integer index(ices) of the endpoints to return.
 #'   Optional. By default, the entire list is returned.

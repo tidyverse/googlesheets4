@@ -34,7 +34,8 @@ that, if auth has been de-activated via \code{\link[=gs4_deauth]{gs4_deauth()}},
 suitable as input for \code{\link[=request_make]{request_make()}}.
 }
 \description{
-Generate a request, using knowledge of the \href{https://developers.google.com/sheets/api/}{Sheets API} from its \href{https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest}{Discovery Document}. Use
+Generate a request, using knowledge of the \href{https://developers.google.com/sheets/api/}{Sheets API} from its Discovery
+Document (\verb{https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest}). Use
 \code{\link[=request_make]{request_make()}} to execute the request. Most users should, instead, use
 higher-level wrappers that facilitate common tasks, such as reading or
 writing worksheets or cell ranges. The functions here are intended for

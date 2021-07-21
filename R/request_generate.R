@@ -1,8 +1,8 @@
 #' Generate a Google Sheets API request
 #'
 #' @description Generate a request, using knowledge of the [Sheets
-#'   API](https://developers.google.com/sheets/api/) from its [Discovery
-#'   Document](https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest). Use
+#'   API](https://developers.google.com/sheets/api/) from its Discovery
+#'   Document (`https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest`). Use
 #'   [request_make()] to execute the request. Most users should, instead, use
 #'   higher-level wrappers that facilitate common tasks, such as reading or
 #'   writing worksheets or cell ranges. The functions here are intended for

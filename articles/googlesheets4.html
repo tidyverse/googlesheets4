@@ -225,13 +225,13 @@
 <span class="co">#&gt; ✔ Reading from "chicken-sheet".</span>
 <span class="co">#&gt; ✔ Range 'chicken.csv'.</span>
 <span class="co">#&gt; # A tibble: 5 × 4</span>
-<span class="co">#&gt;   chicken            breed         sex    motto                                 </span>
-<span class="co">#&gt;   &lt;chr&gt;              &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;                                 </span>
-<span class="co">#&gt; 1 Foghorn Leghorn    Leghorn       roost… That's a joke, ah say, that's a joke,…</span>
-<span class="co">#&gt; 2 Chicken Little     unknown       hen    The sky is falling!                   </span>
-<span class="co">#&gt; 3 Ginger             Rhode Island… hen    Listen. We'll either die free chicken…</span>
-<span class="co">#&gt; 4 Camilla the Chick… Chantecler    hen    Bawk, buck, ba-gawk.                  </span>
-<span class="co">#&gt; 5 Ernie The Giant C… Brahma        roost… Put Captain Solo in the cargo hold.</span></code></pre></div>
+<span class="co">#&gt;   chicken                 breed            sex     motto                        </span>
+<span class="co">#&gt;   &lt;chr&gt;                   &lt;chr&gt;            &lt;chr&gt;   &lt;chr&gt;                        </span>
+<span class="co">#&gt; 1 Foghorn Leghorn         Leghorn          rooster That's a joke, ah say, that'…</span>
+<span class="co">#&gt; 2 Chicken Little          unknown          hen     The sky is falling!          </span>
+<span class="co">#&gt; 3 Ginger                  Rhode Island Red hen     Listen. We'll either die fre…</span>
+<span class="co">#&gt; 4 Camilla the Chicken     Chantecler       hen     Bawk, buck, ba-gawk.         </span>
+<span class="co">#&gt; 5 Ernie The Giant Chicken Brahma           rooster Put Captain Solo in the carg…</span></code></pre></div>
 <p>If you’d like to see a Sheet in the browser, including our example Sheets, use <code><a href="../reference/gs4_browse.html">gs4_browse()</a></code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span>
@@ -282,10 +282,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Creating new Sheet: "cranky-blackbear".</span>
+<span class="co">#&gt; ✔ Creating new Sheet: "dreary-seabird".</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: cranky-blackbear</span>
-<span class="co">#&gt;               ID: 12oLP3NikEgqGaUCZnXJA4CkZZyh8gPTG_h5cQyJIi3w</span>
+<span class="co">#&gt; Spreadsheet name: dreary-seabird</span>
+<span class="co">#&gt;               ID: 1HVZAJrG4r3HpKks9YtCnk2Ksrrx-TfwPus9ZJO2agVg</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -297,13 +297,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; • 'cranky-blackbear' &lt;id: 12oLP3NikEgqGaUCZnXJA4CkZZyh8gPTG_h5cQyJIi3w&gt;</span>
+<span class="co">#&gt; • 'dreary-seabird' &lt;id: 1HVZAJrG4r3HpKks9YtCnk2Ksrrx-TfwPus9ZJO2agVg&gt;</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Creating new Sheet: "testy-hedgehog".</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1-pdRB0Qdz3OTztC8jby69J7C7ZUx8V8Bf_o7WXd8QNg</span>
+<span class="co">#&gt;               ID: 1XzgMMfGZbcKsq1c8M5SCh0-7zZRdUesmnf-jrmZkxMU</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -317,7 +317,7 @@
 <span class="co">#&gt; ✔ Writing to sheet 'chickwts'.</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1-pdRB0Qdz3OTztC8jby69J7C7ZUx8V8Bf_o7WXd8QNg</span>
+<span class="co">#&gt;               ID: 1XzgMMfGZbcKsq1c8M5SCh0-7zZRdUesmnf-jrmZkxMU</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -350,7 +350,6 @@
 <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss</span>, sheet <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from "testy-hedgehog".</span>
 <span class="co">#&gt; ✔ Range ''df''.</span>
-<span class="co">#&gt; ✖ Request failed [429]. Retry 1 happens in 100.6 seconds ...</span>
 <span class="co">#&gt; # A tibble: 8 × 2</span>
 <span class="co">#&gt;       x letters.4.10.</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;        </span>
@@ -368,12 +367,12 @@
 <span class="co">#&gt; # A tibble: 2 × 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 1917344921 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1  591940152 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 1 df           0 1223369959 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1  483693354 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; • 'testy-hedgehog' &lt;id: 1-pdRB0Qdz3OTztC8jby69J7C7ZUx8V8Bf_o7WXd8QNg&gt;</span></code></pre></div>
+<span class="co">#&gt; • 'testy-hedgehog' &lt;id: 1XzgMMfGZbcKsq1c8M5SCh0-7zZRdUesmnf-jrmZkxMU&gt;</span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

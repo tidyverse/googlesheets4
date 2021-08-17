@@ -55,6 +55,12 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("tidyverse/googlesheets4")
 ```
 
+## Cheatsheet
+
+You can see how to read data with googlesheets4 in the **data import cheatsheet**, which also covers similar functionality in the related packages readr and readxl.
+
+<a href="https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf"><img src="https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-import-cheatsheet-thumbs.png" width="630" height="252"/></a>
+
 ## Auth
 
 googlesheets4 will, by default, help you interact with Sheets as an authenticated Google user. If you don't plan to write Sheets or to read private Sheets, use `gs4_deauth()` to indicate there is no need for a token. See the article [googlesheets4 auth](https://googlesheets4.tidyverse.org/articles/articles/auth.html) for more.

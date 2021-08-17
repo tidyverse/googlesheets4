@@ -41,6 +41,14 @@ And the development version from [GitHub](https://github.com/) with:
 devtools::install_github("tidyverse/googlesheets4")
 ```
 
+## Cheatsheet
+
+You can see how to read data with googlesheets4 in the **data import
+cheatsheet**, which also covers similar functionality in the related
+packages readr and readxl.
+
+<a href="https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf"><img src="https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-import-cheatsheet-thumbs.png" width="630" height="252"/></a>
+
 ## Auth
 
 googlesheets4 will, by default, help you interact with Sheets as an
@@ -92,7 +100,7 @@ These all achieve the same thing:
 read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077")
 #> ✓ Reading from "gapminder".
 #> ✓ Range 'Africa'.
-#> # A tibble: 624 x 6
+#> # A tibble: 624 × 6
 #>   country continent  year lifeExp      pop gdpPercap
 #>   <chr>   <chr>     <dbl>   <dbl>    <dbl>     <dbl>
 #> 1 Algeria Africa     1952    43.1  9279525     2449.
@@ -106,7 +114,7 @@ read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2d
 read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 #> ✓ Reading from "gapminder".
 #> ✓ Range 'Africa'.
-#> # A tibble: 624 x 6
+#> # A tibble: 624 × 6
 #>   country continent  year lifeExp      pop gdpPercap
 #>   <chr>   <chr>     <dbl>   <dbl>    <dbl>     <dbl>
 #> 1 Algeria Africa     1952    43.1  9279525     2449.
@@ -122,7 +130,7 @@ googledrive::drive_get("gapminder") %>%
 #> ✓ The input `path` resolved to exactly 1 file.
 #> ✓ Reading from "gapminder".
 #> ✓ Range 'Africa'.
-#> # A tibble: 624 x 6
+#> # A tibble: 624 × 6
 #>   country continent  year lifeExp      pop gdpPercap
 #>   <chr>   <chr>     <dbl>   <dbl>    <dbl>     <dbl>
 #> 1 Algeria Africa     1952    43.1  9279525     2449.
@@ -154,7 +162,7 @@ some initial data.
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> ✓ Creating new Sheet: "fluffy-bunny".
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 1GtTKAaC0R2WI6gaGitsj1v_IGuDC6n6uVBwk8-aFExg
+#>               ID: 18yObQh5XoOZqyj_ISD5JqtR5YF0HuGsHEIvyxIzlqDI
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 1
@@ -173,7 +181,7 @@ head(mtcars) %>%
 #> ✓ Writing to sheet 'autos'.
 ss
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 1GtTKAaC0R2WI6gaGitsj1v_IGuDC6n6uVBwk8-aFExg
+#>               ID: 18yObQh5XoOZqyj_ISD5JqtR5YF0HuGsHEIvyxIzlqDI
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 2

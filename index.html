@@ -168,6 +168,12 @@
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"tidyverse/googlesheets4"</span><span class="op">)</span></code></pre></div>
 </div>
+<div id="cheatsheet" class="section level2">
+<h2 class="hasAnchor">
+<a href="#cheatsheet" class="anchor"></a>Cheatsheet</h2>
+<p>You can see how to read data with googlesheets4 in the <strong>data import cheatsheet</strong>, which also covers similar functionality in the related packages readr and readxl.</p>
+<p><a href="https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf"><img src="https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-import-cheatsheet-thumbs.png" width="630" height="252"></a></p>
+</div>
 <div id="auth" class="section level2">
 <h2 class="hasAnchor">
 <a href="#auth" class="anchor"></a>Auth</h2>
@@ -204,7 +210,7 @@
 <span class="fu"><a href="reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span><span class="op">)</span>
 <span class="co">#&gt; ✓ Reading from "gapminder".</span>
 <span class="co">#&gt; ✓ Range 'Africa'.</span>
-<span class="co">#&gt; # A tibble: 624 x 6</span>
+<span class="co">#&gt; # A tibble: 624 × 6</span>
 <span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
@@ -218,7 +224,7 @@
 <span class="fu"><a href="reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span><span class="op">)</span>
 <span class="co">#&gt; ✓ Reading from "gapminder".</span>
 <span class="co">#&gt; ✓ Range 'Africa'.</span>
-<span class="co">#&gt; # A tibble: 624 x 6</span>
+<span class="co">#&gt; # A tibble: 624 × 6</span>
 <span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
@@ -234,7 +240,7 @@
 <span class="co">#&gt; ✓ The input `path` resolved to exactly 1 file.</span>
 <span class="co">#&gt; ✓ Reading from "gapminder".</span>
 <span class="co">#&gt; ✓ Range 'Africa'.</span>
-<span class="co">#&gt; # A tibble: 624 x 6</span>
+<span class="co">#&gt; # A tibble: 624 × 6</span>
 <span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
@@ -254,7 +260,7 @@
 <code class="sourceCode R"><span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"fluffy-bunny"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>flowers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✓ Creating new Sheet: "fluffy-bunny".</span>
 <span class="co">#&gt; Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;               ID: 1GtTKAaC0R2WI6gaGitsj1v_IGuDC6n6uVBwk8-aFExg</span>
+<span class="co">#&gt;               ID: 18yObQh5XoOZqyj_ISD5JqtR5YF0HuGsHEIvyxIzlqDI</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -269,7 +275,7 @@
 <span class="co">#&gt; ✓ Writing to sheet 'autos'.</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;               ID: 1GtTKAaC0R2WI6gaGitsj1v_IGuDC6n6uVBwk8-aFExg</span>
+<span class="co">#&gt;               ID: 18yObQh5XoOZqyj_ISD5JqtR5YF0HuGsHEIvyxIzlqDI</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>

@@ -188,6 +188,7 @@
 <span class="co">#&gt; 3 Brazil    Americas   1952    50.9 56602560     2109.</span>
 <span class="co">#&gt; 4 Canada    Americas   1952    68.8 14785584    11367.</span>
 <span class="co">#&gt; 5 Chile     Americas   1952    54.7  6377619     3940.</span>
+
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="fu"><a href="../../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span>, sheet <span class="op">=</span> <span class="st">"Oceania"</span>, n_max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from "mini-gap".</span>
 <span class="co">#&gt; ✔ Range ''Oceania''.</span>
@@ -197,6 +198,7 @@
 <span class="co">#&gt; 1 Australia   Oceania    1952    69.1 8691212    10040.</span>
 <span class="co">#&gt; 2 New Zealand Oceania    1952    69.4 1994794    10557.</span>
 <span class="co">#&gt; 3 Australia   Oceania    1957    70.3 9712569    10950.</span>
+
 <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="fu"><a href="../../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>, skip <span class="op">=</span> <span class="fl">4</span>, n_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from "deaths".</span>
 <span class="co">#&gt; ✔ Range '5:5000000'.</span>
@@ -219,7 +221,8 @@
 <li>For the full list of column types and how to specify them, see the <a href="https://googlesheets4.tidyverse.org/reference/range_read.html#column-specification">Column specification</a> section of the help for <code><a href="../../reference/range_read.html">range_read()</a></code>.</li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>
+<code class="sourceCode R">
+<span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>
   <span class="fu"><a href="../../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>, range <span class="op">=</span> <span class="st">"other!A5:F15"</span>, col_types <span class="op">=</span> <span class="st">"?ci??D"</span>
 <span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from "deaths".</span>
@@ -408,14 +411,14 @@
 <span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
 <span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.156   0.008   0.657</span>
+<span class="co">#&gt;   0.164   0.000   0.773</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span>
   <span class="fu"><a href="../../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from "gapminder".</span>
 <span class="co">#&gt; ✔ Range ''Africa''.</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.429   0.024   0.769</span></code></pre></div>
+<span class="co">#&gt;   0.456   0.016   0.891</span></code></pre></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> vs <code><a href="../../reference/range_read.html">range_read()</a></code>:</p>
 <ul>

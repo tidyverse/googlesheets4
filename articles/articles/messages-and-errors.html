@@ -207,9 +207,11 @@
 <code class="sourceCode R"><span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-Google-Sheet"</span>
 <span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Creating new Sheet: {.s_sheet {nm}}"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Creating new Sheet: "name-of-a-Google-Sheet"</span>
+
 <span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-worksheet"</span>
 <span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Protecting cells on sheet: {.w_sheet {nm}}"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Protecting cells on sheet: 'name-of-a-worksheet'</span>
+
 <span class="va">rg</span> <span class="op">&lt;-</span> <span class="st">"A3:B20"</span>
 <span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Writing to the range: {.range {rg}}"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Writing to the range: 'A3:B20'</span></code></pre></div>
@@ -224,6 +226,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">gs4_bullets</span><span class="op">(</span><span class="st">"Doing the stuff you asked me to do."</span><span class="op">)</span>
 <span class="co">#&gt; Doing the stuff you asked me to do.</span>
+
 <span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>
   <span class="st">"You probably need to do one of these things:"</span>,
   <span class="st">"*"</span> <span class="op">=</span> <span class="st">"Call {.fun some_function}."</span>,
@@ -247,6 +250,7 @@
 <span class="va">n_new</span> <span class="op">&lt;-</span> <span class="fl">1</span>
 <span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Adding {n_new} sheet{?s} to {.s_sheet {nm}}"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Adding 1 sheet to "name-of-a-Google-Sheet"</span>
+
 <span class="va">n_new</span> <span class="op">&lt;-</span> <span class="fl">3</span>
 <span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Adding {n_new} sheet{?s} to {.s_sheet {nm}}"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Adding 3 sheets to "name-of-a-Google-Sheet"</span></code></pre></div>
@@ -259,6 +263,7 @@
 <code class="sourceCode R"><span class="va">new_sheet_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span><span class="op">)</span>
 <span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"New sheet{?s}: {.w_sheet {new_sheet_names}}"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; New sheets: 'apple', 'banana', and 'cherry'</span>
+
 <span class="va">new_sheet_names</span> <span class="op">&lt;-</span> <span class="st">"kumquat"</span>
 <span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"New sheet{?s}: {.w_sheet {new_sheet_names}}"</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; New sheet: 'kumquat'</span></code></pre></div>

@@ -195,7 +195,7 @@
 
 <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html">drive_get</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; ✖ Request failed [429]. Retry 1 happens in 100.3 seconds ...</span>
+<span class="co">#&gt; ✔ Reading from "gapminder".</span>
 <span class="co">#&gt; # A tibble: 624 × 6</span>
 <span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
 <span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
@@ -282,10 +282,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Creating new Sheet: "unhealthy-aztecant".</span>
+<span class="co">#&gt; ✔ Creating new Sheet: "dorsal-hornet".</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: unhealthy-aztecant</span>
-<span class="co">#&gt;               ID: 1Ln8qy5_yZ-Ry32keWPqiISnl33OFRhkNCJDO-pGLiLQ</span>
+<span class="co">#&gt; Spreadsheet name: dorsal-hornet</span>
+<span class="co">#&gt;               ID: 1oWyR5sCh6hXBrcX_ROrkgswOvNr4YoZ1weoiTVZeK_c</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -297,13 +297,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; • 'unhealthy-aztecant' &lt;id: 1Ln8qy5_yZ-Ry32keWPqiISnl33OFRhkNCJDO-pGLiLQ&gt;</span>
+<span class="co">#&gt; • 'dorsal-hornet' &lt;id: 1oWyR5sCh6hXBrcX_ROrkgswOvNr4YoZ1weoiTVZeK_c&gt;</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Creating new Sheet: "testy-hedgehog".</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1OFsG6SXoiX1tQRAx1Xl1RaedTxFATmwzsFeXVUrpNCY</span>
+<span class="co">#&gt;               ID: 13SNyJ1Kpae9gdgtdD9-OWTNKg_fApM1CiPFG_yxD3cE</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -317,7 +317,7 @@
 <span class="co">#&gt; ✔ Writing to sheet 'chickwts'.</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1OFsG6SXoiX1tQRAx1Xl1RaedTxFATmwzsFeXVUrpNCY</span>
+<span class="co">#&gt;               ID: 13SNyJ1Kpae9gdgtdD9-OWTNKg_fApM1CiPFG_yxD3cE</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -367,12 +367,12 @@
 <span class="co">#&gt; # A tibble: 2 × 8</span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0  151702610 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 1860955556 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 1 df           0 1958450038 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1  492941394 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; • 'testy-hedgehog' &lt;id: 1OFsG6SXoiX1tQRAx1Xl1RaedTxFATmwzsFeXVUrpNCY&gt;</span></code></pre></div>
+<span class="co">#&gt; • 'testy-hedgehog' &lt;id: 13SNyJ1Kpae9gdgtdD9-OWTNKg_fApM1CiPFG_yxD3cE&gt;</span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

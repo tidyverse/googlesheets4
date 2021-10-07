@@ -210,7 +210,7 @@
 <span class="co">#&gt; 1 2020-04-23 19:48:57 2020-04-23 19:48:58</span></code></pre></div>
 <p>Note that the <code>tt</code> datetime is displayed differently in Sheets than it is locally in R. Sheets presents datetimes in Coordinated Universal Time (time zone Etc/UTC), even if the Sheet’s metadata specifies a different time zone, such as America/Vancouver.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="http://lubridate.tidyverse.org/reference/with_tz.html">with_tz</a></span><span class="op">(</span><span class="va">tt</span>, <span class="st">"Etc/UTC"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://lubridate.tidyverse.org/reference/with_tz.html">with_tz</a></span><span class="op">(</span><span class="va">tt</span>, <span class="st">"Etc/UTC"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "2020-04-23 19:48:57 UTC"</span></code></pre></div>
 <p>If you want to understand more about datetimes in R, in Sheets, and how you can sort of hack around this time zone problem, keep reading.</p>
 </div>
@@ -258,17 +258,17 @@
 <span class="fu"><a href="https://rdrr.io/r/base/timezones.html">Sys.timezone</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; [1] "America/Vancouver"</span></code></pre></div>
 <p>The time zone is <strong>purely matter of display</strong>, but it’s a really nice touch! It is comforting to get a time printed by R that matches your experience of what time it is, based on looking at the clock on your wall (“clock time”).</p>
-<p>lubridate’s <code><a href="http://lubridate.tidyverse.org/reference/with_tz.html">with_tz()</a></code> function lets you explicitly associate a datetime with a time zone, e.g. your own or any other time zone recognized by your system. And this, in turn, affects how the time is formatted for human eyeballs.</p>
+<p>lubridate’s <code><a href="https://lubridate.tidyverse.org/reference/with_tz.html">with_tz()</a></code> function lets you explicitly associate a datetime with a time zone, e.g. your own or any other time zone recognized by your system. And this, in turn, affects how the time is formatted for human eyeballs.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="fu"><a href="http://lubridate.tidyverse.org/reference/with_tz.html">with_tz</a></span><span class="op">(</span><span class="va">tt</span>, tzone <span class="op">=</span> <span class="st">"America/Vancouver"</span><span class="op">)</span>
+<span class="fu"><a href="https://lubridate.tidyverse.org/reference/with_tz.html">with_tz</a></span><span class="op">(</span><span class="va">tt</span>, tzone <span class="op">=</span> <span class="st">"America/Vancouver"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "2020-04-23 12:49:04 PDT"</span>
 
-<span class="fu"><a href="http://lubridate.tidyverse.org/reference/with_tz.html">with_tz</a></span><span class="op">(</span><span class="va">tt</span>, tzone <span class="op">=</span> <span class="st">"America/Denver"</span><span class="op">)</span>
+<span class="fu"><a href="https://lubridate.tidyverse.org/reference/with_tz.html">with_tz</a></span><span class="op">(</span><span class="va">tt</span>, tzone <span class="op">=</span> <span class="st">"America/Denver"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "2020-04-23 13:49:04 MDT"</span>
 
-<span class="fu"><a href="http://lubridate.tidyverse.org/reference/with_tz.html">with_tz</a></span><span class="op">(</span><span class="va">tt</span>, tzone <span class="op">=</span> <span class="st">"Etc/UTC"</span><span class="op">)</span>
+<span class="fu"><a href="https://lubridate.tidyverse.org/reference/with_tz.html">with_tz</a></span><span class="op">(</span><span class="va">tt</span>, tzone <span class="op">=</span> <span class="st">"Etc/UTC"</span><span class="op">)</span>
 <span class="co">#&gt; [1] "2020-04-23 19:49:04 UTC"</span></code></pre></div>
 <p><strong>Google Sheets have no ability to display a moment in time according to a specified time zone.</strong> Yes, each Sheet has an associated time zone, but this is not what it influences, even though you might expect or hope for that.</p>
 <p>When we read datetimes out of a Google Sheet, we must:</p>
@@ -379,7 +379,7 @@
 </tr>
 </tbody>
 </table>
-<p>Capture the current <code>moment</code> in time, with <code><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time()</a></code>, which has no explicit time zone. Store versions of <code>moment</code> with explicit time zones: America/New_York and Etc/UTC. Use <code><a href="http://lubridate.tidyverse.org/reference/force_tz.html">lubridate::force_tz()</a></code> to create a new moment in time: the moment in UTC that has the same clock time as the original <code>moment</code> in New York.</p>
+<p>Capture the current <code>moment</code> in time, with <code><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time()</a></code>, which has no explicit time zone. Store versions of <code>moment</code> with explicit time zones: America/New_York and Etc/UTC. Use <code><a href="https://lubridate.tidyverse.org/reference/force_tz.html">lubridate::force_tz()</a></code> to create a new moment in time: the moment in UTC that has the same clock time as the original <code>moment</code> in New York.</p>
 <p>The first Sheets formula we use is <code>=NOW()</code>, which you might expect to be the equivalent of R’s <code><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time()</a></code>. But it’s more like <code>force_tz(Sys.time(), tzone = "Etc/UTC")</code>. The second formula we construct is more elaborate. It uses datetime functions in Sheets to explicitly construct <code>moment_utc</code> in the Sheet. The last column uses <code>=TO_PURE_NUMBER()</code> to reveal the underlying serial numbers for all of the datetimes.</p>
 <p>Create 3 Sheets, with different approaches to the time zone:</p>
 <ul>

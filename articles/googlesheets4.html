@@ -222,8 +222,6 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"chicken-sheet"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; ✖ Request failed [429]. Retry 1 happens in 100.5 seconds ...</span>
-<span class="co">#&gt; ✖ Request failed [429]. Retry 2 happens in 12.7 seconds ...</span>
 <span class="co">#&gt; ✔ Reading from "chicken-sheet".</span>
 <span class="co">#&gt; ✔ Range 'chicken.csv'.</span>
 <span class="co">#&gt; # A tibble: 5 × 4</span>
@@ -284,10 +282,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Creating new Sheet: "shortish-walrus".</span>
+<span class="co">#&gt; ✔ Creating new Sheet: "colonial-xiaosaurus".</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: shortish-walrus</span>
-<span class="co">#&gt;               ID: 15SznpJ9NfKnQoFEzJed3a_tWzr3IJ705SV0gBPivG1Y</span>
+<span class="co">#&gt; Spreadsheet name: colonial-xiaosaurus</span>
+<span class="co">#&gt;               ID: 18jMrTq1rkU22YKFhm9dy9jeJILsVIN5LElfc6vHYhVs</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -299,13 +297,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; • 'shortish-walrus' &lt;id: 15SznpJ9NfKnQoFEzJed3a_tWzr3IJ705SV0gBPivG1Y&gt;</span>
+<span class="co">#&gt; • 'colonial-xiaosaurus' &lt;id: 18jMrTq1rkU22YKFhm9dy9jeJILsVIN5LElfc6vHYhVs&gt;</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Creating new Sheet: "testy-hedgehog".</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1CIa6oklbVhqHgY3nO15Gl6j3uhmbVTYhx2qKCmr55BY</span>
+<span class="co">#&gt;               ID: 1I82l2R7yDNmAghoKDZegkBbew4ouPxaQOKtQ5V2hq8c</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -319,7 +317,7 @@
 <span class="co">#&gt; ✔ Writing to sheet 'chickwts'.</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1CIa6oklbVhqHgY3nO15Gl6j3uhmbVTYhx2qKCmr55BY</span>
+<span class="co">#&gt;               ID: 1I82l2R7yDNmAghoKDZegkBbew4ouPxaQOKtQ5V2hq8c</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -367,14 +365,14 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 × 8</span>
-<span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0  628763336 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 1969794061 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt;   name     index        id type  visible grid_rows grid_columns data  </span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
+<span class="co">#&gt; 1 df           0  10593267 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 885777231 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; • 'testy-hedgehog' &lt;id: 1CIa6oklbVhqHgY3nO15Gl6j3uhmbVTYhx2qKCmr55BY&gt;</span></code></pre></div>
+<span class="co">#&gt; • 'testy-hedgehog' &lt;id: 1I82l2R7yDNmAghoKDZegkBbew4ouPxaQOKtQ5V2hq8c&gt;</span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

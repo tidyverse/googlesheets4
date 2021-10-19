@@ -203,18 +203,18 @@
 <span class="co">#&gt; ✔ Reading from "deaths".</span>
 <span class="co">#&gt; ✔ Range '5:5000000'.</span>
 <span class="co">#&gt; # A tibble: 10 × 6</span>
-<span class="co">#&gt;    Name               Profession   Age `Has kids` `Date of birth`     `Date of death`    </span>
-<span class="co">#&gt;    &lt;chr&gt;              &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span>
-<span class="co">#&gt;  1 David Bowie        musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span>
-<span class="co">#&gt;  2 Carrie Fisher      actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span>
-<span class="co">#&gt;  3 Chuck Berry        musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span>
-<span class="co">#&gt;  4 Bill Paxton        actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00</span>
-<span class="co">#&gt;  5 Prince             musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00</span>
-<span class="co">#&gt;  6 Alan Rickman       actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00</span>
-<span class="co">#&gt;  7 Florence Henderson actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00</span>
-<span class="co">#&gt;  8 Harper Lee         author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00</span>
-<span class="co">#&gt;  9 Zsa Zsa Gábor      actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00</span>
-<span class="co">#&gt; 10 George Michael     musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00</span></code></pre></div>
+<span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span>
+<span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span>
+<span class="co">#&gt;  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span>
+<span class="co">#&gt;  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span>
+<span class="co">#&gt;  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span>
+<span class="co">#&gt;  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00</span>
+<span class="co">#&gt;  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00</span>
+<span class="co">#&gt;  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00</span>
+<span class="co">#&gt;  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00</span>
+<span class="co">#&gt;  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00</span>
+<span class="co">#&gt;  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00</span>
+<span class="co">#&gt; 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00</span></code></pre></div>
 <p>The example below shows the use of <code>range</code> to specify both the (work)sheet and an A1-style cell range.</p>
 <p>It also demonstrates how <code>col_types</code> gives control of column types, similar to how <code>col_types</code> works in readr and readxl. Note that currently there is only support for the “shortcode” style of column specification and we plan to align better with readr’s capabilities in a future release.</p>
 <ul>
@@ -228,18 +228,18 @@
 <span class="co">#&gt; ✔ Reading from "deaths".</span>
 <span class="co">#&gt; ✔ Range ''other'!A5:F15'.</span>
 <span class="co">#&gt; # A tibble: 10 × 6</span>
-<span class="co">#&gt;    Name           Profession   Age `Has kids` `Date of birth`     `Date of death`</span>
-<span class="co">#&gt;    &lt;chr&gt;          &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;date&gt;         </span>
-<span class="co">#&gt;  1 Vera Rubin     scientist     88 TRUE       1928-07-23 00:00:00 2016-12-25     </span>
-<span class="co">#&gt;  2 Mohamed Ali    athlete       74 TRUE       1942-01-17 00:00:00 2016-06-03     </span>
-<span class="co">#&gt;  3 Morley Safer   journalist    84 TRUE       1931-11-08 00:00:00 2016-05-19     </span>
-<span class="co">#&gt;  4 Fidel Castro   politician    90 TRUE       1926-08-13 00:00:00 2016-11-25     </span>
-<span class="co">#&gt;  5 Antonin Scalia lawyer        79 TRUE       1936-03-11 00:00:00 2016-02-13     </span>
-<span class="co">#&gt;  6 Jo Cox         politician    41 TRUE       1974-06-22 00:00:00 2016-06-16     </span>
-<span class="co">#&gt;  7 Janet Reno     lawyer        78 FALSE      1938-07-21 00:00:00 2016-11-07     </span>
-<span class="co">#&gt;  8 Gwen Ifill     journalist    61 FALSE      1955-09-29 00:00:00 2016-11-14     </span>
-<span class="co">#&gt;  9 John Glenn     astronaut     95 TRUE       1921-07-28 00:00:00 2016-12-08     </span>
-<span class="co">#&gt; 10 Pat Summit     coach         64 TRUE       1952-06-14 00:00:00 2016-06-28</span></code></pre></div>
+<span class="co">#&gt;    Name          Profession   Age `Has kids` `Date of birth`     `Date of death`</span>
+<span class="co">#&gt;    &lt;chr&gt;         &lt;chr&gt;      &lt;int&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;date&gt;         </span>
+<span class="co">#&gt;  1 Vera Rubin    scientist     88 TRUE       1928-07-23 00:00:00 2016-12-25     </span>
+<span class="co">#&gt;  2 Mohamed Ali   athlete       74 TRUE       1942-01-17 00:00:00 2016-06-03     </span>
+<span class="co">#&gt;  3 Morley Safer  journalist    84 TRUE       1931-11-08 00:00:00 2016-05-19     </span>
+<span class="co">#&gt;  4 Fidel Castro  politician    90 TRUE       1926-08-13 00:00:00 2016-11-25     </span>
+<span class="co">#&gt;  5 Antonin Scal… lawyer        79 TRUE       1936-03-11 00:00:00 2016-02-13     </span>
+<span class="co">#&gt;  6 Jo Cox        politician    41 TRUE       1974-06-22 00:00:00 2016-06-16     </span>
+<span class="co">#&gt;  7 Janet Reno    lawyer        78 FALSE      1938-07-21 00:00:00 2016-11-07     </span>
+<span class="co">#&gt;  8 Gwen Ifill    journalist    61 FALSE      1955-09-29 00:00:00 2016-11-14     </span>
+<span class="co">#&gt;  9 John Glenn    astronaut     95 TRUE       1921-07-28 00:00:00 2016-12-08     </span>
+<span class="co">#&gt; 10 Pat Summit    coach         64 TRUE       1952-06-14 00:00:00 2016-06-28</span></code></pre></div>
 <p>If you looked at the “deaths” spreadsheet in the browser (it’s <a href="https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/edit#gid=1210215306">here</a>), you know that it has some of the typical features of real world spreadsheets: the main data rectangle has prose intended for human-consumption before and after it. That’s why we have to specify the range when we read from it.</p>
 <p>We’ve designated the data rectangles as <a href="https://support.google.com/docs/answer/63175?co=GENIE.Platform%3DDesktop&amp;hl=en">named ranges</a>, which provides a very slick way to read them – definitely less brittle and mysterious than approaches like <code>range = "other!A5:F15"</code> or <code>skip = 4, n_max = 10</code>. A named range can be passed via the <code>range =</code> argument:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -248,18 +248,18 @@
 <span class="co">#&gt; ✔ Reading from "deaths".</span>
 <span class="co">#&gt; ✔ Range 'arts_data'.</span>
 <span class="co">#&gt; # A tibble: 10 × 6</span>
-<span class="co">#&gt;    Name               Profession   Age `Has kids` `Date of birth`     `Date of death`    </span>
-<span class="co">#&gt;    &lt;chr&gt;              &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span>
-<span class="co">#&gt;  1 David Bowie        musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span>
-<span class="co">#&gt;  2 Carrie Fisher      actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span>
-<span class="co">#&gt;  3 Chuck Berry        musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span>
-<span class="co">#&gt;  4 Bill Paxton        actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00</span>
-<span class="co">#&gt;  5 Prince             musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00</span>
-<span class="co">#&gt;  6 Alan Rickman       actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00</span>
-<span class="co">#&gt;  7 Florence Henderson actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00</span>
-<span class="co">#&gt;  8 Harper Lee         author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00</span>
-<span class="co">#&gt;  9 Zsa Zsa Gábor      actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00</span>
-<span class="co">#&gt; 10 George Michael     musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00</span></code></pre></div>
+<span class="co">#&gt;    Name      Profession   Age `Has kids` `Date of birth`     `Date of death`    </span>
+<span class="co">#&gt;    &lt;chr&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;lgl&gt;      &lt;dttm&gt;              &lt;dttm&gt;             </span>
+<span class="co">#&gt;  1 David Bo… musician      69 TRUE       1947-01-08 00:00:00 2016-01-10 00:00:00</span>
+<span class="co">#&gt;  2 Carrie F… actor         60 TRUE       1956-10-21 00:00:00 2016-12-27 00:00:00</span>
+<span class="co">#&gt;  3 Chuck Be… musician      90 TRUE       1926-10-18 00:00:00 2017-03-18 00:00:00</span>
+<span class="co">#&gt;  4 Bill Pax… actor         61 TRUE       1955-05-17 00:00:00 2017-02-25 00:00:00</span>
+<span class="co">#&gt;  5 Prince    musician      57 TRUE       1958-06-07 00:00:00 2016-04-21 00:00:00</span>
+<span class="co">#&gt;  6 Alan Ric… actor         69 FALSE      1946-02-21 00:00:00 2016-01-14 00:00:00</span>
+<span class="co">#&gt;  7 Florence… actor         82 TRUE       1934-02-14 00:00:00 2016-11-24 00:00:00</span>
+<span class="co">#&gt;  8 Harper L… author        89 FALSE      1926-04-28 00:00:00 2016-02-19 00:00:00</span>
+<span class="co">#&gt;  9 Zsa Zsa … actor         99 TRUE       1917-02-06 00:00:00 2016-12-18 00:00:00</span>
+<span class="co">#&gt; 10 George M… musician      53 FALSE      1963-06-25 00:00:00 2016-12-25 00:00:00</span></code></pre></div>
 <p>The named ranges, if any exist, are part of the information returned by <code><a href="../../reference/gs4_get.html">gs4_get()</a></code>.</p>
 </div>
 <div id="detailed-cell-data" class="section level2">
@@ -411,14 +411,14 @@
 <span class="co">#&gt; ℹ Use `spec()` to retrieve the full column specification for this data.</span>
 <span class="co">#&gt; ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.105   0.012   0.751</span>
+<span class="co">#&gt;   0.111   0.020   0.622</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span>
   <span class="fu"><a href="../../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../../reference/%&gt;%.html">%&gt;%</a></span> <span class="fu"><a href="../../reference/range_read.html">range_read</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span>
 <span class="op">)</span>
 <span class="co">#&gt; ✔ Reading from "gapminder".</span>
 <span class="co">#&gt; ✔ Range ''Africa''.</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.307   0.008   0.686</span></code></pre></div>
+<span class="co">#&gt;   0.345   0.008   0.699</span></code></pre></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../../reference/range_speedread.html">range_speedread()</a></code> vs <code><a href="../../reference/range_read.html">range_read()</a></code>:</p>
 <ul>

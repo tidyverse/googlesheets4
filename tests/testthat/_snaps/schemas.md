@@ -20,7 +20,5 @@
     Code
       check_against_schema(x)
     Error <googlesheets4_error>
-      Trying to check an object of class
-      <googlesheets4_schema_SomeThing/googlesheets4_schema/list>, but can't get a
-      schema.
+      Trying to check an object of class <googlesheets4_schema_SomeThing/googlesheets4_schema/list>, but can't get a schema.
 

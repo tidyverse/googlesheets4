@@ -28,8 +28,7 @@
     Code
       as_sheets_id(d)
     Error <googlesheets4_error>
-      <dribble> input must refer to a Google Sheet, i.e. a file with MIME type
-      'application/vnd.google-apps.spreadsheet'.
+      <dribble> input must refer to a Google Sheet, i.e. a file with MIME type 'application/vnd.google-apps.spreadsheet'.
       i File name: "chicken.txt"
       i File id: '1wOLeWVRkTb6lDmLRiOhg9iKM7DlN762Y'
       x MIME TYPE: 'text/plain'
@@ -69,8 +68,7 @@
       
       Unable to get metadata for this Sheet. Error details:
       Client error: (404) NOT_FOUND
-      * A specified resource is not found, or the request is rejected by undisclosed
-        reasons, such as whitelisting.
+      * A specified resource is not found, or the request is rejected by undisclosed reasons, such as whitelisting.
       * Requested entity was not found.
 
 # can print public sheets_id if deauth'd

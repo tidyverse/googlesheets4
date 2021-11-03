@@ -222,6 +222,8 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"chicken-sheet"</span><span class="op">)</span> <span class="op"><a href="../reference/%&gt;%.html">%&gt;%</a></span> 
   <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="op">)</span>
+<span class="co">#&gt; ✖ Request failed [429]. Retry 1 happens in 100.7 seconds ...</span>
+<span class="co">#&gt; ✖ Request failed [429]. Retry 2 happens in 2.8 seconds ...</span>
 <span class="co">#&gt; ✔ Reading from "chicken-sheet".</span>
 <span class="co">#&gt; ✔ Range 'chicken.csv'.</span>
 <span class="co">#&gt; # A tibble: 5 × 4</span>
@@ -282,10 +284,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; ✔ Creating new Sheet: "musical-mammoth".</span>
+<span class="co">#&gt; ✔ Creating new Sheet: "flameproof-fox".</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: musical-mammoth</span>
-<span class="co">#&gt;               ID: 1wZuV2U74bWdFiz09zrTPzu7wMTueBO4pHONeURz0v40</span>
+<span class="co">#&gt; Spreadsheet name: flameproof-fox</span>
+<span class="co">#&gt;               ID: 12t2N_jKEXt5hgMO-M7nklREmQq2KWwgjskpAgVexzUY</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -297,13 +299,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; • 'musical-mammoth' &lt;id: 1wZuV2U74bWdFiz09zrTPzu7wMTueBO4pHONeURz0v40&gt;</span>
+<span class="co">#&gt; • 'flameproof-fox' &lt;id: 12t2N_jKEXt5hgMO-M7nklREmQq2KWwgjskpAgVexzUY&gt;</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; ✔ Creating new Sheet: "testy-hedgehog".</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 12yZ3NEeojLRHTeGg8vb_uj3wvcg7HTnwgEJa97lkRXA</span>
+<span class="co">#&gt;               ID: 1kVg9VOgnZ1_rmfhhnzVhUXp0hNRr6Jlp9WAkQT5ERSQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -317,7 +319,7 @@
 <span class="co">#&gt; ✔ Writing to sheet 'chickwts'.</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 12yZ3NEeojLRHTeGg8vb_uj3wvcg7HTnwgEJa97lkRXA</span>
+<span class="co">#&gt;               ID: 1kVg9VOgnZ1_rmfhhnzVhUXp0hNRr6Jlp9WAkQT5ERSQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -365,14 +367,14 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 2 × 8</span>
-<span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
-<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;      &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
-<span class="co">#&gt; 1 df           0 1958441070 GRID  TRUE            9            2 &lt;NULL&gt;</span>
-<span class="co">#&gt; 2 chickwts     1 1098840879 GRID  TRUE           72            2 &lt;NULL&gt;</span>
+<span class="co">#&gt;   name     index        id type  visible grid_rows grid_columns data  </span>
+<span class="co">#&gt;   &lt;chr&gt;    &lt;int&gt;     &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;       &lt;int&gt;        &lt;int&gt; &lt;list&gt;</span>
+<span class="co">#&gt; 1 df           0 801338943 GRID  TRUE            9            2 &lt;NULL&gt;</span>
+<span class="co">#&gt; 2 chickwts     1 584074459 GRID  TRUE           72            2 &lt;NULL&gt;</span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; • 'testy-hedgehog' &lt;id: 12yZ3NEeojLRHTeGg8vb_uj3wvcg7HTnwgEJa97lkRXA&gt;</span></code></pre></div>
+<span class="co">#&gt; • 'testy-hedgehog' &lt;id: 1kVg9VOgnZ1_rmfhhnzVhUXp0hNRr6Jlp9WAkQT5ERSQ&gt;</span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </div>

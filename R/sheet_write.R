@@ -29,7 +29,7 @@
 #' * `sheet_write()` is the right name according to the naming convention used
 #'   throughout the googlesheets4 package.
 #'
-#' `write_sheet()` and `sheet_write()` are homonyms and you can use either one.
+#' `write_sheet()` and `sheet_write()` are equivalent and you can use either one.
 #'
 #' @param data A data frame. If it has zero rows, we send one empty pseudo-row
 #'   of data, so that we can apply the usual table styling. This empty row goes

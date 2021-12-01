@@ -64,7 +64,7 @@ contexts:
 throughout the googlesheets4 package.
 }
 
-\code{write_sheet()} and \code{sheet_write()} are synonyms and you can use either one.
+\code{write_sheet()} and \code{sheet_write()} are equivalent and you can use either one.
 }
 \examples{
 if (gs4_has_token()) {

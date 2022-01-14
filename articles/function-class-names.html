@@ -163,9 +163,9 @@
 <li>Function names</li>
 <li>Classes</li>
 </ul>
-<div class="section level1">
-<h1 id="prefixes-gs4-sheet-range">Prefixes: gs4, sheet, range<a class="anchor" aria-label="anchor" href="#prefixes-gs4-sheet-range"></a>
-</h1>
+<div class="section level2">
+<h2 id="prefixes-gs4-sheet-range">Prefixes: gs4, sheet, range<a class="anchor" aria-label="anchor" href="#prefixes-gs4-sheet-range"></a>
+</h2>
 <p>Almost all functions in googlesheets4 have one of these prefixes:</p>
 <ul>
 <li>
@@ -210,15 +210,15 @@
 </table>
 <p>Take this table with a grain of salt. There are a few violations of it in function signatures, when justified, but it’s true in broad strokes. And remember that <code>gs4_</code> is also used for general, package-level functions.</p>
 </div>
-<div class="section level1">
-<h1 id="previous-use-of-sheets_-prefix">Previous use of <code>sheets_</code> prefix<a class="anchor" aria-label="anchor" href="#previous-use-of-sheets_-prefix"></a>
-</h1>
+<div class="section level2">
+<h2 id="previous-use-of-sheets_-prefix">Previous use of <code>sheets_</code> prefix<a class="anchor" aria-label="anchor" href="#previous-use-of-sheets_-prefix"></a>
+</h2>
 <p>When googlesheets4 first appeared on CRAN and up to v0.1.1 (released 2020-03-21), it had a nearly universal <code>sheets_</code> prefix. In version 0.2.0 (released 2020-05-08), googlesheets4 gained a tremendous amount of writing and editing functionality. At that time, it became clear that the <code>sheets_</code> scheme was an impediment to generating descriptive, predictable function names. For example, you can delete a (spread)Sheet, a (work)sheet, or a cell range. Which one of these functions will be named <code>sheets_delete()</code>? How do we name the others? There is no good answer to this, which is why we adopted the 3 prefix strategy.</p>
 <p>Any function that existed in v0.1.1 was formally deprecated in v0.2.0 and was removed in v1.0.0. Below are tables documenting the name changes, that also cover functions that only existed in dev versions, but that may have seen use in the community. As time goes on, this article becomes more of historical note.</p>
 <p>The dev version of googlesheets4 was bumped from 0.1.1.9000 to 0.1.1.9100 when the <code>sheets_</code> naming scheme was abandoned. The last commit under the old scheme was also tagged as “v0.1.1.9000”, which means one can install from that specific state via <code>devtools::install_github("tidyverse/googlesheets4@v0.1.1.9000")</code>.</p>
-<div class="section level2">
-<h2 id="auth-and-the-sheet-api-v4-surface">Auth and the Sheet API v4 surface<a class="anchor" aria-label="anchor" href="#auth-and-the-sheet-api-v4-surface"></a>
-</h2>
+<div class="section level3">
+<h3 id="auth-and-the-sheet-api-v4-surface">Auth and the Sheet API v4 surface<a class="anchor" aria-label="anchor" href="#auth-and-the-sheet-api-v4-surface"></a>
+</h3>
 <table class="table">
 <thead><tr class="header">
 <th align="left">&lt;= v0.1.1.9000</th>
@@ -274,9 +274,9 @@
 </table>
 <p>(*) indicates functions in the CRAN versions &lt;= v0.1.1.</p>
 </div>
-<div class="section level2">
-<h2 id="spreadsheet-scope">(Spread)sheet scope<a class="anchor" aria-label="anchor" href="#spreadsheet-scope"></a>
-</h2>
+<div class="section level3">
+<h3 id="spreadsheet-scope">(Spread)sheet scope<a class="anchor" aria-label="anchor" href="#spreadsheet-scope"></a>
+</h3>
 <table class="table">
 <thead><tr class="header">
 <th align="left">&lt;= v0.1.1.9000</th>
@@ -328,9 +328,9 @@
 </table>
 <p>(*) indicates functions in the CRAN versions &lt;= v0.1.1.</p>
 </div>
-<div class="section level2">
-<h2 id="worksheet-scope">(Work)sheet scope<a class="anchor" aria-label="anchor" href="#worksheet-scope"></a>
-</h2>
+<div class="section level3">
+<h3 id="worksheet-scope">(Work)sheet scope<a class="anchor" aria-label="anchor" href="#worksheet-scope"></a>
+</h3>
 <table class="table">
 <thead><tr class="header">
 <th align="left">&lt;= v0.1.1.9000</th>
@@ -386,9 +386,9 @@
 </table>
 <p>(*) indicates functions in the CRAN versions &lt;= v0.1.1.</p>
 </div>
-<div class="section level2">
-<h2 id="range-scope">Range scope<a class="anchor" aria-label="anchor" href="#range-scope"></a>
-</h2>
+<div class="section level3">
+<h3 id="range-scope">Range scope<a class="anchor" aria-label="anchor" href="#range-scope"></a>
+</h3>
 <table class="table">
 <thead><tr class="header">
 <th align="left">&lt;= v0.1.1.9000</th>
@@ -437,9 +437,9 @@
 <p>The <code>range_</code> prefix encompasses both types of ranges and each function has to indicate what sorts of <code>range</code> it supports, which is determined by the behaviour of the associated API endpoint.</p>
 </div>
 </div>
-<div class="section level1">
-<h1 id="classes">Classes<a class="anchor" aria-label="anchor" href="#classes"></a>
-</h1>
+<div class="section level2">
+<h2 id="classes">Classes<a class="anchor" aria-label="anchor" href="#classes"></a>
+</h2>
 <p>Any user facing class that is related to a schema should be named like <code>googlesheets4_schema_name</code>, where the schema name is in lower_snake_case.</p>
 <p>The internal schema-derived classes should be like <code>googlesheets4_schema_SchemaName</code> / <code>googlesheets4_schema</code> / <code>list</code>. Use the <code>googlesheets4_schema</code> prefix and retain the API’s UpperCamelCase.</p>
 </div>

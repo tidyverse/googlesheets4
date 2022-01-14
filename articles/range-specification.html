@@ -164,9 +164,9 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/gs4_deauth.html">gs4_deauth</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<div class="section level1">
-<h1 id="user-specified-range">User-specified range<a class="anchor" aria-label="anchor" href="#user-specified-range"></a>
-</h1>
+<div class="section level2">
+<h2 id="user-specified-range">User-specified range<a class="anchor" aria-label="anchor" href="#user-specified-range"></a>
+</h2>
 <p>Several googlesheets4 functions allow the user to specify which cells to read or write. This range specification comes via the <code>sheet</code>, <code>range</code>, and (possibly) <code>skip</code> arguments. Examples of functions with this interface: <code><a href="../reference/range_read.html">range_read()</a></code>, <code><a href="../reference/range_read_cells.html">range_read_cells()</a></code>, and <code><a href="../reference/range_write.html">range_write()</a></code>.</p>
 <ul>
 <li>
@@ -193,9 +193,9 @@
 <li>Should <code><a href="../reference/range_write.html">range_write()</a></code> have a skip argument, just for internal consistency?</li>
 </ul>
 </div>
-<div class="section level1">
-<h1 id="range-spec">Range spec<a class="anchor" aria-label="anchor" href="#range-spec"></a>
-</h1>
+<div class="section level2">
+<h2 id="range-spec">Range spec<a class="anchor" aria-label="anchor" href="#range-spec"></a>
+</h2>
 <p><code>range_spec</code> is an internal S3 class that is typically used inside any function that accepts the <code>(sheet, range, skip)</code> trio.</p>
 <p>We need some sort of intermediate storage, in order to translate between the various ways the user can express their range and the requirements of different Sheets API endpoints (which differ more than you’d expect!). We generally require metadata about the associated Sheet in order to form a <code>range_spec</code>, because we potentially need to lookup the (work)<code>sheet</code> by position or determine whether a name refers to a named range or a (work)<code>sheet</code>.</p>
 <p>The internal generic <code>as_range_spec()</code> dispatches on primary argument <code>x</code>, which maps to <code>range</code>. Its job is to transform user-supplied <code>(sheet, range, skip)</code> into:</p>
@@ -312,9 +312,9 @@
 </tr>
 </tbody>
 </table>
-<div class="section level2">
-<h2 id="cell-rectangles">Cell rectangles<a class="anchor" aria-label="anchor" href="#cell-rectangles"></a>
-</h2>
+<div class="section level3">
+<h3 id="cell-rectangles">Cell rectangles<a class="anchor" aria-label="anchor" href="#cell-rectangles"></a>
+</h3>
 <p>When a <code>range_spec</code> is first formed, it may hold specifics for a cell rectangle, although it does not have to. This info appears in one of these fields:</p>
 <ul>
 <li>
@@ -332,9 +332,9 @@
 </ul>
 <p>A <code>cell_limits</code> object is, overall, a much more sane way to hold this information, because explicit <code>NA</code>s can be used to convey unboundedness. Some types of unboundedness simply can’t be conveyed in A1 notation, even though those partially open rectangles are as legitimate as those that can be recorded in A1 notation.</p>
 <p>In any case, between user expectations and API idiosyncrasies, we have to be able to translate between <code>cell_range</code> and <code>cell_limits</code>.</p>
-<div class="section level3">
-<h3 id="a1-range-from-cell_limits">A1 range from <code>cell_limits</code><a class="anchor" aria-label="anchor" href="#a1-range-from-cell_limits"></a>
-</h3>
+<div class="section level4">
+<h4 id="a1-range-from-cell_limits">A1 range from <code>cell_limits</code><a class="anchor" aria-label="anchor" href="#a1-range-from-cell_limits"></a>
+</h4>
 <p>The reading functions <code><a href="../reference/range_read.html">range_read()</a></code> and <code><a href="../reference/range_read_cells.html">range_read_cells()</a></code> hit the <code>sheets.spreadsheets.get</code> endpoint. Bizarrely, this endpoint requires the range to be specified in A1-notation. If the user specifies the cell rectangle in A1-notation, things are easy and we essentially just pass that along. But users can describe certain partially open cell rectangles via <code>cell_limits</code> that can’t be literally expressed in A1-notation. The table below shows how all possible combinations of row and cell limits are translated into an A1-style range, using technical limits on the number of rows and columns in a Google Sheet.</p>
 <table class="table">
 <thead><tr class="header">
@@ -477,10 +477,10 @@
 </tbody>
 </table>
 </div>
-<div class="section level3">
-<h3 id="cell_limits-from-a1-range">
+<div class="section level4">
+<h4 id="cell_limits-from-a1-range">
 <code>cell_limits</code> from A1 range<a class="anchor" aria-label="anchor" href="#cell_limits-from-a1-range"></a>
-</h3>
+</h4>
 <p>When editing a sheet, we send an <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest" class="external-link"><code>UpdateCellsRequest</code></a>, which takes the location of the write via a <em>union field</em>. We must send one of the following:</p>
 <ul>
 <li>

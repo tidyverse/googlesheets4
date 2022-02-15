@@ -178,7 +178,7 @@
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; noindent</span>
 <span class="co">#&gt;   indent</span>
-<span class="co">#&gt; • bullet</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> bullet</span>
 <span class="co">#&gt; → arrow</span>
 <span class="co">#&gt; <span style="color: #00BB00;">✔</span> Doing good stuff for YOU the user</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Nope nope nope</span>
@@ -239,8 +239,8 @@
   <span class="st">"*"</span> <span class="op">=</span> <span class="st">"Provide more specific input via {.arg some_argument}."</span>
 <span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; You probably need to do one of these things:</span>
-<span class="co">#&gt; • Call <span style="color: #262626; background-color: #DADADA;">`some_function()`</span>.</span>
-<span class="co">#&gt; • Provide more specific input via <span style="color: #262626; background-color: #DADADA;">`some_argument`</span>.</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> Call `some_function()`.</span>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> Provide more specific input via `some_argument`.</span></code></pre></div>
 <p>Most relevant cli docs:</p>
 <ul>
 <li><a href="https://cli.r-lib.org/reference/inline-markup.html" class="external-link">CLI inline markup</a></li>
@@ -291,9 +291,9 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="fl">1</span>, class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">abort_unsupported_conversion</span><span class="op">(</span><span class="va">x</span>, to <span class="op">=</span> <span class="st">"SheetThing"</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in </span><span style="color: #262626; background-color: #DADADA; font-weight: bold;">`cli::cli_abort()`</span><span style="font-weight: bold;">:</span></span>
+<span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `abort_unsupported_conversion()`:</span></span>
 <span class="co">#&gt; <span style="color: #BBBB00;">!</span> Don't know how to make an instance of <span style="color: #0000BB;">&lt;SheetThing&gt;</span> from something of</span>
-<span class="co">#&gt; class <span style="color: #0000BB;">&lt;a/b/c&gt;</span>.</span></code></pre></div>
+<span class="co">#&gt;   class <span style="color: #0000BB;">&lt;a/b/c&gt;</span>.</span></code></pre></div>
 <p><code>abort_unsupported_conversion()</code> exists to standardize a recurring type of error message, usually encountered during development, not by end-users. I use it a lot in the default method of an <code>as_{to}()</code> generic.</p>
 <p>There’s not much to add here re: errors, now that <code><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli::cli_abort()</a></code> exists. Error messages are formed just like informational messages now.</p>
 </div>

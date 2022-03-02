@@ -30,8 +30,8 @@ googlesheets4:::gs4_auth_docs()
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/googlesheets4)](https://CRAN.R-project.org/package=googlesheets4)
-[![Codecov test coverage](https://codecov.io/gh/tidyverse/googlesheets4/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/googlesheets4?branch=master)
-[![R-CMD-check](https://github.com/tidyverse/googlesheets4/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googlesheets4/actions)
+[![R-CMD-check](https://github.com/tidyverse/googlesheets4/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidyverse/googlesheets4/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/tidyverse/googlesheets4/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/googlesheets4?branch=main)
 <!-- badges: end -->
 
 ## Overview
@@ -54,6 +54,12 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("tidyverse/googlesheets4")
 ```
+
+## Cheatsheet
+
+You can see how to read data with googlesheets4 in the **data import cheatsheet**, which also covers similar functionality in the related packages readr and readxl.
+
+<a href="https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf"><img src="https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-import-cheatsheet-thumbs.png" width="630" height="252"/></a>
 
 ## Auth
 

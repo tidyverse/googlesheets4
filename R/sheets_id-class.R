@@ -196,7 +196,7 @@ print.sheets_id <- function(x, ...) {
 }
 
 #' @export
-format.sheets_id <- function(x) {
+format.sheets_id <- function(x, ...) {
   meta <- tryCatch(
     gs4_get(x),
     # seen with a failed request

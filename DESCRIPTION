@@ -1,14 +1,11 @@
 Package: googlesheets4
 Title: Access Google Sheets using the Sheets API V4
 Version: 1.0.0.9000
-Authors@R: 
-    c(person(given = "Jennifer",
-             family = "Bryan",
-             role = c("cre", "aut"),
-             email = "jenny@rstudio.com",
-             comment = c(ORCID = "0000-0002-6983-2759")),
-      person(given = "RStudio",
-             role = c("cph", "fnd")))
+Authors@R: c(
+    person("Jennifer", "Bryan", , "jenny@rstudio.com", role = c("cre", "aut"),
+           comment = c(ORCID = "0000-0002-6983-2759")),
+    person("RStudio", role = c("cph", "fnd"))
+  )
 Description: Interact with Google Sheets through the Sheets API v4
     <https://developers.google.com/sheets/api>. "API" is an acronym for
     "application programming interface"; the Sheets API allows users to
@@ -47,6 +44,8 @@ Suggests:
     spelling,
     testthat (>= 3.0.0),
     withr
+Remotes: 
+    r-lib/gargle
 ByteCompile: true
 Config/Needs/website: pkgdown, tidyverse, r-lib/downlit,
     tidyverse/tidytemplate
@@ -55,5 +54,3 @@ Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1.9001
-Remotes:  
-    r-lib/gargle

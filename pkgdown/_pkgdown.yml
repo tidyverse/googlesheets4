@@ -2,28 +2,18 @@ url: https://googlesheets4.tidyverse.org
 
 template:
   package: tidytemplate
+  bootstrap: 5
 
-home:
-  strip_header: true
+  includes:
+    in_header: |
+      <script defer data-domain="googlesheets4.tidyverse.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
 
-authors:
-  Jennifer Bryan:
-    href: https://jennybryan.org
-
-navbar:
-  components:
-    home: ~
-    news:
-      text: News
-      menu:
-      - text: "Blog posts"
-      - text: "googlesheets4 1.0.0"
-        href: https://www.tidyverse.org/blog/2021/07/googlesheets4-1-0-0/
-      - text: "googlesheets4 0.2.0"
-        href: https://www.tidyverse.org/blog/2020/05/googlesheets4-0-2-0/
-      - text: "------------------"
-      - text: "Change log"
-        href: news/index.html
+news:
+  releases:
+    - text: "googlesheets4 1.0.0"
+      href: https://www.tidyverse.org/blog/2021/07/googlesheets4-1-0-0/
+    - text: "googlesheets4 0.2.0"
+      href: https://www.tidyverse.org/blog/2020/05/googlesheets4-0-2-0/
 
 articles:
 - title: Basic reading and writing

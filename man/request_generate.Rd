@@ -20,7 +20,8 @@ the query, or the body.}
 
 \item{key}{API key. Needed for requests that don't contain a token. The need
 for an API key in the absence of a token is explained in Google's document
-\href{https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279}{Credentials, access, security, and identity}.
+"Credentials, access, security, and identity"
+(\verb{https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279}).
 In order of precedence, these sources are consulted: the formal \code{key}
 argument, a \code{key} parameter in \code{params}, a user-configured API key set up
 with \code{\link[=gs4_auth_configure]{gs4_auth_configure()}} and retrieved with \code{\link[=gs4_api_key]{gs4_api_key()}}.}

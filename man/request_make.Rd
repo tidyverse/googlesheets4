@@ -35,7 +35,7 @@ created with \code{\link[=request_generate]{request_generate()}} or \code{\link[
 is processed with \code{process_response()}.
 
 \code{\link[gargle:request_retry]{gargle::request_retry()}} retries requests that error with \verb{429 RESOURCE_EXHAUSTED}. Its basic scheme is exponential backoff, with one tweak
-that is very specific to the Sheets API, which has documented \href{https://developers.google.com/sheets/api/reference/limits}{usage limits}:
+that is very specific to the Sheets API, which has documented \href{https://developers.google.com/sheets/api/limits}{usage limits}:
 
 "a limit of 500 requests per 100 seconds per project and 100 requests per 100
 seconds per user"

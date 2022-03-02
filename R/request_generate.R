@@ -22,8 +22,8 @@
 #'   the query, or the body.
 #' @param key API key. Needed for requests that don't contain a token. The need
 #'   for an API key in the absence of a token is explained in Google's document
-#'   [Credentials, access, security, and
-#'   identity](https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279).
+#'   "Credentials, access, security, and identity"
+#'   (`https://support.google.com/googleapi/answer/6158857?hl=en&ref_topic=7013279`).
 #'   In order of precedence, these sources are consulted: the formal `key`
 #'   argument, a `key` parameter in `params`, a user-configured API key set up
 #'   with [gs4_auth_configure()] and retrieved with [gs4_api_key()].

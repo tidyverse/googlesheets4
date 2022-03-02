@@ -30,8 +30,8 @@ googlesheets4:::gs4_auth_docs()
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/googlesheets4)](https://CRAN.R-project.org/package=googlesheets4)
-[![Codecov test coverage](https://codecov.io/gh/tidyverse/googlesheets4/branch/main/graph/badge.svg)](https://codecov.io/gh/tidyverse/googlesheets4?branch=main)
-[![R-CMD-check](https://github.com/tidyverse/googlesheets4/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googlesheets4/actions)
+[![R-CMD-check](https://github.com/tidyverse/googlesheets4/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidyverse/googlesheets4/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/tidyverse/googlesheets4/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/googlesheets4?branch=main)
 <!-- badges: end -->
 
 ## Overview

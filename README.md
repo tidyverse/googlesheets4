@@ -7,9 +7,9 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/googlesheets4)](https://CRAN.R-project.org/package=googlesheets4)
+[![R-CMD-check](https://github.com/tidyverse/googlesheets4/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidyverse/googlesheets4/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
-coverage](https://codecov.io/gh/tidyverse/googlesheets4/branch/main/graph/badge.svg)](https://codecov.io/gh/tidyverse/googlesheets4?branch=main)
-[![R-CMD-check](https://github.com/tidyverse/googlesheets4/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/googlesheets4/actions)
+coverage](https://codecov.io/gh/tidyverse/googlesheets4/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/googlesheets4?branch=main)
 <!-- badges: end -->
 
 ## Overview
@@ -162,7 +162,7 @@ some initial data.
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> ✓ Creating new Sheet: "fluffy-bunny".
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 18yObQh5XoOZqyj_ISD5JqtR5YF0HuGsHEIvyxIzlqDI
+#>               ID: 1NEnHGqHVlNJZvDQp9uk8vrCLhoXNBl8qLjm3loZf5cU
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 1
@@ -181,7 +181,7 @@ head(mtcars) %>%
 #> ✓ Writing to sheet 'autos'.
 ss
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 18yObQh5XoOZqyj_ISD5JqtR5YF0HuGsHEIvyxIzlqDI
+#>               ID: 1NEnHGqHVlNJZvDQp9uk8vrCLhoXNBl8qLjm3loZf5cU
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 2

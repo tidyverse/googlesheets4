@@ -118,7 +118,7 @@ only adding the googlesheets4 user agent. Typically the input has been
 created with <code><a href="request_generate.html">request_generate()</a></code> or <code><a href="https://gargle.r-lib.org/reference/request_develop.html" class="external-link">gargle::request_build()</a></code> and the output
 is processed with <code>process_response()</code>.</p>
 <p><code><a href="https://gargle.r-lib.org/reference/request_retry.html" class="external-link">gargle::request_retry()</a></code> retries requests that error with <code>429 RESOURCE_EXHAUSTED</code>. Its basic scheme is exponential backoff, with one tweak
-that is very specific to the Sheets API, which has documented <a href="https://developers.google.com/sheets/api/reference/limits" class="external-link">usage limits</a>:</p>
+that is very specific to the Sheets API, which has documented <a href="https://developers.google.com/sheets/api/limits" class="external-link">usage limits</a>:</p>
 <p>"a limit of 500 requests per 100 seconds per project and 100 requests per 100
 seconds per user"</p>
 <p>Note that the "project" here means everyone using googlesheets4 who hasn't

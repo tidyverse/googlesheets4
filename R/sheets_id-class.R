@@ -191,11 +191,12 @@ as_sheets_id.googlesheets4_spreadsheet <- function(x, ...) {
 
 #' @export
 print.sheets_id <- function(x, ...) {
-  cli::cat_line(sheets_id_print(x))
+  cli::cat_line(format(x))
   invisible(x)
 }
 
-sheets_id_print <- function(x) {
+#' @export
+format.sheets_id <- function(x) {
   meta <- tryCatch(
     gs4_get(x),
     # seen with a failed request
@@ -214,6 +215,9 @@ sheets_id_print <- function(x) {
     format(out),
     "",
     "Unable to get metadata for this Sheet. Error details:",
-    meta$message
+    meta$message,
+    cli::cli_format_method(
+      cli::cli_bullets(meta$body)
+    )
   )
 }

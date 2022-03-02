@@ -68,7 +68,8 @@
       
       Unable to get metadata for this Sheet. Error details:
       Client error: (404) NOT_FOUND
-      * A specified resource is not found, or the request is rejected by undisclosed reasons, such as whitelisting.
+      * A specified resource is not found, or the request is rejected by undisclosed
+        reasons, such as whitelisting.
       * Requested entity was not found.
 
 # can print public sheets_id if deauth'd

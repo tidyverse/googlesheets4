@@ -11,8 +11,8 @@ test_that("sq_escape() does nothing if string already single-quoted", {
 
 test_that("sq_escape() duplicates single quotes and adds to start, end", {
   expect_identical(
-    sq_escape(c(  "abc",    "'abc",    "abc'",     "'a'bc",    "'")),
-              c("'abc'", "'''abc'", "'abc'''", "'''a''bc'", "''''")
+    sq_escape(c("abc", "'abc", "abc'", "'a'bc", "'")),
+    c("'abc'", "'''abc'", "'abc'''", "'''a''bc'", "''''")
   )
 })
 
@@ -24,7 +24,7 @@ test_that("sq_unescape() does nothing if string is not single-quoted", {
 test_that("sq_unescape() strips outer single quotes, de-duplicates inner", {
   expect_identical(
     sq_unescape(c("'abc'", "'''abc'", "'abc'''", "'''a''bc'", "''''")),
-                c(  "abc",    "'abc",    "abc'",     "'a'bc",    "'")
+    c("abc", "'abc", "abc'", "'a'bc", "'")
   )
 })
 
@@ -78,52 +78,52 @@ test_that("resolve_limits() leaves these cases unchanged", {
 
 test_that("resolve_limits() completes a row- or column-only range", {
   expect_identical(
-    resolve_limits(cell_limits(c(2, NA), c(     NA, NA))),
-                   cell_limits(c(2, NA), c(5000000, NA))
+    resolve_limits(cell_limits(c(2, NA), c(NA, NA))),
+    cell_limits(c(2, NA), c(5000000, NA))
   )
   expect_identical(
     # I now think it's a bug that cell_limits() fills in this start row
     resolve_limits(cell_limits(c(NA, NA), c(3, NA))),
-                   cell_limits(c(1, NA), c(3, NA))
+    cell_limits(c(1, NA), c(3, NA))
   )
   expect_identical(
     resolve_limits(cell_limits(c(NA, 2), c(NA, NA))),
-                   cell_limits(c(NA, 2), c(NA, 18278))
+    cell_limits(c(NA, 2), c(NA, 18278))
   )
   expect_identical(
     # I now think it's a bug that cell_limits() fills in this start column
     resolve_limits(cell_limits(c(NA, NA), c(NA, 3))),
-                   cell_limits(c(NA, 1),  c(NA, 3))
+    cell_limits(c(NA, 1), c(NA, 3))
   )
 })
 
 test_that("resolve_limits() completes upper left cell", {
   expect_identical(
     resolve_limits(cell_limits(c(2, NA), c(NA, 3))),
-                   cell_limits(c(2, 1),  c(NA, 3))
+    cell_limits(c(2, 1), c(NA, 3))
   )
   expect_identical(
     resolve_limits(cell_limits(c(NA, 2), c(3, NA))),
-                   cell_limits(c( 1, 2), c(3, NA))
+    cell_limits(c(1, 2), c(3, NA))
   )
   expect_identical(
     resolve_limits(cell_limits(c(NA, NA), c(3, 3))),
-                   cell_limits(c( 1,  1), c(3, 3))
+    cell_limits(c(1, 1), c(3, 3))
   )
   expect_identical(
     resolve_limits(cell_limits(c(2, NA), c(3, 3))),
-                   cell_limits(c(2,  1), c(3, 3))
+    cell_limits(c(2, 1), c(3, 3))
   )
   expect_identical(
     resolve_limits(cell_limits(c(NA, 2), c(3, 3))),
-                   cell_limits(c( 1, 2), c(3, 3))
+    cell_limits(c(1, 2), c(3, 3))
   )
 })
 
 test_that("resolve_limits() populates column of lower right cell", {
   expect_identical(
     resolve_limits(cell_limits(c(2, 2), c(NA, NA))),
-                   cell_limits(c(2, 2), c(NA, 18278))
+    cell_limits(c(2, 2), c(NA, 18278))
   )
 })
 

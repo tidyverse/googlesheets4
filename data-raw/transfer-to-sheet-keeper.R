@@ -18,11 +18,11 @@ sheet_keeper_email <-
 # example Sheets started out as owned by the docs service account
 # test Sheets started out as owned by the testing service account
 # one of my personal Google identities had the 'write' role on each, as well
-#googlesheets4:::gs4_auth_docs()
+# googlesheets4:::gs4_auth_docs()
 googlesheets4:::gs4_auth_testing()
 gs4_find()
 
-#target_sheets <- googlesheets4:::.gs4_examples
+# target_sheets <- googlesheets4:::.gs4_examples
 target_sheets <- googlesheets4:::.test_sheets
 
 dat <- target_sheets %>%
@@ -45,7 +45,7 @@ dat_explore %>%
 # determine which Sheets are not yet owned by sheet keeper
 to_transfer <- dat_explore %>%
   filter(role == "owner", displayName != "googlesheets4-sheet-keeper") %>%
-  #select(name, displayName)
+  # select(name, displayName)
   pull(name)
 
 # transfer ownership to sheet keeper

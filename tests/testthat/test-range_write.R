@@ -10,7 +10,8 @@ test_that("range_write() works", {
   m <- 5
   data <- suppressMessages( # silence messages about name repair
     tibble::as_tibble(
-      matrix(head(letters, n * m), nrow = n , ncol = m), .name_repair = "unique"
+      matrix(head(letters, n * m), nrow = n, ncol = m),
+      .name_repair = "unique"
     )
   )
 
@@ -87,7 +88,8 @@ test_that("prepare_dims() works when write_loc is a `start` (a GridCoordinate)",
   m <- 5
   data <- suppressMessages( # silence messages about name repair
     tibble::as_tibble(
-      matrix(head(letters, n * m), nrow = n , ncol = m), .name_repair = "unique"
+      matrix(head(letters, n * m), nrow = n, ncol = m),
+      .name_repair = "unique"
     )
   )
 
@@ -123,7 +125,8 @@ test_that("prepare_dims() works when write_loc is a `range` (a GridRange)", {
   m <- 5
   data <- suppressMessages( # silence messages about name repair
     tibble::as_tibble(
-      matrix(head(letters, n * m), nrow = n , ncol = m), .name_repair = "unique"
+      matrix(head(letters, n * m), nrow = n, ncol = m),
+      .name_repair = "unique"
     )
   )
 
@@ -160,11 +163,13 @@ test_that("prepare_dims() works when write_loc is a `range` (a GridRange)", {
   # range is open on the bottom and right
   # get row extent from range + data, column extent from range + data
   expect_dims(
-    cell_limits(c(2, 4), c(NA, NA)), col_names = TRUE,
-                                    list(nrow = 2 + n + 1 - 1, ncol = 4 + m - 1)
+    cell_limits(c(2, 4), c(NA, NA)),
+    col_names = TRUE,
+    list(nrow = 2 + n + 1 - 1, ncol = 4 + m - 1)
   )
   expect_dims(
-    cell_limits(c(2, 4), c(NA, NA)), col_names = FALSE,
-                                    list(nrow = 2 + n - 1,     ncol = 4 + m - 1)
+    cell_limits(c(2, 4), c(NA, NA)),
+    col_names = FALSE,
+    list(nrow = 2 + n - 1, ncol = 4 + m - 1)
   )
 })

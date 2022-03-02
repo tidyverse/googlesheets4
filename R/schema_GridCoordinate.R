@@ -1,5 +1,5 @@
 as_GridCoordinate <- function(x, ...) {
-    UseMethod("as_GridCoordinate")
+  UseMethod("as_GridCoordinate")
 }
 
 #' @export
@@ -26,7 +26,9 @@ as_GridCoordinate.range_spec <- function(x, ..., strict = TRUE) {
     }
   }
 
-  grid_range <- grid_range %>% discard(is.null) %>% discard(is.na)
+  grid_range <- grid_range %>%
+    discard(is.null) %>%
+    discard(is.na)
   new(
     "GridCoordinate",
     sheetId = grid_range$sheetId,

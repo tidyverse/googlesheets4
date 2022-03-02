@@ -65,7 +65,10 @@ range_delete <- function(ss,
     shift_dimension <- NULL
   } else {
     shift <- match.arg(shift, c("up", "left"))
-    shift_dimension <- switch(shift, up = "ROWS", left = "COLUMNS")
+    shift_dimension <- switch(shift,
+      up = "ROWS",
+      left = "COLUMNS"
+    )
   }
 
   x <- gs4_get(ssid)
@@ -90,7 +93,8 @@ range_delete <- function(ss,
   if (is.null(shift_dimension)) {
     gs4_abort(c(
       "The {.arg shift} direction must be specified for this {.arg range}.",
-      "It can't be automatically determined."))
+      "It can't be automatically determined."
+    ))
   }
 
   # form batch update request --------------------------------------------------

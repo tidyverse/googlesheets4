@@ -77,8 +77,7 @@ read_cells_impl_ <- function(ssid,
   #   2. Set `includeGridData` to true. This gets *everything* about the
   #      Spreadsheet and the Sheet(s). So far, this seems like TMI.
   detail_level <- match.arg(detail_level)
-  cell_mask <- switch(
-    detail_level,
+  cell_mask <- switch(detail_level,
     "default" = ".values(effectiveValue,formattedValue,effectiveFormat.numberFormat)",
     "full" = ""
   )

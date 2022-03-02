@@ -71,7 +71,7 @@ maybe_character <- function(x, nm = deparse(substitute(x))) {
 
 check_non_negative_integer <- function(i, nm = deparse(substitute(i))) {
   if (length(i) != 1 || !is.numeric(i) ||
-      !is_integerish(i) || is.na(i) || i < 0) {
+    !is_integerish(i) || is.na(i) || i < 0) {
     gs4_abort(c(
       "{.arg {nm}} must be a positive integer:",
       x = "{.arg {nm}} has class {.cls {class(i)}}."

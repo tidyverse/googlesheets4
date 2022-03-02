@@ -28,7 +28,7 @@
 
 ## this generic is "dumb": it only reports ctype
 ## it doesn't implement any logic about guessing, coercion, etc.
-ctype <- function(x,  ...) {
+ctype <- function(x, ...) {
   UseMethod("ctype")
 }
 
@@ -107,8 +107,12 @@ admissible_types <- function(x) {
 
     CELL_TEXT     = "COL_LIST"
   )
-  if (x[[1]] == "COL_LIST")  return(x)
-  if (! x[[1]] %in% names(z)) return()
+  if (x[[1]] == "COL_LIST") {
+    return(x)
+  }
+  if (!x[[1]] %in% names(z)) {
+    return()
+  }
   c(admissible_types(z[[x[[1]]]]), x)
 }
 
@@ -128,7 +132,7 @@ consensus_col_type <- function(ctype) {
 }
 
 blank_to_logical <- function(ctype) {
-  modify_if(ctype, ~ identical(.x, "CELL_BLANK"), ~ "CELL_LOGICAL")
+  modify_if(ctype, ~ identical(.x, "CELL_BLANK"), ~"CELL_LOGICAL")
 }
 
 ## input: an instance of CellData
@@ -146,9 +150,9 @@ infer_ctype <- function(cell, na = "", trim_ws = TRUE) {
   #   * cell is NULL or list()
   #   * cell has no effectiveValue
   #   * formattedValue matches an `na` string
-  if ( length(cell) == 0 ||
-       length(cell[["effectiveValue"]]) == 0 ||
-       is_na_string(cell[["formattedValue"]], na = na, trim_ws = trim_ws)
+  if (length(cell) == 0 ||
+    length(cell[["effectiveValue"]]) == 0 ||
+    is_na_string(cell[["formattedValue"]], na = na, trim_ws = trim_ws)
   ) {
     return("CELL_BLANK")
   }
@@ -156,10 +160,9 @@ infer_ctype <- function(cell, na = "", trim_ws = TRUE) {
   effective_type <- .extended_value[[names(cell[["effectiveValue"]])]]
 
   if (!identical(effective_type, "number")) {
-    return(switch(
-      effective_type,
-      error   = "CELL_BLANK",
-      string  = "CELL_TEXT",
+    return(switch(effective_type,
+      error = "CELL_BLANK",
+      string = "CELL_TEXT",
       boolean = "CELL_LOGICAL",
       formula = {
         warn("Internal warning: Cell has formula as effectiveValue. I thought impossible!")
@@ -230,13 +233,21 @@ upper_bound <- function(x, y) {
   nx <- length(x)
   ny <- length(y)
   ## these brackets make covr happy
-  if (nx + ny == 0) {return()}
-  if (nx == 0) {return(y[[ny]])}
-  if (ny == 0) {return(x[[nx]])}
+  if (nx + ny == 0) {
+    return()
+  }
+  if (nx == 0) {
+    return(y[[ny]])
+  }
+  if (ny == 0) {
+    return(x[[nx]])
+  }
   comp <- seq_len(min(nx, ny))
   ## TODO: if our DAG were more complicated, I think this would need to be
   ## based on a set operation
   res <- x[comp] == y[comp]
-  if (!any(res)) return()
+  if (!any(res)) {
+    return()
+  }
   x[[max(which(res))]]
 }

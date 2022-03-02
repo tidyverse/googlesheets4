@@ -97,7 +97,8 @@ range_speedread <- function(ss,
   }
   msg <- glue("
     Reading from {.s_sheet {x$name}}<<sheet_msg>><<range_msg>>.",
-    .open = "<<", .close = ">>")
+    .open = "<<", .close = ">>"
+  )
   gs4_bullets(c(v = msg))
 
   token <- gs4_token() %||% list()

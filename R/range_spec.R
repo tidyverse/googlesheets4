@@ -177,8 +177,8 @@ format.range_spec <- function(x, ...) {
 
 #' @export
 print.range_spec <- function(x, ...) {
- cat(format(x), sep = "\n")
- invisible(x)
+  cat(format(x), sep = "\n")
+  invisible(x)
 }
 
 as_A1_range <- function(x) {
@@ -219,4 +219,3 @@ as_A1_range <- function(x) {
 #
 #   range_spec
 # }
-

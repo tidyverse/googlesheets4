@@ -58,7 +58,8 @@ sheet_freeze <- function(ss,
   x <- gs4_get(ssid)
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
   gs4_bullets(c(
-    v = "Freezing {dims} on sheet {.w_sheet {s$name}} in {.s_sheet {x$name}}."))
+    v = "Freezing {dims} on sheet {.w_sheet {s$name}} in {.s_sheet {x$name}}."
+  ))
 
   freeze_req <- bureq_set_grid_properties(
     sheetId = s$id,

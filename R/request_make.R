@@ -46,7 +46,8 @@
 #' @family low-level API functions
 request_make <- function(x, ..., encode = "json") {
   gargle::request_retry(
-    x, ..., encode = encode, user_agent = gs4_user_agent()
+    x, ...,
+    encode = encode, user_agent = gs4_user_agent()
   )
 }
 

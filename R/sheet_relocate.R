@@ -81,7 +81,7 @@ sheet_relocate <- function(ss,
   requests <- map(
     sheet,
     ~ make_UpdateSheetPropertiesRequest(
-        sheet = .x, .before = .before, .after = .after, sheets_df = x$sheets
+      sheet = .x, .before = .before, .after = .after, sheets_df = x$sheets
     )
   )
   req <- request_generate(

@@ -310,9 +310,12 @@ local_deauth <- function(env = parent.frame()) {
     gs4_bullets(c("i" = "Restoring previous auth state.")),
     envir = env
   )
-  withr::defer({
-    .auth$set_cred(original_cred)
-    .auth$set_auth_active(original_auth_active)
-  }, envir = env)
+  withr::defer(
+    {
+      .auth$set_cred(original_cred)
+      .auth$set_auth_active(original_auth_active)
+    },
+    envir = env
+  )
   gs4_deauth()
 }

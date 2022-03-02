@@ -15,12 +15,12 @@
 # gs4_share(ss, type = "user", emailAddress = "jane@example.com")
 # gs4_share(ss, type = "user", emailAddress = "jane@example.com", role = "writer")
 gs4_share <- function(ss,
-                         ...,
-                         role = c(
-                           "reader", "commenter", "writer",
-                           "owner", "organizer"
-                         ),
-                         type = c("anyone", "user", "group", "domain")) {
+                      ...,
+                      role = c(
+                        "reader", "commenter", "writer",
+                        "owner", "organizer"
+                      ),
+                      type = c("anyone", "user", "group", "domain")) {
   check_gs4_email_is_drive_email()
   role <- match.arg(role)
   type <- match.arg(type)

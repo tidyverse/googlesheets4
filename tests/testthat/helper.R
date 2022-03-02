@@ -33,16 +33,19 @@ local_ss <- function(name, ..., env = parent.frame()) {
     gs4_abort("A spreadsheet named {.s_sheet name} already exists.")
   }
 
-  withr::defer({
-    trash_me <- gs4_find(name)
-    if (nrow(trash_me) < 1) {
-      cli::cli_warn("
+  withr::defer(
+    {
+      trash_me <- gs4_find(name)
+      if (nrow(trash_me) < 1) {
+        cli::cli_warn("
         The spreadsheet named {.s_sheet name} already seems to be deleted.")
-    } else {
-      quiet <- gs4_quiet() %|% is_testing()
-      if (quiet) googledrive::local_drive_quiet()
-      googledrive::drive_trash(trash_me)
-    }
-  }, envir = env)
+      } else {
+        quiet <- gs4_quiet() %|% is_testing()
+        if (quiet) googledrive::local_drive_quiet()
+        googledrive::drive_trash(trash_me)
+      }
+    },
+    envir = env
+  )
   gs4_create(name, ...)
 }

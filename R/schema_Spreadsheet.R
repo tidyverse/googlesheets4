@@ -61,7 +61,9 @@ format.googlesheets4_spreadsheet <- function(x, ...) {
     "Time zone", x$time_zone,
     "# of sheets", if (rlang::has_name(x, "sheets")) {
       as.character(nrow(x$sheets))
-      } else "<unknown>"
+    } else {
+      "<unknown>"
+    }
   )
   if (!is.null(x$named_ranges)) {
     meta <- tibble::add_row(

@@ -15,7 +15,8 @@ test_that("range_autofit() works", {
 
   range_autofit(ss)
   before <- gs4_get_impl_(
-    ssid, fields = "sheets.data.columnMetadata.pixelSize"
+    ssid,
+    fields = "sheets.data.columnMetadata.pixelSize"
   )
 
   dat2 <- purrr::modify(dat, ~ paste0(.x, "_", .x))
@@ -24,7 +25,8 @@ test_that("range_autofit() works", {
   range_autofit(ss)
 
   after <- gs4_get_impl_(
-    ssid, fields = "sheets.data.columnMetadata.pixelSize"
+    ssid,
+    fields = "sheets.data.columnMetadata.pixelSize"
   )
 
   before <- pluck(before, "sheets", 1, "data", 1, "columnMetadata")

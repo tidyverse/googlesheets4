@@ -160,10 +160,16 @@ as_cell_limits <- function(x) {
 
 limits_from_range <- function(x) {
   x_split <- strsplit(x, ":")[[1]]
-  if (!length(x_split) %in% 1:2)   {gs4_abort("Invalid range: {.range {x}}")}
-  if (!all(grepl(A1_rx, x_split))) {gs4_abort("Invalid range: {.range {x}}")}
+  if (!length(x_split) %in% 1:2) {
+    gs4_abort("Invalid range: {.range {x}}")
+  }
+  if (!all(grepl(A1_rx, x_split))) {
+    gs4_abort("Invalid range: {.range {x}}")
+  }
   corners <- rematch2::re_match(x_split, A1_decomp)
-  if (anyNA(corners$.match))  {gs4_abort("Invalid range: {.range {x}}")}
+  if (anyNA(corners$.match)) {
+    gs4_abort("Invalid range: {.range {x}}")
+  }
   corners$column <- ifelse(nzchar(corners$column), corners$column, NA_character_)
   corners$row <- ifelse(nzchar(corners$row), corners$row, NA_character_)
   corners$row <- as.integer(corners$row)
@@ -192,7 +198,7 @@ check_range <- function(range = NULL) {
 
 ## the `...` are used to absorb extra variables when this is used inside pmap()
 make_cell_range <- function(start_row, end_row, start_column, end_column,
-                       sheet_name, ...) {
+                            sheet_name, ...) {
   cl <- cellranger::cell_limits(
     ul = c(start_row, start_column),
     lr = c(end_row, end_column),
@@ -204,7 +210,9 @@ make_cell_range <- function(start_row, end_row, start_column, end_column,
 ## A pair of functions for the (un)escaping of spreadsheet names
 ## for use in range strings like 'Sheet1'!A2:D4
 sq_escape <- function(x) {
-  if (is.null(x)) return()
+  if (is.null(x)) {
+    return()
+  }
   ## if string already starts and ends with single quote, pass it through
   is_not_quoted <- !map_lgl(x, ~ grepl("^'.*'$", .x))
   ## duplicate each single quote and protect string with single quotes
@@ -213,7 +221,9 @@ sq_escape <- function(x) {
 }
 
 sq_unescape <- function(x) {
-  if (is.null(x)) return()
+  if (is.null(x)) {
+    return()
+  }
   ## only modify if string starts and ends with single quote
   is_quoted <- map_lgl(x, ~ grepl("^'.*'$", .x))
   ## strip leading and trailing single quote and substitute 1 single quote

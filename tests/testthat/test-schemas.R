@@ -98,7 +98,8 @@ test_that("check_against_schema() errors if names aren't unique", {
       list(spreadsheetId = "abc", spreadsheetId = "def"),
       id = "Spreadsheet"
     ),
-    "is_dictionaryish(x) is not TRUE", fixed = TRUE
+    "is_dictionaryish(x) is not TRUE",
+    fixed = TRUE
   )
 })
 

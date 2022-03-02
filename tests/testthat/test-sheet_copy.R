@@ -26,7 +26,8 @@ test_that("external copy works", {
   ss_dest <- local_ss(me_("dest"))
 
   sheet_copy(
-    ss_source, from_sheet = "chickwts",
+    ss_source,
+    from_sheet = "chickwts",
     to_ss = ss_dest, to_sheet = "chicks-two", .before = 1
   )
   out <- sheet_names(ss_dest)

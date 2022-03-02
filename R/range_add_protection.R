@@ -124,10 +124,12 @@ range_add_protection <- function(ss,
   if (is.null(range_spec$named_range)) {
     range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
     gs4_bullets(c(
-      v = "Protecting cells on sheet: {.w_sheet {range_spec$sheet_name}}."))
+      v = "Protecting cells on sheet: {.w_sheet {range_spec$sheet_name}}."
+    ))
   } else {
     gs4_bullets(c(
-      v = "Protecting named range: {.range {range_spec$named_range}}."))
+      v = "Protecting named range: {.range {range_spec$named_range}}."
+    ))
   }
 
   # form batch update request --------------------------------------------------

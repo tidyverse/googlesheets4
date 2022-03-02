@@ -144,7 +144,8 @@ sheet_copy_external <- function(from_ssid,
   from_s <- lookup_sheet(from_sheet, sheets_df = from_x$sheets)
   gs4_bullets(c(
     v = "Copying sheet {.w_sheet {from_s$name}} from \\
-         {.s_sheet {from_x$name}} to {.s_sheet {to_x$name}}."))
+         {.s_sheet {from_x$name}} to {.s_sheet {to_x$name}}."
+  ))
 
   req <- request_generate(
     "sheets.spreadsheets.sheets.copyTo",

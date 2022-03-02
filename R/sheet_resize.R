@@ -76,7 +76,8 @@ sheet_resize <- function(ss,
 
   gs4_bullets(c(
     v = "Changing dims: ({s$grid_rows} x {s$grid_columns}) --> \\
-         ({new_nrow} x {new_ncol})."))
+         ({new_nrow} x {new_ncol})."
+  ))
 
   req <- request_generate(
     "sheets.spreadsheets.batchUpdate",

@@ -50,7 +50,8 @@
 #'     showCustomUi = TRUE
 #'   )
 #'   googlesheets4:::range_add_validation(
-#'     ss, range = "Sheet1!B2:B", rule = rule_checkbox
+#'     ss,
+#'     range = "Sheet1!B2:B", rule = rule_checkbox
 #'   )
 #'
 #'   # create a column that presents as a dropdown list
@@ -64,7 +65,8 @@
 #'     showCustomUi = TRUE
 #'   )
 #'   googlesheets4:::range_add_validation(
-#'     ss, range = "Sheet1!C2:C", rule = rule_dropdown_list
+#'     ss,
+#'     range = "Sheet1!C2:C", rule = rule_dropdown_list
 #'   )
 #'
 #'   read_sheet(ss)

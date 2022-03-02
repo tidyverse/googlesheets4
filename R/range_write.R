@@ -121,7 +121,8 @@ range_write <- function(ss,
 
   # determine (work)sheet ------------------------------------------------------
   range_spec <- as_range_spec(
-    range, sheet = sheet,
+    range,
+    sheet = sheet,
     sheets_df = x$sheets, nr_df = x$named_ranges
   )
   range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
@@ -129,7 +130,7 @@ range_write <- function(ss,
 
   # initialize the batch update requests; store details on target sheet s ------
   requests <- list()
-  s <- lookup_sheet(range_spec$sheet_name , sheets_df = x$sheets)
+  s <- lookup_sheet(range_spec$sheet_name, sheets_df = x$sheets)
 
   # package the write location as `start` or `range` ---------------------------
   loc <- prepare_loc(range_spec)
@@ -151,7 +152,8 @@ range_write <- function(ss,
     gs4_bullets(c(
       v = "Changing dims: ({s$grid_rows} x {s$grid_columns}) --> \\
            ({new_dims$rowCount %||% s$grid_rows} x \\
-           {new_dims$columnCount %||% s$grid_columns})."))
+           {new_dims$columnCount %||% s$grid_columns})."
+    ))
     requests <- c(requests, list(resize_req))
   }
 

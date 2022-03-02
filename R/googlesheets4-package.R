@@ -81,7 +81,7 @@ nm_fun <- function(context, user_run = TRUE) {
 }
 
 nm_user_run <- function() {
-  if(as.logical(Sys.getenv("GITHUB_ACTIONS", unset = "false"))) {
+  if (as.logical(Sys.getenv("GITHUB_ACTIONS", unset = "false"))) {
     glue("gha-{Sys.getenv('GITHUB_WORKFLOW')}-{Sys.getenv('GITHUB_RUN_ID')}")
   } else {
     random_id <- ids::proquint(n = 1, n_words = 2)

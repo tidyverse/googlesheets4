@@ -58,8 +58,8 @@ message <- function(...) {
     instead of {.fun message}")
 }
 
-fr <- function(x) format(x, justify = 'right')
-fl <- function(x) format(x, justify = 'left')
+fr <- function(x) format(x, justify = "right")
+fl <- function(x) format(x, justify = "left")
 
 gs4_quiet <- function() {
   getOption("googlesheets4_quiet", default = NA)

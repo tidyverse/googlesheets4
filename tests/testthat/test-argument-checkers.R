@@ -25,10 +25,12 @@ test_that("standardise_ctypes() understands and requires readr shortcodes", {
   good <- "_-lidnDtTcCL?"
   expect_equal(
     standardise_ctypes(good),
-    c(`_` = "COL_SKIP", `-` = "COL_SKIP", l = "CELL_LOGICAL",
+    c(
+      `_` = "COL_SKIP", `-` = "COL_SKIP", l = "CELL_LOGICAL",
       i = "CELL_INTEGER", d = "CELL_NUMERIC", n = "CELL_NUMERIC",
       D = "CELL_DATE", t = "CELL_TIME", T = "CELL_DATETIME", c = "CELL_TEXT",
-      C = "COL_CELL", L = "COL_LIST", `?` = "COL_GUESS")
+      C = "COL_CELL", L = "COL_LIST", `?` = "COL_GUESS"
+    )
   )
   expect_error(standardise_ctypes("abe"), "Unrecognized")
   expect_error(standardise_ctypes("f:"), "Unrecognized")

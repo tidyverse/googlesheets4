@@ -242,10 +242,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">analogous-hellbender</span>.</span>
+<span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">financial-tortoise</span>.</span>
 <span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: analogous-hellbender</span>
-<span class="co">#&gt;               ID: 1uR_PfaZp0WVvknt1_UxAZLssVR57AuzkOgqj_I2aB4w</span>
+<span class="co">#&gt; Spreadsheet name: financial-tortoise</span>
+<span class="co">#&gt;               ID: 1ALdJFNI-br4jp3aEElL0zP_S_TunjtwBhKxzeUnhsEg</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -257,15 +257,13 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">analogous-hellbender</span> <span style="color: #555555;">&lt;id: 1uR_PfaZp0WVvknt1_UxAZLssVR57AuzkOgqj_I2aB4w&gt;</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">financial-tortoise</span> <span style="color: #555555;">&lt;id: 1ALdJFNI-br4jp3aEElL0zP_S_TunjtwBhKxzeUnhsEg&gt;</span></span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">testy-hedgehog</span>.</span>
 <span class="va">ss</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Request failed [429]. Retry 1 happens in 100.2 seconds ...</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Request failed [429]. Retry 2 happens in 12.6 seconds ...</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1k1LORUclq0-mddR2Tzj-jczlQmO9rFEL4mIEIIOusfU</span>
+<span class="co">#&gt;               ID: 1r1tOncEjWqoPs3h357zwsPKG6F4manmKcJEeT1qLdcE</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -279,7 +277,7 @@
 <span class="co">#&gt; <span style="color: #00BB00;">✔</span> Writing to sheet <span style="color: #00BB00;">chickwts</span>.</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1k1LORUclq0-mddR2Tzj-jczlQmO9rFEL4mIEIIOusfU</span>
+<span class="co">#&gt;               ID: 1r1tOncEjWqoPs3h357zwsPKG6F4manmKcJEeT1qLdcE</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -329,12 +327,12 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 8</span></span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> df           0 <span style="text-decoration: underline;">1</span>014<span style="text-decoration: underline;">579</span>824 GRID  TRUE            9            2 <span style="color: #949494;">&lt;NULL&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> chickwts     1  237<span style="text-decoration: underline;">705</span>992 GRID  TRUE           72            2 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> df           0 <span style="text-decoration: underline;">1</span>834<span style="text-decoration: underline;">462</span>411 GRID  TRUE            9            2 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> chickwts     1 <span style="text-decoration: underline;">1</span>639<span style="text-decoration: underline;">796</span>295 GRID  TRUE           72            2 <span style="color: #949494;">&lt;NULL&gt;</span></span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">testy-hedgehog</span> <span style="color: #555555;">&lt;id: 1k1LORUclq0-mddR2Tzj-jczlQmO9rFEL4mIEIIOusfU&gt;</span></span></code></pre></div>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">testy-hedgehog</span> <span style="color: #555555;">&lt;id: 1r1tOncEjWqoPs3h357zwsPKG6F4manmKcJEeT1qLdcE&gt;</span></span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -83,7 +83,7 @@ range_read(
 
 ```
 
-If you looked at the "deaths" spreadsheet in the browser (it's [here](https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/edit#gid=1210215306)), you know that it has some of the typical features of real world spreadsheets: the main data rectangle has prose intended for human-consumption before and after it. That's why we have to specify the range when we read from it.
+If you looked at the "deaths" spreadsheet in the browser (it's [here](https://docs.google.com/spreadsheets/d/1tuYKzSbLukDLe5ymf_ZKdQA8SfOyeMM7rmf6D6NJpxg/edit#gid=1210215306)), you know that it has some of the typical features of real-world spreadsheets: the main data rectangle has prose intended for human consumption before and after it. That's why we have to specify the range when we read from it.
 
 We've designated the data rectangles as [named ranges](https://support.google.com/docs/answer/63175?co=GENIE.Platform%3DDesktop&hl=en), which provides a very slick way to read them -- definitely less brittle and mysterious than approaches like `range = "other!A5:F15"` or `skip = 4, n_max = 10`. A named range can be passed via the `range =` argument:
 
@@ -169,7 +169,7 @@ The modest difference above shows that the speed difference is unlikely to be a 
 
 Summary of how to think about `range_speedread()` vs `range_read()`:
 
-  * Both use auth (literally, send a token), unless there was a prior to call to
+  * Both use auth (literally, send a token), unless there was a prior call to
     `gs4_deauth()`.
   * `range_speedread()` is faster, but it's not noticeable for typical Sheets.
   * `range_speedread()` uses readr-style column type specification, which is

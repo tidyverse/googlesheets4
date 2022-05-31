@@ -242,12 +242,10 @@
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">disgusted-swift</span>.</span>
+<span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">shaven-malamute</span>.</span>
 <span class="va">ss</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Request failed [429]. Retry 1 happens in 100.1 seconds ...</span>
-<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Request failed [429]. Retry 2 happens in 12.3 seconds ...</span>
-<span class="co">#&gt; Spreadsheet name: disgusted-swift</span>
-<span class="co">#&gt;               ID: 1Y-QFFbmrMqfyZOidHThdbTyguvDZv744CGTaCitQcpg</span>
+<span class="co">#&gt; Spreadsheet name: shaven-malamute</span>
+<span class="co">#&gt;               ID: 1flk612g1AqNxhg2s7YvAKuoVPbxmq3gtFB2djuXA9KQ</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -259,13 +257,15 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">disgusted-swift</span> <span style="color: #555555;">&lt;id: 1Y-QFFbmrMqfyZOidHThdbTyguvDZv744CGTaCitQcpg&gt;</span></span>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">shaven-malamute</span> <span style="color: #555555;">&lt;id: 1flk612g1AqNxhg2s7YvAKuoVPbxmq3gtFB2djuXA9KQ&gt;</span></span>
 
 <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">testy-hedgehog</span>.</span>
 <span class="va">ss</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Request failed [429]. Retry 1 happens in 100.2 seconds ...</span>
+<span class="co">#&gt; <span style="color: #BB0000;">✖</span> Request failed [429]. Retry 2 happens in 6.4 seconds ...</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1SIiecz5LiwYxnPOZZP7ztu4tEEZxy7Jy2WkkiCkX-mY</span>
+<span class="co">#&gt;               ID: 1l9HEH8xk_iRa3Uozg_iLMLM01k1IIKvUHtfMy9W3uzA</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 1</span>
@@ -279,7 +279,7 @@
 <span class="co">#&gt; <span style="color: #00BB00;">✔</span> Writing to sheet <span style="color: #00BB00;">chickwts</span>.</span>
 <span class="va">ss</span>
 <span class="co">#&gt; Spreadsheet name: testy-hedgehog</span>
-<span class="co">#&gt;               ID: 1SIiecz5LiwYxnPOZZP7ztu4tEEZxy7Jy2WkkiCkX-mY</span>
+<span class="co">#&gt;               ID: 1l9HEH8xk_iRa3Uozg_iLMLM01k1IIKvUHtfMy9W3uzA</span>
 <span class="co">#&gt;           Locale: en_US</span>
 <span class="co">#&gt;        Time zone: Etc/GMT</span>
 <span class="co">#&gt;      # of sheets: 2</span>
@@ -329,12 +329,12 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 8</span></span>
 <span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> df           0 <span style="text-decoration: underline;">1</span>054<span style="text-decoration: underline;">196</span>381 GRID  TRUE            9            2 <span style="color: #949494;">&lt;NULL&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> chickwts     1  503<span style="text-decoration: underline;">124</span>350 GRID  TRUE           72            2 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> df           0  260<span style="text-decoration: underline;">563</span>363 GRID  TRUE            9            2 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> chickwts     1 <span style="text-decoration: underline;">1</span>191<span style="text-decoration: underline;">619</span>820 GRID  TRUE           72            2 <span style="color: #949494;">&lt;NULL&gt;</span></span>
 
 <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span>
 <span class="co">#&gt; File trashed:</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">testy-hedgehog</span> <span style="color: #555555;">&lt;id: 1SIiecz5LiwYxnPOZZP7ztu4tEEZxy7Jy2WkkiCkX-mY&gt;</span></span></code></pre></div>
+<span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">testy-hedgehog</span> <span style="color: #555555;">&lt;id: 1l9HEH8xk_iRa3Uozg_iLMLM01k1IIKvUHtfMy9W3uzA&gt;</span></span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> has even more detail.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

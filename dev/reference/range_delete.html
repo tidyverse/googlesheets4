@@ -108,8 +108,12 @@ represents Drive files</p></li>
 <li><p>an instance of <code>googlesheets4_spreadsheet</code>, which is what <code><a href="gs4_get.html">gs4_get()</a></code>
 returns</p></li>
 </ul><p>Processed through <code><a href="sheets_id.html">as_sheets_id()</a></code>.</p></dd>
+
+
 <dt>sheet</dt>
 <dd><p>Sheet to delete, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Ignored if the sheet is specified via <code>range</code>. If neither argument specifies the sheet, defaults to the first visible sheet.</p></dd>
+
+
 <dt>range</dt>
 <dd><p>Cells to delete. There are a couple differences between <code>range</code>
 here and how it works in other functions (e.g. <code><a href="range_read.html">range_read()</a></code>):</p><ul><li><p><code>range</code> must be specified.</p></li>
@@ -120,15 +124,22 @@ Row-only and column-only ranges are especially relevant, such as "2:6" or
 "D". Remember you can also use the helpers in <code><a href="cell-specification.html">cell-specification</a></code>,
 such as <code>cell_cols(4:6)</code>, or <code>cell_rows(5)</code>.</p></li>
 </ul></dd>
+
+
 <dt>shift</dt>
 <dd><p>Must be one of "up" or "left", if specified. Required if <code>range</code>
 is NOT a rows-only or column-only range (in which case, we can figure it
 out for you). Determines whether the deleted area is filled by shifting
 surrounding cells up or to the left.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The input <code>ss</code>, as an instance of <code><a href="sheets_id.html">sheets_id</a></code></p>
+    
+
+<p>The input <code>ss</code>, as an instance of <code><a href="sheets_id.html">sheets_id</a></code></p>
+
+
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -172,7 +183,7 @@ surrounding cells up or to the left.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Editing <span style="color: #00BBBB;">range-delete-example</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Deleting cells in sheet <span style="color: #00BB00;">Sheet1</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">range-delete-example</span> <span style="color: #555555;">&lt;id: 1CFLxWLY9VarVexTrvKNeQAVLpHf3P6Lz7PbkNr__Xt0&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">range-delete-example</span> <span style="color: #555555;">&lt;id: 1iStpTHjC9Z21XLic2XN8xHU2NwB8BxTpsfiJJDzwgMk&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -186,7 +197,7 @@ surrounding cells up or to the left.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

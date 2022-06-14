@@ -143,8 +143,12 @@ represents Drive files</p></li>
 <li><p>an instance of <code>googlesheets4_spreadsheet</code>, which is what <code><a href="gs4_get.html">gs4_get()</a></code>
 returns</p></li>
 </ul><p>Processed through <code><a href="sheets_id.html">as_sheets_id()</a></code>.</p></dd>
+
+
 <dt>sheet</dt>
 <dd><p>Sheet to read, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Ignored if the sheet is specified via <code>range</code>. If neither argument specifies the sheet, defaults to the first visible sheet.</p></dd>
+
+
 <dt>range</dt>
 <dd><p>A cell range to read from. If <code>NULL</code>, all non-empty cells are
 read. Otherwise specify <code>range</code> as described in <a href="https://developers.google.com/sheets/api/guides/concepts#a1_notation" class="external-link">Sheets A1 notation</a>
@@ -156,43 +160,64 @@ strictly, even if the range forces the inclusion of leading, trailing, or
 embedded empty rows or columns. Takes precedence over <code>skip</code>, <code>n_max</code> and
 <code>sheet</code>. Note <code>range</code> can be a named range, like <code>"sales_data"</code>, without
 any cell reference.</p></dd>
+
+
 <dt>col_names</dt>
 <dd><p><code>TRUE</code> to use the first row as column names, <code>FALSE</code> to get
 default names, or a character vector to provide column names directly. If
 user provides <code>col_types</code>, <code>col_names</code> can have one entry per column or one
 entry per unskipped column.</p></dd>
+
+
 <dt>col_types</dt>
 <dd><p>Column types. Either <code>NULL</code> to guess all from the
 spreadsheet or a string of readr-style shortcodes, with one character or
 code per column. If exactly one <code>col_type</code> is specified, it is recycled.
 See Column Specification for more.</p></dd>
+
+
 <dt>na</dt>
 <dd><p>Character vector of strings to interpret as missing values. By
 default, blank cells are treated as missing data.</p></dd>
+
+
 <dt>trim_ws</dt>
 <dd><p>Logical. Should leading and trailing whitespace be trimmed
 from cell contents?</p></dd>
+
+
 <dt>skip</dt>
 <dd><p>Minimum number of rows to skip before reading anything, be it
 column names or data. Leading empty rows are automatically skipped, so this
 is a lower bound. Ignored if <code>range</code> is given.</p></dd>
+
+
 <dt>n_max</dt>
 <dd><p>Maximum number of data rows to parse into the returned tibble.
 Trailing empty rows are automatically skipped, so this is an upper bound on
 the number of rows in the result. Ignored if <code>range</code> is given. <code>n_max</code> is
 imposed locally, after reading all non-empty cells, so, if speed is an
 issue, it is better to use <code>range</code>.</p></dd>
+
+
 <dt>guess_max</dt>
 <dd><p>Maximum number of data rows to use for guessing column
 types.</p></dd>
+
+
 <dt>.name_repair</dt>
 <dd><p>Handling of column names. By default, googlesheets4
 ensures column names are not empty and are unique. There is full support
 for <code>.name_repair</code> as documented in <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
+    
+
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
+
+
     </div>
     <div class="section level2">
     <h2 id="column-specification">Column Specification<a class="anchor" aria-label="anchor" href="#column-specification"></a></h2>
@@ -281,7 +306,7 @@ its discovered type.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

@@ -100,11 +100,17 @@ represents Drive files</p></li>
 <li><p>an instance of <code>googlesheets4_spreadsheet</code>, which is what <code><a href="gs4_get.html">gs4_get()</a></code>
 returns</p></li>
 </ul><p>Processed through <code><a href="sheets_id.html">as_sheets_id()</a></code>.</p></dd>
+
+
 <dt>from_sheet</dt>
 <dd><p>Sheet to copy, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Defaults to the first visible sheet.</p></dd>
+
+
 <dt>to_ss</dt>
 <dd><p>The Sheet to copy <em>to</em>. Accepts all the same types of input as
 <code>from_ss</code>, which is also what this defaults to, if unspecified.</p></dd>
+
+
 <dt>to_sheet</dt>
 <dd><p>Optional. Name of the new sheet, as a string. If you don't
 specify this, Google generates a name, along the lines of "Copy of blah".
@@ -112,12 +118,17 @@ Note that sheet names must be unique within a Sheet, so if the automatic
 name would violate this, Google also de-duplicates it for you, meaning you
 could conceivably end up with "Copy of blah 2". If you have better ideas
 about sheet names, specify <code>to_sheet</code>.</p></dd>
+
+
 <dt>.before, .after</dt>
 <dd><p>Optional specification of where to put the new sheet. Specify, at most, one of <code>.before</code> and <code>.after</code>. Refer to an existing sheet by name (via a string) or by position (via a number). If unspecified, Sheets puts the new sheet at the end.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The receiving Sheet, <code>to_ ss</code>, as an instance of <code><a href="sheets_id.html">sheets_id</a></code>.</p>
+    
+
+<p>The receiving Sheet, <code>to_ ss</code>, as an instance of <code><a href="sheets_id.html">sheets_id</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -184,8 +195,8 @@ about sheet names, specify <code>to_sheet</code>.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Copying sheet <span style="color: #00BB00;">chickwts</span> from <span style="color: #00BBBB;">sheet-copy-demo-aaa</span> to <span style="color: #00BBBB;">sheet-copy-demo-bbb</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Copied as <span style="color: #00BB00;">chicks-two</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Files trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheet-copy-demo-bbb</span> <span style="color: #555555;">&lt;id: 1BUP4Wa38JWMd6C1d0uGXaQMdaVAcOVlveXoE3htwdS0&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheet-copy-demo-aaa</span> <span style="color: #555555;">&lt;id: 1gyWT4y6Yn48YAH1jghsI51iFwF_GxCpreQuck1tCCgM&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheet-copy-demo-bbb</span> <span style="color: #555555;">&lt;id: 1GrY7KN1Xhyk2W2khKq20jsIvAOfGYFtw4Ngp-sjXaDo&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheet-copy-demo-aaa</span> <span style="color: #555555;">&lt;id: 1CTlCSDVf-X8Jq7KqMb3nielzqXsILz9fV_Hd5qBAF7g&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -199,7 +210,7 @@ about sheet names, specify <code>to_sheet</code>.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

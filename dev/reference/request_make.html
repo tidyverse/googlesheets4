@@ -98,18 +98,25 @@ for internal use and for programming around the Sheets API.</p>
 <dd><p>List. Holds the components for an HTTP request, presumably created
 with <code><a href="request_generate.html">request_generate()</a></code> or <code><a href="https://gargle.r-lib.org/reference/request_develop.html" class="external-link">gargle::request_build()</a></code>. Must contain a
 <code>method</code> and <code>url</code>. If present, <code>body</code> and <code>token</code> are used.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Optional arguments passed through to the HTTP method.</p></dd>
+
+
 <dt>encode</dt>
 <dd><p>If the body is a named list, how should it be encoded? This has
 the same meaning as <code>encode</code> in all the <code><a href="https://httr.r-lib.org/reference/VERB.html" class="external-link">httr::VERB()</a></code>s, such as
 <code><a href="https://httr.r-lib.org/reference/POST.html" class="external-link">httr::POST()</a></code>. Note, however, that we default to <code>encode = "json"</code>, which
 is what you want most of the time when calling the Sheets API. The httr
 default is <code>"multipart"</code>. Other acceptable values are <code>"form"</code> and <code>"raw"</code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Object of class <code>response</code> from <a href="https://httr.r-lib.org/reference/httr-package.html" class="external-link">httr</a>.</p>
+    
+
+<p>Object of class <code>response</code> from <a href="https://httr.r-lib.org/reference/httr-package.html" class="external-link">httr</a>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -151,7 +158,7 @@ in the gargle vignette <code><a href="https://gargle.r-lib.org/articles/get-api-
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

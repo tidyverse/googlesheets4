@@ -102,21 +102,32 @@ represents Drive files</p></li>
 <li><p>an instance of <code>googlesheets4_spreadsheet</code>, which is what <code><a href="gs4_get.html">gs4_get()</a></code>
 returns</p></li>
 </ul><p>Processed through <code><a href="sheets_id.html">as_sheets_id()</a></code>.</p></dd>
+
+
 <dt>sheet</dt>
 <dd><p>Sheet to modify, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Ignored if the sheet is specified via <code>range</code>. If neither argument specifies the sheet, defaults to the first visible sheet.</p></dd>
+
+
 <dt>range</dt>
 <dd><p>Which columns or rows to resize. Optional. If you want to resize
 all columns or all rows, use <code>dimension</code> instead. All the usual <code>range</code>
 specifications are accepted, but the targeted range must specify only
 columns (e.g. "B:F") or only rows (e.g. "2:7").</p></dd>
+
+
 <dt>dimension</dt>
 <dd><p>Ignored if <code>range</code> is given. If consulted, <code>dimension</code> must
 be either <code>"columns"</code> (the default) or <code>"rows"</code>. This is the simplest way
 to request auto-resize for all columns or all rows.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>The input <code>ss</code>, as an instance of <code><a href="sheets_id.html">sheets_id</a></code></p>
+    
+
+<p>The input <code>ss</code>, as an instance of <code><a href="sheets_id.html">sheets_id</a></code></p>
+
+
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -163,7 +174,7 @@ to request auto-resize for all columns or all rows.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Editing <span style="color: #00BBBB;">range-autofit-demo</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Resizing one or more columns in <span style="color: #00BB00;">dat</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">range-autofit-demo</span> <span style="color: #555555;">&lt;id: 1UjvJ9Xrbkf7e7YNT4x85dE3l0Jnt8Qv_I2EGGrGJEZo&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">range-autofit-demo</span> <span style="color: #555555;">&lt;id: 1fCI5e7XUPUcA5H00MVKDGXnYtn5ZntmB7fHU-PrgJYk&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -177,7 +188,7 @@ to request auto-resize for all columns or all rows.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
   </div></footer></body></html>

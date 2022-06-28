@@ -98,7 +98,7 @@ Document (<code>https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest</cod
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">gs4_endpoints</span><span class="op">(</span>i <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gs4_endpoints</span><span class="op">(</span>i <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -118,7 +118,7 @@ endpoints that are used internally by googlesheets4.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu">gs4_endpoints</span><span class="op">(</span><span class="op">)</span>, max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu">gs4_endpoints</span><span class="op">(</span><span class="op">)</span>, max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 17</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.get                           :List of 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.get"</span>
@@ -286,7 +286,7 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "CopySheetToAnotherSpreadsheetRequest"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "SheetProperties"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:2] "spreadsheetId" "sheetId"</span>
-<span class="r-in"><span class="fu">gs4_endpoints</span><span class="op">(</span><span class="st">"sheets.spreadsheets.values.get"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">gs4_endpoints</span><span class="op">(</span><span class="st">"sheets.spreadsheets.values.get"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "sheets.spreadsheets.values.get"</span>
@@ -538,7 +538,7 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "spreadsheetId" "range"        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span class="fu">gs4_endpoints</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">gs4_endpoints</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "sheets.spreadsheets.getByDataFilter"</span>

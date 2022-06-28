@@ -121,13 +121,13 @@
 <p>If you don’t need to access private Sheets, use <code><a href="../reference/gs4_deauth.html">gs4_deauth()</a></code> to indicate there is no need for a token. This puts googlesheets4 into a de-authorized mode.</p>
 <p>Here’s how an R script might look if all you plan to do is read Sheets that are world-readable or readable by “anyone with a link”:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/gs4_deauth.html">gs4_deauth</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="co"># imagine this is the URL or ID of a Sheet readable by anyone (with a link)</span>
-<span class="va">ss</span> <span class="op">&lt;-</span> <span class="st">"?????"</span>
-<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/gs4_deauth.html">gs4_deauth</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># imagine this is the URL or ID of a Sheet readable by anyone (with a link)</span></span>
+<span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="st">"?????"</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="default-auth-behaviour-and-beyond">Default auth behaviour and beyond<a class="anchor" aria-label="anchor" href="#default-auth-behaviour-and-beyond"></a>

@@ -104,33 +104,33 @@ throughout the googlesheets4 package.</p></li>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">range_read</span><span class="op">(</span>
-  <span class="va">ss</span>,
-  sheet <span class="op">=</span> <span class="cn">NULL</span>,
-  range <span class="op">=</span> <span class="cn">NULL</span>,
-  col_names <span class="op">=</span> <span class="cn">TRUE</span>,
-  col_types <span class="op">=</span> <span class="cn">NULL</span>,
-  na <span class="op">=</span> <span class="st">""</span>,
-  trim_ws <span class="op">=</span> <span class="cn">TRUE</span>,
-  skip <span class="op">=</span> <span class="fl">0</span>,
-  n_max <span class="op">=</span> <span class="cn">Inf</span>,
-  guess_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="va">n_max</span><span class="op">)</span>,
-  .name_repair <span class="op">=</span> <span class="st">"unique"</span>
-<span class="op">)</span>
-
-<span class="fu">read_sheet</span><span class="op">(</span>
-  <span class="va">ss</span>,
-  sheet <span class="op">=</span> <span class="cn">NULL</span>,
-  range <span class="op">=</span> <span class="cn">NULL</span>,
-  col_names <span class="op">=</span> <span class="cn">TRUE</span>,
-  col_types <span class="op">=</span> <span class="cn">NULL</span>,
-  na <span class="op">=</span> <span class="st">""</span>,
-  trim_ws <span class="op">=</span> <span class="cn">TRUE</span>,
-  skip <span class="op">=</span> <span class="fl">0</span>,
-  n_max <span class="op">=</span> <span class="cn">Inf</span>,
-  guess_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="va">n_max</span><span class="op">)</span>,
-  .name_repair <span class="op">=</span> <span class="st">"unique"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">range_read</span><span class="op">(</span></span>
+<span>  <span class="va">ss</span>,</span>
+<span>  sheet <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  range <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  col_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  col_types <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  na <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  trim_ws <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  skip <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  n_max <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  guess_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="va">n_max</span><span class="op">)</span>,</span>
+<span>  .name_repair <span class="op">=</span> <span class="st">"unique"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">read_sheet</span><span class="op">(</span></span>
+<span>  <span class="va">ss</span>,</span>
+<span>  sheet <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  range <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  col_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  col_types <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  na <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  trim_ws <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  skip <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  n_max <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  guess_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="va">n_max</span><span class="op">)</span>,</span>
+<span>  .name_repair <span class="op">=</span> <span class="st">"unique"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -261,20 +261,20 @@ its discovered type.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="gs4_has_token.html">gs4_has_token</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"A5:F15"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"other!A5:F15"</span>, col_types <span class="op">=</span> <span class="st">"ccilDD"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"arts_data"</span>, col_types <span class="op">=</span> <span class="st">"ccilDD"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="fu">read_sheet</span><span class="op">(</span><span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">read_sheet</span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span>,</span>
-<span class="r-in">    sheet <span class="op">=</span> <span class="st">"Europe"</span>,</span>
-<span class="r-in">    range <span class="op">=</span> <span class="st">"A:D"</span>,</span>
-<span class="r-in">    col_types <span class="op">=</span> <span class="st">"ccid"</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="gs4_has_token.html">gs4_has_token</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"A5:F15"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"other!A5:F15"</span>, col_types <span class="op">=</span> <span class="st">"ccilDD"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"arts_data"</span>, col_types <span class="op">=</span> <span class="st">"ccilDD"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span>  <span class="fu">read_sheet</span><span class="op">(</span><span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="fu">read_sheet</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    sheet <span class="op">=</span> <span class="st">"Europe"</span>,</span></span>
+<span class="r-in"><span>    range <span class="op">=</span> <span class="st">"A:D"</span>,</span></span>
+<span class="r-in"><span>    col_types <span class="op">=</span> <span class="st">"ccid"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">A5:F15</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span>

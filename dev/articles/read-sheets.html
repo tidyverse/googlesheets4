@@ -378,14 +378,14 @@
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.155   0.000   0.878</span></span>
+<span><span class="co">#&gt;   0.102   0.004   0.659</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/range_read.html">range_read</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">gapminder</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Range '<span style="color: #BBBB00;">'Africa'</span>'.</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.471   0.004   1.002</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.330   0.000   0.952</span></span></code></pre></div>
 <p>The modest difference above shows that the speed difference is unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../reference/range_speedread.html">range_speedread()</a></code> vs <code><a href="../reference/range_read.html">range_read()</a></code>:</p>
 <ul>

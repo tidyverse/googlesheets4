@@ -84,10 +84,11 @@ as_sheets_range <- function(x) {
 # df[df$name == sheet, c("grid_rows", "grid_columns")]
 resolve_limits <- function(cell_limits, sheet_data = NULL) {
   # If no sheet_data, use theoretical maxima.
-  # Rows: Max number of cells is 5 million. So that must be the maximum
+  # https://workspaceupdates.googleblog.com/2022/03/ten-million-cells-google-sheets.html
+  # Rows: Max number of cells is 10 million. So that must be the maximum
   #       number of rows (imagine a spreadsheet with 1 sheet and 1 column).
   # Columns: Max col is "ZZZ" = cellranger::letter_to_num("ZZZ") = 18278
-  MAX_ROW <- sheet_data$grid_rows    %||% 5000000L
+  MAX_ROW <- sheet_data$grid_rows    %||% 10000000L
   MAX_COL <- sheet_data$grid_columns %||% 18278L
 
   limits <- c(cell_limits$ul, cell_limits$lr)

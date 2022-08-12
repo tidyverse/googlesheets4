@@ -79,7 +79,7 @@ test_that("resolve_limits() leaves these cases unchanged", {
 test_that("resolve_limits() completes a row- or column-only range", {
   expect_identical(
     resolve_limits(cell_limits(c(2, NA), c(NA, NA))),
-    cell_limits(c(2, NA), c(5000000, NA))
+    cell_limits(c(2, NA), c(10000000, NA))
   )
   expect_identical(
     # I now think it's a bug that cell_limits() fills in this start row

@@ -1,5 +1,7 @@
 # googlesheets4 (development version)
 
+The mere existence of an invalid named range no longer prevents googlesheets4 from dealing with a Sheet (#175).
+
 # googlesheets4 1.0.0
 
 ## User interface

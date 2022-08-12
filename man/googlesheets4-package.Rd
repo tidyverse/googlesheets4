@@ -6,9 +6,9 @@
 \alias{googlesheets4-package}
 \title{googlesheets4: Access Google Sheets using the Sheets API V4}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Interact with Google Sheets through the Sheets API v4 <https://developers.google.com/sheets/api>. "API" is an acronym for "application programming interface"; the Sheets API allows users to interact with Google Sheets programmatically, instead of via a web browser. The "v4" refers to the fact that the Sheets API is currently at version 4. This package can read and write both the metadata and the cell data in a Sheet.
+Interact with Google Sheets through the Sheets API v4 \url{https://developers.google.com/sheets/api}. "API" is an acronym for "application programming interface"; the Sheets API allows users to interact with Google Sheets programmatically, instead of via a web browser. The "v4" refers to the fact that the Sheets API is currently at version 4. This package can read and write both the metadata and the cell data in a Sheet.
 }
 \seealso{
 Useful links:

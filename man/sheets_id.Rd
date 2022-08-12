@@ -9,7 +9,7 @@ as_sheets_id(x, ...)
 }
 \arguments{
 \item{x}{Something that contains a Google Sheet id: an id string, a
-\code{\link[googledrive:drive_id]{drive_id}}, a URL, a one-row
+\code{\link[googledrive:as_id]{drive_id}}, a URL, a one-row
 \code{\link[googledrive:dribble]{dribble}}, or a \code{googlesheets4_spreadsheet}.}
 
 \item{...}{Other arguments passed down to methods. (Not used.)}
@@ -18,7 +18,7 @@ as_sheets_id(x, ...)
 \code{sheets_id} is an S3 class that marks a string as a Google Sheet's id, which
 the Sheets API docs refer to as \code{spreadsheetId}.
 
-Any object of class \code{sheets_id} also has the \code{\link[googledrive:drive_id]{drive_id}}
+Any object of class \code{sheets_id} also has the \code{\link[googledrive:as_id]{drive_id}}
 class, which is used by \link{googledrive} for the same purpose. This means you
 can provide a \code{sheets_id} to \link{googledrive} functions, in order to do anything
 with your Sheet that has nothing to do with it being a spreadsheet. Examples:
@@ -70,5 +70,5 @@ as_sheets_id("abc")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\link[googledrive:drive_id]{googledrive::as_id}
+\link[googledrive:as_id]{googledrive::as_id}
 }

@@ -40,10 +40,20 @@ new_googlesheets4_spreadsheet <- function(x = list()) {
       key = "id",
       value = "name"
     )
-    named_ranges$cell_range <- pmap_chr(named_ranges, make_cell_range)
-    named_ranges$A1_range <- qualified_A1(
-      named_ranges$sheet_name, named_ranges$cell_range
+
+    # https://github.com/tidyverse/googlesheets4/issues/175
+    # dysfunctional named ranges are possible and should not prevent us from
+    # dealing with a Sheet
+    possibly_make_cell_range <- purrr::possibly(
+      make_cell_range,
+      otherwise = NA_character_
     )
+    named_ranges$cell_range <- pmap_chr(named_ranges, possibly_make_cell_range)
+    named_ranges$A1_range <- qualified_A1(
+      named_ranges$sheet_name,
+      named_ranges$cell_range
+    )
+    named_ranges$A1_range[is.na(named_ranges$cell_range)] <- NA_character_
 
     out$named_ranges <- named_ranges
   }

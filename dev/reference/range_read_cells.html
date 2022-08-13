@@ -182,18 +182,31 @@ we check for an <code>effectiveValue</code>, which is one of the fields in the
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="gs4_has_token.html">gs4_has_token</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="fu">range_read_cells</span><span class="op">(</span><span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>, range <span class="op">=</span> <span class="st">"arts_data"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># if you want detailed and exhaustive cell data, do this</span></span></span>
-<span class="r-in"><span>  <span class="fu">range_read_cells</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"formulas-and-formats"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    cell_data <span class="op">=</span> <span class="st">"full"</span>,</span></span>
-<span class="r-in"><span>    discard_empty <span class="op">=</span> <span class="cn">FALSE</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">range_read_cells</span><span class="op">(</span><span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>, range <span class="op">=</span> <span class="st">"arts_data"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">arts_data</span>.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 66 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      row   col loc   cell      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     5     1 A5    <span style="color: #949494;">&lt;CELL_TEX&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     5     2 B5    <span style="color: #949494;">&lt;CELL_TEX&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     5     3 C5    <span style="color: #949494;">&lt;CELL_TEX&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     5     4 D5    <span style="color: #949494;">&lt;CELL_TEX&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     5     5 E5    <span style="color: #949494;">&lt;CELL_TEX&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     5     6 F5    <span style="color: #949494;">&lt;CELL_TEX&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     6     1 A6    <span style="color: #949494;">&lt;CELL_TEX&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     6     2 B6    <span style="color: #949494;">&lt;CELL_TEX&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     6     3 C6    <span style="color: #949494;">&lt;CELL_NUM&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>     6     4 D6    <span style="color: #949494;">&lt;CELL_LOG&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 56 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># if you want detailed and exhaustive cell data, do this</span></span></span>
+<span class="r-in"><span><span class="fu">range_read_cells</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"formulas-and-formats"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  cell_data <span class="op">=</span> <span class="st">"full"</span>,</span></span>
+<span class="r-in"><span>  discard_empty <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">formulas-and-formats</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">Sheet1</span>.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 678 × 4</span></span>

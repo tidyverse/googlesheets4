@@ -138,50 +138,58 @@ in <code>name = value</code> form.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="gs4_has_token.html">gs4_has_token</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span>  <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"add-sheets-to-me"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># the only required argument is the target spreadsheet</span></span></span>
-<span class="r-in"><span>  <span class="va">ss</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">sheet_add</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># but you CAN specify sheet name and/or position</span></span></span>
-<span class="r-in"><span>  <span class="va">ss</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">sheet_add</span><span class="op">(</span><span class="st">"apple"</span>, .after <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
-<span class="r-in"><span>  <span class="va">ss</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">sheet_add</span><span class="op">(</span><span class="st">"banana"</span>, .after <span class="op">=</span> <span class="st">"apple"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># add multiple sheets at once</span></span></span>
-<span class="r-in"><span>  <span class="va">ss</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">sheet_add</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"coconut"</span>, <span class="st">"dragonfruit"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># keeners can even specify additional sheet properties</span></span></span>
-<span class="r-in"><span>  <span class="va">ss</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>    <span class="fu">sheet_add</span><span class="op">(</span></span></span>
-<span class="r-in"><span>      sheet <span class="op">=</span> <span class="st">"eggplant"</span>,</span></span>
-<span class="r-in"><span>      .before <span class="op">=</span> <span class="fl">1</span>,</span></span>
-<span class="r-in"><span>      gridProperties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        rowCount <span class="op">=</span> <span class="fl">3</span>, columnCount <span class="op">=</span> <span class="fl">6</span>, frozenRowCount <span class="op">=</span> <span class="fl">1</span></span></span>
-<span class="r-in"><span>      <span class="op">)</span></span></span>
-<span class="r-in"><span>    <span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># get an overview of the sheets</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span>  <span class="co"># clean up</span></span></span>
-<span class="r-in"><span>  <span class="fu"><a href="gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"add-sheets-to-me"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
-<span class="r-in"><span>    <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"add-sheets-to-me"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">add-sheets-to-me</span>.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># the only required argument is the target spreadsheet</span></span></span>
+<span class="r-in"><span><span class="va">ss</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">sheet_add</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Adding 1 sheet to <span style="color: #00BBBB;">add-sheets-to-me</span>:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">Sheet2</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># but you CAN specify sheet name and/or position</span></span></span>
+<span class="r-in"><span><span class="va">ss</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">sheet_add</span><span class="op">(</span><span class="st">"apple"</span>, .after <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Adding 1 sheet to <span style="color: #00BBBB;">add-sheets-to-me</span>:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">apple</span></span>
+<span class="r-in"><span><span class="va">ss</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">sheet_add</span><span class="op">(</span><span class="st">"banana"</span>, .after <span class="op">=</span> <span class="st">"apple"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Adding 1 sheet to <span style="color: #00BBBB;">add-sheets-to-me</span>:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">banana</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># add multiple sheets at once</span></span></span>
+<span class="r-in"><span><span class="va">ss</span> <span class="op"><a href="pipe.html">%&gt;%</a></span> <span class="fu">sheet_add</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"coconut"</span>, <span class="st">"dragonfruit"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Adding 2 sheets to <span style="color: #00BBBB;">add-sheets-to-me</span>:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">coconut</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">dragonfruit</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># keeners can even specify additional sheet properties</span></span></span>
+<span class="r-in"><span><span class="va">ss</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">sheet_add</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    sheet <span class="op">=</span> <span class="st">"eggplant"</span>,</span></span>
+<span class="r-in"><span>    .before <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>    gridProperties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      rowCount <span class="op">=</span> <span class="fl">3</span>, columnCount <span class="op">=</span> <span class="fl">6</span>, frozenRowCount <span class="op">=</span> <span class="fl">1</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Adding 1 sheet to <span style="color: #00BBBB;">add-sheets-to-me</span>:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">eggplant</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># get an overview of the sheets</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 7 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   name        index         id type  visible grid_rows grid_columns data  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> eggplant        0 <span style="text-decoration: underline;">1</span>285<span style="text-decoration: underline;">654</span>229 GRID  TRUE            3            6 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Sheet1          1          0 GRID  TRUE         <span style="text-decoration: underline;">1</span>000           26 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> apple           2  413<span style="text-decoration: underline;">867</span>577 GRID  TRUE         <span style="text-decoration: underline;">1</span>000           26 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> banana          3 <span style="text-decoration: underline;">1</span>990<span style="text-decoration: underline;">550</span>903 GRID  TRUE         <span style="text-decoration: underline;">1</span>000           26 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Sheet2          4  237<span style="text-decoration: underline;">522</span>836 GRID  TRUE         <span style="text-decoration: underline;">1</span>000           26 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> coconut         5 <span style="text-decoration: underline;">1</span>681<span style="text-decoration: underline;">409</span>956 GRID  TRUE         <span style="text-decoration: underline;">1</span>000           26 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> dragonfruit     6 <span style="text-decoration: underline;">1</span>392<span style="text-decoration: underline;">014</span>919 GRID  TRUE         <span style="text-decoration: underline;">1</span>000           26 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># clean up</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"add-sheets-to-me"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
+<span class="r-in"><span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">add-sheets-to-me</span> <span style="color: #555555;">&lt;id: 1FAIOy4EzghMRR8OGLmMrZl5Walp04eVVrVnMg50bXp0&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">add-sheets-to-me</span> <span style="color: #555555;">&lt;id: 1QUNu7p5fn7d7SNn1pomNrxkLp7n4gGKX9441DegS9j4&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

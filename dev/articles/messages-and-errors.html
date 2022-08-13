@@ -119,7 +119,7 @@
 <div class="section level2">
 <h2 id="user-facing-messages">User-facing messages<a class="anchor" aria-label="anchor" href="#user-facing-messages"></a>
 </h2>
-<p>Everything should be emitted by helpers in <code>utils-ui.R</code>: specifically, <code>gs4_bullets()</code> and, for errors, <code>gs4_abort()</code>. These helpers are wrappers around <code><a href="https://cli.r-lib.org/reference/cli_bullets.html" class="external-link">cli::cli_bullets()</a></code> and <code><a href="https://cli.r-lib.org/reference/cli_alert.html" class="external-link">cli::cli_alert()</a></code>, respectively.</p>
+<p>Everything should be emitted by helpers in <code>utils-ui.R</code>: specifically, <code>gs4_bullets()</code> and, for errors, <code>gs4_abort()</code>. These helpers are wrappers around <code><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli::cli_inform()</a></code> and <code><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli::cli_abort()</a></code>, respectively.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>        <span class="st">"noindent"</span>,</span>
@@ -176,13 +176,13 @@
 <span><span class="va">rg</span> <span class="op">&lt;-</span> <span class="st">"A3:B20"</span></span>
 <span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Writing to the range: {.range {rg}}"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Writing to the range: <span style="color: #BBBB00;">A3:B20</span></span></span></code></pre></div>
-<p>Above, I don’t include a period (<code>.</code>) at the end of a message with the form: <code>Description of thing: THING</code>. I view it as a special case of a bullet list of simple items, which also don’t get periods.</p>
+<p>Above, I don’t include a period (<code>.</code>) at the end of a message with the form: <code>Description of thing: THING</code>. I view it as a special case of a bullet list of simple items, which also don’t get periods. (<code>bulletize()</code> comes from gargle.)</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"We're going to list some things:"</span>,</span>
 <span>  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">month.abb</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in bulletize(gargle_map_cli(month.abb[1:4])): could not find function "bulletize"</span></span></code></pre></div>
+<span><span class="co">#&gt; Error in gargle_map_cli(month.abb[1:4]): could not find function "gargle_map_cli"</span></span></code></pre></div>
 <p>Other messages that are complete sentence, or at least aspire to be, <strong>do</strong> get a period.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="st">"Doing the stuff you asked me to do."</span><span class="op">)</span></span>

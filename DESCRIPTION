@@ -1,6 +1,6 @@
 Package: googlesheets4
 Title: Access Google Sheets using the Sheets API V4
-Version: 1.0.0.9000
+Version: 1.0.1
 Authors@R: c(
     person("Jennifer", "Bryan", , "jenny@rstudio.com", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0002-6983-2759")),

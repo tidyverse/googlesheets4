@@ -1,4 +1,4 @@
-# googlesheets4 (development version)
+# googlesheets4 1.0.1
 
 The mere existence of an invalid named range no longer prevents googlesheets4 from dealing with a Sheet (#175).
 

@@ -44,38 +44,38 @@ result, break it into a sequence of simpler calls to
 \code{sheet_relocate()}.
 }
 \examples{
-if (gs4_has_token()) {
-  sheet_names <- c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot")
-  ss <- gs4_create("sheet-relocate-demo", sheets = sheet_names)
-  sheet_names(ss)
+\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+sheet_names <- c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot")
+ss <- gs4_create("sheet-relocate-demo", sheets = sheet_names)
+sheet_names(ss)
 
-  # move one sheet, forwards then backwards
-  ss \%>\%
-    sheet_relocate("echo", .before = "bravo") \%>\%
-    sheet_names()
-  ss \%>\%
-    sheet_relocate("echo", .after = "delta") \%>\%
-    sheet_names()
+# move one sheet, forwards then backwards
+ss \%>\%
+  sheet_relocate("echo", .before = "bravo") \%>\%
+  sheet_names()
+ss \%>\%
+  sheet_relocate("echo", .after = "delta") \%>\%
+  sheet_names()
 
-  # reorder and move multiple sheets to the front
-  ss \%>\%
-    sheet_relocate(list("foxtrot", 4)) \%>\%
-    sheet_names()
+# reorder and move multiple sheets to the front
+ss \%>\%
+  sheet_relocate(list("foxtrot", 4)) \%>\%
+  sheet_names()
 
-  # put the sheets back in the original order
-  ss \%>\%
-    sheet_relocate(sheet_names) \%>\%
-    sheet_names()
+# put the sheets back in the original order
+ss \%>\%
+  sheet_relocate(sheet_names) \%>\%
+  sheet_names()
 
-  # reorder and move multiple sheets to the back
-  ss \%>\%
-    sheet_relocate(c("bravo", "alfa", "echo"), .after = 10) \%>\%
-    sheet_names()
+# reorder and move multiple sheets to the back
+ss \%>\%
+  sheet_relocate(c("bravo", "alfa", "echo"), .after = 10) \%>\%
+  sheet_names()
 
-  # clean up
-  gs4_find("sheet-relocate-demo") \%>\%
-    googledrive::drive_trash()
-}
+# clean up
+gs4_find("sheet-relocate-demo") \%>\%
+  googledrive::drive_trash()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Constructs a batch of \code{UpdateSheetPropertiesRequest}s (one per sheet):

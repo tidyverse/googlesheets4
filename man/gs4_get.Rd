@@ -32,9 +32,9 @@ returns metadata that exists for any file on Drive.
 }
 }
 \examples{
-if (gs4_has_token()) {
-  gs4_get(gs4_example("mini-gap"))
-}
+\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+gs4_get(gs4_example("mini-gap"))
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Wraps the \code{spreadsheets.get} endpoint:

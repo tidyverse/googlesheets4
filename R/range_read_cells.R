@@ -34,17 +34,15 @@
 #' @return A tibble with one row per cell in the `range`.
 #' @export
 #'
-#' @examples
-#' if (gs4_has_token()) {
-#'   range_read_cells(gs4_example("deaths"), range = "arts_data")
+#' @examplesIf gs4_has_token()
+#' range_read_cells(gs4_example("deaths"), range = "arts_data")
 #'
-#'   # if you want detailed and exhaustive cell data, do this
-#'   range_read_cells(
-#'     gs4_example("formulas-and-formats"),
-#'     cell_data = "full",
-#'     discard_empty = FALSE
-#'   )
-#' }
+#' # if you want detailed and exhaustive cell data, do this
+#' range_read_cells(
+#'   gs4_example("formulas-and-formats"),
+#'   cell_data = "full",
+#'   discard_empty = FALSE
+#' )
 range_read_cells <- function(ss,
                              sheet = NULL,
                              range = NULL,

@@ -33,11 +33,11 @@ Reveals full metadata or just the names for the (work)sheets inside a
 (spread)Sheet.
 }
 \examples{
-if (gs4_has_token()) {
-  ss <- gs4_example("gapminder")
-  sheet_properties(ss)
-  sheet_names(ss)
-}
+\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ss <- gs4_example("gapminder")
+sheet_properties(ss)
+sheet_names(ss)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other worksheet functions: 

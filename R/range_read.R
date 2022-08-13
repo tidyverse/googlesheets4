@@ -72,21 +72,19 @@
 #' @return A [tibble][tibble::tibble-package]
 #' @export
 #'
-#' @examples
-#' if (gs4_has_token()) {
-#'   ss <- gs4_example("deaths")
-#'   read_sheet(ss, range = "A5:F15")
-#'   read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
-#'   read_sheet(ss, range = "arts_data", col_types = "ccilDD")
+#' @examplesIf gs4_has_token()
+#' ss <- gs4_example("deaths")
+#' read_sheet(ss, range = "A5:F15")
+#' read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
+#' read_sheet(ss, range = "arts_data", col_types = "ccilDD")
 #'
-#'   read_sheet(gs4_example("mini-gap"))
-#'   read_sheet(
-#'     gs4_example("mini-gap"),
-#'     sheet = "Europe",
-#'     range = "A:D",
-#'     col_types = "ccid"
-#'   )
-#' }
+#' read_sheet(gs4_example("mini-gap"))
+#' read_sheet(
+#'   gs4_example("mini-gap"),
+#'   sheet = "Europe",
+#'   range = "A:D",
+#'   col_types = "ccid"
+#' )
 range_read <- function(ss,
                        sheet = NULL,
                        range = NULL,
@@ -140,15 +138,13 @@ read_sheet <- range_read
 #'   whitespace trimming.
 #' @export
 #'
-#' @examples
-#' if (gs4_has_token()) {
-#'   df <- gs4_example("mini-gap") %>%
-#'     range_read_cells()
-#'   spread_sheet(df)
+#' @examplesIf gs4_has_token()
+#' df <- gs4_example("mini-gap") %>%
+#'   range_read_cells()
+#' spread_sheet(df)
 #'
-#'   # ^^ gets same result as ...
-#'   read_sheet(gs4_example("mini-gap"))
-#' }
+#' # ^^ gets same result as ...
+#' read_sheet(gs4_example("mini-gap"))
 spread_sheet <- function(df,
                          col_names = TRUE, col_types = NULL,
                          na = "", trim_ws = TRUE,

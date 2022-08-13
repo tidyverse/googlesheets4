@@ -97,39 +97,39 @@ and format are deleted.
 }
 
 \examples{
-if (gs4_has_token()) {
-  # create a Sheet with some initial, empty (work)sheets
-  (ss <- gs4_create("range-write-demo", sheets = c("alpha", "beta")))
+\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# create a Sheet with some initial, empty (work)sheets
+(ss <- gs4_create("range-write-demo", sheets = c("alpha", "beta")))
 
-  df <- data.frame(
-    x = 1:3,
-    y = letters[1:3]
-  )
+df <- data.frame(
+  x = 1:3,
+  y = letters[1:3]
+)
 
-  #  write df somewhere other than the "upper left corner"
-  range_write(ss, data = df, range = "D6")
+#  write df somewhere other than the "upper left corner"
+range_write(ss, data = df, range = "D6")
 
-  # view your magnificent creation in the browser
-  gs4_browse(ss)
+# view your magnificent creation in the browser
+gs4_browse(ss)
 
-  # send data of disparate types to a 1-row rectangle
-  dat <- tibble::tibble(
-    string = "string",
-    logical = TRUE,
-    datetime = Sys.time()
-  )
-  range_write(ss, data = dat, sheet = "beta", col_names = FALSE)
+# send data of disparate types to a 1-row rectangle
+dat <- tibble::tibble(
+  string = "string",
+  logical = TRUE,
+  datetime = Sys.time()
+)
+range_write(ss, data = dat, sheet = "beta", col_names = FALSE)
 
-  # send data of disparate types to a 1-column rectangle
-  dat <- tibble::tibble(
-    x = list(Sys.time(), FALSE, "string")
-  )
-  range_write(ss, data = dat, range = "beta!C5", col_names = FALSE)
+# send data of disparate types to a 1-column rectangle
+dat <- tibble::tibble(
+  x = list(Sys.time(), FALSE, "string")
+)
+range_write(ss, data = dat, range = "beta!C5", col_names = FALSE)
 
-  # clean up
-  gs4_find("range-write-demo") \%>\%
-    googledrive::drive_trash()
-}
+# clean up
+gs4_find("range-write-demo") \%>\%
+  googledrive::drive_trash()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 If sheet size needs to change, makes an \code{UpdateSheetPropertiesRequest}:

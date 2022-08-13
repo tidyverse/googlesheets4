@@ -48,10 +48,10 @@ currently configured OAuth app and API key, respectively.
 }
 }
 \examples{
-# see and store the current user-configured OAuth app (probaby `NULL`)
+# see and store the current user-configured OAuth app (probably `NULL`)
 (original_app <- gs4_oauth_app())
 
-# see and store the current user-configured API key (probaby `NULL`)
+# see and store the current user-configured API key (probably `NULL`)
 (original_api_key <- gs4_api_key())
 
 if (require(httr)) {

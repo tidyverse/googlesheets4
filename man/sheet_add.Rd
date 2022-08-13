@@ -37,36 +37,36 @@ Adds one or more (work)sheets to an existing (spread)Sheet. Note that sheet
 names must be unique.
 }
 \examples{
-if (gs4_has_token()) {
-  ss <- gs4_create("add-sheets-to-me")
+\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ss <- gs4_create("add-sheets-to-me")
 
-  # the only required argument is the target spreadsheet
-  ss \%>\% sheet_add()
+# the only required argument is the target spreadsheet
+ss \%>\% sheet_add()
 
-  # but you CAN specify sheet name and/or position
-  ss \%>\% sheet_add("apple", .after = 1)
-  ss \%>\% sheet_add("banana", .after = "apple")
+# but you CAN specify sheet name and/or position
+ss \%>\% sheet_add("apple", .after = 1)
+ss \%>\% sheet_add("banana", .after = "apple")
 
-  # add multiple sheets at once
-  ss \%>\% sheet_add(c("coconut", "dragonfruit"))
+# add multiple sheets at once
+ss \%>\% sheet_add(c("coconut", "dragonfruit"))
 
-  # keeners can even specify additional sheet properties
-  ss \%>\%
-    sheet_add(
-      sheet = "eggplant",
-      .before = 1,
-      gridProperties = list(
-        rowCount = 3, columnCount = 6, frozenRowCount = 1
-      )
+# keeners can even specify additional sheet properties
+ss \%>\%
+  sheet_add(
+    sheet = "eggplant",
+    .before = 1,
+    gridProperties = list(
+      rowCount = 3, columnCount = 6, frozenRowCount = 1
     )
+  )
 
-  # get an overview of the sheets
-  sheet_properties(ss)
+# get an overview of the sheets
+sheet_properties(ss)
 
-  # clean up
-  gs4_find("add-sheets-to-me") \%>\%
-    googledrive::drive_trash()
-}
+# clean up
+gs4_find("add-sheets-to-me") \%>\%
+  googledrive::drive_trash()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Makes a batch of \code{AddSheetRequest}s (one per sheet):

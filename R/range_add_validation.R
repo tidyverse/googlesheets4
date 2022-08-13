@@ -28,53 +28,51 @@
 #' @keywords internal
 #' @noRd
 #'
-#' @examples
-#' if (gs4_has_token()) {
-#'   # create a data frame to use as initial data
-#'   df <- data.frame(
-#'     id = 1:3,
-#'     "Hungry?" = NA,
-#'     ice_cream = NA,
-#'     check.names = FALSE
-#'   )
+#' @examplesIf gs4_has_token()
+#' # create a data frame to use as initial data
+#' df <- data.frame(
+#'   id = 1:3,
+#'   "Hungry?" = NA,
+#'   ice_cream = NA,
+#'   check.names = FALSE
+#' )
 #'
-#'   # create Sheet
-#'   ss <- gs4_create("range-add-validation-demo", sheets = list(df))
+#' # create Sheet
+#' ss <- gs4_create("range-add-validation-demo", sheets = list(df))
 #'
-#'   # create a column that presents as a basic TRUE/FALSE checkbox
-#'   rule_checkbox <- googlesheets4:::new(
-#'     "DataValidationRule",
-#'     condition = googlesheets4:::new_BooleanCondition(type = "BOOLEAN"),
-#'     inputMessage = "Please let us know if you are hungry.",
-#'     strict = TRUE,
-#'     showCustomUi = TRUE
-#'   )
-#'   googlesheets4:::range_add_validation(
-#'     ss,
-#'     range = "Sheet1!B2:B", rule = rule_checkbox
-#'   )
+#' # create a column that presents as a basic TRUE/FALSE checkbox
+#' rule_checkbox <- googlesheets4:::new(
+#'   "DataValidationRule",
+#'   condition = googlesheets4:::new_BooleanCondition(type = "BOOLEAN"),
+#'   inputMessage = "Please let us know if you are hungry.",
+#'   strict = TRUE,
+#'   showCustomUi = TRUE
+#' )
+#' googlesheets4:::range_add_validation(
+#'   ss,
+#'   range = "Sheet1!B2:B", rule = rule_checkbox
+#' )
 #'
-#'   # create a column that presents as a dropdown list
-#'   rule_dropdown_list <- googlesheets4:::new(
-#'     "DataValidationRule",
-#'     condition = googlesheets4:::new_BooleanCondition(
-#'       type = "ONE_OF_LIST", values = c("vanilla", "chocolate", "strawberry")
-#'     ),
-#'     inputMessage = "Which ice cream flavor do you want?",
-#'     strict = TRUE,
-#'     showCustomUi = TRUE
-#'   )
-#'   googlesheets4:::range_add_validation(
-#'     ss,
-#'     range = "Sheet1!C2:C", rule = rule_dropdown_list
-#'   )
+#' # create a column that presents as a dropdown list
+#' rule_dropdown_list <- googlesheets4:::new(
+#'   "DataValidationRule",
+#'   condition = googlesheets4:::new_BooleanCondition(
+#'     type = "ONE_OF_LIST", values = c("vanilla", "chocolate", "strawberry")
+#'   ),
+#'   inputMessage = "Which ice cream flavor do you want?",
+#'   strict = TRUE,
+#'   showCustomUi = TRUE
+#' )
+#' googlesheets4:::range_add_validation(
+#'   ss,
+#'   range = "Sheet1!C2:C", rule = rule_dropdown_list
+#' )
 #'
-#'   read_sheet(ss)
+#' read_sheet(ss)
 #'
-#'   # clean up
-#'   gs4_find("range-add-validation-demo") %>%
-#'     googledrive::drive_trash()
-#' }
+#' # clean up
+#' gs4_find("range-add-validation-demo") %>%
+#'   googledrive::drive_trash()
 range_add_validation <- function(ss,
                                  sheet = NULL,
                                  range = NULL,

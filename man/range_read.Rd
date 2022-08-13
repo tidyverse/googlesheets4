@@ -151,18 +151,18 @@ its discovered type.
 }
 
 \examples{
-if (gs4_has_token()) {
-  ss <- gs4_example("deaths")
-  read_sheet(ss, range = "A5:F15")
-  read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
-  read_sheet(ss, range = "arts_data", col_types = "ccilDD")
+\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ss <- gs4_example("deaths")
+read_sheet(ss, range = "A5:F15")
+read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
+read_sheet(ss, range = "arts_data", col_types = "ccilDD")
 
-  read_sheet(gs4_example("mini-gap"))
-  read_sheet(
-    gs4_example("mini-gap"),
-    sheet = "Europe",
-    range = "A:D",
-    col_types = "ccid"
-  )
-}
+read_sheet(gs4_example("mini-gap"))
+read_sheet(
+  gs4_example("mini-gap"),
+  sheet = "Europe",
+  range = "A:D",
+  col_types = "ccid"
+)
+\dontshow{\}) # examplesIf}
 }

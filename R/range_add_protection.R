@@ -26,85 +26,83 @@
 #' @keywords internal
 #' @noRd
 #'
-#' @examples
-#' if (gs4_has_token()) {
-#'   # create a data frame to use as initial data
-#'   dat <- gs4_fodder(3)
+#' @examplesIf gs4_has_token()
+#' # create a data frame to use as initial data
+#' dat <- gs4_fodder(3)
 #'
-#'   # create Sheet, add a couple more sheets
-#'   ss <- gs4_create("range-add-protection-example", sheets = dat)
-#'   sheet_write(head(chickwts), ss, sheet = "chickwts")
-#'   sheet_write(head(mtcars), ss, sheet = "mtcars")
-#'   sheet_write(ToothGrowth, ss, sheet = "ToothGrowth")
+#' # create Sheet, add a couple more sheets
+#' ss <- gs4_create("range-add-protection-example", sheets = dat)
+#' sheet_write(head(chickwts), ss, sheet = "chickwts")
+#' sheet_write(head(mtcars), ss, sheet = "mtcars")
+#' sheet_write(ToothGrowth, ss, sheet = "ToothGrowth")
 #'
-#'   # add myself and get it open in the browser
-#'   gs4_share(ss, type = "user", emailAddress = "jenny@rstudio.com", role = "writer")
-#'   gs4_browse(ss)
+#' # add myself and get it open in the browser
+#' gs4_share(ss, type = "user", emailAddress = "jenny@rstudio.com", role = "writer")
+#' gs4_browse(ss)
 #'
-#'   # protect a whole sheet
-#'   ss %>%
-#'     range_add_protection(sheet = "dat", description = "whole sheet")
+#' # protect a whole sheet
+#' ss %>%
+#'   range_add_protection(sheet = "dat", description = "whole sheet")
 #'
-#'   # create a named range, then protect it
-#'   ss %>%
-#'     range_add_named("feed", sheet = "chickwts", range = "B:B") %>%
-#'     range_add_protection(range = "feed", description = "named range")
+#' # create a named range, then protect it
+#' ss %>%
+#'   range_add_named("feed", sheet = "chickwts", range = "B:B") %>%
+#'   range_add_protection(range = "feed", description = "named range")
 #'
-#'   # protect an arbitrary rectangle and add an editor
-#'   ss %>%
-#'     range_add_protection(
-#'       range = "mtcars!1:1",
-#'       description = "single row",
-#'       editors = new("Editors", users = "jenny@rstudio.com")
-#'     )
-#'
-#'   # check in on the protected ranges we've created
-#'   ss_info <- gs4_get(ss)
-#'   ss_info$protected_ranges
-#'
-#'   # protect a sheet EXCEPT certain columns that can be edited
-#'   unprotect_this <- as_range_spec(
-#'     "C:C",
-#'     sheet = "ToothGrowth",
-#'     sheets_df = ss_info$sheets, nr_df = ss_info$named_ranges
-#'   )
-#'   unprotect_range <- as_GridRange(unprotect_this)
-#'   ss %>%
-#'     range_add_protection(
-#'       sheet = "ToothGrowth",
-#'       description = "sheet MINUS some cols",
-#'       unprotectedRanges = unprotect_range
-#'     )
-#'
-#'   # look at the editors for our protected ranges
-#'   ss_info <- gs4_get(ss)
-#'   ss_info$protected_ranges
-#'   ss_info$protected_ranges$editors
-#'
-#'   # add an editor to a protected range
-#'   id <- ss_info$protected_ranges$protected_range_id[[1]]
-#'   range_update_protection(
-#'     ss,
-#'     protectedRangeId = id,
+#' # protect an arbitrary rectangle and add an editor
+#' ss %>%
+#'   range_add_protection(
+#'     range = "mtcars!1:1",
+#'     description = "single row",
 #'     editors = new("Editors", users = "jenny@rstudio.com")
 #'   )
 #'
-#'   # confirm the editor change happened
-#'   ss_info <- gs4_get(ss)
-#'   ss_info$protected_ranges$editors
+#' # check in on the protected ranges we've created
+#' ss_info <- gs4_get(ss)
+#' ss_info$protected_ranges
 #'
-#'   # delete protections from a range
-#'   id <- ss_info$protected_ranges$protected_range_id[[3]]
-#'   range_delete_protection(ss, id = id)
+#' # protect a sheet EXCEPT certain columns that can be edited
+#' unprotect_this <- as_range_spec(
+#'   "C:C",
+#'   sheet = "ToothGrowth",
+#'   sheets_df = ss_info$sheets, nr_df = ss_info$named_ranges
+#' )
+#' unprotect_range <- as_GridRange(unprotect_this)
+#' ss %>%
+#'   range_add_protection(
+#'     sheet = "ToothGrowth",
+#'     description = "sheet MINUS some cols",
+#'     unprotectedRanges = unprotect_range
+#'   )
 #'
-#'   # confirm the deletion happened
-#'   ss_info <- gs4_get(ss)
-#'   ss_info$protected_ranges
+#' # look at the editors for our protected ranges
+#' ss_info <- gs4_get(ss)
+#' ss_info$protected_ranges
+#' ss_info$protected_ranges$editors
 #'
-#'   # clean up
-#'   gs4_find("range-add-protection-example") %>%
-#'     googledrive::drive_trash()
-#' }
+#' # add an editor to a protected range
+#' id <- ss_info$protected_ranges$protected_range_id[[1]]
+#' range_update_protection(
+#'   ss,
+#'   protectedRangeId = id,
+#'   editors = new("Editors", users = "jenny@rstudio.com")
+#' )
+#'
+#' # confirm the editor change happened
+#' ss_info <- gs4_get(ss)
+#' ss_info$protected_ranges$editors
+#'
+#' # delete protections from a range
+#' id <- ss_info$protected_ranges$protected_range_id[[3]]
+#' range_delete_protection(ss, id = id)
+#'
+#' # confirm the deletion happened
+#' ss_info <- gs4_get(ss)
+#' ss_info$protected_ranges
+#'
+#' # clean up
+#' gs4_find("range-add-protection-example") %>%
+#'   googledrive::drive_trash()
 range_add_protection <- function(ss,
                                  sheet = NULL,
                                  range = NULL, ...) {

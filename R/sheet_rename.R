@@ -15,22 +15,20 @@
 #' @seealso Makes an `UpdateSheetPropertiesRequest`:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest>
 #'
-#' @examples
-#' if (gs4_has_token()) {
-#'   ss <- gs4_create(
-#'     "sheet-rename-demo",
-#'     sheets = list(cars = head(cars), chickwts = head(chickwts))
-#'   )
-#'   sheet_names(ss)
+#' @examplesIf gs4_has_token()
+#' ss <- gs4_create(
+#'   "sheet-rename-demo",
+#'   sheets = list(cars = head(cars), chickwts = head(chickwts))
+#' )
+#' sheet_names(ss)
 #'
-#'   ss %>%
-#'     sheet_rename(1, new_name = "automobiles") %>%
-#'     sheet_rename("chickwts", new_name = "poultry")
+#' ss %>%
+#'   sheet_rename(1, new_name = "automobiles") %>%
+#'   sheet_rename("chickwts", new_name = "poultry")
 #'
-#'   # clean up
-#'   gs4_find("sheet-rename-demo") %>%
-#'     googledrive::drive_trash()
-#' }
+#' # clean up
+#' gs4_find("sheet-rename-demo") %>%
+#'   googledrive::drive_trash()
 sheet_rename <- function(ss,
                          sheet = NULL,
                          new_name) {

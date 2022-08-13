@@ -12,21 +12,19 @@
 #'
 #' @template ss-return
 #' @keywords internal
-#' @examples
-#' if (gs4_has_token()) {
-#'   dat <- data.frame(x = 1:3, y = letters[1:3])
-#'   ss <- gs4_create("range-add-named-demo", sheets = list(alpha = dat))
+#' @examplesIf gs4_has_token()
+#' dat <- data.frame(x = 1:3, y = letters[1:3])
+#' ss <- gs4_create("range-add-named-demo", sheets = list(alpha = dat))
 #'
-#'   ss %>%
-#'     range_add_named("two_rows", sheet = "alpha", range = "A2:B3")
+#' ss %>%
+#'   range_add_named("two_rows", sheet = "alpha", range = "A2:B3")
 #'
-#'   # notice the 'two_rows' named range reported here
-#'   ss
+#' # notice the 'two_rows' named range reported here
+#' ss
 #'
-#'   # clean up
-#'   gs4_find("range-add-named-demo") %>%
-#'     googledrive::drive_trash()
-#' }
+#' # clean up
+#' gs4_find("range-add-named-demo") %>%
+#'   googledrive::drive_trash()
 range_add_named <- function(ss,
                             name,
                             sheet = NULL,

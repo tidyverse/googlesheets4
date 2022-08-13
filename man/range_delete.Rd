@@ -51,26 +51,26 @@ are several related tasks that are implemented by other functions:
 }
 }
 \examples{
-if (gs4_has_token()) {
-  # create a data frame to use as initial data
-  df <- gs4_fodder(10)
+\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# create a data frame to use as initial data
+df <- gs4_fodder(10)
 
-  # create Sheet
-  ss <- gs4_create("range-delete-example", sheets = list(df))
+# create Sheet
+ss <- gs4_create("range-delete-example", sheets = list(df))
 
-  # delete some rows
-  range_delete(ss, range = "2:4")
+# delete some rows
+range_delete(ss, range = "2:4")
 
-  # delete a column
-  range_delete(ss, range = "C")
+# delete a column
+range_delete(ss, range = "C")
 
-  # delete a rectangle and specify how to shift remaining cells
-  range_delete(ss, range = "B3:F4", shift = "left")
+# delete a rectangle and specify how to shift remaining cells
+range_delete(ss, range = "B3:F4", shift = "left")
 
-  # clean up
-  gs4_find("range-delete-example") \%>\%
-    googledrive::drive_trash()
-}
+# clean up
+gs4_find("range-delete-example") \%>\%
+  googledrive::drive_trash()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Makes a \code{DeleteRangeRequest}:

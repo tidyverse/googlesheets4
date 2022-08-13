@@ -100,22 +100,22 @@ For details on the many ways to find a token, see
 Read more about gargle options, see \link[gargle:gargle_options]{gargle::gargle_options}.
 }
 \examples{
-if (interactive()) {
-  # load/refresh existing credentials, if available
-  # otherwise, go to browser for authentication and authorization
-  gs4_auth()
+\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# load/refresh existing credentials, if available
+# otherwise, go to browser for authentication and authorization
+gs4_auth()
 
-  # force use of a token associated with a specific email
-  gs4_auth(email = "jenny@example.com")
+# force use of a token associated with a specific email
+gs4_auth(email = "jenny@example.com")
 
-  # use a 'read only' scope, so it's impossible to edit or delete Sheets
-  gs4_auth(
-    scopes = "https://www.googleapis.com/auth/spreadsheets.readonly"
-  )
+# use a 'read only' scope, so it's impossible to edit or delete Sheets
+gs4_auth(
+  scopes = "https://www.googleapis.com/auth/spreadsheets.readonly"
+)
 
-  # use a service account token
-  gs4_auth(path = "foofy-83ee9e7c9c48.json")
-}
+# use a service account token
+gs4_auth(path = "foofy-83ee9e7c9c48.json")
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other auth functions: 

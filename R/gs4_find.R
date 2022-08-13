@@ -15,20 +15,18 @@
 #' @inherit googledrive::drive_find return
 #' @export
 #'
-#' @examples
-#' if (gs4_has_token()) {
-#'   # see all your Sheets
-#'   gs4_find()
+#' @examplesIf gs4_has_token()
+#' # see all your Sheets
+#' gs4_find()
 #'
-#'   # see 5 Sheets, prioritized by creation time
-#'   x <- gs4_find(order_by = "createdTime desc", n_max = 5)
-#'   x
+#' # see 5 Sheets, prioritized by creation time
+#' x <- gs4_find(order_by = "createdTime desc", n_max = 5)
+#' x
 #'
-#'   # hoist the creation date, using other packages in the tidyverse
-#'   # x %>%
-#'   #   tidyr::hoist(drive_resource, created_on = "createdTime") %>%
-#'   #   dplyr::mutate(created_on = as.Date(created_on))
-#' }
+#' # hoist the creation date, using other packages in the tidyverse
+#' # x %>%
+#' #   tidyr::hoist(drive_resource, created_on = "createdTime") %>%
+#' #   dplyr::mutate(created_on = as.Date(created_on))
 gs4_find <- function(...) {
   check_gs4_email_is_drive_email()
   googledrive::drive_find(..., type = "spreadsheet")

@@ -14,34 +14,32 @@
 #' @seealso Makes an `AppendCellsRequest`:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AppendCellsRequest>
 #'
-#' @examples
-#' if (gs4_has_token()) {
-#'   # we will recreate the table of "other" deaths from this example Sheet
-#'   (deaths <- gs4_example("deaths") %>%
-#'     range_read(range = "other_data", col_types = "????DD"))
+#' @examplesIf gs4_has_token()
+#' # we will recreate the table of "other" deaths from this example Sheet
+#' (deaths <- gs4_example("deaths") %>%
+#'   range_read(range = "other_data", col_types = "????DD"))
 #'
-#'   # split the data into 3 pieces, which we will send separately
-#'   deaths_one   <- deaths[ 1:5, ]
-#'   deaths_two   <- deaths[   6, ]
-#'   deaths_three <- deaths[7:10, ]
+#' # split the data into 3 pieces, which we will send separately
+#' deaths_one <- deaths[1:5, ]
+#' deaths_two <- deaths[6, ]
+#' deaths_three <- deaths[7:10, ]
 #'
-#'   # create a Sheet and send the first chunk of data
-#'   ss <- gs4_create("sheet-append-demo", sheets = list(deaths = deaths_one))
+#' # create a Sheet and send the first chunk of data
+#' ss <- gs4_create("sheet-append-demo", sheets = list(deaths = deaths_one))
 #'
-#'   # append a single row
-#'   ss %>% sheet_append(deaths_two)
+#' # append a single row
+#' ss %>% sheet_append(deaths_two)
 #'
-#'   # append remaining rows
-#'   ss %>% sheet_append(deaths_three)
+#' # append remaining rows
+#' ss %>% sheet_append(deaths_three)
 #'
-#'   # read and check against the original
-#'   deaths_replica <- range_read(ss, col_types = "????DD")
-#'   identical(deaths, deaths_replica)
+#' # read and check against the original
+#' deaths_replica <- range_read(ss, col_types = "????DD")
+#' identical(deaths, deaths_replica)
 #'
-#'   # clean up
-#'   gs4_find("sheet-append-demo") %>%
-#'     googledrive::drive_trash()
-#' }
+#' # clean up
+#' gs4_find("sheet-append-demo") %>%
+#'   googledrive::drive_trash()
 sheet_append <- function(ss, data, sheet = 1) {
   check_data_frame(data)
   ssid <- as_sheets_id(ss)

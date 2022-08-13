@@ -22,17 +22,17 @@ function will emit an informational message if you are currently logged in
 with both googlesheets4 and googledrive, but as different users.
 }
 \examples{
-if (gs4_has_token()) {
-  # see all your Sheets
-  gs4_find()
+\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# see all your Sheets
+gs4_find()
 
-  # see 5 Sheets, prioritized by creation time
-  x <- gs4_find(order_by = "createdTime desc", n_max = 5)
-  x
+# see 5 Sheets, prioritized by creation time
+x <- gs4_find(order_by = "createdTime desc", n_max = 5)
+x
 
-  # hoist the creation date, using other packages in the tidyverse
-  # x \%>\%
-  #   tidyr::hoist(drive_resource, created_on = "createdTime") \%>\%
-  #   dplyr::mutate(created_on = as.Date(created_on))
-}
+# hoist the creation date, using other packages in the tidyverse
+# x \%>\%
+#   tidyr::hoist(drive_resource, created_on = "createdTime") \%>\%
+#   dplyr::mutate(created_on = as.Date(created_on))
+\dontshow{\}) # examplesIf}
 }

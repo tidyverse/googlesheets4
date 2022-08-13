@@ -20,14 +20,14 @@ If auth has been deactivated via \code{\link[=gs4_deauth]{gs4_deauth()}}, \code{
 returns \code{NULL}.
 }
 \examples{
-if (gs4_has_token()) {
-  req <- request_generate(
-    "sheets.spreadsheets.get",
-    list(spreadsheetId = "abc"),
-    token = gs4_token()
-  )
-  req
-}
+\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+req <- request_generate(
+  "sheets.spreadsheets.get",
+  list(spreadsheetId = "abc"),
+  token = gs4_token()
+)
+req
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other low-level API functions: 

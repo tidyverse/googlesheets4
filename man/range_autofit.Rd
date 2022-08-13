@@ -40,35 +40,35 @@ from the current cell contents. This only affects the appearance of a sheet
 in the browser and doesn't affect its values or dimensions in any way.
 }
 \examples{
-if (gs4_has_token()) {
-  dat <- tibble::tibble(
-    fruit = c("date", "lime", "pear", "plum")
-  )
+\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+dat <- tibble::tibble(
+  fruit = c("date", "lime", "pear", "plum")
+)
 
-  ss <- gs4_create("range-autofit-demo", sheets = dat)
-  ss
+ss <- gs4_create("range-autofit-demo", sheets = dat)
+ss
 
-  # open in the browser
-  gs4_browse(ss)
+# open in the browser
+gs4_browse(ss)
 
-  # shrink column A to fit the short fruit names
-  range_autofit(ss)
-  # in the browser, notice how the column width shrank
+# shrink column A to fit the short fruit names
+range_autofit(ss)
+# in the browser, notice how the column width shrank
 
-  # send some longer fruit names
-  dat2 <- tibble::tibble(
-    fruit = c("cucumber", "honeydew")
-  )
-  ss \%>\% sheet_append(dat2)
-  # in the browser, see that column A is now too narrow to show the data
+# send some longer fruit names
+dat2 <- tibble::tibble(
+  fruit = c("cucumber", "honeydew")
+)
+ss \%>\% sheet_append(dat2)
+# in the browser, see that column A is now too narrow to show the data
 
-  range_autofit(ss)
-  # in the browser, see the column A reveals all the data now
+range_autofit(ss)
+# in the browser, see the column A reveals all the data now
 
-  # clean up
-  gs4_find("range-autofit-demo") \%>\%
-    googledrive::drive_trash()
-}
+# clean up
+gs4_find("range-autofit-demo") \%>\%
+  googledrive::drive_trash()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Makes an \code{AutoResizeDimensionsRequest}:

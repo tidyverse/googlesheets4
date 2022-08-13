@@ -18,14 +18,14 @@ via \code{\link[=gs4_auth_configure]{gs4_auth_configure()}} and retrieve that ke
 In the absence of a user-configured key, a built-in default key is used.
 }
 \examples{
-if (interactive()) {
-  gs4_deauth()
-  gs4_user()
+\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+gs4_deauth()
+gs4_user()
 
-  # get metadata on the public 'deaths' spreadsheet
-  gs4_example("deaths") \%>\%
-    gs4_get()
-}
+# get metadata on the public 'deaths' spreadsheet
+gs4_example("deaths") \%>\%
+  gs4_get()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other auth functions: 

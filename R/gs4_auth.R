@@ -23,23 +23,21 @@ gargle_lookup_table <- list(
 #' @family auth functions
 #' @export
 #'
-#' @examples
-#' if (interactive()) {
-#'   # load/refresh existing credentials, if available
-#'   # otherwise, go to browser for authentication and authorization
-#'   gs4_auth()
+#' @examplesIf rlang::is_interactive()
+#' # load/refresh existing credentials, if available
+#' # otherwise, go to browser for authentication and authorization
+#' gs4_auth()
 #'
-#'   # force use of a token associated with a specific email
-#'   gs4_auth(email = "jenny@example.com")
+#' # force use of a token associated with a specific email
+#' gs4_auth(email = "jenny@example.com")
 #'
-#'   # use a 'read only' scope, so it's impossible to edit or delete Sheets
-#'   gs4_auth(
-#'     scopes = "https://www.googleapis.com/auth/spreadsheets.readonly"
-#'   )
+#' # use a 'read only' scope, so it's impossible to edit or delete Sheets
+#' gs4_auth(
+#'   scopes = "https://www.googleapis.com/auth/spreadsheets.readonly"
+#' )
 #'
-#'   # use a service account token
-#'   gs4_auth(path = "foofy-83ee9e7c9c48.json")
-#' }
+#' # use a service account token
+#' gs4_auth(path = "foofy-83ee9e7c9c48.json")
 gs4_auth <- function(email = gargle::gargle_oauth_email(),
                      path = NULL,
                      scopes = "https://www.googleapis.com/auth/spreadsheets",
@@ -84,15 +82,13 @@ gs4_auth <- function(email = gargle::gargle_oauth_email(),
 #'
 #' @family auth functions
 #' @export
-#' @examples
-#' if (interactive()) {
-#'   gs4_deauth()
-#'   gs4_user()
+#' @examplesIf rlang::is_interactive()
+#' gs4_deauth()
+#' gs4_user()
 #'
-#'   # get metadata on the public 'deaths' spreadsheet
-#'   gs4_example("deaths") %>%
-#'     gs4_get()
-#' }
+#' # get metadata on the public 'deaths' spreadsheet
+#' gs4_example("deaths") %>%
+#'   gs4_get()
 gs4_deauth <- function() {
   .auth$set_auth_active(FALSE)
   .auth$clear_cred()
@@ -106,15 +102,13 @@ gs4_deauth <- function() {
 #'
 #' @family low-level API functions
 #' @export
-#' @examples
-#' if (gs4_has_token()) {
-#'   req <- request_generate(
-#'     "sheets.spreadsheets.get",
-#'     list(spreadsheetId = "abc"),
-#'     token = gs4_token()
-#'   )
-#'   req
-#' }
+#' @examplesIf gs4_has_token()
+#' req <- request_generate(
+#'   "sheets.spreadsheets.get",
+#'   list(spreadsheetId = "abc"),
+#'   token = gs4_token()
+#' )
+#' req
 gs4_token <- function() {
   if (isFALSE(.auth$auth_active)) {
     return(NULL)
@@ -148,10 +142,10 @@ gs4_has_token <- function() {
 #' @family auth functions
 #' @export
 #' @examples
-#' # see and store the current user-configured OAuth app (probaby `NULL`)
+#' # see and store the current user-configured OAuth app (probably `NULL`)
 #' (original_app <- gs4_oauth_app())
 #'
-#' # see and store the current user-configured API key (probaby `NULL`)
+#' # see and store the current user-configured API key (probably `NULL`)
 #' (original_api_key <- gs4_api_key())
 #'
 #' if (require(httr)) {

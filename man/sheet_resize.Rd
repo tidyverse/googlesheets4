@@ -36,35 +36,35 @@ The input \code{ss}, as an instance of \code{\link{sheets_id}}
 Changes the number of rows and/or columns in a (work)sheet.
 }
 \examples{
-if (gs4_has_token()) {
-  # create a Sheet with the default initial worksheet
-  (ss <- gs4_create("sheet-resize-demo"))
+\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# create a Sheet with the default initial worksheet
+(ss <- gs4_create("sheet-resize-demo"))
 
-  # see (work)sheet dims
-  sheet_properties(ss)
+# see (work)sheet dims
+sheet_properties(ss)
 
-  # no resize occurs
-  sheet_resize(ss, nrow = 2, ncol = 6)
+# no resize occurs
+sheet_resize(ss, nrow = 2, ncol = 6)
 
-  # reduce sheet size
-  sheet_resize(ss, nrow = 5, ncol = 7, exact = TRUE)
+# reduce sheet size
+sheet_resize(ss, nrow = 5, ncol = 7, exact = TRUE)
 
-  # add rows
-  sheet_resize(ss, nrow = 7)
+# add rows
+sheet_resize(ss, nrow = 7)
 
-  # add columns
-  sheet_resize(ss, ncol = 10)
+# add columns
+sheet_resize(ss, ncol = 10)
 
-  # add rows and columns
-  sheet_resize(ss, nrow = 9, ncol = 12)
+# add rows and columns
+sheet_resize(ss, nrow = 9, ncol = 12)
 
-  # re-inspect (work)sheet dims
-  sheet_properties(ss)
+# re-inspect (work)sheet dims
+sheet_properties(ss)
 
-  # clean up
-  gs4_find("sheet-resize-demo") \%>\%
-    googledrive::drive_trash()
-}
+# clean up
+gs4_find("sheet-resize-demo") \%>\%
+  googledrive::drive_trash()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Makes an \code{UpdateSheetPropertiesRequest}:

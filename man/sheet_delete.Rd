@@ -28,25 +28,25 @@ The input \code{ss}, as an instance of \code{\link{sheets_id}}
 Deletes one or more (work)sheets from a (spread)Sheet.
 }
 \examples{
-if (gs4_has_token()) {
-  ss <- gs4_create("delete-sheets-from-me")
-  sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
+\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+ss <- gs4_create("delete-sheets-from-me")
+sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 
-  # get an overview of the sheets
-  sheet_properties(ss)
+# get an overview of the sheets
+sheet_properties(ss)
 
-  # delete sheets
-  sheet_delete(ss, 1)
-  sheet_delete(ss, "gamma")
-  sheet_delete(ss, list("alpha", 2))
+# delete sheets
+sheet_delete(ss, 1)
+sheet_delete(ss, "gamma")
+sheet_delete(ss, list("alpha", 2))
 
-  # get an overview of the sheets
-  sheet_properties(ss)
+# get an overview of the sheets
+sheet_properties(ss)
 
-  # clean up
-  gs4_find("delete-sheets-from-me") \%>\%
-    googledrive::drive_trash()
-}
+# clean up
+gs4_find("delete-sheets-from-me") \%>\%
+  googledrive::drive_trash()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Makes an \code{DeleteSheetsRequest}:

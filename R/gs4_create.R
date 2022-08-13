@@ -26,38 +26,36 @@
 #' @export
 #' @family write functions
 #'
-#' @examples
-#' if (gs4_has_token()) {
-#'   gs4_create("gs4-create-demo-1")
+#' @examplesIf gs4_has_token()
+#' gs4_create("gs4-create-demo-1")
 #'
-#'   gs4_create("gs4-create-demo-2", locale = "en_CA")
+#' gs4_create("gs4-create-demo-2", locale = "en_CA")
 #'
-#'   gs4_create(
-#'     "gs4-create-demo-3",
-#'     locale = "fr_FR",
-#'     timeZone = "Europe/Paris"
-#'   )
+#' gs4_create(
+#'   "gs4-create-demo-3",
+#'   locale = "fr_FR",
+#'   timeZone = "Europe/Paris"
+#' )
 #'
-#'   gs4_create(
-#'     "gs4-create-demo-4",
-#'     sheets = c("alpha", "beta")
-#'   )
+#' gs4_create(
+#'   "gs4-create-demo-4",
+#'   sheets = c("alpha", "beta")
+#' )
 #'
-#'   my_data <- data.frame(x = 1)
-#'   gs4_create(
-#'     "gs4-create-demo-5",
-#'     sheets = my_data
-#'   )
+#' my_data <- data.frame(x = 1)
+#' gs4_create(
+#'   "gs4-create-demo-5",
+#'   sheets = my_data
+#' )
 #'
-#'   gs4_create(
-#'     "gs4-create-demo-6",
-#'     sheets = list(chickwts = head(chickwts), mtcars = head(mtcars))
-#'   )
+#' gs4_create(
+#'   "gs4-create-demo-6",
+#'   sheets = list(chickwts = head(chickwts), mtcars = head(mtcars))
+#' )
 #'
-#'   # clean up
-#'   gs4_find("gs4-create-demo") %>%
-#'     googledrive::drive_trash()
-#' }
+#' # Clean up
+#' gs4_find("gs4-create-demo") %>%
+#'   googledrive::drive_trash()
 gs4_create <- function(name = gs4_random(), ..., sheets = NULL) {
   sheets       <- enlist_sheets(enquo(sheets))
   sheets_given <- !is.null(sheets)

@@ -13,10 +13,8 @@
 #' @seealso Wraps the `spreadsheets.get` endpoint:
 #'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/get>
 #'
-#' @examples
-#' if (gs4_has_token()) {
-#'   gs4_get(gs4_example("mini-gap"))
-#' }
+#' @examplesIf gs4_has_token()
+#' gs4_get(gs4_example("mini-gap"))
 gs4_get <- function(ss) {
   resp <- gs4_get_impl_(as_sheets_id(ss))
   new_googlesheets4_spreadsheet(resp)

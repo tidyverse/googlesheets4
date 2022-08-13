@@ -27,37 +27,37 @@ Optionally, you can also provide names and/or data for the initial set of
 as described in \code{\link[=sheet_write]{sheet_write()}}.
 }
 \examples{
-if (gs4_has_token()) {
-  gs4_create("gs4-create-demo-1")
+\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+gs4_create("gs4-create-demo-1")
 
-  gs4_create("gs4-create-demo-2", locale = "en_CA")
+gs4_create("gs4-create-demo-2", locale = "en_CA")
 
-  gs4_create(
-    "gs4-create-demo-3",
-    locale = "fr_FR",
-    timeZone = "Europe/Paris"
-  )
+gs4_create(
+  "gs4-create-demo-3",
+  locale = "fr_FR",
+  timeZone = "Europe/Paris"
+)
 
-  gs4_create(
-    "gs4-create-demo-4",
-    sheets = c("alpha", "beta")
-  )
+gs4_create(
+  "gs4-create-demo-4",
+  sheets = c("alpha", "beta")
+)
 
-  my_data <- data.frame(x = 1)
-  gs4_create(
-    "gs4-create-demo-5",
-    sheets = my_data
-  )
+my_data <- data.frame(x = 1)
+gs4_create(
+  "gs4-create-demo-5",
+  sheets = my_data
+)
 
-  gs4_create(
-    "gs4-create-demo-6",
-    sheets = list(chickwts = head(chickwts), mtcars = head(mtcars))
-  )
+gs4_create(
+  "gs4-create-demo-6",
+  sheets = list(chickwts = head(chickwts), mtcars = head(mtcars))
+)
 
-  # clean up
-  gs4_find("gs4-create-demo") \%>\%
-    googledrive::drive_trash()
-}
+# Clean up
+gs4_find("gs4-create-demo") \%>\%
+  googledrive::drive_trash()
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Wraps the \code{spreadsheets.create} endpoint:

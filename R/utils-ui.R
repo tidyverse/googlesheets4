@@ -7,7 +7,7 @@ gs4_theme <- function() {
     span.range = list(color = "yellow", fmt = single_quote_weird_name),
     # since we're using color so much elsewhere, I think the standard bullet
     # should be "normal" color; matches what I do in googledrive
-    ".memo .memo-item-*" = list(
+    ".bullets .bullet-*" = list(
       "text-exdent" = 2,
       before = function(x) paste0(cli::symbol$bullet, " ")
     )
@@ -55,7 +55,8 @@ with_no_color <- function(code) {
 message <- function(...) {
   gs4_abort("
     Internal error: use the UI functions in {.pkg googlesheets4} \\
-    instead of {.fun message}")
+    instead of {.fun message}",
+    .internal = TRUE)
 }
 
 fr <- function(x) format(x, justify = "right")
@@ -118,7 +119,9 @@ gs4_bullets <- function(text, .envir = parent.frame()) {
     return(invisible())
   }
   cli::cli_div(theme = gs4_theme())
-  cli::cli_inform(message = text, .envir = .envir)
+  # TODO: fix this: when I switched from cli::cli_bullets() to
+  # cli::cli_inform(), my custom bullet styling was lost (suppressing colour)
+  cli::cli_bullets(text, .envir = .envir)
 }
 
 #' Error conditions for the googlesheets4 package
@@ -130,13 +133,18 @@ gs4_bullets <- function(text, .envir = parent.frame()) {
 #' @noRd
 NULL
 
-gs4_abort <- function(message, ..., class = NULL, .envir = parent.frame()) {
+gs4_abort <- function(message,
+                      ...,
+                      class = NULL,
+                      .envir = parent.frame(),
+                      call = caller_env()) {
   cli::cli_div(theme = gs4_theme())
   cli::cli_abort(
     message = message,
     ...,
     class = c(class, "googlesheets4_error"),
-    .envir = .envir
+    .envir = .envir,
+    call = call
   )
 }
 

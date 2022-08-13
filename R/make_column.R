@@ -49,7 +49,10 @@ gs4_parse <- function(x, ctype, ...) {
     COL_CELL      = as_cell,
     COL_LIST      = as_list,
     ## TODO: factor, duration
-    gs4_abort("Not a recognized column type: {.field {ctype}}")
+    gs4_abort(
+      "Not a recognized column type: {.field {ctype}}",
+      .internal = TRUE
+    )
   )
   if (inherits(x, "SHEETS_CELL")) {
     x <- list(x)

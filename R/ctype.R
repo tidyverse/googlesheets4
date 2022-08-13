@@ -165,10 +165,16 @@ infer_ctype <- function(cell, na = "", trim_ws = TRUE) {
       string = "CELL_TEXT",
       boolean = "CELL_LOGICAL",
       formula = {
-        warn("Internal warning: Cell has formula as effectiveValue. I thought impossible!")
+        cli::cli_warn("
+          Internal warning from googlesheets4: \\
+          Cell has formula as effectiveValue. \\
+          I thought this was impossible!")
         "CELL_TEXT"
       },
-      gs4_abort("Unhandled effective_type: {.field {effective_type}}")
+      gs4_abort(
+        "Unhandled effective_type: {.field {effective_type}}",
+        .internal = TRUE
+      )
     ))
   }
   # only numeric cells remain

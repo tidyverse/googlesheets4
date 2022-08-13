@@ -79,7 +79,10 @@ sheet_relocate <- function(ss,
   requests <- map(
     sheet,
     ~ make_UpdateSheetPropertiesRequest(
-      sheet = .x, .before = .before, .after = .after, sheets_df = x$sheets
+      sheet = .x,
+      .before = .before, .after = .after,
+      sheets_df = x$sheets,
+      call = quote(sheet_relocate())
     )
   )
   req <- request_generate(
@@ -97,9 +100,10 @@ sheet_relocate <- function(ss,
 
 make_UpdateSheetPropertiesRequest <- function(sheet,
                                               .before, .after,
-                                              sheets_df) {
-  s <- lookup_sheet(sheet, sheets_df = sheets_df)
-  index <- resolve_index(sheets_df, .before, .after)
+                                              sheets_df,
+                                              call = caller_env()) {
+  s <- lookup_sheet(sheet, sheets_df = sheets_df, call = call)
+  index <- resolve_index(sheets_df, .before, .after, call = call)
   sp <- new("SheetProperties", sheetId = s$id, index = index)
   update_req <- new(
     "UpdateSheetPropertiesRequest",

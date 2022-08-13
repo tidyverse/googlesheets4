@@ -119,7 +119,7 @@ force_cell_limits <- function(x) {
   x
 }
 
-check_only_one_dimension <- function(x) {
+check_only_one_dimension <- function(x, call = caller_env()) {
   limits <- x$cell_limits
 
   if (is.na(limits$ul[1]) && is.na(limits$lr[1])) {
@@ -129,8 +129,10 @@ check_only_one_dimension <- function(x) {
     return(invisible(x))
   }
 
-  gs4_abort("
-    The {.arg range} must target only columns or only rows, but not both.")
+  gs4_abort(
+    "The {.arg range} must target only columns or only rows, but not both.",
+    call = call
+  )
 }
 
 determine_dimension <- function(x) {

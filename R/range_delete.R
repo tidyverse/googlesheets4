@@ -116,7 +116,7 @@ range_delete <- function(ss,
   invisible(ssid)
 }
 
-determine_shift <- function(gr) {
+determine_shift <- function(gr, call = caller_env()) {
   stopifnot(inherits(gr, "googlesheets4_schema_GridRange"))
   bounded_on_bottom <- !is.null(gr$endRowIndex) && notNA(gr$endRowIndex)
   bounded_on_right <- !is.null(gr$endColumnIndex) && notNA(gr$endColumnIndex)
@@ -133,9 +133,12 @@ determine_shift <- function(gr) {
     return("COLUMNS")
   }
 
-  gs4_abort(c(
-    "{.arg range} must be bounded on the bottom and/or on the right.",
-    i = "Use {.fun sheet_delete} or {.fun sheet_resize} to delete or \\
-         resize a (work)sheet."
-  ))
+  gs4_abort(
+    c(
+      "{.arg range} must be bounded on the bottom and/or on the right.",
+      i = "Use {.fun sheet_delete} or {.fun sheet_resize} to delete or \\
+           resize a (work)sheet."
+    ),
+    call = call
+  )
 }

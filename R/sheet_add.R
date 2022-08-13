@@ -95,20 +95,23 @@ sheet_add_impl_ <- function(ssid,
   new_googlesheets4_spreadsheet(resp$updatedSpreadsheet)
 }
 
-resolve_index <- function(sheets_df, .before = NULL, .after = NULL) {
+resolve_index <- function(sheets_df,
+                          .before = NULL,
+                          .after = NULL,
+                          call = caller_env()) {
   if (is.null(.before) && is.null(.after)) {
     return(NULL)
   }
 
   if (is.null(.after)) {
-    s <- lookup_sheet(.before, sheets_df = sheets_df)
+    s <- lookup_sheet(.before, sheets_df = sheets_df, call = call)
     return(s$index)
   }
 
   if (is.numeric(.after)) {
     .after <- min(.after, nrow(sheets_df))
   }
-  s <- lookup_sheet(.after, sheets_df = sheets_df)
+  s <- lookup_sheet(.after, sheets_df = sheets_df, call = call)
   s$index + 1
 }
 

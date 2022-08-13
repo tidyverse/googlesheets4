@@ -35,13 +35,16 @@
 #'   googledrive::drive_trash()
 sheet_delete <- function(ss, sheet) {
   ssid <- as_sheets_id(ss)
-  walk(sheet, ~ check_sheet(.x, nm = "sheet"))
+  walk(sheet, ~ check_sheet(.x, arg = "sheet"))
 
   # retrieve spreadsheet metadata ----------------------------------------------
   x <- gs4_get(ssid)
 
   # capture sheet ids ----------------------------------------------------------
-  s <- map(sheet, ~ lookup_sheet(.x, sheets_df = x$sheets))
+  s <- map(
+    sheet,
+    ~ lookup_sheet(.x, sheets_df = x$sheets, call = quote(sheet_delete()))
+  )
   sheet_names <- map_chr(s, "name")
   n <- length(sheet_names)
   gs4_bullets(c(

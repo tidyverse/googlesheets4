@@ -1,7 +1,13 @@
-lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
-  maybe_sheet(sheet)
+lookup_sheet <- function(sheet = NULL,
+                         sheets_df,
+                         visible = NA,
+                         call = caller_env()) {
+  maybe_sheet(sheet, call = call)
   if (is.null(sheets_df)) {
-    gs4_abort("Can't look up, e.g., sheet name or id without sheet metadata.")
+    gs4_abort(
+      "Can't look up, e.g., sheet name or id without sheet metadata.",
+      call = call
+    )
   }
 
   if (isTRUE(visible)) {
@@ -24,7 +30,8 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
         # there is some usage where we throw this error, but it is OK
         # and we use tryCatch()
         # that's why we apply the sub-class
-        class = "googlesheets4_error_sheet_not_found"
+        class = "googlesheets4_error_sheet_not_found",
+        call = call
       )
     }
     return(as.list(sheets_df[m, ]))
@@ -33,10 +40,13 @@ lookup_sheet <- function(sheet = NULL, sheets_df, visible = NA) {
 
   m <- as.integer(sheet)
   if (!(m %in% seq_len(nrow(sheets_df)))) {
-    gs4_abort(c(
-      "There {?is/are} {nrow(sheets_df)} sheet{?s}:",
-      x = "Requested sheet number is out-of-bounds: {m}"
-    ))
+    gs4_abort(
+      c(
+        "There {?is/are} {nrow(sheets_df)} sheet{?s}:",
+        x = "Requested sheet number is out-of-bounds: {m}"
+      ),
+      call = call
+    )
   }
   as.list(sheets_df[m, ])
 }
@@ -60,23 +70,28 @@ lookup_sheet_name <- function(sheet, sheets_df) {
   s$name
 }
 
-check_sheet <- function(sheet, nm = deparse(substitute(sheet))) {
-  check_length_one(sheet, nm = nm)
+check_sheet <- function(sheet, arg = caller_arg(sheet), call = caller_env()) {
+  check_length_one(sheet, arg = arg, call = call)
   if (!is.character(sheet) && !is.numeric(sheet)) {
-    gs4_abort(c(
-      "{.arg {nm}} must be either {.cls character} (sheet name) or \\
-       {.cls numeric} (sheet number):",
-      x = "{.arg {nm}} has class {.cls {class(sheet)}}."
-    ))
+    gs4_abort(
+      c(
+        "{.arg {arg}} must be either {.cls character} (sheet name) or \\
+         {.cls numeric} (sheet number):",
+        x = "{.arg {arg}} has class {.cls {class(sheet)}}."
+      ),
+      call = call
+    )
   }
   sheet
 }
 
-maybe_sheet <- function(sheet = NULL, nm = deparse(substitute(sheet))) {
+maybe_sheet <- function(sheet = NULL,
+                        arg = caller_arg(sheet),
+                        call = caller_env()) {
   if (is.null(sheet)) {
     sheet
   } else {
-    check_sheet(sheet, nm = nm)
+    check_sheet(sheet, arg = arg, call = call)
   }
 }
 

@@ -189,12 +189,15 @@ limits_from_range <- function(x) {
   )
 }
 
-check_range <- function(range = NULL) {
+check_range <- function(range = NULL, call = caller_env()) {
   if (is.null(range) || inherits(range, "cell_limits") || is_string(range)) {
     return(range)
   }
-  gs4_abort("
-    {.arg range} must be {.code NULL}, a string, or a {.cls cell_limits} object.")
+  gs4_abort(
+    "{.arg range} must be {.code NULL}, a string, or a {.cls cell_limits} \\
+     object.",
+    call = call
+  )
 }
 
 ## the `...` are used to absorb extra variables when this is used inside pmap()

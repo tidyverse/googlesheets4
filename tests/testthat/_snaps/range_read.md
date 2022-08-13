@@ -1,42 +1,42 @@
 # col_names must be logical or character and have length
 
     Code
-      check_col_names(1:3)
+      wrapper_fun(1:3)
     Condition
-      Error in `check_character()`:
+      Error in `wrapper_fun()`:
       ! `col_names` must be <character>:
       x `col_names` has class <integer>.
 
 ---
 
     Code
-      check_col_names(factor("a"))
+      wrapper_fun(factor("a"))
     Condition
-      Error in `check_character()`:
+      Error in `wrapper_fun()`:
       ! `col_names` must be <character>:
       x `col_names` has class <factor>.
 
 ---
 
     Code
-      check_col_names(character())
+      wrapper_fun(character())
     Condition
-      Error in `check_has_length()`:
+      Error in `wrapper_fun()`:
       ! `col_names` must have length greater than zero.
 
 # logical col_names must be TRUE or FALSE
 
     Code
-      check_col_names(NA)
+      wrapper_fun(NA)
     Condition
-      Error in `check_bool()`:
+      Error in `wrapper_fun()`:
       ! `col_names` must be either `TRUE` or `FALSE`.
 
 ---
 
     Code
-      check_col_names(c(TRUE, FALSE))
+      wrapper_fun(c(TRUE, FALSE))
     Condition
-      Error in `check_bool()`:
+      Error in `wrapper_fun()`:
       ! `col_names` must be either `TRUE` or `FALSE`.
 

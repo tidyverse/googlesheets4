@@ -135,8 +135,10 @@ new_BooleanCondition <- function(type = "NOT_BLANK", values = NULL) {
     "DATE_BEFORE", "DATE_AFTER", "DATE_ON_OR_BEFORE", "DATE_ON_OR_AFTER"
   )
   if (type %in% needs_relative_date) {
-    gs4_abort("
-      {.field relativeDate} not yet supported as a {.code conditionValue}.")
+    gs4_abort(
+      "{.field relativeDate} not yet supported as a {.code conditionValue}.",
+      .internal = TRUE
+    )
   }
   patch(out, values = map(values, ~ list(userEnteredValue = as.character(.x))))
 }

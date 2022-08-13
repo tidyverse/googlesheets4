@@ -46,14 +46,16 @@ gs4_example <- function(matches) {
   )
 }
 
-many_sheets <- function(needle, haystack, adjective) {
+many_sheets <- function(needle, haystack, adjective, call = caller_env()) {
   out <- haystack
 
   if (!missing(needle)) {
-    check_string(needle)
+    check_string(needle, call = call)
     sel <- grepl(needle, names(out), ignore.case = TRUE)
     if (!any(sel)) {
-      gs4_abort("Can't find {adjective} Sheet that matches {.q {needle}}.")
+      gs4_abort(
+        "Can't find {adjective} Sheet that matches {.q {needle}}.",
+        call = call)
     }
     out <- as_id(out[sel])
   }
@@ -61,15 +63,23 @@ many_sheets <- function(needle, haystack, adjective) {
   out
 }
 
-one_sheet <- function(needle, haystack, adjective) {
-  check_string(needle)
-  out <- many_sheets(needle = needle, haystack = haystack, adjective = adjective)
+one_sheet <- function(needle, haystack, adjective, call = caller_env()) {
+  check_string(needle, call = call)
+  out <- many_sheets(
+    needle = needle,
+    haystack = haystack,
+    adjective = adjective,
+    call = call
+  )
   if (length(out) > 1) {
-    gs4_abort(c(
-      "Found multiple matching {adjective} Sheets:",
-      bulletize(gargle_map_cli(names(out), template = "{.s_sheet <<x>>}")),
-      i = "Make the {.arg matches} regular expression more specific."
-    ))
+    gs4_abort(
+      c(
+        "Found multiple matching {adjective} Sheets:",
+        bulletize(gargle_map_cli(names(out), template = "{.s_sheet <<x>>}")),
+        i = "Make the {.arg matches} regular expression more specific."
+      ),
+      call = call
+    )
   }
   as_sheets_id(out)
 }

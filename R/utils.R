@@ -13,93 +13,119 @@ is_integerish <- function(x) {
   floor(x) == x
 }
 
-check_data_frame <- function(x, nm = deparse(substitute(x))) {
+check_data_frame <- function(x, arg = caller_arg(x), call = caller_env()) {
   if (!is.data.frame(x)) {
-    gs4_abort(c(
-      "{.arg {nm}} must be a {.cls data.frame}:",
-      x = "{.arg {nm}} has class {.cls {class(x)}}."
-    ))
+    gs4_abort(
+      c(
+        "{.arg {arg}} must be a {.cls data.frame}:",
+        x = "{.arg {arg}} has class {.cls {class(x)}}."
+      ),
+      call = call
+    )
   }
   x
 }
 
-check_string <- function(x, nm = deparse(substitute(x))) {
-  check_character(x, nm = nm)
-  check_length_one(x, nm = nm)
+check_string <- function(x, arg = caller_arg(x), call = caller_env()) {
+  check_character(x, arg = arg, call = call)
+  check_length_one(x, arg = arg, call = call)
   x
 }
 
-maybe_string <- function(x, nm = deparse(substitute(x))) {
+maybe_string <- function(x, arg = caller_arg(x), call = caller_env()) {
   if (is.null(x)) {
     x
   } else {
-    check_string(x, nm = nm)
+    check_string(x, arg = arg, call = call)
   }
 }
 
-check_length_one <- function(x, nm = deparse(substitute(x))) {
+check_length_one <- function(x, arg = caller_arg(x), call = caller_env()) {
   if (length(x) != 1) {
-    gs4_abort("{.arg {nm}} must have length 1, not length {length(x)}.")
+    gs4_abort(
+      "{.arg {arg}} must have length 1, not length {length(x)}.",
+      call = call
+    )
   }
   x
 }
 
-check_has_length <- function(x, nm = deparse(substitute(x))) {
+check_has_length <- function(x, arg = caller_arg(x), call = caller_env()) {
   if (length(x) < 1) {
-    gs4_abort("{.arg {nm}} must have length greater than zero.")
+    gs4_abort(
+      "{.arg {arg}} must have length greater than zero.",
+      call = call
+    )
   }
   x
 }
 
-check_character <- function(x, nm = deparse(substitute(x))) {
+check_character <- function(x, arg = caller_arg(x), call = caller_env()) {
   if (!is.character(x)) {
-    gs4_abort(c(
-      "{.arg {nm}} must be {.cls character}:",
-      x = "{.arg {nm}} has class {.cls {class(x)}}."
-    ))
+    gs4_abort(
+      c(
+        "{.arg {arg}} must be {.cls character}:",
+        x = "{.arg {arg}} has class {.cls {class(x)}}."
+      ),
+      call = call
+    )
   }
   x
 }
 
-maybe_character <- function(x, nm = deparse(substitute(x))) {
+maybe_character <- function(x, arg = caller_arg(x), call = caller_env()) {
   if (is.null(x)) {
     x
   } else {
-    check_character(x, nm = nm)
+    check_character(x, arg = arg, call = call)
   }
 }
 
-check_non_negative_integer <- function(i, nm = deparse(substitute(i))) {
+check_non_negative_integer <- function(i,
+                                       arg = caller_arg(i),
+                                       call = caller_env()) {
   if (length(i) != 1 || !is.numeric(i) ||
     !is_integerish(i) || is.na(i) || i < 0) {
-    gs4_abort(c(
-      "{.arg {nm}} must be a positive integer:",
-      x = "{.arg {nm}} has class {.cls {class(i)}}."
-    ))
+    gs4_abort(
+      c(
+        "{.arg {arg}} must be a positive integer:",
+        x = "{.arg {arg}} has class {.cls {class(i)}}."
+      ),
+      call = call
+    )
   }
   i
 }
 
-maybe_non_negative_integer <- function(i, nm = deparse(substitute(i))) {
+maybe_non_negative_integer <- function(i,
+                                       arg = caller_arg(i),
+                                       call = caller_env()) {
   if (is.null(i)) {
     i
   } else {
-    check_non_negative_integer(i, nm = nm)
+    check_non_negative_integer(i, arg = arg, call = call)
   }
 }
 
-check_bool <- function(bool, nm = deparse(substitute(bool))) {
+check_bool <- function(bool,
+                       arg = caller_arg(bool),
+                       call = caller_env()) {
   if (!is_bool(bool)) {
-    gs4_abort("{.arg {nm}} must be either {.code TRUE} or {.code FALSE}.")
+    gs4_abort(
+      "{.arg {arg}} must be either {.code TRUE} or {.code FALSE}.",
+      call = call
+    )
   }
   bool
 }
 
-maybe_bool <- function(bool, nm = deparse(substitute(bool))) {
+maybe_bool <- function(bool,
+                       arg = caller_arg(bool),
+                       call = caller_env()) {
   if (is.null(bool)) {
     bool
   } else {
-    check_bool(bool, nm = nm)
+    check_bool(bool, arg = arg, call = call)
   }
 }
 

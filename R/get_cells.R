@@ -5,16 +5,17 @@ get_cells <- function(ss,
                       col_names_in_sheet = TRUE,
                       skip = 0, n_max = Inf,
                       detail_level = c("default", "full"),
-                      discard_empty = TRUE) {
+                      discard_empty = TRUE,
+                      call = caller_env()) {
   ssid <- as_sheets_id(ss)
 
-  maybe_sheet(sheet)
-  check_range(range)
-  check_bool(col_names_in_sheet)
-  check_non_negative_integer(skip)
-  check_non_negative_integer(n_max)
+  maybe_sheet(sheet, call = call)
+  check_range(range, call = call)
+  check_bool(col_names_in_sheet, call = call)
+  check_non_negative_integer(skip, call = call)
+  check_non_negative_integer(n_max, call = call)
   detail_level <- match.arg(detail_level)
-  check_bool(discard_empty)
+  check_bool(discard_empty, call = call)
 
   ## retrieve spreadsheet metadata --------------------------------------------
   x <- gs4_get(ssid)

@@ -1,8 +1,18 @@
 # googlesheets4 (development version)
 
-Help files below `man/` have been re-generated, so that they give rise to valid HTML5.
-
 The mere existence of an invalid named range no longer prevents googlesheets4 from dealing with a Sheet (#175).
+
+googlesheets4 now understands that Google Sheets can have 10 million cells (up from 5 million) (#257).
+
+## Internal matters
+
+Help files below `man/` have been re-generated, so that they give rise to valid HTML5. (This is the impetus for this release, to keep the package safely on CRAN.)
+
+Examples now use `@examplesIf` to express when a token or an interactive session is required for successful execution.
+
+Errors have been revised to (more often) reveal the most appropriate call, i.e. the high-level function called by the user as opposed to an internal helper (#255).
+
+Informative messages now route through `cli::cli_inform()`, instead of `cli::cli_bullets()`.
 
 # googlesheets4 1.0.0
 

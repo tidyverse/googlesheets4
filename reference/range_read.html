@@ -8,7 +8,7 @@ range_read() is the right name according to the naming convention used
 throughout the googlesheets4 package.
 
 
-read_sheet() and range_read() are synonyms and you can use either one.'><title>Read a Sheet into a data frame — range_read • googlesheets4</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet"><link href="../deps/_Source%20Code%20Pro-0.4.0/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Read a Sheet into a data frame — range_read"><meta property="og:description" content='This is the main "read" function of the googlesheets4 package. It goes by two
+read_sheet() and range_read() are synonyms and you can use either one.'><title>Read a Sheet into a data frame — range_read • googlesheets4</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.2/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.2/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Read a Sheet into a data frame — range_read"><meta property="og:description" content='This is the main "read" function of the googlesheets4 package. It goes by two
 names, because we want it to make sense in two contexts:
 read_sheet() evokes other table-reading functions, like
 readr::read_csv() and readxl::read_excel(). The sheet in this case
@@ -28,7 +28,7 @@ read_sheet() and range_read() are synonyms and you can use either one.'><meta pr
     
     <a class="navbar-brand me-2" href="../index.html">googlesheets4</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,33 +104,33 @@ throughout the googlesheets4 package.</p></li>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">range_read</span><span class="op">(</span>
-  <span class="va">ss</span>,
-  sheet <span class="op">=</span> <span class="cn">NULL</span>,
-  range <span class="op">=</span> <span class="cn">NULL</span>,
-  col_names <span class="op">=</span> <span class="cn">TRUE</span>,
-  col_types <span class="op">=</span> <span class="cn">NULL</span>,
-  na <span class="op">=</span> <span class="st">""</span>,
-  trim_ws <span class="op">=</span> <span class="cn">TRUE</span>,
-  skip <span class="op">=</span> <span class="fl">0</span>,
-  n_max <span class="op">=</span> <span class="cn">Inf</span>,
-  guess_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="va">n_max</span><span class="op">)</span>,
-  .name_repair <span class="op">=</span> <span class="st">"unique"</span>
-<span class="op">)</span>
-
-<span class="fu">read_sheet</span><span class="op">(</span>
-  <span class="va">ss</span>,
-  sheet <span class="op">=</span> <span class="cn">NULL</span>,
-  range <span class="op">=</span> <span class="cn">NULL</span>,
-  col_names <span class="op">=</span> <span class="cn">TRUE</span>,
-  col_types <span class="op">=</span> <span class="cn">NULL</span>,
-  na <span class="op">=</span> <span class="st">""</span>,
-  trim_ws <span class="op">=</span> <span class="cn">TRUE</span>,
-  skip <span class="op">=</span> <span class="fl">0</span>,
-  n_max <span class="op">=</span> <span class="cn">Inf</span>,
-  guess_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="va">n_max</span><span class="op">)</span>,
-  .name_repair <span class="op">=</span> <span class="st">"unique"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">range_read</span><span class="op">(</span></span>
+<span>  <span class="va">ss</span>,</span>
+<span>  sheet <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  range <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  col_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  col_types <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  na <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  trim_ws <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  skip <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  n_max <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  guess_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="va">n_max</span><span class="op">)</span>,</span>
+<span>  .name_repair <span class="op">=</span> <span class="st">"unique"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">read_sheet</span><span class="op">(</span></span>
+<span>  <span class="va">ss</span>,</span>
+<span>  sheet <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  range <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  col_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  col_types <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  na <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  trim_ws <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  skip <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  n_max <span class="op">=</span> <span class="cn">Inf</span>,</span>
+<span>  guess_max <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="va">n_max</span><span class="op">)</span>,</span>
+<span>  .name_repair <span class="op">=</span> <span class="st">"unique"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -143,8 +143,12 @@ represents Drive files</p></li>
 <li><p>an instance of <code>googlesheets4_spreadsheet</code>, which is what <code><a href="gs4_get.html">gs4_get()</a></code>
 returns</p></li>
 </ul><p>Processed through <code><a href="sheets_id.html">as_sheets_id()</a></code>.</p></dd>
+
+
 <dt>sheet</dt>
 <dd><p>Sheet to read, in the sense of "worksheet" or "tab". You can identify a sheet by name, with a string, or by position, with a number. Ignored if the sheet is specified via <code>range</code>. If neither argument specifies the sheet, defaults to the first visible sheet.</p></dd>
+
+
 <dt>range</dt>
 <dd><p>A cell range to read from. If <code>NULL</code>, all non-empty cells are
 read. Otherwise specify <code>range</code> as described in <a href="https://developers.google.com/sheets/api/guides/concepts#a1_notation" class="external-link">Sheets A1 notation</a>
@@ -156,43 +160,64 @@ strictly, even if the range forces the inclusion of leading, trailing, or
 embedded empty rows or columns. Takes precedence over <code>skip</code>, <code>n_max</code> and
 <code>sheet</code>. Note <code>range</code> can be a named range, like <code>"sales_data"</code>, without
 any cell reference.</p></dd>
+
+
 <dt>col_names</dt>
 <dd><p><code>TRUE</code> to use the first row as column names, <code>FALSE</code> to get
 default names, or a character vector to provide column names directly. If
 user provides <code>col_types</code>, <code>col_names</code> can have one entry per column or one
 entry per unskipped column.</p></dd>
+
+
 <dt>col_types</dt>
 <dd><p>Column types. Either <code>NULL</code> to guess all from the
 spreadsheet or a string of readr-style shortcodes, with one character or
 code per column. If exactly one <code>col_type</code> is specified, it is recycled.
 See Column Specification for more.</p></dd>
+
+
 <dt>na</dt>
 <dd><p>Character vector of strings to interpret as missing values. By
 default, blank cells are treated as missing data.</p></dd>
+
+
 <dt>trim_ws</dt>
 <dd><p>Logical. Should leading and trailing whitespace be trimmed
 from cell contents?</p></dd>
+
+
 <dt>skip</dt>
 <dd><p>Minimum number of rows to skip before reading anything, be it
 column names or data. Leading empty rows are automatically skipped, so this
 is a lower bound. Ignored if <code>range</code> is given.</p></dd>
+
+
 <dt>n_max</dt>
 <dd><p>Maximum number of data rows to parse into the returned tibble.
 Trailing empty rows are automatically skipped, so this is an upper bound on
 the number of rows in the result. Ignored if <code>range</code> is given. <code>n_max</code> is
 imposed locally, after reading all non-empty cells, so, if speed is an
 issue, it is better to use <code>range</code>.</p></dd>
+
+
 <dt>guess_max</dt>
 <dd><p>Maximum number of data rows to use for guessing column
 types.</p></dd>
+
+
 <dt>.name_repair</dt>
 <dd><p>Handling of column names. By default, googlesheets4
 ensures column names are not empty and are unique. There is full support
 for <code>.name_repair</code> as documented in <code><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble::tibble()</a></code>.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
+    
+
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
+
+
     </div>
     <div class="section level2">
     <h2 id="column-specification">Column Specification<a class="anchor" aria-label="anchor" href="#column-specification"></a></h2>
@@ -236,28 +261,76 @@ its discovered type.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="gs4_has_token.html">gs4_has_token</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"A5:F15"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"other!A5:F15"</span>, col_types <span class="op">=</span> <span class="st">"ccilDD"</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"arts_data"</span>, col_types <span class="op">=</span> <span class="st">"ccilDD"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in">  <span class="fu">read_sheet</span><span class="op">(</span><span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in">  <span class="fu">read_sheet</span><span class="op">(</span></span>
-<span class="r-in">    <span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span>,</span>
-<span class="r-in">    sheet <span class="op">=</span> <span class="st">"Europe"</span>,</span>
-<span class="r-in">    range <span class="op">=</span> <span class="st">"A:D"</span>,</span>
-<span class="r-in">    col_types <span class="op">=</span> <span class="st">"ccid"</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"A5:F15"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">A5:F15</span>.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Name      Profe…¹   Age Has k…² `Date of birth`     `Date of death`    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> David Bo… musici…    69 TRUE    1947-01-08 <span style="color: #949494;">00:00:00</span> 2016-01-10 <span style="color: #949494;">00:00:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Carrie F… actor      60 TRUE    1956-10-21 <span style="color: #949494;">00:00:00</span> 2016-12-27 <span style="color: #949494;">00:00:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Chuck Be… musici…    90 TRUE    1926-10-18 <span style="color: #949494;">00:00:00</span> 2017-03-18 <span style="color: #949494;">00:00:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Bill Pax… actor      61 TRUE    1955-05-17 <span style="color: #949494;">00:00:00</span> 2017-02-25 <span style="color: #949494;">00:00:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Prince    musici…    57 TRUE    1958-06-07 <span style="color: #949494;">00:00:00</span> 2016-04-21 <span style="color: #949494;">00:00:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Alan Ric… actor      69 FALSE   1946-02-21 <span style="color: #949494;">00:00:00</span> 2016-01-14 <span style="color: #949494;">00:00:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Florence… actor      82 TRUE    1934-02-14 <span style="color: #949494;">00:00:00</span> 2016-11-24 <span style="color: #949494;">00:00:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Harper L… author     89 FALSE   1926-04-28 <span style="color: #949494;">00:00:00</span> 2016-02-19 <span style="color: #949494;">00:00:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Zsa Zsa … actor      99 TRUE    1917-02-06 <span style="color: #949494;">00:00:00</span> 2016-12-18 <span style="color: #949494;">00:00:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> George M… musici…    53 FALSE   1963-06-25 <span style="color: #949494;">00:00:00</span> 2016-12-25 <span style="color: #949494;">00:00:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​Profession, ²​`Has kids`</span></span>
+<span class="r-in"><span><span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"other!A5:F15"</span>, col_types <span class="op">=</span> <span class="st">"ccilDD"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range '<span style="color: #BBBB00;">'other'!A5:F15</span>'.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Name           Profession   Age `Has kids` `Date of birth` Date of de…¹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Vera Rubin     scientist     88 TRUE       1928-07-23      2016-12-25  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Mohamed Ali    athlete       74 TRUE       1942-01-17      2016-06-03  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Morley Safer   journalist    84 TRUE       1931-11-08      2016-05-19  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Fidel Castro   politician    90 TRUE       1926-08-13      2016-11-25  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Antonin Scalia lawyer        79 TRUE       1936-03-11      2016-02-13  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Jo Cox         politician    41 TRUE       1974-06-22      2016-06-16  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Janet Reno     lawyer        78 FALSE      1938-07-21      2016-11-07  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Gwen Ifill     journalist    61 FALSE      1955-09-29      2016-11-14  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> John Glenn     astronaut     95 TRUE       1921-07-28      2016-12-08  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Pat Summit     coach         64 TRUE       1952-06-14      2016-06-28  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​`Date of death`</span></span>
+<span class="r-in"><span><span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"arts_data"</span>, col_types <span class="op">=</span> <span class="st">"ccilDD"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">arts_data</span>.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Name               Profession   Age `Has kids` Date of bir…¹ Date of …²</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> David Bowie        musician      69 TRUE       1947-01-08    2016-01-10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Carrie Fisher      actor         60 TRUE       1956-10-21    2016-12-27</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Chuck Berry        musician      90 TRUE       1926-10-18    2017-03-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Bill Paxton        actor         61 TRUE       1955-05-17    2017-02-25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Prince             musician      57 TRUE       1958-06-07    2016-04-21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Alan Rickman       actor         69 FALSE      1946-02-21    2016-01-14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Florence Henderson actor         82 TRUE       1934-02-14    2016-11-24</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Harper Lee         author        89 FALSE      1926-04-28    2016-02-19</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Zsa Zsa Gábor      actor         99 TRUE       1917-02-06    2016-12-18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> George Michael     musician      53 FALSE      1963-06-25    2016-12-25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​`Date of birth`, ²​`Date of death`</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">read_sheet</span><span class="op">(</span><span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">mini-gap</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">Africa</span>.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   country      continent  year lifeExp     pop gdpPercap</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Algeria      Africa     <span style="text-decoration: underline;">1</span>952    43.1 9<span style="text-decoration: underline;">279</span>525     <span style="text-decoration: underline;">2</span>449.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Angola       Africa     <span style="text-decoration: underline;">1</span>952    30.0 4<span style="text-decoration: underline;">232</span>095     <span style="text-decoration: underline;">3</span>521.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Benin        Africa     <span style="text-decoration: underline;">1</span>952    38.2 1<span style="text-decoration: underline;">738</span>315     <span style="text-decoration: underline;">1</span>063.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Botswana     Africa     <span style="text-decoration: underline;">1</span>952    47.6  <span style="text-decoration: underline;">442</span>308      851.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Burkina Faso Africa     <span style="text-decoration: underline;">1</span>952    32.0 4<span style="text-decoration: underline;">469</span>979      543.</span>
+<span class="r-in"><span><span class="fu">read_sheet</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  sheet <span class="op">=</span> <span class="st">"Europe"</span>,</span></span>
+<span class="r-in"><span>  range <span class="op">=</span> <span class="st">"A:D"</span>,</span></span>
+<span class="r-in"><span>  col_types <span class="op">=</span> <span class="st">"ccid"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">mini-gap</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range '<span style="color: #BBBB00;">'Europe'!A:D</span>'.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 4</span></span>
@@ -281,7 +354,7 @@ its discovered type.</p></li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
   </div></footer></body></html>

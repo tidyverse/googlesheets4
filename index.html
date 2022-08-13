@@ -20,9 +20,9 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="deps/_Source%20Sans%20Pro-0.4.0/font.css" rel="stylesheet">
-<link href="deps/_Source%20Code%20Pro-0.4.0/font.css" rel="stylesheet">
+<link href="deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.2/font.css" rel="stylesheet">
+<link href="deps/Source_Code_Pro-0.4.2/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Access Google Sheets using the Sheets API V4">
@@ -47,7 +47,7 @@
     
     <a class="navbar-brand me-2" href="index.html">googlesheets4</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -117,7 +117,6 @@
 </h1>
 </div>
 <!-- badges: start -->
-
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
@@ -129,11 +128,11 @@
 </h2>
 <p>You can install the released version of googlesheets4 from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"googlesheets4"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"googlesheets4"</span><span class="op">)</span></span></code></pre></div>
 <p>And the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"tidyverse/googlesheets4"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"tidyverse/googlesheets4"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="cheatsheet">Cheatsheet<a class="anchor" aria-label="anchor" href="#cheatsheet"></a>
@@ -151,7 +150,7 @@
 <h2 id="attach-googlesheets4">Attach googlesheets4<a class="anchor" aria-label="anchor" href="#attach-googlesheets4"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="read">Read<a class="anchor" aria-label="anchor" href="#read"></a>
@@ -173,49 +172,52 @@
 </ul>
 <p>These all achieve the same thing:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># URL</span>
-<span class="fu"><a href="reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span><span class="op">)</span>
-<span class="co">#&gt; ✓ Reading from "gapminder".</span>
-<span class="co">#&gt; ✓ Range 'Africa'.</span>
-<span class="co">#&gt; # A tibble: 624 × 6</span>
-<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
-<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
-<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
-<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
-<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span>
-
-<span class="co"># Sheet ID</span>
-<span class="fu"><a href="reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span><span class="op">)</span>
-<span class="co">#&gt; ✓ Reading from "gapminder".</span>
-<span class="co">#&gt; ✓ Range 'Africa'.</span>
-<span class="co">#&gt; # A tibble: 624 × 6</span>
-<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
-<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
-<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
-<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
-<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span>
-
-<span class="co"># a googledrive "dribble"</span>
-<span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">drive_get</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; ✓ The input `path` resolved to exactly 1 file.</span>
-<span class="co">#&gt; ✓ Reading from "gapminder".</span>
-<span class="co">#&gt; ✓ Range 'Africa'.</span>
-<span class="co">#&gt; # A tibble: 624 × 6</span>
-<span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span>
-<span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span>
-<span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span>
-<span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span>
-<span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span>
-<span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span>
-<span class="co">#&gt; # … with 619 more rows</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># URL</span></span>
+<span><span class="fu"><a href="reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ✔ Reading from "gapminder".</span></span>
+<span><span class="co">#&gt; ✔ Range 'Africa'.</span></span>
+<span><span class="co">#&gt; # A tibble: 624 × 6</span></span>
+<span><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span></span>
+<span><span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span></span>
+<span><span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span></span>
+<span><span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span></span>
+<span><span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span></span>
+<span><span class="co">#&gt; # … with 619 more rows</span></span>
+<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span>
+<span></span>
+<span><span class="co"># Sheet ID</span></span>
+<span><span class="fu"><a href="reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ✔ Reading from "gapminder".</span></span>
+<span><span class="co">#&gt; ✔ Range 'Africa'.</span></span>
+<span><span class="co">#&gt; # A tibble: 624 × 6</span></span>
+<span><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span></span>
+<span><span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span></span>
+<span><span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span></span>
+<span><span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span></span>
+<span><span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span></span>
+<span><span class="co">#&gt; # … with 619 more rows</span></span>
+<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span>
+<span></span>
+<span><span class="co"># a googledrive "dribble"</span></span>
+<span><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">drive_get</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ✔ The input `path` resolved to exactly 1 file.</span></span>
+<span><span class="co">#&gt; ✔ Reading from "gapminder".</span></span>
+<span><span class="co">#&gt; ✔ Range 'Africa'.</span></span>
+<span><span class="co">#&gt; # A tibble: 624 × 6</span></span>
+<span><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 Algeria Africa     1952    43.1  9279525     2449.</span></span>
+<span><span class="co">#&gt; 2 Algeria Africa     1957    45.7 10270856     3014.</span></span>
+<span><span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span></span>
+<span><span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span></span>
+<span><span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span></span>
+<span><span class="co">#&gt; # … with 619 more rows</span></span>
+<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
 <p><em>Note: the only reason we can read a sheet named “gapminder” (the last example) is because the account we’re logged in as has a Sheet named “gapminder”.</em></p>
 <p>See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Find and Identify Sheets</a> for more about specifying the Sheet you want to address. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Read Sheets</a> for more about reading from specific sheets or ranges, setting column type, and getting low-level cell data.</p>
 </div>
@@ -224,32 +226,32 @@
 </h2>
 <p><code><a href="reference/gs4_create.html">gs4_create()</a></code> creates a brand new Google Sheet and can optionally send some initial data.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"fluffy-bunny"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>flowers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; ✓ Creating new Sheet: "fluffy-bunny".</span>
-<span class="co">#&gt; Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;               ID: 1iJ-45jIoM7vejOW8xGkqRMzvFrIkYQnopRJPyKoYfdI</span>
-<span class="co">#&gt;           Locale: en_US</span>
-<span class="co">#&gt;        Time zone: Etc/GMT</span>
-<span class="co">#&gt;      # of sheets: 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;      flowers: 7 x 5</span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"fluffy-bunny"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>flowers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ✔ Creating new Sheet: "fluffy-bunny".</span></span>
+<span><span class="co">#&gt; Spreadsheet name: fluffy-bunny</span></span>
+<span><span class="co">#&gt;               ID: 1YVHPcvzoM0SW4MKgQFoH8TQDtEnxnhHewOzWEj6Yz9k</span></span>
+<span><span class="co">#&gt;           Locale: en_US</span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
+<span><span class="co">#&gt;      # of sheets: 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span><span class="co">#&gt;      flowers: 7 x 5</span></span></code></pre></div>
 <p><code><a href="reference/sheet_write.html">sheet_write()</a></code> (over)writes a whole data frame into a (work)sheet within a (spread)Sheet.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
-  <span class="fu"><a href="reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">ss</span>, sheet <span class="op">=</span> <span class="st">"autos"</span><span class="op">)</span>
-<span class="co">#&gt; ✓ Writing to "fluffy-bunny".</span>
-<span class="co">#&gt; ✓ Writing to sheet 'autos'.</span>
-<span class="va">ss</span>
-<span class="co">#&gt; Spreadsheet name: fluffy-bunny</span>
-<span class="co">#&gt;               ID: 1iJ-45jIoM7vejOW8xGkqRMzvFrIkYQnopRJPyKoYfdI</span>
-<span class="co">#&gt;           Locale: en_US</span>
-<span class="co">#&gt;        Time zone: Etc/GMT</span>
-<span class="co">#&gt;      # of sheets: 2</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span>
-<span class="co">#&gt;      flowers: 7 x 5</span>
-<span class="co">#&gt;        autos: 7 x 11</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">ss</span>, sheet <span class="op">=</span> <span class="st">"autos"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ✔ Writing to "fluffy-bunny".</span></span>
+<span><span class="co">#&gt; ✔ Writing to sheet 'autos'.</span></span>
+<span><span class="va">ss</span></span>
+<span><span class="co">#&gt; Spreadsheet name: fluffy-bunny</span></span>
+<span><span class="co">#&gt;               ID: 1YVHPcvzoM0SW4MKgQFoH8TQDtEnxnhHewOzWEj6Yz9k</span></span>
+<span><span class="co">#&gt;           Locale: en_US</span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
+<span><span class="co">#&gt;      # of sheets: 2</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span><span class="co">#&gt;      flowers: 7 x 5</span></span>
+<span><span class="co">#&gt;        autos: 7 x 11</span></span></code></pre></div>
 <p><code><a href="reference/sheet_append.html">sheet_append()</a></code>, <code><a href="reference/range_write.html">range_write()</a></code>, <code><a href="reference/range_flood.html">range_flood()</a></code>, and <code><a href="reference/range_flood.html">range_clear()</a></code> are more specialized writing functions. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write Sheets</a> for more about writing to Sheets.</p>
 </div>
 <div class="section level2">
@@ -308,6 +310,7 @@
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+<li><a href="SUPPORT.html">Getting help</a></li>
 </ul>
 </div>
 
@@ -328,14 +331,7 @@
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://CRAN.R-project.org/package=googlesheets4" class="external-link"><img src="https://www.r-pkg.org/badges/version/googlesheets4" alt="CRAN status"></a></li>
-<li><a href="https://github.com/tidyverse/googlesheets4/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/tidyverse/googlesheets4/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/tidyverse/googlesheets4?branch=main" class="external-link"><img src="https://codecov.io/gh/tidyverse/googlesheets4/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-</ul>
-</div>
+
 
   </aside>
 </div>
@@ -350,7 +346,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
   </div></footer>

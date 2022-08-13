@@ -80,7 +80,7 @@ I view it as a special case of a bullet list of simple items, which also don't g
 ```{r}
 gs4_bullets(c(
   "We're going to list some things:",
-  bulletize(gargle_map_cli(month.abb[1:4]))
+  bulletize(gargle::gargle_map_cli(month.abb[1:4]))
 ))
 ```
 

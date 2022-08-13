@@ -131,7 +131,7 @@ gs4_example("gapminder") %>%
   range_speedread(sheet = "Oceania", n_max = 3)
 ```
 
-The output above reveals that, under the hood, `range_speedread()` calls an external function for CSV parsing (currently `readr::read_csv()`, but it is likely to switch to `vroom::vroom()`). An important consequence is that all arguments around column type specification are passed along to the CSV-parsing function. Here is a demo using readr-style column specification:
+The output above reveals that, under the hood, `range_speedread()` calls an external function for CSV parsing (namely, `readr::read_csv()`). An important consequence is that all arguments around column type specification are passed along to the CSV-parsing function. Here is a demo using readr-style column specification:
 
 ```{r}
 gs4_example("deaths") %>% 

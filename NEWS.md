@@ -1,5 +1,7 @@
 # googlesheets4 (development version)
 
+Help files below `man/` have been re-generated, so that they give rise to valid HTML5.
+
 The mere existence of an invalid named range no longer prevents googlesheets4 from dealing with a Sheet (#175).
 
 # googlesheets4 1.0.0

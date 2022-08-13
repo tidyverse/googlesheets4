@@ -1,7 +1,7 @@
 A1_char_class <- "[a-zA-Z0-9:$]"
 compound_rx <- glue("(?<sheet>^.+)!(?<cell_range>{A1_char_class}+$)")
 letter_part <- "[$]?[A-Za-z]{1,3}"
-number_part <- "[$]?[0-9]{1,7}"
+number_part <- "[$]?[0-9]{1,8}"
 A1_rx <- glue("^{letter_part}{number_part}$|^{letter_part}$|^{number_part}$")
 A1_decomp <- glue("(?<column>{letter_part})?(?<row>{number_part})?")
 

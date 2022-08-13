@@ -21,12 +21,14 @@ gs4_bullets <- googlesheets4:::gs4_bullets
 
 gs4_abort <- googlesheets4:::gs4_abort
 abort_unsupported_conversion <- googlesheets4:::abort_unsupported_conversion
+
+bulletize <- gargle:::bulletize
 ```
 
 ## User-facing messages
 
 Everything should be emitted by helpers in `utils-ui.R`: specifically, `gs4_bullets()` and, for errors, `gs4_abort()`.
-These helpers are wrappers around `cli::cli_bullets()` and `cli::cli_alert()`, respectively.
+These helpers are wrappers around `cli::cli_inform()` and `cli::cli_abort()`, respectively.
 
 ```{r}
 gs4_bullets(c(
@@ -73,7 +75,7 @@ gs4_bullets(c(v = "Writing to the range: {.range {rg}}"))
 ```
 
 Above, I don't include a period (`.`) at the end of a message with the form: `Description of thing: THING`.
-I view it as a special case of a bullet list of simple items, which also don't get periods.
+I view it as a special case of a bullet list of simple items, which also don't get periods. (`bulletize()` comes from gargle.)
 
 ```{r}
 gs4_bullets(c(

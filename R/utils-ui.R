@@ -120,7 +120,7 @@ gs4_bullets <- function(text, .envir = parent.frame()) {
     return(invisible())
   }
   cli::cli_div(theme = gs4_theme())
-  cli::cli_bullets(text = text, .envir = .envir)
+  cli::cli_inform(message = text, .envir = .envir)
 }
 
 #' Error conditions for the googlesheets4 package

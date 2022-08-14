@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">googlesheets4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -180,9 +180,13 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"We're going to list some things:"</span>,</span>
-<span>  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle_map_cli</span><span class="op">(</span><span class="va">month.abb</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_map_cli.html" class="external-link">gargle_map_cli</a></span><span class="op">(</span><span class="va">month.abb</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in gargle_map_cli(month.abb[1:4]): could not find function "gargle_map_cli"</span></span></code></pre></div>
+<span><span class="co">#&gt; We're going to list some things:</span></span>
+<span><span class="co">#&gt; • <span style="color: #00BB00;">Jan</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #00BB00;">Feb</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #00BB00;">Mar</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #00BB00;">Apr</span></span></span></code></pre></div>
 <p>Other messages that are complete sentence, or at least aspire to be, <strong>do</strong> get a period.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="st">"Doing the stuff you asked me to do."</span><span class="op">)</span></span>

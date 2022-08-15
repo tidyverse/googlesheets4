@@ -315,7 +315,7 @@ read_this(ss_edit)
 (df <- tibble(V1 = head(LETTERS,3), V2 = tail(LETTERS, 3)))
 ```
 
-If we do not specify the range, `df` is written into the upper left corner and only affects cells spanned by `df`. To see where we've written, focus on the cells are NOT "x".
+If we do not specify the range, `df` is written into the upper left corner and only affects cells spanned by `df`. To see where we've written, focus on the cells are NOT "-".
 
 ```{r}
 range_write(ss_edit, data = df) %>% read_this()

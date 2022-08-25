@@ -148,8 +148,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span></code></pre></div>
 <p>At this time, although the URL may contain both a (spread)Sheet and a (work)sheet, we only extract the (spread)Sheet ID. If the function targets a specific (work)sheet, that is typically specified via arguments like <code>range</code> or <code>sheet</code> or a default of “first (visible) sheet”.</p>
 <p>These URLs are not particularly nice to look at in your code, though.</p>
 </div>
@@ -197,8 +196,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span></code></pre></div>
 <p>I think in a script or app that will endure for a while it is better to refer to a Sheet by its ID than by its URL. The Sheet ID is nicer to look at, it is complete, it is minimal.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ssid</span> <span class="op">&lt;-</span> <span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span></span>
@@ -213,8 +211,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span></code></pre></div>
 <p>Note this demonstration that a Sheet ID also works when provided as a plain, old string, i.e. it does not <strong>have</strong> to have the <code>sheets_id</code> class. In some contexts, you might even prefer to store it as a string, in order to bypass the special printing behaviour for <code>sheets_id</code>.</p>
 <p>When the Sheet is specified via a character string, googlesheets4 assumes it is a Sheet ID (or an ID-containing URL). This is NOT the case for googledrive, which assumes a character string is a file name or path. Therefore, for maximum happiness, in a mixed googlesheets4 / googledrive workflow, it’s a good idea to be explicit and declare a string to be a Sheet ID, when that is the case.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -230,8 +227,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span></code></pre></div>
 <p>If your script or app targets a specific Sheet, the most efficient and robust way to address it is by its ID.</p>
 </div>
 <div class="section level2">
@@ -310,8 +306,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> bacciform-booby   15WqCxHBCjY4P_i6-uTL9rUBgpcHRKQFrqheRSSO… &lt;named list&gt;</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> childsafe-squid   1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc9B… &lt;named list&gt;</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> fiery-hart        18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEnWY… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 4 more rows, and abbreviated variable name ¹​drive_resource</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 4 more rows, and abbreviated variable name ¹​drive_resource</span></span></span></code></pre></div>
 <p>This is so handy that we’ve made <code><a href="../reference/gs4_find.html">gs4_find()</a></code> in googlesheets4, which is a shortcut for <code>drive_find(type = "spreadsheet")</code>:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -323,8 +318,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> bacciform-booby   15WqCxHBCjY4P_i6-uTL9rUBgpcHRKQFrqheRSSO… &lt;named list&gt;</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> childsafe-squid   1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc9B… &lt;named list&gt;</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> fiery-hart        18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEnWY… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 4 more rows, and abbreviated variable name ¹​drive_resource</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 4 more rows, and abbreviated variable name ¹​drive_resource</span></span></span></code></pre></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">drive_find()</a></code> and <code><a href="../reference/gs4_find.html">gs4_find()</a></code> for more ideas about how to search Drive effectively for your Sheets.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

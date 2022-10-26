@@ -113,7 +113,9 @@
 
     
     
-<p>This is article serves mostly as internal documentation of how various representations of cell ranges relate to each other in googlesheets4.</p>
+<p>This is article serves mostly as internal documentation of how
+various representations of cell ranges relate to each other in
+googlesheets4.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span>
@@ -122,51 +124,108 @@
 <div class="section level2">
 <h2 id="user-specified-range">User-specified range<a class="anchor" aria-label="anchor" href="#user-specified-range"></a>
 </h2>
-<p>Several googlesheets4 functions allow the user to specify which cells to read or write. This range specification comes via the <code>sheet</code>, <code>range</code>, and (possibly) <code>skip</code> arguments. Examples of functions with this interface: <code><a href="../reference/range_read.html">range_read()</a></code>, <code><a href="../reference/range_read_cells.html">range_read_cells()</a></code>, and <code><a href="../reference/range_write.html">range_write()</a></code>.</p>
+<p>Several googlesheets4 functions allow the user to specify which cells
+to read or write. This range specification comes via the
+<code>sheet</code>, <code>range</code>, and (possibly) <code>skip</code>
+arguments. Examples of functions with this interface:
+<code><a href="../reference/range_read.html">range_read()</a></code>, <code><a href="../reference/range_read_cells.html">range_read_cells()</a></code>, and
+<code><a href="../reference/range_write.html">range_write()</a></code>.</p>
 <ul>
 <li>
-<code>range</code> is the primary and most powerful argument and takes precedence over all others. <code>range</code> can be:
+<code>range</code> is the primary and most powerful argument and
+takes precedence over all others. <code>range</code> can be:
 <ul>
-<li>an <a href="https://developers.google.com/sheets/api/guides/concepts#a1_notation" class="external-link">A1-style spreadsheet range</a>, with or without a sheet name, such as “A3:D7” or “arts!A5:F15”</li>
+<li>an <a href="https://developers.google.com/sheets/api/guides/concepts#a1_notation" class="external-link">A1-style
+spreadsheet range</a>, with or without a sheet name, such as “A3:D7” or
+“arts!A5:F15”</li>
 <li>a (work)sheet name, such as “arts”</li>
 <li>a named range, such as “arts_data”</li>
-<li>a <code>cell_limits</code> object made with helpers from the cellranger package</li>
+<li>a <code>cell_limits</code> object made with helpers from the
+cellranger package</li>
 </ul>
 </li>
 <li>
-<code>sheet</code> can be used to specify a (work)sheet by name, such as “arts”, or by position, such as 3</li>
+<code>sheet</code> can be used to specify a (work)sheet by name,
+such as “arts”, or by position, such as 3</li>
 <li>
-<code>skip</code> is an optional argument that appears in <code><a href="../reference/range_read.html">range_read()</a></code> and <code><a href="../reference/range_read_cells.html">range_read_cells()</a></code>, to be compatible with functions like <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table()</a></code>, <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code>, and <code><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">readxl::read_excel()</a></code>.</li>
+<code>skip</code> is an optional argument that appears in
+<code><a href="../reference/range_read.html">range_read()</a></code> and <code><a href="../reference/range_read_cells.html">range_read_cells()</a></code>, to be
+compatible with functions like <code><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.table()</a></code>,
+<code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim()</a></code>, and
+<code><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">readxl::read_excel()</a></code>.</li>
 </ul>
-<p>(You might think <code>n_max</code> should also be mentioned here, but for technical reasons, in general, <code>n_max</code> can only be enforced after we’ve read data. So it’s not part of the range ingest problem.)</p>
+<p>(You might think <code>n_max</code> should also be mentioned here,
+but for technical reasons, in general, <code>n_max</code> can only be
+enforced after we’ve read data. So it’s not part of the range ingest
+problem.)</p>
 <p>Loose ends and hangnails:</p>
 <ul>
-<li>The story around (work)sheet visibility is muddy. But I’m letting that be, because I have yet to have a user interaction that had anything to do with sheet (in)visibility.</li>
-<li>The problem of a completely unspecified range. In a very hand-wavy sense, “no range” means “all cells” or “all non-empty cells” or “all non-empty cells in the first (visible?) sheet”. That is obviously very imprecise, which means that I have to think about how to handle “no range” for each individual endpoint or function. Sometimes I inject some info (such as the first visible worksheet), so we don’t retrieve data that we will just throw away. This is all very special case-y right now.</li>
+<li>The story around (work)sheet visibility is muddy. But I’m letting
+that be, because I have yet to have a user interaction that had anything
+to do with sheet (in)visibility.</li>
+<li>The problem of a completely unspecified range. In a very hand-wavy
+sense, “no range” means “all cells” or “all non-empty cells” or “all
+non-empty cells in the first (visible?) sheet”. That is obviously very
+imprecise, which means that I have to think about how to handle “no
+range” for each individual endpoint or function. Sometimes I inject some
+info (such as the first visible worksheet), so we don’t retrieve data
+that we will just throw away. This is all very special case-y right
+now.</li>
 <li>
-<code>cell_limits</code> objects can hold sheet information and I have made no arrangements for that.</li>
-<li>Should <code><a href="../reference/range_write.html">range_write()</a></code> have a skip argument, just for internal consistency?</li>
+<code>cell_limits</code> objects can hold sheet information and I
+have made no arrangements for that.</li>
+<li>Should <code><a href="../reference/range_write.html">range_write()</a></code> have a skip argument, just for
+internal consistency?</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="range-spec">Range spec<a class="anchor" aria-label="anchor" href="#range-spec"></a>
 </h2>
-<p><code>range_spec</code> is an internal S3 class that is typically used inside any function that accepts the <code>(sheet, range, skip)</code> trio.</p>
-<p>We need some sort of intermediate storage, in order to translate between the various ways the user can express their range and the requirements of different Sheets API endpoints (which differ more than you’d expect!). We generally require metadata about the associated Sheet in order to form a <code>range_spec</code>, because we potentially need to lookup the (work)<code>sheet</code> by position or determine whether a name refers to a named range or a (work)<code>sheet</code>.</p>
-<p>The internal generic <code>as_range_spec()</code> dispatches on primary argument <code>x</code>, which maps to <code>range</code>. Its job is to transform user-supplied <code>(sheet, range, skip)</code> into:</p>
+<p><code>range_spec</code> is an internal S3 class that is typically
+used inside any function that accepts the
+<code>(sheet, range, skip)</code> trio.</p>
+<p>We need some sort of intermediate storage, in order to translate
+between the various ways the user can express their range and the
+requirements of different Sheets API endpoints (which differ more than
+you’d expect!). We generally require metadata about the associated Sheet
+in order to form a <code>range_spec</code>, because we potentially need
+to lookup the (work)<code>sheet</code> by position or determine whether
+a name refers to a named range or a (work)<code>sheet</code>.</p>
+<p>The internal generic <code>as_range_spec()</code> dispatches on
+primary argument <code>x</code>, which maps to <code>range</code>. Its
+job is to transform user-supplied <code>(sheet, range, skip)</code>
+into:</p>
 <ul>
 <li>
-<code>sheet_name</code>: (Work)sheet name, can be <code>NULL</code>.</li>
+<code>sheet_name</code>: (Work)sheet name, can be
+<code>NULL</code>.</li>
 <li>
-<code>named_range</code>: Name of range, can be <code>NULL</code>. But if not <code>NULL</code>, then this is the complete specification of the range, i.e. it cannot be combined with any other information.</li>
+<code>named_range</code>: Name of range, can be <code>NULL</code>.
+But if not <code>NULL</code>, then this is the complete specification of
+the range, i.e. it cannot be combined with any other information.</li>
 <li>
-<code>cell_range</code> and/or <code>cell_limits</code>: Ways to specify a rectangle of cells, can be <code>NULL</code>. If user specifies <code>skip</code>, that is re-expressed as <code>cell_limits</code>. At intake, at most one of <code>cell_range</code> and <code>cell_limits</code> is populated. But internally, we might populate one from the other, as we prepare the range to meet the requirements of a specific API endpoint.</li>
+<code>cell_range</code> and/or <code>cell_limits</code>: Ways to
+specify a rectangle of cells, can be <code>NULL</code>. If user
+specifies <code>skip</code>, that is re-expressed as
+<code>cell_limits</code>. At intake, at most one of
+<code>cell_range</code> and <code>cell_limits</code> is populated. But
+internally, we might populate one from the other, as we prepare the
+range to meet the requirements of a specific API endpoint.</li>
 <li>
-<code>shim</code>: indicates whether the user specified a specific cell rectangle (<code>shim = TRUE</code>) or we filled in some specifics pragmatically (<code>shim = FALSE</code>), which is necessary to express some partially open rectangles in A1-notation. This aspect of the user-supplied data needs to be retained to inform downstream post-processing.</li>
-<li>(<code>sheets_df</code> and <code>nr_df</code> are retained in a <code>range_spec</code>, if they were provided to <code>as_range_spec()</code>.)</li>
-<li>Loose end: I wonder if <code>range_spec</code> should have a field for (work)sheet id.</li>
+<code>shim</code>: indicates whether the user specified a specific
+cell rectangle (<code>shim = TRUE</code>) or we filled in some specifics
+pragmatically (<code>shim = FALSE</code>), which is necessary to express
+some partially open rectangles in A1-notation. This aspect of the
+user-supplied data needs to be retained to inform downstream
+post-processing.</li>
+<li>(<code>sheets_df</code> and <code>nr_df</code> are retained in a
+<code>range_spec</code>, if they were provided to
+<code>as_range_spec()</code>.)</li>
+<li>Loose end: I wonder if <code>range_spec</code> should have a field
+for (work)sheet id.</li>
 </ul>
-<p>Here’s how various user-specified ranges are stored as a <code>range_spec</code>.</p>
+<p>Here’s how various user-specified ranges are stored as a
+<code>range_spec</code>.</p>
 <table class="table">
 <colgroup>
 <col width="6%">
@@ -185,95 +244,126 @@
 <td align="left">NULL</td>
 <td align="left">NULL</td>
 <td align="right">0</td>
-<td align="left">sheet_name: NULL<br>named_range: NULL<br> cell_range: NULL<br>cell_limits: NULL<br> shim: FALSE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
+<td align="left">sheet_name: NULL<br>named_range: NULL<br> cell_range:
+NULL<br>cell_limits: NULL<br> shim: FALSE<br> sheets_df:
+&lt;provided&gt;<br> nr_df: NULL</td>
 </tr>
 <tr class="even">
 <td align="left">Africa</td>
 <td align="left">NULL</td>
 <td align="right">0</td>
-<td align="left">sheet_name: Africa<br>named_range: NULL<br> cell_range: NULL<br>cell_limits: NULL<br> shim: FALSE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
+<td align="left">sheet_name: Africa<br>named_range: NULL<br> cell_range:
+NULL<br>cell_limits: NULL<br> shim: FALSE<br> sheets_df:
+&lt;provided&gt;<br> nr_df: NULL</td>
 </tr>
 <tr class="odd">
 <td align="left">4</td>
 <td align="left">NULL</td>
 <td align="right">0</td>
-<td align="left">sheet_name: Europe<br>named_range: NULL<br> cell_range: NULL<br>cell_limits: NULL<br> shim: FALSE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
+<td align="left">sheet_name: Europe<br>named_range: NULL<br> cell_range:
+NULL<br>cell_limits: NULL<br> shim: FALSE<br> sheets_df:
+&lt;provided&gt;<br> nr_df: NULL</td>
 </tr>
 <tr class="even">
 <td align="left">NULL</td>
 <td align="left">NULL</td>
 <td align="right">2</td>
-<td align="left">sheet_name: NULL<br>named_range: NULL<br> cell_range: NULL<br>cell_limits: list(ul = c(3, NA), lr = c(NA, NA), sheet = NA)<br> shim: FALSE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
+<td align="left">sheet_name: NULL<br>named_range: NULL<br> cell_range:
+NULL<br>cell_limits: list(ul = c(3, NA), lr = c(NA, NA), sheet = NA)<br>
+shim: FALSE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
 </tr>
 <tr class="odd">
 <td align="left">Africa</td>
 <td align="left">NULL</td>
 <td align="right">3</td>
-<td align="left">sheet_name: Africa<br>named_range: NULL<br> cell_range: NULL<br>cell_limits: list(ul = c(4, NA), lr = c(NA, NA), sheet = NA)<br> shim: FALSE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
+<td align="left">sheet_name: Africa<br>named_range: NULL<br> cell_range:
+NULL<br>cell_limits: list(ul = c(4, NA), lr = c(NA, NA), sheet = NA)<br>
+shim: FALSE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
 </tr>
 <tr class="even">
 <td align="left">4</td>
 <td align="left">NULL</td>
 <td align="right">4</td>
-<td align="left">sheet_name: Europe<br>named_range: NULL<br> cell_range: NULL<br>cell_limits: list(ul = c(5, NA), lr = c(NA, NA), sheet = NA)<br> shim: FALSE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
+<td align="left">sheet_name: Europe<br>named_range: NULL<br> cell_range:
+NULL<br>cell_limits: list(ul = c(5, NA), lr = c(NA, NA), sheet = NA)<br>
+shim: FALSE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
 </tr>
 <tr class="odd">
 <td align="left">&lt;ignored&gt;</td>
 <td align="left">Asia!A1:B2</td>
 <td align="right">0</td>
-<td align="left">sheet_name: Asia<br>named_range: NULL<br> cell_range: A1:B2<br>cell_limits: NULL<br> shim: TRUE<br> sheets_df: &lt;provided&gt;<br> nr_df: &lt;provided&gt;</td>
+<td align="left">sheet_name: Asia<br>named_range: NULL<br> cell_range:
+A1:B2<br>cell_limits: NULL<br> shim: TRUE<br> sheets_df:
+&lt;provided&gt;<br> nr_df: &lt;provided&gt;</td>
 </tr>
 <tr class="even">
 <td align="left">&lt;ignored&gt;</td>
 <td align="left">canada</td>
 <td align="right">0</td>
-<td align="left">sheet_name: NULL<br>named_range: canada<br> cell_range: NULL<br>cell_limits: NULL<br> shim: FALSE<br> sheets_df: &lt;provided&gt;<br> nr_df: &lt;provided&gt;</td>
+<td align="left">sheet_name: NULL<br>named_range: canada<br> cell_range:
+NULL<br>cell_limits: NULL<br> shim: FALSE<br> sheets_df:
+&lt;provided&gt;<br> nr_df: &lt;provided&gt;</td>
 </tr>
 <tr class="odd">
 <td align="left">&lt;ignored&gt;</td>
 <td align="left">Europe</td>
 <td align="right">3</td>
-<td align="left">sheet_name: Europe<br>named_range: NULL<br> cell_range: NULL<br>cell_limits: list(ul = c(4, NA), lr = c(NA, NA), sheet = NA)<br> shim: FALSE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
+<td align="left">sheet_name: Europe<br>named_range: NULL<br> cell_range:
+NULL<br>cell_limits: list(ul = c(4, NA), lr = c(NA, NA), sheet = NA)<br>
+shim: FALSE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
 </tr>
 <tr class="even">
 <td align="left">NULL</td>
 <td align="left">A1:B2</td>
 <td align="right">0</td>
-<td align="left">sheet_name: NULL<br>named_range: NULL<br> cell_range: A1:B2<br>cell_limits: NULL<br> shim: TRUE<br> sheets_df: &lt;provided&gt;<br> nr_df: &lt;provided&gt;</td>
+<td align="left">sheet_name: NULL<br>named_range: NULL<br> cell_range:
+A1:B2<br>cell_limits: NULL<br> shim: TRUE<br> sheets_df:
+&lt;provided&gt;<br> nr_df: &lt;provided&gt;</td>
 </tr>
 <tr class="odd">
 <td align="left">Oceania</td>
 <td align="left">A1:B2</td>
 <td align="right">0</td>
-<td align="left">sheet_name: Oceania<br>named_range: NULL<br> cell_range: A1:B2<br>cell_limits: NULL<br> shim: TRUE<br> sheets_df: &lt;provided&gt;<br> nr_df: &lt;provided&gt;</td>
+<td align="left">sheet_name: Oceania<br>named_range: NULL<br>
+cell_range: A1:B2<br>cell_limits: NULL<br> shim: TRUE<br> sheets_df:
+&lt;provided&gt;<br> nr_df: &lt;provided&gt;</td>
 </tr>
 <tr class="even">
 <td align="left">2</td>
 <td align="left">A1:B2</td>
 <td align="right">0</td>
-<td align="left">sheet_name: Americas<br>named_range: NULL<br> cell_range: A1:B2<br>cell_limits: NULL<br> shim: TRUE<br> sheets_df: &lt;provided&gt;<br> nr_df: &lt;provided&gt;</td>
+<td align="left">sheet_name: Americas<br>named_range: NULL<br>
+cell_range: A1:B2<br>cell_limits: NULL<br> shim: TRUE<br> sheets_df:
+&lt;provided&gt;<br> nr_df: &lt;provided&gt;</td>
 </tr>
 <tr class="odd">
 <td align="left">NULL</td>
 <td align="left">cell_limits(c(2, 3), c(NA, 5))</td>
 <td align="right">0</td>
-<td align="left">sheet_name: NULL<br>named_range: NULL<br> cell_range: NULL<br>cell_limits: list(ul = 2:3, lr = c(NA, 5), sheet = NA)<br> shim: TRUE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
+<td align="left">sheet_name: NULL<br>named_range: NULL<br> cell_range:
+NULL<br>cell_limits: list(ul = 2:3, lr = c(NA, 5), sheet = NA)<br> shim:
+TRUE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
 </tr>
 <tr class="even">
 <td align="left">Americas</td>
 <td align="left">cell_limits(c(2, 3), c(NA, 5))</td>
 <td align="right">0</td>
-<td align="left">sheet_name: Americas<br>named_range: NULL<br> cell_range: NULL<br>cell_limits: list(ul = 2:3, lr = c(NA, 5), sheet = NA)<br> shim: TRUE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
+<td align="left">sheet_name: Americas<br>named_range: NULL<br>
+cell_range: NULL<br>cell_limits: list(ul = 2:3, lr = c(NA, 5), sheet =
+NA)<br> shim: TRUE<br> sheets_df: &lt;provided&gt;<br> nr_df: NULL</td>
 </tr>
 </tbody>
 </table>
 <div class="section level3">
 <h3 id="cell-rectangles">Cell rectangles<a class="anchor" aria-label="anchor" href="#cell-rectangles"></a>
 </h3>
-<p>When a <code>range_spec</code> is first formed, it may hold specifics for a cell rectangle, although it does not have to. This info appears in one of these fields:</p>
+<p>When a <code>range_spec</code> is first formed, it may hold specifics
+for a cell rectangle, although it does not have to. This info appears in
+one of these fields:</p>
 <ul>
 <li>
-<code>cell_range</code>: an <a href="https://developers.google.com/sheets/api/guides/concepts#a1_notation" class="external-link">A1-style spreadsheet range</a>, with NO sheet information
+<code>cell_range</code>: an <a href="https://developers.google.com/sheets/api/guides/concepts#a1_notation" class="external-link">A1-style
+spreadsheet range</a>, with NO sheet information
 <ul>
 <li>Examples: “A4”, “D:G”, “3:7”, “B3:H”, “C4:G16”</li>
 </ul>
@@ -285,12 +375,28 @@
 </ul>
 </li>
 </ul>
-<p>A <code>cell_limits</code> object is, overall, a much more sane way to hold this information, because explicit <code>NA</code>s can be used to convey unboundedness. Some types of unboundedness simply can’t be conveyed in A1 notation, even though those partially open rectangles are as legitimate as those that can be recorded in A1 notation.</p>
-<p>In any case, between user expectations and API idiosyncrasies, we have to be able to translate between <code>cell_range</code> and <code>cell_limits</code>.</p>
+<p>A <code>cell_limits</code> object is, overall, a much more sane way
+to hold this information, because explicit <code>NA</code>s can be used
+to convey unboundedness. Some types of unboundedness simply can’t be
+conveyed in A1 notation, even though those partially open rectangles are
+as legitimate as those that can be recorded in A1 notation.</p>
+<p>In any case, between user expectations and API idiosyncrasies, we
+have to be able to translate between <code>cell_range</code> and
+<code>cell_limits</code>.</p>
 <div class="section level4">
 <h4 id="a1-range-from-cell_limits">A1 range from <code>cell_limits</code><a class="anchor" aria-label="anchor" href="#a1-range-from-cell_limits"></a>
 </h4>
-<p>The reading functions <code><a href="../reference/range_read.html">range_read()</a></code> and <code><a href="../reference/range_read_cells.html">range_read_cells()</a></code> hit the <code>sheets.spreadsheets.get</code> endpoint. Bizarrely, this endpoint requires the range to be specified in A1-notation. If the user specifies the cell rectangle in A1-notation, things are easy and we essentially just pass that along. But users can describe certain partially open cell rectangles via <code>cell_limits</code> that can’t be literally expressed in A1-notation. The table below shows how all possible combinations of row and cell limits are translated into an A1-style range, using technical limits on the number of rows and columns in a Google Sheet.</p>
+<p>The reading functions <code><a href="../reference/range_read.html">range_read()</a></code> and
+<code><a href="../reference/range_read_cells.html">range_read_cells()</a></code> hit the
+<code>sheets.spreadsheets.get</code> endpoint. Bizarrely, this endpoint
+requires the range to be specified in A1-notation. If the user specifies
+the cell rectangle in A1-notation, things are easy and we essentially
+just pass that along. But users can describe certain partially open cell
+rectangles via <code>cell_limits</code> that can’t be literally
+expressed in A1-notation. The table below shows how all possible
+combinations of row and cell limits are translated into an A1-style
+range, using technical limits on the number of rows and columns in a
+Google Sheet.</p>
 <table class="table">
 <thead><tr class="header">
 <th align="right">start_col</th>
@@ -436,43 +542,77 @@
 <h4 id="cell_limits-from-a1-range">
 <code>cell_limits</code> from A1 range<a class="anchor" aria-label="anchor" href="#cell_limits-from-a1-range"></a>
 </h4>
-<p>When editing a sheet, we send an <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest" class="external-link"><code>UpdateCellsRequest</code></a>, which takes the location of the write via a <em>union field</em>. We must send one of the following:</p>
+<p>When editing a sheet, we send an <a href="https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#updatecellsrequest" class="external-link"><code>UpdateCellsRequest</code></a>,
+which takes the location of the write via a <em>union field</em>. We
+must send one of the following:</p>
 <ul>
 <li>
-<p><code>start</code>: An instance of <code>GridCoordinate</code> which identifies one cell. This is where the write starts and the cells hit are determined by the structure of the accompanying <code>RowData</code>. Think of <code>start</code> as specifying the upper left corner of a target rectangle. Fields:</p>
+<p><code>start</code>: An instance of <code>GridCoordinate</code>
+which identifies one cell. This is where the write starts and the cells
+hit are determined by the structure of the accompanying
+<code>RowData</code>. Think of <code>start</code> as specifying the
+upper left corner of a target rectangle. Fields:</p>
 <ul>
 <li>
-<code>sheetId</code>: ID of the (work)sheet. The only required field.</li>
+<code>sheetId</code>: ID of the (work)sheet. The only required
+field.</li>
 <li>
-<code>rowIndex</code>: Zero-based row index. Unspecified means 0.</li>
+<code>rowIndex</code>: Zero-based row index. Unspecified means
+0.</li>
 <li>
-<code>columnIndex</code>: Zero-based column index. Unspecified means 0.</li>
+<code>columnIndex</code>: Zero-based column index. Unspecified means
+0.</li>
 </ul>
 </li>
 <li>
-<p><code>range</code>: An instance of <code>GridRange</code> which identifies a rectangle of cells. Fields:</p>
+<p><code>range</code>: An instance of <code>GridRange</code> which
+identifies a rectangle of cells. Fields:</p>
 <ul>
 <li>
-<code>sheetId</code>: ID of the (work)sheet. The only required field.</li>
+<code>sheetId</code>: ID of the (work)sheet. The only required
+field.</li>
 <li>
-<code>startRowIndex</code>: Zero-based inclusive start row. Unspecified means 0.</li>
+<code>startRowIndex</code>: Zero-based inclusive start row.
+Unspecified means 0.</li>
 <li>
-<code>endRowIndex</code>: Zero-based exclusive end row. Unspecified means unbounded.</li>
+<code>endRowIndex</code>: Zero-based exclusive end row. Unspecified
+means unbounded.</li>
 <li>
-<code>startColumnIndex</code>: Zero-based inclusive start column. Unspecified means
+<code>startColumnIndex</code>: Zero-based inclusive start column.
+Unspecified means
 <ol start="0" style="list-style-type: decimal">
 <li>
 </ol>
 </li>
 <li>
-<code>endColumnIndex</code>: Zero-based exclusive end column. Unspecified means unbounded.</li>
+<code>endColumnIndex</code>: Zero-based exclusive end column.
+Unspecified means unbounded.</li>
 </ul>
-<p>All the start/end row/column indices are optional. If omitted, it means the rectangle is unbounded on that side. Unbounded on the left or top is boring, because that just amounts to starting at the first row or column. But unbounded on the right or bottom is a more interesting scenario because of this:</p>
-<p>If the <code>RowData</code> doesn’t cover the entire <code>range</code> rectangle, the targetted cells that don’t receive new data are cleared, according to the accompanying field mask in <code>fields</code>.</p>
+<p>All the start/end row/column indices are optional. If omitted, it
+means the rectangle is unbounded on that side. Unbounded on the left or
+top is boring, because that just amounts to starting at the first row or
+column. But unbounded on the right or bottom is a more interesting
+scenario because of this:</p>
+<p>If the <code>RowData</code> doesn’t cover the entire
+<code>range</code> rectangle, the targetted cells that don’t receive new
+data are cleared, according to the accompanying field mask in
+<code>fields</code>.</p>
 </li>
 </ul>
-<p><code><a href="../reference/range_write.html">range_write()</a></code> is the only writing function in googlesheets4 that lets the user target a specific range. This function is why we need the ability to convert A1-notation to <code>cell_limits</code> and to decide whether user’s range should be sent via <code>start</code> or <code>range</code>. <code><a href="../reference/gs4_create.html">gs4_create()</a></code>, <code><a href="../reference/sheet_write.html">sheet_write()</a></code>, and <code><a href="../reference/sheet_append.html">sheet_append()</a></code> all offer a higher-level API, focused on the holistic management of (work)sheets that hold a single data table.</p>
-<p>Here’s a table that translates the A1-style ranges created above into <code>cell_limits</code>. Some scenarios are covered more than once in this input, because above we were tackling a different (harder) problem. But that’s harmless and these inputs are good, in terms of covering all relevant scenarios. Note I dropped the row corresponding to “no input”.</p>
+<p><code><a href="../reference/range_write.html">range_write()</a></code> is the only writing function in
+googlesheets4 that lets the user target a specific range. This function
+is why we need the ability to convert A1-notation to
+<code>cell_limits</code> and to decide whether user’s range should be
+sent via <code>start</code> or <code>range</code>.
+<code><a href="../reference/gs4_create.html">gs4_create()</a></code>, <code><a href="../reference/sheet_write.html">sheet_write()</a></code>, and
+<code><a href="../reference/sheet_append.html">sheet_append()</a></code> all offer a higher-level API, focused on the
+holistic management of (work)sheets that hold a single data table.</p>
+<p>Here’s a table that translates the A1-style ranges created above into
+<code>cell_limits</code>. Some scenarios are covered more than once in
+this input, because above we were tackling a different (harder) problem.
+But that’s harmless and these inputs are good, in terms of covering all
+relevant scenarios. Note I dropped the row corresponding to “no
+input”.</p>
 <table class="table">
 <thead><tr class="header">
 <th align="left">range</th>
@@ -541,20 +681,44 @@
 </tr>
 </tbody>
 </table>
-<p>How to decide whether to send user’s range via <code>start</code> or <code>range</code>? Possible scenarios for <code>(sheet, range)</code> (remember: so far, <code><a href="../reference/range_write.html">range_write()</a></code> doesn’t offer <code>skip</code>):</p>
+<p>How to decide whether to send user’s range via <code>start</code> or
+<code>range</code>? Possible scenarios for <code>(sheet, range)</code>
+(remember: so far, <code><a href="../reference/range_write.html">range_write()</a></code> doesn’t offer
+<code>skip</code>):</p>
 <ul>
 <li>
-<code>sheet</code> not given: populate with first (visible) sheet.</li>
-<li>No <code>range</code>: Send sheet ID as <code>GridCoordinate</code> via <code>start</code>. We will overwrite data (and usually formats) in cells covered by the accompanying <code>data</code>. But we don’t touch the rest of the sheet. Why not send as <code>range</code>? That feels too aggressive because it clears the data (and usually formats) of any cells in the sheet that are not covered by the <code>data</code>. But if user wants that, there’s always <code><a href="../reference/range_write.html">range_write()</a></code>.</li>
+<code>sheet</code> not given: populate with first (visible)
+sheet.</li>
+<li>No <code>range</code>: Send sheet ID as <code>GridCoordinate</code>
+via <code>start</code>. We will overwrite data (and usually formats) in
+cells covered by the accompanying <code>data</code>. But we don’t touch
+the rest of the sheet. Why not send as <code>range</code>? That feels
+too aggressive because it clears the data (and usually formats) of any
+cells in the sheet that are not covered by the <code>data</code>. But if
+user wants that, there’s always <code><a href="../reference/range_write.html">range_write()</a></code>.</li>
 <li>
-<code>range</code> as A1 notation: Re-express it as <code>cell_limits</code>.</li>
+<code>range</code> as A1 notation: Re-express it as
+<code>cell_limits</code>.</li>
 <li>
-<code>range</code> as <code>cell_limits</code> breaks down into a couple scenarios:
+<code>range</code> as <code>cell_limits</code> breaks down into a
+couple scenarios:
 <ul>
 <li>
-<code>cell_limits</code> contains at least 1 <code>NA</code>: send as <code>GridRange</code> via <code>range</code>. Analysis of the “all <code>NA</code>” edge case: we send just the sheet ID as a <code>GridRange</code>, so we will clear the targeted fields for the whole sheet. This seems OK here, because no one can do this by accident, i.e. you have to go out of your way to make an explicit <code>cell_limits</code> object containing only <code>NA</code>s. Why would you do this instead of <code><a href="../reference/range_write.html">range_write()</a></code>? Maybe you need to suppress the inclusion of <code>col_names</code> or you don’t like the table formatting applied by <code><a href="../reference/range_write.html">range_write()</a></code>.</li>
+<code>cell_limits</code> contains at least 1 <code>NA</code>: send
+as <code>GridRange</code> via <code>range</code>. Analysis of the “all
+<code>NA</code>” edge case: we send just the sheet ID as a
+<code>GridRange</code>, so we will clear the targeted fields for the
+whole sheet. This seems OK here, because no one can do this by accident,
+i.e. you have to go out of your way to make an explicit
+<code>cell_limits</code> object containing only <code>NA</code>s. Why
+would you do this instead of <code><a href="../reference/range_write.html">range_write()</a></code>? Maybe you need
+to suppress the inclusion of <code>col_names</code> or you don’t like
+the table formatting applied by <code><a href="../reference/range_write.html">range_write()</a></code>.</li>
 <li>
-<code>cell_limits</code> has no <code>NA</code>s: If rectangle includes more than 1 cell, send as <code>GridRange</code> via <code>range</code>. If rectangle is exactly 1 cell, send as <code>GridCoordinate</code> via <code>start</code>.</li>
+<code>cell_limits</code> has no <code>NA</code>s: If rectangle
+includes more than 1 cell, send as <code>GridRange</code> via
+<code>range</code>. If rectangle is exactly 1 cell, send as
+<code>GridCoordinate</code> via <code>start</code>.</li>
 </ul>
 </li>
 </ul>

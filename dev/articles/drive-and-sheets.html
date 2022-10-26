@@ -116,34 +116,64 @@
 <div class="section level2">
 <h2 id="why-use-googlesheets4-and-googledrive-together">Why use googlesheets4 and googledrive together?<a class="anchor" aria-label="anchor" href="#why-use-googlesheets4-and-googledrive-together"></a>
 </h2>
-<p>googlesheets4 wraps the Sheets API v4, which lets you read, write, and format data in Sheets. The Sheets API is very focused on spreadsheet-oriented data and metadata, i.e. (work)sheets and cells.</p>
-<p>The Sheets API offers practically no support for file-level operations, other than basic spreadsheet creation. There is no way to delete, copy, or rename a Sheet or to place it in a folder or to change its sharing permissions. We must use the Drive API for all of this, which is wrapped by the googledrive package (<a href="https://googledrive.tidyverse.org" class="external-link uri">https://googledrive.tidyverse.org</a>).</p>
-<p>Another reason to use the googlesheets4 and googledrive packages together is for ease of file (Sheet) identification. The googlesheets4 package requires you to specify the target Sheet by its ID, not by its <em>name</em>. That’s because the underlying APIs only accept file IDs. But the googledrive package offers lots of support for navigating between human-friendly file names and their associated IDs. This support applies to all files on Drive and, specifically, to Sheets.</p>
-<p>Therefore, it is common to use googledrive and googlesheets4 together in a script or app.</p>
+<p>googlesheets4 wraps the Sheets API v4, which lets you read, write,
+and format data in Sheets. The Sheets API is very focused on
+spreadsheet-oriented data and metadata, i.e. (work)sheets and cells.</p>
+<p>The Sheets API offers practically no support for file-level
+operations, other than basic spreadsheet creation. There is no way to
+delete, copy, or rename a Sheet or to place it in a folder or to change
+its sharing permissions. We must use the Drive API for all of this,
+which is wrapped by the googledrive package (<a href="https://googledrive.tidyverse.org" class="external-link uri">https://googledrive.tidyverse.org</a>).</p>
+<p>Another reason to use the googlesheets4 and googledrive packages
+together is for ease of file (Sheet) identification. The googlesheets4
+package requires you to specify the target Sheet by its ID, not by its
+<em>name</em>. That’s because the underlying APIs only accept file IDs.
+But the googledrive package offers lots of support for navigating
+between human-friendly file names and their associated IDs. This support
+applies to all files on Drive and, specifically, to Sheets.</p>
+<p>Therefore, it is common to use googledrive and googlesheets4 together
+in a script or app.</p>
 </div>
 <div class="section level2">
 <h2 id="coordinating-auth">Coordinating auth<a class="anchor" aria-label="anchor" href="#coordinating-auth"></a>
 </h2>
-<p>How does auth work if you’re using googlesheets4 <strong>and</strong> googledrive? The path of least resistance is to do nothing and just let each package deal with its own auth. This works fine! But it’s a bit clunky and you need to make sure you’re using the same Google identity (email) with each package/API.</p>
-<p>It can be nicer to be proactive about auth and use the same token for your googledrive and googlesheets4 work. Below we show a couple of ways to do this.</p>
+<p>How does auth work if you’re using googlesheets4 <strong>and</strong>
+googledrive? The path of least resistance is to do nothing and just let
+each package deal with its own auth. This works fine! But it’s a bit
+clunky and you need to make sure you’re using the same Google identity
+(email) with each package/API.</p>
+<p>It can be nicer to be proactive about auth and use the same token for
+your googledrive and googlesheets4 work. Below we show a couple of ways
+to do this.</p>
 </div>
 <div class="section level2">
 <h2 id="auth-with-googledrive-first-then-googlesheets4">Auth with googledrive first, then googlesheets4<a class="anchor" aria-label="anchor" href="#auth-with-googledrive-first-then-googlesheets4"></a>
 </h2>
 <p>Outline:</p>
 <ul>
-<li>Make sure auth happens first with googledrive, probably by calling <code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html" class="external-link">googledrive::drive_auth()</a></code> yourself. The default scope is <code>"https://www.googleapis.com/auth/drive"</code>, which is sufficient for all your Drive and Sheets work.</li>
+<li>Make sure auth happens first with googledrive, probably by calling
+<code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html" class="external-link">googledrive::drive_auth()</a></code> yourself. The default scope is
+<code>"https://www.googleapis.com/auth/drive"</code>, which is
+sufficient for all your Drive and Sheets work.</li>
 <li>Tell googlesheets4 to use the same token as googledrive.</li>
 </ul>
 <p>First attach both packages.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org" class="external-link">googledrive</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span></code></pre></div>
-<p>Do auth first with googledrive. Remember <code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html" class="external-link">googledrive::drive_auth()</a></code> accepts additional arguments, e.g. to specify a Google identity via <code>email =</code> or to use a service account via <code>path =</code>. Then direct googlesheets4 to use the same token as googledrive.</p>
+<p>Do auth first with googledrive. Remember
+<code><a href="https://googledrive.tidyverse.org/reference/drive_auth.html" class="external-link">googledrive::drive_auth()</a></code> accepts additional arguments,
+e.g. to specify a Google identity via <code>email =</code> or to use a
+service account via <code>path =</code>. Then direct googlesheets4 to
+use the same token as googledrive.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html" class="external-link">drive_auth</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/gs4_auth.html">gs4_auth</a></span><span class="op">(</span>token <span class="op">=</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_token.html" class="external-link">drive_token</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Now you can use googledrive functions, like <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">googledrive::drive_find()</a></code> or <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">googledrive::drive_get()</a></code>, to list files or find them by name, path, or other property. Then, once you’ve identified the target file, use googlesheets4 to do spreadsheet-specific tasks.</p>
+<p>Now you can use googledrive functions, like
+<code><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">googledrive::drive_find()</a></code> or
+<code><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">googledrive::drive_get()</a></code>, to list files or find them by
+name, path, or other property. Then, once you’ve identified the target
+file, use googlesheets4 to do spreadsheet-specific tasks.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">drive_find</a></span><span class="op">(</span><span class="st">"chicken"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 3</span></span></span>
@@ -176,7 +206,9 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Ginger                  Rhode Island Red hen     Listen. We'll either d…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Camilla the Chicken     Chantecler       hen     Bawk, buck, ba-gawk.   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Ernie The Giant Chicken Brahma           rooster Put Captain Solo in th…</span></span></code></pre></div>
-<p>If you ever want to confirm the currently authenticated user, both packages provide a <code>*_user()</code> function that reveals some info:</p>
+<p>If you ever want to confirm the currently authenticated user, both
+packages provide a <code>*_user()</code> function that reveals some
+info:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_user.html" class="external-link">drive_user</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Logged in as:</span></span>
@@ -187,25 +219,37 @@
 <span><span class="fu"><a href="../reference/gs4_user.html">gs4_user</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Logged in to <span style="color: #0000BB;">googlesheets4</span> as</span></span>
 <span><span class="co">#&gt;   <span style="color: #0000BB;">googlesheets4-dev-docs@robust-fin-276504.iam.gserviceaccount.com</span>.</span></span></code></pre></div>
-<p>We are using a service account to render this article. But if you’ve used the default OAuth flow, this should correspond to the email of the Google account you logged in with.</p>
+<p>We are using a service account to render this article. But if you’ve
+used the default OAuth flow, this should correspond to the email of the
+Google account you logged in with.</p>
 </div>
 <div class="section level2">
 <h2 id="auth-with-googlesheets4-first-then-googledrive">Auth with googlesheets4 first, then googledrive<a class="anchor" aria-label="anchor" href="#auth-with-googlesheets4-first-then-googledrive"></a>
 </h2>
 <p>Outline:</p>
 <ul>
-<li>Proactively auth with googlesheets4 and specify the <code>"https://www.googleapis.com/auth/drive"</code> scope. The default googlesheets4 scope is <code>"https://www.googleapis.com/auth/spreadsheets"</code>, which is insufficient for general work with the Drive API.</li>
+<li>Proactively auth with googlesheets4 and specify the
+<code>"https://www.googleapis.com/auth/drive"</code> scope. The default
+googlesheets4 scope is
+<code>"https://www.googleapis.com/auth/spreadsheets"</code>, which is
+insufficient for general work with the Drive API.</li>
 <li>Tell googledrive to use the same token as googlesheets4.</li>
 </ul>
 <p>First attach both packages.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org" class="external-link">googledrive</a></span><span class="op">)</span></span></code></pre></div>
-<p>Do auth first with googlesheets4, specifying a Drive scope. Remember <code><a href="../reference/gs4_auth.html">gs4_auth()</a></code> accepts additional arguments, e.g. to specify a Google identity via <code>email =</code> or to use a service account via <code>path =</code>. Then direct googledrive to use the same token as googlesheets4.</p>
+<p>Do auth first with googlesheets4, specifying a Drive scope. Remember
+<code><a href="../reference/gs4_auth.html">gs4_auth()</a></code> accepts additional arguments, e.g. to specify a
+Google identity via <code>email =</code> or to use a service account via
+<code>path =</code>. Then direct googledrive to use the same token as
+googlesheets4.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_auth.html">gs4_auth</a></span><span class="op">(</span>scope <span class="op">=</span> <span class="st">"https://www.googleapis.com/auth/drive"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_auth.html" class="external-link">drive_auth</a></span><span class="op">(</span>token <span class="op">=</span> <span class="fu"><a href="../reference/gs4_token.html">gs4_token</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Now you can use googledrive functions to list files or find them by name, path, or other property. Then, once you’ve identified the target file, use googlesheets4 to do spreadsheet-specific tasks.</p>
+<p>Now you can use googledrive functions to list files or find them by
+name, path, or other property. Then, once you’ve identified the target
+file, use googlesheets4 to do spreadsheet-specific tasks.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">drive_find</a></span><span class="op">(</span><span class="st">"chicken"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 3</span></span></span>
@@ -242,16 +286,26 @@
 <div class="section level2">
 <h2 id="scope-savvy">Scope savvy<a class="anchor" aria-label="anchor" href="#scope-savvy"></a>
 </h2>
-<p>If you only need “read” access to Drive or Sheets, the conservative thing to do is to specify a read-only scope. This is a great way to limit the damage anyone can do with the token – you or someone else – through carelessness or malice. If you are storing a token on a remote or shared location, it is wise to use the most conservative scope that still gets the job done.</p>
-<p>Here are various scopes relevant to googledrive and googlesheets4 and what they would allow.</p>
-<p><code>drive</code> scope allows reading and writing with Drive and Sheets APIs. This scope is the most powerful and, therefore, the most dangerous.</p>
+<p>If you only need “read” access to Drive or Sheets, the conservative
+thing to do is to specify a read-only scope. This is a great way to
+limit the damage anyone can do with the token – you or someone else –
+through carelessness or malice. If you are storing a token on a remote
+or shared location, it is wise to use the most conservative scope that
+still gets the job done.</p>
+<p>Here are various scopes relevant to googledrive and googlesheets4 and
+what they would allow.</p>
+<p><code>drive</code> scope allows reading and writing with Drive and
+Sheets APIs. This scope is the most powerful and, therefore, the most
+dangerous.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">PACKAGE_auth</span><span class="op">(</span></span>
 <span>  <span class="va">...</span>,</span>
 <span>  scopes <span class="op">=</span> <span class="st">"https://www.googleapis.com/auth/drive"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><code>drive.readonly</code> still allows file identification via Drive and can be combined with <code>spreadsheets</code> if you plan to edit, create, or delete Sheets.</p>
+<p><code>drive.readonly</code> still allows file identification via
+Drive and can be combined with <code>spreadsheets</code> if you plan to
+edit, create, or delete Sheets.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">PACKAGE_auth</span><span class="op">(</span></span>
 <span>  <span class="va">...</span>,</span>
@@ -261,14 +315,18 @@
 <span>  <span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>If you are just using Drive to identify Sheets and are only reading from those Sheets, the <code>drive.readonly</code> scope is sufficient and means you can’t modify anything by accident.</p>
+<p>If you are just using Drive to identify Sheets and are only reading
+from those Sheets, the <code>drive.readonly</code> scope is sufficient
+and means you can’t modify anything by accident.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">PACKAGE_auth</span><span class="op">(</span></span>
 <span>  <span class="va">...</span>,</span>
 <span>  scopes <span class="op">=</span> <span class="st">"https://www.googleapis.com/auth/drive.readonly"</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>If you are not using Drive at all, i.e. you always identify Sheets by file ID, and you are only reading from those Sheets, you only need googlesheets4 and <code>spreadsheets.readonly</code> is sufficient.</p>
+<p>If you are not using Drive at all, i.e. you always identify Sheets by
+file ID, and you are only reading from those Sheets, you only need
+googlesheets4 and <code>spreadsheets.readonly</code> is sufficient.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_auth.html">gs4_auth</a></span><span class="op">(</span></span>
 <span>  <span class="va">...</span>,</span>

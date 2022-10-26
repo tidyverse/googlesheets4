@@ -113,7 +113,8 @@
 
     
     
-<p>An index of the official example and test Sheets. They are world-readable, so we do <code><a href="../reference/gs4_deauth.html">gs4_deauth()</a></code>.</p>
+<p>An index of the official example and test Sheets. They are
+world-readable, so we do <code><a href="../reference/gs4_deauth.html">gs4_deauth()</a></code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span>
 <span></span>
@@ -122,6 +123,10 @@
 <h2 id="example-sheets">Example Sheets<a class="anchor" aria-label="anchor" href="#example-sheets"></a>
 </h2>
 <table class="table">
+<colgroup>
+<col width="36%">
+<col width="63%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">name (these are links)</th>
 <th align="left">id</th>
@@ -156,7 +161,9 @@
 <div class="section level3">
 <h3 id="how-to-get-hold-of-the-example-sheets-yourself">How to get hold of the example Sheets yourself<a class="anchor" aria-label="anchor" href="#how-to-get-hold-of-the-example-sheets-yourself"></a>
 </h3>
-<p><code><a href="../reference/gs4_examples.html">gs4_examples()</a></code> returns a named vector of Sheet IDs. It is also an instance of <code>drive_id</code>, to make good things happen with googledrive.</p>
+<p><code><a href="../reference/gs4_examples.html">gs4_examples()</a></code> returns a named vector of Sheet IDs. It
+is also an instance of <code>drive_id</code>, to make good things happen
+with googledrive.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_examples.html">gs4_examples</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;drive_id[6]&gt;</span></span>
@@ -186,7 +193,10 @@
 <span><span class="co">#&gt; 1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E </span></span>
 <span><span class="co">#&gt;                         formulas-and-formats </span></span>
 <span><span class="co">#&gt; 1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms</span></span></code></pre></div>
-<p><code><a href="../reference/gs4_examples.html">gs4_example()</a></code> returns exactly one Sheet ID (or errors). It is an instance of <code>drive_id</code>. It is also an instance of <code>sheets_id</code>, which means printing will (try to) reveal current metadata about the Sheet.</p>
+<p><code><a href="../reference/gs4_examples.html">gs4_example()</a></code> returns exactly one Sheet ID (or errors).
+It is an instance of <code>drive_id</code>. It is also an instance of
+<code>sheets_id</code>, which means printing will (try to) reveal
+current metadata about the Sheet.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"chicken"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Spreadsheet name: chicken-sheet</span></span>
@@ -204,7 +214,8 @@
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">gapminder</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">mini-gap</span></span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Make the `matches` regular expression more specific.</span></span></code></pre></div>
-<p>Here’s a handy snippet to open all the example Sheets in browser tabs.</p>
+<p>Here’s a handy snippet to open all the example Sheets in browser
+tabs.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="../reference/gs4_examples.html">gs4_examples</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">gs4_browse</span><span class="op">)</span></span>
 <span></span>
@@ -216,8 +227,13 @@
 <div class="section level2">
 <h2 id="test-sheets">Test Sheets<a class="anchor" aria-label="anchor" href="#test-sheets"></a>
 </h2>
-<p>These are more developer-facing, but it’s convenient to do them here too.</p>
+<p>These are more developer-facing, but it’s convenient to do them here
+too.</p>
 <table class="table">
+<colgroup>
+<col width="35%">
+<col width="64%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">name (these are links)</th>
 <th align="left">id</th>

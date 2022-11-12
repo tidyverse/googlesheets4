@@ -220,9 +220,9 @@ returns</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># specify only a data frame, get a new Sheet, with a random name</span></span></span>
 <span class="r-in"><span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu">write_sheet</span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">revenued-mousebird</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">kneelength-albatross</span>.</span>
 <span class="r-in"><span><span class="fu"><a href="range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">revenued-mousebird</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">kneelength-albatross</span>.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">df</span>.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       x y    </span>
@@ -234,7 +234,7 @@ returns</p></li>
 <span class="r-in"><span><span class="co"># clean up</span></span></span>
 <span class="r-in"><span><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">revenued-mousebird</span> <span style="color: #555555;">&lt;id: 1zWl-cgXsQcOQXDO-N7t4n_u9mOPp5hc7fqTmBzV7Vec&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">kneelength-albatross</span> <span style="color: #555555;">&lt;id: 1B1a3YBWVBg7hRV0UPpnHRKqkvKJyeMd5Ye2DBtaJQ28&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create a Sheet with some initial, placeholder data</span></span></span>
 <span class="r-in"><span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gs4_create.html">gs4_create</a></span><span class="op">(</span></span></span>
@@ -258,9 +258,9 @@ returns</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name  index         id type  visible grid_rows grid_columns data  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> alpha     0  720<span style="text-decoration: underline;">031</span>415 GRID  TRUE            2            1 <span style="color: #949494;">&lt;NULL&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> omega     1 <span style="text-decoration: underline;">2</span>057<span style="text-decoration: underline;">399</span>268 GRID  TRUE           33           11 <span style="color: #949494;">&lt;NULL&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> df        2 <span style="text-decoration: underline;">2</span>046<span style="text-decoration: underline;">135</span>253 GRID  TRUE            4            2 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> alpha     0  556<span style="text-decoration: underline;">153</span>275 GRID  TRUE            2            1 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> omega     1 <span style="text-decoration: underline;">2</span>022<span style="text-decoration: underline;">933</span>766 GRID  TRUE           33           11 <span style="color: #949494;">&lt;NULL&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> df        2 <span style="text-decoration: underline;">1</span>224<span style="text-decoration: underline;">808</span>038 GRID  TRUE            4            2 <span style="color: #949494;">&lt;NULL&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># view your magnificent creation in the browser</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="gs4_browse.html">gs4_browse</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span></span></span>
@@ -269,7 +269,7 @@ returns</p></li>
 <span class="r-in"><span><span class="fu"><a href="gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheet-write-demo"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheet-write-demo</span> <span style="color: #555555;">&lt;id: 1lXTB4OkNtaKSNuyVKRCk6AjjilIgUSuQa4msQ8OUDSY&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheet-write-demo</span> <span style="color: #555555;">&lt;id: 1z7tuyzrcsZeHmx9O5RexbO8odOWg4n3j0qSbPVOpbAg&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

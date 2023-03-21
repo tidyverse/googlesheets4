@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2020 Jennifer Bryan and RStudio
+Copyright (c) 2023 googlesheets4 authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

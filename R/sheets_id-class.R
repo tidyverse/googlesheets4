@@ -120,7 +120,7 @@ vec_cast.sheets_id.drive_id <- function(x, to, ...) {
 vec_cast.drive_id.sheets_id <- function(x, to, ...) as_id(vec_data(x))
 
 #' @export
-vec_ptype_abbr.sheets_id <- function(x) "sht_id"
+vec_ptype_abbr.sheets_id <- function(x, ...) "sht_id"
 
 # googledrive ----
 

@@ -3,30 +3,34 @@
 \name{gs4_auth_configure}
 \alias{gs4_auth_configure}
 \alias{gs4_api_key}
-\alias{gs4_oauth_app}
+\alias{gs4_oauth_client}
 \title{Edit and view auth configuration}
 \usage{
-gs4_auth_configure(app, path, api_key)
+gs4_auth_configure(client, path, api_key, app = deprecated())
 
 gs4_api_key()
 
-gs4_oauth_app()
+gs4_oauth_client()
 }
 \arguments{
-\item{app}{OAuth app, in the sense of \code{\link[httr:oauth_app]{httr::oauth_app()}}.}
+\item{client}{A Google OAuth client, presumably constructed via
+\code{\link[gargle:gargle_oauth_client_from_json]{gargle::gargle_oauth_client_from_json()}}. Note, however, that it is
+preferred to specify the client with JSON, using the \code{path} argument.}
 
-\item{path}{JSON downloaded from Google Cloud Platform Console, containing a
-client id (aka key) and secret, in one of the forms supported for the \code{txt}
-argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a file path or JSON string).}
+\item{path}{JSON downloaded from \href{https://console.cloud.google.com}{Google Cloud Console}, containing a client id and
+secret, in one of the forms supported for the \code{txt} argument of
+\code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a file path or JSON string).}
 
 \item{api_key}{API key.}
+
+\item{app}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Replaced by the \code{client}
+argument.}
 }
 \value{
 \itemize{
 \item \code{gs4_auth_configure()}: An object of R6 class
 \link[gargle:AuthState-class]{gargle::AuthState}, invisibly.
-\item \code{gs4_oauth_app()}: the current user-configured
-\code{\link[httr:oauth_app]{httr::oauth_app()}}.
+\item \code{gs4_oauth_client()}: the current user-configured OAuth client.
 \item \code{gs4_api_key()}: the current user-configured API key.
 }
 }
@@ -35,53 +39,44 @@ These functions give more control over and visibility into the auth
 configuration than \code{\link[=gs4_auth]{gs4_auth()}} does. \code{gs4_auth_configure()}
 lets the user specify their own:
 \itemize{
-\item OAuth app, which is used when obtaining a user token.
+\item OAuth client, which is used when obtaining a user token.
 \item API key. If googlesheets4 is de-authorized via \code{\link[=gs4_deauth]{gs4_deauth()}}, all
 requests are sent with an API key in lieu of a token.
-See the vignette
-\href{https://gargle.r-lib.org/articles/get-api-credentials.html}{How to get your own API credentials}
+}
+
+See the \code{vignette("get-api-credentials", package = "gargle")}
 for more.
 If the user does not configure these settings, internal defaults
 are used.
-\code{gs4_oauth_app()} and \code{gs4_api_key()} retrieve the
-currently configured OAuth app and API key, respectively.
-}
+
+\code{gs4_oauth_client()} and \code{gs4_api_key()} retrieve the
+currently configured OAuth client and API key, respectively.
 }
 \examples{
-# see and store the current user-configured OAuth app (probably `NULL`)
-(original_app <- gs4_oauth_app())
+# see and store the current user-configured OAuth client (probably `NULL`)
+(original_client <- gs4_oauth_client())
 
 # see and store the current user-configured API key (probably `NULL`)
 (original_api_key <- gs4_api_key())
 
-if (require(httr)) {
-  # bring your own app via client id (aka key) and secret
-  google_app <- httr::oauth_app(
-    "my-awesome-google-api-wrapping-package",
-    key = "YOUR_CLIENT_ID_GOES_HERE",
-    secret = "YOUR_SECRET_GOES_HERE"
-  )
-  google_key <- "YOUR_API_KEY"
-  gs4_auth_configure(app = google_app, api_key = google_key)
+# the preferred way to configure your own client is via a JSON file
+# downloaded from Google Developers Console
+# this example JSON is indicative, but fake
+path_to_json <- system.file(
+  "extdata", "data", "client_secret_123.googleusercontent.com.json",
+  package = "googledrive"
+)
+gs4_auth_configure(path = path_to_json)
 
-  # confirm the changes
-  gs4_oauth_app()
-  gs4_api_key()
+# this is also obviously a fake API key
+drive_auth_configure(api_key = "the_key_I_got_for_a_google_API")
 
-  # bring your own app via JSON downloaded from Google Developers Console
-  # this file has the same structure as the JSON from Google
-  app_path <- system.file(
-    "extdata", "fake-oauth-client-id-and-secret.json",
-    package = "googlesheets4"
-  )
-  gs4_auth_configure(path = app_path)
-
-  # confirm the changes
-  gs4_oauth_app()
-}
+# confirm the changes
+gs4_oauth_client()
+gs4_api_key()
 
 # restore original auth config
-gs4_auth_configure(app = original_app, api_key = original_api_key)
+gs4_auth_configure(client = original_client, api_key = original_api_key)
 }
 \seealso{
 Other auth functions: 

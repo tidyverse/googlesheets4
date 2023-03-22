@@ -1,0 +1,59 @@
+test_that("gs4_auth_configure works", {
+  old_client <- gs4_oauth_client()
+  old_api_key <- gs4_api_key()
+  withr::defer(
+    gs4_auth_configure(client = old_client, api_key = old_api_key)
+  )
+
+  expect_no_error(gs4_oauth_client())
+  expect_no_error(gs4_api_key())
+
+  expect_snapshot(
+    gs4_auth_configure(client = gargle::gargle_client(), path = "PATH"),
+    error = TRUE
+  )
+
+  gs4_auth_configure(client = gargle::gargle_client())
+  expect_s3_class(gs4_oauth_client(), "gargle_oauth_client")
+
+  path_to_json <- system.file(
+    "extdata", "data", "client_secret_123.googleusercontent.com.json",
+    package = "googledrive"
+  )
+  gs4_auth_configure(path = path_to_json)
+  expect_s3_class(gs4_oauth_client(), "gargle_oauth_client")
+
+  gs4_auth_configure(client = NULL)
+  expect_null(gs4_oauth_client())
+
+  gs4_auth_configure(api_key = "API_KEY")
+  expect_identical(gs4_api_key(), "API_KEY")
+
+  gs4_auth_configure(api_key = NULL)
+  expect_null(gs4_api_key())
+})
+
+test_that("gs4_oauth_app() is deprecated", {
+  withr::local_options(lifecycle_verbosity = "warning")
+  expect_snapshot(absorb <- gs4_oauth_app())
+})
+
+test_that("gs4_auth_configure(app =) is deprecated in favor of client", {
+  withr::local_options(lifecycle_verbosity = "warning")
+  (original_client <- gs4_oauth_client())
+  withr::defer(gs4_auth_configure(client = original_client))
+
+  client <- gargle::gargle_oauth_client_from_json(
+    system.file(
+      "extdata", "data", "client_secret_123.googleusercontent.com.json",
+      package = "googledrive"
+    ),
+    name = "test-client"
+  )
+  expect_snapshot(
+    gs4_auth_configure(app = client)
+  )
+  expect_equal(gs4_oauth_client()$name, "test-client")
+  expect_equal(gs4_oauth_client()$id, "abc.apps.googleusercontent.com")
+})
+

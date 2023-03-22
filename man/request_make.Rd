@@ -41,7 +41,7 @@ that is very specific to the Sheets API, which has documented \href{https://deve
 seconds per user"
 
 Note that the "project" here means everyone using googlesheets4 who hasn't
-configured their own OAuth app. This is potentially a lot of users, all
+configured their own OAuth client. This is potentially a lot of users, all
 acting independently.
 
 If you hit the "100 requests per 100 seconds per \strong{user}" limit (which
@@ -50,7 +50,7 @@ then we revert to exponential backoff.
 
 If you experience lots of retries, especially with 100 second delays, it
 means your use of googlesheets4 is more than casual and \strong{it's time for you
-to get your own OAuth app or use a service account token}. This is explained
+to get your own OAuth client or use a service account token}. This is explained
 in the gargle vignette \code{vignette("get-api-credentials", package = "gargle")}.
 }
 \seealso{

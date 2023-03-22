@@ -1,5 +1,17 @@
 # googlesheets4 (development version)
 
+## Syncing up with gargle
+
+Version 1.3.0 of gargle introduced some changes around OAuth and googlesheets4 is syncing up that:
+
+* `gs4_oauth_client()` is a new function to replace the now-deprecated `gs4_oauth_app()`.
+* The new `client` argument of `gs4_auth_configure()` replaces the now-deprecated `app` argument.
+* The documentation of `gs4_auth_configure()` emphasizes that the preferred way to "bring your own OAuth client" is by providing the JSON downloaded from Google Developers Console.
+
+## Other
+
+`gs4_auth()` now warns if the user specifies both `email` and `path`, because this is almost always an error.
+
 # googlesheets4 1.0.1
 
 The mere existence of an invalid named range no longer prevents googlesheets4 from dealing with a Sheet (#175).

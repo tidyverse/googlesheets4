@@ -2,9 +2,9 @@ Package: googlesheets4
 Title: Access Google Sheets using the Sheets API V4
 Version: 1.0.1.9000
 Authors@R: c(
-    person("Jennifer", "Bryan", , "jenny@rstudio.com", role = c("cre", "aut"),
+    person("Jennifer", "Bryan", , "jenny@posit.co", role = c("cre", "aut"),
            comment = c(ORCID = "0000-0002-6983-2759")),
-    person("RStudio", role = c("cph", "fnd"))
+    person("Posit Software, PBC", role = c("cph", "fnd"))
   )
 Description: Interact with Google Sheets through the Sheets API v4
     <https://developers.google.com/sheets/api>. "API" is an acronym for
@@ -52,4 +52,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3

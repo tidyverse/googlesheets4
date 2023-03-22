@@ -19,7 +19,7 @@ and, if provided, it can match multiple Sheets. The singular
 \itemize{
 \item \code{gs4_example()}: a \link{sheets_id}
 \item \code{gs4_examples()}: a named vector of all built-in examples, with class
-\code{\link[googledrive:as_id]{drive_id}}
+\code{\link[googledrive:drive_id]{drive_id}}
 }
 }
 \description{

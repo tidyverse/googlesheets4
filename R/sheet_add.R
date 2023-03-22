@@ -55,8 +55,8 @@ sheet_add <- function(ss,
                       ...,
                       .before = NULL,
                       .after = NULL) {
-  ssid <- as_sheets_id(ss)
   maybe_character(sheet)
+  ssid <- as_sheets_id(ss)
   x <- gs4_get(ssid)
   index <- resolve_index(x$sheets, .before, .after)
   n_new <- if (is.null(sheet)) 1 else length(sheet)

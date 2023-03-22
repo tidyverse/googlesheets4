@@ -28,6 +28,7 @@ Imports:
     googledrive (>= 2.0.0),
     httr,
     ids,
+    lifecycle,
     magrittr,
     methods,
     purrr,

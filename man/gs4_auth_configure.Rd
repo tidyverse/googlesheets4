@@ -69,7 +69,7 @@ path_to_json <- system.file(
 gs4_auth_configure(path = path_to_json)
 
 # this is also obviously a fake API key
-drive_auth_configure(api_key = "the_key_I_got_for_a_google_API")
+gs4_auth_configure(api_key = "the_key_I_got_for_a_google_API")
 
 # confirm the changes
 gs4_oauth_client()

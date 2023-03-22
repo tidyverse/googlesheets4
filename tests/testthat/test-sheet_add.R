@@ -15,23 +15,23 @@ test_that("sheet_add() works", {
 
   ss <- local_ss(me_())
 
-  expect_error_free(
+  expect_no_error(
     sheet_add(ss)
   )
 
-  expect_error_free(
+  expect_no_error(
     sheet_add(ss, "apple", .after = 1)
   )
 
-  expect_error_free(
+  expect_no_error(
     sheet_add(ss, "banana", .after = "apple")
   )
 
-  expect_error_free(
+  expect_no_error(
     sheet_add(ss, c("coconut", "dragonfruit"))
   )
 
-  expect_error_free(
+  expect_no_error(
     sheet_add(
       ss,
       sheet = "eggplant",

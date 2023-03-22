@@ -56,13 +56,13 @@ test_that("full cell data and empties are within reach", {
   expect_true("B2" %in% out$loc)
 
   # C2 is empty and orange; make sure it's here and format is available
-  expect_error_free(
+  expect_no_error(
     cell <- out$cell[[which(out$loc == "C2")]]
   )
   expect_true(!is.null(cell$effectiveFormat))
 
   # C1 bears a note
-  expect_error_free(
+  expect_no_error(
     cell <- out$cell[[which(out$loc == "C1")]]
   )
   note <- cell$note

@@ -19,10 +19,6 @@ skip_if_no_token <- function() {
   }
 }
 
-expect_error_free <- function(...) {
-  expect_error(..., regexp = NA)
-}
-
 expect_gs4_error <- function(...) {
   expect_error(..., class = "googlesheets4_error")
 }

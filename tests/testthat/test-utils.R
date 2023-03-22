@@ -1,11 +1,11 @@
 test_that("check_length_one() works", {
-  expect_error_free(check_length_one(1))
+  expect_no_error(check_length_one(1))
   expect_error(check_length_one(1:2), "must have length 1")
   expect_error(check_length_one(letters), "letters")
 })
 
 test_that("check_character() works", {
-  expect_error_free(check_character(letters))
+  expect_no_error(check_character(letters))
   expect_error(check_character(1:2), "integer")
 })
 

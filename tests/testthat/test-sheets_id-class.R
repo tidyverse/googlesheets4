@@ -81,7 +81,7 @@ test_that("sheets_id print method doesn't error for nonexistent ID", {
   skip_if_offline()
   skip_if_no_token()
 
-  expect_error_free(format(as_sheets_id("12345")))
+  expect_no_error(format(as_sheets_id("12345")))
   expect_snapshot(as_sheets_id("12345"))
 })
 
@@ -105,19 +105,19 @@ test_that("sheets_id print does not error for lack of cred", {
   .auth$clear_cred()
   .auth$set_auth_active(TRUE)
 
-  expect_error_free(format(gs4_example("mini-gap")))
+  expect_no_error(format(gs4_example("mini-gap")))
   expect_snapshot(print(gs4_example("mini-gap")))
 })
 
 ## low-level helpers ----
 test_that("new_sheets_id() handles 0-length input and NA", {
-  expect_error_free(
+  expect_no_error(
     out <- new_sheets_id(character())
   )
   expect_length(out, 0)
   expect_s3_class(out, "sheets_id")
 
-  expect_error_free(
+  expect_no_error(
     out <- new_sheets_id(NA_character_)
   )
   expect_true(is.na(out))

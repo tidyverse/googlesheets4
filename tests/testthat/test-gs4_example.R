@@ -43,7 +43,7 @@ test_that("`matches` works in gs4_example()", {
   skip_if_offline()
   skip_on_cran()
 
-  expect_error_free(
+  expect_no_error(
     example <- gs4_example("gapminder")
   )
   expect_length(example, 1)

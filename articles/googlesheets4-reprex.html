@@ -14,12 +14,12 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.2/font.css" rel="stylesheet">
-<link href="../deps/Source_Code_Pro-0.4.2/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.5/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.5/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="How to create a googlesheets4 reprex">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="How to create a googlesheets4 reprex">
 <meta property="og:description" content="googlesheets4">
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">googlesheets4</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -112,17 +112,27 @@
 
     
     
-<p>“reprex” is short for “reproducible example”. A reprex is very helpful when reporting a bug or requesting a new feature. The <a href="https://reprex.tidyverse.org" class="external-link">reprex package</a> helps with some of the fiddly mechanics of making a self-contained, well-formatted reprex.</p>
-<p>You might worry about some awkward things when using reprex with googlesheets4:</p>
+<p>“reprex” is short for “reproducible example”. A reprex is very
+helpful when reporting a bug or requesting a new feature. The <a href="https://reprex.tidyverse.org" class="external-link">reprex package</a> helps with some
+of the fiddly mechanics of making a self-contained, well-formatted
+reprex.</p>
+<p>You might worry about some awkward things when using reprex with
+googlesheets4:</p>
 <ul>
-<li>What about auth? What if you need to reprex with a private Sheet?</li>
-<li>How do you make a Sheet readable by everyone or specific individuals, like a package maintainer?</li>
+<li>What about auth? What if you need to reprex with a private
+Sheet?</li>
+<li>How do you make a Sheet readable by everyone or specific
+individuals, like a package maintainer?</li>
 </ul>
-<p>Here we show various ways this can work, if rough order of preference.</p>
+<p>Here we show various ways this can work, if rough order of
+preference.</p>
 <div class="section level2">
 <h2 id="use-a-public-example-sheet">Use a public example Sheet<a class="anchor" aria-label="anchor" href="#use-a-public-example-sheet"></a>
 </h2>
-<p>If you can make your point with one of the example Sheets, exposed via <code><a href="../reference/gs4_examples.html">gs4_examples()</a></code> and <code><a href="../reference/gs4_examples.html">gs4_example()</a></code>, do so! You can call <code><a href="../reference/gs4_deauth.html">gs4_deauth()</a></code> explicitly in your reprex to shut down any attempt to get a token.</p>
+<p>If you can make your point with one of the example Sheets, exposed
+via <code><a href="../reference/gs4_examples.html">gs4_examples()</a></code> and <code><a href="../reference/gs4_examples.html">gs4_example()</a></code>, do so!
+You can call <code><a href="../reference/gs4_deauth.html">gs4_deauth()</a></code> explicitly in your reprex to shut
+down any attempt to get a token.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span>
 <span></span>
@@ -136,10 +146,16 @@
 <div class="section level2">
 <h2 id="create-a-sheet-and-make-it-world-readable">Create a Sheet and make it world-readable<a class="anchor" aria-label="anchor" href="#create-a-sheet-and-make-it-world-readable"></a>
 </h2>
-<p>If you can create an example Sheet that makes your point and make it readable by “anyone with a link”, do so! You can call <code><a href="../reference/gs4_deauth.html">gs4_deauth()</a></code> explicitly in your reprex to shut down any attempt to get a token.</p>
-<p>How do you make a Sheet world-readable? Do this setup once! It should not be part of your reprex. Two options:</p>
+<p>If you can create an example Sheet that makes your point and make it
+readable by “anyone with a link”, do so! You can call
+<code><a href="../reference/gs4_deauth.html">gs4_deauth()</a></code> explicitly in your reprex to shut down any
+attempt to get a token.</p>
+<p>How do you make a Sheet world-readable? Do this setup once! It should
+not be part of your reprex. Two options:</p>
 <ul>
-<li><p>In the browser: <em>Share</em> (big green button) &gt; <em>Advanced</em> &gt; <em>Who has access … Change</em> &gt; <em>Link sharing: On - Anyone with the link</em></p></li>
+<li><p>In the browser: <em>Share</em> (big green button) &gt;
+<em>Advanced</em> &gt; <em>Who has access … Change</em> &gt; <em>Link
+sharing: On - Anyone with the link</em></p></li>
 <li>
 <p>Using googledrive:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -150,7 +166,8 @@
 <span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_share.html" class="external-link">drive_share</a></span><span class="op">(</span><span class="va">x</span>, role <span class="op">=</span> <span class="st">"reader"</span>, type <span class="op">=</span> <span class="st">"anyone"</span><span class="op">)</span></span></code></pre></div>
 </li>
 </ul>
-<p>Now make a reprex just like we do with the official example Sheets:</p>
+<p>Now make a reprex just like we do with the official example
+Sheets:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span>
 <span></span>
@@ -162,9 +179,12 @@
 <div class="section level3">
 <h3 id="grant-access-to-specific-users">Grant access to specific user(s)<a class="anchor" aria-label="anchor" href="#grant-access-to-specific-users"></a>
 </h3>
-<p>If you can’t create a world-readable example Sheet, perhaps you can still share one with specific individuals, such as a package maintainer. How to share with specific user(s):</p>
+<p>If you can’t create a world-readable example Sheet, perhaps you can
+still share one with specific individuals, such as a package maintainer.
+How to share with specific user(s):</p>
 <ul>
-<li><p>In the browser: <em>Share</em> (big green button) &gt; <em>People</em> &gt; <em>Enter names or email addresses</em>.</p></li>
+<li><p>In the browser: <em>Share</em> (big green button) &gt;
+<em>People</em> &gt; <em>Enter names or email addresses</em>.</p></li>
 <li>
 <p>Using googledrive:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -185,15 +205,24 @@
 <div class="section level2">
 <h2 id="use-a-private-sheet">Use a private Sheet<a class="anchor" aria-label="anchor" href="#use-a-private-sheet"></a>
 </h2>
-<p><code><a href="https://reprex.tidyverse.org/reference/reprex.html" class="external-link">reprex::reprex()</a></code> eventually runs your code in a fresh, non-interactive R session. You won’t be there to do anything about auth, like select the right identity or approve the use of a cached token.</p>
-<p>This general situation is documented in the gargle vignette <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html" class="external-link">Non-interactive auth</a>. But here’s the short version:</p>
+<p><code><a href="https://reprex.tidyverse.org/reference/reprex.html" class="external-link">reprex::reprex()</a></code> eventually runs your code in a fresh,
+non-interactive R session. You won’t be there to do anything about auth,
+like select the right identity or approve the use of a cached token.</p>
+<p>This general situation is documented in the gargle vignette <a href="https://gargle.r-lib.org/articles/non-interactive-auth.html" class="external-link">Non-interactive
+auth</a>. But here’s the short version:</p>
 <ul>
-<li>Develop a code snippet that works interactively for you, in a clean R session.</li>
-<li>Note who you are logged in as. <code><a href="../reference/gs4_user.html">gs4_user()</a></code> reveals this if you’re not sure.</li>
-<li>Insert an explicit call to <code>gs4_auth(email = "SOMEONE@example.org)</code> into your code (see below).</li>
+<li>Develop a code snippet that works interactively for you, in a clean
+R session.</li>
+<li>Note who you are logged in as. <code><a href="../reference/gs4_user.html">gs4_user()</a></code> reveals this
+if you’re not sure.</li>
+<li>Insert an explicit call to
+<code>gs4_auth(email = "SOMEONE@example.org)</code> into your code (see
+below).</li>
 <li>Use <code><a href="https://reprex.tidyverse.org/reference/reprex.html" class="external-link">reprex::reprex()</a></code>.</li>
 </ul>
-<p>Here’s an example of a snippet suitable for <code><a href="https://reprex.tidyverse.org/reference/reprex.html" class="external-link">reprex::reprex()</a></code>, assuming the user has successfully run it once interactively, so there’s a cached token for “<a href="mailto:jane_doe@example.com" class="email">jane_doe@example.com</a>”.</p>
+<p>Here’s an example of a snippet suitable for
+<code><a href="https://reprex.tidyverse.org/reference/reprex.html" class="external-link">reprex::reprex()</a></code>, assuming the user has successfully run it
+once interactively, so there’s a cached token for “<a href="mailto:jane_doe@example.com" class="email">jane_doe@example.com</a>”.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span>
 <span></span>
@@ -203,7 +232,11 @@
 <span><span class="co"># the following is just an example, replace it with your own code</span></span>
 <span><span class="va">ssid</span> <span class="op">&lt;-</span> <span class="st">"some_very_long_string_of_letters_and_digits"</span></span>
 <span><span class="fu"><a href="../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span></code></pre></div>
-<p>If you’re reluctant to reveal your email address and/or the spreadsheet id, you can use special comments to create a hidden chunk and a visible body chunk. If the Sheet is private and no one else will be able to access it anyway, this is still a good option to show exactly what you’re seeing locally.</p>
+<p>If you’re reluctant to reveal your email address and/or the
+spreadsheet id, you can use special comments to create a hidden chunk
+and a visible body chunk. If the Sheet is private and no one else will
+be able to access it anyway, this is still a good option to show exactly
+what you’re seeing locally.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span>
 <span></span>
@@ -227,12 +260,12 @@
   <footer><div class="container">
   <div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
+<p>Developed by <a href="https://jennybryan.org" class="external-link">Jennifer Bryan</a>, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" style="margin-bottom: 3px;"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
   </div></footer>

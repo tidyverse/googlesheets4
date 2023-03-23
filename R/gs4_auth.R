@@ -44,6 +44,17 @@ gs4_auth <- function(email = gargle::gargle_oauth_email(),
                      cache = gargle::gargle_oauth_cache(),
                      use_oob = gargle::gargle_oob_default(),
                      token = NULL) {
+  if (!missing(email) && !missing(path)) {
+    cli::cli_warn(c(
+      "It is very unusual to provide both {.arg email} and \\
+       {.arg path} to {.fun gs4_auth}.",
+      "They relate to two different auth methods.",
+      "The {.arg path} argument is only for a service account token.",
+      "If you need to specify your own OAuth client, use \\
+      {.fun gs4_auth_configure}."
+    ))
+  }
+
   # I have called `gs4_auth(token = drive_token())` multiple times now,
   # without attaching googledrive. Expose this error noisily, before it gets
   # muffled by the `tryCatch()` treatment of `token_fetch()`.
@@ -51,7 +62,7 @@ gs4_auth <- function(email = gargle::gargle_oauth_email(),
 
   cred <- gargle::token_fetch(
     scopes = scopes,
-    app = gs4_oauth_app() %||% gargle::tidyverse_app(),
+    app = gs4_oauth_client() %||% gargle::tidyverse_client(),
     email = email,
     path = path,
     package = "googlesheets4",
@@ -142,54 +153,53 @@ gs4_has_token <- function() {
 #' @family auth functions
 #' @export
 #' @examples
-#' # see and store the current user-configured OAuth app (probably `NULL`)
-#' (original_app <- gs4_oauth_app())
+#' # see and store the current user-configured OAuth client (probably `NULL`)
+#' (original_client <- gs4_oauth_client())
 #'
 #' # see and store the current user-configured API key (probably `NULL`)
 #' (original_api_key <- gs4_api_key())
 #'
-#' if (require(httr)) {
-#'   # bring your own app via client id (aka key) and secret
-#'   google_app <- httr::oauth_app(
-#'     "my-awesome-google-api-wrapping-package",
-#'     key = "YOUR_CLIENT_ID_GOES_HERE",
-#'     secret = "YOUR_SECRET_GOES_HERE"
-#'   )
-#'   google_key <- "YOUR_API_KEY"
-#'   gs4_auth_configure(app = google_app, api_key = google_key)
+#' # the preferred way to configure your own client is via a JSON file
+#' # downloaded from Google Developers Console
+#' # this example JSON is indicative, but fake
+#' path_to_json <- system.file(
+#'   "extdata", "data", "client_secret_123.googleusercontent.com.json",
+#'   package = "googledrive"
+#' )
+#' gs4_auth_configure(path = path_to_json)
 #'
-#'   # confirm the changes
-#'   gs4_oauth_app()
-#'   gs4_api_key()
+#' # this is also obviously a fake API key
+#' gs4_auth_configure(api_key = "the_key_I_got_for_a_google_API")
 #'
-#'   # bring your own app via JSON downloaded from Google Developers Console
-#'   # this file has the same structure as the JSON from Google
-#'   app_path <- system.file(
-#'     "extdata", "fake-oauth-client-id-and-secret.json",
-#'     package = "googlesheets4"
-#'   )
-#'   gs4_auth_configure(path = app_path)
-#'
-#'   # confirm the changes
-#'   gs4_oauth_app()
-#' }
+#' # confirm the changes
+#' gs4_oauth_client()
+#' gs4_api_key()
 #'
 #' # restore original auth config
-#' gs4_auth_configure(app = original_app, api_key = original_api_key)
-gs4_auth_configure <- function(app, path, api_key) {
-  if (!missing(app) && !missing(path)) {
-    gs4_abort("Must supply exactly one of {.arg app} and {.arg path}, not both.")
+#' gs4_auth_configure(client = original_client, api_key = original_api_key)
+gs4_auth_configure <- function(client, path, api_key, app = deprecated()) {
+  if (lifecycle::is_present(app)) {
+    lifecycle::deprecate_warn(
+      "1.1.0",
+      "gs4_auth_configure(app)",
+      "gs4_auth_configure(client)"
+    )
+    gs4_auth_configure(client = app, path = path, api_key = api_key)
+  }
+
+  if (!missing(client) && !missing(path)) {
+    gs4_abort("Must supply exactly one of {.arg client} and {.arg path}, not both.")
   }
   stopifnot(missing(api_key) || is.null(api_key) || is_string(api_key))
 
   if (!missing(path)) {
     stopifnot(is_string(path))
-    app <- gargle::oauth_app_from_json(path)
+    client <- gargle::gargle_oauth_client_from_json(path)
   }
-  stopifnot(missing(app) || is.null(app) || inherits(app, "oauth_app"))
+  stopifnot(missing(client) || is.null(client) || inherits(client, "gargle_oauth_client"))
 
-  if (!missing(app) || !missing(path)) {
-    .auth$set_app(app)
+  if (!missing(client) || !missing(path)) {
+    .auth$set_app(client)
   }
 
   if (!missing(api_key)) {
@@ -201,11 +211,15 @@ gs4_auth_configure <- function(app, path, api_key) {
 
 #' @export
 #' @rdname gs4_auth_configure
-gs4_api_key <- function() .auth$api_key
+gs4_api_key <- function() {
+  .auth$api_key
+}
 
 #' @export
 #' @rdname gs4_auth_configure
-gs4_oauth_app <- function() .auth$app
+gs4_oauth_client <- function() {
+  .auth$app
+}
 
 #' Get info on current user
 #'
@@ -313,3 +327,23 @@ local_deauth <- function(env = parent.frame()) {
   )
   gs4_deauth()
 }
+
+# deprecated functions ----
+
+#' Get currently configured OAuth app (deprecated)
+#'
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#'
+#' In light of the new [gargle::gargle_oauth_client()] constructor and class of
+#' the same name, `gs4_oauth_app()` is being replaced by
+#' [gs4_oauth_client()].
+#' @keywords internal
+#' @export
+gs4_oauth_app <- function() {
+  lifecycle::deprecate_warn(
+    "1.1.0", "gs4_oauth_app()", "gs4_oauth_client()"
+  )
+  gs4_oauth_client()
+}
+

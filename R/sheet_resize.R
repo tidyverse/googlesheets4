@@ -15,7 +15,7 @@
 #' @export
 #' @family worksheet functions
 #' @seealso Makes an `UpdateSheetPropertiesRequest`:
-#'   * <# https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest>
+#'   * <https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest>
 #'
 #' @examplesIf gs4_has_token()
 #' # create a Sheet with the default initial worksheet

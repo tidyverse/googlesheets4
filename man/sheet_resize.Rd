@@ -69,7 +69,7 @@ gs4_find("sheet-resize-demo") \%>\%
 \seealso{
 Makes an \code{UpdateSheetPropertiesRequest}:
 \itemize{
-\item <# https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest>
+\item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest}
 }
 
 Other worksheet functions: 

@@ -36,15 +36,15 @@ Imports:
     rlang (>= 1.0.2),
     tibble (>= 2.1.1),
     utils,
-    vctrs (>= 0.2.3)
+    vctrs (>= 0.2.3),
+    withr
 Suggests: 
     covr,
     readr,
     rmarkdown,
     sodium,
     spelling,
-    testthat (>= 3.1.7),
-    withr
+    testthat (>= 3.1.7)
 ByteCompile: true
 Config/Needs/website:
     tidyverse,

@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# googlesheets4 <a href="https://googlesheets4.tidyverse.org"><img src="man/figures/logo.png" align="right" height="138" /></a>
+# googlesheets4 <a href="https://googlesheets4.tidyverse.org"><img src="man/figures/logo.png" align="right" height="138" alt = ""/></a>
 
 <!-- badges: start -->
 
@@ -47,7 +47,7 @@ You can see how to read data with googlesheets4 in the **data import
 cheatsheet**, which also covers similar functionality in the related
 packages readr and readxl.
 
-<a href="https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf"><img src="https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-import-cheatsheet-thumbs.png" width="630" height="252"/></a>
+<a href="https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf"><img src="https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-import-cheatsheet-thumbs.png" width="630" height="252"  alt="thumbnail of data import cheatsheet"/></a>
 
 ## Auth
 
@@ -162,7 +162,7 @@ some initial data.
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> ✔ Creating new Sheet: "fluffy-bunny".
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 1VLVKN1T_kRsjtqH5VGPuPH9i2q1YhFAf2VWNcp9wEqo
+#>               ID: 1EvVyj_fABQiNEEqdZ6wZeA0po6E-6fE3PQJHZ0J1pY4
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 1
@@ -181,7 +181,7 @@ head(mtcars) %>%
 #> ✔ Writing to sheet 'autos'.
 ss
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 1VLVKN1T_kRsjtqH5VGPuPH9i2q1YhFAf2VWNcp9wEqo
+#>               ID: 1EvVyj_fABQiNEEqdZ6wZeA0po6E-6fE3PQJHZ0J1pY4
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 2

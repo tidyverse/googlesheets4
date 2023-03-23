@@ -1,4 +1,4 @@
-# googlesheets4 (development version)
+# googlesheets4 1.1.0
 
 ## Syncing up with gargle
 

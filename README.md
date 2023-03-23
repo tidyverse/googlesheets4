@@ -162,7 +162,7 @@ some initial data.
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> ✔ Creating new Sheet: "fluffy-bunny".
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 1EvVyj_fABQiNEEqdZ6wZeA0po6E-6fE3PQJHZ0J1pY4
+#>               ID: 1e11N05mAALaEWLSFF2BMuXIRHyj9U5RG4zDBkE05wE4
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 1
@@ -181,7 +181,7 @@ head(mtcars) %>%
 #> ✔ Writing to sheet 'autos'.
 ss
 #> Spreadsheet name: fluffy-bunny
-#>               ID: 1EvVyj_fABQiNEEqdZ6wZeA0po6E-6fE3PQJHZ0J1pY4
+#>               ID: 1e11N05mAALaEWLSFF2BMuXIRHyj9U5RG4zDBkE05wE4
 #>           Locale: en_US
 #>        Time zone: Etc/GMT
 #>      # of sheets: 2
@@ -236,7 +236,7 @@ tidyverse:
   leaves all “whole file” operations to googledrive; and (3) uses shared
   infrastructure for auth and more, from the gargle package. The v3 API
   wrapped by googlesheets is deprecated. [Starting in April/May
-  2020](https://cloud.google.com/blog/products/g-suite/migrate-your-apps-use-latest-sheets-api),
+  2020](https://workspace.google.com/blog/product-announcements/migrate-your-apps-use-latest-sheets-api),
   features will gradually be disabled and it’s anticipated the API will
   fully shutdown in September 2020. At that point, the original
   googlesheets package must be retired.

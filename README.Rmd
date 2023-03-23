@@ -159,7 +159,7 @@ Please note that the googlesheets4 project is released with a [Contributor Code 
 googlesheets4 draws on and complements / emulates other packages in the tidyverse:
 
   * [googlesheets](https://cran.r-project.org/package=googlesheets) is the package that googlesheets4 replaces. Main improvements in googlesheets4: (1) wraps the current, most modern Sheets API; (2) leaves all "whole file"
-  operations to googledrive; and (3) uses shared infrastructure for auth and more, from the gargle package. The v3 API wrapped by googlesheets is deprecated. [Starting in April/May 2020](https://cloud.google.com/blog/products/g-suite/migrate-your-apps-use-latest-sheets-api),
+  operations to googledrive; and (3) uses shared infrastructure for auth and more, from the gargle package. The v3 API wrapped by googlesheets is deprecated. [Starting in April/May 2020](https://workspace.google.com/blog/product-announcements/migrate-your-apps-use-latest-sheets-api),
   features will gradually be disabled and it's anticipated the API will fully
   shutdown in September 2020. At that point, the original googlesheets
   package must be retired.

@@ -8,5 +8,6 @@
 4 foregroundColor      object  Color       <NA>     <NA>   <tibble [0 × 2]>
 5 foregroundColorStyle object  ColorStyle  <NA>     <NA>   <tibble [0 × 2]>
 6 italic               boolean <NA>        <NA>     <NA>   <tibble [0 × 2]>
-7 strikethrough        boolean <NA>        <NA>     <NA>   <tibble [0 × 2]>
-8 underline            boolean <NA>        <NA>     <NA>   <tibble [0 × 2]>
+7 link                 object  Link        <NA>     <NA>   <tibble [0 × 2]>
+8 strikethrough        boolean <NA>        <NA>     <NA>   <tibble [0 × 2]>
+9 underline            boolean <NA>        <NA>     <NA>   <tibble [0 × 2]>

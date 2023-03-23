@@ -2,7 +2,7 @@
 
 ## Syncing up with gargle
 
-Version 1.3.0 of gargle introduced some changes around OAuth and googlesheets4 is syncing up that:
+Version 1.3.0 of gargle introduced some changes around OAuth and googlesheets4 is syncing with up that:
 
 * `gs4_oauth_client()` is a new function to replace the now-deprecated `gs4_oauth_app()`.
 * The new `client` argument of `gs4_auth_configure()` replaces the now-deprecated `app` argument.

@@ -1,5 +1,5 @@
 # Editors  
-# A tibble: 3 x 7
+# A tibble: 3 × 7
   property           type    instance_of array_of items            format enum            
   <chr>              <chr>   <chr>       <chr>    <list>           <chr>  <list>          
 1 domainUsersCanEdit boolean <NA>        <NA>     <NULL>           <NA>   <tibble [0 × 2]>

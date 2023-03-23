@@ -1,5 +1,5 @@
 # RowData  
-# A tibble: 1 x 6
+# A tibble: 1 × 6
   property type  instance_of array_of format enum            
   <chr>    <chr> <chr>       <chr>    <chr>  <list>          
 1 values   array <NA>        CellData <NA>   <tibble [0 × 2]>

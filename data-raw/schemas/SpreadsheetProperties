@@ -1,5 +1,5 @@
 # SpreadsheetProperties  
-# A tibble: 7 x 6
+# A tibble: 7 × 6
   property                     type   instance_of                  array_of format enum            
   <chr>                        <chr>  <chr>                        <chr>    <chr>  <list>          
 1 autoRecalc                   enum   <NA>                         <NA>     <NA>   <tibble [4 × 2]>

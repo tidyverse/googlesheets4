@@ -1,9 +1,9 @@
 # Spreadsheet  
-# A tibble: 8 x 7
+# A tibble: 8 × 7
   property            type   instance_of           array_of                  format readOnly enum            
   <chr>               <chr>  <chr>                 <chr>                     <chr>  <lgl>    <list>          
-1 dataSources         array  <NA>                  DataSource                <NA>   NA       <tibble [0 × 2]>
-2 dataSourceSchedules array  <NA>                  DataSourceRefreshSchedule <NA>   TRUE     <tibble [0 × 2]>
+1 dataSourceSchedules array  <NA>                  DataSourceRefreshSchedule <NA>   TRUE     <tibble [0 × 2]>
+2 dataSources         array  <NA>                  DataSource                <NA>   NA       <tibble [0 × 2]>
 3 developerMetadata   array  <NA>                  DeveloperMetadata         <NA>   NA       <tibble [0 × 2]>
 4 namedRanges         array  <NA>                  NamedRange                <NA>   NA       <tibble [0 × 2]>
 5 properties          object SpreadsheetProperties <NA>                      <NA>   NA       <tibble [0 × 2]>

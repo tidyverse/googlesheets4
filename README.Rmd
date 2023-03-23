@@ -26,7 +26,7 @@ message("No token available. Code chunks will not be evaluated.")
 googlesheets4:::gs4_auth_docs()
 ```
 
-# googlesheets4 <a href='https:/googlesheets4.tidyverse.org'><img src='man/figures/logo.png' align="right" height="138.5" /></a>
+# googlesheets4 <a href="https://googlesheets4.tidyverse.org"><img src="man/figures/logo.png" align="right" height="138" /></a>
 
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/googlesheets4)](https://CRAN.R-project.org/package=googlesheets4)
@@ -50,9 +50,9 @@ install.packages("googlesheets4")
 
 And the development version from [GitHub](https://github.com/) with:
 
-```{r, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("tidyverse/googlesheets4")
+```{r eval = FALSE}
+#install.packages("pak")
+pak::pak("tidyverse/googlesheets4")
 ```
 
 ## Cheatsheet

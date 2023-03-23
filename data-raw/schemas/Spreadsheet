@@ -1,5 +1,5 @@
 # Spreadsheet  
-# A tibble: 8 x 7
+# A tibble: 8 × 7
   property            type   instance_of           array_of                  format readOnly enum            
   <chr>               <chr>  <chr>                 <chr>                     <chr>  <lgl>    <list>          
 1 dataSources         array  <NA>                  DataSource                <NA>   NA       <tibble [0 × 2]>

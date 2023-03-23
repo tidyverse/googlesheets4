@@ -1,5 +1,5 @@
 # ProtectedRange  
-# A tibble: 8 x 6
+# A tibble: 8 × 6
   property              type    instance_of array_of  format enum            
   <chr>                 <chr>   <chr>       <chr>     <chr>  <list>          
 1 description           string  <NA>        <NA>      <NA>   <tibble [0 × 2]>

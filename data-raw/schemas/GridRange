@@ -1,5 +1,5 @@
 # GridRange  
-# A tibble: 5 x 6
+# A tibble: 5 × 6
   property         type    instance_of array_of format enum            
   <chr>            <chr>   <chr>       <chr>    <chr>  <list>          
 1 endColumnIndex   integer <NA>        <NA>     int32  <tibble [0 × 2]>

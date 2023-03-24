@@ -16,7 +16,7 @@ for internal use and for programming around the Sheets API."><meta property="og:
     
     <a class="navbar-brand me-2" href="../index.html">googlesheets4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,7 +116,7 @@ default is <code>"multipart"</code>. Other acceptable values are <code>"form"</c
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>Object of class <code>response</code> from <a href="https://httr.r-lib.org/reference/httr-package.html" class="external-link">httr</a>.</p>
+<p>Object of class <code>response</code> from httr.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -129,14 +129,14 @@ that is very specific to the Sheets API, which has documented <a href="https://d
 <p>"a limit of 500 requests per 100 seconds per project and 100 requests per 100
 seconds per user"</p>
 <p>Note that the "project" here means everyone using googlesheets4 who hasn't
-configured their own OAuth app. This is potentially a lot of users, all
+configured their own OAuth client. This is potentially a lot of users, all
 acting independently.</p>
 <p>If you hit the "100 requests per 100 seconds per <strong>user</strong>" limit (which
 really does mean YOU), the first wait time is a bit more than 100 seconds,
 then we revert to exponential backoff.</p>
 <p>If you experience lots of retries, especially with 100 second delays, it
 means your use of googlesheets4 is more than casual and <strong>it's time for you
-to get your own OAuth app or use a service account token</strong>. This is explained
+to get your own OAuth client or use a service account token</strong>. This is explained
 in the gargle vignette <code><a href="https://gargle.r-lib.org/articles/get-api-credentials.html" class="external-link">vignette("get-api-credentials", package = "gargle")</a></code>.</p>
     </div>
     <div class="section level2">

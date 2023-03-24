@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">googlesheets4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -145,7 +145,7 @@ URL:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 619 more rows</span></span></span></code></pre></div>
 <p>However, these URLs are not pleasant to work with. More often, you
 will want to identify a Sheet by its ID:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -160,7 +160,7 @@ will want to identify a Sheet by its ID:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 619 more rows</span></span></span></code></pre></div>
 <p>or by its name, which requires an assist from the googledrive package
 (<a href="https://googledrive.tidyverse.org" class="external-link">googledrive.tidyverse.org</a>):</p>
 <!-- remove the 'message = i' later -->
@@ -178,7 +178,7 @@ will want to identify a Sheet by its ID:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 619 more rows</span></span></span></code></pre></div>
 <p>Note that the name-based approach above will only work if
 <strong>you</strong> have access to a Sheet named “gapminder”. Sheet
 names cannot be used as absolute identifiers; only a Sheet ID can play
@@ -281,10 +281,10 @@ required argument is the data.</p>
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">front-dodobird</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">pastyfaced-wasp</span>.</span></span>
 <span><span class="va">ss</span></span>
-<span><span class="co">#&gt; Spreadsheet name: front-dodobird</span></span>
-<span><span class="co">#&gt;               ID: 15wEdH1bMriVX760pWqTMzMiBXTRBuY4j8oH2e1nUfCc</span></span>
+<span><span class="co">#&gt; Spreadsheet name: pastyfaced-wasp</span></span>
+<span><span class="co">#&gt;               ID: 1uFTRyGz-5Cf1m0yX6IbvH5hxKuLdzguJ1TFXdv-dxEM</span></span>
 <span><span class="co">#&gt;           Locale: en_US</span></span>
 <span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
 <span><span class="co">#&gt;      # of sheets: 1</span></span>
@@ -299,13 +299,13 @@ more control over various aspects of the new Sheet.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File trashed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">front-dodobird</span> <span style="color: #555555;">&lt;id: 15wEdH1bMriVX760pWqTMzMiBXTRBuY4j8oH2e1nUfCc&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">pastyfaced-wasp</span> <span style="color: #555555;">&lt;id: 1uFTRyGz-5Cf1m0yX6IbvH5hxKuLdzguJ1TFXdv-dxEM&gt;</span></span></span>
 <span></span>
 <span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"testy-hedgehog"</span>, sheets <span class="op">=</span> <span class="va">df</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">testy-hedgehog</span>.</span></span>
 <span><span class="va">ss</span></span>
 <span><span class="co">#&gt; Spreadsheet name: testy-hedgehog</span></span>
-<span><span class="co">#&gt;               ID: 1DarIhAbDixa4QTGzX_SD1wdGW2VCPZwvLkhZBaeo-jU</span></span>
+<span><span class="co">#&gt;               ID: 1x4AgStoJHP6DHgEtof97O43252f-CdErmObkc0a4TRI</span></span>
 <span><span class="co">#&gt;           Locale: en_US</span></span>
 <span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
 <span><span class="co">#&gt;      # of sheets: 1</span></span>
@@ -321,7 +321,7 @@ in <code>ss</code>.</p>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Writing to sheet <span style="color: #00BB00;">chickwts</span>.</span></span>
 <span><span class="va">ss</span></span>
 <span><span class="co">#&gt; Spreadsheet name: testy-hedgehog</span></span>
-<span><span class="co">#&gt;               ID: 1DarIhAbDixa4QTGzX_SD1wdGW2VCPZwvLkhZBaeo-jU</span></span>
+<span><span class="co">#&gt;               ID: 1x4AgStoJHP6DHgEtof97O43252f-CdErmObkc0a4TRI</span></span>
 <span><span class="co">#&gt;           Locale: en_US</span></span>
 <span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
 <span><span class="co">#&gt;      # of sheets: 2</span></span>
@@ -346,7 +346,7 @@ existing sheet.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     6 f            </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     7 g            </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     8 h            </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 2 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more rows</span></span></span></code></pre></div>
 <p><code><a href="../reference/sheet_append.html">sheet_append()</a></code> adds one or more rows to an existing
 sheet.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
@@ -364,7 +364,7 @@ sheet.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     6 f            </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     7 g            </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>     8 h            </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 3 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more rows</span></span></span></code></pre></div>
 <p>A related function – <code><a href="../reference/range_write.html">range_write()</a></code> – writes arbitrary
 data, into an arbitrary range. It has a very different “feel” from
 <code><a href="../reference/gs4_create.html">gs4_create()</a></code>, <code><a href="../reference/sheet_write.html">sheet_write()</a></code>, and
@@ -381,12 +381,12 @@ then clean up.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 8</span></span></span>
 <span><span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> df           0 <span style="text-decoration: underline;">1</span>901<span style="text-decoration: underline;">105</span>095 GRID  TRUE            9            2 <span style="color: #949494;">&lt;NULL&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> chickwts     1 <span style="text-decoration: underline;">1</span>696<span style="text-decoration: underline;">348</span>777 GRID  TRUE           72            2 <span style="color: #949494;">&lt;NULL&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> df           0 <span style="text-decoration: underline;">1</span>802<span style="text-decoration: underline;">810</span>125 GRID  TRUE            9            2 <span style="color: #949494;">&lt;NULL&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> chickwts     1 <span style="text-decoration: underline;">2</span>100<span style="text-decoration: underline;">223</span>224 GRID  TRUE           72            2 <span style="color: #949494;">&lt;NULL&gt;</span></span></span>
 <span></span>
 <span><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File trashed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">testy-hedgehog</span> <span style="color: #555555;">&lt;id: 1DarIhAbDixa4QTGzX_SD1wdGW2VCPZwvLkhZBaeo-jU&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">testy-hedgehog</span> <span style="color: #555555;">&lt;id: 1x4AgStoJHP6DHgEtof97O43252f-CdErmObkc0a4TRI&gt;</span></span></span></code></pre></div>
 <p>The article <a href="https://googlesheets4.tidyverse.org/articles/articles/write-sheets.html">Write
 Sheets</a> has even more detail.</p>
 </div>

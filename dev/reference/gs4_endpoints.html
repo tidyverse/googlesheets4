@@ -22,7 +22,7 @@ Document (https://www.googleapis.com/discovery/v1/apis/sheets/v4/rest)."><meta p
     
     <a class="navbar-brand me-2" href="../index.html">googlesheets4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -120,13 +120,14 @@ endpoints that are used internally by googlesheets4.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu">gs4_endpoints</span><span class="op">(</span><span class="op">)</span>, max.level <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.get                           :List of 8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.get"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "GET"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.getByDataFilter               :List of 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.getByDataFilter"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "POST"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}:getByDataFilter"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. By default, data within gr"| __truncated__</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. This method differs from G"| __truncated__</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "GetSpreadsheetByDataFilterRequest"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "Spreadsheet"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr "spreadsheetId"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.batchUpdate                   :List of 9</span>
@@ -149,14 +150,13 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "Spreadsheet"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "Spreadsheet"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: list()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.getByDataFilter               :List of 9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.getByDataFilter"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "POST"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}:getByDataFilter"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.get                           :List of 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.get"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "GET"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. This method differs from G"| __truncated__</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "GetSpreadsheetByDataFilterRequest"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. By default, data within gr"| __truncated__</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "Spreadsheet"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr "spreadsheetId"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.batchUpdate            :List of 9</span>
@@ -168,26 +168,6 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Sets values in one or more ranges of a spreadsheet. The caller must specify the spreadsheet ID, a valueInputOpt"| __truncated__</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "BatchUpdateValuesRequest"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "BatchUpdateValuesResponse"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr "spreadsheetId"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.batchClearByDataFilter :List of 9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.values.batchClearByDataFilter"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "POST"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Clears one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or m"| __truncated__</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "BatchClearValuesByDataFilterRequest"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "BatchClearValuesByDataFilterResponse"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr "spreadsheetId"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.batchClear             :List of 9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.values.batchClear"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "POST"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values:batchClear"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Clears one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or m"| __truncated__</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "BatchClearValuesRequest"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "BatchClearValuesResponse"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr "spreadsheetId"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.batchGetByDataFilter   :List of 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.values.batchGetByDataFilter"</span>
@@ -208,36 +188,6 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Returns a range of values from a spreadsheet. The caller must specify the spreadsheet ID and a range."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "ValueRange"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:2] "spreadsheetId" "range"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.batchUpdateByDataFilter:List of 9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.values.batchUpdateByDataFilter"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "POST"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Sets values in one or more ranges of a spreadsheet. The caller must specify the spreadsheet ID, a valueInputOpt"| __truncated__</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "BatchUpdateValuesByDataFilterRequest"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "BatchUpdateValuesByDataFilterResponse"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr "spreadsheetId"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.append                 :List of 9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.values.append"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "POST"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values/{range}:append"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Appends values to a spreadsheet. The input range is used to search for existing data and find a \"table\" withi"| __truncated__</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "ValueRange"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "AppendValuesResponse"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:2] "spreadsheetId" "range"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.update                 :List of 9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.values.update"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "PUT"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values/{range}"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Sets values in a range of a spreadsheet. The caller must specify the spreadsheet ID, range, and a valueInputOption."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "ValueRange"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "UpdateValuesResponse"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:2] "spreadsheetId" "range"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.clear                  :List of 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.values.clear"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "POST"</span>
@@ -248,6 +198,46 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "ClearValuesRequest"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "ClearValuesResponse"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:2] "spreadsheetId" "range"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.batchUpdateByDataFilter:List of 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.values.batchUpdateByDataFilter"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "POST"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values:batchUpdateByDataFilter"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Sets values in one or more ranges of a spreadsheet. The caller must specify the spreadsheet ID, a valueInputOpt"| __truncated__</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "BatchUpdateValuesByDataFilterRequest"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "BatchUpdateValuesByDataFilterResponse"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr "spreadsheetId"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.update                 :List of 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.values.update"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "PUT"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values/{range}"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 20</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Sets values in a range of a spreadsheet. The caller must specify the spreadsheet ID, range, and a valueInputOption."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "ValueRange"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "UpdateValuesResponse"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:2] "spreadsheetId" "range"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.append                 :List of 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.values.append"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "POST"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values/{range}:append"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 21</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Appends values to a spreadsheet. The input range is used to search for existing data and find a \"table\" withi"| __truncated__</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "ValueRange"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "AppendValuesResponse"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:2] "spreadsheetId" "range"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.batchClearByDataFilter :List of 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.values.batchClearByDataFilter"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "POST"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values:batchClearByDataFilter"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Clears one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or m"| __truncated__</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "BatchClearValuesByDataFilterRequest"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "BatchClearValuesByDataFilterResponse"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr "spreadsheetId"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.batchGet               :List of 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.values.batchGet"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "GET"</span>
@@ -257,24 +247,15 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Returns one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or more ranges."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "BatchGetValuesResponse"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr "spreadsheetId"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.developerMetadata.get         :List of 8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.developerMetadata.get"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "GET"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/developerMetadata/{metadataId}"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Returns the developer metadata with the specified ID. The caller must specify the spreadsheet ID and the develo"| __truncated__</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "DeveloperMetadata"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:2] "spreadsheetId" "metadataId"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.developerMetadata.search      :List of 9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.developerMetadata.search"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.values.batchClear             :List of 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.values.batchClear"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "POST"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/developerMetadata:search"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/values:batchClear"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 13</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Returns all developer metadata matching the specified DataFilter. If the provided DataFilter represents a Devel"| __truncated__</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "SearchDeveloperMetadataRequest"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "SearchDeveloperMetadataResponse"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Clears one or more ranges of values from a spreadsheet. The caller must specify the spreadsheet ID and one or m"| __truncated__</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "BatchClearValuesRequest"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "BatchClearValuesResponse"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr "spreadsheetId"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.sheets.copyTo                 :List of 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.sheets.copyTo"</span>
@@ -286,6 +267,25 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "CopySheetToAnotherSpreadsheetRequest"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "SheetProperties"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:2] "spreadsheetId" "sheetId"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.developerMetadata.search      :List of 9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.developerMetadata.search"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "POST"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/developerMetadata:search"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Returns all developer metadata matching the specified DataFilter. If the provided DataFilter represents a Devel"| __truncated__</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ request       : chr "SearchDeveloperMetadataRequest"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "SearchDeveloperMetadataResponse"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr "spreadsheetId"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ sheets.spreadsheets.developerMetadata.get         :List of 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ id            : chr "sheets.spreadsheets.developerMetadata.get"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ httpMethod    : chr "GET"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ path          : 'fs_path' chr "/v4/spreadsheets/{spreadsheetId}/developerMetadata/{metadataId}"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameters    :List of 13</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ scopes        : chr "drive, drive.file, spreadsheets"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ description   : chr "Returns the developer metadata with the specified ID. The caller must specify the spreadsheet ID and the develo"| __truncated__</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ response      : chr "DeveloperMetadata"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ parameterOrder: chr [1:2] "spreadsheetId" "metadataId"</span>
 <span class="r-in"><span><span class="fu">gs4_endpoints</span><span class="op">(</span><span class="st">"sheets.spreadsheets.values.get"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$id</span>
@@ -298,27 +298,45 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> /v4/spreadsheets/{spreadsheetId}/values/{range}</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$spreadsheetId</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$spreadsheetId$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$majorDimension</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$majorDimension$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$majorDimension$enum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "DIMENSION_UNSPECIFIED" "ROWS"                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "COLUMNS"              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$majorDimension$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$spreadsheetId$required</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$majorDimension$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The major dimension that results should use. For example, if the spreadsheet data in Sheet1 is: `A1=1,B1=2,A2=3,B2=4`, then requesting `range=Sheet1!A1:B2?majorDimension=ROWS` returns `[[1,2],[3,4]]`, whereas requesting `range=Sheet1!A1:B2?majorDimension=COLUMNS` returns `[[1,3],[2,4]]`."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$spreadsheetId$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "path"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$majorDimension$enumDescriptions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The default value, do not use."     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Operates on the rows of a sheet."   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Operates on the columns of a sheet."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$spreadsheetId$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The ID of the spreadsheet to retrieve data from."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "How dates, times, and durations should be represented in the output. This is ignored if value_render_option is FORMATTED_VALUE. The default dateTime render option is SERIAL_NUMBER."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption$enum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "SERIAL_NUMBER"    "FORMATTED_STRING"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption$enumDescriptions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Instructs date, time, datetime, and duration fields to be output as doubles in \"serial number\" format, as popularized by Lotus 1-2-3. The whole number portion of the value (left of the decimal) counts the days since December 30th 1899. The fractional portion (right of the decimal) counts the time as a fraction of the day. For example, January 1st 1900 at noon would be 2.5, 2 because it's 2 days after December 30th 1899, and .5 because noon is half a day. February 1st 1900 at 3pm would be 33.625. This correctly treats the year 1900 as not a leap year."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Instructs date, time, datetime, and duration fields to be output as strings in their given number format (which depends on the spreadsheet locale)."                                                                                                                                                                                                                                                                                                                                                                                                                           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$valueRenderOption</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$valueRenderOption$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$valueRenderOption$enum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "FORMATTED_VALUE"   "UNFORMATTED_VALUE" "FORMULA"          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$valueRenderOption$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -327,74 +345,42 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Values will be calculated, but not formatted in the reply. For example, if `A1` is `1.23` and `A2` is `=A1` and formatted as currency, then `A2` would return the number `1.23`."                                                                                                         </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Values will not be calculated. The reply will include the formulas. For example, if `A1` is `1.23` and `A2` is `=A1` and formatted as currency, then A2 would return `\"=A1\"`."                                                                                                          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$valueRenderOption$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$valueRenderOption$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "How values should be represented in the output. The default render option is ValueRenderOption.FORMATTED_VALUE."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "How values should be represented in the output. The default render option is FORMATTED_VALUE."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$valueRenderOption$enum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "FORMATTED_VALUE"   "UNFORMATTED_VALUE" "FORMULA"          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$spreadsheetId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$spreadsheetId$required</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$spreadsheetId$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "path"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$spreadsheetId$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$spreadsheetId$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The ID of the spreadsheet to retrieve data from."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$range</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$range$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "path"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$range$required</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$range$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$range$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "path"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$range$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The A1 notation of the values to retrieve."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$range$required</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$majorDimension</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$majorDimension$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The major dimension that results should use. For example, if the spreadsheet data is: `A1=1,B1=2,A2=3,B2=4`, then requesting `range=A1:B2,majorDimension=ROWS` returns `[[1,2],[3,4]]`, whereas requesting `range=A1:B2,majorDimension=COLUMNS` returns `[[1,3],[2,4]]`."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$majorDimension$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$majorDimension$enum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "DIMENSION_UNSPECIFIED" "ROWS"                 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "COLUMNS"              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$majorDimension$enumDescriptions</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The default value, do not use."     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Operates on the rows of a sheet."   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Operates on the columns of a sheet."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$majorDimension$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "How dates, times, and durations should be represented in the output. This is ignored if value_render_option is FORMATTED_VALUE. The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER]."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption$enumDescriptions</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Instructs date, time, datetime, and duration fields to be output as doubles in \"serial number\" format, as popularized by Lotus 1-2-3. The whole number portion of the value (left of the decimal) counts the days since December 30th 1899. The fractional portion (right of the decimal) counts the time as a fraction of the day. For example, January 1st 1900 at noon would be 2.5, 2 because it's 2 days after December 30st 1899, and .5 because noon is half a day. February 1st 1900 at 3pm would be 33.625. This correctly treats the year 1900 as not a leap year."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Instructs date, time, datetime, and duration fields to be output as strings in their given number format (which is dependent on the spreadsheet locale)."                                                                                                                                                                                                                                                                                                                                                                                                                      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption$enum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "SERIAL_NUMBER"    "FORMATTED_STRING"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$dateTimeRenderOption$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$prettyPrint</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$prettyPrint$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$prettyPrint$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Returns response with indentations and line breaks."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$prettyPrint$default</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "true"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$prettyPrint$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The [A1 notation or R1C1 notation](/sheets/api/guides/concepts#cell) of the range to retrieve values from."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$uploadType</span>
@@ -409,36 +395,42 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$callback</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$callback$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "JSONP"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$callback$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$callback$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "JSONP"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$callback$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$quotaUser</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$quotaUser$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$fields</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$fields$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Selector specifying which fields to include in a partial response."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$quotaUser$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$quotaUser$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$fields$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$access_token</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$access_token$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$access_token$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$fields$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$access_token$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OAuth access token."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$`$.xgafv`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$`$.xgafv`$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "V1 error format."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$`$.xgafv`$enumDescriptions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "v1 error format" "v2 error format"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$`$.xgafv`$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$`$.xgafv`$enum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1" "2"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$`$.xgafv`$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$upload_protocol</span>
@@ -452,10 +444,32 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$alt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$alt$default</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$prettyPrint</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$prettyPrint$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$prettyPrint$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Returns response with indentations and line breaks."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$prettyPrint$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$prettyPrint$default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "true"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$quotaUser</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$quotaUser$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$quotaUser$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$quotaUser$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$alt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$alt$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Data format for response."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -464,35 +478,27 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Media download with context-dependent Content-Type"   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Responses with Content-Type of application/x-protobuf"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$alt$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$alt$default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$alt$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$alt$enum</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"  "media" "proto"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$alt$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$oauth_token</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$oauth_token$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OAuth 2.0 token for the current user."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$oauth_token$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$oauth_token$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$fields</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$fields$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$fields$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Selector specifying which fields to include in a partial response."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$fields$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$oauth_token$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -500,28 +506,22 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$key$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$key$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$key$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$`$.xgafv`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$`$.xgafv`$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$`$.xgafv`$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "V1 error format."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$`$.xgafv`$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$key$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$`$.xgafv`$enumDescriptions</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "v1 error format" "v2 error format"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$`$.xgafv`$enum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1" "2"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$access_token</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$access_token$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$access_token$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OAuth access token."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.values.get$parameters$access_token$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -539,213 +539,208 @@ endpoints that are used internally by googlesheets4.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">gs4_endpoints</span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$id</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "sheets.spreadsheets.getByDataFilter"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "sheets.spreadsheets.get"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$httpMethod</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "POST"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$httpMethod</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "GET"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$path</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /v4/spreadsheets/{spreadsheetId}:getByDataFilter</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$path</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /v4/spreadsheets/{spreadsheetId}</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$spreadsheetId</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$spreadsheetId$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The spreadsheet to request."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$ranges</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$ranges$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$spreadsheetId$required</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$ranges$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$ranges$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The ranges to retrieve from the spreadsheet."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$ranges$repeated</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$spreadsheetId$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$spreadsheetId$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "path"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$includeGridData</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$includeGridData$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$dataFilters</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$dataFilters$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The DataFilters used to select which ranges to retrieve from the spreadsheet."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$dataFilters$items</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$dataFilters$items$`$ref`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "DataFilter"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$dataFilters$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "array"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$dataFilters$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "body"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$includeGridData</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$includeGridData$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$includeGridData$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "True if grid data should be returned. This parameter is ignored if a field mask was set in the request."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$includeGridData$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$includeGridData$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "body"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$prettyPrint</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$prettyPrint$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$prettyPrint$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Returns response with indentations and line breaks."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$prettyPrint$default</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "true"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$prettyPrint$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$includeGridData$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$uploadType</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$uploadType$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$spreadsheetId</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$spreadsheetId$required</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$spreadsheetId$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "The spreadsheet to request."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$spreadsheetId$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "path"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$spreadsheetId$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$uploadType</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$uploadType$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Legacy upload protocol for media (e.g. \"media\", \"multipart\")."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$uploadType$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$uploadType$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$uploadType$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$uploadType$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$callback</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$callback$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$callback</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$callback$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$callback$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "JSONP"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$callback$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$callback$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$callback$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$quotaUser</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$quotaUser$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$fields</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$fields$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Selector specifying which fields to include in a partial response."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$quotaUser$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$quotaUser$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$fields$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$access_token</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$access_token$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$access_token$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$fields$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$access_token$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OAuth access token."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$`$.xgafv`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$`$.xgafv`$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "V1 error format."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$`$.xgafv`$enumDescriptions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "v1 error format" "v2 error format"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$`$.xgafv`$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$`$.xgafv`$enum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1" "2"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$`$.xgafv`$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$upload_protocol</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$upload_protocol$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$upload_protocol</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$upload_protocol$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Upload protocol for media (e.g. \"raw\", \"multipart\")."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$upload_protocol$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$upload_protocol$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$upload_protocol$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$upload_protocol$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$alt</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$alt$default</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$prettyPrint</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$prettyPrint$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$alt$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$prettyPrint$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Returns response with indentations and line breaks."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$prettyPrint$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "boolean"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$prettyPrint$default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "true"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$quotaUser</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$quotaUser$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$quotaUser$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Available to use for quota purposes for server-side applications. Can be any arbitrary string assigned to a user, but should not exceed 40 characters."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$quotaUser$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$alt</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$alt$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Data format for response."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$alt$enumDescriptions</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$alt$enumDescriptions</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Responses with Content-Type of application/json"      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [2] "Media download with context-dependent Content-Type"   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [3] "Responses with Content-Type of application/x-protobuf"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$alt$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$alt$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$alt$default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$alt$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$alt$enum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$alt$enum</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "json"  "media" "proto"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$alt$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$oauth_token</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$oauth_token$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$oauth_token</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$oauth_token$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OAuth 2.0 token for the current user."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$oauth_token$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$oauth_token$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$oauth_token$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$fields</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$fields$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$fields$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Selector specifying which fields to include in a partial response."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$fields$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$oauth_token$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$key</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$key$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$key</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$key$description</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "API key. Your API key identifies your project and provides you with API access, quota, and reports. Required unless you provide an OAuth 2.0 token."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$key$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$key$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$key$location</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$key$type</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$access_token</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$access_token$location</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$access_token$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "OAuth access token."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameters$access_token$type</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$`$.xgafv`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$`$.xgafv`$type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "string"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$`$.xgafv`$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "V1 error format."</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$scopes</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "drive, drive.file, drive.readonly, spreadsheets, spreadsheets.readonly"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$`$.xgafv`$location</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "query"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$description</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. By default, data within grids is not returned. You can include grid data in one of 2 ways: * Specify a [field mask](https://developers.google.com/sheets/api/guides/field-masks) listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData URL parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, as a best practice, retrieve only the specific spreadsheet fields that you want. To retrieve only subsets of spreadsheet data, use the ranges URL parameter. Ranges are specified using [A1 notation](/sheets/api/guides/concepts#cell). You can define a single cell (for example, `A1`) or multiple cells (for example, `A1:D5`). You can also get cells from other sheets within the same spreadsheet (for example, `Sheet2!A1:C4`) or retrieve multiple ranges at once (for example, `?ranges=A1:D5&amp;ranges=Sheet2!A1:C4`). Limiting the range returns only the portions of the spreadsheet that intersect the requested ranges."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$`$.xgafv`$enumDescriptions</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "v1 error format" "v2 error format"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameters$`$.xgafv`$enum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1" "2"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$scopes</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "drive, drive.file, spreadsheets"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$description</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Returns the spreadsheet at the given ID. The caller must specify the spreadsheet ID. This method differs from GetSpreadsheet in that it allows selecting which subsets of spreadsheet data to return by specifying a dataFilters parameter. Multiple DataFilters can be specified. Specifying one or more data filters will return the portions of the spreadsheet that intersect ranges matched by any of the filters. By default, data within grids will not be returned. You can include grid data one of two ways: * Specify a field mask listing your desired fields using the `fields` URL parameter in HTTP * Set the includeGridData parameter to true. If a field mask is set, the `includeGridData` parameter is ignored For large spreadsheets, it is recommended to retrieve only the specific fields of the spreadsheet that you want."</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$request</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "GetSpreadsheetByDataFilterRequest"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$response</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$response</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Spreadsheet"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.getByDataFilter$parameterOrder</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $sheets.spreadsheets.get$parameterOrder</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "spreadsheetId"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>

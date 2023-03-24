@@ -48,7 +48,7 @@
     
     <a class="navbar-brand me-2" href="index.html">googlesheets4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,14 +133,14 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"googlesheets4"</span><span class="op">)</span></span></code></pre></div>
 <p>And the development version from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"tidyverse/googlesheets4"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"tidyverse/googlesheets4"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="cheatsheet">Cheatsheet<a class="anchor" aria-label="anchor" href="#cheatsheet"></a>
 </h2>
 <p>You can see how to read data with googlesheets4 in the <strong>data import cheatsheet</strong>, which also covers similar functionality in the related packages readr and readxl.</p>
-<p><a href="https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf" class="external-link"><img src="https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-import-cheatsheet-thumbs.png" width="630" height="252"></a></p>
+<p><a href="https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf" class="external-link"><img src="https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-import-cheatsheet-thumbs.png" width="630" height="252" alt="thumbnail of data import cheatsheet"></a></p>
 </div>
 <div class="section level2">
 <h2 id="auth">Auth<a class="anchor" aria-label="anchor" href="#auth"></a>
@@ -186,8 +186,7 @@
 <span><span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span></span>
 <span><span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span></span>
 <span><span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span></span>
-<span><span class="co">#&gt; # … with 619 more rows</span></span>
-<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span>
+<span><span class="co">#&gt; # ℹ 619 more rows</span></span>
 <span></span>
 <span><span class="co"># Sheet ID</span></span>
 <span><span class="fu"><a href="reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span><span class="op">)</span></span>
@@ -201,8 +200,7 @@
 <span><span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span></span>
 <span><span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span></span>
 <span><span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span></span>
-<span><span class="co">#&gt; # … with 619 more rows</span></span>
-<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span>
+<span><span class="co">#&gt; # ℹ 619 more rows</span></span>
 <span></span>
 <span><span class="co"># a googledrive "dribble"</span></span>
 <span><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">drive_get</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> </span>
@@ -218,8 +216,7 @@
 <span><span class="co">#&gt; 3 Algeria Africa     1962    48.3 11000948     2551.</span></span>
 <span><span class="co">#&gt; 4 Algeria Africa     1967    51.4 12760499     3247.</span></span>
 <span><span class="co">#&gt; 5 Algeria Africa     1972    54.5 14760787     4183.</span></span>
-<span><span class="co">#&gt; # … with 619 more rows</span></span>
-<span><span class="co">#&gt; # ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<span><span class="co">#&gt; # ℹ 619 more rows</span></span></code></pre></div>
 <p><em>Note: the only reason we can read a sheet named “gapminder” (the last example) is because the account we’re logged in as has a Sheet named “gapminder”.</em></p>
 <p>See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Find and Identify Sheets</a> for more about specifying the Sheet you want to address. See the article <a href="https://googlesheets4.tidyverse.org/articles/articles/find-identify-sheets.html">Read Sheets</a> for more about reading from specific sheets or ranges, setting column type, and getting low-level cell data.</p>
 </div>
@@ -231,7 +228,7 @@
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"fluffy-bunny"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>flowers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ✔ Creating new Sheet: "fluffy-bunny".</span></span>
 <span><span class="co">#&gt; Spreadsheet name: fluffy-bunny</span></span>
-<span><span class="co">#&gt;               ID: 1YVHPcvzoM0SW4MKgQFoH8TQDtEnxnhHewOzWEj6Yz9k</span></span>
+<span><span class="co">#&gt;               ID: 1e11N05mAALaEWLSFF2BMuXIRHyj9U5RG4zDBkE05wE4</span></span>
 <span><span class="co">#&gt;           Locale: en_US</span></span>
 <span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
 <span><span class="co">#&gt;      # of sheets: 1</span></span>
@@ -246,7 +243,7 @@
 <span><span class="co">#&gt; ✔ Writing to sheet 'autos'.</span></span>
 <span><span class="va">ss</span></span>
 <span><span class="co">#&gt; Spreadsheet name: fluffy-bunny</span></span>
-<span><span class="co">#&gt;               ID: 1YVHPcvzoM0SW4MKgQFoH8TQDtEnxnhHewOzWEj6Yz9k</span></span>
+<span><span class="co">#&gt;               ID: 1e11N05mAALaEWLSFF2BMuXIRHyj9U5RG4zDBkE05wE4</span></span>
 <span><span class="co">#&gt;           Locale: en_US</span></span>
 <span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
 <span><span class="co">#&gt;      # of sheets: 2</span></span>
@@ -280,7 +277,7 @@
 <p>googlesheets4 draws on and complements / emulates other packages in the tidyverse:</p>
 <ul>
 <li>
-<a href="https://cran.r-project.org/package=googlesheets" class="external-link">googlesheets</a> is the package that googlesheets4 replaces. Main improvements in googlesheets4: (1) wraps the current, most modern Sheets API; (2) leaves all “whole file” operations to googledrive; and (3) uses shared infrastructure for auth and more, from the gargle package. The v3 API wrapped by googlesheets is deprecated. <a href="https://cloud.google.com/blog/products/g-suite/migrate-your-apps-use-latest-sheets-api" class="external-link">Starting in April/May 2020</a>, features will gradually be disabled and it’s anticipated the API will fully shutdown in September 2020. At that point, the original googlesheets package must be retired.</li>
+<a href="https://cran.r-project.org/package=googlesheets" class="external-link">googlesheets</a> is the package that googlesheets4 replaces. Main improvements in googlesheets4: (1) wraps the current, most modern Sheets API; (2) leaves all “whole file” operations to googledrive; and (3) uses shared infrastructure for auth and more, from the gargle package. The v3 API wrapped by googlesheets is deprecated. <a href="https://workspace.google.com/blog/product-announcements/migrate-your-apps-use-latest-sheets-api" class="external-link">Starting in April/May 2020</a>, features will gradually be disabled and it’s anticipated the API will fully shutdown in September 2020. At that point, the original googlesheets package must be retired.</li>
 <li>
 <a href="https://googledrive.tidyverse.org" class="external-link">googledrive</a> provides a fully-featured interface to the Google Drive API. Any “whole file” operations can be accomplished with googledrive: upload or download or update a spreadsheet, copy, rename, move, change permission, delete, etc. googledrive supports Team Drives.</li>
 <li>

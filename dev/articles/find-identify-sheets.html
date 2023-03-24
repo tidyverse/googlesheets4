@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">googlesheets4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.0.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -157,7 +157,7 @@ official example Sheet that holds Gapminder data</a>.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 619 more rows</span></span></span></code></pre></div>
 <p>At this time, although the URL may contain both a (spread)Sheet and a
 (work)sheet, we only extract the (spread)Sheet ID. If the function
 targets a specific (work)sheet, that is typically specified via
@@ -224,7 +224,7 @@ of many functions:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 619 more rows</span></span></span></code></pre></div>
 <p>I think in a script or app that will endure for a while it is better
 to refer to a Sheet by its ID than by its URL. The Sheet ID is nicer to
 look at, it is complete, it is minimal.</p>
@@ -241,7 +241,7 @@ look at, it is complete, it is minimal.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 619 more rows</span></span></span></code></pre></div>
 <p>Note this demonstration that a Sheet ID also works when provided as a
 plain, old string, i.e. it does not <strong>have</strong> to have the
 <code>sheets_id</code> class. In some contexts, you might even prefer to
@@ -266,7 +266,7 @@ string to be a Sheet ID, when that is the case.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 619 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 619 more rows</span></span></span></code></pre></div>
 <p>If your script or app targets a specific Sheet, the most efficient
 and robust way to address it is by its ID.</p>
 </div>
@@ -300,10 +300,9 @@ by the account we’ve logged in as here. We can use
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">gap_dribble</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">drive_get</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> The input `path` resolved to exactly 1 file.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 4</span></span></span>
-<span><span class="co">#&gt;   name      path      id                                      drive_reso…¹</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> gapminder gapminder 1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZO… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable name ¹​drive_resource</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   name      path      id                                    drive_resource</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> gapminder gapminder 1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6M… <span style="color: #949494;">&lt;named list&gt;</span></span></span></code></pre></div>
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">drive_get()</a></code> returns a <a href="https://googledrive.tidyverse.org/reference/dribble.html" class="external-link"><code>dribble</code></a>,
 a “Drive tibble”, where each row holds info on a Drive file.
 <code><a href="../reference/sheets_id.html">as_sheets_id()</a></code> also accepts a one-row <code>dribble</code>,
@@ -375,28 +374,28 @@ and we can use one of them to narrow the search to Google Sheets:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 9 × 3</span></span></span>
-<span><span class="co">#&gt;   name              id                                        drive_reso…¹</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> geological-canary 13fmUp01xitQrPvgw7LWDXNMHiMewxHnPuYHaig2… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> blubbery-lobo     1foTYXQEknymPpyug1xWOq7ituJ-ywLCaTEHaF2y… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> bacciform-booby   15WqCxHBCjY4P_i6-uTL9rUBgpcHRKQFrqheRSSO… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> childsafe-squid   1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc9B… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> fiery-hart        18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEnWY… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 4 more rows, and abbreviated variable name ¹​drive_resource</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   name              id                                      drive_resource</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> geological-canary 13fmUp01xitQrPvgw7LWDXNMHiMewxHnPuYHai… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> blubbery-lobo     1foTYXQEknymPpyug1xWOq7ituJ-ywLCaTEHaF… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> bacciform-booby   15WqCxHBCjY4P_i6-uTL9rUBgpcHRKQFrqheRS… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> childsafe-squid   1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> fiery-hart        18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEn… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more rows</span></span></span></code></pre></div>
 <p>This is so handy that we’ve made <code><a href="../reference/gs4_find.html">gs4_find()</a></code> in
 googlesheets4, which is a shortcut for
 <code>drive_find(type = "spreadsheet")</code>:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 9 × 3</span></span></span>
-<span><span class="co">#&gt;   name              id                                        drive_reso…¹</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> geological-canary 13fmUp01xitQrPvgw7LWDXNMHiMewxHnPuYHaig2… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> blubbery-lobo     1foTYXQEknymPpyug1xWOq7ituJ-ywLCaTEHaF2y… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> bacciform-booby   15WqCxHBCjY4P_i6-uTL9rUBgpcHRKQFrqheRSSO… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> childsafe-squid   1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc9B… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> fiery-hart        18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEnWY… &lt;named list&gt;</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 4 more rows, and abbreviated variable name ¹​drive_resource</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   name              id                                      drive_resource</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> geological-canary 13fmUp01xitQrPvgw7LWDXNMHiMewxHnPuYHai… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> blubbery-lobo     1foTYXQEknymPpyug1xWOq7ituJ-ywLCaTEHaF… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> bacciform-booby   15WqCxHBCjY4P_i6-uTL9rUBgpcHRKQFrqheRS… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> childsafe-squid   1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> fiery-hart        18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEn… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more rows</span></span></span></code></pre></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">drive_find()</a></code> and
 <code><a href="../reference/gs4_find.html">gs4_find()</a></code> for more ideas about how to search Drive
 effectively for your Sheets.</p>

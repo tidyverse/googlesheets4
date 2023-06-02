@@ -1,5 +1,5 @@
-## This file is the interface between googlesheets4 and the
-## auth functionality in gargle.
+# This file is the interface between googlesheets4 and the
+# auth functionality in gargle.
 
 # Initialization happens in .onLoad
 .auth <- NULL
@@ -28,8 +28,12 @@ gargle_lookup_table <- list(
 #' # otherwise, go to browser for authentication and authorization
 #' gs4_auth()
 #'
-#' # force use of a token associated with a specific email
+#' # indicate the specific identity you want to auth as
 #' gs4_auth(email = "jenny@example.com")
+#'
+#' # force a new browser dance, i.e. don't even try to use existing user
+#' # credentials
+#' gs4_auth(email = NA)
 #'
 #' # use a 'read only' scope, so it's impossible to edit or delete Sheets
 #' gs4_auth(
@@ -163,8 +167,8 @@ gs4_has_token <- function() {
 #' # downloaded from Google Developers Console
 #' # this example JSON is indicative, but fake
 #' path_to_json <- system.file(
-#'   "extdata", "data", "client_secret_123.googleusercontent.com.json",
-#'   package = "googledrive"
+#'   "extdata", "client_secret_installed.googleusercontent.com.json",
+#'   package = "gargle"
 #' )
 #' gs4_auth_configure(path = path_to_json)
 #'

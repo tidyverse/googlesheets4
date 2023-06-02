@@ -264,7 +264,7 @@ gs4_auth_internal <- function(account = c("docs", "testing"),
                               scopes = NULL,
                               drive = TRUE) {
   account <- match.arg(account)
-  can_decrypt <- gargle:::secret_can_decrypt("googlesheets4")
+  can_decrypt <- gargle::secret_has_key("GOOGLESHEETS4_KEY")
   online <- !is.null(curl::nslookup("sheets.googleapis.com", error = FALSE))
   if (!can_decrypt || !online) {
     gs4_abort(
@@ -287,8 +287,13 @@ gs4_auth_internal <- function(account = c("docs", "testing"),
   # TODO: revisit when I do PKG_scopes()
   # https://github.com/r-lib/gargle/issues/103
   scopes <- scopes %||% "https://www.googleapis.com/auth/drive"
-  json <- gargle:::secret_read("googlesheets4", filename)
-  gs4_auth(scopes = scopes, path = rawToChar(json))
+  gs4_auth(
+    scopes = scopes,
+    path = gargle::secret_decrypt_json(
+      system.file("secret", filename, package = "googlesheets4"),
+      "GOOGLESHEETS4_KEY"
+    )
+  )
   gs4_user()
   if (drive) {
     googledrive::drive_auth(token = gs4_token())

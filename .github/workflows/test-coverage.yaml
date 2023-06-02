@@ -20,7 +20,7 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      GOOGLESHEETS4_PASSWORD: ${{ secrets.GOOGLESHEETS4_PASSWORD }}
+      GOOGLESHEETS4_KEY: ${{ secrets.GOOGLESHEETS4_KEY }}
 
     steps:
       - uses: actions/checkout@v3

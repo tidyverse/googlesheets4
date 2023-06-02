@@ -34,4 +34,4 @@ jobs:
         with:
           upload-snapshots: true
         env:
-          GOOGLESHEETS4_PASSWORD: ${{ secrets.GOOGLESHEETS4_PASSWORD }}
+          GOOGLESHEETS4_KEY: ${{ secrets.GOOGLESHEETS4_KEY }}

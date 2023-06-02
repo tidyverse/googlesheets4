@@ -5,6 +5,7 @@ CLI
 CMD
 Cheatsheet
 Codecov
+Colaboratory
 Computerphile's
 Datetime
 Datetimes
@@ -13,15 +14,16 @@ Gapminder
 IDEs
 JSON
 OAuth
+OOB
 ORCID
+PBC
 POSIXct
+RStudio
 SheetN
 Shortcodes
 Timezones
 UI
-UpdateSheetPropertiesRequest
 UpperCamelCase
-api
 auth
 autogenerates
 backoff
@@ -44,7 +46,6 @@ gapminder
 gmailr
 googledrive
 googlesheets
-https
 httr
 httr's
 js
@@ -52,8 +53,6 @@ lubridate
 lubridate's
 noninteractively
 ny
-oauth
-oob
 pkgdown
 pre
 programmatically

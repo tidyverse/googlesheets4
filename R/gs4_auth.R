@@ -48,16 +48,7 @@ gs4_auth <- function(email = gargle::gargle_oauth_email(),
                      cache = gargle::gargle_oauth_cache(),
                      use_oob = gargle::gargle_oob_default(),
                      token = NULL) {
-  if (!missing(email) && !missing(path)) {
-    cli::cli_warn(c(
-      "It is very unusual to provide both {.arg email} and \\
-       {.arg path} to {.fun gs4_auth}.",
-      "They relate to two different auth methods.",
-      "The {.arg path} argument is only for a service account token.",
-      "If you need to specify your own OAuth client, use \\
-      {.fun gs4_auth_configure}."
-    ))
-  }
+  gargle::check_is_service_account(path, hint = "gs4_auth_configure")
 
   # I have called `gs4_auth(token = drive_token())` multiple times now,
   # without attaching googledrive. Expose this error noisily, before it gets
@@ -66,7 +57,7 @@ gs4_auth <- function(email = gargle::gargle_oauth_email(),
 
   cred <- gargle::token_fetch(
     scopes = scopes,
-    app = gs4_oauth_client() %||% gargle::tidyverse_client(),
+    client = gs4_oauth_client() %||% gargle::tidyverse_client(),
     email = email,
     path = path,
     package = "googlesheets4",
@@ -203,7 +194,7 @@ gs4_auth_configure <- function(client, path, api_key, app = deprecated()) {
   stopifnot(missing(client) || is.null(client) || inherits(client, "gargle_oauth_client"))
 
   if (!missing(client) || !missing(path)) {
-    .auth$set_app(client)
+    .auth$set_client(client)
   }
 
   if (!missing(api_key)) {
@@ -222,7 +213,7 @@ gs4_api_key <- function() {
 #' @export
 #' @rdname gs4_auth_configure
 gs4_oauth_client <- function() {
-  .auth$app
+  .auth$client
 }
 
 #' Get info on current user

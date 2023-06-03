@@ -5,7 +5,7 @@ description: >
 ---
 
 ```{r setup, include = FALSE}
-can_decrypt <- gargle:::secret_can_decrypt("googlesheets4")
+can_decrypt <- gargle::secret_has_key("GOOGLESHEETS4_KEY")
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -66,7 +66,6 @@ range_read(gs4_example("mini-gap"), sheet = 2)
 range_read(gs4_example("mini-gap"), sheet = "Oceania", n_max = 3)
 
 range_read(gs4_example("deaths"), skip = 4, n_max = 10)
-
 ```
 
 The example below shows the use of `range` to specify both the (work)sheet and an A1-style cell range.
@@ -76,11 +75,9 @@ It also demonstrates how `col_types` gives control of column types, similar to h
 * For the full list of column types and how to specify them, see the [Column specification](https://googlesheets4.tidyverse.org/reference/range_read.html#column-specification) section of the help for `range_read()`.
 
 ```{r}
-
 range_read(
   gs4_example("deaths"), range = "other!A5:F15", col_types = "?ci??D"
 )
-
 ```
 
 ```{r include = FALSE}

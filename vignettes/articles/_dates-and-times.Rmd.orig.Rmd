@@ -7,10 +7,15 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-<!-- dates-and-times.Rmd is generated from dates-and-times.Rmd.orig.Rmd. Please edit that file -->
+<!-- dates-and-times.Rmd is generated from _dates-and-times.Rmd.orig.Rmd. Please edit that file -->
+
+<!--
+generate the pre-rendered vignette like so:
+knitr::knit("vignettes/articles/_dates-and-times.Rmd.orig.Rmd", output = "vignettes/articles/dates-and-times.Rmd")
+-->
 
 ```{r setup, include = FALSE}
-can_decrypt <- gargle:::secret_can_decrypt("googlesheets4")
+can_decrypt <- gargle::secret_has_key("GOOGLESHEETS4_KEY")
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",

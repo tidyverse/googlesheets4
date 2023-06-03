@@ -3,7 +3,7 @@ title: "Get started with googlesheets4"
 ---
 
 ```{r setup, include = FALSE}
-can_decrypt <- gargle:::secret_can_decrypt("googlesheets4")
+can_decrypt <- gargle::secret_has_key("GOOGLESHEETS4_KEY")
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",

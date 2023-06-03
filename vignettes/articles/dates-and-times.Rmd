@@ -7,7 +7,12 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-<!-- dates-and-times.Rmd is generated from dates-and-times.Rmd.orig.Rmd. Please edit that file -->
+<!-- dates-and-times.Rmd is generated from _dates-and-times.Rmd.orig.Rmd. Please edit that file -->
+
+<!--
+generate the pre-rendered vignette like so:
+knitr::knit("vignettes/articles/_dates-and-times.Rmd.orig.Rmd", output = "vignettes/articles/dates-and-times.Rmd")
+-->
 
 
 
@@ -50,7 +55,7 @@ A short demo: in R, capture the current time as `tt` and reveal the current time
 
 ```r
 (tt <- Sys.time())
-#> [1] "2020-04-23 12:48:57 PDT"
+#> [1] "2023-06-03 13:31:01 PDT"
 
 Sys.timezone()
 #> [1] "America/Vancouver"
@@ -70,23 +75,23 @@ dat <- tibble::tibble(
   sheets = dat,
   timeZone = Sys.timezone()
 ))
-#> Creating new Sheet: "no-time-zone-effect"
-#>   Spreadsheet name: no-time-zone-effect
-#>                 ID: 1rH4nOOFBFvqCLEcYqaPjMIPj7EHfcT21tLTRL2FbHx0
-#>             Locale: en_US
-#>          Time zone: America/Vancouver
-#>        # of sheets: 1
+#> ✔ Creating new Sheet: "no-time-zone-effect".
+#> Spreadsheet name: no-time-zone-effect
+#>               ID: 1LlZXwI7cxDUHyGbiW9ojYlARmp0mtR6-6xEUCXi-hI4
+#>           Locale: en_US
+#>        Time zone: America/Vancouver
+#>      # of sheets: 1
 #> 
 #> (Sheet name): (Nominal extent in rows x columns)
 #>          dat: 2 x 2
 
 read_sheet(ss)
-#> Reading from "no-time-zone-effect"
-#> Range "dat"
-#> # A tibble: 1 x 2
+#> ✔ Reading from "no-time-zone-effect".
+#> ✔ Range 'dat'.
+#> # A tibble: 1 × 2
 #>   datetime            as_displayed       
 #>   <dttm>              <chr>              
-#> 1 2020-04-23 19:48:57 2020-04-23 19:48:58
+#> 1 2023-06-03 20:31:01 2023-06-03 20:31:01
 ```
 
 Note that the `tt` datetime is displayed differently in Sheets than it is locally in R. Sheets presents datetimes in Coordinated Universal Time (time zone Etc/UTC), even if the Sheet's metadata specifies a different time zone, such as America/Vancouver.
@@ -94,7 +99,7 @@ Note that the `tt` datetime is displayed differently in Sheets than it is locall
 
 ```r
 with_tz(tt, "Etc/UTC")
-#> [1] "2020-04-23 19:48:57 UTC"
+#> [1] "2023-06-03 20:31:01 UTC"
 ```
 
 If you want to understand more about datetimes in R, in Sheets, and how you can sort of hack around this time zone problem, keep reading.
@@ -143,7 +148,7 @@ If you ask for the current time, R prints it formatted for your time zone (or, a
 
 ```r
 Sys.time()
-#> [1] "2020-04-23 12:49:04 PDT"
+#> [1] "2023-06-03 13:31:05 PDT"
 
 Sys.timezone()
 #> [1] "America/Vancouver"
@@ -158,13 +163,13 @@ lubridate's `with_tz()` function lets you explicitly associate a datetime with a
 tt <- Sys.time()
 
 with_tz(tt, tzone = "America/Vancouver")
-#> [1] "2020-04-23 12:49:04 PDT"
+#> [1] "2023-06-03 13:31:05 PDT"
 
 with_tz(tt, tzone = "America/Denver")
-#> [1] "2020-04-23 13:49:04 MDT"
+#> [1] "2023-06-03 14:31:05 MDT"
 
 with_tz(tt, tzone = "Etc/UTC")
-#> [1] "2020-04-23 19:49:04 UTC"
+#> [1] "2023-06-03 20:31:05 UTC"
 ```
 
 **Google Sheets have no ability to display a moment in time according to a specified time zone.** Yes, each Sheet has an associated time zone, but this is not what it influences, even though you might expect or hope for that.
@@ -193,10 +198,10 @@ Let's gain some intuition by looking at datetimes shortly after the epoch and in
 
 
 ```
-#> Creating new Sheet: "near-the-epoch"
-#> Reading from "near-the-epoch"
-#> Range "dat"
-#> # A tibble: 2 x 2
+#> ✔ Creating new Sheet: "near-the-epoch".
+#> ✔ Reading from "near-the-epoch".
+#> ✔ Range 'dat'.
+#> # A tibble: 2 × 2
 #>   datetime            serial_number
 #>   <dttm>                      <dbl>
 #> 1 1899-12-30 12:00:00          0.5 
@@ -213,11 +218,12 @@ Every Google Sheet has an associated time zone. It is included in the metadata r
 ```r
 (meta <- gs4_example("gapminder") %>%
    gs4_get())
-#>   Spreadsheet name: gapminder
-#>                 ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY
-#>             Locale: en_US
-#>          Time zone: America/Los_Angeles
-#>        # of sheets: 5
+#>  Spreadsheet name: gapminder
+#>                ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY
+#>            Locale: en_US
+#>         Time zone: America/Los_Angeles
+#>       # of sheets: 5
+#> # of named ranges: 1
 #> 
 #> (Sheet name): (Nominal extent in rows x columns)
 #>       Africa: 625 x 6
@@ -277,11 +283,11 @@ Create 3 Sheets, with different approaches to the time zone:
 
 ```r
 ss_xx  <- gs4_create("tz-default")
-#> Creating new Sheet: "tz-default"
+#> ✔ Creating new Sheet: "tz-default".
 ss_ny  <- gs4_create("tz-america-new-york", timeZone = "America/New_York")
-#> Creating new Sheet: "tz-america-new-york"
+#> ✔ Creating new Sheet: "tz-america-new-york".
 ss_utc <- gs4_create("tz-etc-utc", timeZone = "Etc/UTC")
-#> Creating new Sheet: "tz-etc-utc"
+#> ✔ Creating new Sheet: "tz-etc-utc".
 
 show_timezone <- function(ss) gs4_get(ss)$time_zone
 
@@ -304,24 +310,24 @@ Capture the current `moment` with `Sys.time()`, construct the data frame describ
 
 ```r
 dat <- populate_sheets(Sys.time(), c(ss_xx, ss_ny, ss_utc))
-#> Writing to "tz-default"
-#> Writing to sheet "Sheet1"
-#> Editing "tz-default"
-#> Resizing one or more columns in "Sheet1"
-#> Editing "tz-default"
-#> Editing sheet "Sheet1"
-#> Writing to "tz-america-new-york"
-#> Writing to sheet "Sheet1"
-#> Editing "tz-america-new-york"
-#> Resizing one or more columns in "Sheet1"
-#> Editing "tz-america-new-york"
-#> Editing sheet "Sheet1"
-#> Writing to "tz-etc-utc"
-#> Writing to sheet "Sheet1"
-#> Editing "tz-etc-utc"
-#> Resizing one or more columns in "Sheet1"
-#> Editing "tz-etc-utc"
-#> Editing sheet "Sheet1"
+#> ✔ Writing to "tz-default".
+#> ✔ Writing to sheet 'Sheet1'.
+#> ✔ Editing "tz-default".
+#> ✔ Resizing one or more columns in 'Sheet1'.
+#> ✔ Editing "tz-default".
+#> ✔ Editing sheet 'Sheet1'.
+#> ✔ Writing to "tz-america-new-york".
+#> ✔ Writing to sheet 'Sheet1'.
+#> ✔ Editing "tz-america-new-york".
+#> ✔ Resizing one or more columns in 'Sheet1'.
+#> ✔ Editing "tz-america-new-york".
+#> ✔ Editing sheet 'Sheet1'.
+#> ✔ Writing to "tz-etc-utc".
+#> ✔ Writing to sheet 'Sheet1'.
+#> ✔ Editing "tz-etc-utc".
+#> ✔ Resizing one or more columns in 'Sheet1'.
+#> ✔ Editing "tz-etc-utc".
+#> ✔ Editing sheet 'Sheet1'.
 ```
 
 First, let's look at `dat`, the data frame we sent.
@@ -329,30 +335,30 @@ First, let's look at `dat`, the data frame we sent.
 
 ```r
 dat
-#> # A tibble: 6 x 3
+#> # A tibble: 6 × 3
 #>   what                datetime   serial_number                      
 #>   <chr>               <list>     <fmla>                             
 #> 1 moment              <dttm [1]> =ARRAYFORMULA(TO_PURE_NUMBER(B2:B))
 #> 2 moment_ny           <dttm [1]> NA                                 
 #> 3 moment_utc          <dttm [1]> NA                                 
 #> 4 moment_ny_utc_force <dttm [1]> NA                                 
-#> 5 =NOW()              <fmla>     NA                                 
-#> 6 =DATE(moment_utc)   <fmla>     NA
+#> 5 =NOW()              <fmla [1]> NA                                 
+#> 6 =DATE(moment_utc)   <fmla [1]> NA
 ```
 
 That's hard to parse since the `datetime` column is a list-column. Here's a different look, with the most natural character representation of that column.
 
 
 ```
-#> # A tibble: 6 x 3
-#>   what             datetime                     serial_number                      
-#>   <chr>            <chr>                        <fmla>                             
-#> 1 moment           2020-04-23 12:49:20 PDT      =ARRAYFORMULA(TO_PURE_NUMBER(B2:B))
-#> 2 moment_ny        2020-04-23 15:49:20 EDT      NA                                 
-#> 3 moment_utc       2020-04-23 19:49:20 UTC      NA                                 
-#> 4 moment_ny_utc_f… 2020-04-23 15:49:20 UTC      NA                                 
-#> 5 =NOW()           =NOW()                       NA                                 
-#> 6 =DATE(moment_ut… =(DATE(2020,4,23)+time(19,4… NA
+#> # A tibble: 6 × 3
+#>   what                datetime                           serial_number                      
+#>   <chr>               <chr>                              <fmla>                             
+#> 1 moment              2023-06-03 13:31:14 PDT            =ARRAYFORMULA(TO_PURE_NUMBER(B2:B))
+#> 2 moment_ny           2023-06-03 16:31:14 EDT            NA                                 
+#> 3 moment_utc          2023-06-03 20:31:14 UTC            NA                                 
+#> 4 moment_ny_utc_force 2023-06-03 16:31:14 UTC            NA                                 
+#> 5 =NOW()              =NOW()                             NA                                 
+#> 6 =DATE(moment_utc)   =(DATE(2023,6,3)+time(20,31,14.7)) NA
 ```
 
 Read the Sheets back into R, the Sheet with no explicit time zone set.
@@ -360,35 +366,35 @@ Read the Sheets back into R, the Sheet with no explicit time zone set.
 
 ```r
 read_sheet(ss_xx) %>% as.data.frame()
-#> Reading from "tz-default"
-#> Range "Sheet1"
+#> ✔ Reading from "tz-default".
+#> ✔ Range 'Sheet1'.
 #>                  what            datetime serial_number
-#> 1              moment 2020-04-23 19:49:20      43944.83
-#> 2           moment_ny 2020-04-23 19:49:20      43944.83
-#> 3          moment_utc 2020-04-23 19:49:20      43944.83
-#> 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66
-#> 5              =NOW() 2020-04-23 19:49:22      43944.83
-#> 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83
+#> 1              moment 2023-06-03 20:31:14      45080.86
+#> 2           moment_ny 2023-06-03 20:31:14      45080.86
+#> 3          moment_utc 2023-06-03 20:31:14      45080.86
+#> 4 moment_ny_utc_force 2023-06-03 16:31:14      45080.69
+#> 5              =NOW() 2023-06-03 20:31:16      45080.86
+#> 6   =DATE(moment_utc) 2023-06-03 20:31:14      45080.86
 read_sheet(ss_ny) %>% as.data.frame()
-#> Reading from "tz-america-new-york"
-#> Range "Sheet1"
+#> ✔ Reading from "tz-america-new-york".
+#> ✔ Range 'Sheet1'.
 #>                  what            datetime serial_number
-#> 1              moment 2020-04-23 19:49:20      43944.83
-#> 2           moment_ny 2020-04-23 19:49:20      43944.83
-#> 3          moment_utc 2020-04-23 19:49:20      43944.83
-#> 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66
-#> 5              =NOW() 2020-04-23 15:49:23      43944.66
-#> 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83
+#> 1              moment 2023-06-03 20:31:14      45080.86
+#> 2           moment_ny 2023-06-03 20:31:14      45080.86
+#> 3          moment_utc 2023-06-03 20:31:14      45080.86
+#> 4 moment_ny_utc_force 2023-06-03 16:31:14      45080.69
+#> 5              =NOW() 2023-06-03 16:31:17      45080.69
+#> 6   =DATE(moment_utc) 2023-06-03 20:31:14      45080.86
 read_sheet(ss_utc) %>% as.data.frame()
-#> Reading from "tz-etc-utc"
-#> Range "Sheet1"
+#> ✔ Reading from "tz-etc-utc".
+#> ✔ Range 'Sheet1'.
 #>                  what            datetime serial_number
-#> 1              moment 2020-04-23 19:49:20      43944.83
-#> 2           moment_ny 2020-04-23 19:49:20      43944.83
-#> 3          moment_utc 2020-04-23 19:49:20      43944.83
-#> 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66
-#> 5              =NOW() 2020-04-23 19:49:25      43944.83
-#> 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83
+#> 1              moment 2023-06-03 20:31:14      45080.86
+#> 2           moment_ny 2023-06-03 20:31:14      45080.86
+#> 3          moment_utc 2023-06-03 20:31:14      45080.86
+#> 4 moment_ny_utc_force 2023-06-03 16:31:14      45080.69
+#> 5              =NOW() 2023-06-03 20:31:19      45080.86
+#> 6   =DATE(moment_utc) 2023-06-03 20:31:14      45080.86
 ```
 
 Main conclusions:
@@ -404,7 +410,7 @@ Clean up.
 gs4_find("tz-") %>% 
   googledrive::drive_trash()
 #> Files trashed:
-#>   * tz-etc-utc: 1xUiNXYsk6nDMmgDq8E5FhBwJA6Zg1XCyhkuQISI91As
-#>   * tz-america-new-york: 1RYjk25FKJH2QRpfT1fHGmomeO2BQ5VqErWQADLGeFJI
-#>   * tz-default: 1X9Zqe--GLw6X4jajyHVb9XmKh-AiLMwZKk_g5GoJl3Y
+#> • 'tz-etc-utc' <id: 1N6TD-6vwPy3UgDS4i85_vbOw_F9IPPkMx_04lhmqW_k>
+#> • 'tz-america-new-york' <id: 153iIAZ5dti6svjSRqg-4uu20x9TztyhtmJIRoravSUY>
+#> • 'tz-default' <id: 16i-SjgQR5nhbxxGF-dND2otRb1v6lsK-6yYTfUSySdM>
 ```

@@ -113,7 +113,11 @@
 
     
     
-<!-- dates-and-times.Rmd is generated from dates-and-times.Rmd.orig.Rmd. Please edit that file -->
+<!-- dates-and-times.Rmd is generated from _dates-and-times.Rmd.orig.Rmd. Please edit that file -->
+<!--
+generate the pre-rendered vignette like so:
+knitr::knit("vignettes/articles/_dates-and-times.Rmd.orig.Rmd", output = "vignettes/articles/dates-and-times.Rmd")
+-->
 <p>This article provides advice on reading and writing datetimes with
 Google Sheets, specifically around the matter of time zones.</p>
 <p>A related issue is how datetimes are formatted for presentation in
@@ -149,7 +153,7 @@ reveal the current time zone. Note that <code>tt</code> is displayed in
 R according to this time zone.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">tt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2020-04-23 12:48:57 PDT"</span></span>
+<span><span class="co">#&gt; [1] "2023-06-03 13:31:01 PDT"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "America/Vancouver"</span></span></code></pre></div>
@@ -168,30 +172,30 @@ Read this back into R.</p>
 <span>  sheets <span class="op">=</span> <span class="va">dat</span>,</span>
 <span>  timeZone <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Creating new Sheet: "no-time-zone-effect"</span></span>
-<span><span class="co">#&gt;   Spreadsheet name: no-time-zone-effect</span></span>
-<span><span class="co">#&gt;                 ID: 1rH4nOOFBFvqCLEcYqaPjMIPj7EHfcT21tLTRL2FbHx0</span></span>
-<span><span class="co">#&gt;             Locale: en_US</span></span>
-<span><span class="co">#&gt;          Time zone: America/Vancouver</span></span>
-<span><span class="co">#&gt;        # of sheets: 1</span></span>
+<span><span class="co">#&gt; ✔ Creating new Sheet: "no-time-zone-effect".</span></span>
+<span><span class="co">#&gt; Spreadsheet name: no-time-zone-effect</span></span>
+<span><span class="co">#&gt;               ID: 1LlZXwI7cxDUHyGbiW9ojYlARmp0mtR6-6xEUCXi-hI4</span></span>
+<span><span class="co">#&gt;           Locale: en_US</span></span>
+<span><span class="co">#&gt;        Time zone: America/Vancouver</span></span>
+<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
 <span><span class="co">#&gt;          dat: 2 x 2</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Reading from "no-time-zone-effect"</span></span>
-<span><span class="co">#&gt; Range "dat"</span></span>
-<span><span class="co">#&gt; # A tibble: 1 x 2</span></span>
+<span><span class="co">#&gt; ✔ Reading from "no-time-zone-effect".</span></span>
+<span><span class="co">#&gt; ✔ Range 'dat'.</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 2</span></span>
 <span><span class="co">#&gt;   datetime            as_displayed       </span></span>
 <span><span class="co">#&gt;   &lt;dttm&gt;              &lt;chr&gt;              </span></span>
-<span><span class="co">#&gt; 1 2020-04-23 19:48:57 2020-04-23 19:48:58</span></span></code></pre></div>
+<span><span class="co">#&gt; 1 2023-06-03 20:31:01 2023-06-03 20:31:01</span></span></code></pre></div>
 <p>Note that the <code>tt</code> datetime is displayed differently in
 Sheets than it is locally in R. Sheets presents datetimes in Coordinated
 Universal Time (time zone Etc/UTC), even if the Sheet’s metadata
 specifies a different time zone, such as America/Vancouver.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/with_tz.html" class="external-link">with_tz</a></span><span class="op">(</span><span class="va">tt</span>, <span class="st">"Etc/UTC"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2020-04-23 19:48:57 UTC"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2023-06-03 20:31:01 UTC"</span></span></code></pre></div>
 <p>If you want to understand more about datetimes in R, in Sheets, and
 how you can sort of hack around this time zone problem, keep
 reading.</p>
@@ -260,7 +264,7 @@ zone (or, at least, it tries). You can also ask R to reveal what it
 thinks your time zone is.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2020-04-23 12:49:04 PDT"</span></span>
+<span><span class="co">#&gt; [1] "2023-06-03 13:31:05 PDT"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/timezones.html" class="external-link">Sys.timezone</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "America/Vancouver"</span></span></code></pre></div>
@@ -276,13 +280,13 @@ is formatted for human eyeballs.</p>
 <code class="sourceCode R"><span><span class="va">tt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/with_tz.html" class="external-link">with_tz</a></span><span class="op">(</span><span class="va">tt</span>, tzone <span class="op">=</span> <span class="st">"America/Vancouver"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2020-04-23 12:49:04 PDT"</span></span>
+<span><span class="co">#&gt; [1] "2023-06-03 13:31:05 PDT"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/with_tz.html" class="external-link">with_tz</a></span><span class="op">(</span><span class="va">tt</span>, tzone <span class="op">=</span> <span class="st">"America/Denver"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2020-04-23 13:49:04 MDT"</span></span>
+<span><span class="co">#&gt; [1] "2023-06-03 14:31:05 MDT"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/with_tz.html" class="external-link">with_tz</a></span><span class="op">(</span><span class="va">tt</span>, tzone <span class="op">=</span> <span class="st">"Etc/UTC"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "2020-04-23 19:49:04 UTC"</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "2023-06-03 20:31:05 UTC"</span></span></code></pre></div>
 <p><strong>Google Sheets have no ability to display a moment in time
 according to a specified time zone.</strong> Yes, each Sheet has an
 associated time zone, but this is not what it influences, even though
@@ -315,10 +319,10 @@ strings</a>, although one day it probably will.</p>
 <p>Let’s gain some intuition by looking at datetimes shortly after the
 epoch and inspecting the underlying serial numbers. In a hidden chunk,
 we create a Sheet and read it into R.</p>
-<pre><code><span><span class="co">#&gt; Creating new Sheet: "near-the-epoch"</span></span>
-<span><span class="co">#&gt; Reading from "near-the-epoch"</span></span>
-<span><span class="co">#&gt; Range "dat"</span></span>
-<span><span class="co">#&gt; # A tibble: 2 x 2</span></span>
+<pre><code><span><span class="co">#&gt; ✔ Creating new Sheet: "near-the-epoch".</span></span>
+<span><span class="co">#&gt; ✔ Reading from "near-the-epoch".</span></span>
+<span><span class="co">#&gt; ✔ Range 'dat'.</span></span>
+<span><span class="co">#&gt; # A tibble: 2 × 2</span></span>
 <span><span class="co">#&gt;   datetime            serial_number</span></span>
 <span><span class="co">#&gt;   &lt;dttm&gt;                      &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt; 1 1899-12-30 12:00:00          0.5 </span></span>
@@ -334,11 +338,12 @@ revealed by default when we print a Sheets ID.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">meta</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>   <span class="fu"><a href="../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   Spreadsheet name: gapminder</span></span>
-<span><span class="co">#&gt;                 ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY</span></span>
-<span><span class="co">#&gt;             Locale: en_US</span></span>
-<span><span class="co">#&gt;          Time zone: America/Los_Angeles</span></span>
-<span><span class="co">#&gt;        # of sheets: 5</span></span>
+<span><span class="co">#&gt;  Spreadsheet name: gapminder</span></span>
+<span><span class="co">#&gt;                ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY</span></span>
+<span><span class="co">#&gt;            Locale: en_US</span></span>
+<span><span class="co">#&gt;         Time zone: America/Los_Angeles</span></span>
+<span><span class="co">#&gt;       # of sheets: 5</span></span>
+<span><span class="co">#&gt; # of named ranges: 1</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
 <span><span class="co">#&gt;       Africa: 625 x 6</span></span>
@@ -463,11 +468,11 @@ get here!</li>
 </ul>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ss_xx</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"tz-default"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Creating new Sheet: "tz-default"</span></span>
+<span><span class="co">#&gt; ✔ Creating new Sheet: "tz-default".</span></span>
 <span><span class="va">ss_ny</span>  <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"tz-america-new-york"</span>, timeZone <span class="op">=</span> <span class="st">"America/New_York"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Creating new Sheet: "tz-america-new-york"</span></span>
+<span><span class="co">#&gt; ✔ Creating new Sheet: "tz-america-new-york".</span></span>
 <span><span class="va">ss_utc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"tz-etc-utc"</span>, timeZone <span class="op">=</span> <span class="st">"Etc/UTC"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Creating new Sheet: "tz-etc-utc"</span></span>
+<span><span class="co">#&gt; ✔ Creating new Sheet: "tz-etc-utc".</span></span>
 <span></span>
 <span><span class="va">show_timezone</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">ss</span><span class="op">)</span> <span class="fu"><a href="../reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span><span class="op">$</span><span class="va">time_zone</span></span>
 <span></span>
@@ -482,81 +487,81 @@ construct the data frame described above, and write it into each of the
 prepared Google Sheets.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">populate_sheets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ss_xx</span>, <span class="va">ss_ny</span>, <span class="va">ss_utc</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Writing to "tz-default"</span></span>
-<span><span class="co">#&gt; Writing to sheet "Sheet1"</span></span>
-<span><span class="co">#&gt; Editing "tz-default"</span></span>
-<span><span class="co">#&gt; Resizing one or more columns in "Sheet1"</span></span>
-<span><span class="co">#&gt; Editing "tz-default"</span></span>
-<span><span class="co">#&gt; Editing sheet "Sheet1"</span></span>
-<span><span class="co">#&gt; Writing to "tz-america-new-york"</span></span>
-<span><span class="co">#&gt; Writing to sheet "Sheet1"</span></span>
-<span><span class="co">#&gt; Editing "tz-america-new-york"</span></span>
-<span><span class="co">#&gt; Resizing one or more columns in "Sheet1"</span></span>
-<span><span class="co">#&gt; Editing "tz-america-new-york"</span></span>
-<span><span class="co">#&gt; Editing sheet "Sheet1"</span></span>
-<span><span class="co">#&gt; Writing to "tz-etc-utc"</span></span>
-<span><span class="co">#&gt; Writing to sheet "Sheet1"</span></span>
-<span><span class="co">#&gt; Editing "tz-etc-utc"</span></span>
-<span><span class="co">#&gt; Resizing one or more columns in "Sheet1"</span></span>
-<span><span class="co">#&gt; Editing "tz-etc-utc"</span></span>
-<span><span class="co">#&gt; Editing sheet "Sheet1"</span></span></code></pre></div>
+<span><span class="co">#&gt; ✔ Writing to "tz-default".</span></span>
+<span><span class="co">#&gt; ✔ Writing to sheet 'Sheet1'.</span></span>
+<span><span class="co">#&gt; ✔ Editing "tz-default".</span></span>
+<span><span class="co">#&gt; ✔ Resizing one or more columns in 'Sheet1'.</span></span>
+<span><span class="co">#&gt; ✔ Editing "tz-default".</span></span>
+<span><span class="co">#&gt; ✔ Editing sheet 'Sheet1'.</span></span>
+<span><span class="co">#&gt; ✔ Writing to "tz-america-new-york".</span></span>
+<span><span class="co">#&gt; ✔ Writing to sheet 'Sheet1'.</span></span>
+<span><span class="co">#&gt; ✔ Editing "tz-america-new-york".</span></span>
+<span><span class="co">#&gt; ✔ Resizing one or more columns in 'Sheet1'.</span></span>
+<span><span class="co">#&gt; ✔ Editing "tz-america-new-york".</span></span>
+<span><span class="co">#&gt; ✔ Editing sheet 'Sheet1'.</span></span>
+<span><span class="co">#&gt; ✔ Writing to "tz-etc-utc".</span></span>
+<span><span class="co">#&gt; ✔ Writing to sheet 'Sheet1'.</span></span>
+<span><span class="co">#&gt; ✔ Editing "tz-etc-utc".</span></span>
+<span><span class="co">#&gt; ✔ Resizing one or more columns in 'Sheet1'.</span></span>
+<span><span class="co">#&gt; ✔ Editing "tz-etc-utc".</span></span>
+<span><span class="co">#&gt; ✔ Editing sheet 'Sheet1'.</span></span></code></pre></div>
 <p>First, let’s look at <code>dat</code>, the data frame we sent.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span></span>
-<span><span class="co">#&gt; # A tibble: 6 x 3</span></span>
+<span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
 <span><span class="co">#&gt;   what                datetime   serial_number                      </span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;               &lt;list&gt;     &lt;fmla&gt;                             </span></span>
 <span><span class="co">#&gt; 1 moment              &lt;dttm [1]&gt; =ARRAYFORMULA(TO_PURE_NUMBER(B2:B))</span></span>
 <span><span class="co">#&gt; 2 moment_ny           &lt;dttm [1]&gt; NA                                 </span></span>
 <span><span class="co">#&gt; 3 moment_utc          &lt;dttm [1]&gt; NA                                 </span></span>
 <span><span class="co">#&gt; 4 moment_ny_utc_force &lt;dttm [1]&gt; NA                                 </span></span>
-<span><span class="co">#&gt; 5 =NOW()              &lt;fmla&gt;     NA                                 </span></span>
-<span><span class="co">#&gt; 6 =DATE(moment_utc)   &lt;fmla&gt;     NA</span></span></code></pre></div>
+<span><span class="co">#&gt; 5 =NOW()              &lt;fmla [1]&gt; NA                                 </span></span>
+<span><span class="co">#&gt; 6 =DATE(moment_utc)   &lt;fmla [1]&gt; NA</span></span></code></pre></div>
 <p>That’s hard to parse since the <code>datetime</code> column is a
 list-column. Here’s a different look, with the most natural character
 representation of that column.</p>
-<pre><code><span><span class="co">#&gt; # A tibble: 6 x 3</span></span>
-<span><span class="co">#&gt;   what             datetime                     serial_number                      </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;            &lt;chr&gt;                        &lt;fmla&gt;                             </span></span>
-<span><span class="co">#&gt; 1 moment           2020-04-23 12:49:20 PDT      =ARRAYFORMULA(TO_PURE_NUMBER(B2:B))</span></span>
-<span><span class="co">#&gt; 2 moment_ny        2020-04-23 15:49:20 EDT      NA                                 </span></span>
-<span><span class="co">#&gt; 3 moment_utc       2020-04-23 19:49:20 UTC      NA                                 </span></span>
-<span><span class="co">#&gt; 4 moment_ny_utc_f… 2020-04-23 15:49:20 UTC      NA                                 </span></span>
-<span><span class="co">#&gt; 5 =NOW()           =NOW()                       NA                                 </span></span>
-<span><span class="co">#&gt; 6 =DATE(moment_ut… =(DATE(2020,4,23)+time(19,4… NA</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; # A tibble: 6 × 3</span></span>
+<span><span class="co">#&gt;   what                datetime                           serial_number                      </span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;               &lt;chr&gt;                              &lt;fmla&gt;                             </span></span>
+<span><span class="co">#&gt; 1 moment              2023-06-03 13:31:14 PDT            =ARRAYFORMULA(TO_PURE_NUMBER(B2:B))</span></span>
+<span><span class="co">#&gt; 2 moment_ny           2023-06-03 16:31:14 EDT            NA                                 </span></span>
+<span><span class="co">#&gt; 3 moment_utc          2023-06-03 20:31:14 UTC            NA                                 </span></span>
+<span><span class="co">#&gt; 4 moment_ny_utc_force 2023-06-03 16:31:14 UTC            NA                                 </span></span>
+<span><span class="co">#&gt; 5 =NOW()              =NOW()                             NA                                 </span></span>
+<span><span class="co">#&gt; 6 =DATE(moment_utc)   =(DATE(2023,6,3)+time(20,31,14.7)) NA</span></span></code></pre>
 <p>Read the Sheets back into R, the Sheet with no explicit time zone
 set.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss_xx</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Reading from "tz-default"</span></span>
-<span><span class="co">#&gt; Range "Sheet1"</span></span>
+<span><span class="co">#&gt; ✔ Reading from "tz-default".</span></span>
+<span><span class="co">#&gt; ✔ Range 'Sheet1'.</span></span>
 <span><span class="co">#&gt;                  what            datetime serial_number</span></span>
-<span><span class="co">#&gt; 1              moment 2020-04-23 19:49:20      43944.83</span></span>
-<span><span class="co">#&gt; 2           moment_ny 2020-04-23 19:49:20      43944.83</span></span>
-<span><span class="co">#&gt; 3          moment_utc 2020-04-23 19:49:20      43944.83</span></span>
-<span><span class="co">#&gt; 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66</span></span>
-<span><span class="co">#&gt; 5              =NOW() 2020-04-23 19:49:22      43944.83</span></span>
-<span><span class="co">#&gt; 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83</span></span>
+<span><span class="co">#&gt; 1              moment 2023-06-03 20:31:14      45080.86</span></span>
+<span><span class="co">#&gt; 2           moment_ny 2023-06-03 20:31:14      45080.86</span></span>
+<span><span class="co">#&gt; 3          moment_utc 2023-06-03 20:31:14      45080.86</span></span>
+<span><span class="co">#&gt; 4 moment_ny_utc_force 2023-06-03 16:31:14      45080.69</span></span>
+<span><span class="co">#&gt; 5              =NOW() 2023-06-03 20:31:16      45080.86</span></span>
+<span><span class="co">#&gt; 6   =DATE(moment_utc) 2023-06-03 20:31:14      45080.86</span></span>
 <span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss_ny</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Reading from "tz-america-new-york"</span></span>
-<span><span class="co">#&gt; Range "Sheet1"</span></span>
+<span><span class="co">#&gt; ✔ Reading from "tz-america-new-york".</span></span>
+<span><span class="co">#&gt; ✔ Range 'Sheet1'.</span></span>
 <span><span class="co">#&gt;                  what            datetime serial_number</span></span>
-<span><span class="co">#&gt; 1              moment 2020-04-23 19:49:20      43944.83</span></span>
-<span><span class="co">#&gt; 2           moment_ny 2020-04-23 19:49:20      43944.83</span></span>
-<span><span class="co">#&gt; 3          moment_utc 2020-04-23 19:49:20      43944.83</span></span>
-<span><span class="co">#&gt; 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66</span></span>
-<span><span class="co">#&gt; 5              =NOW() 2020-04-23 15:49:23      43944.66</span></span>
-<span><span class="co">#&gt; 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83</span></span>
+<span><span class="co">#&gt; 1              moment 2023-06-03 20:31:14      45080.86</span></span>
+<span><span class="co">#&gt; 2           moment_ny 2023-06-03 20:31:14      45080.86</span></span>
+<span><span class="co">#&gt; 3          moment_utc 2023-06-03 20:31:14      45080.86</span></span>
+<span><span class="co">#&gt; 4 moment_ny_utc_force 2023-06-03 16:31:14      45080.69</span></span>
+<span><span class="co">#&gt; 5              =NOW() 2023-06-03 16:31:17      45080.69</span></span>
+<span><span class="co">#&gt; 6   =DATE(moment_utc) 2023-06-03 20:31:14      45080.86</span></span>
 <span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ss_utc</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Reading from "tz-etc-utc"</span></span>
-<span><span class="co">#&gt; Range "Sheet1"</span></span>
+<span><span class="co">#&gt; ✔ Reading from "tz-etc-utc".</span></span>
+<span><span class="co">#&gt; ✔ Range 'Sheet1'.</span></span>
 <span><span class="co">#&gt;                  what            datetime serial_number</span></span>
-<span><span class="co">#&gt; 1              moment 2020-04-23 19:49:20      43944.83</span></span>
-<span><span class="co">#&gt; 2           moment_ny 2020-04-23 19:49:20      43944.83</span></span>
-<span><span class="co">#&gt; 3          moment_utc 2020-04-23 19:49:20      43944.83</span></span>
-<span><span class="co">#&gt; 4 moment_ny_utc_force 2020-04-23 15:49:20      43944.66</span></span>
-<span><span class="co">#&gt; 5              =NOW() 2020-04-23 19:49:25      43944.83</span></span>
-<span><span class="co">#&gt; 6   =DATE(moment_utc) 2020-04-23 19:49:20      43944.83</span></span></code></pre></div>
+<span><span class="co">#&gt; 1              moment 2023-06-03 20:31:14      45080.86</span></span>
+<span><span class="co">#&gt; 2           moment_ny 2023-06-03 20:31:14      45080.86</span></span>
+<span><span class="co">#&gt; 3          moment_utc 2023-06-03 20:31:14      45080.86</span></span>
+<span><span class="co">#&gt; 4 moment_ny_utc_force 2023-06-03 16:31:14      45080.69</span></span>
+<span><span class="co">#&gt; 5              =NOW() 2023-06-03 20:31:19      45080.86</span></span>
+<span><span class="co">#&gt; 6   =DATE(moment_utc) 2023-06-03 20:31:14      45080.86</span></span></code></pre></div>
 <p>Main conclusions:</p>
 <ul>
 <li>All 3 versions of <code>moment</code> result in the same serial
@@ -578,9 +583,9 @@ Sheet’s clock time into UTC.</li>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"tz-"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Files trashed:</span></span>
-<span><span class="co">#&gt;   * tz-etc-utc: 1xUiNXYsk6nDMmgDq8E5FhBwJA6Zg1XCyhkuQISI91As</span></span>
-<span><span class="co">#&gt;   * tz-america-new-york: 1RYjk25FKJH2QRpfT1fHGmomeO2BQ5VqErWQADLGeFJI</span></span>
-<span><span class="co">#&gt;   * tz-default: 1X9Zqe--GLw6X4jajyHVb9XmKh-AiLMwZKk_g5GoJl3Y</span></span></code></pre></div>
+<span><span class="co">#&gt; • 'tz-etc-utc' &lt;id: 1N6TD-6vwPy3UgDS4i85_vbOw_F9IPPkMx_04lhmqW_k&gt;</span></span>
+<span><span class="co">#&gt; • 'tz-america-new-york' &lt;id: 153iIAZ5dti6svjSRqg-4uu20x9TztyhtmJIRoravSUY&gt;</span></span>
+<span><span class="co">#&gt; • 'tz-default' &lt;id: 16i-SjgQR5nhbxxGF-dND2otRb1v6lsK-6yYTfUSySdM&gt;</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

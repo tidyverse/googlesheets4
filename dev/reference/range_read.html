@@ -261,84 +261,20 @@ its discovered type.</p></li>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># gs4_has_token()</span></span></span>
+<span class="r-in"><span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"A5:F15"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">A5:F15</span>.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Name               Profession   Age `Has kids` `Date of birth`    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> David Bowie        musician      69 TRUE       1947-01-08 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Carrie Fisher      actor         60 TRUE       1956-10-21 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Chuck Berry        musician      90 TRUE       1926-10-18 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Bill Paxton        actor         61 TRUE       1955-05-17 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Prince             musician      57 TRUE       1958-06-07 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Alan Rickman       actor         69 FALSE      1946-02-21 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Florence Henderson actor         82 TRUE       1934-02-14 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Harper Lee         author        89 FALSE      1926-04-28 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Zsa Zsa Gábor      actor         99 TRUE       1917-02-06 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> George Michael     musician      53 FALSE      1963-06-25 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: `Date of death` &lt;dttm&gt;</span></span>
 <span class="r-in"><span><span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"other!A5:F15"</span>, col_types <span class="op">=</span> <span class="st">"ccilDD"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range '<span style="color: #BBBB00;">'other'!A5:F15</span>'.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Name        Profession   Age `Has kids` `Date of birth` `Date of death`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Vera Rubin  scientist     88 TRUE       1928-07-23      2016-12-25     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Mohamed Ali athlete       74 TRUE       1942-01-17      2016-06-03     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Morley Saf… journalist    84 TRUE       1931-11-08      2016-05-19     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Fidel Cast… politician    90 TRUE       1926-08-13      2016-11-25     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Antonin Sc… lawyer        79 TRUE       1936-03-11      2016-02-13     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Jo Cox      politician    41 TRUE       1974-06-22      2016-06-16     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Janet Reno  lawyer        78 FALSE      1938-07-21      2016-11-07     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Gwen Ifill  journalist    61 FALSE      1955-09-29      2016-11-14     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> John Glenn  astronaut     95 TRUE       1921-07-28      2016-12-08     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Pat Summit  coach         64 TRUE       1952-06-14      2016-06-28     </span>
 <span class="r-in"><span><span class="fu">read_sheet</span><span class="op">(</span><span class="va">ss</span>, range <span class="op">=</span> <span class="st">"arts_data"</span>, col_types <span class="op">=</span> <span class="st">"ccilDD"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">arts_data</span>.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Name        Profession   Age `Has kids` `Date of birth` `Date of death`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> David Bowie musician      69 TRUE       1947-01-08      2016-01-10     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Carrie Fis… actor         60 TRUE       1956-10-21      2016-12-27     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Chuck Berry musician      90 TRUE       1926-10-18      2017-03-18     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Bill Paxton actor         61 TRUE       1955-05-17      2017-02-25     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Prince      musician      57 TRUE       1958-06-07      2016-04-21     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Alan Rickm… actor         69 FALSE      1946-02-21      2016-01-14     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Florence H… actor         82 TRUE       1934-02-14      2016-11-24     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Harper Lee  author        89 FALSE      1926-04-28      2016-02-19     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Zsa Zsa Gá… actor         99 TRUE       1917-02-06      2016-12-18     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> George Mic… musician      53 FALSE      1963-06-25      2016-12-25     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">read_sheet</span><span class="op">(</span><span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">mini-gap</span>.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">Africa</span>.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   country      continent  year lifeExp     pop gdpPercap</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Algeria      Africa     <span style="text-decoration: underline;">1</span>952    43.1 9<span style="text-decoration: underline;">279</span>525     <span style="text-decoration: underline;">2</span>449.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Angola       Africa     <span style="text-decoration: underline;">1</span>952    30.0 4<span style="text-decoration: underline;">232</span>095     <span style="text-decoration: underline;">3</span>521.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Benin        Africa     <span style="text-decoration: underline;">1</span>952    38.2 1<span style="text-decoration: underline;">738</span>315     <span style="text-decoration: underline;">1</span>063.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Botswana     Africa     <span style="text-decoration: underline;">1</span>952    47.6  <span style="text-decoration: underline;">442</span>308      851.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Burkina Faso Africa     <span style="text-decoration: underline;">1</span>952    32.0 4<span style="text-decoration: underline;">469</span>979      543.</span>
 <span class="r-in"><span><span class="fu">read_sheet</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  sheet <span class="op">=</span> <span class="st">"Europe"</span>,</span></span>
 <span class="r-in"><span>  range <span class="op">=</span> <span class="st">"A:D"</span>,</span></span>
 <span class="r-in"><span>  col_types <span class="op">=</span> <span class="st">"ccid"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">mini-gap</span>.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Range '<span style="color: #BBBB00;">'Europe'!A:D</span>'.</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   country                continent  year lifeExp</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Albania                Europe     <span style="text-decoration: underline;">1</span>952    55.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Austria                Europe     <span style="text-decoration: underline;">1</span>952    66.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Belgium                Europe     <span style="text-decoration: underline;">1</span>952    68  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> Bosnia and Herzegovina Europe     <span style="text-decoration: underline;">1</span>952    53.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Bulgaria               Europe     <span style="text-decoration: underline;">1</span>952    59.6</span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

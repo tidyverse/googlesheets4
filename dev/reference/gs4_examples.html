@@ -114,13 +114,59 @@ and, if provided, it can match multiple Sheets. The singular
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># gs4_has_token()</span></span></span>
-<span class="r-in"><span><span class="fu">gs4_examples</span><span class="op">(</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">gs4_examples</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;drive_id[6]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                    cell-contents-and-formats </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1peJXEeAp5Qt3ENoTvkhvenQ36N3kLyq6sq9Dh2ufQ6E </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                chicken-sheet </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1ct9t1Efv8pAGN9YO5gC2QfRq2wT4XjNoTMXpVeUghJU </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                       deaths </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                         formulas-and-formats </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1wPLrWOxxEjp3T1nv2YBxn63FX70Mz5W5Tm4tGc-lRms </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    gapminder </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     mini-gap </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU </span>
 <span class="r-in"><span><span class="fu">gs4_examples</span><span class="op">(</span><span class="st">"gap"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;drive_id[2]&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                    gapminder </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                     mini-gap </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">gs4_example</span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Spreadsheet name: gapminder</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            Locale: en_US</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Time zone: America/Los_Angeles</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       # of sheets: 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # of named ranges: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Sheet name): (Nominal extent in rows x columns)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Africa: 625 x 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     Americas: 301 x 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Asia: 397 x 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Europe: 361 x 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      Oceania: 25 x 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Named range): (A1 range)        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        canada: 'Americas'!A38:F49</span>
 <span class="r-in"><span><span class="fu">gs4_example</span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  Spreadsheet name: deaths</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                ID: 1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            Locale: en_US</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         Time zone: America/Los_Angeles</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       # of sheets: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # of named ranges: 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Sheet name): (Nominal extent in rows x columns)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         arts: 1000 x 26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        other: 1000 x 26</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Named range): (A1 range)    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     arts_data: 'arts'!A5:F15 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    other_data: 'other'!A5:F15</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

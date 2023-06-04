@@ -117,11 +117,19 @@ formula. <code>googlesheets4_formula</code> is an S3 class implemented using the
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># gs4_has_token()</span></span></span>
-<span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">6</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"gs4-formula-demo"</span>, sheets <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">gs4-formula-demo</span>.</span>
 <span class="r-in"><span><span class="va">ss</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Spreadsheet name: gs4-formula-demo</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               ID: 1koB1_QLwPKm2dTPNa_Z4NXOytudOjvCe1wjuT_EtyAg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           Locale: en_US</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        Time zone: Etc/GMT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      # of sheets: 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> (Sheet name): (Nominal extent in rows x columns)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          dat: 7 x 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">summaries</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="op">~</span><span class="va">desc</span>, <span class="op">~</span><span class="va">summaries</span>,</span></span>
@@ -134,8 +142,18 @@ formula. <code>googlesheets4_formula</code> is an S3 class implemented using the
 <span class="r-in"><span><span class="co"># explicitly declare a column as `googlesheets4_formula`</span></span></span>
 <span class="r-in"><span><span class="va">summaries</span><span class="op">$</span><span class="va">summaries</span> <span class="op">&lt;-</span> <span class="fu">gs4_formula</span><span class="op">(</span><span class="va">summaries</span><span class="op">$</span><span class="va">summaries</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">summaries</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   desc      summaries                         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;fmla&gt;</span>                            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> max       =max(A:A)                         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> sum       =sum(A:A)                         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> min       =min(A:A)                         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> sparkline =SPARKLINE(A:A, {"color", "blue"})</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="range_write.html">range_write</a></span><span class="op">(</span><span class="va">ss</span>, data <span class="op">=</span> <span class="va">summaries</span>, range <span class="op">=</span> <span class="st">"C1"</span>, reformat <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Editing <span style="color: #00BBBB;">gs4-formula-demo</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Writing to sheet <span style="color: #00BB00;">dat</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Changing dims: (7 x 1) --&gt; (7 x 4).</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">miscellany</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="op">~</span><span class="va">desc</span>, <span class="op">~</span><span class="va">example</span>,</span></span>
@@ -144,13 +162,21 @@ formula. <code>googlesheets4_formula</code> is an S3 class implemented using the
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">miscellany</span><span class="op">$</span><span class="va">example</span> <span class="op">&lt;-</span> <span class="fu">gs4_formula</span><span class="op">(</span><span class="va">miscellany</span><span class="op">$</span><span class="va">example</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">miscellany</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   desc      example                                                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;fmla&gt;</span>                                                 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> hyperlink =HYPERLINK("http://www.google.com/","Google")          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> image     =IMAGE("https://www.google.com/images/srpr/logo3w.png")</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">miscellany</span>, ss <span class="op">=</span> <span class="va">ss</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Writing to <span style="color: #00BBBB;">gs4-formula-demo</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Writing to sheet <span style="color: #00BB00;">miscellany</span>.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"gs4-formula-demo"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> File trashed:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">gs4-formula-demo</span> <span style="color: #555555;">&lt;id: 1koB1_QLwPKm2dTPNa_Z4NXOytudOjvCe1wjuT_EtyAg&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

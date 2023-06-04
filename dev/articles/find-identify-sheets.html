@@ -113,14 +113,13 @@
 
     
     
-<pre><code>No token available. Code chunks will not be evaluated.</code></pre>
 <p>There are many ways to get your hands on your Sheets, in order to
 work with them via googlesheets4. They basically range from “ugly, but
 low effort” to “more humane, but more effort”.</p>
 <div class="section level2">
 <h2 id="attach-googlesheets4">Attach googlesheets4<a class="anchor" aria-label="anchor" href="#attach-googlesheets4"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googlesheets4.tidyverse.org">googlesheets4</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -145,9 +144,20 @@ ID. This URL happens to link to <a href="https://docs.google.com/spreadsheets/d/
 official example Sheet that holds Gapminder data</a>.</p>
 <p>googlesheets4 accepts such a URL as the <code>ss</code> argument
 (think “spreadsheet”) of many functions:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ugly_url</span> <span class="op">&lt;-</span> <span class="st">"https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"</span></span>
-<span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ugly_url</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ugly_url</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">gapminder</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">Africa</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 624 × 6</span></span></span>
+<span><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Algeria Africa     <span style="text-decoration: underline;">1</span>952    43.1  9<span style="text-decoration: underline;">279</span>525     <span style="text-decoration: underline;">2</span>449.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Algeria Africa     <span style="text-decoration: underline;">1</span>957    45.7 10<span style="text-decoration: underline;">270</span>856     <span style="text-decoration: underline;">3</span>014.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 619 more rows</span></span></span></code></pre></div>
 <p>At this time, although the URL may contain both a (spread)Sheet and a
 (work)sheet, we only extract the (spread)Sheet ID. If the function
 targets a specific (work)sheet, that is typically specified via
@@ -162,10 +172,12 @@ though.</p>
 <p>You can extract the Sheet ID from a URL with
 <code><a href="../reference/sheets_id.html">as_sheets_id()</a></code> (which is what we are doing internally to
 make the URL work in the first place):</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ssid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheets_id.html">as_sheets_id</a></span><span class="op">(</span><span class="va">ugly_url</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "sheets_id"  "drive_id"   "vctrs_vctr" "character"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span></span></code></pre></div>
 <p><code><a href="../reference/sheets_id.html">as_sheets_id()</a></code> is a generic function, which means it
 knows what to do with a few different types of input. For character
 string input, <code><a href="../reference/sheets_id.html">as_sheets_id()</a></code> passes a string through,
@@ -177,21 +189,59 @@ nicely with googledrive).</p>
 Sheet ID? Because, by default, when you print an instance of
 <code>sheets_id</code>, we attempt to show you some current metadata
 about the Sheet.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ssid</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">ssid</span></span>
+<span><span class="co">#&gt;  Spreadsheet name: gapminder</span></span>
+<span><span class="co">#&gt;                ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY</span></span>
+<span><span class="co">#&gt;            Locale: en_US</span></span>
+<span><span class="co">#&gt;         Time zone: America/Los_Angeles</span></span>
+<span><span class="co">#&gt;       # of sheets: 5</span></span>
+<span><span class="co">#&gt; # of named ranges: 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span><span class="co">#&gt;       Africa: 625 x 6</span></span>
+<span><span class="co">#&gt;     Americas: 301 x 6</span></span>
+<span><span class="co">#&gt;         Asia: 397 x 6</span></span>
+<span><span class="co">#&gt;       Europe: 361 x 6</span></span>
+<span><span class="co">#&gt;      Oceania: 25 x 6</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; (Named range): (A1 range)        </span></span>
+<span><span class="co">#&gt;        canada: 'Americas'!A38:F49</span></span></code></pre></div>
 <p>This is the same metadata you’ll see when you call
 <code><a href="../reference/gs4_get.html">gs4_get()</a></code> (but you must call <code><a href="../reference/gs4_get.html">gs4_get()</a></code>
 explicitly if you want to <em>store</em> the returned metadata).</p>
 <p>googlesheets4 also accepts a Sheet ID as the <code>ss</code> argument
 of many functions:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">gapminder</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">Africa</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 624 × 6</span></span></span>
+<span><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Algeria Africa     <span style="text-decoration: underline;">1</span>952    43.1  9<span style="text-decoration: underline;">279</span>525     <span style="text-decoration: underline;">2</span>449.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Algeria Africa     <span style="text-decoration: underline;">1</span>957    45.7 10<span style="text-decoration: underline;">270</span>856     <span style="text-decoration: underline;">3</span>014.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 619 more rows</span></span></span></code></pre></div>
 <p>I think in a script or app that will endure for a while it is better
 to refer to a Sheet by its ID than by its URL. The Sheet ID is nicer to
 look at, it is complete, it is minimal.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ssid</span> <span class="op">&lt;-</span> <span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span></span>
-<span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">gapminder</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">Africa</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 624 × 6</span></span></span>
+<span><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Algeria Africa     <span style="text-decoration: underline;">1</span>952    43.1  9<span style="text-decoration: underline;">279</span>525     <span style="text-decoration: underline;">2</span>449.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Algeria Africa     <span style="text-decoration: underline;">1</span>957    45.7 10<span style="text-decoration: underline;">270</span>856     <span style="text-decoration: underline;">3</span>014.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 619 more rows</span></span></span></code></pre></div>
 <p>Note this demonstration that a Sheet ID also works when provided as a
 plain, old string, i.e. it does not <strong>have</strong> to have the
 <code>sheets_id</code> class. In some contexts, you might even prefer to
@@ -203,9 +253,20 @@ for googledrive, which assumes a character string is a file name or
 path. Therefore, for maximum happiness, in a mixed googlesheets4 /
 googledrive workflow, it’s a good idea to be explicit and declare a
 string to be a Sheet ID, when that is the case.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ssid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheets_id.html">as_sheets_id</a></span><span class="op">(</span><span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">gapminder</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">Africa</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 624 × 6</span></span></span>
+<span><span class="co">#&gt;   country continent  year lifeExp      pop gdpPercap</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Algeria Africa     <span style="text-decoration: underline;">1</span>952    43.1  9<span style="text-decoration: underline;">279</span>525     <span style="text-decoration: underline;">2</span>449.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Algeria Africa     <span style="text-decoration: underline;">1</span>957    45.7 10<span style="text-decoration: underline;">270</span>856     <span style="text-decoration: underline;">3</span>014.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Algeria Africa     <span style="text-decoration: underline;">1</span>962    48.3 11<span style="text-decoration: underline;">000</span>948     <span style="text-decoration: underline;">2</span>551.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Algeria Africa     <span style="text-decoration: underline;">1</span>967    51.4 12<span style="text-decoration: underline;">760</span>499     <span style="text-decoration: underline;">3</span>247.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Algeria Africa     <span style="text-decoration: underline;">1</span>972    54.5 14<span style="text-decoration: underline;">760</span>787     <span style="text-decoration: underline;">4</span>183.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 619 more rows</span></span></span></code></pre></div>
 <p>If your script or app targets a specific Sheet, the most efficient
 and robust way to address it is by its ID.</p>
 </div>
@@ -228,28 +289,58 @@ via googledrive. See the article <a href="https://googlesheets4.tidyverse.org/ar
 googlesheets4 with googledrive</a> for more.</p>
 <p>It’s time to attach googledrive (in addition to the already-attached
 googlesheets4):</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org" class="external-link">googledrive</a></span><span class="op">)</span></span></code></pre></div>
 <p>(In our hidden auth chunk, we actually put a shared token into force
 for both googlesheets4 and googledrive, anticipating this moment.)</p>
 <p>The Sheet we’ve been working with is named “gapminder” and is owned
 by the account we’ve logged in as here. We can use
 <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">googledrive::drive_get()</a></code> to identify a file by name:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">gap_dribble</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">drive_get</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">gap_dribble</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">drive_get</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> The input `path` resolved to exactly 1 file.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 4</span></span></span>
+<span><span class="co">#&gt;   name      path      id                                    drive_resource</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> gapminder gapminder 1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6M… <span style="color: #949494;">&lt;named list&gt;</span></span></span></code></pre></div>
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">drive_get()</a></code> returns a <a href="https://googledrive.tidyverse.org/reference/dribble.html" class="external-link"><code>dribble</code></a>,
 a “Drive tibble”, where each row holds info on a Drive file.
 <code><a href="../reference/sheets_id.html">as_sheets_id()</a></code> also accepts a one-row <code>dribble</code>,
 so we can get right into our normal googlesheets4 workflows:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gap_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheets_id.html">as_sheets_id</a></span><span class="op">(</span><span class="va">gap_dribble</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="va">gap_id</span><span class="op">)</span></span>
-<span><span class="va">gap_id</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] "1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew"</span></span>
+<span><span class="va">gap_id</span></span>
+<span><span class="co">#&gt;  Spreadsheet name: gapminder</span></span>
+<span><span class="co">#&gt;                ID: 1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew</span></span>
+<span><span class="co">#&gt;            Locale: en_US</span></span>
+<span><span class="co">#&gt;         Time zone: America/Los_Angeles</span></span>
+<span><span class="co">#&gt;       # of sheets: 5</span></span>
+<span><span class="co">#&gt; # of named ranges: 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
+<span><span class="co">#&gt;       Africa: 625 x 6</span></span>
+<span><span class="co">#&gt;     Americas: 301 x 6</span></span>
+<span><span class="co">#&gt;         Asia: 397 x 6</span></span>
+<span><span class="co">#&gt;       Europe: 361 x 6</span></span>
+<span><span class="co">#&gt;      Oceania: 25 x 6</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; (Named range): (A1 range)        </span></span>
+<span><span class="co">#&gt;        canada: 'Americas'!A38:F49</span></span></code></pre></div>
 <p>Since we generally call <code><a href="../reference/sheets_id.html">as_sheets_id()</a></code> on whatever the
 user provides as <code>ss</code>, you can even pass
 <code>gap_dribble</code> straight into googlesheets4 functions.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">gap_dribble</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">gap_dribble</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 8</span></span></span>
+<span><span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Africa       0  780<span style="text-decoration: underline;">868</span>077 GRID  TRUE          625            6 <span style="color: #949494;">&lt;NULL&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Americas     1   45<span style="text-decoration: underline;">759</span>261 GRID  TRUE          301            6 <span style="color: #949494;">&lt;NULL&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Asia         2 <span style="text-decoration: underline;">1</span>984<span style="text-decoration: underline;">823</span>455 GRID  TRUE          397            6 <span style="color: #949494;">&lt;NULL&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Europe       3 <span style="text-decoration: underline;">1</span>503<span style="text-decoration: underline;">562</span>052 GRID  TRUE          361            6 <span style="color: #949494;">&lt;NULL&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Oceania      4 <span style="text-decoration: underline;">1</span>796<span style="text-decoration: underline;">776</span>040 GRID  TRUE           25            6 <span style="color: #949494;">&lt;NULL&gt;</span></span></span></code></pre></div>
 <p>Two important things to note:</p>
 <ul>
 <li>googledrive requires auth for functions like
@@ -280,13 +371,31 @@ can’t <code><a href="https://googledrive.tidyverse.org/reference/drive_get.htm
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">googledrive::drive_find()</a></code> is the workhorse function for
 these tasks for general Drive files. It has lots of bells and whistles
 and we can use one of them to narrow the search to Google Sheets:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 9 × 3</span></span></span>
+<span><span class="co">#&gt;   name              id                                      drive_resource</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> geological-canary 13fmUp01xitQrPvgw7LWDXNMHiMewxHnPuYHai… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> blubbery-lobo     1foTYXQEknymPpyug1xWOq7ituJ-ywLCaTEHaF… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> bacciform-booby   15WqCxHBCjY4P_i6-uTL9rUBgpcHRKQFrqheRS… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> childsafe-squid   1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> fiery-hart        18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEn… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more rows</span></span></span></code></pre></div>
 <p>This is so handy that we’ve made <code><a href="../reference/gs4_find.html">gs4_find()</a></code> in
 googlesheets4, which is a shortcut for
 <code>drive_find(type = "spreadsheet")</code>:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 9 × 3</span></span></span>
+<span><span class="co">#&gt;   name              id                                      drive_resource</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> geological-canary 13fmUp01xitQrPvgw7LWDXNMHiMewxHnPuYHai… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> blubbery-lobo     1foTYXQEknymPpyug1xWOq7ituJ-ywLCaTEHaF… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> bacciform-booby   15WqCxHBCjY4P_i6-uTL9rUBgpcHRKQFrqheRS… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> childsafe-squid   1uGu_BHwialVz6okcuO5kRgLhaprClnzq5Orgc… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> fiery-hart        18KiiL2AGkL9nTkjHdOXGmeUQzqnOLqWnnOIEn… <span style="color: #949494;">&lt;named list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more rows</span></span></span></code></pre></div>
 <p>See the examples for <code><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">drive_find()</a></code> and
 <code><a href="../reference/gs4_find.html">gs4_find()</a></code> for more ideas about how to search Drive
 effectively for your Sheets.</p>

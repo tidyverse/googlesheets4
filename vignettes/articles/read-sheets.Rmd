@@ -80,6 +80,13 @@ range_read(
 )
 ```
 
+```{r include = FALSE, eval = TRUE}
+# set deaths_hyperlink to a fallback value, so that this article doesn't
+# error when can_decrypt (and therefore document-level eval) is FALSE
+# this makes the inline code work, no matter what
+deaths_hyperlink <- "[here](https://docs.google.com/spreadsheets/d/1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y)"
+```
+
 ```{r include = FALSE}
 deaths_url <- rlang::with_interactive(value = FALSE,
   gs4_browse(gs4_example("deaths"))

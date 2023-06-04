@@ -63,56 +63,71 @@ new_googlesheets4_spreadsheet <- function(x = list()) {
 
 #' @export
 format.googlesheets4_spreadsheet <- function(x, ...) {
-  meta <- tibble::tribble(
-    ~col1, ~col2,
-    "Spreadsheet name", x$name,
-    "ID", as.character(x$spreadsheet_id),
-    "Locale", x$locale,
-    "Time zone", x$time_zone,
-    "# of sheets", if (rlang::has_name(x, "sheets")) {
-      as.character(nrow(x$sheets))
-    } else {
-      "<unknown>"
-    }
+  cli::cli_div(theme = gs4_theme())
+  meta <- list(
+  `Spreadsheet name` = cli::format_inline("{.s_sheet {x$name}}"),
+                  ID = as.character(x$spreadsheet_id),
+              Locale = x$locale,
+         `Time zone` = x$time_zone,
+       `# of sheets` = if (rlang::has_name(x, "sheets")) {
+         as.character(nrow(x$sheets))
+       } else {
+         "<unknown>"
+       }
   )
   if (!is.null(x$named_ranges)) {
-    meta <- tibble::add_row(
-      meta,
-      col1 = "# of named ranges", col2 = as.character(nrow(x$named_ranges))
-    )
+    meta <- c(meta, `# of named ranges` = as.character(nrow(x$named_ranges)))
   }
   if (!is.null(x$protected_ranges)) {
-    meta <- tibble::add_row(
-      meta,
-      col1 = "# of protected ranges", col2 = as.character(nrow(x$protected_ranges))
-    )
+    meta <- c(meta, `# of protected ranges` = as.character(nrow(x$protected_ranges)))
   }
-  meta <- glue_data(meta, "{fr(col1)}: {col2}")
+  out <- c(
+    cli::cli_format_method(
+      cli::cli_h1("<googlesheets4_spreadsheet>")
+    ),
+    glue("{fr(names(meta))}: {fl(meta)}")
+  )
 
   if (!is.null(x$sheets)) {
-    col1 <- fr(c("(Sheet name)", x$sheets$name))
+    col1 <- fr(c(
+      "(Sheet name)",
+      sapply(
+        gargle::gargle_map_cli(x$sheets$name, template = "{.w_sheet <<x>>}"),
+        cli::format_inline
+      )
+    ))
     col2 <- c(
       "(Nominal extent in rows x columns)",
       glue_data(x$sheets, "{grid_rows} x {grid_columns}")
     )
-    meta <- c(
-      meta,
-      "",
+    out <- c(
+      out,
+      cli::cli_format_method(
+        cli::cli_h1("<sheets>")
+      ),
       glue_data(list(col1 = col1, col2 = col2), "{col1}: {col2}")
     )
   }
 
   if (!is.null(x$named_ranges)) {
-    col1 <- fr(c("(Named range)", x$named_ranges$name))
+    col1 <- fr(c(
+      "(Named range)",
+      sapply(
+        gargle::gargle_map_cli(x$named_ranges$name, template = "{.range <<x>>}"),
+        cli::format_inline
+      )
+    ))
     col2 <- fl(c("(A1 range)", x$named_ranges$A1_range))
-    meta <- c(
-      meta,
-      "",
+    out <- c(
+      out,
+      cli::cli_format_method(
+        cli::cli_h1("<named ranges>")
+      ),
       glue_data(list(col1 = col1, col2 = col2), "{col1}: {col2}")
     )
   }
 
-  meta
+  out
 }
 
 #' @export

@@ -42,33 +42,39 @@
     Code
       print(gs4_example("gapminder"))
     Output
-       Spreadsheet name: gapminder
+      
+      -- <googlesheets4_spreadsheet> -------------------------------------------------
+       Spreadsheet name: "gapminder"                                 
                      ID: 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY
-                 Locale: en_US
-              Time zone: America/Los_Angeles
-            # of sheets: 5
-      # of named ranges: 1
+                 Locale: en_US                                       
+              Time zone: America/Los_Angeles                         
+            # of sheets: 5                                           
+      # of named ranges: 1                                           
       
+      -- <sheets> --------------------------------------------------------------------
       (Sheet name): (Nominal extent in rows x columns)
-            Africa: 625 x 6
-          Americas: 301 x 6
-              Asia: 397 x 6
-            Europe: 361 x 6
-           Oceania: 25 x 6
+          'Africa': 625 x 6
+        'Americas': 301 x 6
+            'Asia': 397 x 6
+          'Europe': 361 x 6
+         'Oceania': 25 x 6
       
+      -- <named ranges> --------------------------------------------------------------
       (Named range): (A1 range)        
-             canada: 'Americas'!A38:F49
+           'canada': 'Americas'!A38:F49
 
 # sheets_id print method doesn't error for nonexistent ID
 
     Code
       as_sheets_id("12345")
     Output
-      Spreadsheet name: <unknown>
-                    ID: 12345
-                Locale: <unknown>
-             Time zone: <unknown>
-           # of sheets: <unknown>
+      
+      -- <googlesheets4_spreadsheet> -------------------------------------------------
+      Spreadsheet name: "<unknown>"
+                    ID: 12345      
+                Locale: <unknown>  
+             Time zone: <unknown>  
+           # of sheets: <unknown>  
       
       Unable to get metadata for this Sheet. Error details:
       Client error: (404) NOT_FOUND
@@ -81,29 +87,34 @@
     Code
       print(gs4_example("mini-gap"))
     Output
-      Spreadsheet name: mini-gap
-                    ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
-                Locale: en_US
-             Time zone: America/Los_Angeles
-           # of sheets: 5
       
+      -- <googlesheets4_spreadsheet> -------------------------------------------------
+      Spreadsheet name: "mini-gap"                                  
+                    ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
+                Locale: en_US                                       
+             Time zone: America/Los_Angeles                         
+           # of sheets: 5                                           
+      
+      -- <sheets> --------------------------------------------------------------------
       (Sheet name): (Nominal extent in rows x columns)
-            Africa: 6 x 6
-          Americas: 6 x 6
-              Asia: 6 x 6
-            Europe: 6 x 6
-           Oceania: 6 x 6
+          'Africa': 6 x 6
+        'Americas': 6 x 6
+            'Asia': 6 x 6
+          'Europe': 6 x 6
+         'Oceania': 6 x 6
 
 # sheets_id print does not error for lack of cred
 
     Code
       print(gs4_example("mini-gap"))
     Output
-      Spreadsheet name: <unknown>
+      
+      -- <googlesheets4_spreadsheet> -------------------------------------------------
+      Spreadsheet name: "<unknown>"                                 
                     ID: 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU
-                Locale: <unknown>
-             Time zone: <unknown>
-           # of sheets: <unknown>
+                Locale: <unknown>                                   
+             Time zone: <unknown>                                   
+           # of sheets: <unknown>                                   
       
       Unable to get metadata for this Sheet. Error details:
       Can't get Google credentials.

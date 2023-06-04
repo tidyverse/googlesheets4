@@ -59,8 +59,21 @@ message <- function(...) {
     .internal = TRUE)
 }
 
-fr <- function(x) format(x, justify = "right")
-fl <- function(x) format(x, justify = "left")
+fr <- function(x) {
+  cli::ansi_align(
+    as.character(x),
+    align = "right",
+    width = max(cli::ansi_nchar(x))
+  )
+}
+
+fl <- function(x) {
+  cli::ansi_align(
+    as.character(x),
+    align = "left",
+    width = max(cli::ansi_nchar(x))
+  )
+}
 
 gs4_quiet <- function() {
   getOption("googlesheets4_quiet", default = NA)

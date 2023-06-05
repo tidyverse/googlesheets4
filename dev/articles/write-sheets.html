@@ -185,14 +185,17 @@ generated name).</p>
 <code class="sourceCode R"><span><span class="va">ss1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"sheets-create-demo-1"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">sheets-create-demo-1</span>.</span></span>
 <span><span class="va">ss1</span></span>
-<span><span class="co">#&gt; Spreadsheet name: sheets-create-demo-1</span></span>
-<span><span class="co">#&gt;               ID: 16v4fHwspfTK3J_xpHmB_1xlaiAbHobY9Hfyf3yhq0HE</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">sheets-create-demo-1</span>                        </span></span>
+<span><span class="co">#&gt;               ID: 13wXGBNlQTdlHIJ-k2MXrkXqCBUeynfncHGjM5bL2sNc</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;       Sheet1: 1000 x 26</span></span></code></pre></div>
+<span><span class="co">#&gt;       <span style="color: #00BB00;">Sheet1</span>: 1000 x 26</span></span></code></pre></div>
 <p>Every Sheet <em>must</em> have at least one (work)sheet, so Google
 Sheets automatically creates an empty “Sheet1”.</p>
 <p>You can control the names and content of the initial (work)sheets
@@ -209,15 +212,18 @@ sheets.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">sheets-create-demo-2</span>.</span></span>
 <span><span class="va">ss2</span></span>
-<span><span class="co">#&gt; Spreadsheet name: sheets-create-demo-2</span></span>
-<span><span class="co">#&gt;               ID: 1VdfkOUpijtZLGaexsTLNv9D5X7-AWdDGQbnOk1cjQBg</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 2</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">sheets-create-demo-2</span>                        </span></span>
+<span><span class="co">#&gt;               ID: 1-TRvMfTuquRByIYgsxirD3KfvZ4XeUunUhWy3hLmCMA</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 2                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;        alpha: 1000 x 26</span></span>
-<span><span class="co">#&gt;         beta: 1000 x 26</span></span></code></pre></div>
+<span><span class="co">#&gt;        <span style="color: #00BB00;">alpha</span>: 1000 x 26</span></span>
+<span><span class="co">#&gt;         <span style="color: #00BB00;">beta</span>: 1000 x 26</span></span></code></pre></div>
 <p>These sheets have no values and get their dimensions from Sheets
 default behaviour.</p>
 </div>
@@ -237,14 +243,17 @@ the data frame, where possible.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">sheets-create-demo-3</span>.</span></span>
 <span><span class="va">ss3</span></span>
-<span><span class="co">#&gt; Spreadsheet name: sheets-create-demo-3</span></span>
-<span><span class="co">#&gt;               ID: 1mme2XBSw4Rz7mCLankdfsA4Zne6ZUGfRlNStMfZ68Ho</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">sheets-create-demo-3</span>                        </span></span>
+<span><span class="co">#&gt;               ID: 10jwwLCGb4POVFObY3pZFdYGeQoIgW_1neBrOr-F6Mk0</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;      my_data: 4 x 2</span></span></code></pre></div>
+<span><span class="co">#&gt;      <span style="color: #00BB00;">my_data</span>: 4 x 2</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="send-multiple-data-frames">Send multiple data frames<a class="anchor" aria-label="anchor" href="#send-multiple-data-frames"></a>
@@ -262,15 +271,18 @@ the names from the list, if it has names.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">sheets-create-demo-4</span>.</span></span>
 <span><span class="va">ss4</span></span>
-<span><span class="co">#&gt; Spreadsheet name: sheets-create-demo-4</span></span>
-<span><span class="co">#&gt;               ID: 1nTnLLdHbkxpfh8fTKd8dPBedhc4TiFdRe1iYQ16qgU8</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 2</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">sheets-create-demo-4</span>                        </span></span>
+<span><span class="co">#&gt;               ID: 1JEhLYG0StS8JS0PGgklGTjPb8bqEFR5RidNLP3rxWLU</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 2                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;         iris: 7 x 5</span></span>
-<span><span class="co">#&gt;     chickwts: 7 x 2</span></span></code></pre></div>
+<span><span class="co">#&gt;         <span style="color: #00BB00;">iris</span>: 7 x 5</span></span>
+<span><span class="co">#&gt;     <span style="color: #00BB00;">chickwts</span>: 7 x 2</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="write-metadata">Write metadata<a class="anchor" aria-label="anchor" href="#write-metadata"></a>
@@ -289,14 +301,17 @@ we request a French locale.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">sheets-create-demo-5</span>.</span></span>
 <span><span class="va">ss5</span></span>
-<span><span class="co">#&gt; Spreadsheet name: sheets-create-demo-5</span></span>
-<span><span class="co">#&gt;               ID: 1PT8c1yAitpbh-5XLAc9AX0RWayNtVpt2zC8AMRunXwM</span></span>
-<span><span class="co">#&gt;           Locale: fr_FR</span></span>
-<span><span class="co">#&gt;        Time zone: Europe/Paris</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">sheets-create-demo-5</span>                        </span></span>
+<span><span class="co">#&gt;               ID: 1zxKfYqkKQHhlPZStwjpvjuzLlihg06WtLWE_6-OEi88</span></span>
+<span><span class="co">#&gt;           Locale: fr_FR                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Europe/Paris                                </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;    Feuille 1: 1000 x 26</span></span></code></pre></div>
+<span><span class="co">#&gt;    <span style="color: #00BB00;">Feuille 1</span>: 1000 x 26</span></span></code></pre></div>
 <p>I would only do this if you have specific evidence that the default
 behaviour with respect to locale and time zone is problematic for your
 use case.</p>
@@ -314,11 +329,11 @@ googlesheets4 with googledrive</a>.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-create-demo"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Files trashed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-create-demo-5</span> <span style="color: #555555;">&lt;id: 1PT8c1yAitpbh-5XLAc9AX0RWayNtVpt2zC8AMRunXwM&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-create-demo-4</span> <span style="color: #555555;">&lt;id: 1nTnLLdHbkxpfh8fTKd8dPBedhc4TiFdRe1iYQ16qgU8&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-create-demo-3</span> <span style="color: #555555;">&lt;id: 1mme2XBSw4Rz7mCLankdfsA4Zne6ZUGfRlNStMfZ68Ho&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-create-demo-2</span> <span style="color: #555555;">&lt;id: 1VdfkOUpijtZLGaexsTLNv9D5X7-AWdDGQbnOk1cjQBg&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-create-demo-1</span> <span style="color: #555555;">&lt;id: 16v4fHwspfTK3J_xpHmB_1xlaiAbHobY9Hfyf3yhq0HE&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-create-demo-5</span> <span style="color: #555555;">&lt;id: 1zxKfYqkKQHhlPZStwjpvjuzLlihg06WtLWE_6-OEi88&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-create-demo-4</span> <span style="color: #555555;">&lt;id: 1JEhLYG0StS8JS0PGgklGTjPb8bqEFR5RidNLP3rxWLU&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-create-demo-3</span> <span style="color: #555555;">&lt;id: 10jwwLCGb4POVFObY3pZFdYGeQoIgW_1neBrOr-F6Mk0&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-create-demo-2</span> <span style="color: #555555;">&lt;id: 1-TRvMfTuquRByIYgsxirD3KfvZ4XeUunUhWy3hLmCMA&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-create-demo-1</span> <span style="color: #555555;">&lt;id: 13wXGBNlQTdlHIJ-k2MXrkXqCBUeynfncHGjM5bL2sNc&gt;</span></span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -336,16 +351,19 @@ data.</p>
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">random_ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheet_write.html">sheet_write</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">harmless-ragfish</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">chantable-springbok</span>.</span></span>
 <span><span class="va">random_ss</span></span>
-<span><span class="co">#&gt; Spreadsheet name: harmless-ragfish</span></span>
-<span><span class="co">#&gt;               ID: 1LMILKdrGTcVr7uuvXFr1yNAE8rLvKyBhOl28dPKiTkw</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">chantable-springbok</span>                         </span></span>
+<span><span class="co">#&gt;               ID: 1YfSerFovpQYSQmfUHzYAzwgF55jdt4J7v1QT08i1mUs</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;           df: 4 x 2</span></span></code></pre></div>
+<span><span class="co">#&gt;           <span style="color: #00BB00;">df</span>: 4 x 2</span></span></code></pre></div>
 <p>This creates a new (work)sheet inside a new (spread)Sheet and returns
 its ID. You’ll notice the new Sheet has a randomly generated name. If
 that is a problem, use <code><a href="../reference/gs4_create.html">gs4_create()</a></code> instead, which affords
@@ -358,7 +376,7 @@ data.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="va">random_ss</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File trashed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">harmless-ragfish</span> <span style="color: #555555;">&lt;id: 1LMILKdrGTcVr7uuvXFr1yNAE8rLvKyBhOl28dPKiTkw&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">chantable-springbok</span> <span style="color: #555555;">&lt;id: 1YfSerFovpQYSQmfUHzYAzwgF55jdt4J7v1QT08i1mUs&gt;</span></span></span>
 <span></span>
 <span><span class="va">ss1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span></span>
 <span>  <span class="st">"write-sheets-demo-1"</span>,</span>
@@ -366,14 +384,17 @@ data.</p>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">write-sheets-demo-1</span>.</span></span>
 <span><span class="va">ss1</span></span>
-<span><span class="co">#&gt; Spreadsheet name: write-sheets-demo-1</span></span>
-<span><span class="co">#&gt;               ID: 12DxJy4g-ANt3KMa5aMuhf-tgA5GDBr0UlH6NLysRUo4</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">write-sheets-demo-1</span>                         </span></span>
+<span><span class="co">#&gt;               ID: 1Ml20yFo3zhGr7-nrvTf9atjM6RIYsyr7pCHu2r-oUoY</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;     chickwts: 1000 x 26</span></span></code></pre></div>
+<span><span class="co">#&gt;     <span style="color: #00BB00;">chickwts</span>: 1000 x 26</span></span></code></pre></div>
 <p><code><a href="../reference/sheet_write.html">sheet_write()</a></code> allows us to write the actual
 <code>chickwts</code> data into the sheet by that name.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -381,14 +402,17 @@ data.</p>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Writing to <span style="color: #00BBBB;">write-sheets-demo-1</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Writing to sheet <span style="color: #00BB00;">chickwts</span>.</span></span>
 <span><span class="va">ss1</span></span>
-<span><span class="co">#&gt; Spreadsheet name: write-sheets-demo-1</span></span>
-<span><span class="co">#&gt;               ID: 12DxJy4g-ANt3KMa5aMuhf-tgA5GDBr0UlH6NLysRUo4</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">write-sheets-demo-1</span>                         </span></span>
+<span><span class="co">#&gt;               ID: 1Ml20yFo3zhGr7-nrvTf9atjM6RIYsyr7pCHu2r-oUoY</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;     chickwts: 72 x 2</span></span></code></pre></div>
+<span><span class="co">#&gt;     <span style="color: #00BB00;">chickwts</span>: 72 x 2</span></span></code></pre></div>
 <p><code><a href="../reference/sheet_write.html">sheet_write()</a></code> can also write data into a new sheet, if
 <code>sheet</code> implicitly or explicitly targets a non-existent
 sheet.</p>
@@ -410,17 +434,20 @@ generated by Sheets.</p>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Writing to <span style="color: #00BBBB;">write-sheets-demo-1</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Writing to sheet <span style="color: #00BB00;">Sheet1</span>.</span></span>
 <span><span class="va">ss1</span></span>
-<span><span class="co">#&gt; Spreadsheet name: write-sheets-demo-1</span></span>
-<span><span class="co">#&gt;               ID: 12DxJy4g-ANt3KMa5aMuhf-tgA5GDBr0UlH6NLysRUo4</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 4</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">write-sheets-demo-1</span>                         </span></span>
+<span><span class="co">#&gt;               ID: 1Ml20yFo3zhGr7-nrvTf9atjM6RIYsyr7pCHu2r-oUoY</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 4                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;     chickwts: 72 x 2</span></span>
-<span><span class="co">#&gt;         iris: 151 x 5</span></span>
-<span><span class="co">#&gt;       mtcars: 33 x 11</span></span>
-<span><span class="co">#&gt;       Sheet1: 3 x 2</span></span></code></pre></div>
+<span><span class="co">#&gt;     <span style="color: #00BB00;">chickwts</span>: 72 x 2</span></span>
+<span><span class="co">#&gt;         <span style="color: #00BB00;">iris</span>: 151 x 5</span></span>
+<span><span class="co">#&gt;       <span style="color: #00BB00;">mtcars</span>: 33 x 11</span></span>
+<span><span class="co">#&gt;       <span style="color: #00BB00;">Sheet1</span>: 3 x 2</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="clean-up-1">Clean up<a class="anchor" aria-label="anchor" href="#clean-up-1"></a>
 </h3>
@@ -428,7 +455,7 @@ generated by Sheets.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"write-sheets-demo"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File trashed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">write-sheets-demo-1</span> <span style="color: #555555;">&lt;id: 12DxJy4g-ANt3KMa5aMuhf-tgA5GDBr0UlH6NLysRUo4&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">write-sheets-demo-1</span> <span style="color: #555555;">&lt;id: 1Ml20yFo3zhGr7-nrvTf9atjM6RIYsyr7pCHu2r-oUoY&gt;</span></span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -471,14 +498,17 @@ freeze the top row), but it will soon be filled when we append.</p>
 <code class="sourceCode R"><span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"sheets-append-demo"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>deaths <span class="op">=</span> <span class="va">deaths_zero</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">sheets-append-demo</span>.</span></span>
 <span><span class="va">ss</span></span>
-<span><span class="co">#&gt; Spreadsheet name: sheets-append-demo</span></span>
-<span><span class="co">#&gt;               ID: 1mGwrFJ_bZggBM1a9jocuJLssQu4i4gkLdVLQfS2PzqY</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">sheets-append-demo</span>                          </span></span>
+<span><span class="co">#&gt;               ID: 1pVYkIM9HWvjZVH2na4BksDTgOi37S0fJ_aqT5zipUzs</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;       deaths: 2 x 6</span></span></code></pre></div>
+<span><span class="co">#&gt;       <span style="color: #00BB00;">deaths</span>: 2 x 6</span></span></code></pre></div>
 <p>If you’re following along, I recommend you open this Sheet in a web
 browser with <code><a href="../reference/gs4_browse.html">gs4_browse()</a></code> and revisit as we go along, to
 see how the initial empty row gets consumed and how additional rows are
@@ -489,56 +519,68 @@ added to the targetted sheet automatically.</p>
 browser if you’re doing this yourself.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ss</span></span>
-<span><span class="co">#&gt; Spreadsheet name: sheets-append-demo</span></span>
-<span><span class="co">#&gt;               ID: 1mGwrFJ_bZggBM1a9jocuJLssQu4i4gkLdVLQfS2PzqY</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">sheets-append-demo</span>                          </span></span>
+<span><span class="co">#&gt;               ID: 1pVYkIM9HWvjZVH2na4BksDTgOi37S0fJ_aqT5zipUzs</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;       deaths: 2 x 6</span></span>
+<span><span class="co">#&gt;       <span style="color: #00BB00;">deaths</span>: 2 x 6</span></span>
 <span></span>
 <span><span class="co"># send several rows</span></span>
 <span><span class="va">ss</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/sheet_append.html">sheet_append</a></span><span class="op">(</span><span class="va">deaths_one</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Writing to <span style="color: #00BBBB;">sheets-append-demo</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Appending 5 rows to <span style="color: #00BB00;">deaths</span>.</span></span>
 <span><span class="va">ss</span></span>
-<span><span class="co">#&gt; Spreadsheet name: sheets-append-demo</span></span>
-<span><span class="co">#&gt;               ID: 1mGwrFJ_bZggBM1a9jocuJLssQu4i4gkLdVLQfS2PzqY</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">sheets-append-demo</span>                          </span></span>
+<span><span class="co">#&gt;               ID: 1pVYkIM9HWvjZVH2na4BksDTgOi37S0fJ_aqT5zipUzs</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;       deaths: 6 x 6</span></span>
+<span><span class="co">#&gt;       <span style="color: #00BB00;">deaths</span>: 6 x 6</span></span>
 <span></span>
 <span><span class="co"># send a single row</span></span>
 <span><span class="va">ss</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/sheet_append.html">sheet_append</a></span><span class="op">(</span><span class="va">deaths_two</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Writing to <span style="color: #00BBBB;">sheets-append-demo</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Appending 1 row to <span style="color: #00BB00;">deaths</span>.</span></span>
 <span><span class="va">ss</span></span>
-<span><span class="co">#&gt; Spreadsheet name: sheets-append-demo</span></span>
-<span><span class="co">#&gt;               ID: 1mGwrFJ_bZggBM1a9jocuJLssQu4i4gkLdVLQfS2PzqY</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">sheets-append-demo</span>                          </span></span>
+<span><span class="co">#&gt;               ID: 1pVYkIM9HWvjZVH2na4BksDTgOi37S0fJ_aqT5zipUzs</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;       deaths: 7 x 6</span></span>
+<span><span class="co">#&gt;       <span style="color: #00BB00;">deaths</span>: 7 x 6</span></span>
 <span></span>
 <span><span class="co"># send remaining rows</span></span>
 <span><span class="va">ss</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/sheet_append.html">sheet_append</a></span><span class="op">(</span><span class="va">deaths_three</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Writing to <span style="color: #00BBBB;">sheets-append-demo</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Appending 4 rows to <span style="color: #00BB00;">deaths</span>.</span></span>
 <span><span class="va">ss</span></span>
-<span><span class="co">#&gt; Spreadsheet name: sheets-append-demo</span></span>
-<span><span class="co">#&gt;               ID: 1mGwrFJ_bZggBM1a9jocuJLssQu4i4gkLdVLQfS2PzqY</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">sheets-append-demo</span>                          </span></span>
+<span><span class="co">#&gt;               ID: 1pVYkIM9HWvjZVH2na4BksDTgOi37S0fJ_aqT5zipUzs</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;       deaths: 11 x 6</span></span></code></pre></div>
+<span><span class="co">#&gt;       <span style="color: #00BB00;">deaths</span>: 11 x 6</span></span></code></pre></div>
 <p>Now the big reveal: have we successfully rebuilt that data through
 incremental updates?</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -556,7 +598,7 @@ checked this article!</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-append-demo"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File trashed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-append-demo</span> <span style="color: #555555;">&lt;id: 1mGwrFJ_bZggBM1a9jocuJLssQu4i4gkLdVLQfS2PzqY&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-append-demo</span> <span style="color: #555555;">&lt;id: 1pVYkIM9HWvjZVH2na4BksDTgOi37S0fJ_aqT5zipUzs&gt;</span></span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -738,7 +780,7 @@ disparate type to a 1-row or a 1-column region.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-edit-demo"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File trashed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-edit-demo</span> <span style="color: #555555;">&lt;id: 1_nMb0knLi3pILLgjK4DnMf1KUruV9ZMK02MXexivgWA&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-edit-demo</span> <span style="color: #555555;">&lt;id: 1Qo6qiSFZyEHRNNVzSMpV2zBf4L3bmMVDWC7INvkJTpg&gt;</span></span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -764,14 +806,17 @@ inside a Sheet.</p>
 <span></span>
 <span><span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"sheets-formula-demo"</span>, sheets <span class="op">=</span> <span class="va">lang_dat</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">sheets-formula-demo</span>.</span></span>
-<span><span class="co">#&gt; Spreadsheet name: sheets-formula-demo</span></span>
-<span><span class="co">#&gt;               ID: 1sGEM3DUiCkOCIIxktP74lv_VZ_Ptbqz0cfn5h3mqAVk</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">sheets-formula-demo</span>                         </span></span>
+<span><span class="co">#&gt;               ID: 1Aa1m8H3tnrjCIuXfPx7y1UISx-EQ3MQtw5Wb55yJfAg</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;     lang_dat: 4 x 3</span></span></code></pre></div>
+<span><span class="co">#&gt;     <span style="color: #00BB00;">lang_dat</span>: 4 x 3</span></span></code></pre></div>
 <p>Now we can read the data back out, complete with translations!</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="va">ss</span><span class="op">)</span></span>
@@ -790,7 +835,7 @@ inside a Sheet.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-formula-demo"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File trashed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-formula-demo</span> <span style="color: #555555;">&lt;id: 1sGEM3DUiCkOCIIxktP74lv_VZ_Ptbqz0cfn5h3mqAVk&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-formula-demo</span> <span style="color: #555555;">&lt;id: 1Aa1m8H3tnrjCIuXfPx7y1UISx-EQ3MQtw5Wb55yJfAg&gt;</span></span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -808,14 +853,17 @@ data.</p>
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_fodder.html">gs4_fodder</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"range-flood-demo"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">range-flood-demo</span>.</span></span>
-<span><span class="co">#&gt; Spreadsheet name: range-flood-demo</span></span>
-<span><span class="co">#&gt;               ID: 1i50fxQigWnHbVTszfpiohOhzCGcjDKtcmoAu57R_vNg</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">range-flood-demo</span>                            </span></span>
+<span><span class="co">#&gt;               ID: 19PbHG_m0zvrVhzi3_pwdBudC-MsC2IcmCkJNhKxvKqM</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;       Sheet1: 11 x 10</span></span></code></pre></div>
+<span><span class="co">#&gt;       <span style="color: #00BB00;">Sheet1</span>: 11 x 10</span></span></code></pre></div>
 <p>To begin, each cell holds its A1-coordinates as its value. If you
 viewed this in the browser, you’d see the header row has some special
 formatting, including a gray background.</p>
@@ -896,7 +944,7 @@ not).</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"range-flood-demo"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File trashed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">range-flood-demo</span> <span style="color: #555555;">&lt;id: 1i50fxQigWnHbVTszfpiohOhzCGcjDKtcmoAu57R_vNg&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">range-flood-demo</span> <span style="color: #555555;">&lt;id: 19PbHG_m0zvrVhzi3_pwdBudC-MsC2IcmCkJNhKxvKqM&gt;</span></span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -915,14 +963,17 @@ data.</p>
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_fodder.html">gs4_fodder</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span></span>
 <span><span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"sheets-delete-demo"</span>, sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">sheets-delete-demo</span>.</span></span>
-<span><span class="co">#&gt; Spreadsheet name: sheets-delete-demo</span></span>
-<span><span class="co">#&gt;               ID: 1IfCfkBqT40-pE2m5ZIQIpGO1ppU2FkafrtNVSJHwYrk</span></span>
-<span><span class="co">#&gt;           Locale: en_US</span></span>
-<span><span class="co">#&gt;        Time zone: Etc/GMT</span></span>
-<span><span class="co">#&gt;      # of sheets: 1</span></span>
 <span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
+<span><span class="co">#&gt; Spreadsheet name: <span style="color: #00BBBB;">sheets-delete-demo</span>                          </span></span>
+<span><span class="co">#&gt;               ID: 1otr68tfvXLnUptqaw6XxlFdOsuUCsevrie_1bwhlpRE</span></span>
+<span><span class="co">#&gt;           Locale: en_US                                       </span></span>
+<span><span class="co">#&gt;        Time zone: Etc/GMT                                     </span></span>
+<span><span class="co">#&gt;      # of sheets: 1                                           </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;       Sheet1: 5 x 4</span></span></code></pre></div>
+<span><span class="co">#&gt;       <span style="color: #00BB00;">Sheet1</span>: 5 x 4</span></span></code></pre></div>
 <p>To begin, each cell holds its A1-coordinates as its value. If you
 viewed this in the browser, you’d see the header row has some special
 formatting, including a gray background.</p>
@@ -988,7 +1039,7 @@ locations.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheets-delete-demo"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File trashed:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-delete-demo</span> <span style="color: #555555;">&lt;id: 1IfCfkBqT40-pE2m5ZIQIpGO1ppU2FkafrtNVSJHwYrk&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> <span style="color: #00BBBB;">sheets-delete-demo</span> <span style="color: #555555;">&lt;id: 1otr68tfvXLnUptqaw6XxlFdOsuUCsevrie_1bwhlpRE&gt;</span></span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

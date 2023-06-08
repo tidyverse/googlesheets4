@@ -52,7 +52,6 @@ gargle_lookup_table <- list(
 #'
 #' # use a 'read only' scope, so it's impossible to edit or delete Sheets
 #' gs4_auth(scopes = "spreadsheets.readonly")
-#' )
 #'
 #' # use a service account token
 #' gs4_auth(path = "foofy-83ee9e7c9c48.json")

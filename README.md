@@ -161,14 +161,17 @@ some initial data.
 ``` r
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> ✔ Creating new Sheet: "fluffy-bunny".
-#> Spreadsheet name: fluffy-bunny
-#>               ID: 1kkH-92mPKzKbySO8oxL6SUOjhRFtrOFEHSxm127_dEg
-#>           Locale: en_US
-#>        Time zone: Etc/GMT
-#>      # of sheets: 1
 #> 
+#> ── <googlesheets4_spreadsheet> ─────────────────────────────────────────────────
+#> Spreadsheet name: "fluffy-bunny"                              
+#>               ID: 1enILX4tYJeFEJ1RL8MsGgDRjb0NHTdm3ZD92R2RMWYI
+#>           Locale: en_US                                       
+#>        Time zone: Etc/GMT                                     
+#>      # of sheets: 1                                           
+#> 
+#> ── <sheets> ────────────────────────────────────────────────────────────────────
 #> (Sheet name): (Nominal extent in rows x columns)
-#>      flowers: 7 x 5
+#>    'flowers': 7 x 5
 ```
 
 `sheet_write()` (over)writes a whole data frame into a (work)sheet
@@ -180,15 +183,18 @@ head(mtcars) %>%
 #> ✔ Writing to "fluffy-bunny".
 #> ✔ Writing to sheet 'autos'.
 ss
-#> Spreadsheet name: fluffy-bunny
-#>               ID: 1kkH-92mPKzKbySO8oxL6SUOjhRFtrOFEHSxm127_dEg
-#>           Locale: en_US
-#>        Time zone: Etc/GMT
-#>      # of sheets: 2
 #> 
+#> ── <googlesheets4_spreadsheet> ─────────────────────────────────────────────────
+#> Spreadsheet name: "fluffy-bunny"                              
+#>               ID: 1enILX4tYJeFEJ1RL8MsGgDRjb0NHTdm3ZD92R2RMWYI
+#>           Locale: en_US                                       
+#>        Time zone: Etc/GMT                                     
+#>      # of sheets: 2                                           
+#> 
+#> ── <sheets> ────────────────────────────────────────────────────────────────────
 #> (Sheet name): (Nominal extent in rows x columns)
-#>      flowers: 7 x 5
-#>        autos: 7 x 11
+#>    'flowers': 7 x 5
+#>      'autos': 7 x 11
 ```
 
 `sheet_append()`, `range_write()`, `range_flood()`, and `range_clear()`

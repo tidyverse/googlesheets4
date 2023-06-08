@@ -11,6 +11,8 @@
   vector of scopes, where the names are the associated short aliases.
   `gs4_scopes()` can also be called with a character vector; any element that's
   recognized as a short alias is replaced with the associated full scope (#291).
+  
+* Various internal changes to sync up with gargle v1.5.0.
 
 # googlesheets4 1.1.0
 

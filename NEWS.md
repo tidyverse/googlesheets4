@@ -1,5 +1,11 @@
 # googlesheets4 (development version)
 
+* `gs4_scopes()` is a new function to access scopes relevant to the Sheets and
+  Drive APIs. When called without arguments, `gs4_scopes()` returns a named
+  vector of scopes, where the names are the associated short aliases.
+  `gs4_scopes()` can also be called with a character vector; any element that's
+  recognized as a short alias is replaced with the associated full scope (#291).
+
 # googlesheets4 1.1.0
 
 ## Syncing up with gargle

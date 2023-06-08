@@ -30,6 +30,7 @@ gs4_example("deaths") \%>\%
 \seealso{
 Other auth functions: 
 \code{\link{gs4_auth_configure}()},
-\code{\link{gs4_auth}()}
+\code{\link{gs4_auth}()},
+\code{\link{gs4_scopes}()}
 }
 \concept{auth functions}

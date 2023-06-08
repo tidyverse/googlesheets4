@@ -108,6 +108,7 @@ reference:
     - gs4_deauth
     - gs4_user
     - gs4_auth_configure
+    - gs4_scopes
     - googlesheets4-configuration
   - title: "Programming around the Sheets API"
     desc: >

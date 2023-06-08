@@ -7,7 +7,7 @@
 gs4_auth(
   email = gargle::gargle_oauth_email(),
   path = NULL,
-  scopes = "https://www.googleapis.com/auth/spreadsheets",
+  scopes = "spreadsheets",
   cache = gargle::gargle_oauth_cache(),
   use_oob = gargle::gargle_oob_default(),
   token = NULL
@@ -41,15 +41,22 @@ default behavior).}
 supported for the \code{txt} argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a
 file path or JSON string).}
 
-\item{scopes}{A character vector of scopes to request. Pick from those listed
-at \url{https://developers.google.com/identity/protocols/oauth2/scopes}.
+\item{scopes}{One or more API scopes. Each scope can be specified in full or,
+for Sheets API-specific scopes, in an abbreviated form that is recognized by
+\code{\link[=gs4_scopes]{gs4_scopes()}}:
+\itemize{
+\item "spreadsheets" = "https://www.googleapis.com/auth/spreadsheets"
+(the default)
+\item "spreadsheets.readonly" =
+"https://www.googleapis.com/auth/spreadsheets.readonly"
+\item "drive" = "https://www.googleapis.com/auth/drive"
+\item "drive.readonly" = "https://www.googleapis.com/auth/drive.readonly"
+\item "drive.file" = "https://www.googleapis.com/auth/drive.file"
+}
 
-For certain token flows, the
-\code{"https://www.googleapis.com/auth/userinfo.email"} scope is unconditionally
-included. This grants permission to retrieve the email address associated
-with a token; gargle uses this to index cached OAuth tokens. This grants no
-permission to view or send email and is generally considered a low-value
-scope.}
+See
+\url{https://developers.google.com/identity/protocols/oauth2/scopes#sheets} for
+details on the permissions for each scope.}
 
 \item{cache}{Specifies the OAuth token cache. Defaults to the option named
 \code{"gargle_oauth_cache"}, retrieved via \code{\link[gargle:gargle_oauth_cache]{gargle_oauth_cache()}}.}
@@ -139,8 +146,7 @@ gs4_auth(email = "jenny@example.com")
 gs4_auth(email = NA)
 
 # use a 'read only' scope, so it's impossible to edit or delete Sheets
-gs4_auth(
-  scopes = "https://www.googleapis.com/auth/spreadsheets.readonly"
+gs4_auth(scopes = "spreadsheets.readonly")
 )
 
 # use a service account token
@@ -150,6 +156,7 @@ gs4_auth(path = "foofy-83ee9e7c9c48.json")
 \seealso{
 Other auth functions: 
 \code{\link{gs4_auth_configure}()},
-\code{\link{gs4_deauth}()}
+\code{\link{gs4_deauth}()},
+\code{\link{gs4_scopes}()}
 }
 \concept{auth functions}

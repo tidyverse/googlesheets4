@@ -81,6 +81,7 @@ gs4_auth_configure(client = original_client, api_key = original_api_key)
 \seealso{
 Other auth functions: 
 \code{\link{gs4_auth}()},
-\code{\link{gs4_deauth}()}
+\code{\link{gs4_deauth}()},
+\code{\link{gs4_scopes}()}
 }
 \concept{auth functions}

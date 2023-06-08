@@ -7,6 +7,7 @@
 gs4_auth(
   email = gargle::gargle_oauth_email(),
   path = NULL,
+  subject = NULL,
   scopes = "spreadsheets",
   cache = gargle::gargle_oauth_cache(),
   use_oob = gargle::gargle_oob_default(),
@@ -40,6 +41,15 @@ default behavior).}
 \item{path}{JSON identifying the service account, in one of the forms
 supported for the \code{txt} argument of \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a
 file path or JSON string).}
+
+\item{subject}{An optional subject claim. Specify this if you wish to use the
+service account represented by \code{path} to impersonate the \code{subject}, who is
+a normal user. Before this can work, an administrator must grant the service
+account domain-wide authority. Identify the user to impersonate via their
+email, e.g. \code{subject = "user@example.com"}. Note that gargle automatically
+adds the non-sensitive \code{"https://www.googleapis.com/auth/userinfo.email"}
+scope, so this scope must be enabled for the service account, along with
+any other \code{scopes} being requested.}
 
 \item{scopes}{One or more API scopes. Each scope can be specified in full or,
 for Sheets API-specific scopes, in an abbreviated form that is recognized by

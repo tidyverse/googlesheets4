@@ -57,7 +57,7 @@ gargle_lookup_table <- list(
 #' # use a service account token
 #' gs4_auth(path = "foofy-83ee9e7c9c48.json")
 gs4_auth <- function(email = gargle::gargle_oauth_email(),
-                     path = NULL,
+                     path = NULL, subject = NULL,
                      scopes = "spreadsheets",
                      cache = gargle::gargle_oauth_cache(),
                      use_oob = gargle::gargle_oob_default(),
@@ -75,6 +75,7 @@ gs4_auth <- function(email = gargle::gargle_oauth_email(),
     client = gs4_oauth_client() %||% gargle::tidyverse_client(),
     email = email,
     path = path,
+    subject = subject,
     package = "googlesheets4",
     cache = cache,
     use_oob = use_oob,

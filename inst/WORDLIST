@@ -44,8 +44,10 @@ funder
 gamechanger
 gapminder
 gmailr
+googleapis
 googledrive
 googlesheets
+https
 httr
 httr's
 js
@@ -56,6 +58,7 @@ ny
 pkgdown
 pre
 programmatically
+readonly
 readr
 readr's
 readxl
@@ -78,5 +81,6 @@ utc
 vctrs
 vectorized
 withr
+www
 xls
 xlsx

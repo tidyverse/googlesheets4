@@ -107,7 +107,8 @@ tokens are less likely to be synced to the cloud by accident.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gs4_auth</span><span class="op">(</span></span>
 <span>  email <span class="op">=</span> <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oauth_email</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  path <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  scopes <span class="op">=</span> <span class="st">"https://www.googleapis.com/auth/spreadsheets"</span>,</span>
+<span>  subject <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  scopes <span class="op">=</span> <span class="st">"spreadsheets"</span>,</span>
 <span>  cache <span class="op">=</span> <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oauth_cache</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  use_oob <span class="op">=</span> <span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_options.html" class="external-link">gargle_oob_default</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  token <span class="op">=</span> <span class="cn">NULL</span></span>
@@ -143,15 +144,30 @@ supported for the <code>txt</code> argument of <code><a href="https://rdrr.io/pk
 file path or JSON string).</p></dd>
 
 
+<dt>subject</dt>
+<dd><p>An optional subject claim. Specify this if you wish to use the
+service account represented by <code>path</code> to impersonate the <code>subject</code>, who is
+a normal user. Before this can work, an administrator must grant the service
+account domain-wide authority. Identify the user to impersonate via their
+email, e.g. <code>subject = "user@example.com"</code>. Note that gargle automatically
+adds the non-sensitive <code>"https://www.googleapis.com/auth/userinfo.email"</code>
+scope, so this scope must be enabled for the service account, along with
+any other <code>scopes</code> being requested.</p></dd>
+
+
 <dt>scopes</dt>
-<dd><p>A character vector of scopes to request. Pick from those listed
-at <a href="https://developers.google.com/identity/protocols/oauth2/scopes" class="external-link">https://developers.google.com/identity/protocols/oauth2/scopes</a>.</p>
-<p>For certain token flows, the
-<code>"https://www.googleapis.com/auth/userinfo.email"</code> scope is unconditionally
-included. This grants permission to retrieve the email address associated
-with a token; gargle uses this to index cached OAuth tokens. This grants no
-permission to view or send email and is generally considered a low-value
-scope.</p></dd>
+<dd><p>One or more API scopes. Each scope can be specified in full or,
+for Sheets API-specific scopes, in an abbreviated form that is recognized by
+<code><a href="gs4_scopes.html">gs4_scopes()</a></code>:</p><ul><li><p>"spreadsheets" = "https://www.googleapis.com/auth/spreadsheets"
+(the default)</p></li>
+<li><p>"spreadsheets.readonly" =
+"https://www.googleapis.com/auth/spreadsheets.readonly"</p></li>
+<li><p>"drive" = "https://www.googleapis.com/auth/drive"</p></li>
+<li><p>"drive.readonly" = "https://www.googleapis.com/auth/drive.readonly"</p></li>
+<li><p>"drive.file" = "https://www.googleapis.com/auth/drive.file"</p></li>
+</ul><p>See
+<a href="https://developers.google.com/identity/protocols/oauth2/scopes#sheets" class="external-link">https://developers.google.com/identity/protocols/oauth2/scopes#sheets</a> for
+details on the permissions for each scope.</p></dd>
 
 
 <dt>cache</dt>
@@ -217,7 +233,8 @@ To learn more about gargle options, see <a href="https://gargle.r-lib.org/refere
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other auth functions: 
 <code><a href="gs4_auth_configure.html">gs4_auth_configure</a>()</code>,
-<code><a href="gs4_deauth.html">gs4_deauth</a>()</code></p></div>
+<code><a href="gs4_deauth.html">gs4_deauth</a>()</code>,
+<code><a href="gs4_scopes.html">gs4_scopes</a>()</code></p></div>
     </div>
 
     <div class="section level2">
@@ -235,9 +252,7 @@ To learn more about gargle options, see <a href="https://gargle.r-lib.org/refere
 <span class="r-in"><span><span class="fu">gs4_auth</span><span class="op">(</span>email <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># use a 'read only' scope, so it's impossible to edit or delete Sheets</span></span></span>
-<span class="r-in"><span><span class="fu">gs4_auth</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  scopes <span class="op">=</span> <span class="st">"https://www.googleapis.com/auth/spreadsheets.readonly"</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">gs4_auth</span><span class="op">(</span>scopes <span class="op">=</span> <span class="st">"spreadsheets.readonly"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># use a service account token</span></span></span>
 <span class="r-in"><span><span class="fu">gs4_auth</span><span class="op">(</span>path <span class="op">=</span> <span class="st">"foofy-83ee9e7c9c48.json"</span><span class="op">)</span></span></span>

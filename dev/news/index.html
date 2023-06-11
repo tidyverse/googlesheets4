@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">googlesheets4</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.0.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.1.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,6 +75,9 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="googlesheets4-development-version">googlesheets4 (development version)<a class="anchor" aria-label="anchor" href="#googlesheets4-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.1.1" id="googlesheets4-111">googlesheets4 1.1.1<a class="anchor" aria-label="anchor" href="#googlesheets4-111"></a></h2><p class="text-muted">CRAN release: 2023-06-11</p>
 <ul><li><p><code>gs4_auth(subject =)</code> is a new argument that can be used with <code>gs4_auth(path =)</code>, i.e. when using a service account. The <code>path</code> and <code>subject</code> arguments are ultimately processed by <code><a href="https://gargle.r-lib.org/reference/credentials_service_account.html" class="external-link">gargle::credentials_service_account()</a></code> and support the use of a service account to impersonate a normal user.</p></li>
 <li><p><code><a href="../reference/gs4_scopes.html">gs4_scopes()</a></code> is a new function to access scopes relevant to the Sheets and Drive APIs. When called without arguments, <code><a href="../reference/gs4_scopes.html">gs4_scopes()</a></code> returns a named vector of scopes, where the names are the associated short aliases. <code><a href="../reference/gs4_scopes.html">gs4_scopes()</a></code> can also be called with a character vector; any element that’s recognized as a short alias is replaced with the associated full scope (<a href="https://github.com/tidyverse/googlesheets4/issues/291" class="external-link">#291</a>).</p></li>
 <li><p>Various internal changes to sync up with gargle v1.5.0.</p></li>

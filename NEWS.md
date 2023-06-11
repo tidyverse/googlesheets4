@@ -1,4 +1,4 @@
-# googlesheets4 (development version)
+# googlesheets4 1.1.1
 
 * `gs4_auth(subject =)` is a new argument that can be used with
   `gs4_auth(path =)`, i.e. when using a service account. The `path` and

@@ -177,9 +177,9 @@ file, use googlesheets4 to do spreadsheet-specific tasks.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">drive_find</a></span><span class="op">(</span><span class="st">"chicken"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 3</span></span></span>
-<span><span class="co">#&gt;   name          id                                          drive_resource</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-sheet 1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM7… <span style="color: #949494;">&lt;named list&gt;</span></span></span>
+<span><span class="co">#&gt;   name          id       drive_resource   </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-sheet 1StV8oq… <span style="color: #949494;">&lt;named list [35]&gt;</span></span></span>
 <span></span>
 <span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">drive_get</a></span><span class="op">(</span><span class="st">"chicken-sheet"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> The input `path` resolved to exactly 1 file.</span></span>
@@ -214,9 +214,9 @@ info:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_user.html" class="external-link">drive_user</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Logged in as:</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> displayName:</span></span>
+<span><span class="co">#&gt; • displayName:</span></span>
 <span><span class="co">#&gt;   <span style="color: #00BB00;">googlesheets4-dev-docs@robust-fin-276504.iam.gserviceaccount.com</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> emailAddress:</span></span>
+<span><span class="co">#&gt; • emailAddress:</span></span>
 <span><span class="co">#&gt;   <span style="color: #0000BB;">googlesheets4-dev-docs@robust-fin-276504.iam.gserviceaccount.com</span></span></span>
 <span><span class="fu"><a href="../reference/gs4_user.html">gs4_user</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Logged in to <span style="color: #0000BB;">googlesheets4</span> as</span></span>
@@ -255,9 +255,9 @@ file, use googlesheets4 to do spreadsheet-specific tasks.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">drive_find</a></span><span class="op">(</span><span class="st">"chicken"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 3</span></span></span>
-<span><span class="co">#&gt;   name          id                                          drive_resource</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span>                                    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-sheet 1StV8oqHa0SVo58ztLGPH5mDMMHIBsiF6VO5GUJjM7… <span style="color: #949494;">&lt;named list&gt;</span></span></span>
+<span><span class="co">#&gt;   name          id       drive_resource   </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> chicken-sheet 1StV8oq… <span style="color: #949494;">&lt;named list [35]&gt;</span></span></span>
 <span></span>
 <span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">drive_get</a></span><span class="op">(</span><span class="st">"chicken-sheet"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> The input `path` resolved to exactly 1 file.</span></span>

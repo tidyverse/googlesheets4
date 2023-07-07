@@ -114,7 +114,7 @@ However, when necessary, \code{gs4_auth()} allows the user to explicitly:
 \item Bring your own \code{token}.
 \item Customize \code{scopes}.
 \item Use a non-default \code{cache} folder or turn caching off.
-\item Explicitly request out-of-bound (OOB) auth via \code{use_oob}.
+\item Explicitly request out-of-band (OOB) auth via \code{use_oob}.
 }
 
 If you are interacting with R within a browser (applies to RStudio

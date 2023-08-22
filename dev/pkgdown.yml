@@ -15,7 +15,7 @@ articles:
   read-sheets: read-sheets.html
   write-sheets: write-sheets.html
   googlesheets4: googlesheets4.html
-last_built: 2023-08-21T11:05Z
+last_built: 2023-08-22T11:05Z
 urls:
   reference: https://googlesheets4.tidyverse.org/reference
   article: https://googlesheets4.tidyverse.org/articles

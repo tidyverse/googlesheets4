@@ -10,7 +10,6 @@
 #' @importFrom glue glue_data
 #' @importFrom googledrive as_id
 #' @importFrom lifecycle deprecated
-#' @importFrom purrr %||%
 #' @importFrom purrr compact
 #' @importFrom purrr discard
 #' @importFrom purrr imap

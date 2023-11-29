@@ -85,6 +85,7 @@ read_cells_impl_ <- function(ssid,
   default_fields <- c(
     "spreadsheetId", "properties.title",
     "sheets.properties(sheetId,title)",
+    "sheets.merges",
     glue("sheets.data(startRow,startColumn,rowData{cell_mask})")
   )
   fields <- fields %||% glue_collapse(default_fields, sep = ",")
@@ -103,7 +104,7 @@ read_cells_impl_ <- function(ssid,
 
 ## input: an instance of Spreadsheet
 ## https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets#Spreadsheet
-## output: a tibble with one row per non-empty cell (row, column, cell)
+## output: a tibble with one row per non-empty cell (row, column, n_rows, n_columns, cell)
 cells <- function(x = list()) {
   ## identify upper left cell of the rectangle
   ## values are absent in the response if equal to 0, hence the default
@@ -112,7 +113,6 @@ cells <- function(x = list()) {
   start_column <- (pluck(x, "sheets", 1, "data", 1, "startColumn") %||% 0) + 1
 
   # TODO: make this an as_tibble method?
-  # TODO: deal with the merged cells
   # TODO: ensure this returns integer columns where appropriate
 
   row_data <- x %>%
@@ -125,13 +125,59 @@ cells <- function(x = list()) {
   row_lengths <- map_int(row_data, length)
   n_rows <- length(row_data)
 
-  tibble::tibble(
+  # cell table
+  cell_data <- tibble::tibble(
     row = rep.int(
       seq.int(from = start_row, length.out = n_rows),
       times = row_lengths
     ),
     col = as.integer(start_column + sequence(row_lengths) - 1),
+    n_rows = 1L,
+    n_cols = 1L,
     cell = purrr::flatten(row_data)
+  )
+
+  # handle merged cells
+  merged_ranges <- get_merged_ranges(pluck(x, "sheets", 1, "merges"))
+
+  # TODO: add paranoid checks ensuring that there is only one cell returned per range
+  merged_cells <- vec_locate_matches(
+    cell_data[c("row", "col")],
+    merged_ranges[c("row", "col")],
+    condition = "==",
+    remaining = "drop",
+    relationship = "one-to-one"
+  )
+  merged_cells <- vec_slice(merged_cells, !is.na(merged_cells$haystack))
+
+  # update merged cells dimensions
+  cell_data$n_rows[merged_cells$needles] <- merged_ranges$n_rows[merged_cells$haystack]
+  cell_data$n_cols[merged_cells$needles] <- merged_ranges$n_cols[merged_cells$haystack]
+
+  # return the cell data
+  cell_data
+}
+
+## input: Sheet.merges field
+## https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/sheets#sheet
+## output: a data frame with merged cell regions (start row/col, end row/col)
+get_merged_ranges <- function(merged_ranges_data) {
+  if (is.null(merged_ranges_data) || length(merged_ranges_data) == 0L) {
+    return(data_frame(
+      row = integer(), col = integer(), n_rows = integer(), n_cols = integer()
+    ))
+  }
+
+  start_row <- map_int(merged_ranges_data, "startRowIndex")
+  start_col <- map_int(merged_ranges_data, "startColumnIndex")
+  end_row <- map_int(merged_ranges_data, "endRowIndex")
+  end_col <- map_int(merged_ranges_data, "endColumnIndex")
+
+  data_frame(
+    row = start_row + 1L,
+    col = start_col + 1L,
+    n_rows = end_row - start_row,
+    n_cols = end_col - start_col
   )
 }
 

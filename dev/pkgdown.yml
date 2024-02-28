@@ -1,4 +1,4 @@
-pandoc: 2.19.2
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
@@ -15,7 +15,7 @@ articles:
   read-sheets: read-sheets.html
   write-sheets: write-sheets.html
   googlesheets4: googlesheets4.html
-last_built: 2024-02-27T11:06Z
+last_built: 2024-02-28T11:05Z
 urls:
   reference: https://googlesheets4.tidyverse.org/reference
   article: https://googlesheets4.tidyverse.org/articles

@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.0.7
+pkgdown: 2.0.8
 pkgdown_sha: ~
 articles:
   auth: auth.html
@@ -10,12 +10,12 @@ articles:
   fun-with-googledrive-and-readxl: fun-with-googledrive-and-readxl.html
   function-class-names: function-class-names.html
   googlesheets4-reprex: googlesheets4-reprex.html
+  googlesheets4: googlesheets4.html
   messages-and-errors: messages-and-errors.html
   range-specification: range-specification.html
   read-sheets: read-sheets.html
   write-sheets: write-sheets.html
-  googlesheets4: googlesheets4.html
-last_built: 2024-04-10T11:09Z
+last_built: 2024-04-11T11:06Z
 urls:
   reference: https://googlesheets4.tidyverse.org/reference
   article: https://googlesheets4.tidyverse.org/articles

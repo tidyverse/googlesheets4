@@ -178,15 +178,17 @@ with googledrive.</p>
 <span><span class="co">#&gt;                                    gapminder </span></span>
 <span><span class="co">#&gt; 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY </span></span>
 <span><span class="co">#&gt;                                     mini-gap </span></span>
-<span><span class="co">#&gt; 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU</span></span>
-<span></span>
+<span><span class="co">#&gt; 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/gs4_examples.html">gs4_examples</a></span><span class="op">(</span><span class="st">"gap"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;drive_id[2]&gt;</span></span>
 <span><span class="co">#&gt;                                    gapminder </span></span>
 <span><span class="co">#&gt; 1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY </span></span>
 <span><span class="co">#&gt;                                     mini-gap </span></span>
-<span><span class="co">#&gt; 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU</span></span>
-<span></span>
+<span><span class="co">#&gt; 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/gs4_examples.html">gs4_examples</a></span><span class="op">(</span><span class="st">"and"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;drive_id[2]&gt;</span></span>
 <span><span class="co">#&gt;                    cell-contents-and-formats </span></span>
@@ -197,7 +199,7 @@ with googledrive.</p>
 It is an instance of <code>drive_id</code>. It is also an instance of
 <code>sheets_id</code>, which means printing will (try to) reveal
 current metadata about the Sheet.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"chicken"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
@@ -209,8 +211,9 @@ current metadata about the Sheet.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;sheets&gt;</span> <span style="color: #00BBBB;">──────────────────────────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt; (Sheet name): (Nominal extent in rows x columns)</span></span>
-<span><span class="co">#&gt;  <span style="color: #00BB00;">chicken.csv</span>: 1000 x 26</span></span>
-<span></span>
+<span><span class="co">#&gt;  <span style="color: #00BB00;">chicken.csv</span>: 1000 x 26</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"gap"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `gs4_example()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Found multiple matching example Sheets:</span></span>
@@ -219,7 +222,7 @@ current metadata about the Sheet.</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Make the `matches` regular expression more specific.</span></span></code></pre></div>
 <p>Here’s a handy snippet to open all the example Sheets in browser
 tabs.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="../reference/gs4_examples.html">gs4_examples</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">gs4_browse</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># for tidyversers</span></span>

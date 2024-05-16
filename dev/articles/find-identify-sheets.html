@@ -175,8 +175,9 @@ make the URL work in the first place):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ssid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheets_id.html">as_sheets_id</a></span><span class="op">(</span><span class="va">ugly_url</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "sheets_id"  "drive_id"   "vctrs_vctr" "character"</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "sheets_id"  "drive_id"   "vctrs_vctr" "character"</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span></span></code></pre></div>
 <p><code><a href="../reference/sheets_id.html">as_sheets_id()</a></code> is a generic function, which means it
 knows what to do with a few different types of input. For character
@@ -189,7 +190,7 @@ nicely with googledrive).</p>
 Sheet ID? Because, by default, when you print an instance of
 <code>sheets_id</code>, we attempt to show you some current metadata
 about the Sheet.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ssid</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
@@ -216,7 +217,7 @@ about the Sheet.</p>
 explicitly if you want to <em>store</em> the returned metadata).</p>
 <p>googlesheets4 also accepts a Sheet ID as the <code>ss</code> argument
 of many functions:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">gapminder</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">Africa</span>.</span></span>
@@ -232,7 +233,7 @@ of many functions:</p>
 <p>I think in a script or app that will endure for a while it is better
 to refer to a Sheet by its ID than by its URL. The Sheet ID is nicer to
 look at, it is complete, it is minimal.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ssid</span> <span class="op">&lt;-</span> <span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span></span>
 <span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">gapminder</span>.</span></span>
@@ -257,7 +258,7 @@ for googledrive, which assumes a character string is a file name or
 path. Therefore, for maximum happiness, in a mixed googlesheets4 /
 googledrive workflow, it’s a good idea to be explicit and declare a
 string to be a Sheet ID, when that is the case.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ssid</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheets_id.html">as_sheets_id</a></span><span class="op">(</span><span class="st">"1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">ssid</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">gapminder</span>.</span></span>
@@ -293,14 +294,14 @@ via googledrive. See the article <a href="https://googlesheets4.tidyverse.org/ar
 googlesheets4 with googledrive</a> for more.</p>
 <p>It’s time to attach googledrive (in addition to the already-attached
 googlesheets4):</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://googledrive.tidyverse.org" class="external-link">googledrive</a></span><span class="op">)</span></span></code></pre></div>
 <p>(In our hidden auth chunk, we actually put a shared token into force
 for both googlesheets4 and googledrive, anticipating this moment.)</p>
 <p>The Sheet we’ve been working with is named “gapminder” and is owned
 by the account we’ve logged in as here. We can use
 <code><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">googledrive::drive_get()</a></code> to identify a file by name:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">gap_dribble</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_get.html" class="external-link">drive_get</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> The input `path` resolved to exactly 1 file.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 4</span></span></span>
@@ -311,11 +312,12 @@ by the account we’ve logged in as here. We can use
 a “Drive tibble”, where each row holds info on a Drive file.
 <code><a href="../reference/sheets_id.html">as_sheets_id()</a></code> also accepts a one-row <code>dribble</code>,
 so we can get right into our normal googlesheets4 workflows:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gap_id</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/sheets_id.html">as_sheets_id</a></span><span class="op">(</span><span class="va">gap_dribble</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="va">gap_id</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew"</span></span>
-<span><span class="va">gap_id</span></span>
+<span><span class="co">#&gt; [1] "1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew"</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gap_id</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">───────────────────────────────────────────</span></span></span>
 <span><span class="co">#&gt;  Spreadsheet name: <span style="color: #00BBBB;">gapminder</span>                                   </span></span>
@@ -339,7 +341,7 @@ so we can get right into our normal googlesheets4 workflows:</p>
 <p>Since we generally call <code><a href="../reference/sheets_id.html">as_sheets_id()</a></code> on whatever the
 user provides as <code>ss</code>, you can even pass
 <code>gap_dribble</code> straight into googlesheets4 functions.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/sheet_properties.html">sheet_properties</a></span><span class="op">(</span><span class="va">gap_dribble</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 8</span></span></span>
 <span><span class="co">#&gt;   name     index         id type  visible grid_rows grid_columns data  </span></span>
@@ -379,7 +381,7 @@ can’t <code><a href="https://googledrive.tidyverse.org/reference/drive_get.htm
 <p><code><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">googledrive::drive_find()</a></code> is the workhorse function for
 these tasks for general Drive files. It has lots of bells and whistles
 and we can use one of them to narrow the search to Google Sheets:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_find.html" class="external-link">drive_find</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 9 × 3</span></span></span>
 <span><span class="co">#&gt;   name              id       drive_resource   </span></span>
@@ -393,7 +395,7 @@ and we can use one of them to narrow the search to Google Sheets:</p>
 <p>This is so handy that we’ve made <code><a href="../reference/gs4_find.html">gs4_find()</a></code> in
 googlesheets4, which is a shortcut for
 <code>drive_find(type = "spreadsheet")</code>:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 9 × 3</span></span></span>
 <span><span class="co">#&gt;   name              id       drive_resource   </span></span>

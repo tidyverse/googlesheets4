@@ -191,12 +191,14 @@ experience is nice.</em></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-Google-Sheet"</span></span>
 <span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Creating new Sheet: {.s_sheet {nm}}"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">name-of-a-Google-Sheet</span></span></span>
-<span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">name-of-a-Google-Sheet</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-worksheet"</span></span>
 <span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Protecting cells on sheet: {.w_sheet {nm}}"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Protecting cells on sheet: <span style="color: #00BB00;">name-of-a-worksheet</span></span></span>
-<span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Protecting cells on sheet: <span style="color: #00BB00;">name-of-a-worksheet</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="va">rg</span> <span class="op">&lt;-</span> <span class="st">"A3:B20"</span></span>
 <span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Writing to the range: {.range {rg}}"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Writing to the range: <span style="color: #BBBB00;">A3:B20</span></span></span></code></pre></div>
@@ -204,7 +206,7 @@ experience is nice.</em></p>
 message with the form: <code>Description of thing: THING</code>. I view
 it as a special case of a bullet list of simple items, which also don’t
 get periods. (<code>bulletize()</code> comes from gargle.)</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"We're going to list some things:"</span>,</span>
 <span>  <span class="fu">bulletize</span><span class="op">(</span><span class="fu">gargle</span><span class="fu">::</span><span class="fu"><a href="https://gargle.r-lib.org/reference/gargle_map_cli.html" class="external-link">gargle_map_cli</a></span><span class="op">(</span><span class="va">month.abb</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
@@ -216,10 +218,11 @@ get periods. (<code>bulletize()</code> comes from gargle.)</p>
 <span><span class="co">#&gt; • <span style="color: #00BB00;">Apr</span></span></span></code></pre></div>
 <p>Other messages that are complete sentence, or at least aspire to be,
 <strong>do</strong> get a period.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="st">"Doing the stuff you asked me to do."</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Doing the stuff you asked me to do.</span></span>
-<span></span>
+<span><span class="co">#&gt; Doing the stuff you asked me to do.</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"You probably need to do one of these things:"</span>,</span>
 <span>  <span class="st">"*"</span> <span class="op">=</span> <span class="st">"Call {.fun some_function}."</span>,</span>
@@ -241,12 +244,13 @@ a Semantic CLI</a></li>
 </h3>
 <p><a href="https://cli.r-lib.org/articles/pluralization.html" class="external-link">cli’s
 pluralization</a> is awesome!</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nm</span> <span class="op">&lt;-</span> <span class="st">"name-of-a-Google-Sheet"</span></span>
 <span><span class="va">n_new</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Adding {n_new} sheet{?s} to {.s_sheet {nm}}"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Adding 1 sheet to <span style="color: #00BBBB;">name-of-a-Google-Sheet</span></span></span>
-<span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Adding 1 sheet to <span style="color: #00BBBB;">name-of-a-Google-Sheet</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="va">n_new</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
 <span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>v <span class="op">=</span> <span class="st">"Adding {n_new} sheet{?s} to {.s_sheet {nm}}"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Adding 3 sheets to <span style="color: #00BBBB;">name-of-a-Google-Sheet</span></span></span></code></pre></div>
@@ -256,11 +260,12 @@ pluralization</a> is awesome!</p>
 </h3>
 <p><a href="https://cli.r-lib.org/articles/semantic-cli.html#inline-lists-of-items" class="external-link">Collapsing
 lists of things</a> is great! Also more pluralization.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">new_sheet_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"apple"</span>, <span class="st">"banana"</span>, <span class="st">"cherry"</span><span class="op">)</span></span>
 <span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"New sheet{?s}: {.w_sheet {new_sheet_names}}"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; New sheets: <span style="color: #00BB00;">apple</span>, <span style="color: #00BB00;">banana</span>, and <span style="color: #00BB00;">cherry</span></span></span>
-<span></span>
+<span><span class="co">#&gt; New sheets: <span style="color: #00BB00;">apple</span>, <span style="color: #00BB00;">banana</span>, and <span style="color: #00BB00;">cherry</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
 <span><span class="va">new_sheet_names</span> <span class="op">&lt;-</span> <span class="st">"kumquat"</span></span>
 <span><span class="fu">gs4_bullets</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"New sheet{?s}: {.w_sheet {new_sheet_names}}"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; New sheet: <span style="color: #00BB00;">kumquat</span></span></span></code></pre></div>
@@ -284,7 +289,7 @@ put data in the condition, but I could start when/if there’s a reason
 to.</p>
 <p><code>abort_unsupported_conversion()</code> is a wrapper around
 <code>gs4_abort()</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="fl">1</span>, class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">abort_unsupported_conversion</span><span class="op">(</span><span class="va">x</span>, to <span class="op">=</span> <span class="st">"SheetThing"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `abort_unsupported_conversion()`:</span></span></span>

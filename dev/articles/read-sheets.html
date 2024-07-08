@@ -5,7 +5,6 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Specifying the range and column types, getting detailed cell data">
 <title>Read Sheets • googlesheets4</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
@@ -17,85 +16,73 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.9/font.css" rel="stylesheet">
 <link href="../deps/Source_Code_Pro-0.4.9/font.css" rel="stylesheet">
-<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Read Sheets">
+<link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Read Sheets">
+<meta name="description" content="Specifying the range and column types, getting detailed cell data">
 <meta property="og:description" content="Specifying the range and column types, getting detailed cell data">
 <meta property="og:image" content="https://googlesheets4.tidyverse.org/logo.png">
 <meta name="robots" content="noindex">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]--><script defer data-domain="googlesheets4.tidyverse.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
+<script defer data-domain="googlesheets4.tidyverse.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
 </head>
 <body>
     <a href="#container" class="visually-hidden-focusable">Skip to content</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-none" data-bs-theme="light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-none" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">googlesheets4</a>
 
     <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">1.1.1.9000</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../articles/googlesheets4.html">Get started</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../articles/googlesheets4.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/read-sheets.html">Read Sheets</a>
-    <a class="dropdown-item" href="../articles/write-sheets.html">Write Sheets</a>
-    <div class="dropdown-divider"></div>
-    <h6 class="dropdown-header" data-toc-skip>Special topics</h6>
-    <a class="dropdown-item" href="../articles/auth.html">googlesheets4 auth</a>
-    <a class="dropdown-item" href="../articles/dates-and-times.html">Dates and times</a>
-    <a class="dropdown-item" href="../articles/find-identify-sheets.html">Find and identify Sheets</a>
-    <div class="dropdown-divider"></div>
-    <h6 class="dropdown-header" data-toc-skip>Connections to other packages</h6>
-    <a class="dropdown-item" href="../articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a>
-    <a class="dropdown-item" href="../articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a>
-    <a class="dropdown-item" href="../articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/read-sheets.html">Read Sheets</a></li>
+    <li><a class="dropdown-item" href="../articles/write-sheets.html">Write Sheets</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Special topics</h6></li>
+    <li><a class="dropdown-item" href="../articles/auth.html">googlesheets4 auth</a></li>
+    <li><a class="dropdown-item" href="../articles/dates-and-times.html">Dates and times</a></li>
+    <li><a class="dropdown-item" href="../articles/find-identify-sheets.html">Find and identify Sheets</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><h6 class="dropdown-header" data-toc-skip>Connections to other packages</h6></li>
+    <li><a class="dropdown-item" href="../articles/drive-and-sheets.html">Using googlesheets4 with googledrive</a></li>
+    <li><a class="dropdown-item" href="../articles/fun-with-googledrive-and-readxl.html">Fun with googledrive and readxl</a></li>
+    <li><a class="dropdown-item" href="../articles/googlesheets4-reprex.html">How to create a googlesheets4 reprex</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="../articles/index.html">More articles...</a></li>
+  </ul>
 </li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-news">News</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-news">
-    <h6 class="dropdown-header" data-toc-skip>Releases</h6>
-    <a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2021/07/googlesheets4-1-0-0/">googlesheets4 1.0.0</a>
-    <a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2020/05/googlesheets4-0-2-0/">googlesheets4 0.2.0</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="../news/index.html">Changelog</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-news" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">News</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-news">
+<li><h6 class="dropdown-header" data-toc-skip>Releases</h6></li>
+    <li><a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2021/07/googlesheets4-1-0-0/">googlesheets4 1.0.0</a></li>
+    <li><a class="external-link dropdown-item" href="https://www.tidyverse.org/blog/2020/05/googlesheets4-0-2-0/">googlesheets4 0.2.0</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a class="dropdown-item" href="../news/index.html">Changelog</a></li>
+  </ul>
 </li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/tidyverse/googlesheets4/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/tidyverse/googlesheets4/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article" id="container">
 
@@ -107,7 +94,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>Read Sheets</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/googlesheets4/blob/HEAD/vignettes/articles/read-sheets.Rmd" class="external-link"><code>vignettes/articles/read-sheets.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/googlesheets4/blob/main/vignettes/articles/read-sheets.Rmd" class="external-link"><code>vignettes/articles/read-sheets.Rmd</code></a></small>
       <div class="d-none name"><code>read-sheets.Rmd</code></div>
     </div>
 
@@ -167,9 +154,8 @@ some of the different ways to specify (work)sheet and cell ranges.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Bolivia   Americas   <span style="text-decoration: underline;">1</span>952    40.4  2<span style="text-decoration: underline;">883</span>315     <span style="text-decoration: underline;">2</span>677.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Brazil    Americas   <span style="text-decoration: underline;">1</span>952    50.9 56<span style="text-decoration: underline;">602</span>560     <span style="text-decoration: underline;">2</span>109.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Canada    Americas   <span style="text-decoration: underline;">1</span>952    68.8 14<span style="text-decoration: underline;">785</span>584    <span style="text-decoration: underline;">11</span>367.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Chile     Americas   <span style="text-decoration: underline;">1</span>952    54.7  6<span style="text-decoration: underline;">377</span>619     <span style="text-decoration: underline;">3</span>940.</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Chile     Americas   <span style="text-decoration: underline;">1</span>952    54.7  6<span style="text-decoration: underline;">377</span>619     <span style="text-decoration: underline;">3</span>940.</span></span>
+<span></span>
 <span><span class="fu"><a href="../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"mini-gap"</span><span class="op">)</span>, sheet <span class="op">=</span> <span class="st">"Oceania"</span>, n_max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">mini-gap</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Range '<span style="color: #BBBB00;">'Oceania'</span>'.</span></span>
@@ -178,9 +164,8 @@ some of the different ways to specify (work)sheet and cell ranges.</p>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Australia   Oceania    <span style="text-decoration: underline;">1</span>952    69.1 8<span style="text-decoration: underline;">691</span>212    <span style="text-decoration: underline;">10</span>040.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> New Zealand Oceania    <span style="text-decoration: underline;">1</span>952    69.4 1<span style="text-decoration: underline;">994</span>794    <span style="text-decoration: underline;">10</span>557.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Australia   Oceania    <span style="text-decoration: underline;">1</span>957    70.3 9<span style="text-decoration: underline;">712</span>569    <span style="text-decoration: underline;">10</span>950.</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Australia   Oceania    <span style="text-decoration: underline;">1</span>957    70.3 9<span style="text-decoration: underline;">712</span>569    <span style="text-decoration: underline;">10</span>950.</span></span>
+<span></span>
 <span><span class="fu"><a href="../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>, skip <span class="op">=</span> <span class="fl">4</span>, n_max <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">5:10000000</span>.</span></span>
@@ -211,7 +196,7 @@ capabilities in a future release.</p>
 specification</a> section of the help for
 <code><a href="../reference/range_read.html">range_read()</a></code>.</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/range_read.html">range_read</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>, range <span class="op">=</span> <span class="st">"other!A5:F15"</span>, col_types <span class="op">=</span> <span class="st">"?ci??D"</span></span>
 <span><span class="op">)</span></span>
@@ -241,7 +226,7 @@ less brittle and mysterious than approaches like
 <code>range = "other!A5:F15"</code> or
 <code>skip = 4, n_max = 10</code>. A named range can be passed via the
 <code>range =</code> argument:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/range_read.html">range_read</a></span><span class="op">(</span>range <span class="op">=</span> <span class="st">"arts_data"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span></span>
@@ -268,7 +253,7 @@ by <code><a href="../reference/gs4_get.html">gs4_get()</a></code>.</p>
 </h2>
 <p><code><a href="../reference/range_read_cells.html">range_read_cells()</a></code> returns a data frame with one row per
 cell and it gives access to raw cell data sent by the Sheets API.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/range_read_cells.html">range_read_cells</a></span><span class="op">(</span><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>, range <span class="op">=</span> <span class="st">"E5:E7"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">E5:E7</span>.</span></span>
@@ -277,9 +262,8 @@ cell and it gives access to raw cell data sent by the Sheets API.</p>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     5     5 E5    <span style="color: #949494;">&lt;CELL_TEX&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     6     5 E6    <span style="color: #949494;">&lt;CELL_DAT&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     7     5 E7    <span style="color: #949494;">&lt;CELL_DAT&gt;</span></span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">cell</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     7     5 E7    <span style="color: #949494;">&lt;CELL_DAT&gt;</span></span></span>
+<span><span class="va">df</span><span class="op">$</span><span class="va">cell</span><span class="op">[[</span><span class="fl">3</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; $effectiveValue</span></span>
 <span><span class="co">#&gt; $effectiveValue$numberValue</span></span>
 <span><span class="co">#&gt; [1] 20749</span></span>
@@ -306,15 +290,14 @@ formatting.</p>
 <p><code><a href="../reference/spread_sheet.html">spread_sheet()</a></code> converts data in the “one row per cell”
 form into the data frame you get from <code><a href="../reference/range_read.html">range_read()</a></code>, which
 involves reshaping and column typing.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/spread_sheet.html">spread_sheet</a></span><span class="op">(</span>col_types <span class="op">=</span> <span class="st">"D"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 1</span></span></span>
 <span><span class="co">#&gt;   `Date of birth`</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1947-01-08     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1956-10-21</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">## is same as ...</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1956-10-21</span></span>
+<span><span class="co">## is same as ...</span></span>
 <span><span class="fu"><a href="../reference/range_read.html">range_read</a></span><span class="op">(</span><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span>, range <span class="op">=</span> <span class="st">"E5:E7"</span>, col_types <span class="op">=</span><span class="st">"D"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">E5:E7</span>.</span></span>
@@ -340,7 +323,7 @@ difference is imperceptible for many Sheets and there are some downsides
 (described later).</p>
 <p><code><a href="../reference/range_speedread.html">range_speedread()</a></code> has much the same interface as
 <code><a href="../reference/range_read.html">range_read()</a></code>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/range_speedread.html">range_speedread</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Oceania"</span>, n_max <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">gapminder</span>, sheet <span style="color: #00BB00;">Oceania</span>.</span></span>
@@ -366,7 +349,7 @@ parsing (namely, <code><a href="https://readr.tidyverse.org/reference/read_delim
 consequence is that all arguments around column type specification are
 passed along to the CSV-parsing function. Here is a demo using
 readr-style column specification:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/range_speedread.html">range_speedread</a></span><span class="op">(</span></span>
 <span>    range <span class="op">=</span> <span class="st">"other!A5:F15"</span>,</span>
@@ -394,7 +377,7 @@ readr-style column specification:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Pat Summit  coach         64 TRUE       1952-06-14      2016-06-28</span></span></code></pre></div>
 <p>Compare that to how we would read the same data with
 <code><a href="../reference/range_read.html">range_read()</a></code>:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"deaths"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="../reference/range_read.html">range_read</a></span><span class="op">(</span>range <span class="op">=</span> <span class="st">"other_data"</span>, col_types <span class="op">=</span> <span class="st">"??i?DD"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">deaths</span>.</span></span>
@@ -427,7 +410,7 @@ has access to the actual cell data and its type.</li>
 <p>What’s the speed difference for something like the Africa sheet in
 the “gapminder” example Sheet? (around 625 rows x 6 columns, or 3700
 cells)</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/range_speedread.html">range_speedread</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
@@ -443,15 +426,14 @@ cells)</p>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Use `spec()` to retrieve the full column specification for this data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Specify the column types or set `show_col_types = FALSE` to quiet this message.</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.075   0.019   0.506</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
+<span><span class="co">#&gt;   0.088   0.007   0.429</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/gs4_examples.html">gs4_example</a></span><span class="op">(</span><span class="st">"gapminder"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="../reference/range_read.html">range_read</a></span><span class="op">(</span>sheet <span class="op">=</span> <span class="st">"Africa"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">gapminder</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Range '<span style="color: #BBBB00;">'Africa'</span>'.</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.294   0.004   0.555</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.310   0.000   0.576</span></span></code></pre></div>
 <p>The modest difference above shows that the speed difference is
 unlikely to be a gamechanger in many settings.</p>
 <p>Summary of how to think about <code><a href="../reference/range_speedread.html">range_speedread()</a></code> vs
@@ -478,7 +460,7 @@ formatting.</li>
 <code><a href="../reference/range_speedread.html">range_speedread()</a></code> can’t work with named ranges.</li>
 </ul>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -491,7 +473,7 @@ formatting.</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
   </div></footer>

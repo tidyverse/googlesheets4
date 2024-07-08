@@ -1,198 +1,68 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/SUPPORT.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/auth.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/dates-and-times.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/drive-and-sheets.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/example-sheets.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/find-identify-sheets.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/fun-with-googledrive-and-readxl.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/function-class-names.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/googlesheets4-reprex.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/googlesheets4.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/messages-and-errors.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/range-specification.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/read-sheets.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/articles/write-sheets.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/index.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/cell-specification.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-configuration.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-package.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-vctrs.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_auth.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_browse.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_create.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_deauth.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_endpoints.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_examples.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_find.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_fodder.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_formula.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_get.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_has_token.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_oauth_app.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_random.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_scopes.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_token.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_user.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/range_autofit.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/range_delete.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/range_flood.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/range_read.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/range_read_cells.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/range_speedread.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/range_write.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/request_generate.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/request_make.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_add.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_append.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_copy.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_delete.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_properties.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_relocate.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_rename.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_resize.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_write.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/sheets_id.html</loc>
-  </url>
-  <url>
-    <loc>https://googlesheets4.tidyverse.org/dev/reference/spread_sheet.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://googlesheets4.tidyverse.org/dev/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/CONTRIBUTING.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/LICENSE-text.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/LICENSE.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/SUPPORT.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/auth.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/dates-and-times.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/drive-and-sheets.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/example-sheets.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/find-identify-sheets.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/fun-with-googledrive-and-readxl.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/function-class-names.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/googlesheets4-reprex.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/googlesheets4.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/index.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/messages-and-errors.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/range-specification.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/read-sheets.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/articles/write-sheets.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/authors.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/index.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/news/index.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/cell-specification.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-configuration.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-package.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-vctrs.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_auth.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_browse.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_create.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_deauth.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_endpoints.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_examples.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_find.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_fodder.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_formula.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_get.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_has_token.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_oauth_app.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_random.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_scopes.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_token.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/gs4_user.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/index.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/pipe.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/range_autofit.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/range_delete.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/range_flood.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/range_read.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/range_read_cells.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/range_speedread.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/range_write.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/request_generate.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/request_make.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_add.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_append.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_copy.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_delete.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_properties.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_relocate.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_rename.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_resize.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/sheet_write.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/sheets_id.html</loc></url>
+<url><loc>https://googlesheets4.tidyverse.org/dev/reference/spread_sheet.html</loc></url>
 </urlset>
+

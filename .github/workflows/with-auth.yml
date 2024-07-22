@@ -5,6 +5,7 @@ on:
     branches: [main, master]
 
 name: with-auth
+permissions: read-all
 
 jobs:
   with-auth:

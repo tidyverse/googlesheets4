@@ -59,7 +59,7 @@ pak::pak("tidyverse/googlesheets4")
 
 You can see how to read data with googlesheets4 in the **data import cheatsheet**, which also covers similar functionality in the related packages readr and readxl.
 
-<a href="https://github.com/rstudio/cheatsheets/blob/master/data-import.pdf"><img src="https://raw.githubusercontent.com/rstudio/cheatsheets/master/pngs/thumbnails/data-import-cheatsheet-thumbs.png" width="630" height="252"  alt="thumbnail of data import cheatsheet"/></a>
+<a href="https://github.com/rstudio/cheatsheets/blob/main/data-import.pdf"><img src="https://raw.githubusercontent.com/rstudio/cheatsheets/main/pngs/thumbnails/data-import-cheatsheet-thumbs.png" width="630" height="252" alt="thumbnail of data import cheatsheet"/></a>
 
 ## Auth
 

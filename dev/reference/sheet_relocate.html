@@ -161,6 +161,8 @@ specified. Refer to an existing sheet by name (via a string) or by position
 <span class="r-in"><span>  <span class="fu">sheet_relocate</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"foxtrot"</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="sheet_properties.html">sheet_names</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Relocating sheets in <span style="color: #00BBBB;">sheet-relocate-demo</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request failed [429]. Retry 1 happens in 60.5 seconds ...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request failed [429]. Retry 2 happens in 3.9 seconds ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "foxtrot" "delta"   "alfa"    "bravo"   "charlie" "echo"   </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># put the sheets back in the original order</span></span></span>
@@ -181,7 +183,7 @@ specified. Refer to an existing sheet by name (via a string) or by position
 <span class="r-in"><span><span class="fu"><a href="gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheet-relocate-demo"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">sheet-relocate-demo</span> <span style="color: #555555;">&lt;id: 1eHKZoaTIS7gz-jiSZC19GSqU9WsnhfnS9I4IJq0Laho&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">sheet-relocate-demo</span> <span style="color: #555555;">&lt;id: 1-FFKy6TVvOVQCO-X-JE79-J-UWpYeq7vXgw4qX5DJro&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -6,12 +6,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Fun with googledrive and readxl • googlesheets4</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
@@ -130,29 +129,29 @@ googlesheets4 with googledrive</a>.</p>
 <p>Put the iris data into a csv file.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">iris_tempfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>pattern <span class="op">=</span> <span class="st">"iris-"</span>, fileext <span class="op">=</span> <span class="st">".csv"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/tmp/RtmphZcY1S/iris-2742de96de.csv"</span></span>
+<span><span class="co">#&gt; [1] "/tmp/RtmpkfHy6M/iris-276c4a1ef8fb.csv"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/write.table.html" class="external-link">write.csv</a></span><span class="op">(</span><span class="va">iris</span>, <span class="va">iris_tempfile</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Use <code><a href="https://googledrive.tidyverse.org/reference/drive_upload.html" class="external-link">googledrive::drive_upload()</a></code> to upload the csv and
 simultaneously convert to a Sheet.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">iris_ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_upload.html" class="external-link">drive_upload</a></span><span class="op">(</span><span class="va">iris_tempfile</span>, type <span class="op">=</span> <span class="st">"spreadsheet"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Local file:</span></span>
-<span><span class="co">#&gt; • <span style="color: #0000BB;">/tmp/RtmphZcY1S/iris-2742de96de.csv</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #0000BB;">/tmp/RtmpkfHy6M/iris-276c4a1ef8fb.csv</span></span></span>
 <span><span class="co">#&gt; Uploaded into Drive file:</span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">iris-2742de96de</span> <span style="color: #555555;">&lt;id: 1_yMqcvaDWtHUNbjAkqcy4pSKEGrdkl8CBvEYPOpFU2k&gt;</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #00BBBB;">iris-276c4a1ef8fb</span> <span style="color: #555555;">&lt;id: 1jlRyR-9XKZIlKzQ4q5nRMXPC4K-6My4sU-_b21TdFws&gt;</span></span></span>
 <span><span class="co">#&gt; With MIME type:</span></span>
 <span><span class="co">#&gt; • <span style="color: #00BB00;">application/vnd.google-apps.spreadsheet</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A dribble: 1 × 3</span></span></span>
-<span><span class="co">#&gt;   name            id       drive_resource   </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> iris-2742de96de 1_yMqcv… <span style="color: #949494;">&lt;named list [36]&gt;</span></span></span>
+<span><span class="co">#&gt;   name              id       drive_resource   </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> iris-276c4a1ef8fb 1jlRyR-… <span style="color: #949494;">&lt;named list [37]&gt;</span></span></span>
 <span></span>
 <span><span class="co"># visit the new Sheet in the browser, in an interactive session!</span></span>
 <span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_browse.html" class="external-link">drive_browse</a></span><span class="op">(</span><span class="va">iris_ss</span><span class="op">)</span></span></code></pre></div>
 <p>Read data from the private Sheet into R.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/range_read.html">read_sheet</a></span><span class="op">(</span><span class="va">iris_ss</span>, range <span class="op">=</span> <span class="st">"B1:D6"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">iris-2742de96de.csv</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Reading from <span style="color: #00BBBB;">iris-276c4a1ef8fb.csv</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BB00;">✔</span> Range <span style="color: #BBBB00;">B1:D6</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 3</span></span></span>
 <span><span class="co">#&gt;   Sepal.Width Petal.Length Petal.Width</span></span>
@@ -169,12 +168,12 @@ simultaneously convert to a Sheet.</p>
 <p>Download the Sheet as an Excel workbook.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">iris_xlsxfile</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">"[.]csv"</span>, <span class="st">".xlsx"</span>, <span class="va">iris_tempfile</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "/tmp/RtmphZcY1S/iris-2742de96de.xlsx"</span></span>
+<span><span class="co">#&gt; [1] "/tmp/RtmpkfHy6M/iris-276c4a1ef8fb.xlsx"</span></span>
 <span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_download.html" class="external-link">drive_download</a></span><span class="op">(</span><span class="va">iris_ss</span>, path <span class="op">=</span> <span class="va">iris_xlsxfile</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File downloaded:</span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">iris-2742de96de</span> <span style="color: #555555;">&lt;id: 1_yMqcvaDWtHUNbjAkqcy4pSKEGrdkl8CBvEYPOpFU2k&gt;</span></span></span>
+<span><span class="co">#&gt; • <span style="color: #00BBBB;">iris-276c4a1ef8fb</span> <span style="color: #555555;">&lt;id: 1jlRyR-9XKZIlKzQ4q5nRMXPC4K-6My4sU-_b21TdFws&gt;</span></span></span>
 <span><span class="co">#&gt; Saved locally as:</span></span>
-<span><span class="co">#&gt; • <span style="color: #0000BB;">/tmp/RtmphZcY1S/iris-2742de96de.xlsx</span></span></span></code></pre></div>
+<span><span class="co">#&gt; • <span style="color: #0000BB;">/tmp/RtmpkfHy6M/iris-276c4a1ef8fb.xlsx</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="read-xlsx-with-readxl">Read xlsx with readxl<a class="anchor" aria-label="anchor" href="#read-xlsx-with-readxl"></a>
@@ -207,7 +206,7 @@ simultaneously convert to a Sheet.</p>
 <span><span class="co">#&gt; [1] TRUE TRUE</span></span>
 <span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="va">iris_ss</span><span class="op">)</span></span>
 <span><span class="co">#&gt; File trashed:</span></span>
-<span><span class="co">#&gt; • <span style="color: #00BBBB;">iris-2742de96de</span> <span style="color: #555555;">&lt;id: 1_yMqcvaDWtHUNbjAkqcy4pSKEGrdkl8CBvEYPOpFU2k&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; • <span style="color: #00BBBB;">iris-276c4a1ef8fb</span> <span style="color: #555555;">&lt;id: 1jlRyR-9XKZIlKzQ4q5nRMXPC4K-6My4sU-_b21TdFws&gt;</span></span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -222,7 +221,7 @@ simultaneously convert to a Sheet.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
   </div></footer>

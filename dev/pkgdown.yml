@@ -15,7 +15,7 @@ articles:
   articles/range-specification: range-specification.html
   articles/read-sheets: read-sheets.html
   articles/write-sheets: write-sheets.html
-last_built: 2025-05-17T11:10Z
+last_built: 2025-05-18T11:09Z
 urls:
   reference: https://googlesheets4.tidyverse.org/reference
   article: https://googlesheets4.tidyverse.org/articles

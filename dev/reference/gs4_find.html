@@ -104,15 +104,15 @@ with both googlesheets4 and googledrive, but as different users.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 9 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name               id       drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> geological-canary  13fmUp0… <span style="color: #949494;">&lt;named list [37]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> blubbery-lobo      1foTYXQ… <span style="color: #949494;">&lt;named list [36]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> bacciform-booby    15WqCxH… <span style="color: #949494;">&lt;named list [35]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> childsafe-squid    1uGu_BH… <span style="color: #949494;">&lt;named list [36]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> fiery-hart         18KiiL2… <span style="color: #949494;">&lt;named list [36]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> chicken-sheet      1StV8oq… <span style="color: #949494;">&lt;named list [36]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> releasable-rooster 1cMnXxJ… <span style="color: #949494;">&lt;named list [36]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> eonian-atlasmoth   1BMEsbT… <span style="color: #949494;">&lt;named list [36]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> gapminder          1ksUQqF… <span style="color: #949494;">&lt;named list [34]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> geological-canary  13fmUp0… <span style="color: #949494;">&lt;named list [38]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> blubbery-lobo      1foTYXQ… <span style="color: #949494;">&lt;named list [37]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> bacciform-booby    15WqCxH… <span style="color: #949494;">&lt;named list [36]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> childsafe-squid    1uGu_BH… <span style="color: #949494;">&lt;named list [37]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> fiery-hart         18KiiL2… <span style="color: #949494;">&lt;named list [37]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> chicken-sheet      1StV8oq… <span style="color: #949494;">&lt;named list [37]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> releasable-rooster 1cMnXxJ… <span style="color: #949494;">&lt;named list [37]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> eonian-atlasmoth   1BMEsbT… <span style="color: #949494;">&lt;named list [37]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> gapminder          1ksUQqF… <span style="color: #949494;">&lt;named list [35]&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># see 5 Sheets, prioritized by creation time</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">gs4_find</span><span class="op">(</span>order_by <span class="op">=</span> <span class="st">"createdTime desc"</span>, n_max <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
@@ -120,11 +120,11 @@ with both googlesheets4 and googledrive, but as different users.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A dribble: 5 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   name              id       drive_resource   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;drv_id&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> geological-canary 13fmUp0… <span style="color: #949494;">&lt;named list [37]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> blubbery-lobo     1foTYXQ… <span style="color: #949494;">&lt;named list [36]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> bacciform-booby   15WqCxH… <span style="color: #949494;">&lt;named list [35]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> childsafe-squid   1uGu_BH… <span style="color: #949494;">&lt;named list [36]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> fiery-hart        18KiiL2… <span style="color: #949494;">&lt;named list [36]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> geological-canary 13fmUp0… <span style="color: #949494;">&lt;named list [38]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> blubbery-lobo     1foTYXQ… <span style="color: #949494;">&lt;named list [37]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> bacciform-booby   15WqCxH… <span style="color: #949494;">&lt;named list [36]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> childsafe-squid   1uGu_BH… <span style="color: #949494;">&lt;named list [37]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> fiery-hart        18KiiL2… <span style="color: #949494;">&lt;named list [37]&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># hoist the creation date, using other packages in the tidyverse</span></span></span>
 <span class="r-in"><span><span class="co"># x %&gt;%</span></span></span>

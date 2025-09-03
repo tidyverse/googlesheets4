@@ -1,4 +1,4 @@
-# googlesheets4 (development version)
+# googlesheets4 1.1.2
 
 * No significant user-facing changes. Release motivated by documentation updates
   to support HTML reference manuals on CRAN.

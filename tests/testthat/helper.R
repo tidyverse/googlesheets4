@@ -33,11 +33,14 @@ local_ss <- function(name, ..., env = parent.frame()) {
     {
       trash_me <- gs4_find(name)
       if (nrow(trash_me) < 1) {
-        cli::cli_warn("
-        The spreadsheet named {.s_sheet name} already seems to be deleted.")
+        cli::cli_warn(
+          "The spreadsheet named {.s_sheet name} already seems to be deleted."
+        )
       } else {
         quiet <- gs4_quiet() %|% is_testing()
-        if (quiet) googledrive::local_drive_quiet()
+        if (quiet) {
+          googledrive::local_drive_quiet()
+        }
         googledrive::drive_trash(trash_me)
       }
     },

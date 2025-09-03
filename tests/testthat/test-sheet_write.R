@@ -20,7 +20,8 @@ test_that("sheet_write() writes what it should", {
   # the main interesting bit to test is whether we successfully sent
   # correct value for the date and datetime, with a sane (= ISO 8601) format
   expect_equal(
-    purrr::pluck(x, "date", 1, "formattedValue"), format(dat$date[1])
+    purrr::pluck(x, "date", 1, "formattedValue"),
+    format(dat$date[1])
   )
   expect_equal(
     purrr::pluck(x, "date", 1, "effectiveFormat", "numberFormat", "type"),
@@ -32,14 +33,22 @@ test_that("sheet_write() writes what it should", {
   )
 
   expect_equal(
-    purrr::pluck(x, "datetime", 1, "formattedValue"), format(dat$datetime[1])
+    purrr::pluck(x, "datetime", 1, "formattedValue"),
+    format(dat$datetime[1])
   )
   expect_equal(
     purrr::pluck(x, "datetime", 1, "effectiveFormat", "numberFormat", "type"),
     "DATE_TIME"
   )
   expect_equal(
-    purrr::pluck(x, "datetime", 1, "effectiveFormat", "numberFormat", "pattern"),
+    purrr::pluck(
+      x,
+      "datetime",
+      1,
+      "effectiveFormat",
+      "numberFormat",
+      "pattern"
+    ),
     "yyyy-mm-dd hh:mm:ss"
   )
 })

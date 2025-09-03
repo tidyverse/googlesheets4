@@ -57,9 +57,9 @@
 #' gs4_find("gs4-create-demo") %>%
 #'   googledrive::drive_trash()
 gs4_create <- function(name = gs4_random(), ..., sheets = NULL) {
-  sheets       <- enlist_sheets(enquo(sheets))
+  sheets <- enlist_sheets(enquo(sheets))
   sheets_given <- !is.null(sheets)
-  data_given   <- sheets_given && !is.null(unlist(sheets$value))
+  data_given <- sheets_given && !is.null(unlist(sheets$value))
 
   # create the (spread)Sheet ---------------------------------------------------
   gs4_bullets(c(v = "Creating new Sheet: {.s_sheet {name}}."))
@@ -114,17 +114,21 @@ prepare_df <- function(sheet_id, df, skip = 0) {
   if (skip > 0) {
     start <- patch(start, rowIndex = skip)
   }
-  request_values <- list(updateCells = new(
-    "UpdateCellsRequest",
-    start = start,
-    rows = as_RowData(df), # an array of instances of RowData
-    fields = "userEnteredValue,userEnteredFormat"
-  ))
+  request_values <- list(
+    updateCells = new(
+      "UpdateCellsRequest",
+      start = start,
+      rows = as_RowData(df), # an array of instances of RowData
+      fields = "userEnteredValue,userEnteredFormat"
+    )
+  )
 
   # set sheet dimensions and freeze top row -------------------------------------
   request_sheet_properties <- bureq_set_grid_properties(
     sheetId = sheet_id,
-    nrow = nrow(df) + skip + 1, ncol = ncol(df), frozenRowCount = skip + 1
+    nrow = nrow(df) + skip + 1,
+    ncol = ncol(df),
+    frozenRowCount = skip + 1
   )
 
   c(

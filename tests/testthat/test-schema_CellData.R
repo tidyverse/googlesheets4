@@ -104,9 +104,12 @@ test_that("as_CellData() works for POSIXct", {
     (naked_input[[3]] / 86400) + 25569
   )
 
-  fmt <- list(numberFormat = list(
-    type = "DATE_TIME", pattern = "yyyy-mm-dd hh:mm:ss"
-  ))
+  fmt <- list(
+    numberFormat = list(
+      type = "DATE_TIME",
+      pattern = "yyyy-mm-dd hh:mm:ss"
+    )
+  )
   expect_cell_format(out[[1]], fmt)
   expect_cell_format(out[[2]], fmt)
   expect_cell_format(out[[3]], fmt)

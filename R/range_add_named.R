@@ -25,10 +25,7 @@
 #' # clean up
 #' gs4_find("range-add-named-demo") %>%
 #'   googledrive::drive_trash()
-range_add_named <- function(ss,
-                            name,
-                            sheet = NULL,
-                            range = NULL) {
+range_add_named <- function(ss, name, sheet = NULL, range = NULL) {
   ssid <- as_sheets_id(ss)
   name <- check_string(name)
   maybe_sheet(sheet)
@@ -41,15 +38,19 @@ range_add_named <- function(ss,
   range_spec <- as_range_spec(
     range,
     sheet = sheet,
-    sheets_df = x$sheets, nr_df = x$named_ranges
+    sheets_df = x$sheets,
+    nr_df = x$named_ranges
   )
-  range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
+  range_spec$sheet_name <- range_spec$sheet_name %||%
+    first_visible_name(x$sheets)
 
   # form batch update request --------------------------------------------------
-  req <- list(addNamedRange = new(
-    "AddNamedRangeRequest",
-    namedRange = as_NamedRange(range_spec, name = name)
-  ))
+  req <- list(
+    addNamedRange = new(
+      "AddNamedRangeRequest",
+      namedRange = as_NamedRange(range_spec, name = name)
+    )
+  )
 
   # do it ----------------------------------------------------------------------
   req <- request_generate(
@@ -68,7 +69,9 @@ range_add_named <- function(ss,
   reply <- as.list(as_tibble(reply))
   reply$sheet_name <- vlookup(
     reply$sheet_id,
-    data = x$sheets, key = "id", value = "name"
+    data = x$sheets,
+    key = "id",
+    value = "name"
   )
   A1_range <- qualified_A1(reply$sheet_name, do.call(make_cell_range, reply))
   gs4_bullets(c(

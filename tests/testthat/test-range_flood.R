@@ -34,6 +34,12 @@ test_that("range_flood() works", {
   expect_true(all(unlist(fmts) == 1))
 
   column_C_header <- out[out$col == 3 & out$row == 1, ]
-  fmt <- purrr::pluck(column_C_header, "cell", 1, "effectiveFormat", "backgroundColor")
+  fmt <- purrr::pluck(
+    column_C_header,
+    "cell",
+    1,
+    "effectiveFormat",
+    "backgroundColor"
+  )
   expect_true(all(unlist(fmt) < 1))
 })

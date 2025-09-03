@@ -101,12 +101,14 @@
 #' # clean up
 #' gs4_find("range-write-demo") %>%
 #'   googledrive::drive_trash()
-range_write <- function(ss,
-                        data,
-                        sheet = NULL,
-                        range = NULL,
-                        col_names = TRUE, # not sure about this default
-                        reformat = TRUE) {
+range_write <- function(
+  ss,
+  data,
+  sheet = NULL,
+  range = NULL,
+  col_names = TRUE, # not sure about this default
+  reformat = TRUE
+) {
   ssid <- as_sheets_id(ss)
   check_data_frame(data)
   maybe_sheet(sheet)
@@ -121,9 +123,11 @@ range_write <- function(ss,
   range_spec <- as_range_spec(
     range,
     sheet = sheet,
-    sheets_df = x$sheets, nr_df = x$named_ranges
+    sheets_df = x$sheets,
+    nr_df = x$named_ranges
   )
-  range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
+  range_spec$sheet_name <- range_spec$sheet_name %||%
+    first_visible_name(x$sheets)
   gs4_bullets(c(v = "Writing to sheet {.w_sheet {range_spec$sheet_name}}."))
 
   # initialize the batch update requests; store details on target sheet s ------
@@ -145,7 +149,9 @@ range_write <- function(ss,
   if (!is.null(resize_req)) {
     new_dims <- pluck(
       resize_req,
-      "updateSheetProperties", "properties", "gridProperties"
+      "updateSheetProperties",
+      "properties",
+      "gridProperties"
     )
     gs4_bullets(c(
       v = "Changing dims: ({s$grid_rows} x {s$grid_columns}) --> \\
@@ -156,7 +162,11 @@ range_write <- function(ss,
   }
 
   # pack the data, specify field mask ------------------------------------------
-  fields <- if (reformat) "userEnteredValue,userEnteredFormat" else "userEnteredValue"
+  fields <- if (reformat) {
+    "userEnteredValue,userEnteredFormat"
+  } else {
+    "userEnteredValue"
+  }
   data_req <- new(
     "UpdateCellsRequest",
     rows = as_RowData(data, col_names = col_names),
@@ -211,7 +221,7 @@ prepare_dims <- function(write_loc, data, col_names) {
   #   * `range` is an instance of GridRange
   if (has_name(write_loc, "start")) {
     return(list(
-      nrow = (write_loc$start$rowIndex    %||% 0) + nrow(data) + col_names,
+      nrow = (write_loc$start$rowIndex %||% 0) + nrow(data) + col_names,
       ncol = (write_loc$start$columnIndex %||% 0) + ncol(data)
     ))
   }

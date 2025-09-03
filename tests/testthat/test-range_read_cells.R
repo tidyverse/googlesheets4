@@ -49,7 +49,8 @@ test_that("full cell data and empties are within reach", {
   out <- range_read_cells(
     test_sheet("googlesheets4-cell-tests"),
     sheet = "empties-and-formats",
-    cell_data = "full", discard_empty = FALSE
+    cell_data = "full",
+    discard_empty = FALSE
   )
 
   # B2 is empty; make sure it's here
@@ -79,7 +80,8 @@ test_that("formula cells are parsed based on effectiveValue", {
     test_sheet("googlesheets4-cell-tests"),
     sheet = "formulas",
     range = "B:B",
-    cell_data = "full", discard_empty = FALSE
+    cell_data = "full",
+    discard_empty = FALSE
   )
 
   expect_s3_class(out$cell[[which(out$loc == "B2")]], "CELL_TEXT")

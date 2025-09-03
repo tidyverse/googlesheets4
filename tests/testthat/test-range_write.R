@@ -8,7 +8,8 @@ test_that("range_write() works", {
 
   n <- 3
   m <- 5
-  data <- suppressMessages( # silence messages about name repair
+  data <- suppressMessages(
+    # silence messages about name repair
     tibble::as_tibble(
       matrix(head(letters, n * m), nrow = n, ncol = m),
       .name_repair = "unique"
@@ -69,24 +70,25 @@ test_that("prepare_loc() makes the right call re: `start` vs. `range`", {
     expect_named(out, loc)
   }
 
-  expect_loc(NULL,     "start")
+  expect_loc(NULL, "start")
   expect_loc("Sheet1", "start")
-  expect_loc("D4",     "start")
-  expect_loc("B5:B5",  "start")
+  expect_loc("D4", "start")
+  expect_loc("B5:B5", "start")
   expect_loc(cell_limits(c(5, 2), c(5, 2)), "start")
 
   expect_loc("B4:G9", "range")
-  expect_loc("A2:F",  "range")
-  expect_loc("A2:5",  "range")
-  expect_loc("C:E",   "range")
-  expect_loc("5:7",   "range")
+  expect_loc("A2:F", "range")
+  expect_loc("A2:5", "range")
+  expect_loc("C:E", "range")
+  expect_loc("5:7", "range")
   expect_loc(cell_limits(c(2, 4), c(NA, NA)), "range")
 })
 
 test_that("prepare_dims() works when write_loc is a `start` (a GridCoordinate)", {
   n <- 3
   m <- 5
-  data <- suppressMessages( # silence messages about name repair
+  data <- suppressMessages(
+    # silence messages about name repair
     tibble::as_tibble(
       matrix(head(letters, n * m), nrow = n, ncol = m),
       .name_repair = "unique"
@@ -99,31 +101,32 @@ test_that("prepare_dims() works when write_loc is a `start` (a GridCoordinate)",
 
   # no row or column info --> default offset is 0 (remember these are 0-indexed)
   loc <- list(start = new("GridCoordinate", sheetId = 123))
-  expect_dims(loc, col_names = TRUE,  list(nrow = n + 1, ncol = m))
-  expect_dims(loc, col_names = FALSE, list(nrow = n,     ncol = m))
+  expect_dims(loc, col_names = TRUE, list(nrow = n + 1, ncol = m))
+  expect_dims(loc, col_names = FALSE, list(nrow = n, ncol = m))
 
   # row offset
   loc <- list(start = new("GridCoordinate", sheetId = 123, rowIndex = 2))
-  expect_dims(loc, col_names = TRUE,  list(nrow = 2 + n + 1, ncol = m))
-  expect_dims(loc, col_names = FALSE, list(nrow = 2 + n,     ncol = m))
+  expect_dims(loc, col_names = TRUE, list(nrow = 2 + n + 1, ncol = m))
+  expect_dims(loc, col_names = FALSE, list(nrow = 2 + n, ncol = m))
 
   # column offset
   loc <- list(start = new("GridCoordinate", sheetId = 123, columnIndex = 3))
-  expect_dims(loc, col_names = TRUE,  list(nrow = n + 1, ncol = 3 + m))
-  expect_dims(loc, col_names = FALSE, list(nrow = n,     ncol = 3 + m))
+  expect_dims(loc, col_names = TRUE, list(nrow = n + 1, ncol = 3 + m))
+  expect_dims(loc, col_names = FALSE, list(nrow = n, ncol = 3 + m))
 
   # row and column offset
   loc <- list(
     start = new("GridCoordinate", sheetId = 123, rowIndex = 2, columnIndex = 3)
   )
-  expect_dims(loc, col_names = TRUE,  list(nrow = 2 + n + 1, ncol = 3 + m))
-  expect_dims(loc, col_names = FALSE, list(nrow = 2 + n,     ncol = 3 + m))
+  expect_dims(loc, col_names = TRUE, list(nrow = 2 + n + 1, ncol = 3 + m))
+  expect_dims(loc, col_names = FALSE, list(nrow = 2 + n, ncol = 3 + m))
 })
 
 test_that("prepare_dims() works when write_loc is a `range` (a GridRange)", {
   n <- 3
   m <- 5
-  data <- suppressMessages( # silence messages about name repair
+  data <- suppressMessages(
+    # silence messages about name repair
     tibble::as_tibble(
       matrix(head(letters, n * m), nrow = n, ncol = m),
       .name_repair = "unique"
@@ -137,28 +140,60 @@ test_that("prepare_dims() works when write_loc is a `range` (a GridRange)", {
   }
 
   # fully specified range; lower right cell is all that matters
-  expect_dims("B4:G9", col_names = TRUE,  list(nrow = 9, ncol = which(LETTERS == "G")))
-  expect_dims("B4:G9", col_names = FALSE, list(nrow = 9, ncol = which(LETTERS == "G")))
+  expect_dims(
+    "B4:G9",
+    col_names = TRUE,
+    list(nrow = 9, ncol = which(LETTERS == "G"))
+  )
+  expect_dims(
+    "B4:G9",
+    col_names = FALSE,
+    list(nrow = 9, ncol = which(LETTERS == "G"))
+  )
 
   # range is open on the bottom
   # get row extent from upper left of range + data, column extent from range
-  expect_dims("B3:D", col_names = TRUE,  list(nrow = 2 + n + 1, ncol = which(LETTERS == "D")))
-  expect_dims("B3:D", col_names = FALSE, list(nrow = 2 + n ,    ncol = which(LETTERS == "D")))
+  expect_dims(
+    "B3:D",
+    col_names = TRUE,
+    list(nrow = 2 + n + 1, ncol = which(LETTERS == "D"))
+  )
+  expect_dims(
+    "B3:D",
+    col_names = FALSE,
+    list(nrow = 2 + n, ncol = which(LETTERS == "D"))
+  )
 
   # range is open on the right
   # get row extent from range, column extent from range + data
-  expect_dims("C3:5", col_names = TRUE,  list(nrow = 5, ncol = which(LETTERS == "C") + m - 1))
-  expect_dims("C3:5", col_names = FALSE, list(nrow = 5, ncol = which(LETTERS == "C") + m - 1))
+  expect_dims(
+    "C3:5",
+    col_names = TRUE,
+    list(nrow = 5, ncol = which(LETTERS == "C") + m - 1)
+  )
+  expect_dims(
+    "C3:5",
+    col_names = FALSE,
+    list(nrow = 5, ncol = which(LETTERS == "C") + m - 1)
+  )
 
   # range is open on left (trivially) and on the right
   # get row extent from range, column extent from the data
-  expect_dims("5:7", col_names = TRUE,  list(nrow = 7, ncol = m))
+  expect_dims("5:7", col_names = TRUE, list(nrow = 7, ncol = m))
   expect_dims("5:7", col_names = FALSE, list(nrow = 7, ncol = m))
 
   # range is open on the top (trivially) and bottom
   # get row extent from data, column extent from range
-  expect_dims("B:H", col_names = TRUE,  list(nrow = n + 1, ncol = which(LETTERS == "H")))
-  expect_dims("B:H", col_names = FALSE, list(nrow = n,     ncol = which(LETTERS == "H")))
+  expect_dims(
+    "B:H",
+    col_names = TRUE,
+    list(nrow = n + 1, ncol = which(LETTERS == "H"))
+  )
+  expect_dims(
+    "B:H",
+    col_names = FALSE,
+    list(nrow = n, ncol = which(LETTERS == "H"))
+  )
 
   # range is open on the bottom and right
   # get row extent from range + data, column extent from range + data

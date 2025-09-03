@@ -45,10 +45,13 @@
 #' # clean up
 #' gs4_find("sheet-resize-demo") %>%
 #'   googledrive::drive_trash()
-sheet_resize <- function(ss,
-                         sheet = NULL,
-                         nrow = NULL, ncol = NULL,
-                         exact = FALSE) {
+sheet_resize <- function(
+  ss,
+  sheet = NULL,
+  nrow = NULL,
+  ncol = NULL,
+  exact = FALSE
+) {
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   maybe_non_negative_integer(nrow)
@@ -57,9 +60,16 @@ sheet_resize <- function(ss,
 
   x <- gs4_get(ssid)
   s <- lookup_sheet(sheet, sheets_df = x$sheets)
-  gs4_bullets(c(v = "Resizing sheet {.w_sheet {s$name}} in {.s_sheet {x$name}}."))
+  gs4_bullets(c(
+    v = "Resizing sheet {.w_sheet {s$name}} in {.s_sheet {x$name}}."
+  ))
 
-  bureq <- prepare_resize_request(s, nrow_needed = nrow, ncol_needed = ncol, exact = exact)
+  bureq <- prepare_resize_request(
+    s,
+    nrow_needed = nrow,
+    ncol_needed = ncol,
+    exact = exact
+  )
 
   if (is.null(bureq)) {
     gs4_bullets(c(
@@ -68,7 +78,12 @@ sheet_resize <- function(ss,
     return(invisible(ssid))
   }
 
-  new_grid_properties <- pluck(bureq, "updateSheetProperties", "properties", "gridProperties")
+  new_grid_properties <- pluck(
+    bureq,
+    "updateSheetProperties",
+    "properties",
+    "gridProperties"
+  )
   new_nrow <- pluck(new_grid_properties, "rowCount") %||% s$grid_rows
   new_ncol <- pluck(new_grid_properties, "columnCount") %||% s$grid_columns
 
@@ -90,10 +105,12 @@ sheet_resize <- function(ss,
   invisible(ssid)
 }
 
-prepare_resize_request <- function(sheet_info,
-                                   nrow_needed,
-                                   ncol_needed,
-                                   exact = FALSE) {
+prepare_resize_request <- function(
+  sheet_info,
+  nrow_needed,
+  ncol_needed,
+  exact = FALSE
+) {
   nrow_sheet <- sheet_info$grid_rows
   ncol_sheet <- sheet_info$grid_columns
 
@@ -107,7 +124,8 @@ prepare_resize_request <- function(sheet_info,
   } else {
     bureq_set_grid_properties(
       sheetId = sheet_info$id,
-      nrow = new_dims$nrow, ncol = new_dims$ncol,
+      nrow = new_dims$nrow,
+      ncol = new_dims$ncol,
       frozenRowCount = NULL
     )
   }

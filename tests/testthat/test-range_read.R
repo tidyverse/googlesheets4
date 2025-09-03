@@ -6,13 +6,13 @@ test_that("read_sheet() works and discovers reasonable types", {
     test_sheet("googlesheets4-col-types"),
     sheet = "lots-of-types"
   )
-  expect_type(    dat$logical,   "logical")
-  expect_type(    dat$character, "character")
-  expect_type(    dat$factor,    "character")
-  expect_type(    dat$integer,   "double")
-  expect_type(    dat$double,    "double")
-  expect_s3_class(dat$date,      "POSIXct")
-  expect_s3_class(dat$datetime,  "POSIXct")
+  expect_type(dat$logical, "logical")
+  expect_type(dat$character, "character")
+  expect_type(dat$factor, "character")
+  expect_type(dat$integer, "double")
+  expect_type(dat$double, "double")
+  expect_s3_class(dat$date, "POSIXct")
+  expect_s3_class(dat$datetime, "POSIXct")
 })
 
 test_that("read_sheet() enacts user-specified coltypes", {
@@ -24,13 +24,13 @@ test_that("read_sheet() enacts user-specified coltypes", {
     sheet = "lots-of-types",
     col_types = "lccinDT"
   )
-  expect_type(    dat$logical,   "logical")
-  expect_type(    dat$character, "character")
-  expect_type(    dat$factor,    "character") # TODO: revisit when 'f' means factor
-  expect_type(    dat$integer,   "integer")
-  expect_type(    dat$double,    "double")
-  expect_s3_class(dat$date,      "Date")
-  expect_s3_class(dat$datetime,  "POSIXct")
+  expect_type(dat$logical, "logical")
+  expect_type(dat$character, "character")
+  expect_type(dat$factor, "character") # TODO: revisit when 'f' means factor
+  expect_type(dat$integer, "integer")
+  expect_type(dat$double, "double")
+  expect_s3_class(dat$date, "Date")
+  expect_s3_class(dat$datetime, "POSIXct")
 })
 
 test_that("read_sheet() can skip columns", {
@@ -43,8 +43,8 @@ test_that("read_sheet() can skip columns", {
     col_types = "?-_-_-?"
   )
   expect_equal(ncol(dat), 2)
-  expect_type(    dat$logical,   "logical")
-  expect_s3_class(dat$datetime,  "POSIXct")
+  expect_type(dat$logical, "logical")
+  expect_s3_class(dat$datetime, "POSIXct")
 })
 
 # https://github.com/tidyverse/googlesheets4/issues/73
@@ -86,7 +86,8 @@ test_that("read_sheet() honors `na`", {
   dat <- read_sheet(
     test_sheet("googlesheets4-col-types"),
     sheet = "NAs",
-    na = character(), trim_ws = FALSE
+    na = character(),
+    trim_ws = FALSE
   )
   expect_equal(dat$space[2], " ")
 
@@ -156,10 +157,19 @@ test_that("standardise_ctypes() understands and requires readr shortcodes", {
   expect_equal(
     standardise_ctypes(good),
     c(
-      `_` = "COL_SKIP", `-` = "COL_SKIP", l = "CELL_LOGICAL",
-      i = "CELL_INTEGER", d = "CELL_NUMERIC", n = "CELL_NUMERIC",
-      D = "CELL_DATE", t = "CELL_TIME", T = "CELL_DATETIME", c = "CELL_TEXT",
-      C = "COL_CELL", L = "COL_LIST", `?` = "COL_GUESS"
+      `_` = "COL_SKIP",
+      `-` = "COL_SKIP",
+      l = "CELL_LOGICAL",
+      i = "CELL_INTEGER",
+      d = "CELL_NUMERIC",
+      n = "CELL_NUMERIC",
+      D = "CELL_DATE",
+      t = "CELL_TIME",
+      T = "CELL_DATETIME",
+      c = "CELL_TEXT",
+      C = "COL_CELL",
+      L = "COL_LIST",
+      `?` = "COL_GUESS"
     )
   )
   expect_error(standardise_ctypes("abe"), "Unrecognized")

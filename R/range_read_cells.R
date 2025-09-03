@@ -43,20 +43,25 @@
 #'   cell_data = "full",
 #'   discard_empty = FALSE
 #' )
-range_read_cells <- function(ss,
-                             sheet = NULL,
-                             range = NULL,
-                             skip = 0, n_max = Inf,
-                             cell_data = c("default", "full"),
-                             discard_empty = TRUE) {
+range_read_cells <- function(
+  ss,
+  sheet = NULL,
+  range = NULL,
+  skip = 0,
+  n_max = Inf,
+  cell_data = c("default", "full"),
+  discard_empty = TRUE
+) {
   cell_data <- match.arg(cell_data)
 
   # range spec params are checked inside get_cells():
   # ss, sheet, range, skip, n_max
   out <- get_cells(
     ss = ss,
-    sheet = sheet, range = range,
-    skip = skip, n_max = n_max,
+    sheet = sheet,
+    range = range,
+    skip = skip,
+    n_max = n_max,
     col_names_in_sheet = FALSE,
     detail_level = cell_data,
     discard_empty = discard_empty

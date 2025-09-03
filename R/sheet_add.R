@@ -50,11 +50,7 @@
 #' # clean up
 #' gs4_find("add-sheets-to-me") %>%
 #'   googledrive::drive_trash()
-sheet_add <- function(ss,
-                      sheet = NULL,
-                      ...,
-                      .before = NULL,
-                      .after = NULL) {
+sheet_add <- function(ss, sheet = NULL, ..., .before = NULL, .after = NULL) {
   maybe_character(sheet)
   ssid <- as_sheets_id(ss)
   x <- gs4_get(ssid)
@@ -72,9 +68,7 @@ sheet_add <- function(ss,
   invisible(ssid)
 }
 
-sheet_add_impl_ <- function(ssid,
-                            sheet_name = NULL,
-                            index = NULL, ...) {
+sheet_add_impl_ <- function(ssid, sheet_name = NULL, index = NULL, ...) {
   sheet_name <- sheet_name %||% list(NULL)
   dots <- list2(...)
   requests <- map(
@@ -95,10 +89,12 @@ sheet_add_impl_ <- function(ssid,
   new_googlesheets4_spreadsheet(resp$updatedSpreadsheet)
 }
 
-resolve_index <- function(sheets_df,
-                          .before = NULL,
-                          .after = NULL,
-                          call = caller_env()) {
+resolve_index <- function(
+  sheets_df,
+  .before = NULL,
+  .after = NULL,
+  call = caller_env()
+) {
   if (is.null(.before) && is.null(.after)) {
     return(NULL)
   }
@@ -121,8 +117,10 @@ make_addSheet <- function(title = NULL, index = NULL, dots = list()) {
     return(list(addSheet = NULL))
   }
 
-  list(addSheet = new(
-    "AddSheetRequest",
-    properties = new("SheetProperties", title = title, index = index, !!!dots)
-  ))
+  list(
+    addSheet = new(
+      "AddSheetRequest",
+      properties = new("SheetProperties", title = title, index = index, !!!dots)
+    )
+  )
 }

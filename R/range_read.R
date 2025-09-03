@@ -85,14 +85,19 @@
 #'   range = "A:D",
 #'   col_types = "ccid"
 #' )
-range_read <- function(ss,
-                       sheet = NULL,
-                       range = NULL,
-                       col_names = TRUE, col_types = NULL,
-                       na = "", trim_ws = TRUE,
-                       skip = 0, n_max = Inf,
-                       guess_max = min(1000, n_max),
-                       .name_repair = "unique") {
+range_read <- function(
+  ss,
+  sheet = NULL,
+  range = NULL,
+  col_names = TRUE,
+  col_types = NULL,
+  na = "",
+  trim_ws = TRUE,
+  skip = 0,
+  n_max = Inf,
+  guess_max = min(1000, n_max),
+  .name_repair = "unique"
+) {
   # check these first, so we don't download cells in vain
   col_spec <- standardise_col_spec(col_names, col_types, call = current_env())
   check_character(na)
@@ -103,14 +108,19 @@ range_read <- function(ss,
   # ss, sheet, range, skip, n_max
   df <- get_cells(
     ss = ss,
-    sheet = sheet, range = range,
+    sheet = sheet,
+    range = range,
     col_names_in_sheet = isTRUE(col_spec$col_names),
-    skip = skip, n_max = n_max
+    skip = skip,
+    n_max = n_max
   )
 
   spread_sheet_impl_(
     df,
-    col_spec = col_spec, na = na, trim_ws = trim_ws, guess_max = guess_max,
+    col_spec = col_spec,
+    na = na,
+    trim_ws = trim_ws,
+    guess_max = guess_max,
     .name_repair = .name_repair
   )
 }
@@ -145,11 +155,15 @@ read_sheet <- range_read
 #'
 #' # ^^ gets same result as ...
 #' read_sheet(gs4_example("mini-gap"))
-spread_sheet <- function(df,
-                         col_names = TRUE, col_types = NULL,
-                         na = "", trim_ws = TRUE,
-                         guess_max = min(1000, max(df$row)),
-                         .name_repair = "unique") {
+spread_sheet <- function(
+  df,
+  col_names = TRUE,
+  col_types = NULL,
+  na = "",
+  trim_ws = TRUE,
+  guess_max = min(1000, max(df$row)),
+  .name_repair = "unique"
+) {
   col_spec <- standardise_col_spec(col_names, col_types, call = current_env())
   check_character(na)
   check_bool(trim_ws)
@@ -157,19 +171,26 @@ spread_sheet <- function(df,
 
   spread_sheet_impl_(
     df,
-    col_spec = col_spec, na = na, trim_ws = trim_ws, guess_max = guess_max,
+    col_spec = col_spec,
+    na = na,
+    trim_ws = trim_ws,
+    guess_max = guess_max,
     .name_repair = .name_repair
   )
 }
 
-spread_sheet_impl_ <- function(df,
-                               col_spec = list(
-                                 col_names = TRUE, col_types = NULL
-                               ),
-                               na = "", trim_ws = TRUE,
-                               guess_max = min(1000, max(df$row)),
-                               .name_repair = "unique",
-                               call = caller_env()) {
+spread_sheet_impl_ <- function(
+  df,
+  col_spec = list(
+    col_names = TRUE,
+    col_types = NULL
+  ),
+  na = "",
+  trim_ws = TRUE,
+  guess_max = min(1000, max(df$row)),
+  .name_repair = "unique",
+  call = caller_env()
+) {
   if (nrow(df) == 0) {
     return(tibble::tibble())
   }
@@ -235,7 +256,10 @@ spread_sheet_impl_ <- function(df,
     df_split,
     ctypes,
     make_column,
-    na = na, trim_ws = trim_ws, nr = nr, guess_max = guess_max
+    na = na,
+    trim_ws = trim_ws,
+    nr = nr,
+    guess_max = guess_max
   ) %>%
     set_names(col_names) %>%
     discard(is.null)
@@ -277,7 +301,8 @@ standardise_ctypes <- function(col_types, call = caller_env()) {
   check_string(col_types, call = call)
 
   if (identical(col_types, "")) {
-    gs4_abort("
+    gs4_abort(
+      "
       {.arg col_types}, when provided, must be a string that contains at \\
       least one readr-style shortcode.",
       call = call

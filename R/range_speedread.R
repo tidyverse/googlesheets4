@@ -52,11 +52,7 @@
 #'
 #' # clean up
 #' googledrive::drive_trash(ss)
-range_speedread <- function(ss,
-                            sheet = NULL,
-                            range = NULL,
-                            skip = 0,
-                            ...) {
+range_speedread <- function(ss, sheet = NULL, range = NULL, skip = 0, ...) {
   check_installed("readr", "to use `range_speedread()`.")
 
   ssid <- as_sheets_id(ss)
@@ -75,8 +71,10 @@ range_speedread <- function(ss,
   range_msg <- ""
   range_spec <- as_range_spec(
     range,
-    sheet = sheet, skip = skip,
-    sheets_df = x$sheets, nr_df = x$named_ranges
+    sheet = sheet,
+    skip = skip,
+    sheets_df = x$sheets,
+    nr_df = x$named_ranges
   )
   if (!is.null(range_spec$named_range)) {
     gs4_abort("{.fun range_speedread} cannot work with a named range.")
@@ -93,9 +91,11 @@ range_speedread <- function(ss,
     params[["gid"]] <- s$id
     sheet_msg <- ", sheet {.w_sheet {range_spec$sheet_name}}"
   }
-  msg <- glue("
+  msg <- glue(
+    "
     Reading from {.s_sheet {x$name}}<<sheet_msg>><<range_msg>>.",
-    .open = "<<", .close = ">>"
+    .open = "<<",
+    .close = ">>"
   )
   gs4_bullets(c(v = msg))
 

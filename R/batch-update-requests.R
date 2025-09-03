@@ -1,10 +1,12 @@
 # https://developers.google.com/sheets/api/samples/formatting#format_a_header_row
 # returns: a wrapped instance of RepeatCellRequest
-bureq_header_row <- function(row = 1,
-                             sheetId = NULL,
-                             backgroundColor = 0.92,
-                             horizontalAlignment = "CENTER",
-                             bold = TRUE) {
+bureq_header_row <- function(
+  row = 1,
+  sheetId = NULL,
+  backgroundColor = 0.92,
+  horizontalAlignment = "CENTER",
+  bold = TRUE
+) {
   row <- row - 1 # indices are zero-based; intervals are half open: [start, end)
   grid_range <- new(
     "GridRange",
@@ -19,9 +21,9 @@ bureq_header_row <- function(row = 1,
     backgroundColor = new(
       "Color",
       # I want a shade of grey
-      red   = backgroundColor,
+      red = backgroundColor,
       green = backgroundColor,
-      blue  = backgroundColor
+      blue = backgroundColor
     ),
     textFormat = new(
       "TextFormat",
@@ -35,30 +37,37 @@ bureq_header_row <- function(row = 1,
   # example: Color's other child, alpha
   fields <- "userEnteredFormat(horizontalAlignment,backgroundColor,textFormat)"
 
-  list(repeatCell = new(
-    "RepeatCellRequest",
-    range = grid_range,
-    cell = cell_data,
-    fields = fields
-  ))
+  list(
+    repeatCell = new(
+      "RepeatCellRequest",
+      range = grid_range,
+      cell = cell_data,
+      fields = fields
+    )
+  )
 }
 
 # based on this, except I clear everything by sending 'fields = "*"'
 # https://developers.google.com/sheets/api/samples/sheet#clear_a_sheet_of_all_values_while_preserving_formats
 # returns: a wrapped instance of RepeatCellRequest
 bureq_clear_sheet <- function(sheetId) {
-  list(repeatCell = new(
-    "RepeatCellRequest",
-    range = new("GridRange", sheetId = sheetId),
-    fields = "*"
-  ))
+  list(
+    repeatCell = new(
+      "RepeatCellRequest",
+      range = new("GridRange", sheetId = sheetId),
+      fields = "*"
+    )
+  )
 }
 
 # https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest
-bureq_set_grid_properties <- function(sheetId,
-                                      nrow = NULL, ncol = NULL,
-                                      frozenRowCount = 1,
-                                      frozenColumnCount = NULL) {
+bureq_set_grid_properties <- function(
+  sheetId,
+  nrow = NULL,
+  ncol = NULL,
+  frozenRowCount = 1,
+  frozenColumnCount = NULL
+) {
   gp <- new("GridProperties", rowCount = nrow, columnCount = ncol)
   if (!is.null(frozenRowCount) && frozenRowCount > 0) {
     gp <- patch(gp, frozenRowCount = frozenRowCount)
@@ -71,19 +80,23 @@ bureq_set_grid_properties <- function(sheetId,
   }
 
   sp <- new("SheetProperties", sheetId = sheetId, gridProperties = gp)
-  list(updateSheetProperties = new(
-    "UpdateSheetPropertiesRequest",
-    properties = sp,
-    fields = gargle::field_mask(sp)
-  ))
+  list(
+    updateSheetProperties = new(
+      "UpdateSheetPropertiesRequest",
+      properties = sp,
+      fields = gargle::field_mask(sp)
+    )
+  )
 }
 
 # https://developers.google.com/sheets/api/samples/rowcolumn#automatically_resize_a_column
 # https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#AutoResizeDimensionsRequest
-bureq_auto_resize_dimensions <- function(sheetId,
-                                         dimension = c("COLUMNS", "ROWS"),
-                                         start = NULL,
-                                         end = NULL) {
+bureq_auto_resize_dimensions <- function(
+  sheetId,
+  dimension = c("COLUMNS", "ROWS"),
+  start = NULL,
+  end = NULL
+) {
   dimension <- match.arg(dimension)
   # https://developers.google.com/sheets/api/reference/rest/v4/DimensionRange
   # A range along a single dimension on a sheet. All indexes are zero-based.
@@ -102,8 +115,10 @@ bureq_auto_resize_dimensions <- function(sheetId,
     check_non_negative_integer(end)
     dimension_range <- patch(dimension_range, endIndex = end)
   }
-  list(autoResizeDimensions = new(
-    "AutoResizeDimensionsRequest",
-    dimensions = dimension_range
-  ))
+  list(
+    autoResizeDimensions = new(
+      "AutoResizeDimensionsRequest",
+      dimensions = dimension_range
+    )
+  )
 }

@@ -39,15 +39,16 @@ as_Sheet.data.frame <- function(x, ...) {
     sp,
     gridProperties = new(
       "GridProperties",
-      rowCount       = nrow(x) + 1, # make room for column names
-      columnCount    = ncol(x),
+      rowCount = nrow(x) + 1, # make room for column names
+      columnCount = ncol(x),
     )
   )
 
   new(
     "Sheet",
     properties = sp,
-    data = list( # an array of instances of GridData
+    data = list(
+      # an array of instances of GridData
       list(
         rowData = as_RowData(x) # an array of instances of RowData
       )

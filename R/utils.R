@@ -81,11 +81,14 @@ maybe_character <- function(x, arg = caller_arg(x), call = caller_env()) {
   }
 }
 
-check_non_negative_integer <- function(i,
-                                       arg = caller_arg(i),
-                                       call = caller_env()) {
-  if (length(i) != 1 || !is.numeric(i) ||
-    !is_integerish(i) || is.na(i) || i < 0) {
+check_non_negative_integer <- function(
+  i,
+  arg = caller_arg(i),
+  call = caller_env()
+) {
+  if (
+    length(i) != 1 || !is.numeric(i) || !is_integerish(i) || is.na(i) || i < 0
+  ) {
     gs4_abort(
       c(
         "{.arg {arg}} must be a positive integer:",
@@ -97,9 +100,11 @@ check_non_negative_integer <- function(i,
   i
 }
 
-maybe_non_negative_integer <- function(i,
-                                       arg = caller_arg(i),
-                                       call = caller_env()) {
+maybe_non_negative_integer <- function(
+  i,
+  arg = caller_arg(i),
+  call = caller_env()
+) {
   if (is.null(i)) {
     i
   } else {
@@ -107,9 +112,7 @@ maybe_non_negative_integer <- function(i,
   }
 }
 
-check_bool <- function(bool,
-                       arg = caller_arg(bool),
-                       call = caller_env()) {
+check_bool <- function(bool, arg = caller_arg(bool), call = caller_env()) {
   if (!is_bool(bool)) {
     gs4_abort(
       "{.arg {arg}} must be either {.code TRUE} or {.code FALSE}.",
@@ -119,9 +122,7 @@ check_bool <- function(bool,
   bool
 }
 
-maybe_bool <- function(bool,
-                       arg = caller_arg(bool),
-                       call = caller_env()) {
+maybe_bool <- function(bool, arg = caller_arg(bool), call = caller_env()) {
   if (is.null(bool)) {
     bool
   } else {

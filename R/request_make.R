@@ -46,16 +46,24 @@
 #' @family low-level API functions
 request_make <- function(x, ..., encode = "json") {
   gargle::request_retry(
-    x, ...,
-    encode = encode, user_agent = gs4_user_agent()
+    x,
+    ...,
+    encode = encode,
+    user_agent = gs4_user_agent()
   )
 }
 
 gs4_user_agent <- function() {
   httr::user_agent(paste0(
-    "googlesheets4/", utils::packageVersion("googlesheets4"), " ",
-    "(GPN:RStudio; )", " ",
-    "gargle/", utils::packageVersion("gargle"), " ",
-    "httr/", utils::packageVersion("httr")
+    "googlesheets4/",
+    utils::packageVersion("googlesheets4"),
+    " ",
+    "(GPN:RStudio; )",
+    " ",
+    "gargle/",
+    utils::packageVersion("gargle"),
+    " ",
+    "httr/",
+    utils::packageVersion("httr")
   ))
 }

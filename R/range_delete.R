@@ -51,10 +51,7 @@
 #' # clean up
 #' gs4_find("range-delete-example") %>%
 #'   googledrive::drive_trash()
-range_delete <- function(ss,
-                         sheet = NULL,
-                         range,
-                         shift = NULL) {
+range_delete <- function(ss, sheet = NULL, range, shift = NULL) {
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   check_range(range)
@@ -63,10 +60,7 @@ range_delete <- function(ss,
     shift_dimension <- NULL
   } else {
     shift <- match.arg(shift, c("up", "left"))
-    shift_dimension <- switch(shift,
-      up = "ROWS",
-      left = "COLUMNS"
-    )
+    shift_dimension <- switch(shift, up = "ROWS", left = "COLUMNS")
   }
 
   x <- gs4_get(ssid)
@@ -76,15 +70,19 @@ range_delete <- function(ss,
   range_spec <- as_range_spec(
     range,
     sheet = sheet,
-    sheets_df = x$sheets, nr_df = x$named_ranges
+    sheets_df = x$sheets,
+    nr_df = x$named_ranges
   )
   if (is.null(range_spec$cell_range) && is.null(range_spec$cell_limits)) {
     gs4_abort("{.fun range_delete} requires a cell range.")
   }
-  range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
+  range_spec$sheet_name <- range_spec$sheet_name %||%
+    first_visible_name(x$sheets)
   # as_GridRange() throws an error for a named range
   grid_range <- as_GridRange(range_spec)
-  gs4_bullets(c(v = "Deleting cells in sheet {.w_sheet {range_spec$sheet_name}}."))
+  gs4_bullets(c(
+    v = "Deleting cells in sheet {.w_sheet {range_spec$sheet_name}}."
+  ))
 
   # form batch update request --------------------------------------------------
   shift_dimension <- shift_dimension %||% determine_shift(grid_range)
@@ -96,11 +94,13 @@ range_delete <- function(ss,
   }
 
   # form batch update request --------------------------------------------------
-  delete_req <- list(deleteRange = new(
-    "DeleteRangeRequest",
-    range = grid_range,
-    shiftDimension = shift_dimension
-  ))
+  delete_req <- list(
+    deleteRange = new(
+      "DeleteRangeRequest",
+      range = grid_range,
+      shiftDimension = shift_dimension
+    )
+  )
 
   # do it ----------------------------------------------------------------------
   req <- request_generate(
@@ -121,15 +121,18 @@ determine_shift <- function(gr, call = caller_env()) {
   bounded_on_bottom <- !is.null(gr$endRowIndex) && notNA(gr$endRowIndex)
   bounded_on_right <- !is.null(gr$endColumnIndex) && notNA(gr$endColumnIndex)
 
-  if (bounded_on_bottom && bounded_on_right) { # user must specify shift
+  if (bounded_on_bottom && bounded_on_right) {
+    # user must specify shift
     return(NULL)
   }
 
-  if (bounded_on_bottom) { # and not bounded_on_right
+  if (bounded_on_bottom) {
+    # and not bounded_on_right
     return("ROWS")
   }
 
-  if (bounded_on_right) { # and not bounded_on_bottom
+  if (bounded_on_right) {
+    # and not bounded_on_bottom
     return("COLUMNS")
   }
 

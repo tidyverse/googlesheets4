@@ -186,15 +186,15 @@ test_that("as_sheets_range() deals when one of lr limits is missing", {
 # commenting out, not skipping, because this is the only with_mock()
 
 #test_that("as_sheets_range() errors for limits that should be fixed by resolve_limits()", {
-  # I think cellranger::cell_limits() should do much less.
-  # Already planning here for such a change there.
-  # Here's a very crude version of what I have in mind.
-  # cl <- function(ul, lr) {
-  #   structure(
-  #     list(ul = as.integer(ul), lr = as.integer(lr), sheet = NA_character_),
-  #     class = c("cell_limits", "list")
-  #   )
-  # }
+# I think cellranger::cell_limits() should do much less.
+# Already planning here for such a change there.
+# Here's a very crude version of what I have in mind.
+# cl <- function(ul, lr) {
+#   structure(
+#     list(ul = as.integer(ul), lr = as.integer(lr), sheet = NA_character_),
+#     class = c("cell_limits", "list")
+#   )
+# }
 #   with_mock(
 #     resolve_limits = function(x) x,
 #     `cellranger:::cell_limits` = function(ul, lr, sheet) cl(ul, lr), {

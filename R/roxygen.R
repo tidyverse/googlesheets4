@@ -2,7 +2,8 @@
 
 ### ss ----
 param_ss <- function(..., pname = "ss") {
-  template <- glue("
+  template <- glue(
+    "
     @param {pname} \\
     Something that identifies a Google Sheet:
     * its file id as a string or [`drive_id`][googledrive::as_id]
@@ -12,7 +13,8 @@ param_ss <- function(..., pname = "ss") {
     * an instance of `googlesheets4_spreadsheet`, which is what [gs4_get()]
       returns
 
-    Processed through [as_sheets_id()].")
+    Processed through [as_sheets_id()]."
+  )
   dots <- list2(...)
   if (length(dots) > 0) {
     template <- c(template, dots)
@@ -22,12 +24,14 @@ param_ss <- function(..., pname = "ss") {
 
 ### sheet ----
 param_sheet <- function(..., action = "act on", pname = "sheet") {
-  template <- glue("
+  template <- glue(
+    "
     @param {pname} \\
     Sheet to {action}, in the sense of \"worksheet\" or \"tab\". \\
     You can identify a sheet by name, with a string, or by position, \\
     with a number.
-    ")
+    "
+  )
   dots <- list2(...)
   if (length(dots) > 0) {
     template <- c(template, dots)
@@ -36,11 +40,13 @@ param_sheet <- function(..., action = "act on", pname = "sheet") {
 }
 
 param_before_after <- function(sheet_text) {
-  glue("
+  glue(
+    "
     @param .before,.after \\
     Optional specification of where to put the new {sheet_text}. \\
     Specify, at most, one of `.before` and `.after`. Refer to an existing \\
     sheet by name (via a string) or by position (via a number). If \\
     unspecified, Sheets puts the new {sheet_text} at the end.
-    ")
+    "
+  )
 }

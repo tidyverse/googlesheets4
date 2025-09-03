@@ -55,11 +55,13 @@
 #' # clean up
 #' gs4_find("range-flood-demo") %>%
 #'   googledrive::drive_trash()
-range_flood <- function(ss,
-                        sheet = NULL,
-                        range = NULL,
-                        cell = NULL,
-                        reformat = TRUE) {
+range_flood <- function(
+  ss,
+  sheet = NULL,
+  range = NULL,
+  cell = NULL,
+  reformat = TRUE
+) {
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   check_range(range)
@@ -72,9 +74,11 @@ range_flood <- function(ss,
   range_spec <- as_range_spec(
     range,
     sheet = sheet,
-    sheets_df = x$sheets, nr_df = x$named_ranges
+    sheets_df = x$sheets,
+    nr_df = x$named_ranges
   )
-  range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
+  range_spec$sheet_name <- range_spec$sheet_name %||%
+    first_visible_name(x$sheets)
   s <- lookup_sheet(range_spec$sheet_name, sheets_df = x$sheets)
   gs4_bullets(c(v = "Editing sheet {.w_sheet {range_spec$sheet_name}}."))
 
@@ -84,16 +88,22 @@ range_flood <- function(ss,
     fields <- gargle::field_mask(cell)
   } else {
     cell <- as_CellData(cell %||% NA)[[1]]
-    fields <- if (reformat) "userEnteredValue,userEnteredFormat" else "userEnteredValue"
+    fields <- if (reformat) {
+      "userEnteredValue,userEnteredFormat"
+    } else {
+      "userEnteredValue"
+    }
   }
 
   # form batch update request --------------------------------------------------
-  repeat_req <- list(repeatCell = new(
-    "RepeatCellRequest",
-    range = as_GridRange(range_spec),
-    cell = cell,
-    fields = fields
-  ))
+  repeat_req <- list(
+    repeatCell = new(
+      "RepeatCellRequest",
+      range = as_GridRange(range_spec),
+      cell = cell,
+      fields = fields
+    )
+  )
 
   # do it ----------------------------------------------------------------------
   req <- request_generate(
@@ -111,10 +121,7 @@ range_flood <- function(ss,
 
 #' @rdname range_flood
 #' @export
-range_clear <- function(ss,
-                        sheet = NULL,
-                        range = NULL,
-                        reformat = TRUE) {
+range_clear <- function(ss, sheet = NULL, range = NULL, reformat = TRUE) {
   range_flood(
     ss = ss,
     sheet = sheet,

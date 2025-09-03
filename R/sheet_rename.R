@@ -29,9 +29,7 @@
 #' # clean up
 #' gs4_find("sheet-rename-demo") %>%
 #'   googledrive::drive_trash()
-sheet_rename <- function(ss,
-                         sheet = NULL,
-                         new_name) {
+sheet_rename <- function(ss, sheet = NULL, new_name) {
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   check_string(new_name)

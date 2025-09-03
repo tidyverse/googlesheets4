@@ -103,9 +103,7 @@
 #' # clean up
 #' gs4_find("range-add-protection-example") %>%
 #'   googledrive::drive_trash()
-range_add_protection <- function(ss,
-                                 sheet = NULL,
-                                 range = NULL, ...) {
+range_add_protection <- function(ss, sheet = NULL, range = NULL, ...) {
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   check_range(range)
@@ -117,10 +115,12 @@ range_add_protection <- function(ss,
   range_spec <- as_range_spec(
     range,
     sheet = sheet,
-    sheets_df = x$sheets, nr_df = x$named_ranges
+    sheets_df = x$sheets,
+    nr_df = x$named_ranges
   )
   if (is.null(range_spec$named_range)) {
-    range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
+    range_spec$sheet_name <- range_spec$sheet_name %||%
+      first_visible_name(x$sheets)
     gs4_bullets(c(
       v = "Protecting cells on sheet: {.w_sheet {range_spec$sheet_name}}."
     ))
@@ -131,10 +131,12 @@ range_add_protection <- function(ss,
   }
 
   # form batch update request --------------------------------------------------
-  prot_req <- list(addProtectedRange = new(
-    "AddProtectedRangeRequest",
-    protectedRange = new_ProtectedRange(range_spec, ...)
-  ))
+  prot_req <- list(
+    addProtectedRange = new(
+      "AddProtectedRangeRequest",
+      protectedRange = new_ProtectedRange(range_spec, ...)
+    )
+  )
 
   # do it ----------------------------------------------------------------------
   req <- request_generate(
@@ -157,7 +159,12 @@ new_ProtectedRange <- function(range_spec, ...) {
   } else {
     out <- new(
       "ProtectedRange",
-      namedRangeId = vlookup(range_spec$named_range, range_spec$nr_df, "name", "id")
+      namedRangeId = vlookup(
+        range_spec$named_range,
+        range_spec$nr_df,
+        "name",
+        "id"
+      )
     )
   }
   out <- patch(out, editors = new("Editors", domainUsersCanEdit = FALSE))
@@ -177,11 +184,13 @@ range_update_protection <- function(ss, ...) {
   # I have no idea why this is necessary, but it's the only way I've been able
   # to updated editors
   mask <- sub("editors.users", "editors", mask)
-  prot_req <- list(updateProtectedRange = new(
-    "UpdateProtectedRangeRequest",
-    protectedRange = protected_range,
-    fields = mask
-  ))
+  prot_req <- list(
+    updateProtectedRange = new(
+      "UpdateProtectedRangeRequest",
+      protectedRange = protected_range,
+      fields = mask
+    )
+  )
 
   # do it ----------------------------------------------------------------------
   req <- request_generate(
@@ -204,10 +213,12 @@ range_delete_protection <- function(ss, id) {
   gs4_bullets(c(v = "Editing {.s_sheet {x$name}}."))
 
   # form batch update request --------------------------------------------------
-  prot_req <- list(deleteProtectedRange = new(
-    "DeleteProtectedRangeRequest",
-    protectedRangeId = id
-  ))
+  prot_req <- list(
+    deleteProtectedRange = new(
+      "DeleteProtectedRangeRequest",
+      protectedRangeId = id
+    )
+  )
 
   # do it ----------------------------------------------------------------------
   req <- request_generate(

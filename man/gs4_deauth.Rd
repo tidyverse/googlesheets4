@@ -18,7 +18,7 @@ via \code{\link[=gs4_auth_configure]{gs4_auth_configure()}} and retrieve that ke
 In the absence of a user-configured key, a built-in default key is used.
 }
 \examples{
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 gs4_deauth()
 gs4_user()
 
@@ -29,8 +29,8 @@ gs4_example("deaths") \%>\%
 }
 \seealso{
 Other auth functions: 
-\code{\link{gs4_auth_configure}()},
 \code{\link{gs4_auth}()},
+\code{\link{gs4_auth_configure}()},
 \code{\link{gs4_scopes}()}
 }
 \concept{auth functions}

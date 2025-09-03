@@ -29,7 +29,7 @@ example Sheets. See \code{vignette("example-sheets", package = "googlesheets4")}
 for more.
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 gs4_examples()
 gs4_examples("gap")
 

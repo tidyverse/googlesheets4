@@ -32,7 +32,7 @@ returns metadata that exists for any file on Drive.
 }
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 gs4_get(gs4_example("mini-gap"))
 \dontshow{\}) # examplesIf}
 }

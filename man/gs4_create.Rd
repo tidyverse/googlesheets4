@@ -27,7 +27,7 @@ Optionally, you can also provide names and/or data for the initial set of
 as described in \code{\link[=sheet_write]{sheet_write()}}.
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 gs4_create("gs4-create-demo-1")
 
 gs4_create("gs4-create-demo-2", locale = "en_CA")

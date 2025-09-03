@@ -36,7 +36,7 @@ The input \code{ss}, as an instance of \code{\link{sheets_id}}
 Changes the number of rows and/or columns in a (work)sheet.
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 # create a Sheet with the default initial worksheet
 (ss <- gs4_create("sheet-resize-demo"))
 

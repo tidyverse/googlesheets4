@@ -136,6 +136,7 @@ as_CellData.POSIXct <- function(x, .na = NULL) {
 
 # Currently (overly) focused on userEnteredValue, because I am thinking about
 # writing. But with a reading focus, one would want to see effectiveValue.
+#' @export
 format.googlesheets4_schema_CellData <- function(x, ...) {
   # TODO: convey something about userEnteredFormat?
   user_entered_value <- pluck(x, "userEnteredValue")
@@ -147,6 +148,7 @@ format.googlesheets4_schema_CellData <- function(x, ...) {
   as.character(glue("{nm}: {fval}"))
 }
 
+#' @export
 print.googlesheets4_schema_CellData <- function(x, ...) {
   header <- as.character(glue("<CellData>"))
   cat(c(header, format(x)), sep = "\n")

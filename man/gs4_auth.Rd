@@ -143,7 +143,7 @@ For details on the many ways to find a token, see
 To learn more about gargle options, see \link[gargle:gargle_options]{gargle::gargle_options}.
 }
 \examples{
-\dontshow{if (rlang::is_interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (rlang::is_interactive()) withAutoprint(\{ # examplesIf}
 # load/refresh existing credentials, if available
 # otherwise, go to browser for authentication and authorization
 gs4_auth()

@@ -37,7 +37,7 @@ Adds one or more (work)sheets to an existing (spread)Sheet. Note that sheet
 names must be unique.
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 ss <- gs4_create("add-sheets-to-me")
 
 # the only required argument is the target spreadsheet

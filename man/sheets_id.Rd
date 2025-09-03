@@ -19,11 +19,11 @@ as_sheets_id(x, ...)
 the Sheets API docs refer to as \code{spreadsheetId}.
 
 Any object of class \code{sheets_id} also has the \code{\link[googledrive:drive_id]{drive_id}}
-class, which is used by \link{googledrive} for the same purpose. This means you
-can provide a \code{sheets_id} to \link{googledrive} functions, in order to do anything
+class, which is used by \link[googledrive:googledrive-package]{googledrive::googledrive} for the same purpose. This means you
+can provide a \code{sheets_id} to \link[googledrive:googledrive-package]{googledrive::googledrive} functions, in order to do anything
 with your Sheet that has nothing to do with it being a spreadsheet. Examples:
 change the Sheet's name, parent folder, or permissions. Read more about using
-\link{googlesheets4} and \link{googledrive} together in \code{vignette("drive-and-sheets")}.
+\link{googlesheets4} and \link[googledrive:googledrive-package]{googledrive::googledrive} together in \code{vignette("drive-and-sheets")}.
 Note that a \code{sheets_id} object is intended to hold \strong{just one} id, while the
 parent class \code{drive_id} can be used for multiple ids.
 
@@ -46,7 +46,7 @@ characters", typically 44 characters long, in our experience. Example:
 \item A URL, from which we can excavate a spreadsheet or file id. Example:
 \code{"https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545"}.
 \item A one-row \code{\link[googledrive:dribble]{dribble}}, a "Drive tibble" used by the
-\link{googledrive} package. In general, a \code{dribble} can represent several
+\link[googledrive:googledrive-package]{googledrive::googledrive} package. In general, a \code{dribble} can represent several
 files, one row per file. Since googlesheets4 is not vectorized over
 spreadsheets, we are only prepared to accept a one-row \code{dribble}.
 \itemize{
@@ -61,7 +61,7 @@ this is an object of class \code{googlesheets4_spreadsheet}.
 }
 
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 mini_gap_id <- gs4_example("mini-gap")
 class(mini_gap_id)
 mini_gap_id

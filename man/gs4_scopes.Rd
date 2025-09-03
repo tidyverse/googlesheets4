@@ -45,8 +45,8 @@ gs4_scopes()
 details on the permissions for each scope.
 
 Other auth functions: 
-\code{\link{gs4_auth_configure}()},
 \code{\link{gs4_auth}()},
+\code{\link{gs4_auth_configure}()},
 \code{\link{gs4_deauth}()}
 }
 \concept{auth functions}

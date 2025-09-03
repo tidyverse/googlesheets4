@@ -20,7 +20,7 @@ is what you want most of the time when calling the Sheets API. The httr
 default is \code{"multipart"}. Other acceptable values are \code{"form"} and \code{"raw"}.}
 }
 \value{
-Object of class \code{response} from \link{httr}.
+Object of class \code{response} from \link[httr:httr-package]{httr::httr}.
 }
 \description{
 Low-level function to execute a Sheets API request. Most users should,

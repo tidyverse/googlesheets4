@@ -30,7 +30,7 @@ The input \code{ss}, as an instance of \code{\link{sheets_id}}
 Changes the name of a (work)sheet.
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 ss <- gs4_create(
   "sheet-rename-demo",
   sheets = list(cars = head(cars), chickwts = head(chickwts))

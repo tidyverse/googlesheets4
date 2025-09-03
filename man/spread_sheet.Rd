@@ -56,7 +56,7 @@ use and for testing. The flagship function \code{\link[=range_read]{range_read()
 \code{\link[=range_read_cells]{range_read_cells()}} + \code{spread_sheet()}.
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 df <- gs4_example("mini-gap") \%>\%
   range_read_cells()
 spread_sheet(df)

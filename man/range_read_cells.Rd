@@ -73,7 +73,7 @@ what most users are looking for, rather than \code{range_read_cells()}.
 really want raw cell data from the API, \code{range_read_cells()} is for you!
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 range_read_cells(gs4_example("deaths"), range = "arts_data")
 
 # if you want detailed and exhaustive cell data, do this

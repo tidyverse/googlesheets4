@@ -67,7 +67,7 @@ sends an auth token with the request, unless a previous call to
 \code{\link[=gs4_deauth]{gs4_deauth()}} has put googlesheets4 into a de-authorized state.
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 if (require("readr")) {
   # since cell type is not available, use readr's col type specification
   range_speedread(

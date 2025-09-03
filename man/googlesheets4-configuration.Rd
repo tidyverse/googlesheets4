@@ -55,7 +55,7 @@ by the gargle package, which consults several options:
 }
 
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 # message: "Creating new Sheet ..."
 (ss <- gs4_create("gs4-quiet-demo", sheets = "alpha"))
 

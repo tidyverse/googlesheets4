@@ -67,7 +67,7 @@ throughout the googlesheets4 package.
 \code{write_sheet()} and \code{sheet_write()} are equivalent and you can use either one.
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 df <- data.frame(
   x = 1:3,
   y = letters[1:3]

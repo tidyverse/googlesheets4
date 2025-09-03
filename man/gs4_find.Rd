@@ -22,7 +22,7 @@ function will emit an informational message if you are currently logged in
 with both googlesheets4 and googledrive, but as different users.
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 # see all your Sheets
 gs4_find()
 

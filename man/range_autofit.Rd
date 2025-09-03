@@ -40,7 +40,7 @@ from the current cell contents. This only affects the appearance of a sheet
 in the browser and doesn't affect its values or dimensions in any way.
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 dat <- tibble::tibble(
   fruit = c("date", "lime", "pear", "plum")
 )

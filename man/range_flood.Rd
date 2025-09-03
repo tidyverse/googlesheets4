@@ -52,7 +52,7 @@ clearing the cell value. Both functions, by default, also clear the format,
 but this can be specified via \code{reformat}.
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 # create a data frame to use as initial data
 df <- gs4_fodder(10)
 

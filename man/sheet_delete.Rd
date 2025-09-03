@@ -28,7 +28,7 @@ The input \code{ss}, as an instance of \code{\link{sheets_id}}
 Deletes one or more (work)sheets from a (spread)Sheet.
 }
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 ss <- gs4_create("delete-sheets-from-me")
 sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 

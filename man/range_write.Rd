@@ -97,7 +97,7 @@ and format are deleted.
 }
 
 \examples{
-\dontshow{if (gs4_has_token()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (gs4_has_token()) withAutoprint(\{ # examplesIf}
 # create a Sheet with some initial, empty (work)sheets
 (ss <- gs4_create("range-write-demo", sheets = c("alpha", "beta")))
 

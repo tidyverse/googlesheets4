@@ -7,11 +7,12 @@ make_column <- function(df, ctype, ..., nr, guess_max = min(1000, nr)) {
     return()
   }
   fodder <- rep_len(NA, length.out = nr)
-  column <- switch(ctype,
+  column <- switch(
+    ctype,
     ## NAs must be numeric in order to initialize datetimes with a timezone
-    CELL_DATE     = as_Date(as.numeric(fodder)),
+    CELL_DATE = as_Date(as.numeric(fodder)),
     ## TODO: time of day not really implemented yet
-    CELL_TIME     = as_POSIXct(as.numeric(fodder)),
+    CELL_TIME = as_POSIXct(as.numeric(fodder)),
     CELL_DATETIME = as_POSIXct(as.numeric(fodder)),
     COL_LIST = vector(mode = "list", length = nr),
     as.vector(fodder, mode = typeof(parsed))
@@ -36,7 +37,9 @@ resolve_col_type <- function(cell, ctype = "COL_GUESS") {
 
 gs4_parse <- function(x, ctype, ...) {
   stopifnot(is_string(ctype))
-  parse_fun <- switch(ctype,
+  # fmt: skip
+  parse_fun <- switch(
+    ctype,
     COL_SKIP      = as_skip,
     CELL_LOGICAL  = as_logical,
     CELL_INTEGER  = as_integer,
@@ -73,7 +76,8 @@ as_list <- function(cell, ...) {
 
 ## prepare to coerce to logical, integer, double
 cell_content <- function(cell, na = "", trim_ws = TRUE) {
-  switch(ctype(cell),
+  switch(
+    ctype(cell),
     CELL_BLANK = NA,
     CELL_LOGICAL = pluck(cell, "effectiveValue", "boolValue"),
     CELL_NUMERIC = pluck(cell, "effectiveValue", "numberValue"),
@@ -106,7 +110,8 @@ as_double <- function(cell, na = "", trim_ws = TRUE) {
 
 ## prepare to coerce to date, time, datetime
 cell_content_datetime <- function(cell, na = "", trim_ws = TRUE) {
-  switch(ctype(cell),
+  switch(
+    ctype(cell),
     CELL_BLANK = NA,
     CELL_LOGICAL = NA,
     CELL_NUMERIC = NA,
@@ -140,7 +145,6 @@ as_date <- function(cell, na = "", trim_ws = TRUE) {
 #     `*`(24 * 60 * 60) %>%
 #     as_POSIXct()
 # }
-
 
 ## prepare to coerce to character
 cell_content_chr <- function(cell, na = "", trim_ws = TRUE) {

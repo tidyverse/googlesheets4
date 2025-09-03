@@ -3,13 +3,13 @@ new_range_spec <- function(...) {
   l <- list2(...)
   structure(
     list(
-      sheet_name  = l$sheet_name  %||% NULL,
+      sheet_name = l$sheet_name %||% NULL,
       named_range = l$named_range %||% NULL,
-      cell_range  = l$cell_range  %||% NULL,
+      cell_range = l$cell_range %||% NULL,
       cell_limits = l$cell_limits %||% NULL,
-      shim        = FALSE,
-      sheets_df   = l$sheets_df   %||% NULL,
-      nr_df       = l$nr_df       %||% NULL
+      shim = FALSE,
+      sheets_df = l$sheets_df %||% NULL,
+      nr_df = l$nr_df %||% NULL
     ),
     # useful when debugging range specification, but otherwise this is TMI
     # .input = l$.input,
@@ -46,18 +46,23 @@ as_range_spec.default <- function(x, ...) {
 # Sheet1  A1:B2         ****
 # 3       A1:B2         ****
 #' @export
-as_range_spec.character <- function(x,
-                                    ...,
-                                    sheet = NULL,
-                                    skip = 0,
-                                    sheets_df = NULL,
-                                    nr_df = NULL) {
+as_range_spec.character <- function(
+  x,
+  ...,
+  sheet = NULL,
+  skip = 0,
+  sheets_df = NULL,
+  nr_df = NULL
+) {
   check_length_one(x)
 
   out <- new_range_spec(
-    sheets_df = sheets_df, nr_df = nr_df,
+    sheets_df = sheets_df,
+    nr_df = nr_df,
     .input = list(
-      sheet = sheet, range = x, skip = skip
+      sheet = sheet,
+      range = x,
+      skip = skip
     )
   )
 
@@ -67,7 +72,7 @@ as_range_spec.character <- function(x,
   if (notNA(m[[".match"]])) {
     out$sheet_name <- lookup_sheet_name(m$sheet, sheets_df)
     out$cell_range <- m$cell_range
-    out$shim       <- TRUE
+    out$shim <- TRUE
     return(out)
   }
 
@@ -115,11 +120,13 @@ as_range_spec.character <- function(x,
 #             >0    Express skip request in cell_limits object and re-dispatch.
 # Sheet1 / 2  >0    <same as previous>
 #' @export
-as_range_spec.NULL <- function(x,
-                               ...,
-                               sheet = NULL,
-                               skip = 0,
-                               sheets_df = NULL) {
+as_range_spec.NULL <- function(
+  x,
+  ...,
+  sheet = NULL,
+  skip = 0,
+  sheets_df = NULL
+) {
   out <- new_range_spec(
     sheets_df = sheets_df,
     .input = list(sheet = sheet, skip = skip)
@@ -134,7 +141,8 @@ as_range_spec.NULL <- function(x,
 
   as_range_spec(
     cell_rows(c(skip + 1, NA)),
-    sheet = sheet, sheets_df = sheets_df,
+    sheet = sheet,
+    sheets_df = sheets_df,
     shim = FALSE
   )
 }
@@ -151,11 +159,13 @@ as_range_spec.NULL <- function(x,
 # Sheet1 / 2  cell_limits   Resolve sheet name, make A1 range, send combined
 #                           result.
 #' @export
-as_range_spec.cell_limits <- function(x,
-                                      ...,
-                                      shim = TRUE,
-                                      sheet = NULL,
-                                      sheets_df = NULL) {
+as_range_spec.cell_limits <- function(
+  x,
+  ...,
+  shim = TRUE,
+  sheet = NULL,
+  sheets_df = NULL
+) {
   out <- new_range_spec(
     sheets_df = sheets_df,
     .input = list(sheet = sheet, range = x, shim = shim)

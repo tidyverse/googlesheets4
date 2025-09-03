@@ -23,9 +23,11 @@ check_against_schema <- function(x, schema = NULL, id = NA_character_) {
     .tidy_schemas[[id %|% id_from_class(x)]] %||%
     attr(x, "schema")
   if (is.null(schema)) {
-    gs4_abort("
+    gs4_abort(
+      "
       Trying to check an object of class {.cls {class(x)}}, \\
-      but can't get a schema.")
+      but can't get a schema."
+    )
   }
   stopifnot(is_dictionaryish(x))
   unexpected <- setdiff(names(x), schema$property)
@@ -56,8 +58,10 @@ patch <- function(x, ...) {
 
 #' @export
 patch.default <- function(x, ...) {
-  gs4_abort("
-    Don't know how to {.fun patch} an object of class {.cls {class(x)}}.")
+  gs4_abort(
+    "
+    Don't know how to {.fun patch} an object of class {.cls {class(x)}}."
+  )
 }
 
 #' @export

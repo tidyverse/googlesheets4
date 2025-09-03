@@ -30,8 +30,8 @@ NULL
 #' @export
 gs4_examples <- function(matches) {
   many_sheets(
-    needle    = matches,
-    haystack  = example_and_test_sheets("example"),
+    needle = matches,
+    haystack = example_and_test_sheets("example"),
     adjective = "example"
   )
 }
@@ -40,8 +40,8 @@ gs4_examples <- function(matches) {
 #' @export
 gs4_example <- function(matches) {
   one_sheet(
-    needle    = matches,
-    haystack  = example_and_test_sheets("example"),
+    needle = matches,
+    haystack = example_and_test_sheets("example"),
     adjective = "example"
   )
 }
@@ -55,7 +55,8 @@ many_sheets <- function(needle, haystack, adjective, call = caller_env()) {
     if (!any(sel)) {
       gs4_abort(
         "Can't find {adjective} Sheet that matches {.q {needle}}.",
-        call = call)
+        call = call
+      )
     }
     out <- as_id(out[sel])
   }
@@ -89,7 +90,8 @@ example_and_test_sheets <- function(purpose = NULL) {
   if (!env_has(.googlesheets4, "example_and_test_sheets")) {
     inventory_id <- "1dSIZ2NkEPDWiEbsg9G80Hr9Xe7HZglEAPwGhVa-OSyA"
     local_gs4_quiet()
-    if (!gs4_has_token()) { # don't trigger auth just for this
+    if (!gs4_has_token()) {
+      # don't trigger auth just for this
       local_deauth()
     }
     dat <- read_sheet(as_sheets_id(inventory_id))
@@ -107,16 +109,16 @@ example_and_test_sheets <- function(purpose = NULL) {
 # test sheet management ----
 test_sheets <- function(matches) {
   many_sheets(
-    needle    = matches,
-    haystack  = example_and_test_sheets("test"),
+    needle = matches,
+    haystack = example_and_test_sheets("test"),
     adjective = "test"
   )
 }
 
 test_sheet <- function(matches = "googlesheets4-cell-tests") {
   one_sheet(
-    needle    = matches,
-    haystack  = example_and_test_sheets("test"),
+    needle = matches,
+    haystack = example_and_test_sheets("test"),
     adjective = "test"
   )
 }
@@ -127,9 +129,11 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
   user <- gs4_user()
   if (!grepl("^googlesheets4-sheet-keeper", user)) {
     user <- sub("@.+$", "", user)
-    gs4_abort("
+    gs4_abort(
+      "
       Must be auth'd as {.email googlesheets4-sheet-keeper}, \\
-      not {.email {user}}.")
+      not {.email {user}}."
+    )
   }
 
   existing <- gs4_find()
@@ -146,7 +150,9 @@ test_sheet_create <- function(name = "googlesheets4-cell-tests") {
   ssid <- as_sheets_id(ss)
 
   # it's fiddly to check current sharing status, so just re-share
-  gs4_bullets(c(v = 'Making sure "anyone with a link" can read {.s_sheet {name}}.'))
+  gs4_bullets(c(
+    v = 'Making sure "anyone with a link" can read {.s_sheet {name}}.'
+  ))
   gs4_share(ssid)
   ssid
 }

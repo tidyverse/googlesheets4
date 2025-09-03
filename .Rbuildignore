@@ -18,3 +18,5 @@
 ^tools$
 ^revdep$
 ^CRAN-SUBMISSION$
+^[.]?air[.]toml$
+^\.vscode$

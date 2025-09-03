@@ -7,11 +7,11 @@
 ## The roxygen comments for these functions are mostly generated from data
 ## in this list and template text maintained in gargle.
 gargle_lookup_table <- list(
-  PACKAGE     = "googlesheets4",
-  YOUR_STUFF  = "your Google Sheets",
-  PRODUCT     = "Google Sheets",
-  API         = "Sheets API",
-  PREFIX      = "gs4"
+  PACKAGE = "googlesheets4",
+  YOUR_STUFF = "your Google Sheets",
+  PRODUCT = "Google Sheets",
+  API = "Sheets API",
+  PREFIX = "gs4"
 )
 
 #' Authorize googlesheets4
@@ -55,12 +55,15 @@ gargle_lookup_table <- list(
 #'
 #' # use a service account token
 #' gs4_auth(path = "foofy-83ee9e7c9c48.json")
-gs4_auth <- function(email = gargle::gargle_oauth_email(),
-                     path = NULL, subject = NULL,
-                     scopes = "spreadsheets",
-                     cache = gargle::gargle_oauth_cache(),
-                     use_oob = gargle::gargle_oob_default(),
-                     token = NULL) {
+gs4_auth <- function(
+  email = gargle::gargle_oauth_email(),
+  path = NULL,
+  subject = NULL,
+  scopes = "spreadsheets",
+  cache = gargle::gargle_oauth_cache(),
+  use_oob = gargle::gargle_oob_default(),
+  token = NULL
+) {
   gargle::check_is_service_account(path, hint = "gs4_auth_configure")
   scopes <- gs4_scopes(scopes)
 
@@ -198,7 +201,9 @@ gs4_auth_configure <- function(client, path, api_key, app = deprecated()) {
   }
 
   if (!missing(client) && !missing(path)) {
-    gs4_abort("Must supply exactly one of {.arg client} and {.arg path}, not both.")
+    gs4_abort(
+      "Must supply exactly one of {.arg client} and {.arg path}, not both."
+    )
   }
   stopifnot(missing(api_key) || is.null(api_key) || is_string(api_key))
 
@@ -206,7 +211,11 @@ gs4_auth_configure <- function(client, path, api_key, app = deprecated()) {
     stopifnot(is_string(path))
     client <- gargle::gargle_oauth_client_from_json(path)
   }
-  stopifnot(missing(client) || is.null(client) || inherits(client, "gargle_oauth_client"))
+  stopifnot(
+    missing(client) ||
+      is.null(client) ||
+      inherits(client, "gargle_oauth_client")
+  )
 
   if (!missing(client) || !missing(path)) {
     .auth$set_client(client)
@@ -304,11 +313,11 @@ gs4_scopes <- function(scopes = NULL) {
 }
 
 sheets_scopes <- c(
-  spreadsheets          = "https://www.googleapis.com/auth/spreadsheets",
+  spreadsheets = "https://www.googleapis.com/auth/spreadsheets",
   spreadsheets.readonly = "https://www.googleapis.com/auth/spreadsheets.readonly",
-  drive                 = "https://www.googleapis.com/auth/drive",
-  drive.readonly        = "https://www.googleapis.com/auth/drive.readonly",
-  drive.file            = "https://www.googleapis.com/auth/drive.file"
+  drive = "https://www.googleapis.com/auth/drive",
+  drive.readonly = "https://www.googleapis.com/auth/drive.readonly",
+  drive.file = "https://www.googleapis.com/auth/drive.file"
 )
 
 resolve_scopes <- function(user_scopes, package_scopes) {
@@ -317,9 +326,11 @@ resolve_scopes <- function(user_scopes, package_scopes) {
 }
 
 # unexported helpers that are nice for internal use ----
-gs4_auth_internal <- function(account = c("docs", "testing"),
-                              scopes = NULL,
-                              drive = TRUE) {
+gs4_auth_internal <- function(
+  account = c("docs", "testing"),
+  scopes = NULL,
+  drive = TRUE
+) {
   account <- match.arg(account)
   can_decrypt <- gargle::secret_has_key("GOOGLESHEETS4_KEY")
   online <- !is.null(curl::nslookup("sheets.googleapis.com", error = FALSE))
@@ -331,15 +342,20 @@ gs4_auth_internal <- function(account = c("docs", "testing"),
           c("x" = "Can't decrypt the {.field {account}} service account token.")
         },
         if (!online) {
-          c("x" = "We don't appear to be online. Or maybe the Sheets API is down?")
+          c(
+            "x" = "We don't appear to be online. Or maybe the Sheets API is down?"
+          )
         }
       ),
       class = "googlesheets4_auth_internal_error",
-      can_decrypt = can_decrypt, online = online
+      can_decrypt = can_decrypt,
+      online = online
     )
   }
 
-  if (!is_interactive()) local_gs4_quiet()
+  if (!is_interactive()) {
+    local_gs4_quiet()
+  }
   filename <- glue("googlesheets4-{account}.json")
   # TODO: revisit when I do PKG_scopes()
   # https://github.com/r-lib/gargle/issues/103
@@ -399,8 +415,9 @@ local_deauth <- function(env = parent.frame()) {
 #' @export
 gs4_oauth_app <- function() {
   lifecycle::deprecate_warn(
-    "1.1.0", "gs4_oauth_app()", "gs4_oauth_client()"
+    "1.1.0",
+    "gs4_oauth_app()",
+    "gs4_oauth_client()"
   )
   gs4_oauth_client()
 }
-

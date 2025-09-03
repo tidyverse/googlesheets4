@@ -28,7 +28,9 @@ test_that("external copy works", {
   sheet_copy(
     ss_source,
     from_sheet = "chickwts",
-    to_ss = ss_dest, to_sheet = "chicks-two", .before = 1
+    to_ss = ss_dest,
+    to_sheet = "chicks-two",
+    .before = 1
   )
   out <- sheet_names(ss_dest)
   expect_equal(out, c("chicks-two", "Sheet1"))

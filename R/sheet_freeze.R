@@ -34,9 +34,7 @@
 #' # clean up
 #' gs4_find("sheet-freeze-example") %>%
 #'   googledrive::drive_trash()
-sheet_freeze <- function(ss,
-                         sheet = NULL,
-                         nrow = NULL, ncol = NULL) {
+sheet_freeze <- function(ss, sheet = NULL, nrow = NULL, ncol = NULL) {
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   maybe_non_negative_integer(nrow)

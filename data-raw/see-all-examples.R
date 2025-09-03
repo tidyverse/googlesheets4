@@ -19,7 +19,8 @@ do_one <- function(x) {
     cat(
       readLines(tmp),
       file = here("examples", "googlesheets4-examples.R"),
-      append = TRUE, sep = "\n"
+      append = TRUE,
+      sep = "\n"
     )
   } else {
     print("  ^ no examples!!")

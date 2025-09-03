@@ -66,12 +66,14 @@
 #' # clean up
 #' gs4_find("sheet-copy-demo") %>%
 #'   googledrive::drive_trash()
-sheet_copy <- function(from_ss,
-                       from_sheet = NULL,
-                       to_ss = from_ss,
-                       to_sheet = NULL,
-                       .before = NULL,
-                       .after = NULL) {
+sheet_copy <- function(
+  from_ss,
+  from_sheet = NULL,
+  to_ss = from_ss,
+  to_sheet = NULL,
+  .before = NULL,
+  .after = NULL
+) {
   from_ssid <- as_sheets_id(from_ss)
   to_ssid <- as_sheets_id(to_ss)
   maybe_sheet(from_sheet)
@@ -96,16 +98,20 @@ sheet_copy <- function(from_ss,
   }
 }
 
-sheet_copy_internal <- function(ssid,
-                                from_sheet = NULL,
-                                to_sheet = NULL,
-                                .before = NULL,
-                                .after = NULL,
-                                call = caller_env()) {
+sheet_copy_internal <- function(
+  ssid,
+  from_sheet = NULL,
+  to_sheet = NULL,
+  .before = NULL,
+  .after = NULL,
+  call = caller_env()
+) {
   maybe_string(to_sheet, call = call)
   x <- gs4_get(ssid)
   s <- lookup_sheet(from_sheet, sheets_df = x$sheets, call = call)
-  gs4_bullets(c(v = "Duplicating sheet {.w_sheet {s$name}} in {.s_sheet {x$name}}."))
+  gs4_bullets(c(
+    v = "Duplicating sheet {.w_sheet {s$name}} in {.s_sheet {x$name}}."
+  ))
 
   index <- resolve_index(x$sheets, .before, .after, call = call)
   dup_request <- new(
@@ -130,13 +136,15 @@ sheet_copy_internal <- function(ssid,
   invisible(ssid)
 }
 
-sheet_copy_external <- function(from_ssid,
-                                from_sheet = NULL,
-                                to_ssid,
-                                to_sheet = NULL,
-                                .before = NULL,
-                                .after = NULL,
-                                call = caller_env()) {
+sheet_copy_external <- function(
+  from_ssid,
+  from_sheet = NULL,
+  to_ssid,
+  to_sheet = NULL,
+  .before = NULL,
+  .after = NULL,
+  call = caller_env()
+) {
   from_x <- gs4_get(from_ssid)
   to_x <- gs4_get(to_ssid)
   maybe_string(to_sheet, "sheet_copy", call = call)

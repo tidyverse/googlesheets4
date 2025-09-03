@@ -29,7 +29,11 @@ test_that("prepare_resize_request() works for resize & no resize", {
   # 3 * 3 * 2 = 18 combinations
 
   # exact = FALSE
-  df <- expand.grid(nrow_needed = n + -1:1, ncol_needed = m + -1:1, exact = FALSE)
+  df <- expand.grid(
+    nrow_needed = n + -1:1,
+    ncol_needed = m + -1:1,
+    exact = FALSE
+  )
   req <- pmap(df, prepare_resize_request, sheet_info = sheet_info)
   grid_properties <- purrr::map(
     req,
@@ -55,7 +59,11 @@ test_that("prepare_resize_request() works for resize & no resize", {
   )
 
   # exact = TRUE
-  df <- expand.grid(nrow_needed = n + -1:1, ncol_needed = m + -1:1, exact = TRUE)
+  df <- expand.grid(
+    nrow_needed = n + -1:1,
+    ncol_needed = m + -1:1,
+    exact = TRUE
+  )
   req <- pmap(df, prepare_resize_request, sheet_info = sheet_info)
   grid_properties <- purrr::map(
     req,

@@ -53,10 +53,12 @@ with_no_color <- function(code) {
 }
 
 message <- function(...) {
-  gs4_abort("
+  gs4_abort(
+    "
     Internal error: use the UI functions in {.pkg googlesheets4} \\
     instead of {.fun message}",
-    .internal = TRUE)
+    .internal = TRUE
+  )
 }
 
 fr <- function(x) {
@@ -146,11 +148,13 @@ gs4_bullets <- function(text, .envir = parent.frame()) {
 #' @noRd
 NULL
 
-gs4_abort <- function(message,
-                      ...,
-                      class = NULL,
-                      .envir = parent.frame(),
-                      call = caller_env()) {
+gs4_abort <- function(
+  message,
+  ...,
+  class = NULL,
+  .envir = parent.frame(),
+  call = caller_env()
+) {
   cli::cli_div(theme = gs4_theme())
   cli::cli_abort(
     message = message,
@@ -169,9 +173,11 @@ abort_unsupported_conversion <- function(from, to) {
   } else {
     msg_from <- "something of class {.cls {class(from)}}"
   }
-  msg <- glue("
+  msg <- glue(
+    "
     Don't know how to make an instance of {.cls {to}} from <<msg_from>>.",
-    .open = "<<", .close = ">>"
+    .open = "<<",
+    .close = ">>"
   )
   gs4_abort(msg)
 }

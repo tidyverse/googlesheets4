@@ -8,7 +8,9 @@ test_that("we can make a GridRange from a range_spec", {
   expect_equal(out$sheetId, 123)
 
   spec <- new_range_spec(
-    sheet_name = "abc", cell_range = "A3:B4", sheets_df = sheets_df
+    sheet_name = "abc",
+    cell_range = "A3:B4",
+    sheets_df = sheets_df
   )
   out <- as_GridRange(spec)
   expect_equal(out$sheetId, 123)
@@ -18,7 +20,9 @@ test_that("we can make a GridRange from a range_spec", {
   expect_equal(out$endColumnIndex, 2)
 
   spec <- new_range_spec(
-    sheet_name = "abc", cell_range = "A5:B", sheets_df = sheets_df
+    sheet_name = "abc",
+    cell_range = "A5:B",
+    sheets_df = sheets_df
   )
   out <- as_GridRange(spec)
   expect_equal(out$sheetId, 123)
@@ -28,7 +32,9 @@ test_that("we can make a GridRange from a range_spec", {
   expect_equal(out$endColumnIndex, 2)
 
   spec <- new_range_spec(
-    sheet_name = "abc", cell_range = "A:B", sheets_df = sheets_df
+    sheet_name = "abc",
+    cell_range = "A:B",
+    sheets_df = sheets_df
   )
   out <- as_GridRange(spec)
   expect_equal(out$sheetId, 123)
@@ -38,7 +44,9 @@ test_that("we can make a GridRange from a range_spec", {
   expect_equal(out$endColumnIndex, 2)
 
   spec <- new_range_spec(
-    sheet_name = "abc", cell_range = "A1:A1", sheets_df = sheets_df
+    sheet_name = "abc",
+    cell_range = "A1:A1",
+    sheets_df = sheets_df
   )
   out <- as_GridRange(spec)
   expect_equal(out$sheetId, 123)
@@ -48,10 +56,14 @@ test_that("we can make a GridRange from a range_spec", {
   expect_equal(out$endColumnIndex, 1)
 
   spec1 <- new_range_spec(
-    sheet_name = "abc", cell_range = "C3:C3", sheets_df = sheets_df
+    sheet_name = "abc",
+    cell_range = "C3:C3",
+    sheets_df = sheets_df
   )
   spec2 <- new_range_spec(
-    sheet_name = "abc", cell_range = "C3", sheets_df = sheets_df
+    sheet_name = "abc",
+    cell_range = "C3",
+    sheets_df = sheets_df
   )
   expect_equal(as_GridRange(spec1), as_GridRange(spec2))
 })

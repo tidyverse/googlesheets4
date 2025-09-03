@@ -37,7 +37,9 @@ test_that("sheet_add() works", {
       sheet = "eggplant",
       .before = 1,
       gridProperties = list(
-        rowCount = 3, columnCount = 6, frozenRowCount = 1
+        rowCount = 3,
+        columnCount = 6,
+        frozenRowCount = 1
       )
     )
   )
@@ -46,7 +48,15 @@ test_that("sheet_add() works", {
 
   expect_identical(
     sheets_df$name,
-    c("eggplant", "Sheet1", "apple", "banana", "Sheet2", "coconut", "dragonfruit")
+    c(
+      "eggplant",
+      "Sheet1",
+      "apple",
+      "banana",
+      "Sheet2",
+      "coconut",
+      "dragonfruit"
+    )
   )
   expect_identical(vlookup("eggplant", sheets_df, "name", "grid_rows"), 3L)
   expect_identical(vlookup("eggplant", sheets_df, "name", "grid_columns"), 6L)

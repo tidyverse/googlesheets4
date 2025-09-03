@@ -12,12 +12,12 @@ schema_rectangle <- function(s) {
 
   properties <- pluck(schema, "properties")
   scaffold <- list(
-    description      = "Just a placeholder",
-    type             = "scaffold",
-    "$ref"           = "SCHEMA",
-    items            = list("$ref" = "SCHEMA"),
-    format           = "FORMAT",
-    enum             = letters[1:3],
+    description = "Just a placeholder",
+    type = "scaffold",
+    "$ref" = "SCHEMA",
+    items = list("$ref" = "SCHEMA"),
+    format = "FORMAT",
+    enum = letters[1:3],
     enumDescriptions = LETTERS[1:3]
   )
   df <- tibble(properties = c(scaffold = list(scaffold), properties))
@@ -41,7 +41,7 @@ schema_rectangle <- function(s) {
 
   make_enum_tibble <- function(x, y) {
     tibble(
-      enum     = x %||% character(),
+      enum = x %||% character(),
       enumDesc = y %||% character()
     )
   }

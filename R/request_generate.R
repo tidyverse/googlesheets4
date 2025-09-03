@@ -45,10 +45,12 @@
 #'   token = NULL
 #' )
 #' req
-request_generate <- function(endpoint = character(),
-                             params = list(),
-                             key = NULL,
-                             token = gs4_token()) {
+request_generate <- function(
+  endpoint = character(),
+  params = list(),
+  key = NULL,
+  token = gs4_token()
+) {
   ept <- .endpoints[[endpoint]]
   if (is.null(ept)) {
     gs4_abort(c("Endpoint not recognized:", x = "{.field {endpoint}}"))
@@ -59,8 +61,10 @@ request_generate <- function(endpoint = character(),
   force(params)
 
   ## modifications specific to googlesheets4 package
-  params$key <- key %||% params$key %||%
-    gs4_api_key() %||% gargle::tidyverse_api_key()
+  params$key <- key %||%
+    params$key %||%
+    gs4_api_key() %||%
+    gargle::tidyverse_api_key()
 
   req <- gargle::request_develop(
     endpoint = ept,

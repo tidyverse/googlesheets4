@@ -2,9 +2,14 @@
 # an attribute for each cell. Possibly a premature concern.
 new_CellData <- function(...) {
   # explicit 'list' class is a bit icky but it makes jsonlite happy
-  structure(list2(...), class = c(
-    "googlesheets4_schema_CellData", "googlesheets4_schema", "list"
-  ))
+  structure(
+    list2(...),
+    class = c(
+      "googlesheets4_schema_CellData",
+      "googlesheets4_schema",
+      "list"
+    )
+  )
 }
 
 # Use this instead of `new_CellData()` when (light) validation makes sense.

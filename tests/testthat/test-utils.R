@@ -42,18 +42,18 @@ test_that("enforce_na() works", {
 
   expect_identical(
     enforce_na(c("a", "", "c")),
-               c("a", NA, "c")
+    c("a", NA, "c")
   )
   expect_identical(
     enforce_na(c("a", "", "c"), na = "c"),
-               c("a", "", NA)
+    c("a", "", NA)
   )
   expect_identical(
     enforce_na(c("abc", "", "cab"), na = c("abc", "")),
-               c(   NA, NA, "cab")
+    c(NA, NA, "cab")
   )
   expect_identical(
     enforce_na(c("a", "", "c"), na = character()),
-               c("a", "", "c")
+    c("a", "", "c")
   )
 })

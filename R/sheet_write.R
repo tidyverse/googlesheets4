@@ -77,9 +77,7 @@
 #' # clean up
 #' gs4_find("sheet-write-demo") %>%
 #'   googledrive::drive_trash()
-sheet_write <- function(data,
-                        ss = NULL,
-                        sheet = NULL) {
+sheet_write <- function(data, ss = NULL, sheet = NULL) {
   data_quo <- enquo(data)
   data <- eval_tidy(data_quo)
   check_data_frame(data)

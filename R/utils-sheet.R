@@ -1,7 +1,9 @@
-lookup_sheet <- function(sheet = NULL,
-                         sheets_df,
-                         visible = NA,
-                         call = caller_env()) {
+lookup_sheet <- function(
+  sheet = NULL,
+  sheets_df,
+  visible = NA,
+  call = caller_env()
+) {
   maybe_sheet(sheet, call = call)
   if (is.null(sheets_df)) {
     gs4_abort(
@@ -85,9 +87,11 @@ check_sheet <- function(sheet, arg = caller_arg(sheet), call = caller_env()) {
   sheet
 }
 
-maybe_sheet <- function(sheet = NULL,
-                        arg = caller_arg(sheet),
-                        call = caller_env()) {
+maybe_sheet <- function(
+  sheet = NULL,
+  arg = caller_arg(sheet),
+  call = caller_env()
+) {
   if (is.null(sheet)) {
     sheet
   } else {

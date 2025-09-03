@@ -53,10 +53,12 @@
 #' # clean up
 #' gs4_find("range-autofit-demo") %>%
 #'   googledrive::drive_trash()
-range_autofit <- function(ss,
-                          sheet = NULL,
-                          range = NULL,
-                          dimension = c("columns", "rows")) {
+range_autofit <- function(
+  ss,
+  sheet = NULL,
+  range = NULL,
+  dimension = c("columns", "rows")
+) {
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   check_range(range)
@@ -67,23 +69,29 @@ range_autofit <- function(ss,
   range_spec <- as_range_spec(
     range,
     sheet = sheet,
-    sheets_df = x$sheets, nr_df = x$named_ranges
+    sheets_df = x$sheets,
+    nr_df = x$named_ranges
   )
-  range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
+  range_spec$sheet_name <- range_spec$sheet_name %||%
+    first_visible_name(x$sheets)
   s <- lookup_sheet(range_spec$sheet_name, sheets_df = x$sheets)
 
   # form request ---------------------------------------------------------------
   if (is.null(range)) {
     dimension <- match.arg(dimension)
     resize_req <- list(bureq_auto_resize_dimensions(
-      sheetId = s$id, dimension = toupper(dimension)
+      sheetId = s$id,
+      dimension = toupper(dimension)
     ))
   } else {
     resize_req <- prepare_auto_resize_request(s$id, range_spec)
   }
   resize_dim <- pluck(
     resize_req,
-    1, "autoResizeDimensions", "dimensions", "dimension"
+    1,
+    "autoResizeDimensions",
+    "dimensions",
+    "dimension"
   )
 
   gs4_bullets(c(

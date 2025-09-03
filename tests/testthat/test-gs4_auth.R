@@ -17,7 +17,8 @@ test_that("gs4_auth_configure works", {
   expect_s3_class(gs4_oauth_client(), "gargle_oauth_client")
 
   path_to_json <- system.file(
-    "extdata", "client_secret_installed.googleusercontent.com.json",
+    "extdata",
+    "client_secret_installed.googleusercontent.com.json",
     package = "gargle"
   )
   gs4_auth_configure(path = path_to_json)
@@ -45,7 +46,8 @@ test_that("gs4_auth_configure(app =) is deprecated in favor of client", {
 
   client <- gargle::gargle_oauth_client_from_json(
     system.file(
-      "extdata", "client_secret_installed.googleusercontent.com.json",
+      "extdata",
+      "client_secret_installed.googleusercontent.com.json",
       package = "gargle"
     ),
     name = "test-client"

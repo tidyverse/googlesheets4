@@ -88,7 +88,7 @@ resolve_limits <- function(cell_limits, sheet_data = NULL) {
   # Rows: Max number of cells is 10 million. So that must be the maximum
   #       number of rows (imagine a spreadsheet with 1 sheet and 1 column).
   # Columns: Max col is "ZZZ" = cellranger::letter_to_num("ZZZ") = 18278
-  MAX_ROW <- sheet_data$grid_rows    %||% 10000000L
+  MAX_ROW <- sheet_data$grid_rows %||% 10000000L
   MAX_COL <- sheet_data$grid_columns %||% 18278L
 
   limits <- c(cell_limits$ul, cell_limits$lr)
@@ -171,7 +171,11 @@ limits_from_range <- function(x) {
   if (anyNA(corners$.match)) {
     gs4_abort("Invalid range: {.range {x}}")
   }
-  corners$column <- ifelse(nzchar(corners$column), corners$column, NA_character_)
+  corners$column <- ifelse(
+    nzchar(corners$column),
+    corners$column,
+    NA_character_
+  )
   corners$row <- ifelse(nzchar(corners$row), corners$row, NA_character_)
   corners$row <- as.integer(corners$row)
   if (nrow(corners) == 1) {
@@ -201,8 +205,14 @@ check_range <- function(range = NULL, call = caller_env()) {
 }
 
 ## the `...` are used to absorb extra variables when this is used inside pmap()
-make_cell_range <- function(start_row, end_row, start_column, end_column,
-                            sheet_name, ...) {
+make_cell_range <- function(
+  start_row,
+  end_row,
+  start_column,
+  end_column,
+  sheet_name,
+  ...
+) {
   cl <- cellranger::cell_limits(
     ul = c(start_row, start_column),
     lr = c(end_row, end_column),

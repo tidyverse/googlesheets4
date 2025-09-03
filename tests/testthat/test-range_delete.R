@@ -29,9 +29,9 @@ test_that("determine_shift() 'works' for ranges where user input is required", {
   # us how to shift cells into the deleted region
   bounded_bottom_and_right <- list(
     cell_limits(c(NA, NA), c(3, 5)),
-    cell_limits(c( 1, NA), c(3, 5)),
-    cell_limits(c(NA,  3), c(3, 5)),
-    cell_limits(c( 1,  3), c(3, 5))
+    cell_limits(c(1, NA), c(3, 5)),
+    cell_limits(c(NA, 3), c(3, 5)),
+    cell_limits(c(1, 3), c(3, 5))
   )
 
   out <- purrr::map(
@@ -47,9 +47,9 @@ test_that("determine_shift() detects ranges where we shift ROWS up", {
   # these are bounded on the bottom, but not the on the right
   bounded_bottom <- list(
     cell_limits(c(NA, NA), c(3, NA)),
-    cell_limits(c( 1, NA), c(3, NA)),
-    cell_limits(c(NA,  3), c(3, NA)),
-    cell_limits(c( 1,  3), c(3, NA))
+    cell_limits(c(1, NA), c(3, NA)),
+    cell_limits(c(NA, 3), c(3, NA)),
+    cell_limits(c(1, 3), c(3, NA))
   )
 
   out <- purrr::map_chr(
@@ -65,9 +65,9 @@ test_that("determine_shift() detects ranges where we shift COLUMNS left", {
   # these are bounded on the bottom, but not the on the right
   bounded_right <- list(
     cell_limits(c(NA, NA), c(NA, 5)),
-    cell_limits(c( 1, NA), c(NA, 5)),
-    cell_limits(c(NA,  3), c(NA, 5)),
-    cell_limits(c( 1,  3), c(NA, 5))
+    cell_limits(c(1, NA), c(NA, 5)),
+    cell_limits(c(NA, 3), c(NA, 5)),
+    cell_limits(c(1, 3), c(NA, 5))
   )
 
   out <- purrr::map_chr(
@@ -83,9 +83,9 @@ test_that("determine_shift() detects ranges where we must error", {
   # these are not bounded at on either the bottom or the right
   not_bounded <- list(
     cell_limits(c(NA, NA), c(NA, NA)),
-    cell_limits(c( 1, NA), c(NA, NA)),
-    cell_limits(c(NA,  3), c(NA, NA)),
-    cell_limits(c( 1,  3), c(NA, NA))
+    cell_limits(c(1, NA), c(NA, NA)),
+    cell_limits(c(NA, 3), c(NA, NA)),
+    cell_limits(c(1, 3), c(NA, NA))
   )
 
   expect_bad_range <- function(x) {

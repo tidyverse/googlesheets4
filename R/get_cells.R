@@ -1,12 +1,15 @@
 ## this is the "cell getter" for range_read_cells() and read_sheet()
-get_cells <- function(ss,
-                      sheet = NULL,
-                      range = NULL,
-                      col_names_in_sheet = TRUE,
-                      skip = 0, n_max = Inf,
-                      detail_level = c("default", "full"),
-                      discard_empty = TRUE,
-                      call = caller_env()) {
+get_cells <- function(
+  ss,
+  sheet = NULL,
+  range = NULL,
+  col_names_in_sheet = TRUE,
+  skip = 0,
+  n_max = Inf,
+  detail_level = c("default", "full"),
+  discard_empty = TRUE,
+  call = caller_env()
+) {
   ssid <- as_sheets_id(ss)
 
   maybe_sheet(sheet, call = call)
@@ -26,8 +29,10 @@ get_cells <- function(ss,
   ## user's range, sheet, skip --> qualified A1 range, suitable for API
   range_spec <- as_range_spec(
     range,
-    sheet = sheet, skip = skip,
-    sheets_df = x$sheets, nr_df = x$named_ranges
+    sheet = sheet,
+    skip = skip,
+    sheets_df = x$sheets,
+    nr_df = x$named_ranges
   )
   # if we send no range, we get all cells from all sheets; not what we want
   effective_range <- as_A1_range(range_spec) %||% first_visible_name(x$sheets)
@@ -69,21 +74,25 @@ get_cells <- function(ss,
 # I want a separate worker so there is a version of this available that
 # accepts `fields` (or `includeGridData`), yet I don't want a user-facing
 # function that exposes those details
-read_cells_impl_ <- function(ssid,
-                             ranges,
-                             fields = NULL,
-                             detail_level = c("default", "full")) {
+read_cells_impl_ <- function(
+  ssid,
+  ranges,
+  fields = NULL,
+  detail_level = c("default", "full")
+) {
   # there are 2 ways to control the level of detail re: cell data:
   #   1. Supply a field mask. What we currently do.
   #   2. Set `includeGridData` to true. This gets *everything* about the
   #      Spreadsheet and the Sheet(s). So far, this seems like TMI.
   detail_level <- match.arg(detail_level)
-  cell_mask <- switch(detail_level,
+  cell_mask <- switch(
+    detail_level,
     "default" = ".values(effectiveValue,formattedValue,effectiveFormat.numberFormat)",
     "full" = ""
   )
   default_fields <- c(
-    "spreadsheetId", "properties.title",
+    "spreadsheetId",
+    "properties.title",
     "sheets.properties(sheetId,title)",
     glue("sheets.data(startRow,startColumn,rowData{cell_mask})")
   )
@@ -145,14 +154,14 @@ insert_shims <- function(df, cell_limits) {
 
   ## 1-based indices, referring to cell coordinates in the spreadsheet
   start_row <- cell_limits$ul[[1]]
-  end_row   <- cell_limits$lr[[1]]
+  end_row <- cell_limits$lr[[1]]
   start_col <- cell_limits$ul[[2]]
-  end_col   <- cell_limits$lr[[2]]
+  end_col <- cell_limits$lr[[2]]
 
-  shim_up    <- notNA(start_row) && start_row < min(df$row)
-  shim_left  <- notNA(start_col) && start_col < min(df$col)
-  shim_down  <- notNA(end_row)   &&   end_row > max(df$row)
-  shim_right <- notNA(end_col)   &&   end_col > max(df$col)
+  shim_up <- notNA(start_row) && start_row < min(df$row)
+  shim_left <- notNA(start_col) && start_col < min(df$col)
+  shim_down <- notNA(end_row) && end_row > max(df$row)
+  shim_right <- notNA(end_col) && end_col > max(df$col)
 
   ## add placeholder to establish upper left corner
   if (shim_up || shim_left) {

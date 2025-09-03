@@ -1,6 +1,7 @@
 #  input: a named list, usually an instance of googlesheets4_schema_Spreadsheet
 # output: instance of googlesheets4_spreadsheet, which is actually useful
 new_googlesheets4_spreadsheet <- function(x = list()) {
+  # fmt: skip
   ours_theirs <- list(
     spreadsheet_id  = "spreadsheetId",
     spreadsheet_url = "spreadsheetUrl",
@@ -64,6 +65,7 @@ new_googlesheets4_spreadsheet <- function(x = list()) {
 #' @export
 format.googlesheets4_spreadsheet <- function(x, ...) {
   cli::cli_div(theme = gs4_theme())
+  # fmt: skip
   meta <- list(
   `Spreadsheet name` = cli::format_inline("{.s_sheet {x$name}}"),
                   ID = as.character(x$spreadsheet_id),
@@ -79,7 +81,10 @@ format.googlesheets4_spreadsheet <- function(x, ...) {
     meta <- c(meta, `# of named ranges` = as.character(nrow(x$named_ranges)))
   }
   if (!is.null(x$protected_ranges)) {
-    meta <- c(meta, `# of protected ranges` = as.character(nrow(x$protected_ranges)))
+    meta <- c(
+      meta,
+      `# of protected ranges` = as.character(nrow(x$protected_ranges))
+    )
   }
   out <- c(
     cli::cli_format_method(
@@ -113,7 +118,10 @@ format.googlesheets4_spreadsheet <- function(x, ...) {
     col1 <- fr(c(
       "(Named range)",
       sapply(
-        gargle::gargle_map_cli(x$named_ranges$name, template = "{.range <<x>>}"),
+        gargle::gargle_map_cli(
+          x$named_ranges$name,
+          template = "{.range <<x>>}"
+        ),
         cli::format_inline
       )
     ))

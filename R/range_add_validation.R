@@ -73,10 +73,7 @@
 #' # clean up
 #' gs4_find("range-add-validation-demo") %>%
 #'   googledrive::drive_trash()
-range_add_validation <- function(ss,
-                                 sheet = NULL,
-                                 range = NULL,
-                                 rule) {
+range_add_validation <- function(ss, sheet = NULL, range = NULL, rule) {
   ssid <- as_sheets_id(ss)
   maybe_sheet(sheet)
   check_range(range)
@@ -91,18 +88,22 @@ range_add_validation <- function(ss,
   range_spec <- as_range_spec(
     range,
     sheet = sheet,
-    sheets_df = x$sheets, nr_df = x$named_ranges
+    sheets_df = x$sheets,
+    nr_df = x$named_ranges
   )
-  range_spec$sheet_name <- range_spec$sheet_name %||% first_visible_name(x$sheets)
+  range_spec$sheet_name <- range_spec$sheet_name %||%
+    first_visible_name(x$sheets)
   s <- lookup_sheet(range_spec$sheet_name, sheets_df = x$sheets)
   gs4_bullets(c(v = "Editing sheet {.w_sheet {range_spec$sheet_name}}."))
 
   # form batch update request --------------------------------------------------
-  sdv_req <- list(setDataValidation = new(
-    "SetDataValidationRequest",
-    range = as_GridRange(range_spec),
-    rule = rule
-  ))
+  sdv_req <- list(
+    setDataValidation = new(
+      "SetDataValidationRequest",
+      range = as_GridRange(range_spec),
+      rule = rule
+    )
+  )
 
   # do it ----------------------------------------------------------------------
   req <- request_generate(
@@ -132,7 +133,10 @@ new_BooleanCondition <- function(type = "NOT_BLANK", values = NULL) {
   }
 
   needs_relative_date <- c(
-    "DATE_BEFORE", "DATE_AFTER", "DATE_ON_OR_BEFORE", "DATE_ON_OR_AFTER"
+    "DATE_BEFORE",
+    "DATE_AFTER",
+    "DATE_ON_OR_BEFORE",
+    "DATE_ON_OR_AFTER"
   )
   if (type %in% needs_relative_date) {
     gs4_abort(

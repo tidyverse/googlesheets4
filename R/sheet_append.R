@@ -66,10 +66,12 @@ sheet_append <- function(ss, data, sheet = 1) {
 }
 
 prepare_rows <- function(sheet_id, df) {
-  list(appendCells = new(
-    "AppendCellsRequest",
-    sheetId = sheet_id,
-    rows = as_RowData(df, col_names = FALSE), # an array of instances of RowData
-    fields = "userEnteredValue,userEnteredFormat.numberFormat"
-  ))
+  list(
+    appendCells = new(
+      "AppendCellsRequest",
+      sheetId = sheet_id,
+      rows = as_RowData(df, col_names = FALSE), # an array of instances of RowData
+      fields = "userEnteredValue,userEnteredFormat.numberFormat"
+    )
+  )
 }

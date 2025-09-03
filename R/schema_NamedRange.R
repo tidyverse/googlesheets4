@@ -5,7 +5,7 @@ as_tibble.googlesheets4_schema_NamedRange <- function(x, ...) {
 
   tibble::tibble(
     name = glean_chr(x, "name"),
-    id   = glean_chr(x, "namedRangeId"),
+    id = glean_chr(x, "namedRangeId"),
     !!!grid_range
   )
 }

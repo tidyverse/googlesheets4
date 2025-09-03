@@ -61,10 +61,12 @@
 #' # clean up
 #' gs4_find("sheet-relocate-demo") %>%
 #'   googledrive::drive_trash()
-sheet_relocate <- function(ss,
-                           sheet,
-                           .before = if (is.null(.after)) 1,
-                           .after = NULL) {
+sheet_relocate <- function(
+  ss,
+  sheet,
+  .before = if (is.null(.after)) 1,
+  .after = NULL
+) {
   ssid <- as_sheets_id(ss)
   walk(sheet, check_sheet)
   maybe_sheet(.before)
@@ -80,7 +82,8 @@ sheet_relocate <- function(ss,
     sheet,
     ~ make_UpdateSheetPropertiesRequest(
       sheet = .x,
-      .before = .before, .after = .after,
+      .before = .before,
+      .after = .after,
       sheets_df = x$sheets,
       call = quote(sheet_relocate())
     )
@@ -98,10 +101,13 @@ sheet_relocate <- function(ss,
   invisible(ssid)
 }
 
-make_UpdateSheetPropertiesRequest <- function(sheet,
-                                              .before, .after,
-                                              sheets_df,
-                                              call = caller_env()) {
+make_UpdateSheetPropertiesRequest <- function(
+  sheet,
+  .before,
+  .after,
+  sheets_df,
+  call = caller_env()
+) {
   s <- lookup_sheet(sheet, sheets_df = sheets_df, call = call)
   index <- resolve_index(sheets_df, .before, .after, call = call)
   sp <- new("SheetProperties", sheetId = s$id, index = index)

@@ -1,5 +1,8 @@
 # googlesheets4 (development version)
 
+* No significant user-facing changes. Release motivated by documentation updates
+  to support HTML reference manuals on CRAN.
+
 # googlesheets4 1.1.1
 
 * `gs4_auth(subject =)` is a new argument that can be used with

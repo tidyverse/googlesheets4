@@ -1,22 +1,21 @@
-pandoc: 2.19.2
-pkgdown: 2.0.7
+pandoc: 3.1.11
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
-  auth: auth.html
-  dates-and-times: dates-and-times.html
-  drive-and-sheets: drive-and-sheets.html
-  example-sheets: example-sheets.html
-  find-identify-sheets: find-identify-sheets.html
-  fun-with-googledrive-and-readxl: fun-with-googledrive-and-readxl.html
-  function-class-names: function-class-names.html
-  googlesheets4-reprex: googlesheets4-reprex.html
-  messages-and-errors: messages-and-errors.html
-  range-specification: range-specification.html
-  read-sheets: read-sheets.html
-  write-sheets: write-sheets.html
+  articles/auth: auth.html
+  articles/dates-and-times: dates-and-times.html
+  articles/drive-and-sheets: drive-and-sheets.html
+  articles/example-sheets: example-sheets.html
+  articles/find-identify-sheets: find-identify-sheets.html
+  articles/fun-with-googledrive-and-readxl: fun-with-googledrive-and-readxl.html
+  articles/function-class-names: function-class-names.html
+  articles/googlesheets4-reprex: googlesheets4-reprex.html
   googlesheets4: googlesheets4.html
-last_built: 2023-06-11T04:17Z
+  articles/messages-and-errors: messages-and-errors.html
+  articles/range-specification: range-specification.html
+  articles/read-sheets: read-sheets.html
+  articles/write-sheets: write-sheets.html
+last_built: 2025-09-04T01:20Z
 urls:
   reference: https://googlesheets4.tidyverse.org/reference
   article: https://googlesheets4.tidyverse.org/articles
-

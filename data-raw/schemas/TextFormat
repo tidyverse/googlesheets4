@@ -1,13 +1,13 @@
 # TextFormat  
-# A tibble: 9 × 6
-  property             type    instance_of array_of format enum            
-  <chr>                <chr>   <chr>       <chr>    <chr>  <list>          
-1 bold                 boolean <NA>        <NA>     <NA>   <tibble [0 × 2]>
-2 fontFamily           string  <NA>        <NA>     <NA>   <tibble [0 × 2]>
-3 fontSize             integer <NA>        <NA>     int32  <tibble [0 × 2]>
-4 foregroundColor      object  Color       <NA>     <NA>   <tibble [0 × 2]>
-5 foregroundColorStyle object  ColorStyle  <NA>     <NA>   <tibble [0 × 2]>
-6 italic               boolean <NA>        <NA>     <NA>   <tibble [0 × 2]>
-7 link                 object  Link        <NA>     <NA>   <tibble [0 × 2]>
-8 strikethrough        boolean <NA>        <NA>     <NA>   <tibble [0 × 2]>
-9 underline            boolean <NA>        <NA>     <NA>   <tibble [0 × 2]>
+# A tibble: 9 × 7
+  property             type    instance_of array_of format deprecated enum            
+  <chr>                <chr>   <chr>       <chr>    <chr>  <lgl>      <list>          
+1 bold                 boolean <NA>        <NA>     <NA>   NA         <tibble [0 × 2]>
+2 fontFamily           string  <NA>        <NA>     <NA>   NA         <tibble [0 × 2]>
+3 fontSize             integer <NA>        <NA>     int32  NA         <tibble [0 × 2]>
+4 foregroundColor      object  Color       <NA>     <NA>   TRUE       <tibble [0 × 2]>
+5 foregroundColorStyle object  ColorStyle  <NA>     <NA>   NA         <tibble [0 × 2]>
+6 italic               boolean <NA>        <NA>     <NA>   NA         <tibble [0 × 2]>
+7 link                 object  Link        <NA>     <NA>   NA         <tibble [0 × 2]>
+8 strikethrough        boolean <NA>        <NA>     <NA>   NA         <tibble [0 × 2]>
+9 underline            boolean <NA>        <NA>     <NA>   NA         <tibble [0 × 2]>

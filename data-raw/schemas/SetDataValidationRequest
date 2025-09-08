@@ -1,6 +1,7 @@
 # SetDataValidationRequest  
-# A tibble: 2 × 6
-  property type   instance_of        array_of format enum            
-  <chr>    <chr>  <chr>              <chr>    <chr>  <list>          
-1 range    object GridRange          <NA>     <NA>   <tibble [0 × 2]>
-2 rule     object DataValidationRule <NA>     <NA>   <tibble [0 × 2]>
+# A tibble: 3 × 6
+  property             type    instance_of        array_of format enum            
+  <chr>                <chr>   <chr>              <chr>    <chr>  <list>          
+1 filteredRowsIncluded boolean <NA>               <NA>     <NA>   <tibble [0 × 2]>
+2 range                object  GridRange          <NA>     <NA>   <tibble [0 × 2]>
+3 rule                 object  DataValidationRule <NA>     <NA>   <tibble [0 × 2]>

@@ -6,10 +6,11 @@ template:
 
   includes:
     in_header: |
+      <script src="https://cdn.jsdelivr.net/gh/posit-dev/supported-by-posit/js/badge.min.js" data-hide-below="1200" data-max-height="43" data-light-bg="#666f76" data-light-fg="#f9f9f9"></script>
       <script defer data-domain="googlesheets4.tidyverse.org,all.tidyverse.org" src="https://plausible.io/js/plausible.js"></script>
 
 development:
-   mode: auto
+  mode: auto
 
 news:
   releases:
@@ -20,7 +21,7 @@ news:
 
 articles:
 - title: Basic reading and writing
-  navbar: ~
+  navbar:
   contents:
   - googlesheets4
   - articles/read-sheets
@@ -49,89 +50,89 @@ articles:
   - articles/messages-and-errors
 
 reference:
-  - title: "Reading"
-    desc: >
-      Import data from a Sheet into a local data frame
-    contents:
-    - read_sheet
-    - range_speedread
-    - range_read_cells
-    - spread_sheet
-    - cell-specification
-  - title: "Writing"
-    desc: >
-      Write data into a Sheet
-    contents:
-    - write_sheet
-    - gs4_create
-    - sheet_append
-    - range_write
-    - range_flood
-    - range_clear
-  - title: "Data preparation"
-    desc: >
-      Helpers for preparing data to write into Sheets
-    contents:
-    - gs4_fodder
-    - gs4_formula
-  - title: "Metadata on Sheets"
-    desc: >
-      Helpers for accessing Sheets and their metadata
-    contents:
-    - gs4_get
-    - gs4_find
-    - gs4_browse
-    - as_sheets_id
-    - gs4_random
-  - title: "Modify a Sheet"
-    desc: >
-      Make changes to a (spread)Sheet or to the (work)sheets it contains
-    contents:
-    - gs4_create
-    - range_delete
-    - starts_with("sheet")
-  - title: "Formatting and aesthetics"
-    desc: >
-      Change how a Sheet appears in the browser UI
-    contents:
-    - range_autofit
-  - title: "Example Sheets"
-    desc: >
-      World-readable Sheets to use in examples and reprexes
-    contents:
-    - starts_with("gs4_example")
-  - title: "Auth"
-    desc: >
-      Take explicit control of the googlesheets4 auth status or examine current state
-    contents:
-    - gs4_auth
-    - gs4_deauth
-    - gs4_user
-    - gs4_auth_configure
-    - gs4_scopes
-    - googlesheets4-configuration
-  - title: "Programming around the Sheets API"
-    desc: >
-      Low-level functions used internally and made available for programming
-    contents:
-    - request_generate
-    - request_make
-    - gs4_token
-    - gs4_has_token
-    - gs4_endpoints
-    - matches("quiet")
-  - title: "Operate on (spread)Sheets or the Sheets API"
-    desc: >
-      Functions that operate at the level of a (spread)sheet or the whole API/package
-    contents:
-    - starts_with("gs4_")
-  - title: "Operate on (work)sheets"
-    desc: >
-      Functions that operate on whole (work)sheets
-    contents:
-    - starts_with("sheet_")
-  - title: "Operate on a range of cells"
-    desc: >
-      Functions that can target a cell range
-    contents:
-    - starts_with("range_")
+- title: "Reading"
+  desc: >
+    Import data from a Sheet into a local data frame
+  contents:
+  - read_sheet
+  - range_speedread
+  - range_read_cells
+  - spread_sheet
+  - cell-specification
+- title: "Writing"
+  desc: >
+    Write data into a Sheet
+  contents:
+  - write_sheet
+  - gs4_create
+  - sheet_append
+  - range_write
+  - range_flood
+  - range_clear
+- title: "Data preparation"
+  desc: >
+    Helpers for preparing data to write into Sheets
+  contents:
+  - gs4_fodder
+  - gs4_formula
+- title: "Metadata on Sheets"
+  desc: >
+    Helpers for accessing Sheets and their metadata
+  contents:
+  - gs4_get
+  - gs4_find
+  - gs4_browse
+  - as_sheets_id
+  - gs4_random
+- title: "Modify a Sheet"
+  desc: >
+    Make changes to a (spread)Sheet or to the (work)sheets it contains
+  contents:
+  - gs4_create
+  - range_delete
+  - starts_with("sheet")
+- title: "Formatting and aesthetics"
+  desc: >
+    Change how a Sheet appears in the browser UI
+  contents:
+  - range_autofit
+- title: "Example Sheets"
+  desc: >
+    World-readable Sheets to use in examples and reprexes
+  contents:
+  - starts_with("gs4_example")
+- title: "Auth"
+  desc: >
+    Take explicit control of the googlesheets4 auth status or examine current state
+  contents:
+  - gs4_auth
+  - gs4_deauth
+  - gs4_user
+  - gs4_auth_configure
+  - gs4_scopes
+  - googlesheets4-configuration
+- title: "Programming around the Sheets API"
+  desc: >
+    Low-level functions used internally and made available for programming
+  contents:
+  - request_generate
+  - request_make
+  - gs4_token
+  - gs4_has_token
+  - gs4_endpoints
+  - matches("quiet")
+- title: "Operate on (spread)Sheets or the Sheets API"
+  desc: >
+    Functions that operate at the level of a (spread)sheet or the whole API/package
+  contents:
+  - starts_with("gs4_")
+- title: "Operate on (work)sheets"
+  desc: >
+    Functions that operate on whole (work)sheets
+  contents:
+  - starts_with("sheet_")
+- title: "Operate on a range of cells"
+  desc: >
+    Functions that can target a cell range
+  contents:
+  - starts_with("range_")

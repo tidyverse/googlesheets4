@@ -119,10 +119,39 @@ deleted and their contents are lost.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># create a Sheet with the default initial worksheet</span></span></span>
 <span class="r-in"><span><span class="op">(</span><span class="va">ss</span> <span class="op">&lt;-</span> <span class="fu"><a href="gs4_create.html">gs4_create</a></span><span class="op">(</span><span class="st">"sheet-resize-demo"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">sheet-resize-demo</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 61.4s.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  1m</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠹ Retry happens in  1m</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠸ Retry happens in  1m</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠼ Retry happens in  1m</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠴ Retry happens in  1m</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠦ Retry happens in 47s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠧ Retry happens in 44s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠇ Retry happens in 41s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠏ Retry happens in 38s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠋ Retry happens in 35s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in 32s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠹ Retry happens in 29s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠸ Retry happens in 26s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠼ Retry happens in 23s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠴ Retry happens in 20s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠦ Retry happens in 17s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠧ Retry happens in 14s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠇ Retry happens in 11s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠏ Retry happens in  8s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠋ Retry happens in  5s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  2s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  2s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 1.4s.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  2s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  0s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Request 3 successful!</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">&lt;googlesheets4_spreadsheet&gt;</span> <span style="color: #00BBBB;">────────────────────────────────────────</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Spreadsheet name: <span style="color: #00BBBB;">sheet-resize-demo</span>                           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               ID: 1yuRXF--G8dY5kXdQOuzD9SSYR-XY56Zyj87vlhQZjPg</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               ID: 1e37grECtsiWcoCj6DAxDrkbroeimkA5JNvHZEX3Oy6Q</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           Locale: en_US                                       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        Time zone: Etc/GMT                                     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      # of sheets: 1                                           </span>
@@ -174,7 +203,7 @@ deleted and their contents are lost.</p></dd>
 <span class="r-in"><span><span class="fu"><a href="gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"sheet-resize-demo"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">sheet-resize-demo</span> <span style="color: #555555;">&lt;id: 1yuRXF--G8dY5kXdQOuzD9SSYR-XY56Zyj87vlhQZjPg&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">sheet-resize-demo</span> <span style="color: #555555;">&lt;id: 1e37grECtsiWcoCj6DAxDrkbroeimkA5JNvHZEX3Oy6Q&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

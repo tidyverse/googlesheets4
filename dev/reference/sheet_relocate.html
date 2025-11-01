@@ -175,39 +175,6 @@ specified. Refer to an existing sheet by name (via a string) or by position
 <span class="r-in"><span>  <span class="fu">sheet_relocate</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bravo"</span>, <span class="st">"alfa"</span>, <span class="st">"echo"</span><span class="op">)</span>, .after <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="sheet_properties.html">sheet_names</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Relocating sheets in <span style="color: #00BBBB;">sheet-relocate-demo</span>.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 61.3s.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  1m</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠹ Retry happens in  1m</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠸ Retry happens in  1m</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠼ Retry happens in  1m</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠴ Retry happens in  1m</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠦ Retry happens in 48s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠧ Retry happens in 45s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠇ Retry happens in 42s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠏ Retry happens in 39s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠋ Retry happens in 36s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in 33s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠹ Retry happens in 30s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠸ Retry happens in 27s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠼ Retry happens in 24s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠴ Retry happens in 21s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠦ Retry happens in 18s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠧ Retry happens in 15s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠇ Retry happens in 12s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠏ Retry happens in  9s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠋ Retry happens in  6s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  3s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  3s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 6s.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  3s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  0s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  5s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠹ Retry happens in  3s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Request 3 successful!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠹ Retry happens in  3s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠹ Retry happens in  0s</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "charlie" "delta"   "foxtrot" "bravo"   "alfa"    "echo"   </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># clean up</span></span></span>
@@ -215,7 +182,7 @@ specified. Refer to an existing sheet by name (via a string) or by position
 <span class="r-in"><span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> File trashed:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">sheet-relocate-demo</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1zluTPe1KUVXOiGH6lNxlaMQE52Cy_Jl-YLD1dmgcchQ&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #555555;">&lt;id: 1ERKEgUmANppOMhpZGjQYClbLjL3PiyKbvKHDGuFugFw&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

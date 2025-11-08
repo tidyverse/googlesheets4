@@ -1,0 +1,56 @@
+# googlesheets4 auth
+
+googlesheets4 will, by default, help you interact with Sheets as an
+authenticated Google user. The package facilitates this process upon
+first need.
+
+## `gs4_deauth()`
+
+If you don’t need to access private Sheets, use
+[`gs4_deauth()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_deauth.md)
+to indicate there is no need for a token. This puts googlesheets4 into a
+de-authorized mode.
+
+Here’s how an R script might look if all you plan to do is read Sheets
+that are world-readable or readable by “anyone with a link”:
+
+``` r
+library(googlesheets4)
+
+gs4_deauth()
+
+# imagine this is the URL or ID of a Sheet readable by anyone (with a link)
+ss <- "?????"
+dat <- read_sheet(ss)
+```
+
+## Default auth behaviour and beyond
+
+As soon as googlesheets4 needs a token, it tries to discover one. If it
+fails, it engages with you interactively to help you get a token. Once
+successful, that token is remembered for subsequent use in that R
+session.
+
+Users can take control of auth proactively via the [`gs4_auth*()` family
+of
+functions](https://googlesheets4.tidyverse.org/reference/index.html#auth).
+Examples of what you can control or provide:
+
+- The email address of the Google identity you want to use.
+- Whether to cache tokens and where.
+- Whether to use out-of-band auth.
+- A service account token.
+- The OAuth app and/or API key.
+
+Auth is actually handled by the gargle package
+([gargle.r-lib.org](https://gargle.r-lib.org)), similar to googledrive,
+bigrquery, and gmailr, and gargle’s documentation and articles are the
+definitive guide to more advanced topics.
+
+## Multi-package auth
+
+It is common to use googlesheets4 together with the googledrive package
+([googledrive.tidyverse.org](https://googledrive.tidyverse.org)). See
+the article [Using googlesheets4 with
+googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html)
+for advice on how to streamline auth in this case.

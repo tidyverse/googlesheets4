@@ -1,0 +1,154 @@
+# How to create a googlesheets4 reprex
+
+“reprex” is short for “reproducible example”. A reprex is very helpful
+when reporting a bug or requesting a new feature. The [reprex
+package](https://reprex.tidyverse.org) helps with some of the fiddly
+mechanics of making a self-contained, well-formatted reprex.
+
+You might worry about some awkward things when using reprex with
+googlesheets4:
+
+- What about auth? What if you need to reprex with a private Sheet?
+- How do you make a Sheet readable by everyone or specific individuals,
+  like a package maintainer?
+
+Here we show various ways this can work, if rough order of preference.
+
+## Use a public example Sheet
+
+If you can make your point with one of the example Sheets, exposed via
+[`gs4_examples()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_examples.md)
+and
+[`gs4_example()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_examples.md),
+do so! You can call
+[`gs4_deauth()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_deauth.md)
+explicitly in your reprex to shut down any attempt to get a token.
+
+``` r
+library(googlesheets4)
+
+gs4_deauth()
+
+# put the googlesheets4 code you want to reproduce below here
+# the following is just an example, replace it with your own code
+gs4_example("mini-gap") %>% 
+  gs4_get()
+```
+
+## Create a Sheet and make it world-readable
+
+If you can create an example Sheet that makes your point and make it
+readable by “anyone with a link”, do so! You can call
+[`gs4_deauth()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_deauth.md)
+explicitly in your reprex to shut down any attempt to get a token.
+
+How do you make a Sheet world-readable? Do this setup once! It should
+not be part of your reprex. Two options:
+
+- In the browser: *Share* (big green button) \> *Advanced* \> *Who has
+  access … Change* \> *Link sharing: On - Anyone with the link*
+
+- Using googledrive:
+
+  ``` r
+  library(googledrive)
+
+  x <- drive_get("YOUR_SHEET_NAME")
+
+  drive_share(x, role = "reader", type = "anyone")
+  ```
+
+Now make a reprex just like we do with the official example Sheets:
+
+``` r
+library(googlesheets4)
+
+gs4_deauth()
+
+# put the googlesheets4 code you want to reproduce below here
+# the following is just an example, replace it with your own code
+gs4_get("YOUR_SHEET_ID_OR_URL_GOES_HERE")
+```
+
+### Grant access to specific user(s)
+
+If you can’t create a world-readable example Sheet, perhaps you can
+still share one with specific individuals, such as a package maintainer.
+How to share with specific user(s):
+
+- In the browser: *Share* (big green button) \> *People* \> *Enter names
+  or email addresses*.
+
+- Using googledrive:
+
+  ``` r
+  library(googledrive)
+
+  x <- drive_get("YOUR_SHEET_NAME")
+
+  drive_share(
+    x, 
+    role = "reader", type = "user",
+    email_address = "jane_package_maintainer@example.org"
+  )
+  ```
+
+See the next section for advice on your reprex code.
+
+## Use a private Sheet
+
+[`reprex::reprex()`](https://reprex.tidyverse.org/reference/reprex.html)
+eventually runs your code in a fresh, non-interactive R session. You
+won’t be there to do anything about auth, like select the right identity
+or approve the use of a cached token.
+
+This general situation is documented in the gargle vignette
+[Non-interactive
+auth](https://gargle.r-lib.org/articles/non-interactive-auth.html). But
+here’s the short version:
+
+- Develop a code snippet that works interactively for you, in a clean R
+  session.
+- Note who you are logged in as.
+  [`gs4_user()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_user.md)
+  reveals this if you’re not sure.
+- Insert an explicit call to `gs4_auth(email = "SOMEONE@example.org)`
+  into your code (see below).
+- Use
+  [`reprex::reprex()`](https://reprex.tidyverse.org/reference/reprex.html).
+
+Here’s an example of a snippet suitable for
+[`reprex::reprex()`](https://reprex.tidyverse.org/reference/reprex.html),
+assuming the user has successfully run it once interactively, so there’s
+a cached token for “<jane_doe@example.com>”.
+
+``` r
+library(googlesheets4)
+
+gs4_auth(email = "jane_doe@example.com")
+
+# put the googlesheets4 code you want to reproduce below here
+# the following is just an example, replace it with your own code
+ssid <- "some_very_long_string_of_letters_and_digits"
+gs4_get(ssid)
+```
+
+If you’re reluctant to reveal your email address and/or the spreadsheet
+id, you can use special comments to create a hidden chunk and a visible
+body chunk. If the Sheet is private and no one else will be able to
+access it anyway, this is still a good option to show exactly what
+you’re seeing locally.
+
+``` r
+library(googlesheets4)
+
+#+ include = FALSE
+# code here is executed but the results won't appear in rendered reprex
+gs4_auth(email = "jane_doe@example.com")
+ssid <- "some_very_long_string_of_letters_and_digits"
+
+#+ include = TRUE
+# put the googlesheets4 code you want to reproduce below here
+# the following is just an example, replace it with your own code
+gs4_get(ssid)
+```

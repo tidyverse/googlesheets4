@@ -132,7 +132,7 @@ read_sheet(ss)
 googledrive::drive_trash(ss)
 #> File trashed:
 #> • coexistent-blackbird
-#>   <id: 1tj9ElHsB7hbAxHMb6V_5JIyKUY6hZygMH_tLXo6gD-Q>
+#>   <id: 1XlNhh4bpbPssAaZz-da7zRrbjXKAe_d-5v-8Ac8HgGM>
 
 # create a Sheet with some initial, placeholder data
 ss <- gs4_create(
@@ -156,9 +156,9 @@ sheet_properties(ss)
 #> # A tibble: 3 × 8
 #>   name  index         id type  visible grid_rows grid_columns data  
 #>   <chr> <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 alpha     0 1304645902 GRID  TRUE            2            1 <NULL>
-#> 2 omega     1 1772469552 GRID  TRUE           33           11 <NULL>
-#> 3 df        2  845784615 GRID  TRUE            4            2 <NULL>
+#> 1 alpha     0  858005208 GRID  TRUE            2            1 <NULL>
+#> 2 omega     1  622243404 GRID  TRUE           33           11 <NULL>
+#> 3 df        2 1962072382 GRID  TRUE            4            2 <NULL>
 
 # view your magnificent creation in the browser
 gs4_browse(ss)
@@ -167,5 +167,5 @@ gs4_browse(ss)
 gs4_find("sheet-write-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-write-demo <id: 1kgGP2C8iB-v2JyF1aC_2IJ_zxxEoPur5T80KX1ftoqM>
+#> • sheet-write-demo <id: 1feHHPG4TfEtizGdhQTgTnVrU33StBQAzUVIqwmMs0mg>
 ```

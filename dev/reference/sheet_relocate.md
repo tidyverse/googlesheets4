@@ -114,6 +114,39 @@ ss %>%
 ss %>%
   sheet_relocate(c("bravo", "alfa", "echo"), .after = 10) %>%
   sheet_names()
+#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ℹ Will retry in 61.3s.
+#> ⠙ Retry happens in  1m
+#> ⠹ Retry happens in  1m
+#> ⠸ Retry happens in  1m
+#> ⠼ Retry happens in  1m
+#> ⠴ Retry happens in 50s
+#> ⠦ Retry happens in 47s
+#> ⠧ Retry happens in 44s
+#> ⠇ Retry happens in 41s
+#> ⠏ Retry happens in 38s
+#> ⠋ Retry happens in 35s
+#> ⠙ Retry happens in 32s
+#> ⠹ Retry happens in 29s
+#> ⠸ Retry happens in 26s
+#> ⠼ Retry happens in 23s
+#> ⠴ Retry happens in 20s
+#> ⠦ Retry happens in 17s
+#> ⠧ Retry happens in 14s
+#> ⠇ Retry happens in 11s
+#> ⠏ Retry happens in  8s
+#> ⠋ Retry happens in  5s
+#> ⠙ Retry happens in  2s
+#> ✖ Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ⠙ Retry happens in  2s
+#> ℹ Will retry in 6s.
+#> ⠙ Retry happens in  2s
+#> ⠙ Retry happens in  0s
+#> ⠙ Retry happens in  5s
+#> ⠹ Retry happens in  2s
+#> ✔ Request 3 successful!
+#> ⠹ Retry happens in  2s
+#> ⠹ Retry happens in  0s
 #> ✔ Relocating sheets in sheet-relocate-demo.
 #> [1] "charlie" "delta"   "foxtrot" "bravo"   "alfa"    "echo"   
 
@@ -122,5 +155,5 @@ gs4_find("sheet-relocate-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • sheet-relocate-demo
-#>   <id: 1w6grcV_X1501DRWw_dwfdql4BtsgH0l9-Bo5kGQfzAA>
+#>   <id: 1SjpXB1M-NMUr3OxVtGcFqBlrFx8coPgjKvPlC-7syNo>
 ```

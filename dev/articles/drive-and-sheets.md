@@ -83,9 +83,6 @@ ss <- drive_get("chicken-sheet")
 #> ✔ The input `path` resolved to exactly 1 file.
 
 gs4_get(ss)
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 1.8s.
-#> ✔ Request 2 successful!
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: chicken-sheet                               

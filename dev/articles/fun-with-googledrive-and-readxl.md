@@ -34,7 +34,7 @@ Put the iris data into a csv file.
 
 ``` r
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/tmp/RtmpRlEqEi/iris-240437cd94a2.csv"
+#> [1] "/tmp/Rtmpe8QN4J/iris-23fb625c381b.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -45,15 +45,15 @@ to upload the csv and simultaneously convert to a Sheet.
 ``` r
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#> • /tmp/RtmpRlEqEi/iris-240437cd94a2.csv
+#> • /tmp/Rtmpe8QN4J/iris-23fb625c381b.csv
 #> Uploaded into Drive file:
-#> • iris-240437cd94a2 <id: 1bgK1_16OERujsfXO-TmsDH9A0vEIRhLUhl6evpEtB9I>
+#> • iris-23fb625c381b <id: 1M7snpFN0ZgA095elF9rB-r_sFOTGtDphCfzSMp7IRXI>
 #> With MIME type:
 #> • application/vnd.google-apps.spreadsheet
 #> # A dribble: 1 × 3
 #>   name              id       drive_resource   
 #>   <chr>             <drv_id> <list>           
-#> 1 iris-240437cd94a2 1bgK1_1… <named list [37]>
+#> 1 iris-23fb625c381b 1M7snpF… <named list [37]>
 
 # visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -63,7 +63,7 @@ Read data from the private Sheet into R.
 
 ``` r
 read_sheet(iris_ss, range = "B1:D6")
-#> ✔ Reading from iris-240437cd94a2.csv.
+#> ✔ Reading from iris-23fb625c381b.csv.
 #> ✔ Range B1:D6.
 #> # A tibble: 5 × 3
 #>   Sepal.Width Petal.Length Petal.Width
@@ -81,12 +81,12 @@ Download the Sheet as an Excel workbook.
 
 ``` r
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/tmp/RtmpRlEqEi/iris-240437cd94a2.xlsx"
+#> [1] "/tmp/Rtmpe8QN4J/iris-23fb625c381b.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#> • iris-240437cd94a2 <id: 1bgK1_16OERujsfXO-TmsDH9A0vEIRhLUhl6evpEtB9I>
+#> • iris-23fb625c381b <id: 1M7snpFN0ZgA095elF9rB-r_sFOTGtDphCfzSMp7IRXI>
 #> Saved locally as:
-#> • /tmp/RtmpRlEqEi/iris-240437cd94a2.xlsx
+#> • /tmp/Rtmpe8QN4J/iris-23fb625c381b.xlsx
 ```
 
 ## Read xlsx with readxl
@@ -121,5 +121,5 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_trash(iris_ss)
 #> File trashed:
-#> • iris-240437cd94a2 <id: 1bgK1_16OERujsfXO-TmsDH9A0vEIRhLUhl6evpEtB9I>
+#> • iris-23fb625c381b <id: 1M7snpFN0ZgA095elF9rB-r_sFOTGtDphCfzSMp7IRXI>
 ```

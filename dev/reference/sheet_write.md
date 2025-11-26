@@ -117,9 +117,9 @@ df <- data.frame(
 
 # specify only a data frame, get a new Sheet, with a random name
 ss <- write_sheet(df)
-#> ✔ Creating new Sheet: coexistent-blackbird.
+#> ✔ Creating new Sheet: alive-ratfish.
 read_sheet(ss)
-#> ✔ Reading from coexistent-blackbird.
+#> ✔ Reading from alive-ratfish.
 #> ✔ Range df.
 #> # A tibble: 3 × 2
 #>       x y    
@@ -131,8 +131,7 @@ read_sheet(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • coexistent-blackbird
-#>   <id: 19BSMgRMkDdzd7Q94HQLiydPCnCzxC7g69xo0y5k78mM>
+#> • alive-ratfish <id: 12D1UL7f6uGqQ1D-ttdLKZWpDv_0K71W7Ar_fQZWXy48>
 
 # create a Sheet with some initial, placeholder data
 ss <- gs4_create(
@@ -156,9 +155,9 @@ sheet_properties(ss)
 #> # A tibble: 3 × 8
 #>   name  index         id type  visible grid_rows grid_columns data  
 #>   <chr> <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 alpha     0  523725648 GRID  TRUE            2            1 <NULL>
-#> 2 omega     1 1061056284 GRID  TRUE           33           11 <NULL>
-#> 3 df        2  229106802 GRID  TRUE            4            2 <NULL>
+#> 1 alpha     0 1350821400 GRID  TRUE            2            1 <NULL>
+#> 2 omega     1 1267122903 GRID  TRUE           33           11 <NULL>
+#> 3 df        2  506658588 GRID  TRUE            4            2 <NULL>
 
 # view your magnificent creation in the browser
 gs4_browse(ss)
@@ -167,5 +166,5 @@ gs4_browse(ss)
 gs4_find("sheet-write-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-write-demo <id: 1FMux5tijibJ8ewx55bYBA-4OOuEeba1bSUsrlLZm3aw>
+#> • sheet-write-demo <id: 1tEs833JsKofYRQ-yemPtSrUL84pKEPIv_LGBw386KPU>
 ```

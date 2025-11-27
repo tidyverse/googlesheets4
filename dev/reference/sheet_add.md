@@ -77,9 +77,6 @@ Other worksheet functions:
 ``` r
 ss <- gs4_create("add-sheets-to-me")
 #> ✔ Creating new Sheet: add-sheets-to-me.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 1.4s.
-#> ✔ Request 2 successful!
 
 # the only required argument is the target spreadsheet
 ss %>% sheet_add()
@@ -117,17 +114,17 @@ sheet_properties(ss)
 #> # A tibble: 7 × 8
 #>   name        index      id type  visible grid_rows grid_columns data  
 #>   <chr>       <int>   <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 eggplant        0  2.76e8 GRID  TRUE            3            6 <NULL>
+#> 1 eggplant        0  1.42e9 GRID  TRUE            3            6 <NULL>
 #> 2 Sheet1          1  0      GRID  TRUE         1000           26 <NULL>
-#> 3 apple           2  2.07e9 GRID  TRUE         1000           26 <NULL>
-#> 4 banana          3  4.23e8 GRID  TRUE         1000           26 <NULL>
-#> 5 Sheet2          4  9.47e8 GRID  TRUE         1000           26 <NULL>
-#> 6 coconut         5  4.14e8 GRID  TRUE         1000           26 <NULL>
-#> 7 dragonfruit     6  6.69e8 GRID  TRUE         1000           26 <NULL>
+#> 3 apple           2  3.31e8 GRID  TRUE         1000           26 <NULL>
+#> 4 banana          3  8.82e8 GRID  TRUE         1000           26 <NULL>
+#> 5 Sheet2          4  5.62e8 GRID  TRUE         1000           26 <NULL>
+#> 6 coconut         5  1.93e8 GRID  TRUE         1000           26 <NULL>
+#> 7 dragonfruit     6  1.05e9 GRID  TRUE         1000           26 <NULL>
 
 # clean up
 gs4_find("add-sheets-to-me") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • add-sheets-to-me <id: 1jyZzT3CrxmjtC75JFHWWgwE_N_CMyNI-vGhN3XvkJwg>
+#> • add-sheets-to-me <id: 1__LzchmTmPyJ3LPGRe4PrjQzVu0xPS6tKGOzHmLN8fQ>
 ```

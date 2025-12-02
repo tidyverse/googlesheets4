@@ -155,7 +155,7 @@ Other write functions:
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: range-write-demo                            
-#>               ID: 1VBptgHh_m9bcDOM36jFBhAgrtxnS3OPrnaI5Jupc5yA
+#>               ID: 1QXhQKvvOyU0MjMfulr41jSPl-joAHzQkrD31EEIt77o
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           
@@ -200,5 +200,5 @@ range_write(ss, data = dat, range = "beta!C5", col_names = FALSE)
 gs4_find("range-write-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • range-write-demo <id: 1VBptgHh_m9bcDOM36jFBhAgrtxnS3OPrnaI5Jupc5yA>
+#> • range-write-demo <id: 1QXhQKvvOyU0MjMfulr41jSPl-joAHzQkrD31EEIt77o>
 ```

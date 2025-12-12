@@ -66,7 +66,7 @@ It is powered by the gargle package, which consults several options:
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: gs4-quiet-demo                              
-#>               ID: 1IV1PhzgyKpduU-Vmd_uy5wHFNZ-cc1vWV7Qm53yw6Xo
+#>               ID: 1-ZZP1TDGQm4cQB99X65X0RAJxkHkGy83Q-5LWDC1oyk
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -112,5 +112,5 @@ read_sheet(ss)
 gs4_find("gs4-quiet-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • gs4-quiet-demo <id: 1IV1PhzgyKpduU-Vmd_uy5wHFNZ-cc1vWV7Qm53yw6Xo>
+#> • gs4-quiet-demo <id: 1-ZZP1TDGQm4cQB99X65X0RAJxkHkGy83Q-5LWDC1oyk>
 ```

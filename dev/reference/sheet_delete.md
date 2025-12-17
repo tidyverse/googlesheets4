@@ -76,10 +76,10 @@ sheet_properties(ss)
 #>   name   index         id type  visible grid_rows grid_columns data  
 #>   <chr>  <int>      <int> <chr> <lgl>       <int>        <int> <list>
 #> 1 Sheet1     0          0 GRID  TRUE         1000           26 <NULL>
-#> 2 alpha      1 1735444919 GRID  TRUE         1000           26 <NULL>
-#> 3 beta       2  575266330 GRID  TRUE         1000           26 <NULL>
-#> 4 gamma      3  646406532 GRID  TRUE         1000           26 <NULL>
-#> 5 delta      4 1542048738 GRID  TRUE         1000           26 <NULL>
+#> 2 alpha      1  165336996 GRID  TRUE         1000           26 <NULL>
+#> 3 beta       2 1296704919 GRID  TRUE         1000           26 <NULL>
+#> 4 gamma      3 1642925991 GRID  TRUE         1000           26 <NULL>
+#> 5 delta      4 1183810672 GRID  TRUE         1000           26 <NULL>
 
 # delete sheets
 sheet_delete(ss, 1)
@@ -98,12 +98,12 @@ sheet_properties(ss)
 #> # A tibble: 1 × 8
 #>   name  index         id type  visible grid_rows grid_columns data  
 #>   <chr> <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 delta     0 1542048738 GRID  TRUE         1000           26 <NULL>
+#> 1 delta     0 1183810672 GRID  TRUE         1000           26 <NULL>
 
 # clean up
 gs4_find("delete-sheets-from-me") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • delete-sheets-from-me
-#>   <id: 1ZSfiIf_ASXFd6--FQfRmUFHctwT_tRJ5DdHE8jDx-0Y>
+#>   <id: 1zdvif6QdJL2kSh9azD3t-FAZYdFgi0sR_Y00jB_7TsI>
 ```

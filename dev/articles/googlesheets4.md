@@ -208,7 +208,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: unfearing-guineafowl                        
-#>               ID: 1dL_3h3lnTsMwWgQ3bKJU3a5sr5cGJPhaeQM7RzRioz8
+#>               ID: 1GhGJFu2g0XBHsJ_ou44ZrmuQqoWpJAk6lT4c5o2EfzE
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -232,7 +232,7 @@ so we can specify the new Sheet’s name.
 googledrive::drive_trash(ss)
 #> File trashed:
 #> • unfearing-guineafowl
-#>   <id: 1dL_3h3lnTsMwWgQ3bKJU3a5sr5cGJPhaeQM7RzRioz8>
+#>   <id: 1GhGJFu2g0XBHsJ_ou44ZrmuQqoWpJAk6lT4c5o2EfzE>
 
 ss <- gs4_create("testy-hedgehog", sheets = df)
 #> ✔ Creating new Sheet: testy-hedgehog.
@@ -240,7 +240,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: testy-hedgehog                              
-#>               ID: 1p53D0Pjl3Z-2ZqgGc_A08n86iY6OCanMW1reR58SGcs
+#>               ID: 1dP2YeDQ7UDve4xt94m0yLjvfGWiZ0UVwf3lO55F72KE
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -262,7 +262,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: testy-hedgehog                              
-#>               ID: 1p53D0Pjl3Z-2ZqgGc_A08n86iY6OCanMW1reR58SGcs
+#>               ID: 1dP2YeDQ7UDve4xt94m0yLjvfGWiZ0UVwf3lO55F72KE
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           
@@ -300,6 +300,11 @@ adds one or more rows to an existing sheet.
 
 ``` r
 ss %>% sheet_append(data.frame(x = 11, letters[11]), sheet = "df")
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 1s.
+#> ✖ Request 2 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 1.5s.
+#> ✔ Request 3 successful!
 #> ✔ Writing to testy-hedgehog.
 #> ✔ Appending 1 row to df.
 read_sheet(ss, sheet = "df")
@@ -341,12 +346,12 @@ sheet_properties(ss)
 #> # A tibble: 2 × 8
 #>   name     index         id type  visible grid_rows grid_columns data  
 #>   <chr>    <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 df           0  153091054 GRID  TRUE            9            2 <NULL>
-#> 2 chickwts     1 1141151892 GRID  TRUE           72            2 <NULL>
+#> 1 df           0 1176725117 GRID  TRUE            9            2 <NULL>
+#> 2 chickwts     1  517031219 GRID  TRUE           72            2 <NULL>
 
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • testy-hedgehog <id: 1p53D0Pjl3Z-2ZqgGc_A08n86iY6OCanMW1reR58SGcs>
+#> • testy-hedgehog <id: 1dP2YeDQ7UDve4xt94m0yLjvfGWiZ0UVwf3lO55F72KE>
 ```
 
 The article [Write

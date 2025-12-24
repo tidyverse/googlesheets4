@@ -127,14 +127,7 @@ ss_aaa %>%
   sheet_copy("chickwts", to_ss = ss_bbb)
 #> ✔ Copying sheet chickwts from sheet-copy-demo-aaa to
 #>   sheet-copy-demo-bbb.
-#> ✖ Request 1 failed [500: DATA_LOSS].
-#> ℹ Will retry in 3.8s.
-#> ⠙ Retry happens in  3s
-#> ⠹ Retry happens in  3s
-#> ✔ Request 2 successful!
-#> ⠹ Retry happens in  3s
-#> ⠹ Retry happens in  0s
-#> ✔ Copied as Copy of chickwts 1.
+#> ✔ Copied as Copy of chickwts.
 
 # copy 'chickwts' sheet from first Sheet to second,
 # WITH a specific name and into a specific location
@@ -152,7 +145,7 @@ gs4_find("sheet-copy-demo") %>%
   googledrive::drive_trash()
 #> Files trashed:
 #> • sheet-copy-demo-bbb
-#>   <id: 16NBvVW9wSU_oUVv2HsJe1C9s4viN50G-eSpcPpd9zbM>
+#>   <id: 1bKxS6PGiq41ondn9g8Iu-xtf-2fyd3VJVmVJQGLK1mk>
 #> • sheet-copy-demo-aaa
-#>   <id: 1wkcSNiFyJbrV1GdaPcg_mYr3ooJRpFH1yMiUbelHgmU>
+#>   <id: 1IZRbFS2zslav9b1lRSwlufmE_5zleCRpQ_DYmTGjmcI>
 ```

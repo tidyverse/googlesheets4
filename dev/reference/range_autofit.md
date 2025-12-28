@@ -74,18 +74,11 @@ dat <- tibble::tibble(
 
 ss <- gs4_create("range-autofit-demo", sheets = dat)
 #> ✔ Creating new Sheet: range-autofit-demo.
-#> ✖ Request 1 failed [502].
-#> ℹ Will retry in 4.5s.
-#> ⠙ Retry happens in  4s
-#> ⠹ Retry happens in  1s
-#> ✔ Request 2 successful!
-#> ⠹ Retry happens in  1s
-#> ⠹ Retry happens in  0s
 ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: range-autofit-demo                          
-#>               ID: 1kt125pOTzHuQXaYhht3KiPiDdSBRTJY_g9pNWipXYzg
+#>               ID: 1YN6h1zZZOWprBGqyOerOK0bPqZ-Jxbok2SxToY1uZ1s
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -122,5 +115,5 @@ gs4_find("range-autofit-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • range-autofit-demo
-#>   <id: 1kt125pOTzHuQXaYhht3KiPiDdSBRTJY_g9pNWipXYzg>
+#>   <id: 1YN6h1zZZOWprBGqyOerOK0bPqZ-Jxbok2SxToY1uZ1s>
 ```

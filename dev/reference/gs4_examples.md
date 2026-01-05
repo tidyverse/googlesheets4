@@ -77,6 +77,22 @@ gs4_example("gapminder")
 #> (Named range): (A1 range)        
 #>        canada: 'Americas'!A38:F49
 gs4_example("deaths")
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 2.6s.
+#> ⠙ Retry happens in  2s
+#> ✖ Request 2 failed [503: UNAVAILABLE].
+#> ⠙ Retry happens in  2s
+#> ℹ Will retry in 13s.
+#> ⠙ Retry happens in  2s
+#> ⠙ Retry happens in  3s
+#> ⠙ Retry happens in 12s
+#> ⠹ Retry happens in  9s
+#> ⠸ Retry happens in  6s
+#> ⠼ Retry happens in  3s
+#> ⠴ Retry happens in  0s
+#> ✔ Request 3 successful!
+#> ⠴ Retry happens in  0s
+#> ⠴ Retry happens in  0s
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #>  Spreadsheet name: deaths                                      

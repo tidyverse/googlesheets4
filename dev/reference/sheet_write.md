@@ -117,9 +117,9 @@ df <- data.frame(
 
 # specify only a data frame, get a new Sheet, with a random name
 ss <- write_sheet(df)
-#> ✔ Creating new Sheet: endemic-grosbeak.
+#> ✔ Creating new Sheet: coexistent-blackbird.
 read_sheet(ss)
-#> ✔ Reading from endemic-grosbeak.
+#> ✔ Reading from coexistent-blackbird.
 #> ✔ Range df.
 #> # A tibble: 3 × 2
 #>       x y    
@@ -131,7 +131,8 @@ read_sheet(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • endemic-grosbeak <id: 15FoKDs5-nomccjtIVS4NMEb6KmF1Rwx1hBj5Rw91XDw>
+#> • coexistent-blackbird
+#>   <id: 1Sjgn8a2cvh5zQTPZFe45w_b-Cg50XJZ4Oj51MWrAX3w>
 
 # create a Sheet with some initial, placeholder data
 ss <- gs4_create(
@@ -155,9 +156,9 @@ sheet_properties(ss)
 #> # A tibble: 3 × 8
 #>   name  index         id type  visible grid_rows grid_columns data  
 #>   <chr> <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 alpha     0  333236844 GRID  TRUE            2            1 <NULL>
-#> 2 omega     1  494652716 GRID  TRUE           33           11 <NULL>
-#> 3 df        2 1753087472 GRID  TRUE            4            2 <NULL>
+#> 1 alpha     0 1344787287 GRID  TRUE            2            1 <NULL>
+#> 2 omega     1 1688661363 GRID  TRUE           33           11 <NULL>
+#> 3 df        2 1458146622 GRID  TRUE            4            2 <NULL>
 
 # view your magnificent creation in the browser
 gs4_browse(ss)
@@ -166,5 +167,5 @@ gs4_browse(ss)
 gs4_find("sheet-write-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-write-demo <id: 1kg5aZC76D5ap3NPc-xcbRzwpqVD7RH5F2u_tv8Z2iU0>
+#> • sheet-write-demo <id: 1JVbDBLrORjXn4HS1EcukCB9oY2koRno_T1XzoPEQGLM>
 ```

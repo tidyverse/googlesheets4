@@ -23,5 +23,5 @@ A character vector.
 
 ``` r
 gs4_random()
-#> [1] "meek-nudibranch"
+#> [1] "fatherly-graywolf"
 ```

@@ -132,7 +132,7 @@ read_sheet(ss)
 googledrive::drive_trash(ss)
 #> File trashed:
 #> • coexistent-blackbird
-#>   <id: 1dFxpyo32qWy3iNcdPD0YRewCW_T-lVxc7nzaSNelINw>
+#>   <id: 1SGhfqB1DrIyjOKWlf4bC72Js9KolnDqXRPPz3NSoGa4>
 
 # create a Sheet with some initial, placeholder data
 ss <- gs4_create(
@@ -154,11 +154,11 @@ sheet_write(mtcars, ss = ss, sheet = "omega")
 # get an overview of the sheets
 sheet_properties(ss)
 #> # A tibble: 3 × 8
-#>   name  index         id type  visible grid_rows grid_columns data  
-#>   <chr> <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 alpha     0  606374742 GRID  TRUE            2            1 <NULL>
-#> 2 omega     1 1301501031 GRID  TRUE           33           11 <NULL>
-#> 3 df        2 1218001686 GRID  TRUE            4            2 <NULL>
+#>   name  index        id type  visible grid_rows grid_columns data  
+#>   <chr> <int>     <int> <chr> <lgl>       <int>        <int> <list>
+#> 1 alpha     0 123262278 GRID  TRUE            2            1 <NULL>
+#> 2 omega     1 477723254 GRID  TRUE           33           11 <NULL>
+#> 3 df        2 837315458 GRID  TRUE            4            2 <NULL>
 
 # view your magnificent creation in the browser
 gs4_browse(ss)
@@ -167,5 +167,5 @@ gs4_browse(ss)
 gs4_find("sheet-write-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-write-demo <id: 1Vaz8j0q4HIXoDoxdDkTu86ctWbSxZm_rz4wS82g9Y4w>
+#> • sheet-write-demo <id: 12gkY2oTAxqt7hqiGfFrfRc1fyLMthbUbJFl7vMTvBMc>
 ```

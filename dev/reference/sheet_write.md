@@ -132,7 +132,7 @@ read_sheet(ss)
 googledrive::drive_trash(ss)
 #> File trashed:
 #> • coexistent-blackbird
-#>   <id: 17qXfu58IuNOkZVCNUv3gdhyU122BT_W0qW_CClLZj3M>
+#>   <id: 1E9w0lnUXu5LBJevqEX91zQ_CRTztttBYQJAJ5coqLF8>
 
 # create a Sheet with some initial, placeholder data
 ss <- gs4_create(
@@ -143,39 +143,6 @@ ss <- gs4_create(
 
 # write df into its own, new sheet
 sheet_write(df, ss = ss)
-#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
-#> ℹ Will retry in 61.9s.
-#> ⠙ Retry happens in  1m
-#> ⠹ Retry happens in  1m
-#> ⠸ Retry happens in  1m
-#> ⠼ Retry happens in  1m
-#> ⠴ Retry happens in 49s
-#> ⠦ Retry happens in 46s
-#> ⠧ Retry happens in 43s
-#> ⠇ Retry happens in 40s
-#> ⠏ Retry happens in 37s
-#> ⠋ Retry happens in 34s
-#> ⠙ Retry happens in 31s
-#> ⠹ Retry happens in 28s
-#> ⠸ Retry happens in 25s
-#> ⠼ Retry happens in 22s
-#> ⠴ Retry happens in 19s
-#> ⠦ Retry happens in 16s
-#> ⠧ Retry happens in 13s
-#> ⠇ Retry happens in 10s
-#> ⠏ Retry happens in  7s
-#> ⠋ Retry happens in  4s
-#> ⠙ Retry happens in  1s
-#> ✖ Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].
-#> ⠙ Retry happens in  1s
-#> ℹ Will retry in 5.1s.
-#> ⠙ Retry happens in  1s
-#> ⠙ Retry happens in  0s
-#> ⠙ Retry happens in  4s
-#> ⠹ Retry happens in  1s
-#> ✔ Request 3 successful!
-#> ⠹ Retry happens in  1s
-#> ⠹ Retry happens in  0s
 #> ✔ Writing to sheet-write-demo.
 #> ✔ Writing to sheet df.
 
@@ -189,9 +156,9 @@ sheet_properties(ss)
 #> # A tibble: 3 × 8
 #>   name  index         id type  visible grid_rows grid_columns data  
 #>   <chr> <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 alpha     0 1487132606 GRID  TRUE            2            1 <NULL>
-#> 2 omega     1 1578760764 GRID  TRUE           33           11 <NULL>
-#> 3 df        2 2067890884 GRID  TRUE            4            2 <NULL>
+#> 1 alpha     0 1770177484 GRID  TRUE            2            1 <NULL>
+#> 2 omega     1  105406618 GRID  TRUE           33           11 <NULL>
+#> 3 df        2 1308133364 GRID  TRUE            4            2 <NULL>
 
 # view your magnificent creation in the browser
 gs4_browse(ss)
@@ -200,5 +167,5 @@ gs4_browse(ss)
 gs4_find("sheet-write-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-write-demo <id: 1_VjBZp7H2ALh-Dhz3B3biRlr7kK4bh-_WAkf8kZVnq8>
+#> • sheet-write-demo <id: 1-l50FsGWBnvmnBj1_jwwXeZnnEQdLw_dBPzLUsP4HAk>
 ```

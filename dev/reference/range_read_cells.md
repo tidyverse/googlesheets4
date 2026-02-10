@@ -139,14 +139,6 @@ range_read_cells(
 )
 #> ✔ Reading from formulas-and-formats.
 #> ✔ Range Sheet1.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 6.5s.
-#> ⠙ Retry happens in  6s
-#> ⠹ Retry happens in  4s
-#> ⠸ Retry happens in  1s
-#> ✔ Request 2 successful!
-#> ⠸ Retry happens in  1s
-#> ⠸ Retry happens in  0s
 #> # A tibble: 678 × 4
 #>      row   col loc   cell      
 #>    <int> <int> <chr> <list>    

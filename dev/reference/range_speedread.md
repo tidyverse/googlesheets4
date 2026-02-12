@@ -134,7 +134,7 @@ if (require("readr")) {
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: weariful-bunting                            
-#>               ID: 13_5AZVOdu8K0l5j24BR4JKqAQnO2MfrEatzT9ozu0As
+#>               ID: 1lw8wELPG7DCEE4MtUvCBkeabLZNdiP3yh7eZN3ttp1A
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -147,7 +147,7 @@ if (require("readr")) {
 range_speedread(ss)
 #> ✔ Reading from weariful-bunting.
 #> ℹ Export URL:
-#>   <https://docs.google.com/spreadsheets/d/13_5AZVOdu8K0l5j24BR4JKqAQnO2MfrEatzT9ozu0As/export?format=csv>
+#>   <https://docs.google.com/spreadsheets/d/1lw8wELPG7DCEE4MtUvCBkeabLZNdiP3yh7eZN3ttp1A/export?format=csv>
 #> Rows: 71 Columns: 2
 #> ── Column specification ───────────────────────────────────────────────
 #> Delimiter: ","
@@ -174,5 +174,5 @@ range_speedread(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • weariful-bunting <id: 13_5AZVOdu8K0l5j24BR4JKqAQnO2MfrEatzT9ozu0As>
+#> • weariful-bunting <id: 1lw8wELPG7DCEE4MtUvCBkeabLZNdiP3yh7eZN3ttp1A>
 ```

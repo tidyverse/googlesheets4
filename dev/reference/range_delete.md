@@ -121,5 +121,5 @@ gs4_find("range-delete-example") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • range-delete-example
-#>   <id: 1pkDkVdSNPxm2jBPHpceQC9tCAYPspadX4-pdvk_Lljg>
+#>   <id: 14XyY73CYdmh69as3F7HrIbtB_SrksS6sKkYQo1-19lk>
 ```

@@ -130,11 +130,11 @@ if (require("readr")) {
 
 # write a Sheet that, by default, is NOT world-readable
 (ss <- sheet_write(chickwts))
-#> ✔ Creating new Sheet: magnesial-ambushbug.
+#> ✔ Creating new Sheet: weariful-bunting.
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
-#> Spreadsheet name: magnesial-ambushbug                         
-#>               ID: 11altXYJ3GGaHwqn-mWHkwKQH6s8Z6E97NT4CafvSSDc
+#> Spreadsheet name: weariful-bunting                            
+#>               ID: 1yglqH79w3JYVvqtc1suUc2Fg0drh4Zb5AEslHN3Pxkk
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -145,9 +145,9 @@ if (require("readr")) {
 
 # demo that range_speedread() sends a token, which is why we can read this
 range_speedread(ss)
-#> ✔ Reading from magnesial-ambushbug.
+#> ✔ Reading from weariful-bunting.
 #> ℹ Export URL:
-#>   <https://docs.google.com/spreadsheets/d/11altXYJ3GGaHwqn-mWHkwKQH6s8Z6E97NT4CafvSSDc/export?format=csv>
+#>   <https://docs.google.com/spreadsheets/d/1yglqH79w3JYVvqtc1suUc2Fg0drh4Zb5AEslHN3Pxkk/export?format=csv>
 #> Rows: 71 Columns: 2
 #> ── Column specification ───────────────────────────────────────────────
 #> Delimiter: ","
@@ -174,6 +174,5 @@ range_speedread(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • magnesial-ambushbug
-#>   <id: 11altXYJ3GGaHwqn-mWHkwKQH6s8Z6E97NT4CafvSSDc>
+#> • weariful-bunting <id: 1yglqH79w3JYVvqtc1suUc2Fg0drh4Zb5AEslHN3Pxkk>
 ```

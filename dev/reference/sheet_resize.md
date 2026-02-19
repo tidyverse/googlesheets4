@@ -78,7 +78,7 @@ Other worksheet functions:
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheet-resize-demo                           
-#>               ID: 1UxWDffjDZc_m86st3qSmCSoIpvYpd7i5sTxpHHZmogI
+#>               ID: 14eZbCDKrvf9ap9qpPtB-J2w0U-K7N8D-WGaSjw_cUOY
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -130,5 +130,5 @@ sheet_properties(ss)
 gs4_find("sheet-resize-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-resize-demo <id: 1UxWDffjDZc_m86st3qSmCSoIpvYpd7i5sTxpHHZmogI>
+#> • sheet-resize-demo <id: 14eZbCDKrvf9ap9qpPtB-J2w0U-K7N8D-WGaSjw_cUOY>
 ```

@@ -51,9 +51,6 @@ gs4_find()
 
 # see 5 Sheets, prioritized by creation time
 x <- gs4_find(order_by = "createdTime desc", n_max = 5)
-#> ✖ Request 1 failed [500: DATA_LOSS].
-#> ℹ Will retry in 1.9s.
-#> ✔ Request 2 successful!
 x
 #> # A dribble: 5 × 3
 #>   name              id       drive_resource   

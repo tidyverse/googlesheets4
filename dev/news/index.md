@@ -4,14 +4,10 @@
 
 ## googlesheets4 1.1.2
 
-CRAN release: 2025-09-03
-
 - No significant user-facing changes. Release motivated by documentation
   updates to support HTML reference manuals on CRAN.
 
 ## googlesheets4 1.1.1
-
-CRAN release: 2023-06-11
 
 - `gs4_auth(subject =)` is a new argument that can be used with
   `gs4_auth(path =)`, i.e. when using a service account. The `path` and
@@ -33,8 +29,6 @@ CRAN release: 2023-06-11
 - Various internal changes to sync up with gargle v1.5.0.
 
 ## googlesheets4 1.1.0
-
-CRAN release: 2023-03-23
 
 ### Syncing up with gargle
 
@@ -59,8 +53,6 @@ now warns if the user specifies both `email` and `path`, because this is
 almost always an error.
 
 ## googlesheets4 1.0.1
-
-CRAN release: 2022-08-13
 
 The mere existence of an invalid named range no longer prevents
 googlesheets4 from dealing with a Sheet
@@ -90,8 +82,6 @@ instead of
 [`cli::cli_bullets()`](https://cli.r-lib.org/reference/cli_bullets.html).
 
 ## googlesheets4 1.0.0
-
-CRAN release: 2021-07-21
 
 ### User interface
 
@@ -159,8 +149,6 @@ policy](https://www.tidyverse.org/blog/2019/04/r-version-support/).
 
 ## googlesheets4 0.3.0
 
-CRAN release: 2021-03-04
-
 All requests are now made with retry capability. Specifically, when a
 request fails due to a `429 RESOURCE_EXHAUSTED` error, it is retried a
 few times, with suitable delays. Note that if it appears that you
@@ -176,8 +164,6 @@ different Google identities.
 retrieves information about protected ranges.
 
 ## googlesheets4 0.2.0
-
-CRAN release: 2020-05-08
 
 googlesheets4 can now write and modify Sheets.
 
@@ -319,13 +305,9 @@ has this class.
 
 ## googlesheets4 0.1.1
 
-CRAN release: 2020-03-21
-
 - Patch release to modify a test fixture, to be compatible with tibble
   v3.0. Related to tibble’s increased type strictness.
 
 ## googlesheets4 0.1.0
-
-CRAN release: 2019-11-04
 
 - Added a `NEWS.md` file to track changes to the package.

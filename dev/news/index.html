@@ -60,17 +60,17 @@
 <h2 class="pkg-version" data-toc-text="development version" id="googlesheets4-development-version">googlesheets4 (development version)<a class="anchor" aria-label="anchor" href="#googlesheets4-development-version"></a></h2>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.1.2" id="googlesheets4-112">googlesheets4 1.1.2<a class="anchor" aria-label="anchor" href="#googlesheets4-112"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.1.2" id="googlesheets4-112">googlesheets4 1.1.2<a class="anchor" aria-label="anchor" href="#googlesheets4-112"></a></h2><p class="text-muted">CRAN release: 2025-09-03</p>
 <ul><li>No significant user-facing changes. Release motivated by documentation updates to support HTML reference manuals on CRAN.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.1.1" id="googlesheets4-111">googlesheets4 1.1.1<a class="anchor" aria-label="anchor" href="#googlesheets4-111"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.1.1" id="googlesheets4-111">googlesheets4 1.1.1<a class="anchor" aria-label="anchor" href="#googlesheets4-111"></a></h2><p class="text-muted">CRAN release: 2023-06-11</p>
 <ul><li><p><code>gs4_auth(subject =)</code> is a new argument that can be used with <code>gs4_auth(path =)</code>, i.e. when using a service account. The <code>path</code> and <code>subject</code> arguments are ultimately processed by <code><a href="https://gargle.r-lib.org/reference/credentials_service_account.html" class="external-link">gargle::credentials_service_account()</a></code> and support the use of a service account to impersonate a normal user.</p></li>
 <li><p><code><a href="../reference/gs4_scopes.html">gs4_scopes()</a></code> is a new function to access scopes relevant to the Sheets and Drive APIs. When called without arguments, <code><a href="../reference/gs4_scopes.html">gs4_scopes()</a></code> returns a named vector of scopes, where the names are the associated short aliases. <code><a href="../reference/gs4_scopes.html">gs4_scopes()</a></code> can also be called with a character vector; any element that’s recognized as a short alias is replaced with the associated full scope (<a href="https://github.com/tidyverse/googlesheets4/issues/291" class="external-link">#291</a>).</p></li>
 <li><p>Various internal changes to sync up with gargle v1.5.0.</p></li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.1.0" id="googlesheets4-110">googlesheets4 1.1.0<a class="anchor" aria-label="anchor" href="#googlesheets4-110"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.1.0" id="googlesheets4-110">googlesheets4 1.1.0<a class="anchor" aria-label="anchor" href="#googlesheets4-110"></a></h2><p class="text-muted">CRAN release: 2023-03-23</p>
 <div class="section level3">
 <h3 id="syncing-up-with-gargle-1-1-0">Syncing up with gargle<a class="anchor" aria-label="anchor" href="#syncing-up-with-gargle-1-1-0"></a></h3>
 <p>Version 1.3.0 of gargle introduced some changes around OAuth and googlesheets4 is syncing with up that:</p>
@@ -85,7 +85,7 @@
 </div>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.1" id="googlesheets4-101">googlesheets4 1.0.1<a class="anchor" aria-label="anchor" href="#googlesheets4-101"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.1" id="googlesheets4-101">googlesheets4 1.0.1<a class="anchor" aria-label="anchor" href="#googlesheets4-101"></a></h2><p class="text-muted">CRAN release: 2022-08-13</p>
 <p>The mere existence of an invalid named range no longer prevents googlesheets4 from dealing with a Sheet (<a href="https://github.com/tidyverse/googlesheets4/issues/175" class="external-link">#175</a>).</p>
 <p>googlesheets4 now understands that Google Sheets can have 10 million cells (up from 5 million) (<a href="https://github.com/tidyverse/googlesheets4/issues/257" class="external-link">#257</a>).</p>
 <div class="section level3">
@@ -97,7 +97,7 @@
 </div>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.0.0" id="googlesheets4-100">googlesheets4 1.0.0<a class="anchor" aria-label="anchor" href="#googlesheets4-100"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.0.0" id="googlesheets4-100">googlesheets4 1.0.0<a class="anchor" aria-label="anchor" href="#googlesheets4-100"></a></h2><p class="text-muted">CRAN release: 2021-07-21</p>
 <div class="section level3">
 <h3 id="user-interface-1-0-0">User interface<a class="anchor" aria-label="anchor" href="#user-interface-1-0-0"></a></h3>
 <p>The user interface has gotten more stylish, thanks to the cli package (<a href="https://cli.r-lib.org" class="external-link uri">https://cli.r-lib.org</a>).</p>
@@ -121,13 +121,13 @@
 </div>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.3.0" id="googlesheets4-030">googlesheets4 0.3.0<a class="anchor" aria-label="anchor" href="#googlesheets4-030"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.3.0" id="googlesheets4-030">googlesheets4 0.3.0<a class="anchor" aria-label="anchor" href="#googlesheets4-030"></a></h2><p class="text-muted">CRAN release: 2021-03-04</p>
 <p>All requests are now made with retry capability. Specifically, when a request fails due to a <code>429 RESOURCE_EXHAUSTED</code> error, it is retried a few times, with suitable delays. Note that if it appears that you <em>personally</em> have exhausted your quota (more than 100 requests in 100 seconds), the initial waiting time is 100 seconds and this indicates you need to get your own OAuth app or service account.</p>
 <p>When googlesheets4 and googledrive are used together in the same session, we alert you if you’re logged in to these package with different Google identities.</p>
 <p><code><a href="../reference/gs4_get.html">gs4_get()</a></code> retrieves information about protected ranges.</p>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.0" id="googlesheets4-020">googlesheets4 0.2.0<a class="anchor" aria-label="anchor" href="#googlesheets4-020"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.2.0" id="googlesheets4-020">googlesheets4 0.2.0<a class="anchor" aria-label="anchor" href="#googlesheets4-020"></a></h2><p class="text-muted">CRAN release: 2020-05-08</p>
 <p>googlesheets4 can now write and modify Sheets.</p>
 <p>Several new articles are available at <a href="https://googlesheets4.tidyverse.org/articles/index.html">googlesheets4.tidyverse.org</a>.</p>
 <div class="section level3">
@@ -205,11 +205,11 @@
 </ul></div>
 </div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.1" id="googlesheets4-011">googlesheets4 0.1.1<a class="anchor" aria-label="anchor" href="#googlesheets4-011"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.1.1" id="googlesheets4-011">googlesheets4 0.1.1<a class="anchor" aria-label="anchor" href="#googlesheets4-011"></a></h2><p class="text-muted">CRAN release: 2020-03-21</p>
 <ul><li>Patch release to modify a test fixture, to be compatible with tibble v3.0. Related to tibble’s increased type strictness.</li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.0" id="googlesheets4-010">googlesheets4 0.1.0<a class="anchor" aria-label="anchor" href="#googlesheets4-010"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.1.0" id="googlesheets4-010">googlesheets4 0.1.0<a class="anchor" aria-label="anchor" href="#googlesheets4-010"></a></h2><p class="text-muted">CRAN release: 2019-11-04</p>
 <ul><li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
 </ul></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

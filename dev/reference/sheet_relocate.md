@@ -81,6 +81,13 @@ Other worksheet functions:
 sheet_names <- c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot")
 ss <- gs4_create("sheet-relocate-demo", sheets = sheet_names)
 #> ✔ Creating new Sheet: sheet-relocate-demo.
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 5.2s.
+#> ⠙ Retry happens in  4s
+#> ⠹ Retry happens in  2s
+#> ✔ Request 2 successful!
+#> ⠹ Retry happens in  2s
+#> ⠹ Retry happens in  0s
 sheet_names(ss)
 #> [1] "alfa"    "bravo"   "charlie" "delta"   "echo"    "foxtrot"
 
@@ -122,5 +129,5 @@ gs4_find("sheet-relocate-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • sheet-relocate-demo
-#>   <id: 18FtKA7FVtiBwvbHGnuxX7rJrw6mU0XPmX72bL7n2u5A>
+#>   <id: 1HT_mMbyqMhbT6pIykooPgNL5tD4J9PvSkWWzphq-oBQ>
 ```

@@ -130,11 +130,11 @@ if (require("readr")) {
 
 # write a Sheet that, by default, is NOT world-readable
 (ss <- sheet_write(chickwts))
-#> ✔ Creating new Sheet: fiery-hart.
+#> ✔ Creating new Sheet: heartsick-sealion.
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
-#> Spreadsheet name: fiery-hart                                  
-#>               ID: 1opKmnOkQFy6Sl7RhE9CDPonLSOH6z6anfmiaPJqq8jY
+#> Spreadsheet name: heartsick-sealion                           
+#>               ID: 1MIs_8nwqCBL6wjIccoZ7s41g62GyQQ5BdZfwxu3lQK4
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -145,9 +145,9 @@ if (require("readr")) {
 
 # demo that range_speedread() sends a token, which is why we can read this
 range_speedread(ss)
-#> ✔ Reading from fiery-hart.
+#> ✔ Reading from heartsick-sealion.
 #> ℹ Export URL:
-#>   <https://docs.google.com/spreadsheets/d/1opKmnOkQFy6Sl7RhE9CDPonLSOH6z6anfmiaPJqq8jY/export?format=csv>
+#>   <https://docs.google.com/spreadsheets/d/1MIs_8nwqCBL6wjIccoZ7s41g62GyQQ5BdZfwxu3lQK4/export?format=csv>
 #> Rows: 71 Columns: 2
 #> ── Column specification ───────────────────────────────────────────────
 #> Delimiter: ","
@@ -174,5 +174,5 @@ range_speedread(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • fiery-hart <id: 1opKmnOkQFy6Sl7RhE9CDPonLSOH6z6anfmiaPJqq8jY>
+#> • heartsick-sealion <id: 1MIs_8nwqCBL6wjIccoZ7s41g62GyQQ5BdZfwxu3lQK4>
 ```

@@ -140,5 +140,5 @@ range_clear(ss, range = "10:10", reformat = FALSE)
 gs4_find("range-flood-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • range-flood-demo <id: 1i9Aih3ONCp-GuF3B3y-lFhgGpZwoAnDH3PQnYMPvYDU>
+#> • range-flood-demo <id: 12ALZ65PC4YhBm4T4lNR3V8gL6UGkOHOPkpbATDK49X8>
 ```

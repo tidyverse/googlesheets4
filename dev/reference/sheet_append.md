@@ -122,5 +122,5 @@ identical(deaths, deaths_replica)
 gs4_find("sheet-append-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-append-demo <id: 1ojlCQptkgSzHenAOQXaDlZsJbLZ85W_tscFvCRsqLDM>
+#> • sheet-append-demo <id: 1wTvgnUFGBApLgnllHY-LTBGj8S1kxXAf1ZPnHyT2CQM>
 ```

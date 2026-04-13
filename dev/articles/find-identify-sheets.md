@@ -244,6 +244,9 @@ gap_id <- as_sheets_id(gap_dribble)
 unclass(gap_id)
 #> [1] "1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew"
 gap_id
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 1.8s.
+#> ✔ Request 2 successful!
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #>  Spreadsheet name: gapminder                                   

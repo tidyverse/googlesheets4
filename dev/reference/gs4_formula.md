@@ -43,7 +43,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: gs4-formula-demo                            
-#>               ID: 1oB8zORQJrGlf9jmVkxv6WYH7AwTCE1vB0R-7Fh9FWSs
+#>               ID: 1zAj4DTANgy2iEMqSb5l1nc_Y6yTn4jgmCHhXO_3cvnc
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -97,5 +97,5 @@ sheet_write(miscellany, ss = ss)
 gs4_find("gs4-formula-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • gs4-formula-demo <id: 1oB8zORQJrGlf9jmVkxv6WYH7AwTCE1vB0R-7Fh9FWSs>
+#> • gs4-formula-demo <id: 1zAj4DTANgy2iEMqSb5l1nc_Y6yTn4jgmCHhXO_3cvnc>
 ```

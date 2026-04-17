@@ -134,7 +134,7 @@ if (require("readr")) {
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: heartsick-sealion                           
-#>               ID: 1tfKjcWRvbXneJDheKJUGMSpt5IYQD5Ol-PNtzAOk03M
+#>               ID: 1M8lJSEZo7EkVbFlGtmB6C5etahieWdr0e8TjDfT3Ppo
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -147,7 +147,7 @@ if (require("readr")) {
 range_speedread(ss)
 #> ✔ Reading from heartsick-sealion.
 #> ℹ Export URL:
-#>   <https://docs.google.com/spreadsheets/d/1tfKjcWRvbXneJDheKJUGMSpt5IYQD5Ol-PNtzAOk03M/export?format=csv>
+#>   <https://docs.google.com/spreadsheets/d/1M8lJSEZo7EkVbFlGtmB6C5etahieWdr0e8TjDfT3Ppo/export?format=csv>
 #> Rows: 71 Columns: 2
 #> ── Column specification ───────────────────────────────────────────────
 #> Delimiter: ","
@@ -174,5 +174,5 @@ range_speedread(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • heartsick-sealion <id: 1tfKjcWRvbXneJDheKJUGMSpt5IYQD5Ol-PNtzAOk03M>
+#> • heartsick-sealion <id: 1M8lJSEZo7EkVbFlGtmB6C5etahieWdr0e8TjDfT3Ppo>
 ```

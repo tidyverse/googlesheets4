@@ -78,7 +78,7 @@ Other worksheet functions:
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheet-resize-demo                           
-#>               ID: 1eE9H8-KfkTNjh4dRs4_u0BMpocSyP6zoGp780kTeq9U
+#>               ID: 1Rz5emHwJOVjCNyf76dUmmBE69Xl5N9xdPS7sMZ6tV-g
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -121,39 +121,6 @@ sheet_resize(ss, nrow = 9, ncol = 12)
 
 # re-inspect (work)sheet dims
 sheet_properties(ss)
-#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
-#> ℹ Will retry in 61.5s.
-#> ⠙ Retry happens in  1m
-#> ⠹ Retry happens in  1m
-#> ⠸ Retry happens in  1m
-#> ⠼ Retry happens in  1m
-#> ⠴ Retry happens in  1m
-#> ⠦ Retry happens in 48s
-#> ⠧ Retry happens in 45s
-#> ⠇ Retry happens in 42s
-#> ⠏ Retry happens in 39s
-#> ⠋ Retry happens in 36s
-#> ⠙ Retry happens in 33s
-#> ⠹ Retry happens in 30s
-#> ⠸ Retry happens in 27s
-#> ⠼ Retry happens in 24s
-#> ⠴ Retry happens in 21s
-#> ⠦ Retry happens in 18s
-#> ⠧ Retry happens in 15s
-#> ⠇ Retry happens in 12s
-#> ⠏ Retry happens in  9s
-#> ⠋ Retry happens in  6s
-#> ⠙ Retry happens in  3s
-#> ✖ Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].
-#> ⠙ Retry happens in  3s
-#> ℹ Will retry in 3.9s.
-#> ⠙ Retry happens in  3s
-#> ⠙ Retry happens in  0s
-#> ⠙ Retry happens in  3s
-#> ⠹ Retry happens in  1s
-#> ✔ Request 3 successful!
-#> ⠹ Retry happens in  1s
-#> ⠹ Retry happens in  0s
 #> # A tibble: 1 × 8
 #>   name   index    id type  visible grid_rows grid_columns data  
 #>   <chr>  <int> <int> <chr> <lgl>       <int>        <int> <list>
@@ -163,5 +130,5 @@ sheet_properties(ss)
 gs4_find("sheet-resize-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-resize-demo <id: 1eE9H8-KfkTNjh4dRs4_u0BMpocSyP6zoGp780kTeq9U>
+#> • sheet-resize-demo <id: 1Rz5emHwJOVjCNyf76dUmmBE69Xl5N9xdPS7sMZ6tV-g>
 ```

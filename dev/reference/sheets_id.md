@@ -105,6 +105,33 @@ mini_gap_id
 #>      Oceania: 6 x 6
 
 as_sheets_id("abc")
+#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ℹ Will retry in 61.9s.
+#> ⠙ Retry happens in  1m
+#> ⠹ Retry happens in  1m
+#> ⠸ Retry happens in  1m
+#> ⠼ Retry happens in  1m
+#> ⠴ Retry happens in  1m
+#> ⠦ Retry happens in 49s
+#> ⠧ Retry happens in 46s
+#> ⠇ Retry happens in 43s
+#> ⠏ Retry happens in 40s
+#> ⠋ Retry happens in 37s
+#> ⠙ Retry happens in 34s
+#> ⠹ Retry happens in 31s
+#> ⠸ Retry happens in 28s
+#> ⠼ Retry happens in 25s
+#> ⠴ Retry happens in 21s
+#> ⠦ Retry happens in 19s
+#> ⠧ Retry happens in 16s
+#> ⠇ Retry happens in 12s
+#> ⠏ Retry happens in 10s
+#> ⠋ Retry happens in  7s
+#> ⠙ Retry happens in  3s
+#> ⠹ Retry happens in  1s
+#> ✔ Request 2 failed :(
+#> ⠹ Retry happens in  1s
+#> ⠹ Retry happens in  0s
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: "<unknown>"

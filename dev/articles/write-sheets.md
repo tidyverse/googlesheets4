@@ -1,6 +1,7 @@
 # Write Sheets
 
 ``` r
+
 library(googlesheets4)
 ```
 
@@ -54,13 +55,14 @@ You can specify the new Sheet’s `name` (or accept a randomly generated
 name).
 
 ``` r
+
 ss1 <- gs4_create("sheets-create-demo-1")
 #> ✔ Creating new Sheet: sheets-create-demo-1.
 ss1
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-create-demo-1                        
-#>               ID: 1x_7jDSbXr0lhoXBTOxXCwXOh7c8EmYQZVI3RNu65EJU
+#>               ID: 1ifKURidS4z5-8bY7M6KpKsgU1s9_IVPG9Ap-GcFsPD8
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -81,6 +83,7 @@ the `sheets` argument.
 Use a character vector to specify the names of one or more empty sheets.
 
 ``` r
+
 ss2 <- gs4_create(
   "sheets-create-demo-2",
   sheets = c("alpha", "beta")
@@ -90,7 +93,7 @@ ss2
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-create-demo-2                        
-#>               ID: 1SrcKK_CIex_qTh7WQbp-KZUwuBVpZBSUHJjqAxLK7UE
+#>               ID: 1Ul8QbS65eSprD1Dnn6_jUb7TN4149aRHWIzIx-RJl7g
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           
@@ -112,6 +115,7 @@ also gets special treatment. The sheet inherits the name of the data
 frame, where possible.
 
 ``` r
+
 my_data <- data.frame(x = 1:3, y = letters[1:3])
 
 ss3 <- gs4_create(
@@ -123,7 +127,7 @@ ss3
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-create-demo-3                        
-#>               ID: 1hIc1a3LEknJ4M0_NwkGRL9SLNGhoIFon9FmnlhHagEQ
+#>               ID: 1yw3LBFjGeVAJpynfbliOpNlBeWmg8n6EcXY61M1ZWxk
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -141,6 +145,7 @@ The header row also gets special treatment. The sheets inherit the names
 from the list, if it has names.
 
 ``` r
+
 my_data_frames <- list(iris = head(iris), chickwts = head(chickwts))
 
 ss4 <- gs4_create(
@@ -152,7 +157,7 @@ ss4
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-create-demo-4                        
-#>               ID: 1vj9m0EqlToNm8Ng7PGJ1WYDj5yZWzotZybh29m4cbF0
+#>               ID: 1GvMEdm6MuwUOTdi0lpcB00HBjSoInmKL0vTejhRqzpo
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           
@@ -176,6 +181,7 @@ Notice how the default empty Sheet here is named “Feuille 1”, since we
 request a French locale.
 
 ``` r
+
 ss5 <- gs4_create(
   "sheets-create-demo-5",
   locale = "fr_FR",
@@ -186,7 +192,7 @@ ss5
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-create-demo-5                        
-#>               ID: 1U4JWsp5b6WeapGdqmezZyL0kG1rX-ZJuLay6Fgj7iSw
+#>               ID: 1woF-bijsXLUmPn0NnaLmLNzNyH9bz3B4rCWw2CglRgA
 #>           Locale: fr_FR                                       
 #>        Time zone: Europe/Paris                                
 #>      # of sheets: 1                                           
@@ -210,19 +216,20 @@ in your own work in the article [Using googlesheets4 with
 googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-sheets.html).
 
 ``` r
+
 gs4_find("sheets-create-demo") %>%
   googledrive::drive_trash()
 #> Files trashed:
 #> • sheets-create-demo-5
-#>   <id: 1U4JWsp5b6WeapGdqmezZyL0kG1rX-ZJuLay6Fgj7iSw>
+#>   <id: 1woF-bijsXLUmPn0NnaLmLNzNyH9bz3B4rCWw2CglRgA>
 #> • sheets-create-demo-4
-#>   <id: 1vj9m0EqlToNm8Ng7PGJ1WYDj5yZWzotZybh29m4cbF0>
+#>   <id: 1GvMEdm6MuwUOTdi0lpcB00HBjSoInmKL0vTejhRqzpo>
 #> • sheets-create-demo-3
-#>   <id: 1hIc1a3LEknJ4M0_NwkGRL9SLNGhoIFon9FmnlhHagEQ>
+#>   <id: 1yw3LBFjGeVAJpynfbliOpNlBeWmg8n6EcXY61M1ZWxk>
 #> • sheets-create-demo-2
-#>   <id: 1SrcKK_CIex_qTh7WQbp-KZUwuBVpZBSUHJjqAxLK7UE>
+#>   <id: 1Ul8QbS65eSprD1Dnn6_jUb7TN4149aRHWIzIx-RJl7g>
 #> • sheets-create-demo-1
-#>   <id: 1x_7jDSbXr0lhoXBTOxXCwXOh7c8EmYQZVI3RNu65EJU>
+#>   <id: 1ifKURidS4z5-8bY7M6KpKsgU1s9_IVPG9Ap-GcFsPD8>
 ```
 
 ## `write_sheet()`, a.k.a. `sheet_write()`
@@ -243,6 +250,7 @@ The only required argument for
 is the data.
 
 ``` r
+
 df <- data.frame(x = 1:3, y = letters[1:3])
 
 random_ss <- sheet_write(df)
@@ -251,7 +259,7 @@ random_ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: unfearing-guineafowl                        
-#>               ID: 1Y_wL0pLCHYjIQ4gx4rr4AkA86VOez8ZYNMV5sGl3cs8
+#>               ID: 1GU45bnP2Z1GW9S98y77bdc4eB4M9wEwlT-cvpcCShrc
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -276,10 +284,11 @@ We send one sheet name, “chickwts”, to prevent the creation of “Sheet1”,
 but we send no data.
 
 ``` r
+
 googledrive::drive_trash(random_ss)
 #> File trashed:
 #> • unfearing-guineafowl
-#>   <id: 1Y_wL0pLCHYjIQ4gx4rr4AkA86VOez8ZYNMV5sGl3cs8>
+#>   <id: 1GU45bnP2Z1GW9S98y77bdc4eB4M9wEwlT-cvpcCShrc>
 
 ss1 <- gs4_create(
   "write-sheets-demo-1",
@@ -290,7 +299,7 @@ ss1
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: write-sheets-demo-1                         
-#>               ID: 1IOj9R8SH8UnmBYA-w99ANizDy_dmgOLsdpNb_I86rW8
+#>               ID: 1WcHWx2mVFHMiQoH75zpSeqGiazAMGQtleIpS2NtxVoQ
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -305,6 +314,7 @@ allows us to write the actual `chickwts` data into the sheet by that
 name.
 
 ``` r
+
 sheet_write(chickwts, ss = ss1, sheet = "chickwts")
 #> ✔ Writing to write-sheets-demo-1.
 #> ✔ Writing to sheet chickwts.
@@ -312,7 +322,7 @@ ss1
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: write-sheets-demo-1                         
-#>               ID: 1IOj9R8SH8UnmBYA-w99ANizDy_dmgOLsdpNb_I86rW8
+#>               ID: 1WcHWx2mVFHMiQoH75zpSeqGiazAMGQtleIpS2NtxVoQ
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -327,6 +337,7 @@ can also write data into a new sheet, if `sheet` implicitly or
 explicitly targets a non-existent sheet.
 
 ``` r
+
 # explicitly make a new sheet named "iris"
 sheet_write(iris, ss = ss1, sheet = "iris")
 #> ✔ Writing to write-sheets-demo-1.
@@ -342,6 +353,7 @@ If no sheet name is given and it can’t be determined from `data`, a name
 of the form “SheetN” is automatically generated by Sheets.
 
 ``` r
+
 sheet_write(data.frame(x = 1:2, y = 3:4), ss = ss1)
 #> ✔ Writing to write-sheets-demo-1.
 #> ✔ Writing to sheet Sheet1.
@@ -349,7 +361,7 @@ ss1
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: write-sheets-demo-1                         
-#>               ID: 1IOj9R8SH8UnmBYA-w99ANizDy_dmgOLsdpNb_I86rW8
+#>               ID: 1WcHWx2mVFHMiQoH75zpSeqGiazAMGQtleIpS2NtxVoQ
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 4                                           
@@ -365,11 +377,12 @@ ss1
 ### Clean up
 
 ``` r
+
 gs4_find("write-sheets-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • write-sheets-demo-1
-#>   <id: 1IOj9R8SH8UnmBYA-w99ANizDy_dmgOLsdpNb_I86rW8>
+#>   <id: 1WcHWx2mVFHMiQoH75zpSeqGiazAMGQtleIpS2NtxVoQ>
 ```
 
 ## `sheet_append()`
@@ -382,6 +395,7 @@ without the annoying text above and below the data. First we bring that
 data into a local data frame and chop it into pieces.
 
 ``` r
+
 (deaths <- gs4_example("deaths") %>%
    range_read(range = "other_data", col_types = "????DD"))
 #> ✔ Reading from deaths.
@@ -414,13 +428,14 @@ must be, in order for us to freeze the top row), but it will soon be
 filled when we append.
 
 ``` r
+
 ss <- gs4_create("sheets-append-demo", sheets = list(deaths = deaths_zero))
 #> ✔ Creating new Sheet: sheets-append-demo.
 ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-append-demo                          
-#>               ID: 1FEZ2HNxz7xiXGi8dPP_QZG35KZdsX3xJA4LfexPtTm8
+#>               ID: 17HNCg2XdQQ5Ny3R7Gpf63WRy_NJewm4HH_I7CHaSw-A
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -438,6 +453,7 @@ consumed and how additional rows are added to the targetted sheet
 automatically.
 
 ``` r
+
 gs4_browse(ss)
 ```
 
@@ -445,11 +461,12 @@ Send the data, one or more rows at a time. Keep inspecting in the
 browser if you’re doing this yourself.
 
 ``` r
+
 ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-append-demo                          
-#>               ID: 1FEZ2HNxz7xiXGi8dPP_QZG35KZdsX3xJA4LfexPtTm8
+#>               ID: 17HNCg2XdQQ5Ny3R7Gpf63WRy_NJewm4HH_I7CHaSw-A
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -466,7 +483,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-append-demo                          
-#>               ID: 1FEZ2HNxz7xiXGi8dPP_QZG35KZdsX3xJA4LfexPtTm8
+#>               ID: 17HNCg2XdQQ5Ny3R7Gpf63WRy_NJewm4HH_I7CHaSw-A
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -483,7 +500,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-append-demo                          
-#>               ID: 1FEZ2HNxz7xiXGi8dPP_QZG35KZdsX3xJA4LfexPtTm8
+#>               ID: 17HNCg2XdQQ5Ny3R7Gpf63WRy_NJewm4HH_I7CHaSw-A
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -500,7 +517,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-append-demo                          
-#>               ID: 1FEZ2HNxz7xiXGi8dPP_QZG35KZdsX3xJA4LfexPtTm8
+#>               ID: 17HNCg2XdQQ5Ny3R7Gpf63WRy_NJewm4HH_I7CHaSw-A
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -514,6 +531,7 @@ Now the big reveal: have we successfully rebuilt that data through
 incremental updates?
 
 ``` r
+
 deaths_replica <- range_read(ss, col_types = "????DD")
 #> ✔ Reading from sheets-append-demo.
 #> ✔ Range deaths.
@@ -527,11 +545,12 @@ article!
 ### Clean up
 
 ``` r
+
 gs4_find("sheets-append-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • sheets-append-demo
-#>   <id: 1FEZ2HNxz7xiXGi8dPP_QZG35KZdsX3xJA4LfexPtTm8>
+#>   <id: 17HNCg2XdQQ5Ny3R7Gpf63WRy_NJewm4HH_I7CHaSw-A>
 ```
 
 ## `range_write()`
@@ -554,6 +573,7 @@ that names columns by letter, like spreadsheets do.
 Here’s the initial state of `ss_edit`:
 
 ``` r
+
 read_this(ss_edit)
 #> ✔ Reading from sheets-edit-demo.
 #> ✔ Range Sheet1.
@@ -573,6 +593,7 @@ read_this(ss_edit)
 [`range_write()`](https://googlesheets4.tidyverse.org/dev/reference/range_write.md):
 
 ``` r
+
 (df <- tibble(V1 = head(LETTERS,3), V2 = tail(LETTERS, 3)))
 #> # A tibble: 3 × 2
 #>   V1    V2   
@@ -587,6 +608,7 @@ corner and only affects cells spanned by `df`. To see where we’ve
 written, focus on the cells are NOT “-”.
 
 ``` r
+
 range_write(ss_edit, data = df) %>% read_this()
 #> ✔ Editing sheets-edit-demo.
 #> ✔ Writing to sheet Sheet1.
@@ -612,6 +634,7 @@ corner of the target area. The cells written are determined by the
 extent of the data.
 
 ``` r
+
 range_write(ss_edit, data = df, range = "C2") %>% read_this()
 #> ✔ Editing sheets-edit-demo.
 #> ✔ Writing to sheet Sheet1.
@@ -637,6 +660,7 @@ the data, so the remaining cells are cleared of their existing “-”
 value.
 
 ``` r
+
 range_write(ss_edit, data = df, range = "D4:G7") %>% read_this()
 #> ✔ Editing sheets-edit-demo.
 #> ✔ Writing to sheet Sheet1.
@@ -658,6 +682,7 @@ Here’s another case where the `range` is bigger than it needs to be and
 it’s unbounded on the bottom and top:
 
 ``` r
+
 range_write(ss_edit, data = df, range = "B:E") %>% read_this()
 #> ✔ Editing sheets-edit-demo.
 #> ✔ Writing to sheet Sheet1.
@@ -678,6 +703,7 @@ range_write(ss_edit, data = df, range = "B:E") %>% read_this()
 Here’s another `range` that’s unbounded on the left and “too big”:
 
 ``` r
+
 range_write(ss_edit, data = df, range = "B2:6") %>% read_this()
 #> ✔ Editing sheets-edit-demo.
 #> ✔ Writing to sheet Sheet1.
@@ -699,6 +725,7 @@ The target sheet will be expanded, if necessary, if and only if `range`
 is a single cell (i.e. it gives the upper left corner).
 
 ``` r
+
 range_write(ss_edit, data = df, range = "G6") %>% read_this()
 #> ✔ Editing sheets-edit-demo.
 #> ✔ Writing to sheet Sheet1.
@@ -736,10 +763,11 @@ show writing data of disparate type to a 1-row or a 1-column region.
 ### Clean up
 
 ``` r
+
 gs4_find("sheets-edit-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheets-edit-demo <id: 1Y5yWYIzLSkjalClwT6HHnPsn-7nbBt9DVkczLHU9hjE>
+#> • sheets-edit-demo <id: 1Rpc015EEUvfNZIChqB_MHqXZMJvrchy7Pz7d-GRA8l4>
 ```
 
 ## Write formulas
@@ -755,6 +783,7 @@ Here’s a demo that also shows off using the Google Translate API inside
 a Sheet.
 
 ``` r
+
 lang_dat <- tibble::tribble(
        ~ english, ~ to,
            "dog", "es",
@@ -770,7 +799,7 @@ lang_dat$translated <- gs4_formula(
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-formula-demo                         
-#>               ID: 1GboNJa3B9PRGdSFC03FR27F96dUSCJkgDsn0hgQVI_s
+#>               ID: 1DM79d2Si3fmHzt0s0WyD2_c7aQDRD2vSOl0BdqRiNHg
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -783,6 +812,7 @@ lang_dat$translated <- gs4_formula(
 Now we can read the data back out, complete with translations!
 
 ``` r
+
 range_read(ss)
 #> ✔ Reading from sheets-formula-demo.
 #> ✔ Range lang_dat.
@@ -797,11 +827,12 @@ range_read(ss)
 ### Clean up
 
 ``` r
+
 gs4_find("sheets-formula-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • sheets-formula-demo
-#>   <id: 1GboNJa3B9PRGdSFC03FR27F96dUSCJkgDsn0hgQVI_s>
+#>   <id: 1DM79d2Si3fmHzt0s0WyD2_c7aQDRD2vSOl0BdqRiNHg>
 ```
 
 ## `range_flood()`
@@ -816,13 +847,14 @@ is a convenience wrapper for this special case.
 First, we create a data frame and initialize a new Sheet with that data.
 
 ``` r
+
 df <- gs4_fodder(10)
 (ss <- gs4_create("range-flood-demo", sheets = list(df)))
 #> ✔ Creating new Sheet: range-flood-demo.
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: range-flood-demo                            
-#>               ID: 1vRfTIzayLYCV6mLiRMzhsmF347PkgC26jlvJbSBN3QA
+#>               ID: 1kFwB787Ows-Ktt4cQzEQgPJavk04_Q-BoQsP2ehUcRk
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -837,6 +869,7 @@ this in the browser, you’d see the header row has some special
 formatting, including a gray background.
 
 ``` r
+
 range_read(ss)
 #> ✔ Reading from range-flood-demo.
 #> ✔ Range Sheet1.
@@ -860,6 +893,7 @@ By default,
 sends an empty cell (and clears existing formatting).
 
 ``` r
+
 range_flood(ss, range = "A1:B3")
 #> ✔ Editing range-flood-demo.
 #> ✔ Editing sheet Sheet1.
@@ -891,6 +925,7 @@ clear the existing format (or not).
 We can also send a new value into a range of cells.
 
 ``` r
+
 range_flood(ss, range = "4:5", cell = ";-)")
 #> ✔ Editing range-flood-demo.
 #> ✔ Editing sheet Sheet1.
@@ -918,10 +953,11 @@ range_read(ss)
 ### Clean up
 
 ``` r
+
 gs4_find("range-flood-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • range-flood-demo <id: 1vRfTIzayLYCV6mLiRMzhsmF347PkgC26jlvJbSBN3QA>
+#> • range-flood-demo <id: 1kFwB787Ows-Ktt4cQzEQgPJavk04_Q-BoQsP2ehUcRk>
 ```
 
 ## `range_delete()`
@@ -939,13 +975,14 @@ If you just want to clear values or formats, use
 First, we create a data frame and initialize a new Sheet with that data.
 
 ``` r
+
 df <- gs4_fodder(4)
 (ss <- gs4_create("sheets-delete-demo", sheets = list(df)))
 #> ✔ Creating new Sheet: sheets-delete-demo.
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-delete-demo                          
-#>               ID: 1kJMcjfDFBsLLrz4-ELraTwkKm3hcaL1n57UIg95m-zA
+#>               ID: 1DDfWtr9pUB1TrTH4vZpFXXXNzdms04Z84k5-CBe6vd4
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -960,6 +997,7 @@ this in the browser, you’d see the header row has some special
 formatting, including a gray background.
 
 ``` r
+
 range_read(ss)
 #> ✔ Reading from sheets-delete-demo.
 #> ✔ Range Sheet1.
@@ -975,6 +1013,7 @@ range_read(ss)
 Let’s delete some rows.
 
 ``` r
+
 range_delete(ss, range = "2:3")
 #> ✔ Editing sheets-delete-demo.
 #> ✔ Deleting cells in sheet Sheet1.
@@ -991,6 +1030,7 @@ range_read(ss)
 Let’s delete a column.
 
 ``` r
+
 range_delete(ss, range = "C")
 #> ✔ Editing sheets-delete-demo.
 #> ✔ Deleting cells in sheet Sheet1.
@@ -1011,7 +1051,38 @@ actual rows and columns and, due to our deletions, no longer match with
 the values which reflect the original locations.
 
 ``` r
+
 range_delete(ss, range = "B2:B3", shift = "left")
+#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ℹ Will retry in 61s.
+#> ⠙ Retry happens in  1m
+#> ⠹ Retry happens in  1m
+#> ⠸ Retry happens in  1m
+#> ⠼ Retry happens in  1m
+#> ⠴ Retry happens in  1m
+#> ⠦ Retry happens in 47s
+#> ⠧ Retry happens in 44s
+#> ⠇ Retry happens in 41s
+#> ⠏ Retry happens in 38s
+#> ⠋ Retry happens in 35s
+#> ⠙ Retry happens in 32s
+#> ⠹ Retry happens in 29s
+#> ⠸ Retry happens in 26s
+#> ⠼ Retry happens in 23s
+#> ⠴ Retry happens in 20s
+#> ⠦ Retry happens in 17s
+#> ⠧ Retry happens in 14s
+#> ⠇ Retry happens in 11s
+#> ⠏ Retry happens in  8s
+#> ⠋ Retry happens in  5s
+#> ⠙ Retry happens in  2s
+#> ✖ Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ⠙ Retry happens in  2sℹ Will retry in 6.2s.
+#> ⠙ Retry happens in  2s⠙ Retry happens in  0s
+#> ⠙ Retry happens in  5s
+#> ⠹ Retry happens in  3s
+#> ✔ Request 3 successful!
+#> ⠹ Retry happens in  3s⠹ Retry happens in  0s
 #> ✔ Editing sheets-delete-demo.
 #> ✔ Deleting cells in sheet Sheet1.
 range_read(ss)
@@ -1027,9 +1098,10 @@ range_read(ss)
 ### Clean up
 
 ``` r
+
 gs4_find("sheets-delete-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • sheets-delete-demo
-#>   <id: 1kJMcjfDFBsLLrz4-ELraTwkKm3hcaL1n57UIg95m-zA>
+#>   <id: 1DDfWtr9pUB1TrTH4vZpFXXXNzdms04Z84k5-CBe6vd4>
 ```

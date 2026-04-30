@@ -25,6 +25,7 @@ do so! You can call
 explicitly in your reprex to shut down any attempt to get a token.
 
 ``` r
+
 library(googlesheets4)
 
 gs4_deauth()
@@ -51,6 +52,7 @@ not be part of your reprex. Two options:
 - Using googledrive:
 
   ``` r
+
   library(googledrive)
 
   x <- drive_get("YOUR_SHEET_NAME")
@@ -61,6 +63,7 @@ not be part of your reprex. Two options:
 Now make a reprex just like we do with the official example Sheets:
 
 ``` r
+
 library(googlesheets4)
 
 gs4_deauth()
@@ -82,6 +85,7 @@ How to share with specific user(s):
 - Using googledrive:
 
   ``` r
+
   library(googledrive)
 
   x <- drive_get("YOUR_SHEET_NAME")
@@ -123,6 +127,7 @@ assuming the user has successfully run it once interactively, so there’s
 a cached token for “<jane_doe@example.com>”.
 
 ``` r
+
 library(googlesheets4)
 
 gs4_auth(email = "jane_doe@example.com")
@@ -140,6 +145,7 @@ access it anyway, this is still a good option to show exactly what
 you’re seeing locally.
 
 ``` r
+
 library(googlesheets4)
 
 #+ include = FALSE

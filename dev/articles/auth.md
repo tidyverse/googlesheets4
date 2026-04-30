@@ -15,6 +15,7 @@ Here’s how an R script might look if all you plan to do is read Sheets
 that are world-readable or readable by “anyone with a link”:
 
 ``` r
+
 library(googlesheets4)
 
 gs4_deauth()

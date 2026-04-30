@@ -1,6 +1,7 @@
 # Get started with googlesheets4
 
 ``` r
+
 library(googlesheets4)
 ```
 
@@ -28,6 +29,7 @@ is designed to “just work”, for most purposes, most of the time. It can
 read straight from a Sheets browser URL:
 
 ``` r
+
 read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077")
 #> ✔ Reading from gapminder.
 #> ✔ Range Africa.
@@ -46,6 +48,7 @@ However, these URLs are not pleasant to work with. More often, you will
 want to identify a Sheet by its ID:
 
 ``` r
+
 read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 #> ✔ Reading from gapminder.
 #> ✔ Range Africa.
@@ -64,6 +67,7 @@ or by its name, which requires an assist from the googledrive package
 ([googledrive.tidyverse.org](https://googledrive.tidyverse.org)):
 
 ``` r
+
 library(googledrive)
 
 drive_get("gapminder") %>% 
@@ -106,6 +110,7 @@ on these file IDs.
   throws an error).
 
 ``` r
+
 gs4_example("chicken-sheet") %>% 
   read_sheet()
 #> ✔ Reading from chicken-sheet.
@@ -125,6 +130,7 @@ Sheets, use
 [`gs4_browse()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_browse.md):
 
 ``` r
+
 gs4_example("deaths") %>%
   gs4_browse()
 ```
@@ -135,6 +141,7 @@ gs4_example("deaths") %>%
 exposes Sheet metadata, such as details on worksheets and named ranges.
 
 ``` r
+
 ss <- gs4_example("deaths")
 
 gs4_get(ss)
@@ -200,6 +207,7 @@ writes a data frame into a Sheet. The only required argument is the
 data.
 
 ``` r
+
 df <- data.frame(x = 1:3, y = letters[1:3])
 
 ss <- sheet_write(df)
@@ -208,7 +216,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: unfearing-guineafowl                        
-#>               ID: 1Dl8Ylhxs0-MtwyJqYI2SxIuz0gkDJZysUkv8ry3-DL0
+#>               ID: 1Es8xzSjD4GmFCDfK01kkzIz1IegOEyxBPuNrZf3UkrQ
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -229,10 +237,11 @@ Let’s start over: we delete that Sheet and call
 so we can specify the new Sheet’s name.
 
 ``` r
+
 googledrive::drive_trash(ss)
 #> File trashed:
 #> • unfearing-guineafowl
-#>   <id: 1Dl8Ylhxs0-MtwyJqYI2SxIuz0gkDJZysUkv8ry3-DL0>
+#>   <id: 1Es8xzSjD4GmFCDfK01kkzIz1IegOEyxBPuNrZf3UkrQ>
 
 ss <- gs4_create("testy-hedgehog", sheets = df)
 #> ✔ Creating new Sheet: testy-hedgehog.
@@ -240,7 +249,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: testy-hedgehog                              
-#>               ID: 1P25aSoGekTaacmGX-mQvhtMgzhld_7qYYYU6P-6QgSE
+#>               ID: 1ja9kx0yWLsEBaaQcqTuTZ8SxxJI-pFktmZOSgiKWeNU
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -255,6 +264,7 @@ can write to new or existing (work)sheets in this Sheet. Let’s write the
 `chickwts` data to a new sheet in `ss`.
 
 ``` r
+
 sheet_write(chickwts, ss)
 #> ✔ Writing to testy-hedgehog.
 #> ✔ Writing to sheet chickwts.
@@ -262,7 +272,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: testy-hedgehog                              
-#>               ID: 1P25aSoGekTaacmGX-mQvhtMgzhld_7qYYYU6P-6QgSE
+#>               ID: 1ja9kx0yWLsEBaaQcqTuTZ8SxxJI-pFktmZOSgiKWeNU
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           
@@ -278,6 +288,7 @@ We can also use
 to replace the data in an existing sheet.
 
 ``` r
+
 sheet_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
 #> ✔ Writing to testy-hedgehog.
 #> ✔ Writing to sheet df.
@@ -299,6 +310,7 @@ read_sheet(ss, sheet = "df")
 adds one or more rows to an existing sheet.
 
 ``` r
+
 ss %>% sheet_append(data.frame(x = 11, letters[11]), sheet = "df")
 #> ✔ Writing to testy-hedgehog.
 #> ✔ Appending 1 row to df.
@@ -337,16 +349,17 @@ operations, such as add and delete.
 We take one last look at the sheets we created in `ss`, then clean up.
 
 ``` r
+
 sheet_properties(ss)
 #> # A tibble: 2 × 8
 #>   name     index         id type  visible grid_rows grid_columns data  
 #>   <chr>    <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 df           0  664958543 GRID  TRUE            9            2 <NULL>
-#> 2 chickwts     1 1458563246 GRID  TRUE           72            2 <NULL>
+#> 1 df           0 1932286355 GRID  TRUE            9            2 <NULL>
+#> 2 chickwts     1 2012274297 GRID  TRUE           72            2 <NULL>
 
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • testy-hedgehog <id: 1P25aSoGekTaacmGX-mQvhtMgzhld_7qYYYU6P-6QgSE>
+#> • testy-hedgehog <id: 1ja9kx0yWLsEBaaQcqTuTZ8SxxJI-pFktmZOSgiKWeNU>
 ```
 
 The article [Write

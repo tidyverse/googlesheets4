@@ -15,6 +15,7 @@ address these formats, although it may do so in the future.
 Attach googlesheets4.
 
 ``` r
+
 library(googlesheets4)
 ```
 
@@ -26,6 +27,7 @@ The lubridate package
 for this exploration, so we attach it now.
 
 ``` r
+
 library(lubridate, warn.conflicts = FALSE)
 ```
 
@@ -45,6 +47,7 @@ current time zone. Note that `tt` is displayed in R according to this
 time zone.
 
 ``` r
+
 (tt <- Sys.time())
 #> [1] "2023-06-03 13:31:01 PDT"
 
@@ -57,6 +60,7 @@ as the local R session, and create another cell that captures the exact
 text presented in the browser UI for `tt`. Read this back into R.
 
 ``` r
+
 dat <- tibble::tibble(
   datetime = tt,
   as_displayed = gs4_formula("=TO_TEXT(A2)")
@@ -92,6 +96,7 @@ is locally in R. Sheets presents datetimes in Coordinated Universal Time
 time zone, such as America/Vancouver.
 
 ``` r
+
 with_tz(tt, "Etc/UTC")
 #> [1] "2023-06-03 20:31:01 UTC"
 ```
@@ -154,6 +159,7 @@ zone (or, at least, it tries). You can also ask R to reveal what it
 thinks your time zone is.
 
 ``` r
+
 Sys.time()
 #> [1] "2023-06-03 13:31:05 PDT"
 
@@ -173,6 +179,7 @@ e.g. your own or any other time zone recognized by your system. And
 this, in turn, affects how the time is formatted for human eyeballs.
 
 ``` r
+
 tt <- Sys.time()
 
 with_tz(tt, tzone = "America/Vancouver")
@@ -240,6 +247,7 @@ metadata returned by
 like the locale, and is revealed by default when we print a Sheets ID.
 
 ``` r
+
 (meta <- gs4_example("gapminder") %>%
    gs4_get())
 #>  Spreadsheet name: gapminder
@@ -311,14 +319,14 @@ work once the data is written into a Sheet. We sketch the construction
 of this data frame here, with considerable abuse of notation (mixing R
 code and Sheets formulas):
 
-| what                                   | datetime                                                                                                                            | serial_number                         |
-|----------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|
-| moment                                 | [`Sys.time()`](https://rdrr.io/r/base/Sys.time.html)                                                                                | `=ARRAYFORMULA(TO_PURE_NUMBER(B2:B))` |
-| moment_ny                              | `with_tz(moment, tzone = "America/New_York")`                                                                                       |                                       |
-| moment_utc                             | `with_tz(moment, tzone = "Etc/UTC")`                                                                                                |                                       |
-| moment_ny_force_utc                    | `force_tz(moment_ny, tzone = "Etc/UTC")`                                                                                            |                                       |
-| =NOW()                                 | `=NOW()`                                                                                                                            |                                       |
-| =(DATE(moment_utc) + TIME(moment_utc)) | `=(DATE({year},{month},{day})+time({hour},{minute},{round(second, 1)}))` where `year`, `month`, etc. are computed from `moment_utc` |                                       |
+| what | datetime | serial_number |
+|----|----|----|
+| moment | [`Sys.time()`](https://rdrr.io/r/base/Sys.time.html) | `=ARRAYFORMULA(TO_PURE_NUMBER(B2:B))` |
+| moment_ny | `with_tz(moment, tzone = "America/New_York")` |  |
+| moment_utc | `with_tz(moment, tzone = "Etc/UTC")` |  |
+| moment_ny_force_utc | `force_tz(moment_ny, tzone = "Etc/UTC")` |  |
+| =NOW() | `=NOW()` |  |
+| =(DATE(moment_utc) + TIME(moment_utc)) | `=(DATE({year},{month},{day})+time({hour},{minute},{round(second, 1)}))` where `year`, `month`, etc. are computed from `moment_utc` |  |
 
 Capture the current `moment` in time, with
 [`Sys.time()`](https://rdrr.io/r/base/Sys.time.html), which has no
@@ -345,6 +353,7 @@ Create 3 Sheets, with different approaches to the time zone:
 - Etc/UTC
 
 ``` r
+
 ss_xx  <- gs4_create("tz-default")
 #> ✔ Creating new Sheet: "tz-default".
 ss_ny  <- gs4_create("tz-america-new-york", timeZone = "America/New_York")
@@ -368,6 +377,7 @@ frame described above, and write it into each of the prepared Google
 Sheets.
 
 ``` r
+
 dat <- populate_sheets(Sys.time(), c(ss_xx, ss_ny, ss_utc))
 #> ✔ Writing to "tz-default".
 #> ✔ Writing to sheet 'Sheet1'.
@@ -392,6 +402,7 @@ dat <- populate_sheets(Sys.time(), c(ss_xx, ss_ny, ss_utc))
 First, let’s look at `dat`, the data frame we sent.
 
 ``` r
+
 dat
 #> # A tibble: 6 × 3
 #>   what                datetime   serial_number                      
@@ -421,6 +432,7 @@ of that column.
 Read the Sheets back into R, the Sheet with no explicit time zone set.
 
 ``` r
+
 read_sheet(ss_xx) %>% as.data.frame()
 #> ✔ Reading from "tz-default".
 #> ✔ Range 'Sheet1'.
@@ -470,6 +482,7 @@ Main conclusions:
 Clean up.
 
 ``` r
+
 gs4_find("tz-") %>% 
   googledrive::drive_trash()
 #> Files trashed:

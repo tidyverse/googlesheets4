@@ -7,6 +7,7 @@ effort” to “more humane, but more effort”.
 ## Attach googlesheets4
 
 ``` r
+
 library(googlesheets4)
 ```
 
@@ -38,6 +39,7 @@ googlesheets4 accepts such a URL as the `ss` argument (think
 “spreadsheet”) of many functions:
 
 ``` r
+
 ugly_url <- "https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"
 read_sheet(ugly_url)
 #> ✔ Reading from gapminder.
@@ -69,6 +71,7 @@ You can extract the Sheet ID from a URL with
 place):
 
 ``` r
+
 ssid <- as_sheets_id(ugly_url)
 class(ssid)
 #> [1] "sheets_id"  "drive_id"   "vctrs_vctr" "character"
@@ -90,6 +93,7 @@ Because, by default, when you print an instance of `sheets_id`, we
 attempt to show you some current metadata about the Sheet.
 
 ``` r
+
 ssid
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
@@ -123,6 +127,7 @@ googlesheets4 also accepts a Sheet ID as the `ss` argument of many
 functions:
 
 ``` r
+
 read_sheet(ssid)
 #> ✔ Reading from gapminder.
 #> ✔ Range Africa.
@@ -142,6 +147,7 @@ refer to a Sheet by its ID than by its URL. The Sheet ID is nicer to
 look at, it is complete, it is minimal.
 
 ``` r
+
 ssid <- "1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY"
 read_sheet(ssid)
 #> ✔ Reading from gapminder.
@@ -170,6 +176,7 @@ googledrive workflow, it’s a good idea to be explicit and declare a
 string to be a Sheet ID, when that is the case.
 
 ``` r
+
 ssid <- as_sheets_id("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 read_sheet(ssid)
 #> ✔ Reading from gapminder.
@@ -211,6 +218,7 @@ It’s time to attach googledrive (in addition to the already-attached
 googlesheets4):
 
 ``` r
+
 library(googledrive)
 ```
 
@@ -223,6 +231,7 @@ the account we’ve logged in as here. We can use
 to identify a file by name:
 
 ``` r
+
 (gap_dribble <- drive_get("gapminder"))
 #> ✔ The input `path` resolved to exactly 1 file.
 #> # A dribble: 1 × 4
@@ -240,10 +249,25 @@ also accepts a one-row `dribble`, so we can get right into our normal
 googlesheets4 workflows:
 
 ``` r
+
 gap_id <- as_sheets_id(gap_dribble)
 unclass(gap_id)
 #> [1] "1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew"
 gap_id
+#> ✖ Request 1 failed [500: DATA_LOSS].
+#> ℹ Will retry in 1.8s.
+#> ✖ Request 2 failed [500: DATA_LOSS].
+#> ℹ Will retry in 8s.
+#> ⠙ Retry happens in  7s
+#> ⠹ Retry happens in  5s
+#> ⠸ Retry happens in  2s
+#> ✖ Request 3 failed [500: DATA_LOSS].
+#> ⠸ Retry happens in  2sℹ Will retry in 4.2s.
+#> ⠸ Retry happens in  2s⠸ Retry happens in  0s
+#> ⠙ Retry happens in  3s
+#> ⠹ Retry happens in  0s
+#> ✔ Request 4 successful!
+#> ⠹ Retry happens in  0s⠹ Retry happens in  0s
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #>  Spreadsheet name: gapminder                                   
@@ -272,6 +296,7 @@ on whatever the user provides as `ss`, you can even pass `gap_dribble`
 straight into googlesheets4 functions.
 
 ``` r
+
 sheet_properties(gap_dribble)
 #> # A tibble: 5 × 8
 #>   name     index         id type  visible grid_rows grid_columns data  
@@ -317,6 +342,7 @@ has lots of bells and whistles and we can use one of them to narrow the
 search to Google Sheets:
 
 ``` r
+
 drive_find(type = "spreadsheet")
 #> # A dribble: 9 × 3
 #>   name              id       drive_resource   
@@ -335,6 +361,7 @@ in googlesheets4, which is a shortcut for
 `drive_find(type = "spreadsheet")`:
 
 ``` r
+
 gs4_find()
 #> # A dribble: 9 × 3
 #>   name              id       drive_resource   

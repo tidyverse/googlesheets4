@@ -49,6 +49,7 @@ Outline:
 First attach both packages.
 
 ``` r
+
 library(googledrive)
 library(googlesheets4)
 ```
@@ -60,6 +61,7 @@ accepts additional arguments, e.g. to specify a Google identity via
 googlesheets4 to use the same token as googledrive.
 
 ``` r
+
 drive_auth()
 gs4_auth(token = drive_token())
 ```
@@ -73,6 +75,7 @@ you’ve identified the target file, use googlesheets4 to do
 spreadsheet-specific tasks.
 
 ``` r
+
 drive_find("chicken")
 #> # A dribble: 1 × 3
 #>   name          id       drive_resource   
@@ -112,6 +115,7 @@ If you ever want to confirm the currently authenticated user, both
 packages provide a `*_user()` function that reveals some info:
 
 ``` r
+
 drive_user()
 #> Logged in as:
 #> • displayName:
@@ -141,6 +145,7 @@ Outline:
 First attach both packages.
 
 ``` r
+
 library(googlesheets4)
 library(googledrive)
 ```
@@ -152,6 +157,7 @@ accepts additional arguments, e.g. to specify a Google identity via
 googledrive to use the same token as googlesheets4.
 
 ``` r
+
 gs4_auth(scope = "https://www.googleapis.com/auth/drive")
 drive_auth(token = gs4_token())
 ```
@@ -161,6 +167,7 @@ name, path, or other property. Then, once you’ve identified the target
 file, use googlesheets4 to do spreadsheet-specific tasks.
 
 ``` r
+
 drive_find("chicken")
 #> # A dribble: 1 × 3
 #>   name          id       drive_resource   
@@ -212,6 +219,7 @@ what they would allow.
 This scope is the most powerful and, therefore, the most dangerous.
 
 ``` r
+
 PACKAGE_auth(
   ...,
   scopes = "https://www.googleapis.com/auth/drive",
@@ -224,6 +232,7 @@ combined with `spreadsheets` if you plan to edit, create, or delete
 Sheets.
 
 ``` r
+
 PACKAGE_auth(
   ...,
   scopes = c(
@@ -239,6 +248,7 @@ those Sheets, the `drive.readonly` scope is sufficient and means you
 can’t modify anything by accident.
 
 ``` r
+
 PACKAGE_auth(
   ...,
   scopes = "https://www.googleapis.com/auth/drive.readonly",
@@ -251,6 +261,7 @@ file ID, and you are only reading from those Sheets, you only need
 googlesheets4 and `spreadsheets.readonly` is sufficient.
 
 ``` r
+
 gs4_auth(
   ...,
   scopes = "https://www.googleapis.com/auth/spreadsheets.readonly",

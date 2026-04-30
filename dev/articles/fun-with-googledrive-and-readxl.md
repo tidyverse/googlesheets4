@@ -7,6 +7,7 @@ ends in R, but travels in spreadsheet form, via Google Sheets.
 ## Attach packages
 
 ``` r
+
 library(googlesheets4)
 library(googledrive)
 #> 
@@ -33,8 +34,9 @@ googledrive](https://googlesheets4.tidyverse.org/articles/articles/drive-and-she
 Put the iris data into a csv file.
 
 ``` r
+
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/tmp/RtmpxHuetL/iris-251b6711a0ed.csv"
+#> [1] "/tmp/RtmpqbaCxW/iris-260045d72475.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -43,17 +45,18 @@ Use
 to upload the csv and simultaneously convert to a Sheet.
 
 ``` r
+
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#> • /tmp/RtmpxHuetL/iris-251b6711a0ed.csv
+#> • /tmp/RtmpqbaCxW/iris-260045d72475.csv
 #> Uploaded into Drive file:
-#> • iris-251b6711a0ed <id: 1tmzFJvMNGhCPVR4P95jF-fsShQC0pOYVQRDcTEFcocg>
+#> • iris-260045d72475 <id: 1ei6lK3LzNOYGK3YoEc7tp7OjvvCrhIGv9aV-YjdoJsE>
 #> With MIME type:
 #> • application/vnd.google-apps.spreadsheet
 #> # A dribble: 1 × 3
 #>   name              id       drive_resource   
 #>   <chr>             <drv_id> <list>           
-#> 1 iris-251b6711a0ed 1tmzFJv… <named list [38]>
+#> 1 iris-260045d72475 1ei6lK3… <named list [37]>
 
 # visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -62,8 +65,9 @@ drive_browse(iris_ss)
 Read data from the private Sheet into R.
 
 ``` r
+
 read_sheet(iris_ss, range = "B1:D6")
-#> ✔ Reading from iris-251b6711a0ed.csv.
+#> ✔ Reading from iris-260045d72475.csv.
 #> ✔ Range B1:D6.
 #> # A tibble: 5 × 3
 #>   Sepal.Width Petal.Length Petal.Width
@@ -80,13 +84,14 @@ read_sheet(iris_ss, range = "B1:D6")
 Download the Sheet as an Excel workbook.
 
 ``` r
+
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/tmp/RtmpxHuetL/iris-251b6711a0ed.xlsx"
+#> [1] "/tmp/RtmpqbaCxW/iris-260045d72475.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#> • iris-251b6711a0ed <id: 1tmzFJvMNGhCPVR4P95jF-fsShQC0pOYVQRDcTEFcocg>
+#> • iris-260045d72475 <id: 1ei6lK3LzNOYGK3YoEc7tp7OjvvCrhIGv9aV-YjdoJsE>
 #> Saved locally as:
-#> • /tmp/RtmpxHuetL/iris-251b6711a0ed.xlsx
+#> • /tmp/RtmpqbaCxW/iris-260045d72475.xlsx
 ```
 
 ## Read xlsx with readxl
@@ -95,6 +100,7 @@ Read the iris data back in via
 [`readxl::read_excel()`](https://readxl.tidyverse.org/reference/read_excel.html).
 
 ``` r
+
 if (requireNamespace("readxl", quietly = TRUE)) {
   readxl::read_excel(iris_xlsxfile)  
 }
@@ -117,9 +123,10 @@ if (requireNamespace("readxl", quietly = TRUE)) {
 ## Clean up
 
 ``` r
+
 file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_trash(iris_ss)
 #> File trashed:
-#> • iris-251b6711a0ed <id: 1tmzFJvMNGhCPVR4P95jF-fsShQC0pOYVQRDcTEFcocg>
+#> • iris-260045d72475 <id: 1ei6lK3LzNOYGK3YoEc7tp7OjvvCrhIGv9aV-YjdoJsE>
 ```

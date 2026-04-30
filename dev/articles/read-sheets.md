@@ -1,6 +1,7 @@
 # Read Sheets
 
 ``` r
+
 library(googlesheets4)
 ```
 
@@ -51,6 +52,7 @@ Here we read from the “mini-gap” and “deaths” example Sheets to show
 some of the different ways to specify (work)sheet and cell ranges.
 
 ``` r
+
 range_read(gs4_example("mini-gap"), sheet = 2)
 #> ✔ Reading from mini-gap.
 #> ✔ Range ''Americas''.
@@ -108,6 +110,7 @@ future release.
   [`range_read()`](https://googlesheets4.tidyverse.org/dev/reference/range_read.md).
 
 ``` r
+
 range_read(
   gs4_example("deaths"), range = "other!A5:F15", col_types = "?ci??D"
 )
@@ -144,6 +147,7 @@ and mysterious than approaches like `range = "other!A5:F15"` or
 argument:
 
 ``` r
+
 gs4_example("deaths") %>% 
   range_read(range = "arts_data")
 #> ✔ Reading from deaths.
@@ -174,6 +178,7 @@ returns a data frame with one row per cell and it gives access to raw
 cell data sent by the Sheets API.
 
 ``` r
+
 (df <- range_read_cells(gs4_example("deaths"), range = "E5:E7"))
 #> ✔ Reading from deaths.
 #> ✔ Range E5:E7.
@@ -216,6 +221,7 @@ from
 which involves reshaping and column typing.
 
 ``` r
+
 df %>% spread_sheet(col_types = "D")
 #> # A tibble: 2 × 1
 #>   `Date of birth`
@@ -256,6 +262,7 @@ has much the same interface as
 [`range_read()`](https://googlesheets4.tidyverse.org/dev/reference/range_read.md).
 
 ``` r
+
 gs4_example("gapminder") %>% 
   range_speedread(sheet = "Oceania", n_max = 3)
 #> ✔ Reading from gapminder, sheet Oceania.
@@ -286,6 +293,7 @@ specification are passed along to the CSV-parsing function. Here is a
 demo using readr-style column specification:
 
 ``` r
+
 gs4_example("deaths") %>% 
   range_speedread(
     range = "other!A5:F15",
@@ -317,6 +325,7 @@ Compare that to how we would read the same data with
 [`range_read()`](https://googlesheets4.tidyverse.org/dev/reference/range_read.md):
 
 ``` r
+
 gs4_example("deaths") %>% 
   range_read(range = "other_data", col_types = "??i?DD")
 #> ✔ Reading from deaths.
@@ -354,6 +363,7 @@ What’s the speed difference for something like the Africa sheet in the
 “gapminder” example Sheet? (around 625 rows x 6 columns, or 3700 cells)
 
 ``` r
+
 system.time(
   gs4_example("gapminder") %>% range_speedread(sheet = "Africa")
 )
@@ -369,14 +379,14 @@ system.time(
 #> ℹ Use `spec()` to retrieve the full column specification for this data.
 #> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 #>    user  system elapsed 
-#>   0.079   0.013   0.805
+#>   0.087   0.007   0.485
 system.time(
   gs4_example("gapminder") %>% range_read(sheet = "Africa")
 )
 #> ✔ Reading from gapminder.
 #> ✔ Range ''Africa''.
 #>    user  system elapsed 
-#>   0.262   0.016   0.732
+#>   0.267   0.018   0.614
 ```
 
 The modest difference above shows that the speed difference is unlikely

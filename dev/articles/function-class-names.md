@@ -55,65 +55,65 @@ means one can install from that specific state via
 
 ### Auth and the Sheet API v4 surface
 
-| \<= v0.1.1.9000                | \>= v0.1.1.9100                                                                                   |
-|:-------------------------------|:--------------------------------------------------------------------------------------------------|
-| `sheets_api_key()` (\*)        | [`gs4_api_key()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md)        |
-| `sheets_auth()` (\*)           | [`gs4_auth()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth.md)                     |
+| \<= v0.1.1.9000 | \>= v0.1.1.9100 |
+|:---|:---|
+| `sheets_api_key()` (\*) | [`gs4_api_key()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md) |
+| `sheets_auth()` (\*) | [`gs4_auth()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth.md) |
 | `sheets_auth_configure()` (\*) | [`gs4_auth_configure()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md) |
-| `sheets_deauth()` (\*)         | [`gs4_deauth()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_deauth.md)                 |
-| `sheets_endpoints()` (\*)      | [`gs4_endpoints()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_endpoints.md)           |
-| `sheets_has_token()` (\*)      | [`gs4_has_token()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_has_token.md)           |
-| `sheets_oauth_app()` (\*)      | [`gs4_oauth_app()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_oauth_app.md)           |
-| `sheets_token()` (\*)          | [`gs4_token()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_token.md)                   |
-| `sheets_user()` (\*)           | [`gs4_user()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_user.md)                     |
+| `sheets_deauth()` (\*) | [`gs4_deauth()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_deauth.md) |
+| `sheets_endpoints()` (\*) | [`gs4_endpoints()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_endpoints.md) |
+| `sheets_has_token()` (\*) | [`gs4_has_token()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_has_token.md) |
+| `sheets_oauth_app()` (\*) | [`gs4_oauth_app()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_oauth_app.md) |
+| `sheets_token()` (\*) | [`gs4_token()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_token.md) |
+| `sheets_user()` (\*) | [`gs4_user()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_user.md) |
 
 (\*) indicates functions in the CRAN versions \<= v0.1.1.
 
 ### (Spread)sheet scope
 
-| \<= v0.1.1.9000          | \>= v0.1.1.9100                                                                       |
-|:-------------------------|:--------------------------------------------------------------------------------------|
-| `sheets_browse()` (\*)   | [`gs4_browse()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_browse.md)     |
-| `sheets_create()`        | [`gs4_create()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_create.md)     |
-| `sheets_find()` (\*)     | [`gs4_find()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_find.md)         |
-| `sheets_fodder()`        | [`gs4_fodder()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_fodder.md)     |
-| `sheets_formula()`       | [`gs4_formula()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_formula.md)   |
-| `sheets_example()` (\*)  | [`gs4_example()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_examples.md)  |
+| \<= v0.1.1.9000 | \>= v0.1.1.9100 |
+|:---|:---|
+| `sheets_browse()` (\*) | [`gs4_browse()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_browse.md) |
+| `sheets_create()` | [`gs4_create()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_create.md) |
+| `sheets_find()` (\*) | [`gs4_find()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_find.md) |
+| `sheets_fodder()` | [`gs4_fodder()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_fodder.md) |
+| `sheets_formula()` | [`gs4_formula()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_formula.md) |
+| `sheets_example()` (\*) | [`gs4_example()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_examples.md) |
 | `sheets_examples()` (\*) | [`gs4_examples()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_examples.md) |
-| `sheets_get()` (\*)      | [`gs4_get()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_get.md)           |
-| `sheets_random()`        | [`gs4_random()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_random.md)     |
+| `sheets_get()` (\*) | [`gs4_get()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_get.md) |
+| `sheets_random()` | [`gs4_random()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_random.md) |
 
 (\*) indicates functions in the CRAN versions \<= v0.1.1.
 
 ### (Work)sheet scope
 
-| \<= v0.1.1.9000             | \>= v0.1.1.9100                                                                               |
-|:----------------------------|:----------------------------------------------------------------------------------------------|
-| `sheets_append()`           | [`sheet_append()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_append.md)         |
-| `sheets_sheet_add()`        | [`sheet_add()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_add.md)               |
-| `sheets_sheet_copy()`       | [`sheet_copy()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_copy.md)             |
-| `sheets_sheet_delete()`     | [`sheet_delete()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_delete.md)         |
-| `sheets_sheet_names()`      | [`sheet_names()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_properties.md)      |
+| \<= v0.1.1.9000 | \>= v0.1.1.9100 |
+|:---|:---|
+| `sheets_append()` | [`sheet_append()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_append.md) |
+| `sheets_sheet_add()` | [`sheet_add()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_add.md) |
+| `sheets_sheet_copy()` | [`sheet_copy()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_copy.md) |
+| `sheets_sheet_delete()` | [`sheet_delete()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_delete.md) |
+| `sheets_sheet_names()` | [`sheet_names()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_properties.md) |
 | `sheets_sheet_properties()` | [`sheet_properties()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_properties.md) |
-| `sheets_sheet_relocate()`   | [`sheet_relocate()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_relocate.md)     |
-| `sheets_sheet_rename()`     | [`sheet_rename()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_rename.md)         |
-| `sheets_sheet_resize()`     | [`sheet_resize()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_resize.md)         |
-| `sheets_sheets()` (\*)      | [`sheet_names()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_properties.md)      |
-| `sheets_write()`            | [`sheet_write()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_write.md)           |
+| `sheets_sheet_relocate()` | [`sheet_relocate()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_relocate.md) |
+| `sheets_sheet_rename()` | [`sheet_rename()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_rename.md) |
+| `sheets_sheet_resize()` | [`sheet_resize()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_resize.md) |
+| `sheets_sheets()` (\*) | [`sheet_names()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_properties.md) |
+| `sheets_write()` | [`sheet_write()`](https://googlesheets4.tidyverse.org/dev/reference/sheet_write.md) |
 
 (\*) indicates functions in the CRAN versions \<= v0.1.1.
 
 ### Range scope
 
-| \<= v0.1.1.9000             | \>= v0.1.1.9100                                                                               |
-|:----------------------------|:----------------------------------------------------------------------------------------------|
-| `sheets_auto_resize_dims()` | [`range_autofit()`](https://googlesheets4.tidyverse.org/dev/reference/range_autofit.md)       |
-| `sheets_cells()` (\*)       | [`range_read_cells()`](https://googlesheets4.tidyverse.org/dev/reference/range_read_cells.md) |
-| `sheets_clear()`            | [`range_clear()`](https://googlesheets4.tidyverse.org/dev/reference/range_flood.md)           |
-| `sheets_edit()`             | [`range_write()`](https://googlesheets4.tidyverse.org/dev/reference/range_write.md)           |
-| `sheets_flood()`            | [`range_flood()`](https://googlesheets4.tidyverse.org/dev/reference/range_flood.md)           |
-| `sheets_read()` (\*)        | [`range_read()`](https://googlesheets4.tidyverse.org/dev/reference/range_read.md)             |
-| `sheets_speedread()`        | [`range_speedread()`](https://googlesheets4.tidyverse.org/dev/reference/range_speedread.md)   |
+| \<= v0.1.1.9000 | \>= v0.1.1.9100 |
+|:---|:---|
+| `sheets_auto_resize_dims()` | [`range_autofit()`](https://googlesheets4.tidyverse.org/dev/reference/range_autofit.md) |
+| `sheets_cells()` (\*) | [`range_read_cells()`](https://googlesheets4.tidyverse.org/dev/reference/range_read_cells.md) |
+| `sheets_clear()` | [`range_clear()`](https://googlesheets4.tidyverse.org/dev/reference/range_flood.md) |
+| `sheets_edit()` | [`range_write()`](https://googlesheets4.tidyverse.org/dev/reference/range_write.md) |
+| `sheets_flood()` | [`range_flood()`](https://googlesheets4.tidyverse.org/dev/reference/range_flood.md) |
+| `sheets_read()` (\*) | [`range_read()`](https://googlesheets4.tidyverse.org/dev/reference/range_read.md) |
+| `sheets_speedread()` | [`range_speedread()`](https://googlesheets4.tidyverse.org/dev/reference/range_speedread.md) |
 
 (\*) indicates functions in the CRAN versions \<= v0.1.1.
 

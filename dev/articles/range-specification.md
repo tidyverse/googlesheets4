@@ -4,6 +4,7 @@ This is article serves mostly as internal documentation of how various
 representations of cell ranges relate to each other in googlesheets4.
 
 ``` r
+
 library(tidyverse)
 library(googlesheets4)
 

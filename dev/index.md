@@ -19,12 +19,14 @@ You can install the released version of googlesheets4 from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
+
 install.packages("googlesheets4")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
+
 #install.packages("pak")
 pak::pak("tidyverse/googlesheets4")
 ```
@@ -54,6 +56,7 @@ hidden chunk.
 ## Attach googlesheets4
 
 ``` r
+
 library(googlesheets4)
 ```
 
@@ -93,6 +96,7 @@ Read from
 These all achieve the same thing:
 
 ``` r
+
 # URL
 read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077")
 #> ✔ Reading from "gapminder".
@@ -157,6 +161,7 @@ creates a brand new Google Sheet and can optionally send some initial
 data.
 
 ``` r
+
 (ss <- gs4_create("fluffy-bunny", sheets = list(flowers = head(iris))))
 #> ✔ Creating new Sheet: "fluffy-bunny".
 #> 
@@ -177,6 +182,7 @@ data.
 (spread)Sheet.
 
 ``` r
+
 head(mtcars) %>% 
   sheet_write(ss, sheet = "autos")
 #> ✔ Writing to "fluffy-bunny".

@@ -1,6 +1,7 @@
 # Messages and errors in googlesheets4
 
 ``` r
+
 library(googlesheets4)
 ```
 
@@ -17,6 +18,7 @@ and
 respectively.
 
 ``` r
+
 gs4_bullets(c(
         "noindent",
   " " = "indent",
@@ -76,6 +78,7 @@ How we use the inline classes:
 nice.*
 
 ``` r
+
 nm <- "name-of-a-Google-Sheet"
 gs4_bullets(c(v = "Creating new Sheet: {.s_sheet {nm}}"))
 #> ✔ Creating new Sheet: name-of-a-Google-Sheet
@@ -95,6 +98,7 @@ bullet list of simple items, which also don’t get periods.
 (`bulletize()` comes from gargle.)
 
 ``` r
+
 gs4_bullets(c(
   "We're going to list some things:",
   bulletize(gargle::gargle_map_cli(month.abb[1:4]))
@@ -110,6 +114,7 @@ Other messages that are complete sentence, or at least aspire to be,
 **do** get a period.
 
 ``` r
+
 gs4_bullets("Doing the stuff you asked me to do.")
 #> Doing the stuff you asked me to do.
 
@@ -136,6 +141,7 @@ Most relevant cli docs:
 is awesome!
 
 ``` r
+
 nm <- "name-of-a-Google-Sheet"
 n_new <- 1
 gs4_bullets(c(v = "Adding {n_new} sheet{?s} to {.s_sheet {nm}}"))
@@ -153,6 +159,7 @@ things](https://cli.r-lib.org/articles/semantic-cli.html#inline-lists-of-items)
 is great! Also more pluralization.
 
 ``` r
+
 new_sheet_names <- c("apple", "banana", "cherry")
 gs4_bullets(c("New sheet{?s}: {.w_sheet {new_sheet_names}}"))
 #> New sheets: apple, banana, and cherry
@@ -180,6 +187,7 @@ there’s a reason to.
 `abort_unsupported_conversion()` is a wrapper around `gs4_abort()`.
 
 ``` r
+
 x <- structure(1, class = c("a", "b", "c"))
 abort_unsupported_conversion(x, to = "SheetThing")
 #> Error in `abort_unsupported_conversion()`:

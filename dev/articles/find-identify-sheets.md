@@ -254,20 +254,6 @@ gap_id <- as_sheets_id(gap_dribble)
 unclass(gap_id)
 #> [1] "1ksUQqF_K5yKbJr_uWVnFVZhVuxwMyZCvK6MZOEb7Kew"
 gap_id
-#> ✖ Request 1 failed [500: DATA_LOSS].
-#> ℹ Will retry in 1.8s.
-#> ✖ Request 2 failed [500: DATA_LOSS].
-#> ℹ Will retry in 8s.
-#> ⠙ Retry happens in  7s
-#> ⠹ Retry happens in  5s
-#> ⠸ Retry happens in  2s
-#> ✖ Request 3 failed [500: DATA_LOSS].
-#> ⠸ Retry happens in  2sℹ Will retry in 4.2s.
-#> ⠸ Retry happens in  2s⠸ Retry happens in  0s
-#> ⠙ Retry happens in  3s
-#> ⠹ Retry happens in  0s
-#> ✔ Request 4 successful!
-#> ⠹ Retry happens in  0s⠹ Retry happens in  0s
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #>  Spreadsheet name: gapminder                                   

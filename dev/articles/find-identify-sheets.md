@@ -237,7 +237,7 @@ to identify a file by name:
 #> # A dribble: 1 × 4
 #>   name      path      id       drive_resource   
 #>   <chr>     <chr>     <drv_id> <list>           
-#> 1 gapminder gapminder 1ksUQqF… <named list [35]>
+#> 1 gapminder gapminder 1ksUQqF… <named list [36]>
 ```
 
 [`drive_get()`](https://googledrive.tidyverse.org/reference/drive_get.html)
@@ -333,11 +333,11 @@ drive_find(type = "spreadsheet")
 #> # A dribble: 9 × 3
 #>   name              id       drive_resource   
 #>   <chr>             <drv_id> <list>           
-#> 1 geological-canary 13fmUp0… <named list [38]>
-#> 2 blubbery-lobo     1foTYXQ… <named list [37]>
-#> 3 bacciform-booby   15WqCxH… <named list [36]>
-#> 4 childsafe-squid   1uGu_BH… <named list [37]>
-#> 5 fiery-hart        18KiiL2… <named list [37]>
+#> 1 geological-canary 13fmUp0… <named list [39]>
+#> 2 blubbery-lobo     1foTYXQ… <named list [38]>
+#> 3 bacciform-booby   15WqCxH… <named list [37]>
+#> 4 childsafe-squid   1uGu_BH… <named list [38]>
+#> 5 fiery-hart        18KiiL2… <named list [38]>
 #> # ℹ 4 more rows
 ```
 
@@ -352,11 +352,11 @@ gs4_find()
 #> # A dribble: 9 × 3
 #>   name              id       drive_resource   
 #>   <chr>             <drv_id> <list>           
-#> 1 geological-canary 13fmUp0… <named list [38]>
-#> 2 blubbery-lobo     1foTYXQ… <named list [37]>
-#> 3 bacciform-booby   15WqCxH… <named list [36]>
-#> 4 childsafe-squid   1uGu_BH… <named list [37]>
-#> 5 fiery-hart        18KiiL2… <named list [37]>
+#> 1 geological-canary 13fmUp0… <named list [39]>
+#> 2 blubbery-lobo     1foTYXQ… <named list [38]>
+#> 3 bacciform-booby   15WqCxH… <named list [37]>
+#> 4 childsafe-squid   1uGu_BH… <named list [38]>
+#> 5 fiery-hart        18KiiL2… <named list [38]>
 #> # ℹ 4 more rows
 ```
 

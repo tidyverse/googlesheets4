@@ -80,7 +80,7 @@ drive_find("chicken")
 #> # A dribble: 1 × 3
 #>   name          id       drive_resource   
 #>   <chr>         <drv_id> <list>           
-#> 1 chicken-sheet 1StV8oq… <named list [37]>
+#> 1 chicken-sheet 1StV8oq… <named list [38]>
 
 ss <- drive_get("chicken-sheet")
 #> ✔ The input `path` resolved to exactly 1 file.
@@ -172,7 +172,7 @@ drive_find("chicken")
 #> # A dribble: 1 × 3
 #>   name          id       drive_resource   
 #>   <chr>         <drv_id> <list>           
-#> 1 chicken-sheet 1StV8oq… <named list [37]>
+#> 1 chicken-sheet 1StV8oq… <named list [38]>
 
 ss <- drive_get("chicken-sheet")
 #> ✔ The input `path` resolved to exactly 1 file.

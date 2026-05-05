@@ -92,10 +92,10 @@ gs4_create(
 gs4_find("gs4-create-demo") %>%
   googledrive::drive_trash()
 #> Files trashed:
-#> • gs4-create-demo-6 <id: 1fNx4NTJ6-5XUQwJ-Z7lQ7-mPx1-ZB22iuWCd6mfsuBU>
-#> • gs4-create-demo-5 <id: 1LlgJvFuGao0wnqIXP65S9qAcwc1pu5cCU-7R9CnLXCw>
-#> • gs4-create-demo-4 <id: 1cMvdWtbuZXHZa3X12eUmLM9t46L5jRIlL_7h7hqWWyQ>
-#> • gs4-create-demo-3 <id: 1vspZDff45yPnSLfN5eXF-GrmmvdB03s6bq62jUku-5A>
-#> • gs4-create-demo-2 <id: 1qkFsh3NBpNMOq4jmlnxiz7MhCwC3wcN_LDuM2oWXUkQ>
-#> • gs4-create-demo-1 <id: 1OYqFIV7BnJ9MYrRVp4LzTVyg-pAK-XoLybMywRCfiqQ>
+#> • gs4-create-demo-6 <id: 1EowoVgOS_5bqATMUmmMLBnO4gDs5cPiR389pAhOIOa4>
+#> • gs4-create-demo-5 <id: 18P8kiYF7gkBUAOMeDzJwpSki__XP7lcfsfbPf8CnsL8>
+#> • gs4-create-demo-4 <id: 1RPhq0YWRKYNAX97ZgpKDy9CIUlYQ0byOIcZO1bQkTVo>
+#> • gs4-create-demo-3 <id: 1-yUTugVV_QFjVpJ0i8OvRZPboGegznJr-KvmUZPiZL0>
+#> • gs4-create-demo-2 <id: 1PxVCnaOfg_ab7GnAgYRoqoX6lxRKCX_EJZSrp9DTX00>
+#> • gs4-create-demo-1 <id: 1IQD6B7OEkIAYyd5v0oCFFhzOph8jgstj0fbkUS4PZfM>
 ```

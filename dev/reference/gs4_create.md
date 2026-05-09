@@ -58,9 +58,6 @@ Other write functions:
 ``` r
 gs4_create("gs4-create-demo-1")
 #> ✔ Creating new Sheet: gs4-create-demo-1.
-#> ✖ Request 1 failed [502].
-#> ℹ Will retry in 1.8s.
-#> ✔ Request 2 successful!
 
 gs4_create("gs4-create-demo-2", locale = "en_CA")
 #> ✔ Creating new Sheet: gs4-create-demo-2.
@@ -95,10 +92,10 @@ gs4_create(
 gs4_find("gs4-create-demo") %>%
   googledrive::drive_trash()
 #> Files trashed:
-#> • gs4-create-demo-6 <id: 1eDOJRVDfSNJ6293Rbs_jyPUPVHIIkPpBHKwd4FTT7O4>
-#> • gs4-create-demo-5 <id: 1SihifakHP6tB5dSmwoH3nHZ4eGjVXwOJxGzNlsZMCuQ>
-#> • gs4-create-demo-4 <id: 1Oo2BaSO8aaxZNfvUEFsSMk8iYPH02eQJjK6fklOEnGY>
-#> • gs4-create-demo-3 <id: 1d5QefLZpjO4MX3WaYctSh_86MegRZ-z7ResiHvdaQAA>
-#> • gs4-create-demo-2 <id: 1QM7lnGPezIQm3Mg1P6S5KXfy-BuJKWAiKmiwH05Uc4Q>
-#> • gs4-create-demo-1 <id: 1wPI6F0H5tLbVu5bQUrIEECXvxnmZN0oM5n97Ke0qMTc>
+#> • gs4-create-demo-6 <id: 1JDDWLf9KNlxuEU08HjtWSlE-djBjF9xOo9lZbPSB6Dc>
+#> • gs4-create-demo-5 <id: 1gF25wAOFXZDVtQd7de8hDrOF5NF3HGGoc_ney29uDfw>
+#> • gs4-create-demo-4 <id: 1ony44KqXz9W4qE18sZGbqSKMdNYOe4EUsSK3Z5Gv2WI>
+#> • gs4-create-demo-3 <id: 19kaq7uMs3nRinTEK3kneCG8Beew6r8SqYvpIX048xZM>
+#> • gs4-create-demo-2 <id: 18d5tLJS_O0Y_6I2Lo4qSTy3hyXcG2RJpOnQeAei85hA>
+#> • gs4-create-demo-1 <id: 1M7bgYjk5PY3IgJnqTEfzvZTNu22GUHnmiAC9M2_bgpo>
 ```

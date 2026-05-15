@@ -63,13 +63,10 @@ It is powered by the gargle package, which consults several options:
 # message: "Creating new Sheet ..."
 (ss <- gs4_create("gs4-quiet-demo", sheets = "alpha"))
 #> ✔ Creating new Sheet: gs4-quiet-demo.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 1.8s.
-#> ✔ Request 2 successful!
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: gs4-quiet-demo                              
-#>               ID: 1mFx6LChPxpRYVudzx6vaDFJ1tQUeFsruGJz9gYSz_2g
+#>               ID: 1Uqm79mNvyeWEiPj46HCp-PTV8HGSKqPO2TXF3H3BuWA
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -115,5 +112,5 @@ read_sheet(ss)
 gs4_find("gs4-quiet-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • gs4-quiet-demo <id: 1mFx6LChPxpRYVudzx6vaDFJ1tQUeFsruGJz9gYSz_2g>
+#> • gs4-quiet-demo <id: 1Uqm79mNvyeWEiPj46HCp-PTV8HGSKqPO2TXF3H3BuWA>
 ```

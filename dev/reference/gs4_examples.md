@@ -56,6 +56,9 @@ gs4_examples("gap")
 #> 1k94ZVVl6sdj0AXfK9MQOuQ4rOhd1PULqpAu2_kr9MAU 
 
 gs4_example("gapminder")
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 1.8s.
+#> ✔ Request 2 successful!
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #>  Spreadsheet name: gapminder                                   

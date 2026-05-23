@@ -62,7 +62,7 @@ ss1
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-create-demo-1                        
-#>               ID: 1NZs9lpUzyonzf6J8R_-iKVfAB8DEiZnWS48N07zMpHU
+#>               ID: 1whO1ky46RKTNUVfZ44HgE6a-n23oX9ze1KS8n73Tphs
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -93,7 +93,7 @@ ss2
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-create-demo-2                        
-#>               ID: 1u3fevJjLrH73-diqPb1ovR70_jx94mk6WQ36pCIcVjg
+#>               ID: 1TpH4XpLcoLrw6X7lo46gijnZJdMRHk7vmV3swEdCWaE
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           
@@ -127,7 +127,7 @@ ss3
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-create-demo-3                        
-#>               ID: 1jQLX-_rsRHWXkDuv5lNZ5a9_lDRdyEFOsRlsHKXq7io
+#>               ID: 1HtocqZtw-wDtfeD-ZdZx4HgX0ZuxkFx9IXoU8I8DDEo
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -157,7 +157,7 @@ ss4
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-create-demo-4                        
-#>               ID: 15_YKafKU8QuLYo2UtS4GfxADAaqfzkefkoswmlCov4E
+#>               ID: 1JMEKIHvGbkFJIxejRitjGFuEHMxE1B2hWVLQhjNb40g
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           
@@ -192,7 +192,7 @@ ss5
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-create-demo-5                        
-#>               ID: 1mLWV3u-kWYOcc8QkwO6h8IJsLECtRTeMliQy6aTPkVE
+#>               ID: 1srmjd-Na7lwHYvB9iaEajx-x0XYZA8d5ad4KuvNPdn8
 #>           Locale: fr_FR                                       
 #>        Time zone: Europe/Paris                                
 #>      # of sheets: 1                                           
@@ -221,15 +221,15 @@ gs4_find("sheets-create-demo") %>%
   googledrive::drive_trash()
 #> Files trashed:
 #> • sheets-create-demo-5
-#>   <id: 1mLWV3u-kWYOcc8QkwO6h8IJsLECtRTeMliQy6aTPkVE>
+#>   <id: 1srmjd-Na7lwHYvB9iaEajx-x0XYZA8d5ad4KuvNPdn8>
 #> • sheets-create-demo-4
-#>   <id: 15_YKafKU8QuLYo2UtS4GfxADAaqfzkefkoswmlCov4E>
+#>   <id: 1JMEKIHvGbkFJIxejRitjGFuEHMxE1B2hWVLQhjNb40g>
 #> • sheets-create-demo-3
-#>   <id: 1jQLX-_rsRHWXkDuv5lNZ5a9_lDRdyEFOsRlsHKXq7io>
+#>   <id: 1HtocqZtw-wDtfeD-ZdZx4HgX0ZuxkFx9IXoU8I8DDEo>
 #> • sheets-create-demo-2
-#>   <id: 1u3fevJjLrH73-diqPb1ovR70_jx94mk6WQ36pCIcVjg>
+#>   <id: 1TpH4XpLcoLrw6X7lo46gijnZJdMRHk7vmV3swEdCWaE>
 #> • sheets-create-demo-1
-#>   <id: 1NZs9lpUzyonzf6J8R_-iKVfAB8DEiZnWS48N07zMpHU>
+#>   <id: 1whO1ky46RKTNUVfZ44HgE6a-n23oX9ze1KS8n73Tphs>
 ```
 
 ## `write_sheet()`, a.k.a. `sheet_write()`
@@ -259,7 +259,7 @@ random_ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: unfearing-guineafowl                        
-#>               ID: 1Wh-rxWFsph5AmOffa1uZffm12phf4PgZadgpxQsSnbY
+#>               ID: 1N6UrwKL0sYMNYNwUpv0-8lXnzpQTNV_5zZME-UTIFQA
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -288,7 +288,7 @@ but we send no data.
 googledrive::drive_trash(random_ss)
 #> File trashed:
 #> • unfearing-guineafowl
-#>   <id: 1Wh-rxWFsph5AmOffa1uZffm12phf4PgZadgpxQsSnbY>
+#>   <id: 1N6UrwKL0sYMNYNwUpv0-8lXnzpQTNV_5zZME-UTIFQA>
 
 ss1 <- gs4_create(
   "write-sheets-demo-1",
@@ -299,7 +299,7 @@ ss1
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: write-sheets-demo-1                         
-#>               ID: 1479Gq7bEErkXSlJfzBLz8bte6zkBwGxu0U6ylZ-G7UQ
+#>               ID: 1MzGST7K-AUOGaBwLkXwOUc_LeX3UhFKE7mfERvGyATw
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -322,7 +322,7 @@ ss1
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: write-sheets-demo-1                         
-#>               ID: 1479Gq7bEErkXSlJfzBLz8bte6zkBwGxu0U6ylZ-G7UQ
+#>               ID: 1MzGST7K-AUOGaBwLkXwOUc_LeX3UhFKE7mfERvGyATw
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -361,7 +361,7 @@ ss1
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: write-sheets-demo-1                         
-#>               ID: 1479Gq7bEErkXSlJfzBLz8bte6zkBwGxu0U6ylZ-G7UQ
+#>               ID: 1MzGST7K-AUOGaBwLkXwOUc_LeX3UhFKE7mfERvGyATw
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 4                                           
@@ -382,7 +382,7 @@ gs4_find("write-sheets-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • write-sheets-demo-1
-#>   <id: 1479Gq7bEErkXSlJfzBLz8bte6zkBwGxu0U6ylZ-G7UQ>
+#>   <id: 1MzGST7K-AUOGaBwLkXwOUc_LeX3UhFKE7mfERvGyATw>
 ```
 
 ## `sheet_append()`
@@ -435,7 +435,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-append-demo                          
-#>               ID: 1CaCTQY_OBE9D9wXKAQBKieCuj-0btJQ5FpRsloUMimY
+#>               ID: 1zzgkGaav1BTCbJUnFZjF1TUdpnYWXhK2NR3IatSaNSM
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -466,7 +466,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-append-demo                          
-#>               ID: 1CaCTQY_OBE9D9wXKAQBKieCuj-0btJQ5FpRsloUMimY
+#>               ID: 1zzgkGaav1BTCbJUnFZjF1TUdpnYWXhK2NR3IatSaNSM
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -483,7 +483,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-append-demo                          
-#>               ID: 1CaCTQY_OBE9D9wXKAQBKieCuj-0btJQ5FpRsloUMimY
+#>               ID: 1zzgkGaav1BTCbJUnFZjF1TUdpnYWXhK2NR3IatSaNSM
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -500,7 +500,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-append-demo                          
-#>               ID: 1CaCTQY_OBE9D9wXKAQBKieCuj-0btJQ5FpRsloUMimY
+#>               ID: 1zzgkGaav1BTCbJUnFZjF1TUdpnYWXhK2NR3IatSaNSM
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -517,7 +517,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-append-demo                          
-#>               ID: 1CaCTQY_OBE9D9wXKAQBKieCuj-0btJQ5FpRsloUMimY
+#>               ID: 1zzgkGaav1BTCbJUnFZjF1TUdpnYWXhK2NR3IatSaNSM
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -550,7 +550,7 @@ gs4_find("sheets-append-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • sheets-append-demo
-#>   <id: 1CaCTQY_OBE9D9wXKAQBKieCuj-0btJQ5FpRsloUMimY>
+#>   <id: 1zzgkGaav1BTCbJUnFZjF1TUdpnYWXhK2NR3IatSaNSM>
 ```
 
 ## `range_write()`
@@ -767,7 +767,7 @@ show writing data of disparate type to a 1-row or a 1-column region.
 gs4_find("sheets-edit-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheets-edit-demo <id: 17OoNLVrJ8b4E1MxBnK-MfLChUdOx2ngcstmd4oLvknc>
+#> • sheets-edit-demo <id: 1QH19G8A_mydWMQF38Xg7tChzfrtrmafLH4UGv7VD480>
 ```
 
 ## Write formulas
@@ -799,7 +799,7 @@ lang_dat$translated <- gs4_formula(
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-formula-demo                         
-#>               ID: 1yn60rH1cSZiH6WpIQxusDz4wWBBFsjpr8NCecDrYHJY
+#>               ID: 10mv8a5rRJbPkCwc63O2WR4K7ne0pVeCTuUgcepmR4co
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -832,7 +832,7 @@ gs4_find("sheets-formula-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • sheets-formula-demo
-#>   <id: 1yn60rH1cSZiH6WpIQxusDz4wWBBFsjpr8NCecDrYHJY>
+#>   <id: 10mv8a5rRJbPkCwc63O2WR4K7ne0pVeCTuUgcepmR4co>
 ```
 
 ## `range_flood()`
@@ -854,7 +854,7 @@ df <- gs4_fodder(10)
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: range-flood-demo                            
-#>               ID: 1o_Cs-TFX8PCufJecweWd4BLY6rkt25rIMxlMjbp7j_g
+#>               ID: 1Swih3z45CWEJ04jishpDR2Gfvy6kzjUtM1R8aSVoVOE
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -957,7 +957,7 @@ range_read(ss)
 gs4_find("range-flood-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • range-flood-demo <id: 1o_Cs-TFX8PCufJecweWd4BLY6rkt25rIMxlMjbp7j_g>
+#> • range-flood-demo <id: 1Swih3z45CWEJ04jishpDR2Gfvy6kzjUtM1R8aSVoVOE>
 ```
 
 ## `range_delete()`
@@ -982,7 +982,7 @@ df <- gs4_fodder(4)
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheets-delete-demo                          
-#>               ID: 1IRZXLtKSjQOZScPdRL7Cmp93k1B6Jtt0pDFH2AZ3_EE
+#>               ID: 1hSS4Z9qQEJFLJ59xwCISxWtQYgzVFwb9Nx9Ux-k_m-s
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -1073,5 +1073,5 @@ gs4_find("sheets-delete-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • sheets-delete-demo
-#>   <id: 1IRZXLtKSjQOZScPdRL7Cmp93k1B6Jtt0pDFH2AZ3_EE>
+#>   <id: 1hSS4Z9qQEJFLJ59xwCISxWtQYgzVFwb9Nx9Ux-k_m-s>
 ```

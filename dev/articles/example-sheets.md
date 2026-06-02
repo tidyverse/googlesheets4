@@ -68,6 +68,9 @@ will (try to) reveal current metadata about the Sheet.
 ``` r
 
 gs4_example("chicken")
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 1.8s.
+#> ✔ Request 2 successful!
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: chicken-sheet                               

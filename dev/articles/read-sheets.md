@@ -379,14 +379,14 @@ system.time(
 #> ℹ Use `spec()` to retrieve the full column specification for this data.
 #> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 #>    user  system elapsed 
-#>   0.082   0.014   0.550
+#>   0.092   0.004   0.577
 system.time(
   gs4_example("gapminder") %>% range_read(sheet = "Africa")
 )
 #> ✔ Reading from gapminder.
 #> ✔ Range ''Africa''.
 #>    user  system elapsed 
-#>   0.264   0.024   0.619
+#>   0.291   0.018   0.798
 ```
 
 The modest difference above shows that the speed difference is unlikely

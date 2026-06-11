@@ -117,9 +117,42 @@ df <- data.frame(
 
 # specify only a data frame, get a new Sheet, with a random name
 ss <- write_sheet(df)
-#> ✔ Creating new Sheet: heartsick-sealion.
+#> ✔ Creating new Sheet: despotic-carp.
 read_sheet(ss)
-#> ✔ Reading from heartsick-sealion.
+#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ℹ Will retry in 61.4s.
+#> ⠙ Retry happens in  1m
+#> ⠹ Retry happens in  1m
+#> ⠸ Retry happens in  1m
+#> ⠼ Retry happens in  1m
+#> ⠴ Retry happens in  1m
+#> ⠦ Retry happens in 49s
+#> ⠧ Retry happens in 46s
+#> ⠇ Retry happens in 43s
+#> ⠏ Retry happens in 40s
+#> ⠋ Retry happens in 37s
+#> ⠙ Retry happens in 34s
+#> ⠹ Retry happens in 31s
+#> ⠸ Retry happens in 28s
+#> ⠼ Retry happens in 25s
+#> ⠴ Retry happens in 22s
+#> ⠦ Retry happens in 19s
+#> ⠧ Retry happens in 16s
+#> ⠇ Retry happens in 13s
+#> ⠏ Retry happens in 10s
+#> ⠋ Retry happens in  7s
+#> ⠙ Retry happens in  4s
+#> ⠹ Retry happens in  1s
+#> ✖ Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ⠹ Retry happens in  1s
+#> ℹ Will retry in 2.6s.
+#> ⠹ Retry happens in  1s
+#> ⠹ Retry happens in  0s
+#> ⠙ Retry happens in  2s
+#> ✔ Request 3 successful!
+#> ⠙ Retry happens in  2s
+#> ⠙ Retry happens in  0s
+#> ✔ Reading from despotic-carp.
 #> ✔ Range df.
 #> # A tibble: 3 × 2
 #>       x y    
@@ -131,7 +164,7 @@ read_sheet(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • heartsick-sealion <id: 1wrV5DSHmvT7sERRtLQ_8GxZ9POUnwfW2gjFVq6nTpVA>
+#> • despotic-carp <id: 1LdpHTxMkTw6ZRZD1yb1wmo1248phKSAPOdSkLLsVIq8>
 
 # create a Sheet with some initial, placeholder data
 ss <- gs4_create(
@@ -155,9 +188,9 @@ sheet_properties(ss)
 #> # A tibble: 3 × 8
 #>   name  index         id type  visible grid_rows grid_columns data  
 #>   <chr> <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 alpha     0 1298743616 GRID  TRUE            2            1 <NULL>
-#> 2 omega     1  758727495 GRID  TRUE           33           11 <NULL>
-#> 3 df        2  197306111 GRID  TRUE            4            2 <NULL>
+#> 1 alpha     0 1179066002 GRID  TRUE            2            1 <NULL>
+#> 2 omega     1  416151874 GRID  TRUE           33           11 <NULL>
+#> 3 df        2 1733086827 GRID  TRUE            4            2 <NULL>
 
 # view your magnificent creation in the browser
 gs4_browse(ss)
@@ -166,5 +199,5 @@ gs4_browse(ss)
 gs4_find("sheet-write-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-write-demo <id: 1dm_XT3ORuEtmnwzyMu2XpolwkMRvmmG7dppOgQdd0eg>
+#> • sheet-write-demo <id: 1T_vD9XC6v2rMssCef8sEtbzS-8CJqP5j0qwlf8rZ25Y>
 ```

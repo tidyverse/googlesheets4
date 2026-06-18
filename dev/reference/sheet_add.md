@@ -114,17 +114,17 @@ sheet_properties(ss)
 #> # A tibble: 7 × 8
 #>   name        index      id type  visible grid_rows grid_columns data  
 #>   <chr>       <int>   <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 eggplant        0  1.97e9 GRID  TRUE            3            6 <NULL>
+#> 1 eggplant        0  1.58e9 GRID  TRUE            3            6 <NULL>
 #> 2 Sheet1          1  0      GRID  TRUE         1000           26 <NULL>
-#> 3 apple           2  1.02e9 GRID  TRUE         1000           26 <NULL>
-#> 4 banana          3  1.96e9 GRID  TRUE         1000           26 <NULL>
-#> 5 Sheet2          4  1.24e9 GRID  TRUE         1000           26 <NULL>
-#> 6 coconut         5  1.87e8 GRID  TRUE         1000           26 <NULL>
-#> 7 dragonfruit     6  1.39e9 GRID  TRUE         1000           26 <NULL>
+#> 3 apple           2  1.60e9 GRID  TRUE         1000           26 <NULL>
+#> 4 banana          3  1.49e9 GRID  TRUE         1000           26 <NULL>
+#> 5 Sheet2          4  1.76e9 GRID  TRUE         1000           26 <NULL>
+#> 6 coconut         5  7.43e8 GRID  TRUE         1000           26 <NULL>
+#> 7 dragonfruit     6  2.91e8 GRID  TRUE         1000           26 <NULL>
 
 # clean up
 gs4_find("add-sheets-to-me") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • add-sheets-to-me <id: 1zZGDs5-uXOFDgrQXUq42jYZX9XbAzuxvoVEFotrN-g8>
+#> • add-sheets-to-me <id: 1obCJT8iGlAjq7ZsfeM_ShVN1NONxwu82YJ8J2H75E2I>
 ```

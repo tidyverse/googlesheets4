@@ -39,4 +39,7 @@ The Sheet's browser URL, invisibly.
 
 ``` r
 gs4_example("mini-gap") %>% gs4_browse()
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 1.8s.
+#> ✔ Request 2 successful!
 ```

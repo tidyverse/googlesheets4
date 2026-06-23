@@ -145,7 +145,7 @@ gs4_find("sheet-copy-demo") %>%
   googledrive::drive_trash()
 #> Files trashed:
 #> • sheet-copy-demo-bbb
-#>   <id: 17eZhRooOT3mZ7aodccxgoAuP1VliU8P85iZvBqAL9ZA>
+#>   <id: 19NEUxI9SNc0YyNgoQDicD6cro0rRjb8D9Zys_MGW_XA>
 #> • sheet-copy-demo-aaa
-#>   <id: 1CYoq6rmzCU_vxow8zCePKJ4bUN7kfxVMWBw9q0gfc98>
+#>   <id: 1omkreZ5b9GXRk0FnHG7c1_kK_K-owwGNAr6WsPPUHrM>
 ```

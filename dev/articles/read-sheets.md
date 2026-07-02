@@ -268,20 +268,8 @@ gs4_example("gapminder") %>%
 #> ✔ Reading from gapminder, sheet Oceania.
 #> ℹ Export URL:
 #>   <https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&gid=1796776040>
-#> Rows: 3 Columns: 6
-#> ── Column specification ───────────────────────────────────────────────
-#> Delimiter: ","
-#> chr (2): country, continent
-#> dbl (4): year, lifeExp, pop, gdpPercap
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#> # A tibble: 3 × 6
-#>   country   continent  year lifeExp      pop gdpPercap
-#>   <chr>     <chr>     <dbl>   <dbl>    <dbl>     <dbl>
-#> 1 Australia Oceania    1952    69.1  8691212    10040.
-#> 2 Australia Oceania    1957    70.3  9712569    10950.
-#> 3 Australia Oceania    1962    70.9 10794968    12217.
+#> Error in `range_speedread()`:
+#> ! identical(httr::http_type(response), "text/csv") is not TRUE
 ```
 
 The output above reveals that, under the hood,
@@ -370,23 +358,16 @@ system.time(
 #> ✔ Reading from gapminder, sheet Africa.
 #> ℹ Export URL:
 #>   <https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/export?format=csv&gid=780868077>
-#> Rows: 624 Columns: 6
-#> ── Column specification ───────────────────────────────────────────────
-#> Delimiter: ","
-#> chr (2): country, continent
-#> dbl (4): year, lifeExp, pop, gdpPercap
-#> 
-#> ℹ Use `spec()` to retrieve the full column specification for this data.
-#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
-#>    user  system elapsed 
-#>   0.087   0.002   0.522
+#> Error in `range_speedread()`:
+#> ! identical(httr::http_type(response), "text/csv") is not TRUE
+#> Timing stopped at: 0.067 0.003 26.46
 system.time(
   gs4_example("gapminder") %>% range_read(sheet = "Africa")
 )
 #> ✔ Reading from gapminder.
 #> ✔ Range ''Africa''.
 #>    user  system elapsed 
-#>   0.282   0.006   0.620
+#>   0.301   0.019  52.753
 ```
 
 The modest difference above shows that the speed difference is unlikely

@@ -97,7 +97,7 @@ gs4_auth_configure(api_key = "the_key_I_got_for_a_google_API")
 # confirm the changes
 gs4_oauth_client()
 #> <gargle_oauth_client>
-#> name: a_project_d1c5a8066d2cbe48e8d94514dd286163
+#> name: a_project_59aa1797ab7ac4667a77617c3400999c
 #> id: abc.apps.googleusercontent.com
 #> secret: <REDACTED>
 #> type: installed

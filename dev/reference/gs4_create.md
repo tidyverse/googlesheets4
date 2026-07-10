@@ -87,18 +87,15 @@ gs4_create(
   sheets = list(chickwts = head(chickwts), mtcars = head(mtcars))
 )
 #> ✔ Creating new Sheet: gs4-create-demo-6.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 1.8s.
-#> ✔ Request 2 successful!
 
 # Clean up
 gs4_find("gs4-create-demo") %>%
   googledrive::drive_trash()
 #> Files trashed:
-#> • gs4-create-demo-6 <id: 16vB_kdRJ7mToPhyiuZWf3hOMHEEaohqSw33Woqkonts>
-#> • gs4-create-demo-5 <id: 19oehLYSRL5SRWDyhgtL-8XhVBRRurUGKtQPHGlZlZ08>
-#> • gs4-create-demo-4 <id: 1cP0IPY9Fda2IyH55OzUjxlPUKqRxI_q7-wAeO5qXqQs>
-#> • gs4-create-demo-3 <id: 1DX34VwH_EwtRux2hTTftJp-81OptiXl6z0jKWSiG8i8>
-#> • gs4-create-demo-2 <id: 1e-gtiD9jJMXseIok0KQI367vdvwGfC8K7DlW7Bd8Mzg>
-#> • gs4-create-demo-1 <id: 1xOkXQrsQtXyFKBKlfbm7FGAqQbcgY7b1BwGces3-NfA>
+#> • gs4-create-demo-6 <id: 1PVN_j1zkslTOVbtjyNU3JOk9Sy5G67z9xxllFdg-clg>
+#> • gs4-create-demo-5 <id: 1sFxLbcY9QRWCcou8GM6dfFqj25DHp8eNFnaVYakjLDs>
+#> • gs4-create-demo-4 <id: 1g8U1Q5H7dqDbsrJyPdKtTevc8xcZDYGjpt707JFiVeY>
+#> • gs4-create-demo-3 <id: 1f7WJRKPoCMy9syfHjd3p6Zfu_tibOG6PoO3mqCbXmFc>
+#> • gs4-create-demo-2 <id: 1I9o7YCuNR7ud79Fmo0ojOk1ou8Rs4PgbNCWoZ2pzXRU>
+#> • gs4-create-demo-1 <id: 1d2aONC4g01JHXthTlrkHm9U3Zpe-xY7yw3usDHugOnU>
 ```

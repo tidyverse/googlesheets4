@@ -212,14 +212,11 @@ df <- data.frame(x = 1:3, y = letters[1:3])
 
 ss <- sheet_write(df)
 #> ✔ Creating new Sheet: unfearing-guineafowl.
-#> ✖ Request 1 failed [500: DATA_LOSS].
-#> ℹ Will retry in 1s.
-#> ✔ Request 2 successful!
 ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: unfearing-guineafowl                        
-#>               ID: 1flHSXnLA0Qrd-eHhql_smydIt0Bf1jBAQ5iMS69e3MA
+#>               ID: 1mZ_clHkDCzJU6tNcZvFJcrRVw3K2Cnbn4qFc1wC79jA
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -244,7 +241,7 @@ so we can specify the new Sheet’s name.
 googledrive::drive_trash(ss)
 #> File trashed:
 #> • unfearing-guineafowl
-#>   <id: 1flHSXnLA0Qrd-eHhql_smydIt0Bf1jBAQ5iMS69e3MA>
+#>   <id: 1mZ_clHkDCzJU6tNcZvFJcrRVw3K2Cnbn4qFc1wC79jA>
 
 ss <- gs4_create("testy-hedgehog", sheets = df)
 #> ✔ Creating new Sheet: testy-hedgehog.
@@ -252,7 +249,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: testy-hedgehog                              
-#>               ID: 1rDgzRtWEeTqzDTyM1k_VqlpHkPgQKU7VPUxgLdhwll0
+#>               ID: 1AdZJMo6STD-Mdci18tM06JeWK_FSyUkjtOOnffq8GHg
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -275,7 +272,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: testy-hedgehog                              
-#>               ID: 1rDgzRtWEeTqzDTyM1k_VqlpHkPgQKU7VPUxgLdhwll0
+#>               ID: 1AdZJMo6STD-Mdci18tM06JeWK_FSyUkjtOOnffq8GHg
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           
@@ -355,14 +352,14 @@ We take one last look at the sheets we created in `ss`, then clean up.
 
 sheet_properties(ss)
 #> # A tibble: 2 × 8
-#>   name     index        id type  visible grid_rows grid_columns data  
-#>   <chr>    <int>     <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 df           0  69528699 GRID  TRUE            9            2 <NULL>
-#> 2 chickwts     1 691621718 GRID  TRUE           72            2 <NULL>
+#>   name     index         id type  visible grid_rows grid_columns data  
+#>   <chr>    <int>      <int> <chr> <lgl>       <int>        <int> <list>
+#> 1 df           0  211320697 GRID  TRUE            9            2 <NULL>
+#> 2 chickwts     1 1360288928 GRID  TRUE           72            2 <NULL>
 
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • testy-hedgehog <id: 1rDgzRtWEeTqzDTyM1k_VqlpHkPgQKU7VPUxgLdhwll0>
+#> • testy-hedgehog <id: 1AdZJMo6STD-Mdci18tM06JeWK_FSyUkjtOOnffq8GHg>
 ```
 
 The article [Write

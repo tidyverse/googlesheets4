@@ -86,6 +86,20 @@ ss %>% sheet_add()
 # but you CAN specify sheet name and/or position
 ss %>% sheet_add("apple", .after = 1)
 #> ✔ Adding 1 sheet to add-sheets-to-me:
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 3.1s.
+#> ⠙ Retry happens in  2s
+#> ⠹ Retry happens in  0s
+#> ✖ Request 2 failed [503: UNAVAILABLE].
+#> ⠹ Retry happens in  0s
+#> ℹ Will retry in 6.6s.
+#> ⠹ Retry happens in  0s
+#> ⠹ Retry happens in  1s
+#> ⠙ Retry happens in  6s
+#> ⠹ Retry happens in  3s
+#> ⠸ Retry happens in  0s
+#> ✔ Request 3 successful!
+#> ⠸ Retry happens in  0s
 #> • apple
 ss %>% sheet_add("banana", .after = "apple")
 #> ✔ Adding 1 sheet to add-sheets-to-me:
@@ -114,17 +128,17 @@ sheet_properties(ss)
 #> # A tibble: 7 × 8
 #>   name        index      id type  visible grid_rows grid_columns data  
 #>   <chr>       <int>   <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 eggplant        0  7.58e8 GRID  TRUE            3            6 <NULL>
+#> 1 eggplant        0  1.92e8 GRID  TRUE            3            6 <NULL>
 #> 2 Sheet1          1  0      GRID  TRUE         1000           26 <NULL>
-#> 3 apple           2  1.93e9 GRID  TRUE         1000           26 <NULL>
-#> 4 banana          3  2.10e9 GRID  TRUE         1000           26 <NULL>
-#> 5 Sheet2          4  1.33e9 GRID  TRUE         1000           26 <NULL>
-#> 6 coconut         5  4.36e8 GRID  TRUE         1000           26 <NULL>
-#> 7 dragonfruit     6  4.75e8 GRID  TRUE         1000           26 <NULL>
+#> 3 apple           2  1.01e9 GRID  TRUE         1000           26 <NULL>
+#> 4 banana          3  1.96e9 GRID  TRUE         1000           26 <NULL>
+#> 5 Sheet2          4  1.56e9 GRID  TRUE         1000           26 <NULL>
+#> 6 coconut         5  2.27e8 GRID  TRUE         1000           26 <NULL>
+#> 7 dragonfruit     6  1.30e9 GRID  TRUE         1000           26 <NULL>
 
 # clean up
 gs4_find("add-sheets-to-me") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • add-sheets-to-me <id: 173sLh0TdbdErgAbwS_gr6KNPUIwnRcsw4-4K-VwkgWA>
+#> • add-sheets-to-me <id: 1IKl80_XJK01ZX23PnVY5ineTfYjCmpm4p2SN6C_sqqs>
 ```

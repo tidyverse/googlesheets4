@@ -122,5 +122,5 @@ gs4_find("sheet-relocate-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • sheet-relocate-demo
-#>   <id: 101L6STzicyHjVEfOmTFqmfx0Uup8zFjf13XHTq_w_i4>
+#>   <id: 1mWUNG9esdJGYacaLVz5vd0xuopMarj8p_UO2SB42eIM>
 ```

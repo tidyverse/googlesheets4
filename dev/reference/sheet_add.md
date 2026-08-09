@@ -77,14 +77,6 @@ Other worksheet functions:
 ``` r
 ss <- gs4_create("add-sheets-to-me")
 #> ✔ Creating new Sheet: add-sheets-to-me.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 5.2s.
-#> ⠙ Retry happens in  4s
-#> ⠹ Retry happens in  4s
-#> ⠸ Retry happens in  1s
-#> ✔ Request 2 successful!
-#> ⠸ Retry happens in  1s
-#> ⠸ Retry happens in  0s
 
 # the only required argument is the target spreadsheet
 ss %>% sheet_add()
@@ -122,17 +114,17 @@ sheet_properties(ss)
 #> # A tibble: 7 × 8
 #>   name        index      id type  visible grid_rows grid_columns data  
 #>   <chr>       <int>   <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 eggplant        0  8.71e8 GRID  TRUE            3            6 <NULL>
+#> 1 eggplant        0  3.11e8 GRID  TRUE            3            6 <NULL>
 #> 2 Sheet1          1  0      GRID  TRUE         1000           26 <NULL>
-#> 3 apple           2  2.36e8 GRID  TRUE         1000           26 <NULL>
-#> 4 banana          3  2.78e8 GRID  TRUE         1000           26 <NULL>
-#> 5 Sheet2          4  3.83e8 GRID  TRUE         1000           26 <NULL>
-#> 6 coconut         5  1.91e9 GRID  TRUE         1000           26 <NULL>
-#> 7 dragonfruit     6  3.88e8 GRID  TRUE         1000           26 <NULL>
+#> 3 apple           2  1.26e9 GRID  TRUE         1000           26 <NULL>
+#> 4 banana          3  1.96e9 GRID  TRUE         1000           26 <NULL>
+#> 5 Sheet2          4  1.26e9 GRID  TRUE         1000           26 <NULL>
+#> 6 coconut         5  2.02e8 GRID  TRUE         1000           26 <NULL>
+#> 7 dragonfruit     6  1.71e9 GRID  TRUE         1000           26 <NULL>
 
 # clean up
 gs4_find("add-sheets-to-me") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • add-sheets-to-me <id: 1FTXgz6qZzVvOcp0KgdGHj6Qb7HCihCQxfCWvj-uIH5w>
+#> • add-sheets-to-me <id: 1-FHteRttPGbq4mmZSOqpQbKpTHFKxmhKrFV3RFB5lqM>
 ```

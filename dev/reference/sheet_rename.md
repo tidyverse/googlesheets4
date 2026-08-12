@@ -82,5 +82,5 @@ ss %>%
 gs4_find("sheet-rename-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-rename-demo <id: 1WWUxhPefabwnBO-masBWZMpIuATDt60-47ZHfxkysto>
+#> • sheet-rename-demo <id: 1hFxz0RUjLFbLn5fiIUBmFcWr6oQdqUhTA63rF6aJNO0>
 ```

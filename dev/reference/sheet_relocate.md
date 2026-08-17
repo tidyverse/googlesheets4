@@ -120,7 +120,14 @@ ss %>%
 # clean up
 gs4_find("sheet-relocate-demo") %>%
   googledrive::drive_trash()
+#> ✖ Request 1 failed [500: DATA_LOSS].
+#> ℹ Will retry in 3.1s.
+#> ⠙ Retry happens in  2s
+#> ⠹ Retry happens in  1s
+#> ✔ Request 2 successful!
+#> ⠹ Retry happens in  1s
+#> ⠹ Retry happens in  0s
 #> File trashed:
 #> • sheet-relocate-demo
-#>   <id: 1bV3unW3ldm7cbIjmsSdjNbhywKu74I7TgrcrXup0g2E>
+#>   <id: 1Vtrie3_WHxmHo6t7w7wQReyNscxjE4-mpj0YFMKhmiA>
 ```

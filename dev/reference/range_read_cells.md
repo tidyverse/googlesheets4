@@ -137,6 +137,9 @@ range_read_cells(
   cell_data = "full",
   discard_empty = FALSE
 )
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 1s.
+#> ✔ Request 2 successful!
 #> ✔ Reading from formulas-and-formats.
 #> ✔ Range Sheet1.
 #> # A tibble: 678 × 4

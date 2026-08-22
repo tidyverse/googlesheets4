@@ -131,17 +131,10 @@ if (require("readr")) {
 # write a Sheet that, by default, is NOT world-readable
 (ss <- sheet_write(chickwts))
 #> ✔ Creating new Sheet: heartsick-sealion.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 5.2s.
-#> ⠙ Retry happens in  4s
-#> ⠹ Retry happens in  1s
-#> ✔ Request 2 successful!
-#> ⠹ Retry happens in  1s
-#> ⠹ Retry happens in  0s
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: heartsick-sealion                           
-#>               ID: 1kuHnc1r-ZX_3o6pj5xFvTcr0pENTiXbKs1qeNtWTEA0
+#>               ID: 1zrf22CVptpHyG0SHy2Lneb81EYsobASWFA1XxVtcK9M
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -154,7 +147,7 @@ if (require("readr")) {
 range_speedread(ss)
 #> ✔ Reading from heartsick-sealion.
 #> ℹ Export URL:
-#>   <https://docs.google.com/spreadsheets/d/1kuHnc1r-ZX_3o6pj5xFvTcr0pENTiXbKs1qeNtWTEA0/export?format=csv>
+#>   <https://docs.google.com/spreadsheets/d/1zrf22CVptpHyG0SHy2Lneb81EYsobASWFA1XxVtcK9M/export?format=csv>
 #> Rows: 71 Columns: 2
 #> ── Column specification ───────────────────────────────────────────────
 #> Delimiter: ","
@@ -181,5 +174,5 @@ range_speedread(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • heartsick-sealion <id: 1kuHnc1r-ZX_3o6pj5xFvTcr0pENTiXbKs1qeNtWTEA0>
+#> • heartsick-sealion <id: 1zrf22CVptpHyG0SHy2Lneb81EYsobASWFA1XxVtcK9M>
 ```

@@ -117,15 +117,9 @@ df <- data.frame(
 
 # specify only a data frame, get a new Sheet, with a random name
 ss <- write_sheet(df)
-#> ✔ Creating new Sheet: eonian-atlasmoth.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 2.6s.
-#> ⠙ Retry happens in  2s
-#> ✔ Request 2 successful!
-#> ⠙ Retry happens in  2s
-#> ⠙ Retry happens in  0s
+#> ✔ Creating new Sheet: despotic-carp.
 read_sheet(ss)
-#> ✔ Reading from eonian-atlasmoth.
+#> ✔ Reading from despotic-carp.
 #> ✔ Range df.
 #> # A tibble: 3 × 2
 #>       x y    
@@ -137,7 +131,7 @@ read_sheet(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • eonian-atlasmoth <id: 1nRDIem-sV4BVCYnak5HRWLeH72w7jRU8Ritpc5Bo_zA>
+#> • despotic-carp <id: 1u2MktUadXR0CJmHDnN5YFwLsXWxFQAWgQwrbb1YNeFs>
 
 # create a Sheet with some initial, placeholder data
 ss <- gs4_create(
@@ -161,9 +155,9 @@ sheet_properties(ss)
 #> # A tibble: 3 × 8
 #>   name  index         id type  visible grid_rows grid_columns data  
 #>   <chr> <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 alpha     0  399225359 GRID  TRUE            2            1 <NULL>
-#> 2 omega     1 2050536675 GRID  TRUE           33           11 <NULL>
-#> 3 df        2 1946043582 GRID  TRUE            4            2 <NULL>
+#> 1 alpha     0  639903189 GRID  TRUE            2            1 <NULL>
+#> 2 omega     1 1452395204 GRID  TRUE           33           11 <NULL>
+#> 3 df        2  204455473 GRID  TRUE            4            2 <NULL>
 
 # view your magnificent creation in the browser
 gs4_browse(ss)
@@ -172,5 +166,5 @@ gs4_browse(ss)
 gs4_find("sheet-write-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-write-demo <id: 1IJVmk3VYvxfK0p9z4OLSBwQrMggIFfODBa5CMSIk9zw>
+#> • sheet-write-demo <id: 1fQ-uTlbRgt434XaxguboRtBtS6-CJAqU_ElPRCv9qwA>
 ```

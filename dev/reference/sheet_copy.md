@@ -120,11 +120,6 @@ ss_aaa %>%
 # make a second Sheet
 ss_bbb <- gs4_create("sheet-copy-demo-bbb")
 #> ✔ Creating new Sheet: sheet-copy-demo-bbb.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 1.2s.
-#> ✖ Request 2 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 1.3s.
-#> ✔ Request 3 successful!
 
 # copy 'chickwts' sheet from first Sheet to second
 # accept auto-generated name and default location
@@ -150,7 +145,7 @@ gs4_find("sheet-copy-demo") %>%
   googledrive::drive_trash()
 #> Files trashed:
 #> • sheet-copy-demo-bbb
-#>   <id: 1M-MsMnUPgJ9fYRpQT1_OOvbwbA0VUHwgoJ7SjCMf5ak>
+#>   <id: 1ajoZrr3L0q-Lh4lnzhdS19e1VpPrpbtntoB2jA-azA0>
 #> • sheet-copy-demo-aaa
-#>   <id: 15dPfC1ZSZDe2NbLQXooHVK1UEkxuCk_xVzkA_Yfn-c4>
+#>   <id: 1DM8KDjptDcmDLd9nT0X9b5aAwXIiZZnWNQ_IounqUmw>
 ```

@@ -105,6 +105,18 @@ mini_gap_id
 #>      Oceania: 6 x 6
 
 as_sheets_id("abc")
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 2.1s.
+#> ⠙ Retry happens in  1s
+#> ✖ Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ⠙ Retry happens in  1s
+#> ℹ Will retry in 5.4s.
+#> ⠙ Retry happens in  1s
+#> ⠙ Retry happens in  0s
+#> ⠙ Retry happens in  2s
+#> ✔ Request 3 failed :(
+#> ⠙ Retry happens in  2s
+#> ⠙ Retry happens in  0s
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: "<unknown>"

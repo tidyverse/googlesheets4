@@ -212,14 +212,11 @@ df <- data.frame(x = 1:3, y = letters[1:3])
 
 ss <- sheet_write(df)
 #> ✔ Creating new Sheet: unfearing-guineafowl.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 1s.
-#> ✔ Request 2 successful!
 ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: unfearing-guineafowl                        
-#>               ID: 14M0Lum_ogzp7R1LZ087anw7DyTGtEF-Pki9S9YEVO1w
+#>               ID: 1vTKfpqG6GCGHXv2xsJetsCt4upaOS-17nDgLdgOzfj0
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -244,18 +241,15 @@ so we can specify the new Sheet’s name.
 googledrive::drive_trash(ss)
 #> File trashed:
 #> • unfearing-guineafowl
-#>   <id: 14M0Lum_ogzp7R1LZ087anw7DyTGtEF-Pki9S9YEVO1w>
+#>   <id: 1vTKfpqG6GCGHXv2xsJetsCt4upaOS-17nDgLdgOzfj0>
 
 ss <- gs4_create("testy-hedgehog", sheets = df)
 #> ✔ Creating new Sheet: testy-hedgehog.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 1.5s.
-#> ✔ Request 2 successful!
 ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: testy-hedgehog                              
-#>               ID: 1_oV_pU6r1rWKllFg0BsgsPoZKlSIe-qyA-xOA8fR27k
+#>               ID: 1ahOaY_EQUvlpGZJAiitIgh7VaeKPZCPXYleD-Cz9HTI
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -278,7 +272,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: testy-hedgehog                              
-#>               ID: 1_oV_pU6r1rWKllFg0BsgsPoZKlSIe-qyA-xOA8fR27k
+#>               ID: 1ahOaY_EQUvlpGZJAiitIgh7VaeKPZCPXYleD-Cz9HTI
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           
@@ -360,12 +354,12 @@ sheet_properties(ss)
 #> # A tibble: 2 × 8
 #>   name     index        id type  visible grid_rows grid_columns data  
 #>   <chr>    <int>     <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 df           0  39176957 GRID  TRUE            9            2 <NULL>
-#> 2 chickwts     1 427773372 GRID  TRUE           72            2 <NULL>
+#> 1 df           0 119859839 GRID  TRUE            9            2 <NULL>
+#> 2 chickwts     1 626827635 GRID  TRUE           72            2 <NULL>
 
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • testy-hedgehog <id: 1_oV_pU6r1rWKllFg0BsgsPoZKlSIe-qyA-xOA8fR27k>
+#> • testy-hedgehog <id: 1ahOaY_EQUvlpGZJAiitIgh7VaeKPZCPXYleD-Cz9HTI>
 ```
 
 The article [Write

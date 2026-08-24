@@ -100,12 +100,6 @@ df <- gs4_fodder(10)
 # create Sheet
 ss <- gs4_create("range-delete-example", sheets = list(df))
 #> ✔ Creating new Sheet: range-delete-example.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 3.1s.
-#> ⠙ Retry happens in  2s
-#> ✔ Request 2 successful!
-#> ⠙ Retry happens in  2s
-#> ⠙ Retry happens in  0s
 
 # delete some rows
 range_delete(ss, range = "2:4")
@@ -127,5 +121,5 @@ gs4_find("range-delete-example") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • range-delete-example
-#>   <id: 1ItHMsLSSicJKFzhb-lBY0ioT3U2qxJxa9cvCHnuAGKg>
+#>   <id: 1dqc7rn1xJImMC4xo7K_IX6Eq4077dziKz8zqla4yXmc>
 ```

@@ -78,7 +78,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: range-autofit-demo                          
-#>               ID: 1EDhj0DaJd9zf9WloL6k6-P5BTxwFEji0u5s80dcy8eg
+#>               ID: 1DP4TwIp_CtdwimN_-gV-BF488lxQwIBNj3uMT0jqlyI
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -115,5 +115,5 @@ gs4_find("range-autofit-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • range-autofit-demo
-#>   <id: 1EDhj0DaJd9zf9WloL6k6-P5BTxwFEji0u5s80dcy8eg>
+#>   <id: 1DP4TwIp_CtdwimN_-gV-BF488lxQwIBNj3uMT0jqlyI>
 ```

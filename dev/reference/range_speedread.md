@@ -130,11 +130,19 @@ if (require("readr")) {
 
 # write a Sheet that, by default, is NOT world-readable
 (ss <- sheet_write(chickwts))
-#> ✔ Creating new Sheet: heartsick-sealion.
+#> ✔ Creating new Sheet: bighearted-junco.
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 4.9s.
+#> ⠙ Retry happens in  4s
+#> ⠹ Retry happens in  4s
+#> ⠸ Retry happens in  1s
+#> ✔ Request 2 successful!
+#> ⠸ Retry happens in  1s
+#> ⠸ Retry happens in  0s
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
-#> Spreadsheet name: heartsick-sealion                           
-#>               ID: 1JoaGTsIL1HCvEW_28VYYOT7h-eXYq6q3OsXcpS-aXio
+#> Spreadsheet name: bighearted-junco                            
+#>               ID: 1zCwCF7MLZAkMaSEWR9Z1FRUa-0tXwg_p9aohOx_CwGA
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -145,9 +153,9 @@ if (require("readr")) {
 
 # demo that range_speedread() sends a token, which is why we can read this
 range_speedread(ss)
-#> ✔ Reading from heartsick-sealion.
+#> ✔ Reading from bighearted-junco.
 #> ℹ Export URL:
-#>   <https://docs.google.com/spreadsheets/d/1JoaGTsIL1HCvEW_28VYYOT7h-eXYq6q3OsXcpS-aXio/export?format=csv>
+#>   <https://docs.google.com/spreadsheets/d/1zCwCF7MLZAkMaSEWR9Z1FRUa-0tXwg_p9aohOx_CwGA/export?format=csv>
 #> Rows: 71 Columns: 2
 #> ── Column specification ───────────────────────────────────────────────
 #> Delimiter: ","
@@ -174,5 +182,5 @@ range_speedread(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • heartsick-sealion <id: 1JoaGTsIL1HCvEW_28VYYOT7h-eXYq6q3OsXcpS-aXio>
+#> • bighearted-junco <id: 1zCwCF7MLZAkMaSEWR9Z1FRUa-0tXwg_p9aohOx_CwGA>
 ```

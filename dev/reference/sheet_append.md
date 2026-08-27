@@ -100,13 +100,6 @@ deaths_three <- deaths[7:10, ]
 # create a Sheet and send the first chunk of data
 ss <- gs4_create("sheet-append-demo", sheets = list(deaths = deaths_one))
 #> ✔ Creating new Sheet: sheet-append-demo.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 5.2s.
-#> ⠙ Retry happens in  4s
-#> ⠹ Retry happens in  2s
-#> ✔ Request 2 successful!
-#> ⠹ Retry happens in  2s
-#> ⠹ Retry happens in  0s
 
 # append a single row
 ss %>% sheet_append(deaths_two)
@@ -129,5 +122,5 @@ identical(deaths, deaths_replica)
 gs4_find("sheet-append-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-append-demo <id: 15iey7rBvI6zTB-QIMSOzY7uxO41io9OtztAeoK-Hjgk>
+#> • sheet-append-demo <id: 1EDa5u0DO8jgjf5OicxaUSfBxV7r4diCoGc7L1SJHHX8>
 ```

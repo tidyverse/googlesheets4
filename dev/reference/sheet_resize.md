@@ -75,17 +75,10 @@ Other worksheet functions:
 # create a Sheet with the default initial worksheet
 (ss <- gs4_create("sheet-resize-demo"))
 #> ✔ Creating new Sheet: sheet-resize-demo.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 5.8s.
-#> ⠙ Retry happens in  5s
-#> ⠹ Retry happens in  3s
-#> ✔ Request 2 successful!
-#> ⠹ Retry happens in  3s
-#> ⠹ Retry happens in  0s
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheet-resize-demo                           
-#>               ID: 19Z007yxkzNGFif74kbCFliVzSaCfevTD9hh4ISfgcBQ
+#>               ID: 1vth3rgIju30QgCE65n4hOcYGIMSEPwCz5-oJMlwQh7Q
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -137,5 +130,5 @@ sheet_properties(ss)
 gs4_find("sheet-resize-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-resize-demo <id: 19Z007yxkzNGFif74kbCFliVzSaCfevTD9hh4ISfgcBQ>
+#> • sheet-resize-demo <id: 1vth3rgIju30QgCE65n4hOcYGIMSEPwCz5-oJMlwQh7Q>
 ```

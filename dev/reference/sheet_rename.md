@@ -69,15 +69,37 @@ ss <- gs4_create(
   sheets = list(cars = head(cars), chickwts = head(chickwts))
 )
 #> ✔ Creating new Sheet: sheet-rename-demo.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 5.2s.
-#> ⠙ Retry happens in  4s
-#> ⠹ Retry happens in  3s
-#> ⠸ Retry happens in  0s
-#> ✔ Request 2 successful!
-#> ⠸ Retry happens in  0s
-#> ⠸ Retry happens in  0s
 sheet_names(ss)
+#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ℹ Will retry in 61.9s.
+#> ⠙ Retry happens in  1m
+#> ⠹ Retry happens in  1m
+#> ⠸ Retry happens in  1m
+#> ⠼ Retry happens in  1m
+#> ⠴ Retry happens in  1m
+#> ⠦ Retry happens in 48s
+#> ⠧ Retry happens in 45s
+#> ⠇ Retry happens in 42s
+#> ⠏ Retry happens in 39s
+#> ⠋ Retry happens in 36s
+#> ⠙ Retry happens in 33s
+#> ⠹ Retry happens in 30s
+#> ⠸ Retry happens in 27s
+#> ⠼ Retry happens in 24s
+#> ⠴ Retry happens in 21s
+#> ⠦ Retry happens in 18s
+#> ⠧ Retry happens in 15s
+#> ⠇ Retry happens in 12s
+#> ⠏ Retry happens in  9s
+#> ⠋ Retry happens in  6s
+#> ⠙ Retry happens in  3s
+#> ⠹ Retry happens in  0s
+#> ✖ Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ⠹ Retry happens in  0s
+#> ℹ Will retry in 2.3s.
+#> ⠹ Retry happens in  0s
+#> ⠹ Retry happens in  0s
+#> ✔ Request 3 successful!
 #> [1] "cars"     "chickwts"
 
 ss %>%
@@ -90,5 +112,5 @@ ss %>%
 gs4_find("sheet-rename-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-rename-demo <id: 1U7IKYvLSUfqMX6feWnRZ3uYHIefdsSTXF8-M-ui0M-8>
+#> • sheet-rename-demo <id: 1j1jLisU8dXEDDvS_-3W1E2wB7XWdO6ofsph2g-tc2-U>
 ```

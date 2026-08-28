@@ -116,6 +116,9 @@ frames. See the examples.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">gs4_create</span><span class="op">(</span><span class="st">"gs4-create-demo-1"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">gs4-create-demo-1</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 1 failed [503: UNAVAILABLE].</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 1.8s.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Request 2 successful!</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">gs4_create</span><span class="op">(</span><span class="st">"gs4-create-demo-2"</span>, locale <span class="op">=</span> <span class="st">"en_CA"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">gs4-create-demo-2</span>.</span>
@@ -150,12 +153,12 @@ frames. See the examples.</p></dd>
 <span class="r-in"><span><span class="fu"><a href="gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"gs4-create-demo"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Files trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-6</span> <span style="color: #555555;">&lt;id: 1EQF0bGOIohdqWGNw5-bhTXp-GRe2vqREgOp3mo62nXE&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-5</span> <span style="color: #555555;">&lt;id: 1Lz6tRiaquBnaLlvUoK267P72dEhZkdPt65H6WMAl_Zg&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-4</span> <span style="color: #555555;">&lt;id: 1qdF1ULJ-zVbnUohXE4zJsby4h0wVK-JlsioUqi5ZoOc&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-3</span> <span style="color: #555555;">&lt;id: 197ELQIOm9rPZM5KzBTdPKPLlTzW0m3G4ulq4vqTkm7I&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-2</span> <span style="color: #555555;">&lt;id: 1foSK9AiGImaS0nMB4TF2olkaEnZc8zq5MFsJJL67TlI&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-1</span> <span style="color: #555555;">&lt;id: 13_KD-Y1Ru-lCjP-zWWmljh5nJX2kPGriGNcfVW0Tz0A&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-6</span> <span style="color: #555555;">&lt;id: 1J9hn5LrA4eTnS5I1C3S89YQJyaxa25RUaZ-NXtPZhOI&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-5</span> <span style="color: #555555;">&lt;id: 1NEPKtGgzvV8G8P0_O_vg84PQvvg_eUN3ySfA_MVOJA4&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-4</span> <span style="color: #555555;">&lt;id: 1tah2q_2JaoSBYi417CnihbXIOo5br3zjlYbJPEZD0eM&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-3</span> <span style="color: #555555;">&lt;id: 1Ao87X8ojTz8Ku0zr9Gr5mNFIoha-Nih5bxctWETFAl4&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-2</span> <span style="color: #555555;">&lt;id: 1aJ01sbl-3AWnYPUp7YqGTgG__21iGGszBsy8GZGNZr0&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-1</span> <span style="color: #555555;">&lt;id: 1REnSiJYZ4ut6Ybr25cJoh2Vx255CBCUrMbjEfxVPWBQ&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -117,15 +117,9 @@ df <- data.frame(
 
 # specify only a data frame, get a new Sheet, with a random name
 ss <- write_sheet(df)
-#> ✔ Creating new Sheet: malicious-carp.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 2.1s.
-#> ⠙ Retry happens in  1s
-#> ⠹ Retry happens in  0s
-#> ✔ Request 2 successful!
-#> ⠹ Retry happens in  0s
+#> ✔ Creating new Sheet: fragrant-huia.
 read_sheet(ss)
-#> ✔ Reading from malicious-carp.
+#> ✔ Reading from fragrant-huia.
 #> ✔ Range df.
 #> # A tibble: 3 × 2
 #>       x y    
@@ -137,7 +131,7 @@ read_sheet(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • malicious-carp <id: 1_wme48lMXeWzvJACgFcOEymo8bkoUvk_UWYE0n2tFyg>
+#> • fragrant-huia <id: 1KLblXVNW2j7DOem8T5VHzjswQeYXdAsY8zz-nu_7oeg>
 
 # create a Sheet with some initial, placeholder data
 ss <- gs4_create(
@@ -161,9 +155,9 @@ sheet_properties(ss)
 #> # A tibble: 3 × 8
 #>   name  index         id type  visible grid_rows grid_columns data  
 #>   <chr> <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 alpha     0 1264730114 GRID  TRUE            2            1 <NULL>
-#> 2 omega     1 1346003308 GRID  TRUE           33           11 <NULL>
-#> 3 df        2 1859229792 GRID  TRUE            4            2 <NULL>
+#> 1 alpha     0 2121239098 GRID  TRUE            2            1 <NULL>
+#> 2 omega     1 1739782198 GRID  TRUE           33           11 <NULL>
+#> 3 df        2   11527815 GRID  TRUE            4            2 <NULL>
 
 # view your magnificent creation in the browser
 gs4_browse(ss)
@@ -172,5 +166,5 @@ gs4_browse(ss)
 gs4_find("sheet-write-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-write-demo <id: 1oLgs2lxlasOf9P10OlgrDk-_JOHDrd5kaO1gg8Z_o7o>
+#> • sheet-write-demo <id: 1zreaOxF4E5x9d91vHtOOz-TitUev6a9RrAyOVeYvXpo>
 ```

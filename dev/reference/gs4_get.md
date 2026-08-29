@@ -48,6 +48,9 @@ Wraps the `spreadsheets.get` endpoint:
 
 ``` r
 gs4_get(gs4_example("mini-gap"))
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 1.5s.
+#> ✔ Request 2 successful!
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: mini-gap                                    

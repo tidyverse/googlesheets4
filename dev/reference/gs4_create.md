@@ -68,9 +68,6 @@ gs4_create(
   timeZone = "Europe/Paris"
 )
 #> ✔ Creating new Sheet: gs4-create-demo-3.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 1.8s.
-#> ✔ Request 2 successful!
 
 gs4_create(
   "gs4-create-demo-4",
@@ -90,22 +87,15 @@ gs4_create(
   sheets = list(chickwts = head(chickwts), mtcars = head(mtcars))
 )
 #> ✔ Creating new Sheet: gs4-create-demo-6.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 4s.
-#> ⠙ Retry happens in  3s
-#> ⠹ Retry happens in  2s
-#> ✔ Request 2 successful!
-#> ⠹ Retry happens in  2s
-#> ⠹ Retry happens in  0s
 
 # Clean up
 gs4_find("gs4-create-demo") %>%
   googledrive::drive_trash()
 #> Files trashed:
-#> • gs4-create-demo-6 <id: 1iVH-YxZoW2bn0zgzjBAZ5RwGbMzXXWaMZ7lVdRF9c1g>
-#> • gs4-create-demo-5 <id: 1ztffhlEoxGeMAd5Yq4BRuKs5LSFcdtklfrELCAtTpmI>
-#> • gs4-create-demo-4 <id: 1UvbKO6hipEY2dhvnQP4TXFgbqADiD1ROqawr0WSQQ20>
-#> • gs4-create-demo-3 <id: 1s9-kWjJ047uBgNzKQ-hlE-dIWLnNEiBDDhBjf7wMF8U>
-#> • gs4-create-demo-2 <id: 1zlboZ108QTHrsJLZDv35FbXJIOsqs7pn2YP_Kslck4o>
-#> • gs4-create-demo-1 <id: 1iJS7G3euUdvEMkUUq11vymZPjmzM6Kh6eCcF19G3de4>
+#> • gs4-create-demo-6 <id: 1hBU7L33E0yQiLZ5wl1aqT_CgGEfX9YmrRxqK5b4mU7A>
+#> • gs4-create-demo-5 <id: 13_iXuxtPMbDX2kA7PjvpHKdM-4bR5bkhWeRAJKNtlBY>
+#> • gs4-create-demo-4 <id: 1pXK_YgNXjIOVzIDY97WZ8hY931u1synomurX-nUaYzE>
+#> • gs4-create-demo-3 <id: 1yrBAr0weera7Nyptk--hSNBr2yp6UvHTmVE1ExLcK4g>
+#> • gs4-create-demo-2 <id: 18oTUsYUTgwwPAKKbfJ7vW3hetjT_k_DT0EypFxqytwI>
+#> • gs4-create-demo-1 <id: 1BubaWf-Rp2q8ekD-3Eap5puthsbLXcVdp6kHO0qmCTs>
 ```

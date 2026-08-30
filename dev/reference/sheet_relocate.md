@@ -81,6 +81,12 @@ Other worksheet functions:
 sheet_names <- c("alfa", "bravo", "charlie", "delta", "echo", "foxtrot")
 ss <- gs4_create("sheet-relocate-demo", sheets = sheet_names)
 #> ✔ Creating new Sheet: sheet-relocate-demo.
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 3.1s.
+#> ⠙ Retry happens in  2s
+#> ✔ Request 2 successful!
+#> ⠙ Retry happens in  2s
+#> ⠙ Retry happens in  0s
 sheet_names(ss)
 #> [1] "alfa"    "bravo"   "charlie" "delta"   "echo"    "foxtrot"
 
@@ -107,36 +113,6 @@ ss %>%
 ss %>%
   sheet_relocate(sheet_names) %>%
   sheet_names()
-#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
-#> ℹ Will retry in 61.4s.
-#> ⠙ Retry happens in  1m
-#> ⠹ Retry happens in  1m
-#> ⠸ Retry happens in  1m
-#> ⠼ Retry happens in  1m
-#> ⠴ Retry happens in  1m
-#> ⠦ Retry happens in 48s
-#> ⠧ Retry happens in 45s
-#> ⠇ Retry happens in 42s
-#> ⠏ Retry happens in 39s
-#> ⠋ Retry happens in 36s
-#> ⠙ Retry happens in 33s
-#> ⠹ Retry happens in 30s
-#> ⠸ Retry happens in 27s
-#> ⠼ Retry happens in 24s
-#> ⠴ Retry happens in 21s
-#> ⠦ Retry happens in 18s
-#> ⠧ Retry happens in 15s
-#> ⠇ Retry happens in 12s
-#> ⠏ Retry happens in  9s
-#> ⠋ Retry happens in  6s
-#> ⠙ Retry happens in  3s
-#> ⠹ Retry happens in  0s
-#> ✖ Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].
-#> ⠹ Retry happens in  0s
-#> ℹ Will retry in 2.6s.
-#> ⠹ Retry happens in  0s
-#> ⠹ Retry happens in  0s
-#> ✔ Request 3 successful!
 #> ✔ Relocating sheets in sheet-relocate-demo.
 #> [1] "alfa"    "bravo"   "charlie" "delta"   "echo"    "foxtrot"
 
@@ -152,5 +128,5 @@ gs4_find("sheet-relocate-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • sheet-relocate-demo
-#>   <id: 14DbEi6hFV84Q_LjyG6UGjBz4IvYzMnF3ASdlYc74Ahk>
+#>   <id: 1Jxpvax8Ovb8VtIrm9OcPqwaXimUwzA9DM_3Re86rPLw>
 ```

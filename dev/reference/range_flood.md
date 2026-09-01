@@ -96,13 +96,6 @@ df <- gs4_fodder(10)
 # create Sheet
 ss <- gs4_create("range-flood-demo", sheets = list(df))
 #> ✔ Creating new Sheet: range-flood-demo.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 3.1s.
-#> ⠙ Retry happens in  2s
-#> ⠹ Retry happens in  1s
-#> ✔ Request 2 successful!
-#> ⠹ Retry happens in  1s
-#> ⠹ Retry happens in  0s
 
 # default behavior (`cell = NULL`): clear value and format
 range_flood(ss, range = "A1:B3")
@@ -147,5 +140,5 @@ range_clear(ss, range = "10:10", reformat = FALSE)
 gs4_find("range-flood-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • range-flood-demo <id: 1iIIldEe3h1slUQJGk46WKHmJ5AZXNdRUUCyPsLQrY7A>
+#> • range-flood-demo <id: 1rII4mJGm4G6u-lmDWkeMafKfI-DQGFlnzwOz8cfl12I>
 ```

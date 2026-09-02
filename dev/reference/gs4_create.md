@@ -60,10 +60,31 @@ gs4_create("gs4-create-demo-1")
 #> ✔ Creating new Sheet: gs4-create-demo-1.
 #> ✖ Request 1 failed [503: UNAVAILABLE].
 #> ℹ Will retry in 1.8s.
-#> ✔ Request 2 successful!
+#> ✖ Request 2 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 8s.
+#> ⠙ Retry happens in  7s
+#> ⠹ Retry happens in  4s
+#> ⠸ Retry happens in  2s
+#> ✔ Request 3 successful!
+#> ⠸ Retry happens in  2s
+#> ⠸ Retry happens in  0s
 
 gs4_create("gs4-create-demo-2", locale = "en_CA")
 #> ✔ Creating new Sheet: gs4-create-demo-2.
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 1s.
+#> ✖ Request 2 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 1.5s.
+#> ✖ Request 3 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 13.3s.
+#> ⠙ Retry happens in 12s
+#> ⠹ Retry happens in 10s
+#> ⠸ Retry happens in  7s
+#> ⠼ Retry happens in  4s
+#> ⠴ Retry happens in  1s
+#> ✔ Request 4 successful!
+#> ⠴ Retry happens in  1s
+#> ⠴ Retry happens in  0s
 
 gs4_create(
   "gs4-create-demo-3",
@@ -95,10 +116,10 @@ gs4_create(
 gs4_find("gs4-create-demo") %>%
   googledrive::drive_trash()
 #> Files trashed:
-#> • gs4-create-demo-6 <id: 1vIoAyXlFT81RpNPLKX8tdGdCdfheG_SnLw7NRqGsrYg>
-#> • gs4-create-demo-5 <id: 1rhpAQZQ28NeAbluHUi5QQWScUbX6x3waneqe_ymgECs>
-#> • gs4-create-demo-4 <id: 1lSf0M6GuQrvAV3w5tHrUHyK6jnfY85ag1DR98h0yLvo>
-#> • gs4-create-demo-3 <id: 1E9SJXTorkzXT4dhExm61A8C1gzr26tUOHIGoMuaJ0Sw>
-#> • gs4-create-demo-2 <id: 1B0y5jz2LCSrrjucRlU2m6lWCFROJqqnrEDF0usFgVXg>
-#> • gs4-create-demo-1 <id: 13XbD8vwtDJR9WXmTPZA9BdigwwbMP09YuykJTNDAnYA>
+#> • gs4-create-demo-6 <id: 19u7wC-wDMEL0Gqg_D5ikqLRt2y5zfnV5s8x5CIg9PLo>
+#> • gs4-create-demo-5 <id: 1OwDbfjAwBuF1JpH7cNz26YhLZcUTvplMDp6sJcJlsCE>
+#> • gs4-create-demo-4 <id: 1KlybCizMJdwwlTYK4eia9CuY2n2CtZwUiQVutHxhh8g>
+#> • gs4-create-demo-3 <id: 1m4r4s96k5me3zaXopbx7yQ9gEky6XYQj-fi0ESqC_kE>
+#> • gs4-create-demo-2 <id: 1Eq7vXL7yJL2cdo_D6MnCkdIsyPSOtPW8fTBkkr8Osmg>
+#> • gs4-create-demo-1 <id: 1SZiMis9D0yGkDxhSPrksRaG18xOsvNT89_BLwrzc-JM>
 ```

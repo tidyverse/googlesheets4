@@ -105,6 +105,9 @@ mini_gap_id
 #>      Oceania: 6 x 6
 
 as_sheets_id("abc")
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 1.3s.
+#> ✔ Request 2 failed :(
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: "<unknown>"

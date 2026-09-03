@@ -39,11 +39,21 @@ dat <- data.frame(x = c(1, 5, 3, 2, 4, 6))
 
 ss <- gs4_create("gs4-formula-demo", sheets = dat)
 #> ✔ Creating new Sheet: gs4-formula-demo.
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 1.8s.
+#> ✖ Request 2 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 8s.
+#> ⠙ Retry happens in  7s
+#> ⠹ Retry happens in  5s
+#> ⠸ Retry happens in  2s
+#> ✔ Request 3 successful!
+#> ⠸ Retry happens in  2s
+#> ⠸ Retry happens in  0s
 ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: gs4-formula-demo                            
-#>               ID: 1PzAb5msUAmgjsVS1OgacAaoG6VIHnzA7rR3iCWMFl5U
+#>               ID: 1v8Uh9lJdtF_BweWxcILcad55hPjVBZeeM_pg2wLkyLc
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -97,5 +107,5 @@ sheet_write(miscellany, ss = ss)
 gs4_find("gs4-formula-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • gs4-formula-demo <id: 1PzAb5msUAmgjsVS1OgacAaoG6VIHnzA7rR3iCWMFl5U>
+#> • gs4-formula-demo <id: 1v8Uh9lJdtF_BweWxcILcad55hPjVBZeeM_pg2wLkyLc>
 ```

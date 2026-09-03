@@ -116,33 +116,9 @@ frames. See the examples.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">gs4_create</span><span class="op">(</span><span class="st">"gs4-create-demo-1"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">gs4-create-demo-1</span>.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 1 failed [503: UNAVAILABLE].</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 1.8s.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 2 failed [503: UNAVAILABLE].</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 8s.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  7s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠹ Retry happens in  4s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠸ Retry happens in  2s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Request 3 successful!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠸ Retry happens in  2s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠸ Retry happens in  0s</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">gs4_create</span><span class="op">(</span><span class="st">"gs4-create-demo-2"</span>, locale <span class="op">=</span> <span class="st">"en_CA"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">gs4-create-demo-2</span>.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 1 failed [503: UNAVAILABLE].</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 1s.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 2 failed [503: UNAVAILABLE].</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 1.5s.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 3 failed [503: UNAVAILABLE].</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 13.3s.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in 12s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠹ Retry happens in 10s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠸ Retry happens in  7s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠼ Retry happens in  4s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠴ Retry happens in  1s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Request 4 successful!</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠴ Retry happens in  1s</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠴ Retry happens in  0s</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">gs4_create</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"gs4-create-demo-3"</span>,</span></span>
@@ -174,12 +150,12 @@ frames. See the examples.</p></dd>
 <span class="r-in"><span><span class="fu"><a href="gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"gs4-create-demo"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Files trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-6</span> <span style="color: #555555;">&lt;id: 19u7wC-wDMEL0Gqg_D5ikqLRt2y5zfnV5s8x5CIg9PLo&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-5</span> <span style="color: #555555;">&lt;id: 1OwDbfjAwBuF1JpH7cNz26YhLZcUTvplMDp6sJcJlsCE&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-4</span> <span style="color: #555555;">&lt;id: 1KlybCizMJdwwlTYK4eia9CuY2n2CtZwUiQVutHxhh8g&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-3</span> <span style="color: #555555;">&lt;id: 1m4r4s96k5me3zaXopbx7yQ9gEky6XYQj-fi0ESqC_kE&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-2</span> <span style="color: #555555;">&lt;id: 1Eq7vXL7yJL2cdo_D6MnCkdIsyPSOtPW8fTBkkr8Osmg&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-1</span> <span style="color: #555555;">&lt;id: 1SZiMis9D0yGkDxhSPrksRaG18xOsvNT89_BLwrzc-JM&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-6</span> <span style="color: #555555;">&lt;id: 1bftz1gFMLGCXiiYXAaQPSqIMN0DLH5V4sNcHXtmesz0&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-5</span> <span style="color: #555555;">&lt;id: 1knTu5VEu7UVk2XCIm9u4-KNepfBYJUPZzUuslqJGb-Y&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-4</span> <span style="color: #555555;">&lt;id: 1anCLIv2wTCrG0mDJREYqAcz6pQJp_ySQ9WBl0Vmb5Fs&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-3</span> <span style="color: #555555;">&lt;id: 1Y1ok8xOLbdo-f4xGbxHVnGFqft0u6ZOUo2O6GaIPNMI&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-2</span> <span style="color: #555555;">&lt;id: 17mnzacdtWjYBfhkk-y4z2cFUUm6Hlc403XYC3VkWJwg&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-1</span> <span style="color: #555555;">&lt;id: 1txsEaxFcTt0IsSKQUzrIDXzSUagal722n7jDzMo4OWc&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

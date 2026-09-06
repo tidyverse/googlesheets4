@@ -152,10 +152,17 @@ Other write functions:
 # create a Sheet with some initial, empty (work)sheets
 (ss <- gs4_create("range-write-demo", sheets = c("alpha", "beta")))
 #> ✔ Creating new Sheet: range-write-demo.
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 5.2s.
+#> ⠙ Retry happens in  4s
+#> ⠹ Retry happens in  1s
+#> ✔ Request 2 successful!
+#> ⠹ Retry happens in  1s
+#> ⠹ Retry happens in  0s
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: range-write-demo                            
-#>               ID: 19hx_LnJrgU6THBQryGgg-pIVEv6-rYnkWfQn80kL3GI
+#>               ID: 1ACwe8WGI3kfuLZQJ6rGPUQscLAzpyu9V9ByzTIyfRBA
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           
@@ -200,5 +207,5 @@ range_write(ss, data = dat, range = "beta!C5", col_names = FALSE)
 gs4_find("range-write-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • range-write-demo <id: 19hx_LnJrgU6THBQryGgg-pIVEv6-rYnkWfQn80kL3GI>
+#> • range-write-demo <id: 1ACwe8WGI3kfuLZQJ6rGPUQscLAzpyu9V9ByzTIyfRBA>
 ```

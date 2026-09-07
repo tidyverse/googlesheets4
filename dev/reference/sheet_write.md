@@ -117,15 +117,9 @@ df <- data.frame(
 
 # specify only a data frame, get a new Sheet, with a random name
 ss <- write_sheet(df)
-#> ✔ Creating new Sheet: malicious-carp.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 2.1s.
-#> ⠙ Retry happens in  1s
-#> ✔ Request 2 successful!
-#> ⠙ Retry happens in  1s
-#> ⠙ Retry happens in  0s
+#> ✔ Creating new Sheet: heartsick-sealion.
 read_sheet(ss)
-#> ✔ Reading from malicious-carp.
+#> ✔ Reading from heartsick-sealion.
 #> ✔ Range df.
 #> # A tibble: 3 × 2
 #>       x y    
@@ -137,7 +131,7 @@ read_sheet(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • malicious-carp <id: 1bSAAQ3dQzwm0Iiz-r005TTpzQwDTXJP27nutol-inTc>
+#> • heartsick-sealion <id: 19bRhBbDdVBPY4h0bKzc2NajrAv2RYZFKLUJ17BIGXdk>
 
 # create a Sheet with some initial, placeholder data
 ss <- gs4_create(
@@ -145,6 +139,13 @@ ss <- gs4_create(
   sheets = list(alpha = data.frame(x = 1), omega = data.frame(x = 1))
 )
 #> ✔ Creating new Sheet: sheet-write-demo.
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 5.2s.
+#> ⠙ Retry happens in  4s
+#> ⠹ Retry happens in  2s
+#> ✔ Request 2 successful!
+#> ⠹ Retry happens in  2s
+#> ⠹ Retry happens in  0s
 
 # write df into its own, new sheet
 sheet_write(df, ss = ss)
@@ -161,9 +162,9 @@ sheet_properties(ss)
 #> # A tibble: 3 × 8
 #>   name  index         id type  visible grid_rows grid_columns data  
 #>   <chr> <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 alpha     0 1987682345 GRID  TRUE            2            1 <NULL>
-#> 2 omega     1 1121079399 GRID  TRUE           33           11 <NULL>
-#> 3 df        2 1931718377 GRID  TRUE            4            2 <NULL>
+#> 1 alpha     0 1276372590 GRID  TRUE            2            1 <NULL>
+#> 2 omega     1  855210881 GRID  TRUE           33           11 <NULL>
+#> 3 df        2 1165086311 GRID  TRUE            4            2 <NULL>
 
 # view your magnificent creation in the browser
 gs4_browse(ss)
@@ -172,5 +173,5 @@ gs4_browse(ss)
 gs4_find("sheet-write-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-write-demo <id: 1DprzBT5UDRDBDOLjCfO1ml_HbBiDdyMKornw6qs_lE8>
+#> • sheet-write-demo <id: 1E5dVWab8xM56IFyqvEfl-Dd4Q5mYKNB4BW6dV6smp3Y>
 ```

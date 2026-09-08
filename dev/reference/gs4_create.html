@@ -145,17 +145,34 @@ frames. See the examples.</p></dd>
 <span class="r-in"><span>  sheets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>chickwts <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">chickwts</span><span class="op">)</span>, mtcars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Creating new Sheet: <span style="color: #00BBBB;">gs4-create-demo-6</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 1 failed [503: UNAVAILABLE].</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 1.8s.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 2 failed [503: UNAVAILABLE].</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 8s.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  7s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠹ Retry happens in  6s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠸ Retry happens in  3s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠼ Retry happens in  0s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Request 3 failed [503: UNAVAILABLE].</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠼ Retry happens in  0s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Will retry in 4.2s.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠼ Retry happens in  0s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠼ Retry happens in  0s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  2s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Request 4 successful!</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  2s</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> ⠙ Retry happens in  0s</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Clean up</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="gs4_find.html">gs4_find</a></span><span class="op">(</span><span class="st">"gs4-create-demo"</span><span class="op">)</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">googledrive</span><span class="fu">::</span><span class="fu"><a href="https://googledrive.tidyverse.org/reference/drive_trash.html" class="external-link">drive_trash</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Files trashed:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-6</span> <span style="color: #555555;">&lt;id: 1Yu44YW6l2qSGtPnERJUTbyADLeP-C5T0yGztlO4gQys&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-5</span> <span style="color: #555555;">&lt;id: 15Hl-dBAMlxTJhGquVZDCOKMsC2MFXcJ9iz9ZMMg4bUo&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-4</span> <span style="color: #555555;">&lt;id: 1RNK-jv4Ni6gqyhFxQmTYTAYRzAqaxrc_hPQGbJQHpXM&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-3</span> <span style="color: #555555;">&lt;id: 1bcrpytcTVTI1P_213tw9-VrXbNjrHYqZ4kmK4IrEnw4&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-2</span> <span style="color: #555555;">&lt;id: 1Imgnbn9Zpgxi9oQbhEfYWaknr9QD-dp8xlqa3eIy5RI&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-1</span> <span style="color: #555555;">&lt;id: 1PIDUjQFgyx_Tci6-lFu17WieA-HxYFr8BXMwkjJyV9g&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-6</span> <span style="color: #555555;">&lt;id: 1ljAi9LbhMEiH5OTbWzdfCDZUOKWxhi0LGXq2wMJ4wGE&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-5</span> <span style="color: #555555;">&lt;id: 1lermV7UUb-GT_O9ayCDAT70_S1J47_L6ChIQPShA-Hk&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-4</span> <span style="color: #555555;">&lt;id: 1AN0hGMlLMZ5Cb1t0feb9jC6bpK_xia_a_GiGSDcxjo4&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-3</span> <span style="color: #555555;">&lt;id: 1KSRoSrxEJ4uLbH6pAPj0VVYVJ2T2dGbr1P3sMVWlkA4&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-2</span> <span style="color: #555555;">&lt;id: 1QlSsFvbqRQd5t1MruMN8FyFzmjRPpLJqxR1DpMX8jyU&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> • <span style="color: #00BBBB;">gs4-create-demo-1</span> <span style="color: #555555;">&lt;id: 1uFKtlVs_wKFONVtN6yG_IcW6iwZ8cbe8qFNp-57Fkqk&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -63,13 +63,6 @@ Other worksheet functions:
 ``` r
 ss <- gs4_create("delete-sheets-from-me")
 #> ✔ Creating new Sheet: delete-sheets-from-me.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 3.3s.
-#> ⠙ Retry happens in  2s
-#> ⠹ Retry happens in  1s
-#> ✔ Request 2 successful!
-#> ⠹ Retry happens in  1s
-#> ⠹ Retry happens in  0s
 sheet_add(ss, c("alpha", "beta", "gamma", "delta"))
 #> ✔ Adding 4 sheets to delete-sheets-from-me:
 #> • alpha
@@ -83,10 +76,10 @@ sheet_properties(ss)
 #>   name   index         id type  visible grid_rows grid_columns data  
 #>   <chr>  <int>      <int> <chr> <lgl>       <int>        <int> <list>
 #> 1 Sheet1     0          0 GRID  TRUE         1000           26 <NULL>
-#> 2 alpha      1 1588213169 GRID  TRUE         1000           26 <NULL>
-#> 3 beta       2  424131516 GRID  TRUE         1000           26 <NULL>
-#> 4 gamma      3  231953046 GRID  TRUE         1000           26 <NULL>
-#> 5 delta      4  903996346 GRID  TRUE         1000           26 <NULL>
+#> 2 alpha      1  442245810 GRID  TRUE         1000           26 <NULL>
+#> 3 beta       2 1044663082 GRID  TRUE         1000           26 <NULL>
+#> 4 gamma      3 2017790461 GRID  TRUE         1000           26 <NULL>
+#> 5 delta      4  631372839 GRID  TRUE         1000           26 <NULL>
 
 # delete sheets
 sheet_delete(ss, 1)
@@ -105,12 +98,12 @@ sheet_properties(ss)
 #> # A tibble: 1 × 8
 #>   name  index        id type  visible grid_rows grid_columns data  
 #>   <chr> <int>     <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 delta     0 903996346 GRID  TRUE         1000           26 <NULL>
+#> 1 delta     0 631372839 GRID  TRUE         1000           26 <NULL>
 
 # clean up
 gs4_find("delete-sheets-from-me") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • delete-sheets-from-me
-#>   <id: 1AK6IK2pWiC_Vq7ECVLdO4VrShlOFEgSYcTmtu_9OkDg>
+#>   <id: 1cQJ-1ckRjWiqZW-vp8uvOHOcllhIdpG-sxptR7SAHdQ>
 ```

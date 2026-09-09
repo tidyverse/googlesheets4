@@ -69,13 +69,6 @@ ss <- gs4_create(
   sheets = list(cars = head(cars), chickwts = head(chickwts))
 )
 #> ✔ Creating new Sheet: sheet-rename-demo.
-#> ✖ Request 1 failed [503: UNAVAILABLE].
-#> ℹ Will retry in 2.7s.
-#> ⠙ Retry happens in  2s
-#> ⠹ Retry happens in  0s
-#> ✔ Request 2 successful!
-#> ⠹ Retry happens in  0s
-#> ⠹ Retry happens in  0s
 sheet_names(ss)
 #> [1] "cars"     "chickwts"
 
@@ -89,5 +82,5 @@ ss %>%
 gs4_find("sheet-rename-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-rename-demo <id: 1JDpOvUV822_g6wvfmYjYaABhHpSahLCvNPBZcASKaAQ>
+#> • sheet-rename-demo <id: 1IvjwvvCKEn0Yy4WaLxR9qwmQ5YxzDAbaC97EzEUg_Ws>
 ```

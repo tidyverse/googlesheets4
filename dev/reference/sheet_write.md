@@ -117,9 +117,9 @@ df <- data.frame(
 
 # specify only a data frame, get a new Sheet, with a random name
 ss <- write_sheet(df)
-#> ✔ Creating new Sheet: heartsick-sealion.
+#> ✔ Creating new Sheet: despotic-carp.
 read_sheet(ss)
-#> ✔ Reading from heartsick-sealion.
+#> ✔ Reading from despotic-carp.
 #> ✔ Range df.
 #> # A tibble: 3 × 2
 #>       x y    
@@ -131,7 +131,7 @@ read_sheet(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • heartsick-sealion <id: 1cFOxt3tu9dWdG_mrURhiA8oocLFii8GFH7vVJohbJOk>
+#> • despotic-carp <id: 1drCXjhF1Vudp2pCRH6g6Q5VMG20EcuVxG0OAcGOEK9M>
 
 # create a Sheet with some initial, placeholder data
 ss <- gs4_create(
@@ -155,9 +155,9 @@ sheet_properties(ss)
 #> # A tibble: 3 × 8
 #>   name  index         id type  visible grid_rows grid_columns data  
 #>   <chr> <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 alpha     0 1132270605 GRID  TRUE            2            1 <NULL>
-#> 2 omega     1 1171173108 GRID  TRUE           33           11 <NULL>
-#> 3 df        2  682129908 GRID  TRUE            4            2 <NULL>
+#> 1 alpha     0  992584821 GRID  TRUE            2            1 <NULL>
+#> 2 omega     1 1976225804 GRID  TRUE           33           11 <NULL>
+#> 3 df        2 1988414857 GRID  TRUE            4            2 <NULL>
 
 # view your magnificent creation in the browser
 gs4_browse(ss)
@@ -166,5 +166,5 @@ gs4_browse(ss)
 gs4_find("sheet-write-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-write-demo <id: 1la22QrOmQ0ya3mVmF2i-MpvejAljykplGUlIwCc3GCc>
+#> • sheet-write-demo <id: 1mgM6YpmuKkQ0a4ZaHNTJoqrDclH69ooHwP9UWhhZZTA>
 ```

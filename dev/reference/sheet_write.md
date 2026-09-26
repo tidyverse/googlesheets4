@@ -131,7 +131,7 @@ read_sheet(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • heartsick-sealion <id: 1n4vELICnYSVDxLK8lRSyhGJB-zJTS6WarXT2WxLVdhE>
+#> • heartsick-sealion <id: 1wm4YXVRb4gNse-i-4g-JJl19g4emYWoNI8j6QE1kJNs>
 
 # create a Sheet with some initial, placeholder data
 ss <- gs4_create(
@@ -153,11 +153,11 @@ sheet_write(mtcars, ss = ss, sheet = "omega")
 # get an overview of the sheets
 sheet_properties(ss)
 #> # A tibble: 3 × 8
-#>   name  index        id type  visible grid_rows grid_columns data  
-#>   <chr> <int>     <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 alpha     0 435262680 GRID  TRUE            2            1 <NULL>
-#> 2 omega     1  25347203 GRID  TRUE           33           11 <NULL>
-#> 3 df        2 407415294 GRID  TRUE            4            2 <NULL>
+#>   name  index         id type  visible grid_rows grid_columns data  
+#>   <chr> <int>      <int> <chr> <lgl>       <int>        <int> <list>
+#> 1 alpha     0  855985032 GRID  TRUE            2            1 <NULL>
+#> 2 omega     1 2102621201 GRID  TRUE           33           11 <NULL>
+#> 3 df        2 1320411289 GRID  TRUE            4            2 <NULL>
 
 # view your magnificent creation in the browser
 gs4_browse(ss)
@@ -166,5 +166,5 @@ gs4_browse(ss)
 gs4_find("sheet-write-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-write-demo <id: 1YmUC_-0Ctwe_-AXK321EZ6Kw5YcUrbC37tp_e03puGQ>
+#> • sheet-write-demo <id: 1oQQPdPsN4-3wWtM4xHwV-1OJrWVWOAR_RLvYwJwy-_A>
 ```

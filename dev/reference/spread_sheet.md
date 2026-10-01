@@ -94,6 +94,31 @@ spread_sheet(df)
 
 # ^^ gets same result as ...
 read_sheet(gs4_example("mini-gap"))
+#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ℹ Will retry in 61s.
+#> ⠙ Retry happens in  1m
+#> ⠹ Retry happens in  1m
+#> ⠸ Retry happens in  1m
+#> ⠼ Retry happens in  1m
+#> ⠴ Retry happens in 48s
+#> ⠦ Retry happens in 45s
+#> ⠧ Retry happens in 42s
+#> ⠇ Retry happens in 39s
+#> ⠏ Retry happens in 36s
+#> ⠋ Retry happens in 33s
+#> ⠙ Retry happens in 30s
+#> ⠹ Retry happens in 27s
+#> ⠸ Retry happens in 24s
+#> ⠼ Retry happens in 21s
+#> ⠴ Retry happens in 18s
+#> ⠦ Retry happens in 15s
+#> ⠧ Retry happens in 12s
+#> ⠇ Retry happens in  9s
+#> ⠏ Retry happens in  6s
+#> ⠋ Retry happens in  3s
+#> ✔ Request 2 successful!
+#> ⠋ Retry happens in  3s
+#> ⠋ Retry happens in  0s
 #> ✔ Reading from mini-gap.
 #> ✔ Range Africa.
 #> # A tibble: 5 × 6

@@ -82,38 +82,6 @@ df <- gs4_example("mini-gap") %>%
   range_read_cells()
 #> ✔ Reading from mini-gap.
 #> ✔ Range Africa.
-#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
-#> ℹ Will retry in 61.9s.
-#> ⠙ Retry happens in  1m
-#> ⠹ Retry happens in  1m
-#> ⠸ Retry happens in  1m
-#> ⠼ Retry happens in  1m
-#> ⠴ Retry happens in  1m
-#> ⠦ Retry happens in 48s
-#> ⠧ Retry happens in 45s
-#> ⠇ Retry happens in 42s
-#> ⠏ Retry happens in 39s
-#> ⠋ Retry happens in 36s
-#> ⠙ Retry happens in 33s
-#> ⠹ Retry happens in 30s
-#> ⠸ Retry happens in 27s
-#> ⠼ Retry happens in 24s
-#> ⠴ Retry happens in 21s
-#> ⠦ Retry happens in 18s
-#> ⠧ Retry happens in 15s
-#> ⠇ Retry happens in 12s
-#> ⠏ Retry happens in  9s
-#> ⠋ Retry happens in  6s
-#> ⠙ Retry happens in  3s
-#> ✖ Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].
-#> ⠙ Retry happens in  3s
-#> ℹ Will retry in 2.3s.
-#> ⠙ Retry happens in  3s
-#> ⠙ Retry happens in  0s
-#> ⠙ Retry happens in  1s
-#> ✔ Request 3 successful!
-#> ⠙ Retry happens in  1s
-#> ⠙ Retry happens in  0s
 spread_sheet(df)
 #> # A tibble: 5 × 6
 #>   country      continent  year lifeExp     pop gdpPercap

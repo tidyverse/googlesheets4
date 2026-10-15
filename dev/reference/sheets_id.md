@@ -88,6 +88,13 @@ mini_gap_id <- gs4_example("mini-gap")
 class(mini_gap_id)
 #> [1] "sheets_id"  "drive_id"   "vctrs_vctr" "character" 
 mini_gap_id
+#> ✖ Request 1 failed [500: DATA_LOSS].
+#> ℹ Will retry in 5.2s.
+#> ⠙ Retry happens in  4s
+#> ⠹ Retry happens in  3s
+#> ✔ Request 2 successful!
+#> ⠹ Retry happens in  3s
+#> ⠹ Retry happens in  0s
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: mini-gap                                    

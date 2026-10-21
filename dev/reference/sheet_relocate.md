@@ -108,6 +108,39 @@ ss %>%
   sheet_relocate(sheet_names) %>%
   sheet_names()
 #> ✔ Relocating sheets in sheet-relocate-demo.
+#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ℹ Will retry in 61.5s.
+#> ⠙ Retry happens in  1m
+#> ⠹ Retry happens in  1m
+#> ⠸ Retry happens in  1m
+#> ⠼ Retry happens in  1m
+#> ⠴ Retry happens in  1m
+#> ⠦ Retry happens in 48s
+#> ⠧ Retry happens in 45s
+#> ⠇ Retry happens in 42s
+#> ⠏ Retry happens in 39s
+#> ⠋ Retry happens in 36s
+#> ⠙ Retry happens in 33s
+#> ⠹ Retry happens in 30s
+#> ⠸ Retry happens in 27s
+#> ⠼ Retry happens in 24s
+#> ⠴ Retry happens in 21s
+#> ⠦ Retry happens in 18s
+#> ⠧ Retry happens in 15s
+#> ⠇ Retry happens in 12s
+#> ⠏ Retry happens in  9s
+#> ⠋ Retry happens in  6s
+#> ⠙ Retry happens in  3s
+#> ⠹ Retry happens in  0s
+#> ✖ Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ⠹ Retry happens in  0s
+#> ℹ Will retry in 3.9s.
+#> ⠹ Retry happens in  0s
+#> ⠹ Retry happens in  0s
+#> ⠙ Retry happens in  1s
+#> ✔ Request 3 successful!
+#> ⠙ Retry happens in  1s
+#> ⠙ Retry happens in  0s
 #> [1] "alfa"    "bravo"   "charlie" "delta"   "echo"    "foxtrot"
 
 # reorder and move multiple sheets to the back
@@ -122,5 +155,5 @@ gs4_find("sheet-relocate-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
 #> • sheet-relocate-demo
-#>   <id: 1mRfgbZq-5O4nV_hiSJdHhDE37x8iVTe_fop7wD3JHT8>
+#>   <id: 1ouqm9lt1j1tYX8LyGZicE8unOFiZG4ttirb3xJ2NXxs>
 ```

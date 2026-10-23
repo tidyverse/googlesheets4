@@ -12,7 +12,7 @@ range_clear(ss, sheet = NULL, range = NULL, reformat = TRUE)
 \arguments{
 \item{ss}{Something that identifies a Google Sheet:
 \itemize{
-\item its file id as a string or \code{\link[googledrive:drive_id]{drive_id}}
+\item its file id as a string or \code{\link[googledrive:as_id]{drive_id}}
 \item a URL from which we can recover the id
 \item a one-row \code{\link[googledrive:dribble]{dribble}}, which is how googledrive
 represents Drive files
@@ -97,12 +97,12 @@ Makes a \code{RepeatCellRequest}:
 \item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#repeatcellrequest}
 }
 
-Other write functions: 
-\code{\link{gs4_create}()},
-\code{\link{gs4_formula}()},
-\code{\link{range_delete}()},
-\code{\link{range_write}()},
-\code{\link{sheet_append}()},
-\code{\link{sheet_write}()}
+Other write functions:
+\code{\link[=gs4_create]{gs4_create()}},
+\code{\link[=gs4_formula]{gs4_formula()}},
+\code{\link[=range_delete]{range_delete()}},
+\code{\link[=range_write]{range_write()}},
+\code{\link[=sheet_append]{sheet_append()}},
+\code{\link[=sheet_write]{sheet_write()}}
 }
 \concept{write functions}

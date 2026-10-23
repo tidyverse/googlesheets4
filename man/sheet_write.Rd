@@ -17,7 +17,7 @@ away (gets filled, actually) the first time you send more data with
 
 \item{ss}{Something that identifies a Google Sheet:
 \itemize{
-\item its file id as a string or \code{\link[googledrive:drive_id]{drive_id}}
+\item its file id as a string or \code{\link[googledrive:as_id]{drive_id}}
 \item a URL from which we can recover the id
 \item a one-row \code{\link[googledrive:dribble]{dribble}}, which is how googledrive
 represents Drive files
@@ -104,23 +104,23 @@ gs4_find("sheet-write-demo") \%>\%
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other write functions: 
-\code{\link{gs4_create}()},
-\code{\link{gs4_formula}()},
-\code{\link{range_delete}()},
-\code{\link{range_flood}()},
-\code{\link{range_write}()},
-\code{\link{sheet_append}()}
+Other write functions:
+\code{\link[=gs4_create]{gs4_create()}},
+\code{\link[=gs4_formula]{gs4_formula()}},
+\code{\link[=range_delete]{range_delete()}},
+\code{\link[=range_flood]{range_flood()}},
+\code{\link[=range_write]{range_write()}},
+\code{\link[=sheet_append]{sheet_append()}}
 
-Other worksheet functions: 
-\code{\link{sheet_add}()},
-\code{\link{sheet_append}()},
-\code{\link{sheet_copy}()},
-\code{\link{sheet_delete}()},
-\code{\link{sheet_properties}()},
-\code{\link{sheet_relocate}()},
-\code{\link{sheet_rename}()},
-\code{\link{sheet_resize}()}
+Other worksheet functions:
+\code{\link[=sheet_add]{sheet_add()}},
+\code{\link[=sheet_append]{sheet_append()}},
+\code{\link[=sheet_copy]{sheet_copy()}},
+\code{\link[=sheet_delete]{sheet_delete()}},
+\code{\link[=sheet_properties]{sheet_properties()}},
+\code{\link[=sheet_relocate]{sheet_relocate()}},
+\code{\link[=sheet_rename]{sheet_rename()}},
+\code{\link[=sheet_resize]{sheet_resize()}}
 }
 \concept{worksheet functions}
 \concept{write functions}

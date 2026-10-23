@@ -22,6 +22,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Jennifer Bryan \email{jenny@posit.co} (\href{https://orcid.org/0000-0002-6983-2759}{ORCID})
 
+Authors:
+\itemize{
+  \item Jennifer Bryan \email{jenny@posit.co} (\href{https://orcid.org/0000-0002-6983-2759}{ORCID})
+}
+
 Other contributors:
 \itemize{
   \item Posit Software, PBC [copyright holder, funder]

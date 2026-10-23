@@ -163,9 +163,9 @@ gs4_auth(path = "foofy-83ee9e7c9c48.json")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other auth functions: 
-\code{\link{gs4_auth_configure}()},
-\code{\link{gs4_deauth}()},
-\code{\link{gs4_scopes}()}
+Other auth functions:
+\code{\link[=gs4_auth_configure]{gs4_auth_configure()}},
+\code{\link[=gs4_deauth]{gs4_deauth()}},
+\code{\link[=gs4_scopes]{gs4_scopes()}}
 }
 \concept{auth functions}

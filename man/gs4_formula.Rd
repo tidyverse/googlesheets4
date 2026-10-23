@@ -55,12 +55,12 @@ gs4_find("gs4-formula-demo") \%>\%
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other write functions: 
-\code{\link{gs4_create}()},
-\code{\link{range_delete}()},
-\code{\link{range_flood}()},
-\code{\link{range_write}()},
-\code{\link{sheet_append}()},
-\code{\link{sheet_write}()}
+Other write functions:
+\code{\link[=gs4_create]{gs4_create()}},
+\code{\link[=range_delete]{range_delete()}},
+\code{\link[=range_flood]{range_flood()}},
+\code{\link[=range_write]{range_write()}},
+\code{\link[=sheet_append]{sheet_append()}},
+\code{\link[=sheet_write]{sheet_write()}}
 }
 \concept{write functions}

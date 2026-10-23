@@ -8,7 +8,7 @@ request_make(x, ..., encode = "json")
 }
 \arguments{
 \item{x}{List. Holds the components for an HTTP request, presumably created
-with \code{\link[=request_generate]{request_generate()}} or \code{\link[gargle:request_develop]{gargle::request_build()}}. Must contain a
+with \code{\link[=request_generate]{request_generate()}} or \code{\link[gargle:request_build]{gargle::request_build()}}. Must contain a
 \code{method} and \code{url}. If present, \code{body} and \code{token} are used.}
 
 \item{...}{Optional arguments passed through to the HTTP method.}
@@ -20,7 +20,7 @@ is what you want most of the time when calling the Sheets API. The httr
 default is \code{"multipart"}. Other acceptable values are \code{"form"} and \code{"raw"}.}
 }
 \value{
-Object of class \code{response} from \link[httr:httr-package]{httr::httr}.
+Object of class \code{response} from \link[httr:httr]{httr}.
 }
 \description{
 Low-level function to execute a Sheets API request. Most users should,
@@ -31,7 +31,7 @@ for internal use and for programming around the Sheets API.
 \details{
 \code{make_request()} is a very thin wrapper around \code{\link[gargle:request_retry]{gargle::request_retry()}},
 only adding the googlesheets4 user agent. Typically the input has been
-created with \code{\link[=request_generate]{request_generate()}} or \code{\link[gargle:request_develop]{gargle::request_build()}} and the output
+created with \code{\link[=request_generate]{request_generate()}} or \code{\link[gargle:request_build]{gargle::request_build()}} and the output
 is processed with \code{process_response()}.
 
 \code{\link[gargle:request_retry]{gargle::request_retry()}} retries requests that error with \verb{429 RESOURCE_EXHAUSTED}. Its basic scheme is exponential backoff, with one tweak
@@ -54,9 +54,9 @@ to get your own OAuth client or use a service account token}. This is explained
 in the gargle vignette \code{vignette("get-api-credentials", package = "gargle")}.
 }
 \seealso{
-Other low-level API functions: 
-\code{\link{gs4_has_token}()},
-\code{\link{gs4_token}()},
-\code{\link{request_generate}()}
+Other low-level API functions:
+\code{\link[=gs4_has_token]{gs4_has_token()}},
+\code{\link[=gs4_token]{gs4_token()}},
+\code{\link[=request_generate]{request_generate()}}
 }
 \concept{low-level API functions}

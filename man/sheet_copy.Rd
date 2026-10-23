@@ -16,7 +16,7 @@ sheet_copy(
 \arguments{
 \item{from_ss}{Something that identifies a Google Sheet:
 \itemize{
-\item its file id as a string or \code{\link[googledrive:drive_id]{drive_id}}
+\item its file id as a string or \code{\link[googledrive:as_id]{drive_id}}
 \item a URL from which we can recover the id
 \item a one-row \code{\link[googledrive:dribble]{dribble}}, which is how googledrive
 represents Drive files
@@ -100,14 +100,14 @@ and possibly makes a subsequent \code{UpdateSheetPropertiesRequest}:
 \item \url{https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/request#UpdateSheetPropertiesRequest}
 }
 
-Other worksheet functions: 
-\code{\link{sheet_add}()},
-\code{\link{sheet_append}()},
-\code{\link{sheet_delete}()},
-\code{\link{sheet_properties}()},
-\code{\link{sheet_relocate}()},
-\code{\link{sheet_rename}()},
-\code{\link{sheet_resize}()},
-\code{\link{sheet_write}()}
+Other worksheet functions:
+\code{\link[=sheet_add]{sheet_add()}},
+\code{\link[=sheet_append]{sheet_append()}},
+\code{\link[=sheet_delete]{sheet_delete()}},
+\code{\link[=sheet_properties]{sheet_properties()}},
+\code{\link[=sheet_relocate]{sheet_relocate()}},
+\code{\link[=sheet_rename]{sheet_rename()}},
+\code{\link[=sheet_resize]{sheet_resize()}},
+\code{\link[=sheet_write]{sheet_write()}}
 }
 \concept{worksheet functions}

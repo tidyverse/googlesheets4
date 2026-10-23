@@ -28,9 +28,9 @@ gs4_example("deaths") \%>\%
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other auth functions: 
-\code{\link{gs4_auth}()},
-\code{\link{gs4_auth_configure}()},
-\code{\link{gs4_scopes}()}
+Other auth functions:
+\code{\link[=gs4_auth]{gs4_auth()}},
+\code{\link[=gs4_auth_configure]{gs4_auth_configure()}},
+\code{\link[=gs4_scopes]{gs4_scopes()}}
 }
 \concept{auth functions}

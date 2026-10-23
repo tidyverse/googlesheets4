@@ -9,7 +9,7 @@ gs4_oauth_app()
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-In light of the new \code{\link[gargle:gargle_oauth_client_from_json]{gargle::gargle_oauth_client()}} constructor and class of
+In light of the new \code{\link[gargle:gargle_oauth_client]{gargle::gargle_oauth_client()}} constructor and class of
 the same name, \code{gs4_oauth_app()} is being replaced by
 \code{\link[=gs4_oauth_client]{gs4_oauth_client()}}.
 }

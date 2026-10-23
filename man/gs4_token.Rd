@@ -7,7 +7,7 @@
 gs4_token()
 }
 \value{
-A \code{request} object (an S3 class provided by \link[httr:httr-package]{httr}).
+A \code{request} object (an S3 class provided by \link[httr:httr]{httr}).
 }
 \description{
 For internal use or for those programming around the Sheets API.
@@ -30,9 +30,9 @@ req
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other low-level API functions: 
-\code{\link{gs4_has_token}()},
-\code{\link{request_generate}()},
-\code{\link{request_make}()}
+Other low-level API functions:
+\code{\link[=gs4_has_token]{gs4_has_token()}},
+\code{\link[=request_generate]{request_generate()}},
+\code{\link[=request_make]{request_make()}}
 }
 \concept{low-level API functions}

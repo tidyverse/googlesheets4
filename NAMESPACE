@@ -131,33 +131,41 @@ export(with_gs4_quiet)
 export(write_sheet)
 import(rlang)
 import(vctrs)
-importFrom(cellranger,anchored)
-importFrom(cellranger,cell_cols)
-importFrom(cellranger,cell_limits)
-importFrom(cellranger,cell_rows)
-importFrom(gargle,bulletize)
-importFrom(gargle,gargle_map_cli)
-importFrom(glue,glue)
-importFrom(glue,glue_collapse)
-importFrom(glue,glue_data)
+importFrom(cellranger,
+  anchored,
+  cell_cols,
+  cell_limits,
+  cell_rows
+)
+importFrom(gargle,
+  bulletize,
+  gargle_map_cli
+)
+importFrom(glue,
+  glue,
+  glue_collapse,
+  glue_data
+)
 importFrom(googledrive,as_id)
 importFrom(lifecycle,deprecated)
 importFrom(magrittr,"%>%")
 importFrom(methods,setOldClass)
-importFrom(purrr,compact)
-importFrom(purrr,discard)
-importFrom(purrr,imap)
-importFrom(purrr,keep)
-importFrom(purrr,map)
-importFrom(purrr,map2)
-importFrom(purrr,map_chr)
-importFrom(purrr,map_dbl)
-importFrom(purrr,map_int)
-importFrom(purrr,map_lgl)
-importFrom(purrr,modify_if)
-importFrom(purrr,pluck)
-importFrom(purrr,pmap)
-importFrom(purrr,pmap_chr)
-importFrom(purrr,transpose)
-importFrom(purrr,walk)
+importFrom(purrr,
+  compact,
+  discard,
+  imap,
+  keep,
+  map,
+  map2,
+  map_chr,
+  map_dbl,
+  map_int,
+  map_lgl,
+  modify_if,
+  pluck,
+  pmap,
+  pmap_chr,
+  transpose,
+  walk
+)
 importFrom(tibble,as_tibble)

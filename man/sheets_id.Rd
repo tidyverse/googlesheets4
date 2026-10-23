@@ -9,7 +9,7 @@ as_sheets_id(x, ...)
 }
 \arguments{
 \item{x}{Something that contains a Google Sheet id: an id string, a
-\code{\link[googledrive:drive_id]{drive_id}}, a URL, a one-row
+\code{\link[googledrive:as_id]{drive_id}}, a URL, a one-row
 \code{\link[googledrive:dribble]{dribble}}, or a \code{googlesheets4_spreadsheet}.}
 
 \item{...}{Other arguments passed down to methods. (Not used.)}
@@ -18,12 +18,12 @@ as_sheets_id(x, ...)
 \code{sheets_id} is an S3 class that marks a string as a Google Sheet's id, which
 the Sheets API docs refer to as \code{spreadsheetId}.
 
-Any object of class \code{sheets_id} also has the \code{\link[googledrive:drive_id]{drive_id}}
-class, which is used by \link[googledrive:googledrive-package]{googledrive::googledrive} for the same purpose. This means you
-can provide a \code{sheets_id} to \link[googledrive:googledrive-package]{googledrive::googledrive} functions, in order to do anything
+Any object of class \code{sheets_id} also has the \code{\link[googledrive:as_id]{drive_id}}
+class, which is used by \link[googledrive:googledrive]{googledrive} for the same purpose. This means you
+can provide a \code{sheets_id} to \link[googledrive:googledrive]{googledrive} functions, in order to do anything
 with your Sheet that has nothing to do with it being a spreadsheet. Examples:
 change the Sheet's name, parent folder, or permissions. Read more about using
-\link{googlesheets4} and \link[googledrive:googledrive-package]{googledrive::googledrive} together in \code{vignette("drive-and-sheets")}.
+\link{googlesheets4} and \link[googledrive:googledrive]{googledrive} together in \code{vignette("drive-and-sheets")}.
 Note that a \code{sheets_id} object is intended to hold \strong{just one} id, while the
 parent class \code{drive_id} can be used for multiple ids.
 
@@ -46,7 +46,7 @@ characters", typically 44 characters long, in our experience. Example:
 \item A URL, from which we can excavate a spreadsheet or file id. Example:
 \code{"https://docs.google.com/spreadsheets/d/1BzfL0kZUz1TsI5zxJF1WNF01IxvC67FbOJUiiGMZ_mQ/edit#gid=1150108545"}.
 \item A one-row \code{\link[googledrive:dribble]{dribble}}, a "Drive tibble" used by the
-\link[googledrive:googledrive-package]{googledrive::googledrive} package. In general, a \code{dribble} can represent several
+\link[googledrive:googledrive]{googledrive} package. In general, a \code{dribble} can represent several
 files, one row per file. Since googlesheets4 is not vectorized over
 spreadsheets, we are only prepared to accept a one-row \code{dribble}.
 \itemize{
@@ -70,5 +70,5 @@ as_sheets_id("abc")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\link[googledrive:drive_id]{googledrive::as_id}
+\link[googledrive:as_id]{googledrive::as_id}
 }

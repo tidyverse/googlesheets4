@@ -44,9 +44,9 @@ gs4_scopes()
 \url{https://developers.google.com/identity/protocols/oauth2/scopes#sheets} for
 details on the permissions for each scope.
 
-Other auth functions: 
-\code{\link{gs4_auth}()},
-\code{\link{gs4_auth_configure}()},
-\code{\link{gs4_deauth}()}
+Other auth functions:
+\code{\link[=gs4_auth]{gs4_auth()}},
+\code{\link[=gs4_auth_configure]{gs4_auth_configure()}},
+\code{\link[=gs4_deauth]{gs4_deauth()}}
 }
 \concept{auth functions}

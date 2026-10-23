@@ -12,10 +12,10 @@ Many functions in googlesheets4 use a \code{range} argument to target specific
 cells. The Sheets v4 API expects user-specified ranges to be expressed via
 \href{https://developers.google.com/sheets/api/guides/concepts#a1_notation}{its A1 notation},
 but googlesheets4 accepts and converts a few alternative specifications
-provided by the functions in the \link[cellranger:cellranger]{cellranger::cellranger} package. Of course,
+provided by the functions in the \link[cellranger:cellranger]{cellranger} package. Of course,
 you can always provide A1-style ranges directly to functions like
 \code{\link[=read_sheet]{read_sheet()}} or \code{\link[=range_read_cells]{range_read_cells()}}. Why would you use the
-\link[cellranger:cellranger]{cellranger::cellranger} helpers? Some ranges are practically impossible to
+\link[cellranger:cellranger]{cellranger} helpers? Some ranges are practically impossible to
 express in A1 notation, specifically when you want to describe rectangles
 with some bounds that are specified and others determined by the data.
 }

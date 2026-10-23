@@ -29,7 +29,7 @@ argument.}
 \value{
 \itemize{
 \item \code{gs4_auth_configure()}: An object of R6 class
-\link[gargle:AuthState-class]{gargle::AuthState}, invisibly.
+\link[gargle:AuthState]{gargle::AuthState}, invisibly.
 \item \code{gs4_oauth_client()}: the current user-configured OAuth client.
 \item \code{gs4_api_key()}: the current user-configured API key.
 }
@@ -79,9 +79,9 @@ gs4_api_key()
 gs4_auth_configure(client = original_client, api_key = original_api_key)
 }
 \seealso{
-Other auth functions: 
-\code{\link{gs4_auth}()},
-\code{\link{gs4_deauth}()},
-\code{\link{gs4_scopes}()}
+Other auth functions:
+\code{\link[=gs4_auth]{gs4_auth()}},
+\code{\link[=gs4_deauth]{gs4_deauth()}},
+\code{\link[=gs4_scopes]{gs4_scopes()}}
 }
 \concept{auth functions}

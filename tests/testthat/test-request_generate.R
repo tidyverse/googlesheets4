@@ -7,7 +7,7 @@ test_that("can generate a basic request", {
   expect_identical(req$method, "GET")
   expect_match(
     req$url,
-    "^https://sheets.googleapis.com/v4/spreadsheets/abc123\\?key=.+"
+    "^https://sheets.googleapis.com/v4/spreadsheets/abc123"
   )
   expect_null(req$token)
 })

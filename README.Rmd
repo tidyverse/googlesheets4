@@ -31,7 +31,7 @@ googlesheets4:::gs4_auth_docs()
 <!-- badges: start -->
 [![CRAN status](https://www.r-pkg.org/badges/version/googlesheets4)](https://CRAN.R-project.org/package=googlesheets4)
 [![R-CMD-check](https://github.com/tidyverse/googlesheets4/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tidyverse/googlesheets4/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/tidyverse/googlesheets4/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/googlesheets4?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/tidyverse/googlesheets4/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/googlesheets4)
 <!-- badges: end -->
 
 ## Overview
@@ -83,7 +83,7 @@ The main "read" function of the googlesheets4 package goes by two names, because
 * `range_read()` is the right name according to the
   [naming convention](https://googlesheets4.tidyverse.org/articles/articles/function-class-names.html)
   used throughout the googlesheets4 package.
-  
+
 `read_sheet()` and `range_read()` are synonyms and you can use either one. Here we'll use `read_sheet()`.
 
 googlesheets4 is [pipe-friendly](https://r4ds.had.co.nz/pipes.html) (and reexports `%>%`), but works just fine without the pipe.
@@ -99,13 +99,15 @@ These all achieve the same thing:
 
 ```{r}
 # URL
-read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077")
+read_sheet(
+  "https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"
+)
 
 # Sheet ID
 read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 
 # a googledrive "dribble"
-googledrive::drive_get("gapminder") %>% 
+googledrive::drive_get("gapminder") %>%
   read_sheet()
 ```
 
@@ -124,7 +126,7 @@ See the article [Find and Identify Sheets](https://googlesheets4.tidyverse.org/a
 `sheet_write()` (over)writes a whole data frame into a (work)sheet within a (spread)Sheet.
 
 ```{r}
-head(mtcars) %>% 
+head(mtcars) %>%
   sheet_write(ss, sheet = "autos")
 ss
 ```

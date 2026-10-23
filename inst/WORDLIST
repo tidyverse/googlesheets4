@@ -1,18 +1,14 @@
 API's
 Auth
-AuthState
 CLI
 CMD
 Cheatsheet
 Codecov
 Colaboratory
 Computerphile's
-Datetime
-Datetimes
 Feuille
 Gapminder
 IDEs
-JSON
 OAuth
 OOB
 ORCID
@@ -36,8 +32,6 @@ chickwts
 cli
 cli's
 csv
-datetime
-datetimes
 de
 dev
 funder
@@ -57,7 +51,6 @@ noninteractively
 ny
 pkgdown
 pre
-programmatically
 readonly
 readr
 readr's
@@ -79,7 +72,6 @@ unformatted
 unskipped
 utc
 vctrs
-vectorized
 withr
 www
 xls

@@ -36,7 +36,7 @@ Imports:
     rlang (>= 1.0.2),
     tibble (>= 2.1.1),
     utils,
-    vctrs (>= 0.2.3),
+    vctrs (>= 0.4.0),
     withr
 Suggests:
     readr,

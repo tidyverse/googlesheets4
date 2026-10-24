@@ -1,18 +1,19 @@
 # Sheet  
-# A tibble: 14 × 6
+# A tibble: 15 × 6
    property           type   instance_of     array_of              format enum            
    <chr>              <chr>  <chr>           <chr>                 <chr>  <list>          
  1 bandedRanges       array  <NA>            BandedRange           <NA>   <tibble [0 × 2]>
  2 basicFilter        object BasicFilter     <NA>                  <NA>   <tibble [0 × 2]>
  3 charts             array  <NA>            EmbeddedChart         <NA>   <tibble [0 × 2]>
  4 columnGroups       array  <NA>            DimensionGroup        <NA>   <tibble [0 × 2]>
- 5 conditionalFormats array  <NA>            ConditionalFormatRule <NA>   <tibble [0 × 2]>
- 6 data               array  <NA>            GridData              <NA>   <tibble [0 × 2]>
- 7 developerMetadata  array  <NA>            DeveloperMetadata     <NA>   <tibble [0 × 2]>
- 8 filterViews        array  <NA>            FilterView            <NA>   <tibble [0 × 2]>
- 9 merges             array  <NA>            GridRange             <NA>   <tibble [0 × 2]>
-10 properties         object SheetProperties <NA>                  <NA>   <tibble [0 × 2]>
-11 protectedRanges    array  <NA>            ProtectedRange        <NA>   <tibble [0 × 2]>
-12 rowGroups          array  <NA>            DimensionGroup        <NA>   <tibble [0 × 2]>
-13 slicers            array  <NA>            Slicer                <NA>   <tibble [0 × 2]>
-14 tables             array  <NA>            Table                 <NA>   <tibble [0 × 2]>
+ 5 commentAnchors     array  <NA>            CommentAnchor         <NA>   <tibble [0 × 2]>
+ 6 conditionalFormats array  <NA>            ConditionalFormatRule <NA>   <tibble [0 × 2]>
+ 7 data               array  <NA>            GridData              <NA>   <tibble [0 × 2]>
+ 8 developerMetadata  array  <NA>            DeveloperMetadata     <NA>   <tibble [0 × 2]>
+ 9 filterViews        array  <NA>            FilterView            <NA>   <tibble [0 × 2]>
+10 merges             array  <NA>            GridRange             <NA>   <tibble [0 × 2]>
+11 properties         object SheetProperties <NA>                  <NA>   <tibble [0 × 2]>
+12 protectedRanges    array  <NA>            ProtectedRange        <NA>   <tibble [0 × 2]>
+13 rowGroups          array  <NA>            DimensionGroup        <NA>   <tibble [0 × 2]>
+14 slicers            array  <NA>            Slicer                <NA>   <tibble [0 × 2]>
+15 tables             array  <NA>            Table                 <NA>   <tibble [0 × 2]>

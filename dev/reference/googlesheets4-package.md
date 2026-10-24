@@ -23,6 +23,11 @@ Useful links:
 **Maintainer**: Jennifer Bryan <jenny@posit.co>
 ([ORCID](https://orcid.org/0000-0002-6983-2759))
 
+Authors:
+
+- Jennifer Bryan <jenny@posit.co>
+  ([ORCID](https://orcid.org/0000-0002-6983-2759))
+
 Other contributors:
 
 - Posit Software, PBC \[copyright holder, funder\]

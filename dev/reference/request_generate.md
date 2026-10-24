@@ -99,12 +99,16 @@ req
 #> [1] "GET"
 #> 
 #> $url
-#> [1] "https://sheets.googleapis.com/v4/spreadsheets/1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y?key=PRETEND_I_AM_AN_API_KEY"
+#> [1] "https://sheets.googleapis.com/v4/spreadsheets/1VTJjWoP1nshbyxmL9JqXgdVsimaYty21LGxxs018H2Y"
 #> 
 #> $body
 #> named list()
 #> 
 #> $token
 #> NULL
+#> 
+#> $headers
+#>            X-goog-api-key 
+#> "PRETEND_I_AM_AN_API_KEY" 
 #> 
 ```

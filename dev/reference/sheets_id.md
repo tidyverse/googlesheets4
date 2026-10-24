@@ -6,15 +6,15 @@ which the Sheets API docs refer to as `spreadsheetId`.
 Any object of class `sheets_id` also has the
 [`drive_id`](https://googledrive.tidyverse.org/reference/drive_id.html)
 class, which is used by
-[googledrive::googledrive](https://googledrive.tidyverse.org/reference/googledrive-package.html)
+[googledrive](https://googledrive.tidyverse.org/reference/googledrive-package.html)
 for the same purpose. This means you can provide a `sheets_id` to
-[googledrive::googledrive](https://googledrive.tidyverse.org/reference/googledrive-package.html)
+[googledrive](https://googledrive.tidyverse.org/reference/googledrive-package.html)
 functions, in order to do anything with your Sheet that has nothing to
 do with it being a spreadsheet. Examples: change the Sheet's name,
 parent folder, or permissions. Read more about using
 [googlesheets4](https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-package.md)
 and
-[googledrive::googledrive](https://googledrive.tidyverse.org/reference/googledrive-package.html)
+[googledrive](https://googledrive.tidyverse.org/reference/googledrive-package.html)
 together in `vignette("drive-and-sheets")`. Note that a `sheets_id`
 object is intended to hold **just one** id, while the parent class
 `drive_id` can be used for multiple ids.
@@ -62,7 +62,7 @@ These inputs can be converted to a `sheets_id`:
 - A one-row
   [`dribble`](https://googledrive.tidyverse.org/reference/dribble.html),
   a "Drive tibble" used by the
-  [googledrive::googledrive](https://googledrive.tidyverse.org/reference/googledrive-package.html)
+  [googledrive](https://googledrive.tidyverse.org/reference/googledrive-package.html)
   package. In general, a `dribble` can represent several files, one row
   per file. Since googlesheets4 is not vectorized over spreadsheets, we
   are only prepared to accept a one-row `dribble`.

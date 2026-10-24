@@ -53,4 +53,7 @@ req
 #> <request>
 #> Auth token: TokenServiceAccount
 #> 
+#> $headers
+#> NULL
+#> 
 ```

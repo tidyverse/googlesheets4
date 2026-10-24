@@ -2,6 +2,20 @@
 
 ## googlesheets4 (development version)
 
+- Updated the internal data that documents the Sheets API. Motivated by
+  the discovery that googlesheets4 should be able to process a response
+  that includes the relatively new “tables” property
+  ([\#322](https://github.com/tidyverse/googlesheets4/issues/322)).
+
+- The OAuth “app” items, deprecated since googlesheets4 1.1.0 (released
+  March 2023), have been removed:
+
+  - `gs4_oauth_app()` is removed in favor of
+    [`gs4_oauth_client()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md).
+  - The `app` argument of
+    [`gs4_auth_configure()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md)
+    is removed in favor of `client`.
+
 ## googlesheets4 1.1.2
 
 CRAN release: 2025-09-03
@@ -42,8 +56,7 @@ Version 1.3.0 of gargle introduced some changes around OAuth and
 googlesheets4 is syncing with up that:
 
 - [`gs4_oauth_client()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md)
-  is a new function to replace the now-deprecated
-  [`gs4_oauth_app()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_oauth_app.md).
+  is a new function to replace the now-deprecated `gs4_oauth_app()`.
 - The new `client` argument of
   [`gs4_auth_configure()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md)
   replaces the now-deprecated `app` argument.

@@ -22,7 +22,7 @@ configured OAuth client and API key, respectively.
 ## Usage
 
 ``` r
-gs4_auth_configure(client, path, api_key, app = deprecated())
+gs4_auth_configure(client, path, api_key)
 
 gs4_api_key()
 
@@ -49,10 +49,6 @@ gs4_oauth_client()
 - api_key:
 
   API key.
-
-- app:
-
-  **\[deprecated\]** Replaced by the `client` argument.
 
 ## Value
 

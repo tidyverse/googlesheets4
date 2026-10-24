@@ -40,7 +40,7 @@ request_make(x, ..., encode = "json")
 ## Value
 
 Object of class `response` from
-[httr::httr](https://httr.r-lib.org/reference/httr-package.html).
+[httr](https://httr.r-lib.org/reference/httr-package.html).
 
 ## Details
 

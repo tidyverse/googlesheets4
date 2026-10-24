@@ -6,14 +6,14 @@ expressed via [its A1
 notation](https://developers.google.com/sheets/api/guides/concepts#a1_notation),
 but googlesheets4 accepts and converts a few alternative specifications
 provided by the functions in the
-[cellranger::cellranger](https://rdrr.io/pkg/cellranger/man/cellranger.html)
+[cellranger](https://rdrr.io/pkg/cellranger/man/cellranger.html)
 package. Of course, you can always provide A1-style ranges directly to
 functions like
 [`read_sheet()`](https://googlesheets4.tidyverse.org/dev/reference/range_read.md)
 or
 [`range_read_cells()`](https://googlesheets4.tidyverse.org/dev/reference/range_read_cells.md).
 Why would you use the
-[cellranger::cellranger](https://rdrr.io/pkg/cellranger/man/cellranger.html)
+[cellranger](https://rdrr.io/pkg/cellranger/man/cellranger.html)
 helpers? Some ranges are practically impossible to express in A1
 notation, specifically when you want to describe rectangles with some
 bounds that are specified and others determined by the data.

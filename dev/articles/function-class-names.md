@@ -63,7 +63,7 @@ means one can install from that specific state via
 | `sheets_deauth()` (\*) | [`gs4_deauth()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_deauth.md) |
 | `sheets_endpoints()` (\*) | [`gs4_endpoints()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_endpoints.md) |
 | `sheets_has_token()` (\*) | [`gs4_has_token()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_has_token.md) |
-| `sheets_oauth_app()` (\*) | [`gs4_oauth_app()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_oauth_app.md) |
+| `sheets_oauth_app()` (\*) | [`gs4_oauth_client()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md) (formerly `gs4_oauth_app()`) |
 | `sheets_token()` (\*) | [`gs4_token()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_token.md) |
 | `sheets_user()` (\*) | [`gs4_user()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_user.md) |
 

@@ -98,7 +98,9 @@ These all achieve the same thing:
 ``` r
 
 # URL
-read_sheet("https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077")
+read_sheet(
+  "https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"
+)
 #> ✔ Reading from "gapminder".
 #> ✔ Range 'Africa'.
 #> # A tibble: 624 × 6
@@ -126,7 +128,7 @@ read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 #> # ℹ 619 more rows
 
 # a googledrive "dribble"
-googledrive::drive_get("gapminder") %>% 
+googledrive::drive_get("gapminder") %>%
   read_sheet()
 #> ✔ The input `path` resolved to exactly 1 file.
 #> ✔ Reading from "gapminder".
@@ -167,7 +169,7 @@ data.
 #> 
 #> ── <googlesheets4_spreadsheet> ─────────────────────────────────────────────────
 #> Spreadsheet name: "fluffy-bunny"                              
-#>               ID: 1enILX4tYJeFEJ1RL8MsGgDRjb0NHTdm3ZD92R2RMWYI
+#>               ID: 1DQeJwL8zHoEUi1U7WdRdhobXwfGWPDeO-mHcojOdk8U
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -183,7 +185,7 @@ data.
 
 ``` r
 
-head(mtcars) %>% 
+head(mtcars) %>%
   sheet_write(ss, sheet = "autos")
 #> ✔ Writing to "fluffy-bunny".
 #> ✔ Writing to sheet 'autos'.
@@ -191,7 +193,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ─────────────────────────────────────────────────
 #> Spreadsheet name: "fluffy-bunny"                              
-#>               ID: 1enILX4tYJeFEJ1RL8MsGgDRjb0NHTdm3ZD92R2RMWYI
+#>               ID: 1DQeJwL8zHoEUi1U7WdRdhobXwfGWPDeO-mHcojOdk8U
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           

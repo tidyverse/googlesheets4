@@ -28,7 +28,6 @@ Imports:
     googledrive (>= 2.1.0),
     httr,
     ids,
-    lifecycle,
     magrittr,
     methods,
     purrr,
@@ -43,7 +42,7 @@ Suggests:
     rmarkdown,
     spelling,
     testthat (>= 3.1.7)
-Remotes: 
+Remotes:
     r-lib/gargle
 ByteCompile: true
 Config/Needs/website:tidyverse, tidyverse/tidytemplate

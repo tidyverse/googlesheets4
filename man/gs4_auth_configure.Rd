@@ -6,7 +6,7 @@
 \alias{gs4_oauth_client}
 \title{Edit and view auth configuration}
 \usage{
-gs4_auth_configure(client, path, api_key, app = deprecated())
+gs4_auth_configure(client, path, api_key)
 
 gs4_api_key()
 
@@ -22,9 +22,6 @@ secret, in one of the forms supported for the \code{txt} argument of
 \code{\link[jsonlite:fromJSON]{jsonlite::fromJSON()}} (typically, a file path or JSON string).}
 
 \item{api_key}{API key.}
-
-\item{app}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} Replaced by the \code{client}
-argument.}
 }
 \value{
 \itemize{

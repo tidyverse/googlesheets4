@@ -96,7 +96,6 @@ export(gs4_fodder)
 export(gs4_formula)
 export(gs4_get)
 export(gs4_has_token)
-export(gs4_oauth_app)
 export(gs4_oauth_client)
 export(gs4_random)
 export(gs4_scopes)
@@ -147,7 +146,6 @@ importFrom(glue,
   glue_data
 )
 importFrom(googledrive,as_id)
-importFrom(lifecycle,deprecated)
 importFrom(magrittr,"%>%")
 importFrom(methods,setOldClass)
 importFrom(purrr,

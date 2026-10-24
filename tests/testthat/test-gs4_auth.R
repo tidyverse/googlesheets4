@@ -34,31 +34,6 @@ test_that("gs4_auth_configure works", {
   expect_null(gs4_api_key())
 })
 
-test_that("gs4_oauth_app() is deprecated", {
-  withr::local_options(lifecycle_verbosity = "warning")
-  expect_snapshot(absorb <- gs4_oauth_app())
-})
-
-test_that("gs4_auth_configure(app =) is deprecated in favor of client", {
-  withr::local_options(lifecycle_verbosity = "warning")
-  (original_client <- gs4_oauth_client())
-  withr::defer(gs4_auth_configure(client = original_client))
-
-  client <- gargle::gargle_oauth_client_from_json(
-    system.file(
-      "extdata",
-      "client_secret_installed.googleusercontent.com.json",
-      package = "gargle"
-    ),
-    name = "test-client"
-  )
-  expect_snapshot(
-    gs4_auth_configure(app = client)
-  )
-  expect_equal(gs4_oauth_client()$name, "test-client")
-  expect_equal(gs4_oauth_client()$id, "abc.apps.googleusercontent.com")
-})
-
 # gs4_scopes() ----
 test_that("gs4_scopes() reveals Sheets scopes", {
   expect_snapshot(gs4_scopes())

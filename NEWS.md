@@ -4,6 +4,13 @@
   discovery that googlesheets4 should be able to process a response that
   includes the relatively new "tables" property (#322).
 
+* The OAuth "app" items, deprecated since googlesheets4 1.1.0 (released March
+  2023), have been removed:
+
+  - `gs4_oauth_app()` is removed in favor of `gs4_oauth_client()`.
+  - The `app` argument of `gs4_auth_configure()` is removed in favor of
+    `client`.
+
 # googlesheets4 1.1.2
 
 * No significant user-facing changes. Release motivated by documentation updates

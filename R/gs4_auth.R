@@ -190,16 +190,7 @@ gs4_has_token <- function() {
 #'
 #' # restore original auth config
 #' gs4_auth_configure(client = original_client, api_key = original_api_key)
-gs4_auth_configure <- function(client, path, api_key, app = deprecated()) {
-  if (lifecycle::is_present(app)) {
-    lifecycle::deprecate_warn(
-      "1.1.0",
-      "gs4_auth_configure(app)",
-      "gs4_auth_configure(client)"
-    )
-    gs4_auth_configure(client = app, path = path, api_key = api_key)
-  }
-
+gs4_auth_configure <- function(client, path, api_key) {
   if (!missing(client) && !missing(path)) {
     gs4_abort(
       "Must supply exactly one of {.arg client} and {.arg path}, not both."
@@ -399,25 +390,4 @@ local_deauth <- function(env = parent.frame()) {
     envir = env
   )
   gs4_deauth()
-}
-
-# deprecated functions ----
-
-#' Get currently configured OAuth app (deprecated)
-#'
-#' @description
-#' `r lifecycle::badge("deprecated")`
-#'
-#' In light of the new [gargle::gargle_oauth_client()] constructor and class of
-#' the same name, `gs4_oauth_app()` is being replaced by
-#' [gs4_oauth_client()].
-#' @keywords internal
-#' @export
-gs4_oauth_app <- function() {
-  lifecycle::deprecate_warn(
-    "1.1.0",
-    "gs4_oauth_app()",
-    "gs4_oauth_client()"
-  )
-  gs4_oauth_client()
 }

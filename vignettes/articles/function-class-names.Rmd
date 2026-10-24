@@ -18,7 +18,7 @@ This article explains conventions in googlesheets4 around:
 
 Almost all functions in googlesheets4 have one of these prefixes:
 
-  * `gs4_`, referring variously to the googlesheets4 package, v4 of the Google 
+  * `gs4_`, referring variously to the googlesheets4 package, v4 of the Google
     Sheets API, or to operations on one or more (spread)Sheets
   * `sheet_`, referring to an operation on one or more (work)sheets
   * `range_`, referring to an operation on a range of cells
@@ -52,7 +52,7 @@ As time goes on, this article becomes more of historical note.
 The dev version of googlesheets4 was bumped from 0.1.1.9000 to 0.1.1.9100 when the `sheets_` naming scheme was abandoned.
 The last commit under the old scheme was also tagged as "v0.1.1.9000", which means one can install from that specific state via `devtools::install_github("tidyverse/googlesheets4@v0.1.1.9000")`.
 
-## Auth and the Sheet API v4 surface 
+## Auth and the Sheet API v4 surface
 
 ```{r echo = FALSE}
 dat <- tibble::tribble(
@@ -63,7 +63,7 @@ dat <- tibble::tribble(
   "`sheets_deauth()` (*)",         "`gs4_deauth()`",
   "`sheets_endpoints()` (*)",      "`gs4_endpoints()`",
   "`sheets_has_token()` (*)",      "`gs4_has_token()`",
-  "`sheets_oauth_app()` (*)",      "`gs4_oauth_app()`",
+  "`sheets_oauth_app()` (*)",      "`gs4_oauth_client()` (formerly `gs4_oauth_app()`)",
   "`sheets_token()` (*)",          "`gs4_token()`",
   "`sheets_user()` (*)",           "`gs4_user()`"
 )
@@ -97,7 +97,7 @@ knitr::kable(dat)
 ```{r echo = FALSE}
 dat <- tibble::tribble(
   ~ "<= v0.1.1.9000",            ~ ">= v0.1.1.9100",
-  "`sheets_append()`",           "`sheet_append()`",          
+  "`sheets_append()`",           "`sheet_append()`",
   "`sheets_sheet_add()`",        "`sheet_add()`",
   "`sheets_sheet_copy()`",       "`sheet_copy()`",
   "`sheets_sheet_delete()`",     "`sheet_delete()`",
@@ -119,7 +119,7 @@ knitr::kable(dat)
 ```{r echo = FALSE}
 dat <- tibble::tribble(
   ~ "<= v0.1.1.9000",            ~ ">= v0.1.1.9100",
-  "`sheets_auto_resize_dims()`", "`range_autofit()`",          
+  "`sheets_auto_resize_dims()`", "`range_autofit()`",
   "`sheets_cells()` (*)",        "`range_read_cells()`",
   "`sheets_clear()`",            "`range_clear()`",
   "`sheets_edit()`",             "`range_write()`",

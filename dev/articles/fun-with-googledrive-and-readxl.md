@@ -36,7 +36,7 @@ Put the iris data into a csv file.
 ``` r
 
 (iris_tempfile <- tempfile(pattern = "iris-", fileext = ".csv"))
-#> [1] "/tmp/Rtmphtz938/iris-262f37c76383.csv"
+#> [1] "/tmp/RtmpCSL0Hk/iris-25eda4782be.csv"
 write.csv(iris, iris_tempfile, row.names = FALSE)
 ```
 
@@ -48,15 +48,15 @@ to upload the csv and simultaneously convert to a Sheet.
 
 (iris_ss <- drive_upload(iris_tempfile, type = "spreadsheet"))
 #> Local file:
-#> • /tmp/Rtmphtz938/iris-262f37c76383.csv
+#> • /tmp/RtmpCSL0Hk/iris-25eda4782be.csv
 #> Uploaded into Drive file:
-#> • iris-262f37c76383 <id: 1_VC6Wyv57pYVsu4SNGEhMoq4WdxcvHZov-XtzJTIyJ4>
+#> • iris-25eda4782be <id: 1bZzGVBwqq69DWsohKNRDB9ov1GugsYPN2L0YBanmFQc>
 #> With MIME type:
 #> • application/vnd.google-apps.spreadsheet
 #> # A dribble: 1 × 3
-#>   name              id       drive_resource   
-#>   <chr>             <drv_id> <list>           
-#> 1 iris-262f37c76383 1_VC6Wy… <named list [38]>
+#>   name             id       drive_resource   
+#>   <chr>            <drv_id> <list>           
+#> 1 iris-25eda4782be 1bZzGVB… <named list [38]>
 
 # visit the new Sheet in the browser, in an interactive session!
 drive_browse(iris_ss)
@@ -67,7 +67,7 @@ Read data from the private Sheet into R.
 ``` r
 
 read_sheet(iris_ss, range = "B1:D6")
-#> ✔ Reading from iris-262f37c76383.csv.
+#> ✔ Reading from iris-25eda4782be.csv.
 #> ✔ Range B1:D6.
 #> # A tibble: 5 × 3
 #>   Sepal.Width Petal.Length Petal.Width
@@ -86,12 +86,12 @@ Download the Sheet as an Excel workbook.
 ``` r
 
 (iris_xlsxfile <- sub("[.]csv", ".xlsx", iris_tempfile))
-#> [1] "/tmp/Rtmphtz938/iris-262f37c76383.xlsx"
+#> [1] "/tmp/RtmpCSL0Hk/iris-25eda4782be.xlsx"
 drive_download(iris_ss, path = iris_xlsxfile, overwrite = TRUE)
 #> File downloaded:
-#> • iris-262f37c76383 <id: 1_VC6Wyv57pYVsu4SNGEhMoq4WdxcvHZov-XtzJTIyJ4>
+#> • iris-25eda4782be <id: 1bZzGVBwqq69DWsohKNRDB9ov1GugsYPN2L0YBanmFQc>
 #> Saved locally as:
-#> • /tmp/Rtmphtz938/iris-262f37c76383.xlsx
+#> • /tmp/RtmpCSL0Hk/iris-25eda4782be.xlsx
 ```
 
 ## Read xlsx with readxl
@@ -128,5 +128,5 @@ file.remove(iris_tempfile, iris_xlsxfile)
 #> [1] TRUE TRUE
 drive_trash(iris_ss)
 #> File trashed:
-#> • iris-262f37c76383 <id: 1_VC6Wyv57pYVsu4SNGEhMoq4WdxcvHZov-XtzJTIyJ4>
+#> • iris-25eda4782be <id: 1bZzGVBwqq69DWsohKNRDB9ov1GugsYPN2L0YBanmFQc>
 ```

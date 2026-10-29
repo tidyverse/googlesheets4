@@ -1,4 +1,4 @@
-# googlesheets4 (development version)
+# googlesheets4 1.1.3
 
 * Updated the internal data that documents the Sheets API. Motivated by the
   discovery that googlesheets4 should be able to process a response that

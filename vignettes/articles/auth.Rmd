@@ -46,8 +46,8 @@ Users can take control of auth proactively via the [`gs4_auth*()` family of func
   * Whether to cache tokens and where.
   * Whether to use out-of-band auth.
   * A service account token.
-  * The OAuth app and/or API key.
-  
+  * The OAuth client and/or API key.
+
 Auth is actually handled by the gargle package ([gargle.r-lib.org](https://gargle.r-lib.org)), similar to googledrive, bigrquery, and gmailr, and gargle's documentation and articles are the definitive guide to more advanced topics.
 
 ## Multi-package auth

@@ -154,7 +154,7 @@ Please note that the googlesheets4 project is released with a [Contributor Code 
 
 ## Privacy
 
-[Privacy policy](https://www.tidyverse.org/google_privacy_policy)
+[Privacy policy](https://tidyverse.org/google_privacy_policy/)
 
 ## Context
 

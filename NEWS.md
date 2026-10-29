@@ -98,7 +98,7 @@ This should not change anything for users, but it means there is an API call the
 
 * googlesheets4 Suggests testthat >= 3.0.0 and, specifically, uses third edition features.
 
-R 3.4 is now the oldest version that is explicitly supported and tested, as per the [tidyverse policy](https://www.tidyverse.org/blog/2019/04/r-version-support/).
+R 3.4 is now the oldest version that is explicitly supported and tested, as per the [tidyverse policy](https://tidyverse.org/blog/2019/04/r-version-support/).
 
 # googlesheets4 0.3.0
 

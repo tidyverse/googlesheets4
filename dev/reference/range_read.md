@@ -217,7 +217,7 @@ read_sheet(ss, range = "A5:F15")
 #> # ℹ 1 more variable: `Date of death` <dttm>
 read_sheet(ss, range = "other!A5:F15", col_types = "ccilDD")
 #> ✔ Reading from deaths.
-#> ✔ Range ''other'!A5:F15'.
+#> ✔ Range 'other'!A5:F15.
 #> # A tibble: 10 × 6
 #>    Name     Profession   Age `Has kids` `Date of birth` `Date of death`
 #>    <chr>    <chr>      <int> <lgl>      <date>          <date>         
@@ -266,7 +266,7 @@ read_sheet(
   col_types = "ccid"
 )
 #> ✔ Reading from mini-gap.
-#> ✔ Range ''Europe'!A:D'.
+#> ✔ Range 'Europe'!A:D.
 #> # A tibble: 5 × 4
 #>   country                continent  year lifeExp
 #>   <chr>                  <chr>     <int>   <dbl>

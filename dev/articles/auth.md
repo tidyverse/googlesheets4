@@ -41,7 +41,7 @@ Examples of what you can control or provide:
 - Whether to cache tokens and where.
 - Whether to use out-of-band auth.
 - A service account token.
-- The OAuth app and/or API key.
+- The OAuth client and/or API key.
 
 Auth is actually handled by the gargle package
 ([gargle.r-lib.org](https://gargle.r-lib.org)), similar to googledrive,

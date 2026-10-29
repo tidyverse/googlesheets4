@@ -2,6 +2,10 @@
 
 ## googlesheets4 (development version)
 
+## googlesheets4 1.1.3
+
+CRAN release: 2026-10-29
+
 - Updated the internal data that documents the Sheets API. Motivated by
   the discovery that googlesheets4 should be able to process a response
   that includes the relatively new “tables” property
@@ -168,7 +172,7 @@ time either of these functions is called.
 
 R 3.4 is now the oldest version that is explicitly supported and tested,
 as per the [tidyverse
-policy](https://www.tidyverse.org/blog/2019/04/r-version-support/).
+policy](https://tidyverse.org/blog/2019/04/r-version-support/).
 
 ## googlesheets4 0.3.0
 

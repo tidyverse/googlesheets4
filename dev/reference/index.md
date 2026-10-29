@@ -143,6 +143,16 @@ current state
   : Edit and view auth configuration
 - [`gs4_scopes()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_scopes.md)
   : Produce scopes specific to the Sheets API
+
+## Configuration and messages
+
+Configure the OAuth client and API key used for auth or silence
+informational messages
+
+- [`gs4_auth_configure()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md)
+  [`gs4_api_key()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md)
+  [`gs4_oauth_client()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md)
+  : Edit and view auth configuration
 - [`local_gs4_quiet()`](https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-configuration.md)
   [`with_gs4_quiet()`](https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-configuration.md)
   : googlesheets4 configuration
@@ -161,9 +171,6 @@ Low-level functions used internally and made available for programming
   : Is there a token on hand?
 - [`gs4_endpoints()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_endpoints.md)
   : List Sheets endpoints
-- [`local_gs4_quiet()`](https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-configuration.md)
-  [`with_gs4_quiet()`](https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-configuration.md)
-  : googlesheets4 configuration
 
 ## Operate on (spread)Sheets or the Sheets API
 

@@ -216,7 +216,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: unfearing-guineafowl                        
-#>               ID: 1NYxXo1nlu8ROxxbrMoA3bCfTAqkGdSq1spDvYqOTnrA
+#>               ID: 1Frhx2Zo5MlWrWlkP3JlsLAyJfG_tX_H6Yovzn5D2IRY
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -241,7 +241,7 @@ so we can specify the new Sheet’s name.
 googledrive::drive_trash(ss)
 #> File trashed:
 #> • unfearing-guineafowl
-#>   <id: 1NYxXo1nlu8ROxxbrMoA3bCfTAqkGdSq1spDvYqOTnrA>
+#>   <id: 1Frhx2Zo5MlWrWlkP3JlsLAyJfG_tX_H6Yovzn5D2IRY>
 
 ss <- gs4_create("testy-hedgehog", sheets = df)
 #> ✔ Creating new Sheet: testy-hedgehog.
@@ -249,7 +249,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: testy-hedgehog                              
-#>               ID: 1cKDzunkrSFOWwz1XkhJ_BZLRWqeK2N3wS3ko2awNqxI
+#>               ID: 14kSkqC3am9ULpYm7qI3mAM9QFlXrGrh_2jIAyjm4Eso
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -272,7 +272,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: testy-hedgehog                              
-#>               ID: 1cKDzunkrSFOWwz1XkhJ_BZLRWqeK2N3wS3ko2awNqxI
+#>               ID: 14kSkqC3am9ULpYm7qI3mAM9QFlXrGrh_2jIAyjm4Eso
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           
@@ -294,7 +294,7 @@ sheet_write(data.frame(x = 4:10, letters[4:10]), ss, sheet = "df")
 #> ✔ Writing to sheet df.
 read_sheet(ss, sheet = "df")
 #> ✔ Reading from testy-hedgehog.
-#> ✔ Range ''df''.
+#> ✔ Range 'df'.
 #> # A tibble: 7 × 2
 #>       x letters.4.10.
 #>   <dbl> <chr>        
@@ -316,7 +316,7 @@ ss %>% sheet_append(data.frame(x = 11, letters[11]), sheet = "df")
 #> ✔ Appending 1 row to df.
 read_sheet(ss, sheet = "df")
 #> ✔ Reading from testy-hedgehog.
-#> ✔ Range ''df''.
+#> ✔ Range 'df'.
 #> # A tibble: 8 × 2
 #>       x letters.4.10.
 #>   <dbl> <chr>        
@@ -354,12 +354,12 @@ sheet_properties(ss)
 #> # A tibble: 2 × 8
 #>   name     index         id type  visible grid_rows grid_columns data  
 #>   <chr>    <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 df           0 1166999603 GRID  TRUE            9            2 <NULL>
-#> 2 chickwts     1   41379944 GRID  TRUE           72            2 <NULL>
+#> 1 df           0 2140032330 GRID  TRUE            9            2 <NULL>
+#> 2 chickwts     1  524785438 GRID  TRUE           72            2 <NULL>
 
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • testy-hedgehog <id: 1cKDzunkrSFOWwz1XkhJ_BZLRWqeK2N3wS3ko2awNqxI>
+#> • testy-hedgehog <id: 14kSkqC3am9ULpYm7qI3mAM9QFlXrGrh_2jIAyjm4Eso>
 ```
 
 The article [Write

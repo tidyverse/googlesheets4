@@ -55,7 +55,7 @@ some of the different ways to specify (work)sheet and cell ranges.
 
 range_read(gs4_example("mini-gap"), sheet = 2)
 #> ✔ Reading from mini-gap.
-#> ✔ Range ''Americas''.
+#> ✔ Range 'Americas'.
 #> # A tibble: 5 × 6
 #>   country   continent  year lifeExp      pop gdpPercap
 #>   <chr>     <chr>     <dbl>   <dbl>    <dbl>     <dbl>
@@ -67,7 +67,7 @@ range_read(gs4_example("mini-gap"), sheet = 2)
 
 range_read(gs4_example("mini-gap"), sheet = "Oceania", n_max = 3)
 #> ✔ Reading from mini-gap.
-#> ✔ Range ''Oceania''.
+#> ✔ Range 'Oceania'.
 #> # A tibble: 3 × 6
 #>   country     continent  year lifeExp     pop gdpPercap
 #>   <chr>       <chr>     <dbl>   <dbl>   <dbl>     <dbl>
@@ -115,7 +115,7 @@ range_read(
   gs4_example("deaths"), range = "other!A5:F15", col_types = "?ci??D"
 )
 #> ✔ Reading from deaths.
-#> ✔ Range ''other'!A5:F15'.
+#> ✔ Range 'other'!A5:F15.
 #> # A tibble: 10 × 6
 #>    Name           Profession   Age `Has kids` `Date of birth`    
 #>    <chr>          <chr>      <int> <lgl>      <dttm>             
@@ -379,14 +379,14 @@ system.time(
 #> ℹ Use `spec()` to retrieve the full column specification for this data.
 #> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
 #>    user  system elapsed 
-#>   0.093   0.011   0.545
+#>   0.067   0.005   0.969
 system.time(
   gs4_example("gapminder") %>% range_read(sheet = "Africa")
 )
 #> ✔ Reading from gapminder.
-#> ✔ Range ''Africa''.
+#> ✔ Range 'Africa'.
 #>    user  system elapsed 
-#>   0.305   0.011   0.618
+#>   0.197   0.009   0.833
 ```
 
 The modest difference above shows that the speed difference is unlikely

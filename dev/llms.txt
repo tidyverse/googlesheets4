@@ -102,7 +102,7 @@ read_sheet(
   "https://docs.google.com/spreadsheets/d/1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY/edit#gid=780868077"
 )
 #> ✔ Reading from "gapminder".
-#> ✔ Range 'Africa'.
+#> ✔ Range "Africa".
 #> # A tibble: 624 × 6
 #>   country continent  year lifeExp      pop gdpPercap
 #>   <chr>   <chr>     <dbl>   <dbl>    <dbl>     <dbl>
@@ -116,7 +116,7 @@ read_sheet(
 # Sheet ID
 read_sheet("1U6Cf_qEOhiR9AZqTqS3mbMF3zt2db48ZP5v3rkrAEJY")
 #> ✔ Reading from "gapminder".
-#> ✔ Range 'Africa'.
+#> ✔ Range "Africa".
 #> # A tibble: 624 × 6
 #>   country continent  year lifeExp      pop gdpPercap
 #>   <chr>   <chr>     <dbl>   <dbl>    <dbl>     <dbl>
@@ -132,7 +132,7 @@ googledrive::drive_get("gapminder") %>%
   read_sheet()
 #> ✔ The input `path` resolved to exactly 1 file.
 #> ✔ Reading from "gapminder".
-#> ✔ Range 'Africa'.
+#> ✔ Range "Africa".
 #> # A tibble: 624 × 6
 #>   country continent  year lifeExp      pop gdpPercap
 #>   <chr>   <chr>     <dbl>   <dbl>    <dbl>     <dbl>
@@ -169,7 +169,7 @@ data.
 #> 
 #> ── <googlesheets4_spreadsheet> ─────────────────────────────────────────────────
 #> Spreadsheet name: "fluffy-bunny"                              
-#>               ID: 1DQeJwL8zHoEUi1U7WdRdhobXwfGWPDeO-mHcojOdk8U
+#>               ID: 1Y4AkodIKc7daqjNlclcNXkn748dgDORIRzB2YV8-1Qs
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -193,7 +193,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ─────────────────────────────────────────────────
 #> Spreadsheet name: "fluffy-bunny"                              
-#>               ID: 1DQeJwL8zHoEUi1U7WdRdhobXwfGWPDeO-mHcojOdk8U
+#>               ID: 1Y4AkodIKc7daqjNlclcNXkn748dgDORIRzB2YV8-1Qs
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           
@@ -240,7 +240,7 @@ contributing to this project, you agree to abide by its terms.
 
 ## Privacy
 
-[Privacy policy](https://www.tidyverse.org/google_privacy_policy)
+[Privacy policy](https://tidyverse.org/google_privacy_policy/)
 
 ## Context
 
@@ -416,6 +416,16 @@ current state
   : Edit and view auth configuration
 - [`gs4_scopes()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_scopes.md)
   : Produce scopes specific to the Sheets API
+
+## Configuration and messages
+
+Configure the OAuth client and API key used for auth or silence
+informational messages
+
+- [`gs4_auth_configure()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md)
+  [`gs4_api_key()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md)
+  [`gs4_oauth_client()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_auth_configure.md)
+  : Edit and view auth configuration
 - [`local_gs4_quiet()`](https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-configuration.md)
   [`with_gs4_quiet()`](https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-configuration.md)
   : googlesheets4 configuration
@@ -434,9 +444,6 @@ Low-level functions used internally and made available for programming
   : Is there a token on hand?
 - [`gs4_endpoints()`](https://googlesheets4.tidyverse.org/dev/reference/gs4_endpoints.md)
   : List Sheets endpoints
-- [`local_gs4_quiet()`](https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-configuration.md)
-  [`with_gs4_quiet()`](https://googlesheets4.tidyverse.org/dev/reference/googlesheets4-configuration.md)
-  : googlesheets4 configuration
 
 ## Operate on (spread)Sheets or the Sheets API
 

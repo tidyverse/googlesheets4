@@ -15,6 +15,21 @@ test_that("gs4_abort() throws classed condition", {
   )
 })
 
+test_that("range styling: no redundant quotes, double quotes without color", {
+  local_gs4_loud()
+  qualified <- qualified_A1("Sheet1", "A1:B3")
+  bare <- "F"
+  expect_snapshot({
+    gs4_bullets(c(v = "Range {.range {qualified}}."))
+    gs4_bullets(c(v = "Range {.range {bare}}."))
+  })
+  withr::local_options(cli.num_colors = 256)
+  expect_snapshot({
+    gs4_bullets(c(v = "Range {.range {qualified}}."))
+    gs4_bullets(c(v = "Range {.range {bare}}."))
+  })
+})
+
 test_that("abort_unsupported_conversion() works", {
   x <- structure(1, class = c("a", "b", "c"))
   expect_snapshot_error(

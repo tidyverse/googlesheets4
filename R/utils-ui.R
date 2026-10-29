@@ -4,7 +4,11 @@ gs4_theme <- function() {
     # This is same as custom `.drivepath` style in googledrive
     span.s_sheet = list(color = "cyan", fmt = double_quote_weird_name),
     span.w_sheet = list(color = "green", fmt = single_quote_weird_name),
-    span.range = list(color = "yellow", fmt = single_quote_weird_name),
+    # no weird-name fmt: we always put the worksheet name in single quotes
+    # when building a qualified range (e.g. 'Sheet1'!A1), so
+    # *_quote_weird_name would always add a second, redundant pair of quotes;
+    # double quotes (no color only) can't be confused with the sheet's quotes
+    span.range = list(color = "yellow", transform = double_quote_if_no_color),
     # since we're using color so much elsewhere, I think the standard bullet
     # should be "normal" color; matches what I do in googledrive
     ".bullets .bullet-*" = list(

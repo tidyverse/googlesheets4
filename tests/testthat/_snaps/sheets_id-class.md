@@ -61,7 +61,7 @@
       
       -- <named ranges> --------------------------------------------------------------
       (Named range): (A1 range)        
-           'canada': 'Americas'!A38:F49
+           "canada": 'Americas'!A38:F49
 
 # sheets_id print method doesn't error for nonexistent ID
 

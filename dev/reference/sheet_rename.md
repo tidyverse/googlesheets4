@@ -70,6 +70,36 @@ ss <- gs4_create(
 )
 #> ✔ Creating new Sheet: sheet-rename-demo.
 sheet_names(ss)
+#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ℹ Will retry in 61.5s.
+#> ⠙ Retry happens in  1m
+#> ⠹ Retry happens in  1m
+#> ⠸ Retry happens in  1m
+#> ⠼ Retry happens in  1m
+#> ⠴ Retry happens in  1m
+#> ⠦ Retry happens in 49s
+#> ⠧ Retry happens in 46s
+#> ⠇ Retry happens in 43s
+#> ⠏ Retry happens in 40s
+#> ⠋ Retry happens in 37s
+#> ⠙ Retry happens in 34s
+#> ⠹ Retry happens in 31s
+#> ⠸ Retry happens in 28s
+#> ⠼ Retry happens in 25s
+#> ⠴ Retry happens in 22s
+#> ⠦ Retry happens in 19s
+#> ⠧ Retry happens in 16s
+#> ⠇ Retry happens in 13s
+#> ⠏ Retry happens in 10s
+#> ⠋ Retry happens in  7s
+#> ⠙ Retry happens in  4s
+#> ⠹ Retry happens in  1s
+#> ⠹ Retry happens in  0s
+#> ✖ Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ℹ Will retry in 3.9s.
+#> ⠙ Retry happens in  2s
+#> ⠙ Retry happens in  0s
+#> ✔ Request 3 successful!
 #> [1] "cars"     "chickwts"
 
 ss %>%
@@ -82,5 +112,5 @@ ss %>%
 gs4_find("sheet-rename-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-rename-demo <id: 1yahE9vx1sRIiuPGF1JyJLrjI3KlDDZl2O5vt-B6FRz0>
+#> • sheet-rename-demo <id: 1UWXwMs5Z7V7AiAiolYzvsiMr6vySfyWCWywaSt13k44>
 ```

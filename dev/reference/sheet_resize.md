@@ -75,39 +75,10 @@ Other worksheet functions:
 # create a Sheet with the default initial worksheet
 (ss <- gs4_create("sheet-resize-demo"))
 #> ✔ Creating new Sheet: sheet-resize-demo.
-#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
-#> ℹ Will retry in 61.5s.
-#> ⠙ Retry happens in  1m
-#> ⠹ Retry happens in  1m
-#> ⠸ Retry happens in  1m
-#> ⠼ Retry happens in  1m
-#> ⠴ Retry happens in 50s
-#> ⠦ Retry happens in 47s
-#> ⠧ Retry happens in 44s
-#> ⠇ Retry happens in 41s
-#> ⠏ Retry happens in 38s
-#> ⠋ Retry happens in 35s
-#> ⠙ Retry happens in 32s
-#> ⠹ Retry happens in 29s
-#> ⠸ Retry happens in 26s
-#> ⠼ Retry happens in 23s
-#> ⠴ Retry happens in 20s
-#> ⠦ Retry happens in 17s
-#> ⠧ Retry happens in 14s
-#> ⠇ Retry happens in 11s
-#> ⠏ Retry happens in  8s
-#> ⠋ Retry happens in  5s
-#> ⠙ Retry happens in  2s
-#> ⠙ Retry happens in  0s
-#> ✖ Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].
-#> ℹ Will retry in 3.9s.
-#> ⠙ Retry happens in  3s
-#> ⠙ Retry happens in  0s
-#> ✔ Request 3 successful!
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: sheet-resize-demo                           
-#>               ID: 14-OaaDTOt8tc86ffa1Eo-U6DLdh9kC9KjerHQ_AlB6I
+#>               ID: 1T9Iq8qUb8FxZcQLVNfkKnDRLmp4thptbJLytqmxhI2o
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -159,5 +130,5 @@ sheet_properties(ss)
 gs4_find("sheet-resize-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-resize-demo <id: 14-OaaDTOt8tc86ffa1Eo-U6DLdh9kC9KjerHQ_AlB6I>
+#> • sheet-resize-demo <id: 1T9Iq8qUb8FxZcQLVNfkKnDRLmp4thptbJLytqmxhI2o>
 ```

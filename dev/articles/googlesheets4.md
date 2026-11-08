@@ -216,7 +216,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: unfearing-guineafowl                        
-#>               ID: 1JxsqqwmrT9ysVq7A7u27SFqabbW_SmCsn3N0brbxyvo
+#>               ID: 1JaoYUjDkzVpOzrCOyTWYd-Eti5QpQhlkhT7q-mew07w
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -241,7 +241,7 @@ so we can specify the new Sheet’s name.
 googledrive::drive_trash(ss)
 #> File trashed:
 #> • unfearing-guineafowl
-#>   <id: 1JxsqqwmrT9ysVq7A7u27SFqabbW_SmCsn3N0brbxyvo>
+#>   <id: 1JaoYUjDkzVpOzrCOyTWYd-Eti5QpQhlkhT7q-mew07w>
 
 ss <- gs4_create("testy-hedgehog", sheets = df)
 #> ✔ Creating new Sheet: testy-hedgehog.
@@ -249,7 +249,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: testy-hedgehog                              
-#>               ID: 1aSEsbMN8DEkIQRH1Tymla4OkQy64DCUyXSF1Ea0aKt4
+#>               ID: 1V6uvo3Rln5sWbLOMYMv1DCE2vsUQFCdG1X8ndA-CXfU
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -272,7 +272,7 @@ ss
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: testy-hedgehog                              
-#>               ID: 1aSEsbMN8DEkIQRH1Tymla4OkQy64DCUyXSF1Ea0aKt4
+#>               ID: 1V6uvo3Rln5sWbLOMYMv1DCE2vsUQFCdG1X8ndA-CXfU
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 2                                           
@@ -354,12 +354,12 @@ sheet_properties(ss)
 #> # A tibble: 2 × 8
 #>   name     index         id type  visible grid_rows grid_columns data  
 #>   <chr>    <int>      <int> <chr> <lgl>       <int>        <int> <list>
-#> 1 df           0  192455955 GRID  TRUE            9            2 <NULL>
-#> 2 chickwts     1 2049314866 GRID  TRUE           72            2 <NULL>
+#> 1 df           0  307233307 GRID  TRUE            9            2 <NULL>
+#> 2 chickwts     1 1707392655 GRID  TRUE           72            2 <NULL>
 
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • testy-hedgehog <id: 1aSEsbMN8DEkIQRH1Tymla4OkQy64DCUyXSF1Ea0aKt4>
+#> • testy-hedgehog <id: 1V6uvo3Rln5sWbLOMYMv1DCE2vsUQFCdG1X8ndA-CXfU>
 ```
 
 The article [Write

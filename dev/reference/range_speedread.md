@@ -134,7 +134,7 @@ if (require("readr")) {
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: fiery-hart                                  
-#>               ID: 10l7nhW-8j8r_uZAB2ATcFwGs-ziU73Gyd4chrMipd0Q
+#>               ID: 1UxWytQA39ITHyU2qn7UVoEZpnW-9MvDQzK-PwATS4Ew
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -147,7 +147,7 @@ if (require("readr")) {
 range_speedread(ss)
 #> ✔ Reading from fiery-hart.
 #> ℹ Export URL:
-#>   <https://docs.google.com/spreadsheets/d/10l7nhW-8j8r_uZAB2ATcFwGs-ziU73Gyd4chrMipd0Q/export?format=csv>
+#>   <https://docs.google.com/spreadsheets/d/1UxWytQA39ITHyU2qn7UVoEZpnW-9MvDQzK-PwATS4Ew/export?format=csv>
 #> Rows: 71 Columns: 2
 #> ── Column specification ───────────────────────────────────────────────
 #> Delimiter: ","
@@ -174,5 +174,5 @@ range_speedread(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • fiery-hart <id: 10l7nhW-8j8r_uZAB2ATcFwGs-ziU73Gyd4chrMipd0Q>
+#> • fiery-hart <id: 1UxWytQA39ITHyU2qn7UVoEZpnW-9MvDQzK-PwATS4Ew>
 ```

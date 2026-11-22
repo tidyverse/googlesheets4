@@ -131,10 +131,16 @@ if (require("readr")) {
 # write a Sheet that, by default, is NOT world-readable
 (ss <- sheet_write(chickwts))
 #> ✔ Creating new Sheet: fiery-hart.
+#> ✖ Request 1 failed [503: UNAVAILABLE].
+#> ℹ Will retry in 3.1s.
+#> ⠙ Retry happens in  2s
+#> ⠹ Retry happens in  2s
+#> ⠹ Retry happens in  0s
+#> ✔ Request 2 successful!
 #> 
 #> ── <googlesheets4_spreadsheet> ────────────────────────────────────────
 #> Spreadsheet name: fiery-hart                                  
-#>               ID: 1fXx5Gy8_uLwpw-gHmP1xMLTCkVUluXWFITkmUsUTLJI
+#>               ID: 1Vql7S-DEnsDtuVZH7RSw803tmiIVlkd6C6Jrenti43Y
 #>           Locale: en_US                                       
 #>        Time zone: Etc/GMT                                     
 #>      # of sheets: 1                                           
@@ -147,7 +153,7 @@ if (require("readr")) {
 range_speedread(ss)
 #> ✔ Reading from fiery-hart.
 #> ℹ Export URL:
-#>   <https://docs.google.com/spreadsheets/d/1fXx5Gy8_uLwpw-gHmP1xMLTCkVUluXWFITkmUsUTLJI/export?format=csv>
+#>   <https://docs.google.com/spreadsheets/d/1Vql7S-DEnsDtuVZH7RSw803tmiIVlkd6C6Jrenti43Y/export?format=csv>
 #> Rows: 71 Columns: 2
 #> ── Column specification ───────────────────────────────────────────────
 #> Delimiter: ","
@@ -174,5 +180,5 @@ range_speedread(ss)
 # clean up
 googledrive::drive_trash(ss)
 #> File trashed:
-#> • fiery-hart <id: 1fXx5Gy8_uLwpw-gHmP1xMLTCkVUluXWFITkmUsUTLJI>
+#> • fiery-hart <id: 1Vql7S-DEnsDtuVZH7RSw803tmiIVlkd6C6Jrenti43Y>
 ```

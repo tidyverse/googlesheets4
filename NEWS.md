@@ -1,5 +1,9 @@
 # googlesheets4 (development version)
 
+* `read_sheet()` and `spread_sheet()` now keep explicit `col_names` intact when
+  one name is given per unskipped column alongside `col_types` with skipped
+  columns.
+
 # googlesheets4 1.1.3
 
 * Updated the internal data that documents the Sheets API. Motivated by the

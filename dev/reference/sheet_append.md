@@ -103,6 +103,35 @@ ss <- gs4_create("sheet-append-demo", sheets = list(deaths = deaths_one))
 
 # append a single row
 ss %>% sheet_append(deaths_two)
+#> ✖ Request 1 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ℹ Will retry in 61.5s.
+#> ⠙ Retry happens in  1m
+#> ⠹ Retry happens in  1m
+#> ⠸ Retry happens in  1m
+#> ⠼ Retry happens in  1m
+#> ⠴ Retry happens in 50s
+#> ⠦ Retry happens in 47s
+#> ⠧ Retry happens in 44s
+#> ⠇ Retry happens in 41s
+#> ⠏ Retry happens in 38s
+#> ⠋ Retry happens in 35s
+#> ⠙ Retry happens in 32s
+#> ⠹ Retry happens in 29s
+#> ⠸ Retry happens in 26s
+#> ⠼ Retry happens in 23s
+#> ⠴ Retry happens in 20s
+#> ⠦ Retry happens in 17s
+#> ⠧ Retry happens in 14s
+#> ⠇ Retry happens in 11s
+#> ⠏ Retry happens in  8s
+#> ⠋ Retry happens in  5s
+#> ⠙ Retry happens in  2s
+#> ⠙ Retry happens in  0s
+#> ✖ Request 2 failed [429: RESOURCE_EXHAUSTED, per user quota].
+#> ℹ Will retry in 3.9s.
+#> ⠙ Retry happens in  3s
+#> ⠙ Retry happens in  0s
+#> ✔ Request 3 successful!
 #> ✔ Writing to sheet-append-demo.
 #> ✔ Appending 1 row to deaths.
 
@@ -122,5 +151,5 @@ identical(deaths, deaths_replica)
 gs4_find("sheet-append-demo") %>%
   googledrive::drive_trash()
 #> File trashed:
-#> • sheet-append-demo <id: 1fJA4kZptFsvFY7AIxR3mgLUC6rp17JUST8JXrd_1QaI>
+#> • sheet-append-demo <id: 1fUig5F3_PvUzLVlKhCjw3oYyWlGyC58rAyeejOAqT70>
 ```

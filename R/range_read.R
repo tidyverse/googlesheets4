@@ -364,6 +364,9 @@ rep_ctypes <- function(n, ctypes, comparator = "n", call = caller_env()) {
 # rep_ctypes() is called before and ensures that col_names and ctypes are
 # conformable (hence the non-user facing stopifnot())
 filter_col_names <- function(col_names, ctypes) {
-  stopifnot(length(col_names) <= length(ctypes))
-  col_names[ctypes != "COL_SKIP"]
+  if (length(col_names) == length(ctypes)) {
+    return(col_names[ctypes != "COL_SKIP"])
+  }
+  stopifnot(length(col_names) == sum(ctypes != "COL_SKIP"))
+  col_names
 }

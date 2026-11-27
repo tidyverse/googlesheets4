@@ -202,3 +202,47 @@ test_that("filter_col_names() removes entries for skipped columns", {
     letters[c(1, 3)]
   )
 })
+
+test_that("filter_col_names() keeps unskipped col_names", {
+  expect_identical(
+    filter_col_names(c("x", "y"), ctypes = c("COL_SKIP", "c", "c")),
+    c("x", "y")
+  )
+  expect_identical(
+    filter_col_names(c("x", "y"), ctypes = c("c", "COL_SKIP", "c")),
+    c("x", "y")
+  )
+  expect_identical(
+    filter_col_names("x", ctypes = c("COL_SKIP", "c", "COL_SKIP")),
+    "x"
+  )
+  expect_identical(
+    filter_col_names(c("x", "y"), ctypes = c("c", "c", "COL_SKIP")),
+    c("x", "y")
+  )
+})
+
+test_that("spread_sheet() keeps unskipped col_names", {
+  df <- tibble::tibble(
+    row = c(1L, 1L, 1L),
+    col = c(1L, 2L, 3L),
+    cell = list(
+      list(formattedValue = "a", effectiveValue = list(stringValue = "a")),
+      list(formattedValue = "b", effectiveValue = list(stringValue = "b")),
+      list(formattedValue = "c", effectiveValue = list(stringValue = "c"))
+    )
+  )
+
+  expect_identical(
+    spread_sheet(df, col_names = c("x", "y"), col_types = "_cc"),
+    tibble::tibble(x = "b", y = "c")
+  )
+  expect_identical(
+    spread_sheet(df, col_names = c("x", "y"), col_types = "c_c"),
+    tibble::tibble(x = "a", y = "c")
+  )
+  expect_identical(
+    spread_sheet(df, col_names = "x", col_types = "_c_"),
+    tibble::tibble(x = "b")
+  )
+})
